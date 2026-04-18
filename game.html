@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国古代朝代顺序游戏 - 完全自定义挑战</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #8B0000, #B22222);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            min-height: 500px;
+        }
+        
+        .menu {
+            width: 250px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-right: 1px solid #eaeaea;
+        }
+        
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #4a6572;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .menu-btn:hover {
+            background-color: #344955;
+            transform: translateY(-2px);
+        }
+        
+        .menu-btn.active {
+            background-color: #8B0000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .screen {
+            display: none;
+            flex: 1;
+        }
+        
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .welcome-screen {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .welcome-content {
+            max-width: 700px;
+        }
+        
+        .welcome-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #8B0000;
+        }
+        
+        .rules {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rules h3 {
+            margin-bottom: 15px;
+            color: #4a6572;
+        }
+        
+        .rules ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .rules li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .rules li:last-child {
+            border-bottom: none;
+        }
+        
+        .selection-container {
+            display: flex;
+            gap: 30px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        
+        .selection-group {
+            flex: 1;
+            max-width: 300px;
+        }
+        
+        .selection-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #8B0000;
+            text-align: center;
+        }
+        
+        .selection-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .selection-btn {
+            padding: 12px 20px;
+            background-color: #4a6572;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .selection-btn:hover {
+            background-color: #344955;
+        }
+        
+        .selection-btn.active {
+            background-color: #8B0000;
+        }
+        
+        .time-btn.active {
+            background-color: #2196F3;
+        }
+        
+        .difficulty-btn.easy.active {
+            background-color: #4caf50;
+        }
+        
+        .difficulty-btn.medium.active {
+            background-color: #ff9800;
+        }
+        
+        .difficulty-btn.hard.active {
+            background-color: #f44336;
+        }
+        
+        .difficulty-info {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .difficulty-card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            max-width: 200px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .difficulty-card.easy {
+            border-top: 4px solid #4caf50;
+        }
+        
+        .difficulty-card.medium {
+            border-top: 4px solid #ff9800;
+        }
+        
+        .difficulty-card.hard {
+            border-top: 4px solid #f44336;
+        }
+        
+        .difficulty-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .difficulty-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .start-btn {
+            padding: 15px 40px;
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .start-btn:hover {
+            background-color: #A52A2A;
+            transform: scale(1.05);
+        }
+        
+        .game-screen {
+            flex-direction: column;
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .game-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8B0000;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .game-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .difficulty-indicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: white;
+        }
+        
+        .difficulty-indicator.easy {
+            background-color: #4caf50;
+        }
+        
+        .difficulty-indicator.medium {
+            background-color: #ff9800;
+        }
+        
+        .difficulty-indicator.hard {
+            background-color: #f44336;
+        }
+        
+        .time-indicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .timer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8B0000;
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        
+        .timer.warning {
+            color: #ff9800;
+            animation: pulse 1s infinite;
+        }
+        
+        .timer.danger {
+            color: #f44336;
+            animation: pulse 0.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .dynasty-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .dynasty-card {
+            background-color: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: calc(33.333% - 15px);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dynasty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dynasty-card.selected {
+            background-color: #e8f4fd;
+            border-color: #4a90e2;
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+        }
+        
+        .dynasty-card.unselected {
+            background-color: #f8f9fa;
+            border-color: #ddd;
+            opacity: 0.8;
+        }
+        
+        .dynasty-card.unselected:hover {
+            opacity: 1;
+        }
+        
+        .dynasty-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .dynasty-period {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .selected-dynasties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            min-height: 80px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 2px dashed #ddd;
+            justify-content: center;
+        }
+        
+        .selected-item {
+            background-color: #4a6572;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .selected-item .order {
+            background-color: #8B0000;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        
+        .control-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .check-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .check-btn:hover {
+            background-color: #388e3c;
+        }
+        
+        .reset-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background-color: #f57c00;
+        }
+        
+        .result-screen {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .result-content {
+            max-width: 600px;
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #8B0000;
+        }
+        
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #4caf50;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #8B0000;
+        }
+        
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .feedback {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e8f5e9;
+        }
+        
+        .study-screen {
+            flex-direction: column;
+        }
+        
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-order {
+            background-color: #8B0000;
+            color: white;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+        }
+        
+        .timeline-content {
+            padding: 15px;
+            flex: 1;
+        }
+        
+        .timeline-dynasty {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8B0000;
+        }
+        
+        .timeline-period {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .back-btn {
+            padding: 12px 25px;
+            background-color: #4a6572;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            align-self: flex-start;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: #344955;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .menu {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #eaeaea;
+            }
+            
+            .dynasty-card {
+                width: calc(50% - 15px);
+            }
+            
+            .selection-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .selection-group {
+                max-width: 100%;
+            }
+            
+            .difficulty-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .difficulty-card {
+                max-width: 100%;
+                width: 100%;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dynasty-card {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>中国古代朝代顺序游戏</h1>
+            <div class="subtitle">完全自定义挑战 - 自由选择时间和难度</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="menu">
+                <button class="menu-btn active" data-screen="welcome">欢迎</button>
+                <button class="menu-btn" data-screen="game">开始挑战</button>
+                <button class="menu-btn" data-screen="study">学习模式</button>
+            </div>
+            
+            <div class="content-area">
+                <!-- 欢迎屏幕 -->
+                <div class="screen welcome-screen active" id="welcome">
+                    <div class="welcome-content">
+                        <h2>欢迎来到中国古代朝代游戏 - 完全自定义挑战</h2>
+                        <div class="rules">
+                            <h3>游戏规则：</h3>
+                            <ul>
+                                <li>自由选择挑战时间和难度级别</li>
+                                <li>在限定时间内，尽可能多地完成朝代排序挑战</li>
+                                <li>每个挑战的积分 = 基础分 × 正确率 + 时间奖励</li>
+                                <li>时间奖励：剩余时间(秒) × 难度系数</li>
+                                <li>时间结束后，系统会计算你的总积分和排名</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="selection-container">
+                            <div class="selection-group">
+                                <div class="selection-title">选择挑战时间</div>
+                                <div class="selection-options">
+                                    <button class="selection-btn time-btn active" data-time="60">1分钟挑战</button>
+                                    <button class="selection-btn time-btn" data-time="120">2分钟挑战</button>
+                                    <button class="selection-btn time-btn" data-time="180">3分钟挑战</button>
+                                </div>
+                            </div>
+                            
+                            <div class="selection-group">
+                                <div class="selection-title">选择挑战难度</div>
+                                <div class="selection-options">
+                                    <button class="selection-btn difficulty-btn easy active" data-difficulty="easy">初级挑战</button>
+                                    <button class="selection-btn difficulty-btn medium" data-difficulty="medium">中级挑战</button>
+                                    <button class="selection-btn difficulty-btn hard" data-difficulty="hard">高级挑战</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 style="margin-top: 20px;">难度说明：</h3>
+                        <div class="difficulty-info">
+                            <div class="difficulty-card easy">
+                                <div class="difficulty-name">初级</div>
+                                <div class="difficulty-desc">3个朝代一组</div>
+                                <div class="difficulty-desc">基础分：50分</div>
+                                <div class="difficulty-desc">时间系数：1</div>
+                            </div>
+                            <div class="difficulty-card medium">
+                                <div class="difficulty-name">中级</div>
+                                <div class="difficulty-desc">5个朝代一组</div>
+                                <div class="difficulty-desc">基础分：100分</div>
+                                <div class="difficulty-desc">时间系数：2</div>
+                            </div>
+                            <div class="difficulty-card hard">
+                                <div class="difficulty-name">高级</div>
+                                <div class="difficulty-desc">5-8个朝代一组</div>
+                                <div class="difficulty-desc">基础分：150分</div>
+                                <div class="difficulty-desc">时间系数：3</div>
+                            </div>
+                        </div>
+                        
+                        <p>准备好了吗？点击下方按钮开始挑战！</p>
+                        <button class="start-btn" id="startGame">开始挑战</button>
+                    </div>
+                </div>
+                
+                <!-- 游戏屏幕 -->
+                <div class="screen game-screen" id="game">
+                    <div class="game-header">
+                        <div class="game-stats">
+                            <div class="stat-box">
+                                <div class="stat-value" id="score">0</div>
+                                <div class="stat-label">积分</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="completed">0</div>
+                                <div class="stat-label">完成挑战</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="accuracy">0%</div>
+                                <div class="stat-label">平均正确率</div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <div class="difficulty-indicator easy" id="difficultyIndicator">初级</div>
+                            <div class="time-indicator" id="timeIndicator">1分钟</div>
+                        </div>
+                        <div class="timer" id="timer">01:00</div>
+                    </div>
+                    
+                    <p>请按时间顺序点击下列朝代：</p>
+                    
+                    <div class="dynasty-list" id="dynastyList">
+                        <!-- 朝代卡片将通过JavaScript动态生成 -->
+                    </div>
+                    
+                    <div class="selected-area">
+                        <p>你的排序：</p>
+                        <div class="selected-dynasties" id="selectedDynasties">
+                            <!-- 用户选择的朝代将显示在这里 -->
+                        </div>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button class="control-btn reset-btn" id="resetRound">跳过此题</button>
+                        <button class="control-btn check-btn" id="checkAnswer">检查答案</button>
+                    </div>
+                </div>
+                
+                <!-- 学习模式屏幕 -->
+                <div class="screen study-screen" id="study">
+                    <h2>中国古代朝代顺序</h2>
+                    <p>以下是中国古代主要朝代的正确时间顺序：</p>
+                    
+                    <div class="timeline" id="timeline">
+                        <!-- 时间线内容将通过JavaScript动态生成 -->
+                    </div>
+                    
+                    <button class="back-btn" id="backFromStudy">返回主菜单</button>
+                </div>
+                
+                <!-- 结果屏幕 -->
+                <div class="screen result-screen" id="result">
+                    <div class="result-content">
+                        <h2 class="result-title">挑战结果</h2>
+                        <div class="score-display" id="finalScore">0</div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="value" id="finalCompleted">0</div>
+                                <div class="label">完成挑战数</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="value" id="finalAccuracy">0%</div>
+                                <div class="label">平均正确率</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="value" id="challengeCount">0</div>
+                                <div class="label">挑战总数</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="value" id="timeUsed">0s</div>
+                                <div class="label">用时</div>
+                            </div>
+                        </div>
+                        
+                        <div class="feedback" id="feedback">再接再厉！</div>
+                        
+                        <div class="game-controls">
+                            <button class="control-btn reset-btn" id="playAgain">再玩一次</button>
+                            <button class="control-btn check-btn" id="backToMenu">返回主菜单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 朝代数据 - 按正确历史顺序排列
+        const dynasties = [
+            { name: "夏", start: 2070, end: 1600, era: "BCE" },
+            { name: "商", start: 1600, end: 1046, era: "BCE" },
+            { name: "周", start: 1046, end: 256, era: "BCE" },
+            { name: "秦", start: 221, end: 206, era: "BCE" },
+            { name: "汉", start: 202, end: 220, era: "CE" },
+            { name: "三国", start: 220, end: 280, era: "CE" },
+            { name: "两晋", start: 266, end: 420, era: "CE" },
+            { name: "南北朝", start: 420, end: 589, era: "CE" },
+            { name: "隋", start: 581, end: 618, era: "CE" },
+            { name: "唐", start: 618, end: 907, era: "CE" },
+            { name: "五代十国", start: 907, end: 960, era: "CE" },
+            { name: "宋", start: 960, end: 1279, era: "CE" },
+            { name: "元", start: 1271, end: 1368, era: "CE" },
+            { name: "明", start: 1368, end: 1644, era: "CE" },
+            { name: "清", start: 1644, end: 1912, era: "CE" }
+        ];
+
+        // 游戏状态
+        let gameState = {
+            selectedDynasties: [],
+            currentDynasties: [],
+            correctOrder: [],
+            score: 0,
+            completedChallenges: 0,
+            totalChallenges: 0,
+            totalAccuracy: 0,
+            startTime: 0,
+            timeLimit: 60, // 默认1分钟
+            timerInterval: null,
+            roundStartTime: 0,
+            difficulty: 'easy', // 默认初级难度
+            baseScore: 50, // 基础分
+            timeCoefficient: 1 // 时间系数
+        };
+
+        // DOM 元素
+        const screens = {
+            welcome: document.getElementById('welcome'),
+            game: document.getElementById('game'),
+            study: document.getElementById('study'),
+            result: document.getElementById('result')
+        };
+
+        const menuButtons = document.querySelectorAll('.menu-btn');
+        const timeButtons = document.querySelectorAll('.time-btn');
+        const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+        const startButton = document.getElementById('startGame');
+        const resetRoundButton = document.getElementById('resetRound');
+        const checkButton = document.getElementById('checkAnswer');
+        const backFromStudyButton = document.getElementById('backFromStudy');
+        const playAgainButton = document.getElementById('playAgain');
+        const backToMenuButton = document.getElementById('backToMenu');
+        const dynastyList = document.getElementById('dynastyList');
+        const selectedDynasties = document.getElementById('selectedDynasties');
+        const scoreElement = document.getElementById('score');
+        const completedElement = document.getElementById('completed');
+        const accuracyElement = document.getElementById('accuracy');
+        const timerElement = document.getElementById('timer');
+        const difficultyIndicator = document.getElementById('difficultyIndicator');
+        const timeIndicator = document.getElementById('timeIndicator');
+        const finalScoreElement = document.getElementById('finalScore');
+        const finalCompletedElement = document.getElementById('finalCompleted');
+        const finalAccuracyElement = document.getElementById('finalAccuracy');
+        const challengeCountElement = document.getElementById('challengeCount');
+        const timeUsedElement = document.getElementById('timeUsed');
+        const feedbackElement = document.getElementById('feedback');
+        const timelineElement = document.getElementById('timeline');
+
+        // 初始化事件监听
+        function initEventListeners() {
+            // 菜单按钮点击事件
+            menuButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const screen = button.getAttribute('data-screen');
+                    showScreen(screen);
+                    
+                    // 更新活动菜单按钮
+                    menuButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+            
+            // 时间选择按钮
+            timeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    gameState.timeLimit = parseInt(button.getAttribute('data-time'));
+                    
+                    // 更新活动时间按钮
+                    timeButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // 更新计时器显示
+                    updateTimerDisplay(gameState.timeLimit);
+                });
+            });
+            
+            // 难度选择按钮
+            difficultyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    gameState.difficulty = button.getAttribute('data-difficulty');
+                    
+                    // 根据难度设置基础分和时间系数
+                    switch(gameState.difficulty) {
+                        case 'easy':
+                            gameState.baseScore = 50;
+                            gameState.timeCoefficient = 1;
+                            break;
+                        case 'medium':
+                            gameState.baseScore = 100;
+                            gameState.timeCoefficient = 2;
+                            break;
+                        case 'hard':
+                            gameState.baseScore = 150;
+                            gameState.timeCoefficient = 3;
+                            break;
+                    }
+                    
+                    // 更新活动难度按钮
+                    difficultyButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+            
+            // 开始游戏按钮
+            startButton.addEventListener('click', startGame);
+            
+            // 跳过此题按钮
+            resetRoundButton.addEventListener('click', startNewRound);
+            
+            // 检查答案按钮
+            checkButton.addEventListener('click', checkAnswer);
+            
+            // 学习模式返回按钮
+            backFromStudyButton.addEventListener('click', () => {
+                showScreen('welcome');
+                
+                // 更新活动菜单按钮
+                menuButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-screen="welcome"]').classList.add('active');
+            });
+            
+            // 再玩一次按钮
+            playAgainButton.addEventListener('click', () => {
+                startGame();
+                showScreen('game');
+                
+                // 更新活动菜单按钮
+                menuButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-screen="game"]').classList.add('active');
+            });
+            
+            // 返回主菜单按钮
+            backToMenuButton.addEventListener('click', () => {
+                showScreen('welcome');
+                
+                // 更新活动菜单按钮
+                menuButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-screen="welcome"]').classList.add('active');
+            });
+        }
+
+        // 显示指定屏幕
+        function showScreen(screenName) {
+            Object.values(screens).forEach(screen => {
+                screen.classList.remove('active');
+            });
+            screens[screenName].classList.add('active');
+        }
+
+        // 开始新游戏
+        function startGame() {
+            // 重置游戏状态
+            gameState = {
+                selectedDynasties: [],
+                currentDynasties: [],
+                correctOrder: [],
+                score: 0,
+                completedChallenges: 0,
+                totalChallenges: 0,
+                totalAccuracy: 0,
+                startTime: Date.now(),
+                timeLimit: gameState.timeLimit,
+                timerInterval: null,
+                roundStartTime: 0,
+                difficulty: gameState.difficulty,
+                baseScore: gameState.baseScore,
+                timeCoefficient: gameState.timeCoefficient
+            };
+            
+            // 更新难度指示器
+            updateDifficultyIndicator();
+            
+            // 更新时间指示器
+            updateTimeIndicator();
+            
+            // 更新UI
+            updateScoreDisplay();
+            updateTimerDisplay(gameState.timeLimit);
+            
+            // 开始计时器
+            startTimer();
+            
+            // 开始第一轮挑战
+            startNewRound();
+            
+            // 显示游戏屏幕
+            showScreen('game');
+            
+            // 更新活动菜单按钮
+            menuButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-screen="game"]').classList.add('active');
+        }
+
+        // 更新难度指示器
+        function updateDifficultyIndicator() {
+            difficultyIndicator.textContent = 
+                gameState.difficulty === 'easy' ? '初级' : 
+                gameState.difficulty === 'medium' ? '中级' : '高级';
+            
+            difficultyIndicator.className = 'difficulty-indicator ' + gameState.difficulty;
+        }
+
+        // 更新时间指示器
+        function updateTimeIndicator() {
+            timeIndicator.textContent = 
+                gameState.timeLimit === 60 ? '1分钟' : 
+                gameState.timeLimit === 120 ? '2分钟' : '3分钟';
+        }
+
+        // 开始计时器
+        function startTimer() {
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+            
+            gameState.timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
+                const remaining = Math.max(0, gameState.timeLimit - elapsed);
+                
+                updateTimerDisplay(remaining);
+                
+                // 更新计时器样式
+                if (remaining <= 10) {
+                    timerElement.classList.add('danger');
+                    timerElement.classList.remove('warning');
+                } else if (remaining <= 30) {
+                    timerElement.classList.add('warning');
+                    timerElement.classList.remove('danger');
+                } else {
+                    timerElement.classList.remove('warning', 'danger');
+                }
+                
+                // 时间结束
+                if (remaining <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        // 更新计时器显示
+        function updateTimerDisplay(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // 开始新一轮挑战
+        function startNewRound() {
+            // 记录本轮开始时间
+            gameState.roundStartTime = Date.now();
+            
+            // 根据难度决定朝代数量
+            let numDynasties;
+            switch(gameState.difficulty) {
+                case 'easy':
+                    numDynasties = 3;
+                    break;
+                case 'medium':
+                    numDynasties = 5;
+                    break;
+                case 'hard':
+                    numDynasties = Math.floor(Math.random() * 4) + 5; // 5-8
+                    break;
+            }
+            
+            const shuffled = [...dynasties].sort(() => 0.5 - Math.random()).slice(0, numDynasties);
+            
+            // 按时间顺序排序
+            const correctOrder = [...shuffled].sort((a, b) => {
+                // 处理BCE和CE的时间比较
+                if (a.era === "BCE" && b.era === "CE") return -1;
+                if (a.era === "CE" && b.era === "BCE") return 1;
+                if (a.era === "BCE" && b.era === "BCE") return b.start - a.start; // BCE年份越大越晚
+                return a.start - b.start; // CE年份越小越早
+            });
+            
+            // 更新游戏状态
+            gameState.selectedDynasties = [];
+            gameState.currentDynasties = shuffled;
+            gameState.correctOrder = correctOrder;
+            gameState.totalChallenges++;
+            
+            // 更新UI
+            renderDynastyList();
+            renderSelectedDynasties();
+        }
+
+        // 渲染朝代列表
+        function renderDynastyList() {
+            dynastyList.innerHTML = '';
+            
+            gameState.currentDynasties.forEach(dynasty => {
+                const card = document.createElement('div');
+                card.className = 'dynasty-card';
+                
+                // 根据是否已选择设置不同的样式
+                if (gameState.selectedDynasties.some(d => d.name === dynasty.name)) {
+                    card.classList.add('selected');
+                } else {
+                    card.classList.add('unselected');
+                }
+                
+                card.innerHTML = `
+                    <div class="dynasty-name">${dynasty.name}</div>
+                    <div class="dynasty-period">${dynasty.start} ${dynasty.era} - ${dynasty.end} ${dynasty.era}</div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    selectDynasty(dynasty);
+                });
+                
+                dynastyList.appendChild(card);
+            });
+        }
+
+        // 选择朝代
+        function selectDynasty(dynasty) {
+            // 检查是否已经选择
+            if (gameState.selectedDynasties.some(d => d.name === dynasty.name)) {
+                return;
+            }
+            
+            // 添加到已选择列表
+            gameState.selectedDynasties.push(dynasty);
+            
+            // 更新UI
+            renderDynastyList();
+            renderSelectedDynasties();
+        }
+
+        // 渲�
