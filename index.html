@@ -9,122 +9,441 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'STKaiti', 'KaiTi', '楷体', 'SimSun', '宋体', serif;
+            background: #f5f0e8;
+            color: #3d2b1f;
             min-height: 100vh;
+        }
+
+        /* ===== 顶部横幅 ===== */
+        .banner {
+            background: linear-gradient(to right, #8b1a1a, #a63c3c, #8b1a1a);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .banner::before,
+        .banner::after {
+            content: "☯";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: rgba(255, 215, 0, 0.6);
+        }
+
+        .banner::before { left: 30px; }
+        .banner::after { right: 30px; }
+
+        .banner h1 {
+            font-size: 2.2rem;
+            color: #f5e6c8;
+            letter-spacing: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .banner p {
+            color: rgba(245, 230, 200, 0.7);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            margin-top: 6px;
+        }
+
+        /* ===== 导航栏 ===== */
+        .navbar {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 16px;
+            background: #3d2b1f;
+            border-bottom: 3px solid #c8a84e;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-btn {
+            display: flex;
             align-items: center;
-            padding: 20px;
+            gap: 6px;
+            padding: 9px 22px;
+            background: transparent;
+            border: 1px solid #c8a84e;
+            border-radius: 4px;
+            color: #f5e6c8;
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
-        
-        .container {
-            max-width: 900px;
-            width: 100%;
+
+        .nav-btn:hover {
+            background: #c8a84e;
+            color: #3d2b1f;
         }
-        
-        h1 {
-            text-align: center;
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+        .nav-btn .arrow {
+            font-size: 0.65rem;
+            transition: transform 0.2s;
         }
-        
+
+        .nav-item:hover .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* ===== 下拉菜单 ===== */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 180px;
+            background: #f5f0e8;
+            border: 1px solid #c8a84e;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            z-index: 200;
+        }
+
+        .nav-item:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 18px;
+            color: #3d2b1f;
+            text-decoration: none;
+            font-size: 0.92rem;
+            transition: background 0.15s;
+            border-bottom: 1px solid rgba(200, 168, 78, 0.2);
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            background: rgba(200, 168, 78, 0.15);
+            color: #8b1a1a;
+        }
+
+        .dropdown a .tag {
+            font-size: 0.7rem;
+            background: #8b1a1a;
+            color: #f5e6c8;
+            padding: 1px 5px;
+            border-radius: 2px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* ===== 主内容 ===== */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        /* ===== 板块标题 ===== */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+            margin-top: 36px;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .section-title h2 {
+            font-size: 1.35rem;
+            color: #8b1a1a;
+            letter-spacing: 3px;
+            white-space: nowrap;
+        }
+
+        .section-title .line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, #c8a84e, transparent);
+        }
+
+        /* ===== 卡片网格 ===== */
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
         }
-        
+
         .card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: #fffdf5;
+            border: 1px solid #d4c5a0;
+            border-radius: 6px;
+            padding: 22px 18px;
             text-align: center;
+            transition: all 0.25s;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
         }
-        
+
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: #c8a84e;
+            transform: translateY(-4px);
+            box-shadow: 4px 6px 16px rgba(0,0,0,0.12);
         }
-        
-        .card-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
+
+        .card .icon {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
         }
-        
-        .card h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+
+        .card h3 {
+            font-size: 1.05rem;
+            color: #3d2b1f;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
-        
+
         .card p {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
+            font-size: 0.82rem;
+            color: #7a6555;
+            line-height: 1.65;
+            margin-bottom: 16px;
+            font-family: 'Microsoft YaHei', sans-serif;
         }
-        
-        .card-btn {
+
+        .card a {
             display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: 7px 22px;
+            background: #8b1a1a;
+            color: #f5e6c8;
             text-decoration: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-family: inherit;
+            transition: background 0.2s;
         }
-        
-        .card-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5);
+
+        .card a:hover {
+            background: #a63c3c;
         }
-        
+
+        .card.coming-soon {
+            opacity: 0.6;
+        }
+
+        .card.coming-soon a {
+            background: #b0a08a;
+            cursor: not-allowed;
+        }
+
+        /* ===== 底部 ===== */
         .footer {
             text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 40px;
-            font-size: 0.9rem;
+            color: #a09080;
+            font-size: 0.82rem;
+            padding: 28px;
+            border-top: 1px solid #d4c5a0;
+            background: #ece6d8;
+        }
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 600px) {
+            .banner h1 { font-size: 1.5rem; letter-spacing: 4px; }
+            .banner::before, .banner::after { display: none; }
+            .navbar { gap: 6px; padding: 10px; }
+            .nav-btn { padding: 7px 12px; font-size: 0.88rem; }
+            .cards { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .card { padding: 14px 10px; }
+            .card .icon { font-size: 2rem; }
+            .card h3 { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📚 历史学习平台</h1>
-        
-        <div class="cards">
-            <div class="card">
-                <div class="card-icon">🏛️</div>
-                <h2>中国古代朝代顺序游戏</h2>
-                <p>通过趣味游戏学习中国古代朝代顺序，从夏商周到明清，挑战你的历史记忆！</p>
-                <a href="game.html" class="card-btn">开始游戏</a>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">📖</div>
-                <h2>欧洲思想解放运动</h2>
-                <p>中外历史纲要（下）第8课完整教学课件，包含文艺复兴、宗教改革、启蒙运动等内容。</p>
-                <a href="europe.html" class="card-btn">查看课件</a>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">🎯</div>
-                <h2>更多内容</h2>
-                <p>持续更新中...即将推出更多历史学习资源和互动游戏。</p>
-                <a href="#" class="card-btn" onclick="alert('更多内容即将推出！')">敬请期待</a>
-            </div>
+
+<!-- 顶部横幅 -->
+<div class="banner">
+    <h1>历史学习平台</h1>
+    <p>以史为鉴 · 助力教学</p>
+</div>
+
+<!-- 导航栏 -->
+<nav class="navbar">
+
+    <div class="nav-item">
+        <button class="nav-btn">🎮 游戏 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="game.html">朝代更替 <span class="tag">已上线</span></a>
+            <a href="#">竞猜抢答</a>
         </div>
-        
-        <p class="footer">© 2026 历史学习平台 · 助力历史教学</p>
     </div>
+
+    <div class="nav-item">
+        <button class="nav-btn">📗 高一 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">中外历史纲要（上）</a>
+            <a href="europe.html">中外历史纲要（下） <span class="tag">已上线</span></a>
+        </div>
+    </div>
+
+    <div class="nav-item">
+        <button class="nav-btn">📘 高二 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">选择性必修一</a>
+            <a href="#">选择性必修二</a>
+            <a href="#">选择性必修三</a>
+        </div>
+    </div>
+
+    <div class="nav-item">
+        <button class="nav-btn">📙 高三 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">单元训练</a>
+            <a href="#">模拟测试</a>
+            <a href="#">高考真题</a>
+        </div>
+    </div>
+
+    <div class="nav-item">
+        <button class="nav-btn">🌐 历史纵横 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">中国史</a>
+            <a href="#">世界史</a>
+        </div>
+    </div>
+
+</nav>
+
+<!-- 主内容 -->
+<div class="main">
+
+    <div class="section-title">
+        <h2>🎮 游戏</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card">
+            <div class="icon">🏛️</div>
+            <h3>朝代更替</h3>
+            <p>将中国古代朝代按正确顺序排列，考验历史记忆与排序能力！</p>
+            <a href="game.html">开始挑战</a>
+        </div>
+        <div class="card coming-soon">
+            <div class="icon">⚡</div>
+            <h3>竞猜抢答</h3>
+            <p>历史知识抢答挑战，限时作答，比拼速度与准确率！</p>
+            <a href="#">敬请期待</a>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>📗 高一</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <div class="icon">📖</div>
+            <h3>中外历史纲要（上）</h3>
+            <p>中国史部分，从远古到近现代</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card">
+            <div class="icon">🌍</div>
+            <h3>中外历史纲要（下）</h3>
+            <p>欧洲思想解放运动等课件，涵盖世界古代至近代史</p>
+            <a href="europe.html">查看课件</a>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>📘 高二</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <div class="icon">🏛️</div>
+            <h3>选择性必修一</h3>
+            <p>国家制度与社会治理</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <div class="icon">💰</div>
+            <h3>选择性必修二</h3>
+            <p>经济与社会生活</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <div class="icon">🎨</div>
+            <h3>选择性必修三</h3>
+            <p>文化交流与传播</p>
+            <a href="#">建设中</a>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>📙 高三</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <div class="icon">📝</div>
+            <h3>单元训练</h3>
+            <p>按教材单元划分，专项强化训练</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <div class="icon">📋</div>
+            <h3>模拟测试</h3>
+            <p>综合模拟测试卷，限时作答</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <div class="icon">🏆</div>
+            <h3>高考真题</h3>
+            <p>历年高考历史真题汇编与解析</p>
+            <a href="#">建设中</a>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>🌐 历史纵横</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <div class="icon">🐉</div>
+            <h3>中国史</h3>
+            <p>中国历史专题与通史资料</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <div class="icon">🌏</div>
+            <h3>世界史</h3>
+            <p>世界历史专题与通史资料</p>
+            <a href="#">建设中</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+    © 2026 历史学习平台 · 助力历史教学
+</div>
+
 </body>
 </html>
