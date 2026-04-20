@@ -331,6 +331,51 @@
             .cards { grid-template-columns: 1fr; gap: 16px; }
             .section-title h2 { font-size: 1.3rem; }
         }
+
+        .toggle-btn {
+            display: inline-block;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #8b1a1a, #a63c3c);
+            color: #f5e6c8;
+            border: 1px solid #c8a84e;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn:hover {
+            background: linear-gradient(135deg, #c8a84e, #e2c97e);
+            color: #8b1a1a;
+            box-shadow: 0 0 16px rgba(200, 168, 78, 0.4);
+        }
+
+        .course-list {
+            margin-top: 12px;
+        }
+
+        .course-list a {
+            display: block;
+            padding: 8px 20px;
+            margin-top: 6px;
+            background: linear-gradient(135deg, #5a4a3a, #6b5a4a);
+            color: #f5e6c8;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            border: 1px solid #c8a84e;
+            text-align: center;
+        }
+
+        .course-list a:hover {
+            background: linear-gradient(135deg, #c8a84e, #e2c97e);
+            color: #8b1a1a;
+        }
     </style>
 </head>
 <body>
@@ -427,9 +472,12 @@
             <span class="icon">🌍</span>
             <h3>中外历史纲要（下）</h3>
             <p>世界史部分，涵盖世界古代至近代史</p>
-            <a href="europe-mobile.html">第8课 欧洲思想解放运动</a>
-            <a href="纲要下第1课_文明产生与早期发展_知识点衔接详细表.html">第1课 文明与早期发展</a>
-            <a href="纲要下第1课重难点分析与课堂训练.html">第1课 重难点与训练</a>
+            <button class="toggle-btn" onclick="toggleCourse(this)">📚 查看课件</button>
+            <div class="course-list" style="display: none;">
+                <a href="europe-mobile.html">第8课 欧洲思想解放运动</a>
+                <a href="纲要下第1课_文明产生与早期发展_知识点衔接详细表.html">第1课 文明与早期发展</a>
+                <a href="纲要下第1课重难点分析与课堂训练.html">第1课 重难点与训练</a>
+            </div>
         </div>
     </div>
 
@@ -508,6 +556,19 @@
 <div class="footer">
     © 2026 历史学习平台 · 助力历史教学
 </div>
+
+<script>
+function toggleCourse(btn) {
+    var list = btn.nextElementSibling;
+    if (list.style.display === "none") {
+        list.style.display = "block";
+        btn.textContent = "📂 收起课件";
+    } else {
+        list.style.display = "none";
+        btn.textContent = "📚 查看课件";
+    }
+}
+</script>
 
 </body>
 </html>
