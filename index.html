@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub 教育开源项目盘点（历史方向）</title>
+    <title>历史学习平台</title>
     <style>
         * {
             margin: 0;
@@ -13,25 +13,26 @@
 
         body {
             font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
-            background: #f8f5f0;
+            background: #f5f0e6;
             color: #3d2b1f;
-            line-height: 1.8;
+            min-height: 100vh;
         }
 
-        /* 顶部横幅 */
+        /* ===== 顶部大横幅 ===== */
         .hero {
-            background: linear-gradient(135deg, #2d6a4f, #40916c, #2d6a4f);
-            padding: 50px 20px;
+            background: linear-gradient(135deg, #8b1a1a, #b83030, #8b1a1a);
+            padding: 60px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
         .hero::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a373' fill-opacity='0.08'%3E%3Cpath d='M30 30l15-15v30L30 30zM30 30L15 15v30l15-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a84e' fill-opacity='0.08'%3E%3Cpath d='M30 30l15-15v30L30 30zM30 30L15 15v30l15-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             opacity: 0.5;
         }
 
@@ -41,363 +42,444 @@
         }
 
         .hero h1 {
-            font-size: 2.4rem;
-            color: #f8f5f0;
-            letter-spacing: 6px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            margin-bottom: 8px;
+            font-size: 3.2rem;
+            color: #f5e6c8;
+            letter-spacing: 12px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            margin-bottom: 10px;
         }
 
         .hero-sub {
-            font-size: 1rem;
-            color: rgba(212, 163, 115, 0.9);
-            letter-spacing: 4px;
+            font-size: 1.1rem;
+            color: rgba(200, 168, 78, 0.9);
+            letter-spacing: 6px;
             font-family: 'STKaiti', 'KaiTi', '楷体', serif;
         }
 
         .hero-divider {
-            width: 100px;
+            width: 120px;
             height: 3px;
-            background: linear-gradient(to right, transparent, #d4a373, transparent);
-            margin: 18px auto 0;
+            background: linear-gradient(to right, transparent, #c8a84e, transparent);
+            margin: 20px auto 0;
         }
 
-        /* 主容器 */
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        /* ===== 导航栏 ===== */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 18px;
+            background: #8b1a1a;
+            border-bottom: 3px solid #c8a84e;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        /* 分类区块 */
-        .section {
-            margin-bottom: 40px;
+        .nav-item {
+            position: relative;
         }
 
-        .section-title {
-            font-size: 1.35rem;
-            color: #2d6a4f;
-            border-left: 4px solid #d4a373;
-            padding-left: 14px;
-            margin-bottom: 16px;
+        .nav-btn {
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .section-title .emoji {
-            font-size: 1.4rem;
-        }
-
-        /* 表格 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-
-        thead {
-            background: #2d6a4f;
-            color: #fff;
-        }
-
-        thead th {
-            padding: 12px 16px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-        }
-
-        tbody td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #eee;
-            font-size: 0.93rem;
-            vertical-align: top;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        tbody tr:hover {
-            background: #f0faf5;
-        }
-
-        .project-name {
-            font-weight: 600;
-            color: #2d6a4f;
-            font-family: 'Consolas', 'Courier New', monospace;
-        }
-
-        .stars {
-            color: #d4a373;
-            font-weight: 600;
+            padding: 10px 24px;
+            background: transparent;
+            border: 2px solid #c0392b;
+            border-radius: 4px;
+            color: #ffd700;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
             white-space: nowrap;
         }
 
-        .desc {
-            color: #555;
-            line-height: 1.7;
+        .nav-btn:hover {
+            background: #c0392b;
+            color: #ffd700;
+            box-shadow: 0 0 12px rgba(192, 57, 43, 0.6);
         }
 
-        /* 重点推荐 */
-        .recommend {
-            background: linear-gradient(135deg, #f0faf5, #fef9f0);
-            border: 2px solid #d4a373;
+        .nav-btn .arrow {
+            font-size: 0.6rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-item:hover .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* ===== 下拉菜单 ===== */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 200px;
+            background: #1a0a00;
+            border: 2px solid #c0392b;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            z-index: 200;
+        }
+
+        .nav-item:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 20px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background 0.15s, color 0.15s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            background: rgba(192, 57, 43, 0.3);
+            color: #ffd700;
+        }
+
+        .dropdown a .tag {
+            font-size: 0.7rem;
+            background: #c8a84e;
+            color: #8b1a1a;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        /* ===== 主内容 ===== */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 20px 70px;
+            background: rgba(255,255,255,0.4);
             border-radius: 12px;
-            padding: 28px;
-            margin-top: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
-        .recommend .section-title {
-            border-left-color: #2d6a4f;
-            font-size: 1.3rem;
+        /* ===== 板块标题 ===== */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            margin-top: 50px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #c8a84e;
         }
 
-        .recommend-list {
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .section-title h2 {
+            font-size: 1.6rem;
+            color: #8b1a1a;
+            letter-spacing: 4px;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        .section-title .line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, #c8a84e, transparent);
+        }
+
+        /* ===== 卡片 ===== */
+        .cards {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-top: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
         }
 
-        .recommend-card {
-            background: #fff;
-            border-radius: 8px;
-            padding: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border-left: 3px solid #d4a373;
-            transition: transform 0.2s, box-shadow 0.2s;
+        .card {
+            background: #fffdf5;
+            border: 2px solid #c8a84e;
+            border-radius: 10px;
+            padding: 30px 24px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 4px 4px 0 #c8a84e, 6px 6px 16px rgba(0,0,0,0.15);
         }
 
-        .recommend-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #8b1a1a, #c8a84e, #8b1a1a);
         }
 
-        .recommend-card .card-title {
-            font-weight: 700;
-            color: #2d6a4f;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 1rem;
-            margin-bottom: 6px;
+        .card:hover {
+            border-color: #8b1a1a;
+            transform: translateY(-6px);
+            box-shadow: 6px 6px 0 #8b1a1a, 10px 10px 24px rgba(0,0,0,0.2);
         }
 
-        .recommend-card .card-reason {
-            color: #666;
+        .card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: #8b1a1a;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .card p {
             font-size: 0.9rem;
-            line-height: 1.6;
+            color: #7a6555;
+            line-height: 1.7;
+            margin-bottom: 22px;
         }
 
-        /* 页脚 */
+        .card a {
+            display: inline-block;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #8b1a1a, #a63c3c);
+            color: #f5e6c8;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            transition: all 0.2s;
+            border: 1px solid #c8a84e;
+        }
+
+        .card a:hover {
+            background: linear-gradient(135deg, #c8a84e, #e2c97e);
+            color: #8b1a1a;
+            box-shadow: 0 0 16px rgba(200, 168, 78, 0.4);
+        }
+
+        .card.coming-soon {
+            opacity: 0.6;
+        }
+
+        .card.coming-soon a {
+            background: #b0a08a;
+            border-color: #b0a08a;
+            color: #fff;
+            cursor: not-allowed;
+        }
+
+        .card.coming-soon a:hover {
+            background: #b0a08a;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        /* ===== 底部 ===== */
         .footer {
             text-align: center;
-            padding: 24px;
-            color: #999;
+            color: #666;
             font-size: 0.85rem;
-            border-top: 1px solid #eee;
-            margin-top: 20px;
+            padding: 30px;
+            border-top: 1px solid #2a2a2a;
+            letter-spacing: 2px;
         }
 
-        /* 响应式 */
+        /* ===== 手机适配 ===== */
         @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 1.6rem;
-                letter-spacing: 3px;
-            }
-
-            .recommend-list {
-                grid-template-columns: 1fr;
-            }
-
-            thead th, tbody td {
-                padding: 10px 12px;
-                font-size: 0.85rem;
-            }
+            .hero { padding: 40px 16px; }
+            .hero h1 { font-size: 2rem; letter-spacing: 6px; }
+            .hero-sub { font-size: 0.9rem; letter-spacing: 3px; }
+            .navbar { gap: 6px; padding: 12px; }
+            .nav-btn { padding: 8px 14px; font-size: 0.9rem; }
+            .cards { grid-template-columns: 1fr; gap: 16px; }
+            .section-title h2 { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 顶部横幅 -->
-    <div class="hero">
-        <div class="hero-content">
-            <h1>GitHub 教育开源项目盘点</h1>
-            <div class="hero-sub">历史方向 · 精选推荐</div>
-            <div class="hero-divider"></div>
+<!-- 大横幅 -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>历史学习平台</h1>
+        <p class="hero-sub">以史为鉴 · 助力教学</p>
+        <div class="hero-divider"></div>
+    </div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="navbar">
+    <div class="nav-item">
+        <button class="nav-btn">🎮 游戏 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="game.html">朝代更替 <span class="tag">已上线</span></a>
+            <a href="#">竞猜抢答</a>
+        </div>
+    </div>
+    <div class="nav-item">
+        <button class="nav-btn">📗 高一 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">中外历史纲要（上）</a>
+            <a href="europe.html">中外历史纲要（下） <span class="tag">已上线</span></a>
+        </div>
+    </div>
+    <div class="nav-item">
+        <button class="nav-btn">📘 高二 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">选择性必修一</a>
+            <a href="#">选择性必修二</a>
+            <a href="#">选择性必修三</a>
+        </div>
+    </div>
+    <div class="nav-item">
+        <button class="nav-btn">📙 高三 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">单元训练</a>
+            <a href="#">模拟测试</a>
+            <a href="#">高考真题</a>
+        </div>
+    </div>
+    <div class="nav-item">
+        <button class="nav-btn">🌐 历史纵横 <span class="arrow">▼</span></button>
+        <div class="dropdown">
+            <a href="#">中国史</a>
+            <a href="#">世界史</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 主内容 -->
+<div class="main">
+
+    <div class="section-title">
+        <h2>🎮 游戏</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card">
+            <span class="icon">🏛️</span>
+            <h3>朝代更替</h3>
+            <p>将中国古代朝代按正确顺序排列，考验历史记忆与排序能力！</p>
+            <a href="game.html">开始挑战</a>
+        </div>
+        <div class="card coming-soon">
+            <span class="icon">⚡</span>
+            <h3>竞猜抢答</h3>
+            <p>历史知识抢答挑战，限时作答，比拼速度与准确率！</p>
+            <a href="#">敬请期待</a>
         </div>
     </div>
 
-    <div class="container">
-
-        <!-- 📚 高考备考类 -->
-        <div class="section">
-            <div class="section-title">
-                <span class="emoji">📚</span> 高考备考类
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width:22%">项目</th>
-                        <th style="width:10%">Stars</th>
-                        <th>说明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="project-name">GAOKAO-Eval</td>
-                        <td class="stars">⭐ 116</td>
-                        <td class="desc">上海 AI Lab 出品，把 2024 年高考各科试卷拿来测试各大 AI 模型，历史在文综里。有完整的模型答题记录和评分结果</td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">Gaokao-Study-Materials</td>
-                        <td class="stars">⭐ 34</td>
-                        <td class="desc">个人整理的高考各科学习资料，含语文数学英语物理化学生物，历史内容不多但可参考</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 🏛 中国历史经典文献 -->
-        <div class="section">
-            <div class="section-title">
-                <span class="emoji">🏛</span> 中国历史经典文献
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width:22%">项目</th>
-                        <th style="width:10%">Stars</th>
-                        <th>说明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="project-name">china-history</td>
-                        <td class="stars">⭐ 62</td>
-                        <td class="desc">收录《二十四史》全套原文+白话翻译（史记、汉书、三国志、宋史、明史等），可直接在线阅读</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 🗺️ 历史可视化 / 交互类 -->
-        <div class="section">
-            <div class="section-title">
-                <span class="emoji">🗺️</span> 历史可视化 / 交互类
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width:22%">项目</th>
-                        <th style="width:10%">Stars</th>
-                        <th>说明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="project-name">MAO-MAP</td>
-                        <td class="stars">⭐ 525</td>
-                        <td class="desc">交互式地图，展示 1893–1976 年间的历史轨迹，可视化效果很棒，课堂展示极佳</td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">DYNASTIES</td>
-                        <td class="stars">⭐ 4</td>
-                        <td class="desc">中国朝代时间线可视化，用 HTML + jQuery 实现</td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">CHINESE_HISTORY</td>
-                        <td class="stars">⭐ 141</td>
-                        <td class="desc">完整的中国历史电子书合集</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 🤖 AI + 历史教育 -->
-        <div class="section">
-            <div class="section-title">
-                <span class="emoji">🤖</span> AI + 历史教育（前沿方向）
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width:22%">项目</th>
-                        <th style="width:10%">Stars</th>
-                        <th>说明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="project-name">InternLM-History</td>
-                        <td class="stars">—</td>
-                        <td class="desc">基于大模型的中学生历史学习助手，用 InternLM 开发，可对话问答历史知识</td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">LEARNFROMHISTORY-SKILL</td>
-                        <td class="stars">⭐ 1</td>
-                        <td class="desc">将历史案例转化为决策推演工具，用 Claude Code 实现，"以史为鉴"思路很有意思</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 📖 教材类 -->
-        <div class="section">
-            <div class="section-title">
-                <span class="emoji">📖</span> 教材类
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width:22%">项目</th>
-                        <th>说明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="project-name">ChinaTextbook</td>
-                        <td class="desc">收录从小学到大学各学科 PDF 教材，含历史相关，部分可免费获取</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 💡 重点推荐 -->
-        <div class="recommend">
-            <div class="section-title">
-                <span class="emoji">💡</span> 重点推荐
-            </div>
-            <p style="color:#666; font-size:0.93rem;">结合你的需求（教高一世界近现代史），以下四个项目最值得参考：</p>
-            <div class="recommend-list">
-                <div class="recommend-card">
-                    <div class="card-title">MAO-MAP</div>
-                    <div class="card-reason">1893–1976 年的历史地图，课堂展示用，视觉效果好</div>
-                </div>
-                <div class="recommend-card">
-                    <div class="card-title">china-history</div>
-                    <div class="card-reason">二十四史原文+白话，做课件引用史料很方便</div>
-                </div>
-                <div class="recommend-card">
-                    <div class="card-title">GAOKAO-Eval</div>
-                    <div class="card-reason">了解 AI 如何答题，对理解高考命题趋势有帮助</div>
-                </div>
-                <div class="recommend-card">
-                    <div class="card-title">InternLM-History</div>
-                    <div class="card-reason">可以借鉴思路，未来搭一个 AI 历史问答助手</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            GitHub 教育开源项目盘点 · 历史方向
-        </div>
-
+    <div class="section-title">
+        <h2>📗 高一</h2>
+        <div class="line"></div>
     </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <span class="icon">📖</span>
+            <h3>中外历史纲要（上）</h3>
+            <p>中国史部分，从远古到近现代</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card">
+            <span class="icon">🌍</span>
+            <h3>中外历史纲要（下）</h3>
+            <p>欧洲思想解放运动等课件，涵盖世界古代至近代史</p>
+            <a href="europe.html">查看课件</a>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>📘 高二</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <span class="icon">🏛️</span>
+            <h3>选择性必修一</h3>
+            <p>国家制度与社会治理</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <span class="icon">💰</span>
+            <h3>选择性必修二</h3>
+            <p>经济与社会生活</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <span class="icon">🎨</span>
+            <h3>选择性必修三</h3>
+            <p>文化交流与传播</p>
+            <a href="#">建设中</a>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>📙 高三</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <span class="icon">📝</span>
+            <h3>单元训练</h3>
+            <p>按教材单元划分，专项强化训练</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <span class="icon">📋</span>
+            <h3>模拟测试</h3>
+            <p>综合模拟测试卷，限时作答</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <span class="icon">🏆</span>
+            <h3>高考真题</h3>
+            <p>历年高考历史真题汇编与解析</p>
+            <a href="#">建设中</a>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>🌐 历史纵横</h2>
+        <div class="line"></div>
+    </div>
+    <div class="cards">
+        <div class="card coming-soon">
+            <span class="icon">🐉</span>
+            <h3>中国史</h3>
+            <p>中国历史专题与通史资料</p>
+            <a href="#">建设中</a>
+        </div>
+        <div class="card coming-soon">
+            <span class="icon">🌏</span>
+            <h3>世界史</h3>
+            <p>世界历史专题与通史资料</p>
+            <a href="#">建设中</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+    © 2026 历史学习平台 · 助力历史教学
+</div>
 
 </body>
 </html>
