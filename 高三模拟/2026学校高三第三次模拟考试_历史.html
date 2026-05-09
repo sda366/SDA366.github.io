@@ -1,0 +1,720 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高三第三次模拟考试·历史</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: #f5f5f5;
+    font-family: 'Noto Sans SC', 'SimHei', '黑体', sans-serif;
+    font-size: 14pt;
+    line-height: 1.8;
+    color: #222;
+    padding: 20px;
+  }
+  
+  .paper-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 50px 60px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-radius: 4px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 22pt;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  
+  .subtitle {
+    text-align: center;
+    font-size: 14pt;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    font-size: 15pt;
+    font-weight: 700;
+    margin: 30px 0 15px 0;
+    padding: 8px 0;
+    border-bottom: 2px solid #333;
+  }
+  
+  .section-desc {
+    font-size: 14pt;
+    margin-bottom: 20px;
+    text-indent: 0;
+  }
+  
+  .question-block {
+    margin-bottom: 28px;
+    padding: 16px 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+    transition: background 0.2s;
+  }
+  
+  .question-text {
+    font-size: 14pt;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 1.9;
+  }
+  
+  .options {
+    padding-left: 10px;
+  }
+  
+  .option {
+    display: block;
+    padding: 6px 14px;
+    margin: 4px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 14pt;
+    line-height: 1.8;
+    border: 1px solid transparent;
+  }
+  
+  .option:hover {
+    background: #eef2ff;
+    border-color: #b8c5f0;
+  }
+  
+  .option.correct {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+    font-weight: 500;
+  }
+  
+  .option.wrong {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+  }
+  
+  .option.disabled {
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  
+  .option input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.15);
+    vertical-align: middle;
+  }
+  
+  .option label {
+    cursor: pointer;
+    display: inline;
+    vertical-align: middle;
+  }
+  
+  .answer-toggle {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 16px;
+    background: #e9ecef;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13pt;
+    color: #333;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  
+  .answer-toggle:hover {
+    background: #d0d4d8;
+  }
+  
+  .answer-panel {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: #fff8e1;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 4px;
+    font-size: 13pt;
+    line-height: 1.8;
+  }
+  
+  .answer-panel.show {
+    display: block;
+  }
+  
+  .answer-panel .ans-label {
+    font-weight: 700;
+    color: #c0392b;
+  }
+  
+  .answer-panel .analysis-label {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-top: 6px;
+  }
+  
+  .subquestion {
+    margin-bottom: 18px;
+  }
+  
+  .subquestion .question-text {
+    font-weight: 500;
+  }
+  
+  .subquestion textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    font-size: 13pt;
+    font-family: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-top: 6px;
+  }
+  
+  .subquestion textarea:focus {
+    outline: none;
+    border-color: #4a6cf7;
+    box-shadow: 0 0 0 2px rgba(74,108,247,0.12);
+  }
+  
+  .material-box {
+    background: #f8f6f0;
+    padding: 14px 18px;
+    border-left: 4px solid #8e735b;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    font-size: 13pt;
+    line-height: 1.9;
+  }
+  
+  .material-box p {
+    text-indent: 2em;
+    margin-bottom: 6px;
+  }
+  
+  .subquestion .answer-panel {
+    background: #f0f8ff;
+    border-left-color: #4a6cf7;
+  }
+  
+  .subquestion .answer-toggle {
+    background: #e8eef7;
+  }
+  
+  .table-wrap {
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12pt;
+  }
+  
+  .table-wrap th, .table-wrap td {
+    border: 1px solid #bbb;
+    padding: 6px 10px;
+    text-align: center;
+  }
+  
+  .table-wrap th {
+    background: #eef2f7;
+    font-weight: 500;
+  }
+  
+  .stat-section {
+    margin: 20px 0;
+    padding: 14px 18px;
+    background: #e8f5e9;
+    border-radius: 6px;
+    font-size: 14pt;
+    text-align: center;
+  }
+  
+  .stat-section span {
+    font-weight: 700;
+    color: #2e7d32;
+  }
+  
+  @media print {
+    body { background: #fff; padding: 0; }
+    .paper-container { box-shadow: none; padding: 40px; }
+    .option { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .option.correct, .option.wrong, .answer-panel { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  @media (max-width: 640px) {
+    .paper-container { padding: 20px 16px; }
+    body { font-size: 12pt; }
+    .question-text, .option, .section-desc { font-size: 12pt; }
+    h1 { font-size: 18pt; }
+    .answer-panel { font-size: 12pt; }
+  }
+
+  .rating-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 13pt;
+  }
+  .rating-table th, .rating-table td {
+    border: 1px solid #bbb;
+    padding: 8px 12px;
+    text-align: center;
+  }
+  .rating-table th {
+    background: #eef2f7;
+  }
+</style>
+</head>
+<body>
+<div class="paper-container">
+
+<h1>高三第三次模拟考试</h1>
+<p class="subtitle">历 史</p>
+
+<div class="section-desc">
+  <b>注意事项：</b><br>
+  1. 答题前，务必将自己的个人信息填写在答题卡上，并将条形码粘贴在答题卡上的指定位置。<br>
+  2. 回答选择题时，选出每小题答案后，用铅笔把答题卡对应题目的答案标号涂黑。如需改动，用橡皮擦干净后，再选涂其他答案标号。回答非选择题时，将答案写在答题卡上。
+</div>
+
+<!-- ==================== 选择题 ==================== -->
+<div class="section-title">一、选择题</div>
+<p class="section-desc">本题共16小题，每小题3分，共48分。在每小题给出的四个选项中，只有一项是符合题目要求的。</p>
+
+<div id="q1" class="question-block">
+  <div class="question-text">1. 在三星堆遗址的考古发掘中，尚未发现过中原青铜礼器系统中最具代表性的鼎，但发现了作为礼器使用的尊和罍。同样，三星堆出土的玉璋、玉璧、玉琮等玉器在中原文化中也是作为礼器使用。这表明巴蜀文明</div>
+  <div class="options" data-correct="A">
+    <div class="option" data-value="A"> A. 与中原文明存在一定联系</div>
+    <div class="option" data-value="B"> B. 为中华文明作出独特贡献</div>
+    <div class="option" data-value="C"> C. 影响中原地区的礼乐制度</div>
+    <div class="option" data-value="D"> D. 代表中华文明的发展轨迹</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans1')">答案解析</span>
+  <div id="ans1" class="answer-panel">
+    <p><span class="ans-label">正确答案：A</span></p>
+    <p><span class="analysis-label">解析：</span>三星堆遗址出土了中原青铜礼器系统中常见的尊和罍，同时出土的玉璋、玉璧、玉琮等玉器在中原文化中也同样作为礼器使用。这些共同的文化元素表明，巴蜀文明与中原文明存在一定程度的联系，A项正确。材料并未涉及三星堆的器物或文化对外输出或对中华文明整体作了何种贡献，排除B项；材料仅体现巴蜀文明与中原文明存在文化交流与机制上的相通性，无法判断是巴蜀文明影响中原礼乐制度，排除C项；D项夸大了巴蜀文明的地位，排除。</p>
+  </div>
+</div>
+
+<div id="q2" class="question-block">
+  <div class="question-text">2. 战国时期，布币的形状模仿农具，流通区域广泛，涵盖韩、赵、魏等多个诸侯国，各国都有独立的铸币权，布币上的铭文多为各诸侯国的地名。这反映了当时</div>
+  <div class="options" data-correct="D">
+    <div class="option" data-value="A"> A. 铁制农具普遍使用</div>
+    <div class="option" data-value="B"> B. 中原地区商业繁荣</div>
+    <div class="option" data-value="C"> C. 货币实现局部统一</div>
+    <div class="option" data-value="D"> D. 区域经济联系密切</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans2')">答案解析</span>
+  <div id="ans2" class="answer-panel">
+    <p><span class="ans-label">正确答案：D</span></p>
+    <p><span class="analysis-label">解析：</span>布币作为交换媒介的跨区域使用，反映出区域经济联系密切，D项正确。材料只涉及货币形状与农具的相似性，不能由此推断农业生产工具的实际使用状况，排除A项；"布币在多个诸侯国流通"这一现象无法直接证明商业繁荣，排除B项；材料说明各国仍然自主铸造货币，并未实现货币的统一，排除C项。</p>
+  </div>
+</div>
+
+<div id="q3" class="question-block">
+  <div class="question-text">3. 《旧唐书·杨绾传》记载："近场帝始置进士之科，当时犹试策而已。至高宗朝，刘思立为考功员外郎，又奏进士加杂文，明经填帖。"这表明科举制</div>
+  <div class="options" data-correct="D">
+    <div class="option" data-value="A"> A. 考试内容渐趋僵化</div>
+    <div class="option" data-value="B"> B. 选拔范围逐渐放宽</div>
+    <div class="option" data-value="C"> C. 考试程序日益公平</div>
+    <div class="option" data-value="D"> D. 选拔要求不断提高</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans3')">答案解析</span>
+  <div id="ans3" class="answer-panel">
+    <p><span class="ans-label">正确答案：D</span></p>
+    <p><span class="analysis-label">解析：</span>由材料可知，唐朝科举考试科目从"试策"到"加杂文""填帖"，内容从单一走向多元，难度提升且考试内容范围扩大，表明科举制对考生的知识结构和能力要求不断提高，D项正确。科举考试内容的增加，是考试内容丰富化的表现，而非僵化，排除A项；材料未涉及科举选拔范围的变化，排除B项；材料未涉及考试程序相关信息，排除C项。</p>
+  </div>
+</div>
+
+<div id="q4" class="question-block">
+  <div class="question-text">4. 北宋汴梁流行的茜色石榴裙因色彩浓艳被斥为"不类儒风"，而南宋临安流行的霜白、水绿等低饱和色系则被称为"素雅合道"。这反映了</div>
+  <div class="options" data-correct="C">
+    <div class="option" data-value="A"> A. 商品经济推动服饰变革</div>
+    <div class="option" data-value="B"> B. 士人阶层审美趋向保守</div>
+    <div class="option" data-value="C"> C. 理学思想影响社会生活</div>
+    <div class="option" data-value="D"> D. 服饰观念强化等级秩序</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans4')">答案解析</span>
+  <div id="ans4" class="answer-panel">
+    <p><span class="ans-label">正确答案：C</span></p>
+    <p><span class="analysis-label">解析：</span>由材料可知，宋代服饰审美推崇素雅、克制、内敛，并以"道""儒风"作为评判标准，这正是理学强调崇尚简约内敛的价值观念在社会生活与审美上的体现，C项正确。商品经济繁荣通常伴随着服饰的多样化、华丽化，素雅、朴素的审美趋向与商品经济的推动作用方向相反，排除A项；材料反映的审美观念并非士人阶层的单个行为，而是整个社会受理学思想影响的结果，且服饰色彩流行素雅，不等于审美保守，排除B项；材料只涉及色彩风格，未体现服饰的等级身份差异，排除D项。</p>
+  </div>
+</div>
+
+<div id="q5" class="question-block">
+  <div class="question-text">5. 明朝正德年间，巡按御史毛伯温巡按河南，荐举卫辉府知府王继堪任提学官，理由是其"学术渊深，操履醇谨"；弹劾睢州知州任秉一"立心不正，行事乖方，巧于取财"，并奏请皇帝将其罢黜。这说明当时监察制度</div>
+  <div class="options" data-correct="B">
+    <div class="option" data-value="A"> A. 提高了地方行政决策效率</div>
+    <div class="option" data-value="B"> B. 强化了中央对地方的管控</div>
+    <div class="option" data-value="C"> C. 造成了巡按御史权力膨胀</div>
+    <div class="option" data-value="D"> D. 完善了地方分权制衡机制</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans5')">答案解析</span>
+  <div id="ans5" class="answer-panel">
+    <p><span class="ans-label">正确答案：B</span></p>
+    <p><span class="analysis-label">解析：</span>由材料可知，明代中央通过巡按御史制度，对地方官员的履职情况进行监督、考核与处置，这是中央通过监察系统，加强对地方官员的考核与控制，强化了中央对地方的管控，B项正确。荐举与弹劾属于监察范畴，与"行政决策效率"无直接关联，排除A项；材料仅体现巡按御史正常行使荐举与弹劾的职权，并未表明其滥用权力、超越权限，排除C项；巡按御史是中央政府派出的监察官，不能体现地方各权力部门之间的相互制衡，排除D项。</p>
+  </div>
+</div>
+
+<div id="q6" class="question-block">
+  <div class="question-text">6. 晚清时期，中兴名臣曾国藩仅赏侯爵，李鸿章不过伯爵，其余百战功臣，竟有望男爵而不得者。随着商部的成立，颁行《奖励商勋章程》和《华商办理实业爵赏章程》规定：办理1000万元以上实业者赏给男爵，办理2000万元以上实业者赏给子爵。这一规定</div>
+  <div class="options" data-correct="D">
+    <div class="option" data-value="A"> A. 推动了选官制度改革</div>
+    <div class="option" data-value="B"> B. 缓解了政府财政危机</div>
+    <div class="option" data-value="C"> C. 打破了社会等级制度</div>
+    <div class="option" data-value="D"> D. 冲击了传统抑商观念</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans6')">答案解析</span>
+  <div id="ans6" class="answer-panel">
+    <p><span class="ans-label">正确答案：D</span></p>
+    <p><span class="analysis-label">解析：</span>由材料可知，20世纪初政府规定以爵位奖励实业，体现出国家政策重心的转变，从军功优先转向实业优先，表明国家从轻视商业转向鼓励发展工商业，这直接冲击了传统的抑商观念，D项正确。材料主旨是爵位赏赐，而非选官制度，排除A项；奖励实业与爵位赏赐的目的是鼓励兴办实业、发展经济，B项并非这一政策的直接影响，排除；商人获得爵位只是社会等级地位局部变动，并未从根本上打破社会等级结构，排除C项。</p>
+  </div>
+</div>
+
+<div id="q7" class="question-block">
+  <div class="question-text">7. 中华民国成立后，推行历法改革，时人有竹枝词云："新岁齐刊月份牌，各家争赛画图佳。编年民国和黄帝，竟有仍将宣统排。"这表明</div>
+  <div class="options" data-correct="A">
+    <div class="option" data-value="A"> A. 社会转型期新旧观念交织</div>
+    <div class="option" data-value="B"> B. 民主共和观念已深入人心</div>
+    <div class="option" data-value="C"> C. 传统纪年方式被彻底摒弃</div>
+    <div class="option" data-value="D"> D. 历法改革顺应了民间需求</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans7')">答案解析</span>
+  <div id="ans7" class="answer-panel">
+    <p><span class="ans-label">正确答案：A</span></p>
+    <p><span class="analysis-label">解析：</span>材料反映了中华民国成立后，处于新旧社会交替、政权更迭的阶段，民众的观念尚未统一，旧的皇权意识与传统纪年习惯仍然存在，新的民国纪年尚未完全普及。这正是社会转型期新旧观念并存、交替、碰撞的表现，A项正确。"深入人心"与材料主旨不符，排除B项；"竟有仍将宣统排"表明传统纪年仍在使用，排除C项；材料中多种纪年并存说明历法改革并未完全被民间统一接受，排除D项。</p>
+  </div>
+</div>
+
+<div id="q8" class="question-block">
+  <div class="question-text">8. 解放战争时期，晋察冀野战军普遍开展"兵演兵"活动，战士们创作、演出了大量生动活泼、短小精悍的快板剧、小节目。《买卖公平》《上战场》《赵喜来庆功》等剧目深受战士欢迎。这反映了</div>
+  <div class="options" data-correct="B">
+    <div class="option" data-value="A"> A. 文艺创作呈现多元化趋势</div>
+    <div class="option" data-value="B"> B. 革命文艺服务于现实任务</div>
+    <div class="option" data-value="C"> C. 统一战线范围的不断扩大</div>
+    <div class="option" data-value="D"> D. 解放区文化实现全面提升</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans8')">答案解析</span>
+  <div id="ans8" class="answer-panel">
+    <p><span class="ans-label">正确答案：B</span></p>
+    <p><span class="analysis-label">解析：</span>材料中的剧目由战士创作，为战士演出，"上战场""庆功"等内容贴近部队生活与战争实际，服务于战前动员，能激励战斗士气。这说明当时的文艺活动不是脱离现实的消遣，而是结合战争需要，服务于提高部队战斗力、纪律建设、鼓舞士气的现实任务，B项正确。材料只提及快板剧、小节目等形式，并未展示多种不同类型、风格或题材的文艺作品，无法体现文艺创作多元化，排除A项；材料未涉及中国共产党与其他阶级、党派、团体的联合，排除C项；材料仅反映军队内部文艺活动，"全面提升"表述夸大，排除D项。</p>
+  </div>
+</div>
+
+<div id="q9" class="question-block">
+  <div class="question-text">9. 1956年1月，中共中央召开关于知识分子问题的会议，周恩来指出，知识分子中间的绝大部分已是工人阶级的一部分。同时提出，要在第三个五年计划期末，使我国最急需的科学部门接近世界先进水平。这是为了</div>
+  <div class="options" data-correct="C">
+    <div class="option" data-value="A"> A. 推动"双百"方针全面落实</div>
+    <div class="option" data-value="B"> B. 实施科教兴国的国家战略</div>
+    <div class="option" data-value="C"> C. 适应国家工业化发展需要</div>
+    <div class="option" data-value="D"> D. 服务国民经济调整的需求</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans9')">答案解析</span>
+  <div id="ans9" class="answer-panel">
+    <p><span class="ans-label">正确答案：C</span></p>
+    <p><span class="analysis-label">解析：</span>根据材料并结合所学知识可知，1956年我国基本完成了社会主义改造，国家工作重心转向大规模经济建设，第一个五年计划正在实施。工业化建设迫切需要大量科学技术人才和科技创新成果，将知识分子定位为"工人阶级的一部分"，是为了调动知识分子的积极性，使其更好地服务于工业化和科技发展，C项正确。"双百"方针于1956年4月正式提出，排除A项；"科教兴国"战略于1995年提出，与材料时间不符，排除B项；国民经济调整（"调整、巩固、充实、提高"八字方针）是在1961年提出的，排除D项。</p>
+  </div>
+</div>
+
+<div id="q10" class="question-block">
+  <div class="question-text">10. 对下图数据解读合理的是（图：1991—2008年中国外资流入）</div>
+  <div style="text-align:center; margin:10px 0;">
+    <img src="q10_image.jpg" alt="1991—2008年中国外资流入" style="max-width:100%; height:auto;">
+  </div>
+  <div class="options" data-correct="B">
+    <div class="option" data-value="A"> A. 农村改革带动共同富裕</div>
+    <div class="option" data-value="B"> B. 思想解放推动对外开放</div>
+    <div class="option" data-value="C"> C. 城市改革激发企业活力</div>
+    <div class="option" data-value="D"> D. 科技创新增强发展优势</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans10')">答案解析</span>
+  <div id="ans10" class="answer-panel">
+    <p><span class="ans-label">正确答案：B</span></p>
+    <p><span class="analysis-label">解析：</span>根据材料并结合所学知识可知，1992年邓小平南方谈话进一步破除思想束缚，推动对外开放深化，促进1992—2008年外资流入持续增长，B项正确。农村改革与外资流入无直接关联，排除A项；城市经济体制改革主要是增强国内企业活力，与外资流入关系不大，排除C项；材料未体现科技创新因素，排除D项。</p>
+  </div>
+</div>
+
+<div id="q11" class="question-block">
+  <div class="question-text">11. 古埃及人认为埃及是宇宙的中心，他们以埃及的标准来判断其他国家的一切事物，如遇到从北向南流淌的河流时，将之命名为"倒流的河"。这表明古埃及</div>
+  <div class="options" data-correct="B">
+    <div class="option" data-value="A"> A. 对外文化交流频繁</div>
+    <div class="option" data-value="B"> B. 缺乏对外部世界的科学认知</div>
+    <div class="option" data-value="C"> C. 深受海洋文明影响</div>
+    <div class="option" data-value="D"> D. 重视对自然地理规律的探索</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans11')">答案解析</span>
+  <div id="ans11" class="answer-panel">
+    <p><span class="ans-label">正确答案：B</span></p>
+    <p><span class="analysis-label">解析：</span>古埃及人把不符合埃及地理认知的河流称为"倒流的河"，说明他们以自我为中心看待外部世界，地理观念带有局限性，缺乏客观、科学的外部认知，B项正确。材料未涉及埃及与其他文化的交流、互动或吸收外来文化的内容，排除A项；古埃及文明是典型的大河文明（尼罗河），且材料并未体现海洋文明的影响，排除C项；D项与材料主旨相悖，排除。</p>
+  </div>
+</div>
+
+<div id="q12" class="question-block">
+  <div class="question-text">12. 中世纪西欧制作图书的主要方式仍然是手抄，抄书所用的材料一般是羊皮纸。图书馆的数量极为有限，且藏量少得惊人，一般图书馆的平均藏书量在二三百册，1338年巴黎大学图书馆的藏书量仅为1722册。这说明</div>
+  <div class="options" data-correct="A">
+    <div class="option" data-value="A"> A. 知识传播受制于技术条件</div>
+    <div class="option" data-value="B"> B. 文化发展服务于社会需要</div>
+    <div class="option" data-value="C"> C. 东西方技术交流受到阻碍</div>
+    <div class="option" data-value="D"> D. 大学成为文化传播的中心</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans12')">答案解析</span>
+  <div id="ans12" class="answer-panel">
+    <p><span class="ans-label">正确答案：A</span></p>
+    <p><span class="analysis-label">解析：</span>由材料可知，中世纪西欧图书制作以手抄为主，使用羊皮纸作为书写材料，制作过程费时费力，成本高昂，且图书馆藏书量很少，这体现出书籍生产的低效率、高成本，制约了知识在社会中的传播，A项正确。材料只反映了图书生产方式和藏书规模，排除B项；材料未涉及东西方之间的技术交流，排除C项；材料中巴黎大学藏书量少，无法说明其是"文化传播中心"，排除D项。</p>
+  </div>
+</div>
+
+<div id="q13" class="question-block">
+  <div class="question-text">13. 有学者认为，在中世纪和文艺复兴时期之间，并没有遽然的断裂或容易划分的界限，包括经院哲学在内的中世纪的许多思想习惯，在欧洲很多地方一直流传到了16世纪。这一观点</div>
+  <div class="options" data-correct="C">
+    <div class="option" data-value="A"> A. 否定了文艺复兴的进步性</div>
+    <div class="option" data-value="B"> B. 揭示了宗教改革的思想根源</div>
+    <div class="option" data-value="C"> C. 强调了历史发展的延续性</div>
+    <div class="option" data-value="D"> D. 修正了传统史学的分期理论</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans13')">答案解析</span>
+  <div id="ans13" class="answer-panel">
+    <p><span class="ans-label">正确答案：C</span></p>
+    <p><span class="analysis-label">解析：</span>材料观点明确反对将中世纪与文艺复兴时期视为截然断裂的两个时期，而是强调中世纪的文化、思想传统在文艺复兴时期乃至更晚的时期仍然延续存在。因此，该学者强调的是历史发展的延续性，C项正确。材料并未否定文艺复兴的进步性，只是表明历史发展的延续性，排除A项；材料讨论的是中世纪与文艺复兴时期之间的关系，并未涉及宗教改革，排除B项；材料强调中世纪与文艺复兴时期之间的延续性，未提及该学者对传统史学分期理论的修正，排除D项。</p>
+  </div>
+</div>
+
+<div id="q14" class="question-block">
+  <div class="question-text">14. 1701—1802年，英国对棉花的需求增加了60倍，来自西印度群岛、巴西、印度等地的棉花已不能满足需要。这为美国人创造了商业机会，他们从英国对棉花的巨大需求中看到了希望。这直接导致了美国</div>
+  <div class="options" data-correct="D">
+    <div class="option" data-value="A"> A. 南北之间爆发战争</div>
+    <div class="option" data-value="B"> B. 资本主义工商业崛起</div>
+    <div class="option" data-value="C"> C. 加紧对外殖民掠夺</div>
+    <div class="option" data-value="D"> D. 种植园经济快速发展</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans14')">答案解析</span>
+  <div id="ans14" class="answer-panel">
+    <p><span class="ans-label">正确答案：D</span></p>
+    <p><span class="analysis-label">解析：</span>18世纪英国工业革命对原棉需求暴增，而美国南方适宜种植棉花，且以黑奴劳动力为基础。英国巨大的棉花需求直接刺激美国南方大规模扩大棉花种植，推动种植园经济快速发展，D项正确。南北战争爆发于1861年，与材料时间不符，排除A项；资本主义工商业主要在美国北方，材料指向棉花原料供应，与南方种植园更直接相关，排除B项；材料体现的是英国需求带动美国内部棉花生产，并非美国对外殖民掠夺，排除C项。</p>
+  </div>
+</div>
+
+<div id="q15" class="question-block">
+  <div class="question-text">15. 下图是二战结束后大卫·洛发表于英国一家晚报的漫画《看向华盛顿》，后被多国媒体转载。该漫画反映出</div>
+  <div style="text-align:center; margin:10px 0;">
+    <img src="q15_image.jpg" alt="漫画《看向华盛顿》" style="max-width:100%; height:auto;">
+  </div>
+  <div class="options" data-correct="B">
+    <div class="option" data-value="A"> A. 战争给人类带来了灾难与贫困</div>
+    <div class="option" data-value="B"> B. 欧洲国家渴望获得援助的困境</div>
+    <div class="option" data-value="C"> C. 冷战背景下区域协作的必要性</div>
+    <div class="option" data-value="D"> D. 战后国际局势的不确定性增强</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans15')">答案解析</span>
+  <div id="ans15" class="answer-panel">
+    <p><span class="ans-label">正确答案：B</span></p>
+    <p><span class="analysis-label">解析：</span>二战后欧洲经济凋敝、民生困苦，漫画中欧洲民众衣衫褴褛、眺望华盛顿，旁边的地面散落欧洲重建计划，但国会山顶部的问号以及云雾重重，折射出美国态度不明，集中反映出战后欧洲迫切希望得到美国援助的期待与现实困境，B项正确。漫画重点不是展示战争的惨状，而是表现欧洲人眺望华盛顿、渴望援助的行为，排除A项；漫画未体现区域协作，重点是对美关系，排除C项；漫画重点是欧洲对美国的期待与担忧，而非整体国际局势的不确定，排除D项。</p>
+  </div>
+</div>
+
+<div id="q16" class="question-block">
+  <div class="question-text">16. 下表为世界不同国家和地区占世界GDP的份额（单位：%）。据此可知</div>
+  <div class="table-wrap">
+  <table>
+    <tr><th>国家或地区</th><th>1960年</th><th>1973年</th><th>1991年</th><th>2016年</th><th>2023年</th></tr>
+    <tr><td>美国</td><td>31</td><td>27.8</td><td>26.8</td><td>24</td><td>23.6</td></tr>
+    <tr><td>美加墨</td><td>34.9</td><td>32</td><td>31</td><td>27.6</td><td>27</td></tr>
+    <tr><td>欧盟27国</td><td>27.8</td><td>27.8</td><td>25.4</td><td>17.9</td><td>16.6</td></tr>
+    <tr><td>中国</td><td>1.4</td><td>1.3</td><td>3.1</td><td>15.2</td><td>18.4</td></tr>
+    <tr><td>中日韩</td><td>7</td><td>10.1</td><td>14.3</td><td>22.9</td><td>25.2</td></tr>
+    <tr><td>RCEP15国</td><td>10.3</td><td>13.3</td><td>18.4</td><td>28.4</td><td>30.8</td></tr>
+  </table>
+  </div>
+  <p style="font-size:12pt;color:#666;margin:4px 0 10px 0;">注：RCEP即《区域全面经济伙伴关系协定》，是由中国、日本、韩国、澳大利亚、新西兰及东盟十国共15个成员国签署的全球最大自由贸易协定。</p>
+  <div class="options" data-correct="C">
+    <div class="option" data-value="A"> A. 经济全球化趋势发生逆转</div>
+    <div class="option" data-value="B"> B. 区域性经济组织的实力下降</div>
+    <div class="option" data-value="C"> C. 世界经济重心向亚太转移</div>
+    <div class="option" data-value="D"> D. 全球治理模式发生重大转变</div>
+  </div>
+  <span class="answer-toggle" onclick="toggleAnswer('ans16')">答案解析</span>
+  <div id="ans16" class="answer-panel">
+    <p><span class="ans-label">正确答案：C</span></p>
+    <p><span class="analysis-label">解析：</span>由材料可知，美国、欧盟占世界GDP比重持续下降；中国、中日韩、RCEP15国（亚太地区）所占比重显著上升，这一趋势直观反映出世界经济重心逐步向亚太地区转移，C项正确。RCEP等区域合作正是全球化深化的表现，排除A项；RCEP（亚太区域经济贸易协定）的份额从10.3%上升至30.8%，实力显著增强，排除B项；材料未涉及全球治理模式，排除D项。</p>
+  </div>
+</div>
+
+<!-- ==================== 非选择题 ==================== -->
+<div class="section-title">二、非选择题</div>
+<p class="section-desc">本题共4小题，共52分。</p>
+
+<div class="question-block">
+  <div class="question-text" style="font-size:15pt;">17. 阅读材料，完成下列要求。（12分）</div>
+  <div class="material-box">
+    <p>材料 魏晋南北朝时期，是秦汉早期法律制度向隋唐成熟期法律制度过渡的重要阶段。三百多年里，每个政权几乎都进行过立法活动，主要有三国时期魏国的《魏律》，西晋的《泰始律》，北魏的《北魏律》，北齐的《北齐律》。这一时期涌现出众多的律学家，如陈群、钟繇、王朗、刘劭、杜预、张斐等。</p>
+    <p>《魏律》在大规模地整理秦汉旧律的基础上，根据当时具体的社会经济政治情况，增加九篇。魏晋在司法审判中，仍然沿袭汉时以《春秋》经义断案的传统，西晋《泰始律》确立的"准五服以制罪"制度，更是直接将儒家伦理引入量刑标准。西晋《泰始律》由张斐、杜预作注，注释与律文具有同等法律效力。北魏孝文帝多次修律，亲自执笔定刑。《北齐律》以《魏律》为基础修订而成，将《刑名》与《法例》合为《名例律》，作为法典总则，体例更为严谨。</p>
+    <p style="text-align:right;font-size:12pt;color:#666;">——摘编自张晋藩《中国法制史》等</p>
+  </div>
+  <div class="subquestion">
+    <div class="question-text">(1) 根据材料并结合所学知识，概括魏晋南北朝时期法律发展的特点。（6分）</div>
+    <span class="answer-toggle" onclick="toggleAnswer('ans17_1')">答案解析</span>
+    <div id="ans17_1" class="answer-panel">
+      <p><span class="ans-label">参考答案：</span></p>
+      <p>特点：承上启下；法律成果丰富；法律人才众多；体例兼备；儒法融合；注重法律解释；统治者重视。（每点2分，任答三点即可，其他答案言之有理亦可得分）</p>
+    </div>
+  </div>
+  <div class="subquestion">
+    <div class="question-text">(2) 根据材料并结合所学知识，分析魏晋南北朝时期法律发展的影响。（6分）</div>
+    <span class="answer-toggle" onclick="toggleAnswer('ans17_2')">答案解析</span>
+    <div id="ans17_2" class="answer-panel">
+      <p><span class="ans-label">参考答案：</span></p>
+      <p>影响：稳定了社会秩序；推动了礼法进一步结合；完善了法典体例；为隋唐法制完备奠定了基础；对后世律法影响深远。（每点2分，任答三点即可，其他答案言之有理亦可得分）</p>
+    </div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="question-text" style="font-size:15pt;">18. 阅读材料，完成下列要求。（14分）</div>
+  <div class="material-box">
+    <p><b>材料一</b> 1941—1943年，日军集中重兵对冀鲁豫抗日根据地反复实施"扫荡""蚕食"，推行"治安强化运动"，妄图摧毁敌后抗日根据地，控制中原战略要地。冀鲁豫抗日根据地通过开展大生产运动，按照"三三制"进行民主选举等，保障了军需民用物资供给。冀鲁豫军区部队联合地方抗日武装，在根据地群众大力支援下，深挖地道、修筑防御工事，广泛开展麻雀战、破袭战、伏击战；采取内线坚持与外线出击相结合的战术，主力部队与地方部队相配合等多种方式，组建游击支队，整训地方武装，多次粉碎日伪军的军事进攻，巩固了根据地的生存与发展。</p>
+    <p style="text-align:right;font-size:12pt;color:#666;">——摘编自王全营等《河南抗日战争史》</p>
+    <p><b>材料二</b> 冀鲁豫抗日根据地横跨河北、河南、山东三省广大平原一百余县，是联接华中、华东、华北和延安的交通枢纽，也是党在华北敌后打击日本侵略者的重要战场之一。作为华北抗战的重要战略支点，牵制和消耗了日伪军数十万兵力，粉碎了上百次"扫荡"，同时依托地缘优势，转运兵员、传递情报、输送战略物资，有力支援了全国抗战大局。根据地还培养和锻炼了大批优秀的干部和武装力量，这些干部和战士在抗战胜利后，又积极投身到解放战争和新中国的建设中，为国家独立和民族复兴继续贡献力量。</p>
+    <p style="text-align:right;font-size:12pt;color:#666;">——摘编自《冀鲁豫抗日根据地》等</p>
+  </div>
+  <div class="subquestion">
+    <div class="question-text">(1) 根据材料一并结合所学知识，概括冀鲁豫抗日根据地反"扫荡"斗争取得胜利的原因。（6分）</div>
+    <span class="answer-toggle" onclick="toggleAnswer('ans18_1')">答案解析</span>
+    <div id="ans18_1" class="answer-panel">
+      <p><span class="ans-label">参考答案：</span></p>
+      <p>原因：中国共产党的正确领导；人民军队的英勇抗战；人民群众的大力支持；战术灵活，地方部队与主力部队相配合；坚持全面抗战路线；加强抗日根据地建设。（每点2分，任答三点即可，其他答案言之有理亦可得分）</p>
+    </div>
+  </div>
+  <div class="subquestion">
+    <div class="question-text">(2) 根据材料并结合所学知识，简析冀鲁豫抗日根据地在抗战中的历史作用。（8分）</div>
+    <span class="answer-toggle" onclick="toggleAnswer('ans18_2')">答案解析</span>
+    <div id="ans18_2" class="answer-panel">
+      <p><span class="ans-label">参考答案：</span></p>
+      <p>作用：牵制、打击了大量华北日军；保障了根据地之间的战略联络；支援和配合了全国抗战；培养了大批优秀的干部和武装力量。（每点2分，任答四点即可，其他答案言之有理亦可得分）</p>
+    </div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="question-text" style="font-size:15pt;">19. 阅读材料，完成下列要求。（14分）</div>
+  <div class="material-box">
+    <p><b>材料一</b> 到1824年，拉丁美洲人民已基本上赢得了民族解放，但是独立后的拉美仍然保持着传统的单一产品出口的经济结构，因此无力彻底摆脱对外的依附地位。英国制成品的大量输入，摧毁了拉美建立在原始技术基础上的地方初级工业。在英国格拉斯哥制造的美洲毛料被风，在墨西哥的价格比当地手工业制作的产品更便宜。1825—1827年，英国向拉美出口商品年均达6600万英镑，拉美向英国提供的产品主要是蔗糖、咖啡、棉花、羊毛、烟草和各种矿产品。英国又通过提供贷款来控制新生国家，到19世纪50年代，英国提供的贷款和直接投资已达1亿英镑左右。</p>
+    <p style="text-align:right;font-size:12pt;color:#666;">——摘编自刘文龙、朱鸿博《西半球的裂变》</p>
+    <p><b>材料二</b> 到1835年，英国大多数的新兴工业城镇无法提供诸如公共安全、水务与污水治理或垃圾处理等基本城市服务。新兴城市毫无生气，工人宿舍都是匆忙搭建的，拥挤不堪，工人通常每天都要工作14小时。工厂内没有歌声与交谈声，也无欢笑声，整个工厂内鸦雀无声。工人的工资极低，无法养家糊口，孩子们通常不得不在工厂内工作，他们当中有些只有6岁。19世纪英国工人阶级艰苦恶劣的生活被刻画在狄更斯的作品中，如《雾都孤儿》和《艰难时世》。</p>
+    <p style="text-align:right;font-size:12pt;color:#666;">——摘编自[美]大卫·S·梅森《现代欧洲200年》</p>
+  </div>
+  <div class="subquestion">
+    <div class="question-text">(1) 根据材料并结合所学知识，概括19世纪上半叶英国维持其经济优势的主要方式。（8分）</div>
+    <span class="answer-toggle" onclick="toggleAnswer('ans19_1')">答案解析</span>
+    <div id="ans19_1" class="answer-panel">
+      <p><span class="ans-label">参考答案：</span></p>
+      <p>主要方式：对外扩张与掠夺；抢占原料产地和商品市场；资本输出；对内压榨与剥削；降低生产成本，维持价格竞争力。（每点2分，任答四点即可，其他答案言之有理亦可得分）</p>
+    </div>
+  </div>
+  <div class="subquestion">
+    <div class="question-text">(2) 根据材料并结合所学知识，说明上述方式对19世纪世界产生的影响。（6分）</div>
+    <span class="answer-toggle" onclick="toggleAnswer('ans19_2')">答案解析</span>
+    <div id="ans19_2" class="answer-panel">
+      <p><span class="ans-label">参考答案：</span></p>
+      <p>影响：造成了不平等的国际关系；推动了世界市场的初步形成；确立了资本主义全球扩张的模式；引发了早期工人运动。（每点2分，任答三点即可，其他答案言之有理亦可得分）</p>
+    </div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="question-text" style="font-size:15pt;">20. 阅读材料，完成下列要求。（12分）</div>
+  <div class="material-box">
+    <p>材料 马克思的交往理论，是马克思社会发展理论的重要内容之一。马克思所说的"交往"，既有范围上的从民族交往到世界交往，只有这种交往才能真正克服"狭隘地域"的局限，扩大人们的世界历史视野；又有内容上的物质交往和精神交往，物质交往具有决定性的意义，是精神交往的基础和前提。</p>
+    <p style="text-align:right;font-size:12pt;color:#666;">——摘编自钱乘旦《新世界史纲要》</p>
+  </div>
+  <div class="subquestion">
+    <div class="question-text">根据材料并结合所学世界史学界史实，围绕"交往"主题，自拟论题并加以阐述。（要求：论题明确，史论结合，逻辑严谨，表述准确）</div>
+    <span class="answer-toggle" onclick="toggleAnswer('ans20')">答案解析</span>
+    <div id="ans20" class="answer-panel">
+      <p><span class="ans-label">参考示例：</span></p>
+      <p><b>论题：</b>世界交往推动了人类社会的整体发展。</p>
+      <p><b>阐述：</b>世界交往从空间上推动了各地区由相对孤立走向整体，在内容上既有物质交换，又有精神文化的交流，推动了人类文明的交融与进步。</p>
+      <p>新航路开辟前，世界各地区处于相对孤立的状态，交往多局限于相邻民族或区域内部。新航路开辟后，世界各大洲之间建立起直接的联系，开始连为一个整体，世界交往的范围从民族、区域层面拓展为全球性交往。工业革命后，火车、汽船、飞机等新式交通工具的出现，进一步缩短了时空距离，世界交往的规模和速度都大幅提升，真正突破了"狭隘地域"的局限。同时，欧亚大陆的马、牛、羊、小麦、燕麦等，美洲的玉米、辣椒、番茄、花生等通过全球贸易网络传播到世界各地。伴随人员、商品的流通，欧洲的思想文化、科学技术，如启蒙思想、近代自然科学等也传播到亚非拉地区，实现了世界各地区的文化、技术等交流与传播，这是精神交往在物质交往基础上的延伸。</p>
+      <p><b>总结：</b>世界的交往，深刻影响了人类社会的发展轨迹，推动了全球文明的双向互动与进步。今天的世界，同样需要消除隔阂，加强彼此之间的交往、交流，共同推动人类美好的明天。</p>
+      <hr style="margin:10px 0;border:0;border-top:1px dashed #bbb;">
+      <p><span class="ans-label">评分标准：</span></p>
+      <table class="rating-table">
+        <tr><th>等级</th><th>评分标准</th></tr>
+        <tr><td>一等（9~12分）</td><td style="text-align:left;">①观点明确，能充分应用相关史实，史实准确<br>②论证严密，阐述逻辑清晰<br>③总结清楚</td></tr>
+        <tr><td>二等（5~8分）</td><td style="text-align:left;">①观点明确，能应用相关史实，史实较准确<br>②论证较严密，阐述逻辑较清晰<br>③总结较清楚</td></tr>
+        <tr><td>三等（0~4分）</td><td style="text-align:left;">①观点不明确，运用相关史实不够准确或者不能够运用<br>②论证不严密，阐述逻辑不清晰<br>③总结不清楚</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div><!-- /paper-container -->
+
+<script>
+function toggleAnswer(id) {
+  var panel = document.getElementById(id);
+  if (panel.classList.contains('show')) {
+    panel.classList.remove('show');
+  } else {
+    panel.classList.add('show');
+  }
+}
+
+// 选择题选项点击交互
+document.addEventListener('DOMContentLoaded', function() {
+  var blocks = document.querySelectorAll('.question-block');
+  blocks.forEach(function(block) {
+    var optionsDiv = block.querySelector('.options');
+    if (!optionsDiv) return;
+    var correct = optionsDiv.getAttribute('data-correct');
+    var opts = optionsDiv.querySelectorAll('.option');
+    
+    opts.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        // 如果已经选过，不再响应
+        if (this.classList.contains('correct') || this.classList.contains('wrong')) return;
+        
+        var radio = this.querySelector('input[type="radio"]');
+        radio.checked = true;
+        
+        var val = this.getAttribute('data-value');
+        // 禁用所有选项
+        opts.forEach(function(o) { o.classList.add('disabled'); });
+        
+        if (val === correct) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('wrong');
+          // 同时标出正确答案
+          opts.forEach(function(o) {
+            if (o.getAttribute('data-value') === correct) {
+              o.classList.add('correct');
+            }
+          });
+        }
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
