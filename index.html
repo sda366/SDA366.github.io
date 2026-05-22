@@ -715,7 +715,6 @@ function toggleCourse(btn) {
 
 // ===== 成绩管理密码保护 =====
 var GRADE_PASSWORD = "sda366";  // ← 在此修改密码
-var GRADE_UNLOCK_KEY = "grade_unlocked";
 
 // ★ 考试目录（每项 { id, title, downloadUrl, data } ）
 //    添加新考试只需在下面加一项即可
@@ -865,21 +864,7 @@ function closeGradeTable() {
 }
 
 function clickGradeCard() {
-    // 已解锁 → 切换考试列表显示
-    if (localStorage.getItem(GRADE_UNLOCK_KEY) === "1") {
-        var list = document.getElementById("grade-exam-list");
-        var btn = document.getElementById("grade-main-btn");
-        if (list.style.display === "none" || list.style.display === "") {
-            list.style.display = "block";
-            btn.innerHTML = "📋 查看成绩 ▲";
-        } else {
-            list.style.display = "none";
-            btn.innerHTML = "📋 查看成绩";
-            closeGradeTable();
-        }
-        return;
-    }
-    // 未解锁 → 弹出密码框
+    // 每次都要密码验证
     var modal = document.getElementById("grade-modal");
     modal.style.display = "flex";
     document.getElementById("grade-pwd-input").value = "";
@@ -890,7 +875,6 @@ function clickGradeCard() {
 function submitGradePassword() {
     var input = document.getElementById("grade-pwd-input").value;
     if (input === GRADE_PASSWORD) {
-        localStorage.setItem(GRADE_UNLOCK_KEY, "1");
         closeGradeModal();
         // 展开考试列表
         document.getElementById("grade-exam-list").style.display = "block";
@@ -905,14 +889,6 @@ function submitGradePassword() {
 function closeGradeModal() {
     document.getElementById("grade-modal").style.display = "none";
 }
-
-// 页面加载：已解锁则显示提示箭头
-window.addEventListener("load", function() {
-    if (localStorage.getItem(GRADE_UNLOCK_KEY) === "1") {
-        var btn = document.getElementById("grade-main-btn");
-        btn.style.cursor = "pointer";
-    }
-});
 
 // 点击弹窗背景关闭
 document.addEventListener("click", function(e) {
