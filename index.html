@@ -638,15 +638,20 @@
                 <a href="纲要下材料题B.html">纲要下·材料题B（2026年5月18日）</a>
             </div>
         </div>
-        <div class="card" id="grade-card" style="cursor:pointer;" onclick="clickGradeCard()">
-            <h3 style="margin:0; font-size:1.3rem; letter-spacing:4px; line-height:3;" id="grade-title">成绩管理</h3>
+        <div class="card" id="grade-card">
+            <h3 style="margin:0; font-size:1.3rem; letter-spacing:4px; line-height:2;">成绩管理</h3>
+            <button id="grade-main-btn" class="toggle-btn" onclick="clickGradeCard()" style="font-size:0.88rem; padding:8px 26px; letter-spacing:2px; margin-top:10px;">📋 查看成绩</button>
+            <div id="grade-exam-list" style="display:none; margin-top:12px;">
+                <button class="grade-exam-btn" onclick="showGradeExam('exam_april')" style="display:block; width:100%; padding:9px 14px; background:linear-gradient(135deg,#5a4a3a,#6b5a4a); color:#f5e6c8; border:1px solid #c8a84e; border-radius:4px; font-size:0.88rem; font-weight:bold; cursor:pointer; letter-spacing:1px; margin-bottom:8px; transition:all 0.2s;" onmouseover="this.style.background='linear-gradient(135deg,#c8a84e,#e2c97e)'; this.style.color='#8b1a1a';" onmouseout="this.style.background='linear-gradient(135deg,#5a4a3a,#6b5a4a)'; this.style.color='#f5e6c8';">📊 4月联考历史成绩</button>
+                <!-- 未来在此添加更多考试按钮 -->
+            </div>
         </div>
 
-        <!-- 成绩表格（默认隐藏，解锁后显示） -->
+        <!-- 成绩表格（默认隐藏，由按钮触发） -->
         <div id="grade-table-section" style="display:none; margin-top:8px; overflow-x:auto;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-                <span style="color:#8b1a1a; font-weight:bold; letter-spacing:2px;">📊 高一9班 &amp; 10班 历史成绩排名</span>
-                <a id="grade-download-btn" href="高一9班10班历史成绩合并排名.xlsx" download
+                <span id="grade-table-title" style="color:#8b1a1a; font-weight:bold; letter-spacing:2px;"></span>
+                <a id="grade-download-btn" href="#" download
                     style="display:inline-block; padding:6px 18px; background:linear-gradient(135deg,#8b1a1a,#a63c3c); color:#f5e6c8; border:1px solid #c8a84e; border-radius:4px; font-size:0.82rem; font-weight:bold; letter-spacing:1px; text-decoration:none;">📥 下载 xlsx</a>
             </div>
             <table id="grade-table" style="width:100%; border-collapse:collapse; font-size:0.9rem; background:#fffdf5; border:2px solid #c8a84e;">
@@ -657,6 +662,9 @@
                 共 <span id="grade-count">0</span> 名学生 &nbsp;|&nbsp;
                 9班底色 🌾 &nbsp; 10班底色 🌿
             </p>
+            <div style="text-align:center; margin-top:10px;">
+                <button onclick="closeGradeTable()" style="padding:6px 22px; background:#e0d5c5; color:#5a4a3a; border:1px solid #c8a84e; border-radius:4px; font-size:0.82rem; cursor:pointer; letter-spacing:1px;">收起表格 ▲</button>
+            </div>
         </div>
 
         <!-- 密码弹窗 -->
@@ -709,116 +717,129 @@ function toggleCourse(btn) {
 var GRADE_PASSWORD = "sda366";  // ← 在此修改密码
 var GRADE_UNLOCK_KEY = "grade_unlocked";
 
-// 成绩数据（嵌入页面，无需下载即可查看）
-var gradeData = [
-    ["排名","班级","姓名","历史成绩"],
-    ["1","高一9班","张凡莉",62],
-    ["2","高一10班","郭夜羽",62],
-    ["3","高一10班","段瑶",60],
-    ["4","高一9班","吉喆",60],
-    ["5","高一10班","刘昊",57],
-    ["6","高一10班","王靖谣",56],
-    ["7","高一10班","李学燕",54],
-    ["8","高一10班","贾焱楚",54],
-    ["9","高一10班","陈映萱",54],
-    ["10","高一10班","琚志烨",53],
-    ["11","高一9班","袁绪阳",53],
-    ["12","高一9班","安婧涵",52],
-    ["13","高一10班","贠苏芮",52],
-    ["14","高一10班","高家钤",52],
-    ["15","高一9班","王然",51],
-    ["16","高一9班","阮蓝萱",50],
-    ["17","高一9班","倪欣卫",50],
-    ["18","高一10班","宋振萍",50],
-    ["19","高一10班","刘子涵",49],
-    ["20","高一9班","邓六桤",49],
-    ["21","高一10班","张琳",48],
-    ["22","高一9班","曾浩洋",47],
-    ["23","高一9班","李浩宁",47],
-    ["24","高一9班","闫田苗",47],
-    ["25","高一10班","张溢烜",46],
-    ["26","高一9班","王奕宁",46],
-    ["27","高一9班","赵言其",46],
-    ["28","高一10班","杜政睿",46],
-    ["29","高一9班","陈冰",46],
-    ["30","高一10班","董运昌",46],
-    ["31","高一9班","郭思敏",45],
-    ["32","高一9班","冀熠煊",45],
-    ["33","高一10班","刘铭涵",45],
-    ["34","高一10班","崔硕晗",45],
-    ["35","高一10班","王文溪",45],
-    ["36","高一10班","赵秋雅",44],
-    ["37","高一9班","索嘉灿",44],
-    ["38","高一9班","王梦洁",44],
-    ["39","高一9班","申宜昊",44],
-    ["40","高一9班","臧儒源",44],
-    ["41","高一10班","王学森",44],
-    ["42","高一10班","路雨泽",44],
-    ["43","高一10班","蒋泰林",43],
-    ["44","高一9班","郭一漫",42],
-    ["45","高一10班","郝诗雅",42],
-    ["46","高一10班","范潇戈",42],
-    ["47","高一10班","孙静怡",42],
-    ["48","高一10班","李明灿",41],
-    ["49","高一9班","冯程程",41],
-    ["50","高一10班","冯嫣然",41],
-    ["51","高一9班","桑甜心",40],
-    ["52","高一10班","张培玟",40],
-    ["53","高一10班","孙方举",40],
-    ["54","高一10班","魏晨",40],
-    ["55","高一10班","王冰洁",39],
-    ["56","高一9班","李梓诺",39],
-    ["57","高一10班","张子涵",39],
-    ["58","高一9班","崔佳琪",38],
-    ["59","高一9班","李源淇",38],
-    ["60","高一10班","郭旭",38],
-    ["61","高一9班","吴雨颖",38],
-    ["62","高一10班","张子嫣",38],
-    ["63","高一9班","朱雨涵",37],
-    ["64","高一9班","屈爽",37],
-    ["65","高一9班","李志涵",37],
-    ["66","高一9班","魏玘",37],
-    ["67","高一9班","郭霖雨",37],
-    ["68","高一9班","常栗颖",36],
-    ["69","高一9班","刘子歌",35],
-    ["70","高一9班","王一蕾",35],
-    ["71","高一10班","刘婷",35],
-    ["72","高一10班","罗依",35],
-    ["73","高一10班","王广阳",34],
-    ["74","高一10班","尚雨馨",34],
-    ["75","高一9班","刘一依",34],
-    ["76","高一10班","王语薇",33],
-    ["77","高一10班","丁祺斐",32],
-    ["78","高一10班","赵威",32],
-    ["79","高一10班","崔云泽",32],
-    ["80","高一9班","元浩莹",31],
-    ["81","高一10班","付国曹",30],
-    ["82","高一9班","张一宸",26],
-    ["83","高一10班","赵子涵",26],
-    ["84","高一9班","张湉",23],
-    ["85","高一9班","丰焕力",21],
-    ["86","高一10班","牛子畅",13],
-    ["87","高一9班","郭树茂","缺考"],
-    ["88","高一10班","赵敏晶","缺考"],
-    ["89","高一10班","刘怡矾","缺考"],
-    ["90","高一10班","尚钰昌","缺考"],
-    ["91","高一10班","张子轩","缺考"],
-    ["92","高一10班","郭羿彤","缺考"]
-];
+// ★ 考试目录（每项 { id, title, downloadUrl, data } ）
+//    添加新考试只需在下面加一项即可
+var gradeExams = {
+    "exam_april": {
+        title: "📊 4月联考历史成绩 — 高一9班 & 10班",
+        downloadUrl: "高一9班10班历史成绩合并排名.xlsx",
+        data: [
+            ["排名","班级","姓名","历史成绩"],
+            ["1","高一9班","张凡莉",62],
+            ["2","高一10班","郭夜羽",62],
+            ["3","高一10班","段瑶",60],
+            ["4","高一9班","吉喆",60],
+            ["5","高一10班","刘昊",57],
+            ["6","高一10班","王靖谣",56],
+            ["7","高一10班","李学燕",54],
+            ["8","高一10班","贾焱楚",54],
+            ["9","高一10班","陈映萱",54],
+            ["10","高一10班","琚志烨",53],
+            ["11","高一9班","袁绪阳",53],
+            ["12","高一9班","安婧涵",52],
+            ["13","高一10班","贠苏芮",52],
+            ["14","高一10班","高家钤",52],
+            ["15","高一9班","王然",51],
+            ["16","高一9班","阮蓝萱",50],
+            ["17","高一9班","倪欣卫",50],
+            ["18","高一10班","宋振萍",50],
+            ["19","高一10班","刘子涵",49],
+            ["20","高一9班","邓六桤",49],
+            ["21","高一10班","张琳",48],
+            ["22","高一9班","曾浩洋",47],
+            ["23","高一9班","李浩宁",47],
+            ["24","高一9班","闫田苗",47],
+            ["25","高一10班","张溢烜",46],
+            ["26","高一9班","王奕宁",46],
+            ["27","高一9班","赵言其",46],
+            ["28","高一10班","杜政睿",46],
+            ["29","高一9班","陈冰",46],
+            ["30","高一10班","董运昌",46],
+            ["31","高一9班","郭思敏",45],
+            ["32","高一9班","冀熠煊",45],
+            ["33","高一10班","刘铭涵",45],
+            ["34","高一10班","崔硕晗",45],
+            ["35","高一10班","王文溪",45],
+            ["36","高一10班","赵秋雅",44],
+            ["37","高一9班","索嘉灿",44],
+            ["38","高一9班","王梦洁",44],
+            ["39","高一9班","申宜昊",44],
+            ["40","高一9班","臧儒源",44],
+            ["41","高一10班","王学森",44],
+            ["42","高一10班","路雨泽",44],
+            ["43","高一10班","蒋泰林",43],
+            ["44","高一9班","郭一漫",42],
+            ["45","高一10班","郝诗雅",42],
+            ["46","高一10班","范潇戈",42],
+            ["47","高一10班","孙静怡",42],
+            ["48","高一10班","李明灿",41],
+            ["49","高一9班","冯程程",41],
+            ["50","高一10班","冯嫣然",41],
+            ["51","高一9班","桑甜心",40],
+            ["52","高一10班","张培玟",40],
+            ["53","高一10班","孙方举",40],
+            ["54","高一10班","魏晨",40],
+            ["55","高一10班","王冰洁",39],
+            ["56","高一9班","李梓诺",39],
+            ["57","高一10班","张子涵",39],
+            ["58","高一9班","崔佳琪",38],
+            ["59","高一9班","李源淇",38],
+            ["60","高一10班","郭旭",38],
+            ["61","高一9班","吴雨颖",38],
+            ["62","高一10班","张子嫣",38],
+            ["63","高一9班","朱雨涵",37],
+            ["64","高一9班","屈爽",37],
+            ["65","高一9班","李志涵",37],
+            ["66","高一9班","魏玘",37],
+            ["67","高一9班","郭霖雨",37],
+            ["68","高一9班","常栗颖",36],
+            ["69","高一9班","刘子歌",35],
+            ["70","高一9班","王一蕾",35],
+            ["71","高一10班","刘婷",35],
+            ["72","高一10班","罗依",35],
+            ["73","高一10班","王广阳",34],
+            ["74","高一10班","尚雨馨",34],
+            ["75","高一9班","刘一依",34],
+            ["76","高一10班","王语薇",33],
+            ["77","高一10班","丁祺斐",32],
+            ["78","高一10班","赵威",32],
+            ["79","高一10班","崔云泽",32],
+            ["80","高一9班","元浩莹",31],
+            ["81","高一10班","付国曹",30],
+            ["82","高一9班","张一宸",26],
+            ["83","高一10班","赵子涵",26],
+            ["84","高一9班","张湉",23],
+            ["85","高一9班","丰焕力",21],
+            ["86","高一10班","牛子畅",13],
+            ["87","高一9班","郭树茂","缺考"],
+            ["88","高一10班","赵敏晶","缺考"],
+            ["89","高一10班","刘怡矾","缺考"],
+            ["90","高一10班","尚钰昌","缺考"],
+            ["91","高一10班","张子轩","缺考"],
+            ["92","高一10班","郭羿彤","缺考"]
+        ]
+    }
+    // 添加新考试示例（取消注释并填入真实数据）：
+    // "exam_may": {
+    //     title: "5月期中历史成绩",
+    //     downloadUrl: "5月期中成绩.xlsx",
+    //     data: [ ["排名","班级","姓名","历史成绩"], ... ]
+    // }
+};
 
-function buildGradeTable() {
+function buildTableFromData(data) {
     var thead = document.querySelector("#grade-table thead");
     var tbody = document.querySelector("#grade-table tbody");
-    var header = gradeData[0];
+    var header = data[0];
     thead.innerHTML = "<tr>" + header.map(function(h){ return '<th style="padding:8px 10px; border-bottom:2px solid #c8a84e; color:#8b1a1a; white-space:nowrap; background:#f5e6c8;">'+h+'</th>'; }).join("") + "</tr>";
     tbody.innerHTML = "";
     var count = 0;
-    for (var i = 1; i < gradeData.length; i++) {
-        var row = gradeData[i];
+    for (var i = 1; i < data.length; i++) {
+        var row = data[i];
         var cls = row[1];
         var bgColor = "transparent";
-        if (cls === "高一9班") bgColor = "#fdf5e6";   // 米黄
-        else if (cls === "高一10班") bgColor = "#f0f5eb"; // 浅绿
+        if (cls === "高一9班") bgColor = "#fdf5e6";
+        else if (cls === "高一10班") bgColor = "#f0f5eb";
         tbody.innerHTML += "<tr style='background:"+bgColor+";'>" + row.map(function(cell){
             var v = (cell === null || cell === undefined || cell === "") ? "-" : cell;
             return '<td style="padding:6px 10px; border-bottom:1px solid #e0d5c5; text-align:'+(typeof v==="number"?"center":"left")+';">'+v+'</td>';
@@ -828,20 +849,33 @@ function buildGradeTable() {
     document.getElementById("grade-count").textContent = count;
 }
 
+function showGradeExam(examId) {
+    var exam = gradeExams[examId];
+    if (!exam) return;
+    document.getElementById("grade-table-title").textContent = exam.title;
+    document.getElementById("grade-download-btn").href = exam.downloadUrl;
+    document.getElementById("grade-table-section").style.display = "block";
+    buildTableFromData(exam.data);
+    // 滚动到表格
+    document.getElementById("grade-table-section").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function closeGradeTable() {
+    document.getElementById("grade-table-section").style.display = "none";
+}
+
 function clickGradeCard() {
-    // 已解锁 → 切换表格显示/隐藏
+    // 已解锁 → 切换考试列表显示
     if (localStorage.getItem(GRADE_UNLOCK_KEY) === "1") {
-        var section = document.getElementById("grade-table-section");
-        var title = document.getElementById("grade-title");
-        if (section.style.display === "none" || section.style.display === "") {
-            section.style.display = "block";
-            title.innerHTML = "成绩管理 <span style='font-size:0.7rem;letter-spacing:0;margin-left:6px;'>▲</span>";
-            if (document.querySelector("#grade-table tbody").children.length === 0) {
-                buildGradeTable();
-            }
+        var list = document.getElementById("grade-exam-list");
+        var btn = document.getElementById("grade-main-btn");
+        if (list.style.display === "none" || list.style.display === "") {
+            list.style.display = "block";
+            btn.innerHTML = "📋 查看成绩 ▲";
         } else {
-            section.style.display = "none";
-            title.innerHTML = "成绩管理 <span style='font-size:0.7rem;letter-spacing:0;margin-left:6px;'>▼</span>";
+            list.style.display = "none";
+            btn.innerHTML = "📋 查看成绩";
+            closeGradeTable();
         }
         return;
     }
@@ -858,12 +892,9 @@ function submitGradePassword() {
     if (input === GRADE_PASSWORD) {
         localStorage.setItem(GRADE_UNLOCK_KEY, "1");
         closeGradeModal();
-        // 展开表格
-        var section = document.getElementById("grade-table-section");
-        section.style.display = "block";
-        var title = document.getElementById("grade-title");
-        title.innerHTML = "成绩管理 <span style='font-size:0.7rem;letter-spacing:0;margin-left:6px;'>▲</span>";
-        buildGradeTable();
+        // 展开考试列表
+        document.getElementById("grade-exam-list").style.display = "block";
+        document.getElementById("grade-main-btn").innerHTML = "📋 查看成绩 ▲";
     } else {
         document.getElementById("grade-pwd-error").textContent = "密码错误，请重试";
         document.getElementById("grade-pwd-input").value = "";
@@ -875,11 +906,11 @@ function closeGradeModal() {
     document.getElementById("grade-modal").style.display = "none";
 }
 
-// 页面加载时：已解锁则显示箭头提示
+// 页面加载：已解锁则显示提示箭头
 window.addEventListener("load", function() {
     if (localStorage.getItem(GRADE_UNLOCK_KEY) === "1") {
-        var title = document.getElementById("grade-title");
-        title.innerHTML = "成绩管理 <span style='font-size:0.7rem;letter-spacing:0;margin-left:6px;color:#c8a84e;'>▼</span>";
+        var btn = document.getElementById("grade-main-btn");
+        btn.style.cursor = "pointer";
     }
 });
 
