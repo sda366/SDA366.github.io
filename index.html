@@ -633,11 +633,25 @@
                 <a href="纲要下材料题B.html">纲要下·材料题B（2026年5月18日）</a>
             </div>
         </div>
-        <div class="card">
-            <span class="icon">📊</span>
-            <h3>成绩管理</h3>
-            <p>高一9班、10班历史成绩合并排名表</p>
-            <a href="高一9班10班历史成绩合并排名.xlsx" download>📥 下载成绩表</a>
+        <div class="card" id="grade-card" style="cursor:pointer;" onclick="checkGradePassword()">
+            <h3 style="margin:0; font-size:1.3rem; letter-spacing:4px; line-height:3;">成绩管理</h3>
+        </div>
+
+        <!-- 成绩管理密码弹窗 -->
+        <div id="grade-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; display:flex; align-items:center; justify-content:center; display:none;">
+            <div style="background:#fffdf5; border:2px solid #c8a84e; border-radius:12px; padding:36px 40px; width:320px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.4); position:relative;">
+                <div style="font-size:2rem; margin-bottom:12px;">🔒</div>
+                <h3 style="color:#8b1a1a; font-size:1.2rem; letter-spacing:3px; margin-bottom:8px;">成绩管理</h3>
+                <p style="color:#7a6555; font-size:0.85rem; margin-bottom:20px;">请输入访问密码</p>
+                <input type="password" id="grade-pwd-input" placeholder="请输入密码" maxlength="20"
+                    style="width:100%; padding:10px 14px; border:1.5px solid #c8a84e; border-radius:6px; font-size:1rem; outline:none; box-sizing:border-box; margin-bottom:8px; font-family:inherit;"
+                    onkeydown="if(event.key==='Enter') submitGradePassword()">
+                <div id="grade-pwd-error" style="color:#c0392b; font-size:0.82rem; min-height:1.2em; margin-bottom:10px;"></div>
+                <div style="display:flex; gap:12px; justify-content:center;">
+                    <button onclick="submitGradePassword()" style="padding:9px 28px; background:linear-gradient(135deg,#8b1a1a,#a63c3c); color:#f5e6c8; border:1px solid #c8a84e; border-radius:4px; font-size:0.95rem; font-weight:bold; cursor:pointer; letter-spacing:1px;">确认</button>
+                    <button onclick="closeGradeModal()" style="padding:9px 28px; background:#e0d5c5; color:#5a4a3a; border:1px solid #c8a84e; border-radius:4px; font-size:0.95rem; cursor:pointer; letter-spacing:1px;">取消</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -668,6 +682,45 @@ function toggleCourse(btn) {
         btn.textContent = "📚 查看课件";
     }
 }
+
+// ===== 成绩管理密码保护 =====
+var GRADE_PASSWORD = "sda366";  // ← 在此修改密码
+
+function checkGradePassword() {
+    var modal = document.getElementById("grade-modal");
+    modal.style.display = "flex";
+    document.getElementById("grade-pwd-input").value = "";
+    document.getElementById("grade-pwd-error").textContent = "";
+    setTimeout(function(){ document.getElementById("grade-pwd-input").focus(); }, 100);
+}
+
+function submitGradePassword() {
+    var input = document.getElementById("grade-pwd-input").value;
+    if (input === GRADE_PASSWORD) {
+        closeGradeModal();
+        // 触发文件下载
+        var a = document.createElement("a");
+        a.href = "高一9班10班历史成绩合并排名.xlsx";
+        a.download = "高一9班10班历史成绩合并排名.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    } else {
+        document.getElementById("grade-pwd-error").textContent = "密码错误，请重试";
+        document.getElementById("grade-pwd-input").value = "";
+        document.getElementById("grade-pwd-input").focus();
+    }
+}
+
+function closeGradeModal() {
+    document.getElementById("grade-modal").style.display = "none";
+}
+
+// 点击弹窗背景关闭
+document.addEventListener("click", function(e) {
+    var modal = document.getElementById("grade-modal");
+    if (e.target === modal) closeGradeModal();
+});
 </script>
 
 <!-- 不蒜子访问量统计 -->
