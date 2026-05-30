@@ -1,909 +1,104 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>历史学习平台</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
-            background: #f5f0e6;
-            color: #3d2b1f;
-            min-height: 100vh;
-        }
-
-        /* ===== 顶部大横幅 ===== */
-        .hero {
-            background: linear-gradient(135deg, #8b1a1a, #b83030, #8b1a1a);
-            padding: 60px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a84e' fill-opacity='0.08'%3E%3Cpath d='M30 30l15-15v30L30 30zM30 30L15 15v30l15-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            color: #f5e6c8;
-            letter-spacing: 12px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-            margin-bottom: 10px;
-        }
-
-        .hero-sub {
-            font-size: 1.1rem;
-            color: rgba(200, 168, 78, 0.9);
-            letter-spacing: 6px;
-            font-family: 'STKaiti', 'KaiTi', '楷体', serif;
-        }
-
-        .hero-divider {
-            width: 120px;
-            height: 3px;
-            background: linear-gradient(to right, transparent, #c8a84e, transparent);
-            margin: 20px auto 0;
-        }
-
-        /* ===== 导航栏 ===== */
-        .navbar {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 18px;
-            background: #8b1a1a;
-            border-bottom: 3px solid #c8a84e;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: transparent;
-            border: 2px solid #c0392b;
-            border-radius: 4px;
-            color: #ffd700;
-            font-size: 1.05rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .nav-btn:hover {
-            background: #c0392b;
-            color: #ffd700;
-            box-shadow: 0 0 12px rgba(192, 57, 43, 0.6);
-        }
-
-        .nav-btn .arrow {
-            font-size: 0.6rem;
-            transition: transform 0.2s;
-        }
-
-        .nav-item:hover .arrow {
-            transform: rotate(180deg);
-        }
-
-        /* ===== 下拉菜单 ===== */
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%);
-            min-width: 200px;
-            background: #1a0a00;
-            border: 2px solid #c0392b;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-            z-index: 200;
-        }
-
-        .nav-item:hover .dropdown {
-            display: block;
-        }
-
-        .dropdown a {
-            display: block;
-            padding: 12px 20px;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: background 0.15s, color 0.15s;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            font-family: 'Microsoft YaHei', sans-serif;
-        }
-
-        .dropdown a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown a:hover {
-            background: rgba(192, 57, 43, 0.3);
-            color: #ffd700;
-        }
-
-        .dropdown a .tag {
-            font-size: 0.7rem;
-            background: #c8a84e;
-            color: #8b1a1a;
-            padding: 1px 6px;
-            border-radius: 3px;
-            margin-left: 8px;
-            font-weight: bold;
-            vertical-align: middle;
-        }
-
-        .sub-dropdown {
-            display: none;
-            margin-top: 5px;
-            padding-top: 5px;
-            border-top: 1px dashed rgba(139, 26, 26, 0.3);
-        }
-
-        .nav-item:hover .sub-dropdown {
-            display: block;
-        }
-
-        .sub-title {
-            display: block;
-            font-size: 0.75rem;
-            color: #ffd700;
-            padding: 5px 15px 3px;
-            font-weight: bold;
-        }
-
-        .sub-dropdown a {
-            padding-left: 30px;
-            font-size: 0.85rem;
-            background: rgba(0,0,0,0.2);
-        }
-
-        /* ===== 主内容 ===== */
-        .main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px 20px 70px;
-            background: rgba(255,255,255,0.4);
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-
-        /* ===== 板块标题 ===== */
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 28px;
-            margin-top: 50px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #c8a84e;
-        }
-
-        .section-title:first-child {
-            margin-top: 0;
-        }
-
-        .section-title h2 {
-            font-size: 1.6rem;
-            color: #8b1a1a;
-            letter-spacing: 4px;
-            white-space: nowrap;
-            font-weight: bold;
-        }
-
-        .section-title .line {
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(to right, #c8a84e, transparent);
-        }
-
-        /* ===== 卡片 ===== */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: #fffdf5;
-            border: 2px solid #c8a84e;
-            border-radius: 10px;
-            padding: 30px 24px;
-            text-align: center;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 4px 4px 0 #c8a84e, 6px 6px 16px rgba(0,0,0,0.15);
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(to right, #8b1a1a, #c8a84e, #8b1a1a);
-        }
-
-        .card:hover {
-            border-color: #8b1a1a;
-            transform: translateY(-6px);
-            box-shadow: 6px 6px 0 #8b1a1a, 10px 10px 24px rgba(0,0,0,0.2);
-        }
-
-        .card .icon {
-            font-size: 3.5rem;
-            margin-bottom: 18px;
-            display: block;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            color: #8b1a1a;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: #7a6555;
-            line-height: 1.7;
-            margin-bottom: 22px;
-        }
-
-        .card a {
-            display: block;
-            padding: 10px 30px;
-            background: linear-gradient(135deg, #8b1a1a, #a63c3c);
-            color: #f5e6c8;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: all 0.2s;
-            border: 1px solid #c8a84e;
-            margin-top: 8px;
-            text-align: center;
-        }
-
-        .card a:hover {
-            background: linear-gradient(135deg, #c8a84e, #e2c97e);
-            color: #8b1a1a;
-            box-shadow: 0 0 16px rgba(200, 168, 78, 0.4);
-        }
-
-        .card.coming-soon {
-            opacity: 0.6;
-        }
-
-        .card.coming-soon a {
-            background: #b0a08a;
-            border-color: #b0a08a;
-            color: #fff;
-            cursor: not-allowed;
-        }
-
-        .card.coming-soon a:hover {
-            background: #b0a08a;
-            color: #fff;
-            box-shadow: none;
-        }
-
-        /* ===== 底部 ===== */
-        .footer {
-            text-align: center;
-            color: #666;
-            font-size: 0.85rem;
-            padding: 30px;
-            border-top: 1px solid #2a2a2a;
-            letter-spacing: 2px;
-        }
-
-        /* ===== 访问量 ===== */
-        .visitor-count { color: #999; font-size: 0.8rem; margin-top: 8px; }
-        .visitor-count span { margin: 0 8px; }
-
-        /* ===== 小红书链接样式 ===== */
-        .footer-social {
-            margin-top: 12px;
-            font-size: 0.9rem;
-        }
-
-        .footer-social a {
-            color: #c8a84e;
-            text-decoration: none;
-            transition: color 0.2s;
-            font-weight: bold;
-        }
-
-        .footer-social a:hover {
-            color: #ffd700;
-            text-shadow: 0 0 8px rgba(200, 168, 78, 0.4);
-        }
-
-        /* ===== 手机适配 ===== */
-        @media (max-width: 600px) {
-            .hero { padding: 40px 16px; }
-            .hero h1 { font-size: 2rem; letter-spacing: 6px; }
-            .hero-sub { font-size: 0.9rem; letter-spacing: 3px; }
-            .navbar { gap: 6px; padding: 12px; }
-            .nav-btn { padding: 8px 14px; font-size: 0.9rem; }
-            .cards { grid-template-columns: 1fr; gap: 16px; }
-            .section-title h2 { font-size: 1.3rem; }
-        }
-
-        /* 成绩表格横跨全部卡片 */
-        #grade-table-section {
-            grid-column: 1 / -1;
-        }
-
-        .toggle-btn {
-            display: inline-block;
-            padding: 10px 30px;
-            background: linear-gradient(135deg, #8b1a1a, #a63c3c);
-            color: #f5e6c8;
-            border: 1px solid #c8a84e;
-            border-radius: 4px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .toggle-btn:hover {
-            background: linear-gradient(135deg, #c8a84e, #e2c97e);
-            color: #8b1a1a;
-            box-shadow: 0 0 16px rgba(200, 168, 78, 0.4);
-        }
-
-        .course-list {
-            margin-top: 12px;
-        }
-
-        .course-list a {
-            display: block;
-            padding: 8px 20px;
-            margin-top: 6px;
-            background: linear-gradient(135deg, #5a4a3a, #6b5a4a);
-            color: #f5e6c8;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: all 0.2s;
-            border: 1px solid #c8a84e;
-            text-align: center;
-        }
-
-        .course-list a:hover {
-            background: linear-gradient(135deg, #c8a84e, #e2c97e);
-            color: #8b1a1a;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>历史学习平台 · 以史为鉴</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="theme-home">
 
-<!-- 大横幅 -->
-<div class="hero">
-    <div class="hero-content">
-        <h1>历史学习平台</h1>
-        <p class="hero-sub">以史为鉴 · 助力教学</p>
-        <div class="hero-divider"></div>
-    </div>
-</div>
+  <!-- ====== 顶部深红 Header ====== -->
+  <header class="site-header">
+    <h1 class="site-title">历史学习平台</h1>
+    <p class="page-subtitle">以史为鉴 · 助力教学</p>
+    <div class="shichen" id="shichen"></div>
+  </header>
 
-<!-- 导航栏 -->
-<nav class="navbar">
-    <div class="nav-item">
-        <button class="nav-btn">🎮 游戏 <span class="arrow">▼</span></button>
-        <div class="dropdown">
-            <a href="game.html">朝代更替 <span class="tag">已上线</span></a>
-            <a href="欧洲  潮汐之魂.html">趣味追踪 <span class="tag">已上线</span></a>
-        </div>
-    </div>
-    <div class="nav-item">
-        <button class="nav-btn">📗 高一 <span class="arrow">▼</span></button>
-        <div class="dropdown">
-            <a href="中外历史纲要上/index.html">中外历史纲要（上） <span class="tag">已上线</span></a>
-            <a href="中外历史纲要下/index.html">中外历史纲要（下） <span class="tag">已上线</span></a>
-            <div class="sub-dropdown">
-                <span class="sub-title">📚 纲要下课程</span>
-                <a href="纲要下第1课_文明产生与早期发展_知识点衔接详细表.html">第1课 文明产生与早期发展</a>
-                <a href="纲要下第1课重难点分析与课堂训练.html">第1课 重难点与课堂训练</a>
-            </div>
-        </div>
-    </div>
-    <div class="nav-item">
-        <button class="nav-btn">📘 高二 <span class="arrow">▼</span></button>
-        <div class="dropdown">
-            <a href="#">选择性必修一</a>
-            <a href="#">选择性必修二</a>
-            <a href="#">选择性必修三</a>
-        </div>
-    </div>
-    <div class="nav-item">
-        <button class="nav-btn">📙 高三 <span class="arrow">▼</span></button>
-        <div class="dropdown">
-            <a href="#">单元训练</a>
-            <a href="#">模拟测试</a>
-            <a href="#">高考真题</a>
-        </div>
-    </div>
-    <div class="nav-item">
-        <button class="nav-btn">🌐 历史纵横 <span class="arrow">▼</span></button>
-        <div class="dropdown">
-            <a href="#">中国史</a>
-            <a href="#">世界史</a>
-        </div>
-    </div>
-</nav>
+  <!-- ====== 导航栏（红底金字） ====== -->
+  <nav class="site-nav">
+    <a href="电子教材/index.html">电子教材</a>
+    <span class="nav-sep">·</span>
+    <a href="高一/index.html">高一</a>
+    <span class="nav-sep">·</span>
+    <a href="高二/index.html">高二</a>
+    <span class="nav-sep">·</span>
+    <a href="高三/index.html">高三</a>
+    <span class="nav-sep">·</span>
+    <a href="#">游戏</a>
+    <span class="nav-sep">·</span>
+    <a href="#">链接</a>
+    <span class="nav-sep">·</span>
+    <a href="初中/index.html">初中</a>
+  </nav>
 
-<!-- 主内容 -->
-<div class="main">
+  <!-- ====== 主体 ====== -->
+  <main class="main-content">
 
-    <div class="section-title">
-        <h2>🎮 游戏</h2>
-        <div class="line"></div>
-    </div>
-    <div class="cards">
-        <div class="card">
-            <span class="icon">🏛️</span>
-            <h3>朝代更替</h3>
-            <p>将中国古代朝代按正确顺序排列，考验历史记忆与排序能力！</p>
-            <a href="game.html">开始挑战</a>
-        </div>
-        <div class="card">
-            <span class="icon">⚡</span>
-            <h3>趣味追踪</h3>
-            <p>历史知识趣味挑战，寓学于乐，轻松掌握历史脉络！</p>
-            <a href="欧洲  潮汐之魂.html">进入游戏</a>
-        </div>
+    <!-- 第一行 3 卡片：高一 高二 高三 -->
+    <div class="home-grid row-3">
+      <a href="高一/index.html" class="home-card card-blue">
+        <div class="card-icon-wrap">📖</div>
+        <div class="card-title">高一</div>
+        <div class="card-sub">中外历史纲要 · 必修</div>
+      </a>
+      <a href="高二/index.html" class="home-card card-purple">
+        <div class="card-icon-wrap">📝</div>
+        <div class="card-title">高二</div>
+        <div class="card-sub">选择性必修 · 专题深化</div>
+      </a>
+      <a href="高三/index.html" class="home-card">
+        <div class="card-icon-wrap">🎯</div>
+        <div class="card-title">高三</div>
+        <div class="card-sub">备考冲刺 · 决胜高考</div>
+      </a>
     </div>
 
-    <div class="section-title">
-        <h2>📗 高一</h2>
-        <div class="line"></div>
-    </div>
-    <div class="cards">
-        <div class="card">
-            <span class="icon">📖</span>
-            <h3>中外历史纲要（上）</h3>
-            <p>中国史部分（共30课）</p>
-            <a href="中外历史纲要上/index.html">进入学习</a>
-        </div>
-        <div class="card">
-            <span class="icon">🌍</span>
-            <h3>中外历史纲要（下）</h3>
-            <p>世界史部分（共23课）</p>
-            <a href="中外历史纲要下/index.html">进入学习</a>
-            <div class="course-list" style="display: none;">
-                <a href="europe-mobile.html">第8课 欧洲思想解放运动</a>
-                <a href="中外历史纲要下/第1课_文明的产生与早期发展.html">第1课 文明的产生与早期发展</a>
-                <a href="中外历史纲要下/第2课_古代世界的帝国与文明的交流.html">第2课 古代世界的帝国与文明的交流</a>
-                <a href="中外历史纲要下/第3课_中古时期的欧洲.html">第3课 中古时期的欧洲</a>
-                <a href="中外历史纲要下/第4课_中古时期的亚洲.html">第4课 中古时期的亚洲</a>
-                <a href="中外历史纲要下/第5课_古代非洲与美洲.html">第5课 古代非洲与美洲</a>
-                <a href="中外历史纲要下/第6课_全球航路的开辟.html">第6课 全球航路的开辟</a>
-                <a href="中外历史纲要下/第7课_全球联系的初步建立与世界格局的演变.html">第7课 全球联系的初步建立与世界格局的演变</a>
-                <a href="中外历史纲要下/第8课_欧洲的思想解放运动.html">第8课 欧洲的思想解放运动</a>
-                <a href="中外历史纲要下/第9课_资产阶级革命与资本主义制度的确立.html">第9课 资产阶级革命与资本主义制度的确立</a>
-                <a href="中外历史纲要下/第10课_影响世界的工业革命.html">第10课 影响世界的工业革命</a>
-                <a href="中外历史纲要下/第11课_马克思主义的诞生.html">第11课 马克思主义的诞生</a>
-                <a href="中外历史纲要下/第12课_资本主义世界殖民体系的形成.html">第12课 资本主义世界殖民体系的形成</a>
-                <a href="中外历史纲要下/第13课_亚非拉民族独立运动.html">第13课 亚非拉民族独立运动</a>
-                <a href="中外历史纲要下/第14课_第一次世界大战与战后国际秩序.html">第14课 第一次世界大战与战后国际秩序</a>
-                <a href="中外历史纲要下/第15课_十月革命的胜利与苏联的社会主义实践.html">第15课 十月革命的胜利与苏联的社会主义实践</a>
-                <a href="中外历史纲要下/第16课_亚非拉民族民主运动的高涨.html">第16课 亚非拉民族民主运动的高涨</a>
-                <a href="中外历史纲要下/第17课_第二次世界大战与战后国际秩序的形成.html">第17课 第二次世界大战与战后国际秩序的形成</a>
-                <a href="中外历史纲要下/第18课_冷战与国际格局的演变.html">第18课 冷战与国际格局的演变</a>
-                <a href="中外历史纲要下/第19课_资本主义国家的新变化.html">第19课 资本主义国家的新变化</a>
-                <a href="中外历史纲要下/第20课_社会主义国家的发展与变化.html">第20课 社会主义国家的发展与变化</a>
-                <a href="中外历史纲要下/第21课_世界殖民体系的瓦解与新兴国家的发展.html">第21课 世界殖民体系的瓦解与新兴国家的发展</a>
-                <a href="中外历史纲要下/第22课_世界多极化与经济全球化.html">第22课 世界多极化与经济全球化</a>
-                <a href="中外历史纲要下/第23课_和平发展合作共赢的历史潮流.html">第23课 和平发展合作共赢的历史潮流</a>
-
-                <a href="纲要下第1课_文明产生与早期发展_知识点衔接详细表.html">第1课 文明与早期发展</a>
-                <a href="纲要下第1课重难点分析与课堂训练.html">第1课 重难点与训练</a>
-            </div>
-        </div>
-        <div class="card">
-            <span class="icon">✍️</span>
-            <h3>会考训练</h3>
-            <p>学业水平考试专项训练与模拟题</p>
-            <button class="toggle-btn" data-label="📚 查看训练" onclick="toggleCourse(this)">📚 查看训练</button>
-            <div class="course-list" style="display: none;">
-                <a href="会考/中国古代史50题_会考备考.html">中国古代史 50 题</a>
-                <a href="会考/中国近现代史50题_会考备考.html">中国近现代史 50 题</a>
-                <a href="会考/世界古代史50题_会考备考.html">世界古代史 50 题</a>
-                <a href="会考/世界近现代史50题_会考备考.html">世界近现代史 50 题</a>
-            </div>
-        </div>
+    <!-- 第二行 4 卡片：电子教材 游戏 链接 初中 -->
+    <div class="home-grid">
+      <a href="电子教材/index.html" class="home-card">
+        <div class="card-icon-wrap">📚</div>
+        <div class="card-title">电子教材</div>
+        <div class="card-sub">人教社初高中全套</div>
+      </a>
+      <a href="#" class="home-card card-gold">
+        <div class="card-icon-wrap">🎮</div>
+        <div class="card-title">游戏</div>
+        <div class="card-sub">朝代更替 · 趣味追踪</div>
+      </a>
+      <a href="#" class="home-card card-blue">
+        <div class="card-icon-wrap">🔗</div>
+        <div class="card-title">外部链接</div>
+        <div class="card-sub">精选历史资源导航</div>
+      </a>
+      <a href="初中/index.html" class="home-card card-green">
+        <div class="card-icon-wrap">🌱</div>
+        <div class="card-title">初中</div>
+        <div class="card-sub">七 · 八 · 九年级</div>
+      </a>
     </div>
 
-    <div class="section-title">
-        <h2>📘 高二</h2>
-        <div class="line"></div>
+  </main>
+
+  <!-- ====== 页脚（深红底） ====== -->
+  <footer class="site-footer">
+    <div class="footer-motto">鉴往知来</div>
+    <div class="footer-beian">
+      <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2026020364号-1</a><br>
+      <img src="images/beian.png" alt="备案">
+      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41078202000764" target="_blank">豫公网安备 41078202000764号</a>
     </div>
-    <div class="cards">
-        <div class="card coming-soon">
-            <span class="icon">🏛️</span>
-            <h3>选择性必修一</h3>
-            <p>国家制度与社会治理</p>
-            <a href="#">建设中</a>
-        </div>
-        <div class="card coming-soon">
-            <span class="icon">💰</span>
-            <h3>选择性必修二</h3>
-            <p>经济与社会生活</p>
-            <a href="#">建设中</a>
-        </div>
-        <div class="card coming-soon">
-            <span class="icon">🎨</span>
-            <h3>选择性必修三</h3>
-            <p>文化交流与传播</p>
-            <a href="#">建设中</a>
-        </div>
-    </div>
+  </footer>
 
-    <div class="section-title">
-        <h2>📙 高三</h2>
-        <div class="line"></div>
-    </div>
-    <div class="cards">
-        <div class="card coming-soon">
-            <span class="icon">📝</span>
-            <h3>单元训练</h3>
-            <p>按教材单元划分，专项强化训练</p>
-            <a href="#">建设中</a>
-        </div>
-        <div class="card">
-            <span class="icon">📋</span>
-            <h3>模拟测试</h3>
-            <p>综合模拟测试卷，限时作答</p>
-            <button class="toggle-btn" data-label="📂 查看试卷" onclick="toggleCourse(this)">📂 查看试卷</button>
-            <div class="course-list" style="display: none;">
-                <a href="高三模拟/2026北京海淀高三历史一模.html">2026北京海淀高三历史一模</a>
-                <a href="高三模拟/2026学校高三第三次模拟考试_历史.html">2026学校高三第三次模拟考试</a>
-            </div>
-        </div>
-        <div class="card">
-            <span class="icon">🏆</span>
-            <h3>高考真题</h3>
-            <p>各省高考历史真题，含答案与解析</p>
-            <button class="toggle-btn" data-label="📂 查看真题" onclick="toggleCourse(this)">📂 查看真题</button>
-            <div class="course-list" style="display: none;">
-                <a href="2025高考真题/2025年北京高考历史真题（含答案）.html">2025年北京卷</a>
-                <a href="2025高考真题/2025-shandong.html">2025年山东卷</a>
-                <a href="2025高考真题/2025年河南省高考历史真题（含答案）.html">2025年河南卷</a>
-                <a href="2025高考真题/2025年湖北高考历史真题.html">2025年湖北卷</a>
-                <a href="2025高考真题/2025年陕西、山西、青海、宁夏高考历史真题.html">2025年陕西·山西·青海·宁夏卷</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="section-title">
-        <h2>🌐 历史纵横</h2>
-        <div class="line"></div>
-    </div>
-    <div class="cards">
-        <div class="card coming-soon">
-            <span class="icon">🐉</span>
-            <h3>中国史</h3>
-            <p>中国历史专题与通史资料</p>
-            <a href="#">建设中</a>
-        </div>
-        <div class="card">
-            <span class="icon">🌏</span>
-            <h3>世界史</h3>
-            <button class="toggle-btn" data-label="资料导航" onclick="toggleCourse(this)">资料导航</button>
-            <div class="course-list" style="display: none;">
-                <a href="打印纲要下知识点/中外历史纲要（下）参考答案_1-8课.html">参考答案 1-8课</a>
-                <a href="打印纲要下知识点/纲要下答案_9-16课.html">参考答案 9-16课</a>
-                <a href="打印纲要下知识点/纲要下答案_17-23课.html">参考答案 17-23课</a>
-                <a href="纲要下22课辨析题.html">第22课·辨析题（世界多极化与经济全球化）</a>
-                <a href="纲要下13，16，21三课比较.html">第13/16/21课·三时段对比（亚非拉民族民主运动）</a>
-                <a href="纲要下材料题B.html">纲要下·材料题B（2026年5月18日）</a>
-                <a href="纲要下2课.html">第2课·古代世界的帝国与文明的交流（初高中衔接对比表）</a>
-                <a href="纲要下3课.html">第3课·中古时期的欧洲（初高中衔接对比表）</a>
-                <a href="高一下素养评价三历史.html">高一（下）素养评价三 历史试题</a>
-            </div>
-        </div>
-        <div class="card" id="grade-card">
-            <h3 style="margin:0; font-size:1.3rem; letter-spacing:4px; line-height:2;">成绩管理</h3>
-            <button id="grade-main-btn" class="toggle-btn" onclick="clickGradeCard()" style="font-size:0.88rem; padding:8px 26px; letter-spacing:2px; margin-top:10px;">📋 查看成绩</button>
-            <div id="grade-exam-list" style="display:none; margin-top:12px;">
-                <button class="grade-exam-btn" onclick="showGradeExam('exam_april')" style="display:block; width:100%; padding:9px 14px; background:linear-gradient(135deg,#5a4a3a,#6b5a4a); color:#f5e6c8; border:1px solid #c8a84e; border-radius:4px; font-size:0.88rem; font-weight:bold; cursor:pointer; letter-spacing:1px; margin-bottom:8px; transition:all 0.2s;" onmouseover="this.style.background='linear-gradient(135deg,#c8a84e,#e2c97e)'; this.style.color='#8b1a1a';" onmouseout="this.style.background='linear-gradient(135deg,#5a4a3a,#6b5a4a)'; this.style.color='#f5e6c8';">📊 4月联考历史成绩</button>
-                <!-- 未来在此添加更多考试按钮 -->
-            </div>
-        </div>
-
-        <!-- 成绩表格（默认隐藏，由按钮触发） -->
-        <div id="grade-table-section" style="display:none; margin-top:8px; overflow-x:auto;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-                <span id="grade-table-title" style="color:#8b1a1a; font-weight:bold; letter-spacing:2px;"></span>
-                <a id="grade-download-btn" href="#" download
-                    style="display:inline-block; padding:6px 18px; background:linear-gradient(135deg,#8b1a1a,#a63c3c); color:#f5e6c8; border:1px solid #c8a84e; border-radius:4px; font-size:0.82rem; font-weight:bold; letter-spacing:1px; text-decoration:none;">📥 下载 xlsx</a>
-            </div>
-            <table id="grade-table" style="width:100%; border-collapse:collapse; font-size:0.9rem; background:#fffdf5; border:2px solid #c8a84e;">
-                <thead></thead>
-                <tbody></tbody>
-            </table>
-            <p style="text-align:right; color:#999; font-size:0.75rem; margin-top:6px;">
-                共 <span id="grade-count">0</span> 名学生 &nbsp;|&nbsp;
-                9班底色 🌾 &nbsp; 10班底色 🌿
-            </p>
-            <div style="text-align:center; margin-top:10px;">
-                <button onclick="closeGradeTable()" style="padding:6px 22px; background:#e0d5c5; color:#5a4a3a; border:1px solid #c8a84e; border-radius:4px; font-size:0.82rem; cursor:pointer; letter-spacing:1px;">收起表格 ▲</button>
-            </div>
-        </div>
-
-        <!-- 密码弹窗 -->
-        <div id="grade-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center;">
-            <div style="background:#fffdf5; border:2px solid #c8a84e; border-radius:12px; padding:36px 40px; width:320px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.4); position:relative;">
-                <div style="font-size:2rem; margin-bottom:12px;">🔒</div>
-                <h3 style="color:#8b1a1a; font-size:1.2rem; letter-spacing:3px; margin-bottom:8px;">成绩管理</h3>
-                <p style="color:#7a6555; font-size:0.85rem; margin-bottom:20px;">请输入访问密码</p>
-                <input type="password" id="grade-pwd-input" placeholder="请输入密码" maxlength="20"
-                    style="width:100%; padding:10px 14px; border:1.5px solid #c8a84e; border-radius:6px; font-size:1rem; outline:none; box-sizing:border-box; margin-bottom:8px; font-family:inherit;"
-                    onkeydown="if(event.key==='Enter') submitGradePassword()">
-                <div id="grade-pwd-error" style="color:#c0392b; font-size:0.82rem; min-height:1.2em; margin-bottom:10px;"></div>
-                <div style="display:flex; gap:12px; justify-content:center;">
-                    <button onclick="submitGradePassword()" style="padding:9px 28px; background:linear-gradient(135deg,#8b1a1a,#a63c3c); color:#f5e6c8; border:1px solid #c8a84e; border-radius:4px; font-size:0.95rem; font-weight:bold; cursor:pointer; letter-spacing:1px;">确认</button>
-                    <button onclick="closeGradeModal()" style="padding:9px 28px; background:#e0d5c5; color:#5a4a3a; border:1px solid #c8a84e; border-radius:4px; font-size:0.95rem; cursor:pointer; letter-spacing:1px;">取消</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<!-- 底部 -->
-<div class="footer">
-    © 2026 历史学习平台 · 助力历史教学<br>
-    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" style="color:#888; text-decoration:none;">豫ICP备2026020364号-1</a>
-<div style="margin-top:4px;">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAoCAYAAACWwljjAAAFQklEQVRYw+3Wa1BUdRjH8SOpMeg4WhZGpDIxiaaTeUFgWrxE4AVRQJGlRRAVIV1JkbgMgQLi5AVBQSVLSp0xlEAUKBEEFZCrCstll8UV2AV2YbmoGCrYv31+R95UL5pmmtamZ+bz6rz5nvOc/5zDcX9jGLs/iTxuyvIlWYkRFeTHA2HVRFtzfhthTG5KuH96/vUgNlC4mMgyw1NJit/aAXLKazYje9xtIMZ/OZz50gW+9hcNkvoLEemEPbnrSP47QYwxQ5Ifv54RqzcXwFFvSyjaOhfavN8F7Y5ZcC/HH9JOB4LNa9Zw5YA76OZV8vIGMdZtSp7cDrtOnOavYiQhTAiPwi1AMtIQaqyngsxpBtw2GAGDKfaQmpUAa6xc4Vfp4UtEdzAMycsT9JQ1Tyctl/2eEkuTlYysF/rCUNxMqDEzgTqzSXBnpgnIHCzgjvEEuD52DLBr3rA1MAaWmNtB582wdtIljZ9G9D+IPU6aTxIPBjHCcXvg3CEh9K2fDLWvjIH6D6fwTIyheuwEqLUyhzLOALq8pkN+bgRw3HY4FBsMzxojZxP9DequLjAlQwVrbpIjhyIY4UYGQ/buhdBqPxlk3Gion2IMDQIz3kJe/ZS34I7uHkmD7VSQVgYDNyIAwsNCgfXGXoOBPjP9DKrOCAogA2etGTmTHAMcFwFZye7wS5QlVHGjoEw4A2qPCUBZ6AzNcQ5Q/YYRdO+YB1U3dsDwypLio4FJ3ECryIzWz6Cm3NgTRHN8HiPF6eHAGSbAdh8feFZkB7krzaHE9h2o85sDsiAbkIsXQMN+e2CtGyF0kzdwXCgU5++D/ouLQFV4OEU/g2Q/iNuIPNaKkQflAWBqexxGjhLDVUcL6IwSQN3SGVChe6FJg9dckCx6D1QBliDZLIAxo7eA8eyv4KE0BJqTrHkZvnL9DJKn+Twmt0NsGGHZy2Dn3kQYfsQ53Hh4/r4RNGz8AIpdzKEuaAF0RC2E57MmQgE3ATjuM/CPiANW7AqSfQJQ5vk362eQKmd3JrmXsoSRocpNIMnbB9zbceDIWUPmuHFQNMkISqa9DpUvNK6YDpW2s8DfwBK48WFQnhMCgzUBoLy0BrRVe5P0NWjPLdKUsJiR1tR1wGp8IeZwMgx/SrgRvjxuAziNcwLvyathLOcJHLflhRDYGRYFrNET2rJ5yvPLoas0tOj/oL8UpC4JHyTSU+6MNCS4gvKoAB5WiKG+MAQSg0WwLXQ/ZJ3xhao0FxB5hYCbUwAEfhEF3Td8QP2dAOQnPwFlxgrolUVq9TPoaX+ZB2nLc2Gk6awj1MU78HZZwJMid2Byb550JQwVO0NfxlJgdz14vWKeRAiK6DlQF28PLZdcoLNcBIO92bb6GTQ8Q/13RURT6tlH2gvXMlITLYD6uI+gp2ozdF0VQXumM6ivCqGvahM8kPiDItkeGo8tB025GFQ3xFrSr06zI3/4yde7oN7m0sWk5eKWDqK5JWJQvAHac9ygq3Adr9gTNNc3QG85rzPfHe5/7wDtPwuhp/Zz6CjyhaZzwi6ivfetHdH/oP77+3PJQOsuRnqkQdCa4wWqyx6gyecpL64GTaEX7ycXUJz4GJp1B4O0X/Hg0Xp1tFV+8Ei1k6c5coHofxBrrzQinbKYo0SVJ+wn6iurGHlY5gY911aDJnMFaHXXiDp9GQyvtKfUA9QFTtBZ7gPdit0tpFd9OpwwFmlA9D/o9yNLDpxIKmI8PMnNSNtviCLVpYTITzrXEGWaq4qos0WgOPdpCenIF+eRrurjB4k0PXopYZG6gMg/D/gNBUxhAbSAmKMAAAAASUVORK5CYII=" alt="备案图标" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;">
-    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=41078202000764" rel="noreferrer" target="_blank" style="color:#888; text-decoration:none;">豫公网安备41078202000764号</a>
-</div>
-    <div class="visitor-count">
-        <span id="busuanzi_container_site_pv">👁 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
-        <span id="busuanzi_container_page_pv">📖 本页访问量 <span id="busuanzi_value_page_pv"></span> 次</span>
-    </div>
-    <!-- 小红书链接 -->
-    <div class="footer-social">
-        <a href="https://www.xiaohongshu.com/user/profile/66544ea900000000030338b8" target="_blank" rel="noopener">📕 小红书</a>
-    </div>
-</div>
-
-<script>
-function toggleCourse(btn) {
-    var list = btn.nextElementSibling;
-    if (list.style.display === "none") {
-        list.style.display = "block";
-        btn.textContent = "▲ 收起";
-    } else {
-        list.style.display = "none";
-        btn.textContent = btn.dataset.label || "查看";
-    }
-}
-
-// ===== 成绩管理密码保护 =====
-var GRADE_PASSWORD = "sda366";  // ← 在此修改密码
-
-// ★ 考试目录（每项 { id, title, downloadUrl, data } ）
-//    添加新考试只需在下面加一项即可
-var gradeExams = {
-    "exam_april": {
-        title: "📊 4月联考历史成绩 — 高一9班 & 10班",
-        downloadUrl: "高一9班10班历史成绩合并排名.xlsx",
-        data: [
-            ["排名","班级","姓名","历史成绩"],
-            ["1","高一9班","张凡莉",62],
-            ["2","高一10班","郭夜羽",62],
-            ["3","高一10班","段瑶",60],
-            ["4","高一9班","吉喆",60],
-            ["5","高一10班","刘昊",57],
-            ["6","高一10班","王靖谣",56],
-            ["7","高一10班","李学燕",54],
-            ["8","高一10班","贾焱楚",54],
-            ["9","高一10班","陈映萱",54],
-            ["10","高一10班","琚志烨",53],
-            ["11","高一9班","袁绪阳",53],
-            ["12","高一9班","安婧涵",52],
-            ["13","高一10班","贠苏芮",52],
-            ["14","高一10班","高家钤",52],
-            ["15","高一9班","王然",51],
-            ["16","高一9班","阮蓝萱",50],
-            ["17","高一9班","倪欣卫",50],
-            ["18","高一10班","宋振萍",50],
-            ["19","高一10班","刘子涵",49],
-            ["20","高一9班","邓六桤",49],
-            ["21","高一10班","张琳",48],
-            ["22","高一9班","曾浩洋",47],
-            ["23","高一9班","李浩宁",47],
-            ["24","高一9班","闫田苗",47],
-            ["25","高一10班","张溢烜",46],
-            ["26","高一9班","王奕宁",46],
-            ["27","高一9班","赵言其",46],
-            ["28","高一10班","杜政睿",46],
-            ["29","高一9班","陈冰",46],
-            ["30","高一10班","董运昌",46],
-            ["31","高一9班","郭思敏",45],
-            ["32","高一9班","冀熠煊",45],
-            ["33","高一10班","刘铭涵",45],
-            ["34","高一10班","崔硕晗",45],
-            ["35","高一10班","王文溪",45],
-            ["36","高一10班","赵秋雅",44],
-            ["37","高一9班","索嘉灿",44],
-            ["38","高一9班","王梦洁",44],
-            ["39","高一9班","申宜昊",44],
-            ["40","高一9班","臧儒源",44],
-            ["41","高一10班","王学森",44],
-            ["42","高一10班","路雨泽",44],
-            ["43","高一10班","蒋泰林",43],
-            ["44","高一9班","郭一漫",42],
-            ["45","高一10班","郝诗雅",42],
-            ["46","高一10班","范潇戈",42],
-            ["47","高一10班","孙静怡",42],
-            ["48","高一10班","李明灿",41],
-            ["49","高一9班","冯程程",41],
-            ["50","高一10班","冯嫣然",41],
-            ["51","高一9班","桑甜心",40],
-            ["52","高一10班","张培玟",40],
-            ["53","高一10班","孙方举",40],
-            ["54","高一10班","魏晨",40],
-            ["55","高一10班","王冰洁",39],
-            ["56","高一9班","李梓诺",39],
-            ["57","高一10班","张子涵",39],
-            ["58","高一9班","崔佳琪",38],
-            ["59","高一9班","李源淇",38],
-            ["60","高一10班","郭旭",38],
-            ["61","高一9班","吴雨颖",38],
-            ["62","高一10班","张子嫣",38],
-            ["63","高一9班","朱雨涵",37],
-            ["64","高一9班","屈爽",37],
-            ["65","高一9班","李志涵",37],
-            ["66","高一9班","魏玘",37],
-            ["67","高一9班","郭霖雨",37],
-            ["68","高一9班","常栗颖",36],
-            ["69","高一9班","刘子歌",35],
-            ["70","高一9班","王一蕾",35],
-            ["71","高一10班","刘婷",35],
-            ["72","高一10班","罗依",35],
-            ["73","高一10班","王广阳",34],
-            ["74","高一10班","尚雨馨",34],
-            ["75","高一9班","刘一依",34],
-            ["76","高一10班","王语薇",33],
-            ["77","高一10班","丁祺斐",32],
-            ["78","高一10班","赵威",32],
-            ["79","高一10班","崔云泽",32],
-            ["80","高一9班","元浩莹",31],
-            ["81","高一10班","付国曹",30],
-            ["82","高一9班","张一宸",26],
-            ["83","高一10班","赵子涵",26],
-            ["84","高一9班","张湉",23],
-            ["85","高一9班","丰焕力",21],
-            ["86","高一10班","牛子畅",13],
-            ["87","高一9班","郭树茂","缺考"],
-            ["88","高一10班","赵敏晶","缺考"],
-            ["89","高一10班","刘怡矾","缺考"],
-            ["90","高一10班","尚钰昌","缺考"],
-            ["91","高一10班","张子轩","缺考"],
-            ["92","高一10班","郭羿彤","缺考"]
-        ]
-    }
-    // 添加新考试示例（取消注释并填入真实数据）：
-    // "exam_may": {
-    //     title: "5月期中历史成绩",
-    //     downloadUrl: "5月期中成绩.xlsx",
-    //     data: [ ["排名","班级","姓名","历史成绩"], ... ]
-    // }
-};
-
-function buildTableFromData(data) {
-    var thead = document.querySelector("#grade-table thead");
-    var tbody = document.querySelector("#grade-table tbody");
-    var header = data[0];
-    thead.innerHTML = "<tr>" + header.map(function(h){ return '<th style="padding:8px 10px; border-bottom:2px solid #c8a84e; color:#8b1a1a; white-space:nowrap; background:#f5e6c8;">'+h+'</th>'; }).join("") + "</tr>";
-    tbody.innerHTML = "";
-    var count = 0;
-    for (var i = 1; i < data.length; i++) {
-        var row = data[i];
-        var cls = row[1];
-        var bgColor = "transparent";
-        if (cls === "高一9班") bgColor = "#fdf5e6";
-        else if (cls === "高一10班") bgColor = "#f0f5eb";
-        tbody.innerHTML += "<tr style='background:"+bgColor+";'>" + row.map(function(cell){
-            var v = (cell === null || cell === undefined || cell === "") ? "-" : cell;
-            return '<td style="padding:6px 10px; border-bottom:1px solid #e0d5c5; text-align:'+(typeof v==="number"?"center":"left")+';">'+v+'</td>';
-        }).join("") + "</tr>";
-        count++;
-    }
-    document.getElementById("grade-count").textContent = count;
-}
-
-function showGradeExam(examId) {
-    var exam = gradeExams[examId];
-    if (!exam) return;
-    document.getElementById("grade-table-title").textContent = exam.title;
-    document.getElementById("grade-download-btn").href = exam.downloadUrl;
-    document.getElementById("grade-table-section").style.display = "block";
-    buildTableFromData(exam.data);
-    // 滚动到表格
-    document.getElementById("grade-table-section").scrollIntoView({behavior:"smooth", block:"start"});
-}
-
-function closeGradeTable() {
-    document.getElementById("grade-table-section").style.display = "none";
-}
-
-function clickGradeCard() {
-    // 每次都要密码验证
-    var modal = document.getElementById("grade-modal");
-    modal.style.display = "flex";
-    document.getElementById("grade-pwd-input").value = "";
-    document.getElementById("grade-pwd-error").textContent = "";
-    setTimeout(function(){ document.getElementById("grade-pwd-input").focus(); }, 100);
-}
-
-function submitGradePassword() {
-    var input = document.getElementById("grade-pwd-input").value;
-    if (input === GRADE_PASSWORD) {
-        closeGradeModal();
-        // 展开考试列表
-        document.getElementById("grade-exam-list").style.display = "block";
-        document.getElementById("grade-main-btn").innerHTML = "📋 查看成绩 ▲";
-    } else {
-        document.getElementById("grade-pwd-error").textContent = "密码错误，请重试";
-        document.getElementById("grade-pwd-input").value = "";
-        document.getElementById("grade-pwd-input").focus();
-    }
-}
-
-function closeGradeModal() {
-    document.getElementById("grade-modal").style.display = "none";
-}
-
-// 点击弹窗背景关闭
-document.addEventListener("click", function(e) {
-    var modal = document.getElementById("grade-modal");
-    if (e.target === modal) closeGradeModal();
-});
-</script>
-
-<!-- 不蒜子访问量统计 -->
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+  <script>
+  (function(){
+    var h = new Date().getHours();
+    var names = ['子时','丑时','寅时','卯时','辰时','巳时','午时','未时','申时','酉时','戌时','亥时'];
+    var idx = Math.floor(((h + 1) % 24) / 2);
+    document.getElementById('shichen').textContent = names[idx] + ' · 此刻光阴';
+  })();
+  </script>
 
 </body>
 </html>
