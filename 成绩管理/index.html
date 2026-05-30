@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成绩管理</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .lock-box { max-width:380px; margin:3rem auto; background:var(--card-bg); border:2px solid var(--gold); border-radius:var(--radius-lg); padding:2.5rem 2rem; text-align:center; box-shadow:var(--shadow-lg); }
+    .lock-box h3 { color:var(--red-deep); font-size:1.4rem; letter-spacing:4px; margin-bottom:0.5rem; }
+    .lock-box p { color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem; }
+    .lock-box input { width:100%; padding:10px 14px; border:2px solid var(--gold-pale); border-radius:var(--radius-sm); font-size:1.1rem; outline:none; text-align:center; font-family:inherit; margin-bottom:0.5rem; }
+    .lock-box input:focus { border-color:var(--gold); }
+    .lock-err { color:#c0392b; font-size:0.9rem; min-height:1.4em; margin-bottom:1rem; }
+    .lock-btns { display:flex; gap:12px; justify-content:center; }
+    .lock-btns button { padding:10px 30px; border-radius:var(--radius-sm); font-size:1rem; font-weight:bold; cursor:pointer; letter-spacing:2px; border:none; }
+    .btn-confirm { background:linear-gradient(135deg,var(--red-deep),var(--red-mid)); color:var(--gold-pale); border:1px solid var(--gold) !important; }
+    .btn-confirm:hover { background:linear-gradient(135deg,var(--red-mid),var(--red-light)); }
+    .btn-cancel { background:var(--section-alt); color:var(--text-mid); }
+    .btn-cancel:hover { background:var(--gold-pale); }
+    .dl-link { display:none; }
+  </style>
+</head>
+<body class="theme-home">
+
+  <header class="site-header">
+    <h1 class="site-title">成绩管理</h1>
+    <p class="page-subtitle">学生成绩 · 保密数据</p>
+    <div class="shichen" id="shichen"></div>
+  </header>
+
+  <nav class="site-nav">
+    <a href="../电子教材/index.html">电子教材</a><span class="nav-sep">·</span>
+    <a href="../高一/index.html">高一</a><span class="nav-sep">·</span>
+    <a href="../高二/index.html">高二</a><span class="nav-sep">·</span>
+    <a href="../高三/index.html">高三</a><span class="nav-sep">·</span>
+    <a href="../游戏/index.html">游戏</a><span class="nav-sep">·</span>
+    <a href="../链接/index.html">链接</a><span class="nav-sep">·</span>
+    <a href="../初中/index.html">初中</a>
+  </nav>
+
+  <div class="breadcrumb"><a href="../index.html">首页</a> &raquo; 成绩管理</div>
+
+  <main class="main-content">
+    <div class="lock-box" id="lockBox">
+      <h3>🔒 成绩管理</h3>
+      <p>请输入访问密码</p>
+      <input type="password" id="pwdInput" placeholder="请输入密码" maxlength="20" onkeydown="if(event.key==='Enter')checkPwd()">
+      <div class="lock-err" id="pwdErr"></div>
+      <div class="lock-btns">
+        <button class="btn-confirm" onclick="checkPwd()">确认</button>
+        <button class="btn-cancel" onclick="history.back()">返回</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-motto">鉴往知来</div>
+    <div class="footer-beian">
+      <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2026020364号-1</a><br>
+      <img src="../images/beian.png" alt="备案">
+      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41078202000764" target="_blank">豫公网安备 41078202000764号</a>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var h = new Date().getHours();
+    var names = ['子时','丑时','寅时','卯时','辰时','巳时','午时','未时','申时','酉时','戌时','亥时'];
+    var idx = Math.floor(((h + 1) % 24) / 2);
+    document.getElementById('shichen').textContent = names[idx] + ' · 此刻光阴';
+  })();
+
+  var PWD = 'sda366';
+
+  function checkPwd(){
+    var v = document.getElementById('pwdInput').value;
+    if(v === PWD){
+      document.getElementById('lockBox').innerHTML = '<h3 style="color:var(--green-mid);margin-bottom:1rem;">✅ 验证通过</h3><p style="margin-bottom:1.5rem;">点击下方按钮下载成绩数据</p><a href="../高一9班10班历史成绩合并排名.xlsx" download style="display:inline-block;padding:12px 36px;background:linear-gradient(135deg,var(--red-deep),var(--red-mid));color:var(--gold-pale);border:2px solid var(--gold);border-radius:var(--radius-sm);font-size:1.1rem;font-weight:bold;letter-spacing:2px;text-decoration:none;">📥 下载成绩表</a>';
+    } else {
+      document.getElementById('pwdErr').textContent = '密码错误，请重试';
+      document.getElementById('pwdInput').value = '';
+      document.getElementById('pwdInput').focus();
+    }
+  }
+  </script>
+</body>
+</html>
