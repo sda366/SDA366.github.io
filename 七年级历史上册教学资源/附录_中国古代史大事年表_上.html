@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>附录 · 中国古代史大事年表（上）</title>
+<style>
+  :root {
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --bg: #f8f9ff;
+    --card-bg: #ffffff;
+    --text: #2d2d2d;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 14pt;
+  }
+  .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0 4px 20px rgba(102,126,234,0.3);
+  }
+  .hero h1 { font-size: 28pt; margin-bottom: 8px; font-weight: 700; }
+  .hero p { font-size: 14pt; opacity: 0.9; }
+  .container { max-width: 960px; margin: 0 auto; padding: 30px 20px; }
+
+  .period-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0 30px;
+    position: sticky;
+    top: 0;
+    background: rgba(248,249,255,0.95);
+    padding: 15px;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+  }
+  .period-nav button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    font-size: 13pt;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+    color: #fff;
+  }
+  .period-nav button.all { background: linear-gradient(135deg, #667eea, #764ba2); }
+  .period-nav button.prehistory { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+  .period-nav button.xiashangzhou { background: linear-gradient(135deg, #F59E0B, #D97706); }
+  .period-nav button.qinhan { background: linear-gradient(135deg, #10B981, #059669); }
+  .period-nav button.sanguo { background: linear-gradient(135deg, #EF4444, #DC2626); }
+  .period-nav button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .period-nav button.active { box-shadow: 0 0 0 3px rgba(102,126,234,0.3); }
+
+  .timeline { position: relative; padding-left: 50px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 18px; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 3px;
+  }
+
+  .period-group { margin-bottom: 30px; }
+  .period-title {
+    font-size: 18pt;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    color: #fff;
+  }
+  .period-title.prehistory-bg { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+  .period-title.xiashangzhou-bg { background: linear-gradient(135deg, #F59E0B, #D97706); }
+  .period-title.qinhan-bg { background: linear-gradient(135deg, #10B981, #059669); }
+  .period-title.sanguo-bg { background: linear-gradient(135deg, #EF4444, #DC2626); }
+
+  .event-item {
+    position: relative;
+    margin-bottom: 12px;
+    padding: 12px 18px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    transition: all 0.3s;
+  }
+  .event-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(102,126,234,0.15);
+  }
+  .event-item .dot {
+    position: absolute;
+    left: -37px;
+    top: 18px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #667eea;
+    z-index: 2;
+  }
+  .event-item .time {
+    min-width: 160px;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 13pt;
+    flex-shrink: 0;
+  }
+  .event-item .event-text {
+    flex: 1;
+    font-size: 14pt;
+  }
+
+  .search-box {
+    margin: 20px auto;
+    max-width: 500px;
+    position: relative;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--border);
+    border-radius: 30px;
+    font-size: 14pt;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .search-box input:focus { border-color: var(--primary); }
+  .search-box input::placeholder { color: var(--muted); }
+
+  .hidden { display: none !important; }
+
+  .footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+    font-size: 12pt;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .event-item { flex-direction: column; gap: 5px; }
+    .event-item .time { min-width: auto; }
+    .timeline { padding-left: 35px; }
+    .timeline::before { left: 12px; }
+    .event-item .dot { left: -28px; width: 11px; height: 11px; }
+  }
+</style>
+
+  <style>
+  .top-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 12px rgba(102,126,234,0.3);
+    font-size: 12pt;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  }
+  .top-nav a {
+    color: #fff; text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .top-nav a:hover { background: rgba(255,255,255,0.18); }
+  .top-nav .nav-home { font-weight: 700; font-size: 13pt; }
+  .top-nav .nav-placeholder { visibility: hidden; padding: 6px 14px; }
+  .top-nav .nav-sep { color: rgba(255,255,255,0.4); font-size: 10pt; margin: 0 2px; }
+  /* 让页面主体不被导航条遮挡 */
+  
+  /* 响应式 */
+  @media (max-width: 600px) {
+    .top-nav { padding: 6px 10px; font-size: 11pt; }
+    .top-nav a { padding: 5px 8px; }
+    
+  }
+  </style>
+
+  <style>
+  .top-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 18px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 12px rgba(102,126,234,0.35);
+    font-size: 12pt;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  }
+  .top-nav a {
+    color: #fff; text-decoration: none;
+    padding: 5px 12px; border-radius: 8px;
+    transition: background 0.2s; white-space: nowrap;
+  }
+  .top-nav a:hover { background: rgba(255,255,255,0.18); }
+  .top-nav .nav-home { font-weight: 700; font-size: 13pt; }
+  .top-nav .nav-placeholder { visibility: hidden; padding: 5px 12px; }
+  .top-nav .nav-sep { color: rgba(255,255,255,0.35); margin: 0 2px; font-size: 10pt; }
+  body { padding-top: 44px !important; }
+  @media (max-width: 600px) {
+    .top-nav { padding: 5px 8px; font-size: 11pt; }
+    .top-nav a { padding: 4px 7px; }
+    body { padding-top: 40px !important; }
+  }
+  </style>
+</head>
+<body>
+<div class="top-nav"><a href="index.html" class="nav-home">首页</a><span class="nav-sep">|</span><a href="第21课_活动课_从考古发现看中华文明的起源.html" title="活动课">◀ 活动课</a><span class="nav-sep">|</span><span class="nav-placeholder">▶</span></div>
+
+<div class="hero">
+  <h1>中国古代史大事年表（上）</h1>
+  <p>距今约170万年 — 589年 · 七年级历史上册附录</p>
+</div>
+
+<div class="container">
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索事件或时间..." oninput="filterEvents()">
+  </div>
+
+  <div class="period-nav">
+    <button class="all active" onclick="filterPeriod('all')">全部</button>
+    <button class="prehistory" onclick="filterPeriod('prehistory')">史前时期</button>
+    <button class="xiashangzhou" onclick="filterPeriod('xiashangzhou')">夏商周</button>
+    <button class="qinhan" onclick="filterPeriod('qinhan')">秦汉</button>
+    <button class="sanguo" onclick="filterPeriod('sanguo')">三国两晋南北朝</button>
+  </div>
+
+  <div class="timeline" id="timeline">
+
+    <!-- 史前时期 -->
+    <div class="period-group" data-period="prehistory">
+      <div class="period-title prehistory-bg">史前时期：中国境内早期人类与文明的起源</div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约170万年</span><span class="event-text">元谋人</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约160万年</span><span class="event-text">蓝田人</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约100万年</span><span class="event-text">郧县人</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约70万—20万年</span><span class="event-text">北京人</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约3万年</span><span class="event-text">山顶洞人</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约1万年</span><span class="event-text">先民已会栽培水稻、粟、黍，早期农业出现</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约7000年</span><span class="event-text">河姆渡遗址</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约6000年</span><span class="event-text">半坡遗址</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约6000—4000年</span><span class="event-text">传说中的炎帝、黄帝、尧、舜、禹时期</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约5300—4300年</span><span class="event-text">良渚古城遗址：早期国家出现</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#8B5CF6"></span><span class="time">距今约4300—4000年</span><span class="event-text">陶寺古城遗址</span></div>
+    </div>
+
+    <!-- 夏商周 -->
+    <div class="period-group" data-period="xiashangzhou">
+      <div class="period-title xiashangzhou-bg">夏商周时期：早期国家与社会变革</div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">约公元前2070年</span><span class="event-text">夏朝建立</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">约公元前1600年</span><span class="event-text">商汤灭夏，商朝建立</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">公元前1046年</span><span class="event-text">周武王灭商，西周开始</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">公元前841年</span><span class="event-text">国人暴动</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">公元前771年</span><span class="event-text">西周灭亡</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">公元前770年</span><span class="event-text">周平王迁都洛邑，春秋时期开始</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">公元前475年</span><span class="event-text">战国时期开始</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">公元前356年</span><span class="event-text">商鞅开始变法</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#F59E0B"></span><span class="time">公元前256年</span><span class="event-text">李冰主持修建都江堰</span></div>
+    </div>
+
+    <!-- 秦汉 -->
+    <div class="period-group" data-period="qinhan">
+      <div class="period-title qinhan-bg">秦汉时期：统一多民族封建国家的建立和巩固</div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">公元前221年</span><span class="event-text">秦统一六国</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">公元前209年</span><span class="event-text">陈胜、吴广起义爆发</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">公元前207年</span><span class="event-text">秦朝灭亡</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">公元前202年</span><span class="event-text">西汉建立</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">公元前138年</span><span class="event-text">张骞第一次出使西域</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">公元前60年</span><span class="event-text">西汉设置西域都护府</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">公元9年</span><span class="event-text">王莽代汉，定国号为"新"</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">25年</span><span class="event-text">东汉建立</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">73年</span><span class="event-text">班超出使西域</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">105年</span><span class="event-text">蔡伦改进造纸术</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">123年</span><span class="event-text">东汉改西域都护府为西域长史府</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#10B981"></span><span class="time">184年</span><span class="event-text">黄巾起义爆发</span></div>
+    </div>
+
+    <!-- 三国两晋南北朝 -->
+    <div class="period-group" data-period="sanguo">
+      <div class="period-title sanguo-bg">三国两晋南北朝时期：政权分立与民族交融</div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">200年</span><span class="event-text">官渡之战</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">208年</span><span class="event-text">赤壁之战</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">220年</span><span class="event-text">魏国建立，东汉灭亡</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">221年</span><span class="event-text">蜀汉建立</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">229年</span><span class="event-text">吴国建立，三国鼎立局面形成</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">230年</span><span class="event-text">吴派卫温率万人船队到达夷洲</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">263年</span><span class="event-text">魏灭蜀</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">266年</span><span class="event-text">西晋建立</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">280年</span><span class="event-text">西晋灭吴，统一全国</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">316年</span><span class="event-text">西晋灭亡</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">317年</span><span class="event-text">东晋建立</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">383年</span><span class="event-text">淝水之战</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">420年</span><span class="event-text">东晋灭亡，南朝开始</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">439年</span><span class="event-text">北魏统一北方</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">494年</span><span class="event-text">北魏孝文帝迁都洛阳</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">577年</span><span class="event-text">北周灭北齐，统一北方</span></div>
+      <div class="event-item"><span class="dot" style="border-color:#EF4444"></span><span class="time">589年</span><span class="event-text">南北朝结束</span></div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    资料来源：人教版七年级历史上册教材附录 · 中国古代史大事年表（上）
+  </div>
+
+</div>
+
+<script>
+function filterPeriod(period) {
+  document.querySelectorAll('.period-nav button').forEach(b => b.classList.remove('active'));
+  document.querySelector('.period-nav button.' + period).classList.add('active');
+
+  document.querySelectorAll('.period-group').forEach(group => {
+    if (period === 'all' || group.dataset.period === period) {
+      group.classList.remove('hidden');
+    } else {
+      group.classList.add('hidden');
+    }
+  });
+}
+
+function filterEvents() {
+  const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+  document.querySelectorAll('.event-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    if (!keyword || text.includes(keyword)) {
+      item.classList.remove('hidden');
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+  document.querySelectorAll('.period-group').forEach(group => {
+    const visible = group.querySelectorAll('.event-item:not(.hidden)').length;
+    if (visible === 0 && keyword) {
+      group.classList.add('hidden');
+    } else {
+      group.classList.remove('hidden');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
