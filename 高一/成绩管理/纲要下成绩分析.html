@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>纲要下 · 成绩分析</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .lock-box { max-width:380px; margin:3rem auto; background:var(--card-bg); border:2px solid var(--gold); border-radius:var(--radius-lg); padding:2.5rem 2rem; text-align:center; box-shadow:var(--shadow-lg); }
+    .lock-box h3 { color:var(--red-deep); font-size:1.4rem; letter-spacing:4px; margin-bottom:0.5rem; }
+    .lock-box p { color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem; }
+    .lock-box input { width:100%; padding:10px 14px; border:2px solid var(--gold-pale); border-radius:var(--radius-sm); font-size:1.1rem; outline:none; text-align:center; font-family:inherit; margin-bottom:0.5rem; }
+    .lock-box input:focus { border-color:var(--gold); }
+    .lock-err { color:#c0392b; font-size:0.9rem; min-height:1.4em; margin-bottom:1rem; }
+    .lock-btns { display:flex; gap:12px; justify-content:center; }
+    .btn-confirm { padding:10px 30px; border-radius:var(--radius-sm); font-size:1rem; font-weight:bold; cursor:pointer; letter-spacing:2px; border:none; background:linear-gradient(135deg,var(--red-deep),var(--red-mid)); color:var(--gold-pale); border:1px solid var(--gold) !important; }
+    .btn-confirm:hover { background:linear-gradient(135deg,var(--red-mid),var(--red-light)); }
+    .btn-cancel { padding:10px 30px; border-radius:var(--radius-sm); font-size:1rem; font-weight:bold; cursor:pointer; letter-spacing:2px; border:none; background:var(--section-alt); color:var(--text-mid); }
+    .btn-cancel:hover { background:var(--gold-pale); }
+
+    .score-list { max-width:680px; margin:2rem auto; display:flex; flex-direction:column; gap:1.2rem; }
+    .score-card {
+      display:flex; align-items:center; gap:1.2rem;
+      background:var(--card-bg); border:2px solid var(--gold-pale);
+      border-radius:var(--radius-lg); padding:1.5rem 2rem;
+      text-decoration:none; color:inherit;
+      box-shadow:var(--shadow-sm); transition:all 0.25s;
+    }
+    .score-card:hover { border-color:var(--gold); box-shadow:var(--shadow-lg); transform:translateY(-2px); }
+    .score-icon { font-size:2.2rem; flex-shrink:0; }
+    .score-info { flex:1; }
+    .score-title { font-size:1.15rem; font-weight:bold; color:var(--red-deep); margin-bottom:0.3rem; letter-spacing:2px; }
+    .score-desc { font-size:0.92rem; color:var(--text-muted); }
+    .score-arrow { font-size:1.4rem; color:var(--gold); flex-shrink:0; }
+  </style>
+</head>
+<body class="theme-blue">
+
+  <header class="site-header">
+    <h1 class="site-title">纲要下 · 成绩分析</h1>
+    <p class="page-subtitle">世界史 · 考试数据与反思</p>
+    <div class="shichen" id="shichen"></div>
+  </header>
+
+  <nav class="site-nav">
+    <a href="https://jc.pep.com.cn/" target="_blank" rel="noopener">电子教材</a><span class="nav-sep">·</span>
+    <a href="../高一/index.html">高一</a><span class="nav-sep">·</span>
+    <a href="../高二/index.html">高二</a><span class="nav-sep">·</span>
+    <a href="../高三/index.html">高三</a><span class="nav-sep">·</span>
+    <a href="../游戏/index.html">游戏</a><span class="nav-sep">·</span>
+    <a href="../链接/index.html">链接</a><span class="nav-sep">·</span>
+    <a href="../初中/index.html">初中</a>
+  </nav>
+
+  <div class="breadcrumb"><a href="../index.html">首页</a> &raquo; <a href="../高一/index.html">高一</a> &raquo; 纲要下 · 成绩分析</div>
+
+  <!-- 密码输入区 -->
+  <main class="main-content" id="lockBox">
+    <div class="lock-box">
+      <h3>🔒 成绩分析</h3>
+      <p>请输入访问密码</p>
+      <input type="password" id="pwdInput" placeholder="请输入密码" maxlength="20" onkeydown="if(event.key==='Enter')checkPwd()">
+      <div class="lock-err" id="pwdErr"></div>
+      <div class="lock-btns">
+        <button class="btn-confirm" onclick="checkPwd()">确认</button>
+        <button class="btn-cancel" onclick="history.back()">返回</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 成绩内容区（密码正确后显示） -->
+  <main class="main-content" id="scoreBox" style="display:none;">
+
+    <div class="score-list">
+      <a class="score-card" href="5月联考9班10班历史成绩对照表.html">
+        <div class="score-icon">📊</div>
+        <div class="score-info">
+          <div class="score-title">5月联考 · 9班10班历史成绩对照表</div>
+          <div class="score-desc">高一 · 班级成绩对照分析</div>
+        </div>
+        <div class="score-arrow">›</div>
+      </a>
+
+      <a class="score-card" href="9班10班_4月vs5月_历史成绩对比.html">
+        <div class="score-icon">📈</div>
+        <div class="score-info">
+          <div class="score-title">4月 vs 5月 · 历史成绩对比</div>
+          <div class="score-desc">高一 · 跨月考成绩变化趋势</div>
+        </div>
+        <div class="score-arrow">›</div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-motto">鉴往知来</div>
+    <div class="footer-beian">
+      <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2026020364号-1</a><br>
+      <img src="../images/beian.png" alt="备案">
+      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41078202000764" target="_blank">豫公网安备 41078202000764号</a>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var h = new Date().getHours();
+    var names = ['子时','丑时','寅时','卯时','辰时','巳时','午时','未时','申时','酉时','戌时','亥时'];
+    var idx = Math.floor(((h + 1) % 24) / 2);
+    document.getElementById('shichen').textContent = names[idx] + ' · 此刻光阴';
+  })();
+
+  var PWD = 'sda366';
+
+  function checkPwd(){
+    var v = document.getElementById('pwdInput').value;
+    if(v === PWD){
+      document.getElementById('lockBox').style.display = 'none';
+      document.getElementById('scoreBox').style.display = 'block';
+    } else {
+      document.getElementById('pwdErr').textContent = '密码错误，请重试';
+      document.getElementById('pwdInput').value = '';
+      document.getElementById('pwdInput').focus();
+    }
+  }
+  </script>
+
+</body>
+</html>
