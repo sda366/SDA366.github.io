@@ -7,254 +7,221 @@
   <link rel="stylesheet" href="../../css/theme.css">
   <link rel="stylesheet" href="../../css/style.css">
   <style>
-    /* ===== 页面专属变量 ===== */
-    :root {
-      --jade: #5B7A40;
-      --jade-light: #8AAA60;
-      --jade-pale: #E8F0E0;
-      --ink: #2A0A0A;
-      --seal-red: #C0392B;
-    }
-
-    /* ===== 顶部横幅区 ===== */
-    .banner {
-      text-align: center;
-      padding: 3.5rem 1.5rem 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .banner::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(122,26,5,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, rgba(200,144,24,0.06) 0%, transparent 60%);
-    }
-    .banner-icon {
-      font-size: 4rem;
-      display: block;
-      margin-bottom: 0.8rem;
-      position: relative;
-      animation: float 4s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-    .banner-title {
-      font-family: var(--font-accent);
-      font-size: 2.8rem;
-      color: var(--red-deep);
-      letter-spacing: 0.12em;
-      position: relative;
-      display: inline-block;
-      padding: 0 2rem;
-    }
-    .banner-title::before,
-    .banner-title::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 40px;
-      height: 2px;
-      background: var(--gold);
-      opacity: 0.6;
-    }
-    .banner-title::before { left: -10px; }
-    .banner-title::after { right: -10px; }
-    .banner-sub {
-      font-family: var(--font-accent);
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-top: 0.2rem;
-      position: relative;
-      letter-spacing: 0.08em;
-    }
-
-    /* ===== 分割装饰 ===== */
-    .divider-ornament {
-      text-align: center;
-      margin: 0.5rem 0 2rem;
-      color: var(--gold);
-      font-size: 0.8rem;
-      letter-spacing: 1em;
-      opacity: 0.5;
-    }
-
-    /* ===== 文件网格 ===== */
-    .file-grid {
-      max-width: 960px;
+    /* ===== 页面容器 ===== */
+    .resource-page {
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 1.5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
     }
 
-    /* ===== 卷轴卡片 ===== */
-    .file-scroll {
+    /* ===== 页面头部横幅 ===== */
+    .page-hero {
       position: relative;
-      background: linear-gradient(175deg, #FFFEF9 0%, var(--card-bg) 30%, var(--section-alt) 100%);
+      padding: 3rem 2rem 2.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--section-bg) 0%, var(--card-bg) 100%);
       border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 2rem 1.8rem 1.8rem;
-      text-decoration: none;
-      color: inherit;
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
-      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
       overflow: hidden;
     }
-    /* 卷轴轴杆 */
-    .file-scroll::before {
+    .page-hero::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 8px;
-      background: linear-gradient(90deg, var(--gold-pale), var(--gold), var(--gold-pale));
-      border-radius: 4px 4px 0 0;
-    }
-    .file-scroll::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, var(--gold-pale), var(--gold), var(--gold-pale));
-      border-radius: 0 0 3px 3px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--red-deep), var(--gold), transparent);
       opacity: 0.7;
     }
-    .file-scroll:hover {
-      transform: translateY(-6px) scale(1.02);
+    .page-hero-icon {
+      display: inline-block;
+      width: 64px;
+      height: 64px;
+      line-height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red-light), var(--red-deep));
+      color: var(--gold-light);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(122,26,5,0.2);
+    }
+    .page-hero h1 {
+      font-family: var(--font-title);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--red-deep);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .page-hero .hero-desc {
+      font-family: var(--font-accent);
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== 文件卡片网格 ===== */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ===== 文件卡片 ===== */
+    .resource-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 0;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      overflow: hidden;
+    }
+    .resource-card:hover {
+      transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
       border-color: var(--gold);
     }
-    .file-scroll:hover::before {
-      background: linear-gradient(90deg, var(--gold-light), var(--gold-light), var(--gold));
+
+    /* 卡片顶部色条 */
+    .card-accent {
+      height: 4px;
+      background: linear-gradient(90deg, var(--red-deep), var(--gold));
+    }
+    .resource-card:nth-child(even) .card-accent {
+      background: linear-gradient(90deg, var(--green-deep), var(--gold));
     }
 
-    /* 卡片序号印章 */
-    .scroll-number {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      width: 42px;
-      height: 42px;
-      background: var(--seal-red);
-      color: #FFF5E8;
-      font-family: var(--font-accent);
-      font-size: 1.3rem;
-      line-height: 42px;
-      text-align: center;
-      border-radius: 4px;
-      opacity: 0.85;
-      transform: rotate(5deg);
-      transition: transform 0.35s;
-      box-shadow: 0 2px 6px rgba(192,57,43,0.3);
-    }
-    .file-scroll:hover .scroll-number {
-      transform: rotate(0deg) scale(1.1);
+    /* 卡片主体 */
+    .card-body {
+      padding: 1.8rem 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* 卡片图标 */
-    .scroll-icon {
-      font-size: 2.4rem;
-      display: block;
+    /* 卡片图标 + 类型行 */
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
       margin-bottom: 1rem;
-      transition: transform 0.35s;
     }
-    .file-scroll:hover .scroll-icon {
-      transform: scale(1.15);
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .card-icon.type-compare {
+      background: #FEF0D5;
+      color: #C89018;
+    }
+    .card-icon.type-table {
+      background: #EEF5E5;
+      color: #5B7A40;
+    }
+    .card-badge {
+      font-family: var(--font-accent);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      background: var(--section-alt);
+      padding: 3px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
     }
 
     /* 卡片标题 */
-    .scroll-title {
+    .card-heading {
       font-family: var(--font-title);
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 600;
       color: var(--red-deep);
-      margin-bottom: 0.5rem;
       line-height: 1.5;
+      margin-bottom: 0.6rem;
       letter-spacing: 0.04em;
-      padding-right: 50px;
     }
 
     /* 卡片描述 */
-    .scroll-desc {
-      font-size: 0.95rem;
+    .card-desc {
+      font-size: 1rem;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      flex: 1;
     }
 
-    /* 标签行 */
-    .scroll-tags {
+    /* 卡片底部信息 */
+    .card-footer {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
     }
-    .scroll-tag {
-      display: inline-block;
+    .card-filetype {
       font-family: var(--font-accent);
-      font-size: 0.82rem;
-      color: var(--green-deep);
-      background: var(--jade-pale);
-      padding: 3px 12px;
-      border-radius: 20px;
-      letter-spacing: 0.04em;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
-    .scroll-tag.gold {
-      color: #8A5E0A;
-      background: var(--gold-pale);
+    .card-arrow {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-accent);
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .resource-card:hover .card-arrow {
+      color: var(--red-deep);
+    }
+    .card-arrow .arrow-icon {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .resource-card:hover .card-arrow .arrow-icon {
+      transform: translateX(4px);
     }
 
-    /* ===== 空状态占位 ===== */
-    .placeholder-scroll {
-      background: linear-gradient(175deg, #FFFEF9 0%, var(--card-bg) 30%, var(--section-alt) 100%);
-      border: 2px dashed var(--card-border);
+    /* ===== 第二区：提示 / 空位 ===== */
+    .info-note {
+      background: var(--section-bg);
+      border: 1px dashed var(--card-border);
       border-radius: var(--radius-md);
-      padding: 2.5rem 1.8rem;
+      padding: 2rem;
       text-align: center;
       color: var(--text-muted);
       font-family: var(--font-accent);
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       letter-spacing: 0.06em;
-      opacity: 0.7;
     }
-    .placeholder-scroll .ph-icon {
-      font-size: 2.5rem;
+    .info-note .note-icon {
       display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    /* ===== 页脚装饰线 ===== */
-    .ending-seal {
-      text-align: center;
-      margin: 3rem 0 1.5rem;
-    }
-    .ending-seal span {
-      display: inline-block;
-      width: 54px;
-      height: 54px;
-      line-height: 54px;
-      background: var(--seal-red);
-      color: #FFF5E8;
-      font-family: var(--font-accent);
-      font-size: 1.5rem;
-      border-radius: 6px;
-      transform: rotate(-8deg);
-      opacity: 0.65;
-      box-shadow: 0 3px 8px rgba(192,57,43,0.25);
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
     }
 
     /* ===== 响应式 ===== */
-    @media (max-width: 768px) {
-      .banner-title { font-size: 2.2rem; }
-      .file-grid { grid-template-columns: 1fr; }
-      .scroll-title { padding-right: 45px; }
-    }
-    @media (max-width: 480px) {
-      .banner-title { font-size: 1.8rem; }
-      .banner-icon { font-size: 3rem; }
+    @media (max-width: 680px) {
+      .resource-grid { grid-template-columns: 1fr; }
+      .page-hero { padding: 2rem 1.2rem 1.8rem; }
+      .page-hero h1 { font-size: 2rem; }
+      .page-hero-icon { width: 52px; height: 52px; line-height: 52px; font-size: 1.5rem; }
+      .card-body { padding: 1.4rem 1.2rem; }
+      .card-heading { font-size: 1.2rem; }
     }
   </style>
 </head>
@@ -282,48 +249,59 @@
   </div>
 
   <main class="main-content">
+    <div class="resource-page">
 
-    <!-- 顶部横幅 -->
-    <div class="banner">
-      <span class="banner-icon">📜</span>
-      <h2 class="banner-title">课件与资料</h2>
-      <p class="banner-sub">课堂课件 · 学案 · 知识点衔接</p>
+      <!-- 页面头部 -->
+      <div class="page-hero">
+        <div class="page-hero-icon">📚</div>
+        <h1>课件与资料</h1>
+        <p class="hero-desc">课堂课件 · 学案 · 知识点衔接材料</p>
+      </div>
+
+      <!-- 文件卡片 -->
+      <div class="resource-grid">
+
+        <a href="纲要下13，16，21三课比较.html" class="resource-card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-meta">
+              <div class="card-icon type-compare">📖</div>
+              <span class="card-badge">比较分析</span>
+            </div>
+            <h2 class="card-heading">第 13、16、21 课 · 三课比较分析</h2>
+            <p class="card-desc">纲要下三课内容横向对比，梳理知识脉络与内在联系，帮助学生建立跨课时的整体认知框架。</p>
+            <div class="card-footer">
+              <span class="card-filetype">📄 HTML 网页</span>
+              <span class="card-arrow">打开 <span class="arrow-icon">→</span></span>
+            </div>
+          </div>
+        </a>
+
+        <a href="纲要下第1课_文明产生与早期发展_知识点衔接详细表.html" class="resource-card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-meta">
+              <div class="card-icon type-table">📋</div>
+              <span class="card-badge">初高中衔接</span>
+            </div>
+            <h2 class="card-heading">第 1 课 · 文明产生与早期发展</h2>
+            <p class="card-desc">初高中知识衔接详细表，将初中已有认知与高中深度要求一一对应，夯实世界史学习起点。</p>
+            <div class="card-footer">
+              <span class="card-filetype">📄 HTML 网页</span>
+              <span class="card-arrow">打开 <span class="arrow-icon">→</span></span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- 提示 -->
+      <div class="info-note">
+        <span class="note-icon">📌</span>
+        更多课件与资料将陆续添加……
+      </div>
+
     </div>
-
-    <div class="divider-ornament">◆ ◇ ◆</div>
-
-    <!-- 文件网格 -->
-    <div class="file-grid">
-
-      <a href="纲要下13，16，21三课比较.html" class="file-scroll">
-        <span class="scroll-number">壹</span>
-        <span class="scroll-icon">📖</span>
-        <h3 class="scroll-title">第 13、16、21 课<br>三课比较分析</h3>
-        <p class="scroll-desc">纲要下三课内容横向对比，梳理知识脉络与内在联系，帮助学生建立跨课时的整体认知框架。</p>
-        <div class="scroll-tags">
-          <span class="scroll-tag">比较分析</span>
-          <span class="scroll-tag gold">世界史</span>
-        </div>
-      </a>
-
-      <a href="纲要下第1课_文明产生与早期发展_知识点衔接详细表.html" class="file-scroll">
-        <span class="scroll-number">贰</span>
-        <span class="scroll-icon">📋</span>
-        <h3 class="scroll-title">第 1 课 · 文明产生<br>与早期发展</h3>
-        <p class="scroll-desc">初高中知识衔接详细表，将初中已有认知与高中深度要求一一对应，夯实世界史学习起点。</p>
-        <div class="scroll-tags">
-          <span class="scroll-tag">初高中衔接</span>
-          <span class="scroll-tag gold">知识点表</span>
-        </div>
-      </a>
-
-    </div>
-
-    <!-- 页末印章 -->
-    <div class="ending-seal">
-      <span>课件</span>
-    </div>
-
   </main>
 
   <footer class="site-footer">
