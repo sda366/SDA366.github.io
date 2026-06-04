@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中外历史纲要下——回归教材·世界近代史</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "黑体", "SimHei", "Microsoft YaHei", sans-serif;
+    font-size: 16pt;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 30px 16px 60px;
+    color: #222;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 22pt;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center;
+    color: rgba(255,255,255,0.88);
+    font-size: 13pt;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+  .section-title {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 10px 22px;
+    border-radius: 10px 10px 0 0;
+    margin-top: 28px;
+    letter-spacing: 2px;
+  }
+  .question-card {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.13);
+    overflow: hidden;
+  }
+  .question-card + .section-title {
+    margin-top: 36px;
+  }
+  .q-header {
+    background: #f5f3ff;
+    padding: 14px 22px 8px 22px;
+    border-bottom: 2px solid #ede9ff;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .q-num {
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: #fff;
+    font-size: 13pt;
+    font-weight: bold;
+    border-radius: 50%;
+    min-width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-meta {
+    font-size: 11pt;
+    color: #764ba2;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-top: 5px;
+  }
+  .q-body {
+    padding: 14px 22px 6px 22px;
+    font-size: 15pt;
+    line-height: 1.85;
+    color: #222;
+  }
+  .q-body .lead {
+    color: #444;
+    margin-bottom: 8px;
+    font-size: 14pt;
+  }
+  .options {
+    padding: 4px 22px 14px 22px;
+  }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 14pt;
+    line-height: 1.7;
+    cursor: pointer;
+    border: 1.5px solid #ddd;
+    background: #fafafa;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .option:hover {
+    background: #f0eeff;
+    border-color: #aaa8e6;
+  }
+  .option-label {
+    font-weight: bold;
+    min-width: 22px;
+    flex-shrink: 0;
+  }
+  /* 已做题后：选中正确 */
+  .option.correct.selected {
+    background: #eafaf1;
+    border-color: #27ae60;
+    color: #145a32;
+    cursor: default;
+  }
+  .option.correct.selected .option-label { color: #27ae60; }
+  /* 已做题后：选中错误 */
+  .option.wrong.selected {
+    background: #fdf3f2;
+    border-color: #e74c3c;
+    color: #7b241c;
+    cursor: default;
+  }
+  .option.wrong.selected .option-label { color: #e74c3c; }
+  /* 已做题后：显示正确答案（未被选中但是正确） */
+  .option.correct.reveal {
+    background: #eafaf1;
+    border-color: #27ae60;
+    color: #145a32;
+    cursor: default;
+  }
+  .option.correct.reveal .option-label { color: #27ae60; }
+  /* 已做题后：其余选项变灰 */
+  .option.done {
+    opacity: 0.5;
+    cursor: default;
+  }
+  /* 答案折叠区 */
+  .answer-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 22px 14px 22px;
+    cursor: pointer;
+    user-select: none;
+    background: linear-gradient(90deg,#667eea,#764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 12pt;
+    font-family: inherit;
+    transition: opacity 0.15s;
+  }
+  .answer-toggle:hover { opacity: 0.85; }
+  .answer-toggle .arrow {
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+  .answer-toggle.open .arrow { transform: rotate(90deg); }
+  .answer-box {
+    display: none;
+    margin: 0 22px 16px 22px;
+    background: #f8f7ff;
+    border-left: 4px solid #764ba2;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 13.5pt;
+    color: #333;
+    line-height: 1.9;
+  }
+  .answer-box.open { display: block; }
+  .answer-box strong { color: #764ba2; }
+  /* 非选择题 */
+  .essay-card {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.13);
+    padding: 20px 28px;
+  }
+  .essay-card .meta {
+    font-size: 11pt;
+    color: #764ba2;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .essay-card p {
+    font-size: 14.5pt;
+    line-height: 1.9;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  .essay-card img {
+    display: block;
+    max-width: 480px;
+    margin: 10px auto;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+  }
+  .sub-q {
+    background: #f5f3ff;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 10px 0;
+    font-size: 14pt;
+    line-height: 1.85;
+    color: #2c2c6c;
+    border-left: 4px solid #667eea;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 13.5pt;
+  }
+  th {
+    background: linear-gradient(90deg,#667eea,#764ba2);
+    color: #fff;
+    padding: 8px 14px;
+    text-align: center;
+  }
+  td {
+    border: 1px solid #ccc;
+    padding: 7px 14px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  tr:nth-child(even) td { background: #f5f3ff; }
+
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 11pt;
+    margin-top: 40px;
+    letter-spacing: 1px;
+  }
+  @media (max-width: 600px) {
+    body { font-size: 13pt; padding: 10px 4px 40px; }
+    .q-body { font-size: 13pt; }
+    .option { font-size: 12.5pt; }
+    h1 { font-size: 16pt; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>中外历史纲要下</h1>
+  <div class="subtitle">【回归教材 · 世界近代史】精选高考真题</div>
+
+  <!-- ===== 一、选择题 ===== -->
+  <div class="section-title">一、选择题</div>
+
+  <!-- Q1 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">1</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          在马可·波罗之前，欧洲人只知道丝绸来自神秘东方，并不清楚它原产地的模样。马可·波罗通过分享亲身经历，把来源地具象化。《马可·波罗游记》"成为中世纪欧洲最重要的畅销书之一。随后几个世纪，许多探险家、航海家和商人决定追随马可·波罗的脚步，一定要前往马可·波罗所描述的东方。""哥伦布发现新大陆，在某种程度上是受到马可·波罗的书和前往中国的愿望影响的。"上述材料旨在说明
+        </div>
+        <div class="q-meta">2024·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>欧洲人长期对东方尤其是中国兴趣浓厚</div>
+      <div class="option wrong"><span class="option-label">B．</span>马可·波罗指引西方人前往新大陆</div>
+      <div class="option correct"><span class="option-label">C．</span>马可·波罗激发欧洲人的中国情结</div>
+      <div class="option wrong"><span class="option-label">D．</span>《马可·波罗游记》是中世纪欧洲畅销书</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      材料核心在于《马可·波罗游记》对欧洲探险家、航海家的激励，强调它激发了欧洲人前往东方（中国）的强烈愿望，即"中国情结"，而非泛指"对东方兴趣浓厚"（A过宽）。B"指引前往新大陆"不符，D仅是材料局部信息。故选C。
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">2</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          16世纪上半叶，航海家在太平洋开发了连接美洲和亚洲的东风带海上走廊，中后期利用日本洋流从菲律宾群岛航行至美洲西海岸；17世纪初，荷兰人利用西风带环球航行。16至17世纪的航海活动
+        </div>
+        <div class="q-meta">2024·新课标卷·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>激发"地圆说"的形成</div>
+      <div class="option wrong"><span class="option-label">B．</span>表明世界殖民体系的确立</div>
+      <div class="option wrong"><span class="option-label">C．</span>导致陆路贸易基本停滞</div>
+      <div class="option correct"><span class="option-label">D．</span>促进了贵金属的全球流动</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      新航路和环球航路的开辟，使美洲白银大量流入欧洲、亚洲，推动了贵金属的全球流动。A"激发地圆说形成"逻辑颠倒（地圆说在前）；B"世界殖民体系确立"说法过大；C"陆路贸易基本停滞"与史实不符。故选D。
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">3</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          图中①～④号线是1525～1825年欧洲四个城市工人日工资变化折线，其中②号线代表的是
+        </div>
+        <div style="margin:10px 0 6px 0;text-align:center;">
+          <img src="q3_chart.png" alt="1525~1825年欧洲四城市工人日工资折线图" style="max-width:420px;width:100%;border:1px solid #ddd;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <div style="font-size:11pt;color:#666;margin-top:4px;">（单位：克白银）</div>
+        </div>
+        <div class="q-meta">2025·海南·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>荷兰阿姆斯特丹</div>
+      <div class="option wrong"><span class="option-label">B．</span>英国伦敦</div>
+      <div class="option wrong"><span class="option-label">C．</span>意大利佛罗伦萨</div>
+      <div class="option wrong"><span class="option-label">D．</span>奥地利维也纳</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      17世纪荷兰是世界贸易中心，阿姆斯特丹工资水平在欧洲名列前茅；图中②号线在较长时期内保持较高水平，符合17世纪荷兰黄金时代的特征。故②代表荷兰阿姆斯特丹，选A。
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">4</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          有史著谓，达·伽马从印度满载而归获得丰厚利润的消息，像"晴天霹雳"一样震撼着威尼斯，可怕的预感笼罩石头城。当时有威尼斯商人在日记中写道："收到此消息的时候，整个城市的人……都目瞪口呆，最聪明的人都认为，这是他们听过的最坏的消息。"史著中"可怕的预感"是指
+        </div>
+        <div class="q-meta">2025·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>传统商路将因新航路开辟而中断</div>
+      <div class="option wrong"><span class="option-label">B．</span>价格革命会冲击欧洲的封建制度</div>
+      <div class="option wrong"><span class="option-label">C．</span>"地圆说"的证实势必动摇传统信仰</div>
+      <div class="option correct"><span class="option-label">D．</span>欧洲商业格局将要发生重大变化</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      威尼斯是地中海贸易枢纽，靠垄断东西方贸易获利。达·伽马绕道好望角开辟新航路后，贸易中心将西移大西洋沿岸，威尼斯的商业优势将丧失，欧洲商业格局将深刻改变。A"传统商路中断"表述过绝；B、C与材料主旨无关。故选D。
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">5</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          16世纪，意大利人巴尔巴罗为校订、翻译古罗马建筑论著，曾向一位泥瓦匠出身的建筑师寻求帮助；德意志人阿格里科拉在撰写关于采矿的著作时，吸收了矿工传授的知识。这些学者
+        </div>
+        <div class="q-meta">2025·陕晋青宁卷·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>注重提升人的社会地位</div>
+      <div class="option wrong"><span class="option-label">B．</span>复兴了希腊罗马古典文化</div>
+      <div class="option correct"><span class="option-label">C．</span>重视发挥人的聪明才智</div>
+      <div class="option wrong"><span class="option-label">D．</span>推动了人文主义教育兴盛</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      材料中学者向工匠（泥瓦匠、矿工）学习实践知识，体现了对普通人智慧的尊重和对人的才智的重视，这是文艺复兴人文主义精神的体现。A"提升社会地位"、B"复兴古典文化"、D"推动人文主义教育"均不符合材料核心。故选C。
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">6</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          研究指出：自亨利八世改革以来，英国新教与天主教争端不断，直至伊丽莎白一世时期，新教的统治地位才彻底确立；在她治下出现了莎士比亚等诗人和剧作家，同时英国在音乐和哲学方面也达到了创新和活力的顶峰。这一论述意在说明英国
+        </div>
+        <div class="q-meta">2025·甘肃·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>文学艺术发展受制于王权</div>
+      <div class="option wrong"><span class="option-label">B．</span>市民文学与骑士文学充分发展</div>
+      <div class="option wrong"><span class="option-label">C．</span>国教会深受罗马教廷影响</div>
+      <div class="option correct"><span class="option-label">D．</span>宗教改革为文艺复兴作了铺垫</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      材料逻辑：新教地位确立（宗教改革）→莎士比亚等文艺作品繁荣（文艺复兴），说明宗教改革为文艺复兴的兴盛创造了条件。A颠倒逻辑关系；B与材料内容不符；C与材料方向相反。故选D。
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">7</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          15世纪中期的意大利，"圣经人文主义"学派对天主教通行的拉丁文《圣经》加以订正和注释，力图恢复其中每一个特定教义的精确历史内涵。为此，他们追溯到古希腊文与希伯莱文的原版《圣经》中去探究，纠正了拉丁文版本中的许多谬误。这些活动
+        </div>
+        <div class="q-meta">2025·重庆·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>完善了天主教神学理论</div>
+      <div class="option wrong"><span class="option-label">B．</span>偏离了文艺复兴的发展方向</div>
+      <div class="option wrong"><span class="option-label">C．</span>强化了教会的宗教权威</div>
+      <div class="option correct"><span class="option-label">D．</span>奠定了宗教改革运动的基础</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      "圣经人文主义"通过回归原版《圣经》，纠正拉丁文版本谬误，实质上动摇了教会对《圣经》权威解释的垄断，为后来马丁·路德等人的宗教改革（主张直接阅读《圣经》）提供了思想基础。故选D。
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">8</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          17世纪80年代，牛顿在撰写《自然哲学的数学原理》一书时，运用朋友们从欧洲、亚洲、非洲、美洲等地通过贸易路线送来的丰富数据，支撑了他的相关研究。这反映了
+        </div>
+        <div class="q-meta">2025·河北·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>社会信息化有利于知识共享</div>
+      <div class="option wrong"><span class="option-label">B．</span>英国已成为当时欧洲科技中心</div>
+      <div class="option wrong"><span class="option-label">C．</span>电报为文化交流提供了便利</div>
+      <div class="option correct"><span class="option-label">D．</span>世界商业往来促进了科学发展</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      材料关键词：数据"通过贸易路线送来"，说明世界贸易网络的形成为科学研究提供了全球数据支撑，即商业往来促进科学发展。A"社会信息化"是现代概念；C"电报"17世纪尚未发明；B"欧洲科技中心"无法从材料直接推断。故选D。
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">9</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          某启蒙思想家主张：独立思考是为了摆脱那些不容置疑的传统权威的束缚，但在某些情况下须绝对服从。比如，一个正在服役的军官在接到长官指令时质疑其正当性和有效性，结果将是灾难性的。该思想家强调的是
+        </div>
+        <div class="q-meta">2025·广东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>权力制衡</div>
+      <div class="option wrong"><span class="option-label">B．</span>主权在民</div>
+      <div class="option correct"><span class="option-label">C．</span>理性判断</div>
+      <div class="option wrong"><span class="option-label">D．</span>社会平等</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      该思想家既倡导独立思考（摆脱传统权威），又主张在特定情境下理性地判断是否服从（如军事纪律），核心是运用理性进行判断。这体现了启蒙运动强调理性的核心精神。故选C。
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">10</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          伏尔泰在《路易十四时代》中描写了有关巴士底狱神秘囚犯"铁面人"的逸闻。此人总戴着面具，没人知道他的真实姓名、所犯何罪。该书出版后引起很大的反响，"铁面人"的传闻逐渐在民众中"创造出一个无限专横权力的想象世界"。这
+        </div>
+        <div class="q-meta">2025·江苏·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>有利于出版行业的兴起</div>
+      <div class="option wrong"><span class="option-label">B．</span>引发了民众攻占巴士底狱</div>
+      <div class="option wrong"><span class="option-label">C．</span>推动了启蒙运动的产生</div>
+      <div class="option correct"><span class="option-label">D．</span>冲击了封建君主专制统治</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      "铁面人"逸闻在民众中塑造了专横权力的负面形象，激发了民众对君主专制的批判意识，有利于冲击封建专制统治。B"引发攻占巴士底狱"因果关系过于直接；C伏尔泰本身是启蒙运动代表，不是"推动产生"。故选D。
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">11</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          北美独立运动期间，革命者以英国《大宪章》为依据，并为其注入自然权利、社会契约、人民主权等思想，加以新解释，使之成为抵制英国政策的政治话语和反抗英国议会权威的合法性依据。这反映了，当时
+        </div>
+        <div class="q-meta">2025·安徽·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>大陆法系原则在北美地区得到运用</div>
+      <div class="option wrong"><span class="option-label">B．</span>北美独立运动影响欧洲政治文化重构</div>
+      <div class="option correct"><span class="option-label">C．</span>北美革命者融汇多种思想谋求独立</div>
+      <div class="option wrong"><span class="option-label">D．</span>议会权力至上的理念在北美深入人心</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      革命者将英国《大宪章》与启蒙思想（自然权利、社会契约、人民主权）相结合，体现了融汇多种思想资源谋求独立的特征。A"大陆法系"与材料无关；D与材料主旨相反（是反抗议会权威）。故选C。
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">12</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1789年前的十年里，在巴黎和法国其他城市，"公民""公意""法律平等""自然权利"等用语大量出现，人们逐渐熟悉并接受这些用语所表达的理念，形成了新的话语体系。这一话语体系所发挥的重要社会作用是
+        </div>
+        <div class="q-meta">2025·天津·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>强化了王权意识</div>
+      <div class="option wrong"><span class="option-label">B．</span>颠覆了宗教神权</div>
+      <div class="option correct"><span class="option-label">C．</span>冲击了传统秩序</div>
+      <div class="option wrong"><span class="option-label">D．</span>巩固了共和政体</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      启蒙思想话语体系的传播，使民众接受平等、权利等新理念，为法国大革命爆发奠定了思想基础，有力冲击了封建等级制度与专制王权等传统秩序。D"巩固共和政体"在1789年之前并不存在。故选C。
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">13</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          17世纪90年代，英国议会根据《财政筹款特别法案》，批准成立英格兰银行。英王威廉三世与玛丽二世成为其股东。该行宗旨"促进广大公众的利益"，规定军费批文除需要议会通过，还需要国王印章。据此判断，此时英国实行
+        </div>
+        <div class="q-meta">2025·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>民主共和制</div>
+      <div class="option correct"><span class="option-label">B．</span>君主立宪制</div>
+      <div class="option wrong"><span class="option-label">C．</span>责任内阁制</div>
+      <div class="option wrong"><span class="option-label">D．</span>等级君主制</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      材料中英国议会批准成立英格兰银行（议会权力）、国王仍为股东且军费需国王印章（国王仍有一定权力），体现了议会与国王共同参与国家事务的君主立宪制特征。1689年《权利法案》确立君主立宪制，与时间吻合。故选B。
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">14</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          在美国1787年制宪会议上，弗吉尼亚州的代表梅森主张国家的首都不应当设在任何一州的首府，如纽约、费城等；北方的康涅狄格州代表埃尔思沃斯反对由各州支付国会议员薪酬的决定。两人主张的共通之处是，通过宪法
+        </div>
+        <div class="q-meta">2021·河北·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>确立联邦政府的权威</div>
+      <div class="option wrong"><span class="option-label">B．</span>防止外部势力威胁国家安全</div>
+      <div class="option wrong"><span class="option-label">C．</span>保持各州的自治地位</div>
+      <div class="option wrong"><span class="option-label">D．</span>调和南方与北方之间的矛盾</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      梅森主张首都独立设置（不依附任何州），埃尔思沃斯反对各州支付议员薪酬，两者均强调联邦政府的独立性与权威，避免联邦政府受制于各州。故选A。
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">15</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          有史书写道，"从南北战争开始起，最直接的问题乃是联邦能否获胜，然而更根本的问题却是：即使取胜，这一胜利能不能使美国国家重新振作起来。……强迫的过程能否产生自觉自愿的忠诚精神？而这种精神却是联邦的实质所在。虽然绝大多数公职人员不能或不愿理解这个问题。但是亚伯拉罕·林肯胸中对此却洞若观火"。文中"更根本的问题"是指
+        </div>
+        <div class="q-meta">2024·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>维护国家的统一</div>
+      <div class="option wrong"><span class="option-label">B．</span>捍卫资本主义私有制</div>
+      <div class="option wrong"><span class="option-label">C．</span>废除黑人奴隶制</div>
+      <div class="option wrong"><span class="option-label">D．</span>解决农民的土地问题</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      材料强调"联邦的实质"在于"自觉自愿的忠诚精神"，即真正的国家统一不仅是军事胜利，更是民心凝聚。"更根本的问题"是如何实现真正的、持久的国家统一。故选A。
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">16</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1848年7月，普鲁士国民议会的资产阶级代表提出了关于废除封建义务的法案。马克思评论说，他们要无偿废除或通过赎买废除的那些封建义务，如"领主权""饲养税""徭役"等，"在我们听到过法国革命破坏了封建制度、听到过拿破仑法典的两只文明的耳朵听来"是多么荒谬绝伦。马克思意在揭示
+        </div>
+        <div class="q-meta">2025·山东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>无产阶级革命的必然性</div>
+      <div class="option wrong"><span class="option-label">B．</span>德国经济落后的根源</div>
+      <div class="option wrong"><span class="option-label">C．</span>法国大革命对欧洲的意义</div>
+      <div class="option correct"><span class="option-label">D．</span>德国资产阶级革命的保守性</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      马克思以法国大革命和拿破仑法典（彻底废除封建制度）为参照，嘲讽德国资产阶级在1848年还在讨论赎买封建义务，体现出德国资产阶级革命的软弱与保守。故选D。
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">17</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          19世纪60年代，日本有学者提出"富国论"，后来成为"殖产兴业"政策的重要理论来源。他主张既吸收欧美炮舰、机械等现代科技，又承继中国尧舜三代的历史传统，不必区分"东洋道德"和"西洋艺术"。上述材料可以论证明治维新
+        </div>
+        <div class="q-meta">2025·湖北·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>保留了大量传统文化因素</div>
+      <div class="option wrong"><span class="option-label">B．</span>旨在推翻守旧的幕府统治</div>
+      <div class="option correct"><span class="option-label">C．</span>受东西方文明碰撞的影响</div>
+      <div class="option wrong"><span class="option-label">D．</span>遵循"脱亚入欧"的战略</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      材料中学者既主张吸收西方科技，又保留东方传统，体现了东西方文明碰撞对明治维新思想的影响。A"保留大量传统文化"不是材料论证重点；D"脱亚入欧"与材料强调东西并重相矛盾。故选C。
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">18</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1851年英国工程师罗伯茨回忆说，"（1824年海德纺纱工人）罢工持续了三个月。当时，为了能够让纺纱机自动运转，一整个棉纺业雇主的代表团都亲自等候，他们要求我将注意力转向纺纱""机器一旦被制造出来，（雇主们）就会认为他们的目的已经达到了，也就是说，他们随时能用机器对工人施以惩罚"。据此可知，雇主们意在
+        </div>
+        <div class="q-meta">2026·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>以技术革新应对工人反抗</div>
+      <div class="option wrong"><span class="option-label">B．</span>组织联盟以镇压工人运动</div>
+      <div class="option wrong"><span class="option-label">C．</span>通过工厂制提高劳动效率</div>
+      <div class="option wrong"><span class="option-label">D．</span>用机器发明带动工业革命</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      材料明确说明：工人罢工→雇主迫切要求发明机器→"随时能用机器对工人施以惩罚"，即雇主用技术革新（机器）来打压工人的罢工行动。核心逻辑是以技术应对劳动者反抗。故选A。
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">19</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下图为1895～1909年英国在华公司数占外国在华公司总数的比重变化情况。最可能导致该变化的原因是
+        </div>
+        <div style="margin:10px 0 6px 0;text-align:center;">
+          <img src="q19_chart.png" alt="1895~1909年英国在华公司数占比折线图" style="max-width:420px;width:100%;border:1px solid #ddd;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <div style="font-size:11pt;color:#666;margin-top:4px;">（比重 %，年份）</div>
+        </div>
+        <div class="q-meta">2025·山东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>民族救亡运动的高涨</div>
+      <div class="option wrong"><span class="option-label">B．</span>中国民族企业的发展</div>
+      <div class="option wrong"><span class="option-label">C．</span>英国经济结构的调整</div>
+      <div class="option correct"><span class="option-label">D．</span>垄断资本主义的形成</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      19世纪末20世纪初，第二次工业革命推动欧美各国进入帝国主义（垄断资本主义）阶段，美国、德国、日本等新兴帝国主义国家加大对华资本输出，英国在华公司比重相对下降。这是列强争夺中国市场格局变化的体现。故选D。
+    </div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">20</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          19世纪早期，一名波士顿企业家发现木屑的绝热功能，开始采用木屑贮藏冰块保存食物，冰的商业价值从而得以开发。1850年后，用冰贮存食物并进行远距离运输与出售，在美国逐步发展成为一种重要商业活动。这说明19世纪美国
+        </div>
+        <div class="q-meta">2025·贵州·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>制冰技术取得突破</div>
+      <div class="option wrong"><span class="option-label">B．</span>工厂制度普遍形成</div>
+      <div class="option correct"><span class="option-label">C．</span>消费市场不断扩大</div>
+      <div class="option wrong"><span class="option-label">D．</span>食品生产水平提高</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      冰块保存食物从个人发现发展为"重要商业活动"，实现远距离运输与出售，说明食品需求量增大，消费市场不断扩大。A材料无制冰技术；B与材料主旨无关；D食品生产水平无法从材料中直接得出。故选C。
+    </div>
+  </div>
+
+  <!-- Q21 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">21</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下为19世纪中后期英国社会对煤烟影响环境等的看法。材料反映了
+        </div>
+        <div class="q-meta">2025·浙江·高考真题</div>
+      </div>
+    </div>
+    <div style="padding: 0 22px 10px 22px;">
+      <table>
+        <tr>
+          <th>来源</th>
+          <th>主要观点</th>
+        </tr>
+        <tr>
+          <td>某制造商</td>
+          <td style="text-align:left">煤烟中的碳对人的健康不产生任何有害影响，完全能够遏制、消除有害气体</td>
+        </tr>
+        <tr>
+          <td>医学期刊《柳叶刀》</td>
+          <td style="text-align:left">死亡不是与（由）浓雾相伴的寒冷气温引起的，而是浓雾中包含的化学物质引起的</td>
+        </tr>
+        <tr>
+          <td>伦敦市长</td>
+          <td style="text-align:left">大工厂的烟囱竖起之后，疟疾就不再侵扰生活在周边的居民了</td>
+        </tr>
+        <tr>
+          <td>一流行刊物</td>
+          <td style="text-align:left">强健的胸腔无法形成可以抵御煤烟攻击的保护，空气某种程度上已经不再适合呼吸了</td>
+        </tr>
+      </table>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>环境污染问题严峻已成共识</div>
+      <div class="option wrong"><span class="option-label">B．</span>城市化必然会带来公共卫生危机</div>
+      <div class="option wrong"><span class="option-label">C．</span>社会医疗水平随工业化提升</div>
+      <div class="option correct"><span class="option-label">D．</span>工业化城市化过程中存在的问题</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      材料中各方观点不一（有否认有承认），并未"达成共识"，排除A；B"必然"过于绝对；C与材料无关。材料总体反映了工业化城市化进程中环境污染、公共卫生等问题的客观存在及社会各界的不同态度。故选D。
+    </div>
+  </div>
+
+  <!-- Q22 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">22</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1906年，《共产党宣言》尽管在法国得到广泛宣传，但并没有广泛流通。在马克思逝世50周年（1933年）之际，巴黎出版局重印的5万份《共产党宣言》很快售罄，此后几次重印，1938年曾一次性投放市场12万份。这说明
+        </div>
+        <div class="q-meta">2025·安徽·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>西欧的社会思想逐渐趋同</div>
+      <div class="option correct"><span class="option-label">B．</span>马克思主义的科学性日益受到关注</div>
+      <div class="option wrong"><span class="option-label">C．</span>社会主义思想在法国兴起</div>
+      <div class="option wrong"><span class="option-label">D．</span>法国的社会结构多层次化已经形成</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      《共产党宣言》从1906年的"未广泛流通"到1933年后的"迅速售罄""大量重印"，说明20世纪30年代面对资本主义危机（1929年大萧条）和法西斯主义威胁，人们对马克思主义的关注度大幅上升，其科学性日益受到重视。故选B。
+    </div>
+  </div>
+
+  <!-- Q23 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">23</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          马克思在论及第一国际和巴黎公社时说："总委员会引以自豪的是，国际的巴黎各支部在这次巴黎的光辉革命中起了卓越的作用。事实并不是像一些蠢才所想象的那样，仿佛巴黎或任何其他的国际支部从一个中心接受命令。"由此可见，第一国际对巴黎公社的作用在于
+        </div>
+        <div class="q-meta">2023·广东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>组织发动</div>
+      <div class="option wrong"><span class="option-label">B．</span>直接指挥</div>
+      <div class="option correct"><span class="option-label">C．</span>精神引领</div>
+      <div class="option wrong"><span class="option-label">D．</span>经济资助</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      马克思明确否认第一国际对巴黎公社的"组织指挥"，但肯定其支部"起了卓越的作用"，说明第一国际通过思想传播（马克思主义）为巴黎公社提供了精神引领，而非直接的组织或指挥。故选C。
+    </div>
+  </div>
+
+  <!-- Q24 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">24</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          有学者认为，19世纪中期以来"（拉美民族国家构建）的障碍并非是在文化上的差异性，恰恰相反，障碍主要是这片大陆上国家间的文化相同性太过明显"。这表明该学者
+        </div>
+        <div class="q-meta">2025·湖南·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>强调拉美的种族歧视根深蒂固</div>
+      <div class="option wrong"><span class="option-label">B．</span>认为拉美原住民文化已经消亡</div>
+      <div class="option wrong"><span class="option-label">C．</span>主张加强拉美各国的文化交流</div>
+      <div class="option correct"><span class="option-label">D．</span>正视殖民遗产造成的现实困境</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      拉美各国文化"相同性太强"，是西班牙、葡萄牙殖民统治留下的遗产（共同的语言、宗教、文化），使各国缺乏独特的民族认同，导致国家构建困难。学者正视的是殖民历史造成的现实困境。故选D。
+    </div>
+  </div>
+
+  <!-- Q25 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">25</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          19世纪末，欧洲列强瓜分非洲时，采用虚拟方式，人为地在地图上用几何线、经纬度线，以及其他各种直线或圆弧线划分各自的势力范围，并不考虑那片土地上既有的社会形态。这一行为
+        </div>
+        <div class="q-meta">2025·广西·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>摧毁了非洲传统的社会形态</div>
+      <div class="option correct"><span class="option-label">B．</span>埋下了非洲动荡不安的隐患</div>
+      <div class="option wrong"><span class="option-label">C．</span>促进了非洲资产阶级革命的兴起</div>
+      <div class="option wrong"><span class="option-label">D．</span>推动了非洲民族解放运动的高涨</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      列强无视非洲既有社会形态，人为用直线划分边界，导致同一民族被分割到不同国家，或不同民族被强行并入同一国家，为后来非洲的民族冲突、领土争端和政局不稳埋下了深重隐患。A"摧毁"说法绝对；C、D不符合题意。故选B。
+    </div>
+  </div>
+
+  <!-- Q26 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">26</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1897年，比利时在布鲁塞尔修建了刚果展馆，向观众展示其给刚果殖民地带去"文明"和"发展"的"丰功伟绩"。1908年该馆更名为比属刚果博物馆后，在其圆形大厅里有一个雕像，展示的是一个欧洲传教士左手抱着一名非洲幼童，以"救世主"的姿态俯视着右手下方一个非洲成人。这种"展示"旨在
+        </div>
+        <div class="q-meta">2025·安徽·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>通过文化宣传美化殖民历史</div>
+      <div class="option wrong"><span class="option-label">B．</span>为解决国际争端开辟新途径</div>
+      <div class="option wrong"><span class="option-label">C．</span>炫耀比利时强大的工业实力</div>
+      <div class="option wrong"><span class="option-label">D．</span>为开展三角贸易寻找合理性</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      展馆通过"文明"与"发展"的叙事，雕像以传教士"救世主"姿态俯视非洲人，将殖民侵略包装成"文明教化"，典型地通过文化宣传手段美化殖民历史，掩盖殖民掠夺的本质。故选A。
+    </div>
+  </div>
+
+  <!-- Q27 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">27</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下图为某一时期欧洲主要殖民国家在美洲和非洲的殖民地分布示意图。这一时期
+        </div>
+        <div style="margin:10px 0 6px 0;text-align:center;">
+          <img src="q27_chart.png" alt="欧洲主要殖民国家在美洲和非洲的殖民地分布示意图" style="max-width:460px;width:100%;border:1px solid #ddd;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        <div class="q-meta">2023·山东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>拉丁美洲民族独立运动兴起</div>
+      <div class="option wrong"><span class="option-label">B．</span>大西洋三角贸易已走向衰落</div>
+      <div class="option correct"><span class="option-label">C．</span>西、葡殖民优势逐渐被打破</div>
+      <div class="option wrong"><span class="option-label">D．</span>倾销工业品是主要掠夺手段</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      据图中美洲和非洲殖民地分布，有英、法、荷等国，说明原来西、葡对美洲的殖民垄断优势已被英、法、荷等新兴殖民国家所打破。这是17世纪以后殖民格局的特征。故选C。
+    </div>
+  </div>
+
+  <!-- Q28 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">28</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1794年《人权宣言》在哥伦比亚首次被翻译和秘密印刷。在拉丁美洲的一些大城市，土生白人贵族和知识青年组织了各种秘密结社。"我不是西班牙人，我是美洲人"成为惯常口头语，一种"美洲人"的新观念开始形成。这反映了在拉丁美洲
+        </div>
+        <div class="q-meta">2024·广东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>国家认同引发社会变革</div>
+      <div class="option correct"><span class="option-label">B．</span>思想启蒙激发民族意识</div>
+      <div class="option wrong"><span class="option-label">C．</span>独立运动摧毁殖民体系</div>
+      <div class="option wrong"><span class="option-label">D．</span>革命理念得到广泛传播</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      《人权宣言》的传播→秘密结社→"美洲人"认同形成，体现了启蒙思想的传播激发了拉丁美洲的民族意识觉醒。C"独立运动摧毁殖民体系"尚未发生；D"广泛传播"与"秘密印刷"矛盾。故选B。
+    </div>
+  </div>
+
+  <!-- Q29 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">29</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          19世纪七八十年代，印度人经营的棉纺织工厂由61家增至156家。民众希望进一步开拓国货市场。1896年，加尔各答举办了国货博览会。1906年，提拉克向人民呼吁："你们的未来掌握在自己手中……从明天起你们就自由了。"这表明印度
+        </div>
+        <div class="q-meta">2025·江苏·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>传统棉纺织业得到迅速发展</div>
+      <div class="option wrong"><span class="option-label">B．</span>民族解放运动取得初步胜利</div>
+      <div class="option wrong"><span class="option-label">C．</span>民族资产阶级获得广泛支持</div>
+      <div class="option correct"><span class="option-label">D．</span>经济发展推动民族意识增强</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      材料逻辑：棉纺织工厂增多（经济发展）→国货博览会→提拉克呼吁民族自主，体现了经济发展（民族工业兴起）推动了印度民族意识的觉醒与增强。A"传统棉纺织业"与"工厂"不符；B民族解放运动尚未胜利；C材料无法说明"广泛支持"。故选D。
+    </div>
+  </div>
+
+  <!-- Q30 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">30</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1822年，研究古埃及语言文字、历史、艺术等内容的埃及学诞生于法国。1869年，埃及本土学者倡议创办了古埃及语学校。几年后，因时任埃及文物局局长的法国人马里耶特打压，学校被迫关闭。1910年，埃及本土学者推动教育部在高校设立了埃及学部，后来又受到法国把持的文物局打压而撤销。由此可见，埃及学
+      </div>
+        <div class="q-meta">2025·北京·高考真题</div>
+      </div>
+    </div>
+    <div style="padding: 8px 22px 2px 22px; font-size:14pt; color:#444;">
+      ①促进欧洲文化的重构　②客观上利于埃及民族意识觉醒　③在本土发展举步维艰　④导致西方主导的殖民体系崩溃
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>①③</div>
+      <div class="option wrong"><span class="option-label">B．</span>②④</div>
+      <div class="option wrong"><span class="option-label">C．</span>①④</div>
+      <div class="option correct"><span class="option-label">D．</span>②③</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      ②埃及本土学者研究本民族历史文化，客观上有助于民族认同和意识觉醒——正确。③埃及本土的埃及学两度被法国人打压关闭，说明在本土发展举步维艰——正确。①材料无法体现"欧洲文化重构"；④"导致殖民体系崩溃"结论过大，材料无此体现。故选D。
+    </div>
+  </div>
+
+  <!-- ===== 二、非选择题 ===== -->
+  <div class="section-title">二、非选择题</div>
+
+  <!-- 非选题1 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num" style="font-size:12pt;min-width:44px;width:44px;">31</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          阅读材料，完成下列要求。
+        </div>
+        <div class="q-meta">2026·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="essay-card" style="border-radius:0;box-shadow:none;padding:14px 22px;">
+      <p><strong>材料一</strong></p>
+      <div style="margin:10px 0 6px 0;text-align:center;">
+        <img src="q31_map.png" alt="1580年葡萄牙据点与贸易航线示意图" style="max-width:520px;width:100%;border:1px solid #ddd;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        <div style="font-size:11pt;color:#666;margin-top:4px;">——据[美]彭慕兰等《贸易打造的世界：1400年至今的社会、文化和世界经济》</div>
+      </div>
+      <p style="background:#f5f3ff;border-left:4px solid #667eea;padding:8px 14px;border-radius:0 8px 8px 0;font-size:13.5pt;color:#333;">
+        【图示要点】葡萄牙据点主要分布于：西非海岸（如圣多美）、东非海岸（如莫桑比克、蒙巴萨）、印度西海岸（果阿）、东南亚（马六甲）、中国沿海（澳门）等地，均沿海岸线或重要海峡分布。
+      </p>
+      <p><strong>材料二</strong>　在亚欧大陆，葡萄牙人率先开启了海洋帝国的路线，建立了一连串据点。荷兰、英国后来居上，其中一个秘诀是成立"东印度公司"。到18世纪的时候，英国东印度公司就开始不断索要地盘。英国人在印度各地，实行双重管理制度，即保留土邦王公，地方事务由原有的地方政府管理，东印度公司负责维持治安，征收土地税。但东印度公司的兴趣需要是攫取财富，除了税收和贸易，东印度公司还进行赤裸裸的直接搜刮和抢劫，从18世纪后期到19世纪初，在印度共榨取了10亿英镑。到19世纪中叶，东印度公司被解散，印度进入英国政府直接统治时期。从葡萄牙、西班牙、荷兰、法国，一直到英国，这些海洋帝国后来都把大面积的土地视作重要的生命线。它们到亚非拉地区，不但为了贸易，更是为了攫取更多的资源。由此，它们之间的竞争日益加剧，最终导致了一系列帝国主义战争。</p>
+      <p style="color:#555;font-size:12.5pt;">——摘编自葛兆光主编《从中国出发的全球史》</p>
+    </div>
+    <div class="sub-q">（1）根据材料一，概括葡萄牙据点的分布特征，结合所学，分析这些据点形成的主要原因。</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 参考答案</button>
+    <div class="answer-box">
+      <strong>【第（1）题参考答案】</strong><br><br>
+      <strong>分布特征：</strong><br>
+      ①主要分布于沿海地区（海岸线），呈点状分散分布；<br>
+      ②集中于非洲西海岸、东海岸，印度洋沿岸及东南亚要道，即从西欧绕过非洲通往亚洲的航线沿线；<br>
+      ③多位于重要海峡、航运枢纽或贸易港口附近（如马六甲海峡、果阿、澳门等）。<br><br>
+      <strong>形成原因：</strong><br>
+      ①15世纪以来，葡萄牙积极推进海外探险，率先开辟绕非洲好望角通往亚洲的新航路；<br>
+      ②葡萄牙拥有较先进的航海技术和造船技术，国家给予大力支持（王室资助）；<br>
+      ③葡萄牙以控制海上贸易为目标，沿航线建立据点以保障商船补给、维护商业利益；<br>
+      ④葡萄牙通过武力征服、谈判和条约等方式，在沿海要地强行建立据点。
+    </div>
+    <div class="sub-q">（2）根据材料二，指出英国东印度公司抢夺印度财富的主要手段。综合材料一、二，结合所学，概括"海洋帝国"扩张对19世纪世界格局的影响。</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 参考答案</button>
+    <div class="answer-box">
+      <strong>【第（2）题参考答案】</strong><br><br>
+      <strong>主要手段：</strong><br>
+      ①征收土地税（赋税剥削）；<br>
+      ②垄断贸易（商业控制）；<br>
+      ③直接搜刮和抢劫（武力掠夺）。<br><br>
+      <strong>对19世纪世界格局的影响：</strong><br>
+      ①推动了资本主义世界市场的形成，亚非拉地区被纳入世界经济体系（但处于从属地位）；<br>
+      ②加速了西方列强瓜分世界的进程，形成了以欧洲为主导的殖民体系；<br>
+      ③列强之间争夺殖民地的矛盾激化，导致帝国主义战争频发，加剧了国际紧张局势；<br>
+      ④殖民地半殖民地人民遭受残酷剥削和压迫，亚非拉民族解放运动逐渐兴起；<br>
+      ⑤客观上推动了被殖民地区资本主义经济的有限发展和民族意识的觉醒。
+    </div>
+  </div>
+
+  <!-- 非选题2 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num" style="font-size:12pt;min-width:44px;width:44px;">32</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          阅读材料，完成下列要求。
+        </div>
+        <div class="q-meta">2024·海南·高考真题</div>
+      </div>
+    </div>
+    <div class="essay-card" style="border-radius:0;box-shadow:none;padding:14px 22px;">
+      <p>史学家张荫麟先生根据东西方历史学实践，提出撰写通史的五个选材标准：</p>
+      <table>
+        <tr>
+          <th>标准</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>（一）新异性的标准</td>
+          <td style="text-align:left">"内容的特殊性"，即在历史上是否具有新意。史事愈新异则愈重要。</td>
+        </tr>
+        <tr>
+          <td>（二）实效的标准</td>
+          <td style="text-align:left">史事直接或间接影响于人群的苦乐愈大则愈重要。</td>
+        </tr>
+        <tr>
+          <td>（三）文化价值的标准</td>
+          <td style="text-align:left">即真与美的价值，文化价值愈高的事物愈重要。</td>
+        </tr>
+        <tr>
+          <td>（四）训诲功用的标准</td>
+          <td style="text-align:left">完善的模范或成败得失的鉴戒，训诲功用愈大的史事愈重要。</td>
+        </tr>
+        <tr>
+          <td>（五）现状渊源的标准</td>
+          <td style="text-align:left">了解现状须追溯其由来，史事与现状关系愈深则愈重要。</td>
+        </tr>
+      </table>
+      <p style="margin-top:12px;">请任选一个标准，在古代、近代、现代任选一个历史时期，写一段历史。</p>
+      <p style="color:#764ba2;font-size:12.5pt;">（要求：明确写出所选标准，自拟题目，选材符合标准并加以阐释，符合逻辑，表述清晰）</p>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 参考示范答案</button>
+    <div class="answer-box">
+      <strong>【参考示范答案（示范一：现状渊源标准·近代）】</strong><br><br>
+      <strong>所选标准：（五）现状渊源的标准</strong><br>
+      <strong>题目：工业革命与当今世界格局的根源</strong><br><br>
+      18世纪中期，英国率先发生工业革命，蒸汽机的广泛使用推动了工厂制度的建立，机器大生产取代了手工劳动。工业革命深刻改变了世界面貌：它推动了资本主义世界市场的形成，使英国成为"世界工厂"；促进了交通运输革命（铁路、轮船），密切了世界各地的联系；同时加速了列强对外扩张，亚非拉地区被迫卷入世界经济体系。<br><br>
+      这一历史进程与今日世界的关联极为深刻：当今南北发展不平衡，发展中国家在国际分工中处于不利地位，根源正在于近代工业革命所奠定的不平等经济格局；环境污染、气候变化等全球性问题，也与工业文明的扩张密不可分。了解工业革命，是理解当代全球化困境与机遇的必要前提。<br><br>
+      <strong>——</strong>此段历史选材符合"现状渊源"标准：工业革命是今日世界格局最重要的历史根源之一，与现状关系极深，故选材适当。
+      <br><br>
+      <strong>【参考示范答案（示范二：实效标准·近代）】</strong><br><br>
+      <strong>所选标准：（二）实效的标准</strong><br>
+      <strong>题目：新航路开辟——改变世界的大航海时代</strong><br><br>
+      15世纪末至16世纪初，葡萄牙、西班牙航海家相继开辟了通往亚洲和美洲的新航路。这一历史事件对人类苦乐的影响极为深远：其一，世界贸易扩大，欧洲商品经济得到极大促进，推动资本主义发展；其二，引发"商业革命"和"价格革命"，冲击了欧洲封建制度；其三，美洲原住民遭受毁灭性打击，数以千万计的非洲人被贩卖为奴，人类蒙受巨大苦难；其四，物种在全球范围内交流（哥伦布大交换），改变了世界各地的饮食结构和人口分布。<br><br>
+      可以说，新航路的开辟是人类历史上影响最广、最深刻的事件之一，直接关系到此后数个世纪亿万人的命运。按实效标准，此为极重要的史事。
+    </div>
+  </div>
+
+  <div class="footer">
+    中外历史纲要下 · 世界近代史 · 回归教材精选真题 &nbsp;|&nbsp; 共选择题30题 + 非选择题2题
+  </div>
+</div>
+
+<script>
+function toggleAnswer(btn) {
+  btn.classList.toggle('open');
+  const box = btn.nextElementSibling;
+  box.classList.toggle('open');
+}
+
+// 选项点击交互：点击后显示对错，并高亮正确答案
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.options').forEach(function(optionsDiv) {
+    optionsDiv.querySelectorAll('.option').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        // 如果已经完成作答，不再响应
+        if (optionsDiv.dataset.done === '1') return;
+        optionsDiv.dataset.done = '1';
+
+        var allOpts = optionsDiv.querySelectorAll('.option');
+        var isCorrect = opt.classList.contains('correct');
+
+        allOpts.forEach(function(o) {
+          if (o === opt) {
+            // 选中的选项：正确变绿，错误变红
+            o.classList.add('selected');
+          } else if (o.classList.contains('correct')) {
+            // 非选中但正确的：揭示绿色
+            o.classList.add('reveal');
+          } else {
+            // 其余选项变灰
+            o.classList.add('done');
+          }
+          // 所有选项不再可hover
+          o.style.pointerEvents = 'none';
+        });
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>
