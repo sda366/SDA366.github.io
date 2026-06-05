@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中外历史纲要上——回归教材·中国近代史</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "黑体", "SimHei", "Microsoft YaHei", sans-serif;
+    font-size: 16pt;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 30px 16px 60px;
+    color: #222;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 22pt;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center;
+    color: rgba(255,255,255,0.88);
+    font-size: 13pt;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+  .section-title {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 10px 22px;
+    border-radius: 10px 10px 0 0;
+    margin-top: 28px;
+    letter-spacing: 2px;
+  }
+  .question-card {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.13);
+    overflow: hidden;
+  }
+  .question-card + .section-title {
+    margin-top: 36px;
+  }
+  .q-header {
+    background: #f5f3ff;
+    padding: 14px 22px 8px 22px;
+    border-bottom: 2px solid #ede9ff;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .q-num {
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: #fff;
+    font-size: 13pt;
+    font-weight: bold;
+    border-radius: 50%;
+    min-width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-meta {
+    font-size: 11pt;
+    color: #764ba2;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-top: 5px;
+  }
+  .q-body {
+    padding: 14px 22px 6px 22px;
+    font-size: 15pt;
+    line-height: 1.85;
+    color: #222;
+  }
+  .q-body .lead {
+    color: #444;
+    margin-bottom: 8px;
+    font-size: 14pt;
+  }
+  .options {
+    padding: 4px 22px 14px 22px;
+  }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 14pt;
+    line-height: 1.7;
+    cursor: pointer;
+    border: 1.5px solid #ddd;
+    background: #fafafa;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .option:hover {
+    background: #f0eeff;
+    border-color: #aaa8e6;
+  }
+  .option-label {
+    font-weight: bold;
+    min-width: 22px;
+    flex-shrink: 0;
+  }
+  .option.correct.selected {
+    background: #eafaf1;
+    border-color: #27ae60;
+    color: #145a32;
+    cursor: default;
+  }
+  .option.correct.selected .option-label { color: #27ae60; }
+  .option.wrong.selected {
+    background: #fdf3f2;
+    border-color: #e74c3c;
+    color: #7b241c;
+    cursor: default;
+  }
+  .option.wrong.selected .option-label { color: #e74c3c; }
+  .option.correct.reveal {
+    background: #eafaf1;
+    border-color: #27ae60;
+    color: #145a32;
+    cursor: default;
+  }
+  .option.correct.reveal .option-label { color: #27ae60; }
+  .option.done {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .answer-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 22px 14px 22px;
+    cursor: pointer;
+    user-select: none;
+    background: linear-gradient(90deg,#667eea,#764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 12pt;
+    font-family: inherit;
+    transition: opacity 0.15s;
+  }
+  .answer-toggle:hover { opacity: 0.85; }
+  .answer-toggle .arrow {
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+  .answer-toggle.open .arrow { transform: rotate(90deg); }
+  .answer-box {
+    display: none;
+    margin: 0 22px 16px 22px;
+    background: #f8f7ff;
+    border-left: 4px solid #764ba2;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 13.5pt;
+    color: #333;
+    line-height: 1.9;
+  }
+  .answer-box.open { display: block; }
+  .answer-box strong { color: #764ba2; }
+  .essay-card {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.13);
+    padding: 20px 28px;
+  }
+  .essay-card .meta {
+    font-size: 11pt;
+    color: #764ba2;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .essay-card p {
+    font-size: 14.5pt;
+    line-height: 1.9;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  .essay-card img {
+    display: block;
+    max-width: 480px;
+    margin: 10px auto;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+  }
+  .sub-q {
+    background: #f5f3ff;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 10px 0;
+    font-size: 14pt;
+    line-height: 1.85;
+    color: #2c2c6c;
+    border-left: 4px solid #667eea;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 13.5pt;
+  }
+  th {
+    background: linear-gradient(90deg,#667eea,#764ba2);
+    color: #fff;
+    padding: 8px 14px;
+    text-align: center;
+  }
+  td {
+    border: 1px solid #ccc;
+    padding: 7px 14px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  tr:nth-child(even) td { background: #f5f3ff; }
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 11pt;
+    margin-top: 40px;
+    letter-spacing: 1px;
+  }
+  .img-placeholder {
+    margin: 10px 0;
+    padding: 18px;
+    background: #f0eeff;
+    border: 2px dashed #b8b0e8;
+    border-radius: 8px;
+    text-align: center;
+    color: #667eea;
+    font-size: 12pt;
+  }
+  @media (max-width: 600px) {
+    body { font-size: 13pt; padding: 10px 4px 40px; }
+    .q-body { font-size: 13pt; }
+    .option { font-size: 12.5pt; }
+    h1 { font-size: 16pt; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>中外历史纲要上</h1>
+  <div class="subtitle">【回归教材 · 中国近代史】精选高考真题</div>
+
+  <!-- ===== 一、选择题 ===== -->
+  <div class="section-title">一、选择题</div>
+
+  <!-- Q1 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">1</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1836年，某外文刊物发表旅华英人《迫切需要与中国缔约》的文章，认为贸易增长起来，势必要开辟新的门径，但在中国却受到了阻碍，提出"要和中国签订一个条约，这个条约必须是在刺刀尖下依照我们的命令缔结，又必须在大炮的瞄准下发生效力"。据此，该文意图
+        </div>
+        <div class="q-meta">2025·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>要求英国武力对华进行市场扩张</div>
+      <div class="option wrong"><span class="option-label">B．</span>维护英国垄断资产阶级的利益</div>
+      <div class="option wrong"><span class="option-label">C．</span>迫使中国增开沿海内陆贸易口岸</div>
+      <div class="option wrong"><span class="option-label">D．</span>谋取对华贸易片面最惠国待遇</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      材料核心信息：贸易增长但受阻→需用武力（"刺刀尖下""大炮瞄准下"）逼迫中国缔约，即主张以武力打开中国市场。B"垄断资产阶级"概念过大，材料未涉及；C"增开沿海内陆贸易口岸"是具体条约内容，材料未提及；D"片面最惠国待遇"也是具体条约权益，材料未体现。故选A。
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">2</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下图描绘的是晚清时期儿童喜欢的"小放牛"游戏，其中一个儿童扮演牵牛者，两个儿童扮演牛，一个儿童扮演骑牛者。这一游戏场景反映出
+        </div>
+        <img src="q2_xiaofangniu.png" alt="晚清儿童"小放牛"游戏" style="max-width:100%;display:block;margin:10px auto;border-radius:8px;">
+        <div class="q-meta">2025·全国卷·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>男耕女织的小农经济已经解体</div>
+      <div class="option wrong"><span class="option-label">B．</span>西式教育改变人们的劳动观念</div>
+      <div class="option wrong"><span class="option-label">C．</span>城市化推动乡村生活方式变化</div>
+      <div class="option correct"><span class="option-label">D．</span>民众娱乐活动受农业文明影响</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      "小放牛"游戏以农业生产的放牛场景为原型，儿童模仿牵牛、骑牛等农耕活动，说明民众的娱乐活动深受农业文明的影响。A"已经解体"与材料无关且说法过绝；B"西式教育"与农耕游戏无关；C"城市化"材料未涉及。故选D。
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">3</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          魏源在《海国图志》中建议武举增试水师技术，并主张仿照西方的军队编制与组织，组建中国水师，还提议联合美、法、俄等国以应对英国的侵略。由此可知魏源
+        </div>
+        <div class="q-meta">2025·湖北·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>直接推动新式海军的建立</div>
+      <div class="option wrong"><span class="option-label">B．</span>对西方的认知突破器物层面</div>
+      <div class="option wrong"><span class="option-label">C．</span>致力于推行"自强"新政</div>
+      <div class="option correct"><span class="option-label">D．</span>初步认清西方殖民主义本质</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      魏源提议联合美、法、俄以应对英国，说明他已认识到不同西方国家的利益诉求不同，英国是主要的殖民侵略者，初步认清了西方殖民主义的本质。A"直接推动"不准确，魏源只是建议，并未付诸实践；B"突破器物层面"通常指涉及政治制度变革，魏源仍停留在军事和外交层面；C"自强新政"是后来洋务运动的概念，时代不符。故选D。
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">4</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          "太平军之起，固宗教上之逼迫使然，实则亦非真因……予意当时即无洪秀全，中国亦必不能免于革命。设有人以耶稣教之关系及清政府之操切，为……革命之原因，则其所见浅陋实甚。恶根实种于满洲政府之政治，最大之真因为行政机关之腐败，政以贿成。"此言意在说明
+        </div>
+        <div class="q-meta">2025·北京·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>太平天国与西方的宗教没有关联</div>
+      <div class="option correct"><span class="option-label">B．</span>清廷腐朽统治是农民革命动因</div>
+      <div class="option wrong"><span class="option-label">C．</span>没有洪秀全就不会发生农民起义</div>
+      <div class="option wrong"><span class="option-label">D．</span>内部腐败导致太平天国的失败</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      材料明确否定宗教和洪秀全是革命的根本原因，强调"最大之真因为行政机关之腐败，政以贿成"，即清政府腐朽统治才是农民革命的根本动因。A"没有关联"过度绝对，材料说"非真因"而非"没有关联"；C与材料"即无洪秀全……亦必不能免于革命"矛盾；D"太平天国的失败"在材料中未涉及，材料讨论的是起义的动因。故选B。
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">5</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1875年盛宣怀在湖北兴办矿业时，发出了"开矿不难在筹资本，而难在得洋师"之叹，主张大力培养本土科技实用人才，到19世纪末时又提出亟需外交、政务、法律、管理等各类人才。其认识的变化
+        </div>
+        <div class="q-meta">2025·海南·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>深受传统义利观影响</div>
+      <div class="option wrong"><span class="option-label">B．</span>孕育了民主革命思潮</div>
+      <div class="option wrong"><span class="option-label">C．</span>源于创办实业的失败</div>
+      <div class="option correct"><span class="option-label">D．</span>折射时代变革的需求</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      盛宣怀从最初只关注技术人才，到后来认识到还需要外交、政务、法律、管理等人才，其认识的变化反映了时代需求的变迁——从洋务运动学习西方技术，到维新变法追求制度变革，折射出中国近代化从器物到制度层面的深化。A"传统义利观"与材料无关；B"孕育民主革命思潮"过度推断；C"创办实业失败"材料未提及。故选D。
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">6</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          如图为1908年著名漫画家马星驰创作的一幅时事漫画（局部），它反映了
+        </div>
+        <img src="q6_manhua.png" alt="1908年马星驰时事漫画" style="max-width:100%;display:block;margin:10px auto;border-radius:8px;">
+        <div class="q-meta">2023·重庆·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>列强在华利益彼此冲突对立</div>
+      <div class="option wrong"><span class="option-label">B．</span>清廷力拒外资实现铁路国有</div>
+      <div class="option correct"><span class="option-label">C．</span>攫取路权是列强扩大侵华的工具</div>
+      <div class="option wrong"><span class="option-label">D．</span>东北地区成为列强在华争夺焦点</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      19世纪末20世纪初，列强纷纷攫取中国铁路修筑权和经营权，通过控制铁路扩大经济侵略和政治影响。漫画反映了攫取路权是列强扩大侵华的重要工具。A虽有一定道理但非材料主旨；B"力拒外资"与史实不符（清政府反而出卖路权）；D"东北地区"过于具体，漫画并非仅涉及东北。故选C。
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">7</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1897～1898年梁启超担任长沙时务学堂总教习时积极宣扬民权，认为"六经"中含有民权思想。对此，湖南士绅叶德辉批驳说："民有权，上无权矣。欲附会'六经'，'六经'安有此说？"两者争论的实质是
+        </div>
+        <div class="q-meta">2025·山东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>儒家经典是否具有现实价值</div>
+      <div class="option wrong"><span class="option-label">B．</span>以西学解释中学是否可行</div>
+      <div class="option correct"><span class="option-label">C．</span>要不要进行政治制度变革</div>
+      <div class="option wrong"><span class="option-label">D．</span>推行改良还是进行革命</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      梁启超宣扬民权，试图以"六经"为理论依据，实质是主张政治制度变革（实行民权政治）；叶德辉反对民权，维护君主权威，实质是反对政治变革。两者争论的核心是"要不要进行政治制度变革"。A"经典现实价值"和 B"以西学解释中学"都是争论的表象而非实质；D材料未涉及"革命"主张。故选C。
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">8</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          清末北京竹枝词云："巨舰飞来瞬息中，未从江海鼓腥风。全亏诸老能调护，半壁东南保障功。"时人谓："沿江沿海安堵如故，皆张（之洞）刘（坤一）二制军调护之力。"材料从一个侧面反映该事件
+        </div>
+        <div class="q-meta">2025·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>严重动摇清政府的统治根基</div>
+      <div class="option wrong"><span class="option-label">B．</span>推动湘淮系官僚集团崛起</div>
+      <div class="option wrong"><span class="option-label">C．</span>深刻影响洋务运动自强政策</div>
+      <div class="option wrong"><span class="option-label">D．</span>打击了帝国主义在华势力</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      材料反映的是1900年东南互保事件。张之洞、刘坤一等地方督抚未经中央授权，自行与列强达成协议，维护东南地区安定。地方官员绕过中央政府独立行动，民众归功于地方官员而非中央政府，从侧面说明中央权威严重削弱，严重动摇了清政府的统治根基。B"湘淮系崛起"不是材料核心；C洋务运动此时已结束；D东南互保恰恰是避免与列强对抗。故选A。
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">9</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          如下图是刊登在1909年《图画日报》上的系列寓意画。该系列寓意画反映了
+        </div>
+        <img src="q9_yuyituhua.png" alt="1909年《图画日报》系列寓意画" style="max-width:100%;display:block;margin:10px auto;border-radius:8px;">
+        <div class="q-meta">2024·辽宁·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>国人振兴经济救国强国的愿望</div>
+      <div class="option wrong"><span class="option-label">B．</span>一战期间民族经济发展较快</div>
+      <div class="option wrong"><span class="option-label">C．</span>帝国主义的经济侵略日益加深</div>
+      <div class="option wrong"><span class="option-label">D．</span>清政府解决财政危机的信心</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      1909年正值清末新政和实业救国思潮兴起时期，《图画日报》以寓意画形式宣传振兴经济，反映了国人通过发展经济实现救国强国的愿望。B时间错误，一战1914年才开始；C帝国主义侵略是背景而非寓意画的主旨；D"清政府的信心"与民间刊物的立场不符。故选A。
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">10</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          有一份公文这样描述："自近年学堂改章以来，后生初学大率皆喜新厌故，相习成风，骎骎乎有荒经蔑古之患。若明习科学而又研究经学者，甚难其选。诚恐大学经科一项，几无合格升等之人。"与此"描述"相关的史实是
+        </div>
+        <div class="q-meta">2025·安徽·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>京师同文馆在北京设立</div>
+      <div class="option wrong"><span class="option-label">B．</span>维新派主张废八股改试策论</div>
+      <div class="option correct"><span class="option-label">C．</span>清末新政推行教育改革</div>
+      <div class="option wrong"><span class="option-label">D．</span>北洋政府建立文官考试制度</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      "学堂改章"指清末新政中的教育改革（1901年后废除科举、兴办新式学堂）。新式学堂注重科学课程，学生"喜新厌故"，忽视经学，导致大学经科难觅合格人才。A京师同文馆设立于1862年，与"学堂改章"时间不符；B维新派主张是1898年，且未大规模实施；D北洋政府时期晚于材料描述。故选C。
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">11</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下图为1907年的漫画，据图可知作者意在
+        </div>
+        <img src="q11_manhua1907.png" alt="1907年漫画" style="max-width:100%;display:block;margin:10px auto;border-radius:8px;">
+        <div class="q-meta">2025·甘肃·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>支持维新变法</div>
+      <div class="option wrong"><span class="option-label">B．</span>倡导民族团结</div>
+      <div class="option wrong"><span class="option-label">C．</span>警告西方列强</div>
+      <div class="option correct"><span class="option-label">D．</span>宣传民主革命</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      1907年正值资产阶级民主革命运动高涨时期，同盟会成立后革命思想广泛传播，漫画意在宣传民主革命、推翻清朝统治。A维新变法在1907年已过时；B"民族团结"与漫画主旨不符；C"警告西方列强"不是此时期漫画的主要主题。故选D。
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">12</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1912年临时参议院选举袁世凯为临时大总统后，孙中山向革命党人表示："文等所求者，倾覆满清专制政府，创立中华民国也。清帝退位，民国统一，继此建设之事，自宜让熟有政治经验之人……且总统不过国民公仆，当守宪法，从舆论。文前兹所誓忠于国民者，项城（袁世凯）已不能改。若在吾党，不必身揽政权，亦自有其天职，更不以名位而为本党进退之征。"上述材料中，孙中山旨在强调
+        </div>
+        <div class="q-meta">2026·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>民主共和政体在中国初步确立</div>
+      <div class="option wrong"><span class="option-label">B．</span>国家建设需要丰富的政治经验</div>
+      <div class="option wrong"><span class="option-label">C．</span>临时大总统须遵守《临时约法》</div>
+      <div class="option correct"><span class="option-label">D．</span>移交政权有利于巩固革命成果</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      孙中山强调革命目标（倾覆满清、创立民国）已实现，建设之事应让有经验之人来做；总统须守宪法从舆论，革命党人不必身揽政权。核心逻辑是：交出政权（给袁世凯）只要能确保共和制度（守宪法、从舆论），就有利于巩固革命成果。A是客观评价而非孙中山强调的内容；B只是表层意思；C《临时约法》材料未直接提及，"宪法"范围更广。故选D。
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">13</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          辛亥革命后，"代议制度，又因选举不良，丧失人民之信仰。欧战既停，俄国社会革命忽而实现，世界所流行之新思想，乃如潮而至……必欲用科学研究之方法，别开生面，解决人类社会最重要之问题"。该段时评集中反映出当时中国
+        </div>
+        <div class="q-meta">2025·天津·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>封建专制势力的复辟</div>
+      <div class="option wrong"><span class="option-label">B．</span>议会政治体制的崩溃</div>
+      <div class="option wrong"><span class="option-label">C．</span>社会主义革命的推进</div>
+      <div class="option correct"><span class="option-label">D．</span>思想文化革新的兴盛</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      材料描述辛亥革命后代议制失信，俄国革命后新思想如潮水般涌入中国，人们开始用科学方法探讨社会问题。这集中反映了新文化运动以来思想文化革新的兴盛——从对代议制的反思，到对各种新思想的探索。A"复辟"与材料方向相反；B"崩溃"过于绝对；C"社会主义革命的推进"在此时还未成为主流。故选D。
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">14</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1915年，日本提出"二十一条"要求，国人视以为耻，各地掀起"纪念国耻"运动。国耻日的选择，一般以5月7日即日本提出最后通牒之日为国耻日。但自5月20日之后，越来越多的人接受以5月9日即北洋政府接受条约之日为国耻日。这一转变说明
+        </div>
+        <div class="q-meta">2024·甘肃·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>北洋时期政治上分崩离析</div>
+      <div class="option wrong"><span class="option-label">B．</span>国人认为救亡应以自强为本</div>
+      <div class="option wrong"><span class="option-label">C．</span>北洋政府的外交彻底失败</div>
+      <div class="option correct"><span class="option-label">D．</span>国人思想受新文化运动影响</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      国耻日从日本的通牒日（5月7日）变为北洋政府接受条约日（5月9日），说明国人从单纯仇恨外敌转向反思本国政府的软弱无能，体现了批判性思维的觉醒和自我反省意识，与新文化运动倡导的理性批判精神一致。A与材料无关；B"自强为本"不是转变的核心含义；C"彻底失败"过于绝对。故选D。
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">15</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          某同学意欲探究"民国初年民族主义盛行"这一观点。下列史实能论证该观点的是
+        </div>
+        <div class="q-meta">2024·福建·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>创办于上海的《青年杂志》迁往北京</div>
+      <div class="option wrong"><span class="option-label">B．</span>孙中山在民国时期同他人的谈话中，频繁提及民族主义</div>
+      <div class="option correct"><span class="option-label">C．</span>各军阀若攻击他人，则常称其出卖国家利益</div>
+      <div class="option wrong"><span class="option-label">D．</span>第一次世界大战期间，中国纺织、面粉等轻工业迅速发展</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      各军阀攻击他人时常称对方"出卖国家利益"，说明民族主义已成为一种普遍的政治话语和道德标准，连军阀都不得不借助民族主义来获取合法性，最能证明民族主义的"盛行"。A与民族主义无直接关联；B只反映孙中山个人关注民族主义，不足以证明"盛行"；D是经济现象，与民族主义不是直接论证关系。故选C。
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">16</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          截至1921年，中国民族资本机器面粉厂实存137家，日生产能力312883包，与1913年实存57家、日生产能力75815包相比，8年中厂数增加1.4倍，日生产能力增加3.1倍。与这一现象直接相关的国际因素是
+        </div>
+        <div class="q-meta">2025·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>威斯特伐利亚体系形成</div>
+      <div class="option wrong"><span class="option-label">B．</span>资本主义世界殖民体系建立</div>
+      <div class="option correct"><span class="option-label">C．</span>欧洲列强忙于一战无暇东顾</div>
+      <div class="option wrong"><span class="option-label">D．</span>主要资本主义国家出现"滞胀"现象</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      1913—1921年间中国民族面粉工业的快速发展，直接得益于第一次世界大战（1914—1918年）。战争期间欧洲列强忙于战争，暂时放松了对华经济侵略，中国民族工业获得了发展的"黄金时期"。A威斯特伐利亚体系形成于17世纪；B殖民体系建立于19世纪末；D"滞胀"出现于20世纪70年代。故选C。
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">17</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1914年4月，黄炎培考察皖南冲田村公立高等小学，发现该校教师仍有脑后"累累垂辫"者，学生人数由去年40人减少至20人，去年慕名前来学习算术和体操的私塾生今年也不再来了。据此可推知当时
+        </div>
+        <div class="q-meta">2025·湖南·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>崇尚儒学仍是时代潮流</div>
+      <div class="option correct"><span class="option-label">B．</span>新旧势力斗争激烈</div>
+      <div class="option wrong"><span class="option-label">C．</span>政党政治造成政策摇摆</div>
+      <div class="option wrong"><span class="option-label">D．</span>私塾退出历史舞台</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      辛亥革命后虽倡导剪辫、兴新学，但该校教师仍留辫（旧势力残余），学生人数锐减、私塾生不再来（旧势力对新式教育的抵制），反映出新旧势力之间的激烈斗争。A"崇尚儒学"不是材料重点；C"政党政治"与材料无关；D"私塾退出"与"私塾生不再来学新课程"矛盾。故选B。
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">18</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1920年，教育部训令：国民学校各科教科书改为白话文语体。这标志白话文运动取得明显效果。1925年，教育总长章士钊等人谋划将白话文从中小学课本中驱除出去，因遭到鲁迅等思想文化界人士的强烈反对，未能付诸实施。章士钊等人此举失败的主要原因是
+        </div>
+        <div class="q-meta">2025·湖北·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>文学革命的深入</div>
+      <div class="option wrong"><span class="option-label">B．</span>民主思想的活跃</div>
+      <div class="option wrong"><span class="option-label">C．</span>北洋政府的腐朽</div>
+      <div class="option wrong"><span class="option-label">D．</span>教育革新的推行</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      1920年白话文已成为教科书语体，到1925年文学革命已深入发展，白话文在社会文化领域扎根深厚，思想文化界人士的强烈反对正是文学革命深入人心的体现。B"民主思想"不是直接原因；C"北洋政府腐朽"与失败原因无直接逻辑关系；D"教育革新"是文学革命的结果而非原因。故选A。
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">19</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          某外国驻华公使在报告中国对山东问题的反应时称"与中外开始交往以来发生过的风暴不同，一场民众愤怒的风暴席卷了中国"，学生在抗议中发挥了主导作用，进行了"非常有效的宣传"。学生在这次运动中提出的口号有
+        </div>
+        <div class="q-meta">2025·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>"打倒列强，除军阀"</div>
+      <div class="option correct"><span class="option-label">B．</span>"取消二十一条"</div>
+      <div class="option wrong"><span class="option-label">C．</span>"停止内战，一致抗日"</div>
+      <div class="option wrong"><span class="option-label">D．</span>"驱除鞑虏，恢复中华"</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      材料描述的是五四运动（1919年），因巴黎和会将山东权益转让日本而引发。学生在五四运动中提出"外争主权，内除国贼""取消二十一条""誓死力争，还我青岛"等口号。A"打倒列强，除军阀"是国民革命时期口号；C"停止内战，一致抗日"是抗日战争时期口号；D"驱除鞑虏，恢复中华"是辛亥革命时期口号。故选B。
+    </div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">20</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1923年9月，瞿秋白在《自民权主义至社会主义》中指出，"要劳工阶级真正彻底觉悟资产阶级假民权主义的不可信，决不是几本书可以办到"，而必须积累"实际普遍的政治经验"。这表明早期中国共产党人认识到应该
+        </div>
+        <div class="q-meta">2025·陕晋青宁卷·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>制定民主革命纲领</div>
+      <div class="option correct"><span class="option-label">B．</span>引导群众理论联系实际</div>
+      <div class="option wrong"><span class="option-label">C．</span>推翻资产阶级专政</div>
+      <div class="option wrong"><span class="option-label">D．</span>发动工人投身革命斗争</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      瞿秋白强调工人阶级不能仅靠书本（理论）觉悟，必须积累"实际普遍的政治经验"（实践），即理论必须联系实际。A民主革命纲领已有（党的二大）；C"推翻资产阶级专政"不符合当时民主革命阶段的任务；D"发动工人"不如B"理论联系实际"准确，材料强调的不是发动而是方式方法。故选B。
+    </div>
+  </div>
+
+  <!-- Q21 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">21</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          从党的一大确定直接进行社会主义革命，到党的二大确定首先进行民主革命再进行社会主义革命，这是党的战略方针的一次重大转变。这一转变
+        </div>
+        <div class="q-meta">2024·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>使中国革命有了符合国情的目标</div>
+      <div class="option wrong"><span class="option-label">B．</span>使中国革命有了坚强的领导力量</div>
+      <div class="option wrong"><span class="option-label">C．</span>直接促成第一次国共合作的实现</div>
+      <div class="option wrong"><span class="option-label">D．</span>根本改变了中国社会的发展方向</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      党的一大照搬俄国模式，主张直接进行社会主义革命，不符合中国半殖民地半封建社会的国情；党的二大制定了反帝反封建的民主革命纲领，先进行民主革命再进行社会主义革命，使中国革命有了符合国情的目标。B"坚强领导力量"党的成立就确立了；C"直接促成"说法不准确，国共合作还有其他因素；D"根本改变"过于绝对。故选A。
+    </div>
+  </div>
+
+  <!-- Q22 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">22</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1927年5月，王纯一奉上级命令以黄沙坨小学校长身份来到偏僻的台安（今辽宁省台安县），7月，领导成立中共台安支部。支部"在师生中介绍进步刊物《新青年》，出版《晚霞》、《先声》周刊"，发展了多人加入中国共产党。由此可见，当时东北地区
+        </div>
+        <div class="q-meta">2025·黑吉辽蒙卷·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>革命的形势逐渐好转</div>
+      <div class="option correct"><span class="option-label">B．</span>党组织在基层影响扩大</div>
+      <div class="option wrong"><span class="option-label">C．</span>新文化运动影响深远</div>
+      <div class="option wrong"><span class="option-label">D．</span>工农革命运动蓬勃开展</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      王纯一以校长身份在偏僻农村建立党支部、宣传进步刊物、发展党员，说明党组织已深入基层并在偏远地区扩大影响。A"革命形势逐渐好转"与1927年大革命失败后的低潮背景不符；C"新文化运动影响深远"只是借用《新青年》刊名，不是核心；D"工农革命运动蓬勃开展"材料只涉及党员发展，未体现工农运动。故选B。
+    </div>
+  </div>
+
+  <!-- Q23 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">23</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          民族企业家刘鸿生创办的章华毛绒纺织厂，在20世纪30年代初连年亏损。后来企业推出品牌名为"九一八"的产品，国人竞相购买，企业立时恢复了生机。这一转变说明
+        </div>
+        <div class="q-meta">2025·甘肃·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A．</span>反帝爱国有助于民族工业发展</div>
+      <div class="option wrong"><span class="option-label">B．</span>产品命名是国货畅销的主因</div>
+      <div class="option wrong"><span class="option-label">C．</span>民族经济的发展需要抵制日货</div>
+      <div class="option wrong"><span class="option-label">D．</span>民族企业引入新的经营方式</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      "九一八"品牌唤起国人的反帝爱国情感，国人竞相购买使企业恢复生机，说明反帝爱国热情有助于民族工业发展。B"主因"表述不准确，爱国情感是根本推动力；C"需要抵制日货"过于绝对，且材料侧重的是爱国情感促进民族工业；D"新的经营方式"材料未涉及。故选A。
+    </div>
+  </div>
+
+  <!-- Q24 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">24</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下列两幅宣传画的主旨是
+        </div>
+        <div class="img-placeholder">[图片：两幅抗战时期大生产运动宣传画，主题为自力更生、发展生产]</div>
+        <div class="q-meta">2026·浙江·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>开源节流，支持革命</div>
+      <div class="option correct"><span class="option-label">B．</span>自己动手，丰衣足食</div>
+      <div class="option wrong"><span class="option-label">C．</span>减租减息，一致抗日</div>
+      <div class="option wrong"><span class="option-label">D．</span>土地改革，支援前线</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      两幅宣传画反映的是抗战时期陕甘宁边区大生产运动。"自己动手，丰衣足食"是毛泽东为大生产运动题写的著名口号，体现了边区军民自力更生、发展生产的革命精神。A"开源节流"不是大生产运动的口号；C"减租减息"是土地政策，与宣传画主题不同；D"土地改革"是解放战争时期的政策。故选B。
+    </div>
+  </div>
+
+  <!-- Q25 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">25</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          在1934年红五月的扩大红军突击运动中，瑞京（瑞金）3900多名新战士，经过列宁小学学生宣传鼓动而参军者有1500人；在粮食突击运动中，列宁小学学生打锣高叫："集中粮食呀！不要使红军哥哥饿肚皮呀！"这表明
+        </div>
+        <div class="q-meta">2025·江西·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>经济工作稳步推进</div>
+      <div class="option wrong"><span class="option-label">B．</span>战略转移需要民众支持</div>
+      <div class="option correct"><span class="option-label">C．</span>苏区教育成效显著</div>
+      <div class="option wrong"><span class="option-label">D．</span>集中粮食服务扩大红军</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      列宁小学学生积极宣传鼓动参军、动员集中粮食，说明苏区的教育培养出了具有革命觉悟的青少年，教育成效显著。A"经济工作"与材料主旨不符；B"战略转移"（长征）材料未涉及；D只是材料部分内容，不是核心结论。故选C。
+    </div>
+  </div>
+
+  <!-- Q26 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">26</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下图是《救国时报》1937年5月23日刊登的一幅画作。画中士兵手举抗日联军旗帜，头戴布琼尼军帽（曾是苏联红军战士的标配），与日寇英勇战斗。该画作意在表现
+        </div>
+        <img src="q26_xuanchuanhua.png" alt="《救国时报》1937年画作" style="max-width:100%;display:block;margin:10px auto;border-radius:8px;">
+        <div class="q-meta">2025·江苏·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>全民族团结抗战局面的形成</div>
+      <div class="option wrong"><span class="option-label">B．</span>抗日联军后勤装备保障充足</div>
+      <div class="option wrong"><span class="option-label">C．</span>苏军进入东北支援中国抗战</div>
+      <div class="option correct"><span class="option-label">D．</span>中国共产党收复失地的信念</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      《救国时报》是中国共产党在海外创办的报纸，画作中的抗日联军是中国共产党领导的东北抗日武装。画中士兵英勇战斗的形象，意在表现中国共产党坚持抗战、收复失地的坚定信念。A1937年5月全面抗战尚未开始，"全民族团结抗战局面"尚未形成；B"装备保障充足"与布琼尼军帽象征性使用不符；C"苏军进入东北"与史实不符。故选D。
+    </div>
+  </div>
+
+  <!-- Q27 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">27</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          据统计，西南联大历史学系共设6组选修课，史籍名著选读组的10门课中有8门为中国史籍名著；断代史组的16门课中有9门属中国史范畴，且规定必选2门中国史、1至2门西洋史；专门史组有8门中国史课程。上述课程设置注重
+        </div>
+        <div class="q-meta">2025·云南·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>中国古代历史研究</div>
+      <div class="option correct"><span class="option-label">B．</span>中国历史文脉传承</div>
+      <div class="option wrong"><span class="option-label">C．</span>中西文化融会贯通</div>
+      <div class="option wrong"><span class="option-label">D．</span>人文社会科学教育</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      西南联大历史系各课程组中中国史课程占比明显偏高，且规定必选中国史，体现了在抗战时期注重传承中国历史文脉的办学取向——通过历史教育维系民族认同和文化传承。A"古代历史研究"范围过窄；C"融会贯通"与材料强调中国史比重大相矛盾；D"人文社会科学"过于宽泛。故选B。
+    </div>
+  </div>
+
+  <!-- Q28 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">28</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1942年，面对根据地面积与人口缩减的严峻形势，晋绥边区通过高价收购铁轨、铁丝等物资，引导民众破击敌方军用设施。这一做法
+        </div>
+        <div class="q-meta">2025·福建·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>开启了边区大生产运动的先声</div>
+      <div class="option wrong"><span class="option-label">B．</span>解决了敌占区民众的生活困难</div>
+      <div class="option correct"><span class="option-label">C．</span>破坏了日军"以战养战"的部署</div>
+      <div class="option wrong"><span class="option-label">D．</span>扩大了中共在游击区的影响力</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      高价收购铁轨、铁丝，引导民众破击敌方军用设施，直接破坏了日军的铁路运输和军事设施，打断了日军利用占领区资源支持战争（"以战养战"）的部署。A大生产运动1941年已开始，时间不符；B"解决了"过于绝对；D"扩大影响力"不是主要目的，材料侧重的是军事经济效果。故选C。
+    </div>
+  </div>
+
+  <!-- Q29 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">29</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          某知名老字号绸布店长期经营稳定，年年盈余。1948年，该店陷入"虚盈实亏"的境地，动辄亿万的账面看似有盈余，但货物存量越来越少，实已"暗亏"，以致渐临破产。造成这种现象的主要原因是
+        </div>
+        <div class="q-meta">2025·广东·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>官僚资本的垄断</div>
+      <div class="option correct"><span class="option-label">B．</span>通货膨胀的恶化</div>
+      <div class="option wrong"><span class="option-label">C．</span>国际援助的中止</div>
+      <div class="option wrong"><span class="option-label">D．</span>外国资本的压迫</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      1948年国统区爆发恶性通货膨胀，法币和金圆券急剧贬值。账面金额虽巨大，但货币购买力极低，实际是"虚盈实亏"——卖出货物收回的货款远不能补进同等数量的货物，导致货物存量越来越少。A"官僚资本垄断"虽有影响但不是"虚盈实亏"的直接原因；C"国际援助中止"与商业经营无关；D"外国资本"不是主要原因。故选B。
+    </div>
+  </div>
+
+  <!-- Q30 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">30</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1949年2月，毛泽东在一则电文中发出指示，要求部队制印长江以南及西北、西南的简明地图，图上要有大的河流、山脉，有省界及大、中城市的名称等，发给营部以上各级机关，尽量使一切识字的连长、排长及战士都能阅。这一指示
+        </div>
+        <div class="q-meta">2025·河南·高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A．</span>表明党的工作重心转向城市</div>
+      <div class="option wrong"><span class="option-label">B．</span>奠定全国土地改革的基础</div>
+      <div class="option wrong"><span class="option-label">C．</span>预示国家建设即将全面展开</div>
+      <div class="option correct"><span class="option-label">D．</span>为民主革命的胜利做准备</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      1949年2月，辽沈、淮海、平津三大战役即将胜利，毛泽东指示制作长江以南及西北、西南地图，是为即将发起渡江战役和进军全国做准备，即为民主革命在全国的最终胜利做准备。A"转向城市"与制作军事地图的目的不符；B"土地改革"与地图无关；C"国家建设"不是此时军事行动的核心目标。故选D。
+    </div>
+  </div>
+
+  <!-- ===== 二、非选择题 ===== -->
+  <div class="section-title">二、非选择题</div>
+
+  <!-- 非选题1 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num" style="font-size:12pt;min-width:44px;width:44px;">31</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          阅读材料，完成下列要求。
+        </div>
+        <div class="q-meta">2025·云南·高考真题</div>
+      </div>
+    </div>
+    <div class="essay-card" style="border-radius:0;box-shadow:none;padding:14px 22px;">
+      <p><strong>材料一</strong>　七七事变前，中国除东北地区外交通基础十分薄弱。全国抗战爆发后，国民政府西迁重庆，采取多种措施推动西南地区交通运输业的发展。公路方面，各族群众、爱国华侨齐心协力，打通滇缅公路全线，修通中印公路，改善西南国际交通。同时，通过改善旧路和修筑新路，形成以贵阳、重庆为中心的西南公路网，并与西北公路连接起来。铁路方面，赶筑滇缅、川滇铁路。水运方面，扩展和开辟长江、嘉陵江等航线，实现水陆联运。空运方面，开辟莫斯科至重庆、重庆至香港、昆明至河内、昆明至仰光及驼峰航线等。</p>
+      <p style="color:#555;font-size:12.5pt;">——摘编自章开沅、朱英主编《中国近现代史》等</p>
+      <p><strong>材料二</strong>　在抗战大后方的新疆地区，各族儿女的抗战热情不断高涨。在八路军驻新疆办事处推动下，抗战文化宣传和"一县一机"等抗日募捐活动此起彼伏，中苏国际公路交通线和航空线、中印驿运线开通。新疆各族同胞捐献的10架"新疆号"战斗机参加武汉保卫战，至1944年8月，共捐献飞机154架。此外，新疆各族人民还架桥修路，运输盟国援华物资，并以大量的农、牧、矿产品换回抗战急需的武器、弹药和军需品。</p>
+      <p style="color:#555;font-size:12.5pt;">——摘编自本书编写组《中华民族共同体概论》</p>
+    </div>
+    <div class="sub-q">（1）根据材料一，概括全国抗战时期西南交通运输业发展的特点。</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 参考答案</button>
+    <div class="answer-box">
+      <strong>【第（1）题参考答案】</strong><br><br>
+      ①多种运输方式并举（公路、铁路、水运、空运全面发展）；<br>
+      ②注重国际交通线建设（滇缅公路、中印公路、驼峰航线等连接国际）；<br>
+      ③以贵阳、重庆为中心形成西南公路网，并与西北公路相连接；<br>
+      ④实现水陆联运，多种运输方式协同配合；<br>
+      ⑤依靠各族群众和爱国华侨的力量共同建设。
+    </div>
+    <div class="sub-q">（2）根据材料并结合所学知识，简析全国抗战时期大后方交通建设的意义。</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 参考答案</button>
+    <div class="answer-box">
+      <strong>【第（2）题参考答案】</strong><br><br>
+      ①保障了国际援华物资的运输通道，维持了中国与国际社会的联系，支持了持久抗战；<br>
+      ②打破了日军对中国沿海的封锁，为抗战大后方提供了战略物资保障；<br>
+      ③促进了西南、西北地区的经济发展和基础设施建设，为战后建设奠定了一定基础；<br>
+      ④加强了各民族团结抗战，增强了中华民族的凝聚力；<br>
+      ⑤新疆等边疆地区的交通建设和抗战参与，巩固了国家统一，增强了中华民族共同体意识；<br>
+      ⑥体现了全民族抗战精神，各族人民为抗战胜利作出了重要贡献。
+    </div>
+  </div>
+
+  <!-- 非选题2 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num" style="font-size:12pt;min-width:44px;width:44px;">32</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          阅读材料，回答问题。
+        </div>
+        <div class="q-meta">2025·山东·高考真题</div>
+      </div>
+    </div>
+    <div class="essay-card" style="border-radius:0;box-shadow:none;padding:14px 22px;">
+      <p style="text-align:center;font-size:15pt;font-weight:bold;color:#764ba2;">"新文化丛书"广告一则</p>
+      <p>自1920年开始，中华书局推出"新文化丛书"，陆续出版图书40余种。下图为中华书局推介"新文化丛书"的一则广告。</p>
+      <img src="q32_xinwenhuacongshu.png" alt="中华书局"新文化丛书"广告" style="max-width:100%;display:block;margin:10px auto;border-radius:8px;">
+      <p style="font-size:12pt;color:#888;">注：对图中文字作了繁简转换处理</p>
+      <p style="margin-top:14px;font-size:15pt;color:#764ba2;font-weight:bold;">评析这则广告对研究"新文化丛书"的价值。</p>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">▶</span> 参考答案</button>
+    <div class="answer-box">
+      <strong>【参考答案】</strong><br><br>
+      <strong>一、史料价值</strong><br>
+      该广告是中华书局在1920年代发布的原始商业宣传品，属于一手史料，对于研究"新文化丛书"具有重要价值：<br><br>
+      ①<strong>反映丛书出版信息</strong>：广告展示了丛书的书名、作者、出版时间等基本信息，有助于考证丛书的出版规模和选材取向；<br>
+      ②<strong>体现出版机构的策略</strong>：广告的措辞、版式和宣传重点反映了中华书局的出版定位和市场策略，有助于理解新文化运动对出版业的影响；<br>
+      ③<strong>折射时代思想潮流</strong>：丛书以"新文化"命名，广告强调"新"的取向，反映了新文化运动后知识分子对新思想、新知识的渴求；<br>
+      ④<strong>揭示知识传播渠道</strong>：广告展示了新文化思想通过商业出版渠道向公众传播的方式，有助于研究新文化运动的传播机制。<br><br>
+      <strong>二、局限性</strong><br>
+      ①广告是商业宣传品，可能夸大丛书价值，需要与其他史料（如书籍实物、读者反馈等）交叉印证；<br>
+      ②广告内容侧重宣传效果，未必全面反映丛书的学术质量和实际影响；<br>
+      ③广告面向的是潜在购买者，不能完全代表丛书的学术意义和社会影响。<br><br>
+      <strong>三、结论</strong><br>
+      该广告作为一手史料，对研究"新文化丛书"的出版背景、内容构成和传播方式有重要参考价值，但需注意其商业属性带来的偏颇，应结合其他史料综合分析。
+    </div>
+  </div>
+
+  <div class="footer">
+    中外历史纲要上 · 中国近代史 · 回归教材精选真题 &nbsp;|&nbsp; 共选择题30题 + 非选择题2题
+  </div>
+</div>
+
+<script>
+function toggleAnswer(btn) {
+  btn.classList.toggle('open');
+  const box = btn.nextElementSibling;
+  box.classList.toggle('open');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.options').forEach(function(optionsDiv) {
+    optionsDiv.querySelectorAll('.option').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        if (optionsDiv.dataset.done === '1') return;
+        optionsDiv.dataset.done = '1';
+
+        var allOpts = optionsDiv.querySelectorAll('.option');
+        var isCorrect = opt.classList.contains('correct');
+
+        allOpts.forEach(function(o) {
+          if (o === opt) {
+            o.classList.add('selected');
+          } else if (o.classList.contains('correct')) {
+            o.classList.add('reveal');
+          } else {
+            o.classList.add('done');
+          }
+          o.style.pointerEvents = 'none';
+        });
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>

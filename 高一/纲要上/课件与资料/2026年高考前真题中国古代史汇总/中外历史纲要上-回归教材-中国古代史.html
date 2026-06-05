@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中外历史纲要上——回归教材 · 中国古代史</title>
+<style>
+  :root {
+    --gradient-start: #667eea;
+    --gradient-end: #764ba2;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #4a5568;
+    --correct: #38a169;
+    --correct-bg: #f0fff4;
+    --wrong: #e53e3e;
+    --wrong-bg: #fff5f5;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(102, 126, 234, 0.15);
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 14pt;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 48px 24px 36px;
+    color: #fff;
+  }
+  .header h1 {
+    font-size: 28pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .header .subtitle {
+    font-size: 14pt;
+    opacity: 0.9;
+    font-weight: 400;
+  }
+
+  /* Container */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* Section title */
+  .section-title {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    font-size: 20pt;
+    font-weight: 700;
+    color: var(--gradient-start);
+    border-left: 6px solid var(--gradient-start);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.22);
+  }
+
+  /* Question */
+  .q-num {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: #fff;
+    font-weight: 700;
+    font-size: 12pt;
+    padding: 3px 14px;
+    border-radius: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .q-source {
+    font-size: 12pt;
+    color: #718096;
+    margin-bottom: 10px;
+  }
+  .q-text {
+    font-size: 14pt;
+    margin: 10px 0 14px;
+    color: var(--text);
+  }
+  .q-note {
+    font-size: 11pt;
+    color: #a0aec0;
+    font-style: italic;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    background: #f7fafc;
+    border-radius: 6px;
+    border-left: 3px solid #cbd5e0;
+  }
+
+  /* Options */
+  .options { list-style: none; padding: 0; }
+  .options li {
+    padding: 10px 16px;
+    margin: 4px 0;
+    border-radius: 8px;
+    background: #f7fafc;
+    font-size: 14pt;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .options li:hover:not(.correct):not(.wrong) {
+    background: #ebf4ff;
+    border-color: var(--gradient-start);
+    transform: translateX(4px);
+  }
+  .options.done li { cursor: default; }
+  .options.done li:hover:not(.correct):not(.wrong) {
+    background: #f7fafc;
+    border-color: transparent;
+    transform: none;
+  }
+
+  /* Answer toggle */
+  .answer-toggle {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 8px 22px;
+    font-size: 13pt;
+    color: #fff;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .answer-toggle:hover { opacity: 0.9; transform: translateY(-1px); }
+  .answer-toggle:active { transform: scale(0.97); }
+
+  .answer-box {
+    display: none;
+    margin-top: 14px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    background: #f7fafc;
+    border: 1px solid var(--border);
+    animation: fadeIn 0.3s ease;
+  }
+  .answer-box.show { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .answer-label {
+    font-weight: 700;
+    font-size: 13pt;
+    margin-bottom: 8px;
+  }
+  .answer-label.correct-answer { color: var(--correct); }
+  .answer-label.explanation { color: var(--gradient-start); margin-top: 12px; }
+
+  /* Option states */
+  .options li.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+    font-weight: 700;
+  }
+  .options li.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+    color: var(--wrong);
+    text-decoration: line-through;
+  }
+
+  /* Sub-question */
+  .sub-q { margin-top: 16px; }
+  .sub-q .q-text { font-size: 14pt; margin: 6px 0; }
+
+  /* Material quote */
+  .material {
+    background: #edf2f7;
+    border-left: 4px solid var(--gradient-start);
+    padding: 16px 20px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 13pt;
+    color: var(--text-light);
+  }
+  .material p { margin: 4px 0; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: rgba(255,255,255,0.7);
+    font-size: 11pt;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container { padding: 0 12px 40px; }
+    .card { padding: 18px 16px; }
+    .header h1 { font-size: 20pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>中外历史纲要上——回归教材</h1>
+  <div class="subtitle">中国古代史 · 高考真题精练</div>
+</div>
+
+<div class="container">
+
+<!-- ==================== 一、选择题 ==================== -->
+<div class="section-title">一、选择题（共 30 题）</div>
+
+<!-- 第 1 题 -->
+<div class="card">
+  <span class="q-num">1</span>
+  <span class="q-source">2025·河南·高考真题</span>
+  <div class="q-text">下图是黄河流域洛河中游地区仰韶文化到龙山文化时期聚落遗址相关情况的统计。据此可知，该地区（　　）</div>
+  <div class="q-img" style="margin:12px 0; text-align:center;">
+    <img src="第1题图_仰韶到龙山聚落统计.png" alt="仰韶文化到龙山文化聚落遗址统计图" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+  </div>
+  <ul class="options" id="opt1">
+    <li data-opt="A">A．从邦国林立走向国家统一</li>
+    <li data-opt="B">B．仰韶文化时期方国都城面积较小</li>
+    <li data-opt="C">C．聚落规模的分化不断加剧</li>
+    <li data-opt="D">D．龙山文化晚期营建城市形成制度</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt1">查看答案</button>
+  <div class="answer-box" id="a1">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>仰韶文化到龙山文化时期，聚落遗址规模差异逐渐拉大，大型中心聚落与小型普通聚落并存，反映了社会分化与聚落等级化的趋势。此时尚未进入国家统一阶段（A 错）；仰韶文化时期尚未出现"方国都城"概念（B 错）；城市营建形成制度要到更晚阶段（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 2 题 -->
+<div class="card">
+  <span class="q-num">2</span>
+  <span class="q-source">2025·四川·高考真题</span>
+  <div class="q-text">商朝时，卜辞所见"殷"与"外"的概念相对，商王朝对于地方有一种居高临下的地位；周朝"四方"指诸侯国，"王畿"地区与"四夷"相对，作为地方势力的诸侯国在受周王朝控制的同时仍具有很大自治性。这表明商周时期（　　）</div>
+  <ul class="options" id="opt2">
+    <li data-opt="A">A．阴阳五行学说的盛行</li>
+    <li data-opt="B">B．政治制度具有延续性</li>
+    <li data-opt="C">C．宗法血缘关系的松弛</li>
+    <li data-opt="D">D．井田制度影响力仍大</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt2">查看答案</button>
+  <div class="answer-box" id="a2">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>商朝"殷"与"外"的区分和周朝"王畿"与"四方"的区分，都体现了中心—边缘的政治格局，说明商周时期政治制度在内外服制→分封制的演变中具有延续性。阴阳五行学说盛行于战国（A 错）；宗法血缘关系在周代是强化而非松弛（C 错）；材料未涉及井田制（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 3 题 -->
+<div class="card">
+  <span class="q-num">3</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">据考古发现，洛阳东周王城遗址的面积不足10平方公里，赵都邯郸城面积是其两倍，楚都纪南城面积接近其两倍，齐都临淄城的面积约为其三倍。这从侧面反映出当时（　　）</div>
+  <ul class="options" id="opt3">
+    <li data-opt="A">A．礼崩乐坏</li>
+    <li data-opt="B">B．华夏认同</li>
+    <li data-opt="C">C．诸侯混战</li>
+    <li data-opt="D">D．皇权旁落</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt3">查看答案</button>
+  <div class="answer-box" id="a3">
+    <div class="answer-label correct-answer">✅ 正确答案：A</div>
+    <div class="answer-label explanation">解析</div>
+    <p>按照周礼，周天子所在的王城应为天下最大，但东周时期诸侯都城面积纷纷超过王城，僭越了礼制规定，反映"礼崩乐坏"的局面。华夏认同指诸夏对华夏文化的认同（B 不直接相关）；诸侯混战是背景但不是材料直接反映的内容（C 不精确）；东周天子并非皇帝，"皇权旁落"概念不当（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 4 题 -->
+<div class="card">
+  <span class="q-num">4</span>
+  <span class="q-source">2025·河北·高考真题</span>
+  <div class="q-text">据学者研究发现，战国时期，韩、赵、魏、燕等国都城比春秋时期强国的国都规模更加巨大，且呈现城墙逐渐增高加厚的趋势。这一变化主要反映出，战国时期（　　）</div>
+  <ul class="options" id="opt4">
+    <li data-opt="A">A．城市营建制度形成</li>
+    <li data-opt="B">B．阶级矛盾日益激化</li>
+    <li data-opt="C">C．等级制度走向解体</li>
+    <li data-opt="D">D．列国之间纷争加剧</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt4">查看答案</button>
+  <div class="answer-box" id="a4">
+    <div class="answer-label correct-answer">✅ 正确答案：D</div>
+    <div class="answer-label explanation">解析</div>
+    <p>战国时期列国争战频繁，都城规模扩大、城墙增高加厚，主要是出于军事防御的需要，直接反映了列国纷争的加剧。城市营建制度形成于更晚时期（A 错）；材料不涉及阶级矛盾（B 错）；等级制度解体与都城防御增强无直接关联（C 错）。</p>
+  </div>
+</div>
+
+<!-- 第 5 题 -->
+<div class="card">
+  <span class="q-num">5</span>
+  <span class="q-source">2024·重庆·高考真题</span>
+  <div class="q-text">新石器时代到两周时期中国各地区传统墓葬头向可概括为："东夷及其先民尚东，楚蛮及其先民尚南，西戎及其先民尚西，华夏及其先民尚北。"关中地区凤翔西村、沣西客省庄等地西周墓多为北头向，春秋时期的墓葬多为西向头。这表明（　　）</div>
+  <ul class="options" id="opt5">
+    <li data-opt="A">A．西周时期华夏认同初步形成</li>
+    <li data-opt="B">B．春秋时期秦国深受戎俗影响</li>
+    <li data-opt="C">C．各族同源共祖观念得到发展</li>
+    <li data-opt="D">D．各地区的文化传统趋于稳固</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt5">查看答案</button>
+  <div class="answer-box" id="a5">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>关中地区西周墓为北头向（符合华夏"尚北"传统），而到春秋时期变为西头向（符合西戎"尚西"传统），这一变化说明秦国在春秋时期深受西戎文化习俗的影响。西周时期华夏认同尚未形成（A 错）；材料反映的是文化差异而非同源共祖（C 错）；墓葬头向的变化恰恰说明文化传统发生了改变而非稳固（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 6 题 -->
+<div class="card">
+  <span class="q-num">6</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">1896年，法国某考察团进入四川，留下了记载："在彭山县进入了令人赞叹的成都平原——它遍地庄稼，人口稠密……繁荣富庶，令人难以置信，其中一个重要因素就是当地人充分领悟、广泛使用的灌溉体系。"这一"灌溉体系"得益于（　　）</div>
+  <ul class="options" id="opt6">
+    <li data-opt="A">A．都江堰的修建</li>
+    <li data-opt="B">B．芍陂的兴建</li>
+    <li data-opt="C">C．郑国渠的兴修</li>
+    <li data-opt="D">D．灵渠的开凿</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt6">查看答案</button>
+  <div class="answer-box" id="a6">
+    <div class="answer-label correct-answer">✅ 正确答案：A</div>
+    <div class="answer-label explanation">解析</div>
+    <p>成都平原的灌溉体系得益于战国时期秦国蜀守李冰主持修建的都江堰水利工程。芍陂在安徽（B 错）；郑国渠在关中（C 错）；灵渠在广西，连接湘江和漓江（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 7 题 -->
+<div class="card">
+  <span class="q-num">7</span>
+  <span class="q-source">2024·广西·高考真题</span>
+  <div class="q-text">学者劳思光将自我境界划分为四种，分别是形躯我，强调生理欲求；认知我，以知觉推理为要；情意我，重视生命感受；德性我，以价值自觉为主。以下先秦诸子格言中，体现最后一种境界的是（　　）</div>
+  <ul class="options" id="opt7">
+    <li data-opt="A">A．人生天地之间，若白驹过隙</li>
+    <li data-opt="B">B．人而无信，不知其可</li>
+    <li data-opt="C">C．相濡以沫，不若相忘于江湖</li>
+    <li data-opt="D">D．可在乐生，可在逸身</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt7">查看答案</button>
+  <div class="answer-box" id="a7">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>"德性我"以价值自觉为主，强调道德自律。"人而无信，不知其可"（《论语》）强调诚信这一道德价值，属于德性我境界。A 和 C 出自《庄子》，前者感慨人生短暂（情意我），后者表达超脱（情意我）；D 讲求乐生逸身（形躯我）。</p>
+  </div>
+</div>
+
+<!-- 第 8 题 -->
+<div class="card">
+  <span class="q-num">8</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">以下是某时期洞庭郡行政管理体系示意图。该时期是（　　）</div>
+  <div class="q-img" style="margin:12px 0; text-align:center;">
+    <img src="第8题图_洞庭郡行政管理体系.png" alt="洞庭郡行政管理体系示意图" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+  </div>
+  <ul class="options" id="opt8">
+    <li data-opt="A">A．春秋</li>
+    <li data-opt="B">B．秦朝</li>
+    <li data-opt="C">C．宋朝</li>
+    <li data-opt="D">D．元朝</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt8">查看答案</button>
+  <div class="answer-box" id="a8">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>"洞庭郡"是秦朝设置的郡。郡县制在全国推行始于秦朝，郡下设县、乡、里，形成严密的行政层级。春秋时期以分封制为主（A 错）；宋朝地方行政为路—州—县（C 错）；元朝为行省—路—府—州—县（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 9 题 -->
+<div class="card">
+  <span class="q-num">9</span>
+  <span class="q-source">2025·北京·高考真题</span>
+  <div class="q-text">汉武帝在位中后期，多次巡行祭祀五岳。此后，五岳祭祀的国家制度逐渐完善。读图可知，汉武帝（　　）</div>
+  <div class="q-img" style="margin:12px 0; text-align:center;">
+    <img src="第9题图_汉武帝五岳祭祀巡行图.png" alt="汉武帝五岳祭祀巡行路线图" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+  </div>
+  <ul class="options" id="opt9">
+    <li data-opt="A">A．依据黄老思想治国</li>
+    <li data-opt="B">B．北击匈奴扩大了疆域</li>
+    <li data-opt="C">C．通过祭祀强化皇权</li>
+    <li data-opt="D">D．取消了郡国并行制度</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt9">查看答案</button>
+  <div class="answer-box" id="a9">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>汉武帝巡行祭祀五岳，将五岳祭祀纳入国家制度，是利用神权和礼仪来强化皇权权威的举措。汉武帝时期已罢黜百家、独尊儒术，并非依据黄老思想（A 错）；材料不涉及北击匈奴（B 错）；汉武帝并未取消郡国并行制（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 10 题 -->
+<div class="card">
+  <span class="q-num">10</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">有史料记载："往者，郡国诸侯各以其物贡输，往来烦杂，物多苦恶，或不偿其费；故郡国置输官以给相运，而便远方之贡。""大农之诸官，尽笼天下之货物，贵即卖之，贱则买之。"以上史料反映的是（　　）</div>
+  <ul class="options" id="opt10">
+    <li data-opt="A">A．相地而衰征</li>
+    <li data-opt="B">B．盐铁官营</li>
+    <li data-opt="C">C．均输平准</li>
+    <li data-opt="D">D．摊丁入亩</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt10">查看答案</button>
+  <div class="answer-box" id="a10">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>"郡国置输官以给相运"即均输——在各郡国设均输官，负责将贡物运往所需之地；"尽笼天下之货物，贵即卖之，贱则买之"即平准——官府通过买卖平抑物价。相地而衰征是管仲的赋税改革（A 错）；盐铁官营是政府垄断盐铁经营（B 错）；摊丁入亩是清代税制（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 11 题 -->
+<div class="card">
+  <span class="q-num">11</span>
+  <span class="q-source">2025·四川·高考真题</span>
+  <div class="q-text">昆仑山是华夏神话中的神山，其所在地起初并未确定，一说在宗周西陲，又有说在西戎之地，汉武帝时，张骞出使西域后报告黄河源于于阗南山，汉武帝根据"昆仑之邱……河水出焉"的记载，将河所出的于山命名为昆仑山。昆仑山的命名（　　）</div>
+  <ul class="options" id="opt11">
+    <li data-opt="A">A．得益于西域都护府的建立</li>
+    <li data-opt="B">B．推动统一多民族国家的形成</li>
+    <li data-opt="C">C．有利于华夏天下观的拓展</li>
+    <li data-opt="D">D．便于佛教在中原地区的传播</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt11">查看答案</button>
+  <div class="answer-box" id="a11">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>汉武帝根据张骞的报告和古籍记载，将遥远的于阗南山命名为昆仑山，将华夏地理认知延伸到西域，拓展了华夏天下观的边界。西域都护府设立于汉宣帝时期，晚于汉武帝（A 错）；统一多民族国家早已在秦汉时期形成（B 错）；材料与佛教传播无关（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 12 题 -->
+<div class="card">
+  <span class="q-num">12</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">据《通典》记载，西汉末人口约6000万，历经700余年之发展，至唐中期鼎盛的天宝年间，人口约5300万，才大体接近西汉末的数字。关于造成这种现象的主要原因，下列说法中，正确的是（　　）</div>
+  <ul class="options" id="opt12">
+    <li data-opt="A">A．生产工具、技术长期停滞不前</li>
+    <li data-opt="B">B．政局长期动荡、战乱频繁</li>
+    <li data-opt="C">C．疆域变化不定、人口不断外迁</li>
+    <li data-opt="D">D．土地兼并、南北经济衰退</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt12">查看答案</button>
+  <div class="answer-box" id="a12">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>西汉末至唐中期历经三国、两晋南北朝、隋末等长期战乱，多次出现人口大规模减少。东汉末年、三国、西晋八王之乱、永嘉之乱、南北朝对峙、隋末农民战争等都对人口造成极大损耗。A 不准确，这一时期生产力仍有发展（如曲辕犁等）；C 不全面；D 中"南北经济衰退"不符合史实。</p>
+  </div>
+</div>
+
+<!-- 第 13 题 -->
+<div class="card">
+  <span class="q-num">13</span>
+  <span class="q-source">2025·全国卷·高考真题</span>
+  <div class="q-text">据记载，在今浙江、福建及苏南、皖南地区，东汉中期由官方掌握的户数约42.4万；三个多世纪以后的南朝宋末，官方掌握的户数只有约25.3万。对此合理的解释是（　　）</div>
+  <ul class="options" id="opt13">
+    <li data-opt="A">A．豪强地主势力发展</li>
+    <li data-opt="B">B．均田制未得到执行</li>
+    <li data-opt="C">C．编户齐民制度解体</li>
+    <li data-opt="D">D．江南地区经济衰退</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt13">查看答案</button>
+  <div class="answer-box" id="a13">
+    <div class="answer-label correct-answer">✅ 正确答案：A</div>
+    <div class="answer-label explanation">解析</div>
+    <p>东汉中期到南朝宋末，江南地区实际上人口在增长（北方人口南迁），但官方掌握的户数反而减少，说明大量人口被豪强地主隐占，脱离了国家户籍管理。均田制实行于北魏至唐中叶（B 错）；编户齐民制度并未解体（C 过于绝对）；江南经济在南朝时期是发展的而非衰退（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 14 题 -->
+<div class="card">
+  <span class="q-num">14</span>
+  <span class="q-source">2025·海南·高考真题</span>
+  <div class="q-text">有研究表明，北魏前期宗室女子多在鲜卑统治集团内部通婚；孝文帝改革后，宗室女子嫁给中原士族的比例约占75%。这有利于（　　）</div>
+  <ul class="options" id="opt14">
+    <li data-opt="A">A．阶级矛盾的缓和</li>
+    <li data-opt="B">B．门阀观念的弱化</li>
+    <li data-opt="C">C．南北差异的消亡</li>
+    <li data-opt="D">D．民族矛盾的缓解</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt14">查看答案</button>
+  <div class="answer-box" id="a14">
+    <div class="answer-label correct-answer">✅ 正确答案：D</div>
+    <div class="answer-label explanation">解析</div>
+    <p>孝文帝改革后，鲜卑宗室女子与中原士族通婚比例大幅提升，这种胡汉通婚有利于促进民族融合，缓解鲜卑贵族与汉族士族之间的民族矛盾。材料涉及的是民族通婚而非阶级问题（A 不是最佳）；与中原士族联姻反而说明门阀观念的存在（B 错）；南北差异并未因此消亡（C 过于绝对）。</p>
+  </div>
+</div>
+
+<!-- 第 15 题 -->
+<div class="card">
+  <span class="q-num">15</span>
+  <span class="q-source">2025·湖南·高考真题</span>
+  <div class="q-text">唐以前，上巳、清明、端午、重阳等节日主要与信仰、巫术及鬼神崇拜相关。到唐代，民众踏青郊游、聚会饮宴逐渐成为这些节日的重要内容。这反映了唐代（　　）</div>
+  <ul class="options" id="opt15">
+    <li data-opt="A">A．民众重视现世生活享受</li>
+    <li data-opt="B">B．庶民的社会地位提高</li>
+    <li data-opt="C">C．商品经济占据优势地位</li>
+    <li data-opt="D">D．节日的信仰色彩消失</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt15">查看答案</button>
+  <div class="answer-box" id="a15">
+    <div class="answer-label correct-answer">✅ 正确答案：A</div>
+    <div class="answer-label explanation">解析</div>
+    <p>节日从巫术信仰转向郊游饮宴，反映了唐代社会对现世生活的重视和享受，体现了唐人开放、世俗化的生活态度。材料未涉及庶民地位（B 不直接）；唐代商品经济虽有发展但未占据优势地位（C 错）；"信仰色彩消失"过于绝对（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 16 题 -->
+<div class="card">
+  <span class="q-num">16</span>
+  <span class="q-source">2025·四川·高考真题</span>
+  <div class="q-text">度牒是唐代官方颁发的僧尼身份凭证。安史之乱后，宰相杨炎奏请"鬻官及度牒以佐军用"，朝廷遂以售卖官职与度牒充盈财政，此后地方节度使亦竞相效仿。这反映了（　　）</div>
+  <ul class="options" id="opt16">
+    <li data-opt="A">A．赋税改革后经济恢复</li>
+    <li data-opt="B">B．中央与藩镇关系的缓和</li>
+    <li data-opt="C">C．寺院经济的蓬勃发展</li>
+    <li data-opt="D">D．唐朝政府财政危机严重</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt16">查看答案</button>
+  <div class="answer-box" id="a16">
+    <div class="answer-label correct-answer">✅ 正确答案：D</div>
+    <div class="answer-label explanation">解析</div>
+    <p>安史之乱后唐朝财政困难，朝廷不得不通过卖官和售卖度牒来筹集军费，说明政府面临严重的财政危机。杨炎推行两税法正是为了应对财政困境（A 中"经济恢复"不准确）；节度使竞相效仿说明中央控制力减弱而非缓和（B 错）；售卖度牒恰恰说明政府在与寺院争夺经济资源（C 错）。</p>
+  </div>
+</div>
+
+<!-- 第 17 题 -->
+<div class="card">
+  <span class="q-num">17</span>
+  <span class="q-source">2025·江西·高考真题</span>
+  <div class="q-text">开元年间，唐玄宗以节度使牛仙客政绩突出拟提拔他为尚书，但宰相张九龄认为："仙客本河湟使典，今骤居清要，恐羞朝廷"，唐玄宗怒形于色道"卿嫌仙客寒微，如卿有何阀阅？"仍然任命牛仙客为尚书。由此可知，当时（　　）</div>
+  <ul class="options" id="opt17">
+    <li data-opt="A">A．皇权相权相互制约</li>
+    <li data-opt="B">B．门阀观念左右朝政</li>
+    <li data-opt="C">C．人才任用不拘一格</li>
+    <li data-opt="D">D．藩镇势力逐步崛起</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt17">查看答案</button>
+  <div class="answer-box" id="a17">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>张九龄以牛仙客出身寒微为由反对提拔，但唐玄宗坚持任用，最终仍然任命牛仙客为尚书，体现了开元时期唐玄宗在用人上不拘泥于门第出身。张九龄的反对被皇帝驳回，说明皇权的主导地位（A 不准确）；皇帝否定了门阀观念（B 错）；牛仙客虽为节度使出身但材料不涉及藩镇势力崛起（D 不直接）。</p>
+  </div>
+</div>
+
+<!-- 第 18 题 -->
+<div class="card">
+  <span class="q-num">18</span>
+  <span class="q-source">2025·陕晋青宁卷·高考真题</span>
+  <div class="q-text">唐弘道元年（683），侍中裴炎改任中书令，将原设在门下省的政事堂迁至中书省。神龙元年（705），豆卢钦望担任尚书右仆射，因未获得"同中书门下三品"的称号而无法参加宰相议事会议，这说明唐代（　　）</div>
+  <ul class="options" id="opt18">
+    <li data-opt="A">A．宰相的行政权力进一步加强</li>
+    <li data-opt="B">B．政事堂成为三省权力核心</li>
+    <li data-opt="C">C．中枢机构呈现出一体化趋势</li>
+    <li data-opt="D">D．三省长官可共同商议国政</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt18">查看答案</button>
+  <div class="answer-box" id="a18">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>政事堂从门下省迁至中书省，且尚书省长官（尚书右仆射）如果不带"同中书门下三品"衔就不能参加宰相会议，这说明唐代中枢机构逐渐突破三省分工的界限，呈现出三省合一的"一体化"趋势。A 与材料方向不符；B 表述不完全准确；D 恰恰被材料否定——尚书右仆射未能参加议事。</p>
+  </div>
+</div>
+
+<!-- 第 19 题 -->
+<div class="card">
+  <span class="q-num">19</span>
+  <span class="q-source">2025·安徽·高考真题</span>
+  <div class="q-text">唐德宗建中元年（780）定两税法，规定户税征钱，地税征谷物，而物轻钱重，民以为患。税法行四十年后，税额如故，当年若纳绢二匹半者，今需八匹，约要三倍之多，故农人日困，末业日增。这可用以说明，当时（　　）</div>
+  <ul class="options" id="opt19">
+    <li data-opt="A">A．征税标准渐以人丁为主</li>
+    <li data-opt="B">B．货币贬值加重农民负担</li>
+    <li data-opt="C">C．以庸代役利于农业生产</li>
+    <li data-opt="D">D．税法改革促进商业发展</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt19">查看答案</button>
+  <div class="answer-box" id="a19">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>"物轻钱重"即物价低、钱币价值高（通货紧缩），农民需要用更多实物（如绢）才能换到足额的铜钱来纳税，导致实际税负大幅增加。"纳绢二匹半者，今需八匹"说明货币因素导致了农民负担加重。两税法以资产为征税标准（A 错）；材料反映的是两税法而非租庸调制的以庸代役（C 错）；"末业日增"是被迫弃农的结果而非正面促进（D 不准确）。</p>
+  </div>
+</div>
+
+<!-- 第 20 题 -->
+<div class="card">
+  <span class="q-num">20</span>
+  <span class="q-source">2025·贵州·高考真题</span>
+  <div class="q-text">东晋初期，玄学、佛学风靡一时。名士如不懂一点佛学会显得不够名士派头，名僧如不能说理谈玄也有失名僧身份。佛学与玄学，名僧与名士，如此亲密无间地坐到了一起。这反映该时期文化（　　）</div>
+  <ul class="options" id="opt20">
+    <li data-opt="A">A．恣肆放达</li>
+    <li data-opt="B">B．玄风独振</li>
+    <li data-opt="C">C．崇尚清谈</li>
+    <li data-opt="D">D．融合激荡</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt20">查看答案</button>
+  <div class="answer-box" id="a20">
+    <div class="answer-label correct-answer">✅ 正确答案：D</div>
+    <div class="answer-label explanation">解析</div>
+    <p>东晋时期，玄学（道家思想的延续发展）与佛学相互渗透、相互影响，名士谈佛、名僧论玄，体现了不同思想文化的融合与激荡。A、C 是玄学的外在表现而非本质特征；B 忽略了佛学的存在和影响。</p>
+  </div>
+</div>
+
+<!-- 第 21 题 -->
+<div class="card">
+  <span class="q-num">21</span>
+  <span class="q-source">2025·云南·高考真题</span>
+  <div class="q-text">唐朝纺织品广泛应用了从波斯传入的鸟衔花纹样（图1）。工匠巧用自然元素做装饰，并将禽鸟替换为凤鸟、鸳鸯、大雁等瑞鸟，形成了能够体现唐朝雍容富丽、袅娜大气风貌的全新纹样（图2）。材料反映出（　　）</div>
+  <div class="q-img" style="margin:12px 0; text-align:center;">
+    <img src="第21题图_唐代织物纹样对比.png" alt="唐代织物纹样对比——波斯鸟衔花纹样与中国化纹样" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+  </div>
+  <ul class="options" id="opt21">
+    <li data-opt="A">A．中外审美差异显著</li>
+    <li data-opt="B">B．外来文化中国化</li>
+    <li data-opt="C">C．纺织技术世界领先</li>
+    <li data-opt="D">D．朝贡贸易常态化</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt21">查看答案</button>
+  <div class="answer-box" id="a21">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>波斯传入的鸟衔花纹样被唐代工匠改造，将异域禽鸟替换为中国的凤鸟、鸳鸯、大雁等瑞鸟，形成具有中国风格的新纹样，典型体现了外来文化被吸收、改造并中国化的过程。材料恰恰说明中外文化融合而非差异显著（A 错）；C、D 在材料中均未体现。</p>
+  </div>
+</div>
+
+<!-- 第 22 题 -->
+<div class="card">
+  <span class="q-num">22</span>
+  <span class="q-source">2025·云南·高考真题</span>
+  <div class="q-text">北宋前期朝廷向大批普通官员颁授"敕授告身"作为委任凭证，其文词虽由中书门下的舍人院负责起草，但告身文书在形式上却由三省和吏部签署下发。这说明（　　）</div>
+  <ul class="options" id="opt22">
+    <li data-opt="A">A．三省体制影响尚存</li>
+    <li data-opt="B">B．中枢机构互相制衡</li>
+    <li data-opt="C">C．朝廷变法重建三省</li>
+    <li data-opt="D">D．官僚队伍极度膨胀</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt22">查看答案</button>
+  <div class="answer-box" id="a22">
+    <div class="answer-label correct-answer">✅ 正确答案：A</div>
+    <div class="answer-label explanation">解析</div>
+    <p>北宋虽已实行二府三司制，三省的实际职能已被削弱，但告身文书在形式上仍由三省和吏部签署下发，体现了唐代三省体制在制度形式上的延续和影响。材料强调的是形式上的保留而非实质上的制衡（B 错）；北宋并未重建三省体制（C 错）；材料不涉及官僚队伍规模（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 23 题 -->
+<div class="card">
+  <span class="q-num">23</span>
+  <span class="q-source">2025·贵州·高考真题</span>
+  <div class="q-text">据南宋吴自牧《梦粱录》，每年八月，钱塘海潮潮怒甚于平常，从十一日起，便有人前往观潮。十八日当天几乎倾城而出，从庙子头到六和塔，家家楼房全被租赁以观潮。江岸十余里，珠翠琳琅满目，车马塞道，饮食百物数倍于平时。这一现象可说明当时（　　）</div>
+  <ul class="options" id="opt23">
+    <li data-opt="A">A．市镇经济普遍繁荣</li>
+    <li data-opt="B">B．政府引领社会风尚</li>
+    <li data-opt="C">C．社会阶层流动增强</li>
+    <li data-opt="D">D．市民生活较为丰富</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt23">查看答案</button>
+  <div class="answer-box" id="a23">
+    <div class="answer-label correct-answer">✅ 正确答案：D</div>
+    <div class="answer-label explanation">解析</div>
+    <p>南宋临安（杭州）市民倾城而出观潮，车马塞道、饮食百物价格倍增，生动展现了市民的休闲娱乐生活。"倾城而出"说明是市民自发行为而非政府引领（B 错）；材料不涉及阶层流动（C 错）；描述的是临安一地的现象，不能推导出市镇经济"普遍"繁荣（A 过度推断）。</p>
+  </div>
+</div>
+
+<!-- 第 24 题 -->
+<div class="card">
+  <span class="q-num">24</span>
+  <span class="q-source">2024·广东·高考真题</span>
+  <div class="q-text">宋代巨贾彭则爱好儒学，"为其子延接师友，不问其费"，曾捐书于州学。郡从事为之记，称其为"贩夫"，彭氏子孙皆耻之。知州认为，彭则所为是善事，遂删"贩夫"二字。这可以用来说明当时（　　）</div>
+  <ul class="options" id="opt24">
+    <li data-opt="A">A．士农工商界限被打破</li>
+    <li data-opt="B">B．科举制度促进了社会公平</li>
+    <li data-opt="C">C．地方官学教育的普及</li>
+    <li data-opt="D">D．文治政策提升了士人地位</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt24">查看答案</button>
+  <div class="answer-box" id="a24">
+    <div class="answer-label correct-answer">✅ 正确答案：D</div>
+    <div class="answer-label explanation">解析</div>
+    <p>彭则虽是巨贾，但因被称为"贩夫"而子孙引以为耻，知州也认可删去此称，反映出宋代"重文轻利"观念下商人的社会地位仍低于士人，"贩夫"被视为贬称。这恰恰说明士农工商界限依然存在（A 错）；材料不涉及科举公平（B 错）；材料只是个案不说明官学普及（C 错）。</p>
+  </div>
+</div>
+
+<!-- 第 25 题 -->
+<div class="card">
+  <span class="q-num">25</span>
+  <span class="q-source">2025·陕晋青宁卷·高考真题</span>
+  <div class="q-text">元代北方的散曲是宋词与北方各民族乐曲的综合产物，其在句式上可根据需要增添衬字；内容上运用大量方言、俚语，语言表现更加自由。这（　　）</div>
+  <ul class="options" id="opt25">
+    <li data-opt="A">A．反映了城市经济的繁荣</li>
+    <li data-opt="B">B．体现了多元文化的融汇</li>
+    <li data-opt="C">C．得益于市民阶层的兴起</li>
+    <li data-opt="D">D．受到了儒学复兴的影响</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt25">查看答案</button>
+  <div class="answer-box" id="a25">
+    <div class="answer-label correct-answer">✅ 正确答案：B</div>
+    <div class="answer-label explanation">解析</div>
+    <p>元代散曲是宋词（汉文化）与北方各民族乐曲（蒙古、女真等少数民族文化）融合的产物，加上方言俚语的运用，典型体现了元代多元民族文化的交流与融汇。A、C 是其产生的社会背景但不直接反映材料主旨；D 与散曲的自由通俗风格相矛盾。</p>
+  </div>
+</div>
+
+<!-- 第 26 题 -->
+<div class="card">
+  <span class="q-num">26</span>
+  <span class="q-source">2025·重庆·高考真题</span>
+  <div class="q-text">1521年嘉靖帝以藩王身份即位，欲尊其生父兴献王为"皇考"，内阁首辅杨廷和率朝臣反对，因事关国家礼制根本，遂令朝臣廷议，双方坚持不下，尚在礼部观政的张璁亦上疏言此事，嘉靖帝大喜，"亟下廷臣议"，结果仍不能使他满意。三年后，皇帝的支持者增多，"复下廷议"，未果后"自排廷议定大礼"。可见当时（　　）</div>
+  <ul class="options" id="opt26">
+    <li data-opt="A">A．中央决策机构相对规范</li>
+    <li data-opt="B">B．封建礼制得以强化</li>
+    <li data-opt="C">C．国家行政体系日臻完备</li>
+    <li data-opt="D">D．内阁成为决策机构</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt26">查看答案</button>
+  <div class="answer-box" id="a26">
+    <div class="answer-label correct-answer">✅ 正确答案：A</div>
+    <div class="answer-label explanation">解析</div>
+    <p>大礼议过程中，皇帝与朝臣虽有分歧，但双方均遵循"廷议"程序进行讨论，持续三年多次廷议后才由皇帝最终裁定，体现了明代中央决策机制的相对规范性。大礼议的结果恰恰突破了旧礼制（B 错）；D 错——内阁始终是顾问机构而非正式决策机构；C 非材料重点。</p>
+  </div>
+</div>
+
+<!-- 第 27 题 -->
+<div class="card">
+  <span class="q-num">27</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">俄罗斯海参崴市某博物馆藏有发现于今俄罗斯特林地区的石碑两块，名为"敕修奴儿干永宁寺碑"，碑文记录了奴儿干都司建立和当时官员亦失哈两次巡视该地的史实。该石碑可以佐证（　　）</div>
+  <ul class="options" id="opt27">
+    <li data-opt="A">A．中俄之间已经没有领土的纠纷</li>
+    <li data-opt="B">B．清朝在东北边疆设都司和卫所</li>
+    <li data-opt="C">C．明朝在黑龙江流域拥有管辖权</li>
+    <li data-opt="D">D．库页岛在法律上属于中国领土</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt27">查看答案</button>
+  <div class="answer-box" id="a27">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>奴儿干都司是明朝在黑龙江下游设立的军政机构，永宁寺碑记录了奴儿干都司的建立和官员巡视，证明明朝在黑龙江流域行使了有效管辖权。A 过于绝对且非材料重点；B 错误——奴儿干都司是明朝设立而非清朝；D 范围过大且近代中俄边界问题复杂，材料不能直接佐证。</p>
+  </div>
+</div>
+
+<!-- 第 28 题 -->
+<div class="card">
+  <span class="q-num">28</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">康熙为人谨慎，在某项制度的实施过程中，他曾叮嘱臣下"但有所闻，可以亲手书折奏闻才好，此话断不可叫人知道"，也向臣下保证"所批朱笔谕旨，皆出朕手，无代书之人"。这项制度（　　）</div>
+  <ul class="options" id="opt28">
+    <li data-opt="A">A．使皇帝更直接、广泛地获取信息</li>
+    <li data-opt="B">B．使皇帝开始直接领导具体职能部门</li>
+    <li data-opt="C">C．意在配合大规模的"改土归流"</li>
+    <li data-opt="D">D．不经其他中转收发，杜绝宦官专权</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt28">查看答案</button>
+  <div class="answer-box" id="a28">
+    <div class="answer-label correct-answer">✅ 正确答案：A</div>
+    <div class="answer-label explanation">解析</div>
+    <p>材料描述的"亲手书折奏闻""朱笔谕旨皆出朕手"指的是清代的奏折制度（密折制度），皇帝通过密折直接与各地官员沟通，绕开常规的题本—内阁渠道，从而更直接、广泛地获取信息。奏折制度不是为了改土归流（C 错）；"开始"直接领导不准确，明代已有类似做法（B 错）；奏折制度并非完全不经中转（D 过于绝对）。</p>
+  </div>
+</div>
+
+<!-- 第 29 题 -->
+<div class="card">
+  <span class="q-num">29</span>
+  <span class="q-source">2025·河北·高考真题</span>
+  <div class="q-text">据史籍载，清代河间府"肃宁县人多种桃为业，如艺稼然。其业者皆有桃园，多者千树，少亦数百树"；交河县种梨，"业者如肃宁之种桃"；献县产枣，"北以车运供京师，南随漕舶以贩鬻于诸省，土人多以为恒业"。由此可知，清代这一地区（　　）</div>
+  <ul class="options" id="opt29">
+    <li data-opt="A">A．新品种经济作物种植广泛</li>
+    <li data-opt="B">B．农产品加工业日渐兴盛</li>
+    <li data-opt="C">C．农户的商品意识较为明显</li>
+    <li data-opt="D">D．自由雇佣劳动规模较大</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt29">查看答案</button>
+  <div class="answer-box" id="a29">
+    <div class="answer-label correct-answer">✅ 正确答案：C</div>
+    <div class="answer-label explanation">解析</div>
+    <p>材料中农民专门种植桃、梨、枣等经济作物，"如艺稼然"说明以此为主业，产品远销京师和各省，"土人多以为恒业"，体现了农户明确的商品生产意识。桃、梨、枣并非"新品种"经济作物（A 不准确）；材料讲的是种植而非加工（B 错）；材料未提及雇佣劳动（D 错）。</p>
+  </div>
+</div>
+
+<!-- 第 30 题 -->
+<div class="card">
+  <span class="q-num">30</span>
+  <span class="q-source">2024·浙江·高考真题</span>
+  <div class="q-text">南宋陈亮为学"俱以读书经济为事，嗤黜（嘲讽）空疏，随人牙后谈性命者，以为灰埃"，世人"以为此近于功利，俱目之为浙学"；叶适指出："（士、农、工、商）四民交致其用，而后治化兴，锦末厚本，非正论也。"明代王守仁认为"四民异业而同道"，明末清初黄宗羲进一步提出"工商皆本"。这些学者的理念（　　）</div>
+  <ul class="options" id="opt30">
+    <li data-opt="A">A．挑战了封建的纲常伦理</li>
+    <li data-opt="B">B．反映士农阶层地位逐步下降</li>
+    <li data-opt="C">C．促使重农抑商政策转变</li>
+    <li data-opt="D">D．体现了经世致用的务实精神</li>
+  </ul>
+  <button class="answer-toggle" data-optid="opt30">查看答案</button>
+  <div class="answer-box" id="a30">
+    <div class="answer-label correct-answer">✅ 正确答案：D</div>
+    <div class="answer-label explanation">解析</div>
+    <p>陈亮嘲虚空谈性命、注重读书经济（经国济世），叶适主张四民交致其用反对抑末，王守仁认为四民同道，黄宗羲提出工商皆本——这些理念共同体现了关注现实、务求实用的经世致用精神。材料不涉及纲常伦理（A 不准确）；并非反映士农地位下降（B 错）；这些思想并未促成政策转变，重农抑商政策在清代依然存在（C 错）。</p>
+  </div>
+</div>
+
+<!-- ==================== 二、非选择题 ==================== -->
+<div class="section-title">二、非选择题（共 2 题）</div>
+
+<!-- 第 31 题 -->
+<div class="card">
+  <span class="q-num">31</span>
+  <span class="q-source">2025·北京·高考真题</span>
+  <div class="q-text" style="font-weight:700;">舌尖上的历史</div>
+
+  <div class="material">
+    <p>北宋时期，北方人以粟、麦为主食，"南人罕作面饵"。京师（今开封）既有北食，又有南食、川饭店，"以备南人不服北食者"。起初京师人"未尝食蚬蛤""以为珍馔"，而后"士人稍稍食之，蚬蛤亦随而增盛"，酒肆的菜肴有炒蛤蜊、炒蟹等。</p>
+    <p>南宋时，北方"流寓之人"遍布南方各地。南方大量种植小麦，规模"不减淮北"；"饮食混淆，无南、北之分"。在临安，"食店多是效学京师（今开封）人"；有百姓"世以鬻海蛳为业"，酒肆常备有"生蚶子""蚶子辣羹"等小菜。近年杭州南宋德寿宫遗址还出土了长途贩运而来的海鲜遗存，如中华拟蟹守螺等。金朝在招待南宋使者时，宴饮既有燥子粉、肉油饼等汉人食物，也有肉山等女真传统美食。</p>
+    <p>到了元代，"西域之仕于中朝，学于南夏，乐江湖而忘乡国者众矣"；世人"无此疆彼界"之分。当时的生活百科书籍，既存录了中原和江南食物，如水滑面、馄饨、馒头、烧饼、包子等，又有女真挞不剌鸭子、女真肉羊麋、高丽粟糕、回回酸汤、回回卷煎饼等。</p>
+  </div>
+
+  <div class="sub-q">
+    <div class="q-text">(1) 宋元时期饮食文化有哪些变化？依据材料加以概括。</div>
+    <div class="q-text">(2) 结合所学，分析上述变化的历史背景。</div>
+  </div>
+
+  <button class="answer-toggle" data-optid="">查看答案</button>
+  <div class="answer-box" id="a31">
+    <div class="answer-label correct-answer">✅ 参考答案</div>
+    <div class="answer-label explanation">(1) 变化（依据材料概括）</div>
+    <p>① <strong>南北饮食交融：</strong>北宋时南北饮食已有交流但仍有区分；南宋时"饮食混淆，无南北之分"，南方大量种植小麦，北方饮食习俗（如面食）在南方普及。</p>
+    <p>② <strong>饮食种类丰富化：</strong>海鲜（蚬蛤、蛤蜊、蟹、蚶子等）从"珍馔"变为日常菜肴；酒肆菜品日益多样。</p>
+    <p>③ <strong>多民族饮食文化交流：</strong>金朝宴会兼有汉人和女真食物；元代食谱收录了女真、高丽、回回等多民族特色食物。</p>
+    <p>④ <strong>饮食的地域界限被打破：</strong>元代世人"无此疆彼界之分"，各地食物在同一食谱中共存。</p>
+    <div class="answer-label explanation">(2) 历史背景</div>
+    <p>① <strong>经济重心南移：</strong>南宋时经济重心完成南移，南方农业发达，为饮食文化繁荣提供物质基础。</p>
+    <p>② <strong>人口大规模流动：</strong>靖康之变后北方人口大量南迁（"流寓之人"遍布南方），带来了北方的饮食习惯和生产技术。</p>
+    <p>③ <strong>城市与商品经济繁荣：</strong>北宋开封、南宋临安等大城市商业发达，酒肆食店林立，长途贩运（如海鲜）兴盛。</p>
+    <p>④ <strong>民族交往与融合：</strong>宋金对峙时期南北政权交往频繁；元朝实现了空前的大一统，西域等各族人士来到中原和江南，促进了多民族饮食文化的交流融汇。</p>
+    <p>⑤ <strong>农业生产技术进步：</strong>南方麦类种植推广，粮食结构多元化，为饮食融合提供了原料基础。</p>
+  </div>
+</div>
+
+<!-- 第 32 题 -->
+<div class="card">
+  <span class="q-num">32</span>
+  <span class="q-source">2025·全国卷·高考真题</span>
+  <div class="q-text">阅读材料，完成下列要求。</div>
+
+  <div class="material">
+    <p><strong>材料</strong></p>
+    <div class="q-img" style="margin:12px 0; text-align:center;">
+      <img src="第32题图_唐代诗人与进士分布.png" alt="唐代诗人与进士分布地图" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+    </div>
+  </div>
+
+  <div class="q-text">从材料中得出一个有关唐代历史的认识，并予以说明。</div>
+
+  <button class="answer-toggle" data-optid="">查看答案</button>
+  <div class="answer-box" id="a32">
+    <div class="answer-label correct-answer">✅ 答题指导</div>
+    <div class="answer-label explanation">本题为开放性试题（小论文题），答题思路：</div>
+    <p><strong>第一步——提出认识（论题）：</strong>从材料中提取一个关于唐代历史的具体观点作为论题。论题应明确、可论证。例如可能的切入角度：</p>
+    <p>• 唐代中外文化交流繁荣</p>
+    <p>• 唐代政治制度具有创新性</p>
+    <p>• 唐代社会经济高度发展</p>
+    <p>• 唐代民族政策促进了民族融合</p>
+    <p>（具体论题需根据材料内容确定）</p>
+    <p><strong>第二步——展开说明（论证）：</strong>结合所学知识，用 2~3 个具体史实进行论证，史论结合。例如：</p>
+    <p>• 政治方面：三省六部制、科举制的完善</p>
+    <p>• 经济方面：曲辕犁、筒车、丝织业、陶瓷业（唐三彩、越窑青瓷、邢窑白瓷）、商业与市的发展</p>
+    <p>• 文化方面：唐诗的繁荣（李白、杜甫、白居易）、书法（颜真卿、柳公权）、绘画（吴道子）</p>
+    <p>• 民族关系：唐太宗"天可汗"、文成公主入藏、羁縻府州制度</p>
+    <p>• 对外交流：遣唐使、鉴真东渡、玄奘西行、丝绸之路</p>
+    <p><strong>第三步——总结升华：</strong>回扣论题，点明认识的历史意义或启示。</p>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  中外历史纲要上 · 回归教材 &nbsp;|&nbsp; 中国古代史专题 &nbsp;|&nbsp; WorkBuddy 生成
+</div>
+
+<script>
+// ======== 选择题答案映射表 ========
+var answerMap = {
+  'opt1':  { correct:'C', box:'a1' },
+  'opt2':  { correct:'B', box:'a2' },
+  'opt3':  { correct:'A', box:'a3' },
+  'opt4':  { correct:'D', box:'a4' },
+  'opt5':  { correct:'B', box:'a5' },
+  'opt6':  { correct:'A', box:'a6' },
+  'opt7':  { correct:'B', box:'a7' },
+  'opt8':  { correct:'B', box:'a8' },
+  'opt9':  { correct:'C', box:'a9' },
+  'opt10': { correct:'C', box:'a10' },
+  'opt11': { correct:'C', box:'a11' },
+  'opt12': { correct:'B', box:'a12' },
+  'opt13': { correct:'A', box:'a13' },
+  'opt14': { correct:'D', box:'a14' },
+  'opt15': { correct:'A', box:'a15' },
+  'opt16': { correct:'D', box:'a16' },
+  'opt17': { correct:'C', box:'a17' },
+  'opt18': { correct:'C', box:'a18' },
+  'opt19': { correct:'B', box:'a19' },
+  'opt20': { correct:'D', box:'a20' },
+  'opt21': { correct:'B', box:'a21' },
+  'opt22': { correct:'A', box:'a22' },
+  'opt23': { correct:'D', box:'a23' },
+  'opt24': { correct:'D', box:'a24' },
+  'opt25': { correct:'B', box:'a25' },
+  'opt26': { correct:'A', box:'a26' },
+  'opt27': { correct:'C', box:'a27' },
+  'opt28': { correct:'A', box:'a28' },
+  'opt29': { correct:'C', box:'a29' },
+  'opt30': { correct:'D', box:'a30' }
+};
+
+function showAnswer(optListId, correctOpt, answerId, clickedByUser) {
+  var ul = document.getElementById(optListId);
+  if (!ul || ul.classList.contains('done')) return;
+  ul.classList.add('done');
+
+  var box = document.getElementById(answerId);
+  if (box) box.classList.add('show');
+
+  var items = ul.querySelectorAll('li');
+  items.forEach(function(li) {
+    var opt = li.getAttribute('data-opt');
+    if (opt === correctOpt) {
+      li.classList.add('correct');
+    } else {
+      li.classList.add('wrong');
+    }
+  });
+
+  // 如果用户点击了选项但选错了，滚动到正确答案可见
+  if (clickedByUser) {
+    setTimeout(function() {
+      if (box) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 150);
+  }
+}
+
+// ======== 初始化：为所有选项绑定点击事件 ========
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('ul.options').forEach(function(ul) {
+    var id = ul.id;
+    var info = answerMap[id];
+    if (!info) return;
+
+    ul.querySelectorAll('li').forEach(function(li) {
+      li.addEventListener('click', function() {
+        showAnswer(id, info.correct, info.box, true);
+      });
+    });
+  });
+
+  // 按钮：选择题用 showAnswer，非选择题切换显示
+  document.querySelectorAll('.answer-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var ulId = this.getAttribute('data-optid');
+      var info = answerMap[ulId];
+      if (info) {
+        showAnswer(ulId, info.correct, info.box, false);
+      } else {
+        var card = this.closest('.card');
+        if (card) {
+          var box = card.querySelector('.answer-box');
+          if (box) box.classList.toggle('show');
+        }
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
