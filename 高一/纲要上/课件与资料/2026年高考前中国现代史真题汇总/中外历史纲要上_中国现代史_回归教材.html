@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中外历史纲要上——回归教材·中国现代史</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "黑体", "SimHei", "Microsoft YaHei", sans-serif;
+    font-size: 16pt;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 30px 16px 60px;
+    color: #222;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 {
+    text-align: center; color: #fff; font-size: 22pt; font-weight: bold;
+    margin-bottom: 8px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center; color: rgba(255,255,255,0.88); font-size: 13pt;
+    margin-bottom: 30px; letter-spacing: 1px;
+  }
+  .section-title {
+    background: linear-gradient(90deg, #667eea, #764ba2); color: #fff;
+    font-size: 16pt; font-weight: bold; padding: 10px 22px;
+    border-radius: 10px 10px 0 0; margin-top: 28px; letter-spacing: 2px;
+  }
+  .question-card {
+    background: #fff; border-radius: 0 0 12px 12px; margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.13); overflow: hidden;
+  }
+  .question-card + .section-title { margin-top: 36px; }
+  .q-header {
+    background: #f5f3ff; padding: 14px 22px 8px 22px;
+    border-bottom: 2px solid #ede9ff; display: flex; align-items: flex-start; gap: 10px;
+  }
+  .q-num {
+    background: linear-gradient(135deg,#667eea,#764ba2); color: #fff;
+    font-size: 13pt; font-weight: bold; border-radius: 50%; min-width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+  .q-meta { font-size: 11pt; color: #764ba2; font-weight: bold; white-space: nowrap; margin-top: 5px; }
+  .options { padding: 4px 22px 14px 22px; }
+  .option {
+    display: flex; align-items: flex-start; gap: 10px; padding: 7px 14px;
+    border-radius: 8px; margin-bottom: 5px; font-size: 14pt; line-height: 1.7;
+    cursor: pointer; border: 1.5px solid #ddd; background: #fafafa;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .option:hover { background: #f0eeff; border-color: #aaa8e6; }
+  .option-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+  .option.correct.selected { background: #eafaf1; border-color: #27ae60; color: #145a32; cursor: default; }
+  .option.correct.selected .option-label { color: #27ae60; }
+  .option.wrong.selected { background: #fdf3f2; border-color: #e74c3c; color: #7b241c; cursor: default; }
+  .option.wrong.selected .option-label { color: #e74c3c; }
+  .option.correct.reveal { background: #eafaf1; border-color: #27ae60; color: #145a32; cursor: default; }
+  .option.correct.reveal .option-label { color: #27ae60; }
+  .option.done { opacity: 0.5; cursor: default; }
+  .answer-toggle {
+    display: inline-flex; align-items: center; gap: 6px; margin: 0 22px 14px 22px;
+    cursor: pointer; user-select: none; background: linear-gradient(90deg,#667eea,#764ba2);
+    color: #fff; border: none; border-radius: 20px; padding: 5px 18px;
+    font-size: 12pt; font-family: inherit; transition: opacity 0.15s;
+  }
+  .answer-toggle:hover { opacity: 0.85; }
+  .answer-toggle .arrow { transition: transform 0.25s; display: inline-block; }
+  .answer-toggle.open .arrow { transform: rotate(90deg); }
+  .answer-box {
+    display: none; margin: 0 22px 16px 22px; background: #f8f7ff;
+    border-left: 4px solid #764ba2; border-radius: 0 10px 10px 0;
+    padding: 12px 16px; font-size: 13.5pt; color: #333; line-height: 1.9;
+  }
+  .answer-box.open { display: block; }
+  .answer-box strong { color: #764ba2; }
+  .essay-card {
+    background: #fff; border-radius: 0 0 12px 12px; margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.13); padding: 20px 28px;
+  }
+  .sub-q {
+    background: #f5f3ff; border-radius: 8px; padding: 10px 16px; margin: 10px 0;
+    font-size: 14pt; line-height: 1.85; color: #2c2c6c; border-left: 4px solid #667eea;
+  }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 13.5pt; }
+  th { background: linear-gradient(90deg,#667eea,#764ba2); color: #fff; padding: 8px 14px; text-align: center; }
+  td { border: 1px solid #ccc; padding: 7px 14px; text-align: center; vertical-align: middle; }
+  tr:nth-child(even) td { background: #f5f3ff; }
+  .footer {
+    text-align: center; color: rgba(255,255,255,0.7); font-size: 11pt;
+    margin-top: 40px; letter-spacing: 1px;
+  }
+  .img-placeholder {
+    margin: 10px 0; padding: 18px; background: #f0eeff; border: 2px dashed #b8b0e8;
+    border-radius: 8px; text-align: center; color: #667eea; font-size: 12pt;
+  }
+  @media (max-width: 600px) {
+    body { font-size: 13pt; padding: 10px 4px 40px; }
+    .option { font-size: 12.5pt; } h1 { font-size: 16pt; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>中外历史纲要上</h1>
+  <div class="subtitle">【回归教材 · 中国现代史】精选高考真题</div>
+
+  <div class="section-title">一、选择题</div>
+
+  <!-- Q1 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">1</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          有学者指出，新中国成立之初的土地改革不同于某几个帝王用恩赐的办法，&ldquo;均土地、抑豪强&rdquo;，实行土地&ldquo;让步政策&rdquo;，而是要彻底推翻乡村旧秩序，使上层和下层、中央和地方整合在一起。此观点认为，土地改革改变了
+        </div>
+        <div class="q-meta">2024&middot;重庆&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>土地所有制性质</div>
+      <div class="option wrong"><span class="option-label">B。</span>中国的社会性质</div>
+      <div class="option correct"><span class="option-label">C。</span>中国的社会结构</div>
+      <div class="option wrong"><span class="option-label">D。</span>农村的经济格局</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      材料核心观点：土地改革&ldquo;彻底推翻乡村旧秩序，使上层和下层、中央和地方整合在一起&rdquo;，强调的是社会结构（阶层关系、中央与地方关系）的深刻变革。A虽也是土地改革的结果，但材料重点不在所有制而在&ldquo;旧秩序&rdquo;的推翻和&ldquo;上下层整合&rdquo;；B&ldquo;社会性质&rdquo;是从新民主主义到社会主义的转变，与土地改革无直接对应；D偏离材料主旨。故选C。
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">2</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          中共中央把扩大城乡交流放在1951年财经工作的第一位。据苏南行政区18个县的典型村农民购买力的调查，1951年生活资料的投入比1950年增加23.82%，生产资料的投入则增加45.76%。到1952年，全国农民获得的货币收入比1950年增加了近50%。这说明
+        </div>
+        <div class="q-meta">2025&middot;安徽&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>工业化建设推动城乡商品交流</div>
+      <div class="option wrong"><span class="option-label">B。</span>农民增收得益于农业社会主义改造</div>
+      <div class="option wrong"><span class="option-label">C。</span>私营工商业调整促进土地改革</div>
+      <div class="option correct"><span class="option-label">D。</span>城乡互助有利于国民经济全面恢复</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      材料反映1950&mdash;1952年间，国家重视城乡交流，农民购买力和货币收入大幅增长，说明城乡互助促进了国民经济恢复。A&ldquo;工业化建设&rdquo;此时一五计划尚未开始；B&ldquo;农业社会主义改造&rdquo;1953年才开始，时间不符；C因果倒置。故选D。
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">3</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          中国共产党领导的人民军队的历史，是一部从胜利走向胜利的光荣史，也是一部感天动地的奋斗史。如图文字节选自某革命历史时期战士所写诗歌。该诗歌创作于
+        </div>
+        <img src="q3_poem.png" alt="抗美援朝战士诗歌" style="max-width:100%;border-radius:8px;margin:10px 0;">
+        <div class="q-meta">2025&middot;浙江&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>土地革命时期</div>
+      <div class="option wrong"><span class="option-label">B。</span>抗日战争时期</div>
+      <div class="option wrong"><span class="option-label">C。</span>解放战争时期</div>
+      <div class="option correct"><span class="option-label">D。</span>抗美援朝战争时期</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      根据诗歌图片内容涉及&ldquo;抗美援朝、保家卫国&rdquo;等关键词，可判断该诗歌创作于抗美援朝战争时期（1950&mdash;1953年）。故选D。
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">4</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1955年，针对中法建交，周恩来与法国议员代表团会谈时说，现在世界上有人以为中国可以容许&ldquo;两个中国&rdquo;的存在，&ldquo;中国人民决不能接受这种情况&hellip;&hellip;中国本来是统一的，中国内战的结果是中国人民取得了彻底的胜利&hellip;&hellip;新的代替旧的&rdquo;。这段话
+        </div>
+        <div class="q-meta">2024&middot;北京&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>强调一个中国原则是中法建交的政治基础</div>
+      <div class="option wrong"><span class="option-label">B。</span>阐明以&ldquo;求同存异&rdquo;方针推动中法关系的突破</div>
+      <div class="option wrong"><span class="option-label">C。</span>标志着和平共处五项原则的提出</div>
+      <div class="option wrong"><span class="option-label">D。</span>是&ldquo;一国两制&rdquo;方针的早期表述</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      周恩来明确表示中国不能接受&ldquo;两个中国&rdquo;，强调中国是统一的，体现了&ldquo;一个中国&rdquo;原则。B&ldquo;求同存异&rdquo;是1955年万隆会议上提出的方针；C和平共处五项原则是1953&mdash;1954年提出的；D&ldquo;一国两制&rdquo;是20世纪80年代提出的，时代不符。故选A。
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">5</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1955年召开的万隆会议确立了尊重国际社会主体多样性的原则。在万隆精神的指引下，发展中国家正形成一种反对西方中心主义和集团对抗，强调自主性与平等共治的&ldquo;全球南方安全观&rdquo;。该安全观
+        </div>
+        <div class="q-meta">2025&middot;云南&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>蕴含了不结盟的外交思想</div>
+      <div class="option wrong"><span class="option-label">B。</span>推动了区域经济一体化</div>
+      <div class="option wrong"><span class="option-label">C。</span>体现了国际旧秩序的瓦解</div>
+      <div class="option wrong"><span class="option-label">D。</span>巩固了世界多极化格局</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      &ldquo;全球南方安全观&rdquo;强调&ldquo;反对西方中心主义和集团对抗&rdquo;&ldquo;自主性与平等共治&rdquo;，与不结盟运动的核心思想一致，蕴含了不结盟的外交思想。B&ldquo;区域经济一体化&rdquo;与安全观无关；C&ldquo;国际旧秩序的瓦解&rdquo;说法过重；D&ldquo;巩固了多极化格局&rdquo;在1955年多极化尚未形成。故选A。
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">6</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1952年下半年起，国家大范围地统一调配干部。1952&mdash;1953年，中共中央中南局从农村和机关抽调3000多名县级以上干部、3000多名技术骨干和700多名初中以上文化水平的知识分子干部，分配到工业和其他建设部门。这一措施
+        </div>
+        <div class="q-meta">2025&middot;广东&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>适应了国家发展战略的重大转变</div>
+      <div class="option wrong"><span class="option-label">B。</span>实现了党的工作重心向城市转移</div>
+      <div class="option wrong"><span class="option-label">C。</span>促进了干部管理制度的法制化</div>
+      <div class="option wrong"><span class="option-label">D。</span>巩固了新民主主义经济的地位</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      1952&mdash;1953年正值一五计划开始实施，国家从农业国向工业化转变，大量抽调干部到工业部门正是适应了这一发展战略的重大转变。B&ldquo;党的工作重心向城市转移&rdquo;发生在1949年七届二中全会；C&ldquo;法制化&rdquo;材料未涉及；D&ldquo;新民主主义经济&rdquo;与工业化建设方向不一致。故选A。
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">7</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1956年4月，《新民晚报》报道：&ldquo;在从前，由于社会制度和企业性质不同，这项活动（台球）常常被一些游手好闲的人作为赌博、消遣的活动。现在，&lsquo;击弹&rsquo;（台球）已回到了劳动人民面前，它已是被大家作为一项真正的体育活动了。&rdquo;发生这一变化的原因是
+        </div>
+        <div class="q-meta">2025&middot;河北&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>群众对体育运动需求的增加</div>
+      <div class="option correct"><span class="option-label">B。</span>社会主义改造的开展</div>
+      <div class="option wrong"><span class="option-label">C。</span>社会主义工业化建设的推进</div>
+      <div class="option wrong"><span class="option-label">D。</span>国民经济调整的实施</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      1956年，三大改造即将完成，私有制企业变为公有制企业，企业的社会性质发生了根本变化，台球从私人经营的赌博活动转变为面向劳动人民的体育活动，正是社会主义改造改变了企业性质和社会制度的结果。故选B。
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">8</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1956年，中国共产党开始探索中国自己的社会主义建设道路。毛泽东说：&ldquo;我们可以有几条路前进，比较一下，要选一条比较合理、正确的路线。&rdquo;下列各项属于&ldquo;比较合理、正确的路线&rdquo;的有<br>&#9312;《论十大关系》 &#9313;资本主义工商业的社会主义改造 &#9314;人民公社化运动 &#9315;《关于正确处理人民内部矛盾的问题》
+        </div>
+        <div class="q-meta">2024&middot;浙江&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>&#9312;&#9313;</div>
+      <div class="option wrong"><span class="option-label">B。</span>&#9312;&#9313;&#9315;</div>
+      <div class="option wrong"><span class="option-label">C。</span>&#9313;&#9314;&#9315;</div>
+      <div class="option correct"><span class="option-label">D。</span>&#9312;&#9315;</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      &#9312;《论十大关系》是探索中国自己的社会主义建设道路的开篇之作，正确；&#9313;资本主义工商业的社会主义改造属于过渡时期的内容，不属于&ldquo;探索社会主义建设道路&rdquo;的范畴；&#9314;人民公社化运动是探索中的失误；&#9315;《关于正确处理人民内部矛盾的问题》是探索社会主义建设道路的重要理论成果，正确。故选D。
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">9</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          自1964年至90年代末，中法累计达成199个工业合作项目。具有代表性的项目包括七十年代的&ldquo;大化纤&rdquo;设备、七八十年代的&ldquo;超黄蜂&rdquo;&ldquo;小羚羊&rdquo;&ldquo;海豚&rdquo;等多个直升机项目和八十年代的大亚湾核电站一期工程。这可用于说明我国
+        </div>
+        <div class="q-meta">2025&middot;江西&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>持续推进四化建设</div>
+      <div class="option wrong"><span class="option-label">B。</span>努力拓宽外贸渠道</div>
+      <div class="option wrong"><span class="option-label">C。</span>积极改善工业布局</div>
+      <div class="option wrong"><span class="option-label">D。</span>不断优化产业结构</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      从化纤设备到直升机再到核电站，这些项目涵盖轻工业、重工业和新技术产业，体现了中国持续推进工业、农业、国防和科学技术现代化的进程。B&ldquo;外贸渠道&rdquo;不是材料重点；C&ldquo;工业布局&rdquo;材料未涉及地域分布；D&ldquo;产业结构&rdquo;不是最准确的概括。故选A。
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">10</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          新中国成立初期，毛泽东曾两次致信教育部，提出&ldquo;健康第一，学习第二&rdquo;的方针。他强调要充分兼顾&ldquo;工作学习和娱乐休息睡眠两方面&rdquo;，发出&ldquo;要使青年身体好，学习好，工作好&rdquo;的&ldquo;三好&rdquo;号召。这些指示
+        </div>
+        <div class="q-meta">2025&middot;广西&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>明晰了当时教育发展的方向</div>
+      <div class="option wrong"><span class="option-label">B。</span>有利于构建完整的国民教育体系</div>
+      <div class="option wrong"><span class="option-label">C。</span>推动了科教兴国战略的实施</div>
+      <div class="option correct"><span class="option-label">D。</span>有助于提高广大群众的生活质量</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      毛泽东强调&ldquo;健康第一&rdquo;，兼顾学习、工作和休息，关注群众身体健康和生活品质，有助于提高广大群众的生活质量。C&ldquo;科教兴国&rdquo;是1995年提出的战略，时代不符。故选D。
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">11</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          20世纪60年代中后期，国家第一机械工业部与黑龙江阿城继电器厂就新厂选址曾有不同看法，最终国家考虑财力、迁入地供应能力及企业经济属性等因素，同意该厂选址河南某地。这一决策
+        </div>
+        <div class="q-meta">2025&middot;河南&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>反映国际格局发生根本变化</div>
+      <div class="option wrong"><span class="option-label">B。</span>体现计划经济体制被逐步突破</div>
+      <div class="option wrong"><span class="option-label">C。</span>表明现代企业制度逐渐建立</div>
+      <div class="option correct"><span class="option-label">D。</span>兼顾国防建设和经济发展需求</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      20世纪60年代中后期正值三线建设时期，工厂选址内陆（河南）既考虑了国防安全（备战），又考虑了迁入地供应能力和企业经济属性（经济发展），体现了兼顾国防建设和经济发展需求。故选D。
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">12</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          新中国成立初期，天津邮政管理局通过开展民主改革、劳动竞赛等，提高了工作效率，邮件由天津发往国内20个城市的平均时间，缩短了约35%；天津的邮政管理和邮件分发经验被推向全国。&ldquo;天津经验&rdquo;的形成和推广说明
+        </div>
+        <div class="q-meta">2025&middot;天津&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>社会主义改造取得重大成就</div>
+      <div class="option wrong"><span class="option-label">B。</span>科学技术革新发挥重要作用</div>
+      <div class="option correct"><span class="option-label">C。</span>人民群众发扬出主人翁精神</div>
+      <div class="option wrong"><span class="option-label">D。</span>一五计划奠定了工业化基础</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      民主改革和劳动竞赛激发了职工的主人翁精神，是提高工作效率的主要原因。A社会主义改造主要指生产资料所有制的变革，与邮政管理效率无直接关系；B材料未涉及技术革新；D一五计划与邮政管理经验推广无直接关联。故选C。
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">13</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1954年，中国与英国建立代办级外交关系；1964年，中法两国建立大使级外交关系；1972年，中美发表《联合公报》，两国关系开始走向正常化。中国与英法美三国关系的变化
+        </div>
+        <div class="q-meta">2024&middot;天津&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>证明了&ldquo;一边倒&rdquo;方针的胜利</div>
+      <div class="option correct"><span class="option-label">B。</span>体现了独立自主的外交方针</div>
+      <div class="option wrong"><span class="option-label">C。</span>说明了全方位外交活动的开展</div>
+      <div class="option wrong"><span class="option-label">D。</span>反映了两极对峙格局的终结</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      中国与英、法、美三国在不同历史时期逐步建立或改善外交关系，体现了中国始终坚持独立自主的外交方针，根据国情和国际形势主动调整外交策略。A&ldquo;一边倒&rdquo;在1972年已不再适用；C&ldquo;全方位外交&rdquo;是改革开放后的外交格局；D两极格局终结于1991年。故选B。
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">14</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1978年8月，中国同日本签订《中日和平友好条约》。1979年1月，中美两国正式建交。1989年，中苏两国实现关系正常化。上述外交成果的出现主要得益于外交方针政策的新调整。这一&ldquo;新调整&rdquo;是
+        </div>
+        <div class="q-meta">2024&middot;浙江&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>推行&ldquo;打扫干净屋子再请客&rdquo;</div>
+      <div class="option wrong"><span class="option-label">B。</span>提出和平共处五项原则</div>
+      <div class="option correct"><span class="option-label">C。</span>为改革开放和现代化建设服务</div>
+      <div class="option wrong"><span class="option-label">D。</span>首倡&ldquo;求同存异&rdquo;方针</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      1978年改革开放后，中国外交方针政策进行调整，从&ldquo;阶级斗争为纲&rdquo;转向为改革开放和现代化建设服务，积极改善与日、美、苏等国关系。A、B、D均为改革开放前提出的外交方针。故选C。
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">15</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1977年7月，中共中央政治局听取和讨论了国家计委关于引进新技术的报告，报告提出引进新技术一定要适合国情，不能&ldquo;为&lsquo;先进&rsquo;而先进&rdquo;。中央政治局批准了该报告并要求&ldquo;精打细算，买先进的关键设备&hellip;&hellip;引进一百亿美元也可以，但要多快好省&rdquo;。这表明中央<br>&#9312;秉持着实事求是的态度 &#9313;确定了工业发展的方向 &#9314;努力发展生产力的决心 &#9315;作出了改革开放的决策
+        </div>
+        <div class="q-meta">2025&middot;黑吉辽蒙卷&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>&#9312;&#9313;</div>
+      <div class="option wrong"><span class="option-label">B。</span>&#9312;&#9315;</div>
+      <div class="option wrong"><span class="option-label">C。</span>&#9313;&#9314;</div>
+      <div class="option correct"><span class="option-label">D。</span>&#9312;&#9314;</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      材料强调&ldquo;引进新技术一定要适合国情&rdquo;&ldquo;精打细算&rdquo;，体现了实事求是的态度（&#9312;正确）；批准引进一百亿美元设备，体现了发展生产力的决心（&#9314;正确）。&#9313;&ldquo;确定了工业发展的方向&rdquo;材料未明确体现；&#9315;作出改革开放决策是1978年十一届三中全会，时间不符。故选D。
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">16</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          20世纪80年代初，全国农村先后涌现大批专业户。1982年底，山东省泰安专区各类专业户已发展到63760户，占总农户的4.8%。许多专业户的经营规模越来越大，经济效益越来越好，商品率不断增长。已出现一批每年向国家提供&ldquo;万斤肉&rdquo;&ldquo;千只鸡&rdquo;&ldquo;两千斤蛋&rdquo;&ldquo;四五百只鸭鹅&rdquo;收入达万元的农户。这一新局面的出现
+        </div>
+        <div class="q-meta">2025&middot;海南&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>为城市经济体制改革提供了便利条件</div>
+      <div class="option wrong"><span class="option-label">B。</span>展示了社会主义市场经济体制的活力</div>
+      <div class="option wrong"><span class="option-label">C。</span>改变了农村土地所有制结构</div>
+      <div class="option wrong"><span class="option-label">D。</span>得益于农业技术革命性突破</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      农村专业户的涌现和家庭联产承包责任制的推行，极大地解放了农村生产力，为1984年开启的城市经济体制改革提供了有利条件和经验借鉴。B社会主义市场经济体制1992年才提出；C农村土地所有制仍为集体所有，未改变；D材料未涉及农业技术突破。故选A。
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">17</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1995年，湖南省土地承包期续签工作基本完成，80%的农户续签了延包合同。同时，出现了拍卖租赁、招标承包等多种使用权转让形式，土地使用权流转机制开始形成。这
+        </div>
+        <div class="q-meta">2025&middot;湖南&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>顺应了基层群众自治需要</div>
+      <div class="option wrong"><span class="option-label">B。</span>打破了传统城乡二元结构</div>
+      <div class="option wrong"><span class="option-label">C。</span>改变了家庭联产承包责任制</div>
+      <div class="option correct"><span class="option-label">D。</span>适应了市场经济发展的需要</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      土地承包期延包和使用权流转机制的形成，使土地使用权可以根据市场需要流转，适应了社会主义市场经济体制下资源优化配置的需要。A基层群众自治与土地承包流转无直接关系；B城乡二元结构并未被打破；C家庭联产承包责任制的基础未改变，只是使用权可流转。故选D。
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">18</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          20世纪80年代，某城市只允许集体开办&ldquo;老虎灶&rdquo;，集中供给热水。由于供水时间与场所限制，民众生活仍然存在诸多不便。有群众提议允许个体经营老虎灶，获得当地政府同意，个体经营的老虎灶纷纷涌现。民众生活便利的同时，经营者也获得一定收入。上述材料反映
+        </div>
+        <div class="q-meta">2025&middot;湖北&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>改革探索兼顾民生与效益</div>
+      <div class="option wrong"><span class="option-label">B。</span>市场经济体制优势凸显</div>
+      <div class="option wrong"><span class="option-label">C。</span>从试点到推广的改革路径</div>
+      <div class="option wrong"><span class="option-label">D。</span>国民经济全面协调发展</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      允许个体经营老虎灶，既解决了民众生活不便的民生问题，又使经营者获得收入（效益），体现了改革探索兼顾民生与效益。B市场经济体制此时尚未正式确立；C材料未体现从试点到推广的过程；D&ldquo;全面协调&rdquo;过度推断。故选A。
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">19</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          下表中国工业产值统计表（单位：亿元），表中的数据变化说明，这一时期我国<br><table><tr><th></th><th>1977年</th><th>1988年</th><th>1991年</th></tr><tr><td>工业总产值</td><td>3725</td><td>18224.58</td><td>26625</td></tr><tr><td>国有工业</td><td>2869.37</td><td>10351.28</td><td>14955</td></tr><tr><td>集体工业</td><td>855.63</td><td>6587.49</td><td>8783</td></tr><tr><td>城乡个体工业</td><td></td><td>790.49</td><td>1287</td></tr><tr><td>其他经济类型工业</td><td></td><td>495.82</td><td>1600</td></tr></table>
+        </div>
+        <div class="q-meta">2025&middot;陕晋青宁卷&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>工业布局调整效果显著</div>
+      <div class="option wrong"><span class="option-label">B。</span>市场经济起主导作用</div>
+      <div class="option wrong"><span class="option-label">C。</span>现代企业制度不断完善</div>
+      <div class="option correct"><span class="option-label">D。</span>所有制结构逐步优化</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      表格显示，从1977年到1991年，工业总产值大幅增长，且所有制结构从单一的国有、集体工业，逐步发展为国有、集体、城乡个体、其他经济类型（外资、合资等）多元并存，说明所有制结构逐步优化。故选D。
+    </div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">20</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1984年，国务院相关部门撰写了《关于沿海地区经济发展的几个问题》的报告，把经济特区、开放城市、经济技术开发区比喻为桥头堡，要起跳板作用，上海、广州等大城市应当是&ldquo;两个扇面，一个枢纽&rdquo;。该报告受到党中央高度重视。这说明我国
+        </div>
+        <div class="q-meta">2025&middot;贵州&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>经济建设注重区域平衡</div>
+      <div class="option correct"><span class="option-label">B。</span>对外开放格局将进一步扩大</div>
+      <div class="option wrong"><span class="option-label">C。</span>经济体制改革取得成效</div>
+      <div class="option wrong"><span class="option-label">D。</span>沿海地区带动内陆全面发展</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      1984年，中央高度重视沿海开放布局的报告，预示着对外开放将从经济特区扩展到沿海开放城市、经济技术开发区，形成多层次、全方位的对外开放格局。故选B。
+    </div>
+  </div>
+
+  <!-- Q21 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">21</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1978年，香港&ldquo;船王&rdquo;包玉刚表示愿意捐1000万美元在北京建一座饭店，同时表达了以他父亲名字命名的愿望。邓小平同志果断拍板同意。1985年，兆龙饭店落成，邓小平同志破例出席开幕典礼。这表明当时中国
+        </div>
+        <div class="q-meta">2025&middot;江苏&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>推行市场经济迫在眉睫</div>
+      <div class="option correct"><span class="option-label">B。</span>坚持对外开放毫不动摇</div>
+      <div class="option wrong"><span class="option-label">C。</span>提出了建立经济特区的设想</div>
+      <div class="option wrong"><span class="option-label">D。</span>实行&ldquo;引进来&rdquo;&ldquo;走出去&rdquo;战略</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：B</strong><br>
+      邓小平同意香港企业家捐建饭店并出席开幕典礼，体现了中国坚持对外开放、欢迎海外同胞参与祖国建设的态度毫不动摇。A市场经济此时尚未提出；C建立经济特区的设想是1979年；D&ldquo;走出去&rdquo;战略是后来的提法。故选B。
+    </div>
+  </div>
+
+  <!-- Q22 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">22</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          自1993年6月11日起，中国民航取消了国内旅客购买国内飞机票需出具购票介绍信的规定，旅客只需出示居民身份证或民航有关文件规定的其他有效身份证件、证明即可。这一变化的主要原因是
+        </div>
+        <div class="q-meta">2025&middot;河北&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>经济体制改革的推动</div>
+      <div class="option wrong"><span class="option-label">B。</span>现代交通运输的发展</div>
+      <div class="option wrong"><span class="option-label">C。</span>人民生活水平的提高</div>
+      <div class="option wrong"><span class="option-label">D。</span>大众旅游潮流的出现</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      取消购票介绍信制度，是市场经济体制改革深化、人员流动自由化程度提高的体现，主要推动力来自经济体制改革。故选A。
+    </div>
+  </div>
+
+  <!-- Q23 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">23</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1989年，我国国民生产总值比1978年增加了四倍多。1990年北京亚运会期间，全国各地的名优新特产品来京展销，花色品种逾万，几十个国家和地区的十余万游客云集争购。这些经济现象表明当时我国
+        </div>
+        <div class="q-meta">2025&middot;甘肃&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option correct"><span class="option-label">A。</span>践行了社会主义初级阶段理论</div>
+      <div class="option wrong"><span class="option-label">B。</span>生产的商品极大丰富畅销全球</div>
+      <div class="option wrong"><span class="option-label">C。</span>更深层次参与经济全球化进程</div>
+      <div class="option wrong"><span class="option-label">D。</span>建立了社会主义市场经济体制</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：A</strong><br>
+      1987年中共十三大提出社会主义初级阶段理论，强调以经济建设为中心。材料反映1989&mdash;1990年我国生产力快速发展和商品供应丰富，正是践行社会主义初级阶段理论的结果。D社会主义市场经济体制1992年才提出。故选A。
+    </div>
+  </div>
+
+  <!-- Q24 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">24</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          1992年下半年，国家物价局颁布了新的《价格管理目录》，中央直接管理价格的商品由737种减少到89种，工业生产资料大部分并轨实行单一的市场价格，放开了原来尚未放开的工业消费品价格。上述举措的出台
+        </div>
+        <div class="q-meta">2025&middot;浙江&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>反映了社会主义改造的完成</div>
+      <div class="option wrong"><span class="option-label">B。</span>开启了经济体制改革新局面</div>
+      <div class="option wrong"><span class="option-label">C。</span>标志着以市场调节为主的价格机制形成</div>
+      <div class="option correct"><span class="option-label">D。</span>顺应建立社会主义市场经济体制的要求</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      1992年邓小平南方谈话和中共十四大提出建立社会主义市场经济体制，材料中的价格管理改革正是顺应这一要求的重大举措。A社会主义改造完成于1956年；B经济体制改革新局面开启于1978年；C&ldquo;标志着&rdquo;说法过重，价格机制仍在完善中。故选D。
+    </div>
+  </div>
+
+  <!-- Q25 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">25</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          20世纪80年代中后期，中国电影从重视启蒙和教育、个性和自我，走向重视娱乐和盈利。1988年，全国上映的娱乐片达80余部，占故事片总量的60%以上。这反映了
+        </div>
+        <div class="q-meta">2025&middot;广东&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>西方电影的大量引进对国产片造成冲击</div>
+      <div class="option wrong"><span class="option-label">B。</span>其他娱乐方式的缺失助推电影消费热潮</div>
+      <div class="option correct"><span class="option-label">C。</span>社会经济的发展为电影市场注入活力</div>
+      <div class="option wrong"><span class="option-label">D。</span>电影创作和发行体制实现充分市场化</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      20世纪80年代改革开放后，社会经济发展，人民群众收入增加、文化消费需求增长，推动电影市场从强调教育转向重视娱乐，体现了社会经济发展为电影市场注入活力。A材料未涉及西方电影引进；D&ldquo;充分市场化&rdquo;与当时实际情况不符。故选C。
+    </div>
+  </div>
+
+  <!-- Q26 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">26</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          新中国成立以来，中国十分重视与周边国家的交往：20世纪50年代，提出和平共处五项原则；2003年，提出&ldquo;睦邻、安邻、富邻&rdquo;的周边外交政策；中共十八大以来，坚持&ldquo;与邻为善、以邻为伴&rdquo;的外交方针，突出体现&ldquo;亲、诚、惠、容&rdquo;的外交理念。这主要是为了
+        </div>
+        <div class="q-meta">2023&middot;山东&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>消除分歧增进互信</div>
+      <div class="option wrong"><span class="option-label">B。</span>构建均衡发展格局</div>
+      <div class="option correct"><span class="option-label">C。</span>深化合作共谋发展</div>
+      <div class="option wrong"><span class="option-label">D。</span>改善全球治理体系</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：C</strong><br>
+      &ldquo;睦邻、安邻、富邻&rdquo;&ldquo;亲、诚、惠、容&rdquo;等外交理念的核心是与周边国家深化合作、共同发展，实现互利共赢。故选C。
+    </div>
+  </div>
+
+  <!-- Q27 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">27</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          《人民日报》对海南建省设经济特区三十多年来的报道，勾勒出主流媒体对海南记忆的历史图景。建省初期主要聚焦于军队(武警)边防、金融保险、招商引资、人才等方面；进入新世纪，旅游、生态环保、教育、体育、医疗健康等方面获得了更多关注和报道。报道主题的变化反映了
+        </div>
+        <div class="q-meta">2024&middot;海南&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>中华民族伟大复兴的中国梦扬帆起航</div>
+      <div class="option wrong"><span class="option-label">B。</span>中国社会主义建设在探索中曲折发展</div>
+      <div class="option wrong"><span class="option-label">C。</span>中国社会主义市场经济体制基本确立</div>
+      <div class="option correct"><span class="option-label">D。</span>中国特色社会主义总体布局更加完善</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      报道主题从建省初期的经济领域（边防、金融、招商）扩展到新世纪的社会、生态、文化、民生等领域，反映了中国特色社会主义总体布局（经济、政治、文化、社会、生态文明五位一体）更加完善。故选D。
+    </div>
+  </div>
+
+  <!-- Q28 -->
+  <div class="question-card">
+    <div class="q-header">
+      <div class="q-num">28</div>
+      <div style="flex:1">
+        <div style="font-size:14.5pt;font-weight:bold;line-height:1.7;padding-top:2px;">
+          浙江安吉某村的党员们，积极为打赢脱贫攻坚战出一份力。自2018年起，该村向湘川黔三省五县数千贫困户捐赠白茶苗，通过指导种植和茶叶包销等方式，带动受捐地区贫困人口增收脱贫。&ldquo;一片叶子再富一方百姓&rdquo;的故事体现的美好愿景是
+        </div>
+        <div class="q-meta">2025&middot;浙江&middot;高考真题</div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option wrong"><span class="option-label">A。</span>公平正义</div>
+      <div class="option wrong"><span class="option-label">B。</span>合作共赢</div>
+      <div class="option wrong"><span class="option-label">C。</span>共商共建共享</div>
+      <div class="option correct"><span class="option-label">D。</span>共同富裕</div>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)"><span class="arrow">&#9654;</span> 答案解析</button>
+    <div class="answer-box">
+      <strong>答案：D</strong><br>
+      党员带头捐赠白茶苗、指导种植、包销茶叶，带动贫困户增收脱贫，体现了&ldquo;先富帮后富、最终实现共同富裕&rdquo;的美好愿景，是新时代中国特色社会主义共同富裕理念的生动实践。故选D。
+    </div>
+  </div>
+
+  <div class="section-title">二、非选择题</div>
+
+  <!-- Essay Q1 -->
+  <div class="essay-card">
+    <div style="font-size:15pt;font-weight:bold;margin-bottom:12px;">（2025·全国卷·高考真题）[工农业与中国式现代化]</div>
+    <div style="font-size:14pt;line-height:2;color:#333;margin-bottom:14px;">
+      <div class="sub-q"><strong>材料一</strong>　19世纪末，全国工业生产仅有13个门类。1933年，增至23个大类。1952年起，中国工业迅猛发展。1978年，中国能够生产的工业产品已达34个门类。进入21世纪，中国已在所有的工业门类完成布局，拥有完整的工业生产体系。根据联合国制定的行业分类标准，中国是目前唯一拥有全部39个工业大类的国家。</div>
+      <div style="margin:8px 0 0 0;font-size:13.5pt;line-height:1.9;color:#444;">据测算，1954至1978年间，我国通过对农业不等价交换的方式（工农产品&ldquo;剪刀差&rdquo;）从农业中取得的资金达5100亿元，其中为工业化提供的资金约为4500亿元。改革开放后，大量的资金仍从农村流向城市。随着市场化改革和市场主体的多元化，我国工业化积累的方式发生了一些变化：企业基本建设资金由财政拨款改为银行贷款；国有企业税后利润全归企业支配；部分企业通过向社会公众发行股票债券筹集资金。此外，在财政政策方面，设立各类资金或基金支持工业的核心技术研发创新等；在税收政策方面，实施所得税、增值税等优惠。</div>
+      <div class="sub-q" style="margin-top:14px;"><strong>材料二</strong>　2005年10月，党的十六届五中全会通过《中共中央关于制定国民经济和社会发展第十一个五年规划的建议》，该建议指出我国经济发展已经达到工业反哺农业、城市支持乡村的阶段，为了建立和谐社会和全面实现小康目标，提出建立社会主义新农村的重大历史任务。在&ldquo;十一五&rdquo;规划期间，中央财政不仅免除了农业税，还从教育、基础设施、医疗卫生等方面加大对农村的投入。</div>
+      <div style="margin-top:14px;font-weight:bold;color:#764ba2;">(1) 根据材料一并结合所学，归纳新中国成立以来我国工业资本积累方式。</div>
+      <div style="margin:6px 0 12px 0;font-size:13.5pt;line-height:1.8;color:#333;background:#f8f7ff;padding:12px 16px;border-left:4px solid #667eea;border-radius:0 8px 8px 0;">
+        <strong style="color:#764ba2;">参考答案：</strong><br>
+        ①改革开放前：通过工农产品&ldquo;剪刀差&rdquo;，从农业提取积累资金；财政拨款为主要投资方式。<br>
+        ②改革开放后：银行贷款取代财政拨款；国有企业利润留成；发行股票、债券等市场化融资；财政设立专项资金支持核心技术研发；税收优惠政策支持工业发展与创新。
+      </div>
+      <div style="font-weight:bold;color:#764ba2;margin-top:10px;">(2) 根据材料并结合所学，阐述新中国成立以来我国统筹工农业发展的实践及意义。</div>
+      <div style="margin:6px 0 0 0;font-size:13.5pt;line-height:1.8;color:#333;background:#f8f7ff;padding:12px 16px;border-left:4px solid #667eea;border-radius:0 8px 8px 0;">
+        <strong style="color:#764ba2;">参考答案：</strong><br>
+        <strong>实践：</strong><br>
+        ①建国初期：优先发展重工业，通过&ldquo;剪刀差&rdquo;为工业化积累资金，同时推进土地改革和农业合作化，为工业化提供原料和市场。<br>
+        ②改革开放后：家庭联产承包责任制解放农村生产力；乡镇企业兴起；20世纪90年代后，工业反哺农业，2006年废除农业税，中央财政加大三农投入。<br>
+        ③新世纪以来：实施社会主义新农村建设，统筹城乡发展，推进乡村振兴，构建工农互促、城乡互补的新型工农城乡关系。<br><br>
+        <strong>意义：</strong><br>
+        ①实现了从农业国向工业国的历史性转变，建立了独立完整的工业体系。<br>
+        ②农业现代化水平不断提升，粮食安全保障能力显著增强。<br>
+        ③统筹工农业发展为打赢脱贫攻坚战、实现共同富裕奠定了坚实基础。<br>
+        ④彰显了中国特色社会主义制度优势，为发展中国家实现工业化与农业现代化提供了中国方案。
+      </div>
+    </div>
+  </div>
+
+  <!-- Essay Q2 -->
+  <div class="essay-card">
+    <div style="font-size:15pt;font-weight:bold;margin-bottom:12px;">（2024·广西·高考真题）阅读材料，回答问题。</div>
+    <div style="font-size:14pt;line-height:2;color:#333;margin-bottom:14px;">
+      <div style="margin-bottom:12px;">邮票被誉为&ldquo;国家名片&rdquo;，作为时代的象征，记录了民族历史。《邮票看中国》一书在邮票的方寸天地之间，展示与铭刻了国家发展的无数个重要的历史时刻。下表标题摘编自这本书的目录。</div>
+      <table>
+        <tr><th>标题</th></tr>
+        <tr><td>&ldquo;纯情岁月&rdquo;（1949&mdash;1959）</td></tr>
+        <tr><td>&ldquo;躬耕季节&rdquo;（1980&mdash;1989）</td></tr>
+        <tr><td>&ldquo;春日辰光&rdquo;（1990&mdash;1999）</td></tr>
+        <tr><td>&ldquo;希望朝旭&rdquo;（2000&mdash;2009）</td></tr>
+        <tr><td>&ldquo;新的征程&rdquo;（2010&mdash;2019）</td></tr>
+      </table>
+      <div style="margin-top:14px;">根据材料，<strong>任选一个时段</strong>，另拟一个能够反映其时代特征的标题，并结合新中国的发展成就进行论证。（要求：主题明确，观点突出，史论结合，逻辑清晰。）</div>
+      <div style="margin-top:14px;font-size:13.5pt;line-height:1.8;color:#333;background:#f8f7ff;padding:12px 16px;border-left:4px solid #667eea;border-radius:0 8px 8px 0;">
+        <strong style="color:#764ba2;">参考示例（选&ldquo;纯情岁月&rdquo;1949&mdash;1959）：</strong><br>
+        <strong>标题：</strong>&ldquo;奠基岁月&rdquo;（1949&mdash;1959）<br><br>
+        <strong>论证：</strong><br>
+        1949年中华人民共和国成立，标志着新民主主义革命取得伟大胜利，中国人民从此站起来了。<br>
+        1950&mdash;1952年，土地改革在全国基本完成，彻底摧毁了封建地主土地所有制，解放了农村生产力。<br>
+        1953&mdash;1957年，第一个五年计划超额完成，奠定了社会主义工业化的初步基础；同期完成三大改造，确立了社会主义基本制度。<br>
+        1954年，第一届全国人民代表大会召开，通过了《中华人民共和国宪法》，确立了人民代表大会制度这一根本政治制度。<br>
+        1956年，毛泽东发表《论十大关系》，开始探索中国自己的社会主义建设道路；同年中共八大召开，为社会主义建设指明了方向。<br>
+        总之，1949&mdash;1959年是新中国奠基立业的关键十年，社会主义制度确立，工业化和民主法治建设迈出坚实步伐。
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">中外历史纲要上 · 回归教材系列 · 中国现代史专题</div>
+</div>
+
+<script>
+function toggleAnswer(btn) {
+    var box = btn.nextElementSibling;
+    if (box.classList.contains('open')) {
+        box.classList.remove('open');
+        btn.classList.remove('open');
+        btn.querySelector('.arrow').textContent = '\u25b6';
+    } else {
+        box.classList.add('open');
+        btn.classList.add('open');
+        btn.querySelector('.arrow').textContent = '\u25bc';
+    }
+}
+
+document.querySelectorAll('.option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+        var card = opt.closest('.question-card');
+        if (card.querySelector('.answer-box').classList.contains('open')) return;
+        card.querySelectorAll('.option').forEach(function(o) { o.classList.add('done'); });
+        if (opt.classList.contains('correct')) {
+            opt.classList.add('selected');
+        } else {
+            opt.classList.add('selected');
+            card.querySelectorAll('.option.correct').forEach(function(c) { c.classList.add('reveal'); });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
