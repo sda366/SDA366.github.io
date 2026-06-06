@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九年级历史上册 · 全课程导航</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:"SimHei","黑体",sans-serif; font-size:14pt; line-height:1.8; color:#333;
+            background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            padding:20px; min-height:100vh;
+        }
+        .container { max-width:1200px; margin:0 auto; background:#fff; border-radius:15px; box-shadow:0 20px 60px rgba(0,0,0,0.3); overflow:hidden; }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+            color:#fff; padding:50px 40px; text-align:center; position:relative; overflow:hidden;
+        }
+        .header::before {
+            content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='2' fill='%23ffffff' opacity='0.05'/%3E%3C/svg%3E") repeat;
+            animation:float 30s linear infinite;
+        }
+        @keyframes float { 0%{transform:translate(0,0)rotate(0deg)} 100%{transform:translate(-50px,-50px)rotate(360deg)} }
+        .header h1 { font-size:36pt; margin-bottom:10px; position:relative; z-index:1; text-shadow:2px 2px 4px rgba(0,0,0,0.5); }
+        .header .subtitle { font-size:16pt; color:#a8d8ea; position:relative; z-index:1; }
+        .header .count-info { font-size:12pt; color:#ccc; margin-top:10px; position:relative; z-index:1; }
+        
+        /* 内容区域 */
+        .content { padding:30px; }
+        
+        /* 单元整体样式 */
+        .unit {
+            margin-bottom: 40px; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .unit-header {
+            padding: 25px 30px; display: flex; align-items: center; gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .unit-tag {
+            display: inline-block; padding: 8px 20px; border-radius: 25px;
+            font-size: 12pt; font-weight: bold; color: #fff; white-space: nowrap;
+        }
+        
+        .unit-title {
+            font-size: 22pt; font-weight: bold; color: #fff; flex: 1;
+        }
+        
+        .unit-sub {
+            font-size: 13pt; color: rgba(255,255,255,0.85); width: 100%;
+            padding-left: 5px;
+        }
+        
+        /* 各单元配色 */
+        .unit-1 .unit-header { background: linear-gradient(135deg,#E65100 0%,#BF360C 100%); }
+        .unit-1 .unit-tag { background: rgba(255,255,255,0.2); }
+        
+        .unit-2 .unit-header { background: linear-gradient(135deg,#1565C0 0%,#0D47A1 100%); }
+        .unit-2 .unit-tag { background: rgba(255,255,255,0.2); }
+        
+        .unit-3 .unit-header { background: linear-gradient(135deg,#2E7D32 0%,#1B5E20 100%); }
+        .unit-3 .unit-tag { background: rgba(255,255,255,0.2); }
+        
+        .unit-4 .unit-header { background: linear-gradient(135deg,#C62828 0%,#B71C1C 100%); }
+        .unit-4 .unit-tag { background: rgba(255,255,255,0.2); }
+        
+        .unit-5 .unit-header { background: linear-gradient(135deg,#F57C00 0%,#E65100 100%); }
+        .unit-5 .unit-tag { background: rgba(255,255,255,0.2); }
+        
+        .unit-6 .unit-header { background: linear-gradient(135deg,#4A2C8A 0%,#2D1B69 100%); }
+        .unit-6 .unit-tag { background: rgba(255,255,255,0.2); }
+        
+        .unit-7 .unit-header { background: linear-gradient(135deg,#CC0000 0%,#8B0000 100%); }
+        .unit-7 .unit-tag { background: rgba(255,255,255,0.2); }
+        
+        /* 课程网格 */
+        .lesson-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px; padding: 25px; background: #f8f9fa;
+        }
+        
+        .lesson-card {
+            background: #fff; border-radius: 12px; padding: 20px;
+            text-decoration: none; color: #333; transition: all 0.3s;
+            border: 2px solid #e9ecef; display: flex; flex-direction: column;
+            position: relative; overflow: hidden;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .lesson-num {
+            font-size: 11pt; color: #667eea; font-weight: bold; margin-bottom: 5px;
+        }
+        
+        .lesson-name {
+            font-size: 14pt; font-weight: bold; margin-bottom: 8px; flex: 1;
+        }
+        
+        .lesson-type {
+            display: inline-block; padding: 3px 10px; border-radius: 10px;
+            font-size: 10pt; color: #fff; align-self: flex-start;
+        }
+        
+        .type-regular { background: #667eea; }
+        .type-activity { background: #e74c3c; }
+        
+        .lesson-card .color-bar {
+            position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        }
+        
+        /* 各课色彩条 */
+        .c1{background:#E65100} .c2{background:#B8860B} .c3{background:#FF8F00} 
+        .c4{background:#1565C0} .c5{background:#C62828} .c6{background:#6A1B9A}
+        .c7{background:#2E7D32} .c8{background:#795548} .c9{background:#546E7A}
+        .c10{background:#0D47A1} .c11{background:#E91E63} .c12{background:#D4A017}
+        .c13{background:#1B4332} .c14{background:#B8860B} .c15{background:#0D47A1}
+        .c16{background:#8B0000} .c17{background:#4A2C8A} .c18{background:#D32F2F}
+        .c19{background:#002654} .c20{background:#8B7355} .c21{background:#CC0000}
+        .c22{background:#DC143C}
+        
+        /* 课程进度条 */
+        .progress-section { margin-bottom: 40px; }
+        .progress-bar {
+            background: #e9ecef; border-radius: 25px; height: 20px; overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg,#667eea,#764ba2);
+            border-radius: 25px; transition: width 1s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10pt; color: #fff; font-weight: bold;
+        }
+        .progress-text {
+            text-align: center; font-size: 13pt; color: #666;
+        }
+        
+        /* 页脚信息 */
+        .footer {
+            text-align: center; padding: 30px; background: #f8f9fa;
+            border-top: 2px solid #e9ecef; color: #999; font-size: 12pt;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24pt; }
+            .unit-title { font-size: 18pt; }
+            .lesson-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+        }
+        
+        @media print { body{background:#fff;padding:0} .container{box-shadow:none} }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 九年级历史上册</h1>
+            <p class="subtitle">部编版 · 世界历史（全22课）</p>
+            <p class="count-info">涵盖 7 个单元 · 21 课正文 + 1 课活动课 | 全部交互式 HTML 课件</p>
+        </div>
+        
+        <div class="content">
+            <!-- 进度条 -->
+            <div class="progress-section">
+                <h2 style="border-left:5px solid #667eea; padding-left:15px; margin-bottom:10px;">📊 课程总览</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:100%">22 / 22 课（100%）</div>
+                </div>
+                <div class="progress-text">全部课程已完成，点击下方课程卡片即可进入学习</div>
+            </div>
+            
+            <!-- ===== 第一单元 ===== -->
+            <div class="unit unit-1">
+                <div class="unit-header">
+                    <span class="unit-tag">第一单元</span>
+                    <span class="unit-title">古代亚非文明</span>
+                    <span class="unit-sub">🌍 探索人类早期文明的摇篮——尼罗河、两河流域、印度河</span>
+                </div>
+                <div class="lesson-grid">
+                    <a href="九年级历史上_第1课_古代埃及.html" class="lesson-card">
+                        <div class="color-bar c1"></div>
+                        <div class="lesson-num">第1课</div>
+                        <div class="lesson-name">古代埃及</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第2课_古代两河流域.html" class="lesson-card">
+                        <div class="color-bar c2"></div>
+                        <div class="lesson-num">第2课</div>
+                        <div class="lesson-name">古代两河流域</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第3课_古代印度.html" class="lesson-card">
+                        <div class="color-bar c3"></div>
+                        <div class="lesson-num">第3课</div>
+                        <div class="lesson-name">古代印度</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ===== 第二单元 ===== -->
+            <div class="unit unit-2">
+                <div class="unit-header">
+                    <span class="unit-tag">第二单元</span>
+                    <span class="unit-title">古代欧洲文明</span>
+                    <span class="unit-sub">🏛️ 希腊城邦的民主与罗马帝国的法治——西方文明的源头</span>
+                </div>
+                <div class="lesson-grid">
+                    <a href="九年级历史上_第4课_希腊城邦和亚历山大帝国.html" class="lesson-card">
+                        <div class="color-bar c4"></div>
+                        <div class="lesson-num">第4课</div>
+                        <div class="lesson-name">希腊城邦和亚历山大帝国</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第5课_罗马城邦和罗马帝国.html" class="lesson-card">
+                        <div class="color-bar c5"></div>
+                        <div class="lesson-num">第5课</div>
+                        <div class="lesson-name">罗马城邦和罗马帝国</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第6课_希腊罗马古典文化.html" class="lesson-card">
+                        <div class="color-bar c6"></div>
+                        <div class="lesson-num">第6课</div>
+                        <div class="lesson-name">希腊罗马古典文化</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ===== 第三单元 ===== -->
+            <div class="unit unit-3">
+                <div class="unit-header">
+                    <span class="unit-tag">第三单元</span>
+                    <span class="unit-title">封建时代的欧洲</span>
+                    <span class="unit-sub">⚔️ 从基督教兴起、法兰克王国到中世纪城市与大学——千年中世纪</span>
+                </div>
+                <div class="lesson-grid">
+                    <a href="九年级历史上_第7课_基督教的兴起和法兰克王国.html" class="lesson-card">
+                        <div class="color-bar c7"></div>
+                        <div class="lesson-num">第7课</div>
+                        <div class="lesson-name">基督教的兴起和法兰克王国</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第8课_西欧庄园.html" class="lesson-card">
+                        <div class="color-bar c8"></div>
+                        <div class="lesson-num">第8课</div>
+                        <div class="lesson-name">西欧庄园</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第9课_中世纪城市和大学的兴起.html" class="lesson-card">
+                        <div class="color-bar c9"></div>
+                        <div class="lesson-num">第9课</div>
+                        <div class="lesson-name">中世纪城市和大学的兴起</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第10课_拜占庭帝国和查士丁尼法典.html" class="lesson-card">
+                        <div class="color-bar c10"></div>
+                        <div class="lesson-num">第10课</div>
+                        <div class="lesson-name">拜占庭帝国和《查士丁尼法典》</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ===== 第四单元 ===== -->
+            <div class="unit unit-4">
+                <div class="unit-header">
+                    <span class="unit-tag">第四单元</span>
+                    <span class="unit-title">封建时代的亚洲国家</span>
+                    <span class="unit-sub">🗾 日本的大化改新与阿拉伯帝国的崛起——东方的帝国时代</span>
+                </div>
+                <div class="lesson-grid">
+                    <a href="九年级历史上_第11课_古代日本.html" class="lesson-card">
+                        <div class="color-bar c11"></div>
+                        <div class="lesson-num">第11课</div>
+                        <div class="lesson-name">古代日本</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第12课_阿拉伯帝国.html" class="lesson-card">
+                        <div class="color-bar c12"></div>
+                        <div class="lesson-num">第12课</div>
+                        <div class="lesson-name">阿拉伯帝国</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ===== 第五单元 ===== -->
+            <div class="unit unit-5">
+                <div class="unit-header">
+                    <span class="unit-tag">第五单元</span>
+                    <span class="unit-title">走向近代</span>
+                    <span class="unit-sub">⛵ 资本主义萌芽 · 文艺复兴 · 新航路开辟 · 早期殖民掠夺——欧洲的转型时代</span>
+                </div>
+                <div class="lesson-grid">
+                    <a href="九年级历史上_第13课_西欧经济和社会的发展.html" class="lesson-card">
+                        <div class="color-bar c13"></div>
+                        <div class="lesson-num">第13课</div>
+                        <div class="lesson-name">西欧经济和社会的发展</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第14课_文艺复兴运动.html" class="lesson-card">
+                        <div class="color-bar c14"></div>
+                        <div class="lesson-num">第14课</div>
+                        <div class="lesson-name">文艺复兴运动</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第15课_探寻新航路.html" class="lesson-card">
+                        <div class="color-bar c15"></div>
+                        <div class="lesson-num">第15课</div>
+                        <div class="lesson-name">探寻新航路</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第16课_早期殖民掠夺.html" class="lesson-card">
+                        <div class="color-bar c16"></div>
+                        <div class="lesson-num">第16课</div>
+                        <div class="lesson-name">早期殖民掠夺</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ===== 第六单元 ===== -->
+            <div class="unit unit-6">
+                <div class="unit-header">
+                    <span class="unit-tag">第六单元</span>
+                    <span class="unit-title">资本主义制度的初步确立</span>
+                    <span class="unit-sub">👑 英国君主立宪 · 美国独立 · 法国大革命——三大革命开辟新时代</span>
+                </div>
+                <div class="lesson-grid">
+                    <a href="九年级历史上_第17课_君主立宪制的英国.html" class="lesson-card">
+                        <div class="color-bar c17"></div>
+                        <div class="lesson-num">第17课</div>
+                        <div class="lesson-name">君主立宪制的英国</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第18课_美国的独立.html" class="lesson-card">
+                        <div class="color-bar c18"></div>
+                        <div class="lesson-num">第18课</div>
+                        <div class="lesson-name">美国的独立</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第19课_法国大革命和拿破仑帝国.html" class="lesson-card">
+                        <div class="color-bar c19"></div>
+                        <div class="lesson-num">第19课</div>
+                        <div class="lesson-name">法国大革命和拿破仑帝国</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ===== 第七单元 ===== -->
+            <div class="unit unit-7">
+                <div class="unit-header">
+                    <span class="unit-tag">第七单元</span>
+                    <span class="unit-title">工业革命和国际共产主义运动的兴起</span>
+                    <span class="unit-sub">🏭 蒸汽时代 · 马克思主义 · 巴黎公社——工业文明与无产阶级的觉醒</span>
+                </div>
+                <div class="lesson-grid">
+                    <a href="九年级历史上_第20课_第一次工业革命.html" class="lesson-card">
+                        <div class="color-bar c20"></div>
+                        <div class="lesson-num">第20课</div>
+                        <div class="lesson-name">第一次工业革命</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第21课_马克思主义的诞生和国际共产主义运动的兴起.html" class="lesson-card">
+                        <div class="color-bar c21"></div>
+                        <div class="lesson-num">第21课</div>
+                        <div class="lesson-name">马克思主义的诞生和国际共产主义运动的兴起</div>
+                        <span class="lesson-type type-regular">正文</span>
+                    </a>
+                    <a href="九年级历史上_第22课_活动课唱响国际歌.html" class="lesson-card">
+                        <div class="color-bar c22"></div>
+                        <div class="lesson-num">第22课</div>
+                        <div class="lesson-name">唱响《国际歌》（活动课）</div>
+                        <span class="lesson-type type-activity">活动课</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📚 九年级历史上册 · 部编版 · 全课程导航</p>
+            <p>所有课件均采用交互式设计，支持答题判对错（绿色✓/红色✗），答案解析隐藏式</p>
+            <p style="margin-top:5px;font-size:11pt;">建议使用现代浏览器（Chrome/Edge/Firefox）获得最佳体验</p>
+        </div>
+    </div>
+</body>
+</html>

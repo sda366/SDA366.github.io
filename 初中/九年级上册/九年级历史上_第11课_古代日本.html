@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第11课 古代日本 - 九年级历史上册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "SimHei", "黑体", sans-serif;
+            font-size: 14pt;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #FFB7C5 0%, #FFC0CB 50%, #FF69B4 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, #DC143C 0%, #B22222 50%, #8B0000 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='%23fff' opacity='0.1'/%3E%3C/svg%3E") repeat;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 36pt;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header .subtitle {
+            font-size: 18pt;
+            color: #FFB7C5;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 导航标签 */
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #DC143C;
+            overflow-x: auto;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 18px 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 14pt;
+            font-weight: bold;
+            background: #e9ecef;
+            border: none;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .nav-tab:hover {
+            background: #dee2e6;
+        }
+        
+        .nav-tab.active {
+            background: #DC143C;
+            color: #fff;
+        }
+        
+        /* 内容区域 */
+        .content {
+            padding: 30px;
+            min-height: 600px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 标题样式 */
+        h2 {
+            font-size: 22pt;
+            color: #8B0000;
+            border-left: 5px solid #DC143C;
+            padding-left: 15px;
+            margin: 25px 0 15px 0;
+        }
+        
+        h3 {
+            font-size: 16pt;
+            color: #B22222;
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        h4 {
+            font-size: 14pt;
+            color: #333;
+            margin: 15px 0 8px 0;
+        }
+        
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #DC143C 0%, #8B0000 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #DC143C;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 20px;
+            width: 14px;
+            height: 14px;
+            background: #DC143C;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 3px #DC143C;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #8B0000;
+            font-size: 13pt;
+            margin-bottom: 5px;
+        }
+        
+        /* 卡片样式 */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .card-highlight {
+            background: linear-gradient(135deg, #FFF0F5 0%, #fff 100%);
+            border-left: 5px solid #DC143C;
+        }
+        
+        .card-blue {
+            background: linear-gradient(135deg, #F0F8FF 0%, #fff 100%);
+            border-left: 5px solid #8B0000;
+        }
+        
+        /* 知识点列表 */
+        .knowledge-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .knowledge-list li {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .knowledge-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 15px;
+            color: #DC143C;
+            font-weight: bold;
+        }
+        
+        /* 重点标记 */
+        .key-point {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .key-point strong {
+            color: #d35400;
+        }
+        
+        /* 难点标记 */
+        .difficulty {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .difficulty strong {
+            color: #c0392b;
+        }
+        
+        /* 习题区域 */
+        .exercise-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .question-header {
+            font-weight: bold;
+            color: #8B0000;
+            margin-bottom: 12px;
+            font-size: 14pt;
+        }
+        
+        .options {
+            margin: 10px 0;
+        }
+        
+        .option {
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: #f1f3f4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background: #FFF0F5;
+            border-color: #DC143C;
+        }
+        
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        /* 答案区域 */
+        .answer-section {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .answer-section.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+        
+        .answer-section.correct-answer {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+        
+        .answer-section.wrong-answer {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13pt;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: #fff;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
+            color: #fff;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 13pt;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+        
+        th {
+            background: #DC143C;
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        /* 武士卡片 */
+        .samurai-card {
+            background: linear-gradient(135deg, #FFF0F5 0%, #fff 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #DC143C;
+        }
+        
+        .samurai-title {
+            font-weight: bold;
+            color: #8B0000;
+            font-size: 14pt;
+            margin-bottom: 8px;
+        }
+        
+        /* 大化改新表格 */
+        .taika-box {
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5F5DC 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #DAA520;
+        }
+        
+        .taika-title {
+            font-weight: bold;
+            color: #8B0000;
+            font-size: 16pt;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        /* 标签 */
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12pt;
+            margin: 3px;
+        }
+        
+        .tag-red {
+            background: #DC143C;
+            color: #fff;
+        }
+        
+        .tag-gold {
+            background: #8B0000;
+            color: #fff;
+        }
+        
+        /* 引用框 */
+        blockquote {
+            background: #f8f9fa;
+            border-left: 5px solid #DC143C;
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        /* 打印样式 */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .nav-tabs {
+                display: none;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+    
+        /* 导航链接 */
+        .lesson-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 30px; background: #f8f9fa; border-top: 3px solid #DC143C;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .lesson-nav a {
+            text-decoration: none; font-size: 14pt; font-weight: bold;
+            padding: 10px 20px; border-radius: 25px; transition: all 0.3s;
+        }
+        .lesson-nav .prev-link {
+            background: #fff; color: #DC143C; border: 2px solid #DC143C;
+        }
+        .lesson-nav .prev-link:hover { background:#FFF0F0; transform:translateX(-3px); }
+        .lesson-nav .next-link {
+            background: linear-gradient(135deg,#DC143C 0%,#DC143Cdd 100%); color:#fff;
+        }
+        .lesson-nav .next-link:hover { transform:translateX(3px); box-shadow:0 5px 15px rgba(220,20,60,0.4); }
+        .lesson-nav .home-link {
+            background: #e9ecef; color: #333; border: 2px solid #adb5bd;
+        }
+        .lesson-nav .home-link:hover { background:#dee2e6; }
+        
+        @media print { body{background:#fff;padding:0} .container{box-shadow:none} .lesson-nav{display:none} }
+</style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🗾 第11课 古代日本</h1>
+            <p class="subtitle">九年级历史上册 · 第四单元 封建时代的亚洲国家</p>
+        </div>
+        
+        <!-- 导航标签 -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab(0)">📚 知识点总结</button>
+            <button class="nav-tab" onclick="showTab(1)">🎯 重点难点评析</button>
+            <button class="nav-tab" onclick="showTab(2)">✍️ 教材习题解答</button>
+            <button class="nav-tab" onclick="showTab(3)">📝 课堂训练</button>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 第一板块：知识点总结 -->
+            <div class="tab-content active" id="tab-0">
+                <h2>一、时间线索与历史脉络</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1—2世纪</div>
+                        <p>日本有100多个小国。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">5世纪</div>
+                        <p><strong>大和政权统一</strong>：在本州中部兴起的大和政权基本实现了统一。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">6—9世纪</div>
+                        <p>日本积极吸收中国文化，中国文化直接影响着日本，推动日本进行改革。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">646年</div>
+                        <p><strong>大化改新开始</strong>：日本仿效唐朝的典章制度，进行了一系列改革，史称"大化改新"。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">大化改新后</div>
+                        <p>大和正式改称<strong>日本国</strong>。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">12世纪晚期</div>
+                        <p><strong>幕府统治开始</strong>：源氏武士集团击败平氏武士集团，源氏首领源赖朝获得"征夷大将军"称号，设幕府于镰仓。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">幕府统治时期</div>
+                        <p>日本进入近700年的幕府统治时期。</p>
+                    </div>
+                </div>
+                
+                <h2>二、核心知识点详解</h2>
+                
+                <div class="card card-highlight">
+                    <h3>🔷 6世纪前的日本</h3>
+                    
+                    <h4>地理环境</h4>
+                    <ul class="knowledge-list">
+                        <li>日本是东亚的一个岛国</li>
+                        <li>由北海道、本州、四国、九州四个大岛及附近数千个小岛组成</li>
+                        <li>日本各岛上大多是山岭</li>
+                    </ul>
+                    
+                    <h4>早期国家</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>1—2世纪</strong>：日本有100多个小国</li>
+                        <li><strong>5世纪</strong>：在本州中部兴起的<strong>大和政权</strong>基本实现了统一</li>
+                    </ul>
+                    
+                    <h4>大和政权的统治</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>最高统治者</strong>：称为"<strong>大王</strong>"</li>
+                        <li><strong>统治方式</strong>：大王依靠贵族统治全国</li>
+                        <li><strong>土地制度</strong>：王室和贵族各有自己的私有领地</li>
+                        <li><strong>部民制度</strong>：领地上的居民以"<strong>部</strong>"的形式组织生产
+                            <ul>
+                                <li>从事农业的称为"田部"</li>
+                                <li>从事海洋捕捞的称为"海部"</li>
+                                <li>来自中国、朝鲜的移民也依其特长分别被编入锦织部、锻冶部等</li>
+                            </ul>
+                        </li>
+                        <li><strong>部民地位</strong>：部民是贵族的私有民，地位近似于奴隶</li>
+                    </ul>
+                    
+                    <h4>与中国的交往</h4>
+                    <blockquote>
+                        《汉书·地理志》记载："乐浪海中有倭人，分为百余国，以岁时来献见。"
+                        <br><br>
+                        《后汉书·东夷列传》记载，光武帝建武中元二年（57年），倭奴国奉朝贺，光武帝刘秀赐以印绶。
+                        <br><br>
+                        《三国志·魏书·乌丸鲜卑东夷传》记载，邪马台国在3世纪曾数次向三国中的魏进贡，并接受了魏帝的册封与印绶。
+                    </blockquote>
+                </div>
+                
+                <div class="card">
+                    <h3>🔷 大化改新</h3>
+                    
+                    <h4>背景</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>6—9世纪</strong>：日本积极吸收中国文化</li>
+                        <li><strong>文化影响</strong>：中国文化直接影响着日本，推动日本进行改革</li>
+                        <li><strong>改革力量</strong>：大和皇族中的改革派发动宫廷政变，孝德天皇即位，年号大化</li>
+                    </ul>
+                    
+                    <h4>开始时间</h4>
+                    <ul class="knowledge-list">
+                        <li>从<strong>646年</strong>开始</li>
+                    </ul>
+                    
+                    <h4>改革性质</h4>
+                    <ul class="knowledge-list">
+                        <li>日本<strong>仿效唐朝</strong>的典章制度</li>
+                        <li>进行了一系列改革</li>
+                        <li>史称"<strong>大化改新</strong>"</li>
+                    </ul>
+                    
+                    <div class="taika-box">
+                        <div class="taika-title">大化改新的主要内容</div>
+                        <table>
+                            <tr>
+                                <th>领域</th>
+                                <th>内容</th>
+                            </tr>
+                            <tr>
+                                <td><strong>政治</strong></td>
+                                <td>建立以天皇为中心的中央集权制度，地方设国、郡、里三级，由中央派官治理</td>
+                            </tr>
+                            <tr>
+                                <td><strong>经济</strong></td>
+                                <td>
+                                    <ul style="margin-left: 20px;">
+                                        <li>废除一切私地、私民，将土地、部民收归国有，成为公地、公民</li>
+                                        <li>国家将土地分给公民，每隔六年授田一次，不能自由买卖</li>
+                                        <li>统一赋税</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <h4>改革结果</h4>
+                    <ul class="knowledge-list">
+                        <li>大化改新后，大和正式改称<strong>日本国</strong></li>
+                        <li>大化改新使日本发展成为一个<strong>中央集权制的封建国家</strong></li>
+                    </ul>
+                    
+                    <h4>日本与中国关系</h4>
+                    <ul class="knowledge-list">
+                        <li>据《日本书纪》记载，608年，日本第二次派遣隋使</li>
+                        <li>在向隋炀帝递交的国书中写道："<strong>东天皇敬白西皇帝</strong>"</li>
+                        <li>这是日本史书中<strong>第一次出现"天皇"一词</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="card card-blue">
+                    <h3>🔷 幕府统治</h3>
+                    
+                    <h4>背景</h4>
+                    <ul class="knowledge-list">
+                        <li>大化改新百余年后，土地私有与土地兼并盛行</li>
+                        <li>贵族、豪门、寺院大量购买、兼并土地，建立庄园</li>
+                        <li>大庄园享有"<strong>不输不入</strong>"的特权，既不向国家纳税，也不准地方官吏进入庄园，干涉庄园事务</li>
+                        <li>中央对地方逐渐丧失了控制能力，社会局势动荡</li>
+                    </ul>
+                    
+                    <h4>武士集团的兴起</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>兴起原因</strong>：地方豪强为了保护自己的庄园，把自己家族和仆从中的青壮男子武装起来，组成一种血缘关系和主从制相结合的军事集团，成员称为"<strong>武士</strong>"</li>
+                        <li><strong>组织形式</strong>：小的武士团追随、服从一个更强大的首领，组成大的武士团</li>
+                        <li><strong>双重角色</strong>：武士团有时代表庄园利益与地方政府对抗，有时也响应朝廷号召去征战</li>
+                    </ul>
+                    
+                    <h4>幕府统治的建立</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>时间</strong>：12世纪晚期</li>
+                        <li><strong>事件</strong>：源氏武士集团击败平氏武士集团</li>
+                        <li><strong>源赖朝</strong>：源氏首领源赖朝获得"<strong>征夷大将军</strong>"称号，设幕府于<strong>镰仓</strong></li>
+                        <li><strong>历史地位</strong>：镰仓幕府拥有独立于朝廷的政治、军事权力，日本由此进入近700年的幕府统治时期</li>
+                    </ul>
+                    
+                    <div class="samurai-card">
+                        <div class="samurai-title">⚔️ 幕府统治的特点</div>
+                        <ul class="knowledge-list">
+                            <li><strong>并存体制</strong>：幕府与天皇朝廷并存</li>
+                            <li><strong>名义任命</strong>：幕府首领"征夷大将军"名义上由天皇任命</li>
+                            <li><strong>实际掌权</strong>：实际上天皇大权旁落，成为一种礼仪性的摆设</li>
+                            <li><strong>将军执政</strong>：幕府将军实际上把持着国家大权</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>武士道</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>形成</strong>：武士集团的长期统治，逐渐形成了武士道</li>
+                        <li><strong>效忠对象</strong>：武士效忠的对象不是国家，而是他的<strong>主公</strong></li>
+                        <li><strong>道德规范</strong>：强调忠义、勇武、名誉等</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>🔷 古代朝鲜（知识拓展）</h3>
+                    
+                    <h4>三国时期</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>3—4世纪</strong>：朝鲜半岛基本形成了<strong>高句丽、百济和新罗</strong>三国鼎立的局面</li>
+                        <li><strong>676年</strong>：新罗统一了朝鲜半岛大部分地区</li>
+                    </ul>
+                    
+                    <h4>高丽王朝</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>10世纪</strong>：王建建立高丽王朝</li>
+                        <li><strong>政治制度</strong>：仿照唐制，设三省六部</li>
+                        <li><strong>选官制度</strong>：引入科举考试选拔官员</li>
+                    </ul>
+                    
+                    <h4>朝鲜王朝</h4>
+                    <ul class="knowledge-list">
+                        <li><strong>14世纪末</strong>：高丽大将李成桂建立朝鲜王朝</li>
+                        <li><strong>改国号</strong>：改国号为<strong>朝鲜</strong></li>
+                    </ul>
+                </div>
+                
+                <h2>三、知识前后连贯</h2>
+                
+                <div class="key-point">
+                    <strong>📌 与第3课《古代印度》的联系：</strong><br>
+                    大化改新仿效唐朝制度，而佛教正是从印度经中国传入日本。日本在吸收中国文化的同时，也间接受到印度文化的影响。
+                </div>
+                
+                <div class="key-point">
+                    <strong>📌 与第4课《希腊城邦和亚历山大帝国》的联系：</strong><br>
+                    日本的大化改新和希腊的城邦改革都是社会变革，但性质不同：大化改新是学习外来制度，建立中央集权；希腊城邦改革是本土发展，走向民主政治。
+                </div>
+                
+                <div class="key-point">
+                    <strong>📌 与中国历史的联系：</strong><br>
+                    大化改新全面学习唐朝制度，是日本历史上第一次大规模学习中国的改革。日本在文字、制度、文化等方面深受中国影响，形成了"汉字文化圈"。
+                </div>
+                
+                <div class="key-point">
+                    <strong>📌 幕府统治与中国古代政治的比较：</strong><br>
+                    幕府统治时期，天皇大权旁落，将军实际掌权，类似于中国古代的权臣专政或军阀割据。但日本天皇制度始终保留，成为日本政治的一大特色。
+                </div>
+            </div>
+            
+            <!-- 第二板块：重点难点评析 -->
+            <div class="tab-content" id="tab-1">
+                <h2>一、深度评析——核心概念解析</h2>
+                
+                <div class="card">
+                    <h3>🔸 大化改新的性质与影响</h3>
+                    <div class="key-point">
+                        <strong>性质分析：</strong>
+                        <ul class="knowledge-list">
+                            <li><strong>改革性质</strong>：是一场自上而下的封建改革运动</li>
+                            <li><strong>学习对象</strong>：全面仿效唐朝的典章制度</li>
+                            <li><strong>改革内容</strong>：涉及政治、经济等多个领域</li>
+                            <li><strong>历史意义</strong>：使日本从奴隶社会过渡到封建社会</li>
+                        </ul>
+                    </div>
+                    <div class="key-point">
+                        <strong>深远影响：</strong>
+                        <ul class="knowledge-list">
+                            <li>建立了中央集权的封建国家</li>
+                            <li>奠定了日本封建社会的基础</li>
+                            <li>促进了日本文化的发展</li>
+                            <li>开启了日本学习外来先进文化的传统</li>
+                        </ul>
+                    </div>
+                    <div class="difficulty">
+                        <strong>局限性：</strong>
+                        <ul class="knowledge-list">
+                            <li>改革保留了大量奴隶制残余（如部民制）</li>
+                            <li>土地国有制后来逐渐被土地私有制取代</li>
+                            <li>贵族势力仍然强大，为后来的幕府统治埋下伏笔</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>🔸 武士道精神的形成与影响</h3>
+                    <div class="key-point">
+                        <strong>形成背景：</strong>
+                        <ul class="knowledge-list">
+                            <li>庄园经济发展，地方豪强需要武力保护</li>
+                            <li>武士集团的形成和发展</li>
+                            <li>幕府统治的长期存在</li>
+                        </ul>
+                    </div>
+                    <div class="key-point">
+                        <strong>核心内容：</strong>
+                        <ul class="knowledge-list">
+                            <li><strong>忠义</strong>：效忠主公，而非国家</li>
+                            <li><strong>勇武</strong>：英勇善战，不怕牺牲</li>
+                            <li><strong>名誉</strong>：重视荣誉，轻视死亡</li>
+                            <li><strong>礼仪</strong>：讲究礼仪，尊师重道</li>
+                        </ul>
+                    </div>
+                    <div class="difficulty">
+                        <strong>双重影响：</strong>
+                        <ul class="knowledge-list">
+                            <li><strong>积极</strong>：培养了日本人的纪律性和集体主义精神</li>
+                            <li><strong>消极</strong>：强调绝对服从，容易导致盲从；重视主从关系，忽视国家利益</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>二、广度评析——横向比较视野</h2>
+                
+                <div class="card card-blue">
+                    <h3>🔸 大化改新与中国隋唐制度比较</h3>
+                    <table>
+                        <tr>
+                            <th>制度</th>
+                            <th>中国隋唐</th>
+                            <th>日本大化改新</th>
+                        </tr>
+                        <tr>
+                            <td><strong>政治体制</strong></td>
+                            <td>三省六部制</td>
+                            <td>建立中央集权，设国、郡、里三级</td>
+                        </tr>
+                        <tr>
+                            <td><strong>土地制度</strong></td>
+                            <td>均田制</td>
+                            <td>国家授田，每隔六年授田一次</td>
+                        </tr>
+                        <tr>
+                            <td><strong>赋税制度</strong></td>
+                            <td>租庸调制</td>
+                            <td>统一赋税</td>
+                        </tr>
+                        <tr>
+                            <td><strong>选官制度</strong></td>
+                            <td>科举制</td>
+                            <td>中央派官治理</td>
+                        </tr>
+                    </table>
+                    <div class="key-point">
+                        <strong>结论</strong>：大化改新全面学习唐朝制度，但并非简单照搬，而是根据日本国情进行了适当调整。
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>🔸 日本幕府统治与中国古代政治比较</h3>
+                    <table>
+                        <tr>
+                            <th>比较维度</th>
+                            <th>日本幕府统治</th>
+                            <th>中国古代</th>
+                        </tr>
+                        <tr>
+                            <td><strong>君主地位</strong></td>
+                            <td>天皇大权旁落，成为象征</td>
+                            <td>皇帝掌握实权</td>
+                        </tr>
+                        <tr>
+                            <td><strong>实际掌权者</strong></td>
+                            <td>幕府将军</td>
+                            <td>皇帝（或权臣、外戚）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>政治特点</strong></td>
+                            <td>二元政治（天皇+幕府并存）</td>
+                            <td>一元政治（皇权至上）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>武士集团</strong></td>
+                            <td>武士是统治基础</td>
+                            <td>文官政治为主</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h2>三、高度评析——历史思维培养</h2>
+                
+                <div class="card card-highlight">
+                    <h3>🔸 日本古代历史发展规律</h3>
+                    <div class="difficulty">
+                        <strong>学习外来文化的历史传统：</strong>
+                        <ul class="knowledge-list">
+                            <li><strong>大化改新时期</strong>：学习中国隋唐制度，建立封建国家</li>
+                            <li><strong>明治维新时期</strong>：学习西方资本主义制度，走向近代化</li>
+                            <li><strong>战后改革</strong>：学习美国民主制度，实现经济腾飞</li>
+                        </ul>
+                    </div>
+                    <div class="key-point">
+                        <strong>历史启示：</strong>
+                        <ul class="knowledge-list">
+                            <li>善于学习外来先进文化是日本历史发展的重要特征</li>
+                            <li>在吸收外来文化时，能够结合本国国情进行改造</li>
+                            <li>这种学习精神对日本的发展起到了重要推动作用</li>
+                            <li>但同时也需要注意保持民族文化的主体性</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>🔸 封建制度在亚洲的传播与变异</h3>
+                    <div class="key-point">
+                        <strong>中国封建制度：</strong>
+                        <ul class="knowledge-list">
+                            <li>中央集权，皇帝专制</li>
+                            <li>郡县制，官僚政治</li>
+                            <li>科举取士，文官治理</li>
+                        </ul>
+                    </div>
+                    <div class="key-point">
+                        <strong>日本封建制度：</strong>
+                        <ul class="knowledge-list">
+                            <li>学习中国制度，但保留了部民制等残余</li>
+                            <li>庄园经济发展，武士集团崛起</li>
+                            <li>幕府统治，天皇虚君</li>
+                        </ul>
+                    </div>
+                    <div class="key-point">
+                        <strong>朝鲜封建制度：</strong>
+                        <ul class="knowledge-list">
+                            <li>仿照唐制，设三省六部</li>
+                            <li>引入科举考试选拔官员</li>
+                            <li>长期作为中国藩属国</li>
+                        </ul>
+                    </div>
+                    <div class="key-point">
+                        <strong>历史规律</strong>：封建制度在不同国家的传播过程中，都结合了本国国情进行了改造，形成了各具特色的封建制度。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第三板块：教材习题解答 -->
+            <div class="tab-content" id="tab-2">
+                <h2>一、想一想（问题思考）</h2>
+                
+                <div class="exercise-section">
+                    <div class="question">
+                        <div class="question-header">❓ 问题：日本是怎样发展起来的？</div>
+                        <button class="btn btn-primary" onclick="toggleAnswer('answer1', true)">查看答案</button>
+                        <div class="answer-section" id="answer1">
+                            <strong>参考答案：</strong>
+                            
+                            <p><strong>早期阶段（1-5世纪）：</strong></p>
+                            <ul class="knowledge-list">
+                                <li>1—2世纪，日本有100多个小国</li>
+                                <li>5世纪，大和政权基本实现统一</li>
+                                <li>实行部民制，部民是贵族的私有民，地位近似于奴隶</li>
+                            </ul>
+                            
+                            <p><strong>大化改新时期（646年开始）：</strong></p>
+                            <ul class="knowledge-list">
+                                <li>积极吸收中国文化，仿效唐朝典章制度</li>
+                                <li>政治上建立以天皇为中心的中央集权制度</li>
+                                <li>经济上废除私地私民，实行班田收授法，统一赋税</li>
+                                <li>使日本发展成为中央集权制的封建国家</li>
+                            </ul>
+                            
+                            <p><strong>幕府统治时期（12世纪晚期开始）：</strong></p>
+                            <ul class="knowledge-list">
+                                <li>土地兼并盛行，庄园经济发展</li>
+                                <li>武士集团兴起，形成武士道</li>
+                                <li>源赖朝建立镰仓幕府，日本进入近700年的幕府统治时期</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2>二、课后活动</h2>
+                
+                <div class="exercise-section">
+                    <div class="question">
+                        <div class="question-header">📖 活动1：查阅资料，了解日文是怎样产生、成熟的。从中你可以得出什么结论？</div>
+                        <button class="btn btn-primary" onclick="toggleAnswer('answer2', true)">查看答案</button>
+                        <div class="answer-section" id="answer2">
+                            <strong>参考答案：</strong>
+                            
+                            <p><strong>日文的产生与发展：</strong></p>
+                            <ul class="knowledge-list">
+                                <li><strong>汉字传入</strong>：汉字在公元4-5世纪前后传入日本，成为日本最早的文字</li>
+                                <li><strong>万叶假名</strong>：日本人借用汉字的音和义，创造了"万叶假名"，用汉字表音</li>
+                                <li><strong>平假名</strong>：由平安时代的女性将万叶假名草书化，创造平假名</li>
+                                <li><strong>片假名</strong>：由僧侣取汉字偏旁部首，创造片假名</li>
+                                <li><strong>现代日文</strong>：现代日文是汉字、平假名、片假名混用的文字系统</li>
+                            </ul>
+                            
+                            <p><strong>结论：</strong></p>
+                            <ul class="knowledge-list">
+                                <li>日本文字的产生深受汉字影响</li>
+                                <li>日本人在吸收中国文化的基础上，创造了适合自己语言特点的文字</li>
+                                <li>体现了日本善于学习外来文化，又能结合本国实际进行创新的特点</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <div class="question-header">📖 活动2：想一想：在近700年的幕府统治时期，日本的天皇处于什么地位？</div>
+                        <button class="btn btn-primary" onclick="toggleAnswer('answer3', true)">查看答案</button>
+                        <div class="answer-section" id="answer3">
+                            <strong>参考答案：</strong>
+                            <ul class="knowledge-list">
+                                <li><strong>名义地位</strong>：天皇是国家的最高统治者，幕府首领"征夷大将军"名义上由天皇任命</li>
+                                <li><strong>实际地位</strong>：天皇大权旁落，成为一种礼仪性的摆设，没有实际政治权力</li>
+                                <li><strong>幕府掌权</strong>：幕府将军实际上把持着国家大权，掌握政治、军事权力</li>
+                                <li><strong>并存体制</strong>：幕府与天皇朝廷并存，形成二元政治结构</li>
+                            </ul>
+                            <p><strong>总结</strong>：在近700年的幕府统治时期，日本的天皇虽然名义上是国家最高统治者，但实际上大权旁落，只是象征性的存在，真正的权力掌握在幕府将军手中。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2>三、知识拓展</h2>
+                
+                <div class="exercise-section">
+                    <div class="question">
+                        <div class="question-header">📚 古代朝鲜</div>
+                        <p style="margin: 15px 0;">3—4世纪，朝鲜半岛基本形成了高句丽、百济和新罗三国鼎立的局面。676年，新罗统一了朝鲜半岛大部分地区。</p>
+                        <p style="margin: 15px 0;">10世纪，王建建立高丽王朝，仿照唐制，设三省六部，引入科举考试选拔官员。14世纪末，高丽大将李成桂建立朝鲜王朝，改国号为朝鲜。</p>
+                        <p style="margin: 15px 0;"><strong>问题：根据材料，概括古代朝鲜历史发展的特点。</strong></p>
+                        <button class="btn btn-primary" onclick="toggleAnswer('answer4', true)">查看答案</button>
+                        <div class="answer-section" id="answer4">
+                            <strong>参考答案：</strong>
+                            <ul class="knowledge-list">
+                                <li><strong>三国时期</strong>：3—4世纪形成高句丽、百济、新罗三国鼎立局面</li>
+                                <li><strong>统一时期</strong>：676年新罗统一朝鲜半岛大部分地区</li>
+                                <li><strong>学习中国</strong>：高丽王朝仿照唐制，设三省六部，引入科举制</li>
+                                <li><strong>王朝更替</strong>：14世纪末李成桂建立朝鲜王朝，改国号为朝鲜</li>
+                                <li><strong>总体特点</strong>：古代朝鲜深受中国文化影响，政治制度多仿照中国</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第四板块：课堂训练 -->
+            <div class="tab-content" id="tab-3">
+                <h2>课堂训练（有一定难度）</h2>
+                
+                <h3>一、判断题（判断对错并说明理由）</h3>
+                
+                <div class="exercise-section">
+                    <div class="question" data-question="tf1">
+                        <div class="question-header">1. 5世纪，大和政权基本实现了日本的统一。</div>
+                        <div class="options">
+                            <div class="option" onclick="checkTF('tf1', true, this)">A. 正确</div>
+                            <div class="option" onclick="checkTF('tf1', false, this)">B. 错误</div>
+                        </div>
+                        <div class="answer-section" id="answer-tf1"></div>
+                    </div>
+                    
+                    <div class="question" data-question="tf2">
+                        <div class="question-header">2. 大化改新是仿效中国明朝制度进行的改革。</div>
+                        <div class="options">
+                            <div class="option" onclick="checkTF('tf2', true, this)">A. 正确</div>
+                            <div class="option" onclick="checkTF('tf2', false, this)">B. 错误</div>
+                        </div>
+                        <div class="answer-section" id="answer-tf2"></div>
+                    </div>
+                    
+                    <div class="question" data-question="tf3">
+                        <div class="question-header">3. 大化改新使日本发展成为一个中央集权制的封建国家。</div>
+                        <div class="options">
+                            <div class="option" onclick="checkTF('tf3', true, this)">A. 正确</div>
+                            <div class="option" onclick="checkTF('tf3', false, this)">B. 错误</div>
+                        </div>
+                        <div class="answer-section" id="answer-tf3"></div>
+                    </div>
+                    
+                    <div class="question" data-question="tf4">
+                        <div class="question-header">4. 幕府统治时期，日本天皇掌握着国家实际大权。</div>
+                        <div class="options">
+                            <div class="option" onclick="checkTF('tf4', true, this)">A. 正确</div>
+                            <div class="option" onclick="checkTF('tf4', false, this)">B. 错误</div>
+                        </div>
+                        <div class="answer-section" id="answer-tf4"></div>
+                    </div>
+                </div>
+                
+                <h3>二、选择题（单选）</h3>
+                
+                <div class="exercise-section">
+                    <div class="question" data-question="mc1">
+                        <div class="question-header">1. 大化改新开始于（　）</div>
+                        <div class="options">
+                            <div class="option" onclick="checkMC('mc1', 'B', this)">A. 5世纪</div>
+                            <div class="option" onclick="checkMC('mc1', 'B', this)">B. 646年</div>
+                            <div class="option" onclick="checkMC('mc1', 'B', this)">C. 12世纪</div>
+                            <div class="option" onclick="checkMC('mc1', 'B', this)">D. 676年</div>
+                        </div>
+                        <div class="answer-section" id="answer-mc1"></div>
+                    </div>
+                    
+                    <div class="question" data-question="mc2">
+                        <div class="question-header">2. 大化改新仿效的是中国哪个朝代的制度（　）</div>
+                        <div class="options">
+                            <div class="option" onclick="checkMC('mc2', 'C', this)">A. 汉朝</div>
+                            <div class="option" onclick="checkMC('mc2', 'C', this)">B. 明朝</div>
+                            <div class="option" onclick="checkMC('mc2', 'C', this)">C. 唐朝</div>
+                            <div class="option" onclick="checkMC('mc2', 'C', this)">D. 宋朝</div>
+                        </div>
+                        <div class="answer-section" id="answer-mc2"></div>
+                    </div>
+                    
+                    <div class="question" data-question="mc3">
+                        <div class="question-header">3. 日本进入幕府统治时期的标志是（　）</div>
+                        <div class="options">
+                            <div class="option" onclick="checkMC('mc3', 'D', this)">A. 大和政权统一</div>
+                            <div class="option" onclick="checkMC('mc3', 'D', this)">B. 大化改新</div>
+                            <div class="option" onclick="checkMC('mc3', 'D', this)">C. 武士集团兴起</div>
+                            <div class="option" onclick="checkMC('mc3', 'D', this)">D. 镰仓幕府建立</div>
+                        </div>
+                        <div class="answer-section" id="answer-mc3"></div>
+                    </div>
+                    
+                    <div class="question" data-question="mc4">
+                        <div class="question-header">4. 大化改新在政治上建立的政治体制是（　）</div>
+                        <div class="options">
+                            <div class="option" onclick="checkMC('mc4', 'B', this)">A. 幕府统治</div>
+                            <div class="option" onclick="checkMC('mc4', 'B', this)">B. 以天皇为中心的中央集权制度</div>
+                            <div class="option" onclick="checkMC('mc4', 'B', this)">C. 部民制</div>
+                            <div class="option" onclick="checkMC('mc4', 'B', this)">D. 武士集团统治</div>
+                        </div>
+                        <div class="answer-section" id="answer-mc4"></div>
+                    </div>
+                    
+                    <div class="question" data-question="mc5">
+                        <div class="question-header">5. 下列关于日本武士的表述，正确的是（　）</div>
+                        <div class="options">
+                            <div class="option" onclick="checkMC('mc5', 'C', this)">A. 武士效忠的对象是国家</div>
+                            <div class="option" onclick="checkMC('mc5', 'C', this)">B. 武士产生于大化改新时期</div>
+                            <div class="option" onclick="checkMC('mc5', 'C', this)">C. 武士是贵族武装起来的军事集团</div>
+                            <div class="option" onclick="checkMC('mc5', 'C', this)">D. 武士道强调效忠天皇</div>
+                        </div>
+                        <div class="answer-section" id="answer-mc5"></div>
+                    </div>
+                </div>
+                
+                <h3>三、材料解析题（有一定难度）</h3>
+                
+                <div class="exercise-section">
+                    <div class="question" data-question="material1">
+                        <div class="question-header">材料一：6—9世纪，日本积极吸收中国文化。中国文化直接影响着日本，推动日本进行改革。大和皇族中的改革派发动宫廷政变，孝德天皇即位，年号大化。从646年开始，日本仿效唐朝的典章制度，进行了一系列改革，史称"大化改新"。</div>
+                        <div class="question-header">材料二：12世纪晚期，源氏武士集团击败平氏武士集团，源氏首领源赖朝获得"征夷大将军"称号，设幕府于镰仓。镰仓幕府拥有独立于朝廷的政治、军事权力，日本由此进入近700年的幕府统治时期。</div>
+                        
+                        <p style="margin: 15px 0;"><strong>问题：</strong></p>
+                        <p>（1）结合材料一，概括大化改新的背景。（4分）</p>
+                        <p>（2）结合材料二，分析幕府统治的特点。（4分）</p>
+                        <p>（3）综合两则材料，谈谈你对日本古代政治制度演变的认识。（4分）</p>
+                        
+                        <button class="btn btn-primary" onclick="showMaterialAnswer()">查看参考答案</button>
+                        <div class="answer-section" id="answer-material1" style="margin-top: 15px;">
+                            <strong>参考答案：</strong>
+                            
+                            <p><strong>（1）大化改新的背景：</strong></p>
+                            <ul class="knowledge-list">
+                                <li>日本积极吸收中国文化（2分）</li>
+                                <li>中国文化推动日本进行改革（2分）</li>
+                            </ul>
+                            
+                            <p><strong>（2）幕府统治的特点：</strong></p>
+                            <ul class="knowledge-list">
+                                <li>幕府拥有独立于朝廷的政治、军事权力（2分）</li>
+                                <li>幕府首领获得"征夷大将军"称号（2分）</li>
+                            </ul>
+                            
+                            <p><strong>（3）对日本古代政治制度演变的认识：</strong></p>
+                            <ul class="knowledge-list">
+                                <li>大化改新建立了以天皇为中心的中央集权制度（2分）</li>
+                                <li>后来演变为幕府统治，天皇大权旁落（2分）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>四、拓展思考题（难度较高）</h3>
+                
+                <div class="exercise-section">
+                    <div class="question" data-question="extend1">
+                        <div class="question-header">比较日本大化改新与中国戊戌变法的异同，分析为什么两次改革的结果截然不同。</div>
+                        
+                        <button class="btn btn-primary" onclick="showExtendAnswer()">查看参考答案</button>
+                        <div class="answer-section" id="answer-extend1" style="margin-top: 15px;">
+                            <strong>参考答案：</strong>
+                            
+                            <table>
+                                <tr>
+                                    <th>比较维度</th>
+                                    <th>日本大化改新</th>
+                                    <th>中国戊戌变法</th>
+                                </tr>
+                                <tr>
+                                    <td>时间</td>
+                                    <td>646年</td>
+                                    <td>1898年</td>
+                                </tr>
+                                <tr>
+                                    <td>改革力量</td>
+                                    <td>改革派掌握政权</td>
+                                    <td>维新派没有实权</td>
+                                </tr>
+                                <tr>
+                                    <td>改革内容</td>
+                                    <td>全面学习唐朝制度</td>
+                                    <td>主张君主立宪</td>
+                                </tr>
+                                <tr>
+                                    <td>改革结果</td>
+                                    <td>成功，建立封建国家</td>
+                                    <td>失败，仅维持103天</td>
+                                </tr>
+                            </table>
+                            
+                            <p><strong>结果不同的原因：</strong></p>
+                            <ul class="knowledge-list">
+                                <li><strong>改革力量</strong>：大化改新改革派掌握政权，戊戌变法维新派没有实权</li>
+                                <li><strong>社会基础</strong>：大化改新顺应社会发展需要，戊戌变法触动了顽固派利益</li>
+                                <li><strong>改革策略</strong>：大化改新全面彻底，戊戌变法急于求成</li>
+                                <li><strong>国际环境</strong>：大化改新时期唐朝强盛，戊戌变法时期列强环伺</li>
+                            </ul>
+                            
+                            <div class="key-point">
+                                <strong>启示</strong>：改革的成功需要具备多方面的条件，包括改革力量的强大、社会基础的支持、正确的改革策略以及有利的国际环境等。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- 课程导航 -->
+        <div class="lesson-nav">
+            <a href="九年级历史上_第10课_拜占庭帝国和查士丁尼法典.html" class="prev-link">← 第10课：拜占庭帝国和查士丁尼法典</a>
+            <a href="index.html" class="home-link">🏠 返回导航页</a>
+            <a href="九年级历史上_第12课_阿拉伯帝国.html" class="next-link">第12课：阿拉伯帝国 →</a>
+        </div>
+    </div>
+    
+    <script>
+        // 切换标签页
+        function showTab(index) {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+            
+            contents.forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+        }
+        
+        // 切换答案显示
+        function toggleAnswer(id, isCorrect) {
+            const answer = document.getElementById(id);
+            answer.classList.toggle('show');
+        }
+        
+        // 判断题检查
+        function checkTF(questionId, selectedCorrect, element) {
+            const question = document.querySelector(`[data-question="${questionId}"]`);
+            const options = question.querySelectorAll('.option');
+            const answerSection = document.getElementById(`answer-${questionId}`);
+            
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'none';
+            });
+            
+            const correctAnswers = {
+                'tf1': { correct: true, text: '正确。5世纪，在本州中部兴起的大和政权基本实现了统一。' },
+                'tf2': { correct: false, text: '错误。大化改新是仿效中国唐朝制度进行的改革，不是明朝。646年唐朝正处于鼎盛时期。' },
+                'tf3': { correct: true, text: '正确。大化改新使日本发展成为一个中央集权制的封建国家，是日本从奴隶社会向封建社会过渡的标志。' },
+                'tf4': { correct: false, text: '错误。幕府统治时期，天皇大权旁落，成为一种礼仪性的摆设，幕府将军实际上把持着国家大权。' }
+            };
+            
+            const answer = correctAnswers[questionId];
+            
+            if (selectedCorrect === answer.correct) {
+                element.classList.add('correct');
+                answerSection.innerHTML = `<strong style="color: #28a745;">✓ 回答正确！</strong><p>${answer.text}</p>`;
+                answerSection.classList.add('correct-answer');
+            } else {
+                element.classList.add('wrong');
+                answerSection.innerHTML = `<strong style="color: #dc3545;">✗ 回答错误！</strong><p>${answer.text}</p>`;
+                answerSection.classList.add('wrong-answer');
+            }
+            
+            answerSection.classList.add('show');
+        }
+        
+        // 选择题检查
+        function checkMC(questionId, correctOption, element) {
+            const question = document.querySelector(`[data-question="${questionId}"]`);
+            const options = question.querySelectorAll('.option');
+            const answerSection = document.getElementById(`answer-${questionId}`);
+            
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'none';
+            });
+            
+            const selectedText = element.textContent.trim().charAt(0);
+            
+            const answers = {
+                'mc1': { answer: 'B', text: '大化改新开始于646年。5世纪是大和政权统一时期，12世纪是幕府统治开始时期，676年是新罗统一朝鲜半岛时间。' },
+                'mc2': { answer: 'C', text: '大化改新仿效的是中国唐朝的典章制度。646年正处于唐朝时期，唐朝是当时世界上最强盛的国家之一。' },
+                'mc3': { answer: 'D', text: '12世纪晚期，源赖朝建立镰仓幕府，日本进入幕府统治时期。大和政权统一是5世纪，大化改新是646年，武士集团兴起是幕府统治的背景。' },
+                'mc4': { answer: 'B', text: '大化改新在政治上建立了以天皇为中心的中央集权制度。幕府统治和武士集团统治是后来的事情，部民制是大化改新前的制度。' },
+                'mc5': { answer: 'C', text: '武士是地方豪强为了保护自己的庄园而把自己家族和仆从中的青壮男子武装起来的军事集团。武士效忠主公而非国家，产生于大化改新后，武士道强调效忠主公而非天皇。' }
+            };
+            
+            const answer = answers[questionId];
+            
+            if (selectedText === answer.answer) {
+                element.classList.add('correct');
+                answerSection.innerHTML = `<strong style="color: #28a745;">✓ 回答正确！</strong><p>${answer.text}</p>`;
+                answerSection.classList.add('correct-answer');
+            } else {
+                element.classList.add('wrong');
+                options.forEach(opt => {
+                    if (opt.textContent.trim().charAt(0) === answer.answer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                answerSection.innerHTML = `<strong style="color: #dc3545;">✗ 回答错误！正确答案是 ${answer.answer}。</strong><p>${answer.text}</p>`;
+                answerSection.classList.add('wrong-answer');
+            }
+            
+            answerSection.classList.add('show');
+        }
+        
+        // 显示材料题答案
+        function showMaterialAnswer() {
+            document.getElementById('answer-material1').classList.add('show');
+        }
+        
+        // 显示拓展题答案
+        function showExtendAnswer() {
+            document.getElementById('answer-extend1').classList.add('show');
+        }
+    </script>
+</body>
+</html>
