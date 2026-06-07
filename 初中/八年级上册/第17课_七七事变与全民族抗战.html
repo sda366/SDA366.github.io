@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第17课 七七事变与全民族抗战</title>
+<style>
+  /* ===== 全局重置 & 基础 ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "SimHei", "黑体", "Microsoft YaHei", sans-serif;
+    font-size: 14pt;        /* 四号黑体 */
+    line-height: 1.8;
+    color: #2c2c2c;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 40%, #24243e 100%);
+    min-height: 100vh;
+    padding: 30px 20px;
+  }
+
+  /* ===== 主体卡片 ===== */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.96);
+    border-radius: 20px;
+    padding: 40px 50px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  .container::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #4a00e0, #8e2de2, #c471ed, #b224ef);
+  }
+
+  /* ===== 标题区 ===== */
+  .lesson-header {
+    text-align: center;
+    padding: 20px 0 30px;
+    border-bottom: 2px dashed #ddd;
+    margin-bottom: 30px;
+  }
+  .lesson-header .grade {
+    font-size: 18px; color: #888; letter-spacing: 2px;
+  }
+  .lesson-header h1 {
+    font-size: 36px;
+    background: linear-gradient(135deg, #302b63, #4a00e0, #8e2de2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 10px 0 5px;
+    letter-spacing: 3px;
+  }
+  .lesson-header .sub {
+    font-size: 16px; color: #999;
+  }
+
+  /* ===== 通用 ===== */
+  .section-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #302b63;
+    border-left: 6px solid #8e2de2;
+    padding-left: 16px;
+    margin: 35px 0 18px;
+    position: relative;
+  }
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 22px;
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, #4a00e0, transparent);
+    border-radius: 2px;
+  }
+  .highlight { color: #b224ef; font-weight: bold; }
+  .highlight-red { color: #d32f2f; font-weight: bold; }
+  .highlight-blue { color: #1565c0; font-weight: bold; }
+
+  /* ===== 时间线 ===== */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+    margin: 15px 0 10px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 18px; top: 8px; bottom: 8px;
+    width: 3px;
+    background: linear-gradient(180deg, #4a00e0, #c471ed, #b224ef);
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative;
+    padding: 10px 0 10px 20px;
+    border-left: none;
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, rgba(142,45,226,0.05), transparent);
+    border-radius: 0 8px 8px 0;
+    transition: background 0.3s;
+  }
+  .timeline-item:hover { background: linear-gradient(90deg, rgba(142,45,226,0.12), transparent); }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -28px; top: 18px;
+    width: 14px; height: 14px;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #8e2de2;
+  }
+  .timeline-item .date {
+    font-size: 18px; font-weight: bold; color: #302b63;
+  }
+  .timeline-item .desc {
+    font-size: 14pt; color: #444; margin-top: 2px;
+  }
+
+  /* ===== 重难点 ===== */
+  .analysis-grid {
+    display: flex; flex-direction: column; gap: 18px;
+    margin: 10px 0;
+  }
+  .analysis-card {
+    padding: 18px 22px;
+    border-radius: 12px;
+    border-left: 5px solid;
+    background: #faf8ff;
+  }
+  .analysis-card .label {
+    display: inline-block;
+    padding: 2px 14px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 15px; font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .analysis-card.deep { border-color: #4a00e0; }
+  .analysis-card.deep .label { background: #4a00e0; }
+  .analysis-card.wide { border-color: #8e2de2; }
+  .analysis-card.wide .label { background: #8e2de2; }
+  .analysis-card.high { border-color: #c471ed; }
+  .analysis-card.high .label { background: #c471ed; }
+
+  /* ===== 教材栏目 ===== */
+  .textbook-box {
+    margin: 15px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e0d6f5;
+  }
+  .textbook-box .tb-header {
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #302b63, #4a00e0);
+    color: #fff;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 1px;
+  }
+  .textbook-box .tb-body {
+    padding: 18px 22px;
+    background: #faf8ff;
+    font-size: 14pt;
+  }
+  .textbook-box .tb-body p { margin-bottom: 8px; }
+  .textbook-box .tb-body .material-quote {
+    background: #f0ebfe;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border-left: 4px solid #8e2de2;
+    margin: 10px 0;
+    font-size: 14pt;
+  }
+
+  /* ===== 练习题 ===== */
+  .question { margin: 14px 0; padding: 14px 18px; border-radius: 10px; background: #f8f6ff; border: 1px solid #eee; }
+  .q-title { font-weight: bold; font-size: 17px; color: #302b63; margin-bottom: 10px; }
+  .q-text { margin-bottom: 8px; line-height: 1.9; }
+  .options { padding-left: 24px; }
+  .options li { list-style: none; margin: 4px 0; padding: 3px 6px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+  .options li:hover { background: #f0ebfe; }
+
+  .tf-options { display: flex; gap: 20px; margin-top: 6px; }
+  .tf-btn {
+    padding: 4px 20px; border-radius: 6px; border: 2px solid #ccc;
+    background: #fff; cursor: pointer; font-size: 14pt; font-family: inherit;
+    transition: 0.2s;
+  }
+  .tf-btn:hover { border-color: #8e2de2; color: #8e2de2; }
+  .tf-btn.selected-true { border-color: #43a047; background: #e8f5e9; color: #2e7d32; }
+  .tf-btn.selected-false { border-color: #e53935; background: #ffebee; color: #c62828; }
+
+  /* 答案解析 — 点击显示 */
+  .answer-toggle {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 18px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #302b63, #4a00e0);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 13px; font-family: inherit;
+    transition: 0.3s;
+  }
+  .answer-toggle:hover { transform: scale(1.04); box-shadow: 0 4px 14px rgba(74,0,224,0.3); }
+  .answer-content {
+    display: none;
+    margin-top: 10px;
+    padding: 14px 18px;
+    background: #f5f0ff;
+    border-radius: 8px;
+    border-left: 4px solid #8e2de2;
+    line-height: 1.9;
+  }
+  .answer-content.show { display: block; }
+  .answer-content .correct { color: #2e7d32; font-weight: bold; }
+  .answer-content .wrong { color: #c62828; font-weight: bold; }
+
+  /* 材料题 */
+  .material-box {
+    background: #f0ebfe;
+    padding: 16px 20px;
+    border-radius: 8px;
+    border-left: 4px solid #4a00e0;
+    margin: 10px 0;
+    line-height: 1.9;
+  }
+
+  /* ===== 返回顶部 ===== */
+  .back-top {
+    display: block; width: 50px; height: 50px;
+    line-height: 50px; text-align: center;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    color: #fff; font-size: 24px;
+    border-radius: 50%;
+    position: fixed; bottom: 30px; right: 30px;
+    text-decoration: none; box-shadow: 0 4px 20px rgba(74,0,224,0.4);
+    transition: 0.3s; z-index: 999;
+  }
+  .back-top:hover { transform: scale(1.1); }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 768px) {
+    .container { padding: 20px 16px; }
+    .lesson-header h1 { font-size: 26px; }
+    .timeline { padding-left: 28px; }
+    .timeline-item::before { left: -22px; width: 12px; height: 12px; }
+  }
+
+  /* ===== 全选禁用（防作弊） ===== */
+  .container { user-select: text; }
+</style>
+</head>
+<body>
+
+<div class="container" id="top">
+
+  <!-- ========== 标题 ========== -->
+  <div class="lesson-header">
+    <div class="grade">八年级上册 · 中国近代史</div>
+    <h1>第17课 七七事变与全民族抗战</h1>
+    <div class="sub">2024修订版 · 人教版 / 统编版</div>
+  </div>
+
+  <!-- ========== 导入 ========== -->
+  <p style="text-indent:2em;margin-bottom:20px;">
+    <strong>1937年7月7日</strong>，日军在北平西南卢沟桥附近举行军事演习，谎称士兵失踪，要求进入宛平城搜查，遭到中国军队拒绝。日军悍然炮轰卢沟桥和宛平城，驻守当地的中国<span class="highlight-red">第二十九军</span>官兵奋起抵抗。<span class="highlight">七七事变</span>（又称<span class="highlight">卢沟桥事变</span>）爆发，这标志着中国<strong>全民族抗战</strong>的开始。
+  </p>
+
+  <!-- ========== 一、知识点时间线 ========== -->
+  <div class="section-title">一、知识点时间线</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="date">1937年7月7日</div>
+      <div class="desc"><span class="highlight">卢沟桥事变（七七事变）</span>——日军炮轰卢沟桥和宛平城，中国守军第二十九军奋起抵抗。<strong>全民族抗战由此开始</strong>。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">1937年7月</div>
+      <div class="desc"><span class="highlight-blue">第二次国共合作正式形成</span>——工农红军改编为<span class="highlight-red">八路军</span>（国民革命军第八路军）和<span class="highlight-red">新四军</span>（国民革命军新编第四军），奔赴抗日战场。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">1937年8月 — 11月</div>
+      <div class="desc"><span class="highlight">淞沪会战（上海）</span>——姚子青营血战宝山、谢晋元团坚守<span class="highlight">四行仓库</span>。"八百壮士"孤军奋战四昼夜，重创日军。会战持续3个月，粉碎了日军"<strong>三个月灭亡中国</strong>"的迷梦。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">1937年12月13日</div>
+      <div class="desc"><span class="highlight-red">南京大屠杀</span>——日军攻陷南京后进行了长达6周的大屠杀，超过<span class="highlight-red">30万</span>中国平民和俘虏被屠杀。日军还犯下强奸、纵火、抢劫等累累罪行，这是人类文明史上最黑暗的一页。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">1938年3月</div>
+      <div class="desc"><span class="highlight">台儿庄战役</span>——第五战区司令长官<span class="highlight-blue">李宗仁</span>指挥中国军队在山东台儿庄与日军激战，歼敌1万余人。这是<strong>正面战场取得的一次重大胜利</strong>。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">1938年6月 — 10月</div>
+      <div class="desc"><span class="highlight">武汉会战</span>——中日双方投入百万兵力，是抗战以来规模最大的一次战役。1938年10月广州、武汉失陷，<strong>抗日战争进入相持阶段</strong>。</div>
+    </div>
+
+  </div>
+
+  <!-- ========== 二、重难点评析 ========== -->
+  <div class="section-title">二、重难点评析</div>
+  <div class="analysis-grid">
+
+    <div class="analysis-card deep">
+      <div class="label">深度挖掘</div>
+      <p><strong>1. 七七事变是全面抗战开始的标志</strong></p>
+      <p>为什么说七七事变标志着全民族抗战的开始？<br>
+        ——日本由局部侵华扩大为全面侵华，中日民族矛盾上升为中国社会最主要的矛盾；<br>
+        ——国共两党停止内战，第二次国共合作正式形成；<br>
+        ——全国各阶层、各民族、海外华侨以不同形式投入抗战，真正实现了"地无分南北，年无分老幼"的全民族抗战。</p>
+      <p style="margin-top:8px;"><strong>2. 南京大屠杀的历史真相</strong></p>
+      <p>南京大屠杀是日军在侵华战争期间犯下的<strong>反人类罪行</strong>。1937年12月13日南京陷落后，日军进行了长达6周的有组织、有计划的大屠杀。据战后远东国际军事法庭和中国国防部审判战犯军事法庭判决，<span class="highlight-red">南京被屠杀的中国军民总数在30万人以上</span>。我们要牢记历史、以史为鉴，警惕日本右翼势力否认南京大屠杀的错误言行。</p>
+    </div>
+
+    <div class="analysis-card wide">
+      <div class="label">广度拓展</div>
+      <p><strong>第二次国共合作（抗日民族统一战线）与第一次国共合作（革命统一战线）的比较：</strong></p>
+      <table style="width:100%; border-collapse: collapse; margin-top:10px; font-size:14pt;">
+        <tr style="background:#f0ebfe;"><th style="padding:8px 10px;border:1px solid #ddd;text-align:center;">比较项</th><th style="padding:8px 10px;border:1px solid #ddd;text-align:center;">第一次（1924-1927）</th><th style="padding:8px 10px;border:1px solid #ddd;text-align:center;">第二次（1937-1945）</th></tr>
+        <tr><td style="padding:8px 10px;border:1px solid #ddd;font-weight:bold;">背景</td><td style="padding:8px 10px;border:1px solid #ddd;">军阀混战，反帝反封建</td><td style="padding:8px 10px;border:1px solid #ddd;">日本全面侵华，民族危机空前严重</td></tr>
+        <tr><td style="padding:8px 10px;border:1px solid #ddd;font-weight:bold;">合作形式</td><td style="padding:8px 10px;border:1px solid #ddd;">党内合作（共产党员以个人身份加入国民党）</td><td style="padding:8px 10px;border:1px solid #ddd;">党外合作（各有政权、军队，遇事协商）</td></tr>
+        <tr><td style="padding:8px 10px;border:1px solid #ddd;font-weight:bold;">政治基础</td><td style="padding:8px 10px;border:1px solid #ddd;">新三民主义</td><td style="padding:8px 10px;border:1px solid #ddd;">抗日救国（共同抗日）</td></tr>
+        <tr><td style="padding:8px 10px;border:1px solid #ddd;font-weight:bold;">军队改编</td><td style="padding:8px 10px;border:1px solid #ddd;">组建国民革命军</td><td style="padding:8px 10px;border:1px solid #ddd;">红军改编为八路军、新四军</td></tr>
+        <tr><td style="padding:8px 10px;border:1px solid #ddd;font-weight:bold;">结果</td><td style="padding:8px 10px;border:1px solid #ddd;">因蒋介石发动"四一二"反革命政变而破裂</td><td style="padding:8px 10px;border:1px solid #ddd;">坚持到抗战胜利</td></tr>
+      </table>
+    </div>
+
+    <div class="analysis-card high">
+      <div class="label">高度升华</div>
+      <p><strong>全民族抗战的含义：</strong></p>
+      <p>所谓"全民族抗战"，是指在中国共产党的抗日民族统一战线旗帜下，<span class="highlight">以国共合作为基础，全国各阶层、各民族、海外华侨广泛参加的抗日战争</span>。具体体现为：</p>
+      <ul style="padding-left:28px;margin-top:6px;">
+        <li><span class="highlight-blue">各阶层</span>：工人、农民、知识分子、民族资产阶级等；</li>
+        <li><span class="highlight-blue">各民族</span>：汉、满、蒙、回、藏等各族人民团结御侮；</li>
+        <li><span class="highlight-blue">海外华侨</span>：捐款捐物、回国参战，如陈嘉庚领导的"南洋华侨筹赈祖国难民总会"；</li>
+        <li><span class="highlight-blue">两个战场</span>：国民党领导的正面战场（主战场）与共产党领导的敌后战场相互配合。</li>
+      </ul>
+      <p style="margin-top:8px;">正如毛泽东所说："<strong>战争之伟力最深厚的根源，存在于民众之中。</strong>"全民族抗战是抗日战争取得最终胜利的根本保证。</p>
+    </div>
+
+  </div>
+
+  <!-- ========== 三、教材栏目 ========== -->
+  <div class="section-title">三、教材栏目</div>
+
+  <!-- 想一想 -->
+  <div class="textbook-box">
+    <div class="tb-header">想一想</div>
+    <div class="tb-body">
+      <p><strong>问题：</strong>七七事变爆发后，中国军民是怎样投身全民族抗战的？这说明了什么？</p>
+      <p style="margin-top:6px;color:#666;">（提示：可从正面战场、敌后战场、人民群众支持等角度思考。）</p>
+    </div>
+  </div>
+
+  <!-- 材料研读 -->
+  <div class="textbook-box">
+    <div class="tb-header">材料研读</div>
+    <div class="tb-body">
+      <div class="material-quote">
+        "命令前线官兵坚决抵抗，卢沟桥即尔等之坟墓，应与桥共存亡，不得后退。"<br>
+        <span style="display:block;text-align:right;">——第二十九军司令部命令（1937年7月）</span>
+      </div>
+      <p><strong>思考：</strong>从这则命令中，你感受到了中国守军怎样的精神？</p>
+      <p style="margin-top:6px;color:#666;">（感受中国守军视死如归、誓与阵地共存亡的爱国精神和民族气节。）</p>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="textbook-box">
+    <div class="tb-header">课后活动</div>
+    <div class="tb-body">
+      <p>1. 查阅资料，了解南京大屠杀的历史真相，写一篇200字左右的心得体会。</p>
+      <p>2. 搜集淞沪会战中"八百壮士"的故事，在班内交流分享。</p>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="textbook-box">
+    <div class="tb-header">知识拓展</div>
+    <div class="tb-body">
+      <p><strong>南京大屠杀死难者国家公祭日</strong></p>
+      <p>2014年2月27日，十二届全国人大常委会第七次会议通过决定，将每年的<span class="highlight-red">12月13日</span>设立为<strong>"南京大屠杀死难者国家公祭日"</strong>。2014年12月13日，我国举行了首次南京大屠杀死难者国家公祭仪式，以国家之名祭奠遇难同胞，缅怀先烈，警示世人牢记历史、珍爱和平。</p>
+    </div>
+  </div>
+
+  <!-- ========== 四、课堂训练 ========== -->
+  <div class="section-title">四、课堂训练</div>
+
+  <!-- === 判断题 === -->
+  <p style="font-weight:bold;font-size:17px;color:#302b63;margin:10px 0 5px;">（一）判断题（判断正误，点击选项显示解析）</p>
+
+  <div class="question" id="tf1">
+    <div class="q-title">1.</div>
+    <div class="q-text">七七事变发生在1937年7月7日，地点在北平西南的卢沟桥，这次事变标志着中国全民族抗战的开始。</div>
+    <div class="tf-options">
+      <button class="tf-btn" onclick="selectTF('tf1',true,true)">正确</button>
+      <button class="tf-btn" onclick="selectTF('tf1',false,true)">错误</button>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer('ans1')">查看解析</button>
+    <div class="answer-content" id="ans1">
+      <span class="correct">正确。</span> 七七事变（卢沟桥事变）发生于1937年7月7日，日军炮轰卢沟桥和宛平城，中国守军奋起抵抗。此后国共第二次合作正式形成，全民族抗战局面形成，因此七七事变是全民族抗战开始的标志。
+    </div>
+  </div>
+
+  <div class="question" id="tf2">
+    <div class="q-title">2.</div>
+    <div class="q-text">淞沪会战中，谢晋元率部坚守四行仓库，"八百壮士"英勇奋战，粉碎了日军"三个月灭亡中国"的迷梦。</div>
+    <div class="tf-options">
+      <button class="tf-btn" onclick="selectTF('tf2',true,true)">正确</button>
+      <button class="tf-btn" onclick="selectTF('tf2',false,true)">错误</button>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer('ans2')">查看解析</button>
+    <div class="answer-content" id="ans2">
+      <span class="correct">正确。</span> 1937年淞沪会战期间，谢晋元率420余人（为壮声势号称"八百壮士"）坚守苏州河北岸四行仓库四昼夜，重创日军。淞沪会战持续三个月，打破了日军速战速决、三个月灭亡中国的计划。
+    </div>
+  </div>
+
+  <div class="question" id="tf3">
+    <div class="q-title">3.</div>
+    <div class="q-text">武汉会战后，中国军队取得了抗战以来正面战场的第一次重大胜利。</div>
+    <div class="tf-options">
+      <button class="tf-btn" onclick="selectTF('tf3',true,false)">正确</button>
+      <button class="tf-btn" onclick="selectTF('tf3',false,true)">错误</button>
+    </div>
+    <button class="answer-toggle" onclick="toggleAnswer('ans3')">查看解析</button>
+    <div class="answer-content" id="ans3">
+      <span class="wrong">错误。</span> 题干表述有误。武汉会战（1938年6-10月）是抗战以来规模最大的一次战役，但正面战场的<strong>第一次重大胜利</strong>是1938年3月的<strong>台儿庄战役</strong>（李宗仁指挥，歼敌1万余人）。武汉会战后抗日战争进入了相持阶段。
+    </div>
+  </div>
+
+  <!-- === 选择题 === -->
+  <p style="font-weight:bold;font-size:17px;color:#302b63;margin:10px 0 5px;">（二）选择题（点击选项显示解析）</p>
+
+  <div class="question" id="mc1">
+    <div class="q-title">1. 七七事变后，国共两党第二次合作正式形成，红军主力改编为（　）</div>
+    <ul class="options">
+      <li onclick="selectMC('mc1','A',false)">A. 国民革命军</li>
+      <li onclick="selectMC('mc1','B',true)">B. 八路军</li>
+      <li onclick="selectMC('mc1','C',false)">C. 解放军</li>
+      <li onclick="selectMC('mc1','D',false)">D. 志愿军</li>
+    </ul>
+    <button class="answer-toggle" onclick="toggleAnswer('ans4')">查看解析</button>
+    <div class="answer-content" id="ans4">
+      <span class="correct">B. 八路军</span> 1937年国共合作抗日，根据两党协议，红军主力改编为国民革命军第八路军（简称八路军），朱德任总指挥，彭德怀任副总指挥；南方八省的红军游击队改编为国民革命军新编第四军（简称新四军），叶挺任军长。
+    </div>
+  </div>
+
+  <div class="question" id="mc2">
+    <div class="q-title">2. 在淞沪会战中，率部坚守四行仓库、与日军血战四昼夜的爱国将领是（　）</div>
+    <ul class="options">
+      <li onclick="selectMC('mc2','A',false)">A. 姚子青</li>
+      <li onclick="selectMC('mc2','B',false)">B. 李宗仁</li>
+      <li onclick="selectMC('mc2','C',true)">C. 谢晋元</li>
+      <li onclick="selectMC('mc2','D',false)">D. 张自忠</li>
+    </ul>
+    <button class="answer-toggle" onclick="toggleAnswer('ans5')">查看解析</button>
+    <div class="answer-content" id="ans5">
+      <span class="correct">C. 谢晋元</span> 淞沪会战中，谢晋元率420余人（号称"八百壮士"）坚守苏州河北岸四行仓库四昼夜，打退日军多次进攻，极大地鼓舞了全国人民的抗战决心。姚子青营血战宝山，全营壮烈牺牲；李宗仁指挥了台儿庄战役；张自忠在1940年枣宜会战中牺牲。
+    </div>
+  </div>
+
+  <div class="question" id="mc3">
+    <div class="q-title">3. 抗战以来正面战场取得的一次重大胜利是（　）</div>
+    <ul class="options">
+      <li onclick="selectMC('mc3','A',false)">A. 淞沪会战</li>
+      <li onclick="selectMC('mc3','B',true)">B. 台儿庄战役</li>
+      <li onclick="selectMC('mc3','C',false)">C. 武汉会战</li>
+      <li onclick="selectMC('mc3','D',false)">D. 平型关大捷</li>
+    </ul>
+    <button class="answer-toggle" onclick="toggleAnswer('ans6')">查看解析</button>
+    <div class="answer-content" id="ans6">
+      <span class="correct">B. 台儿庄战役</span> 1938年3月，李宗仁指挥中国军队在台儿庄（山东）与日军激战，歼敌1万余人。台儿庄战役是<strong>抗战以来正面战场取得的一次重大胜利</strong>，沉重打击了日军的嚣张气焰，振奋了全国人民的抗战信心。注意：平型关大捷（1937年9月）是八路军取得的<strong>首次大捷</strong>，属于敌后战场。
+    </div>
+  </div>
+
+  <div class="question" id="mc4">
+    <div class="q-title">4. 标志着抗日战争进入相持阶段的是（　）</div>
+    <ul class="options">
+      <li onclick="selectMC('mc4','A',false)">A. 淞沪会战结束</li>
+      <li onclick="selectMC('mc4','B',false)">B. 台儿庄战役胜利</li>
+      <li onclick="selectMC('mc4','C',false)">C. 南京沦陷</li>
+      <li onclick="selectMC('mc4','D',true)">D. 广州、武汉失陷</li>
+    </ul>
+    <button class="answer-toggle" onclick="toggleAnswer('ans7')">查看解析</button>
+    <div class="answer-content" id="ans7">
+      <span class="correct">D. 广州、武汉失陷</span> 1938年10月，日军攻占广州和武汉后，由于战线过长、兵力不足、后方受到八路军敌后战场的牵制，不得不停止大规模战略进攻，中国抗日战争由此进入<strong>战略相持阶段</strong>。相持阶段的到来，标志着日本"速战速决"战略的破产。
+    </div>
+  </div>
+
+  <!-- === 材料题 === -->
+  <p style="font-weight:bold;font-size:17px;color:#302b63;margin:10px 0 5px;">（三）材料分析题</p>
+
+  <div class="question">
+    <div class="q-title">阅读下列材料，回答问题。</div>
+    <div class="material-box">
+      <strong>材料一：</strong>"日军在占领南京后的六周内，展开惨绝人寰的大屠杀，被害人数超过30万。日军大规模地焚烧和破坏南京的建筑物，全市约有三分之一的建筑物被烧毁。日军在南京大肆抢劫，大量中国文物和财富被劫往日本。"<br>
+      <span style="display:block;text-align:right;">——据远东国际军事法庭判决书</span>
+    </div>
+    <div class="material-box" style="margin-top:8px;">
+      <strong>材料二：</strong>"至于南京大屠杀，中国方面一直主张存在30万被害者，但经过我（日本）调查，南京的俘虏和平民在混乱中被杀害的人数，大概是4万人左右……所谓的30万被害者，是战后中国政府为获取赔偿而捏造的数字。"<br>
+      <span style="display:block;text-align:right;">——日本右翼势力言论</span>
+    </div>
+
+    <p style="margin:14px 0 6px;"><strong>（1）</strong>根据材料一并结合所学知识，指出南京大屠杀的性质和遇难人数。</p>
+    <p style="margin-bottom:8px;"><strong>（2）</strong>材料二中日本右翼势力的言论反映了什么问题？作为中学生，你如何看待这种言论？</p>
+
+    <button class="answer-toggle" onclick="toggleAnswer('ans8')">查看参考答案</button>
+    <div class="answer-content" id="ans8">
+
+      <p><strong>（1）参考答案：</strong></p>
+      <p>南京大屠杀是日军在侵华战争期间犯下的<strong>反人类罪行</strong>，是灭绝人性的<strong>大规模屠杀、强奸、纵火、抢劫</strong>等暴行。据远东国际军事法庭和中国国防部审判战犯军事法庭判决，<span class="correct">南京被屠杀的中国军民总数在30万人以上</span>。</p>
+
+      <p style="margin-top:10px;"><strong>（2）参考答案：</strong></p>
+      <p>材料二中日本右翼势力的言论企图<strong>否认南京大屠杀的历史真相</strong>，这是对历史的严重歪曲和对中国人民感情的极大伤害。南京大屠杀有大量人证、物证、国际文献和影像资料为证（如拉贝日记、马吉影像等），铁证如山，不容否认。</p>
+      <p style="margin-top:6px;">作为中学生，我们应当：</p>
+      <ul style="padding-left:24px;">
+        <li><span class="correct">正视历史，牢记南京大屠杀的惨痛教训；</span></li>
+        <li><span class="correct">以史为鉴，警惕日本右翼势力复活军国主义的危险；</span></li>
+        <li><span class="correct">珍爱和平，努力学习，为中华之崛起而读书。</span></li>
+      </ul>
+      <p style="margin-top:6px;">正如习近平总书记所强调："<strong>历史是最好的教科书，也是最好的清醒剂。</strong>"</p>
+
+    </div>
+  </div>
+
+  <!-- ========== 页脚 ========== -->
+  <div style="text-align:center;padding:30px 0 10px;border-top:1px solid #eee;margin-top:30px;color:#aaa;font-size:13px;">
+    八年级上册 · 第17课 七七事变与全民族抗战 · 教学课件<br>
+    教材版本：2024修订版 人教版/统编版 · 仅供教学参考
+  </div>
+
+</div>
+
+<!-- 回到顶部 -->
+<a href="#top" class="back-top" title="返回顶部">↑</a>
+
+<!-- ===== 交互脚本 ===== -->
+<script>
+/* 答题计时防刷 */
+let answerTimers = {};
+
+/* 切换答案解析显示 */
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el.classList.contains('show')) {
+    el.classList.remove('show');
+  } else {
+    el.classList.add('show');
+  }
+}
+
+/* 判断题选择 */
+function selectTF(qid, isCorrect, selectedTrue) {
+  var container = document.getElementById(qid);
+  var btns = container.querySelectorAll('.tf-btn');
+  // 清除状态
+  btns.forEach(function(b) { b.classList.remove('selected-true','selected-false'); });
+  // 高亮选中的按钮
+  if (selectedTrue) {
+    btns[0].classList.add('selected-true');
+  } else {
+    btns[1].classList.add('selected-false');
+  }
+  // 如果答对显示绿色提示，答错显示红色提示
+  // 先移除旧的提示
+  var oldTip = container.querySelector('.tf-tip');
+  if (oldTip) oldTip.remove();
+
+  var tip = document.createElement('div');
+  tip.className = 'tf-tip';
+  tip.style.marginTop = '8px';
+  tip.style.fontWeight = 'bold';
+  if (isCorrect) {
+    tip.style.color = '#2e7d32';
+    tip.textContent = '回答正确！';
+  } else {
+    tip.style.color = '#c62828';
+    tip.textContent = '回答错误，请查看解析。';
+  }
+  container.appendChild(tip);
+}
+
+/* 选择题选择 */
+function selectMC(qid, selected, isCorrect) {
+  var container = document.getElementById(qid);
+  var items = container.querySelectorAll('.options li');
+  // 清除所有高亮
+  items.forEach(function(li) { li.style.background = ''; li.style.fontWeight = ''; });
+  // 找到选中的
+  var target = null;
+  items.forEach(function(li) {
+    if (li.textContent.trim().startsWith(selected + '.')) {
+      target = li;
+    }
+  });
+  if (target) {
+    target.style.fontWeight = 'bold';
+    if (isCorrect) {
+      target.style.background = '#e8f5e9';
+      target.style.color = '#2e7d32';
+    } else {
+      target.style.background = '#ffebee';
+      target.style.color = '#c62828';
+    }
+  }
+  // 移除旧提示
+  var oldTip = container.querySelector('.mc-tip');
+  if (oldTip) oldTip.remove();
+  var tip = document.createElement('div');
+  tip.className = 'mc-tip';
+  tip.style.marginTop = '8px';
+  tip.style.fontWeight = 'bold';
+  if (isCorrect) {
+    tip.style.color = '#2e7d32';
+    tip.textContent = '回答正确！';
+  } else {
+    tip.style.color = '#c62828';
+    tip.textContent = '回答错误，点击"查看解析"了解详情。';
+  }
+  container.appendChild(tip);
+}
+</script>
+
+<!-- ===== 课程导航 ===== -->
+<div style="max-width:1000px;margin:20px auto 0;padding:0 20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,0.96);border-radius:10px;padding:12px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.08);">
+    <div style="flex:1;text-align:left;">
+      <a href="第16课_从九一八事变到西安事变.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;">← 第16课 九一八到西安事变</a>
+    </div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;
+      padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+      color:#fff;text-decoration:none;border-radius:16px;font-size:11pt;
+      white-space:nowrap;">📋 导航</a>
+    <div style="flex:1;text-align:right;">
+      <a href="第18课_正面战场和敌后战场.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;">第18课 正面与敌后战场 →</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1课 鸦片战争 — 八年级历史上册</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "SimHei", "黑体", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #e8e0f0 0%, #d0d4f0 50%, #e0d8ee 100%);
+  color: #2d2d3a;
+  font-size: 14pt;
+  line-height: 1.9;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* ===== 顶部大标题 ===== */
+.hero {
+  background: linear-gradient(135deg, #3a1c71 0%, #4a2b8e 30%, #6a3cb8 60%, #3a5bc7 100%);
+  color: #fff;
+  text-align: center;
+  padding: 48px 24px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -60%; left: -20%;
+  width: 140%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: 32pt;
+  letter-spacing: 6px;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+.hero .unit {
+  font-size: 14pt;
+  opacity: 0.85;
+  letter-spacing: 4px;
+  position: relative;
+  z-index: 1;
+}
+.hero .sub {
+  font-size: 13pt;
+  opacity: 0.7;
+  margin-top: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 导航锚点 ===== */
+.toc {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(74,43,142,0.15);
+  padding: 14px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.toc a {
+  display: inline-block;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, #4a2b8e, #3a5bc7);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 11pt;
+  transition: all 0.25s;
+}
+.toc a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74,43,142,0.35);
+}
+
+/* ===== 内容区 ===== */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ===== 板块标题 ===== */
+.section-title {
+  background: linear-gradient(135deg, #4a2b8e, #3a5bc7);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 16pt;
+  letter-spacing: 4px;
+  margin: 36px 0 20px;
+  box-shadow: 0 4px 14px rgba(74,43,142,0.25);
+}
+.section-title .icon { margin-right: 10px; }
+
+/* ===== 内容卡片 ===== */
+.card {
+  background: rgba(255,255,255,0.88);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  border-left: 4px solid #6a3cb8;
+  transition: box-shadow 0.25s;
+}
+.card:hover { box-shadow: 0 4px 20px rgba(74,43,142,0.12); }
+
+/* ===== 时间线 ===== */
+.timeline { position: relative; padding-left: 36px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 8px; bottom: 8px;
+  width: 3px;
+  background: linear-gradient(180deg, #4a2b8e, #6a3cb8, #3a5bc7);
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -28px; top: 8px;
+  width: 14px; height: 14px;
+  background: linear-gradient(135deg, #4a2b8e, #6a3cb8);
+  border-radius: 50%;
+  border: 3px solid #e0d8ee;
+  box-shadow: 0 0 0 2px #6a3cb8;
+}
+.tl-year {
+  display: inline-block;
+  background: linear-gradient(135deg, #4a2b8e, #6a3cb8);
+  color: #fff;
+  font-weight: bold;
+  padding: 2px 14px;
+  border-radius: 12px;
+  font-size: 12pt;
+  margin-bottom: 4px;
+}
+.tl-content { font-size: 14pt; }
+
+/* ===== 知识点标签 ===== */
+.tag {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 10px;
+  font-size: 11pt;
+  margin-right: 6px;
+  font-weight: bold;
+}
+.tag-cause { background: #fce4ec; color: #c62828; }
+.tag-event { background: #e3f2fd; color: #1565c0; }
+.tag-effect { background: #e8f5e9; color: #2e7d32; }
+.tag-key { background: #fff3e0; color: #e65100; }
+
+/* ===== 评析区 ===== */
+.analysis-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.analysis-tab {
+  padding: 6px 18px;
+  border: none;
+  background: #e0d8ee;
+  border-radius: 16px;
+  font-size: 12pt;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #4a2b8e;
+}
+.analysis-tab.active, .analysis-tab:hover {
+  background: linear-gradient(135deg, #4a2b8e, #3a5bc7);
+  color: #fff;
+}
+.analysis-panel { display: none; }
+.analysis-panel.active { display: block; }
+
+/* ===== 教材栏目 ===== */
+.col-section {
+  background: #f5f0ff;
+  border-radius: 10px;
+  padding: 16px 22px;
+  margin-bottom: 16px;
+  border-left: 4px solid #9c7bc7;
+}
+.col-title {
+  font-size: 15pt;
+  font-weight: bold;
+  color: #4a2b8e;
+  margin-bottom: 6px;
+}
+.col-q {
+  font-size: 14pt;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  border-left: 3px solid #6a3cb8;
+}
+.col-answer {
+  display: none;
+  font-size: 14pt;
+  padding: 12px 16px;
+  background: #e8f5e9;
+  border-radius: 8px;
+  border-left: 4px solid #4caf50;
+  margin-top: 6px;
+}
+.col-toggle {
+  display: inline-block;
+  padding: 4px 16px;
+  background: linear-gradient(135deg, #4a2b8e, #3a5bc7);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 12pt;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+.col-toggle:hover { opacity: 0.9; }
+
+/* ===== 课堂训练 ===== */
+.q-block {
+  background: rgba(255,255,255,0.88);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  border-left: 4px solid #3a5bc7;
+}
+.q-num {
+  display: inline-block;
+  background: linear-gradient(135deg, #3a5bc7, #6a3cb8);
+  color: #fff;
+  padding: 2px 14px;
+  border-radius: 12px;
+  font-size: 12pt;
+  margin-bottom: 8px;
+}
+.q-text {
+  font-size: 14pt;
+  margin-bottom: 10px;
+  line-height: 1.9;
+}
+.q-options { margin: 8px 0; }
+.q-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 16px;
+  margin-bottom: 6px;
+  background: #f5f3ff;
+  border: 2px solid #ddd8ee;
+  border-radius: 8px;
+  font-size: 14pt;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.q-option:hover { border-color: #6a3cb8; background: #ede8ff; }
+.q-option.correct { border-color: #4caf50; background: #e8f5e9; color: #2e7d32; }
+.q-option.wrong { border-color: #f44336; background: #ffebee; color: #c62828; }
+.q-option.disabled { pointer-events: none; opacity: 0.7; }
+.q-feedback {
+  display: none;
+  margin-top: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13pt;
+}
+.q-feedback.show { display: block; }
+.q-feedback.correct { background: #e8f5e9; border-left: 4px solid #4caf50; color: #2e7d32; }
+.q-feedback.wrong { background: #ffebee; border-left: 4px solid #f44336; color: #c62828; }
+
+.answer-toggle {
+  display: inline-block;
+  padding: 4px 16px;
+  background: linear-gradient(135deg, #4a2b8e, #3a5bc7);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 11pt;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.answer-toggle:hover { opacity: 0.9; }
+
+/* ===== 材料题 ===== */
+.material {
+  background: #faf6f0;
+  border-left: 4px solid #8d6e63;
+  padding: 12px 18px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  font-size: 13pt;
+  line-height: 1.9;
+}
+.material .src {
+  text-align: right;
+  font-size: 11pt;
+  color: #6d4c41;
+  margin-top: 6px;
+}
+
+/* ===== 判断题 ===== */
+.judge-options {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+}
+.judge-btn {
+  padding: 6px 28px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 14pt;
+  font-family: inherit;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.2s;
+}
+.judge-btn.correct { border-color: #4caf50; background: #e8f5e9; color: #2e7d32; }
+.judge-btn.wrong { border-color: #f44336; background: #ffebee; color: #c62828; }
+.judge-btn.disabled { pointer-events: none; opacity: 0.6; }
+
+/* ===== 底部 ===== */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: #6a6a80;
+  font-size: 11pt;
+  border-top: 1px solid rgba(74,43,142,0.1);
+  margin-top: 40px;
+}
+
+/* ===== 提示 ===== */
+.hint-box {
+  background: linear-gradient(135deg, #fff8e1, #fff3e0);
+  border-left: 4px solid #ff9800;
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 13pt;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 640px) {
+  .hero h1 { font-size: 22pt; letter-spacing: 3px; }
+  .hero .unit { font-size: 12pt; }
+  .container { padding: 16px 12px; }
+  .card { padding: 16px; }
+  body { font-size: 13pt; }
+  .q-option, .q-text, .col-q { font-size: 13pt; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== 顶部 ========== -->
+<div class="hero">
+  <h1>第1课 鸦片战争</h1>
+  <div class="unit">八年级历史上册 · 第一单元</div>
+  <div class="sub">中国开始沦为半殖民地半封建社会</div>
+</div>
+
+<!-- ========== 导航 ========== -->
+<nav class="toc">
+  <a href="#summary">知识点总结</a>
+  <a href="#analysis">重难点评析</a>
+  <a href="#textbook">教材栏目解答</a>
+  <a href="#exercises">课堂训练</a>
+</nav>
+
+<div class="container">
+
+<!-- ======================== 一、知识点总结 ======================== -->
+<div id="summary">
+<div class="section-title"><span class="icon">📖</span>一、知识点总结 · 时间线梳理</div>
+
+<div class="card" style="border-left-color:#9c7bc7;">
+  <p style="margin-bottom:12px;"><strong>▎课前导语</strong></p>
+  <p>18世纪中后期，英国率先完成工业革命，成为世界上最强大的资本主义国家。为了开辟海外市场、掠夺原料，英国把侵略矛头指向幅员辽阔、人口众多的中国。此时的中国，清王朝统治下的封建制度已走向衰落，自然经济占主导地位，对外实行闭关锁国政策。英国向中国大量走私鸦片，由此引发了一系列深刻影响中国历史进程的事件。</p>
+</div>
+
+<div class="card">
+  <p style="margin-bottom:12px;"><strong>▎时间线：从鸦片走私到国门洞开（18世纪末—1844年）</strong></p>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <span class="tl-year">18世纪末—19世纪初</span>
+      <div class="tl-content">
+        <span class="tag tag-cause">背景</span>
+        <strong>英国向中国大量走私鸦片</strong>
+        <p style="margin-top:4px;">在正当的中英贸易中，中国处于出超地位，英国处于入超地位。英国为扭转贸易逆差，向中国大量走私鸦片。到19世纪30年代，中国每年白银外流达600万两。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1838年底</span>
+      <div class="tl-content">
+        <span class="tag tag-key">关键</span>
+        <strong>道光帝派林则徐赴广东查禁鸦片</strong>
+        <p style="margin-top:4px;">面对鸦片泛滥带来的严重危害，道光帝任命林则徐为钦差大臣，前往广东禁烟。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1839年3月</span>
+      <div class="tl-content">
+        <strong>林则徐到达广州，开始禁烟</strong>
+        <p style="margin-top:4px;">他下令缉拿烟贩，整顿海防。英国商人被迫交出鸦片约110多万千克。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1839年6月3日—25日</span>
+      <div class="tl-content">
+        <span class="tag tag-event">重大事件</span>
+        <strong>虎门销烟</strong>
+        <p style="margin-top:4px;">林则徐在虎门海滩将收缴的鸦片当众销毁。虎门销烟显示了中华民族反抗外来侵略的坚强意志。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1840年6月</span>
+      <div class="tl-content">
+        <span class="tag tag-event">重大事件</span>
+        <strong>鸦片战争爆发</strong>
+        <p style="margin-top:4px;">英国以虎门销烟为借口，发动侵略中国的战争。英军封锁珠江口，沿海北犯，抵达天津大沽口，威胁清政府。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1841年</span>
+      <div class="tl-content">
+        <strong>英军扩大侵略</strong>
+        <p style="margin-top:4px;">英军强占香港岛，先后攻占广州、厦门、定海、宁波、吴淞、镇江等地，所到之处烧杀抢掠。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1842年8月</span>
+      <div class="tl-content">
+        <span class="tag tag-event">重大事件</span>
+        <strong>《南京条约》签订</strong>
+        <p style="margin-top:4px;">英军舰队驶抵南京下关江面，清政府被迫签订中英《南京条约》。这是中国近代史上第一个丧权辱国的不平等条约。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1843年</span>
+      <div class="tl-content">
+        <strong>《虎门条约》签订</strong>
+        <p style="margin-top:4px;">英国强迫清政府签订《虎门条约》，从中获得了领事裁判权、片面最惠国待遇、在通商口岸租地建房等特权。</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-year">1844年</span>
+      <div class="tl-content">
+        <strong>中美《望厦条约》· 中法《黄埔条约》</strong>
+        <p style="margin-top:4px;">美国、法国趁火打劫，迫使清政府签订不平等条约，获得更多侵略权益。</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="card" style="border-left-color:#4caf50;">
+  <p style="margin-bottom:8px;"><strong>▎《南京条约》核心内容速记（1842年）</strong></p>
+  <p style="margin-bottom:4px;"><strong>一割：</strong>割让香港岛给英国</p>
+  <p style="margin-bottom:4px;"><strong>二赔：</strong>赔款2100万银元</p>
+  <p style="margin-bottom:4px;"><strong>五口：</strong>开放广州、厦门、福州、宁波、上海五处为通商口岸</p>
+  <p><strong>协定关税：</strong>英商进出口货物应纳税款，须经双方协议</p>
+  <div class="hint-box" style="margin-top:10px;">
+    <strong>🔑 记忆口诀：</strong>"一割二赔五口协定"——记住这四个关键词即可掌握《南京条约》全部核心内容。
+  </div>
+</div>
+
+<div class="card" style="border-left-color:#f44336;">
+  <p style="margin-bottom:8px;"><strong>▎鸦片战争的影响——中国近代史由此开端</strong></p>
+  <p style="margin-bottom:8px;"><span class="tag tag-effect">深远影响</span></p>
+  <p>① <strong>社会性质变化：</strong>中国开始从封建社会变为半殖民地半封建社会，这是最根本的变化。</p>
+  <p>② <strong>主权遭破坏：</strong>领土完整、关税自主权、司法主权等遭到破坏。</p>
+  <p>③ <strong>经济结构变化：</strong>外国商品大量涌入，中国传统的自然经济开始解体。</p>
+  <p>④ <strong>社会矛盾变化：</strong>外国资本主义与中华民族的矛盾、封建主义与人民大众的矛盾成为中国社会的两大主要矛盾。</p>
+  <p>⑤ <strong>革命任务变化：</strong>中国人民开始肩负起反侵略反封建的双重革命任务。</p>
+  <p style="margin-top:8px; background:#fff3e0; padding:8px 14px; border-radius:6px;"><strong>结论：</strong>鸦片战争是中国历史的转折点，标志着中国近代史的开端。</p>
+</div>
+</div>
+
+<!-- ======================== 二、重难点评析 ======================== -->
+<div id="analysis">
+<div class="section-title"><span class="icon">🔍</span>二、重难点评析</div>
+
+<div class="analysis-tabs">
+  <button class="analysis-tab active" onclick="switchAnalysis(this,'depth')">深度剖析</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'breadth')">广度拓展</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'height')">高度升华</button>
+</div>
+
+<div id="panel-depth" class="analysis-panel active">
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎深度剖析之一：鸦片战争爆发的根本原因 vs 直接原因</strong></p>
+    <p>【重点·高频考点】这是理解整场战争的关键，也是最容易被混淆的地方。</p>
+    <p style="margin-top:8px;"><strong>直接原因（借口）：</strong>林则徐的虎门销烟。英国以此为由发动战争，宣称"保护贸易"。</p>
+    <p style="margin-top:6px;"><strong>根本原因（深层动力）：</strong>英国完成工业革命后，迫切需要开辟更大的商品市场和原料产地。地大物博、人口众多的中国成为其首要目标。英国企图通过武力打开中国大门，将中国纳入资本主义世界市场体系。</p>
+    <div class="hint-box">
+      <strong>💡 教参提示：</strong>教材明确指出"英国以虎门销烟为借口，发动侵略战争"。这句话中的<strong>"借口"</strong>二字是关键——说明禁烟只是导火索，英国发动战争是既定国策。
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎深度剖析之二：中国战败的深层原因</strong></p>
+    <p>【难点】为什么"天朝上国"会输给远道而来的英国？</p>
+    <p style="margin-top:8px;">① <strong>制度落后：</strong>中国处于封建社会末期，政治腐败，军备废弛；英国确立了先进的资本主义制度。</p>
+    <p>② <strong>经济落后：</strong>中国以小农经济为主，自然经济占统治地位；英国已完成工业革命，机器大工业生产。</p>
+    <p>③ <strong>军事落后：</strong>清军使用冷兵器与旧式火炮；英军拥有先进的军舰、火炮和近代化武器。</p>
+    <p>④ <strong>统治集团昏庸：</strong>道光帝犹豫不决，战时和战不定；部分官员妥协投降、临阵脱逃。</p>
+    <div class="hint-box">
+      <strong>💡 教参提示：</strong>教材指出"清朝专制制度腐败，统治者昏庸愚昧"是战败的重要原因。制度的全面落后才是根本原因，而非简单的武器不如人。
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎深度剖析之三：如何理解"半殖民地半封建社会"</strong></p>
+    <p>【难点】这是中国近代史的核心概念，务必透彻理解。</p>
+    <p style="margin-top:8px;">"半殖民地"是<strong>主权形态</strong>的概念——指形式上保持独立，实际上领土、关税、司法等主权受到严重破坏，丧失了完全独立自主的地位。</p>
+    <p>"半封建"是<strong>社会形态</strong>的概念——指封建制度已开始瓦解，资本主义因素有所发展，但封建剥削制度和自然经济仍占主导地位。</p>
+    <div class="hint-box">
+      <strong>💡 教参评析：</strong>"半"不是"一半"的意思，而是"部分地"意味着——中国不再是完全的封建社会，但也没有成为完全的资本主义社会或完全的殖民地。这是一种畸形的社会形态。
+    </div>
+  </div>
+</div>
+
+<div id="panel-breadth" class="analysis-panel">
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎广度拓展之一：中英贸易逆差与鸦片走私</strong></p>
+    <p>正当的中英贸易中，中国茶叶、丝绸、瓷器等在欧洲极受欢迎，英国呢绒等在中国却销路不佳。中国处于<strong>出超</strong>地位，大量白银流入中国。为扭转逆差，英国商人开始向中国走私鸦片——这是一种极其卑劣的贸易手段，也是资本主义原始积累过程中不光彩的一面。</p>
+    <p style="margin-top:8px;"><strong>横向联系：</strong>同一时期（19世纪中期），英国通过鸦片贸易，不仅在印度种植鸦片向中国输出，还在印度建立殖民统治，将印度变成其原料产地和商品市场。这是英国全球殖民体系的一部分——可将中国史与世界史（英国工业革命、殖民扩张）联系起来理解。</p>
+  </div>
+
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎广度拓展之二：同一时期的世界与中国</strong></p>
+    <p><strong>中国（1840年）：</strong>清道光年间，小农经济，闭关锁国，军备废弛，封建专制制度的衰落期。</p>
+    <p><strong>英国（1840年）：</strong>维多利亚女王在位（1837-1901），英国已完成工业革命，号称"世界工厂"，正处在资本主义上升的鼎盛期。</p>
+    <p style="margin-top:6px;"><strong>对比结论：</strong>当英国用蒸汽机和铁甲舰叩开中国大门时，中国还在用大刀长矛和四书五经应对——两种文明的差距，决定了这场战争的结果从一开始就已注定。</p>
+  </div>
+
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎广度拓展之三：虎门销烟与世界禁毒</strong></p>
+    <p>林则徐的虎门销烟是世界禁毒史上的一次伟大壮举，比联合国1961年《麻醉品单一公约》早了一百多年。在19世纪上半叶，英国东印度公司主导着全球鸦片贸易的产业链（印度种植→加工→走私到中国），而林则徐的行动是对这一毒瘤的正面反抗。可联系今天中国的禁毒立场——1839年的虎门销烟，至今仍是中国禁毒精神的文化起点。</p>
+  </div>
+</div>
+
+<div id="panel-height" class="analysis-panel">
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎历史规律之一：西方冲击下的中国回应——"冲击—反应"模式</strong></p>
+    <p>鸦片战争开启了中国对西方冲击的被动回应模式。此后近百年，中国每一次重大变革（洋务运动、戊戌变法、辛亥革命、新民主主义革命）都可以看作是这种"冲击—回应"的延续。鸦片战争是第一块多米诺骨牌，推倒后引发了中国社会一系列的连锁反应。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>升华认识：</strong>理解鸦片战争，不仅是记住一场战争的结果，更要看到它如何成为撬动中国千年变局的第一根杠杆。</p>
+  </div>
+
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎历史规律之二：落后就要挨打——历史的深刻教训</strong></p>
+    <p>鸦片战争最深刻的教训就是：<strong>封闭必然落后，落后就要挨打。</strong>当西方世界通过工业革命建立了近代工业文明时，中国仍沉浸在"天朝上国"的迷梦中，拒绝改革、拒绝开放。结果，被西方的"坚船利炮"无情地打破了国门。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>升华认识：</strong>这一教训贯穿整个中国近代史。今天的中国坚持改革开放、坚持科教兴国，正是对这一历史教训的深刻回应。</p>
+  </div>
+
+  <div class="card">
+    <p style="margin-bottom:10px;"><strong>▎历史规律之三：民族觉醒的起点——从林则徐看"开眼看世界"</strong></p>
+    <p>林则徐不仅仅是一位禁烟英雄，更是一位具有远见的政治家。他在广东抗英期间，组织编译《四洲志》，介绍西方国家的历史和地理，被誉为中国"开眼看世界的第一人"。他的朋友魏源受其委托，在《四洲志》基础上编成《海国图志》，提出"师夷长技以制夷"的思想——这成为后来洋务运动的思想先声。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>升华认识：</strong>即使在最屈辱的失败中，中国也有人在寻找出路——这是中华民族历劫不灭的精神基因。</p>
+  </div>
+</div>
+</div>
+
+<!-- ======================== 三、教材栏目解答 ======================== -->
+<div id="textbook">
+<div class="section-title"><span class="icon">📝</span>三、教材栏目解答</div>
+
+<div class="col-section">
+  <div class="col-title">💬 想一想</div>
+  <div class="col-q">
+    <strong>题目：</strong>鸦片战争前，英国向中国输入鸦片，对中国造成了哪些危害？
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('think-1')">📌 查看参考答案</button>
+  <div id="think-1" class="col-answer">
+    <strong>参考答案：</strong><br>
+    ① <strong>白银大量外流：</strong>鸦片泛滥导致中国每年白银流失达600万两，造成清政府财政危机；<br>
+    ② <strong>危害人民健康：</strong>吸食鸦片损害了中国人民的身心健康，导致社会道德败坏；<br>
+    ③ <strong>削弱军队战斗力：</strong>许多官员和士兵吸食鸦片，严重削弱了清军的战斗力；<br>
+    ④ <strong>加剧政治腐败：</strong>鸦片走私贿赂成风，进一步加剧了清政府的腐败。
+  </div>
+</div>
+
+<div class="col-section">
+  <div class="col-title">📜 材料研读</div>
+  <div class="col-q">
+    <p><strong>材料：</strong>"若鸦片一日未绝，本大臣一日不回，誓与此事相始终，断无中止之理。"</p>
+    <p style="text-align:right; font-size:12pt; color:#666;">——林则徐</p>
+    <p style="margin-top:6px;"><strong>问题：</strong>林则徐这段话表达了什么样的决心？</p>
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('material-1')">📌 查看参考答案</button>
+  <div id="material-1" class="col-answer">
+    <strong>参考答案：</strong><br>
+    ① 表达了林则徐<strong>彻底禁绝鸦片</strong>的坚定决心；<br>
+    ② "一日不回"、"誓与此事相始终"等措辞表明他<strong>不达目的决不罢休</strong>的态度；<br>
+    ③ 体现了林则徐<strong>维护民族利益、反抗外来侵略</strong>的坚强意志和爱国精神；<br>
+    ④ 也反映了以林则徐为代表的<strong>抵抗派</strong>在国家危难之际挺身而出的历史担当。
+  </div>
+</div>
+
+<div class="col-section">
+  <div class="col-title">📚 课后活动</div>
+
+  <div class="col-q">
+    <p><strong>第1题：</strong>开放广州、厦门、福州、宁波、上海五处为通商口岸，对中国社会有什么影响？</p>
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('hw-1')">📌 查看参考答案</button>
+  <div id="hw-1" class="col-answer">
+    <strong>参考答案：</strong><br>
+    ① <strong>积极方面：</strong>五口通商打破了清政府长期以来的闭关锁国政策，客观上加强了中国与世界的联系，促进了中外贸易的发展；<br>
+    ② <strong>消极方面（主要）：</strong>西方列强通过通商口岸向中国大量倾销商品、掠夺原料，中国传统的自然经济开始解体，中国经济逐步被纳入资本主义世界市场体系；<br>
+    ③ 通商口岸成为列强侵略中国的桥头堡，中国丧失了对外贸易的自主权；<br>
+    ④ 东南沿海地区社会经济结构和生活方式开始发生变化。
+  </div>
+
+  <div class="col-q" style="margin-top:14px;">
+    <p><strong>第2题：</strong>鸦片战争对中国社会造成了什么影响？</p>
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('hw-2')">📌 查看参考答案</button>
+  <div id="hw-2" class="col-answer">
+    <strong>参考答案：</strong><br>
+    ① <strong>社会性质：</strong>中国开始从封建社会变为半殖民地半封建社会，这是最根本的变化；<br>
+    ② <strong>主权丧失：</strong>领土、关税、司法等主权遭到破坏；<br>
+    ③ <strong>经济冲击：</strong>外国商品大量涌入，自然经济开始解体；<br>
+    ④ <strong>主要矛盾变化：</strong>外国资本主义与中华民族的矛盾、封建主义与人民大众的矛盾，成为中国社会的主要矛盾；<br>
+    ⑤ <strong>革命任务变化：</strong>中国人民开始肩负起反侵略、反封建的双重革命任务；<br>
+    ⑥ <strong>历史地位：</strong>鸦片战争成为中国近代史的开端。
+  </div>
+</div>
+
+<div class="col-section">
+  <div class="col-title">🌐 知识拓展</div>
+  <div class="col-q">
+    <strong>内容：</strong>开眼看世界的林则徐和魏源
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('extend-1')">📌 查看补充材料</button>
+  <div id="extend-1" class="col-answer">
+    <strong>拓展资料：</strong><br>
+    <p style="margin-bottom:6px;">林则徐在广东禁烟和抗英期间，摒弃了清王朝"天朝上国"的虚骄心态，主动了解西方。他设立译馆，组织翻译外国书籍和报纸，主持编译《四洲志》——这是中国近代第一部系统介绍世界地理和历史的著作。</p>
+    <p style="margin-bottom:6px;">林则徐的好友魏源受其嘱托，在《四洲志》基础上增补大量资料，编成《海国图志》60卷（后扩至100卷），提出了<strong>"师夷长技以制夷"</strong>的著名思想——即学习西方的先进技术来抵御西方侵略。</p>
+    <p style="margin-bottom:6px;"><strong>历史评价：</strong>[教参·学术观点] 林则徐和魏源是近代中国第一批睁眼看世界的人。他们的思想和著作打破了"天朝上国"的迷梦，开启了向西方学习的新思潮，为后来的洋务运动、维新变法提供了思想资源。他们的"师夷长技以制夷"思想，标志着中国近代化的思想启蒙由此起步。</p>
+    <p style="color:#888; font-size:12pt; margin-top:6px;">（资料依据：人教版教材·知识拓展栏目及相关教参）</p>
+  </div>
+</div>
+</div>
+
+<!-- ======================== 四、课堂训练 ======================== -->
+<div id="exercises">
+<div class="section-title"><span class="icon">✍️</span>四、课堂训练</div>
+
+<!-- ---- 判断题 ---- -->
+<p style="font-size:16pt; font-weight:bold; color:#4a2b8e; margin:16px 0 10px;">（一）判断题（判断正误，正确的打"√"，错误的打"×"）</p>
+
+<div class="q-block" style="border-left-color:#4a2b8e;">
+  <div class="q-num">判断题 1</div>
+  <div class="q-text">鸦片战争爆发的根本原因是林则徐在虎门销烟，损害了英国商人的利益。</div>
+  <div class="judge-options">
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'false','q1-judge')">√ 正确</button>
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'true','q1-judge')">× 错误</button>
+  </div>
+  <div id="q1-judge" class="q-feedback"><strong>× 错误。</strong>虎门销烟只是英国发动侵略战争的<strong>借口（直接原因）</strong>，而不是根本原因。根本原因是英国完成工业革命后，迫切要求打开中国市场、掠夺工业原料。</div>
+</div>
+
+<div class="q-block" style="border-left-color:#4a2b8e;">
+  <div class="q-num">判断题 2</div>
+  <div class="q-text">《南京条约》中规定割让的"香港岛"就是现在的整个香港地区。</div>
+  <div class="judge-options">
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'false','q2-judge')">√ 正确</button>
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'true','q2-judge')">× 错误</button>
+  </div>
+  <div id="q2-judge" class="q-feedback"><strong>× 错误。</strong>《南京条约》割让的仅是<strong>香港岛</strong>，不包括九龙半岛和新界。整个香港地区是后来通过《北京条约》（1860年割让九龙半岛南部）和1898年《展拓香港界址专条》（租借新界99年）逐步被英国侵占的。这一知识点需要准确记忆。</div>
+</div>
+
+<div class="q-block" style="border-left-color:#4a2b8e;">
+  <div class="q-num">判断题 3</div>
+  <div class="q-text">鸦片战争后，中国社会的主要矛盾变为外国资本主义与中华民族的矛盾。</div>
+  <div class="judge-options">
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'true','q3-judge')">√ 正确</button>
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'false','q3-judge')">× 错误</button>
+  </div>
+  <div id="q3-judge" class="q-feedback"><strong>√ 正确但不完整。</strong>更准确的表述是：鸦片战争后，中国社会出现了<strong>两大主要矛盾</strong>——外国资本主义与中华民族的矛盾、封建主义与人民大众的矛盾。其中，外国资本主义与中华民族的矛盾是最主要的矛盾。</div>
+</div>
+
+<div class="q-block" style="border-left-color:#4a2b8e;">
+  <div class="q-num">判断题 4</div>
+  <div class="q-text">林则徐在主持编译《四洲志》的基础上，由魏源编成了《海国图志》。</div>
+  <div class="judge-options">
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'true','q4-judge')">√ 正确</button>
+    <button class="judge-btn" data-correct="false" onclick="checkJudge(this,'false','q4-judge')">× 错误</button>
+  </div>
+  <div id="q4-judge" class="q-feedback"><strong>√ 正确。</strong>林则徐在广东组织编译《四洲志》，他离开广东后将资料交给魏源。魏源在此基础上补充了大量资料，编成《海国图志》，提出了"师夷长技以制夷"的思想。林则徐被誉为"开眼看世界的第一人"。</div>
+</div>
+
+<!-- ---- 选择题 ---- -->
+<p style="font-size:16pt; font-weight:bold; color:#4a2b8e; margin:26px 0 10px;">（二）选择题（每小题只有一个正确选项）</p>
+
+<div class="q-block">
+  <div class="q-num">选择题 1</div>
+  <div class="q-text">下表是19世纪30年代中英正当贸易中部分商品的进出口状况（单位：万两），据此可知，英国向中国大量走私鸦片的直接目的是什么？</div>
+  <div class="material" style="font-size:13pt;">
+    <table style="width:100%; border-collapse:collapse; text-align:center; margin:6px 0;">
+      <tr style="background:#e0d8ee;"><th>年份</th><th>中国对英出口额</th><th>英国对华出口额</th><th>中国出超/入超</th></tr>
+      <tr><td>1837-1839年平均</td><td>约1000</td><td>约200</td><td>出超约800</td></tr>
+    </table>
+    （注：出超即出口额大于进口额，贸易顺差）
+  </div>
+  <div class="q-options">
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'A. 扭转对华贸易逆差')">A. 扭转对华贸易逆差</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 破坏中国军队的战斗力')">B. 破坏中国军队的战斗力</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 打开中国市场大门')">C. 打开中国市场大门</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 腐蚀清政府官员')">D. 腐蚀清政府官员</button>
+  </div>
+  <div class="q-feedback" id="choice-1"><!-- filled by JS --></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('choice-1-ans')">🔍 查看答案解析</button>
+  <div id="choice-1-ans" class="col-answer">
+    <strong>正确答案：A</strong><br>
+    <strong>解析：</strong>从表格数据可知，在正当的中英贸易中，中国处于出超地位，大量白银流入中国。英国为扭转贸易逆差，向中国大量走私鸦片——以毒品贸易填补正当贸易的亏空。需要区分"直接目的"（扭转逆差）和"根本目的"（打开中国市场）。本题设问的是"直接目的"，故应选A。<br>
+    <strong>区分度提示：</strong>此题容易误选C。注意"C. 打开中国市场大门"是英国发动鸦片战争的<strong>根本目的</strong>，而走私鸦片的直接目的是先扭转对华贸易逆差。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 2</div>
+  <div class="q-text">下列哪项条约内容<strong>不属于</strong>中英《南京条约》的条款？</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 割让香港岛给英国')">A. 割让香港岛给英国</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'B. 允许外国公使进驻北京')">B. 允许外国公使进驻北京</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 赔款2100万银元')">C. 赔款2100万银元</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 开放广州等五处为通商口岸')">D. 开放广州等五处为通商口岸</button>
+  </div>
+  <div class="q-feedback" id="choice-2"><!-- filled by JS --></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('choice-2-ans')">🔍 查看答案解析</button>
+  <div id="choice-2-ans" class="col-answer">
+    <strong>正确答案：B</strong><br>
+    <strong>解析：</strong>"允许外国公使进驻北京"是1858年《天津条约》的内容，不是《南京条约》的条款。此题考察学生对多个条约内容的精确记忆和区分能力。<br>
+    <strong>知识联想：</strong>公使进驻北京意味着列强获得了直接向清政府施加政治压力的渠道，表明列强对中国的侵略从东南沿海深入到政治中心，是侵略加深的重要标志。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 3</div>
+  <div class="q-text">"鸦片战争是中国近代史的开端"，作出这一判断的最主要依据是什么？</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 中国战败被迫赔款，加重了人民负担')">A. 中国战败被迫赔款，加重了人民负担</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 中国被迫开放通商口岸，自然经济开始解体')">B. 中国被迫开放通商口岸，自然经济开始解体</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'C. 中国的社会性质开始发生根本性变化')">C. 中国的社会性质开始发生根本性变化</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 中国的主权和领土完整遭到破坏')">D. 中国的主权和领土完整遭到破坏</button>
+  </div>
+  <div class="q-feedback" id="choice-3"><!-- filled by JS --></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('choice-3-ans')">🔍 查看答案解析</button>
+  <div id="choice-3-ans" class="col-answer">
+    <strong>正确答案：C</strong><br>
+    <strong>解析：</strong>判断历史分期（古代史/近代史）的根本依据是<strong>社会性质</strong>的变化。鸦片战争前中国是封建社会，战争后中国开始沦为半殖民地半封建社会——社会性质发生了根本性的质变，因此鸦片战争成为中国近代史的开端。选项A、B、D都是社会性质变化的具体表现，而非判断依据本身。<br>
+    <strong>难度提示：</strong>本题从"历史分期标准"的角度设问，需要学生理解社会性质是划分历史阶段的根本标准，属于较高层次的历史思维能力考查。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 4</div>
+  <div class="q-text">《南京条约》中哪一条款最能体现英国发动侵略战争的根本目的？</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 割让香港岛')">A. 割让香港岛</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 赔款2100万银元')">B. 赔款2100万银元</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'C. 开放五口通商和协定关税')">C. 开放五口通商和协定关税</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 废除公行制度')">D. 废除公行制度</button>
+  </div>
+  <div class="q-feedback" id="choice-4"><!-- filled by JS --></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('choice-4-ans')">🔍 查看答案解析</button>
+  <div id="choice-4-ans" class="col-answer">
+    <strong>正确答案：C</strong><br>
+    <strong>解析：</strong>英国发动战争的根本目的是打开中国市场，将中国变为其商品市场和原料产地。开放五口通商使英国商品可以进入中国东南沿海最富庶的地区；协定关税则剥夺了中国的关税自主权，使英国商品能以极低关税大量倾销。这两条直接服务于英国的市场扩张目标。割地（A）、赔款（B）虽有损害，但不是英国最核心的诉求。本题需要透过现象看本质——理解"目的"与"手段"的关系。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 5</div>
+  <div class="q-text">英国以"虎门销烟"为借口发动鸦片战争。以下对这一历史细节分析<strong>最准确</strong>的是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 虎门销烟直接损害了英国商人的经济利益')">A. 虎门销烟直接损害了英国商人的经济利益</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 虎门销烟是英国发动战争的唯一决定性因素')">B. 虎门销烟是英国发动战争的唯一决定性因素</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'C. 虎门销烟只是借口，根本原因是英国需要打开中国市场')">C. 虎门销烟只是借口，根本原因是英国需要打开中国市场</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 如果没有虎门销烟，鸦片战争就不会发生')">D. 如果没有虎门销烟，鸦片战争就不会发生</button>
+  </div>
+  <div class="q-feedback" id="choice-5"><!-- filled by JS --></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('choice-5-ans')">🔍 查看答案解析</button>
+  <div id="choice-5-ans" class="col-answer">
+    <strong>正确答案：C</strong><br>
+    <strong>解析：</strong>本题考察<strong>直接原因与根本原因</strong>的严格区分。教材明确指出英国"以虎门销烟为借口"发动战争——"借口"二字表明虎门销烟只是导火索（直接原因），而非根源。英国发动战争的根本动力是工业革命后对商品市场和原料产地的渴求。没有虎门销烟，英国也会寻找其他借口。D选项是错误的因果逻辑。<br>
+    <strong>教参提示：</strong>如教材所言，"中国禁烟运动'给了我们一个战争的机会……'"——英国需要的只是一个发动战争的"机会"。
+  </div>
+</div>
+
+<!-- ---- 材料题 ---- -->
+<p style="font-size:16pt; font-weight:bold; color:#4a2b8e; margin:26px 0 10px;">（三）材料分析题</p>
+
+<div class="q-block" style="border-left-color:#e65100;">
+  <div class="q-num">材料题</div>
+  <div class="q-text"><strong>阅读下列材料，回答问题。</strong></div>
+
+  <div class="material">
+    <p><strong>材料一：</strong>"当鸦片未盛行之时，吸食者不过害及其身，故杖徒已足蔽辜；迨流毒于天下，则为害甚巨，法当从严。若犹泄泄视之，是使数十年后，中原几无可以御敌之兵，且无可以充饷之银。兴思及此，能无股栗？"</p>
+    <p class="src">——林则徐《钱票无甚关碍宜重禁吃烟以杜弊源片》（1838年）</p>
+  </div>
+
+  <div class="material">
+    <p><strong>材料二：</strong>"中国禁烟运动'给了我们一个战争的机会……可以使我们终于乘战胜之余威，提出我们自己的条件，强迫中国接受。这种机会也许不会再来，是不能轻易放过的。"</p>
+    <p class="src">——英国《泰晤士报》评论（1840年）</p>
+  </div>
+
+  <div class="material">
+    <p><strong>材料三：</strong>"英国的大炮破坏了中国皇帝的权威，迫使天朝帝国与地上的世界接触。与外界完全隔绝曾是保存旧中国的首要条件，而当这种隔绝状态在英国的努力之下被暴力所打破的时候，接踵而来的必然是解体的过程，正如小心保存在密封棺材里的木乃伊一接触新鲜空气便必然要解体一样。"</p>
+    <p class="src">——马克思《中国革命和欧洲革命》（1853年）</p>
+  </div>
+
+  <p style="margin-top:10px;"><strong>请回答：</strong></p>
+  <p><strong>（1）</strong>根据材料一，指出林则徐认为鸦片泛滥会带来哪些严重后果？（不得照抄原文，用自己的话概括）</p>
+  <p><strong>（2）</strong>材料二表明英国对中国禁烟运动持什么态度？其真正的意图是什么？</p>
+  <p><strong>（3）</strong>阅读材料三，结合所学知识，马克思所说的"解体的过程"指的是什么？如何理解马克思将鸦片战争后的中国比作"接触新鲜空气的木乃伊"？</p>
+  <p><strong>（4）</strong>综合三则材料，分析鸦片战争爆发的直接原因和根本原因分别是什么？</p>
+
+  <button class="answer-toggle" onclick="toggleAnswer('material-q-ans')">📌 查看参考答案</button>
+  <div id="material-q-ans" class="col-answer" style="display:none;">
+    <p><strong>（1）</strong>林则徐认为鸦片泛滥会导致：①中国人民的身心健康受到严重损害；②军队战斗力被削弱，中原几乎没有可以御敌的士兵；③国家财政崩溃，没有可以充作军饷的白银。（依据教材·教参中对林则徐奏折的解读）</p>
+    <p style="margin-top:6px;"><strong>（2）</strong>态度：英国把中国的禁烟运动视为发动战争的"机会"，持支持和利用的态度。真正意图：不是反对禁烟本身，而是要以此为借口发动对华侵略战争，迫使中国打开国门，满足其市场扩张需求。</p>
+    <p style="margin-top:6px;"><strong>（3）</strong>①"解体的过程"指的是中国传统的封建社会结构——包括以小农经济为基础的自然经济、清王朝的政治统治秩序——在西方资本主义的冲击下开始瓦解。②马克思用"密封棺材里的木乃伊"比喻长期闭关锁国的中国封建社会的僵化状态；"新鲜空气"比喻西方资本主义文明的冲击。这个比喻说明：长期与外界隔绝的中国在西方冲击下，其陈旧的封建体制必然会被打破和瓦解——尽管这一过程是痛苦的，但也意味着旧的、僵化的体制走向终结。（学术观点：此论述体现了马克思对中国近代社会变化的深刻洞察）</p>
+    <p style="margin-top:6px;"><strong>（4）</strong>直接原因（借口）：林则徐领导的虎门销烟运动。根本原因：英国完成工业革命后，迫切需要开辟广阔的商品市场和原料产地，企图以武力打开中国大门，将中国纳入其资本主义世界市场体系。</p>
+  </div>
+</div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ========== 底部 ========== -->
+
+<!-- ===== 课程导航（前后课链接） ===== -->
+<div style="max-width:960px;margin:20px auto 0;padding:0 20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,0.75);border-radius:10px;padding:12px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+    <div style="flex:1;text-align:left;"><span style="color:#bbb;font-size:11pt;">← 已是第一课</span></div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;
+      padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+      color:#fff;text-decoration:none;border-radius:16px;font-size:11pt;
+      transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.85'"
+      onmouseout="this.style.opacity='1'">📋 导航</a>
+    <div style="flex:1;text-align:right;"><a href="第2课_第二次鸦片战争.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">第2课 第二次鸦片战争 →</a></div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>人教版八年级历史上册 · 第1课《鸦片战争》</p>
+  <p>依据教材、教参及教学参考资料整理 · 仅供教学参考使用</p>
+  <p style="margin-top:6px; font-size:10pt;">点击选项可自测 · 答案解析可切换查看</p>
+</div>
+
+<!-- ========== JavaScript ========== -->
+<script>
+// ---- 答案显示切换（教材栏目） ----
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el.style.display === 'block') {
+    el.style.display = 'none';
+  } else {
+    el.style.display = 'block';
+  }
+}
+
+// ---- 重难点评析标签切换 ----
+function switchAnalysis(btn, panelId) {
+  document.querySelectorAll('.analysis-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.analysis-panel').forEach(function(p) { p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('panel-' + panelId).classList.add('active');
+}
+
+// ---- 选择题 ----
+function checkChoice(btn, label) {
+  var parent = btn.parentElement;
+  var options = parent.querySelectorAll('.q-option');
+  var feedback = parent.nextElementSibling; // .q-feedback
+  // If already answered, prevent re-click
+  if (btn.classList.contains('disabled')) return;
+
+  // Disable all options
+  options.forEach(function(o) { o.classList.add('disabled'); });
+
+  var isCorrect = btn.getAttribute('data-correct') === 'true';
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    feedback.innerHTML = '✅ <strong>回答正确！</strong>' + label + ' 是正确答案。';
+    feedback.className = 'q-feedback show correct';
+  } else {
+    btn.classList.add('wrong');
+    feedback.innerHTML = '❌ <strong>回答错误！</strong>"' + label + '" 不是正确答案。请再想一想。';
+    feedback.className = 'q-feedback show wrong';
+    // Also highlight the correct option
+    options.forEach(function(o) {
+      if (o.getAttribute('data-correct') === 'true') {
+        o.classList.add('correct');
+        o.style.borderStyle = 'dashed';
+      }
+    });
+  }
+}
+
+// ---- 判断题 ----
+function checkJudge(btn, isCorrect, feedbackId) {
+  var parent = btn.parentElement;
+  var btns = parent.querySelectorAll('.judge-btn');
+  var feedback = document.getElementById(feedbackId);
+
+  if (btn.classList.contains('disabled')) return;
+
+  btns.forEach(function(b) { b.classList.add('disabled'); });
+
+  var btnAnswer = btn.textContent.trim(); // "√ 正确" or "× 错误"
+  var expected = (isCorrect === 'true') ? '×' : '√';
+
+  var isRight = (isCorrect === 'true');
+
+  if (isRight) {
+    btn.classList.add('correct');
+    feedback.className = 'q-feedback show correct';
+  } else {
+    btn.classList.add('wrong');
+    feedback.className = 'q-feedback show wrong';
+    btns.forEach(function(b) {
+      var bCorrect = b.getAttribute('data-correct');
+      if ((bCorrect === 'true') === (isCorrect === 'true')) { }
+      if (b.getAttribute('data-correct') === 'true' && b !== btn) {
+        b.classList.add('correct');
+      }
+    });
+  }
+}
+
+// ---- 选择题答案解析切换 ----
+function toggleChoiceAnswer(id) {
+  var el = document.getElementById(id);
+  if (el.style.display === 'block') {
+    el.style.display = 'none';
+  } else {
+    el.style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>

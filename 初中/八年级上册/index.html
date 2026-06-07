@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八年级历史上册 · 全课导航</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:"SimHei","黑体","Microsoft YaHei",sans-serif;
+  background:linear-gradient(135deg,#edeaf5 0%,#d8daf0 40%,#e0d8ee 70%,#efe8f5 100%);
+  color:#2d2d3a;font-size:14pt;line-height:1.8;min-height:100vh;
+}
+
+/* ===== 顶部 ===== */
+.hero{
+  background:linear-gradient(135deg,#2d0f4e 0%,#4a2b8e 30%,#6a3cb8 60%,#2a4ab8 100%);
+  color:#fff;text-align:center;padding:52px 24px 40px;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;top:-50%;left:-15%;width:130%;height:180%;
+  background:radial-gradient(ellipse at 25% 50%,rgba(255,255,255,0.07) 0%,transparent 55%);
+  pointer-events:none;
+}
+.hero h1{font-size:34pt;letter-spacing:8px;margin-bottom:4px;position:relative;z-index:1;}
+.hero .sub{font-size:16pt;opacity:0.82;letter-spacing:4px;position:relative;z-index:1;}
+.hero .desc{font-size:12pt;opacity:0.6;margin-top:10px;position:relative;z-index:1;}
+.hero .badge{
+  display:inline-block;background:rgba(255,255,255,0.15);padding:4px 20px;
+  border-radius:20px;font-size:11pt;margin-top:12px;backdrop-filter:blur(4px);
+  position:relative;z-index:1;
+}
+
+/* ===== 容器 ===== */
+.container{max-width:1060px;margin:0 auto;padding:36px 24px 80px;}
+
+/* ===== 单元 ===== */
+.unit-card{
+  background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);
+  border-radius:16px;margin-bottom:32px;overflow:hidden;
+  box-shadow:0 4px 24px rgba(74,43,142,0.1);transition:box-shadow 0.3s;
+}
+.unit-card:hover{box-shadow:0 8px 36px rgba(74,43,142,0.16);}
+
+.unit-header{
+  padding:18px 28px;display:flex;align-items:center;gap:16px;
+}
+.unit-number{
+  display:flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:12px;
+  font-size:16pt;font-weight:bold;color:#fff;flex-shrink:0;
+}
+.unit-title{flex:1;}
+.unit-title h2{font-size:18pt;letter-spacing:2px;color:#2d2d3a;}
+.unit-title .period{
+  font-size:11pt;color:#888;margin-top:2px;letter-spacing:1px;
+}
+.unit-count{
+  font-size:11pt;color:#888;background:#f0ecf8;padding:4px 14px;
+  border-radius:12px;white-space:nowrap;
+}
+
+/* 单元配色 */
+.u1 .unit-number{background:linear-gradient(135deg,#c62828,#e53935);}
+.u1 .unit-header{border-bottom:3px solid #e53935;}
+.u2 .unit-number{background:linear-gradient(135deg,#e65100,#ff8f00);}
+.u2 .unit-header{border-bottom:3px solid #ff8f00;}
+.u3 .unit-number{background:linear-gradient(135deg,#4a2b8e,#6a3cb8);}
+.u3 .unit-header{border-bottom:3px solid #6a3cb8;}
+.u4 .unit-number{background:linear-gradient(135deg,#1565c0,#1e88e5);}
+.u4 .unit-header{border-bottom:3px solid #1e88e5;}
+.u5 .unit-number{background:linear-gradient(135deg,#2e7d32,#43a047);}
+.u5 .unit-header{border-bottom:3px solid #43a047;}
+.u6 .unit-number{background:linear-gradient(135deg,#c62828,#e53935);}
+.u6 .unit-header{border-bottom:3px solid #e53935;}
+.u7 .unit-number{background:linear-gradient(135deg,#4a2b8e,#6a3cb8);}
+.u7 .unit-header{border-bottom:3px solid #6a3cb8;}
+
+/* ===== 课时列表 ===== */
+.lesson-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:6px;padding:8px 28px 20px;
+}
+.lesson-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 16px;border-radius:10px;
+  text-decoration:none;color:#2d2d3a;
+  transition:all 0.2s;position:relative;
+}
+.lesson-item:hover{
+  background:linear-gradient(135deg,#ede8ff,#f5f0ff);
+  transform:translateX(4px);
+}
+.lesson-num{
+  width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11pt;font-weight:bold;color:#fff;flex-shrink:0;
+}
+.u1 .lesson-num{background:linear-gradient(135deg,#c62828,#e53935);}
+.u2 .lesson-num{background:linear-gradient(135deg,#e65100,#ff8f00);}
+.u3 .lesson-num{background:linear-gradient(135deg,#4a2b8e,#6a3cb8);}
+.u4 .lesson-num{background:linear-gradient(135deg,#1565c0,#1e88e5);}
+.u5 .lesson-num{background:linear-gradient(135deg,#2e7d32,#43a047);}
+.u6 .lesson-num{background:linear-gradient(135deg,#c62828,#e53935);}
+.u7 .lesson-num{background:linear-gradient(135deg,#4a2b8e,#6a3cb8);}
+
+.lesson-name{font-size:13pt;line-height:1.3;}
+.lesson-name small{font-size:10pt;color:#999;display:block;}
+.lesson-arrow{
+  margin-left:auto;color:#ccc;font-size:12pt;transition:all 0.2s;
+}
+.lesson-item:hover .lesson-arrow{color:#4a2b8e;transform:translateX(4px);}
+
+/* ===== 底部统计 ===== */
+.stats{
+  text-align:center;padding:20px;background:rgba(255,255,255,0.75);
+  border-radius:16px;margin-top:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);
+}
+.stats .big{font-size:36pt;font-weight:bold;color:#4a2b8e;}
+.stats .label{font-size:12pt;color:#888;margin-top:2px;}
+.stats-grid{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
+
+.footer{text-align:center;padding:24px 20px 40px;color:#999;font-size:11pt;}
+
+/* ===== 响应式 ===== */
+@media(max-width:640px){
+  .hero h1{font-size:24pt;letter-spacing:4px;}
+  .unit-header{flex-wrap:wrap;padding:14px 18px;}
+  .lesson-grid{grid-template-columns:1fr;padding:8px 18px 16px;}
+  .unit-title h2{font-size:15pt;}
+  .stats-grid{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部 ===== -->
+<div class="hero">
+  <h1>八年级历史上册</h1>
+  <div class="sub">中国近代史</div>
+  <div class="desc">人教版 · 2024年修订版</div>
+  <div class="badge">📚 共 7 个单元 · 22 课</div>
+</div>
+
+<div class="container">
+
+<!-- ===== 第一单元 ===== -->
+<div class="unit-card u1">
+  <div class="unit-header">
+    <div class="unit-number">一</div>
+    <div class="unit-title">
+      <h2>中国开始沦为半殖民地半封建社会</h2>
+      <div class="period">1840—1864年</div>
+    </div>
+    <div class="unit-count">3 课</div>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-item" href="第1课_鸦片战争.html">
+      <div class="lesson-num">1</div>
+      <div class="lesson-name">鸦片战争<small>1840—1842 · 《南京条约》</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第2课_第二次鸦片战争.html">
+      <div class="lesson-num">2</div>
+      <div class="lesson-name">第二次鸦片战争<small>1856—1860 · 火烧圆明园</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第3课_太平天国运动.html">
+      <div class="lesson-num">3</div>
+      <div class="lesson-name">太平天国运动<small>1851—1864 · 天京陷落</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== 第二单元 ===== -->
+<div class="unit-card u2">
+  <div class="unit-header">
+    <div class="unit-number">二</div>
+    <div class="unit-title">
+      <h2>早期现代化的初步探索和民族危机加剧</h2>
+      <div class="period">19世纪60年代—1901年</div>
+    </div>
+    <div class="unit-count">4 课</div>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-item" href="第4课_洋务运动和边疆危机.html">
+      <div class="lesson-num">4</div>
+      <div class="lesson-name">洋务运动与边疆危机<small>自强求富 · 新疆台湾建省</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第5课_甲午中日战争与列强瓜分中国狂潮.html">
+      <div class="lesson-num">5</div>
+      <div class="lesson-name">甲午中日战争与列强瓜分中国狂潮<small>1894—1895 · 《马关条约》</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第6课_戊戌变法.html">
+      <div class="lesson-num">6</div>
+      <div class="lesson-name">戊戌变法<small>1898 · 百日维新</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第7课_义和团运动和八国联军侵华.html">
+      <div class="lesson-num">7</div>
+      <div class="lesson-name">义和团运动与八国联军侵华<small>1900—1901 · 《辛丑条约》</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== 第三单元 ===== -->
+<div class="unit-card u3">
+  <div class="unit-header">
+    <div class="unit-number">三</div>
+    <div class="unit-title">
+      <h2>资产阶级民主革命与中华民国的建立</h2>
+      <div class="period">1905—1915年</div>
+    </div>
+    <div class="unit-count">3 课</div>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-item" href="第8课_中国同盟会.html">
+      <div class="lesson-num">8</div>
+      <div class="lesson-name">中国同盟会<small>1905 · 三民主义</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第9课_辛亥革命.html">
+      <div class="lesson-num">9</div>
+      <div class="lesson-name">辛亥革命<small>1911 · 武昌起义 · 中华民国</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第10课_帝制复辟与军阀割据.html">
+      <div class="lesson-num">10</div>
+      <div class="lesson-name">帝制复辟与军阀割据<small>1912—1916 · 护国战争</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== 第四单元 ===== -->
+<div class="unit-card u4">
+  <div class="unit-header">
+    <div class="unit-number">四</div>
+    <div class="unit-title">
+      <h2>新民主主义革命的兴起</h2>
+      <div class="period">1919—1921年</div>
+    </div>
+    <div class="unit-count">2 课</div>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-item" href="第11课_五四运动.html">
+      <div class="lesson-num">11</div>
+      <div class="lesson-name">五四运动<small>1919 · 新民主主义革命开端</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第12课_中国共产党诞生.html">
+      <div class="lesson-num">12</div>
+      <div class="lesson-name">中国共产党诞生<small>1921 · 中共一大</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== 第五单元 ===== -->
+<div class="unit-card u5">
+  <div class="unit-header">
+    <div class="unit-number">五</div>
+    <div class="unit-title">
+      <h2>从国共合作到农村革命根据地的建立</h2>
+      <div class="period">1924—1936年</div>
+    </div>
+    <div class="unit-count">3 课</div>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-item" href="第13课_国共合作与北伐战争.html">
+      <div class="lesson-num">13</div>
+      <div class="lesson-name">国共合作与北伐战争<small>1924—1927 · 国民革命</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第14课_毛泽东开辟井冈山道路.html">
+      <div class="lesson-num">14</div>
+      <div class="lesson-name">毛泽东开辟井冈山道路<small>1927—1928 · 农村包围城市</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第15课_红军长征与遵义会议.html">
+      <div class="lesson-num">15</div>
+      <div class="lesson-name">红军长征与遵义会议<small>1934—1936 · 转危为安</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== 第六单元 ===== -->
+<div class="unit-card u6">
+  <div class="unit-header">
+    <div class="unit-number">六</div>
+    <div class="unit-title">
+      <h2>中华民族的抗日战争</h2>
+      <div class="period">1931—1945年</div>
+    </div>
+    <div class="unit-count">4 课</div>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-item" href="第16课_从九一八事变到西安事变.html">
+      <div class="lesson-num">16</div>
+      <div class="lesson-name">从九一八事变到西安事变<small>1931—1936 · 局部抗战</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第17课_七七事变与全民族抗战.html">
+      <div class="lesson-num">17</div>
+      <div class="lesson-name">七七事变与全民族抗战<small>1937 · 全面抗战开始</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第18课_正面战场和敌后战场.html">
+      <div class="lesson-num">18</div>
+      <div class="lesson-name">正面战场和敌后战场<small>1937—1945 · 国共合作抗日</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第19课_抗日战争的胜利.html">
+      <div class="lesson-num">19</div>
+      <div class="lesson-name">抗日战争的胜利<small>1945 · 日本投降</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== 第七单元 ===== -->
+<div class="unit-card u7">
+  <div class="unit-header">
+    <div class="unit-number">七</div>
+    <div class="unit-title">
+      <h2>人民解放战争</h2>
+      <div class="period">1945—1949年</div>
+    </div>
+    <div class="unit-count">3 课</div>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-item" href="第20课_国民党挑起内战.html">
+      <div class="lesson-num">20</div>
+      <div class="lesson-name">国民党挑起内战<small>1946—1947 · 全面内战爆发</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第21课_人民解放战争的胜利.html">
+      <div class="lesson-num">21</div>
+      <div class="lesson-name">人民解放战争的胜利<small>1947—1949 · 开国大典</small></div>
+      <span class="lesson-arrow">→</span>
+    </a>
+    <a class="lesson-item" href="第22课_探寻红色文化的历史基因.html">
+      <div class="lesson-num">22</div>
+      <div class="lesson-name">活动课 · 探寻红色文化的历史基因</div>
+      <span class="lesson-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== 统计 ===== -->
+<div class="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="big">22</div>
+      <div class="label">总课数</div>
+    </div>
+    <div>
+      <div class="big" style="color:#e53935;">7</div>
+      <div class="label">单元数</div>
+    </div>
+    <div>
+      <div class="big" style="color:#1e88e5;">1840—1949</div>
+      <div class="label">时间跨度</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>人教版八年级历史上册（2024修订版）· 中国近代史</p>
+  <p style="margin-top:4px;">点击任意一课进入对应教学课件</p>
+</div>
+
+</body>
+</html>

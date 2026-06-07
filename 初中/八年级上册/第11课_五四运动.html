@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第11课 五四运动 — 八年级历史上册</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"SimHei","黑体","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#e8e0f0 0%,#d0d4f0 50%,#e0d8ee 100%);color:#2d2d3a;font-size:14pt;line-height:1.9;padding:0;min-height:100vh;}
+.hero{background:linear-gradient(135deg,#3a1c71 0%,#4a2b8e 30%,#6a3cb8 60%,#3a5bc7 100%);color:#fff;text-align:center;padding:48px 24px 36px;position:relative;overflow:hidden;}
+.hero h1{font-size:32pt;letter-spacing:6px;margin-bottom:6px;position:relative;z-index:1;}
+.hero .unit{font-size:14pt;opacity:0.85;letter-spacing:4px;position:relative;z-index:1;}
+.hero .sub{font-size:13pt;opacity:0.7;margin-top:8px;position:relative;z-index:1;}
+.toc{background:rgba(255,255,255,0.75);backdrop-filter:blur(8px);border-bottom:1px solid rgba(74,43,142,0.15);padding:14px 24px;position:sticky;top:0;z-index:100;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
+.toc a{display:inline-block;padding:6px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;text-decoration:none;border-radius:20px;font-size:11pt;}
+.toc a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,43,142,0.35);}
+.container{max-width:960px;margin:0 auto;padding:28px 20px 60px;}
+.section-title{background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;padding:12px 24px;border-radius:10px;font-size:16pt;letter-spacing:4px;margin:36px 0 20px;box-shadow:0 4px 14px rgba(74,43,142,0.25);}
+.card{background:rgba(255,255,255,0.88);border-radius:12px;padding:24px 28px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,0.06);border-left:4px solid #6a3cb8;}
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:12px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,#4a2b8e,#6a3cb8,#3a5bc7);border-radius:2px;}
+.tl-item{position:relative;margin-bottom:20px;padding-left:20px;}
+.tl-item::before{content:'';position:absolute;left:-28px;top:8px;width:14px;height:14px;background:linear-gradient(135deg,#4a2b8e,#6a3cb8);border-radius:50%;border:3px solid #e0d8ee;box-shadow:0 0 0 2px #6a3cb8;}
+.tl-year{display:inline-block;background:linear-gradient(135deg,#4a2b8e,#6a3cb8);color:#fff;font-weight:bold;padding:2px 14px;border-radius:12px;font-size:12pt;margin-bottom:4px;}
+.tag{display:inline-block;padding:2px 12px;border-radius:10px;font-size:11pt;margin-right:6px;font-weight:bold;}
+.tag-cause{background:#fce4ec;color:#c62828;}.tag-event{background:#e3f2fd;color:#1565c0;}.tag-effect{background:#e8f5e9;color:#2e7d32;}.tag-key{background:#fff3e0;color:#e65100;}
+.analysis-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.analysis-tab{padding:6px 18px;border:none;background:#e0d8ee;border-radius:16px;font-size:12pt;font-family:inherit;cursor:pointer;color:#4a2b8e;}
+.analysis-tab.active,.analysis-tab:hover{background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;}
+.analysis-panel{display:none;}.analysis-panel.active{display:block;}
+.col-section{background:#f5f0ff;border-radius:10px;padding:16px 22px;margin-bottom:16px;border-left:4px solid #9c7bc7;}
+.col-title{font-size:15pt;font-weight:bold;color:#4a2b8e;margin-bottom:6px;}
+.col-q{font-size:14pt;margin-bottom:10px;padding:10px 14px;background:rgba(255,255,255,0.7);border-radius:8px;border-left:3px solid #6a3cb8;}
+.col-answer{display:none;font-size:14pt;padding:12px 16px;background:#e8f5e9;border-radius:8px;border-left:4px solid #4caf50;margin-top:6px;}
+.col-toggle{display:inline-block;padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;border:none;border-radius:14px;font-size:12pt;font-family:inherit;cursor:pointer;margin-top:4px;}
+.q-block{background:rgba(255,255,255,0.88);border-radius:12px;padding:20px 24px;margin-bottom:18px;border-left:4px solid #3a5bc7;}
+.q-num{display:inline-block;background:linear-gradient(135deg,#3a5bc7,#6a3cb8);color:#fff;padding:2px 14px;border-radius:12px;font-size:12pt;margin-bottom:8px;}
+.q-text{font-size:14pt;margin-bottom:10px;}
+.q-option{display:block;width:100%;text-align:left;padding:8px 16px;margin-bottom:6px;background:#f5f3ff;border:2px solid #ddd8ee;border-radius:8px;font-size:14pt;font-family:inherit;cursor:pointer;}
+.q-option.correct{border-color:#4caf50;background:#e8f5e9;color:#2e7d32;}
+.q-option.wrong{border-color:#f44336;background:#ffebee;color:#c62828;}
+.q-option.disabled{pointer-events:none;opacity:0.7;}
+.q-feedback{display:none;margin-top:8px;padding:10px 16px;border-radius:8px;font-size:13pt;}
+.q-feedback.show{display:block;}
+.q-feedback.correct{background:#e8f5e9;border-left:4px solid #4caf50;color:#2e7d32;}
+.q-feedback.wrong{background:#ffebee;border-left:4px solid #f44336;color:#c62828;}
+.answer-toggle{display:inline-block;padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;border:none;border-radius:14px;font-size:11pt;font-family:inherit;cursor:pointer;margin-top:8px;}
+.material{background:#faf6f0;border-left:4px solid #8d6e63;padding:12px 18px;margin-bottom:12px;border-radius:6px;font-size:13pt;}
+.material .src{text-align:right;font-size:11pt;color:#6d4c41;margin-top:6px;}
+.judge-options{display:flex;gap:14px;margin-top:6px;}
+.judge-btn{padding:6px 28px;border:2px solid #ccc;border-radius:8px;font-size:14pt;font-family:inherit;cursor:pointer;background:#fff;}
+.judge-btn.correct{border-color:#4caf50;background:#e8f5e9;color:#2e7d32;}
+.judge-btn.wrong{border-color:#f44336;background:#ffebee;color:#c62828;}
+.judge-btn.disabled{pointer-events:none;opacity:0.6;}
+.hint-box{background:linear-gradient(135deg,#fff8e1,#fff3e0);border-left:4px solid #ff9800;padding:12px 18px;border-radius:8px;margin:10px 0;font-size:13pt;}
+.footer{text-align:center;padding:30px 20px;color:#6a6a80;font-size:11pt;border-top:1px solid rgba(74,43,142,0.1);margin-top:40px;}
+@media(max-width:640px){.hero h1{font-size:22pt;}.container{padding:16px 12px;}.card{padding:16px;}body{font-size:13pt;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>第11课 五四运动</h1>
+  <div class="unit">八年级历史上册 · 第四单元</div>
+  <div class="sub">新民主主义革命的兴起</div>
+</div>
+<nav class="toc">
+  <a href="#summary">知识点总结</a>
+  <a href="#analysis">重难点评析</a>
+  <a href="#textbook">教材栏目解答</a>
+  <a href="#exercises">课堂训练</a>
+</nav>
+<div class="container">
+
+<div id="summary">
+<div class="section-title"><span class="icon">📖</span>一、知识点总结 · 时间线梳理</div>
+
+<div class="card" style="border-left-color:#9c7bc7;">
+  <p><strong>▎课前导语</strong></p>
+  <p style="margin-top:6px;">1919年，中国在巴黎和会上的外交失败，点燃了中国人民心中积蓄已久的怒火。5月4日，北京学生率先走上街头，掀起了轰轰烈烈的五四爱国运动。这场运动迅速从北京扩展到全国，从学生扩展到工人，成为一场彻底的反帝反封建的爱国运动。它标志着中国新民主主义革命的开端。</p>
+  <div class="hint-box">
+    <strong>💡 前后连贯：</strong>第10课我们学到，辛亥革命后军阀割据、政治黑暗，中国在半殖民地半封建社会的深渊中越陷越深。五四运动的爆发证明：中国人民的反抗斗争从来没有停止。但与以往不同的是，五四运动中工人阶级第一次作为独立的政治力量登上历史舞台——这标志着中国革命进入了"新"的阶段。
+  </div>
+</div>
+
+<div class="card">
+  <p><strong>▎第一部分：五四运动的背景与导火索</strong></p>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-year">1918—1919年</span>
+      <div class="tl-content">
+        <span class="tag tag-cause">国际背景</span>
+        <strong>第一次世界大战结束，巴黎和会召开</strong>
+        <p>1918年11月，第一次世界大战结束。中国作为战时参战国（加入了协约国），属于"战胜国"一方。1919年1月，战胜国在法国巴黎召开"和平会议"（巴黎和会）。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1919年1—4月</span>
+      <div class="tl-content">
+        <span class="tag tag-key" style="background:#fce4ec;color:#c62828;">导火索</span>
+        <strong>巴黎和会上中国外交失败</strong>
+        <p>中国代表在会上提出收回德国在山东的特权、废除"二十一条"、取消列强在华特权等正当要求。但操纵会议的英、法、美等国拒绝了中国的要求，竟将德国在山东的特权全部转让给日本！消息传到国内，中国人民积压已久的怒火像火山一样爆发了。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="border-left-color:#1565c0;">
+  <p><strong>▎第二部分：五四运动的经过</strong></p>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-year">1919年5月4日</span>
+      <div class="tl-content">
+        <span class="tag tag-event">爆发</span>
+        <strong>北京学生率先行动</strong>
+        <p>北京大学等13所大中专学校的学生3000多人，在天安门前集会游行，高呼"外争主权，内除国贼""誓死力争，还我青岛""废除二十一条""拒绝在和约上签字"等口号。学生愤怒地痛打章宗祥（卖国贼），火烧了赵家楼曹汝霖住宅。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">5月4日—6月初</span>
+      <div class="tl-content">
+        <span class="tag tag-event">第一阶段</span>
+        <strong>运动扩展——学生被捕，全国响应</strong>
+        <p>北洋政府逮捕了大批学生。但高压政策不仅没有吓倒学生，反而激起了全国人民的更大愤怒。北京学生实行总罢课，各地学生纷纷响应——天津、上海、长沙、广州、南京等地的学生罢课游行，声援北京学生。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1919年6月5日</span>
+      <div class="tl-content">
+        <span class="tag tag-event">第二阶段</span>
+        <strong>工人阶级登上历史舞台——运动中心转移到上海</strong>
+        <p>上海工人率先举行罢工，支援学生爱国运动。随后，唐山、长辛店、九江等地工人也相继罢工。工人阶级第一次以独立的姿态登上了政治舞台！运动中心也从北京转移到上海，主力从学生转变为工人。商人罢市、学生罢课、工人罢工——"三罢"斗争席卷全国。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1919年6月底</span>
+      <div class="tl-content">
+        <span class="tag tag-effect">胜利</span>
+        <strong>五四运动的直接目标实现</strong>
+        <p>在全国人民的巨大压力下，北洋政府被迫：① 释放被捕学生；② 罢免曹汝霖、章宗祥、陆宗舆三个卖国贼的职务；③ 中国代表拒绝在巴黎和约上签字。五四运动的直接斗争目标实现了！</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="border-left-color:#f44336;">
+  <p><strong>▎五四运动的历史意义</strong></p>
+  <p style="margin-top:8px;">① 五四运动是一次<strong>彻底的反帝反封建的爱国运动</strong>——其反帝反封建的彻底性是以往任何运动所没有的；</p>
+  <p>② 运动中，<strong>工人阶级第一次作为独立的政治力量登上了政治舞台</strong>，显示了伟大的力量；</p>
+  <p>③ 促进了<strong>马克思主义在中国的传播</strong>，促进了马克思主义与中国工人运动的结合，为中国共产党的成立做了思想上和干部上的准备；</p>
+  <p>④ 五四运动标志着<strong>中国新民主主义革命的开端</strong>。</p>
+  <div class="hint-box" style="margin-top:10px;">
+    <strong>🔑 核心认识：</strong>五四运动是中国近代史上具有划时代意义的事件——它标志着中国旧民主主义革命（1840-1919）的结束和新民主主义革命（1919-1949）的开始。区分"旧"和"新"的关键在于：领导阶级从资产阶级变成了无产阶级（工人阶级）。
+  </div>
+</div>
+</div>
+
+<div id="analysis">
+<div class="section-title"><span class="icon">🔍</span>二、重难点评析</div>
+<div class="analysis-tabs">
+  <button class="analysis-tab active" onclick="switchAnalysis(this,'depth')">深度剖析</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'breadth')">广度拓展</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'height')">高度升华</button>
+</div>
+<div id="panel-depth" class="analysis-panel active">
+  <div class="card">
+    <p><strong>▎深度剖析：为什么说五四运动是"新"民主主义革命的开端？</strong></p>
+    <p>【重点·核心考点】① <strong>领导阶级不同：</strong>旧民主主义革命由资产阶级领导，新民主主义革命由无产阶级（工人阶级）领导。五四运动中工人阶级首次独立登上政治舞台；② <strong>指导思想不同：</strong>旧民主主义革命以三民主义为指导思想，新民主主义革命以马克思主义为指导思想；③ <strong>革命前途不同：</strong>旧民主主义革命目标是建立资产阶级共和国，新民主主义革命目标是建立人民民主专政的共和国，最终走向社会主义。</p>
+  </div>
+  <div class="card">
+    <p><strong>▎深度剖析：五四精神的内涵</strong></p>
+    <p>五四精神包括：<strong>爱国、进步、民主、科学</strong>。核心是爱国主义。五四运动中的"外争主权，内除国贼""誓死力争，还我青岛"等口号，集中体现了忧国忧民、不屈不挠的爱国主义精神。五四精神至今仍然激励着中国青年为民族复兴而奋斗。</p>
+  </div>
+</div>
+<div id="panel-breadth" class="analysis-panel">
+  <div class="card">
+    <p><strong>▎广度拓展：巴黎和会与中国的"战胜国"屈辱</strong></p>
+    <p>中国在一战期间派出了17万劳工到欧洲战场（挖战壕、运弹药、修路等），为协约国的胜利付出了巨大牺牲。但作为"战胜国"，中国在巴黎和会上不仅没有得到任何好处，反而被列强出卖了山东权益。这让学生和知识分子彻底认清了帝国主义的本质——"公理战胜强权"不过是欺人之谈。这也证明了：弱国无外交，只有国家强大了，才能真正在国际上赢得尊重。</p>
+  </div>
+</div>
+<div id="panel-height" class="analysis-panel">
+  <div class="card">
+    <p><strong>▎历史规律：人民群众是历史的创造者</strong></p>
+    <p>五四运动深刻地证明了人民群众的力量。学生罢课、工人罢工、商人罢市——三股力量的联合，迫使北洋政府屈服。尤其是工人阶级的加入，使运动获得了决定性的力量。这启示我们：任何革命和改革，只有广泛发动群众、依靠群众，才能成功。</p>
+  </div>
+</div>
+</div>
+
+<div id="textbook">
+<div class="section-title"><span class="icon">📝</span>三、教材栏目解答</div>
+<div class="col-section">
+  <div class="col-title">💬 想一想</div>
+  <div class="col-q">五四运动的口号"外争主权，内除国贼"有什么含义？</div>
+  <button class="col-toggle" onclick="toggleAnswer('think-11')">📌 查看</button>
+  <div id="think-11" class="col-answer">"外争主权"——指反对巴黎和会将中国山东权益转让给日本，维护国家领土主权；"内除国贼"——指惩办亲日的卖国贼曹汝霖、章宗祥、陆宗舆。这一口号集中体现了五四运动反帝反封建的性质。</div>
+</div>
+<div class="col-section">
+  <div class="col-title">📜 材料研读</div>
+  <div class="col-q"><strong>材料：</strong>"中国的土地可以征服而不可以断送！中国的人民可以杀戮而不可以低头！"<p class="src" style="text-align:right;font-size:12pt;color:#666;">——《北京学界全体宣言》</p><strong>问题：</strong>表达了什么精神？</div>
+  <button class="col-toggle" onclick="toggleAnswer('material-11')">📌 查看</button>
+  <div id="material-11" class="col-answer">表达了中国人民不畏强暴、誓死捍卫国家主权和民族尊严的爱国主义精神和大无畏斗争精神。</div>
+</div>
+<div class="col-section">
+  <div class="col-title">📚 课后活动</div>
+  <div class="col-q"><strong>第1题：</strong>五四运动的直接目标是什么？</div>
+  <button class="col-toggle" onclick="toggleAnswer('hw1-11')">📌 查看</button>
+  <div id="hw1-11" class="col-answer">释放被捕学生；罢免曹汝霖、章宗祥、陆宗舆的职务；拒绝在巴黎和约上签字。这三个目标都实现了。</div>
+  <div class="col-q" style="margin-top:14px;"><strong>第2题：</strong>为什么说五四运动是新民主主义革命的开端？</div>
+  <button class="col-toggle" onclick="toggleAnswer('hw2-11')">📌 查看</button>
+  <div id="hw2-11" class="col-answer">因为运动中工人阶级首次作为独立的政治力量登上历史舞台，标志着无产阶级开始领导中国革命，革命进入了新民主主义革命时期。</div>
+</div>
+</div>
+
+<div id="exercises">
+<div class="section-title"><span class="icon">✍️</span>四、课堂训练</div>
+<p style="font-size:16pt;font-weight:bold;color:#4a2b8e;margin:16px 0 10px;">（一）判断题</p>
+<div class="q-block">
+  <div class="q-num">判断题 1</div>
+  <div class="q-text">五四运动的导火索是巴黎和会上中国外交的失败。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'true','j1-11')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'false','j1-11')">× 错误</button>
+  </div>
+  <div id="j1-11" class="q-feedback"><strong>√ 正确。</strong>巴黎和会将德国在山东的特权转让给日本，中国外交失败，直接引发了五四运动。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">判断题 2</div>
+  <div class="q-text">五四运动中，工人阶级在第二阶段成为运动的主力。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'true','j2-11')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'false','j2-11')">× 错误</button>
+  </div>
+  <div id="j2-11" class="q-feedback"><strong>√ 正确。</strong>第一阶段（5月4日-6月初）中心在北京，主力为学生；第二阶段（6月5日后）中心在上海，主力为工人。</div>
+</div>
+<p style="font-size:16pt;font-weight:bold;color:#4a2b8e;margin:26px 0 10px;">（二）选择题</p>
+<div class="q-block">
+  <div class="q-num">选择题 1</div>
+  <div class="q-text">五四运动中，最能体现运动性质的口号是：</div>
+  <div class="q-options">
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'A. 外争主权，内除国贼')">A. 外争主权，内除国贼</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 废除二十一条')">B. 废除二十一条</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 誓死力争，还我青岛')">C. 誓死力争，还我青岛</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 拒绝在和约上签字')">D. 拒绝在和约上签字</button>
+  </div>
+  <div class="q-feedback" id="c1-11"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca1-11')">🔍 解析</button>
+  <div id="ca1-11" class="col-answer"><strong>A。</strong>"外争主权"体现了反帝（反对帝国主义侵害中国主权）；"内除国贼"体现了反封建（反对封建卖国贼）。这一口号最全面、最集中地反映了五四运动反帝反封建的性质。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">选择题 2</div>
+  <div class="q-text">五四运动中，标志着工人阶级登上政治舞台的事件是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 北京学生游行')">A. 北京学生游行</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'B. 上海工人罢工')">B. 上海工人罢工</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 商人罢市')">C. 商人罢市</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 火烧赵家楼')">D. 火烧赵家楼</button>
+  </div>
+  <div class="q-feedback" id="c2-11"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca2-11')">🔍 解析</button>
+  <div id="ca2-11" class="col-answer"><strong>B。</strong>1919年6月5日上海工人率先罢工，标志着工人阶级以独立姿态登上政治舞台，这是五四运动进入新阶段的关键标志。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">选择题 3</div>
+  <div class="q-text">五四运动是中国什么革命的开端？</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 旧民主主义革命')">A. 旧民主主义革命</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'B. 新民主主义革命')">B. 新民主主义革命</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 社会主义革命')">C. 社会主义革命</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 资产阶级革命')">D. 资产阶级革命</button>
+  </div>
+  <div class="q-feedback" id="c3-11"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca3-11')">🔍 解析</button>
+  <div id="ca3-11" class="col-answer"><strong>B。</strong>五四运动标志着中国新民主主义革命的开端（1919-1949）。旧民主主义革命（1840-1919）由资产阶级领导，新民主主义革命（1919-1949）由无产阶级领导。</div>
+</div>
+</div>
+</div>
+
+<!-- ===== 课程导航（前后课链接） ===== -->
+<div style="max-width:960px;margin:20px auto 0;padding:0 20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,0.75);border-radius:10px;padding:12px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+    <div style="flex:1;text-align:left;"><a href="第10课_帝制复辟与军阀割据.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">← 第10课 帝制复辟与军阀割据</a></div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;
+      padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+      color:#fff;text-decoration:none;border-radius:16px;font-size:11pt;
+      transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.85'"
+      onmouseout="this.style.opacity='1'">📋 导航</a>
+    <div style="flex:1;text-align:right;"><a href="第12课_中国共产党诞生.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">第12课 中国共产党诞生 →</a></div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>人教版八年级历史上册 · 第11课《五四运动》</p>
+</div>
+<script>
+function toggleAnswer(id){var el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block';}
+function switchAnalysis(btn,panelId){document.querySelectorAll('.analysis-tab').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.analysis-panel').forEach(function(p){p.classList.remove('active');});btn.classList.add('active');document.getElementById('panel-'+panelId).classList.add('active');}
+function checkChoice(btn,label){if(btn.classList.contains('disabled'))return;var parent=btn.parentElement,options=parent.querySelectorAll('.q-option'),feedback=parent.nextElementSibling;options.forEach(function(o){o.classList.add('disabled');});if(btn.getAttribute('data-correct')==='true'){btn.classList.add('correct');feedback.innerHTML='✅ <strong>回答正确！</strong>'+label+' 是正确答案。';feedback.className='q-feedback show correct';}else{btn.classList.add('wrong');feedback.innerHTML='❌ <strong>回答错误！</strong>"'+label+'" 不是正确答案。';feedback.className='q-feedback show wrong';options.forEach(function(o){if(o.getAttribute('data-correct')==='true'){o.classList.add('correct');o.style.borderStyle='dashed';}});}}
+function checkJudge(btn,isCorrect,feedbackId){if(btn.classList.contains('disabled'))return;var btns=btn.parentElement.querySelectorAll('.judge-btn'),feedback=document.getElementById(feedbackId);btns.forEach(function(b){b.classList.add('disabled');});if(isCorrect==='true'){btn.classList.add('correct');feedback.className='q-feedback show correct';}else{btn.classList.add('wrong');feedback.className='q-feedback show wrong';btns.forEach(function(b){if(b.getAttribute('data-correct')==='true'&&b!==btn){b.classList.add('correct');}});}}
+function toggleChoiceAnswer(id){var el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block';}
+</script>
+</body>
+</html>

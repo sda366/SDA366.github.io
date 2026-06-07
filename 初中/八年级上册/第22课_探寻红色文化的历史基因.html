@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第22课 活动课：探寻红色文化的历史基因</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "SimHei", "黑体", "Microsoft YaHei", sans-serif;
+    font-size: 14pt;
+    color: #2c2c2c;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    padding: 30px 20px;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.95);
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    padding: 45px 50px 50px;
+    backdrop-filter: blur(2px);
+  }
+
+  /* ── 顶部标题区 ── */
+  .header {
+    text-align: center;
+    padding-bottom: 28px;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, #4a00e0, #8e2de2) 1;
+    margin-bottom: 32px;
+  }
+  .header .sub { font-size: 13pt; color: #6c5ce7; letter-spacing: 3px; }
+  .header h1 {
+    font-size: 26pt;
+    background: linear-gradient(135deg, #4a00e0, #b224ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 8px 0 6px;
+    letter-spacing: 2px;
+  }
+  .header .info { font-size: 12pt; color: #888; margin-top: 6px; }
+
+  /* ── 通用区块 ── */
+  .section {
+    margin-bottom: 30px;
+  }
+  .section-title {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #4a00e0;
+    padding-left: 16px;
+    border-left: 5px solid #8e2de2;
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+  .section-title .num {
+    display: inline-block;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    color: #fff;
+    font-size: 13pt;
+    border-radius: 50%;
+    width: 34px; height: 34px;
+    line-height: 34px;
+    text-align: center;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .card {
+    background: #f8f7ff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border-left: 4px solid #8e2de2;
+  }
+  .card h3 {
+    font-size: 15pt;
+    color: #302b63;
+    margin-bottom: 10px;
+  }
+  .card p, .card li { line-height: 1.8; }
+  .card ul, .card ol { padding-left: 28px; }
+  .card li { margin-bottom: 4px; }
+
+  /* ── 标签云 ── */
+  .tag-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .tag {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13pt;
+    background: linear-gradient(135deg, #e8e0ff, #d5ccff);
+    color: #302b63;
+    border: 1px solid #c4b5ff;
+    transition: .2s;
+  }
+  .tag:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(78,0,224,0.25); }
+  .tag.red { background: linear-gradient(135deg, #ffe0e0, #ffcccc); border-color: #ff9999; color: #a00000; }
+  .tag.gold { background: linear-gradient(135deg, #fff8e0, #ffedb3); border-color: #e6c200; color: #8b7500; }
+
+  /* ── 地标卡 ── */
+  .landmark-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 14px; margin-top: 10px; }
+  .landmark-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1px solid #e0d8ff;
+    box-shadow: 0 2px 8px rgba(78,0,224,0.08);
+  }
+  .landmark-item h4 { font-size: 14pt; color: #4a00e0; margin-bottom: 4px; }
+  .landmark-item p { font-size: 12pt; color: #555; }
+
+  /* ── 精神卡 ── */
+  .spirit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 12px; margin-top: 10px; }
+  .spirit-item {
+    text-align: center;
+    padding: 16px 10px;
+    background: linear-gradient(135deg, #fff, #f5f0ff);
+    border-radius: 12px;
+    border: 2px solid #d5ccff;
+    font-weight: bold;
+    font-size: 15pt;
+    color: #302b63;
+    transition: .25s;
+    cursor: default;
+  }
+  .spirit-item:hover {
+    border-color: #8e2de2;
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px rgba(78,0,224,0.2);
+  }
+  .spirit-item small { display: block; font-size: 11pt; font-weight: normal; color: #777; margin-top: 4px; }
+
+  /* ── 成果展示 ── */
+  .insight-box {
+    background: linear-gradient(135deg, #f0e6ff, #fce4ec);
+    border-radius: 14px;
+    padding: 22px 28px;
+    border: 2px solid #ce93d8;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .insight-box p { font-size: 14pt; line-height: 2; }
+
+  /* ── 重难点 ── */
+  .difficulty-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 10px; }
+  .diff-item {
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .diff-item h4 {
+    display: inline-block;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-size: 14pt;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .diff-item p { font-size: 13pt; line-height: 1.7; color: #333; }
+  .diff-item:nth-child(1) { background: #e8e0ff; }
+  .diff-item:nth-child(1) h4 { background: linear-gradient(135deg,#4a00e0,#6c5ce7); }
+  .diff-item:nth-child(2) { background: #fff0e0; }
+  .diff-item:nth-child(2) h4 { background: linear-gradient(135deg,#e17055,#d63031); }
+  .diff-item:nth-child(3) { background: #e0f7fa; }
+  .diff-item:nth-child(3) h4 { background: linear-gradient(135deg,#00b894,#00cec9); }
+
+  /* ── 课堂训练 ── */
+  .quiz-box {
+    background: #fff;
+    border: 2px solid #d5ccff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+  }
+  .quiz-box .q-title {
+    font-weight: bold;
+    color: #4a00e0;
+    margin-bottom: 8px;
+  }
+  .quiz-box .options { padding-left: 24px; line-height: 2; }
+  .quiz-box .options label { cursor: pointer; display: block; }
+  .quiz-box .options input { margin-right: 8px; transform: scale(1.1); vertical-align: middle; }
+
+  .btn-answer {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 20px;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 12pt;
+    cursor: pointer;
+    font-family: inherit;
+    transition: .2s;
+  }
+  .btn-answer:hover { opacity: .85; transform: translateY(-1px); }
+  .answer-box {
+    display: none;
+    margin-top: 10px;
+    padding: 14px 18px;
+    background: #f0ebff;
+    border-radius: 10px;
+    border-left: 4px solid #8e2de2;
+    font-size: 13pt;
+    line-height: 1.8;
+  }
+  .answer-box.show { display: block; }
+  .answer-box .key { font-weight: bold; color: #d63031; }
+  .answer-box .analysis { color: #555; margin-top: 4px; }
+
+  /* ── 材料分析题 ── */
+  .material-box {
+    background: #fffbe6;
+    border: 1px solid #ffe082;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 10px 0;
+    font-size: 13pt;
+    line-height: 1.9;
+    border-left: 4px solid #f9a825;
+  }
+
+  /* ── 底部 ── */
+  .footer {
+    text-align: center;
+    padding-top: 24px;
+    margin-top: 30px;
+    border-top: 2px solid #e0d8ff;
+    font-size: 11pt;
+    color: #aaa;
+  }
+
+  /* ── 响应式 ── */
+  @media (max-width: 768px) {
+    .container { padding: 24px 18px; }
+    .header h1 { font-size: 20pt; }
+    .difficulty-grid { grid-template-columns: 1fr; }
+    .landmark-grid { grid-template-columns: 1fr; }
+    .spirit-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .container { box-shadow: none; padding: 20px; }
+    .btn-answer { display: none; }
+    .answer-box { display: block !important; background: #f5f5f5; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ 头部 ============ -->
+  <div class="header">
+    <div class="sub">统编版·八年级历史上册</div>
+    <h1>第22课 活动课：探寻红色文化的历史基因</h1>
+    <div class="info">第六单元 中华民族的抗日战争 ｜ 活动课</div>
+  </div>
+
+  <!-- ============ 第一部分：红色文化知多少 ============ -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span>红色文化知多少</div>
+
+    <div class="card">
+      <h3>什么是红色文化？</h3>
+      <p>红色文化是<b>中国共产党领导人民</b>在长期的<b>革命</b>和<b>建设</b>实践中形成的、具有中国特色的一种先进文化形态。它蕴含着丰富的<b>革命精神</b>、厚重的<b>革命传统</b>和珍贵的<b>革命文物</b>，是中华民族宝贵的精神财富。</p>
+      <div class="tag-group">
+        <span class="tag red">革命精神</span>
+        <span class="tag red">革命传统</span>
+        <span class="tag red">革命文物</span>
+        <span class="tag gold">理想信念</span>
+        <span class="tag gold">爱国主义</span>
+        <span class="tag gold">艰苦奋斗</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>红色地标</h3>
+      <p>在中国革命的伟大征程中，留下了一系列闪耀着红色光芒的历史地标：</p>
+      <div class="landmark-grid">
+        <div class="landmark-item">
+          <h4>上海·中共一大会址</h4>
+          <p>1921年，中国共产党第一次全国代表大会在此召开，宣告党的诞生。</p>
+        </div>
+        <div class="landmark-item">
+          <h4>南昌·八一起义纪念馆</h4>
+          <p>1927年8月1日，南昌起义打响武装反抗国民党反动派第一枪。</p>
+        </div>
+        <div class="landmark-item">
+          <h4>井冈山·革命根据地</h4>
+          <p>毛泽东领导创建的第一个农村革命根据地，开辟"农村包围城市"道路。</p>
+        </div>
+        <div class="landmark-item">
+          <h4>遵义·会议会址</h4>
+          <p>1935年遵义会议，确立毛泽东的领导地位，是党的历史上生死攸关的转折点。</p>
+        </div>
+        <div class="landmark-item">
+          <h4>延安·革命圣地</h4>
+          <p>抗日战争时期中共中央所在地，孕育了伟大的延安精神。</p>
+        </div>
+        <div class="landmark-item">
+          <h4>西柏坡</h4>
+          <p>解放战争时期中共中央驻地，"新中国从这里走来"。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>红色精神谱系</h3>
+      <p>在百年奋斗历程中，中国共产党构筑起了一个个熠熠生辉的精神坐标：</p>
+      <div class="spirit-grid">
+        <div class="spirit-item">红船精神<small>开天辟地·敢为人先</small></div>
+        <div class="spirit-item">井冈山精神<small>坚定信念·艰苦奋斗</small></div>
+        <div class="spirit-item">长征精神<small>不怕牺牲·勇往直前</small></div>
+        <div class="spirit-item">延安精神<small>自力更生·实事求是</small></div>
+        <div class="spirit-item">抗战精神<small>天下兴亡·匹夫有责</small></div>
+        <div class="spirit-item">西柏坡精神<small>谦虚谨慎·敢于斗争</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 第二部分：活动建议 ============ -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span>活动建议</div>
+
+    <div class="card">
+      <h3>活动一：红色故事会</h3>
+      <p>收集革命先烈的感人事迹，如赵一曼、左权、杨靖宇等英雄故事，以小组为单位讲述红色故事，感悟革命先辈的崇高精神。</p>
+    </div>
+
+    <div class="card">
+      <h3>活动二：红色歌曲演唱会</h3>
+      <p>学唱红色经典歌曲，如《义勇军进行曲》《黄河大合唱》《十送红军》《没有共产党就没有新中国》等，在歌声中重温革命岁月。</p>
+    </div>
+
+    <div class="card">
+      <h3>活动三：红色遗址调查</h3>
+      <p>走访当地的革命遗址、纪念馆、烈士陵园等，通过实地调查、采访记录、拍摄照片等方式，了解身边的红色文化资源，撰写调查报告。</p>
+    </div>
+
+    <div class="card">
+      <h3>活动四：探寻身边的红色文化资源</h3>
+      <p>查阅地方史志或访问当地文化馆，寻找本地区的革命遗址、红色人物、革命文物等，制作"身边的红色文化"手抄报或微视频，在班级展示交流。</p>
+      <div class="tag-group" style="margin-top:8px;">
+        <span class="tag">实地走访</span>
+        <span class="tag">口述史采访</span>
+        <span class="tag">资料查阅</span>
+        <span class="tag">手抄报</span>
+        <span class="tag">微视频</span>
+        <span class="tag">班级展示</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 第三部分：成果展示 ============ -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span>成果展示 · 历史启示</div>
+
+    <div class="insight-box">
+      <p style="font-size:15pt;font-weight:bold;margin-bottom:10px;">红色文化——中华民族伟大复兴的精神动力</p>
+      <p>红色文化是中国共产党在革命战争年代和社会主义建设时期形成的<b>宝贵精神财富</b>。</p>
+      <p>它承载着中国共产党人的<b>初心和使命</b>，蕴含着坚定的<b>理想信念</b>、深厚的<b>爱国情怀</b>、</p>
+      <p>顽强的<b>斗争意志</b>和无私的<b>奉献精神</b>，是激励全国各族人民</p>
+      <p>为实现<b>中华民族伟大复兴</b>而不懈奋斗的<b>强大精神动力</b>。</p>
+    </div>
+  </div>
+
+  <!-- ============ 重难点评析 ============ -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span>重难点评析</div>
+
+    <div class="difficulty-grid">
+      <div class="diff-item">
+        <h4>深度 · 精神内涵</h4>
+        <p>红色文化的核心精神内涵——<b>坚定理想信念</b>、<b>艰苦奋斗</b>、<b>实事求是</b>。这些精神品质贯穿党领导人民进行革命和建设的全过程，是红色文化最深层的精神密码。</p>
+      </div>
+      <div class="diff-item">
+        <h4>广度 · 社会价值</h4>
+        <p>红色文化与<b>社会主义核心价值观</b>高度契合。富强、民主、文明、和谐等国家层面的价值目标，自由、平等、公正、法治等社会层面的价值取向，爱国、敬业、诚信、友善等个人层面的价值准则，都能在红色文化中找到深厚根基。</p>
+      </div>
+      <div class="diff-item">
+        <h4>高度 · 传承意义</h4>
+        <p>红色文化基因的传承是新时代的<b>时代课题</b>。将红色资源利用好、红色传统发扬好、红色基因传承好，让革命事业薪火相传、血脉永续，是当代青少年的<b>历史责任</b>。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 课堂训练 ============ -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span>课堂训练</div>
+
+    <!-- 选择题 1 -->
+    <div class="quiz-box">
+      <div class="q-title">1. 红色文化是中国共产党领导人民在革命和建设中形成的先进文化。下列选项中，被誉为"中国革命精神之源"的是（　）</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="A"> A. 井冈山精神</label>
+        <label><input type="radio" name="q1" value="B"> B. 长征精神</label>
+        <label><input type="radio" name="q1" value="C"> C. 红船精神</label>
+        <label><input type="radio" name="q1" value="D"> D. 延安精神</label>
+      </div>
+      <button class="btn-answer" onclick="toggleAnswer('ans1')">查看答案</button>
+      <div class="answer-box" id="ans1">
+        <div class="key">答案：C</div>
+        <div class="analysis">解析：红船精神源于1921年中国共产党在浙江嘉兴南湖红船上成立这一重大历史事件，体现了"开天辟地、敢为人先"的首创精神，是中国共产党革命精神的历史起点，被誉为"中国革命精神之源"。井冈山精神（A）、长征精神（B）、延安精神（D）都是在其之后形成的。</div>
+      </div>
+    </div>
+
+    <!-- 选择题 2 -->
+    <div class="quiz-box">
+      <div class="q-title">2. 红色地标是红色文化的重要载体。以下关于红色地标与其历史事件对应正确的是（　）</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="A"> A. 上海——南昌起义</label>
+        <label><input type="radio" name="q2" value="B"> B. 遵义——中共一大召开</label>
+        <label><input type="radio" name="q2" value="C"> C. 井冈山——第一个农村革命根据地</label>
+        <label><input type="radio" name="q2" value="D"> D. 延安——新中国成立</label>
+      </div>
+      <button class="btn-answer" onclick="toggleAnswer('ans2')">查看答案</button>
+      <div class="answer-box" id="ans2">
+        <div class="key">答案：C</div>
+        <div class="analysis">解析：1927年毛泽东率领秋收起义部队到达井冈山，创建了第一个农村革命根据地，开辟了"农村包围城市、武装夺取政权"的革命道路。A项错误——南昌起义发生在江西南昌，而非上海；B项错误——中共一大在上海（后转移至嘉兴南湖）召开，遵义是1935年遵义会议所在地；D项错误——延安是抗日战争时期中共中央所在地，新中国成立（1949年）的地点是北京。</div>
+      </div>
+    </div>
+
+    <!-- 材料分析题 -->
+    <div class="quiz-box">
+      <div class="q-title">3. 阅读下列材料，回答问题。</div>
+
+      <div class="material-box">
+        <b>材料一：</b>"红船精神"是开天辟地、敢为人先的首创精神，坚定理想、百折不挠的奋斗精神，立党为公、忠诚为民的奉献精神。<br>
+        <span style="float:right;">——习近平《弘扬"红船精神" 走在时代前列》</span>
+      </div>
+      <div class="material-box">
+        <b>材料二：</b>井冈山时期，毛泽东同志写下了《中国的红色政权为什么能够存在？》《井冈山的斗争》等光辉著作，提出了"工农武装割据"思想，为中国革命指明了方向。井冈山精神最重要的方面就是坚定信念、艰苦奋斗、实事求是、敢闯新路、依靠群众、勇于胜利。<br>
+        <span style="float:right;">——习近平论井冈山精神</span>
+      </div>
+
+      <div style="margin-top:14px; line-height:2;">
+        <p><b>（1）</b>根据材料一，概括"红船精神"的主要内涵。（4分）</p>
+        <p><b>（2）</b>结合材料二和所学知识，指出井冈山革命根据地创建的历史意义。（4分）</p>
+        <p><b>（3）</b>综合以上材料，谈谈传承红色文化基因对当代青少年有何启示。（4分）</p>
+      </div>
+
+      <button class="btn-answer" onclick="toggleAnswer('ans3')">查看答案</button>
+      <div class="answer-box" id="ans3">
+
+        <div class="key">（1）参考答案：</div>
+        <div class="analysis">
+          红船精神的主要内涵包括：①<u>开天辟地、敢为人先的首创精神</u>；②<u>坚定理想、百折不挠的奋斗精神</u>；③<u>立党为公、忠诚为民的奉献精神</u>。（答出三点得4分，两点得3分，一点得2分）
+        </div>
+
+        <div class="key" style="margin-top:10px;">（2）参考答案：</div>
+        <div class="analysis">
+          井冈山革命根据地是<u>中国共产党创建的第一个农村革命根据地</u>（2分）。它的成功实践，<u>开辟了"农村包围城市、武装夺取政权"的正确革命道路</u>，为中国革命指明了方向，是马克思主义中国化的伟大开篇（2分）。
+        </div>
+
+        <div class="key" style="margin-top:10px;">（3）参考答案：</div>
+        <div class="analysis">
+          ①要<u>坚定理想信念</u>，树立正确的世界观、人生观、价值观（1分）；②要<u>弘扬艰苦奋斗精神</u>，在学习生活中不畏困难、迎难而上（1分）；③要<u>坚持实事求是</u>，一切从实际出发，与时俱进（1分）；④要<u>传承红色基因</u>，将个人理想融入国家和民族的事业中，为实现中华民族伟大复兴贡献青春力量（1分）。（其他言之有理的观点亦可酌情给分）
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 页脚 ============ -->
+  
+<!-- ===== 课程导航（前后课链接） ===== -->
+<div style="max-width:960px;margin:20px auto 0;padding:0 20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,0.75);border-radius:10px;padding:12px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+    <div style="flex:1;text-align:left;"><a href="第21课_人民解放战争的胜利.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">← 第21课 解放战争胜利</a></div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;
+      padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+      color:#fff;text-decoration:none;border-radius:16px;font-size:11pt;
+      transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.85'"
+      onmouseout="this.style.opacity='1'">📋 导航</a>
+    <div style="flex:1;text-align:right;"><span style="color:#bbb;font-size:11pt;">已是最后一课 →</span></div>
+  </div>
+</div>
+
+<div class="footer">
+    统编版（2024修订版）· 八年级历史上册 · 第22课 活动课<br>
+    课件仅供教学参考使用
+  </div>
+
+</div>
+
+<script>
+function toggleAnswer(id) {
+  var box = document.getElementById(id);
+  if (box.classList.contains('show')) {
+    box.classList.remove('show');
+  } else {
+    box.classList.add('show');
+  }
+}
+</script>
+
+</body>
+</html>

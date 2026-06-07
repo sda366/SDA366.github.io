@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第16课 从九一八事变到西安事变 — 八年级历史上册</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"SimHei","黑体","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#e8e0f0 0%,#d0d4f0 50%,#e0d8ee 100%);color:#2d2d3a;font-size:14pt;line-height:1.9;padding:0;min-height:100vh;}
+.hero{background:linear-gradient(135deg,#3a1c71 0%,#4a2b8e 30%,#6a3cb8 60%,#3a5bc7 100%);color:#fff;text-align:center;padding:48px 24px 36px;}
+.hero h1{font-size:32pt;letter-spacing:6px;margin-bottom:6px;}
+.hero .unit{font-size:14pt;opacity:0.85;letter-spacing:4px;}
+.hero .sub{font-size:13pt;opacity:0.7;margin-top:8px;}
+.toc{background:rgba(255,255,255,0.75);backdrop-filter:blur(8px);border-bottom:1px solid rgba(74,43,142,0.15);padding:14px 24px;position:sticky;top:0;z-index:100;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
+.toc a{display:inline-block;padding:6px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;text-decoration:none;border-radius:20px;font-size:11pt;}
+.container{max-width:960px;margin:0 auto;padding:28px 20px 60px;}
+.section-title{background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;padding:12px 24px;border-radius:10px;font-size:16pt;letter-spacing:4px;margin:36px 0 20px;box-shadow:0 4px 14px rgba(74,43,142,0.25);}
+.card{background:rgba(255,255,255,0.88);border-radius:12px;padding:24px 28px;margin-bottom:18px;border-left:4px solid #6a3cb8;}
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:12px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,#4a2b8e,#6a3cb8,#3a5bc7);border-radius:2px;}
+.tl-item{position:relative;margin-bottom:16px;padding-left:20px;}
+.tl-item::before{content:'';position:absolute;left:-28px;top:8px;width:14px;height:14px;background:linear-gradient(135deg,#4a2b8e,#6a3cb8);border-radius:50%;border:3px solid #e0d8ee;box-shadow:0 0 0 2px #6a3cb8;}
+.tl-year{display:inline-block;background:linear-gradient(135deg,#4a2b8e,#6a3cb8);color:#fff;font-weight:bold;padding:2px 14px;border-radius:12px;font-size:12pt;margin-bottom:4px;}
+.tag{display:inline-block;padding:2px 12px;border-radius:10px;font-size:11pt;font-weight:bold;}
+.tag-cause{background:#fce4ec;color:#c62828;}.tag-event{background:#e3f2fd;color:#1565c0;}.tag-effect{background:#e8f5e9;color:#2e7d32;}
+.analysis-tabs{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.analysis-tab{padding:8px 24px;border:2px solid #4a2b8e;border-radius:20px;background:transparent;color:#4a2b8e;font-size:12pt;font-family:inherit;cursor:pointer;}
+.analysis-tab.active{background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;border-color:transparent;}
+.analysis-panel{display:none;}
+.analysis-panel.active{display:block;}
+.col-section{background:#f5f0ff;border-radius:10px;padding:16px 22px;margin-bottom:16px;border-left:4px solid #9c7bc7;}
+.col-title{font-size:15pt;font-weight:bold;color:#4a2b8e;margin-bottom:6px;}
+.col-q{font-size:14pt;margin-bottom:10px;padding:10px 14px;background:rgba(255,255,255,0.7);border-radius:8px;border-left:3px solid #6a3cb8;}
+.col-answer{display:none;font-size:14pt;padding:12px 16px;background:#e8f5e9;border-radius:8px;border-left:4px solid #4caf50;margin-top:6px;}
+.col-toggle{display:inline-block;padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;border:none;border-radius:14px;font-size:12pt;font-family:inherit;cursor:pointer;margin-top:4px;}
+.q-block{background:rgba(255,255,255,0.88);border-radius:12px;padding:20px 24px;margin-bottom:18px;border-left:4px solid #3a5bc7;}
+.q-num{display:inline-block;background:linear-gradient(135deg,#3a5bc7,#6a3cb8);color:#fff;padding:2px 14px;border-radius:12px;font-size:12pt;margin-bottom:8px;}
+.q-text{font-size:14pt;margin-bottom:10px;}
+.q-option{display:block;width:100%;text-align:left;padding:8px 16px;margin-bottom:6px;background:#f5f3ff;border:2px solid #ddd8ee;border-radius:8px;font-size:14pt;font-family:inherit;cursor:pointer;}
+.q-option.correct{border-color:#4caf50;background:#e8f5e9;color:#2e7d32;}
+.q-option.wrong{border-color:#f44336;background:#ffebee;color:#c62828;}
+.q-option.disabled{pointer-events:none;opacity:0.7;}
+.q-feedback{display:none;margin-top:8px;padding:10px 16px;border-radius:8px;font-size:13pt;}
+.q-feedback.show{display:block;}
+.q-feedback.correct{background:#e8f5e9;border-left:4px solid #4caf50;color:#2e7d32;}
+.q-feedback.wrong{background:#ffebee;border-left:4px solid #f44336;color:#c62828;}
+.answer-toggle{display:inline-block;padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);color:#fff;border:none;border-radius:14px;font-size:11pt;font-family:inherit;cursor:pointer;margin-top:8px;}
+.material{background:#faf6f0;border-left:4px solid #8d6e63;padding:12px 18px;margin-bottom:12px;border-radius:6px;font-size:13pt;}
+.material .src{text-align:right;font-size:11pt;color:#6d4c41;}
+.judge-options{display:flex;gap:14px;margin-top:6px;}
+.judge-btn{padding:6px 28px;border:2px solid #ccc;border-radius:8px;font-size:14pt;font-family:inherit;cursor:pointer;background:#fff;}
+.judge-btn.correct{border-color:#4caf50;background:#e8f5e9;color:#2e7d32;}
+.judge-btn.wrong{border-color:#f44336;background:#ffebee;color:#c62828;}
+.judge-btn.disabled{pointer-events:none;opacity:0.6;}
+.hint-box{background:linear-gradient(135deg,#fff8e1,#fff3e0);border-left:4px solid #ff9800;padding:12px 18px;border-radius:8px;margin:10px 0;font-size:13pt;}
+.footer{text-align:center;padding:30px 20px;color:#6a6a80;font-size:11pt;border-top:1px solid rgba(74,43,142,0.1);margin-top:40px;}
+@media(max-width:640px){.hero h1{font-size:22pt;}.container{padding:16px 12px;}.card{padding:16px;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>第16课 从九一八事变到西安事变</h1>
+  <div class="unit">八年级历史上册 · 第六单元</div>
+  <div class="sub">中华民族的抗日战争</div>
+</div>
+<nav class="toc">
+  <a href="#summary">知识点总结</a>
+  <a href="#analysis">重难点评析</a>
+  <a href="#textbook">教材栏目解答</a>
+  <a href="#exercises">课堂训练</a>
+</nav>
+<div class="container">
+
+<div id="summary">
+<div class="section-title">一、知识点总结 · 时间线梳理</div>
+<div class="card" style="border-left-color:#9c7bc7;">
+  <p><strong>课前导语</strong></p>
+  <p style="margin-top:6px;">1931年9月18日夜，日本关东军悍然炸毁沈阳北郊柳条湖附近南满铁路的一段路轨，反诬中国军队破坏，并以此为借口突袭中国东北军驻地北大营，炮轰沈阳城。这就是震惊中外的"九一八事变"。此后短短四个多月，东北一百多万平方公里的锦绣河山全部沦为日军之手。中华民族到了最危险的时候，一场全民族的抗日战争由此开始。</p>
+  <div class="hint-box"><strong>前后连贯：</strong>第15课我们学习了红军长征和遵义会议——那是中国共产党内部克服危机、转危为安的伟大历程。而与此同时，中国还面临着一个更大的外部危机——日本的全面侵略。从本课开始，我们将进入"中华民族的抗日战争"这一单元，见证中国从内战到团结御侮的伟大转折。</div>
+</div>
+<div class="card">
+  <p><strong>九一八事变</strong></p>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-year">1931年9月18日</span>
+      <div class="tl-content"><span class="tag tag-event">爆发</span><strong>九一八事变（柳条湖事件）</strong><p>日本关东军炸毁沈阳北郊柳条湖附近南满铁路路轨，反诬中国军队破坏，突袭东北军北大营，炮轰沈阳城。蒋介石密电张学良"不予抵抗"。</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1931年9月—1932年2月</span>
+      <div class="tl-content"><span class="tag tag-cause">沦陷</span><strong>东北三省全部沦陷</strong><p>由于国民政府采取不抵抗政策，日军在短短四个多月内占领了东北三省。1932年，日本扶植溥仪建立伪"满洲国"，东北沦为日本殖民地。</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1931年起</span>
+      <div class="tl-content"><strong>东北抗日武装斗争</strong><p>东北人民和未撤走的东北军组织抗日义勇军。中国共产党派杨靖宇等组织抗日游击队，后改编为东北抗日联军，在极端艰苦的条件下坚持抗日游击战争。</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1935年12月9日</span>
+      <div class="tl-content"><span class="tag tag-event">爱国运动</span><strong>一二·九运动</strong><p>北平数千名学生举行抗日救国示威游行，高呼"停止内战，一致抗日"等口号，掀起全国抗日救亡运动的新高潮。</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1935年底</span>
+      <div class="tl-content"><strong>瓦窑堡会议</strong><p>中国共产党在陕北瓦窑堡召开会议，确定建立抗日民族统一战线的方针，标志着中共抗日民族统一战线政策正式确立。</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1936年12月12日</span>
+      <div class="tl-content"><span class="tag tag-event">转折</span><strong>西安事变（双十二事变）</strong><p>张学良、杨虎城在西安临潼华清池扣留蒋介石，实行"兵谏"，要求停止内战、一致抗日。</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1936年12月</span>
+      <div class="tl-content"><span class="tag tag-effect">和平解决</span><strong>中国共产党和平解决西安事变</strong><p>中共中央从全民族利益出发，派周恩来等赴西安调停，促成和平解决。蒋介石被迫接受停止内战、联共抗日等条件。</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1936年底</span>
+      <div class="tl-content"><span class="tag tag-effect">意义</span><strong>十年内战基本结束</strong><p>西安事变的和平解决，标志着十年内战基本结束，抗日民族统一战线初步形成。</p></div>
+    </div>
+  </div>
+</div>
+<div class="card" style="border-left-color:#4caf50;">
+  <p><strong>核心知识小结</strong></p>
+  <p>九一八事变是中国人民抗日战争的起点，由此开始了长达十四年的抗日战争。东北沦陷的根本原因是蒋介石实行"不抵抗政策"。中国共产党在民族危亡关头高举抗日大旗，从东北抗日游击战到推动建立抗日民族统一战线，再到和平解决西安事变，始终以民族利益为重，促成了从内战到抗战的伟大转折。</p>
+</div>
+</div>
+
+<div id="analysis">
+<div class="section-title">二、重难点评析</div>
+<div class="analysis-tabs">
+  <button class="analysis-tab active" onclick="switchAnalysis(this,'depth')">深度剖析</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'breadth')">广度拓展</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'height')">高度升华</button>
+</div>
+<div id="panel-depth" class="analysis-panel active">
+  <div class="card"><p><strong>深度一：为何说九一八事变是抗日战争的"起点"？</strong></p><p>传统的说法是"八年抗战"（1937—1945年全面抗战）。但史学界近年来普遍认为，九一八事变（1931年）才是抗日战争的起点，因为：<br>① 九一八事变后，东北人民和爱国军队就开始了武装抵抗，局部抗战已经爆发；<br>② 中国社会的主要矛盾开始从阶级矛盾向中日民族矛盾转变；<br>③ 2017年教育部明确提出"十四年抗战"概念，将抗日战争从1931年算起，全面纳入中小学教材。<br>因此"十四年抗战"指的是从1931年九一八事变到1945年日本投降的十四年。</p></div>
+  <div class="card"><p><strong>深度二：东北为何迅速沦陷？——"不抵抗政策"的深层分析</strong></p><p>九一八事变发生时，日本关东军仅约2万人，而东北军有近20万人，兵力对比悬殊。然而东北却没有进行有效的抵抗，根源在于：<br>① 蒋介石奉行"攘外必先安内"政策，把消灭共产党作为首要目标，对日本侵略一味妥协退让；<br>② 国民政府寄希望于国联（国际联盟）调停，而国联的"调查"拖沓无力，列强各怀鬼胎；<br>③ 东北军执行了蒋介石的不抵抗命令，几乎一枪未放就撤退入关。<br>东北的沦陷助长了日本的侵略野心，为后来全面侵华埋下了祸根。</p></div>
+</div>
+<div id="panel-breadth" class="analysis-panel">
+  <div class="card"><p><strong>广度拓展：同一时期的国际背景</strong></p><p><strong>一、1929—1933年经济大危机：</strong>资本主义世界爆发了空前严重的经济危机。工厂倒闭、工人失业、社会动荡。危机对日本也造成了沉重打击——工业生产下降、贸易萎缩、农村凋敝。<br><br><strong>二、日本法西斯上台：</strong>在经济危机的冲击下，日本国内矛盾激化，军部法西斯势力迅速膨胀。他们主张通过对外侵略来转嫁国内危机，把侵略的矛头对准了积贫积弱的中国。1931年发动九一八事变，1936年日本建立军事法西斯专政，1937年发动全面侵华战争。<br><br><strong>三、国际绥靖主义盛行：</strong>英法等国对法西斯侵略采取姑息纵容的态度。这种绥靖政策在远东的表现是——国联对日本侵华"雷声大雨点小"，列强的"不干涉"客观上鼓励了日本扩大侵略。</p></div>
+</div>
+<div id="panel-height" class="analysis-panel">
+  <div class="card"><p><strong>高度升华：西安事变和平解决的历史意义</strong></p><p>张学良、杨虎城发动西安事变，扣押了蒋介石。南京政府内部出现了激烈斗争——以何应钦为代表的亲日派主张"讨伐"张、杨，企图趁机夺取政权和扩大内战。中国面临两种前途：一是爆发新的内战，给日本以可乘之机；二是和平解决，促成团结抗日。<br><br>在这千钧一发之际，中国共产党以民族大义为重，做出了和平解决西安事变的重大决策。这绝不是因为"共产党软弱"——恰恰相反，它体现了中国共产党在民族危亡关头的政治远见和担当。<br><br><strong>历史意义：</strong>西安事变的和平解决，迫使蒋介石停止了"剿共"内战，促成了国共两党再次合作。从此，中国从十年内战的深渊中走了出来，团结一致投入了伟大的抗日战争。从这个意义上说，西安事变是"时局转换的枢纽"，是中华民族从分裂走向团结、从内战走向抗战的转折点。</p></div>
+  <div class="card"><p><strong>人物评价：张学良与杨虎城</strong></p><p>张、杨二人发动"兵谏"，扣押"最高领袖"，其个人命运从此发生根本转折。张学良被长期软禁，杨虎城后来惨遭杀害。但历史是公正的——他们停止内战、逼蒋抗日的历史功绩不可磨灭。毛泽东评价："西安事变，把我们从牢狱中解放出来。"周恩来也称张、杨为"千古功臣"。</p></div>
+</div>
+</div>
+
+<div id="textbook">
+<div class="section-title">三、教材栏目解答</div>
+<div class="col-section">
+  <div class="col-title">想一想</div>
+  <div class="col-q">九一八事变后，日本侵占东北三省。东北人民和爱国官兵是如何进行抵抗的？</div>
+  <button class="col-toggle" onclick="toggleAnswer('think-16')">查看</button>
+  <div id="think-16" class="col-answer">① 东北人民和未撤走的东北军部队组织起抗日义勇军，展开抗日武装斗争；② 中国共产党派杨靖宇等人在东北组织游击队，开展抗日游击战争；③ 1936年初，东北各抗日部队改编为东北抗日联军（东北抗联），在极端艰苦的条件下坚持抗战，牵制了大量日军。</div>
+</div>
+<div class="col-section">
+  <div class="col-title">材料研读</div>
+  <div class="col-q"><strong>材料：</strong>"无论日本军队此后如何在东北寻衅，我方应不予抵抗，力避冲突，吾兄万勿逞一时之愤，置国家民族于不顾。"——蒋介石致张学良密电<br><br><strong>问题：</strong>从材料中可以看出蒋介石对日本侵略采取了什么政策？这一政策导致了什么后果？</div>
+  <button class="col-toggle" onclick="toggleAnswer('material-16')">查看</button>
+  <div id="material-16" class="col-answer"><strong>政策：</strong>不抵抗政策。蒋介石明确要求张学良不要抵抗日本军队的挑衅，力避与日军发生冲突。<br><strong>后果：</strong>① 东北军几乎未作抵抗就撤入关内，日军在短短四个多月内占领了东北三省；② 东北一百多万平方公里的土地和三千多万同胞沦于敌手；③ 助长了日本的侵略气焰，加速了其全面侵华的步伐。</div>
+</div>
+<div class="col-section">
+  <div class="col-title">课后活动</div>
+  <div class="col-q"><strong>第1题：</strong>中国共产党为什么主张和平解决西安事变？</div>
+  <button class="col-toggle" onclick="toggleAnswer('hw1-16')">查看</button>
+  <div id="hw1-16" class="col-answer">中国共产党从全民族利益出发，认为当时民族矛盾已上升为主要矛盾，主张和平解决西安事变。和平解决可以促使国共停止内战、共同抗日，有利于维护抗日民族统一战线，有利于挽救民族危亡。如果杀掉蒋介石，将会引发新的内战，给日本以可乘之机。</div>
+</div>
+<div class="col-section">
+  <div class="col-title">知识拓展</div>
+  <div class="col-q"><strong>抗日英雄杨靖宇</strong><br>杨靖宇（1905—1940），原名马尚德，河南确山人。1927年加入中国共产党，是东北抗日联军的主要创建者和领导人之一。他率领抗联部队在极端艰苦的条件下与日军浴血奋战，被日军称为"满洲治安之癌"。1940年2月23日，杨靖宇在吉林濛江（今靖宇县）被日军包围，孤身奋战五昼夜，弹尽粮绝，壮烈牺牲，年仅35岁。日军剖开他的胃，发现只有草根、树皮和棉絮，没有一粒粮食。</div>
+  <button class="col-toggle" onclick="toggleAnswer('extra-16')">查看</button>
+  <div id="extra-16" class="col-answer">杨靖宇将军用生命诠释了中华民族不屈不挠的抗战精神。1946年，东北民主联军总部决定将濛江县改名为靖宇县，以永久纪念这位民族英雄。他的事迹激励着一代又一代中国人——今天的幸福生活，是无数先烈用鲜血和生命换来的。</div>
+</div>
+</div>
+
+<div id="exercises">
+<div class="section-title">四、课堂训练</div>
+<p style="font-size:16pt;font-weight:bold;color:#4a2b8e;margin:16px 0 10px;">判断题（点击"√"或"×"判断正误）</p>
+<div class="q-block">
+  <div class="q-num">判断题 1</div>
+  <div class="q-text">九一八事变后，东北三省迅速沦陷的主要原因是日军兵力远超东北军。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'false','j1-16')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'true','j1-16')">× 错误</button>
+  </div>
+  <div id="j1-16" class="q-feedback"><strong>错误。</strong>九一八事变时日本关东军约2万人，东北军近20万人，兵力占绝对优势。东北迅速沦陷的根本原因是蒋介石奉行"不抵抗政策"，密电张学良"不予抵抗"，导致东北军几乎一枪未放就撤离入关。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">判断题 2</div>
+  <div class="q-text">一二·九运动是1935年12月9日北平学生发动的抗日救国示威游行，掀起了全国抗日救亡运动的新高潮。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'true','j2-16')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'false','j2-16')">× 错误</button>
+  </div>
+  <div id="j2-16" class="q-feedback"><strong>正确。</strong>一二·九运动发生在华北事变后民族危机空前严重的背景下，北平学生高呼"停止内战，一致抗日""反对华北自治"等口号，得到了全国人民的广泛响应，将抗日救亡运动推向了新高潮。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">判断题 3</div>
+  <div class="q-text">西安事变发生后，中国共产党主张处死蒋介石，以彻底结束国民党的统治。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'false','j3-16')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'true','j3-16')">× 错误</button>
+  </div>
+  <div id="j3-16" class="q-feedback"><strong>错误。</strong>西安事变发生后，中国共产党从全民族利益出发，主张和平解决西安事变，派周恩来等赴西安调停，促成蒋介石接受"停止内战、联共抗日"的条件。如果杀掉蒋介石，将引发新的内战，给日本以可乘之机，不利于抗日救国大业。</div>
+</div>
+
+<p style="font-size:16pt;font-weight:bold;color:#4a2b8e;margin:26px 0 10px;">选择题（点击选项即判对错）</p>
+<div class="q-block">
+  <div class="q-num">选择题 1</div>
+  <div class="q-text">九一八事变的爆发地点是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 北平芦沟桥')">A. 北平芦沟桥</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'B. 沈阳柳条湖')">B. 沈阳柳条湖</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 上海淞沪')">C. 上海淞沪</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 天津大沽口')">D. 天津大沽口</button>
+  </div>
+  <div class="q-feedback" id="c1-16"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca1-16')">解析</button>
+  <div id="ca1-16" class="col-answer"><strong>B。</strong>九一八事变发生在沈阳北郊柳条湖附近。日军自导自演"柳条湖事件"，炸毁南满铁路的一段路轨，反诬中国军队破坏，以此为由发动了侵略战争。注意：卢沟桥事变（七七事变）是1937年发生的，不要混淆。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">选择题 2</div>
+  <div class="q-text">日本侵占东北三省后，扶植的傀儡政权是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 华北自治政府')">A. 华北自治政府</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'B. 伪满洲国')">B. 伪满洲国</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 汪伪国民政府')">C. 汪伪国民政府</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 蒙疆联合自治政府')">D. 蒙疆联合自治政府</button>
+  </div>
+  <div class="q-feedback" id="c2-16"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca2-16')">解析</button>
+  <div id="ca2-16" class="col-answer"><strong>B。</strong>1932年，日本扶植清朝末代皇帝溥仪在长春建立伪"满洲国"，作为其统治东北的傀儡工具。伪满洲国存在到1945年日本投降。注意区分：汪伪国民政府是1940年在南京成立的。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">选择题 3</div>
+  <div class="q-text">标志着十年内战基本结束、抗日民族统一战线初步形成的历史事件是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 九一八事变')">A. 九一八事变</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 瓦窑堡会议')">B. 瓦窑堡会议</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'C. 西安事变和平解决')">C. 西安事变和平解决</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 七七事变')">D. 七七事变</button>
+  </div>
+  <div class="q-feedback" id="c3-16"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca3-16')">解析</button>
+  <div id="ca3-16" class="col-answer"><strong>C。</strong>西安事变和平解决后，蒋介石被迫接受"停止内战、联共抗日"的条件，国共十年内战基本结束，抗日民族统一战线初步形成。瓦窑堡会议（1935年底）确定了建立抗日民族统一战线的方针，但真正促成初步形成的是西安事变的和平解决。</div>
+</div>
+<div class="q-block">
+  <div class="q-num">选择题 4</div>
+  <div class="q-text">在东北组织抗日游击队、后来被日军称为"满洲治安之癌"的抗日英雄是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 赵一曼')">A. 赵一曼</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'B. 杨靖宇')">B. 杨靖宇</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 左权')">C. 左权</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 赵尚志')">D. 赵尚志</button>
+  </div>
+  <div class="q-feedback" id="c4-16"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca4-16')">解析</button>
+  <div id="ca4-16" class="col-answer"><strong>B。</strong>杨靖宇是东北抗日联军的主要创建者和领导人之一，他率领抗联在极端艰苦的条件下与日军浴血奋战。1940年牺牲后，日军剖开他的胃只发现草根、树皮和棉絮。左权是八路军副参谋长，1942年在山西十字岭牺牲；赵一曼和赵尚志也都是东北抗联的著名英雄。</div>
+</div>
+
+<p style="font-size:16pt;font-weight:bold;color:#4a2b8e;margin:26px 0 10px;">材料分析题</p>
+<div class="q-block" style="border-left-color:#8d6e63;">
+  <div class="q-num">材料分析题</div>
+  <div class="q-text" style="font-weight:bold;">阅读下列材料，回答问题。</div>
+  <div class="material">
+    <p><strong>材料一：</strong>"陕变事起，曾……通电主张……一致对外……弟（张学良）等此心，可质天日。"
+    <br>——张学良、杨虎城通电（1936年12月）</p>
+  </div>
+  <div class="material">
+    <p><strong>材料二：</strong>"这次事变是为了要抗日救国而产生的……我们处理得好，就会结束内战，团结抗日；处理得不好，就会爆发大规模内战，给日本以可乘之机。"
+    <br>——毛泽东在中共中央政治局会议上的讲话（1936年12月）</p>
+  </div>
+  <div class="material">
+    <p><strong>材料三：</strong>"西安事变的和平解决，成为时局转换的枢纽。"
+    <br>——毛泽东</p>
+  </div>
+  <p style="margin:10px 0 6px;"><strong>问题1：</strong>材料一中的"陕变"指的是什么？张学良、杨虎城发动这一事变的目的是什么？</p>
+  <p style="margin:6px 0;"><strong>问题2：</strong>根据材料二，分析中国共产党主张和平解决西安事变的原因。</p>
+  <p style="margin:6px 0;"><strong>问题3：</strong>如何理解材料三中"时局转换的枢纽"这句话的含义？</p>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca5-16')">查看参考答案</button>
+  <div id="ca5-16" class="col-answer">
+    <p><strong>问题1：</strong>"陕变"指的是西安事变（双十二事变）。目的是"兵谏"蒋介石，逼他停止内战、联共抗日。</p>
+    <p style="margin-top:8px;"><strong>问题2：</strong>① 中国共产党从全民族利益出发，认为民族矛盾已上升为主要矛盾；② 和平解决西安事变可以结束内战、团结抗日，挽救民族危亡；③ 如果处理不好（如杀掉蒋介石），将会爆发大规模内战，给日本以可乘之机，不利于抗日救国大业。</p>
+    <p style="margin-top:8px;"><strong>问题3：</strong>"时局转换的枢纽"是指西安事变成为中国历史发展的关键转折点。和平解决后，蒋介石被迫接受停止内战、联共抗日等条件，国共十年内战基本结束，抗日民族统一战线初步形成。中国从内战分裂转向团结抗日，为全民族抗战的胜利奠定了基础。因此说它是"时局转换的枢纽"。</p>
+  </div>
+</div>
+</div>
+
+</div>
+
+<!-- ===== 课程导航（前后课链接） ===== -->
+<div style="max-width:960px;margin:20px auto 0;padding:0 20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,0.75);border-radius:10px;padding:12px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+    <div style="flex:1;text-align:left;"><a href="第15课_红军长征与遵义会议.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">← 第15课 红军长征与遵义会议</a></div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;
+      padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+      color:#fff;text-decoration:none;border-radius:16px;font-size:11pt;
+      transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.85'"
+      onmouseout="this.style.opacity='1'">📋 导航</a>
+    <div style="flex:1;text-align:right;"><a href="第17课_七七事变与全民族抗战.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">第17课 七七事变 →</a></div>
+  </div>
+</div>
+
+<div class="footer"><p>人教版八年级历史上册 · 第16课《从九一八事变到西安事变》</p><p style="margin-top:4px;">参考：统编版（2024修订版）· 第六单元 中华民族的抗日战争</p></div>
+<script>
+function toggleAnswer(id){var el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block';}
+function switchAnalysis(btn,panelId){document.querySelectorAll('.analysis-tab').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.analysis-panel').forEach(function(p){p.classList.remove('active');});btn.classList.add('active');document.getElementById('panel-'+panelId).classList.add('active');}
+function checkChoice(btn,label){if(btn.classList.contains('disabled'))return;var parent=btn.parentElement,options=parent.querySelectorAll('.q-option'),feedback=parent.nextElementSibling;options.forEach(function(o){o.classList.add('disabled');});if(btn.getAttribute('data-correct')==='true'){btn.classList.add('correct');feedback.innerHTML='回答正确！';feedback.className='q-feedback show correct';}else{btn.classList.add('wrong');feedback.innerHTML='回答错误！';feedback.className='q-feedback show wrong';options.forEach(function(o){if(o.getAttribute('data-correct')==='true'){o.classList.add('correct');}});}}
+function checkJudge(btn,isCorrect,feedbackId){if(btn.classList.contains('disabled'))return;var btns=btn.parentElement.querySelectorAll('.judge-btn'),feedback=document.getElementById(feedbackId);btns.forEach(function(b){b.classList.add('disabled');});if(isCorrect==='true'){btn.classList.add('correct');feedback.className='q-feedback show correct';}else{btn.classList.add('wrong');feedback.className='q-feedback show wrong';btns.forEach(function(b){if(b.getAttribute('data-correct')==='true'&&b!==btn){b.classList.add('correct');}});}}
+function toggleChoiceAnswer(id){var el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block';}
+</script>
+</body>
+</html>

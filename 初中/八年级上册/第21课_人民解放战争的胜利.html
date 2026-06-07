@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第21课 人民解放战争的胜利 | 八年级上册</title>
+<style>
+  :root {
+    --primary: #4a1a8a;
+    --secondary: #6b3fbf;
+    --accent: #9b6fe0;
+    --light: #e8dff8;
+    --gradient: linear-gradient(135deg, #1a0533 0%, #2d1b69 30%, #4a1a8a 60%, #6b3fbf 100%);
+    --card-bg: rgba(255,255,255,0.96);
+    --shadow: 0 6px 24px rgba(0,0,0,0.15);
+    --radius: 12px;
+    --text: #1a1a2e;
+    --text-light: #555;
+    --gold: #d4a030;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "SimHei", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+    font-size: 14pt;
+    color: var(--text);
+    background: var(--gradient);
+    background-attachment: fixed;
+    min-height: 100vh;
+    line-height: 1.8;
+  }
+  /* ===== 顶部导航 ===== */
+  .top-bar {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .top-bar .title-part {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .top-bar .title-part .badge {
+    background: var(--gold);
+    color: #1a0533;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .toc-btn {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .toc-btn:hover { background: rgba(255,255,255,0.25); }
+
+  /* ===== 目录浮层 ===== */
+  .toc-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+  }
+  .toc-overlay.show { display: flex; }
+  .toc-panel {
+    background: #fff;
+    width: 90%; max-width: 520px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: var(--radius);
+    padding: 30px 35px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .toc-panel h2 {
+    font-size: 20px;
+    color: var(--primary);
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--light);
+    padding-bottom: 10px;
+  }
+  .toc-panel a {
+    display: block;
+    padding: 8px 0;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.2s;
+  }
+  .toc-panel a:hover { color: var(--secondary); padding-left: 6px; }
+  .toc-close {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+  }
+  .toc-close:hover { color: #333; }
+
+  /* ===== 主体容器 ===== */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+
+  /* ===== 封面区 ===== */
+  .hero {
+    background: linear-gradient(135deg, #2d1b69, #4a1a8a);
+    border-radius: var(--radius);
+    padding: 50px 40px;
+    text-align: center;
+    color: #fff;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(155,111,224,0.2) 0%, transparent 60%);
+  }
+  .hero h1 {
+    font-size: 36px;
+    letter-spacing: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero .sub {
+    font-size: 18px;
+    opacity: 0.8;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero .badge-row {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero .badge-row span {
+    background: rgba(255,255,255,0.15);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  /* ===== 卡片 ===== */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px 35px;
+    margin-bottom: 24px;
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 5px solid var(--accent);
+    padding-left: 14px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .icon { font-size: 22px; }
+
+  /* ===== 时间线 ===== */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--accent), var(--primary));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 22px;
+    padding-left: 20px;
+  }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 8px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .tl-item .tl-date {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    padding: 1px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .tl-item .tl-body { font-size: 14pt; }
+  .tl-item .tl-body strong { color: var(--primary); }
+
+  /* ===== 重难点 ===== */
+  .difficulty-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .difficulty-grid { grid-template-columns: 1fr; }
+  }
+  .diff-card {
+    background: linear-gradient(135deg, #f5f0ff, #ede4ff);
+    border-radius: 10px;
+    padding: 20px;
+    border-top: 4px solid var(--accent);
+  }
+  .diff-card .diff-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .diff-card .diff-label .tag {
+    display: inline-block;
+    font-size: 12px;
+    background: var(--accent);
+    color: #fff;
+    padding: 0 8px;
+    border-radius: 3px;
+    margin-left: 6px;
+  }
+
+  /* ===== 教材栏目 ===== */
+  .col-box {
+    background: #f8f5ff;
+    border: 1px solid #e0d4f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .col-box .col-head {
+    font-weight: bold;
+    color: var(--secondary);
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  .col-box .col-head .col-icon { margin-right: 6px; }
+
+  /* ===== 课堂训练 ===== */
+  .quiz-section { margin-top: 8px; }
+  .q-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .q-item:last-child { border-bottom: none; }
+  .q-stem {
+    margin-bottom: 6px;
+  }
+  .q-stem .q-num {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    width: 24px; height: 24px;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .q-stem .q-type {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    border-radius: 4px;
+    padding: 0 8px;
+    margin-left: 6px;
+  }
+  .options { padding-left: 36px; margin: 4px 0; }
+  .options label {
+    display: block;
+    padding: 3px 0;
+    cursor: pointer;
+  }
+  .options input { margin-right: 8px; }
+  /* 隐藏答案 */
+  .answer-box {
+    margin: 6px 0 0 36px;
+    display: none;
+  }
+  .answer-box.show { display: block; }
+  .answer-box .ans-inner {
+    background: #f0ebf8;
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 13pt;
+  }
+  .ans-btn {
+    background: none;
+    border: 1px dashed var(--accent);
+    color: var(--secondary);
+    padding: 2px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-left: 36px;
+    margin-top: 4px;
+    font-family: inherit;
+  }
+  .ans-btn:hover {
+    background: var(--light);
+  }
+
+  /* ===== 材料题区域 ===== */
+  .material-box {
+    background: #faf8ff;
+    border: 1px solid #dcd0f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 10px 0;
+  }
+  .material-box .mat-title {
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  /* ===== 页脚 ===== */
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    padding: 30px 20px;
+    font-size: 13px;
+  }
+
+  /* ===== 动画 ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card { animation: fadeUp 0.5s ease both; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.2s; }
+  .card:nth-child(4) { animation-delay: 0.3s; }
+  .card:nth-child(5) { animation-delay: 0.4s; }
+  .card:nth-child(6) { animation-delay: 0.5s; }
+  .card:nth-child(7) { animation-delay: 0.6s; }
+
+  /* ===== 滚动条美化 ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部栏 ===== -->
+<div class="top-bar">
+  <div class="title-part">
+    <span>八年级上册 · 中国近代史</span>
+    <span class="badge">第21课</span>
+  </div>
+  <button class="toc-btn" onclick="toggleToc()">目录</button>
+</div>
+
+<!-- ===== 目录浮层 ===== -->
+<div class="toc-overlay" id="tocOverlay" onclick="closeTocOut(event)">
+  <div class="toc-panel" id="tocPanel">
+    <button class="toc-close" onclick="toggleToc()">&times;</button>
+    <h2>目录导航</h2>
+    <a href="#sec0" onclick="toggleToc()">课程封面</a>
+    <a href="#sec1" onclick="toggleToc()">一、知识点时间线</a>
+    <a href="#sec2" onclick="toggleToc()">二、重难点评析</a>
+    <a href="#sec3" onclick="toggleToc()">三、教材栏目</a>
+    <a href="#sec4" onclick="toggleToc()">四、课堂训练</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== 封面 ===== -->
+  <div class="hero" id="sec0">
+    <h1>第21课 · 人民解放战争的胜利</h1>
+    <div class="sub">八年级上册 · 中国近代史 | 2024修订版统编教材</div>
+    <div class="badge-row">
+      <span>三大战役</span>
+      <span>渡江战役</span>
+      <span>七届二中全会</span>
+      <span>民心向背</span>
+    </div>
+  </div>
+
+  <!-- ===== 一、知识点时间线 ===== -->
+  <div class="card" id="sec1">
+    <div class="card-title"><span class="icon">&#9201;</span> 知识点时间线</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <span class="tl-date">1948.9 — 1948.11</span>
+        <div class="tl-body"><strong>辽沈战役</strong> —— 林彪、罗荣桓指挥，解放东北全境。东北野战军主力南下北宁线，攻占锦州形成"关门打狗"之势，迫使长春守敌起义或投降，随后围歼廖耀湘兵团，解放沈阳、营口。辽沈战役的胜利，使人民解放军在数量上首次超过国民党军队。</div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-date">1948.11 — 1949.1</span>
+        <div class="tl-body"><strong>淮海战役</strong> —— 刘伯承、陈毅、邓小平、粟裕、谭震林组成总前委指挥。在以徐州为中心的地区歼灭国民党军队55万余人，解放了长江中下游以北的广大地区。陈毅元帅说："淮海战役的胜利，是人民群众用小车推出来的。"</div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-date">1948.12 — 1949.1</span>
+        <div class="tl-body"><strong>平津战役</strong> —— 林彪、罗荣桓、聂荣臻指挥。解放军截断敌军从海上南逃和西窜绥远的通道，"先打两头、后取中间"，先后攻克张家口、天津，促使傅作义接受和平改编，<strong>北平和平解放</strong>，使千年古都的文物建筑免遭战火毁坏。</div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-date">三大战役总成果</span>
+        <div class="tl-body">三大战役共歼灭和改编国民党军队<strong>150多万人</strong>，国民党军队的主力基本被消灭，为解放全中国奠定了坚实基础。</div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-date">1949.3</span>
+        <div class="tl-body"><strong>中共七届二中全会在西柏坡召开</strong>。会议确定了党的工作重心由乡村转移到城市，提出了"两个务必"：务必保持谦虚、谨慎、不骄、不躁的作风，务必保持艰苦奋斗的作风。这次会议为新中国的成立作了重要准备。</div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-date">1949.4</span>
+        <div class="tl-body"><strong>渡江战役</strong> —— 人民解放军百万雄师分三路强渡长江，4月23日<strong>占领南京</strong>，宣告国民党政权覆灭。此后，解放军继续向全国进军，追歼国民党残余势力，解放全国大陆。</div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-date">取胜原因</span>
+        <div class="tl-body"><strong>人民解放战争迅速取胜的原因：</strong><br>
+        &#9679; 国民党方面：政治腐败，统治腐朽，失去民心；军队士气低落，指挥失当。<br>
+        &#9679; 共产党方面：得到人民群众的广泛拥护和支援；战略战术正确，指挥得当；<strong>解放区土地改革</strong>的深入开展，充分调动了广大农民的积极性，为战争提供了源源不断的人力物力支持。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 二、重难点评析 ===== -->
+  <div class="card" id="sec2">
+    <div class="card-title"><span class="icon">&#9881;</span> 重难点评析</div>
+    <div class="difficulty-grid">
+
+      <div class="diff-card">
+        <div class="diff-label">深度 <span class="tag">三大战役 · 渡江战役</span></div>
+        <p>三大战役的胜利，使国民党军队的主力基本被消灭，极大地加速了人民解放战争在全国的胜利进程。三大战役无论从规模之大、歼敌之多、战果之辉煌，都是中国战争史上空前的。渡江战役和占领南京，则标志着国民党在大陆22年统治的彻底终结，是人民解放战争取得全国胜利的关键节点。从战略上看，三大战役环环相扣——辽沈战役使解放军数量首次占优，淮海战役奠定长江以北胜局，平津战役和平解放创造了以战促和的光辉范例。</p>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-label">广度 <span class="tag">冷战格局</span></div>
+        <p>解放战争发生于第二次世界大战结束后、冷战格局形成初期。美国推行"扶蒋反共"政策，为国民党提供大量军事和经济援助，试图将中国纳入其亚太战略体系；苏联则出于自身利益考量，与国民党政府签订《中苏友好同盟条约》，但对中共的态度经历了从观望到支持的转变。解放战争的结局不仅改变了中国的历史走向，也深刻影响了世界冷战格局——新中国的成立打破了帝国主义在东方的殖民体系，极大地改变了世界政治力量对比。</p>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-label">高度 <span class="tag">人民战争 · 民心向背</span></div>
+        <p>人民解放战争的胜利，归根结底是人民的胜利。战争期间，解放区经过土地改革，使亿万农民获得土地，激发了空前的革命热情——"参军参战、支援前线"成为自觉行动。淮海战役中，543万支前民工用小推车运送粮食弹药、转运伤员，"最后一口粮做军粮，最后一尺布做军装，最后一个儿子送战场"。毛泽东指出："战争的伟力之最深厚的根源，存在于民众之中。"民心向背是战争胜负的决定因素，这一历史经验至今仍具有深刻启示意义。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 三、教材栏目 ===== -->
+  <div class="card" id="sec3">
+    <div class="card-title"><span class="icon">&#128214;</span> 教材栏目</div>
+
+    <!-- 想一想 -->
+    <div class="col-box">
+      <div class="col-head"><span class="col-icon">&#128161;</span> 想一想</div>
+      <p>为什么说淮海战役的胜利是"人民群众用小车推出来的"？</p>
+      <button class="ans-btn" onclick="toggleAns(this)">查看提示</button>
+      <div class="answer-box">
+        <div class="ans-inner">
+          <strong>提示：</strong>淮海战役期间，解放区人民群众踊跃支前，出动民工543万人、担架20万副、大小车88万辆、牲畜76万头。陈毅元帅的这句话生动地说明了人民群众对解放战争的巨大支持，体现了人民战争的本质。
+        </div>
+      </div>
+    </div>
+
+    <!-- 材料研读 -->
+    <div class="col-box">
+      <div class="col-head"><span class="col-icon">&#128196;</span> 材料研读</div>
+      <div class="material-box">
+        <div class="mat-title">材料一</div>
+        <p>"钟山风雨起苍黄，百万雄师过大江。虎踞龙盘今胜昔，天翻地覆慨而慷。宜将剩勇追穷寇，不可沽名学霸王。天若有情天亦老，人间正道是沧桑。"</p>
+        <p style="text-align:right; margin-top:6px;">——毛泽东《七律·人民解放军占领南京》</p>
+      </div>
+      <p style="margin-top:8px;"><strong>问题：</strong>诗中"不可沽名学霸王"引用的是哪个历史典故？表达了怎样的革命精神？</p>
+      <button class="ans-btn" onclick="toggleAns(this)">查看解析</button>
+      <div class="answer-box">
+        <div class="ans-inner">
+          <strong>解析：</strong>"霸王"指西楚霸王项羽。项羽在鸿门宴上被刘邦的假意求和所迷惑，没有乘胜消灭对手，最终兵败自刎。毛泽东借此告诫全党全军：决不能像项羽那样沽名钓誉、半途而废，要将革命进行到底，坚决彻底地消灭一切反动势力。诗句表达了将革命进行到底、不获全胜决不收兵的彻底革命精神。
+        </div>
+      </div>
+    </div>
+
+    <!-- 课后活动 -->
+    <div class="col-box">
+      <div class="col-head"><span class="col-icon">&#9997;</span> 课后活动</div>
+      <p><strong>活动一：</strong>绘制三大战役示意图，标注三场战役的时间、地点、指挥者和战略意义。</p>
+      <p><strong>活动二：</strong>以"人民为什么选择了共产党"为题，写一篇200字左右的历史小短文，结合本课所学知识进行论述。</p>
+    </div>
+
+    <!-- 知识拓展 -->
+    <div class="col-box">
+      <div class="col-head"><span class="col-icon">&#128218;</span> 知识拓展</div>
+      <p><strong>西柏坡——"新中国从这里走来"</strong></p>
+      <p>西柏坡位于河北省平山县，是解放战争时期中共中央所在地。1948年5月至1949年3月，毛泽东等中央领导在此指挥了三大战役，召开了具有历史意义的七届二中全会，提出了"两个务必"和"进京赶考"的论断。西柏坡因此被誉为"革命圣地"和"新中国从这里走来"的地方。</p>
+      <p style="margin-top:8px;"><strong>土地改革与解放战争：</strong>1947年全国土地会议颁布《中国土地法大纲》，规定"废除封建剥削制度，实行耕者有其田"。到1948年底，解放区约1亿农民获得土地，极大地激发了农民的革命积极性，"保家保田"成为参军参战的有力口号。</p>
+    </div>
+
+  </div>
+
+  <!-- ===== 四、课堂训练 ===== -->
+  <div class="card" id="sec4">
+    <div class="card-title"><span class="icon">&#128221;</span> 课堂训练</div>
+
+    <!-- 一、判断题 -->
+    <h3 style="color:var(--primary); margin:16px 0 8px; font-size:16px;">一、判断题（正确的打&#10003;，错误的打&#10007;）</h3>
+    <div class="quiz-section">
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">1</span>辽沈战役中，人民解放军采取"先打两头、后取中间"的作战方针。<span class="q-type">判断</span></div>
+        <button class="ans-btn" onclick="toggleAns(this)">查看答案</button>
+        <div class="answer-box">
+          <div class="ans-inner"><strong>答案：</strong>&#10007;（错误）<br>"先打两头、后取中间"是平津战役的方针。辽沈战役采取的是"关门打狗"的方针，即先攻克锦州，封闭东北敌军退路。</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">2</span>中共七届二中全会提出了"两个务必"的重要思想。<span class="q-type">判断</span></div>
+        <button class="ans-btn" onclick="toggleAns(this)">查看答案</button>
+        <div class="answer-box">
+          <div class="ans-inner"><strong>答案：</strong>&#10003;（正确）<br>七届二中全会要求全党务必保持谦虚、谨慎、不骄、不躁的作风，务必保持艰苦奋斗的作风。</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">3</span>渡江战役后，国民党政权退守台湾，人民解放战争宣告完全结束。<span class="q-type">判断</span></div>
+        <button class="ans-btn" onclick="toggleAns(this)">查看答案</button>
+        <div class="answer-box">
+          <div class="ans-inner"><strong>答案：</strong>&#10007;（错误）<br>渡江战役占领南京标志着国民党在大陆统治的覆灭，但人民解放军随后继续向全国进军，追歼国民党残余势力，直到1950年基本解放全国大陆。西藏于1951年和平解放。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 二、选择题 -->
+    <h3 style="color:var(--primary); margin:16px 0 8px; font-size:16px;">二、选择题</h3>
+    <div class="quiz-section">
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">1</span>人民解放军在数量上首次超过国民党军队是在哪场战役之后？<span class="q-type">选择</span></div>
+        <div class="options">
+          <label><input type="radio" name="mc1"> A. 平津战役</label>
+          <label><input type="radio" name="mc1"> B. 淮海战役</label>
+          <label><input type="radio" name="mc1"> C. 辽沈战役</label>
+          <label><input type="radio" name="mc1"> D. 渡江战役</label>
+        </div>
+        <button class="ans-btn" onclick="toggleAns(this)">查看答案</button>
+        <div class="answer-box">
+          <div class="ans-inner"><strong>答案：</strong>C<br><strong>解析：</strong>辽沈战役解放东北全境，使人民解放军在数量上首次超过国民党军队，这是战争进程中的一个重要转折点。</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">2</span>北平和平解放是在哪场战役中实现的？<span class="q-type">选择</span></div>
+        <div class="options">
+          <label><input type="radio" name="mc2"> A. 辽沈战役</label>
+          <label><input type="radio" name="mc2"> B. 淮海战役</label>
+          <label><input type="radio" name="mc2"> C. 平津战役</label>
+          <label><input type="radio" name="mc2"> D. 渡江战役</label>
+        </div>
+        <button class="ans-btn" onclick="toggleAns(this)">查看答案</button>
+        <div class="answer-box">
+          <div class="ans-inner"><strong>答案：</strong>C<br><strong>解析：</strong>平津战役中，解放军攻克天津后，在兵临城下的形势下，经过谈判，傅作义接受和平改编，北平和平解放。</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">3</span>毛泽东诗句"宜将剩勇追穷寇，不可沽名学霸王"创作的历史背景是？<span class="q-type">选择</span></div>
+        <div class="options">
+          <label><input type="radio" name="mc3"> A. 抗日战争胜利</label>
+          <label><input type="radio" name="mc3"> B. 三大战役胜利</label>
+          <label><input type="radio" name="mc3"> C. 人民解放军占领南京</label>
+          <label><input type="radio" name="mc3"> D. 新中国成立</label>
+        </div>
+        <button class="ans-btn" onclick="toggleAns(this)">查看答案</button>
+        <div class="answer-box">
+          <div class="ans-inner"><strong>答案：</strong>C<br><strong>解析：</strong>该诗题为《七律·人民解放军占领南京》，作于1949年4月人民解放军攻克南京之际，表达了将革命进行到底的决心。</div>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">4</span>下列哪项不是人民解放战争迅速取胜的原因？<span class="q-type">选择</span></div>
+        <div class="options">
+          <label><input type="radio" name="mc4"> A. 共产党得到人民群众的拥护和支持</label>
+          <label><input type="radio" name="mc4"> B. 解放区实行了土地改革</label>
+          <label><input type="radio" name="mc4"> C. 国民党军队装备落后</label>
+          <label><input type="radio" name="mc4"> D. 国民党统治腐败，失去民心</label>
+        </div>
+        <button class="ans-btn" onclick="toggleAns(this)">查看答案</button>
+        <div class="answer-box">
+          <div class="ans-inner"><strong>答案：</strong>C<br><strong>解析：</strong>国民党军队在装备上占有明显优势（美式装备），并非装备落后。解放军取胜的原因是民心所向、土改动员、战略战术正确以及国民党统治腐败失去民心。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 三、材料题 -->
+    <h3 style="color:var(--primary); margin:16px 0 8px; font-size:16px;">三、材料分析题</h3>
+    <div class="quiz-section">
+
+      <div class="q-item">
+        <div class="q-stem"><span class="q-num">&#9733;</span> 阅读材料，回答问题。<span class="q-type">材料分析</span></div>
+
+        <div class="material-box">
+          <div class="mat-title">材料一</div>
+          <p>"最后一口粮做军粮，最后一尺布做军装，最后一个儿子送战场。"</p>
+          <p style="margin-top:4px;">——解放区支前民谣</p>
+        </div>
+
+        <div class="material-box">
+          <div class="mat-title">材料二</div>
+          <p>"战争的伟力之最深厚的根源，存在于民众之中。"</p>
+          <p style="margin-top:4px;">——毛泽东《论持久战》</p>
+        </div>
+
+        <p style="margin-top:8px;"><strong>问题：</strong></p>
+        <p>(1) 材料一中的民谣反映了什么历史现象？这在淮海战役中具体是如何体现的？</p>
+        <p>(2) 结合所学知识，说明共产党是如何赢得人民群众拥护和支持的？</p>
+        <p>(3) 综合以上材料，谈谈你对"民心向背决定战争胜负"这一观点的认识。</p>
+
+        <button class="ans-btn" onclick="toggleAns(this)">查看参考答案</button>
+        <div class="answer-box">
+          <div class="ans-inner">
+            <strong>参考答案：</strong><br>
+            <strong>(1)</strong> 反映了解放区人民群众倾尽全力支援人民解放战争的感人景象。淮海战役中，543万支前民工踊跃支援前线，用小推车运送粮食弹药、抢救伤员，为战役胜利提供了坚强保障。<br>
+            <strong>(2)</strong> 共产党赢得人民拥护的原因：①在解放区开展土地改革，废除封建土地制度，使亿万农民获得土地，真正成为土地的主人；②共产党纪律严明，全心全意为人民服务；③国民党统治腐败、横征暴敛，与之形成鲜明对比。<br>
+            <strong>(3)</strong> 民心向背是战争胜负的决定因素。得民心者得天下，失民心者失天下。人民解放战争的胜利深刻说明：只有代表最广大人民根本利益、得到人民真心拥护和支持的政党，才能最终赢得胜利。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ===== 课程导航（前后课链接） ===== -->
+<div style="max-width:960px;margin:20px auto 0;padding:0 20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,0.75);border-radius:10px;padding:12px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+    <div style="flex:1;text-align:left;"><a href="第20课_国民党挑起内战.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">← 第20课 国民党挑起内战</a></div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;
+      padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+      color:#fff;text-decoration:none;border-radius:16px;font-size:11pt;
+      transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.85'"
+      onmouseout="this.style.opacity='1'">📋 导航</a>
+    <div style="flex:1;text-align:right;"><a href="第22课_探寻红色文化的历史基因.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">第22课 活动课 →</a></div>
+  </div>
+</div>
+
+<div class="footer">
+  八年级上册 · 第21课《人民解放战争的胜利》 | 2024修订版统编教材 | 仅供教学参考
+</div>
+
+<script>
+// 切换答案解析的显示/隐藏
+function toggleAns(btn) {
+  var box = btn.nextElementSibling;
+  if (box && box.classList.contains('answer-box')) {
+    box.classList.toggle('show');
+    btn.textContent = box.classList.contains('show') ? '隐藏答案' : '查看答案';
+  }
+}
+
+// 目录浮层
+function toggleToc() {
+  var overlay = document.getElementById('tocOverlay');
+  overlay.classList.toggle('show');
+  document.body.style.overflow = overlay.classList.contains('show') ? 'hidden' : '';
+}
+
+function closeTocOut(e) {
+  if (e.target === document.getElementById('tocOverlay')) {
+    toggleToc();
+  }
+}
+
+// ESC 关闭目录
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var overlay = document.getElementById('tocOverlay');
+    if (overlay.classList.contains('show')) toggleToc();
+  }
+});
+</script>
+
+</body>
+</html>

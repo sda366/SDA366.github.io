@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2课 第二次鸦片战争 — 八年级历史上册</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "SimHei","黑体","Microsoft YaHei",sans-serif;
+  background: linear-gradient(135deg,#e8e0f0 0%,#d0d4f0 50%,#e0d8ee 100%);
+  color: #2d2d3a; font-size: 14pt; line-height: 1.9; padding: 0; min-height: 100vh;
+}
+.hero {
+  background: linear-gradient(135deg,#3a1c71 0%,#4a2b8e 30%,#6a3cb8 60%,#3a5bc7 100%);
+  color: #fff; text-align: center; padding: 48px 24px 36px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content:''; position:absolute; top:-60%; left:-20%; width:140%; height:200%;
+  background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,0.06) 0%,transparent 60%); pointer-events:none;
+}
+.hero h1 { font-size:32pt; letter-spacing:6px; margin-bottom:6px; position:relative; z-index:1; }
+.hero .unit { font-size:14pt; opacity:0.85; letter-spacing:4px; position:relative; z-index:1; }
+.hero .sub { font-size:13pt; opacity:0.7; margin-top:8px; position:relative; z-index:1; }
+.toc {
+  background:rgba(255,255,255,0.75); backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(74,43,142,0.15); padding:14px 24px;
+  position:sticky; top:0; z-index:100; display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+}
+.toc a {
+  display:inline-block; padding:6px 16px; background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+  color:#fff; text-decoration:none; border-radius:20px; font-size:11pt; transition:all 0.25s;
+}
+.toc a:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(74,43,142,0.35); }
+.container { max-width:960px; margin:0 auto; padding:28px 20px 60px; }
+.section-title {
+  background:linear-gradient(135deg,#4a2b8e,#3a5bc7); color:#fff;
+  padding:12px 24px; border-radius:10px; font-size:16pt; letter-spacing:4px; margin:36px 0 20px;
+  box-shadow:0 4px 14px rgba(74,43,142,0.25);
+}
+.section-title .icon { margin-right:10px; }
+.card {
+  background:rgba(255,255,255,0.88); border-radius:12px; padding:24px 28px; margin-bottom:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid #6a3cb8; transition:box-shadow 0.25s;
+}
+.card:hover { box-shadow:0 4px 20px rgba(74,43,142,0.12); }
+.timeline { position:relative; padding-left:36px; }
+.timeline::before {
+  content:''; position:absolute; left:12px; top:8px; bottom:8px; width:3px;
+  background:linear-gradient(180deg,#4a2b8e,#6a3cb8,#3a5bc7); border-radius:2px;
+}
+.tl-item { position:relative; margin-bottom:20px; padding-left:20px; }
+.tl-item::before {
+  content:''; position:absolute; left:-28px; top:8px; width:14px; height:14px;
+  background:linear-gradient(135deg,#4a2b8e,#6a3cb8); border-radius:50%;
+  border:3px solid #e0d8ee; box-shadow:0 0 0 2px #6a3cb8;
+}
+.tl-year {
+  display:inline-block; background:linear-gradient(135deg,#4a2b8e,#6a3cb8);
+  color:#fff; font-weight:bold; padding:2px 14px; border-radius:12px; font-size:12pt; margin-bottom:4px;
+}
+.tl-content { font-size:14pt; }
+.tag { display:inline-block; padding:2px 12px; border-radius:10px; font-size:11pt; margin-right:6px; font-weight:bold; }
+.tag-cause { background:#fce4ec; color:#c62828; }
+.tag-event { background:#e3f2fd; color:#1565c0; }
+.tag-effect { background:#e8f5e9; color:#2e7d32; }
+.tag-key { background:#fff3e0; color:#e65100; }
+.analysis-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+.analysis-tab {
+  padding:6px 18px; border:none; background:#e0d8ee; border-radius:16px; font-size:12pt;
+  font-family:inherit; cursor:pointer; transition:all 0.2s; color:#4a2b8e;
+}
+.analysis-tab.active,.analysis-tab:hover { background:linear-gradient(135deg,#4a2b8e,#3a5bc7); color:#fff; }
+.analysis-panel { display:none; }
+.analysis-panel.active { display:block; }
+.col-section { background:#f5f0ff; border-radius:10px; padding:16px 22px; margin-bottom:16px; border-left:4px solid #9c7bc7; }
+.col-title { font-size:15pt; font-weight:bold; color:#4a2b8e; margin-bottom:6px; }
+.col-q {
+  font-size:14pt; margin-bottom:10px; padding:10px 14px; background:rgba(255,255,255,0.7);
+  border-radius:8px; border-left:3px solid #6a3cb8;
+}
+.col-answer {
+  display:none; font-size:14pt; padding:12px 16px; background:#e8f5e9;
+  border-radius:8px; border-left:4px solid #4caf50; margin-top:6px;
+}
+.col-toggle {
+  display:inline-block; padding:4px 16px; background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+  color:#fff; border:none; border-radius:14px; font-size:12pt; font-family:inherit; cursor:pointer; transition:all 0.2s; margin-top:4px;
+}
+.col-toggle:hover { opacity:0.9; }
+.q-block { background:rgba(255,255,255,0.88); border-radius:12px; padding:20px 24px; margin-bottom:18px; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid #3a5bc7; }
+.q-num { display:inline-block; background:linear-gradient(135deg,#3a5bc7,#6a3cb8); color:#fff; padding:2px 14px; border-radius:12px; font-size:12pt; margin-bottom:8px; }
+.q-text { font-size:14pt; margin-bottom:10px; line-height:1.9; }
+.q-options { margin:8px 0; }
+.q-option {
+  display:block; width:100%; text-align:left; padding:8px 16px; margin-bottom:6px;
+  background:#f5f3ff; border:2px solid #ddd8ee; border-radius:8px; font-size:14pt; font-family:inherit; cursor:pointer; transition:all 0.2s;
+}
+.q-option:hover { border-color:#6a3cb8; background:#ede8ff; }
+.q-option.correct { border-color:#4caf50; background:#e8f5e9; color:#2e7d32; }
+.q-option.wrong { border-color:#f44336; background:#ffebee; color:#c62828; }
+.q-option.disabled { pointer-events:none; opacity:0.7; }
+.q-feedback { display:none; margin-top:8px; padding:10px 16px; border-radius:8px; font-size:13pt; }
+.q-feedback.show { display:block; }
+.q-feedback.correct { background:#e8f5e9; border-left:4px solid #4caf50; color:#2e7d32; }
+.q-feedback.wrong { background:#ffebee; border-left:4px solid #f44336; color:#c62828; }
+.answer-toggle {
+  display:inline-block; padding:4px 16px; background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+  color:#fff; border:none; border-radius:14px; font-size:11pt; font-family:inherit; cursor:pointer; transition:all 0.2s; margin-top:8px;
+}
+.answer-toggle:hover { opacity:0.9; }
+.material { background:#faf6f0; border-left:4px solid #8d6e63; padding:12px 18px; margin-bottom:12px; border-radius:6px; font-size:13pt; line-height:1.9; }
+.material .src { text-align:right; font-size:11pt; color:#6d4c41; margin-top:6px; }
+.judge-options { display:flex; gap:14px; margin-top:6px; }
+.judge-btn { padding:6px 28px; border:2px solid #ccc; border-radius:8px; font-size:14pt; font-family:inherit; cursor:pointer; background:#fff; transition:all 0.2s; }
+.judge-btn.correct { border-color:#4caf50; background:#e8f5e9; color:#2e7d32; }
+.judge-btn.wrong { border-color:#f44336; background:#ffebee; color:#c62828; }
+.judge-btn.disabled { pointer-events:none; opacity:0.6; }
+.hint-box { background:linear-gradient(135deg,#fff8e1,#fff3e0); border-left:4px solid #ff9800; padding:12px 18px; border-radius:8px; margin:10px 0; font-size:13pt; }
+.footer { text-align:center; padding:30px 20px; color:#6a6a80; font-size:11pt; border-top:1px solid rgba(74,43,142,0.1); margin-top:40px; }
+@media (max-width:640px) { .hero h1 { font-size:22pt; } .container { padding:16px 12px; } .card { padding:16px; } body { font-size:13pt; } }
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>第2课 第二次鸦片战争</h1>
+  <div class="unit">八年级历史上册 · 第一单元</div>
+  <div class="sub">中国开始沦为半殖民地半封建社会</div>
+</div>
+<nav class="toc">
+  <a href="#summary">知识点总结</a>
+  <a href="#analysis">重难点评析</a>
+  <a href="#textbook">教材栏目解答</a>
+  <a href="#exercises">课堂训练</a>
+</nav>
+<div class="container">
+
+<div id="summary">
+<div class="section-title"><span class="icon">📖</span>一、知识点总结 · 时间线梳理</div>
+
+<div class="card" style="border-left-color:#9c7bc7;">
+  <p><strong>▎课前导语</strong></p>
+  <p style="margin-top:6px;">鸦片战争后，西方列强不满足既得利益，企图进一步打开中国市场，扩大侵略权益。1856年，英法两国联合发动了新的侵华战争——因性质与鸦片战争相似，被称为"第二次鸦片战争"。这场战争使中国的半殖民地化程度进一步加深。</p>
+  <div class="hint-box">
+    <strong>💡 前后连贯：</strong>第1课讲到《南京条约》签订后，英国已打开中国国门。但列强不满足——他们认为《南京条约》中获得的权益太少，要求全面修改条约、增开更多通商口岸、允许公使进驻北京，被清政府拒绝后，便发动了第二次鸦片战争。
+  </div>
+</div>
+
+<div class="card">
+  <p><strong>▎时间线：从"修约"企图到北京沦陷（1854—1860年）</strong></p>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-year">1854年</span>
+      <div class="tl-content">
+        <span class="tag tag-cause">背景</span>
+        <strong>英法美提出"修约"要求</strong>
+        <p style="margin-top:4px;">英、法、美三国向清政府提出全面修改条约的要求——增开更多通商口岸、允许公使进驻北京、允许外国人到内地游历传教等，被清政府拒绝。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1856年10月</span>
+      <div class="tl-content">
+        <span class="tag tag-event">爆发</span>
+        <strong>"亚罗号事件"与"马神甫事件"</strong>
+        <p style="margin-top:4px;">英国以"亚罗号事件"为借口，法国以"马神甫事件"为借口，组成英法联军，发动第二次鸦片战争。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1858年</span>
+      <div class="tl-content">
+        <span class="tag tag-event">签订条约</span>
+        <strong>《天津条约》签订</strong>
+        <p style="margin-top:4px;">英法联军攻陷大沽炮台，进逼天津。清政府被迫与俄、美、英、法四国分别签订《天津条约》。主要内容：①外国公使常驻北京；②增开汉口、南京等十处为通商口岸；③外国商船可在长江各口岸自由航行；④外国人可到内地游历、经商、传教；⑤赔偿英法军费各200万两白银。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1859年</span>
+      <div class="tl-content">
+        <strong>大沽口之战——清军一度获胜</strong>
+        <p style="margin-top:4px;">英法公使率舰队北上换约，炮轰大沽炮台。清军奋起还击，击沉击伤英法军舰多艘，英法舰队狼狈撤退。这是第二次鸦片战争中清军的唯一一次胜利。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">1860年</span>
+      <div class="tl-content">
+        <span class="tag tag-event">最惨痛事件</span>
+        <strong>英法联军火烧圆明园 & 《北京条约》签订</strong>
+        <p style="margin-top:4px;">英法联军再度攻陷天津，进逼北京。咸丰帝逃往承德避暑山庄。英法联军攻入北京后，对圆明园进行疯狂劫掠并纵火焚烧（1860年10月），三百年的皇家园林化为灰烬。清政府被迫签订中英、中法《北京条约》：承认《天津条约》有效；增开天津为商埠；割让九龙半岛南部给英国；赔偿英法军费各增至800万两白银。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="border-left-color:#c62828;">
+  <p><strong>▎火烧圆明园——人类文明史上的浩劫</strong></p>
+  <p style="margin-top:6px;">圆明园是清代最宏伟的皇家园林，被誉为"万园之园"，集中外建筑艺术之大成，收藏了无数珍宝文物和古籍书画。1860年英法联军闯入后，进行了疯狂的掠夺和破坏——能拿走的全部抢走，拿不走的就砸碎。最后，为掩盖罪行、逼迫清政府彻底屈服，英国全权代表额尔金下令将圆明园焚烧三天三夜。</p>
+  <p style="margin-top:6px; background:#fff3e0; padding:8px 14px; border-radius:6px;"><strong>认识：</strong>火烧圆明园充分暴露了西方列强的残暴本质，也是中华民族历史上极为惨痛的一幕——至今，大量圆明园流失文物仍散落海外。</p>
+</div>
+
+<div class="card" style="border-left-color:#1565c0;">
+  <p><strong>▎沙俄侵占中国北方大片领土</strong></p>
+  <p style="margin-top:6px;">在第二次鸦片战争期间及战后，沙俄以"调停有功"为名，采取武力威胁和外交讹诈手段，强迫清政府签订一系列不平等条约，共割占中国东北和西北领土 <strong>150多万平方千米</strong>（相当于今天新疆面积的近一个，或相当于12个江苏省的面积）。</p>
+  <table style="width:100%; border-collapse:collapse; margin-top:8px; font-size:13pt;">
+    <tr style="background:#e0d8ee; font-weight:bold;"><td>条约</td><td>年份</td><td>割占领土</td><td>面积</td></tr>
+    <tr><td>《瑷珲条约》</td><td>1858</td><td>外兴安岭以南、黑龙江以北</td><td>约60万km²</td></tr>
+    <tr><td>《北京条约》</td><td>1860</td><td>乌苏里江以东（含库页岛）</td><td>约40万km²</td></tr>
+    <tr><td>《勘分西北界约记》</td><td>1864</td><td>巴尔喀什湖以东以南</td><td>约44万km²</td></tr>
+    <tr><td>《改订条约》等</td><td>1881</td><td>伊犁地区条款</td><td>约7万km²</td></tr>
+    <tr style="background:#fff3e0; font-weight:bold;"><td colspan="2">合计割占</td><td></td><td>约150万km²</td></tr>
+  </table>
+  <div class="hint-box" style="margin-top:10px;">
+    <strong>🔑 记忆要点：</strong>沙俄是第二次鸦片战争中获利最多的国家——未出一兵一卒（直接参战），却通过外交讹诈割占了最多的中国领土。
+  </div>
+</div>
+
+<div class="card" style="border-left-color:#f44336;">
+  <p><strong>▎第二次鸦片战争的影响</strong></p>
+  <p style="margin-top:6px;">① <strong>主权进一步丧失：</strong>公使进驻北京、增开口岸、内河航运权、内地传教权等，使列强对中国的控制从东南沿海深入到长江流域和内陆。</p>
+  <p>② <strong>领土大量被割占：</strong>沙俄趁机割占中国150多万平方千米领土，是割占领土最多的列强。</p>
+  <p>③ <strong>半殖民地化程度加深：</strong>中国的社会性质进一步向半殖民地半封建社会演变。</p>
+  <p>④ <strong>中外反动势力开始勾结：</strong>第二次鸦片战争后，清政府开始改变对列强的态度，从"剿夷"转向"抚夷"，为后来镇压太平天国时的"借师助剿"奠定基础。</p>
+</div>
+</div>
+
+<div id="analysis">
+<div class="section-title"><span class="icon">🔍</span>二、重难点评析</div>
+<div class="analysis-tabs">
+  <button class="analysis-tab active" onclick="switchAnalysis(this,'depth')">深度剖析</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'breadth')">广度拓展</button>
+  <button class="analysis-tab" onclick="switchAnalysis(this,'height')">高度升华</button>
+</div>
+
+<div id="panel-depth" class="analysis-panel active">
+  <div class="card">
+    <p><strong>▎深度剖析之一：为什么叫"第二次"鸦片战争？</strong></p>
+    <p style="margin-top:6px;">【重点概念辨析】教材用"第二次鸦片战争"这一名称，背后有深刻的历史逻辑：</p>
+    <p>① <strong>原因相似：</strong>两次战争都是为了打开中国市场、扩大侵略权益；</p>
+    <p>② <strong>性质相同：</strong>都是非正义的侵略掠夺战争；</p>
+    <p>③ <strong>对手相似：</strong>主要侵略者都是英国，法国是帮凶；</p>
+    <p>④ <strong>后果加深：</strong>第一次鸦片战争使中国开始沦为半殖民地半封建社会，第二次则使这一程度进一步加深。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>综合分析：</strong>两次战争实际上是西方列强用武力打开中国市场进程中的两个阶段——第一次"破门而入"，第二次"登堂入室"。</p>
+  </div>
+  <div class="card">
+    <p><strong>▎深度剖析之二："亚罗号事件"的真相</strong></p>
+    <p style="margin-top:6px;">【教参补充·难点澄清】"亚罗号"是一艘中国走私船，为方便走私而购买了香港的登记证。广东水师上船缉拿海盗时，将该船上的中国水手逮捕。这本是中国内政，但英国驻广州领事巴夏礼却谎称该船是英国船，诬陷中国水师侮辱了船上的英国国旗，要求放人赔礼。清政府被迫照办，但英国仍以此为借口发动战争。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>结论：</strong>和虎门销烟一样，"亚罗号事件"不过是英国发动战争的借口。英国的真实目的仍然是打开中国市场。</p>
+  </div>
+  <div class="card">
+    <p><strong>▎深度剖析之三：比较两次鸦片战争——《天津条约》vs《南京条约》</strong></p>
+    <table style="width:100%; border-collapse:collapse; margin-top:6px; font-size:13pt;">
+      <tr style="background:#e0d8ee; font-weight:bold;"><td style="padding:6px;border:1px solid #ccc;">比较项</td><td style="padding:6px;border:1px solid #ccc;">《南京条约》(1842)</td><td style="padding:6px;border:1px solid #ccc;">《天津条约》(1858)</td></tr>
+      <tr><td style="padding:6px;border:1px solid #ccc;">通商口岸</td><td style="padding:6px;border:1px solid #ccc;">沿海5口</td><td style="padding:6px;border:1px solid #ccc;">沿海+长江沿岸共10口</td></tr>
+      <tr><td style="padding:6px;border:1px solid #ccc;">公使驻京</td><td style="padding:6px;border:1px solid #ccc;">无</td><td style="padding:6px;border:1px solid #ccc;">有（可直接向清政府施压）</td></tr>
+      <tr><td style="padding:6px;border:1px solid #ccc;">内河航运</td><td style="padding:6px;border:1px solid #ccc;">无</td><td style="padding:6px;border:1px solid #ccc;">外国商船可在长江自由航行</td></tr>
+      <tr><td style="padding:6px;border:1px solid #ccc;">内地传教</td><td style="padding:6px;border:1px solid #ccc;">无</td><td style="padding:6px;border:1px solid #ccc;">外国人可到内地游历传教</td></tr>
+      <tr><td style="padding:6px;border:1px solid #ccc;">侵略深度</td><td style="padding:6px;border:1px solid #ccc;">东南沿海</td><td style="padding:6px;border:1px solid #ccc;">沿海→内地→政治中心（北京）</td></tr>
+    </table>
+    <p style="margin-top:8px; color:#4a2b8e;"><strong>结论：</strong>从《南京条约》到《天津条约》，列强对华侵略呈现出"由沿海到内地、由经济到政治、由局部到全面"的深化趋势。</p>
+  </div>
+</div>
+
+<div id="panel-breadth" class="analysis-panel">
+  <div class="card">
+    <p><strong>▎广度拓展之一：同一时期的太平天国运动</strong></p>
+    <p style="margin-top:6px;">第二次鸦片战争（1856-1860）与太平天国运动（1851-1864）在时间上高度重合。这两大事件相互关联、相互影响：</p>
+    <p>① 清政府两面作战，力量分散，大大削弱了其抵抗能力；</p>
+    <p>② 列强借机观察清政府镇压太平天国的能力，逐渐确立了"扶持清政府、镇压革命"的方针；</p>
+    <p>③ 第二次鸦片战争结束后，中外反动势力开始勾结，共同镇压太平天国。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>历史认识：</strong>内忧（太平天国）与外患（列强侵略）的交织，构成了19世纪中后期中国历史的一条主线。</p>
+  </div>
+  <div class="card">
+    <p><strong>▎广度拓展之二：圆明园文物流失的今天</strong></p>
+    <p style="margin-top:6px;">圆明园被焚毁后，大量流失文物至今仍散落在几十个国家的博物馆和私人收藏家手中。据联合国教科文组织统计，中国流失海外文物超过1000万件，其中很大一部分与1860年圆明园劫难直接相关。</p>
+    <p>近年来，部分圆明园流失文物通过捐赠、拍卖购回等方式回归中国。例如：2019年，马首铜像由港澳爱国人士何鸿燊捐赠，回归圆明园——但绝大多数流失文物仍下落不明。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>现实意义：</strong>文物流失是民族苦难的记忆。勿忘国耻，是今天每一个中国人应有的历史态度。</p>
+  </div>
+  <div class="card">
+    <p><strong>▎广度拓展之三：沙俄的东扩与中国西北边疆危机</strong></p>
+    <p style="margin-top:6px;">世界史视角：16世纪以来，沙俄以惊人速度向东方扩张——越过乌拉尔山、占领西伯利亚，至19世纪已将势力推进到太平洋沿岸。第二次鸦片战争期间，沙俄趁火打劫，以"调停"为名，割占了中国东北和西北150多万平方千米领土。这一扩张势头一直持续到19世纪末，使中国西北边疆面临长期危机，并由此引发了19世纪六七十年代的新疆浩罕国阿古柏入侵和左宗棠收复新疆之战（第4课内容）。</p>
+  </div>
+</div>
+
+<div id="panel-height" class="analysis-panel">
+  <div class="card">
+    <p><strong>▎历史规律之一：侵略的螺旋式上升</strong></p>
+    <p style="margin-top:6px;">从第一次鸦片战争到第二次鸦片战争，清晰地展示了一个规律：列强对中国的侵略是被端呈螺旋式上升的——每一次战争之后签订的不平等条约都带来了更多的权益，而当他们不满足时，就发动新的更大规模的战争。这种"战争—条约—新的战争—更多的条约"的恶性循环，构成了中国近代屈辱史的基本轨迹。</p>
+  </div>
+  <div class="card">
+    <p><strong>▎历史规律之二：落后与腐败是挨打的根源</strong></p>
+    <p style="margin-top:6px;">经历了第一次鸦片战争的沉重打击，清政府却没有进行深刻的变革——除了在军事装备上略有调整外，制度、观念、体制几乎原封未动。林则徐、魏源"师夷长技"的呼声无人真正回应，中国错失了第一次现代化的机遇。第二次鸦片战争中清军的惨败，本质上是清朝统治集团拒绝变革、固守旧制的必然结果。</p>
+    <p style="margin-top:6px; color:#4a2b8e;"><strong>历史启示：</strong>不改革就要落后，改革不彻底也会落后。只有主动变革，才能避免被动挨打。</p>
+  </div>
+  <div class="card">
+    <p><strong>▎历史规律之三：中外关系从"对抗"到"合作"的转折</strong></p>
+    <p style="margin-top:6px;">第二次鸦片战争后，清政府与列强的关系发生了微妙而深刻的转变。在镇压太平天国的共同利益面前，清政府开始与列强"合作"——即"借师助剿"（借助外国军队镇压太平天国）。这一转变标志着清政府从"天朝上国"的迷梦中彻底清醒：它开始认识到列强的军事力量无法抗拒，转而希望通过"合作"来维持自己的统治。从此，"中外反动势力开始勾结"——这是中国近代政治史的一个重要转折点。</p>
+  </div>
+</div>
+</div>
+
+<div id="textbook">
+<div class="section-title"><span class="icon">📝</span>三、教材栏目解答</div>
+
+<div class="col-section">
+  <div class="col-title">💬 想一想</div>
+  <div class="col-q">
+    <strong>题目：</strong>根据教材，第二次鸦片战争期间，英法联军火烧圆明园。想一想：为什么说火烧圆明园是人类文明史上的一场浩劫？
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('think-2')">📌 查看参考答案</button>
+  <div id="think-2" class="col-answer">
+    <strong>参考答案：</strong><br>
+    ① 圆明园是集中外建筑艺术精华的"万园之园"，收藏了无数珍宝文物、古籍书画、历史典籍，具有极高的艺术和历史文化价值；<br>
+    ② 英法联军对圆明园的劫掠和焚烧，是对人类共同文化遗产的严重破坏，造成了无法挽回的巨大损失；<br>
+    ③ 大火烧了三天三夜，大量珍贵文物被抢掠（至今散落海外）或被焚毁，这是人类文明史上罕见的野蛮行径。<br>
+    （依据：教材正文及相关阅读材料）
+  </div>
+</div>
+
+<div class="col-section">
+  <div class="col-title">📜 材料研读</div>
+  <div class="col-q">
+    <p><strong>材料：</strong>"在地球上某个角落里有着一个人间奇迹：它叫夏宫（指圆明园）……这奇迹现已荡然无存。有一天，两个强盗闯进了夏宫。一个进行洗劫，另一个放火焚烧……我相信，解放了的法国、涤荡了污泥浊水的法国一定会把这笔不义之财归还给被抢劫的中国……"</p>
+    <p class="src" style="text-align:right; font-size:12pt; color:#666; margin-top:4px;">——[法]维克多·雨果《致巴特勒上尉的信》</p>
+    <p style="margin-top:6px;"><strong>问题：</strong>雨果是一个法国人，他对法国的"胜利"没有喜悦和骄傲，反而站在公正的立场上批判本国政府的强盗行径。雨果的行为说明了什么？</p>
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('material-2')">📌 查看参考答案</button>
+  <div id="material-2" class="col-answer">
+    <strong>参考答案：</strong><br>
+    ① 雨果的形象反映了<strong>正义与良知是超越国界的</strong>——一个正直的、有良知的作家，不会因为自己的国籍而包庇本国政府的不义行为；<br>
+    ② 雨果不畏强权，敢于坚持真理和正义，体现了一位伟大作家的人道主义精神和高尚品格；<br>
+    ③ 这段文字也说明，即使在西方国家内部，也有具有正义感和良知、真诚同情中国人民的知识分子。<br>
+    （依据：教材·材料研读栏目及相关教参解读）
+  </div>
+</div>
+
+<div class="col-section">
+  <div class="col-title">📚 课后活动</div>
+  <div class="col-q">
+    <strong>第1题：</strong>对比《南京条约》和《天津条约》的内容，说明外国列强对中国的侵略在哪些方面加深了？
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('hw1-2')">📌 查看参考答案</button>
+  <div id="hw1-2" class="col-answer">
+    <strong>参考答案：</strong><br>
+    ① <strong>地域范围扩大：</strong>从《南京条约》的东南沿海5口，扩展到《天津条约》的沿海+长江沿岸10口，深入到中国内陆腹地；<br>
+    ② <strong>政治控制深化：</strong>《天津条约》允许外国公使常驻北京，列强可以直接向清政府施加政治压力；<br>
+    ③ <strong>经济控制加强：</strong>外国商船可在长江各口岸自由航行，列强获得了中国的内河航运权；<br>
+    ④ <strong>文化渗透准入：</strong>允许外国人到内地游历、经商、传教，为列强进行文化渗透和进一步侵略打开了通道。<br>
+    总之，列强对中国的侵略呈现出"从沿海到内地、从经济到政治、从贸易到文化"的全方位加深趋势。
+  </div>
+  <div class="col-q" style="margin-top:14px;">
+    <strong>第2题：</strong>第二次鸦片战争期间，沙俄通过一系列不平等条约割占中国北方大片领土。查阅资料，了解沙俄割占了哪些地方？
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('hw2-2')">📌 查看参考答案</button>
+  <div id="hw2-2" class="col-answer">
+    <strong>参考答案：</strong><br>
+    1858年《瑷珲条约》——割占外兴安岭以南、黑龙江以北约60万平方千米；<br>
+    1860年《北京条约》——割占乌苏里江以东（含库页岛）约40万平方千米；<br>
+    1864年《勘分西北界约记》——割占巴尔喀什湖以东以南约44万平方千米；<br>
+    后通过《改订条约》等割占约7万平方千米。<br>
+    <strong>合计约150多万平方千米。</strong><br>
+    沙俄是第二次鸦片战争期间侵占中国领土最多的国家。
+  </div>
+</div>
+
+<div class="col-section">
+  <div class="col-title">🌐 知识拓展</div>
+  <div class="col-q">
+    <strong>内容：</strong>雨果致巴特勒上尉的信
+  </div>
+  <button class="col-toggle" onclick="toggleAnswer('extend-2')">📌 查看补充材料</button>
+  <div id="extend-2" class="col-answer">
+    <strong>补充资料：</strong><br>
+    <p style="margin-bottom:6px;">法国文豪维克多·雨果在1861年——圆明园被焚毁仅一年后——写下了这封著名的信。信中用"两个强盗"来比喻英国和法国，称"将受到历史审判"。这封信成为日后国际社会谴责列强侵华罪行的著名文献。</p>
+    <p style="margin-bottom:6px;">雨果的信不仅痛斥了英法侵略者的野蛮行径，更体现了超越国家和民族的人道主义精神。这是对中国饱受欺凌的深切同情，也是对正义和公理的坚定捍卫。</p>
+    <p style="font-size:12pt; color:#888;">（依据：教材·知识拓展栏目）</p>
+  </div>
+</div>
+</div>
+
+<div id="exercises">
+<div class="section-title"><span class="icon">✍️</span>四、课堂训练</div>
+
+<p style="font-size:16pt; font-weight:bold; color:#4a2b8e; margin:16px 0 10px;">（一）判断题</p>
+
+<div class="q-block" style="border-left-color:#4a2b8e;">
+  <div class="q-num">判断题 1</div>
+  <div class="q-text">第二次鸦片战争的借口分别是"亚罗号事件"和"马神甫事件"。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'true','j1-2')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'false','j1-2')">× 错误</button>
+  </div>
+  <div id="j1-2" class="q-feedback"><strong>√ 正确。</strong>英国以"亚罗号事件"为借口，法国以"马神甫事件"为借口，联合发动了第二次鸦片战争。</div>
+</div>
+
+<div class="q-block" style="border-left-color:#4a2b8e;">
+  <div class="q-num">判断题 2</div>
+  <div class="q-text">第二次鸦片战争中，沙俄通过不平等条约割占的中国领土总面积约150万平方千米，是获利最多的国家。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'true','j2-2')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'false','j2-2')">× 错误</button>
+  </div>
+  <div id="j2-2" class="q-feedback"><strong>√ 正确。</strong>沙俄在第二次鸦片战争期间及战后通过《瑷珲条约》《北京条约》《勘分西北界约记》等割占中国东北和西北领土共约150多万平方千米。它没有直接出兵参战，但通过外交讹诈获得了最大利益。</div>
+</div>
+
+<div class="q-block" style="border-left-color:#4a2b8e;">
+  <div class="q-num">判断题 3</div>
+  <div class="q-text">《天津条约》中规定开放的通商口岸数量多于《南京条约》。</div>
+  <div class="judge-options">
+    <button class="judge-btn" onclick="checkJudge(this,'true','j3-2')">√ 正确</button>
+    <button class="judge-btn" onclick="checkJudge(this,'false','j3-2')">× 错误</button>
+  </div>
+  <div id="j3-2" class="q-feedback"><strong>√ 正确。</strong>《南京条约》开放5处通商口岸（广州、厦门、福州、宁波、上海），《天津条约》增开汉口、南京等10处，共达15处（含原来的5口）。侵略范围从沿海深入到了长江中下游内地。</div>
+</div>
+
+<p style="font-size:16pt; font-weight:bold; color:#4a2b8e; margin:26px 0 10px;">（二）选择题</p>
+
+<div class="q-block">
+  <div class="q-num">选择题 1</div>
+  <div class="q-text">第二次鸦片战争爆发的根本原因与鸦片战争相同，这主要表现在：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 英国以虎门销烟为借口')">A. 英国以虎门销烟为借口</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 清政府拒绝修改条约')">B. 清政府拒绝修改条约</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'C. 列强要求进一步打开中国市场')">C. 列强要求进一步打开中国市场</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 列强要求赔偿鸦片的损失')">D. 列强要求赔偿鸦片的损失</button>
+  </div>
+  <div class="q-feedback" id="c1-2"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca1-2')">🔍 查看解析</button>
+  <div id="ca1-2" class="col-answer">
+    <strong>正确答案：C</strong><br>
+    <strong>解析：</strong>两次鸦片战争的根本原因完全一致——都是列强要求打开中国大门、扩大商品市场和原料产地，将中国纳入资本主义世界市场体系。第一次是"破门"，第二次是"深入"。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 2</div>
+  <div class="q-text">下列哪一项不是在第二次鸦片战争中签订的条约？</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 《天津条约》')">A. 《天津条约》</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 《北京条约》')">B. 《北京条约》</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 《瑷珲条约》')">C. 《瑷珲条约》</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'D. 《南京条约》')">D. 《南京条约》</button>
+  </div>
+  <div class="q-feedback" id="c2-2"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca2-2')">🔍 查看解析</button>
+  <div id="ca2-2" class="col-answer">
+    <strong>正确答案：D</strong><br>
+    <strong>解析：</strong>《南京条约》是1842年第一次鸦片战争结束时签订的，不属于第二次鸦片战争。此题考察学生对两次战争所签订条约的准确区分能力。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 3</div>
+  <div class="q-text">马克思说："在第二次鸦片战争中，俄国不费一枪一弹而从中国夺得了大片领土。"这片领土的面积约是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 60多万平方千米')">A. 60多万平方千米</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 100多万平方千米')">B. 100多万平方千米</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'C. 150多万平方千米')">C. 150多万平方千米</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 200多万平方千米')">D. 200多万平方千米</button>
+  </div>
+  <div class="q-feedback" id="c3-2"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca3-2')">🔍 查看解析</button>
+  <div id="ca3-2" class="col-answer">
+    <strong>正确答案：C</strong><br>
+    <strong>解析：</strong>第二次鸦片战争期间及战后，沙俄通过多个不平等条约共割占中国领土约150多万平方千米。这个数字需要准确记忆。A项（60万km²）仅是《瑷珲条约》割占的部分。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 4</div>
+  <div class="q-text">《天津条约》规定"外国公使常驻北京"——这一条款的实质影响是：</div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 加强了中外友好往来')">A. 加强了中外友好往来</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'B. 便利了列强直接控制清政府')">B. 便利了列强直接控制清政府</button>
+    <button class="q-option" onclick="checkChoice(this,'C. 促进了中国外交近代化')">C. 促进了中国外交近代化</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 提高了清政府的国际地位')">D. 提高了清政府的国际地位</button>
+  </div>
+  <div class="q-feedback" id="c4-2"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca4-2')">🔍 查看解析</button>
+  <div id="ca4-2" class="col-answer">
+    <strong>正确答案：B</strong><br>
+    <strong>解析：</strong>"公使常驻北京"意味着列强可以直接在清政府的政治心脏施加外交压力，不必再通过广州等沿海口岸传递信息。这标志着列强对中国的侵略从沿海扩展到政治中心，大大便利了列强对清政府的操控。本题需要透过"外交"表象看到"控制"实质。
+  </div>
+</div>
+
+<div class="q-block">
+  <div class="q-num">选择题 5</div>
+  <div class="q-text">下列对第二次鸦片战争影响的表述，<strong>不正确的是：</strong></div>
+  <div class="q-options">
+    <button class="q-option" onclick="checkChoice(this,'A. 中国丧失了更多的主权和领土')">A. 中国丧失了更多的主权和领土</button>
+    <button class="q-option" onclick="checkChoice(this,'B. 中国的半殖民地化程度进一步加深')">B. 中国的半殖民地化程度进一步加深</button>
+    <button class="q-option" data-correct="true" onclick="checkChoice(this,'C. 中国完全沦为半殖民地半封建社会')">C. 中国完全沦为半殖民地半封建社会</button>
+    <button class="q-option" onclick="checkChoice(this,'D. 中外反动势力开始勾结')">D. 中外反动势力开始勾结</button>
+  </div>
+  <div class="q-feedback" id="c5-2"></div>
+  <button class="answer-toggle" onclick="toggleChoiceAnswer('ca5-2')">🔍 查看解析</button>
+  <div id="ca5-2" class="col-answer">
+    <strong>正确答案：C</strong><br>
+    <strong>解析：</strong>第二次鸦片战争使中国的半殖民地化程度"进一步加深"——但还远未到"完全沦为"的程度。"中国完全沦为半殖民地半封建社会"是在《辛丑条约》（1901年）签订以后。本题考察学生对"半殖民地化逐步加深"这一过程的理解——从鸦片战争"开始沦为"，到第二次鸦片战争"进一步加深"，是一个渐进的过程，不可跨越。
+  </div>
+</div>
+
+<p style="font-size:16pt; font-weight:bold; color:#4a2b8e; margin:26px 0 10px;">（三）材料分析题</p>
+
+<div class="q-block" style="border-left-color:#e65100;">
+  <div class="q-num">材料题</div>
+  <div class="q-text"><strong>阅读下列材料，回答问题。</strong></div>
+  <div class="material">
+    <p><strong>材料一：</strong>自从条约缔结以来……市场被打开了，但是同人们的预料相反，商品并没有充斥这个市场。其根本原因在于，这里所依据的只不过是英国对华贸易的一般条件……那些所谓天朝的无知、傲慢和自大……在有些地方需要用武力来强迫谈判。如果没有"亚罗号事件"，英国政府也会找出其他借口来达到目的。</p>
+    <p class="src">——据[美]马士《中华帝国对外关系史》等整理</p>
+  </div>
+  <div class="material">
+    <p><strong>材料二：</strong>在地球上某个角落里有着一个人间奇迹：它叫夏宫……有一天，两个强盗闯进了夏宫。一个进行洗劫，另一个放火焚烧……将受到历史制裁的这两个强盗，一个叫法兰西，另一个叫英吉利。</p>
+    <p class="src">——维克多·雨果《致巴特勒上尉的信》</p>
+  </div>
+  <div class="material">
+    <p><strong>材料三：</strong>恩格斯说："俄国不费一枪一弹，就从中国夺得了相当于法德两国面积的领土和一条同多瑙河一样长的河流。"</p>
+  </div>
+  <p style="margin-top:10px;"><strong>请回答：</strong></p>
+  <p><strong>（1）</strong>材料一中"自从条约缔结以来"的"条约"指的是什么条约？英国为什么要发动第二次鸦片战争？</p>
+  <p><strong>（2）</strong>材料二中"两个强盗"指谁？"夏宫"指的是什么？雨果这样写说明了什么？</p>
+  <p><strong>（3）</strong>材料三中恩格斯的话反映了什么历史事实？恩格斯说的"一条同多瑙河一样长的河流"指的是哪条河流？</p>
+  <p><strong>（4）</strong>综合三则材料，说说第二次鸦片战争给中国带来了哪些深重灾难。</p>
+  <button class="answer-toggle" onclick="toggleAnswer('mq2-ans')">📌 查看参考答案</button>
+  <div id="mq2-ans" class="col-answer" style="display:none;">
+    <p><strong>（1）</strong>"条约"指《南京条约》及其附件。英国发动第二次鸦片战争的原因是：第一次鸦片战争后打开的中国市场远未达到英国的预期，英国商品在中国仍然滞销；英国要求增开口岸、扩大贸易权、公使驻京等，遭清政府拒绝后便寻找借口发动新的战争。（依据教材·教参）</p>
+    <p style="margin-top:6px;"><strong>（2）</strong>"两个强盗"指英国和法国。"夏宫"指圆明园。雨果作为法国人，不以本国政府的侵略为荣，反而仗义执言，谴责本国政府的强盗行径，体现了伟大作家超越国界的正义感和人道主义精神。（依据教材·材料研读栏目）</p>
+    <p style="margin-top:6px;"><strong>（3）</strong>恩格斯的这段话反映了沙俄在第二次鸦片战争期间趁火打劫，通过一系列不平等条约割占了中国150多万平方千米领土的历史事实。"一条同多瑙河一样长的河流"指的是黑龙江——黑龙江全长约4400千米，与多瑙河长度相当。沙俄通过《瑷珲条约》割占了黑龙江以北60万平方千米的领土。（依据教材·教参及恩格斯原话）</p>
+    <p style="margin-top:6px;"><strong>（4）</strong>深重灾难包括：①领土被大量割占（沙俄150多万平方千米）；②主权进一步丧失（公使驻京、内河航运、内地传教等）；③经济掠夺加剧（巨额赔款、增开口岸）；④人类文明瑰宝圆明园被焚毁，造成文化遗产不可挽回的损失；⑤半殖民地化程度进一步加深，中国人民的苦难更加深重。（综合教材·教参）</p>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ===== 课程导航（前后课链接） ===== -->
+<div style="max-width:960px;margin:20px auto 0;padding:0 20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,0.75);border-radius:10px;padding:12px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+    <div style="flex:1;text-align:left;"><a href="第1课_鸦片战争.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">← 第1课 鸦片战争</a></div>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;
+      padding:4px 16px;background:linear-gradient(135deg,#4a2b8e,#3a5bc7);
+      color:#fff;text-decoration:none;border-radius:16px;font-size:11pt;
+      transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.opacity='0.85'"
+      onmouseout="this.style.opacity='1'">📋 导航</a>
+    <div style="flex:1;text-align:right;"><a href="第3课_太平天国运动.html" style="display:inline-flex;align-items:center;gap:4px;color:#4a2b8e;text-decoration:none;font-size:12pt;font-weight:bold;transition:all 0.2s;" onmouseover="this.style.color='#6a3cb8'" onmouseout="this.style.color='#4a2b8e'">第3课 太平天国运动 →</a></div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>人教版八年级历史上册 · 第2课《第二次鸦片战争》</p>
+  <p>依据教材、教参及教学参考资料整理 · 仅供教学参考使用</p>
+  <p style="margin-top:6px; font-size:10pt;">点击选项可自测 · 答案解析可切换查看</p>
+</div>
+<script>
+function toggleAnswer(id){var el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block';}
+function switchAnalysis(btn,panelId){
+  document.querySelectorAll('.analysis-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.analysis-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');document.getElementById('panel-'+panelId).classList.add('active');
+}
+function checkChoice(btn,label){
+  if(btn.classList.contains('disabled'))return;
+  var parent=btn.parentElement,options=parent.querySelectorAll('.q-option'),feedback=parent.nextElementSibling;
+  options.forEach(function(o){o.classList.add('disabled');});
+  if(btn.getAttribute('data-correct')==='true'){
+    btn.classList.add('correct');
+    feedback.innerHTML='✅ <strong>回答正确！</strong>'+label+' 是正确答案。';
+    feedback.className='q-feedback show correct';
+  }else{
+    btn.classList.add('wrong');
+    feedback.innerHTML='❌ <strong>回答错误！</strong>"'+label+'" 不是正确答案。';
+    feedback.className='q-feedback show wrong';
+    options.forEach(function(o){if(o.getAttribute('data-correct')==='true'){o.classList.add('correct');o.style.borderStyle='dashed';}});
+  }
+}
+function checkJudge(btn,isCorrect,feedbackId){
+  if(btn.classList.contains('disabled'))return;
+  var btns=btn.parentElement.querySelectorAll('.judge-btn'),feedback=document.getElementById(feedbackId);
+  btns.forEach(function(b){b.classList.add('disabled');});
+  if(isCorrect==='true'){
+    btn.classList.add('correct');
+    feedback.className='q-feedback show correct';
+  }else{
+    btn.classList.add('wrong');
+    feedback.className='q-feedback show wrong';
+    btns.forEach(function(b){if(b.getAttribute('data-correct')==='true'&&b!==btn){b.classList.add('correct');}});
+  }
+}
+function toggleChoiceAnswer(id){var el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block';}
+</script>
+</body>
+</html>
