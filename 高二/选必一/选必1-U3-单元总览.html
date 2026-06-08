@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三单元 法律与教化 - 单元总览</title>
+    <style>
+        /* ===== 全局重置 & 基础 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "SimHei", "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14pt;
+            line-height: 1.8;
+            color: #2d3436;
+            background-color: #fdf2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== 容器 ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== 标题区（朱砂红渐变背景） ===== */
+        .hero {
+            background: linear-gradient(135deg, #c0392b 0%, #e17055 60%, #fab1a0 100%);
+            color: #fff;
+            padding: 60px 0 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -60%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(250, 177, 160, 0.20) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(4px);
+            padding: 4px 20px;
+            border-radius: 20px;
+            font-size: 13pt;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .hero h1 {
+            font-size: 30pt;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero h1 small {
+            display: block;
+            font-size: 14pt;
+            font-weight: 400;
+            letter-spacing: 6px;
+            margin-top: 8px;
+            opacity: 0.85;
+        }
+
+        .hero-sub {
+            margin-top: 14px;
+            font-size: 13pt;
+            opacity: 0.90;
+            letter-spacing: 1px;
+        }
+
+        /* ===== 导航条（朱砂红底白字） ===== */
+        .nav-bar {
+            background: #fff;
+            border-bottom: 2px solid #f5b7b1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-bar .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            background: #e17055;
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-size: 13pt;
+            font-weight: 600;
+            transition: background 0.25s, transform 0.2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .nav-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn-outline {
+            background: transparent;
+            color: #c0392b;
+            border: 2px solid #e17055;
+        }
+
+        .nav-btn-outline:hover {
+            background: #fdf2f2;
+        }
+
+        .nav-divider {
+            color: #f5b7b1;
+            font-size: 16pt;
+            user-select: none;
+        }
+
+        /* ===== 通用节 ===== */
+        .section {
+            padding: 48px 0;
+        }
+
+        .section-title {
+            font-size: 20pt;
+            font-weight: 700;
+            color: #c0392b;
+            padding-left: 18px;
+            border-left: 5px solid #e17055;
+            margin-bottom: 28px;
+        }
+
+        .section-title .en {
+            display: block;
+            font-size: 10pt;
+            font-weight: 400;
+            color: #e17055;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* ===== 单元概览 ===== */
+        .overview-card {
+            background: linear-gradient(135deg, #fdf2f2, #fff5f5);
+            border: 2px solid #f5b7b1;
+            border-radius: 16px;
+            padding: 32px 36px;
+            position: relative;
+        }
+
+        .overview-card::before {
+            content: "\201C";
+            position: absolute;
+            top: -8px;
+            left: 18px;
+            font-size: 64pt;
+            color: rgba(225, 112, 85, 0.15);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .overview-card p {
+            text-indent: 2em;
+            margin-bottom: 12px;
+            font-size: 14pt;
+        }
+
+        .overview-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .overview-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .overview-keywords span {
+            background: #fff;
+            border: 1px solid #e17055;
+            color: #c0392b;
+            padding: 4px 16px;
+            border-radius: 16px;
+            font-size: 12pt;
+            font-weight: 600;
+        }
+
+        /* ===== 三列卡片网格 ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            border: 2px solid #f5b7b1;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.25s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #e17055, #c0392b);
+            color: #fff;
+            padding: 18px 20px;
+            font-size: 15pt;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .card-header .lesson-no {
+            display: block;
+            font-size: 11pt;
+            font-weight: 400;
+            opacity: 0.80;
+            margin-bottom: 2px;
+        }
+
+        .card-body {
+            padding: 20px 22px;
+        }
+
+        .card-body h4 {
+            color: #c0392b;
+            font-size: 13pt;
+            margin: 14px 0 6px;
+            border-bottom: 1px dashed #f5b7b1;
+            padding-bottom: 4px;
+        }
+
+        .card-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .card-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-body ul li {
+            padding: 3px 0 3px 22px;
+            position: relative;
+            font-size: 13pt;
+        }
+
+        .card-body ul li::before {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            background: #e17055;
+            border-radius: 50%;
+        }
+
+        .card-body ul li .tag {
+            display: inline-block;
+            background: #fdf2f2;
+            color: #c0392b;
+            font-size: 10pt;
+            padding: 0 10px;
+            border-radius: 8px;
+            margin-right: 4px;
+            font-weight: 600;
+        }
+
+        /* ===== 表格 ===== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #f5b7b1;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #c0392b, #e17055);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 14px 16px;
+            font-size: 13pt;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table td {
+            padding: 14px 16px;
+            font-size: 13pt;
+            border-bottom: 1px solid #fdf2f2;
+            vertical-align: top;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody tr:hover {
+            background-color: #fdf2f2;
+        }
+
+        .comparison-table .dimension {
+            font-weight: 700;
+            color: #c0392b;
+            text-align: center;
+            background: #fdf2f2;
+            white-space: nowrap;
+            width: 100px;
+        }
+
+        .table-arrow {
+            text-align: center;
+            font-size: 18pt;
+            color: #e17055;
+        }
+
+        /* ===== 课标要求 ===== */
+        .standard-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .standard-list li {
+            background: #fff;
+            border: 1px solid #f5b7b1;
+            border-radius: 12px;
+            padding: 16px 22px 16px 56px;
+            position: relative;
+            margin-bottom: 12px;
+            font-size: 14pt;
+            transition: background 0.2s;
+        }
+
+        .standard-list li:hover {
+            background: #fdf2f2;
+        }
+
+        .standard-list li .num {
+            position: absolute;
+            left: 18px;
+            top: 16px;
+            width: 28px;
+            height: 28px;
+            background: #e17055;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 12pt;
+            font-weight: 700;
+        }
+
+        .standard-list li strong {
+            color: #c0392b;
+        }
+
+        /* ===== 学习建议 ===== */
+        .advice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .advice-item {
+            background: #fff;
+            border: 1px solid #f5b7b1;
+            border-radius: 14px;
+            padding: 20px 24px;
+            transition: box-shadow 0.25s;
+        }
+
+        .advice-item:hover {
+            box-shadow: 0 4px 16px rgba(192, 57, 43, 0.08);
+        }
+
+        .advice-item .icon {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: #fdf2f2;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 36px;
+            font-size: 18pt;
+            margin-bottom: 8px;
+        }
+
+        .advice-item h4 {
+            color: #c0392b;
+            font-size: 14pt;
+            margin-bottom: 6px;
+        }
+
+        .advice-item p {
+            font-size: 13pt;
+            color: #555;
+        }
+
+        /* ===== 引用框 ===== */
+        .quote-block {
+            background: #fff;
+            border: 1px solid #f5b7b1;
+            border-radius: 12px;
+            padding: 20px 28px;
+            margin-top: 20px;
+            border-left: 4px solid #e17055;
+        }
+
+        .quote-block p {
+            text-indent: 0;
+            font-size: 13pt;
+            color: #555;
+            font-style: italic;
+        }
+
+        .quote-block .source {
+            display: block;
+            margin-top: 8px;
+            text-align: right;
+            font-style: normal;
+            font-size: 11pt;
+            color: #e17055;
+        }
+
+        /* ===== 页脚 ===== */
+        .footer-cta {
+            background: linear-gradient(135deg, #c0392b, #e17055);
+            color: #fff;
+            text-align: center;
+            padding: 48px 0;
+        }
+
+        .footer-cta p {
+            font-size: 14pt;
+            opacity: 0.90;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #fff;
+            color: #c0392b;
+            padding: 14px 48px;
+            border-radius: 30px;
+            font-size: 16pt;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: transform 0.25s, box-shadow 0.25s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-bottom {
+            background: #922b21;
+            color: rgba(255, 255, 255, 0.60);
+            text-align: center;
+            padding: 16px 0;
+            font-size: 11pt;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 900px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .advice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 24pt;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero {
+                padding: 40px 0 32px;
+            }
+
+            .hero h1 {
+                font-size: 20pt;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                font-size: 11pt;
+                padding: 10px 8px;
+            }
+
+            .nav-bar .container {
+                gap: 6px;
+                padding: 10px 16px;
+            }
+
+            .nav-btn {
+                font-size: 11pt;
+                padding: 6px 14px;
+            }
+        }
+
+        @media print {
+            .nav-bar { display: none; }
+            .footer-cta { break-inside: avoid; }
+            .card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== 标题区（朱砂红渐变） ==================== -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-badge">选择性必修1 · 国家制度与社会治理</div>
+        <h1>
+            第三单元 法律与教化
+            <small>Law and Moral Education</small>
+        </h1>
+        <p class="hero-sub">从礼法结合到法治文明——法律与教化是社会治理的两大基石</p>
+    </div>
+</header>
+
+<!-- ==================== 导航条（朱砂红底白字） ==================== -->
+<nav class="nav-bar">
+    <div class="container">
+        <span class="nav-btn" onclick="scrollToSection('overview')">单元概览</span>
+        <span class="nav-divider">|</span>
+        <span class="nav-btn" onclick="scrollToSection('lessons')">各课内容</span>
+        <span class="nav-divider">|</span>
+        <span class="nav-btn" onclick="scrollToSection('timeline')">演变线索</span>
+        <span class="nav-divider">|</span>
+        <span class="nav-btn" onclick="scrollToSection('standards')">课标要求</span>
+        <span class="nav-divider">|</span>
+        <span class="nav-btn" onclick="scrollToSection('advice')">学习建议</span>
+        <span class="nav-divider">|</span>
+        <a href="#" class="nav-btn" onclick="alert('第8课页面待创建');return false">第8课</a>
+        <a href="#" class="nav-btn" onclick="alert('第9课页面待创建');return false">第9课</a>
+        <a href="#" class="nav-btn" onclick="alert('第10课页面待创建');return false">第10课</a>
+        <span class="nav-divider">|</span>
+        <a href="选必1-U2-单元总览.html" class="nav-btn nav-btn-outline">← 第二单元</a>
+    </div>
+</nav>
+
+<!-- ==================== 单元概览 ==================== -->
+<section class="section" id="overview">
+    <div class="container">
+        <h2 class="section-title">
+            单元概览
+            <span class="en">Unit Overview</span>
+        </h2>
+        <div class="overview-card">
+            <p>
+                <strong>法律</strong>与<strong>教化</strong>是国家社会治理的两大基本手段。法律以强制性规范维系社会秩序，教化以道德引导塑造人的内心自觉。本单元以"古今贯通、中西对比"的视角，系统梳理了法律与教化从古至今、从中国到西方的发展演变历程。
+            </p>
+            <p>
+                <strong>中国古代</strong>经历了从"刑"到"法"、从"礼法分离"到"礼法结合"的漫长演变，形成了以德主刑辅、礼法融合为特征的中华法系；<strong>近代西方</strong>在罗马法传统和启蒙思想的基础上，建立了以宪法为核心、以保障个人权利为宗旨的资产阶级法律体系，同时基督教伦理在教化中发挥了重要作用；<strong>当代中国</strong>则在中国共产党的领导下，逐步建立起中国特色社会主义法律体系，并持续推动依法治国与以德治国相结合，同时大力加强精神文明建设。
+            </p>
+            <p>
+                法律与教化的发展折射出人类社会治理理念的深刻变革——从<strong>"神治"</strong>到<strong>"人治"</strong>再到<strong>"法治"</strong>，从<strong>"强制服从"</strong>到<strong>"内心认同"</strong>，这是人类政治文明进步的重要标志。
+            </p>
+            <div class="overview-keywords">
+                <span>中华法系</span>
+                <span>礼法结合</span>
+                <span>罗马法</span>
+                <span>大陆法系</span>
+                <span>英美法系</span>
+                <span>依法治国</span>
+                <span>以德治国</span>
+                <span>精神文明建设</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 各课内容脉络 ==================== -->
+<section class="section" id="lessons" style="background: #fdf2f2;">
+    <div class="container">
+        <h2 class="section-title">
+            各课内容脉络
+            <span class="en">Lesson Outlines</span>
+        </h2>
+        <div class="card-grid">
+
+            <!-- 第8课 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="lesson-no">第8课</span>
+                    中国古代的法治与教化
+                </div>
+                <div class="card-body">
+                    <h4>先秦：法治与教化的源头</h4>
+                    <ul>
+                        <li><span class="tag">西周</span>"敬天保民"思想 · 礼制与刑书</li>
+                        <li><span class="tag">春秋战国</span>儒法之争：儒家"德治" vs 法家"法治"</li>
+                        <li><span class="tag">《法经》</span>中国最早的成文法</li>
+                    </ul>
+                    <h4>秦汉至隋唐：礼法结合的形成</h4>
+                    <ul>
+                        <li><span class="tag">秦</span>以法为教 · 以吏为师（法家实践）</li>
+                        <li><span class="tag">汉</span>"引礼入法" · 《九章律》 · 春秋决狱</li>
+                        <li><span class="tag">魏晋</span>律学发展 · "八议"入律</li>
+                        <li><span class="tag">唐</span>《唐律疏议》——中华法系的典范</li>
+                    </ul>
+                    <h4>宋元明清：礼法的强化与僵化</h4>
+                    <ul>
+                        <li>乡约教化 · 宗族家训 · 理学渗透</li>
+                        <li>明清律令的细密化与专制强化</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第9课 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="lesson-no">第9课</span>
+                    近代西方的法律与教化
+                </div>
+                <div class="card-body">
+                    <h4>近代西方法律的渊源</h4>
+                    <ul>
+                        <li><span class="tag">罗马法</span>《十二铜表法》→《罗马民法大全》</li>
+                        <li><span class="tag">中世纪</span>教会法 · 普通法（英国判例法传统）</li>
+                        <li><span class="tag">启蒙运动</span>自然法 · 社会契约论 · 分权学说</li>
+                    </ul>
+                    <h4>两大法系的形成</h4>
+                    <ul>
+                        <li><span class="tag">大陆法系</span>以罗马法为基础 · 成文法为主（法、德为代表）</li>
+                        <li><span class="tag">英美法系</span>以判例法为主 · 遵循先例（英、美为代表）</li>
+                        <li>《拿破仑法典》——大陆法系的经典</li>
+                    </ul>
+                    <h4>近代西方的教化</h4>
+                    <ul>
+                        <li>基督教的道德教化功能</li>
+                        <li>学校教育与公民意识培养</li>
+                        <li>宗教改革与世俗化进程</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 第10课 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="lesson-no">第10课</span>
+                    当代中国的法治与精神文明建设
+                </div>
+                <div class="card-body">
+                    <h4>新中国法治建设历程</h4>
+                    <ul>
+                        <li><span class="tag">1949-1956</span>《共同纲领》→ 五四宪法 · 初步奠基</li>
+                        <li><span class="tag">1957-1976</span>法制建设遭受挫折</li>
+                        <li><span class="tag">1978-1997</span>八二宪法 · 法治重建 · 法律体系初步形成</li>
+                        <li><span class="tag">1997-2011</span>"依法治国"入宪 · 中国特色社会主义法律体系形成</li>
+                        <li><span class="tag">2012至今</span>全面依法治国 · 法治中国建设</li>
+                    </ul>
+                    <h4>社会主义精神文明建设</h4>
+                    <ul>
+                        <li>思想道德建设 · 社会主义核心价值观</li>
+                        <li>群众性精神文明创建活动</li>
+                        <li>依法治国与以德治国相结合</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 单元逻辑主线表格 ==================== -->
+<section class="section" id="timeline">
+    <div class="container">
+        <h2 class="section-title">
+            单元逻辑主线：法律与教化的历史演变
+            <span class="en">Historical Evolution of Law and Moral Education</span>
+        </h2>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width:12%">维度</th>
+                    <th style="width:29%">中国古代<br><small style="font-weight:400;opacity:.8;">先秦 — 清末</small></th>
+                    <th style="width:6%"></th>
+                    <th style="width:29%">近代西方<br><small style="font-weight:400;opacity:.8;">中世纪 — 现代</small></th>
+                    <th style="width:6%"></th>
+                    <th style="width:18%">当代中国<br><small style="font-weight:400;opacity:.8;">1949 — 当代</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="dimension">法律渊源</td>
+                    <td>礼制 + 刑律 → 成文法（《法经》《唐律疏议》）</td>
+                    <td class="table-arrow">→</td>
+                    <td>罗马法 → 教会法 → 启蒙自然法 → 宪法与法典</td>
+                    <td class="table-arrow">→</td>
+                    <td>以宪法为核心的中国特色社会主义法律体系</td>
+                </tr>
+                <tr>
+                    <td class="dimension">法律特征</td>
+                    <td>礼法结合 · 德主刑辅 · 诸法合体</td>
+                    <td class="table-arrow">→</td>
+                    <td>公私法分立 · 程序正义 · 保障个人权利</td>
+                    <td class="table-arrow">→</td>
+                    <td>依法治国 · 公平正义 · 人民主体地位</td>
+                </tr>
+                <tr>
+                    <td class="dimension">教化方式</td>
+                    <td>儒家伦理教化 · 乡约宗族 · 科举取士</td>
+                    <td class="table-arrow">→</td>
+                    <td>基督教道德 · 学校教育 · 公民意识培养</td>
+                    <td class="table-arrow">→</td>
+                    <td>社会主义核心价值观 · 精神文明建设</td>
+                </tr>
+                <tr>
+                    <td class="dimension">治理理念</td>
+                    <td>德治为主 · 法治为辅（德主刑辅）</td>
+                    <td class="table-arrow">→</td>
+                    <td>法治为主 · 政教分离 · 个人自由</td>
+                    <td class="table-arrow">→</td>
+                    <td>依法治国与以德治国相结合</td>
+                </tr>
+                <tr>
+                    <td class="dimension">历史地位</td>
+                    <td>世界五大法系之一——中华法系</td>
+                    <td class="table-arrow">→</td>
+                    <td>大陆法系与英美法系影响全球</td>
+                    <td class="table-arrow">→</td>
+                    <td>当代法治建设成就显著，特色鲜明</td>
+                </tr>
+                <tr>
+                    <td class="dimension">核心启示</td>
+                    <td colspan="5" style="text-align:center;">
+                        法律与教化是<strong>社会治理的两翼</strong>，二者相辅相成、不可偏废。
+                        从<strong>"礼法结合"</strong>到<strong>"依法治国与以德治国相结合"</strong>，
+                        体现了人类治理智慧的连续与创新。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quote-block">
+            <p>"法安天下，德润人心。法律是成文的道德，道德是内心的法律。国家治理需要法律和道德协同发力。"</p>
+            <span class="source">—— 依法治国与以德治国相结合的理念阐释</span>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 课标要求 ==================== -->
+<section class="section" id="standards" style="background: #fdf2f2;">
+    <div class="container">
+        <h2 class="section-title">
+            课标要求
+            <span class="en">Curriculum Standards</span>
+        </h2>
+
+        <ul class="standard-list">
+            <li>
+                <span class="num">1</span>
+                <strong>了解中国古代法治与教化的演变历程</strong>——从先秦的"礼刑并用"到隋唐"礼法结合"的中华法系确立，再到宋元明清的乡约教化与宗族规范，认识中国古代社会治理的基本模式。
+            </li>
+            <li>
+                <span class="num">2</span>
+                <strong>认识《唐律疏议》的历史地位与影响</strong>——理解《唐律疏议》何以成为中华法系的典范，分析其在立法技术、礼法融合方面的成就及其对东亚法律传统的影响。
+            </li>
+            <li>
+                <span class="num">3</span>
+                <strong>了解近代西方法律制度的渊源与基本特征</strong>——把握罗马法对西方法律的奠基作用，理解大陆法系与英美法系的主要区别，认识资产阶级法律体系在保障个人权利方面的进步性与局限性。
+            </li>
+            <li>
+                <span class="num">4</span>
+                <strong>了解新中国法治建设的历程与成就</strong>——从五四宪法的诞生到全面依法治国基本方略的确立，认识中国特色社会主义法律体系的形成过程及其在国家治理现代化中的意义。
+            </li>
+            <li>
+                <span class="num">5</span>
+                <strong>理解社会主义精神文明建设的内涵与意义</strong>——把握依法治国与以德治国相结合的治理理念，认识社会主义核心价值观在当代中国的引领作用。
+            </li>
+            <li>
+                <span class="num">6</span>
+                <strong>比较中西方法律传统的异同</strong>——从法律渊源、法律体系、法律理念、教化方式等维度进行跨文化比较，培养历史比较与综合分析能力，增进对中华法律文明和中国特色社会主义法治道路的理解。
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- ==================== 学习建议 ==================== -->
+<section class="section" id="advice">
+    <div class="container">
+        <h2 class="section-title">
+            学习建议
+            <span class="en">Learning Suggestions</span>
+        </h2>
+
+        <div class="advice-grid">
+            <div class="advice-item">
+                <div class="icon">&#x1F50D;</div>
+                <h4>纵向贯通，把握"礼法关系"主线索</h4>
+                <p>本单元的核心线索是<strong>礼与法的关系</strong>。从先秦儒法之争（礼法分离）→汉代引礼入法（礼法融合）→隋唐礼法结合成熟→宋明理学强化礼教→近代西方冲击→当代依法治国与以德治国相结合。始终抓住这条主线，就能纲举目张。</p>
+            </div>
+            <div class="advice-item">
+                <div class="icon">&#x1F30D;</div>
+                <h4>横向比较，理解中西法系差异</h4>
+                <p>将中华法系与大陆法系、英美法系进行对照学习。重点关注：①法律渊源差异（成文法vs判例法、礼法结合vs政教分离）；②法律理念差异（集体本位vs个人权利）；③教化方式差异（道德教化vs宗教教化）。在对比中理解不同文明的治理逻辑。</p>
+            </div>
+            <div class="advice-item">
+                <div class="icon">&#x1F4DC;</div>
+                <h4>专题研读关键法律文献</h4>
+                <p>重点研读以下文献选段：《唐律疏议》名例律条文、《十二铜表法》节选、《拿破仑法典》序言、新中国八二宪法序言等。关注法条背后的时代精神、立法理念与社会需求，培养"论从史出"的史料实证意识。</p>
+            </div>
+            <div class="advice-item">
+                <div class="icon">&#x1F4CA;</div>
+                <h4>建构"法律与教化"的知识框架</h4>
+                <p>可围绕"<strong>法律是什么（法的渊源与体系）→法律怎么用（司法与治理）→教化做什么（道德与价值观）→法律与教化如何互动</strong>"来建构知识框架。每一课都从这个框架切入，有助于建立整体认知。</p>
+            </div>
+            <div class="advice-item">
+                <div class="icon">&#x1F4D6;</div>
+                <h4>联系现实，思考法治与道德的关系</h4>
+                <p>关注当代中国法治建设的热点话题（如民法典的实施、司法改革、反腐倡廉、诚信体系建设等），思考"依法治国"与"以德治国"如何在实际中结合。这种现实关怀既有助于理解历史，也有助于提升公民素养。</p>
+            </div>
+            <div class="advice-item">
+                <div class="icon">&#x270F;&#xFE0F;</div>
+                <h4>专题探究与深度思考</h4>
+                <p>可选择以下议题进行拓展探究：①"从《唐律疏议》看中华法系的特征"；②"两大法系的形成及其对世界的不同影响"；③"依法治国与以德治国的历史渊源与现实意义"；④"西方法治精神中的宗教因素——以基督教为中心的考察"。 </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer-cta">
+    <div class="container">
+        <p>理解了法律与教化的演变脉络，让我们一起开启本单元的学习之旅。</p>
+        <a href="#" class="btn-primary" onclick="alert('第8课页面待创建');return false">开始学习第8课 →</a>
+        <div style="margin-top:16px">
+          <a href="选必1-整册导航.html" style="display:inline-block;background:transparent;color:#fff;padding:12px 32px;border-radius:30px;text-decoration:none;font-size:12pt;font-weight:bold;border:2px solid rgba(255,255,255,.7);transition:.3s;font-family:inherit">📖 返回整册导航</a>
+        </div>
+    </div>
+</footer>
+
+<div class="footer-bottom">
+    <div class="container">
+        统编版高中历史 · 选择性必修1《国家制度与社会治理》 · 第三单元总览页
+    </div>
+</div>
+
+<!-- ==================== JavaScript ==================== -->
+<script>
+    function scrollToSection(id) {
+        var el = document.getElementById(id);
+        if (el) {
+            var offset = 70;
+            var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+    }
+</script>
+
+</body>
+</html>

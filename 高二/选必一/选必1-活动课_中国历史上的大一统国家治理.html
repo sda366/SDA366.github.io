@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>活动课·中国历史上的大一统国家治理</title>
+<style>
+/* ===== 全局重置 & 基础 ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14pt}
+body{
+  font-family:"SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  background:#f0e6f6;
+  color:#2c3e50;
+  line-height:1.8;
+  padding:30px 20px;
+}
+/* ===== 主容器 ===== */
+.container{
+  max-width:960px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 8px 40px rgba(142,68,173,0.18);
+  overflow:hidden;
+}
+/* ===== 标题区（紫红渐变） ===== */
+.header{
+  background:linear-gradient(135deg,#6c3483,#8e44ad,#bb8fce);
+  padding:48px 40px 40px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:"";
+  position:absolute;
+  top:-60%;left:-20%;
+  width:140%;height:200%;
+  background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,0.10) 0%,transparent 70%);
+  pointer-events:none;
+}
+.header-badge{
+  display:inline-block;
+  background:rgba(255,255,255,0.20);
+  border:1px solid rgba(255,255,255,0.35);
+  border-radius:30px;
+  padding:6px 22px;
+  color:#fff;
+  font-size:0.75rem;
+  letter-spacing:3px;
+  margin-bottom:16px;
+  backdrop-filter:blur(4px);
+}
+.header h1{
+  color:#fff;
+  font-size:1.9rem;
+  font-weight:700;
+  letter-spacing:3px;
+  text-shadow:0 2px 12px rgba(0,0,0,0.15);
+  position:relative;
+  z-index:1;
+}
+.header .sub{
+  color:rgba(255,255,255,0.88);
+  font-size:0.95rem;
+  margin-top:10px;
+  letter-spacing:2px;
+  position:relative;
+  z-index:1;
+}
+/* ===== 内容区 ===== */
+.content{padding:36px 40px 40px;}
+/* ===== 通用节标题 ===== */
+.section-title{
+  font-size:1.3rem;
+  font-weight:700;
+  color:#6c3483;
+  border-left:5px solid #8e44ad;
+  padding-left:16px;
+  margin:42px 0 22px;
+  position:relative;
+}
+.section-title:first-child{margin-top:0;}
+.section-title::after{
+  content:"";
+  position:absolute;
+  bottom:-6px;left:16px;
+  width:60px;height:3px;
+  background:linear-gradient(90deg,#8e44ad,#bb8fce);
+  border-radius:2px;
+}
+/* ===== 卡片 ===== */
+.card{
+  background:#f4ecf7;
+  border:1px solid #d2b4de;
+  border-radius:12px;
+  padding:22px 26px;
+  margin-bottom:20px;
+  transition:box-shadow .25s;
+}
+.card:hover{box-shadow:0 4px 16px rgba(142,68,173,0.12);}
+.card-title{
+  font-size:1.08rem;
+  font-weight:700;
+  color:#6c3483;
+  margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.card-title .icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(135deg,#8e44ad,#bb8fce);
+  color:#fff;font-size:0.85rem;flex-shrink:0;
+}
+/* ===== 概要区 ===== */
+.overview-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:14px;margin-bottom:18px;
+}
+.overview-item{
+  background:#fff;
+  border:1px solid #d2b4de;
+  border-radius:10px;
+  padding:16px 18px;
+  text-align:center;
+}
+.overview-item .label{
+  font-size:0.8rem;color:#8e44ad;font-weight:700;
+  letter-spacing:1px;margin-bottom:4px;
+}
+.overview-item .value{font-size:1rem;color:#2c3e50;}
+/* ===== 全册知识整合 ===== */
+.unit-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:10px;
+}
+.unit-card{
+  background:#fff;
+  border:1px solid #d2b4de;
+  border-radius:10px;
+  padding:18px 20px;
+  transition:transform .2s,box-shadow .2s;
+}
+.unit-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(142,68,173,0.10);}
+.unit-num{
+  display:inline-block;
+  background:linear-gradient(135deg,#6c3483,#8e44ad);
+  color:#fff;
+  font-size:0.7rem;
+  font-weight:700;
+  border-radius:6px;
+  padding:2px 12px;
+  margin-bottom:8px;
+}
+.unit-card h4{
+  font-size:1rem;color:#6c3483;margin-bottom:6px;
+}
+.unit-card p{
+  font-size:0.85rem;color:#555;line-height:1.7;
+}
+.unit-card .tags{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;
+}
+.unit-card .tag{
+  background:#f4ecf7;color:#8e44ad;font-size:0.7rem;
+  padding:2px 12px;border-radius:12px;border:1px solid #d2b4de;
+}
+/* ===== 探究活动 ===== */
+.inquiry-block{
+  background:#faf5fc;
+  border:2px solid #d2b4de;
+  border-radius:14px;
+  padding:24px 26px;
+  margin-bottom:28px;
+}
+.inquiry-block .iheader{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:14px;
+}
+.inquiry-block .iheader .ino{
+  width:40px;height:40px;
+  background:linear-gradient(135deg,#6c3483,#8e44ad);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:1rem;flex-shrink:0;
+}
+.inquiry-block .iheader h3{
+  font-size:1.1rem;color:#6c3483;font-weight:700;
+}
+.inquiry-block .isub{
+  font-size:0.85rem;color:#8e44ad;margin-bottom:12px;
+  font-weight:700;
+}
+.istep{
+  counter-reset:step;
+  padding-left:0;
+}
+.istep li{
+  list-style:none;
+  position:relative;
+  padding-left:36px;
+  margin-bottom:8px;
+  font-size:0.9rem;
+  line-height:1.7;
+}
+.istep li::before{
+  counter-increment:step;
+  content:counter(step);
+  position:absolute;left:0;top:2px;
+  width:24px;height:24px;
+  background:#bb8fce;color:#fff;
+  font-size:0.75rem;font-weight:700;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.iref{
+  background:#fff;
+  border-left:3px solid #8e44ad;
+  padding:12px 16px;
+  margin:10px 0 12px;
+  font-size:0.85rem;
+  border-radius:0 6px 6px 0;
+}
+.iref strong{color:#6c3483;}
+.eval-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8px;margin-top:10px;
+}
+.eval-item{
+  background:#f4ecf7;
+  border:1px solid #d2b4de;
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:0.8rem;
+}
+.eval-item .elabel{color:#8e44ad;font-weight:700;font-size:0.75rem;}
+/* ===== 课后参考 ===== */
+.ref-card{
+  background:#fff;
+  border:1px solid #d2b4de;
+  border-radius:10px;
+  padding:18px 22px;
+  margin-bottom:14px;
+}
+.ref-card h4{
+  color:#6c3483;font-size:0.95rem;margin-bottom:8px;
+}
+.ref-card p,.ref-card li{
+  font-size:0.85rem;color:#555;line-height:1.8;
+}
+.ref-card ul{padding-left:20px;}
+/* ===== 底部 ===== */
+.footer{
+  background:#f4ecf7;
+  border-top:1px solid #d2b4de;
+  padding:20px 40px;
+  text-align:center;
+  font-size:0.8rem;
+  color:#8e44ad;
+}
+/* ===== 响应式 ===== */
+@media(max-width:700px){
+  body{padding:16px 10px;}
+  .content{padding:24px 18px;}
+  .header{padding:32px 18px 28px;}
+  .header h1{font-size:1.4rem;}
+  .overview-grid,.unit-grid,.eval-grid{grid-template-columns:1fr;}
+  .container{border-radius:12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ===== 标题区 ===== -->
+<div class="header">
+  <div class="header-badge">统编版高中历史 · 选择性必修1</div>
+  <h1>中国历史上的大一统国家治理</h1>
+  <div class="sub">全册综合活动课 · 总结与升华</div>
+</div>
+
+<!-- ===== 正文内容 ===== -->
+<div class="content">
+
+<!-- ============================================================ -->
+<!-- 一、活动课概要 -->
+<!-- ============================================================ -->
+<div class="section-title">一、活动课概要</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="icon">★</span>
+    课程定位
+  </div>
+  <p style="font-size:0.92rem;text-indent:2em;">
+    本活动课是对选择性必修1《国家制度与社会治理》全册内容的综合与升华，围绕<strong style="color:#6c3483;">"大一统国家治理"</strong>这一核心主题展开。通过纵向梳理从秦汉到明清"大一统"治理体系的演进脉络，横向整合政治制度、官员选拔、法律教化、民族关系、经济制度、基层治理六大维度，引导学生构建整体性认知，深入理解中国历史上大一统国家治理的丰富经验与制度智慧。
+  </p>
+</div>
+
+<div class="overview-grid">
+  <div class="overview-item">
+    <div class="label">核心概念</div>
+    <div class="value">大一统 · 政治统一 · 民族交融<br>文化认同 · 制度创新</div>
+  </div>
+  <div class="overview-item">
+    <div class="label">活动目标</div>
+    <div class="value">综合运用全册所学，<br>分析大一统国家治理的经验与智慧</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="icon">◆</span>
+    活动方式
+  </div>
+  <ul style="padding-left:22px;font-size:0.9rem;line-height:2;">
+    <li>小组合作探究：以4-6人为一组，各小组围绕不同维度的探究任务展开研究</li>
+    <li>史料研读与数据分析：运用教材史料、补充文献与图表进行实证分析</li>
+    <li>汇报展示与交叉点评：各小组展示研究成果，跨组互评，促进多维理解</li>
+    <li>总结反思：形成对本册知识体系的整体把握，撰写活动反思报告</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- 二、全册知识整合 -->
+<!-- ============================================================ -->
+<div class="section-title">二、全册知识整合：大一统治理的六大维度</div>
+
+<p style="font-size:0.9rem;margin-bottom:18px;color:#555;">
+  从选择性必修1六大单元出发，梳理"大一统国家治理"在不同制度领域的体现与成就。
+</p>
+
+<div class="unit-grid">
+
+  <!-- 维度1 -->
+  <div class="unit-card">
+    <div class="unit-num">维度一</div>
+    <h4>政治制度维度的"大一统"</h4>
+    <p>从秦汉的三公九卿制到隋唐的三省六部制，再到明清的内阁与军机处，中央官制不断强化君主集权；地方行政从郡县制到行省制，中央对地方的控制日益严密。政治制度的大一统为国家统一治理提供了组织保障。</p>
+    <div class="tags">
+      <span class="tag">中央官制</span>
+      <span class="tag">郡县制</span>
+      <span class="tag">行省制</span>
+      <span class="tag">君主集权</span>
+    </div>
+  </div>
+
+  <!-- 维度2 -->
+  <div class="unit-card">
+    <div class="unit-num">维度二</div>
+    <h4>官员选拔维度的"大一统"</h4>
+    <p>从世卿世禄到察举制、九品中正制，再到科举制的创立与完善，选官制度日趋公平、开放。科举制通过统一考试标准，打破了门阀垄断，促进了社会流动，为大一统国家输送了大量治国人才，强化了文化认同。</p>
+    <div class="tags">
+      <span class="tag">科举制</span>
+      <span class="tag">察举制</span>
+      <span class="tag">社会流动</span>
+      <span class="tag">人才选拔</span>
+    </div>
+  </div>
+
+  <!-- 维度3 -->
+  <div class="unit-card">
+    <div class="unit-num">维度三</div>
+    <h4>法律教化维度的"大一统"</h4>
+    <p>从秦代"以法为教"到汉唐"礼法结合"，再到宋明"德主刑辅"，中国古代法律体系呈现出礼法融合、德教为先的特征。《唐律疏议》作为中华法系的代表，体现了大一统国家以法律维护社会秩序、以教化统一思想的治理逻辑。</p>
+    <div class="tags">
+      <span class="tag">礼法结合</span>
+      <span class="tag">唐律疏议</span>
+      <span class="tag">德主刑辅</span>
+      <span class="tag">中华法系</span>
+    </div>
+  </div>
+
+  <!-- 维度4 -->
+  <div class="unit-card">
+    <div class="unit-num">维度四</div>
+    <h4>民族关系维度的"大一统"</h4>
+    <p>从秦汉"和亲"与"征伐"并举，到唐代"羁縻府州"制度，再到元明清时期的民族政策与改土归流，历代王朝在"大一统"框架下探索多元民族治理模式。民族交融与多元一体的格局不断深化，为现代统一多民族国家奠定了基础。</p>
+    <div class="tags">
+      <span class="tag">羁縻府州</span>
+      <span class="tag">改土归流</span>
+      <span class="tag">民族交融</span>
+      <span class="tag">多元一体</span>
+    </div>
+  </div>
+
+  <!-- 维度5 -->
+  <div class="unit-card">
+    <div class="unit-num">维度五</div>
+    <h4>经济制度维度的"大一统"</h4>
+    <p>从秦汉统一货币、度量衡，到唐代两税法、明代一条鞭法、清代"摊丁入亩"，赋役制度不断改革以维系国家财政。货币从铜钱到纸币再到白银货币化，体现了大一统国家对经济生活的深度介入与调控能力。</p>
+    <div class="tags">
+      <span class="tag">赋役制度</span>
+      <span class="tag">货币统一</span>
+      <span class="tag">两条税法</span>
+      <span class="tag">一条鞭法</span>
+    </div>
+  </div>
+
+  <!-- 维度6 -->
+  <div class="unit-card">
+    <div class="unit-num">维度六</div>
+    <h4>基层治理维度的"大一统"</h4>
+    <p>从秦汉的乡里制度到唐宋的保甲制度，再到明清的里甲与保甲并行，大一统国家对基层社会的管控不断精细化。宗族、乡约等民间力量与官方行政相互配合，形成了"皇权不下县，县下皆自治"的双层治理格局。</p>
+    <div class="tags">
+      <span class="tag">乡里制度</span>
+      <span class="tag">保甲制度</span>
+      <span class="tag">宗族乡约</span>
+      <span class="tag">双层治理</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- 整合示意图 -->
+<div class="card" style="text-align:center;background:linear-gradient(135deg,#f4ecf7,#faf5fc);">
+  <div style="font-size:0.9rem;color:#6c3483;font-weight:700;margin-bottom:6px;">
+    ⚙ 大一统国家治理的逻辑链条
+  </div>
+  <div style="font-size:0.82rem;color:#555;line-height:1.9;">
+    中央集权政治制度 <span style="color:#8e44ad;">→</span> 统一选官培养人才 <span style="color:#8e44ad;">→</span> 法律教化整合社会 <span style="color:#8e44ad;">→</span> 民族政策扩展疆域<br>
+    <span style="color:#8e44ad;">→</span> 财政经济提供支撑 <span style="color:#8e44ad;">→</span> 基层治理稳固根基 <span style="color:#8e44ad;">→</span> <strong style="color:#6c3483;">大一统治理体系</strong>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 三、探究活动设计 -->
+<!-- ============================================================ -->
+<div class="section-title">三、探究活动设计</div>
+
+<p style="font-size:0.9rem;margin-bottom:20px;color:#555;">
+  以下探究任务要求学生综合运用全册所学知识，在合作探究中深化对"大一统国家治理"的理解。
+</p>
+
+<!-- 探究一 -->
+<div class="inquiry-block">
+  <div class="iheader">
+    <div class="ino">1</div>
+    <h3>大一统国家治理的制度骨架</h3>
+  </div>
+  <div class="isub">——中央与地方关系的制度演进</div>
+
+  <p style="font-size:0.9rem;margin-bottom:12px;"><strong>问题情境</strong></p>
+  <p style="font-size:0.88rem;margin-bottom:14px;text-indent:2em;">
+    公元前221年，秦始皇统一六国后，废除分封制，全面推行郡县制，奠定了此后两千余年大一统国家的地方治理基础。从秦到清，中央与地方关系经历了怎样的制度变迁？这些变迁如何体现"大一统"理念的深化？
+  </p>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>探究步骤</strong></p>
+  <ol class="istep">
+    <li>回顾教材：整理秦郡县制、汉郡国并行、唐节度使、宋路制、元行省制、明清省制的基本特征</li>
+    <li>绘制"中央—地方关系演变时间轴"，标注关键转折点（如推恩令、藩镇割据、行省设立等）</li>
+    <li>分析比较：不同朝代在处理央地关系上有哪些"收权"与"放权"的交替？中央集权趋势是否不可逆转？</li>
+    <li>撰写800字以内的分析短文，以"从郡县到行省：大一统央地治理的制度逻辑"为题</li>
+  </ol>
+
+  <div class="iref">
+    <strong>参考材料：</strong> 教材第1-3课相关内容；《史记·秦始皇本纪》（节选）；《元史·地理志》（节选）；严耕望《中国地方行政制度史》相关论述
+  </div>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>评价标准</strong></p>
+  <div class="eval-grid">
+    <div class="eval-item"><span class="elabel">优秀</span><br>史料运用充分，时间线完整，分析有深度，能提出独立见解</div>
+    <div class="eval-item"><span class="elabel">良好</span><br>基本覆盖主要制度，时间线清晰，分析较为全面</div>
+    <div class="eval-item"><span class="elabel">合格</span><br>罗列基本史实，时间线大致正确，分析略显表面</div>
+    <div class="eval-item"><span class="elabel">待提高</span><br>史实不完备，时间线混乱，欠缺比较分析</div>
+  </div>
+</div>
+
+<!-- 探究二 -->
+<div class="inquiry-block">
+  <div class="iheader">
+    <div class="ino">2</div>
+    <h3>以文教化与以法治国</h3>
+  </div>
+  <div class="isub">——礼法结合传统下的社会整合机制</div>
+
+  <p style="font-size:0.9rem;margin-bottom:12px;"><strong>问题情境</strong></p>
+  <p style="font-size:0.88rem;margin-bottom:14px;text-indent:2em;">
+    《唐律疏议》开篇即言"德礼为政教之本，刑罚为政教之用"，点明了中国古代"礼法结合"的治理智慧。在科举制普及、儒学成为官方意识形态的背景下，法律与教化如何协同发挥作用，将大一统的价值观念渗透到社会各阶层？
+  </p>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>探究步骤</strong></p>
+  <ol class="istep">
+    <li>研读教材第8-10课，梳理"礼法结合"传统从汉代"春秋决狱"到唐代《唐律疏议》再到明清"律例并行"的演变</li>
+    <li>分析科举制度与儒学传播的关系：科举如何强化了"大一统"的文化认同？</li>
+    <li>选取一个具体案例（如唐代"不孝"入律、宋代"乡约"的推广），说明法律与教化如何相互配合</li>
+    <li>小组研讨：以"法律统一与文化大一统"为主题，准备5分钟专题发言</li>
+  </ol>
+
+  <div class="iref">
+    <strong>参考材料：</strong> 《唐律疏议·名例律》（节选）；《宋刑统》相关条目；朱熹《朱子家礼》；瞿同祖《中国法律与中国社会》；教材第8-10课
+  </div>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>评价标准</strong></p>
+  <div class="eval-grid">
+    <div class="eval-item"><span class="elabel">优秀</span><br>案例分析深入，善用一手史料，能阐释礼法融合的内在逻辑</div>
+    <div class="eval-item"><span class="elabel">良好</span><br>梳理清晰，案例与论述匹配，体现法律与教化互动关系</div>
+    <div class="eval-item"><span class="elabel">合格</span><br>基本史实正确，案例选取合理，分析较为平直</div>
+    <div class="eval-item"><span class="elabel">待提高</span><br>法律与教化两条线索未能有机结合，论述单薄</div>
+  </div>
+</div>
+
+<!-- 探究三 -->
+<div class="inquiry-block">
+  <div class="iheader">
+    <div class="ino">3</div>
+    <h3>多元一体的民族治理智慧</h3>
+  </div>
+  <div class="isub">——从羁縻到改土归流的治理实践</div>
+
+  <p style="font-size:0.9rem;margin-bottom:12px;"><strong>问题情境</strong></p>
+  <p style="font-size:0.88rem;margin-bottom:14px;text-indent:2em;">
+    中国作为一个统一的多民族国家，历代王朝在治理边疆民族问题上积累了丰富的经验。从唐代的羁縻府州到元代的宣政院制度，再到清代的改土归流与驻藏大臣，大一统国家如何在"因俗而治"与"强化统一"之间取得平衡？这些实践对当代民族治理有何启示？
+  </p>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>探究步骤</strong></p>
+  <ol class="istep">
+    <li>研读教材第11-13课，梳理历代民族政策的主要类型（羁縻、和亲、军事征服、行政整合等）</li>
+    <li>以小组为单位，选择一个边疆地区（如西域、西藏、西南、蒙古）进行专题研究</li>
+    <li>从"治理目标—治理方式—治理效果"三个维度评估该地区在不同朝代的治理实践</li>
+    <li>制作一张"中国古代民族治理方式比较表"，并撰写300字左右的评析</li>
+  </ol>
+
+  <div class="iref">
+    <strong>参考材料：</strong> 教材第11-13课；《汉书·西域传》；《大唐西域记》（节选）；《清实录》中关于改土归流的记载；费孝通《中华民族多元一体格局》（导论部分）
+  </div>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>评价标准</strong></p>
+  <div class="eval-grid">
+    <div class="eval-item"><span class="elabel">优秀</span><br>专题研究有深度，比较分析透彻，能提出具有当代启示的观点</div>
+    <div class="eval-item"><span class="elabel">良好</span><br>分类清晰，比较维度合理，评析有理有据</div>
+    <div class="eval-item"><span class="elabel">合格</span><br>基本掌握各时期民族政策，比较表完整</div>
+    <div class="eval-item"><span class="elabel">待提高</span><br>内容停留在史料罗列，缺乏比较与提炼</div>
+  </div>
+</div>
+
+<!-- 探究四 -->
+<div class="inquiry-block">
+  <div class="iheader">
+    <div class="ino">4</div>
+    <h3>基层社会如何支撑大一统</h3>
+  </div>
+  <div class="isub">——赋役、户籍与乡村治理的制度网络</div>
+
+  <p style="font-size:0.9rem;margin-bottom:12px;"><strong>问题情境</strong></p>
+  <p style="font-size:0.88rem;margin-bottom:14px;text-indent:2em;">
+    大一统国家的运转需要庞大的财政支撑和稳定的基层社会。从秦汉的编户齐民与"租庸调制"，到唐代两税法，再到明代一条鞭法与清代"摊丁入亩"，赋役制度不断改革；与此同时，乡里保甲、宗族乡约等基层制度将国家权力延伸到县以下。大一统国家的"毛细血管"是如何渗透到基层社会的？
+  </p>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>探究步骤</strong></p>
+  <ol class="istep">
+    <li>研读教材第16-18课（经济制度）和第19-21课（基层治理），梳理赋役制度与基层制度的对应关系</li>
+    <li>制作一张"赋役改革与社会治理联动关系图"，标注关键改革及其对基层的影响</li>
+    <li>讨论：赋役改革（如两税法、一条鞭法）如何影响了基层治理结构？国家汲取能力与社会稳定之间存在怎样的张力？</li>
+    <li>以"国家与乡村：大一统治理的基层之维"为题，撰写600字左右的小论文</li>
+  </ol>
+
+  <div class="iref">
+    <strong>参考材料：</strong> 教材第16-21课；《文献通考·田赋考》（节选）；《明史·食货志》（节选）；萧公权《中国乡村》；秦晖《传统十论》相关篇章
+  </div>
+
+  <p style="font-size:0.9rem;margin-bottom:8px;"><strong>评价标准</strong></p>
+  <div class="eval-grid">
+    <div class="eval-item"><span class="elabel">优秀</span><br>联动关系梳理清晰，论证有层次，能触及制度张力与深层逻辑</div>
+    <div class="eval-item"><span class="elabel">良好</span><br>制度梳理完整，能体现赋役与基层治理的互动关系</div>
+    <div class="eval-item"><span class="elabel">合格</span><br>基础知识准确，图表基本反映制度演变</div>
+    <div class="eval-item"><span class="elabel">待提高</span><br>两条线索割裂，缺乏制度间的关联分析</div>
+  </div>
+</div>
+
+<!-- 跨组交流 -->
+<div class="card" style="background:linear-gradient(135deg,#6c3483,#8e44ad);border:none;color:#fff;">
+  <div style="font-size:1rem;font-weight:700;margin-bottom:8px;">跨组交流与成果整合</div>
+  <p style="font-size:0.85rem;opacity:0.92;text-indent:2em;">
+    各小组完成探究任务后，安排两课时进行成果展示与交叉点评。每组展示时间8-10分钟，其他小组可就史料运用、论证逻辑、结论合理性等方面提问或补充。全部展示结束后，全班共同绘制"大一统国家治理六维关系图"，将六个维度的探究成果整合为一幅完整的知识图谱。
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 四、课后参考 -->
+<!-- ============================================================ -->
+<div class="section-title">四、课后参考：进一步阅读与思考</div>
+
+<div class="ref-card">
+  <h4>📚 推荐阅读（拓展深化）</h4>
+  <ul>
+    <li>钱穆《中国历代政治得失》—— 以简明笔法梳理历代政治制度的得失，对理解大一统治理框架有重要启发</li>
+    <li>严耕望《中国地方行政制度史》—— 系统研究秦汉至隋唐地方行政制度的经典之作</li>
+    <li>瞿同祖《中国法律与中国社会》—— 从社会学视角分析传统法律与社会的互动关系</li>
+    <li>费孝通《中华民族多元一体格局》—— 解析中华民族形成与发展的民族学经典</li>
+    <li>黄仁宇《万历十五年》—— 以1587年为切面，观察明代大一统治理体系的运行实态</li>
+    <li>萧公权《中国乡村》—— 系统研究明清时期乡村社会控制与治理的权威著作</li>
+  </ul>
+</div>
+
+<div class="ref-card">
+  <h4>🔍 延伸思考（可任选一题撰写拓展论文）</h4>
+  <ul>
+    <li>题目一：比较秦汉与明清两个大一统时期在治理模式上的异同，并分析其历史演进逻辑。</li>
+    <li>题目二：从科举制度看"大一统"与文化认同的关系——以唐宋变革为中心。</li>
+    <li>题目三："因俗而治"与"强化统一"之间的张力——以西南地区改土归流为例。</li>
+    <li>题目四：中国古代赋役制度改革与基层治理结构的变迁——以一条鞭法为中心。</li>
+    <li>题目五：综合全册所学，谈谈你对"大一统"这一中国历史治理智慧的理解。</li>
+  </ul>
+</div>
+
+<div class="ref-card">
+  <h4>📐 研究工具与方法建议</h4>
+  <ul>
+    <li>制度比较法：从结构、功能、演进三个维度对不同时期的制度进行比较分析</li>
+    <li>长时段分析法：借鉴布罗代尔的"长时段"理论，观察制度的长期变迁趋势</li>
+    <li>史料批判法：关注一手史料的来源、作者意图与时代背景，培养批判性思维</li>
+    <li>数据可视化：运用时间轴、思维导图、统计图表等形式呈现制度演变脉络</li>
+  </ul>
+</div>
+
+</div><!-- /content -->
+
+<!-- ===== 底部 ===== -->
+<div class="footer">
+  统编版高中历史 · 选择性必修1 · 活动课 ｜ 中国历史上的大一统国家治理 ｜ 全册综合
+</div>
+
+</div><!-- /container -->
+
+</body>
+</html>
