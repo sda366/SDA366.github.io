@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第18课 辛亥革命</title>
+<style>
+:root {
+  --unit-primary: #1B3A5C;
+  --unit-primary-light: #4A7FB5;
+  --unit-primary-dark: #0D2137;
+  --unit-bg: #eef3f9;
+  --unit-bg-card: #f4f8fc;
+  --unit-accent: #C9A84C;
+  --unit-border: #8AB4D6;
+  --unit-shadow: rgba(27,58,92,0.12);
+  --unit-text: #1a1a2e;
+  --unit-text-light: #4a5568;
+  --green: #2d7d46;
+  --green-bg: #eaf7ee;
+  --red: #b22222;
+  --red-bg: #fce8e8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "SimHei", "黑体", "Microsoft YaHei", sans-serif;
+  font-size: 14pt;
+  line-height: 1.8;
+  color: var(--unit-text);
+  background: #f5f5f5;
+}
+
+/* Navigation */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, var(--unit-primary-dark), #243B6A, var(--unit-primary));
+  padding: 10px 0;
+  box-shadow: 0 2px 12px var(--unit-shadow);
+}
+.navbar .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 15px;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13pt;
+  transition: all 0.3s;
+}
+.navbar a:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Section */
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 35px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px var(--unit-shadow);
+  border-left: 4px solid var(--unit-primary);
+}
+.section-title {
+  font-size: 20pt;
+  color: var(--unit-primary-dark);
+  border-bottom: 3px solid var(--unit-primary-light);
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--unit-primary);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14pt;
+  flex-shrink: 0;
+}
+
+/* Main title */
+.main-title {
+  text-align: center;
+  padding: 30px 0 10px;
+  margin-bottom: 20px;
+}
+.main-title h1 {
+  font-size: 28pt;
+  color: var(--unit-primary-dark);
+  letter-spacing: 4px;
+}
+.main-title .subtitle {
+  font-size: 12pt;
+  color: var(--unit-text-light);
+  margin-top: 8px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-title .unit-label {
+  display: inline-block;
+  background: var(--unit-primary);
+  color: #fff;
+  padding: 4px 20px;
+  border-radius: 20px;
+  font-size: 12pt;
+  margin-bottom: 15px;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--unit-primary), var(--unit-primary-light));
+  border-radius: 2px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 25px;
+  padding: 18px 20px;
+  background: var(--unit-bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--unit-border);
+  box-shadow: 0 2px 8px var(--unit-shadow);
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 22px;
+  width: 14px;
+  height: 14px;
+  background: var(--unit-primary);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--unit-primary);
+}
+.timeline-item .year {
+  display: inline-block;
+  background: var(--unit-primary);
+  color: #fff;
+  padding: 2px 14px;
+  border-radius: 12px;
+  font-size: 12pt;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.timeline-item h3 {
+  color: var(--unit-primary-dark);
+  font-size: 15pt;
+  margin-bottom: 6px;
+}
+.timeline-item p {
+  font-size: 13pt;
+  color: var(--unit-text);
+  line-height: 1.7;
+}
+.learning-focus {
+  background: var(--unit-bg);
+  border-left: 4px solid var(--unit-accent);
+  padding: 12px 16px;
+  margin: 15px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 13pt;
+}
+.learning-focus::before {
+  content: "📌 学习聚焦：";
+  color: var(--unit-primary-dark);
+  font-weight: bold;
+}
+.knowledge-connect {
+  background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+  border: 1px dashed #4a90d9;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin: 15px 0;
+}
+.knowledge-connect::before {
+  content: "🔗 知识的贯通";
+  display: block;
+  font-weight: bold;
+  color: #2b6cb0;
+  margin-bottom: 6px;
+  font-size: 13pt;
+}
+.knowledge-connect p {
+  font-size: 13pt;
+  color: #2c3e50;
+}
+
+/* Key Points */
+.key-point {
+  background: var(--unit-bg-card);
+  border: 1px solid var(--unit-border);
+  border-radius: 10px;
+  padding: 22px 25px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 10px var(--unit-shadow);
+}
+.kp-label {
+  display: inline-block;
+  background: var(--unit-primary);
+  color: #fff;
+  padding: 3px 18px;
+  border-radius: 15px;
+  font-size: 12pt;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.key-point h3 {
+  color: var(--unit-primary-dark);
+  font-size: 16pt;
+  margin-bottom: 10px;
+}
+.key-point p, .key-point li {
+  font-size: 13pt;
+  line-height: 1.8;
+}
+.key-point ul {
+  padding-left: 22px;
+  margin: 8px 0;
+}
+
+/* Textbook Items */
+.textbook-item {
+  background: #fff;
+  border: 1px solid #e0d5d0;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+.tb-question {
+  background: #f9f3f0;
+  padding: 14px 20px;
+  font-size: 13pt;
+  border-left: 4px solid var(--unit-primary);
+  line-height: 1.7;
+}
+.tb-question .label {
+  display: inline-block;
+  background: var(--unit-primary);
+  color: #fff;
+  padding: 1px 12px;
+  border-radius: 10px;
+  font-size: 11pt;
+  margin-right: 8px;
+}
+.tb-answer {
+  padding: 14px 20px;
+  display: none;
+  border-top: 1px dashed #ddd;
+  background: var(--unit-bg-card);
+}
+.tb-answer .correct {
+  color: var(--green);
+  background: var(--green-bg);
+  padding: 10px 15px;
+  border-radius: 8px;
+  line-height: 1.7;
+  font-size: 13pt;
+}
+.toggle-btn {
+  display: inline-block;
+  background: var(--unit-primary);
+  color: #fff;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 15px;
+  font-size: 12pt;
+  cursor: pointer;
+  margin: 8px 0 8px 20px;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+.toggle-btn:hover {
+  background: var(--unit-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Mindmap */
+.mindmap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 0;
+}
+.mindmap-root {
+  background: linear-gradient(135deg, var(--unit-primary-dark), #1e3d63, var(--unit-primary));
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-size: 16pt;
+  font-weight: bold;
+  box-shadow: 0 4px 15px var(--unit-shadow);
+}
+.mindmap-branches {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.mindmap-branch {
+  flex: 1;
+  min-width: 220px;
+  max-width: 300px;
+  background: var(--unit-bg-card);
+  border: 2px solid var(--unit-primary-light);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 10px var(--unit-shadow);
+}
+.mindmap-branch .branch-title {
+  background: linear-gradient(135deg, var(--unit-primary), var(--unit-primary-light));
+.mindmap-branch ul {
+  padding-left: 18px;
+  margin: 0;
+}
+.mindmap-branch li {
+  font-size: 12pt;
+  line-height: 1.7;
+  padding: 2px 0;
+}
+
+/* Quiz */
+.quiz-item {
+  background: var(--unit-bg-card);
+  border: 1px solid var(--unit-border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 18px;
+}
+.quiz-item .q-title {
+  font-weight: bold;
+  font-size: 13pt;
+  margin-bottom: 10px;
+  color: var(--unit-primary-dark);
+}
+.quiz-item p {
+  font-size: 13pt;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+.quiz-options {
+  list-style: none;
+  padding-left: 0;
+}
+.quiz-options li {
+  padding: 8px 14px;
+  margin: 4px 0;
+  border: 1px solid #e0d5d0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 13pt;
+}
+.quiz-options li:hover {
+  background: #f5f0ed;
+  border-color: var(--unit-primary-light);
+}
+.quiz-options li.opt-correct {
+  background: var(--green-bg) !important;
+  border-color: var(--green) !important;
+  color: var(--green);
+  font-weight: bold;
+}
+.quiz-options li.opt-wrong {
+  background: var(--red-bg) !important;
+  border-color: var(--red) !important;
+  color: var(--red);
+}
+.quiz-options li.opt-dim {
+  opacity: 0.5;
+}
+.quiz-answer {
+  display: none;
+  padding: 12px 16px;
+  margin-top: 10px;
+  background: var(--green-bg);
+  border-radius: 8px;
+  border-left: 4px solid var(--green);
+  font-size: 13pt;
+  line-height: 1.7;
+}
+
+/* Judge Buttons */
+.judge-group {
+  display: flex;
+  gap: 12px;
+  margin: 10px 0;
+}
+.judge-btn {
+  padding: 6px 24px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12pt;
+  font-family: inherit;
+  transition: all 0.3s;
+  background: #fff;
+}
+.judge-btn[data-result="correct"] {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+.judge-btn[data-result="wrong"] {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+.judge-btn:hover {
+  transform: translateY(-1px);
+}
+.judge-feedback {
+  display: none;
+  margin-top: 8px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 13pt;
+  line-height: 1.7;
+}
+.judge-feedback.show {
+  display: block;
+}
+.judge-feedback.correct-fb {
+  background: var(--green-bg);
+  border-left: 4px solid var(--green);
+  color: var(--green);
+}
+.judge-feedback.wrong-fb {
+  background: var(--red-bg);
+  border-left: 4px solid var(--red);
+  color: var(--red);
+}
+
+/* Material analysis */
+.material-item {
+  background: var(--unit-bg-card);
+  border: 1px solid var(--unit-border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 18px;
+}
+.material-item .mat-title {
+  font-weight: bold;
+  font-size: 14pt;
+  color: var(--unit-primary-dark);
+  margin-bottom: 10px;
+}
+.material-item .mat-content {
+  background: #f9f6f4;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13pt;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--unit-accent);
+}
+.material-item .sub-q {
+  font-size: 13pt;
+  line-height: 1.7;
+  margin: 8px 0;
+  padding-left: 10px;
+  border-left: 2px solid #ccc;
+}
+.material-item .sub-a {
+  display: none;
+  margin-top: 8px;
+  padding: 10px 15px;
+  background: var(--green-bg);
+  border-radius: 8px;
+  font-size: 13pt;
+  line-height: 1.7;
+}
+.material-item .sub-a .score {
+  display: inline-block;
+  background: var(--unit-accent);
+  color: #fff;
+  padding: 1px 10px;
+  border-radius: 10px;
+  font-size: 11pt;
+  margin-bottom: 6px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--unit-text-light);
+  font-size: 12pt;
+  background: #fff;
+  border-top: 2px solid var(--unit-border);
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .section { padding: 20px 15px; }
+  .mindmap-branches { flex-direction: column; align-items: center; }
+  .mindmap-branch { min-width: 100%; }
+  .navbar a { font-size: 11pt; padding: 4px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="container">
+    
+    <a href="00_全册导航.html" title="返回全册导航">📖 全册导航</a>
+    <a href="第17课_挽救民族危亡的斗争.html" title="上一课">◀ 上一课</a>
+    <a href="第19课_北洋军阀统治时期的政治经济与文化.html" title="下一课">▶ 下一课</a>
+    <a href="00_全册导航.html#u6-stage" title="查看本单元阶段特征">📋 阶段特征</a>
+    <a href="#s1">📖 知识点</a>
+    <a href="#s2">🔍 重难点</a>
+    <a href="#s3">📚 教材栏目</a>
+    <a href="#s4">🧠 结构图</a>
+    <a href="#s5">📝 课堂训练</a>
+  
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- Title -->
+<div class="main-title">
+  <span class="unit-label">第六单元 辛亥革命与中华民国的建立</span>
+  <h1>第18课 辛亥革命</h1>
+  <div class="subtitle">从兴中会的成立到武昌起义的枪声，从中华民国的建立到《临时约法》的颁布，辛亥革命以巨大的震撼力和深刻的影响力，开启了中国不可逆转的近代化进程。</div>
+</div>
+
+<!-- Section 1: 知识点总结·时间线 -->
+<div class="section" id="s1">
+  <div class="section-title"><span class="num">1</span> 知识点总结 · 时间线</div>
+
+  <div class="learning-focus">
+    辛亥革命是中国近代史上一次伟大的资产阶级民主革命。它推翻了清王朝统治，结束了中国两千多年的封建君主专制制度，建立了资产阶级共和国，传播了民主共和理念，推动了中华民族的思想解放和社会变革。
+  </div>
+
+  <div class="timeline">
+
+    <!-- 子目一：资产阶级民主革命的兴起 -->
+    <div class="timeline-item">
+      <span class="year">1894</span>
+      <h3>一、资产阶级民主革命的兴起——兴中会</h3>
+      <p>孙中山在檀香山创立中国第一个资产阶级革命团体——兴中会，提出"驱除鞑虏，恢复中华，创立合众政府"的革命纲领，标志着中国资产阶级民主革命运动的开始。</p>
+      <div class="learning-focus">孙中山走上革命道路，成为中国民主革命的先行者。</div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="year">1901-1905</span>
+      <h3>一、资产阶级民主革命的兴起——清末新政</h3>
+      <p>《辛丑条约》签订后，清政府为维持统治，推行"新政"。1901年成立督办政务处，推行一系列改革：编练新军、派遣留学生、废科举（1905年）、设学堂等。但新政的目的在于维护封建统治，并未触及根本制度，且通过摊派赔款加重了人民负担，进一步激化了社会矛盾。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="year">1905</span>
+      <h3>一、资产阶级民主革命的兴起——同盟会与三民主义</h3>
+      <p>孙中山联合兴中会、华兴会、光复会等革命团体，在日本东京成立中国同盟会，提出"驱除鞑虏，恢复中华，创立民国，平均地权"的政治纲领。此后，孙中山在《民报》发刊词中将同盟会纲领阐发为三民主义：民族主义（驱除鞑虏、恢复中华）、民权主义（创立民国）、民生主义（平均地权）。</p>
+      <div class="learning-focus">同盟会是近代中国第一个全国性的、统一的资产阶级革命政党。三民主义是辛亥革命的重要指导思想。</div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="year">1906-1911</span>
+      <h3>一、资产阶级民主革命的兴起——革命党人的武装起义</h3>
+      <p>同盟会成立后，革命党人发动了一系列反清武装起义，如萍浏醴起义（1906）、镇南关起义（1907）、黄花岗起义（1911）等。这些起义虽然均告失败，但沉重打击了清政府的统治，极大地激励了全国人民的革命斗志，为武昌起义的胜利创造了条件。</p>
+      <div class="knowledge-connect">
+        <p><strong>纵向贯通：</strong>从戊戌变法的"维新"到辛亥革命的"革命"，反映了近代中国先进分子救亡道路探索的重大转变。维新派试图在不推翻清王朝的前提下改良政治制度；革命派则认识到清王朝已经成为"洋人的朝廷"，必须用革命手段彻底推翻它，建立民主共和国。这一转变标志着中国政治变革从"改良"到"革命"的飞跃。</p>
+        <p><strong>横向比较：</strong>20世纪初，亚洲各国民族民主运动普遍高涨。印度的民族主义运动（1905-1908）、伊朗的立宪革命（1905-1911）、土耳其的青年土耳其党革命（1908），与中国的辛亥革命共同构成了20世纪初亚洲的觉醒浪潮，标志着亚洲进入了一个新的历史时期。</p>
+      </div>
+    </div>
+
+    <!-- 子目二：武昌起义与中华民国的建立 -->
+    <div class="timeline-item">
+      <span class="year">1911.5</span>
+      <h3>二、武昌起义与中华民国的建立——保路运动</h3>
+      <p>清政府宣布"铁路国有"政策，将已归商办的川汉、粤汉铁路收归国有，随后又将铁路筑路权出卖给列强，激起四川、湖北、湖南、广东等省人民的强烈反对，保路运动爆发。四川尤为激烈，发展为全省规模的武装反抗。清廷调湖北新军入川镇压，导致湖北防务空虚。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="year">1911.10.10</span>
+      <h3>二、武昌起义与中华民国的建立——武昌起义</h3>
+      <p>湖北革命团体文学社、共进会在同盟会的影响下，利用湖北新军主力入川、防务空虚的有利时机，发动武昌起义。经过一夜激战，革命军占领武昌城，随后攻占汉阳、汉口。武昌起义的胜利，迅速引发了全国性的革命高潮，各省纷纷宣布独立。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="year">1912.1.1</span>
+      <h3>二、武昌起义与中华民国的建立——中华民国成立</h3>
+      <p>各省代表在南京集会，选举孙中山为中华民国临时大总统。1912年1月1日，孙中山在南京宣誓就职，中华民国正式成立，以五色旗为国旗，改用公历，以中华民国纪元。南京临时政府的成立，标志着资产阶级共和国的诞生。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="year">1912.3</span>
+      <h3>二、武昌起义与中华民国的建立——《中华民国临时约法》</h3>
+      <p>南京临时政府颁布《中华民国临时约法》，规定：中华民国主权属于国民全体；国民一律平等，享有人身、财产、言论、出版、集会、结社、信教等自由；确立了三权分立的政治体制；特别规定实行责任内阁制，限制总统权力。《临时约法》是中国历史上第一部具有资产阶级共和国宪法性质的重要文件。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="year">1912.2-4</span>
+      <h3>二、武昌起义与中华民国的建立——袁世凯窃取革命果实</h3>
+      <p>在列强和立宪派的支持下，袁世凯以"拥护共和"为条件，逼迫清帝退位（1912年2月12日），随后被南京参议院选举为临时大总统。孙中山为限制袁世凯，提出定都南京、袁须到南京就职等条件，但袁世凯指使部下制造"北京兵变"，最终迫使参议院同意他在北京就职。1912年4月，临时政府迁往北京，辛亥革命的果实被袁世凯窃取。</p>
+      <div class="knowledge-connect">
+        <p><strong>纵向贯通：</strong>从戊戌变法依靠光绪帝的"自上而下"改良，到辛亥革命建立共和国的"自下而上"革命，再到最终被袁世凯窃取果实，近代中国政治变革的曲折历程深刻揭示了：在半殖民地半封建的中国，缺乏广泛群众基础和强大军事后盾的资产阶级革命，难以建立起真正的民主共和制度。</p>
+      </div>
+    </div>
+
+    <!-- 子目三：辛亥革命的历史意义 -->
+    <div class="timeline-item">
+      <span class="year">1912以后</span>
+      <h3>三、辛亥革命的历史意义</h3>
+      <p>辛亥革命是中国近代史上一次伟大的资产阶级民主革命，具有极其深远的历史意义：</p>
+      <p><strong>政治意义：</strong>推翻了清王朝的反动统治，结束了中国延续两千多年的封建君主专制制度，建立了亚洲第一个资产阶级民主共和国——中华民国。</p>
+      <p><strong>思想意义：</strong>传播了民主共和理念，使"民主共和"观念深入人心，大大促进了中华民族的思想解放。此后，任何复辟帝制的企图都必将以失败告终（如袁世凯称帝、张勋复辟）。</p>
+      <p><strong>经济意义：</strong>南京临时政府颁布了一系列发展工商业的法令，推动了民族资本主义的发展，为中国民族工业的进一步发展创造了条件。</p>
+      <p><strong>社会生活意义：</strong>辛亥革命推动了社会习俗的革新，如剪辫易服、废除跪拜、禁止缠足、改用公历等，促进了社会文明进步。</p>
+      <p><strong>世界意义：</strong>辛亥革命是20世纪初亚洲民族解放运动的重要组成部分，有力地推动了亚洲各国民族民主运动的发展。</p>
+      <div class="learning-focus">辛亥革命以巨大的震撼力和深刻的影响力，推动了中国社会变革，是中国近代化进程中的一座里程碑。</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Section 2: 重难点探究与解析 -->
+<div class="section" id="s2">
+  <div class="section-title"><span class="num">2</span> 重难点探究与解析</div>
+
+  <!-- 重点一 -->
+  <div class="key-point">
+    <span class="kp-label">重点一</span>
+    <h3>三民主义的深刻内涵与历史评价</h3>
+    <p><strong>深度分析：</strong></p>
+    <p>三民主义是孙中山在《民报》发刊词中对同盟会"驱除鞑虏，恢复中华，创立民国，平均地权"十六字纲领的系统阐述，包括：</p>
+    <p><strong>民族主义：</strong></p>
+    <ul>
+      <li><strong>内涵：</strong>"驱除鞑虏，恢复中华"——以革命手段推翻清王朝统治，反对民族压迫，实现民族独立。</li>
+      <li><strong>进步性：</strong>将反清与反对帝国主义侵略（虽然未明确提出反帝口号）相结合，反映了近代中国民族矛盾的主要方面，具有鲜明的反封建民族压迫的进步意义。</li>
+      <li><strong>局限：</strong>没有明确提出反对帝国主义的纲领，对帝国主义的本质认识不足，是后来辛亥革命果实被列强支持下的袁世凯窃取的重要原因之一。</li>
+    </ul>
+    <p><strong>民权主义：</strong></p>
+    <ul>
+      <li><strong>内涵：</strong>"创立民国"——推翻封建君主专制制度，建立资产阶级民主共和国，实行国民平等。</li>
+      <li><strong>进步性：</strong>三民主义的核心，是近代中国第一个比较完整的资产阶级民主革命纲领，从根本上否定了封建君主专制制度的合法性和正当性。</li>
+      <li><strong>历史意义：</strong>使"民主共和"观念深入人心，任何复辟帝制的企图都不得人心，迅速失败。</li>
+    </ul>
+    <p><strong>民生主义：</strong></p>
+    <ul>
+      <li><strong>内涵：</strong>"平均地权"——通过核定地价、增价归公的办法，防止土地兼并和贫富分化。</li>
+      <li><strong>进步性：</strong>反映了孙中山对农民土地问题的关注，试图通过温和的社会改良解决贫富分化问题，具有进步意义。</li>
+      <li><strong>局限：</strong>"平均地权"并非"平分土地"，没有真正满足农民对土地的迫切要求，因而未能充分发动农民群众参加革命，这是辛亥革命缺乏广泛群众基础的重要原因。</li>
+    </ul>
+    <p><strong>理论升华：</strong></p>
+    <p>三民主义是中国近代史上第一个比较完整的资产阶级民主革命纲领，将民族革命（民族主义）、政治革命（民权主义）和社会革命（民生主义）融为一体，是孙中山民主革命思想的核心。但是，由于资产阶级的软弱性和妥协性，三民主义缺乏彻底反帝反封建的内容，这是辛亥革命最终未能完成反帝反封建革命任务的思想根源。</p>
+  </div>
+
+  <!-- 重点二 -->
+  <div class="key-point">
+    <span class="kp-label">重点二</span>
+    <h3>辛亥革命的历史功绩与局限性</h3>
+    <p><strong>广度分析——伟大功绩：</strong></p>
+    <ul>
+      <li><strong>制度变革：</strong>推翻了延续两千多年的封建君主专制制度，建立了亚洲第一个资产阶级民主共和国，是20世纪中国历史上最伟大的事件之一。</li>
+      <li><strong>思想解放：</strong>使"民主共和"观念深入人心，此后任何复辟帝制的图谋都注定失败。中国人民开始觉醒，认识到自己不是"臣民"而是"国民"。</li>
+      <li><strong>经济发展：</strong>南京临时政府颁布了一系列鼓励工商业发展的政策法令，推动了民族资本主义经济的进一步发展，形成了中国民族工业发展的"黄金时期"。</li>
+      <li><strong>社会变革：</strong>革除了剪辫、缠足、跪拜等封建陋习，推动了社会生活习俗的近代化。</li>
+    </ul>
+    <p><strong>深度剖析——历史局限：</strong></p>
+    <ul>
+      <li><strong>革命任务未完成：</strong>辛亥革命没有从根本上改变中国半殖民地半封建的社会性质，没有完成反帝反封建的革命任务。帝国主义势力依然在中国横行，封建土地制度依然存在。</li>
+      <li><strong>革命果实被窃取：</strong>袁世凯在列强支持、立宪派拥戴和革命派妥协的情况下，窃取了辛亥革命的胜利果实，中国进入了北洋军阀统治的黑暗时期。</li>
+      <li><strong>群众基础薄弱：</strong>革命党人没有充分发动和依靠人民群众（特别是广大农民），缺乏广泛的群众基础，因此在面对内外反动势力的联合进攻时孤立无援。</li>
+      <li><strong>缺乏强大武装：</strong>革命党人没有建立起自己直接领导的强大革命军队，武昌起义后依靠的是旧军队和会党力量，最终无法与袁世凯的北洋军抗衡。</li>
+    </ul>
+    <p><strong>理论升华：</strong></p>
+    <p>辛亥革命的历史表明，在半殖民地半封建的中国，由于民族资产阶级的软弱性和妥协性，资产阶级民主共和国方案不可能彻底解决中国社会的基本矛盾，不可能领导中国真正走上独立、民主、富强的道路。这一历史任务最终需要由无产阶级及其政党来完成。</p>
+  </div>
+
+  <!-- 难点 -->
+  <div class="key-point">
+    <span class="kp-label">难点</span>
+    <h3>评价辛亥革命中革命派与袁世凯的"和谈妥协"</h3>
+    <p><strong>深度分析：</strong></p>
+    <p>武昌起义胜利后，革命派在军事上并未取得绝对优势，南北双方（革命派与袁世凯的北洋军）处于对峙状态。在这种情况下，革命派最终选择与袁世凯进行和谈，以袁世凯逼迫清帝退位、拥护共和为条件，推举其为临时大总统。如何评价这一妥协？</p>
+    <p><strong>客观原因（从当时形势看）：</strong></p>
+    <ul>
+      <li><strong>军事形势：</strong>北洋军训练有素、装备精良，革命军多为临时招募，缺乏统一指挥。南京临时政府财政困难，无力支付军费和维持政府运转。</li>
+      <li><strong>外部压力：</strong>列强在财政上支持袁世凯（如"善后大借款"），对革命政府进行经济封锁和外交孤立，拒绝承认南京临时政府。</li>
+      <li><strong>内部矛盾：</strong>立宪派和旧官僚（如张謇、程德全等）掌握部分省份实权，他们倾向于支持袁世凯，反对继续革命。</li>
+      <li><strong>袁世凯的"两面派"策略：</strong>袁世凯一方面以革命势力逼迫清帝退位，另一方面以北洋军为后盾恫吓革命派，利用双方矛盾实现个人野心。</li>
+    </ul>
+    <p><strong>历史评价（多角度分析）：</strong></p>
+    <p><strong>肯定论：</strong>妥协避免了大规模内战，以和平方式结束了清王朝的统治，减少了社会动荡和人民牺牲，并在形式上建立了民主共和政体。</p>
+    <p><strong>否定论：</strong>妥协使辛亥革命缺乏彻底性，革命果实被封建军阀袁世凯窃取，革命党人丧失了革命政权，民主共和制度徒有其表，中国陷入了北洋军阀的黑暗统治。</p>
+    <p><strong>辩证评价：</strong>妥协既是革命党人力量不足、形势所迫的无奈选择，也反映了中国民族资产阶级的软弱性和对封建势力的妥协性。革命果实被窃取的教训说明，缺乏足以制衡反革命力量的革命武装和群众基础，任何革命成果都无法真正巩固。</p>
+  </div>
+</div>
+
+<!-- Section 3: 教材栏目解答 -->
+<div class="section" id="s3">
+  <div class="section-title"><span class="num">3</span> 教材栏目解答</div>
+
+  <!-- 历史纵横（清末新政） -->
+  <div class="textbook-item">
+    <div class="tb-question">
+      <span class="label">历史纵横</span>
+      1901年，清政府开始推行"新政"。请简述清末新政的主要内容，并分析其与戊戌变法的异同。
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('lszj1')">查看解答</button>
+    <div class="tb-answer" id="lszj1">
+      <div class="correct">
+        <strong>主要内容：</strong><br>
+        1901年，清政府成立督办政务处，宣布实行"新政"。主要措施包括：编练新军（北洋新军）、改革官制（裁撤冗衙、设立新部）、废除科举（1905年）、兴办学堂、派遣留学生等。<br><br>
+        <strong>与戊戌变法的异同：</strong><br>
+        <strong>相同点：</strong>两者都试图通过自上而下的改革应对民族危机，在编练新军、废科举、兴学堂等方面有相似之处。<br><br>
+        <strong>不同点：</strong><br>
+        ① 目的不同：戊戌变法旨在建立君主立宪制度，实现政治体制的根本变革；清末新政的根本目的是维护清朝封建统治，并非真正的制度改革；<br>
+        ② 主导力量不同：戊戌变法由维新派（康有为、梁启超等）发动，依靠光绪帝；清末新政由慈禧太后等守旧势力主导；<br>
+        ③ 影响不同：戊戌变法虽然失败，但促进了思想解放；清末新政虽然客观上推动了近代化，但加重了人民负担（摊派赔款），并因"皇族内阁"的欺骗性进一步激化了社会矛盾，加速了清王朝的灭亡。<br><br>
+        <strong>评价：</strong>清末新政是清政府在《辛丑条约》签订后为巩固统治而推行的自救运动，客观上推动了中国的近代化（如新式教育的发展、新军的编练），但其"假维新"的本质和"皇族内阁"的出台，使立宪派也转向了革命，反而加速了清王朝的崩溃。
+      </div>
+    </div>
+  </div>
+
+  <!-- 学思之窗（三民主义） -->
+  <div class="textbook-item">
+    <div class="tb-question">
+      <span class="label">学思之窗</span>
+      阅读同盟会政治纲领"驱除鞑虏，恢复中华，创立民国，平均地权"，结合孙中山在《民报》发刊词中阐发的三民主义，分析这三民主义之间的关系及其内在逻辑。
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('xscx1')">查看解答</button>
+    <div class="tb-answer" id="xscx1">
+      <div class="correct">
+        <strong>三民主义的内在逻辑：</strong><br>
+        三民主义是一个相互关联、层层递进的有机整体：<br><br>
+        ① <strong>民族主义</strong>（"驱除鞑虏，恢复中华"）是前提——推翻清王朝统治，完成民族革命，为政治革命扫清障碍；<br>
+        ② <strong>民权主义</strong>（"创立民国"）是核心——推翻封建君主专制，建立民主共和国，完成政治革命，是三民主义最核心的内容；<br>
+        ③ <strong>民生主义</strong>（"平均地权"）是补充——通过社会改良防止贫富分化，关注民生问题，完成社会革命。<br><br>
+        <strong>三者关系：</strong><br>
+        民族革命是政治革命的前提，政治革命是民族革命的深化，社会革命则是前两者的保障。孙中山认为，欧美各国在政治革命之后出现了严重的贫富分化和社会问题，中国应当"举政治革命、社会革命毕其功于一役"，在完成民族民主革命的同时关注社会民生问题。<br><br>
+        <strong>局限性：</strong><br>
+        三民主义虽然是一个较为完整的资产阶级民主革命纲领，但没有明确提出反对帝国主义的纲领，也未能真正解决农民的土地问题，这是其历史局限。
+      </div>
+    </div>
+  </div>
+
+  <!-- 史料阅读（秋瑾/林觉民） -->
+  <div class="textbook-item">
+    <div class="tb-question">
+      <span class="label">史料阅读</span>
+      阅读秋瑾或林觉民等革命志士的诗文资料，分析辛亥革命时期革命党人的精神风貌和爱国情怀。
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('slyd1')">查看解答</button>
+    <div class="tb-answer" id="slyd1">
+      <div class="correct">
+        <strong>革命党人的精神风貌：</strong><br>
+        以秋瑾、林觉民、喻培伦等为代表的革命党人，展现出以下精神特征：<br><br>
+        <strong>① 舍生取义的牺牲精神：</strong>黄花岗起义中，林觉民写下《与妻书》，"愿中国青年人人如我皆有一死"，以个人牺牲换取民族未来；喻培伦胸前挂满炸弹冲向敌阵。革命党人前赴后继，视死如归。<br><br>
+        <strong>② 爱国救亡的时代担当：</strong>秋瑾冲破家庭束缚东渡日本求学，"身不得，男儿列；心却比，男儿烈"；回国后创办《中国女报》，号召妇女解放，投身革命。这种将个人解放与民族解放相结合的精神，鼓舞了无数后来者。<br><br>
+        <strong>③ 追求民主共和的理想信仰：</strong>革命党人不是为个人私利而战，而是为了实现"共和"理想，建立民主国家。这种对民主共和的执着追求，是辛亥革命最重要的精神遗产之一。<br><br>
+        <strong>历史启示：</strong><br>
+        革命志士的爱国精神和牺牲精神，是中华民族宝贵的精神财富。辛亥革命时期的革命党人以鲜血和生命唤醒了国人，为后来的革命者树立了光辉榜样。
+      </div>
+    </div>
+  </div>
+
+  <!-- 思考点（武汉成为首义之地的原因） -->
+  <div class="textbook-item">
+    <div class="tb-question">
+      <span class="label">思考点</span>
+      阅读课本第112页武昌起义形势图及相关文字，思考：武汉为什么会成为辛亥革命的首义之地？
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('skd1')">查看解答</button>
+    <div class="tb-answer" id="skd1">
+      <div class="correct">
+        <strong>武汉成为首义之地的主要原因：</strong><br><br>
+        <strong>① 新军中革命力量的积聚：</strong>湖北新军素质较高，文学社、共进会等革命团体在湖北新军中进行了长期的宣传和组织工作，大批新军士兵加入了革命组织。据统计，湖北新军约1.5万人中，参加革命组织的达五六千人，是武昌起义成功的直接力量。<br><br>
+        <strong>② 保路运动造成的有利时机：</strong>清政府调湖北新军主力入川镇压保路运动，造成湖北防务空虚，为武昌起义提供了可乘之机。<br><br>
+        <strong>③ 武汉地区工商业发达，交通便利：</strong>武汉是长江中游最大的工商业城市，九省通衢，信息传播快，思想开放，群众基础较好。<br><br>
+        <strong>④ 革命党人的周密准备：</strong>文学社和共进会两个革命团体在同盟会的推动下实现了联合，成立了统一的起义领导机构，制定了周密的起义计划。<br><br>
+        <strong>⑤ 同盟会的思想影响：</strong>全国各地（包括湖北）的革命志士深受孙中山三民主义思想的影响，革命觉悟较高。
+      </div>
+    </div>
+  </div>
+
+  <!-- 探究与拓展（孙中山《中国问题的真解决》） -->
+  <div class="textbook-item">
+    <div class="tb-question">
+      <span class="label">探究与拓展</span>
+      1904年，孙中山发表《中国问题的真解决》一文。请结合当时的国内外形势，分析孙中山是如何看待中国革命与帝国主义列强的关系的？
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('tjyz1')">查看解答</button>
+    <div class="tb-answer" id="tjyz1">
+      <div class="correct">
+        <strong>孙中山的基本观点：</strong><br>
+        孙中山在《中国问题的真解决》中指出，清王朝的统治已经腐朽不堪，必须推翻；中国的革命是正义的事业，应当得到世界各国的支持；同时，他呼吁列强不要干涉中国革命，希望列强能够采取中立立场。<br><br>
+        <strong>积极意义：</strong><br>
+        ① 孙中山认识到中国问题的根本出路在于推翻清王朝的统治，具有明确的革命立场；<br>
+        ② 他将中国革命置于世界视野中考察，具有广阔的国际视野；<br>
+        ③ 他呼吁列强不干涉中国革命，体现了对列强侵略行径的一定警惕。<br><br>
+        <strong>局限性：</strong><br>
+        ① 孙中山对帝国主义的本质认识不足，没有明确提出反对帝国主义侵略的纲领，幻想列强会支持或至少不干涉中国革命；<br>
+        ② 事实证明，列强不仅没有支持中国革命，反而在财政上和外交上支持袁世凯，对革命政府实行经济封锁和外交孤立，直接导致了革命果实的丧失；<br>
+        ③ 这种对列强的幻想和依赖，反映了中国民族资产阶级的软弱性和对帝国主义的妥协性。<br><br>
+        <strong>历史启示：</strong><br>
+        革命必须彻底摆脱对帝国主义的幻想，只有依靠本国人民的广泛参与和斗争，才能真正实现国家的独立和解放。
+      </div>
+    </div>
+  </div>
+
+  <!-- 学习拓展（《临时约法》） -->
+  <div class="textbook-item">
+    <div class="tb-question">
+      <span class="label">学习拓展</span>
+        《中华民国临时约法》是中国历史上第一部具有资产阶级共和国宪法性质的重要文件。请分析其核心内容和历史意义。
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('xxtz1')">查看解答</button>
+    <div class="tb-answer" id="xxtz1">
+      <div class="correct">
+        <strong>核心内容：</strong><br>
+        ① <strong>主权在民：</strong>明确规定"中华民国之主权，属于国民全体"，从根本上否定了封建君主专制制度"主权在君"的原则；<br>
+        ② <strong>自由平等：</strong>宣布中华民国国民一律平等，享有人身、财产、言论、出版、集会、结社、信教等自由；<br>
+        ③ <strong>三权分立：</strong>确立行政、立法、司法三权分立的政体，参议院行使立法权，临时大总统和国务员行使行政权，法院行使司法权；<br>
+        ④ <strong>责任内阁制：</strong>特别规定实行责任内阁制——国务员辅佐临时大总统行使行政权，对参议院负责。总统颁布命令须经国务员副署方能生效。<br><br>
+        <strong>历史意义：</strong><br>
+        ① 《临时约法》是中国历史上第一部具有资产阶级共和国宪法性质的重要文件，以根本法的形式否定了封建专制制度的合法性；<br>
+        ② 确立了"主权在民""三权分立""自由平等"等基本原则，传播了民主共和理念；<br>
+        ③ 责任内阁制的设计是为了限制袁世凯的权力，体现了革命党人维护共和制度的良苦用心；<br>
+        ④ 但《临时约法》并没有真正得到实施（袁世凯上台后逐步废弃了《临时约法》），反映了资产阶级共和制度在缺乏相应社会基础的中国难以真正扎根。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Section 4: 知识结构图 -->
+<div class="section" id="s4">
+  <div class="section-title"><span class="num">4</span> 知识结构图</div>
+
+  <div class="mindmap">
+    <div class="mindmap-root">第18课 辛亥革命</div>
+    <div class="mindmap-branches">
+      <div class="mindmap-branch">
+        <div class="branch-title">一、民主革命的兴起</div>
+        <ul>
+          <li>兴中会（1894，檀香山）</li>
+          <li>同盟会（1905，东京）</li>
+          <li>三民主义：民族、民权、民生</li>
+          <li>清末新政（1901-1905）</li>
+          <li>革命党武装起义</li>
+          <li>保路运动（1911）</li>
+        </ul>
+      </div>
+      <div class="mindmap-branch">
+        <div class="branch-title">二、武昌起义与中华民国</div>
+        <ul>
+          <li>武昌起义（1911.10.10）</li>
+          <li>各省纷纷独立</li>
+          <li>中华民国成立（1912.1.1）</li>
+          <li>《临时约法》（1912.3）</li>
+          <li>清帝退位（1912.2.12）</li>
+          <li>袁世凯窃取革命果实</li>
+        </ul>
+      </div>
+      <div class="mindmap-branch">
+        <div class="branch-title">三、历史意义</div>
+        <ul>
+          <li>推翻清王朝、结束封建帝制</li>
+          <li>建立亚洲第一个共和国</li>
+          <li>民主共和观念深入人心</li>
+          <li>推动民族资本主义发展</li>
+          <li>革除封建陋习（剪辫、放足等）</li>
+          <li>局限：未完成反帝反封建任务</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 5: 课堂训练 -->
+<div class="section" id="s5">
+  <div class="section-title"><span class="num">5</span> 课堂训练</div>
+
+  <!-- 判断题 -->
+  <h3 style="font-size:16pt;color:var(--unit-primary-dark);margin-bottom:15px;">（一）判断题</h3>
+
+  <div class="quiz-item">
+    <p><strong>1. </strong>同盟会是近代中国第一个全国性的、统一的资产阶级革命政党。</p>
+    <div class="judge-group">
+      <button class="judge-btn" data-q="1" data-result="correct">正</button>
+      <button class="judge-btn" data-q="1" data-result="wrong">误</button>
+    </div>
+    <div class="judge-feedback" id="fb1"><strong>正确。</strong>1905年，孙中山联合兴中会、华兴会、光复会等革命团体在日本东京成立了中国同盟会，这是近代中国第一个全国性的、统一的资产阶级革命政党。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p><strong>2. </strong>《中华民国临时约法》规定实行总统制，赋予临时大总统以最大的行政权力。</p>
+    <div class="judge-group">
+      <button class="judge-btn" data-q="2" data-result="correct">正</button>
+      <button class="judge-btn" data-q="2" data-result="wrong">误</button>
+    </div>
+    <div class="judge-feedback" id="fb2"><strong>错误。</strong>《临时约法》规定的是责任内阁制而非总统制。国务员辅佐临时大总统行使行政权，对参议院负责；总统颁布命令须经国务员副署方能生效。这一设计的目的是限制即将就任临时大总统的袁世凯的权力。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p><strong>3. </strong>辛亥革命推翻了中国两千多年的封建制度。</p>
+    <div class="judge-group">
+      <button class="judge-btn" data-q="3" data-result="correct">正</button>
+      <button class="judge-btn" data-q="3" data-result="wrong">误</button>
+    </div>
+    <div class="judge-feedback" id="fb3"><strong>错误。</strong>辛亥革命推翻的是两千多年的封建君主专制制度（即帝制），而非封建制度。封建制度包括封建土地制度、封建经济制度等，这些在辛亥革命后并未被消灭，中国半殖民地半封建的社会性质没有根本改变。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p><strong>4. </strong>三民主义中，民权主义"创立民国"是三民主义的核心。</p>
+    <div class="judge-group">
+      <button class="judge-btn" data-q="4" data-result="correct">正</button>
+      <button class="judge-btn" data-q="4" data-result="wrong">误</button>
+    </div>
+    <div class="judge-feedback" id="fb4"><strong>正确。</strong>民权主义"创立民国"是三民主义的核心。民族主义（推翻清朝）是政治革命的前提，民权主义（建立民国）是政治革命的根本目标，民生主义是对社会问题的补充关心。三者的核心是推翻君主专制，建立民主共和国。</div>
+  </div>
+
+  <!-- 单项选择题 -->
+  <h3 style="font-size:16pt;color:var(--unit-primary-dark);margin:25px 0 15px;">（二）单项选择题</h3>
+
+  <div class="quiz-item" data-correct="B">
+    <p><strong>1. </strong>中国同盟会成立的地点是（  ）</p>
+    <ul class="quiz-options">
+      <li onclick="showSingleAnswer(this,'q1')">A. 檀香山</li>
+      <li onclick="showSingleAnswer(this,'q1')">B. 东京</li>
+      <li onclick="showSingleAnswer(this,'q1')">C. 南京</li>
+      <li onclick="showSingleAnswer(this,'q1')">D. 上海</li>
+    </ul>
+    <div class="quiz-answer" id="aq1"><strong>正确答案：B</strong><br>1905年，孙中山在日本东京联合兴中会、华兴会、光复会等革命团体成立中国同盟会。A项檀香山是兴中会（1894年）的创立地点，C项南京是1912年中华民国临时政府的所在地，D项上海不是同盟会成立地点。</div>
+  </div>
+
+  <div class="quiz-item" data-correct="A">
+    <p><strong>2. </strong>下列关于武昌起义的叙述，正确的是（  ）</p>
+    <ul class="quiz-options">
+      <li onclick="showSingleAnswer(this,'q2')">A. 1911年10月10日爆发，是辛亥革命的开端</li>
+      <li onclick="showSingleAnswer(this,'q2')">B. 由孙中山直接领导和指挥</li>
+      <li onclick="showSingleAnswer(this,'q2')">C. 起义后立即成立了中华民国</li>
+      <li onclick="showSingleAnswer(this,'q2')">D. 武昌起义后清政府迅速垮台</li>
+    </ul>
+    <div class="quiz-answer" id="aq2"><strong>正确答案：A</strong><br>武昌起义于1911年10月10日爆发，打响了辛亥革命的第一枪。B项错误——孙中山并未直接领导武昌起义，他当时在国外；起义由湖北文学社、共进会等革命团体发动。C项错误——中华民国于1912年1月1日成立，在武昌起义近三个月后。D项错误——清帝退位于1912年2月12日，武昌起义后清政府并未迅速垮台，仍在维持统治。</div>
+  </div>
+
+  <div class="quiz-item" data-correct="D">
+    <p><strong>3. </strong>《中华民国临时约法》特别规定实行责任内阁制，其主要目的是（  ）</p>
+    <ul class="quiz-options">
+      <li onclick="showSingleAnswer(this,'q3')">A. 效仿美国的总统共和制</li>
+      <li onclick="showSingleAnswer(this,'q3')">B. 扩大临时大总统的行政权</li>
+      <li onclick="showSingleAnswer(this,'q3')">C. 维护辛亥革命的胜利果实</li>
+      <li onclick="showSingleAnswer(this,'q3')">D. 限制即将就任的袁世凯的权力</li>
+    </ul>
+    <div class="quiz-answer" id="aq3"><strong>正确答案：D</strong><br>《临时约法》规定责任内阁制，总统颁布命令须经国务员副署方能生效，其核心目的是限制即将就任临时大总统的袁世凯的权力，防止他实行独裁。A项错误——美国是总统制而非责任内阁制；B项错误——恰恰相反，责任内阁制限制而非扩大了总统权力；C项不够准确——"维护革命果实"是总目标，但责任内阁制的直接目的就是限制袁世凯。</div>
+  </div>
+
+  <div class="quiz-item" data-correct="C">
+    <p><strong>4. </strong>下列关于三民主义的表述，不正确的是（  ）</p>
+    <ul class="quiz-options">
+      <li onclick="showSingleAnswer(this,'q4')">A. 民族主义要求推翻清王朝统治</li>
+      <li onclick="showSingleAnswer(this,'q4')">B. 民权主义要求建立民主共和国</li>
+      <li onclick="showSingleAnswer(this,'q4')">C. 民生主义主张没收地主的土地分给农民</li>
+      <li onclick="showSingleAnswer(this,'q4')">D. 三民主义是辛亥革命的指导思想</li>
+    </ul>
+    <div class="quiz-answer" id="aq4"><strong>正确答案：C</strong><br>民生主义"平均地权"主张核定地价、增价归公，通过温和措施防止土地兼并，并非主张"没收地主土地分给农民"。平均地权不否定土地私有制，也没有满足农民对土地的迫切要求。A、B、D项均符合史实。</div>
+  </div>
+
+  <div class="quiz-item" data-correct="A">
+    <p><strong>5. </strong>有人说："辛亥革命使中国人的脑袋和双蹄不再是磕头机器。"这句话体现的是辛亥革命（  ）</p>
+    <ul class="quiz-options">
+      <li onclick="showSingleAnswer(this,'q5')">A. 推动了社会习俗的变革</li>
+      <li onclick="showSingleAnswer(this,'q5')">B. 促进了资本主义经济的发展</li>
+      <li onclick="showSingleAnswer(this,'q5')">C. 传播了民主共和理念</li>
+      <li onclick="showSingleAnswer(this,'q5')">D. 实现了政治体制的变革</li>
+    </ul>
+    <div class="quiz-answer" id="aq5"><strong>正确答案：A</strong><br>"脑袋"指的是剪辫易服，"双蹄"指的是废除跪拜礼。这句话生动地说明了辛亥革命在推动社会习俗变革方面的巨大影响——剪辫子、放足、废除跪拜礼、改称"同志"等，使人们从形式到思想都摆脱了封建等级制度的束缚。B、C项也是辛亥革命的历史功绩，但不符合题意所描述的内容。</div>
+  </div>
+
+  <!-- 材料解析题 -->
+  <h3 style="font-size:16pt;color:var(--unit-primary-dark);margin:25px 0 15px;">（三）材料解析题</h3>
+
+  <div class="material-item">
+    <div class="mat-title">阅读下列材料，回答问题。</div>
+    <div class="mat-content">
+      <strong>材料一：</strong>"满清王朝可以比作一座即将倒塌的房屋，整个结构已从根本上彻底地腐朽了……必须以一个新的、开明的、进步的政府来代替旧政府。"<br>
+      <span style="float:right;">——孙中山《中国问题的真解决》（1904年）</span>
+    </div>
+    <div class="mat-content">
+      <strong>材料二：</strong>"中华民国之主权，属于国民全体……中华民国人民一律平等，无种族、阶级、宗教之区别……人民享有人身、财产、言论、出版、集会、结社、信教等自由。"<br>
+      <span style="float:right;">——《中华民国临时约法》（1912年）</span>
+    </div>
+
+    <div class="sub-q">
+      <strong>（1）</strong>根据材料一，指出孙中山对清王朝的态度，并结合所学知识分析孙中山这种认识的来源。（6分）
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('m1')">查看答案</button>
+    <div class="sub-a" id="m1">
+      <div class="score">评分说明</div>
+      <p><strong>态度：</strong>孙中山认为清王朝已经腐朽透顶，必须用新的、进步的政府取而代之，表明了孙中山推翻清王朝的革命立场。（2分）</p>
+      <p><strong>认识来源：</strong>① 甲午战争后，中国民族危机日益加深，孙中山认识到清王朝的腐朽无能；（2分）② 孙中山早年接受西方教育，接触到西方民主政治学说，认识到民主共和的优越性；（1分）③ 上书李鸿章失败后，孙中山放弃改良幻想，决心用革命手段推翻清王朝。（1分）</p>
+    </div>
+
+    <div class="sub-q">
+      <strong>（2）</strong>根据材料二，概括《临时约法》体现的核心原则，并分析其历史进步性。（6分）
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('m2')">查看答案</button>
+    <div class="sub-a" id="m2">
+      <div class="score">评分说明</div>
+      <p><strong>核心原则：</strong>① "主权在民"——国家主权属于国民全体；（2分）② 自由平等——人民享有广泛的自由权利。（2分）</p>
+      <p><strong>历史进步性：</strong>《临时约法》以根本法的形式否定了封建君主专制制度"主权在君"的原则，确立了资产阶级民主共和的基本原则，是中国历史上第一部具有资产阶级共和国宪法性质的重要文件，推动了民主共和理念的传播和民众的觉醒。（2分）</p>
+    </div>
+
+    <div class="sub-q">
+      <strong>（3）</strong>综合上述材料并结合所学，评价辛亥革命的历史意义。（8分）
+    </div>
+    <button class="toggle-btn" onclick="toggleAnswer('m3')">查看答案</button>
+    <div class="sub-a" id="m3">
+      <div class="score">评分说明</div>
+      <p>① <strong>政治意义：</strong>推翻了清王朝，结束了延续两千多年的封建君主专制制度，建立了亚洲第一个资产阶级民主共和国——中华民国。（2分）</p>
+      <p>② <strong>思想意义：</strong>传播了民主共和理念，使"民主共和"观念深入人心，极大推动了中华民族的思想解放。（2分）</p>
+      <p>③ <strong>经济与社会意义：</strong>推动了民族资本主义的发展，促进了社会习俗的革新，推动了中国近代化进程。（2分）</p>
+      <p>④ <strong>局限性：</strong>没有完成反帝反封建的革命任务，没有改变中国半殖民地半封建的社会性质，革命果实被袁世凯窃取。这证明资产阶级共和国的方案在半殖民地半封建的中国行不通。（2分）</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  统编版·中外历史纲要（上）·2024年修订版 &nbsp;|&nbsp; 第六单元·第18课 辛亥革命
+</div>
+
+</div>
+
+<script>
+// Toggle answer visibility
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el.style.display === 'block') {
+    el.style.display = 'none';
+  } else {
+    el.style.display = 'block';
+  }
+}
+
+// Single choice quiz handler
+function showSingleAnswer(el, qid) {
+  var parent = el.closest('.quiz-item');
+  var correct = parent.getAttribute('data-correct');
+  var options = parent.querySelectorAll('.quiz-options li');
+
+  // Disable further clicks
+  options.forEach(function(opt) {
+    opt.onclick = null;
+  });
+
+  // Get the selected option letter
+  var selectedText = el.textContent.replace('.','').trim();
+  var selectedLetter = selectedText.charAt(0);
+
+  // Mark each option
+  options.forEach(function(opt) {
+    var txt = opt.textContent.replace('.','').trim();
+    var letter = txt.charAt(0);
+    if (letter === correct) {
+      opt.classList.add('opt-correct');
+    } else if (letter === selectedLetter && letter !== correct) {
+      opt.classList.add('opt-wrong');
+    } else {
+      opt.classList.add('opt-dim');
+    }
+  });
+
+  // Show answer
+  var answerId = 'a' + qid;
+  var answerEl = document.getElementById(answerId);
+  if (answerEl) {
+    answerEl.style.display = 'block';
+  }
+}
+
+// Judge button event delegation
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('judge-btn')) {
+    var btn = e.target;
+    var q = btn.getAttribute('data-q');
+    var result = btn.getAttribute('data-result');
+    var feedback = document.getElementById('fb' + q);
+
+    // Disable buttons in this group
+    var group = btn.closest('.judge-group');
+    var allBtns = group.querySelectorAll('.judge-btn');
+    allBtns.forEach(function(b) {
+      b.onclick = null;
+    });
+
+    // Highlight selected button
+    if (result === 'correct') {
+      btn.classList.add('opt-correct');
+      btn.style.background = 'var(--green)';
+      btn.style.color = '#fff';
+    } else {
+      btn.classList.add('opt-wrong');
+      btn.style.background = 'var(--red)';
+      btn.style.color = '#fff';
+    }
+
+    // Show feedback
+    if (feedback) {
+      feedback.classList.add('show');
+      if (result === 'correct') {
+        feedback.className = 'judge-feedback show correct-fb';
+      } else {
+        feedback.className = 'judge-feedback show wrong-fb';
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
