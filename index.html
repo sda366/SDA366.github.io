@@ -161,11 +161,11 @@
       联系我：<a href="mailto:50160083@qq.com" style="color:#ffd700; text-decoration:none;">50160083@qq.com</a>
     </div>
     <div class="footer-counter">
-      <span id="busuanzi_container_site_pv" style="margin-right:16px;">
-        👁 访问量 <span id="busuanzi_value_site_pv"></span> 次
+      <span style="margin-right:16px;">
+        👁 访问量 <span id="counter_pv">--</span> 次
       </span>
-      <span id="busuanzi_container_site_uv">
-        👤 访客数 <span id="busuanzi_value_site_uv"></span> 人
+      <span>
+        👤 访客数 <span id="counter_uv">--</span> 人
       </span>
     </div>
     <div class="footer-beian">
@@ -175,8 +175,61 @@
     </div>
   </footer>
 
-  <!-- 不蒜子访问计数器 -->
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!-- CountAPI 访问计数器（数据服务端存储，跨设备一致） -->
+  <script>
+  (function(){
+    var API = 'https://api.countapi.xyz';
+    var NS = 'jeep-history-site';
+
+    function initCounter(key, startVal) {
+      return fetch(API + '/get/' + NS + '/' + key)
+        .then(function(r) {
+          if (!r.ok) {
+            return fetch(API + '/set/' + NS + '/' + key + '?value=' + startVal)
+              .then(function() { return startVal; });
+          }
+          return r.json().then(function(d) { return d.value; });
+        });
+    }
+
+    function hitCounter(key) {
+      return fetch(API + '/hit/' + NS + '/' + key)
+        .then(function(r) { return r.json(); })
+        .then(function(d) { return d.value; });
+    }
+
+    // PV：每次访问 +1
+    hitCounter('site_pv').then(function(v) {
+      document.getElementById('counter_pv').textContent = v;
+    }).catch(function() {
+      initCounter('site_pv', 500).then(function(v) {
+        return hitCounter('site_pv');
+      }).then(function(v) {
+        document.getElementById('counter_pv').textContent = v;
+      });
+    });
+
+    // UV：同一会话只计 1 次
+    var visited = sessionStorage.getItem('jeep_visited');
+    if (visited) {
+      fetch(API + '/get/' + NS + '/site_uv')
+        .then(function(r) { return r.json(); })
+        .then(function(d) { document.getElementById('counter_uv').textContent = d.value; })
+        .catch(function() { document.getElementById('counter_uv').textContent = '100'; });
+    } else {
+      sessionStorage.setItem('jeep_visited', '1');
+      hitCounter('site_uv').then(function(v) {
+        document.getElementById('counter_uv').textContent = v;
+      }).catch(function() {
+        initCounter('site_uv', 100).then(function(v) {
+          return hitCounter('site_uv');
+        }).then(function(v) {
+          document.getElementById('counter_uv').textContent = v;
+        });
+      });
+    }
+  })();
+  </script>
 
   <script>
   (function(){
