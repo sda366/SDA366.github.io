@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年高一下学期期末模拟试题（纲要下）· 完整试卷</title>
+<style>
+  :root {
+    --primary: #1a56a0;
+    --primary-light: #e8f0fe;
+    --accent: #c0392b;
+    --text: #2c3e50;
+    --text-light: #555;
+    --border: #d0d7de;
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --correct: #27ae60;
+    --wrong: #e74c3c;
+    --option-hover: #f0f6ff;
+  }
+
+  * { margin:0; padding:0; box-sizing: border-box; }
+
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    padding: 20px;
+  }
+
+  .exam-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* ===== 页眉 ===== */
+  .exam-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #0f3d7a 100%);
+    color: white;
+    padding: 28px 32px;
+    text-align: center;
+  }
+  .exam-header h1 { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+  .exam-meta { margin-top: 10px; font-size: 13.5px; opacity: 0.85; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+
+  /* ===== 大题标题 ===== */
+  .section-title {
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    border-left: 4px solid var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+    margin: 0;
+  }
+
+  /* ===== 选择题卡片 ===== */
+  .question-card {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .question-card.answered { background: #fafbfc; }
+  .q-text {
+    font-size: 15px;
+    line-height: 1.95;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .q-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px; height: 26px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ===== 选项 ===== */
+  .options { display: flex; flex-direction: column; gap: 7px; }
+  .option-item {
+    padding: 9px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    user-select: none;
+  }
+  .option-item:hover { background: var(--option-hover); border-color: var(--primary); }
+  .option-item.correct {
+    background: #e8f8ef;
+    border-color: var(--correct);
+    color: #1a6d38;
+    font-weight: 600;
+  }
+  .option-item.wrong {
+    background: #fde8e8;
+    border-color: var(--wrong);
+    color: #a93226;
+    font-weight: 600;
+  }
+  .option-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .option-item.correct .option-label { background: var(--correct); color: white; }
+  .option-item.wrong .option-label { background: var(--wrong); color: white; }
+
+  /* ===== 每题解析面板 ===== */
+  .q-analysis {
+    display: none;
+    margin-top: 14px;
+    border: 1.5px solid #d4efdf;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f0faf4 0%, #eaf5f0 100%);
+    overflow: hidden;
+    animation: slideDown 0.3s ease;
+  }
+  .q-analysis.show { display: block; }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .analysis-header {
+    padding: 10px 16px;
+    background: #27ae60;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .analysis-body { padding: 14px 16px; font-size: 14px; line-height: 1.95; color: #333; }
+  .analysis-body .ans-correct { color: #1a6d38; font-weight: 700; font-size: 15px; }
+  .analysis-body .ans-reason { margin: 8px 0; }
+  .analysis-body .wrong-title {
+    margin-top: 12px;
+    padding: 5px 10px;
+    background: #fde8e8;
+    color: #a93226;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13.5px;
+  }
+  .analysis-body .wrong-item {
+    margin: 6px 0 0 16px;
+    padding-left: 10px;
+    border-left: 3px solid #f5b7b1;
+    font-size: 13.5px;
+    color: #555;
+  }
+  .analysis-body .wrong-item .opt-name { font-weight: 700; color: #a93226; }
+
+  /* ===== 数据表格 ===== */
+  .data-table-wrapper { margin: 12px 0; overflow-x: auto; }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .data-table th {
+    background: var(--primary);
+    color: white;
+    padding: 8px 10px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .data-table td {
+    padding: 7px 10px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+  }
+  .data-table tr:nth-child(even) td { background: #f8f9fb; }
+
+  /* ===== 图表区域 ===== */
+  .chart-area {
+    margin: 12px 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  /* ===== 非选择题样式 ===== */
+  .essay-card {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--border);
+    background: #fefefe;
+  }
+  .essay-card:last-child { border-bottom: none; }
+  .essay-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #c0392b;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .essay-title .q-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    background: #c0392b; color: white;
+    border-radius: 50%; font-size: 14px;
+  }
+  .essay-material {
+    padding: 16px 18px;
+    background: #fffbf0;
+    border-left: 3px solid #f0a500;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    line-height: 1.9;
+    color: #444;
+  }
+  .essay-material strong { color: #333; }
+  .material-source {
+    text-align: right;
+    color: #888;
+    font-size: 12.5px;
+    margin-top: 4px;
+  }
+  .sub-question {
+    padding: 12px 0;
+    border-top: 1px dashed #e0e0e0;
+  }
+  .sub-q-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .sub-q-score {
+    display: inline-block;
+    background: #e8f0fe;
+    color: var(--primary);
+    padding: 1px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-left: 8px;
+    font-weight: normal;
+  }
+
+  /* ===== 页脚 ===== */
+  .page-footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 13px;
+    color: #999;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<div class="exam-container">
+
+  <!-- 页眉 -->
+  <div class="exam-header">
+    <h1>📜 2026年高一下学期期末模拟试题（纲要下）</h1>
+    <div class="exam-meta">
+      <span>⏱ 考试时间：75 分钟</span>
+      <span>📊 满分：100 分</span>
+      <span>📝 选择题：48 分（16 题 × 3 分）</span>
+    </div>
+  </div>
+
+  <!-- 选择题标题 -->
+  <div class="section-title">
+    一、选择题：本大题共 16 小题，每小题 3 分，共 48 分。在每小题列出的四个选项中，只有一个是符合题目要求的。
+  </div>
+
+  <!-- ========== 第1题 ========== -->
+  <div class="question-card" data-q="1" data-ans="C">
+    <div class="q-text">
+      <span class="q-number">1</span>
+      <span class="q-text-content">
+        20 世纪 70 年代，伊拉克境内乌鲁克城墙（长达 9 公里）和埃及前王朝时期的马斯塔巴陵墓（大型石构建筑）相继被发现。这些大型工程表明，当时的两河流域和埃及
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>地理环境差异决定文明的发展走向</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>国家具备强大的社会组织能力</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>建筑技术水平已达到古代文明顶峰</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>形成了专制主义中央集权体制</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-1">
+      <div class="analysis-header">✅ 正确答案：B　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">乌鲁克城墙（长达 9 公里）和马斯塔巴陵墓都是需要调动大量人力、物力、财力才能完成的大型工程，这充分说明当时的两河流域和埃及已经出现了国家组织，并且具备<strong class="ans-correct">强大的社会组织能力</strong>来统筹和完成这类公共工程。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（地理环境决定论）</span>：地理环境对文明有影响，但"决定"一词过于绝对化，且材料并未讨论地理环境的作用，属于无中生有。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（建筑技术达顶峰）</span>：材料只说明有能力建造大型工程，并不等于"达到古代文明顶峰"，表述夸大，且两河与埃及各具特色，无法比较"顶峰"。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（专制主义中央集权体制）</span>：这一时期（前王朝、早期国家）尚未形成成熟的中,央集权体制，该体制是后来才逐步发展的，时间不符。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第2题 ========== -->
+  <div class="question-card" data-q="2" data-ans="D">
+    <div class="q-text">
+      <span class="q-number">2</span>
+      <span class="q-text-content">
+        下图是学者根据文献绘制的公元前后罗马与汉朝的"丝绸之路"贸易量对比示意图。据此可知
+      </span>
+    </div>
+    <div class="chart-area" style="padding:12px;">
+      <canvas id="chartQ2" width="500" height="260"></canvas>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>两大帝国的经济结构具有互补性</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>罗马的金银大量外流激化了社会矛盾</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>汉朝手工业水平领先于罗马帝国</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>汉朝对罗马的贸易长期处于出超地位</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-2">
+      <div class="analysis-header">✅ 正确答案：D　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">从图表可见，汉朝通过丝绸之路流向罗马的商品中，<strong class="ans-correct">丝织品的价值标注为"极高"</strong>，而罗马流向汉朝的商品中，金银为"高"、玻璃器皿为"中"、珊瑚为"低"。同时汉朝从罗马流入的铁器、漆器仅为"低"。这说明<strong class="ans-correct">汉朝出口高价值商品远多于进口，长期处于贸易出超（顺差）地位</strong>。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（经济结构互补）</span>：材料仅展示贸易量对比，无法判断两国经济结构是否互补，属于过度推断。</div>
+        <div class="wrong-item"><span class="opt-name">B 项（金银外流激化社会矛盾）</span>：材料未涉及罗马国内社会矛盾的信息，"激化社会矛盾"无从体现，属于无中生有。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（汉朝手工业领先罗马）</span>：材料无法直接比较两地手工业技术水平，且"领先"的判断需要更多技术史证据，不能仅凭贸易量推断。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第3题 ========== -->
+  <div class="question-card" data-q="3" data-ans="C">
+    <div class="q-text">
+      <span class="q-number">3</span>
+      <span class="q-text-content">
+        1384—1389 年间，法国王室消费税和盐税年均收入超 200 万锂；达依税（主要针对城市居民）年均达 400 万锂，是 1304 年的 2.5 倍。而同期领地收入（传统封建收入）则大幅下降，仅占总收入的 10% 左右。这反映了当时法国
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>封建封君制度逐步走向瓦解</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>城市成为国王对抗教会的盟友</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>商品经济发展推动王权强化</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>重商主义成为了主流经济思想</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-3">
+      <div class="analysis-header">✅ 正确答案：C　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">消费税和达依税主要来自<strong class="ans-correct">商品流通和城市工商业活动</strong>，其收入大幅增长并超过传统封建领地收入（仅占10%），说明法国商品经济迅速发展，而<strong class="ans-correct">王权的财政基础日益依赖商品经济，从而推动了王权的强化</strong>。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（封建封君制度走向瓦解）</span>："逐步走向瓦解"表述过于夸张，14世纪末法国封建制度仍在，只是王权在强化，两者并非简单的此消彼长关系。</div>
+        <div class="wrong-item"><span class="opt-name">B 项（城市成为国王对抗教会的盟友）</span>：材料完全没有涉及教会的信息，属于无中生有，不能选。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（重商主义成为主流）</span>：重商主义盛行于16—17世纪以后，14世纪尚未成为主流经济思想，时间不符。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第4题 ========== -->
+  <div class="question-card" data-q="4" data-ans="A">
+    <div class="q-text">
+      <span class="q-number">4</span>
+      <span class="q-text-content">
+        下表为古代美洲三大文明的部分经济状况。这反映了古代美洲
+      </span>
+    </div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <tr><th>文明</th><th>主要农作物</th><th>核心耕作法</th><th>主要牲畜</th></tr>
+        <tr><td><strong>玛雅</strong></td><td>玉米、豆类</td><td>轮歇农业</td><td>无大型役畜</td></tr>
+        <tr><td><strong>阿兹特克</strong></td><td>玉米、南瓜</td><td>浮田耕作法</td><td>无大型役畜</td></tr>
+        <tr><td><strong>印加</strong></td><td>玉米、马铃薯</td><td>修筑梯田</td><td>骆马（仅限驮运）</td></tr>
+      </table>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>农耕生产方式的落后性</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>多元一体的发展趋势</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>区域经济文化联系密切</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>独立发展的文明特征</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-4">
+      <div class="analysis-header">✅ 正确答案：A　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">表格显示三大文明<strong class="ans-correct">均无大型役畜（或仅有驮运用的骆马），耕作方法以轮歇农业、浮田、梯田为主，缺乏先进犁耕技术的支撑</strong>。这反映了古代美洲农耕生产方式相对落后——没有牛马等大型牲畜进行深耕，生产力受到较大限制。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">B 项（多元一体的发展趋势）</span>："多元一体"通常指多种文化融合为整体，材料仅展示三地农业状况，未体现"一体"趋势，与材料无关。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（区域经济文化联系密切）</span>：材料未体现美洲三大文明之间的经济文化联系，古代美洲各文明间联系相对有限，不能选。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（独立发展的文明特征）</span>：虽然古代美洲文明确实独立发展，但材料主旨是通过对比展示其农耕方式的共同局限性，而非强调"独立发展"这一特征。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第5题 ========== -->
+  <div class="question-card" data-q="5" data-ans="A">
+    <div class="q-text">
+      <span class="q-number">5</span>
+      <span class="q-text-content">
+        下表为 16 世纪中后期，西班牙输入欧洲的白银数量变化情况。这一变化
+      </span>
+    </div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <tr><th style="width:35%">年代</th><th>白银年均输入量（千克）</th></tr>
+        <tr><td>40 年代</td><td>17,500</td></tr>
+        <tr><td>50 年代</td><td>30,000</td></tr>
+        <tr><td>60 年代</td><td>94,000</td></tr>
+        <tr><td>70 年代</td><td>100,000+</td></tr>
+        <tr><td>80 年代</td><td>200,000</td></tr>
+        <tr><td>90 年代</td><td>270,000</td></tr>
+      </table>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>引发价格革命，加速欧洲封建制度解体</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>巩固了西班牙世界殖民霸权地位</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>推动商业革命，促进世界市场最终形成</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>促使西班牙率先完成了社会转型</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-5">
+      <div class="analysis-header">✅ 正确答案：A　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">白银大量流入欧洲是<strong class="ans-correct">价格革命</strong>的直接根源——白银贬值、物价飞涨，依靠固定地租收入的封建贵族衰落，从事商品经济的资产阶级崛起，从而<strong class="ans-correct">加速了欧洲封建制度的解体</strong>。这是高中历史的核心考点。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">B 项（巩固西班牙殖民霸权）</span>：恰恰相反，白银大量外流（用于购买欧洲其他国家商品）反而削弱了西班牙的国力，1588年无敌舰队战败后霸权衰落。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（世界市场最终形成）</span以下简称"最终形成"表述有误，19世纪末20世纪初世界市场才最终形成，16世纪仅是雏形出现，时间不符。A项虽也需注意"加速"的程度，但相较之下更符合史实。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（西班牙率先完成社会转型）</span>：西班牙并未率先完成社会转型，其封建势力依然强大，资本主义发展反而相对滞后，典型的"帝国悖论"。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第6题 ========== -->
+  <div class="question-card" data-q="6" data-ans="B">
+    <div class="q-text">
+      <span class="q-number">6</span>
+      <span class="q-text-content">
+        彼特拉克等人文主义者反对天主教会的禁欲主义，追求现世社会的幸福生活；马丁·路德批判天主教会的穷奢极欲，主张建立独立的廉俭教会。他们的思想存在显著差异，但都推动了欧洲社会的发展。这是因为，他们的主张都
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>否定了宗教神学的理论基础</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>适应了新兴资产阶级的利益诉求</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>冲破了罗马教廷的神权统治</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>得到了欧洲封建统治者大力支持</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-6">
+      <div class="analysis-header">✅ 正确答案：B　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">彼特拉克（文艺复兴）和马丁·路德（宗教改革）虽具体主张不同，但本质上都<strong class="ans-correct">反映了新兴资产阶级反对封建神权统治、追求自身利益的要求</strong>，因此都顺应了历史潮流，推动了欧洲社会的发展。这是两类运动最深层的共同本质。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（否定宗教神学理论基础）</span>：人文主义者并不否定宗教神学，彼特拉克本人仍是虔诚的基督徒；宗教改革更是在"信仰"框架内的改革，并未否定神学基础。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（冲破罗马教廷神权统治）</span>：文艺复兴时期尚未冲破神权统治，宗教改革才真正冲击了罗马教廷权威，C项只适用于宗教改革，不适用于文艺复兴。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（得到封建统治者大力支持）</span>：两者都遭到封建统治者（及教会）不同程度的压制，路德被教皇开除教籍，人文主义者也有受迫害的，明显错误。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第7题 ========== -->
+  <div class="question-card" data-q="7" data-ans="A">
+    <div class="q-text">
+      <span class="q-number">7</span>
+      <span class="q-text-content">
+        1776 年，潘恩指出："北美没有法律，或顺从英国为我们制定的法律，实际上都可以奴役我们……究竟是我们自己制定我们的法律，还是让这个大陆的目前和将来最大的敌人——英王来吩咐我们；除我所喜欢的法律以外不准有任何法律。"潘恩的思想本质上
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>蕴含了民族独立的理念</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>要求殖民地获得立法权</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>体现了君主立宪的追求</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>主张武力推翻英王统治</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-7">
+      <div class="analysis-header">✅ 正确答案：A　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">潘恩在《常识》中的核心思想是：北美殖民地不应受英国法律的奴役，而应<strong class="ans-correct">自己制定法律，摆脱"最大的敌人——英王"</strong>。这本质上<strong class="ans-correct">蕴含了北美人民要求民族独立、摆脱英国殖民统治的理念</strong>，为美国独立战争提供了思想武器。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">B 项（要求殖民地获得立法权）</span>：B项是A项的具体表现之一，但不够深入全面。潘恩的思想本质是要摆脱殖民统治、实现民族独立，立法权独立只是其中一部分，A项更能揭示本质。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（体现了君主立宪的追求）</span>：潘恩强烈反对君主制，他主张建立共和制，"英王是敌人"的表述与君主立宪完全相悖，明显错误。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（主张武力推翻英王统治）</span>：材料强调的是立法权的独立，即政治独立，并未提及武力手段，属于过度推断。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第8题 ========== -->
+  <div class="question-card" data-q="8" data-ans="C">
+    <div class="q-text">
+      <span class="q-number">8</span>
+      <span class="q-text-content">
+        1871 年德意志帝国宪法规定，联邦议会由各邦代表组成，普鲁士在其中拥有 17 个席位（总 58 席），而宪法修正案只需 14 票反对即可被否决。这一规定
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>体现了德国宪政民主程序的缺失</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>折射了君主专制色彩的浓厚</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>契合了统一带来的权力分配特征</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>使议会成为国家权力的中心</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-8">
+      <div class="analysis-header">✅ 正确答案：C　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">1871年德意志统一是通过<strong class="ans-correct">普鲁士主导的王朝战争</strong>完成的。宪法规定普鲁士拥有近三分之一的席位（17/58），且仅需14票即可否决修正案——这<strong class="ans-correct">体现了普鲁士在联邦中的特殊地位和主导权，是德国统一后权力分配格局的制度化体现</strong>。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（宪政民主程序缺失）</span>：宪法本身有议会、有投票程序，并非"民主程序缺失"，而是民主的"质量"问题（普鲁士权重过大），A项不准确。</div>
+        <div class="wrong-item"><span class="opt-name">B 项（君主专制色彩浓厚）</span>：B项有一定道理（德国1871宪法确有专制色彩），但本题题干强调的是"普鲁士席位多、可否决"，主旨是权力分配特征，C项更贴合题意。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（议会成为国家权力中心）</span>：恰恰相反，德意志帝国是皇帝权力中心，议会并非权力中心，D项与史实不符。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第9题 ========== -->
+  <div class="question-card" data-q="9" data-ans="A">
+    <div class="q-text">
+      <span class="q-number">9</span>
+      <span class="q-text-content">
+        1798 年，美国发明家、机械工程师惠特尼与美国政府签约，承诺在两年内制造 1 万支滑膛枪。他没有依靠技艺精湛的枪械师手工打磨，而是制造了专门机器，让半熟练工人生产出可互换的标准零件。这反映了
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>科学理论与生产技术的紧密结合</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>市场需求促成生产技术革新</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>美国开始引领世界工业革命浪潮</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>机器工业生产模式正式确立</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-9">
+      <div class="analysis-header">✅ 正确答案：A　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">惠特尼采用<strong class="ans-correct">标准化可互换零件</strong>制造滑膛枪，通过专门机器让半熟练工人也能生产标准零件，实现了<strong class="ans-correct">科学理论（标准化设计原理）与生产技术（机械化制造）的紧密结合</strong>。这是第一次工业革命中生产技术的重要突破。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">B 项（市场需求促成技术革新）</span>：市场需求是背景因素，但材料着重展示的是"标准化生产"这一技术突破本身，B项未能准确概括材料主旨。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（美国开始引领工业革命）</span>：此时（1798年）英国仍是工业革命的引领者，美国"开始引领"是更晚的事，与史实不符。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（机器工业生产模式正式确立）</span>"正式确立"表述过于绝对，且机器工业生产模式在英国早已开始确立，美国此举是具体实践而非"正式确立"的标志。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第10题 ========== -->
+  <div class="question-card" data-q="10" data-ans="D">
+    <div class="q-text">
+      <span class="q-number">10</span>
+      <span class="q-text-content">
+        巴黎公社在短短 72 天内颁布了一系列法令。下表反映了巴黎公社政权
+      </span>
+    </div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <tr><th style="width:50%">法令名称</th><th>核心内容</th></tr>
+        <tr><td>《废除常备军改由国民自卫军代替的法令》</td><td>取消旧军队，武装人民</td></tr>
+        <tr><td>《废除国家机关高薪法令》</td><td>国家高薪金不超过熟练工人工资</td></tr>
+        <tr><td>《关于政权组织的法令》</td><td>公社委员由选举产生，可随时撤换</td></tr>
+      </table>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>建立了成熟的社会主义经济体系</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>受到马克思主义无产阶级专政理论指导</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>践行了启蒙思想的国家政权学说</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>具备了无产阶级政权的民主尝试特征</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-10">
+      <div class="analysis-header">✅ 正确答案：D　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">从表格可见巴黎公社的三项法令：<strong class="ans-correct">武装人民取代常备军、限制高薪、公社委员由选举产生并可撤换</strong>——这些都是<strong class="ans-correct">无产阶级政权尝试建立新型民主制度的具体措施</strong>，体现了无产阶级政权的民主尝试特征，是巴黎公社的重要历史意义。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（建立了成熟的社会主义经济体系）</span>：巴黎公社仅存在72天，并未建立社会主义经济体系，"成熟"二字更是无从谈起，明显错误。</div>
+        <div class="wrong-item"><span class="opt-name">B 项（受马克思主义指导）</span>：巴黎公社是一次<strong>自发</strong>的工人运动，并非在马克思主义理论指导下有计划的行动，这是重要史实，易错！</div>
+        <div class="wrong-item"><span class="opt-name">C 项（践行启蒙思想政权学说）</span>：虽然巴黎公社一定程度上受启蒙思想（主权在民）影响，但D项更准确地概括了巴黎公社的<strong>无产阶级性质</strong>，是最佳答案。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第11题 ========== -->
+  <div class="question-card" data-q="11" data-ans="B">
+    <div class="q-text">
+      <span class="q-number">11</span>
+      <span class="q-text-content">
+        20 世纪初，印度国大党激进派领袖提拉克曾指出："我要做自己房子的主人，不要仅仅成为为被逐出家门的陌生人"；"自治是我们的目标；我们要掌握自己的行政权。我们不想成为书记员（殖民政府的低级文员）"。这一思想
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>旨在推翻英国的封建专制统治</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>推动印度民族解放运动走向高涨</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>指出非暴力不合作运动的不足</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>主张通过暴力革命实现民族独立</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-11">
+      <div class="analysis-header">✅ 正确答案：B　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">提拉克的言论表达了印度人民要求<strong class="ans-correct">掌握自己国家主权、争取政治独立的强烈愿望</strong>。"做自己房子的主人""自治是我们的目标""掌握自己的行政权"等表述，反映了印度民族资产阶级对殖民统治的不满，<strong class="ans-correct">推动了印度民族解放运动走向高涨</strong>。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（推翻英国封建专制统治）</span>：英国对印度的统治是<strong>殖民统治</strong>，而非"封建专制统治"，概念混淆，A项错误。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（指出非暴力不合作运动的不足）</span>：提拉克是<strong>激进派</strong>，主张更激烈的斗争方式，非暴力不合作是后来甘地的主张，时间顺序和人物主张均不符。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（主张通过暴力革命实现独立）</span>：材料仅表达政治诉求，并未明确提及"暴力革命"手段，属于过度推断。且提拉克虽属激进派，但其具体手段在材料中未明确。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第12题 ========== -->
+  <div class="question-card" data-q="12" data-ans="D">
+    <div class="q-text">
+      <span class="q-number">12</span>
+      <span class="q-text-content">
+        华盛顿会议期间，美国国务卿休斯提出："海军军备竞赛正吞噬着各国的财富……我们应当确立一种主力舰吨位的比例标准，以保障各签约国的国家安全，同时停止这种无休止的造舰竞赛。"休斯此番提议旨在
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>缓解各国财政压力以稳定战后经济</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>凭借自身经济优势谋求海上霸权</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>利用英国海上优势以制约日本扩张</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>顺应国内和平主义思潮的基本诉求</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-12">
+      <div class="analysis-header">✅ 正确答案：D　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">一战后美国国内<strong class="ans-correct">和平主义思潮高涨</strong>，民众对军备竞赛深感忧虑，强烈要求裁军。休斯提出限制海军军备竞赛的主张，<strong class="ans-correct">表面上出于经济和国家安全考量，实质上是为了顺应国内和平主义的基本诉求</strong>，以争取国内民众支持。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（缓解各国财政压力）</span>：缓解财政压力是客观效果之一，但休斯作为美国国务卿，其根本目的是服务美国国家利益，A项未触及根本目的。</div>
+        <div class="wrong-item"><span class="opt-name">B 项（谋求海上霸权）</span>：限制海军军备与"谋求海上霸权"自相矛盾，且休斯提议限制的是<strong>各国</strong>主力舰比例，并非只针对他国。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（利用英国优势制约日本）</span>：这是策略层面的考量（五五五三比例确实限制了日本），但"根本目的"是顺应国内和平主义诉求，C项是手段而非目的。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第13题 ========== -->
+  <div class="question-card" data-q="13" data-ans="C">
+    <div class="q-text">
+      <span class="q-number">13</span>
+      <span class="q-text-content">
+        下图为 1942 年欧洲形势图。这一局面
+      </span>
+    </div>
+    <div class="chart-area" style="padding:12px;">
+      <img src="q13_map_1942.jpg" alt="1942年欧洲形势图" style="max-width:100%;height:auto;border-radius:6px;">
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>反映了英法绥靖主义政策的破产</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>说明二战开始发展到全球阶段</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>推动了世界反法西斯力量的团结</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>迫使美国放弃了孤立主义政策</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-13">
+      <div class="analysis-header">✅ 正确答案：C　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">1942年欧洲形势图显示<strong class="ans-correct">纳粹德国已占领欧洲大片领土</strong>（包括法国大部、东欧等地），法西斯势力的疯狂扩张使<strong class="ans-correct">反法西斯各国面临共同的生存威胁</strong>。这种严峻局势促使美、英、苏等国加强合作，<strong class="ans-correct">推动了世界反法西斯力量走向团结</strong>（如1942年《联合国家宣言》签署）。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（绥靖政策破产）</span>：绥靖政策的破产以1939年德国入侵波兰为标志，1942年时绥靖政策早已破产，时间不符。</div>
+        <div class="wrong-item"><span class="opt-name">B 项（二战发展到全球阶段）</span>：二战发展到全球阶段是1941年太平洋战争爆发后的事，1942年已是全球战争，B项"开始"表述错误。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（美国放弃孤立主义）</span>：美国放弃孤立主义以1941年《租借法案》和珍珠港事件为标志，早于1942年，时间不符。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第14题 ========== -->
+  <div class="question-card" data-q="14" data-ans="A">
+    <div class="q-text">
+      <span class="q-number">14</span>
+      <span class="q-text-content">
+        二战后，英国政府逐步调整科技人才政策：20 世纪 50—60 年代主导科研体系与高等教育改革，80 年代推动市场化导向、削减基础科研经费，90 年代后强化知识经济与国际人才引进，同时大力建设科学园以促进产、学、研结合。这一演进过程折射出
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>经济周期性波动影响科技政策的调整</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>政府主导作用随市场化改革逐渐弱化</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>国家干预与市场调节在不同时期调适</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>科技政策服务于产业升级的现实需求</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-14">
+      <div class="analysis-header">✅ 正确答案：A　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">英国科技人才政策的演变轨迹——<strong class="ans-correct">50-60年代政府主导→80年代市场化、削减经费→90年代知识经济、引进人才</strong>——清晰地反映了<strong class="ans-correct">不同经济发展阶段对科技政策的不同需求</strong>：战后重建期重视基础研究→滞胀时期紧缩开支→全球化时代重视创新人才。这一过程<strong class="ans-correct">折射出经济周期性波动对科技政策调整的影响</strong>。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">B 项（政府主导作用逐渐弱化）</span>：90年代后政府仍在"强化知识经济与国际人才引进"，政府作用并未弱化，只是在不同领域调整方式，B项错误。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（国家干预与市场调节调适）</span>：C项有一定道理，但A项更准确地概括了"经济周期→政策调整"这一因果链条，且C项两种手段的"调适"在材料中体现不够充分。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（服务于产业升级）</span>：D项只覆盖了后期（90年代）的内容，无法概括50-80年代的政策演变，以偏概全。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第15题 ========== -->
+  <div class="question-card" data-q="15" data-ans="A">
+    <div class="q-text">
+      <span class="q-number">15</span>
+      <span class="q-text-content">
+        下表反映了二战后新兴民族国家发展的困境。这一困境的形成源于
+      </span>
+    </div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <tr><th style="width:40%">困境表现</th><th>典型案例</th></tr>
+        <tr><td>政局动荡、民族冲突</td><td>印巴分治、卢旺达大屠杀</td></tr>
+        <tr><td>经济结构单一、依赖国际市场</td><td>尼日利亚依赖石油、古巴依赖蔗糖</td></tr>
+      </table>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>殖民统治留下的后遗症</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>新兴民族国家缺乏治理经验</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>冷战格局下的美苏争夺</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>全球化浪潮带来的负面冲击</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-15">
+      <div class="analysis-header">✅ 正确答案：A　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">表格显示二战后新兴民族国家面临两大困境：一是<strong class="ans-correct">政局动荡、民族冲突</strong>（如印巴分治源于英国"分而治之"政策）；二是<strong class="ans-correct">经济结构单一依赖国际市场</strong>（殖民时期形成的单一作物种植模式）。这些困境的<strong class="ans-correct">根本原因在于长期的殖民统治留下的后遗症</strong>——人为划分边界、单一经济结构等都是殖民遗产。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">B 项（缺乏治理经验）</span>：治理经验不足是<strong>次要因素</strong>，且许多新兴国家独立后立即面临殖民遗产问题，根本原因仍是殖民统治的后遗症。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（冷战格局下美苏争夺）</span>：冷战确实加剧了部分地区的冲突，但并非困境形成的<strong>根源</strong>，且经济结构单一问题与冷战关系不大。</div>
+        <div class="wrong-item"><span class="opt-name">D 项（全球化负面冲击）</span>：全球化是更晚期的因素（20世纪80年代后），而新兴民族国家的困境在独立之初（1940-50年代）就已存在，时间不符。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 第16题 ========== -->
+  <div class="question-card" data-q="16" data-ans="D">
+    <div class="q-text">
+      <span class="q-number">16</span>
+      <span class="q-text-content">
+        二战后，以联合国为核心的全球人权治理机制逐步建立，但其话语与制度长期被西方国家主导，形成排他性框架与结构性失衡。20 世纪中后期以来，全球南方国家持续推进人权话语创新与区域治理机制建设，为全球人权治理注入新的活力。由此可见，这些探索
+      </span>
+    </div>
+    <div class="options">
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">A</span><span>动摇西方人权治理的主导地位</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">B</span><span>推动区域人权治理的自主实践</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">C</span><span>重塑全球人权治理的顶层制度</span></div>
+      <div class="option-item" onclick="checkAnswer(this)"><span class="option-label">D</span><span>丰富全球人权治理的多元路径</span></div>
+    </div>
+    <div class="q-analysis" id="analysis-16">
+      <div class="analysis-header">✅ 正确答案：D　📖 详细解析</div>
+      <div class="analysis-body">
+        <div class="ans-reason">材料指出全球南方国家推进人权话语创新与区域治理机制建设，<strong class="ans-correct">为全球人权治理注入新活力</strong>。这说明发展中国家通过探索适合自身国情的人权实践路径，<strong class="ans-correct">丰富了全球人权治理的多元路径</strong>，打破了西方话语垄断的局面。D项最准确地概括了材料的中心意思。</div>
+        <div class="wrong-title">❌ 易错项辨析</div>
+        <div class="wrong-item"><span class="opt-name">A 项（动摇西方主导地位）</span>"动摇"表述过于绝对，西方在人权治理中的主导地位依然强大，全球南方探索是在"丰富多元路径"而非直接"动摇"主导权。</div>
+        <div class="wrong-item"><span class="opt-name">B 项（推动区域人权治理自主实践）</span>：B项仅涉及"区域"层面，而材料强调的是对"全球"人权治理的贡献，B项概括不够全面。</div>
+        <div class="wrong-item"><span class="opt-name">C 项（重塑全球人权治理顶层制度）</span>"重塑顶层制度"不符合实际，联合国框架下的顶层制度并未被重塑，全球南方的探索更多是在实践和路径层面。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 非选择题标题 -->
+  <div class="section-title" style="margin-top:8px;border-left-color:#c0392b;color:#c0392b;background:#fdf2f2;">
+    二、非选择题：本大题共 4 小题，共 52 分。
+  </div>
+
+  <!-- ========== 第17题 ========== -->
+  <div class="essay-card" data-q="17">
+    <div class="essay-title">
+      <span class="q-num">17</span>
+      <span>阅读材料，完成下列要求。<span class="sub-q-score">(12 分)</span></span>
+    </div>
+    <div class="essay-material">
+      <strong>材料　</strong>中世纪西欧文化与教育被天主教教会垄断，教会学校以拉丁语为通用语言，课程以神学为核心、服务宗教，世俗文化水平普遍低下。但拉丁古典文化并未完全湮灭——11 世纪中期起，拉丁古典著作成为宗教与世俗通用语言，修道院抄录并保存着古典著作。11 世纪中后期至 13 世纪末，欧洲兴起翻译运动，大量希腊、阿拉伯典籍被译为拉丁文，包括亚里士多德（哲学）、欧几里得（几何学）、盖伦（医学）等。大学相继建立，至 13 世纪末西欧各世俗大学已有约 80 所。这些大学以古典拉丁学术为主要教材，推动哲学、法学、医学、天文学等学科发展，为后世思想文化发展积蓄了力量。
+      <div class="material-source">——摘编自张俊芳《中世纪西欧古典文化得以传承的原因》</div>
+    </div>
+    <div class="sub-question">
+      <div class="sub-q-title">(1) 根据材料并结合所学知识，说明中世纪西欧古典文化得以传承的原因。<span class="sub-q-score">(6 分)</span></div>
+    </div>
+    <div class="sub-question" style="border-top:none;">
+      <div class="sub-q-title">(2) 根据材料并结合所学知识，分析中世纪西欧大学兴起的历史影响。<span class="sub-q-score">(6 分)</span></div>
+    </div>
+  </div>
+
+  <!-- ========== 第18题 ========== -->
+  <div class="essay-card" data-q="18">
+    <div class="essay-title">
+      <span class="q-num">18</span>
+      <span>阅读材料，完成下列要求。<span class="sub-q-score">(14 分)</span></span>
+    </div>
+    <div class="essay-material">
+      <strong>材料　</strong>16 世纪西班牙的殖民征服活动促进了美洲与欧洲之间的物品交换。可可原产于美洲，被哥伦布等探险者带到欧洲。16 世纪可可种植园逐步建立，从美洲到欧洲的贸易网络形成。17 世纪，可可贸易突显出商品属性，通过荷兰、英国商人扩展到全球，成为仅次于金银的殖民地重要出口商品。可可作为货币在美洲消费体系中流通，在小额交易中替代价值过大的贵金属币，兼具商品与货币双重属性。由于西班牙王室垄断贸易，颁布严禁商业条款和贸易禁令，早期可可种植园以印第安人劳动为主；殖民压迫与疾病导致印第安人口崩溃，殖民者转而通过大西洋奴隶贸易输入非洲黑奴。欧洲白人、美洲印第安人、非洲黑人在美洲共同劳作，形成了美洲独特的混合种族文化。17 世纪可可传入欧洲后最初被当作药物，后逐渐在欧洲各国普及，催生了巧克力制作器具生产等相关产业，形成独特的欧洲巧克力消费文化。
+    </div>
+    <div class="sub-question">
+      <div class="sub-q-title">(1) 概括并评述 16—17 世纪西属美洲可可贸易发展的特点。<span class="sub-q-score">(6 分)</span></div>
+    </div>
+    <div class="sub-question" style="border-top:none;">
+      <div class="sub-q-title">(2) 根据材料并结合所学知识，分析可可贸易的历史影响。<span class="sub-q-score">(8 分)</span></div>
+    </div>
+  </div>
+
+  <!-- ========== 第19题 ========== -->
+  <div class="essay-card" data-q="19">
+    <div class="essay-title">
+      <span class="q-num">19</span>
+      <span>阅读材料，完成下列要求。<span class="sub-q-score">(14 分)</span></span>
+    </div>
+    <div class="essay-material">
+      <strong>材料一　</strong>20 世纪 20 年代末至 30 年代，苏联采取了特殊的工业发展战略。为此，国家通过"农业全盘集体化"为工业发展强制积累资金，并大规模引进西方技术和设备。1928—1940 年，苏联工业产值增长了 5.5 倍，其中重工业增长了 9 倍。与此同时，工农产品价格"剪刀差"扩大，农民负担加重，日用品和食品的供应在大部分时间内处于紧张状态。在取得显著工业成就的同时，经济结构失衡的现象也逐渐固化。
+      <div class="material-source">——摘编自金冲及《二十世纪中国史纲》</div>
+      <br>
+      <strong>材料二　</strong>1965 年，苏联推行"新经济体制"改革。规定减少国家下达给企业的指令性指标，由原来的几十项减为 9 项；允许企业利用利润中提取部分建立企业基金，用于集体福利和个人奖励；银行利用利率、贷款等经济杠杆调节企业活动。但改革始终强调"指令性指标是主要的和决定性的"，并未触及旧有经济管理体制的实质。
+      <div class="material-source">——摘编自吴于廑《世界史·现代史编》</div>
+    </div>
+    <div class="sub-question">
+      <div class="sub-q-title">(1) 根据材料一并结合所学知识，从经济角度简析 20 世纪 20 年代末至 40 年代苏联工业化的影响。<span class="sub-q-score">(6 分)</span></div>
+    </div>
+    <div class="sub-question" style="border-top:none;">
+      <div class="sub-q-title">(2) 根据材料二并结合所学知识，概括 1965 年苏联"新经济体制"改革的主要表现，并指出其改革成效有限的核心原因。<span class="sub-q-score">(8 分)</span></div>
+    </div>
+  </div>
+
+  <!-- ========== 第20题 ========== -->
+  <div class="essay-card" style="border-bottom:none;" data-q="20">
+    <div class="essay-title">
+      <span class="q-num">20</span>
+      <span>阅读材料，完成下列要求。<span class="sub-q-score">(12 分)</span></span>
+    </div>
+    <div class="essay-material">
+      <strong>材料　</strong>20 世纪，世界格局发生三次具有全球意义的变动：一战后凡尔赛—华盛顿体系建立，动摇了欧洲中心地位；二战后美苏两极格局形成，取代了以欧洲为中心的旧秩序；20 世纪 90 年代两极格局瓦解，世界呈现"一超多强"并向多极化发展。
+    </div>
+    <div class="sub-question">
+      <div class="sub-q-title">根据材料，结合世界近现代史的知识，围绕<strong>"国际格局的演变"</strong>这一主题，自拟论题，展开论述。（要求：观点明确，史论结合，逻辑清晰，表述成文。）</div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="page-footer">2026年高一下学期期末模拟试题（纲要下）· 完整版（选择 16 题 + 非选择题 4 题）</div>
+
+</div><!-- /exam-container -->
+
+<script>
+// ---- 选项点击判题交互 ----
+function checkAnswer(el) {
+  const card = el.closest('.question-card');
+  if (!card || card.classList.contains('answered')) return;  // 已作答则不再响应
+
+  const correctAns = card.getAttribute('data-ans');
+  const allOpts = card.querySelectorAll('.option-item');
+  const selectedLabel = el.querySelector('.option-label').textContent.trim();
+
+  // 标记已作答
+  card.classList.add('answered');
+
+  // 遍历所有选项，标绿/标红
+  allOpts.forEach(opt => {
+    const label = opt.querySelector('.option-label').textContent.trim();
+    if (label === correctAns) {
+      opt.classList.add('correct');
+    } else {
+      opt.classList.add('wrong');
+    }
+  });
+
+  // 显示本题解析面板
+  const analysis = card.querySelector('.q-analysis');
+  if (analysis) analysis.classList.add('show');
+
+  // 滚动到解析可见
+  setTimeout(() => {
+    const analysisEl = card.querySelector('.q-analysis.show');
+    if (analysisEl) {
+      analysisEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, 100);
+}
+
+// ---- 绘制第2题柱状图 ----
+(function drawChart() {
+  const canvas = document.getElementById('chartQ2');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  // 高清适配
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  // 数据：[标签，价值等级，柱高比例]
+  const romeData = [
+    { label: '金银', level: '高', h: 70 },
+    { label: '玻璃器皿', level: '中', h: 48 },
+    { label: '珊瑚', level: '低', h: 22 },
+  ];
+  const hanData = [
+    { label: '丝织', level: '极高', h: 100 },
+    { label: '漆器', level: '中', h: 50 },
+    { label: '铁器', level: '低', h: 20 },
+  ];
+
+  const barW = 44;
+  const gap = 28;
+  const baseY = H - 55;
+  const maxH = H - 110;
+  const romeStartX = 55;
+  const hanStartX = 295;
+
+  // 背景
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, W, H);
+
+  // 分组标签
+  ctx.font = 'bold 13px sans-serif';
+  ctx.fillStyle = '#4a6fa5';
+  ctx.textAlign = 'center';
+  ctx.fillText('罗马流出 →', romeStartX + 50, 24);
+  ctx.fillStyle = '#b03a2e';
+  ctx.fillText('← 汉朝流出', hanStartX + 50, 24);
+
+  // 绘制罗马柱子（蓝灰色系）
+  romeData.forEach((d, i) => {
+    const x = romeStartX + i * (barW + gap);
+    const bh = (d.h / 100) * maxH;
+    const y = baseY - bh;
+    const grad = ctx.createLinearGradient(x, y, x, baseY);
+    grad.addColorStop(0, '#5b8bd4');
+    grad.addColorStop(1, '#2c4a73');
+    ctx.fillStyle = grad;
+    roundRect(ctx, x, y, barW, bh, 4);
+    // 等级标注
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText(d.level, x + barW/2, y - 8);
+    // X轴标签
+    ctx.fillStyle = '#555';
+    ctx.font = '12px sans-serif';
+    ctx.fillText(d.label, x + barW/2, baseY + 20);
+  });
+
+  // 绘制汉朝柱子（红褐色系）
+  hanData.forEach((d, i) => {
+    const x = hanStartX + i * (barW + gap);
+    const bh = (d.h / 100) * maxH;
+    const y = baseY - bh;
+    const grad = ctx.createLinearGradient(x, y, x, baseY);
+    grad.addColorStop(0, '#d4a06a');
+    grad.addColorStop(1, '#8b5e3c');
+    ctx.fillStyle = grad;
+    roundRect(ctx, x, y, barW, bh, 4);
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText(d.level, x + barW/2, y - 8);
+    ctx.fillStyle = '#555';
+    ctx.font = '12px sans-serif';
+    ctx.fillText(d.label, x + barW/2, baseY + 20);
+  });
+
+  // 基准线
+  ctx.strokeStyle = '#ccc';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(40, baseY);
+  ctx.lineTo(W - 40, baseY);
+  ctx.stroke();
+
+  // 图例
+  ctx.fillStyle = '#888';
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('柱高示意相对贸易量指数（越高=贸易价值越大）', W/2, H - 12);
+
+  function roundRect(c, x, y, w, h, r) {
+    if (h < 1) h = 1;
+    c.beginPath();
+    c.moveTo(x + r, y);
+    c.lineTo(x + w - r, y);
+    c.quadraticCurveTo(x + w, y, x + w, y + r);
+    c.lineTo(x + w, y + h);
+    c.lineTo(x, y + h);
+    c.lineTo(x, y + r);
+    c.quadraticCurveTo(x, y, x + r, y);
+    c.closePath();
+    c.fill();
+  }
+})();
+</script>
+
+</body>
+</html>
