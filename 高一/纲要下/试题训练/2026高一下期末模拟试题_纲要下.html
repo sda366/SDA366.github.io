@@ -279,7 +279,49 @@
     color: #999;
     border-top: 1px solid var(--border);
   }
-</style>
+
+  /* ===== 非选择题子问题解析面板 ===== */
+  .sub-analysis { max-height:0; overflow:hidden; transition:max-height .5s ease; background:#f0faf4; border-top:2px dashed #a5d6a7; border-radius:0 0 10px 10px; margin-top:6px; }
+  .sub-analysis.show { max-height:2000px; }
+  .sub-analysis-inner { padding:14px 18px 16px 18px; }
+  .sub-ana-title { font-weight:700; font-size:14.5px; color:#2e7d32; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+  .sub-ana-body { background:white; padding:12px 16px; border-radius:8px; border-left:4px solid #a5d6a7; font-size:14px; line-height:1.9; color:#333; }
+  .sub-ana-point { padding-left:18px; position:relative; margin-bottom:3px; }
+  .sub-ana-point:before { position:absolute; left:0; color:#388e3c; font-weight:700; }
+  .sub-ana-point.p1:before { content:"①"; }
+  .sub-ana-point.p2:before { content:"②"; }
+  .sub-ana-point.p3:before { content:"③"; }
+  .sub-ana-point.p4:before { content:"④"; }
+  .sub-ana-point.p5:before { content:"⑤"; }
+  .sub-ana-btn { display:inline-flex; align-items:center; gap:5px; margin:6px 0 2px 0; padding:6px 18px; background:linear-gradient(135deg,#388e3c,#4caf50); color:white; border:none; border-radius:16px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.25s; box-shadow:0 2px 8px rgba(56,142,60,0.25); }
+  .sub-ana-btn:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(56,142,60,0.4); }
+  .sub-ana-btn .arr { transition:transform 0.3s; display:inline-block; }
+  .sub-ana-btn.active .arr { transform:rotate(180deg); }
+  .essay-overall-btn { display:inline-flex; align-items:center; gap:5px; margin:10px 0 2px 0; padding:7px 20px; background:linear-gradient(135deg,#1565c0,#1976d2); color:white; border:none; border-radius:16px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.25s; box-shadow:0 2px 8px rgba(21,101,192,0.25); }
+  .essay-overall-btn:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(21,101,192,0.4); }
+  .essay-overall-btn .arr { transition:transform 0.3s; display:inline-block; }
+  .essay-overall-btn.active .arr { transform:rotate(180deg); }
+  .essay-overall-panel { max-height:0; overflow:hidden; transition:max-height 0.5s ease; background:#e3f2fd; border-radius:10px; margin-top:6px; }
+  .essay-overall-panel.show { max-height:5000px; }
+  .essay-overall-inner { padding:16px 20px; }
+  .oa-section { margin-bottom:14px; }
+  .oa-section:last-child { margin-bottom:0; }
+  .oa-title { font-weight:700; font-size:14.5px; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+  .oa-title.green { color:#2e7d32; }
+  .oa-title.blue  { color:#1565c0; }
+  .oa-title.orange { color:#e65100; }
+  .oa-title.purple { color:#6a1b9a; }
+  .oa-body { background:white; padding:12px 16px; border-radius:8px; border-left:4px solid #90caf9; font-size:14px; line-height:1.9; color:#333; }
+  .angle-box { background:#fffde7; border:1px solid #fff9c4; border-radius:8px; padding:12px 16px; margin-bottom:10px; }
+  .angle-title { font-weight:700; color:#f57f17; font-size:14px; margin-bottom:4px; }
+  .angle-body { font-size:13.5px; color:#555; line-height:1.8; }
+  .essay-sample { background:#e8f5e9; border:1px solid #a5d6a7; border-radius:8px; padding:14px 18px; margin-bottom:12px; line-height:2; font-size:14px; color:#1b5e20; }
+  .essay-sample-title { font-weight:700; font-size:14.5px; color:#1b5e20; margin-bottom:6px; border-bottom:1px solid #a5d6a7; padding-bottom:5px; }
+  .essay-thesis { font-weight:700; color:#b71c1c; margin:6px 0 3px 0; }
+  .essay-elab { padding-left:10px; }
+  .essay-conclusion { font-weight:700; color:#1b5e20; margin-top:6px; padding-top:5px; border-top:1px dashed #a5d6a7; }
+
+  </style>
 </head>
 <body>
 
@@ -761,23 +803,73 @@
     二、非选择题：本大题共 4 小题，共 52 分。
   </div>
 
+
   <!-- ========== 第17题 ========== -->
   <div class="essay-card" data-q="17">
     <div class="essay-title">
       <span class="q-num">17</span>
       <span>阅读材料，完成下列要求。<span class="sub-q-score">(12 分)</span></span>
     </div>
+
     <div class="essay-material">
       <strong>材料　</strong>中世纪西欧文化与教育被天主教教会垄断，教会学校以拉丁语为通用语言，课程以神学为核心、服务宗教，世俗文化水平普遍低下。但拉丁古典文化并未完全湮灭——11 世纪中期起，拉丁古典著作成为宗教与世俗通用语言，修道院抄录并保存着古典著作。11 世纪中后期至 13 世纪末，欧洲兴起翻译运动，大量希腊、阿拉伯典籍被译为拉丁文，包括亚里士多德（哲学）、欧几里得（几何学）、盖伦（医学）等。大学相继建立，至 13 世纪末西欧各世俗大学已有约 80 所。这些大学以古典拉丁学术为主要教材，推动哲学、法学、医学、天文学等学科发展，为后世思想文化发展积蓄了力量。
       <div class="material-source">——摘编自张俊芳《中世纪西欧古典文化得以传承的原因》</div>
     </div>
+
+    <!-- 第(1)问 -->
     <div class="sub-question">
       <div class="sub-q-title">(1) 根据材料并结合所学知识，说明中世纪西欧古典文化得以传承的原因。<span class="sub-q-score">(6 分)</span></div>
+      <button class="sub-ana-btn" onclick="toggleSubAna('ea17_1', this)"><span class="btn-txt">📖 查看第(1)问解析</span><span class="arr">▾</span></button>
+      <div class="sub-analysis" id="ea17_1">
+        <div class="sub-analysis-inner">
+          <div class="sub-ana-title">✅ 第(1)问参考答案（6分）</div>
+          <div class="sub-ana-body">
+            <div class="sub-ana-point p1">教会垄断教育，修道院抄录并保存了大量古典著作，使古典文化得以在教会内部延续。（2分）</div>
+            <div class="sub-ana-point p2">11—13世纪翻译运动兴起，大量希腊、阿拉伯典籍被译为拉丁文，使古典学术重新传入西欧。（2分）</div>
+            <div class="sub-ana-point p3">城市的复兴和世俗文化的发展，为古典文化的传播提供了社会基础；大学的兴起为古典学术的研究与传承提供了制度保障。（2分）</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- 第(2)问 -->
     <div class="sub-question" style="border-top:none;">
       <div class="sub-q-title">(2) 根据材料并结合所学知识，分析中世纪西欧大学兴起的历史影响。<span class="sub-q-score">(6 分)</span></div>
+      <button class="sub-ana-btn" onclick="toggleSubAna('ea17_2', this)"><span class="btn-txt">📖 查看第(2)问解析</span><span class="arr">▾</span></button>
+      <div class="sub-analysis" id="ea17_2">
+        <div class="sub-analysis-inner">
+          <div class="sub-ana-title">✅ 第(2)问参考答案（6分）</div>
+          <div class="sub-ana-body">
+            <div class="sub-ana-point p1">大学以古典拉丁学术为教材，推动了古典文化的系统研究与传播，为文艺复兴准备了学术条件。（2分）</div>
+            <div class="sub-ana-point p2">大学培养了大批专业人才（哲学、法学、医学、天文学等），促进了西欧学术和教育的世俗化进程。（2分）</div>
+            <div class="sub-ana-point p3">中世纪大学的兴起奠定了近代欧洲高等教育的基础，其学术自由、大学自治等传统对后世产生了深远影响。（2分）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 整体解析按钮 -->
+    <button class="essay-overall-btn" onclick="toggleOverall('ea17_overall', this)" style="margin-top:12px;"><span class="btn-txt">📐 审题思路 & 答题技巧</span><span class="arr">▾</span></button>
+    <div class="essay-overall-panel" id="ea17_overall">
+      <div class="essay-overall-inner">
+        <div class="oa-section">
+          <div class="oa-title green">📐 审题思路</div>
+          <div class="oa-body">
+            本题两问均要求<strong>"根据材料并结合所学知识"</strong>，答题时必须：① 从材料中提取关键信息；② 结合教材知识补充完善。第(1)问"原因"类题目，应从<strong>教会保存、翻译运动、大学兴起、城市复兴</strong>等多方面作答。第(2)问"影响"类题目，应从<strong>知识传播、思想解放、人才培养、高教基础</strong>等角度作答。
+          </div>
+        </div>
+        <div class="oa-section">
+          <div class="oa-title orange">💡 答题技巧</div>
+          <div class="oa-body">
+            ① <strong>"原因"题</strong>：从政治、经济、文化、社会等多角度思考，材料+教材双来源。<br>
+            ② <strong>"影响"题</strong>：分积极/消极、短期/长期、对当时/对后世等维度。<br>
+            ③ <strong>分值提示</strong>：6分题一般答3点，每点2分，注意条理清晰。
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
 
   <!-- ========== 第18题 ========== -->
   <div class="essay-card" data-q="18">
@@ -785,16 +877,66 @@
       <span class="q-num">18</span>
       <span>阅读材料，完成下列要求。<span class="sub-q-score">(14 分)</span></span>
     </div>
+
     <div class="essay-material">
       <strong>材料　</strong>16 世纪西班牙的殖民征服活动促进了美洲与欧洲之间的物品交换。可可原产于美洲，被哥伦布等探险者带到欧洲。16 世纪可可种植园逐步建立，从美洲到欧洲的贸易网络形成。17 世纪，可可贸易突显出商品属性，通过荷兰、英国商人扩展到全球，成为仅次于金银的殖民地重要出口商品。可可作为货币在美洲消费体系中流通，在小额交易中替代价值过大的贵金属币，兼具商品与货币双重属性。由于西班牙王室垄断贸易，颁布严禁商业条款和贸易禁令，早期可可种植园以印第安人劳动为主；殖民压迫与疾病导致印第安人口崩溃，殖民者转而通过大西洋奴隶贸易输入非洲黑奴。欧洲白人、美洲印第安人、非洲黑人在美洲共同劳作，形成了美洲独特的混合种族文化。17 世纪可可传入欧洲后最初被当作药物，后逐渐在欧洲各国普及，催生了巧克力制作器具生产等相关产业，形成独特的欧洲巧克力消费文化。
     </div>
+
+    <!-- 第(1)问 -->
     <div class="sub-question">
       <div class="sub-q-title">(1) 概括并评述 16—17 世纪西属美洲可可贸易发展的特点。<span class="sub-q-score">(6 分)</span></div>
+      <button class="sub-ana-btn" onclick="toggleSubAna('ea18_1', this)"><span class="btn-txt">📖 查看第(1)问解析</span><span class="arr">▾</span></button>
+      <div class="sub-analysis" id="ea18_1">
+        <div class="sub-analysis-inner">
+          <div class="sub-ana-title">✅ 第(1)问参考答案（6分）</div>
+          <div class="sub-ana-body">
+            <div class="sub-ana-point p1"><strong>特点：</strong>可可贸易从西属美洲扩展到全球，贸易范围不断扩大；可可兼具商品与货币双重属性；贸易由西班牙垄断，后扩展到荷兰、英国等。（3分）</div>
+            <div class="sub-ana-point p2"><strong>评述：</strong>可可贸易的发展反映了16—17世纪全球联系的建立与扩展，是早期经济全球化的重要组成部分；但贸易的繁荣建立在殖民压迫和奴隶劳动的基础上，具有鲜明的时代局限性。（3分）</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- 第(2)问 -->
     <div class="sub-question" style="border-top:none;">
       <div class="sub-q-title">(2) 根据材料并结合所学知识，分析可可贸易的历史影响。<span class="sub-q-score">(8 分)</span></div>
+      <button class="sub-ana-btn" onclick="toggleSubAna('ea18_2', this)"><span class="btn-txt">📖 查看第(2)问解析</span><span class="arr">▾</span></button>
+      <div class="sub-analysis" id="ea18_2">
+        <div class="sub-analysis-inner">
+          <div class="sub-ana-title">✅ 第(2)问参考答案（8分）</div>
+          <div class="sub-ana-body">
+            <div class="sub-ana-point p1">促进了早期全球贸易网络的形成，美洲、欧洲、非洲之间的联系日益紧密，世界市场雏形出现。（2分）</div>
+            <div class="sub-ana-point p2">改变了欧洲人的消费习惯，巧克力文化兴起，催生了新的相关产业（如巧克力制作器具生产）。（2分）</div>
+            <div class="sub-ana-point p3">可可种植园经济的发展加剧了殖民者对印第安人的压迫，并推动了大西洋奴隶贸易的兴盛，给非洲人民带来了深重灾难。（2分）</div>
+            <div class="sub-ana-point p4">促进了美洲社会的种族融合与文化交融，形成了独特的混合种族文化；同时也使美洲的经济结构日益依附于欧洲市场。（2分）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 整体解析按钮 -->
+    <button class="essay-overall-btn" onclick="toggleOverall('ea18_overall', this)" style="margin-top:12px;"><span class="btn-txt">📐 审题思路 & 答题技巧</span><span class="arr">▾</span></button>
+    <div class="essay-overall-panel" id="ea18_overall">
+      <div class="essay-overall-inner">
+        <div class="oa-section">
+          <div class="oa-title green">📐 审题思路</div>
+          <div class="oa-body">
+            第(1)问<strong>"概括并评述"</strong>："概括"是从材料中提炼特点（4-5点），"评述"是对这些特点进行简要评价（如反映殖民压迫、全球联系加强等）。<br>
+            第(2)问<strong>"历史影响"</strong>：应从<strong>全球贸易、欧洲社会、美洲社会、非洲（黑奴）、文化交融</strong>等多角度分析，注意材料与教材知识结合。
+          </div>
+        </div>
+        <div class="oa-section">
+          <div class="oa-title orange">💡 答题技巧</div>
+          <div class="oa-body">
+            ① <strong>"概括并评述"</strong>：先概括特点（是什么），再评述（说明其反映的本质或影响）。<br>
+            ② <strong>"影响"题</strong>：多角度（全球/地区/经济/社会/文化），一分为二（积极/消极）。<br>
+            ③ <strong>殖民类题目</strong>：务必提到殖民压迫、奴隶贸易等负面内容，体现历史批判性。
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
 
   <!-- ========== 第19题 ========== -->
   <div class="essay-card" data-q="19">
@@ -802,6 +944,7 @@
       <span class="q-num">19</span>
       <span>阅读材料，完成下列要求。<span class="sub-q-score">(14 分)</span></span>
     </div>
+
     <div class="essay-material">
       <strong>材料一　</strong>20 世纪 20 年代末至 30 年代，苏联采取了特殊的工业发展战略。为此，国家通过"农业全盘集体化"为工业发展强制积累资金，并大规模引进西方技术和设备。1928—1940 年，苏联工业产值增长了 5.5 倍，其中重工业增长了 9 倍。与此同时，工农产品价格"剪刀差"扩大，农民负担加重，日用品和食品的供应在大部分时间内处于紧张状态。在取得显著工业成就的同时，经济结构失衡的现象也逐渐固化。
       <div class="material-source">——摘编自金冲及《二十世纪中国史纲》</div>
@@ -809,13 +952,64 @@
       <strong>材料二　</strong>1965 年，苏联推行"新经济体制"改革。规定减少国家下达给企业的指令性指标，由原来的几十项减为 9 项；允许企业利用利润中提取部分建立企业基金，用于集体福利和个人奖励；银行利用利率、贷款等经济杠杆调节企业活动。但改革始终强调"指令性指标是主要的和决定性的"，并未触及旧有经济管理体制的实质。
       <div class="material-source">——摘编自吴于廑《世界史·现代史编》</div>
     </div>
+
+    <!-- 第(1)问 -->
     <div class="sub-question">
       <div class="sub-q-title">(1) 根据材料一并结合所学知识，从经济角度简析 20 世纪 20 年代末至 40 年代苏联工业化的影响。<span class="sub-q-score">(6 分)</span></div>
+      <button class="sub-ana-btn" onclick="toggleSubAna('ea19_1', this)"><span class="btn-txt">📖 查看第(1)问解析</span><span class="arr">▾</span></button>
+      <div class="sub-analysis" id="ea19_1">
+        <div class="sub-analysis-inner">
+          <div class="sub-ana-title">✅ 第(1)问参考答案（6分）</div>
+          <div class="sub-ana-body">
+            <div class="sub-ana-point p1"><strong>积极影响：</strong>通过农业集体化为工业强制积累资金，工业产值快速增长（1928—1940年增长5.5倍），重工业尤为突出（增长9倍），为苏联工业化和国防建设奠定了坚实基础。（2分）</div>
+            <div class="sub-ana-point p2"><strong>消极影响：</strong>工农产品"剪刀差"扩大，农民负担沉重，生活水平下降；轻工业和日用品生产长期落后，经济结构严重失衡；农业集体化过程中的强制手段破坏了农村生产力。（4分，答出两点即可）</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- 第(2)问 -->
     <div class="sub-question" style="border-top:none;">
       <div class="sub-q-title">(2) 根据材料二并结合所学知识，概括 1965 年苏联"新经济体制"改革的主要表现，并指出其改革成效有限的核心原因。<span class="sub-q-score">(8 分)</span></div>
+      <button class="sub-ana-btn" onclick="toggleSubAna('ea19_2', this)"><span class="btn-txt">📖 查看第(2)问解析</span><span class="arr">▾</span></button>
+      <div class="sub-analysis" id="ea19_2">
+        <div class="sub-analysis-inner">
+          <div class="sub-ana-title">✅ 第(2)问参考答案（8分）</div>
+          <div class="sub-ana-body">
+            <div style="margin-bottom:8px;"><strong style="color:#1565c0;">改革的主要表现：（4分）</strong></div>
+            <div class="sub-ana-point p1">减少指令性指标，扩大企业自主权（由原来的几十项减为9项）。</div>
+            <div class="sub-ana-point p2">允许企业从利润中提取部分建立企业基金，用于集体福利和个人奖励，调动企业生产积极性。</div>
+            <div class="sub-ana-point p3">利用利率、贷款等经济杠杆调节企业活动，尝试用经济手段代替单纯的行政命令。</div>
+            <div style="margin-top:10px;margin-bottom:8px;"><strong style="color:#1565c0;">改革成效有限的核心原因：（4分）</strong></div>
+            <div class="sub-ana-point p4">改革始终强调"指令性指标是主要的和决定性的"，并未触及计划经济管理体制的实质，只是在原有体制框架内进行局部调整，无法从根本上解决苏联经济体制的深层矛盾。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 整体解析按钮 -->
+    <button class="essay-overall-btn" onclick="toggleOverall('ea19_overall', this)" style="margin-top:12px;"><span class="btn-txt">📐 审题思路 & 答题技巧</span><span class="arr">▾</span></button>
+    <div class="essay-overall-panel" id="ea19_overall">
+      <div class="essay-overall-inner">
+        <div class="oa-section">
+          <div class="oa-title green">📐 审题思路</div>
+          <div class="oa-body">
+            第(1)问：材料一明确提示了<strong>积极（工业成就）和消极（农民负担、经济失衡）两方面</strong>，答题时必须辩证分析，不能只写一面。<br>
+            第(2)问：第一问"概括表现"直接从材料二提炼；第二问"核心原因"要看到改革"未触及实质"这一关键表述。
+          </div>
+        </div>
+        <div class="oa-section">
+          <div class="oa-title orange">💡 答题技巧</div>
+          <div class="oa-body">
+            ① <strong>苏联改革类题目</strong>：掌握主线"赫鲁晓夫→勃列日涅夫→戈尔巴乔夫"，每次改革都是"修补"而非"根本变革"。<br>
+            ② <strong>"核心原因"题</strong>：要抓住本质（体制问题），不能只答表面现象。<br>
+            ③ <strong>辩证分析</strong>：积极+消极，一分为二，这是高中历史核心思维方法。
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
 
   <!-- ========== 第20题 ========== -->
   <div class="essay-card" style="border-bottom:none;" data-q="20">
@@ -823,11 +1017,80 @@
       <span class="q-num">20</span>
       <span>阅读材料，完成下列要求。<span class="sub-q-score">(12 分)</span></span>
     </div>
+
     <div class="essay-material">
       <strong>材料　</strong>20 世纪，世界格局发生三次具有全球意义的变动：一战后凡尔赛—华盛顿体系建立，动摇了欧洲中心地位；二战后美苏两极格局形成，取代了以欧洲为中心的旧秩序；20 世纪 90 年代两极格局瓦解，世界呈现"一超多强"并向多极化发展。
     </div>
+
     <div class="sub-question">
       <div class="sub-q-title">根据材料，结合世界近现代史的知识，围绕<strong>"国际格局的演变"</strong>这一主题，自拟论题，展开论述。（要求：观点明确，史论结合，逻辑清晰，表述成文。）</div>
+    </div>
+
+    <!-- 整体解析按钮（第20题只有一问，直接放整体解析） -->
+    <button class="essay-overall-btn" onclick="toggleOverall('ea20_overall', this)" style="margin-top:8px;"><span class="btn-txt">📖 查看多角度分析 & 范文</span><span class="arr">▾</span></button>
+    <div class="essay-overall-panel" id="ea20_overall">
+      <div class="essay-overall-inner">
+
+        <!-- 多角度分析 -->
+        <div class="oa-section">
+          <div class="oa-title green">📐 多角度分析（可任选一个角度自拟论题）</div>
+          <div class="oa-body">
+            <div class="angle-box">
+              <div class="angle-title">角度一：综合型（推荐）</div>
+              <div class="angle-body">论题：<strong>20世纪国际格局经历了三次具有全球意义的变动，从欧洲中心走向多极化。</strong><br>论述线索：凡尔赛—华盛顿体系（欧洲中心动摇）→ 美苏两极格局（欧洲边缘化）→ 冷战结束后多极化趋势（非西方力量崛起）。</div>
+            </div>
+            <div class="angle-box">
+              <div class="angle-title">角度二：冷战视角</div>
+              <div class="angle-body">论题：<strong>两极格局的形成与瓦解深刻影响了20世纪的世界历史进程。</strong><br>论述线索：雅尔塔体系确立两极格局 → 冷战对峙（北约/华约、古巴导弹危机）→ 苏联解体、两极瓦解。</div>
+            </div>
+            <div class="angle-box">
+              <div class="angle-title">角度三：欧洲地位变化</div>
+              <div class="angle-body">论题：<strong>20世纪欧洲国际地位的衰落是世界格局演变的重要特征。</strong><br>论述线索：19世纪欧洲中心 → 一战削弱 → 二战彻底衰落 → 冷战中被边缘化 → 欧盟成立试图重新发挥影响力。</div>
+            </div>
+            <div class="angle-box">
+              <div class="angle-title">角度四：多极化趋势</div>
+              <div class="angle-body">论题：<strong>冷战后世界多极化趋势深入发展，国际关系的民主化进程不可逆转。</strong><br>论述线索：一超（美国）相对衰落 → 多强（欧盟/日本/俄罗斯/中国/印度）崛起 → 全球南方推动国际关系民主化。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 范文一 -->
+        <div class="oa-section">
+          <div class="oa-title purple">📝 范文一（综合型角度）</div>
+          <div class="essay-sample">
+            <div class="essay-sample-title">论题：20世纪国际格局的三次变动反映了世界力量对比的深刻变化（12分）</div>
+            <div class="essay-thesis">一战后，通过巴黎和会和华盛顿会议确立了凡尔赛—华盛顿体系，这一体系削弱了欧洲传统大国（英、法、德、奥匈）的力量，美国、日本登上国际舞台，欧洲中心地位开始动摇。（3分）</div>
+            <div class="essay-elab">二战后，欧洲普遍衰落，美国成为资本主义世界头号强国，苏联成为唯一能与美国抗衡的政治军事大国。通过雅尔塔会议等，美苏两极格局正式形成，以欧洲为中心的国际旧秩序被彻底取代。（3分）</div>
+            <div class="essay-elab">20世纪80年代末90年代初，东欧剧变、苏联解体，两极格局瓦解。美国成为唯一超级大国，但欧盟、日本、俄罗斯、中国、印度等国家或国家联盟的力量不断壮大，世界正朝着多极化方向发展，"一超多强"的局面将在相当长时期内存在。（4分）</div>
+            <div class="essay-conclusion">综上所述，20世纪国际格局的三次变动本质上是世界力量对比变化的结果，从欧洲中心到美苏两极再到多极化，反映了国际关系民主化的历史趋势。</div>
+          </div>
+        </div>
+
+        <!-- 范文二 -->
+        <div class="oa-section">
+          <div class="oa-title purple">📝 范文二（多极化角度）</div>
+          <div class="essay-sample">
+            <div class="essay-sample-title">论题：冷战结束后，世界多极化趋势深入发展（12分）</div>
+            <div class="essay-thesis">1991年苏联解体，冷战结束，美国成为唯一超级大国。但从20世纪90年代至今，世界并未走向美国主导的单极世界，而是呈现出明显的多极化趋势。（3分）</div>
+            <div class="essay-elab">欧盟成立后一体化进程深入发展，在国际事务中力图发出独立声音；日本长期是世界第二经济大国（后为中国），谋求政治大国地位；俄罗斯继承了苏联的核武库和大国地位，在国际舞台上继续发挥重要作用；中国改革开放以来综合国力迅速提升，国际影响力日益增强；印度等新兴大国也在快速崛起。（6分）</div>
+            <div class="essay-elab">与此同时，广大发展中国家（"全球南方"）整体力量上升，在联合国、G20等国际舞台上积极推动国际关系民主化，成为制约单极霸权、推动多极化的重要力量。（2分）</div>
+            <div class="essay-conclusion">综上所述，冷战结束后，世界多极化趋势深入发展，"一超多强"的局面将在相当长时期内存在，国际关系的民主化进程不可逆转。</div>
+          </div>
+        </div>
+
+        <!-- 答题技巧 -->
+        <div class="oa-section">
+          <div class="oa-title orange">💡 论述题答题技巧</div>
+          <div class="oa-body">
+            ① <strong>论题（观点）</strong>：必须明确，用判断句（如"XX反映了YY""XX推动了YY"），不能只抄材料。<br>
+            ② <strong>阐述</strong>：分层论述，一般3-4层，每层2-3个史实，史论结合。<br>
+            ③ <strong>史实</strong>：准确、具体（时间、事件名称、关键数据），不能泛泛而谈。<br>
+            ④ <strong>"综上所述"</strong>：必须写，用1-2句话升华主题，呼应论题。<br>
+            ⑤ <strong>字数</strong>：一般200-250字左右，不要太少（低于150字难拿高分），也不要太多（超过300字浪费时间）。
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -872,6 +1135,45 @@ function checkAnswer(el) {
   }, 100);
 }
 
+
+
+// ---- 非选择题子问题解析 ----
+function toggleSubAna(id, btn) {
+  var panel = document.getElementById(id);
+  if (!panel) return;
+  if (panel.classList.contains('show')) {
+    panel.classList.remove('show');
+    btn.classList.remove('active');
+    var txt = btn.querySelector('.btn-txt');
+    if (txt) txt.textContent = txt.textContent.replace('收起', '查看');
+  } else {
+    panel.classList.add('show');
+    btn.classList.add('active');
+    var txt = btn.querySelector('.btn-txt');
+    if (txt) txt.textContent = txt.textContent.replace('查看', '收起');
+    setTimeout(function() {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
+function toggleOverall(id, btn) {
+  var panel = document.getElementById(id);
+  if (!panel) return;
+  if (panel.classList.contains('show')) {
+    panel.classList.remove('show');
+    btn.classList.remove('active');
+    var txt = btn.querySelector('.btn-txt');
+    if (txt) txt.textContent = txt.textContent.replace('收起', '查看');
+  } else {
+    panel.classList.add('show');
+    btn.classList.add('active');
+    var txt = btn.querySelector('.btn-txt');
+    if (txt) txt.textContent = txt.textContent.replace('查看', '收起');
+    setTimeout(function() {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
 // ---- 绘制第2题柱状图 ----
 (function drawChart() {
   const canvas = document.getElementById('chartQ2');
@@ -984,6 +1286,7 @@ function checkAnswer(el) {
     c.fill();
   }
 })();
+
 </script>
 
 </body>
