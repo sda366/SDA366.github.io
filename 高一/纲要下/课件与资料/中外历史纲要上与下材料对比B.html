@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中外历史纲要对比研究（四号字体·视觉优化版）</title>
+    <style>
+        /* 全局重置与四号字体设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef3f7;  /* 柔和蓝灰底色，缓解视觉疲劳 */
+            font-family: 'Georgia', 'Times New Roman', '宋体', serif;
+            font-size: 14pt;      /* 四号字标准大小 */
+            line-height: 1.8;
+            color: #1e2a3a;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;   /* 纯白卡片，提高对比度与清晰度 */
+            padding: 50px 60px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            border: 1px solid #dce5ed;
+        }
+
+        /* 标题层级 —— 相对比例保持 */
+        h1 {
+            font-size: 2.2em;      /* 约30pt，相对body的14pt */
+            font-weight: 700;
+            text-align: center;
+            color: #2c3e4f;
+            letter-spacing: 4px;
+            border-bottom: 3px double #b8c9d9;
+            padding-bottom: 18px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.05em;     /* 约14.7pt */
+            color: #5f7287;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            font-style: italic;
+            border-bottom: 1px dashed #dce3ec;
+            padding-bottom: 20px;
+        }
+
+        .toc {
+            background: #f4f8fc;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 45px;
+            border-left: 4px solid #8faec9;
+        }
+
+        .toc h3 {
+            font-size: 1.1em;
+            color: #2c4a66;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 30px;
+            font-size: 1em;        /* 继承14pt */
+        }
+
+        .toc-grid a {
+            color: #3f5e7a;
+            text-decoration: none;
+            border-bottom: 1px dotted #c6d5e3;
+            padding: 2px 0;
+            transition: color 0.2s;
+        }
+
+        .toc-grid a:hover {
+            color: #7d9bb8;
+            border-bottom-color: #7d9bb8;
+        }
+
+        .section {
+            margin-bottom: 55px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e2eaf2;
+        }
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.6em;      /* 约22pt */
+            font-weight: 700;
+            color: #1f3a4f;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .section-sub {
+            font-size: 1em;
+            color: #7a8fa2;
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 16px 0 20px 0;
+        }
+
+        .side {
+            background: #f7fafd;
+            padding: 18px 22px;
+            border-radius: 8px;
+            border-top: 3px solid #9bb7d0;
+        }
+
+        .side h4 {
+            font-size: 1.15em;
+            color: #1e3c57;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .side ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1em;        /* 14pt */
+        }
+
+        .side ul li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .side ul li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #9bb7d0;
+            font-size: 0.85em;
+        }
+
+        .analysis {
+            background: #f2f7fc;
+            padding: 18px 24px;
+            border-radius: 8px;
+            margin-top: 14px;
+            border-left: 4px solid #6f93b0;
+        }
+
+        .analysis h4 {
+            font-size: 1.1em;
+            color: #1e3c57;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .analysis p {
+            font-size: 1em;
+            line-height: 1.9;
+            color: #1f2c3a;
+        }
+
+        .analysis strong {
+            color: #385a78;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.85em;
+            background: #dce6ef;
+            color: #2c4a66;
+            padding: 2px 14px;
+            border-radius: 20px;
+            margin-right: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .extra-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 30px;
+            margin-top: 12px;
+        }
+
+        .extra-item {
+            background: #f7fafd;
+            padding: 16px 20px;
+            border-radius: 8px;
+            border-left: 3px solid #9bb7d0;
+            font-size: 1em;
+        }
+
+        .extra-item strong {
+            color: #1f3a4f;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05em;
+        }
+
+        .extra-item p {
+            font-size: 1em;
+            color: #1e2a3a;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 18px;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            .extra-list {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+
+        .conclusion-box {
+            background: #1f2e3d;
+            color: #e8f0f7;
+            padding: 28px 32px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .conclusion-box h4 {
+            color: #c4d7e8;
+            font-size: 1.15em;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .conclusion-box p {
+            font-size: 1em;
+            line-height: 2;
+            color: #dce6ef;
+        }
+
+        .conclusion-box strong {
+            color: #efd9b0;
+        }
+
+        /* 调整部分细节 */
+        .side ul li strong, .extra-item strong {
+            color: #1d3a52;
+        }
+        .analysis strong {
+            color: #2a5370;
+        }
+        .tag {
+            background: #d5e1ed;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 导航条 -->
+<div style="max-width:1100px;margin:0 auto 20px;background:#fff;padding:14px 24px;border-radius:10px;border:1px solid #dce5ed;box-shadow:0 2px 8px rgba(0,0,0,0.03);text-align:center;font-size:14pt;">
+  <a href="index.html" style="color:#3f5e7a;text-decoration:none;font-weight:700;">← 返回课件与资料</a>
+  <span style="color:#b8c9d9;margin:0 18px;font-size:16pt;">|</span>
+  <a href="中外历史纲上 下对比材料A.html" style="color:#3f5e7a;text-decoration:none;font-weight:700;">查看材料 A：高考提分专版 →</a>
+</div>
+
+<div class="container">
+
+    <h1>📜 中外历史纲要 · 对比研究</h1>
+    <p class="subtitle">—— 从社会学与历史学视角，透视文明演进的异与同</p>
+
+    <!-- 目录 -->
+    <div class="toc">
+        <h3>📑 目 录</h3>
+        <div class="toc-grid">
+            <a href="#s1">一、西周分封制 vs 西欧封君封臣制</a>
+            <a href="#s2">二、东汉庄园（坞堡）vs 西欧庄园</a>
+            <a href="#s3">三、秦朝 vs 亚历山大帝国</a>
+            <a href="#s4">四、郑和下西洋 vs 新航路开辟</a>
+            <a href="#s5">五、戊戌维新 vs 日本明治维新</a>
+            <a href="#s6">六、苏联社会主义探索 vs 中国独立探索社会主义道路</a>
+            <a href="#s7">七、二战后两极格局变化 vs 中国外交政策变化</a>
+            <a href="#s8">八、拓展对比 · 更多中外历史镜鉴</a>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 一、西周分封制 vs 西欧封君封臣制 -->
+    <div class="section" id="s1">
+        <div class="section-title">一、西周分封制 vs 西欧封君封臣制</div>
+        <div class="section-sub">血缘纽带 vs 契约纽带 · 宗法伦理 vs 封建法权</div>
+
+        <div class="comparison-grid">
+            <div class="side">
+                <h4>🏯 西周分封制</h4>
+                <ul>
+                    <li><strong>分封对象：</strong>以血缘亲属为主，“封建亲戚，以藩屏周”[reference:0]</li>
+                    <li><strong>权力结构：</strong>天子—诸侯—卿大夫—士，等级森严，天子居于至高无上的绝对支配地位[reference:1]</li>
+                    <li><strong>维系纽带：</strong>宗法制与血缘伦理，“立子以贵不以长，立嫡以长不以贤”[reference:2]</li>
+                    <li><strong>继承规则：</strong>严格的嫡长子继承制，女性无继承权[reference:3]</li>
+                    <li><strong>经济基础：</strong>王室有份地自养，诸侯对天子有朝见、出兵等义务[reference:4]</li>
+                </ul>
+            </div>
+            <div class="side">
+                <h4>⚔️ 西欧封君封臣制</h4>
+                <ul>
+                    <li><strong>分封对象：</strong>不看重血缘，通过武力、联姻、继承等手段获取土地[reference:5]</li>
+                    <li><strong>权力结构：</strong>“我的封臣的封臣不是我的封臣”——国王权力被层层削弱[reference:6]</li>
+                    <li><strong>维系纽带：</strong>契约关系与宣誓效忠，具有明确的双向权利义务[reference:7]</li>
+                    <li><strong>继承规则：</strong>女性及母系亲属可继承，母系继承权在欧洲极为重要[reference:8]</li>
+                    <li><strong>经济基础：</strong>领主靠农民地租和下级领主贡赋维持[reference:9]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>📌 社会学与历史学分析</h4>
+            <p>
+                <span class="tag">社会学</span> 西周分封制以血缘宗法为纽带，构建了一个纵向贯通的“家国同构”社会——政治秩序即伦理秩序的延伸，社会整合靠的是对祖先的共同尊崇。西欧封君封臣制则以契约和效忠为核心，是一种横向的、个人化的权利义务关系，社会整合靠的是法律化的封建法权。<br><br>
+                <span class="tag">历史学</span> 西周分封制在“天下共主”的框架内实现了广土众民的早期政治整合，为秦汉大一统奠定了文化心理基础；西欧封君封臣制则导致权力碎片化，形成了“封建割据”的政治格局，但也孕育了近代契约精神和法治传统。两种制度的分野，深刻塑造了此后东西方政治发展的不同轨迹——东方走向中央集权，西方走向多元分权[reference:10]。
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 二、东汉庄园（坞堡）vs 西欧庄园 -->
+    <div class="section" id="s2">
+        <div class="section-title">二、东汉庄园（坞堡）vs 西欧庄园</div>
+        <div class="section-sub">豪强割据 vs 封建领权 · 依附关系 vs 农奴制度</div>
+
+        <div class="comparison-grid">
+            <div class="side">
+                <h4>🏛️ 东汉庄园（坞堡）</h4>
+                <ul>
+                    <li><strong>形成时间：</strong>东汉后期（2世纪末3世纪初）[reference:11]</li>
+                    <li><strong>政治背景：</strong>中央集权衰弱，豪强地主势力膨胀[reference:12]</li>
+                    <li><strong>经济特征：</strong>自给自足，农林牧副渔及手工业、商业多业并存[reference:13]</li>
+                    <li><strong>军事特征：</strong>筑坞堡自守，拥有私人武装[reference:14]</li>
+                    <li><strong>社会关系：</strong>聚族而居，贫苦农民及宾客、徒附对庄园主有极强依附性[reference:15]</li>
+                </ul>
+            </div>
+            <div class="side">
+                <h4>🌾 西欧庄园</h4>
+                <ul>
+                    <li><strong>形成时间：</strong>9世纪[reference:16]</li>
+                    <li><strong>政治背景：</strong>封君封臣制度形成，王权衰落[reference:17]</li>
+                    <li><strong>经济特征：</strong>自给自足实体，领主自营地与农民份地并存[reference:18][reference:19]</li>
+                    <li><strong>军事特征：</strong>庄园主为保护财产豢养武士[reference:20]</li>
+                    <li><strong>社会关系：</strong>农奴须无偿为领主耕种自营地，存在严格的人身依附[reference:21]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>📌 社会学与历史学分析</h4>
+            <p>
+                <span class="tag">社会学</span> 东汉庄园是“血缘共同体”与“经济共同体”的叠加——宗族关系与生产关系高度重合，庄园主既是族长又是地主，形成了“家—庄”一体的社会单元。西欧庄园则是“领主—农奴”二元结构，以土地权利和义务为纽带，是一种法权化的社会关系，与庄园外的教会、王权构成多重社会网络。<br><br>
+                <span class="tag">历史学</span> 东汉庄园的坞堡化加速了国家分裂，直接导致三国鼎立局面的出现[reference:22]。西欧庄园则是西欧封建割据的物质基础[reference:23]。但两者的历史走向截然不同：中国庄园最终被隋唐中央集权所瓦解，而西欧庄园则在漫长演化中孕育了城市自治和资本主义萌芽[reference:24]。关键差异在于：中国庄园始终处于大一统政治框架的“离心力”与“向心力”拉锯之中，而西欧庄园是在王权真空地带自发生长出来的独立政治经济单元。
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 三、秦朝 vs 亚历山大帝国 -->
+    <div class="section" id="s3">
+        <div class="section-title">三、秦朝 vs 亚历山大帝国</div>
+        <div class="section-sub">制度帝国 vs 征服帝国 · 延续 vs 断裂</div>
+
+        <div class="comparison-grid">
+            <div class="side">
+                <h4>🐉 秦朝</h4>
+                <ul>
+                    <li><strong>疆域：</strong>约340万平方公里</li>
+                    <li><strong>军队规模：</strong>常备军约60万人[reference:25]</li>
+                    <li><strong>统一方式：</strong>长期兼并战争，历经500余年从邦国到帝国[reference:26]</li>
+                    <li><strong>统治模式：</strong>中央集权官僚制，郡县制度，书同文、车同轨</li>
+                    <li><strong>历史延续：</strong>秦制被汉朝继承，奠定了此后两千年的帝国范式[reference:27]</li>
+                </ul>
+            </div>
+            <div class="side">
+                <h4>🏺 亚历山大帝国</h4>
+                <ul>
+                    <li><strong>疆域：</strong>约550万平方公里[reference:28]</li>
+                    <li><strong>军队规模：</strong>巅峰时期约5—7万人[reference:29][reference:30]</li>
+                    <li><strong>统一方式：</strong>十年东征，以个人军事天才快速征服[reference:31]</li>
+                    <li><strong>统治模式：</strong>继承波斯制度，推广希腊文化（希腊化）[reference:32]</li>
+                    <li><strong>历史延续：</strong>亚历山大死后帝国迅速分裂，再无后继[reference:33]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>📌 社会学与历史学分析</h4>
+            <p>
+                <span class="tag">社会学</span> 秦朝建立的是一个“制度帝国”——通过郡县制、统一文字度量衡、严密的官僚体系，将不同地域的人群整合为一个同质化的政治共同体。亚历山大帝国则是一个“个人帝国”——完全依赖亚历山大的军事天才和人格魅力维系，缺乏制度化的整合机制，一旦核心人物消失，帝国便分崩离析。<br><br>
+                <span class="tag">历史学</span> 两个帝国都以“短命”著称（秦15年，亚历山大帝国仅十几年）[reference:34][reference:35]，但历史命运截然相反：秦朝虽短，其制度遗产却被汉朝全面继承并光大，形成了“秦制—汉承”的文明延续模式[reference:36]；亚历山大帝国则如流星划过，虽有希腊化文化的传播，却未能形成持久的政治统一。这一对比深刻揭示了：<strong>制度的生命力远胜于个人的伟力</strong>——秦始皇“废封建、立郡县”的制度创新，比亚历山大的军事征服更具有历史持久性。
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 四、郑和下西洋 vs 新航路开辟 -->
+    <div class="section" id="s4">
+        <div class="section-title">四、郑和下西洋 vs 新航路开辟</div>
+        <div class="section-sub">朝贡外交 vs 殖民扩张 · 和平互鉴 vs 全球掠夺</div>
+
+        <div class="comparison-grid">
+            <div class="side">
+                <h4>⛵ 郑和下西洋</h4>
+                <ul>
+                    <li><strong>时间：</strong>1405—1433年，七次[reference:37]</li>
+                    <li><strong>目的：</strong>政治目的——宣扬国威，朝贡贸易，和平交往[reference:38]</li>
+                    <li><strong>规模：</strong>船队庞大，组织严密，当时世界最大[reference:39]</li>
+                    <li><strong>范围：</strong>东南亚、南亚、西亚及东非[reference:40]</li>
+                    <li><strong>后果：</strong>增进友谊，促进文化交流，但贡赐贸易违背经济规律，给明政府造成巨大财政负担[reference:41]</li>
+                </ul>
+            </div>
+            <div class="side">
+                <h4>🧭 新航路开辟</h4>
+                <ul>
+                    <li><strong>时间：</strong>1487—1522年（迪亚士至麦哲伦）[reference:42]</li>
+                    <li><strong>目的：</strong>经济目的——开辟商路，寻找黄金，殖民扩张[reference:43]</li>
+                    <li><strong>规模：</strong>多国多船队，哥伦布、达·伽马、麦哲伦等[reference:44]</li>
+                    <li><strong>范围：</strong>全球——欧洲、非洲、美洲、亚洲连为一体[reference:45]</li>
+                    <li><strong>后果：</strong>引发价格革命和商业革命，促进欧洲资本原始积累和资本主义成长[reference:46]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>📌 社会学与历史学分析</h4>
+            <p>
+                <span class="tag">社会学</span> 郑和下西洋是农耕文明“天下观”的海洋实践——以“厚往薄来”的朝贡逻辑处理国际关系，体现的是“中心—边缘”的文明秩序想象。新航路开辟则是海洋文明“扩张观”的全球实践——以殖民、贸易、传教三位一体重构世界秩序，体现的是资本主义的无限增殖逻辑。两种航海活动的深层差异，是<strong>“农耕文明的朝贡体系”与“海洋文明的殖民体系”</strong>两种文明范式的根本对立[reference:47]。<br><br>
+                <span class="tag">历史学</span> 郑和下西洋比新航路开辟早了半个多世纪[reference:48]，在航海技术和规模上遥遥领先[reference:49]，却未能将中国引向海洋扩张的道路。根本原因在于：郑和航海是皇权意志的临时行为，缺乏经济驱动力和社会基础；新航路开辟则是欧洲资本主义萌芽的必然产物，有强大的经济动力和持续的社会投入。这一对比的深刻启示是：<strong>国家的战略方向最终由经济基础决定</strong>——没有资本主义经济的内在驱动，任何伟大的航海壮举都只能是历史的插曲，而非时代的转向[reference:50]。
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 五、戊戌维新 vs 日本明治维新 -->
+    <div class="section" id="s5">
+        <div class="section-title">五、戊戌维新 vs 日本明治维新</div>
+        <div class="section-sub">改良失败 vs 革命成功 · 路径差异与历史宿命</div>
+
+        <div class="comparison-grid">
+            <div class="side">
+                <h4>🇨🇳 戊戌维新（1898）</h4>
+                <ul>
+                    <li><strong>领导力量：</strong>康有为、梁启超等书生型维新派，缺乏政治经验[reference:51]</li>
+                    <li><strong>依靠对象：</strong>光绪皇帝，疏远群众，缺乏社会基础[reference:52]</li>
+                    <li><strong>社会基础：</strong>资本主义因素仅限东南沿海，占全国比重极小[reference:53]</li>
+                    <li><strong>斗争策略：</strong>操之过急，急功冒进[reference:54]</li>
+                    <li><strong>外部态度：</strong>对帝国主义抱有幻想[reference:55]</li>
+                    <li><strong>结局：</strong>百日而败，六君子殉难</li>
+                </ul>
+            </div>
+            <div class="side">
+                <h4>🇯🇵 明治维新（1868）</h4>
+                <ul>
+                    <li><strong>领导力量：</strong>“维新三杰”等倒幕派，斗争经验丰富[reference:56]</li>
+                    <li><strong>依靠对象：</strong>天皇+强藩+下级武士，联合商人、富农[reference:57]</li>
+                    <li><strong>社会基础：</strong>资本主义因素在京畿地区，占全国比重大[reference:58]</li>
+                    <li><strong>斗争策略：</strong>稳扎稳打，步步为营[reference:59]</li>
+                    <li><strong>外部态度：</strong>警惕外来侵略，坚决维护民族独立[reference:60]</li>
+                    <li><strong>结局：</strong>成功确立君主立宪制，走上资本主义道路[reference:61]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>📌 社会学与历史学分析</h4>
+            <p>
+                <span class="tag">社会学</span> 明治维新是一场“由下而上”的社会革命——倒幕派以武力推翻旧政权，再以国家力量推行全面改革，社会各阶层在“富国强兵”的旗帜下实现了广泛动员。戊戌维新则是一场“由上而下”的宫廷改良——维新派试图在不触动既得利益集团的前提下，通过皇帝权威推行制度改革，社会动员严重不足[reference:62]。两种路径的根本差异在于：<strong>日本有“革命”的勇气，中国只有“改良”的幻想</strong>。<br><br>
+                <span class="tag">历史学</span> 两国维新结果迥异的深层原因在于政治结构的差异：中国是高度中央集权的郡县制帝国，皇帝权力虽大但受制于庞大的官僚集团和保守势力[reference:63]；日本是封建割据的幕藩体制，幕府权威衰落，强藩有独立的政治和军事力量[reference:64]。此外，日本维新派大多出身武士阶层，有实战经验和政治手腕；中国维新派则是书斋中成长的知识分子[reference:65]。这一对比的深刻启示是：<strong>任何成功的改革都必须具备强大的社会基础和有力的执行力量</strong>——没有“枪杆子”支撑的“笔杆子”改革，在旧势力的反扑面前不堪一击[reference:66]。
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 六、苏联社会主义探索 vs 中国独立探索社会主义道路 -->
+    <div class="section" id="s6">
+        <div class="section-title">六、苏联社会主义探索 vs 中国独立探索社会主义道路</div>
+        <div class="section-sub">政治至上 vs 实事求是 · 僵化 vs 灵活</div>
+
+        <div class="comparison-grid">
+            <div class="side">
+                <h4>🔴 苏联模式</h4>
+                <ul>
+                    <li><strong>经济体制：</strong>全面国有化，非市场经济模式，政府统一定价[reference:67]</li>
+                    <li><strong>发展重点：</strong>优先发展重工业和军事工业[reference:68]</li>
+                    <li><strong>农业政策：</strong>农业集体化，取代家庭农业[reference:69]</li>
+                    <li><strong>理论依据：</strong>以马克思、恩格斯论述的共产主义第一阶段为指导[reference:70]</li>
+                    <li><strong>对外战略：</strong>具有明显的备战色彩，以国家独立和安全为目标[reference:71]</li>
+                    <li><strong>结局：</strong>1991年解体，模式失败</li>
+                </ul>
+            </div>
+            <div class="side">
+                <h4>🇨🇳 中国特色社会主义</h4>
+                <ul>
+                    <li><strong>经济体制：</strong>社会主义市场经济，公有制为主体、多种所有制共同发展</li>
+                    <li><strong>发展重点：</strong>以经济建设为中心，注重民生改善[reference:72]</li>
+                    <li><strong>农业政策：</strong>家庭联产承包责任制[reference:73]</li>
+                    <li><strong>理论依据：</strong>坚持和发展马克思主义，结合中国实际[reference:74]</li>
+                    <li><strong>对外战略：</strong>和平外交，科学发展之路[reference:75]</li>
+                    <li><strong>结局：</strong>持续发展，取得举世瞩目成就[reference:76]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>📌 社会学与历史学分析</h4>
+            <p>
+                <span class="tag">社会学</span> 苏联模式是一种“政治至上”的社会工程——国家权力全面渗透经济和社会生活，试图用行政命令取代市场规律，用意识形态统一取代多元社会诉求。中国模式则是一种“实事求是”的社会实验——在坚持社会主义基本制度的前提下，灵活运用市场机制，尊重社会发展的客观规律，注重调动各方面的积极性[reference:77]。<br><br>
+                <span class="tag">历史学</span> 苏联的失败在于将马克思主义教条化，脱离本国国情，违背了社会发展规律[reference:78]；中国的成功在于坚持独立自主、根据本国实际选择发展道路[reference:79]。邓小平曾明确指出：“中国的社会主义道路与苏联不完全一样，一开始就有区别，中国建国以来就有自己的特点。”[reference:80]这一对比的深刻启示是：<strong>社会主义没有固定模式，只有与本国国情相结合才能焕发生命力</strong>——任何脱离实际的理论教条，无论多么“正统”，都将被历史所淘汰。
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 七、二战后两极格局变化 vs 中国外交政策变化 -->
+    <div class="section" id="s7">
+        <div class="section-title">七、二战后两极格局变化 vs 中国外交政策变化</div>
+        <div class="section-sub">冷战对峙到多极化 · 独立自主一以贯之</div>
+
+        <div class="comparison-grid">
+            <div class="side">
+                <h4>🌍 两极格局演变</h4>
+                <ul>
+                    <li><strong>形成（1940s—1950s）：</strong>美苏对峙，两大阵营形成[reference:81]</li>
+                    <li><strong>对峙（1950s—1980s）：</strong>冷战全面展开，美苏争霸</li>
+                    <li><strong>分化（1960s—1970s）：</strong>两大阵营内部出现分化</li>
+                    <li><strong>解体（1989—1991）：</strong>东欧剧变、苏联解体，两极格局终结[reference:82]</li>
+                    <li><strong>多极化（1990s至今）：</strong>一超多强，多极化趋势加强[reference:83]</li>
+                </ul>
+            </div>
+            <div class="side">
+                <h4>🇨🇳 中国外交政策</h4>
+                <ul>
+                    <li><strong>“一边倒”（1950s）：</strong>站在社会主义阵营一边[reference:84]</li>
+                    <li><strong>“两个拳头打人”（1960s）：</strong>反美反苏</li>
+                    <li><strong>“一条线”（1970s）：</strong>联合美国遏制苏联</li>
+                    <li><strong>“独立自主不结盟”（1980s—1990s）：</strong>全方位外交</li>
+                    <li><strong>“大国外交”（21世纪）：</strong>构建人类命运共同体</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>📌 社会学与历史学分析</h4>
+            <p>
+                <span class="tag">社会学</span> 两极格局的本质是两种社会制度、两种意识形态的全球性对抗，国际关系被简化为“非此即彼”的二元对立。中国外交政策的调整则体现了现实主义与理想主义的辩证统一——既坚持“独立自主”的核心原则[reference:85]，又根据国际力量对比的变化灵活调整策略，在夹缝中寻求最大生存和发展空间。<br><br>
+                <span class="tag">历史学</span> 75年来，中国的外交环境从“两极对峙”变为“百年未有之大变局”，外交舞台从“被孤立”变为“世界舞台中心”，但不变的是“独立自主”的初心、“反对霸权”的立场、“团结发展中国家”的策略[reference:86]。这一对比的深刻启示是：<strong>一个国家的国际地位最终取决于其综合国力</strong>——从“一边倒”到“全方位外交”的转变，本质上是中国从“生存外交”走向“大国担当”的历史进程[reference:87]。
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 八、拓展对比 -->
+    <div class="section" id="s8">
+        <div class="section-title">八、拓展对比 · 更多中外历史镜鉴</div>
+        <div class="section-sub">跨时空的历史回响——文明演进的多元路径</div>
+
+        <div class="extra-list">
+
+            <div class="extra-item">
+                <strong>🏛️ 秦汉帝国 vs 罗马帝国</strong>
+                <p>两者是欧亚大陆东西两端几乎同时期的超级帝国，人口规模均在5000—6000万[reference:88]。秦朝以郡县制实现中央集权，罗马以行省制和罗马法维系多元治理[reference:89]。秦汉帝国崩溃后迎来“分久必合”的再统一，罗马帝国崩溃后则再未统一。差异根源在于：中华文明有统一的文字和文化认同，罗马帝国缺乏深层的文化整合[reference:90]。</p>
+            </div>
+
+            <div class="extra-item">
+                <strong>📜 隋唐帝国 vs 拜占庭帝国</strong>
+                <p>两者均为7—8世纪世界级强国。隋唐以皇权至上、科举取士、开放的民族政策为特征；拜占庭以政教合一、东正教为国教、军区制为特色[reference:91]。隋唐以世俗官僚体系治国，拜占庭以宗教与法律并重[reference:92]。两种治理模式分别代表了东方“人治+文官”与西方“法治+宗教”的不同传统。</p>
+            </div>
+
+            <div class="extra-item">
+                <strong>⚙️ 洋务运动 vs 俄国1861年改革</strong>
+                <p>两者均为19世纪六七十年代封建国家的自救运动[reference:93]。洋务运动仅局限于“器物”层面的技术引进，坚持“中体西用”[reference:94]；俄国改革则深入到政治民主化和法制化层面[reference:95]。洋务运动失败，俄国改革成功走上资本主义道路[reference:96]。差异源于：俄国地处欧洲，受启蒙思想影响较深；中国封建观念根深蒂固[reference:97]。</p>
+            </div>
+
+            <div class="extra-item">
+                <strong>📢 五四运动 vs 印度非暴力不合作运动</strong>
+                <p>两者均发生于1919年前后，是亚洲民族解放运动高潮的组成部分[reference:98]。五四运动以学生罢课、工人罢工为主要形式，具有鲜明的反帝反封建色彩；印度非暴力不合作运动以和平、合法手段争取自治[reference:99]。两者代表了殖民地半殖民地国家反抗西方压迫的两种路径——中国的“革命”与印度的“不合作”，深刻影响了此后两国的现代化道路。</p>
+            </div>
+
+            <div class="extra-item">
+                <strong>🏗️ 中国改革开放 vs 苏联新经济政策</strong>
+                <p>两者均为社会主义国家引入市场机制的探索[reference:100]。列宁新经济政策（1921年）允许商品经济、多种所有制、吸引外资[reference:101]，但仅持续7—8年即被抛弃[reference:102]；中国改革开放（1978年）同样引入市场机制，却持续深化并取得巨大成功。差异在于：新经济政策是“战术性退却”，改革开放是“战略性转型”——前者是权宜之计，后者是制度创新[reference:103]。</p>
+            </div>
+
+            <div class="extra-item">
+                <strong>📖 轴心时代：春秋战国 vs 古希腊</strong>
+                <p>公元前800—前200年，东西方同时进入“轴心时代”——中国诞生了孔子、老子、墨子等诸子百家，希腊诞生了苏格拉底、柏拉图、亚里士多德等哲学家。两者均实现了人类思想的哲学突破，但路径不同：中国思想聚焦于“人伦秩序”与“社会治乱”，希腊思想聚焦于“宇宙本原”与“理性逻辑”[reference:104]。这一思想分野深刻影响了此后两千多年东西方文明的不同走向。</p>
+            </div>
+
+        </div>
+
+        <div class="conclusion-box">
+            <h4>🎯 总体结论：文明演进的多元逻辑</h4>
+            <p>
+                纵览上述中外历史对比，可以提炼出若干具有普遍意义的规律：<br><br>
+                <strong>第一，制度比个人更持久。</strong>秦朝与亚历山大帝国的对比表明，制度创新远比个人征服更具历史生命力——秦始皇的制度遗产延续两千年，亚历山大帝国则随着英雄的逝去而烟消云散。<br><br>
+                <strong>第二，经济基础决定战略选择。</strong>郑和下西洋与新航路开辟的对比表明，没有经济动力的驱动，任何伟大的航海壮举都只能是历史的插曲——海洋时代的开启不是靠“宣威”，而是靠“逐利”。<br><br>
+                <strong>第三，社会动员决定改革成败。</strong>戊戌维新与明治维新的对比表明，没有广泛社会基础的改革，无论方案多么完美都难以成功——“笔杆子”必须要有“枪杆子”支撑。<br><br>
+                <strong>第四，实事求是是社会主义的生命线。</strong>苏联模式与中国特色社会主义的对比表明，任何脱离国情、教条化的社会主义实践都难逃失败的命运——只有与本国实际相结合的社会主义才能焕发生命力。<br><br>
+                <strong>第五，独立自主是大国外交的基石。</strong>中国外交政策的演变表明，在国际格局的剧烈变动中，唯有坚持独立自主的原则，才能在风云变幻中立于不败之地。<br><br>
+                历史从不提供简单的答案，但它提供深刻的启示。东西方文明的每一次相遇与分野，都在提醒我们：<strong>文明没有高低之分，只有路径之别；历史没有终点，只有不断的出发。</strong>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 底部导航 -->
+<div style="max-width:1100px;margin:20px auto;text-align:center;font-size:14pt;">
+  <a href="index.html" style="display:inline-block;color:#3f5e7a;text-decoration:none;font-weight:700;background:#fff;padding:10px 28px;border-radius:8px;border:1px solid #dce5ed;box-shadow:0 2px 6px rgba(0,0,0,0.04);">← 返回课件与资料</a>
+  <a href="中外历史纲上 下对比材料A.html" style="display:inline-block;color:#3f5e7a;text-decoration:none;font-weight:700;background:#fff;padding:10px 28px;border-radius:8px;border:1px solid #dce5ed;box-shadow:0 2px 6px rgba(0,0,0,0.04);margin-left:16px;">查看材料 A：高考提分专版 →</a>
+</div>
+
+</body>
+</html>
