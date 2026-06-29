@@ -338,6 +338,36 @@
             color: #3a4f6e;
             margin-right: 6px;
         }
+        /* 带图片题目的左右布局 */
+        .q-body-with-image {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .q-body-with-image .q-image-col {
+            flex: 0 0 42%;
+            max-width: 42%;
+        }
+        .q-body-with-image .q-image-col img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            display: block;
+        }
+        .q-body-with-image .q-options-col {
+            flex: 1;
+            min-width: 0;
+        }
+        @media (max-width: 640px) {
+            .q-body-with-image {
+                flex-direction: column;
+                gap: 14px;
+            }
+            .q-body-with-image .q-image-col {
+                flex: none;
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -605,7 +635,9 @@
             ]
         }, {
             id: 15,
-            text: '图1是美国于1942年1月发布的漫画《退路》（见下图）：一条名为"美国工业生产线"的传送带正在飞速运转。在传送带上，一名形似希特勒的德国纳粹分子正在拼命奔跑，试图跟上传送带的速度，但明显力不从心。<br><br><img src="img-q15-cartoon.jpg" alt="图1 漫画《退路》" style="max-width:100%; border-radius:8px; margin:8px 0; display:block;">该漫画揭示出',
+            text: '图1是美国于1942年1月发布的漫画《退路》（见下图）：一条名为"美国工业生产线"的传送带正在飞速运转。在传送带上，一名形似希特勒的德国纳粹分子正在拼命奔跑，试图跟上传送带的速度，但明显力不从心。该漫画揭示出',
+            image: 'img-q15-cartoon.jpg',
+            imageAlt: '图1 漫画《退路》',
             options: [
                 '经济危机后美国经济的复苏',
                 '美德军备竞赛美国占据优势',
@@ -813,7 +845,17 @@
                 const correctIdx = q.answer;
                 html += `<div class="question-block" data-qid="${q.id}">`;
                 html += `<div class="q-header"><span class="q-label">${q.id}</span> <span>${q.text}</span></div>`;
-                html += `<div class="options">`;
+
+                if (q.image) {
+                    // 图片置左、选项置右的两栏布局
+                    html += `<div class="q-body-with-image">`;
+                    html += `<div class="q-image-col"><img src="${q.image}" alt="${q.imageAlt || ''}"></div>`;
+                    html += `<div class="q-options-col">`;
+                    html += `<div class="options">`;
+                } else {
+                    html += `<div class="options">`;
+                }
+
                 q.options.forEach((opt, oi) => {
                     const isCorrect = (oi === correctIdx);
                     html += `<div class="option-item" data-optidx="${oi}" data-correct="${isCorrect}" onclick="selectOption(this, ${q.id}, ${oi})">`;
@@ -821,7 +863,14 @@
                     html += `<span class="opt-text">${opt}</span>`;
                     html += `</div>`;
                 });
-                html += `</div>`;
+
+                if (q.image) {
+                    html += `</div>`; // options
+                    html += `</div>`; // q-options-col
+                    html += `</div>`; // q-body-with-image
+                } else {
+                    html += `</div>`; // options
+                }
 
                 // 解析区域
                 html += `<div class="toggle-answer" onclick="toggleAnswer(this, ${q.id})">`;
