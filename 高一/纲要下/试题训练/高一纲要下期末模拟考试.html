@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高一纲要下期末模拟考试</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #f5f7fa;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 30px 20px;
+            color: #1e2a3a;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+            padding: 40px 45px;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1px;
+            color: #0b1e33;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 16px;
+            margin-bottom: 28px;
+        }
+        .exam-meta {
+            background: #f0f4fe;
+            border-radius: 12px;
+            padding: 14px 22px;
+            margin-bottom: 30px;
+            font-size: 15px;
+            color: #1e3a6b;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .exam-meta span {
+            font-weight: 500;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 34px 0 16px 0;
+            color: #0b1e33;
+            padding-left: 4px;
+            border-left: 5px solid #1a73e8;
+            padding-left: 14px;
+        }
+        .question-block {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 20px 24px 18px 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e9edf4;
+            transition: border 0.2s;
+        }
+        .question-block:hover {
+            border-color: #cbd5e1;
+        }
+        .q-header {
+            font-weight: 600;
+            font-size: 17px;
+            color: #0b1e33;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .q-header .q-label {
+            background: #1a73e8;
+            color: #fff;
+            border-radius: 20px;
+            padding: 0 12px;
+            font-size: 13px;
+            line-height: 26px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
+        }
+        .q-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #1e2a3a;
+            margin-bottom: 14px;
+            padding: 0 2px;
+        }
+        .q-text .highlight {
+            background: #fef3c7;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 8px 0 10px 0;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: #f8faff;
+            border: 1.5px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-size: 15px;
+            line-height: 1.5;
+            user-select: none;
+        }
+        .option-item:hover {
+            background: #eef3fc;
+            border-color: #b3c9f0;
+        }
+        .option-item .opt-label {
+            font-weight: 700;
+            color: #1a3a6b;
+            min-width: 26px;
+            flex-shrink: 0;
+        }
+        .option-item .opt-text {
+            color: #1e2a3a;
+        }
+        .option-item.correct {
+            background: #dcfce7;
+            border-color: #22a65e;
+            box-shadow: 0 0 0 2px rgba(34, 166, 94, 0.15);
+        }
+        .option-item.correct .opt-label {
+            color: #0f7b3a;
+        }
+        .option-item.wrong {
+            background: #fee9e7;
+            border-color: #d94a4a;
+            box-shadow: 0 0 0 2px rgba(217, 74, 74, 0.12);
+        }
+        .option-item.wrong .opt-label {
+            color: #b13a3a;
+        }
+        .option-item.disabled {
+            cursor: default;
+            opacity: 0.9;
+        }
+        .option-item.disabled:hover {
+            background: inherit;
+            border-color: inherit;
+        }
+        .option-item.correct.disabled:hover {
+            background: #dcfce7;
+            border-color: #22a65e;
+        }
+        .option-item.wrong.disabled:hover {
+            background: #fee9e7;
+            border-color: #d94a4a;
+        }
+        .toggle-answer {
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a73e8;
+            cursor: pointer;
+            padding: 6px 16px 6px 12px;
+            border-radius: 30px;
+            background: #f0f5ff;
+            border: none;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .toggle-answer:hover {
+            background: #e0ebfc;
+        }
+        .toggle-answer .arrow {
+            transition: transform 0.25s ease;
+            display: inline-block;
+        }
+        .toggle-answer .arrow.open {
+            transform: rotate(90deg);
+        }
+        .answer-box {
+            margin-top: 6px;
+            padding: 16px 20px;
+            background: #f8faff;
+            border-radius: 12px;
+            border-left: 4px solid #1a73e8;
+            display: none;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1e2a3a;
+        }
+        .answer-box.open {
+            display: block;
+        }
+        .answer-box .know-point {
+            font-weight: 600;
+            color: #0b2b5e;
+            margin-bottom: 6px;
+        }
+        .answer-box .know-point span {
+            background: #dce6f5;
+            padding: 0 10px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a3a6b;
+        }
+        .answer-box .reason {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #dce3ed;
+        }
+        .answer-box .reason .correct-reason {
+            color: #0f7b3a;
+            font-weight: 500;
+        }
+        .answer-box .reason .wrong-reason {
+            color: #b13a3a;
+            font-weight: 500;
+        }
+        .answer-box .reason .wrong-detail {
+            margin-top: 4px;
+            padding-left: 12px;
+            color: #4a5568;
+            font-size: 14px;
+        }
+        .answer-box .reason .wrong-detail strong {
+            color: #1e2a3a;
+        }
+        .material-q {
+            background: #fafcff;
+        }
+        .material-q .q-text {
+            background: #f4f8fe;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 3px solid #4a7fc1;
+        }
+        .material-q .sub-q {
+            margin-top: 14px;
+            padding-left: 8px;
+            font-weight: 500;
+            color: #0b1e33;
+        }
+        .material-q .sub-q-text {
+            margin: 4px 0 8px 12px;
+            font-weight: 400;
+            color: #1e2a3a;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .footnote {
+            text-align: center;
+            font-size: 13px;
+            color: #7a8ba3;
+            margin-top: 32px;
+            padding-top: 18px;
+            border-top: 1px solid #e2e8f0;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 18px 14px;
+            }
+            .question-block {
+                padding: 16px 14px;
+            }
+            .option-item {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            .exam-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+        }
+        /* 材料题解析中的小标题 */
+        .material-answer .sub-ans {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #0b2b5e;
+        }
+        .material-answer .sub-ans-detail {
+            margin-left: 10px;
+            margin-top: 4px;
+            color: #2d3f5e;
+        }
+        .material-answer .sub-ans-detail ul {
+            padding-left: 22px;
+            margin: 6px 0;
+        }
+        .material-answer .sub-ans-detail li {
+            margin-bottom: 4px;
+        }
+        .badge {
+            display: inline-block;
+            background: #e9edf4;
+            border-radius: 12px;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #3a4f6e;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <h1>📘 高一纲要下期末模拟考试</h1>
+        <div class="exam-meta">
+            <span>📅 调研时间：75分钟</span>
+            <span>📝 满分：100分</span>
+            <span>📌 共23题 · 选择题20题 · 非选择题3题</span>
+        </div>
+
+        <!-- 选择题区域 -->
+        <div class="section-title">一、选择题（共20题，每题3分，共60分）</div>
+        <div id="choice-list"></div>
+
+        <!-- 非选择题区域 -->
+        <div class="section-title" style="margin-top:48px;">二、非选择题（共3题，共40分）</div>
+        <div id="material-list"></div>
+
+        <div class="footnote">— 本试卷仅供复习参考 · 点击选项查看正误与解析 —</div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 数据
+        // ============================================================
+        const choices = [{
+            id: 1,
+            text: '大流士一世统治时期，将全国划分为20个行省，确立各行省贡献额度；同时设立5大军区，实行军政分离；并统一了币制和度量衡。这些举措',
+            options: [
+                '推动了古代希腊民主思想的传播',
+                '实现了地中海世界长期稳定',
+                '促进了波斯帝国治理体系的完善',
+                '扩展了阿拉伯帝国疆域范围'
+            ],
+            answer: 2, // 0-based index
+            knowledge: '波斯帝国的统治与治理',
+            correctReason: '大流士一世的行政、军事、币制改革系统性地完善了波斯帝国的治理体系，加强了中央集权。',
+            wrongReasons: [
+                '希腊民主思想主要在希腊城邦传播，与波斯帝国改革无关。',
+                '地中海世界长期稳定与波斯帝国无关，且波斯帝国后期内部矛盾重重。',
+                '阿拉伯帝国在7世纪后才兴起，与大流士一世时期无关。'
+            ]
+        }, {
+            id: 2,
+            text: '公元8—9世纪，拜占庭帝国出现一种独特的皇帝婚配现象——新娘秀。这种方式打破了皇后出自上层贵族的传统，从百姓中挑选皇后。但随着军事贵族势力逐渐强大，皇室转而与国内大贵族及外族王室进行政治联姻。这一变化折射出拜占庭帝国',
+            options: [
+                '君主权威维系策略的调整',
+                '贵族阶层垄断政治权力',
+                '广泛推行"特辖领地制"',
+                '消除了地方割据的基础'
+            ],
+            answer: 0,
+            knowledge: '拜占庭帝国的政治与贵族势力',
+            correctReason: '从选平民皇后到与贵族联姻，是君主根据政治形势调整权威维系策略的体现，以应对军事贵族势力的崛起。',
+            wrongReasons: [
+                '材料中君主仍掌握联姻主动权，并非贵族垄断权力。',
+                '"特辖领地制"是伊凡四世在俄国推行的政策，与拜占庭无关。',
+                '地方割据基础在拜占庭帝国并未完全消除，且材料未涉及。'
+            ]
+        }, {
+            id: 3,
+            text: '印加帝国时期，人们通过在山地大规模修建梯田，扩大玉米、土豆等作物种植范围，且高处的梯形台地也常被用作观测天象、举行玉米崇拜仪式的场所。这表明印加帝国',
+            options: [
+                '精耕细作技术推动农业的发展',
+                '神权政治主导社会生产活动',
+                '山地开发兼具经济与文化功能',
+                '解决了日益突出的人地矛盾'
+            ],
+            answer: 2,
+            knowledge: '印加帝国的经济与文化',
+            correctReason: '梯田既扩大种植（经济功能），又用于天象观测和宗教仪式（文化功能），体现了山地开发的综合性。',
+            wrongReasons: [
+                '材料未强调"精耕细作"技术，且印加农业以集体劳动为主。',
+                '材料仅提到梯田用于仪式，不能说明神权主导全部生产活动。',
+                '印加帝国并未完全解决人地矛盾，材料也未涉及。'
+            ]
+        }, {
+            id: 4,
+            text: '1331年，英国两位地方领主因庄园租税纠纷，根据王国法律与《大宪章》原则本应诉于王室法庭，却遭当地主教越权干预，二人遂向国王请愿，恳求"依法救济"。这表明当时英国',
+            options: [
+                '封君封臣制度彻底解体',
+                '司法领域内多元权力竞争',
+                '庄园经济走向全面衰落',
+                '宗教伦理成为判决的依据'
+            ],
+            answer: 1,
+            knowledge: '中古英国的王权与教会权力',
+            correctReason: '领主纠纷本应诉王室法庭，却遭主教干预，体现了司法权在王权与教会之间的竞争。',
+            wrongReasons: [
+                '封君封臣制度在14世纪英国仍存在，并未彻底解体。',
+                '庄园经济在14世纪仍占主导，材料未体现衰落。',
+                '材料中主教越权干预，并非以宗教伦理作为判决依据。'
+            ]
+        }, {
+            id: 5,
+            text: '某支船队7月8日从里斯本出发，绕过好望角北航到达东非城邦马林迪，在阿拉伯领航员艾哈迈德·伊本·马德吉德的帮助下，于第二年5月底驶入卡里库特港。这次航行',
+            options: [
+                '证明了地圆学说的正确性',
+                '完成了人类史上首次环球航行',
+                '使欧洲人发现美洲新大陆',
+                '开辟了欧洲通往印度的新航路'
+            ],
+            answer: 3,
+            knowledge: '新航路开辟（达·伽马）',
+            correctReason: '达·伽马船队从里斯本出发，绕过好望角到达印度卡里库特，开辟了欧洲通往印度的新航路。',
+            wrongReasons: [
+                '地圆学说由麦哲伦船队环球航行证明。',
+                '首次环球航行是麦哲伦船队（1519-1522年）。',
+                '发现美洲新大陆的是哥伦布（1492年）。'
+            ]
+        }, {
+            id: 6,
+            text: '有学者指出："既然那场革命……所推翻的不仅仅是中世纪的而且还有古代的权威——既然它不仅终止了经院哲学，而且也摧毁了亚里士多德的物理学——它就像得基督教兴起以来的一切相形见绌。"该学者意在强调"那场革命"',
+            options: [
+                '催生近代人文主义思想',
+                '引导人们开始关注现实',
+                '重塑人类对世界的认知',
+                '直接引发资产阶级革命'
+            ],
+            answer: 2,
+            knowledge: '近代科学革命',
+            correctReason: '材料指科学革命，推翻旧权威和旧物理学，重塑人类对自然和世界的认知。',
+            wrongReasons: [
+                '人文主义思想在文艺复兴时期已出现，早于科学革命。',
+                '关注现实是文艺复兴的特点，并非科学革命的核心。',
+                '科学革命为资产阶级革命提供了思想基础，但并非直接引发。'
+            ]
+        }, {
+            id: 7,
+            text: '1764年，英国贵族高尔伯爵组建公司，亲自开发地产上的煤矿与铁矿。后来，其继承人逐渐退出直接经营，转为通过持有股份获取收益。这一现象说明英国',
+            options: [
+                '贵族阶层长期主导工业化进程',
+                '手工工场技术日趋专门化',
+                '股份制企业成为主要经营形式',
+                '传统阶层具有经济适应性'
+            ],
+            answer: 3,
+            knowledge: '英国工业革命时期的社会阶层变化',
+            correctReason: '贵族从直接经营转向股份持有，说明传统阶层适应资本主义经济发展方式。',
+            wrongReasons: [
+                '贵族并未长期主导工业化进程，工业资产阶级逐渐崛起。',
+                '材料未涉及手工工场技术。',
+                '股份制企业在19世纪后才成为主要形式，且材料仅为一个案例。'
+            ]
+        }, {
+            id: 8,
+            text: '1871年《德意志帝国宪法》规定，外交、军事、宣战和等国家主权归中央，各邦保留司法、财政、教育等行政权，可以自行征税，已伐利亚和荷属东非还拥有自己的邮政系统。这反映了德意志帝国',
+            options: [
+                '存在中央与地方的权力斗争',
+                '分裂割据局面没有消除',
+                '封建君主专制色彩十分浓厚',
+                '实行"三权分立"原则'
+            ],
+            answer: 0,
+            knowledge: '德意志帝国的政治体制',
+            correctReason: '宪法规定了中央与地方的分权，各邦保留部分行政权，这必然带来中央与地方之间的权力斗争。',
+            wrongReasons: [
+                '1871年宪法实现了德意志统一，分裂割据局面基本消除。',
+                '德意志帝国虽有君主，但存在宪法和议会，并非纯粹的封建君主专制。',
+                '德意志帝国并未实行三权分立，权力集中于皇帝和宰相。'
+            ]
+        }, {
+            id: 9,
+            text: '巴黎公社成立后，建立了执行、军事、司法、粮食、财政、对外联络等10个委员会，公社成为统一行使立法、行政权的最高权力机构，各种法令都由公社或根据公社委托制定，经公社代表或某一委员签署后公布。这一做法',
+            options: [
+                '借鉴了十月革命的实践经验',
+                '是无产阶级政权建设的尝试',
+                '照搬了资产阶级代议制模式',
+                '推动工人阶级登上政治舞台'
+            ],
+            answer: 1,
+            knowledge: '巴黎公社的政治意义',
+            correctReason: '巴黎公社建立立法行政合一的委员会，是无产阶级政权建设的首次尝试。',
+            wrongReasons: [
+                '十月革命发生在1917年，晚于巴黎公社（1871年）。',
+                '巴黎公社打破资产阶级代议制，实行直接民主，并非照搬。',
+                '工人阶级在1848年革命中已登上政治舞台。'
+            ]
+        }, {
+            id: 10,
+            text: '表1列举了第二次工业革命的部分成就。据此可知',
+            options: [
+                '科学技术与生产紧密结合',
+                '英国和法国的科技领先世界',
+                '近代科学理论的重大突破',
+                '各国工业革命进程各具特色'
+            ],
+            answer: 0,
+            knowledge: '第二次工业革命的特点',
+            correctReason: '表格显示理论突破后迅速投产（如电磁波理论→无线电通信），体现科技与生产紧密结合。',
+            wrongReasons: [
+                '表格中德国、美国贡献突出，不能说明英法领先世界。',
+                '表格侧重技术与应用，而非单纯科学理论突破。',
+                '表格未体现各国进程差异，而是强调科技转化。'
+            ]
+        }, {
+            id: 11,
+            text: '史学界对海地革命的研究历经三个阶段：早期"种族叙事"强调黑白混血儿和黑人精英的领导作用；随后的"阶级叙事"重视底层奴隶贡献；近年"大西洋转向"则重视革命中的"大西洋因素"。这反映了',
+            options: [
+                '全球史范式已成为史学研究路径',
+                '历史解释多元决定历史真相多维',
+                '历史研究完全摆脱传统观念束缚',
+                '研究视角拓展推动历史认识发展'
+            ],
+            answer: 3,
+            knowledge: '史学理论与研究方法',
+            correctReason: '对海地革命的研究从种族、阶级到大西洋视角，说明视角拓展推动历史认识深化。',
+            wrongReasons: [
+                '材料未强调"全球史范式"，而是具体研究视角的演变。',
+                '历史解释多元不代表历史真相多维，认识是逐步深化的。',
+                '"完全摆脱"表述过于绝对，不符合实际。'
+            ]
+        }, {
+            id: 12,
+            text: '法国为了报普法战争之仇，在巴黎和会时使出浑身解数打击德国，要求德国支付巨额赔款。当1924年法国人力图改善法德关系时，凡尔赛体系已经像一把"尖刀"刺在每个德国人心头。这反映了',
+            options: [
+                '法德矛盾是二战爆发根本原因',
+                '凡尔赛体系埋下新的冲突隐患',
+                '德国经济因赔款迅速走向崩溃',
+                '法国彻底放弃遏制德国的政策'
+            ],
+            answer: 1,
+            knowledge: '凡尔赛体系的影响',
+            correctReason: '凡尔赛体系严厉制裁德国，埋下新的国际冲突隐患，为二战爆发埋下伏笔。',
+            wrongReasons: [
+                '二战爆发的根本原因是帝国主义政治经济发展不平衡。',
+                '德国经济在20世纪20年代曾短暂恢复（道威斯计划）。',
+                '法国并未彻底放弃遏制德国，只是策略调整。'
+            ]
+        }, {
+            id: 13,
+            text: '苏联小说《钢铁是怎样炼成的》中，主人公保尔·柯察金对社会上"开店做买卖"的现象深感不解，但当他看到原来经济萧条、民生凋敝的景象迅速改变，国民经济稳步复苏后，终于理解了。据此可知',
+            options: [
+                '集体农庄运动推动经济繁荣',
+                '战时共产主义政策普遍认同',
+                '新经济政策实施的效果明显',
+                '斯大林模式引发社会群体质疑'
+            ],
+            answer: 2,
+            knowledge: '苏俄新经济政策',
+            correctReason: '"开店做买卖"是新经济政策允许私营商业的表现，国民经济稳步复苏说明其效果明显。',
+            wrongReasons: [
+                '集体农庄运动是斯大林时期政策，与新经济政策不同。',
+                '战时共产主义政策遭到农民反对，并非普遍认同。',
+                '材料中保尔最终理解，说明社会群体并未普遍质疑斯大林模式。'
+            ]
+        }, {
+            id: 14,
+            text: '1930年3月12日，甘地率领70多名追随者从阿姆达巴德出发，步行24天，行程几百公里，到丹迪海边自取海水制盐，一路上宣传动员群众，以争取废除食盐专卖和取消盐税。与此相关的历史事件是',
+            options: [
+                '尼加拉瓜抗美斗争',
+                '非暴力不合作运动',
+                '卡德纳斯民主改革',
+                '华夫脱党护宪运动'
+            ],
+            answer: 1,
+            knowledge: '印度非暴力不合作运动',
+            correctReason: '甘地"食盐进军"是印度非暴力不合作运动的典型事件。',
+            wrongReasons: [
+                '尼加拉瓜抗美斗争由桑地诺领导，与甘地无关。',
+                '卡德纳斯改革在墨西哥，与印度无关。',
+                '华夫脱党护宪运动在埃及，与印度无关。'
+            ]
+        }, {
+            id: 15,
+            text: '图1是美国于1942年1月发布的漫画《退路》：一条名为"美国工业生产线"的传送带正在飞速运转。在传送带上，一名形似希特勒的德国纳粹分子正在拼命奔跑，试图跟上传送带的速度，但明显力不从心。该漫画揭示出',
+            options: [
+                '经济危机后美国经济的复苏',
+                '美德军备竞赛美国占据优势',
+                '绥靖政策助长德国侵略野心',
+                '工业生产优势影响战争结局'
+            ],
+            answer: 3,
+            knowledge: '二战中美国工业的作用',
+            correctReason: '漫画强调美国工业生产线强大，暗示工业优势影响二战结局。',
+            wrongReasons: [
+                '1942年美国已摆脱经济危机，但漫画主旨是工业与战争。',
+                '材料未涉及军备竞赛，而是强调工业生产能力。',
+                '绥靖政策在1938年慕尼黑会议时期，与1942年不符。'
+            ]
+        }, {
+            id: 16,
+            text: '1954年阿尔及利亚民族解放阵线成立后，既依托山区开展游击战，避免与法国殖民军正面抗衡，又在城市组织工人罢工，学生罢课，同时积极借助联合国平台开展外交斡旋。据此可知，阿尔及利亚的民族解放运动',
+            options: [
+                '实现了各阶层民众的联合',
+                '斗争方式呈现多元特征',
+                '彻底摆脱了法国殖民统治',
+                '得到国际社会普遍支持'
+            ],
+            answer: 1,
+            knowledge: '阿尔及利亚民族解放运动',
+            correctReason: '阿尔及利亚斗争包括游击战、城市罢工和联合国外交，方式多元。',
+            wrongReasons: [
+                '材料未体现"各阶层民众的联合"，仅提到工人和学生。',
+                '阿尔及利亚在1962年才独立，1954年尚未彻底摆脱殖民统治。',
+                '"普遍支持"表述过于绝对，材料仅提到借助联合国平台。'
+            ]
+        }, {
+            id: 17,
+            text: '1957年赫鲁晓夫主动邀请美国担任代表团访苏参赞，并表达友好态度；1958年首届美苏田径对抗赛成功举办，促使美国进一步放松对苏联公民入境的限制。这些现象说明',
+            options: [
+                '体育竞赛是美苏外交的渠道',
+                '美国积极谋求两国关系缓和',
+                '美苏关系转向全面合作状态',
+                '苏联放弃与美国争霸的战略'
+            ],
+            answer: 0,
+            knowledge: '美苏冷战中的文化交流',
+            correctReason: '美苏通过田径对抗赛等体育交流，成为缓和关系的渠道。',
+            wrongReasons: [
+                '材料中苏联主动邀请，并非美国积极谋求缓和。',
+                '美苏在冷战期间始终处于竞争状态，未转向全面合作。',
+                '苏联并未放弃与美国争霸的战略。'
+            ]
+        }, {
+            id: 18,
+            text: '有学者指出，二战后美国推行雇员持股计划，推动股权分散、壮大中间阶层，但该制度始终保障企业主的优势地位，仅占人口1%的家庭持有全国63%的股份。这一现象本质上说明美国',
+            options: [
+                '社会结构出现了新变化',
+                '资本集中的趋势并未改变',
+                '建成典型的"福利国家"',
+                '民众完全掌握企业经营权'
+            ],
+            answer: 1,
+            knowledge: '二战后美国的经济与社会',
+            correctReason: '雇员持股但股权高度集中于1%家庭，说明资本集中的本质未变。',
+            wrongReasons: [
+                '社会结构变化是表象，本质是资本集中。',
+                '美国并未建成典型的"福利国家"，且与材料无关。',
+                '民众未完全掌握企业经营权，企业仍由大股东控制。'
+            ]
+        }, {
+            id: 19,
+            text: '20世纪六七十年代，经济学家奥塔·锡克提出：国民经济中的宏观经济平衡依靠政府制定约束性分配计划实现，微观经济运行则依托市场价格机制调节。这一观点',
+            options: [
+                '主张完全摒弃计划经济体制',
+                '照搬西方自由放任经济模式',
+                '倡导计划与市场手段相结合',
+                '否定国家宏观调控的必要性'
+            ],
+            answer: 2,
+            knowledge: '经济体制的理论探索',
+            correctReason: '主张宏观计划与微观市场结合，即计划与市场手段相配合。',
+            wrongReasons: [
+                '观点保留了宏观计划，并非完全摒弃。',
+                '观点强调政府计划，与自由放任模式不同。',
+                '观点肯定了国家宏观调控的必要性。'
+            ]
+        }, {
+            id: 20,
+            text: '2022年1月，由东盟发起，中国等15个亚太国家共同签署的《区域全面经济伙伴关系协定》正式生效。这不仅加快东盟内部商品流通、吸引国际资本入驻，还推动东南亚产品远销全球。这反映出东盟的发展',
+            options: [
+                '开启了经济区域集团化的进程',
+                '主导了世界经济发展的新格局',
+                '彻底打破国际贸易壁垒与限制',
+                '借助区域合作融入经济全球化'
+            ],
+            answer: 3,
+            knowledge: '经济区域集团化与全球化',
+            correctReason: 'RCEP促进东盟内部及国际经贸，体现区域合作助推经济全球化。',
+            wrongReasons: [
+                '经济区域集团化在二战后已开启（如欧共体）。',
+                '东盟主导世界格局的表述不准确。',
+                '"彻底打破"过于绝对，贸易壁垒仍然存在。'
+            ]
+        }];
+
+        // ============================================================
+        // 材料题数据
+        // ============================================================
+        const materials = [{
+            id: 21,
+            score: 13,
+            title: '阅读材料，完成下列要求。',
+            material: `<p><strong>材料一</strong> 图2 古代主要文明示意图（略）</p>
+                    <p><strong>材料二</strong> 从古代埃及到西亚地区需要经过西奈半岛和阿拉伯半岛北部的沙漠地带；西亚到印度之间，则隔着广阔的伊朗高原；从印度到中国，面临着喜马拉雅山、昆仑山等造成的阻隔，双方之间的来往非常不便。古代希腊和西亚、埃及的交往，虽然有海上交通提供的便利，但也不是那么经常。</p>
+                    <p>——摘编自晏绍祥、赵轶欧《如何理解古代世界文明的多元与交流》</p>
+                    <p><strong>材料三</strong> 公元前8世纪左右，整个地中海地区形成了一个超越各族群组织之上的文明交流共同体——地中海共同体，其大致范围包括整个希腊，以及埃及为代表的北非地区，以及地中海沿线各个城市等。这一时期商贸活动的主要参与者是希腊人、腓尼基人、埃及人等。希腊人在地中海和黑海沿岸建立了数百个移民定居点。在移民的过程中，商贸活动一直是地中海世界文明交流的主要形式和载体。不过，此时的共同体仍以局部交流为主，各文明的农业基础与独立特性并未消失，整体统一性尚处于萌芽阶段。</p>
+                    <p>——摘编自李永斌《地中海共同体：古代文明交流研究的一种新范式》</p>`,
+            questions: [
+                '据材料一、二，概括古代文明发展的特点，并结合所学知识，简析这些特点形成的原因。（6分）',
+                '据材料三，指出"地中海共同体"形成过程中文明交流的方式。（3分）',
+                '综合上述材料并结合所学知识，说明"地中海共同体"形成的影响。（4分）'
+            ],
+            answer: `
+                        <div class="sub-ans">(1) 特点及原因（6分）</div>
+                        <div class="sub-ans-detail">
+                            <strong>特点：</strong>古代文明具有多元性、独立性；各文明相对孤立发展，交流受地理阻隔制约；但局部地区已有一定联系。<br>
+                            <strong>原因：</strong>地理环境差异大（沙漠、高原、山脉、海洋阻隔）；生产力水平低下，交通工具落后；早期文明自给自足，对外需求有限。
+                        </div>
+                        <div class="sub-ans" style="margin-top:16px;">(2) 交流方式（3分）</div>
+                        <div class="sub-ans-detail">
+                            商贸活动、人口迁徙（希腊人移民建城）、殖民活动。
+                        </div>
+                        <div class="sub-ans" style="margin-top:16px;">(3) 影响（4分）</div>
+                        <div class="sub-ans-detail">
+                            促进地中海地区经济文化联系与融合；推动了希腊化进程和罗马文明的发展；为后来罗马帝国统一地中海奠定基础；但各文明独立性仍存，整体统一性尚在萌芽。
+                        </div>
+                    `
+        }, {
+            id: 22,
+            score: 15,
+            title: '阅读材料，完成下列要求。',
+            material: `<p><strong>材料一</strong> 15世纪中叶至19世纪末的黑奴贸易对世界历史产生重要影响。对非洲来说，17世纪初其人口约占世界人口的1/3，到20世纪初则只占1/17；社会长期动荡，"非洲人原有的工艺技术水平不但不能提高，反而逐渐衰退。已往的商路也失去作用，昔日繁盛的城市变成了荒凉的村落"。</p>
+                    <p>——摘编自吴秉真《非洲奴隶贸易四百年始末》</p>
+                    <p><strong>材料二</strong> 非洲人民从奴隶贸易一开始就进行了英勇的反抗。随着贩奴活动的扩大，这种反抗更加激烈和广泛。在奴隶贸易的经济价值大幅度降低以前，没有一个西方国家想到过废除奴隶贸易。从18世纪后期开始，欧美国家认识到，在大机器生产条件下，雇佣有人身自由和生产技术的工人，比奴役完全没有劳动积极性的奴隶，成本更低而效率更高；在非洲直接利用黑人开发当地丰富的资源和土地，比贩卖黑人到美洲更赚钱，奴隶贸易开始走向衰落。19世纪中期以后，欧美主要资本主义国家基本从制度层面废除了奴隶贸易。</p>
+                    <p>——摘编自李安山《资本主义与奴隶制度——50年西方史学论争述评》等</p>`,
+            questions: [
+                '据材料一并结合所学知识，说明黑奴贸易对非洲的影响。（6分）',
+                '据材料并结合所学知识，对西方国家"基本从制度层面废除了奴隶贸易"这一做法进行简要评析。（9分）'
+            ],
+            answer: `
+                        <div class="sub-ans">(1) 对非洲的影响（6分）</div>
+                        <div class="sub-ans-detail">
+                            <ul>
+                                <li>人口锐减，劳动力大量流失（17世纪初占世界人口1/3，20世纪初仅占1/17）；</li>
+                                <li>社会长期动荡，政治不稳定；</li>
+                                <li>经济凋敝，原有商路废弃，城市衰落；</li>
+                                <li>技术倒退，传统工艺失传，文明发展受阻。</li>
+                            </ul>
+                        </div>
+                        <div class="sub-ans" style="margin-top:16px;">(2) 评析（9分）</div>
+                        <div class="sub-ans-detail">
+                            <strong>背景：</strong>18世纪末以来，工业资本主义发展需要自由雇佣劳动力和技术工人，奴隶贸易经济价值相对下降；同时，在非洲直接掠夺资源更具利润。<br>
+                            <strong>实质：</strong>废除奴隶贸易是西方资本主义经济发展的客观要求，并非出于人道主义初衷。<br>
+                            <strong>评价：</strong>从结果看，制度上废除奴隶贸易具有历史进步性，顺应了工业文明发展；但西方国家并未停止对非洲的剥削，转而进行殖民掠夺和资源榨取，非洲仍受压迫。
+                        </div>
+                    `
+        }, {
+            id: 23,
+            score: 12,
+            title: '阅读材料，完成下列要求。',
+            material: `<p><strong>材料</strong> 二战结束后，苏联获得美国贷款作为参与布雷顿森林体系的核心动机，但美国国内势力对苏态度严重对立，援苏谈判推进受阻。杜鲁门上台后，美国在贷款提案中又附加了大量苏联难以接受的政治条件，如开放国民经济数据、从东欧撤军等。与此同时，美国迅速与英国达成援助贷款协定，仅要求英国履行布雷顿森林体系的一般义务。1946年，美苏谈判最终破裂，苏联彻底放弃加入布雷顿森林体系。</p>
+                    <p>苏联拒绝加入布雷顿森林体系，加剧了美苏之间本就不断上升的矛盾与不信任感，美国认为苏联试图阻碍美国主导的世界经济一体化进程，并借助由此引发的经济混乱向西欧扩大势力范围，随后美国出台马歇尔计划。……苏联的退出使布雷顿森林体系内缺乏能够制衡美国的力量，原本设计的全球性国际货币体系，逐渐收缩为资本主义阵营内部的区域性货币体系。</p>
+                    <p>——摘编自李黎明《布雷顿森林体系视角下美苏经济合作解体与美元霸权化》</p>`,
+            questions: [
+                '据材料并结合所学知识，分析苏联放弃加入布雷顿森林体系的原因。（6分）',
+                '据材料并结合所学知识，简述苏联放弃加入布雷顿森林体系的历史影响。（6分）'
+            ],
+            answer: `
+                        <div class="sub-ans">(1) 原因（6分）</div>
+                        <div class="sub-ans-detail">
+                            <ul>
+                                <li>美国附加苛刻政治条件（开放经济数据、从东欧撤军等），苏联难以接受；</li>
+                                <li>美苏矛盾加深，互信缺失；</li>
+                                <li>苏联不愿加入美国主导的国际货币体系，担忧丧失经济主权；</li>
+                                <li>苏联计划经济体制与布雷顿森林体系的自由市场原则不兼容。</li>
+                            </ul>
+                        </div>
+                        <div class="sub-ans" style="margin-top:16px;">(2) 影响（6分）</div>
+                        <div class="sub-ans-detail">
+                            <ul>
+                                <li>加剧美苏冷战对立，加速两极格局形成；</li>
+                                <li>使布雷顿森林体系成为资本主义阵营的货币体系，美元霸权得以巩固；</li>
+                                <li>削弱了国际货币体系的全球性，不利于战后世界经济一体化；</li>
+                                <li>苏联转而建立经互会，形成社会主义经济圈，加剧世界经济分裂。</li>
+                            </ul>
+                        </div>
+                    `
+        }];
+
+        // ============================================================
+        // 渲染函数
+        // ============================================================
+        function renderChoices() {
+            const container = document.getElementById('choice-list');
+            let html = '';
+            choices.forEach((q, idx) => {
+                const labels = ['A', 'B', 'C', 'D'];
+                const correctIdx = q.answer;
+                html += `<div class="question-block" data-qid="${q.id}">`;
+                html += `<div class="q-header"><span class="q-label">${q.id}</span> <span>${q.text}</span></div>`;
+                html += `<div class="options">`;
+                q.options.forEach((opt, oi) => {
+                    const isCorrect = (oi === correctIdx);
+                    html += `<div class="option-item" data-optidx="${oi}" data-correct="${isCorrect}" onclick="selectOption(this, ${q.id}, ${oi})">`;
+                    html += `<span class="opt-label">${labels[oi]}.</span>`;
+                    html += `<span class="opt-text">${opt}</span>`;
+                    html += `</div>`;
+                });
+                html += `</div>`;
+
+                // 解析区域
+                html += `<div class="toggle-answer" onclick="toggleAnswer(this, ${q.id})">`;
+                html += `<span>📖 查看解析</span>`;
+                html += `<span class="arrow">▶</span>`;
+                html += `</div>`;
+
+                html += `<div class="answer-box" id="ans-${q.id}">`;
+                html += `<div class="know-point">📌 考查知识点：<span>${q.knowledge}</span></div>`;
+                html += `<div class="reason">`;
+                html += `<div class="correct-reason">✅ 正确选项原因：${q.correctReason}</div>`;
+                html += `<div style="margin-top:10px; font-weight:500; color:#1e2a3a;">❌ 错误选项不选原因：</div>`;
+                html += `<div class="wrong-detail">`;
+                q.wrongReasons.forEach((wr, wi) => {
+                    const label = labels[wi];
+                    html += `<div><strong>${label}.</strong> ${wr}</div>`;
+                });
+                html += `</div>`;
+                html += `</div>`;
+                html += `</div>`;
+                html += `</div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderMaterials() {
+            const container = document.getElementById('material-list');
+            let html = '';
+            materials.forEach((m, idx) => {
+                html += `<div class="question-block material-q" data-mid="${m.id}">`;
+                html += `<div class="q-header"><span class="q-label">${m.id}</span> <span>（${m.score}分）${m.title}</span></div>`;
+                html += `<div class="q-text">${m.material}</div>`;
+                m.questions.forEach((qText, qi) => {
+                    const subLabel = String.fromCharCode(97 + qi); // a, b, c...
+                    html += `<div class="sub-q">(${subLabel}) ${qText}</div>`;
+                });
+                // 解析
+                html += `<div class="toggle-answer" onclick="toggleMaterialAnswer(this, ${m.id})">`;
+                html += `<span>📖 查看解析</span>`;
+                html += `<span class="arrow">▶</span>`;
+                html += `</div>`;
+                html += `<div class="answer-box material-answer" id="mans-${m.id}">`;
+                html += m.answer;
+                html += `</div>`;
+                html += `</div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        // 交互函数
+        // ============================================================
+        function selectOption(el, qid, chosenIdx) {
+            const block = el.closest('.question-block');
+            const options = block.querySelectorAll('.option-item');
+            // 如果已经选过，不能再选
+            if (options[0].classList.contains('disabled')) return;
+
+            // 标记所有选项为disabled
+            options.forEach(opt => opt.classList.add('disabled'));
+
+            // 判断正误
+            const isCorrect = (chosenIdx === choices.find(q => q.id === qid).answer);
+            if (isCorrect) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                // 高亮正确答案
+                options.forEach(opt => {
+                    if (opt.dataset.correct === 'true') {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            // 自动展开解析
+            const ansBox = document.getElementById(`ans-${qid}`);
+            if (ansBox) {
+                ansBox.classList.add('open');
+                // 更新按钮箭头
+                const toggle = block.querySelector('.toggle-answer');
+                if (toggle) {
+                    const arrow = toggle.querySelector('.arrow');
+                    if (arrow) arrow.classList.add('open');
+                    toggle.querySelector('span:first-child').textContent = '📖 收起解析';
+                }
+            }
+        }
+
+        function toggleAnswer(el, qid) {
+            const block = el.closest('.question-block');
+            const ansBox = document.getElementById(`ans-${qid}`);
+            if (!ansBox) return;
+            const isOpen = ansBox.classList.contains('open');
+            if (isOpen) {
+                ansBox.classList.remove('open');
+                el.querySelector('span:first-child').textContent = '📖 查看解析';
+                el.querySelector('.arrow').classList.remove('open');
+            } else {
+                ansBox.classList.add('open');
+                el.querySelector('span:first-child').textContent = '📖 收起解析';
+                el.querySelector('.arrow').classList.add('open');
+            }
+        }
+
+        function toggleMaterialAnswer(el, mid) {
+            const block = el.closest('.question-block');
+            const ansBox = document.getElementById(`mans-${mid}`);
+            if (!ansBox) return;
+            const isOpen = ansBox.classList.contains('open');
+            if (isOpen) {
+                ansBox.classList.remove('open');
+                el.querySelector('span:first-child').textContent = '📖 查看解析';
+                el.querySelector('.arrow').classList.remove('open');
+            } else {
+                ansBox.classList.add('open');
+                el.querySelector('span:first-child').textContent = '📖 收起解析';
+                el.querySelector('.arrow').classList.add('open');
+            }
+        }
+
+        // ============================================================
+        // 初始化
+        // ============================================================
+        renderChoices();
+        renderMaterials();
+    </script>
+
+</body>
+</html>
