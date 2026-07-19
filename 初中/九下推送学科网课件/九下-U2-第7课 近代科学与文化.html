@@ -1,0 +1,1759 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下-U2-第7课 近代科学与文化</title>
+<style>
+/* ========== v2.0 全局 CSS 变量 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+  --gold: #f1c40f;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding:36px 20px 30px;
+  text-align:center;
+  color:#fff;
+  border-radius:0 0 36px 36px;
+  box-shadow:0 6px 30px rgba(61,43,140,0.20);
+  margin:0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background:linear-gradient(135deg,#f0edff,#e0daff);
+  border-radius:12px;
+  padding:20px 24px;
+  margin-bottom:24px;
+  border:1px solid var(--border);
+}
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item {
+  font-size:13.5pt;
+  padding:6px 8px;
+  border-bottom:1px dashed var(--border);
+  cursor:pointer;
+  transition:all 0.2s;
+  border-radius:6px;
+  background:transparent;
+}
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn {
+  display:block; margin:20px auto 10px;
+  background:linear-gradient(135deg,#7c6cf0,#5a4ac7);
+  color:#fff; border:none; border-radius:24px;
+  padding:12px 36px; font-size:16pt; font-weight:700;
+  cursor:pointer; transition:all 0.25s;
+  box-shadow:0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn {
+  flex:1; padding:14px 8px;
+  font-size:14pt; font-weight:700;
+  border:none; cursor:pointer;
+  text-align:center;
+  transition:all 0.25s;
+  background:#e8e0ff; color:#5a4ac7;
+  letter-spacing:1px;
+}
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ========== 闯关进度条 ========== */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background:var(--bg-card);
+  border-left:4px solid var(--primary);
+  border-radius:0 10px 10px 0;
+  padding:18px 22px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; }
+.kp-card li { margin:6px 0; font-size:14pt; }
+.kp-card p { font-size:14pt; line-height:1.8; }
+
+.timeline-bar {
+  background:#f0edff;
+  border-radius:8px;
+  padding:8px 16px;
+  font-size:12pt;
+  color:#5a4ac7;
+  text-align:center;
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+.link-bar {
+  border:2px dashed #d5cef0;
+  border-radius:10px;
+  padding:12px 16px;
+  margin-top:14px;
+  background:#faf8ff;
+  font-size:13pt;
+  color:#5a4ac7;
+}
+
+/* 标签 */
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-zhongkao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 挑战标题 ========== */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== ① 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item {
+  padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px;
+  cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s;
+}
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot {
+  min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:12pt;
+  transition:all 0.2s; background:#faf8ff; position:relative;
+}
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== ② 填空填词 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input {
+  width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px;
+  font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff;
+}
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== ③ 连线匹配 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item {
+  padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer;
+  transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center;
+}
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== ④ 因果拼图 ========== */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain {
+  background:#fff;
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:16px;
+  border:2px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:all 0.3s;
+}
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14pt;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:10px;
+}
+.puzzle-chain .chain-header .chain-badge {
+  display:inline-block;
+  padding:2px 12px;
+  border-radius:12px;
+  font-size:11pt;
+  color:#fff;
+}
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots {
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.puzzle-slot {
+  min-width:100px;
+  flex:1;
+  min-height:52px;
+  border:2px dashed #dcd4f5;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 10px;
+  font-size:11pt;
+  color:#aaa;
+  background:#faf8ff;
+  transition:all 0.3s;
+  text-align:center;
+}
+.puzzle-slot.filled {
+  border-style:solid;
+  border-color:var(--primary);
+  background:#f0edff;
+  color:#333;
+  font-weight:600;
+}
+.puzzle-slot.correct {
+  border-color:var(--green);
+  background:#d4efdf;
+  color:var(--green);
+}
+.puzzle-pieces {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:6px;
+}
+.puzzle-piece {
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:12pt;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.25s;
+  border:2px solid var(--border);
+  background:#fff;
+  user-select:none;
+  flex:1 1 auto;
+  min-width:80px;
+  text-align:center;
+}
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed {
+  opacity:0.3;
+  cursor:not-allowed;
+  transform:scale(0.95);
+  pointer-events:none;
+}
+.puzzle-piece.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.25); }
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-6px); }
+  75% { transform:translateX(6px); }
+}
+.puzzle-hint { font-size:11pt; color:#888; margin-top:6px; text-align:center; }
+.puzzle-result { text-align:center; padding:10px; border-radius:8px; font-weight:700; font-size:14pt; margin-top:8px; display:none; }
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.puzzle-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.chain-progress {
+  font-size:11pt;
+  color:#888;
+  margin-left:auto;
+}
+.chain-progress strong { color:var(--primary-dark); }
+
+/* ========== ⑤ 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back {
+  position:absolute; width:100%; height:100%; backface-visibility:hidden;
+  border-radius:12px; display:flex; align-items:center; justify-content:center;
+  padding:10px; font-size:11pt; text-align:center;
+}
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== 关卡通过横幅 ========== */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== Page2 手风琴 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s;
+}
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd {
+  background:linear-gradient(135deg,#e67e22,#f0ad4e);
+  color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700;
+  cursor:pointer; user-select:none;
+}
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== 对比表格 ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip {
+  padding:6px 14px; border:2px solid var(--border); border-radius:20px;
+  background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s;
+  font-weight:600; color:#5a4ac7;
+}
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+.col-body .a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.col-body .a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label {
+  display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px;
+  cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff;
+}
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node {
+  width:90%; border-radius:12px; padding:16px 20px; text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative;
+}
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100% { box-shadow:0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow:0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card {
+  background:#fff; border-radius:14px; padding:20px 16px 14px;
+  border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08);
+  position:relative; text-align:left;
+}
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+  .puzzle-slot { min-width:60px; font-size:10pt; }
+  .puzzle-piece { font-size:10.5pt; padding:8px 10px; min-width:60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0 封面页 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第二单元 · 第二次工业革命和近代科学文化</div>
+    <h1>第7课 · 近代科学与文化</h1>
+    <div class="hero-sub">统编版初中历史  九年级下册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解牛顿、达尔文等科学家的成就，认识近代科学与文化发展的时代背景。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过《物种起源》《人间喜剧》等作品，理解科学与文学反映的时代特征。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析进化论对思想界的冲击，理解文学艺术作品与社会现实的关联。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感受科学巨匠和文学艺术大师对真理的追求与对人类的关怀，认识文化自信的重要性。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1 知识要点 + 五关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">科学家</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">文学巨匠</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">音乐美术大师</button>
+  </div>
+
+  <!-- ===== Tab1：科学家 ===== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 17—19世纪</div>
+      <h3>🔬 牛顿（1642—1727）</h3>
+      <ul>
+        <li>英国科学家，近代<strong class="kwd">自然科学奠基人</strong>之一</li>
+        <li><strong>三大成就：</strong>万有引力定律、光学分析、微积分学</li>
+        <li>1687年出版《<strong class="kwd">自然哲学的数学原理</strong>》，物理学成为独立学科</li>
+        <li>使人类对客观世界的探索向前迈了一大步</li>
+      </ul>
+      <h3>🧬 达尔文（1809—1882）</h3>
+      <ul>
+        <li>英国生物学家，1859年出版《<strong class="kwd">物种起源</strong>》</li>
+        <li><strong>进化论观点：</strong>物种不断变化，由低等到高等；遗传变异、生存斗争、自然选择；人类由进化而来</li>
+        <li><strong>意义：</strong>打破<strong class="kwd">“上帝创造万物”</strong>的神创论，掀起生物科学革命</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 达尔文随“小猎犬号”环球航行5年，本意验证《圣经》，却得出相反结论。
+      </div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将科学成就按时间顺序排列</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">牛顿《自然哲学的数学原理》出版（1687年）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">达尔文随“小猎犬号”环球航行（1831—1836年）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">达尔文《物种起源》出版（1859年）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">居里夫人发现镭（1898年）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">居里夫人提炼出纯镭（1910年）</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">牛顿</div><div class="flash-back">英国科学家，近代自然科学奠基人，三大成就：万有引力定律、光学分析、微积分学</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">达尔文</div><div class="flash-back">英国生物学家，1859年《物种起源》提出进化论，打破神创论，掀起生物科学革命</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">进化论</div><div class="flash-back">物种不断变化，由低等到高等，遗传变异和自然选择是进化的机制，人类由进化而来</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《自然哲学的数学原理》</div><div class="flash-back">牛顿1687年出版，物理学成为独立学科，是近代科学划时代的巨著</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab2：文学巨匠 ===== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 19世纪</div>
+      <h3>📖 巴尔扎克（1799—1850）</h3>
+      <ul>
+        <li>法国作家，作品集《<strong class="kwd">人间喜剧</strong>》</li>
+        <li>代表作：《欧也妮·葛朗台》《高老头》</li>
+        <li>再现法国19世纪早期<strong class="kwd">社会图景</strong>，特别是巴黎上流社会的变迁史</li>
+      </ul>
+      <h3>📖 列夫·托尔斯泰（1828—1910）</h3>
+      <ul>
+        <li>俄国作家，代表作《战争与和平》《安娜·卡列尼娜》《复活》</li>
+        <li>猛烈抨击<strong class="kwd">沙皇专制</strong>和地主压榨</li>
+        <li>被列宁称为“<strong class="kwd">俄国革命的镜子</strong>”</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 《高老头》反映资本主义社会里，家庭也成为相互欺骗和掠夺的场所。
+      </div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词，完成文学巨匠的相关内容</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">巴尔扎克的作品集名为《<input type="text" class="fill-input" data-answer="人间喜剧" placeholder="？">》。</div>
+      <div class="fill-blank-row">巴尔扎克的代表作有《欧也妮·葛朗台》和《<input type="text" class="fill-input" data-answer="高老头" placeholder="？">》。</div>
+      <div class="fill-blank-row">托尔斯泰被列宁称为“俄国革命的<input type="text" class="fill-input" data-answer="镜子" placeholder="？">”。</div>
+      <div class="fill-blank-row">托尔斯泰的代表作有《战争与和平》《安娜·卡列尼娜》和《<input type="text" class="fill-input" data-answer="复活" placeholder="？">》。</div>
+      <div class="fill-blank-row">巴尔扎克的创作再现了法国19世纪早期<input type="text" class="fill-input" data-answer="社会" placeholder="？">图景。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将人物与其成就配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">👤 人物</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">牛顿</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">达尔文</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">巴尔扎克</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">托尔斯泰</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">居里夫人</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📌 成就</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">提出万有引力定律，出版《自然哲学的数学原理》</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">提出进化论，出版《物种起源》</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">创作《人间喜剧》，描绘法国社会图景</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">创作《战争与和平》，被列宁称为“俄国革命的镜子”</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">发现钋和镭，两度获得诺贝尔奖</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">巴尔扎克</div><div class="flash-back">法国作家，《人间喜剧》作者，代表作《欧也妮·葛朗台》《高老头》，再现19世纪法国社会</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">托尔斯泰</div><div class="flash-back">俄国作家，代表作《战争与和平》《安娜·卡列尼娜》《复活》，列宁称“俄国革命的镜子”</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《人间喜剧》</div><div class="flash-back">巴尔扎克的小说集，被誉为“法国社会，特别是巴黎上流社会的变迁史”</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《高老头》</div><div class="flash-back">巴尔扎克代表作，反映资本主义社会家庭成为相互欺骗和掠夺的场所</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab3：音乐美术大师 ===== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 18—19世纪</div>
+      <h3>🎵 贝多芬（1770—1827）</h3>
+      <ul>
+        <li>德国作曲家，代表作《<strong class="kwd">英雄交响曲</strong>》（1804年）</li>
+        <li>原为拿破仑而作，后因拿破仑称帝愤怒改名</li>
+        <li>表达对<strong class="kwd">自由、平等和博爱</strong>的渴望</li>
+        <li>28岁患耳疾，几乎完全失聪，用“<strong class="kwd">辨音器</strong>”坚持创作</li>
+      </ul>
+      <h3>🎨 梵高（1853—1890）</h3>
+      <ul>
+        <li>荷兰画家，代表作《<strong class="kwd">向日葵</strong>》《夜间的咖啡馆》</li>
+        <li>明亮艳丽的色彩，表达对<strong class="kwd">生命的赞美</strong>和对美好生活的向往</li>
+        <li>27岁开始画画，生前作品不受重视，生活困窘</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 贝多芬用一根小木棒一端插在钢琴箱里，一端咬在牙齿中间辨音，体现了他对艺术的执着。
+      </div>
+    </div>
+
+    <!-- ④ 因果拼图 -->
+    <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+    <div class="puzzle-container" id="puzzleContainer">
+      <!-- 由JS动态生成 -->
+    </div>
+    <div class="puzzle-result" id="puzzleResult"></div>
+    <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+    <!-- ⑤ 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">贝多芬</div><div class="flash-back">德国作曲家，《英雄交响曲》表达对自由、平等、博爱的渴望，克服失聪坚持创作</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《英雄交响曲》</div><div class="flash-back">贝多芬代表作，原为拿破仑而作，后因拿破仑称帝愤怒改名，是交响乐史上的里程碑</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">梵高</div><div class="flash-back">荷兰画家，代表作《向日葵》《夜间的咖啡馆》，用明亮色彩表达对生命的热爱</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">居里夫人</div><div class="flash-back">发现钋和镭，两次获诺贝尔奖，是第一位两度获得诺贝尔奖的科学家</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page2 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1：科学成就 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>📍 重难点一：近代科学的突破</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 牛顿与达尔文的贡献</div>
+        <div class="deep-card-bd">
+          <p>牛顿是近代自然科学奠基人，三大成就（万有引力定律、光学分析、微积分学）使物理学成为独立学科，人类对客观世界的探索向前迈了一大步。</p>
+          <p>达尔文提出进化论，指出物种不断变化、由低等到高等，人类由进化而来，打破了“上帝创造万物”的神创论。</p>
+          <p><strong>简而言之：</strong>牛顿奠定了近代物理学的基础，达尔文颠覆了人类对生命起源的认识。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与思想解放的关系</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：牛顿的科学发现推动了启蒙运动，达尔文的进化论冲击了宗教神学，两者都促进了人类思想的解放。</p>
+          <p>纵向联系：从哥白尼的日心说到牛顿的经典力学，再到达尔文的进化论，近代科学的发展不断挑战传统权威。</p>
+          <p><strong>这一联系说明：</strong>科学进步是思想解放的重要动力。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“《物种起源》的出版，打破了千百年来'上帝创造万物'的神创论，在生物科学领域掀起了一场伟大革命。”——教材正文</div>
+          <p><span class="tag-value">📖 历史解释</span> 进化论的提出不仅是科学革命，更是一场思想革命，动摇了宗教神学的基础，推动了科学世界观的确立。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：为什么说达尔文的进化论“打破了神创论”？</p>
+          <p><strong>答案：</strong>进化论用自然选择解释物种起源，否定了上帝创造万物的宗教观念，用科学方法回答了生命起源问题。<strong>解析：</strong>需从科学内容和思想冲击两方面回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2：文学成就 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>📍 重难点二：文学巨匠的社会批判</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 巴尔扎克与托尔斯泰</div>
+        <div class="deep-card-bd">
+          <p>巴尔扎克的《人间喜剧》再现了法国19世纪早期的社会图景，揭露了资本主义社会中金钱对人性的腐蚀。</p>
+          <p>托尔斯泰的小说反映了俄国社会各阶层的生活，猛烈抨击沙皇专制和地主压榨，被列宁称为“俄国革命的镜子”。</p>
+          <p><strong>简而言之：</strong>两位文学巨匠都以文学为武器，批判社会的不公与黑暗。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 文学与时代的关联</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：巴尔扎克反映的是法国资本主义上升时期的社会矛盾，托尔斯泰反映的是俄国农奴制改革后的社会转型问题。</p>
+          <p>纵向联系：两位作家的作品都超越了国界，成为世界文学宝库中的经典，对后世文学产生了深远影响。</p>
+          <p><strong>这一联系说明：</strong>伟大的文学作品往往是时代的镜子。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“托尔斯泰在小说中一方面猛烈抨击了俄国的沙皇专制和地主对农民的残酷压榨，另一方面又否定暴力革命，宣扬道德上的博爱。”——教材正文</div>
+          <p><span class="tag-value">📖 历史解释</span> 托尔斯泰的思想体现了俄国知识分子在变革时代的两难处境：既不满现实，又找不到出路。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：为什么列宁称托尔斯泰为“俄国革命的镜子”？</p>
+          <p><strong>答案：</strong>托尔斯泰的小说真实反映了俄国社会各阶层的生活，描绘了农民在变革时代的矛盾心理，成为俄国社会的一面镜子。<strong>解析：</strong>需从作品内容和历史背景两方面回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3：音乐美术 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>📍 重难点三：艺术大师的精神追求</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 贝多芬与梵高</div>
+        <div class="deep-card-bd">
+          <p>贝多芬的《英雄交响曲》表达了对自由、平等、博爱的渴望，他克服失聪坚持创作，展现了音乐家的顽强意志。</p>
+          <p>梵高的《向日葵》以明亮艳丽的色彩表达了对生命的赞美，他生前不被理解，却始终坚持艺术追求。</p>
+          <p><strong>简而言之：</strong>两位艺术大师都以各自的方式表达了对生命的热爱和对理想的执着。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 艺术风格与时代精神</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：贝多芬的音乐受法国大革命影响，体现了对自由、平等的追求；梵高的绘画受印象派影响，强调色彩和情感表达。</p>
+          <p>纵向联系：两位艺术家的作品都超越了自己的时代，成为人类文化的瑰宝，影响了后世无数艺术家。</p>
+          <p><strong>这一联系说明：</strong>真正的艺术能够超越时空，打动人心。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 家国情怀</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“贝多芬28岁就患有耳疾，后来两年完全失聪。为克服失聪带来的困难，他曾将一根小木棒的一端插在钢琴箱里，一端咬在牙齿中间，在作曲时用来辨音。”——人物扫描</div>
+          <p><span class="tag-value">❤️ 家国情怀</span> 贝多芬在失聪的绝境中坚持创作，展现了人类不屈不挠的精神力量，是对生命价值的最高礼赞。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：贝多芬和梵高的艺术成就说明了什么？</p>
+          <p><strong>答案：</strong>说明真正的艺术源于对生活的热爱和对理想的执着追求，即使身处逆境也能创造出不朽的作品。<strong>解析：</strong>需从艺术与人生的关系角度回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page3 教材栏目解答 ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+    <button class="filter-chip" onclick="filterCol('问题思考',this)">问题思考</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 人物扫描1 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：牛顿</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>少年时的牛顿沉默冷静，喜欢思索，特别喜欢制造机械。有一次，有人在城北建起了一座风车，这在当时还比较少见。牛顿跑去认真观察了半天，之后做了一个风车模型。他还为风车模型装上一个路车，让一只小老鼠当"磨工"，带动风车模型转动。</p>
+      <div class="a" id="ans-p3-people1">
+        <strong>📝 要点归纳：</strong>牛顿自幼善于观察、勤于动手，对机械制造充满兴趣，为他后来的科学成就奠定了基础。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-people1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 问题思考 -->
+  <div class="col-box" data-cat="问题思考">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 问题思考</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>达尔文在《物种起源》中提出的主要观点是什么？</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong>物种不断变化，由低等到高等、从简单到复杂演变；生物的发展由遗传变异、生存斗争和自然选择决定；人类也是进化来的，不是上帝创造的。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描2 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：达尔文</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>达尔文22岁时，受"小猎犬号"船长的邀请，以博物学家的身份随船进行了近5年的环球航行。船长本来希望达尔文能够找到科学证据来验证《圣经》的记载，没想到旅行结束后，达尔文却得出了相反的结论。</p>
+      <div class="a" id="ans-p3-people2">
+        <strong>📝 要点归纳：</strong>达尔文环球航行5年，本意验证《圣经》，却从科学考察中得出了相反的结论——进化论，体现了科学精神对权威的挑战。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-people2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：《高老头》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>《高老头》的主人公高老头出身寒微，后来做粮食承包商发了大财。他把大部分财产给两个女儿作陪嫁，后来自己却被女儿们抛弃，一贫如洗，孤苦伶仃地病死在一家小公寓的阁楼上。《高老头》反映出在一切为了金钱的资本主义社会里，家庭也成为人们相互欺骗和掠夺的场所。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong>《高老头》通过父女关系的悲剧，揭露了资本主义社会中金钱对人性的腐蚀，批判了拜金主义的社会风气。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描3 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：贝多芬</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>贝多芬出生在一个音乐世家，后到维也纳学习音乐，逐渐声名大噪。贝多芬28岁就患有耳疾，后来两年完全失聪。为克服失聪带来的困难，他曾将一根小木棒的一端插在钢琴箱里，一端咬在牙齿中间，在作曲时用来辨音。这个特别的辨音器，至今还保存在德国波恩的贝多芬博物馆内。他的《英雄交响曲》用全新的风格，表现了他对英雄的理解，是一部不朽之作。该曲原本是应法国驻维也纳大使的请求，为拿破仑而作的，但在发表时，贝多芬得知拿破仑称帝的消息，他愤怒地丢掉了拿破仑的名字。</p>
+      <div class="a" id="ans-p3-people3">
+        <strong>📝 要点归纳：</strong>贝多芬在失聪的绝境中坚持创作，用“辨音器”克服困难；《英雄交响曲》原为拿破仑而作，后因拿破仑称帝改名，体现了他对自由、平等的坚守。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-people3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描4 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：梵高</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>梵高（1853—1890）27岁才开始画画，在短暂的艺术生涯中，他创作了大量的油画、素描和版画。梵高生前，他的作品不受人重视，很少能卖出去。梵高的生活十分困窘，靠弟弟的接济才得以勉强度日。</p>
+      <div class="a" id="ans-p3-people4">
+        <strong>📝 要点归纳：</strong>梵高一生困窘，生前作品不被重视，却始终坚持艺术创作，用画笔表达对生命的热爱，其艺术价值在他身后才被世人所认识。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-people4')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题1：</strong>学生根据不同爱好，自愿组成文学、音乐和美术3个小组，分别以巴尔扎克、贝多芬和梵高三人的某一作品为对象进行研究，然后介绍小组的体会和看法。</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案：</strong>（开放性活动，鼓励学生自主探究。可参考方向：巴尔扎克《高老头》——批判金钱至上的社会；贝多芬《英雄交响曲》——感受自由、平等、博爱的精神；梵高《向日葵》——体会对生命的热爱与艺术的执着。）
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看提示</button>
+      <p><strong>问题2：</strong>查阅资料，了解达尔文的《物种起源》出版后，引起了怎样的轩然大波。</p>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案：</strong>《物种起源》挑战了宗教神学关于“上帝创造万物”的教义，引发了科学与宗教的大论战。支持者认为它揭示了生命演化的真理，反对者（特别是宗教界）则认为它动摇了信仰的根基。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：居里夫人与镭的发现</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>居里夫人生于波兰，后在法国求学，是世界著名的物理学家和化学家。19世纪末，科学家发现有一种铀盐能放射出射线。这一发现引起居里夫妇的极大兴趣。经过研究，居里夫妇认为在沥青铀矿中存在着某种未知的、放射性很强的元素。经过不懈努力，1898年，居里夫妇发现了钋和镭两种元素。1903年，居里夫妇获得诺贝尔物理学奖。1910年，居里夫人提炼出金属态的纯镭。1911年，居里夫人获得诺贝尔化学奖，成为世界上第一位两度获得诺贝尔奖的人。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong>居里夫妇1898年发现钋和镭，居里夫人1910年提炼出纯镭，两度获诺贝尔奖，是第一位两度获得诺贝尔奖的科学家。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page4 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 q1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 牛顿在物理学领域的划时代巨著是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 《物种起源》</label>
+      <label onclick="optClick(this,'B','q1')">B. 《自然哲学的数学原理》</label>
+      <label onclick="optClick(this,'C','q1')">C. 《人间喜剧》</label>
+      <label onclick="optClick(this,'D','q1')">D. 《战争与和平》</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：牛顿1687年出版《自然哲学的数学原理》，物理学成为独立学科。<br>
+      ❌ 排除A：是达尔文的著作。<br>
+      ❌ 排除C：是巴尔扎克的著作。<br>
+      ❌ 排除D：是托尔斯泰的著作。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 达尔文进化论的核心观点不包括</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 物种不断变化</label>
+      <label onclick="optClick(this,'B','q2')">B. 人类由上帝创造</label>
+      <label onclick="optClick(this,'C','q2')">C. 遗传变异和自然选择</label>
+      <label onclick="optClick(this,'D','q2')">D. 由低等到高等的演变</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：进化论认为人类由进化而来，不是上帝创造的，这是与神创论的根本区别。<br>
+      ❌ 排除A、C、D：都是进化论的核心观点。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 巴尔扎克的作品集是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 《人间喜剧》</label>
+      <label onclick="optClick(this,'B','q3')">B. 《战争与和平》</label>
+      <label onclick="optClick(this,'C','q3')">C. 《复活》</label>
+      <label onclick="optClick(this,'D','q3')">D. 《安娜·卡列尼娜》</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：A<br>
+      📌 解题思路：巴尔扎克的作品集为《人间喜剧》，再现了法国19世纪早期的社会图景。<br>
+      ❌ 排除B、C、D：均为托尔斯泰的作品。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 被列宁称为“俄国革命的镜子”的是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 巴尔扎克</label>
+      <label onclick="optClick(this,'B','q4')">B. 托尔斯泰</label>
+      <label onclick="optClick(this,'C','q4')">C. 贝多芬</label>
+      <label onclick="optClick(this,'D','q4')">D. 梵高</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：列宁称托尔斯泰为“俄国革命的镜子”，因为他真实反映了俄国社会各阶层的生活。<br>
+      ❌ 排除A：巴尔扎克是法国作家。<br>
+      ❌ 排除C：贝多芬是德国音乐家。<br>
+      ❌ 排除D：梵高是荷兰画家。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 贝多芬的《英雄交响曲》最初是为谁而作的？</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 华盛顿</label>
+      <label onclick="optClick(this,'B','q5')">B. 拿破仑</label>
+      <label onclick="optClick(this,'C','q5')">C. 林肯</label>
+      <label onclick="optClick(this,'D','q5')">D. 彼得一世</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：《英雄交响曲》原本是应法国驻维也纳大使的请求，为拿破仑而作的。<br>
+      ❌ 排除A、C、D：均不符合史实。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题（不计分） -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">"《物种起源》的出版，打破了千百年来'上帝创造万物'的神创论，在生物科学领域掀起了一场伟大革命。"——教材正文</div>
+    <div class="q-text">（1）为什么说《物种起源》的出版是一场"伟大革命"？</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong>因为它用进化论否定了神创论，用科学方法解释了物种起源，颠覆了人类对生命起源的传统认识，推动了生物科学的发展和思想解放。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+    <div class="q-text">（2）结合所学，近代科学文化成就对人类社会产生了怎样的影响？</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong>科学成就（牛顿、达尔文等）推动了认识世界的进步和思想解放；文学艺术成就（巴尔扎克、贝多芬等）反映了社会现实，丰富了人类的精神世界，共同推动了人类文明的进步。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== Page5 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🔬</span><strong>科学突破</strong>
+        <p>牛顿经典力学 · 达尔文进化论</p>
+        <div class="kg-detail"><p>牛顿奠定近代物理学基础，达尔文打破神创论，两者共同推动了人类认识世界的革命。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📖</span><strong>文学成就</strong>
+        <p>巴尔扎克《人间喜剧》 · 托尔斯泰批判现实</p>
+        <div class="kg-detail"><p>巴尔扎克揭露资本主义社会问题，托尔斯泰真实反映俄国社会变革，文学成为时代的镜子。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🎵</span><strong>艺术成就</strong>
+        <p>贝多芬《英雄交响曲》 · 梵高《向日葵》</p>
+        <div class="kg-detail"><p>贝多芬用音乐表达对自由、平等的追求，梵高用色彩讴歌生命，艺术成为人类精神的寄托。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌍</span><strong>历史影响</strong>
+        <p>推动思想解放 · 丰富人类文明</p>
+        <div class="kg-detail"><p>近代科学与文化成就共同推动了人类思想的解放，丰富了人类文明的宝库，为20世纪的文化发展奠定了基础。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 科学：理性与探索</div>
+      <div class="kg-rule r2">🟠 文学：批判与反思</div>
+      <div class="kg-rule r3">🟢 艺术：情感与美</div>
+      <div class="kg-rule r4">🔴 思想：解放与进步</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page6 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第二单元 · 第二次工业革命和近代科学文化</div>
+    <h1 style="font-size:22pt;">第7课 · 近代科学与文化</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>科学成就</h3>
+        <ul>
+          <li><strong>牛顿：</strong>万有引力、光学、微积分</li>
+          <li><strong>达尔文：</strong>进化论，打破神创论</li>
+          <li><strong>意义：</strong>推动思想解放</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>文学成就</h3>
+        <ul>
+          <li><strong>巴尔扎克：</strong>《人间喜剧》，批判社会</li>
+          <li><strong>托尔斯泰：</strong>“俄国革命的镜子”</li>
+          <li><strong>意义：</strong>真实反映时代</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>艺术成就</h3>
+        <ul>
+          <li><strong>贝多芬：</strong>《英雄交响曲》</li>
+          <li><strong>梵高：</strong>《向日葵》</li>
+          <li><strong>意义：</strong>表达人类精神</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    
+      
+    
+    
+<footer>
+    <p>统编版初中历史 · 九年级下册 · 第二单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+        <div class="bottom-nav">
+    <div><a href="九下-U2-第6课 工业化国家的社会变化.html">← 上一课：第6课 工业化国家的社会变化</a></div>
+    <div class="nav-center">第7课</div>
+    <div><a href="九下-U3-第8课 第一次世界大战.html">下一课：第8课 第一次世界大战 →</a></div>
+  </div>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+/* ========== 6.1 分页导航系统 ========== */
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+/* ========== 6.2 闯关进度追踪 ========== */
+var stageDone = { sort:false, fill:false, match:false, puzzle:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','puzzle','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+/* ========== 6.3 封面学习目标标记 ========== */
+var targetsDoneCount = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDoneCount = document.querySelectorAll('.target-item.done').length;
+  if (targetsDoneCount >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+/* ========== 6.4 标签页与手风琴 ========== */
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+function markMastered(btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+}
+
+/* ========== 6.5 答案显隐 + 选择题 ========== */
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+var correctAnswers = { q1:'B', q2:'B', q3:'A', q4:'B', q5:'B' };
+var mcDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+  // 自动显示答案解析
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+function resetQuiz() {
+  mcDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+    ex.querySelectorAll('.ans-btn').forEach(function(b) {
+      var parent = b.parentElement;
+      var ansDiv = parent.querySelector('.a');
+      if (ansDiv && ansDiv.classList.contains('show')) {
+        b.textContent = '隐藏答案';
+      } else {
+        b.textContent = '📝 查看解析';
+      }
+    });
+  });
+}
+
+/* ========== 6.6 栏目筛选 ========== */
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+/* ========== 6.7 拖拽排序 ========== */
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key2','key3','key4','key5'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.8 填空填词 ========== */
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查红色标记的输入框';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.9 连线匹配 ========== */
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      var result = document.getElementById('matchResult');
+      result.textContent = '✅ 全部配对正确！';
+      result.className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    selectedLeft.classList.add('wrong-shake');
+    el.classList.add('wrong-shake');
+    var s = selectedLeft;
+    setTimeout(function(){ s.classList.remove('selected','wrong-shake'); }, 500);
+    setTimeout(function(e){ e.classList.remove('wrong-shake'); }, 500, el);
+    selectedLeft = null;
+  }
+}
+
+/* ========== 6.10 翻转卡 ========== */
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+}
+
+/* ========== 6.11 知识结构图节点展开 ========== */
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+/* ========== 6.12 deep-card 折叠 ========== */
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+/* ========== 6.13 因果拼图（第④关） ========== */
+var puzzleData = [
+  {
+    id: 0,
+    title: '链条一：科学革命',
+    badge: 'c1',
+    pieces: [
+      { text: '牛顿奠定经典力学基础，物理学独立', order: 0 },
+      { text: '达尔文提出进化论，挑战神创论', order: 1 },
+      { text: '科学突破推动人类认识世界和思想解放', order: 2 }
+    ]
+  },
+  {
+    id: 1,
+    title: '链条二：文学与时代',
+    badge: 'c2',
+    pieces: [
+      { text: '巴尔扎克用《人间喜剧》揭露社会问题', order: 0 },
+      { text: '托尔斯泰用小说真实反映俄国社会', order: 1 },
+      { text: '文学成为时代的一面镜子', order: 2 }
+    ]
+  },
+  {
+    id: 2,
+    title: '链条三：艺术与精神',
+    badge: 'c3',
+    pieces: [
+      { text: '贝多芬用音乐表达自由、平等、博爱', order: 0 },
+      { text: '梵高用色彩讴歌生命和美好', order: 1 },
+      { text: '艺术成为人类精神的寄托', order: 2 }
+    ]
+  }
+];
+
+var puzzleChainProgress = [0, 0, 0];
+
+function initPuzzle() {
+  var container = document.getElementById('puzzleContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  puzzleChainProgress = [0, 0, 0];
+
+  puzzleData.forEach(function(chain, ci) {
+    var chainDiv = document.createElement('div');
+    chainDiv.className = 'puzzle-chain';
+    chainDiv.id = 'pchain-' + ci;
+
+    var header = document.createElement('div');
+    header.className = 'chain-header';
+    var badge = document.createElement('span');
+    badge.className = 'chain-badge ' + chain.badge;
+    badge.textContent = '链' + (ci + 1);
+    header.appendChild(badge);
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = chain.title;
+    header.appendChild(titleSpan);
+    var prog = document.createElement('span');
+    prog.className = 'chain-progress';
+    prog.id = 'cprog-' + ci;
+    prog.innerHTML = '进度：<strong id="cprogNum-' + ci + '">0</strong>/3';
+    header.appendChild(prog);
+    chainDiv.appendChild(header);
+
+    var slotsDiv = document.createElement('div');
+    slotsDiv.className = 'chain-slots';
+    slotsDiv.id = 'cslots-' + ci;
+    for (var s = 0; s < 3; s++) {
+      var slot = document.createElement('div');
+      slot.className = 'puzzle-slot';
+      slot.id = 'cslot-' + ci + '-' + s;
+      slot.textContent = '第' + (s + 1) + '步';
+      slotsDiv.appendChild(slot);
+    }
+    chainDiv.appendChild(slotsDiv);
+
+    var piecesDiv = document.createElement('div');
+    piecesDiv.className = 'puzzle-pieces';
+    piecesDiv.id = 'cpieces-' + ci;
+    var shuffled = chain.pieces.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = temp;
+    }
+    shuffled.forEach(function(piece, pi) {
+      var pDiv = document.createElement('div');
+      pDiv.className = 'puzzle-piece p' + (ci + 1);
+      pDiv.id = 'cpiece-' + ci + '-' + pi;
+      pDiv.setAttribute('data-chain', ci);
+      pDiv.setAttribute('data-order', piece.order);
+      pDiv.textContent = piece.text;
+      pDiv.addEventListener('click', function() {
+        handlePuzzleClick(parseInt(this.getAttribute('data-chain')), parseInt(this.getAttribute('data-order')));
+      });
+      piecesDiv.appendChild(pDiv);
+    });
+    chainDiv.appendChild(piecesDiv);
+    container.appendChild(chainDiv);
+  });
+}
+
+function handlePuzzleClick(chainIdx, order) {
+  if (puzzleChainProgress[chainIdx] >= 3) return;
+  var nextSlot = puzzleChainProgress[chainIdx];
+  if (order !== nextSlot) {
+    var pieces = document.querySelectorAll('#cpieces-' + chainIdx + ' .puzzle-piece');
+    pieces.forEach(function(p) {
+      if (parseInt(p.getAttribute('data-order')) === order) {
+        p.classList.add('wrong-shake');
+        setTimeout(function() { p.classList.remove('wrong-shake'); }, 500);
+      }
+    });
+    return;
+  }
+
+  var slot = document.getElementById('cslot-' + chainIdx + '-' + nextSlot);
+  var pieceEl = document.querySelector('#cpieces-' + chainIdx + ' .puzzle-piece[data-order="' + order + '"]');
+  if (!pieceEl || !slot) return;
+
+  pieceEl.classList.add('placed');
+  pieceEl.style.display = 'none';
+  slot.textContent = pieceEl.textContent;
+  slot.classList.add('filled', 'correct');
+
+  puzzleChainProgress[chainIdx]++;
+  document.getElementById('cprogNum-' + chainIdx).textContent = puzzleChainProgress[chainIdx];
+
+  if (puzzleChainProgress[chainIdx] >= 3) {
+    document.getElementById('pchain-' + chainIdx).classList.add('complete');
+  }
+
+  var allDone = true;
+  for (var i = 0; i < puzzleChainProgress.length; i++) {
+    if (puzzleChainProgress[i] < 3) { allDone = false; break; }
+  }
+  if (allDone) {
+    var result = document.getElementById('puzzleResult');
+    result.textContent = '🧩 全部因果链拼合正确！';
+    result.className = 'puzzle-result show pass';
+    stageDone.puzzle = true;
+    updateStageProgress();
+    document.getElementById('stagePuzzleDone').classList.add('show');
+  }
+}
+
+// 初始化拼图
+document.addEventListener('DOMContentLoaded', function() {
+  initPuzzle();
+});
+
+// 修复翻牌过关检测
+var origFlip = flipCard;
+flipCard = function(el) {
+  origFlip(el);
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+};
+</script>
+</body>
+</html>

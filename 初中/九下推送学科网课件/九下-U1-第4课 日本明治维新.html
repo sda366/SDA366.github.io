@@ -1,0 +1,1695 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下-U1-第4课 日本明治维新</title>
+<style>
+/* ========== v2.0 全局 CSS 变量 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+  --gold: #f1c40f;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding:36px 20px 30px;
+  text-align:center;
+  color:#fff;
+  border-radius:0 0 36px 36px;
+  box-shadow:0 6px 30px rgba(61,43,140,0.20);
+  margin:0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background:linear-gradient(135deg,#f0edff,#e0daff);
+  border-radius:12px;
+  padding:20px 24px;
+  margin-bottom:24px;
+  border:1px solid var(--border);
+}
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item {
+  font-size:13.5pt;
+  padding:6px 8px;
+  border-bottom:1px dashed var(--border);
+  cursor:pointer;
+  transition:all 0.2s;
+  border-radius:6px;
+  background:transparent;
+}
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn {
+  display:block; margin:20px auto 10px;
+  background:linear-gradient(135deg,#7c6cf0,#5a4ac7);
+  color:#fff; border:none; border-radius:24px;
+  padding:12px 36px; font-size:16pt; font-weight:700;
+  cursor:pointer; transition:all 0.25s;
+  box-shadow:0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn {
+  flex:1; padding:14px 8px;
+  font-size:14pt; font-weight:700;
+  border:none; cursor:pointer;
+  text-align:center;
+  transition:all 0.25s;
+  background:#e8e0ff; color:#5a4ac7;
+  letter-spacing:1px;
+}
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ========== 闯关进度条 ========== */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background:var(--bg-card);
+  border-left:4px solid var(--primary);
+  border-radius:0 10px 10px 0;
+  padding:18px 22px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; }
+.kp-card li { margin:6px 0; font-size:14pt; }
+.kp-card p { font-size:14pt; line-height:1.8; }
+
+.timeline-bar {
+  background:#f0edff;
+  border-radius:8px;
+  padding:8px 16px;
+  font-size:12pt;
+  color:#5a4ac7;
+  text-align:center;
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+.link-bar {
+  border:2px dashed #d5cef0;
+  border-radius:10px;
+  padding:12px 16px;
+  margin-top:14px;
+  background:#faf8ff;
+  font-size:13pt;
+  color:#5a4ac7;
+}
+
+/* 标签 */
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-zhongkao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 挑战标题 ========== */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== ① 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item {
+  padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px;
+  cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s;
+}
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot {
+  min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:12pt;
+  transition:all 0.2s; background:#faf8ff; position:relative;
+}
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== ② 填空填词 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input {
+  width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px;
+  font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff;
+}
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== ③ 连线匹配 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item {
+  padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer;
+  transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center;
+}
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== ④ 因果拼图 ========== */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain {
+  background:#fff;
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:16px;
+  border:2px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:all 0.3s;
+}
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14pt;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:10px;
+}
+.puzzle-chain .chain-header .chain-badge {
+  display:inline-block;
+  padding:2px 12px;
+  border-radius:12px;
+  font-size:11pt;
+  color:#fff;
+}
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots {
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.puzzle-slot {
+  min-width:100px;
+  flex:1;
+  min-height:52px;
+  border:2px dashed #dcd4f5;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 10px;
+  font-size:11pt;
+  color:#aaa;
+  background:#faf8ff;
+  transition:all 0.3s;
+  text-align:center;
+}
+.puzzle-slot.filled {
+  border-style:solid;
+  border-color:var(--primary);
+  background:#f0edff;
+  color:#333;
+  font-weight:600;
+}
+.puzzle-slot.correct {
+  border-color:var(--green);
+  background:#d4efdf;
+  color:var(--green);
+}
+.puzzle-pieces {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:6px;
+}
+.puzzle-piece {
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:12pt;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.25s;
+  border:2px solid var(--border);
+  background:#fff;
+  user-select:none;
+  flex:1 1 auto;
+  min-width:80px;
+  text-align:center;
+}
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed {
+  opacity:0.3;
+  cursor:not-allowed;
+  transform:scale(0.95);
+  pointer-events:none;
+}
+.puzzle-piece.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.25); }
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-6px); }
+  75% { transform:translateX(6px); }
+}
+.puzzle-hint { font-size:11pt; color:#888; margin-top:6px; text-align:center; }
+.puzzle-result { text-align:center; padding:10px; border-radius:8px; font-weight:700; font-size:14pt; margin-top:8px; display:none; }
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.puzzle-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.chain-progress {
+  font-size:11pt;
+  color:#888;
+  margin-left:auto;
+}
+.chain-progress strong { color:var(--primary-dark); }
+
+/* ========== ⑤ 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back {
+  position:absolute; width:100%; height:100%; backface-visibility:hidden;
+  border-radius:12px; display:flex; align-items:center; justify-content:center;
+  padding:10px; font-size:11pt; text-align:center;
+}
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== 关卡通过横幅 ========== */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== Page2 手风琴 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s;
+}
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd {
+  background:linear-gradient(135deg,#e67e22,#f0ad4e);
+  color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700;
+  cursor:pointer; user-select:none;
+}
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== 对比表格 ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip {
+  padding:6px 14px; border:2px solid var(--border); border-radius:20px;
+  background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s;
+  font-weight:600; color:#5a4ac7;
+}
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+.col-body .a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.col-body .a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label {
+  display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px;
+  cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff;
+}
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node {
+  width:90%; border-radius:12px; padding:16px 20px; text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative;
+}
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100% { box-shadow:0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow:0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card {
+  background:#fff; border-radius:14px; padding:20px 16px 14px;
+  border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08);
+  position:relative; text-align:left;
+}
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+  .puzzle-slot { min-width:60px; font-size:10pt; }
+  .puzzle-piece { font-size:10.5pt; padding:8px 10px; min-width:60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0 封面页 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 殖民地人民的反抗与资本主义制度的扩展</div>
+    <h1>第4课 · 日本明治维新</h1>
+    <div class="hero-sub">统编版初中历史  九年级下册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解明治维新的背景、内容与影响，把握19世纪中期日本历史的转折。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过《五条誓文》等史料，理解明治维新的政治纲领与改革方向。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析明治维新使日本走上资本主义道路的原因及其局限性。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>认识改革对国家发展的重要性，感悟日本面对民族危机时的求变精神。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1 知识要点 + 五关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">德川幕府与倒幕运动</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">明治维新的措施</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">因果推演 · 综合闯关</button>
+  </div>
+
+  <!-- ===== Tab1：德川幕府与倒幕运动 ===== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1853年 — 1868年</div>
+      <h3>📌 德川幕府的统治</h3>
+      <ul>
+        <li>天皇名义君主，幕府将军掌握实权</li>
+        <li>推行<strong class="kwd">锁国政策</strong>，仅与中国、荷兰进行有限贸易</li>
+        <li>造成日本与外界隔绝，阻碍社会经济发展</li>
+      </ul>
+      <h3>⚔️ 民族危机与倒幕运动</h3>
+      <ul>
+        <li><strong>黑船事件：</strong>1853—1854年，美国海军舰队强行进入日本港口</li>
+        <li>日本被迫签署不平等条约，开放港口，幕府统治动摇</li>
+        <li><strong>倒幕运动：</strong>中下级武士联合西南强藩和朝廷公卿发动</li>
+        <li><strong>结果：</strong>1868年“<strong class="kwd">王政复古</strong>”政变，粉碎幕府反扑，改年号“明治”</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 倒幕运动的中坚力量是生活困窘、希望改革的中下级武士。
+      </div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将明治维新前的重大事件按时间顺序排列</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">美国黑船来航（1853-1854）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">日本签署不平等条约，开放港口</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">倒幕运动兴起（中下级武士领导）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">“王政复古”政变（1868.1）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">幕府被粉碎，改年号“明治”</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">德川幕府</div><div class="flash-back">19世纪中期日本的实际统治者，推行锁国政策，面临民族危机时束手无策</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">黑船事件</div><div class="flash-back">1853—1854年美国海军舰队两次强行进入日本港口，迫使日本打开国门</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">倒幕运动</div><div class="flash-back">中下级武士联合西南强藩发动的推翻幕府统治的运动，1868年成功</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">王政复古</div><div class="flash-back">1868年1月倒幕派发动的政变，支持天皇亲政，结束幕府统治</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab2：明治维新的措施 ===== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1868年 — 1889年</div>
+      <h3>📌 明治维新的主要内容</h3>
+      <ul>
+        <li><strong>政治：</strong><strong class="kwd">废藩置县</strong>，加强中央集权</li>
+        <li><strong>军事：</strong>实行<strong class="kwd">征兵制</strong>，建立新式军队</li>
+        <li><strong>经济：</strong>推行地税改革，以“<strong class="kwd">殖产兴业</strong>”为口号，大力发展近代经济</li>
+        <li><strong>社会生活：</strong>提倡“<strong class="kwd">文明开化</strong>”，向西方学习，改造教育、文化和生活方式</li>
+      </ul>
+      <h3>📊 历史意义</h3>
+      <ul>
+        <li><strong>积极：</strong>日本历史的<strong class="kwd">重大转折点</strong>，走上发展资本主义道路，跻身资本主义强国</li>
+        <li><strong>局限：</strong>保留大量旧制度残余，<strong class="kwd">军国主义</strong>色彩浓厚，很快走上对外侵略扩张道路</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 《五条誓文》是明治维新的政治纲领，表明日本改革旧制度、向西方学习的决心。
+      </div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词，完成明治维新的核心措施</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">政治上：实行 <input type="text" class="fill-input" data-answer="废藩置县" placeholder="？"> ，加强中央集权。</div>
+      <div class="fill-blank-row">军事上：实行 <input type="text" class="fill-input" data-answer="征兵制" placeholder="？"> ，建立新式军队。</div>
+      <div class="fill-blank-row">经济上：以“<input type="text" class="fill-input" data-answer="殖产兴业" placeholder="？"> ”为口号，大力发展近代经济。</div>
+      <div class="fill-blank-row">社会生活上：提倡“<input type="text" class="fill-input" data-answer="文明开化" placeholder="？"> ”，向西方学习。</div>
+      <div class="fill-blank-row">《<input type="text" class="fill-input" data-answer="五条誓文" placeholder="？"> 》是明治维新的政治纲领。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将明治维新的措施与其具体内容配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 措施</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">政治措施</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">军事措施</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">经济措施</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">社会生活措施</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">改革局限性</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📋 具体内容</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">废藩置县，加强中央集权</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">实行征兵制，建立新式军队</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">殖产兴业，大力发展近代经济</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">文明开化，向西方学习</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">保留旧制度残余，军国主义色彩浓厚</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">废藩置县</div><div class="flash-back">明治维新的政治措施，废除藩国，设立府县，加强中央集权</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">殖产兴业</div><div class="flash-back">明治维新的经济口号，大力发展近代工业，推动资本主义经济发展</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">文明开化</div><div class="flash-back">明治维新的社会生活口号，向西方学习，改造日本的教育、文化和生活方式</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《五条誓文》</div><div class="flash-back">1868年日本新政府颁布的政治纲领，表明改革旧制度、向西方学习的决心</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab3：因果推演 · 综合闯关 ===== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <h3>🧩 因果推演 · 整体认知</h3>
+      <p>面对西方列强的入侵和民族危机，日本通过倒幕运动推翻幕府统治，随后明治政府推行全面改革。明治维新使日本走上了发展资本主义的道路，成为亚洲第一个跻身资本主义强国的国家。</p>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 对比视角</span> 日本的明治维新与中国的洋务运动几乎同时发生，但日本改革更为彻底，成功转型为资本主义国家。
+      </div>
+    </div>
+
+    <!-- ④ 因果拼图 -->
+    <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+    <div class="puzzle-container" id="puzzleContainer">
+      <!-- 由JS动态生成 -->
+    </div>
+    <div class="puzzle-result" id="puzzleResult"></div>
+    <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+    <!-- ⑤ 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">明治维新</div><div class="flash-back">1868年开始日本资产阶级性质的改革，使日本走上发展资本主义道路</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">军国主义</div><div class="flash-back">明治维新保留的旧制度残余，日本强大后迅速走上对外侵略扩张道路</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">天皇制度</div><div class="flash-back">1889年《大日本帝国宪法》确立君主立宪制，天皇总揽大权，后成为军国主义工具</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page2 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1：明治维新的背景 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>📍 重难点一：明治维新的背景</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 幕府统治的危机</div>
+        <div class="deep-card-bd">
+          <p>19世纪中期，日本处于德川幕府统治下，天皇名义君主，幕府将军掌握实权。推行锁国政策，仅与中国、荷兰进行有限贸易，造成日本与外界隔绝。</p>
+          <p>1853—1854年，美国海军舰队两次强行进入日本港口，日本被迫签署不平等条约，其他西方国家接踵而至，幕府统治发生动摇。</p>
+          <p><strong>简而言之：</strong>西方列强的入侵打破了日本锁国状态，幕府统治陷入内外交困的危机。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与中国洋务运动的对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：日本明治维新与中国洋务运动几乎同时发生，但日本改革涉及政治、经济、社会各方面，更为彻底；洋务运动仅停留在“器物”层面。</p>
+          <p>纵向联系：日本的成功为亚洲国家提供了改革图强的范例，但也使其在19世纪末走上侵略扩张道路，如甲午中日战争。</p>
+          <p><strong>这一联系说明：</strong>改革的彻底性决定了国家转型的成败。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“19世纪中期，日本和大多数亚洲国家一样，面临着沦为殖民地的危险。”——教材导言</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 民族危机是明治维新的直接动力，但根本原因是幕府统治的落后与资本主义发展的要求之间的矛盾。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：分析明治维新的历史背景。</p>
+          <p><strong>答案：</strong>内部：幕府统治落后，锁国政策阻碍发展，社会矛盾激化；外部：西方列强入侵，民族危机加深。<strong>解析：</strong>需从内外两方面综合分析。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2：明治维新的措施 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>📍 重难点二：明治维新的措施与影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 改革措施</div>
+        <div class="deep-card-bd">
+          <p>明治维新涉及政治、军事、经济、社会生活等多方面。政治上废藩置县，加强中央集权；军事上实行征兵制；经济上推行“殖产兴业”；社会生活上提倡“文明开化”。</p>
+          <p>《五条誓文》是改革的政治纲领，表明日本改革旧制度、向西方学习的决心。</p>
+          <p><strong>简而言之：</strong>明治维新是一次全方位的资产阶级性质的改革。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与俄国1861年改革的对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：明治维新与俄国1861年改革都属于自上而下的资产阶级改革，但俄国改革仅废除农奴制，日本改革则涉及更广泛的领域。</p>
+          <p>纵向联系：明治维新使日本走上了资本主义道路，避免了沦为殖民地；其成功经验也影响了亚洲其他国家的改革运动。</p>
+          <p><strong>这一联系说明：</strong>改革的广度与深度决定了国家转型的速度与效果。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“《五条誓文》内容包括：一、广兴会议，万事决于公论；二、上下一心，盛行经纶；三、官武一体，以至庶民，各遂其志……五、求知识于世界，大振皇国之基础。”——相关史事</div>
+          <p><span class="tag-value">📖 史料实证</span> 《五条誓文》体现了日本学习西方、改革旧制度的决心，是明治维新的纲领性文件。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：明治维新的措施对日本社会发展有什么影响？</p>
+          <p><strong>答案：</strong>积极：走上资本主义道路，跻身资本主义强国；局限：保留军国主义残余，走上侵略扩张道路。<strong>解析：</strong>需从正反两方面辩证分析。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3：历史意义与启示 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>📍 重难点三：明治维新的历史启示</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 历史意义</div>
+        <div class="deep-card-bd">
+          <p>明治维新是日本历史的重大转折点。它使日本走上了发展资本主义的道路，实现了富国强兵，开始跻身资本主义强国之列。</p>
+          <p>但改革保留了大量旧制度残余，军国主义色彩浓厚。日本强大后很快走上对外侵略扩张的道路，给亚洲邻国带来深重灾难。</p>
+          <p><strong>简而言之：</strong>明治维新使日本成功转型，但改革的局限性也为后来的侵略扩张埋下了伏笔。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与德国改革的对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：明治维新与德国统一后的改革都带有军国主义色彩，两国都迅速成为世界强国并走上扩张道路。</p>
+          <p>纵向联系：日本的成功为落后国家提供了“改革图强”的范例，但其军国主义道路也警示后人：改革不仅要重视经济军事，更要重视民主与和平。</p>
+          <p><strong>这一联系说明：</strong>改革不仅要“富国强兵”，更要建立和平发展的制度基础。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“明治维新成为日本历史的重大转折点。通过明治维新，日本迅速走上了发展资本主义的道路，实现了富国强兵。”——教材正文</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 明治维新是生产力发展要求变革生产关系的体现。改革解放了生产力，使日本迅速实现工业化。但改革的不彻底性（军国主义残余）也暴露了资产阶级革命的局限性。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：从唯物史观角度分析明治维新对日本历史发展的影响。</p>
+          <p><strong>答案：</strong>改革解放了生产力，推动了资本主义发展，是历史的进步；但保留军国主义残余，又埋下了侵略扩张的祸根。<strong>解析：</strong>需运用生产力与生产关系、进步与局限的辩证分析方法。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page3 教材栏目解答 ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 相关史事1 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：武士的分化与倒幕运动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>在德川幕府统治的200多年里，武士构成了统治阶级的基础。在他们的上面，是天皇、将军和各藩的首领“大名”。有的武士接受了良好的文化教育，成为有知识和教养的人，担任幕僚和行政官员。在经济发展的过程中，武士阶层也出现分化。下级武士生活困窘，不少下级武士为维持生计，开始从事商业、手工业，有的当医生、作家，有的沦为浪人。一些有文化和政治经验的中下级武士不满幕府的统治，希望在社会改革中求得生机。他们成为倒幕运动的中坚力量。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong>下级武士在经济发展中生活困窘，不满幕府统治，成为倒幕运动的中坚力量。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事2 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：《五条誓文》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1868年3月，日本新政府颁布了《五条誓文》，内容包括：一、广兴会议，万事决于公论；二、上下一心，盛行经纶；三、官武一体，以至庶民，各遂其志，毋使人心倦怠；四、破除旧来之陋习，一本天地之公道；五、求知识于世界，大振皇国之基础。《五条誓文》表明了日本改革旧制度、向西方学习的决心，成为明治维新的政治纲领。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong>《五条誓文》是明治维新的政治纲领，体现日本改革旧制度、向西方学习的决心。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题1：</strong>制作《中日近代历史大事对照年表》，写出在以下年代中国和日本发生的大事。</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案：</strong><br>
+        1840—1860年：<strong>中国</strong>——鸦片战争（1840—1842）、《南京条约》、太平天国运动（1851—1864）；<strong>日本</strong>——黑船来航（1853—1854）、被迫开放港口、幕府统治动摇<br>
+        1861—1880年：<strong>中国</strong>——洋务运动（1861年起）；<strong>日本</strong>——倒幕运动（1868）、明治维新开始（1868）、废藩置县、殖产兴业<br>
+        1881—1900年：<strong>中国</strong>——甲午中日战争（1894—1895）、《马关条约》、戊戌变法（1898）；<strong>日本</strong>——颁布《大日本帝国宪法》（1889）、对外侵略扩张
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案</button>
+      <p><strong>问题2：</strong>明治维新的主要内容有哪些？明治维新产生了哪些影响？</p>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案：</strong><br>
+        <strong>主要内容：</strong>政治：废藩置县，加强中央集权；军事：实行征兵制；经济：殖产兴业；社会生活：文明开化。<br>
+        <strong>影响：</strong>积极——走上发展资本主义道路，跻身资本主义强国；局限——保留军国主义残余，走上侵略扩张道路。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：日本的天皇制度</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>“天皇”是人们对日本君主的称呼。大化改新后，日本建立了以天皇为中心的中央集权制度，天皇制度正式确立。12世纪后期，日本进入幕府统治时期，天皇逐渐大权旁落。1889年，明治政府颁布了《大日本帝国宪法》，确立了日本近代君主立宪制的天皇制度。宪法规定：大日本帝国由万世一系的天皇统治，天皇神圣不可侵犯；天皇作为国家元首，总揽一切大权，总理大臣和国务大臣组成的政府只对天皇负责。日本的天皇制度后来变成军国主义天皇制度。1946年，日本颁布新宪法，规定天皇是国家的象征，没有实际统治权。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong>1889年宪法确立了近代君主立宪制的天皇制度，天皇总揽大权，后来演变为军国主义天皇制度。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page4 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 q1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 19世纪中期，日本德川幕府推行的政策是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 锁国政策</label>
+      <label onclick="optClick(this,'B','q1')">B. 开放政策</label>
+      <label onclick="optClick(this,'C','q1')">C. 殖民扩张政策</label>
+      <label onclick="optClick(this,'D','q1')">D. 自由贸易政策</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：A<br>
+      📌 解题思路：德川幕府推行锁国政策，只允许日本同中国、荷兰进行有限的贸易。<br>
+      ❌ 排除B：开放政策是黑船事件后被迫实行的。<br>
+      ❌ 排除C：日本当时尚未进行殖民扩张。<br>
+      ❌ 排除D：自由贸易是明治维新后的政策。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 倒幕运动的中坚力量是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 天皇</label>
+      <label onclick="optClick(this,'B','q2')">B. 幕府将军</label>
+      <label onclick="optClick(this,'C','q2')">C. 中下级武士</label>
+      <label onclick="optClick(this,'D','q2')">D. 农民</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：中下级武士生活困窘，不满幕府统治，成为倒幕运动的中坚力量。<br>
+      ❌ 排除A：天皇后来被倒幕派拥立，但不是运动的主力。<br>
+      ❌ 排除B：幕府将军是倒幕的对象。<br>
+      ❌ 排除D：农民不是运动的核心力量。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 明治维新的政治纲领是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 《独立宣言》</label>
+      <label onclick="optClick(this,'B','q3')">B. 《五条誓文》</label>
+      <label onclick="optClick(this,'C','q3')">C. 《人权宣言》</label>
+      <label onclick="optClick(this,'D','q3')">D. 《大日本帝国宪法》</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：《五条誓文》是明治新政府颁布的政治纲领，表明改革旧制度、向西方学习的决心。<br>
+      ❌ 排除A：是美国文件。<br>
+      ❌ 排除C：是法国文件。<br>
+      ❌ 排除D：是1889年颁布的宪法，晚于《五条誓文》。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 明治维新使日本走上发展资本主义道路的标志性措施是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 废藩置县</label>
+      <label onclick="optClick(this,'B','q4')">B. 实行征兵制</label>
+      <label onclick="optClick(this,'C','q4')">C. 殖产兴业</label>
+      <label onclick="optClick(this,'D','q4')">D. 文明开化</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：“殖产兴业”是发展近代工业的经济政策，直接推动资本主义经济发展。<br>
+      ❌ 排除A：政治措施，加强中央集权。<br>
+      ❌ 排除B：军事措施，建立新式军队。<br>
+      ❌ 排除D：社会生活措施，向西方学习文化。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 明治维新的局限性包括</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 保留大量旧制度残余</label>
+      <label onclick="optClick(this,'B','q5')">B. 军国主义色彩浓厚</label>
+      <label onclick="optClick(this,'C','q5')">C. 很快走上对外侵略扩张道路</label>
+      <label onclick="optClick(this,'D','q5')">D. 以上都是</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：D<br>
+      📌 解题思路：A、B、C三项都是明治维新的局限性，因此D项“以上都是”正确。<br>
+      ❌ 排除A：不全面。<br>
+      ❌ 排除B：不全面。<br>
+      ❌ 排除C：不全面。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题（不计分） -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">“《五条誓文》内容包括：一、广兴会议，万事决于公论；二、上下一心，盛行经纶；三、官武一体，以至庶民，各遂其志，毋使人心倦怠；四、破除旧来之陋习，一本天地之公道；五、求知识于世界，大振皇国之基础。”——教材相关史事</div>
+    <div class="q-text">（1）《五条誓文》表明了日本怎样的决心？</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong>表明了日本改革旧制度、向西方学习的决心，是明治维新的政治纲领。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+    <div class="q-text">（2）结合所学，明治维新使日本发生了怎样的变化？</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong>明治维新是日本历史的重大转折点，使日本走上了发展资本主义的道路，实现了富国强兵，开始跻身资本主义强国之列；但保留了军国主义残余，很快走上侵略扩张道路。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== Page5 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌊</span><strong>民族危机</strong>
+        <p>黑船事件 → 被迫开放 → 幕府统治动摇</p>
+        <div class="kg-detail"><p>1853—1854年美国海军舰队入侵日本，迫使日本打开国门，幕府统治陷入内外交困的危机。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚔️</span><strong>倒幕运动</strong>
+        <p>中下级武士领导 → 王政复古 → 结束幕府</p>
+        <div class="kg-detail"><p>中下级武士联合西南强藩发动倒幕运动，1868年成功推翻幕府统治，明治天皇亲政。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📜</span><strong>明治维新</strong>
+        <p>政治·军事·经济·社会生活全面改革</p>
+        <div class="kg-detail"><p>废藩置县、征兵制、殖产兴业、文明开化，全方位向西方学习，推动日本近代化。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>历史影响</strong>
+        <p>走上资本主义道路 → 但保留军国主义残余</p>
+        <div class="kg-detail"><p>日本成为亚洲第一个资本主义强国，但军国主义色彩浓厚，很快走上对外侵略扩张道路。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：中央集权与改革</div>
+      <div class="kg-rule r2">🟠 经济：殖产兴业与资本主义</div>
+      <div class="kg-rule r3">🟢 文化：文明开化与西化</div>
+      <div class="kg-rule r4">🔴 军事：征兵制与军国主义</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page6 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 殖民地人民的反抗与资本主义制度的扩展</div>
+    <h1 style="font-size:22pt;">第4课 · 日本明治维新</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>幕府统治与倒幕运动</h3>
+        <ul>
+          <li><strong>背景：</strong>德川幕府锁国落后，黑船来航</li>
+          <li><strong>倒幕：</strong>中下级武士领导，1868年成功</li>
+          <li><strong>结果：</strong>明治天皇亲政，开启改革</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>明治维新的措施</h3>
+        <ul>
+          <li><strong>政治：</strong>废藩置县，加强中央集权</li>
+          <li><strong>经济：</strong>殖产兴业，发展近代工业</li>
+          <li><strong>军事/文化：</strong>征兵制，文明开化</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>历史意义与启示</h3>
+        <ul>
+          <li><strong>进步：</strong>走上资本主义道路，跻身强国</li>
+          <li><strong>局限：</strong>军国主义残余，侵略扩张</li>
+          <li><strong>启示：</strong>改革的彻底性决定国家转型成败</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    
+      
+    
+    
+<footer>
+    <p>统编版初中历史 · 九年级下册 · 第一单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+        <div class="bottom-nav">
+    <div><a href="九下-U1-第3课 美国内战.html">← 上一课：第3课 美国内战</a></div>
+    <div class="nav-center">第4课</div>
+    <div><a href="九下-U2-第5课 第二次工业革命.html">下一课：第5课 第二次工业革命 →</a></div>
+  </div>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+/* ========== 6.1 分页导航系统 ========== */
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+/* ========== 6.2 闯关进度追踪 ========== */
+var stageDone = { sort:false, fill:false, match:false, puzzle:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','puzzle','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+/* ========== 6.3 封面学习目标标记 ========== */
+var targetsDoneCount = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDoneCount = document.querySelectorAll('.target-item.done').length;
+  if (targetsDoneCount >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+/* ========== 6.4 标签页与手风琴 ========== */
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+function markMastered(btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+}
+
+/* ========== 6.5 答案显隐 + 选择题 ========== */
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+var correctAnswers = { q1:'A', q2:'C', q3:'B', q4:'C', q5:'D' };
+var mcDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+  // 自动显示答案解析
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+function resetQuiz() {
+  mcDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+    ex.querySelectorAll('.ans-btn').forEach(function(b) {
+      var parent = b.parentElement;
+      var ansDiv = parent.querySelector('.a');
+      if (ansDiv && ansDiv.classList.contains('show')) {
+        b.textContent = '隐藏答案';
+      } else {
+        b.textContent = '📝 查看解析';
+      }
+    });
+  });
+}
+
+/* ========== 6.6 栏目筛选 ========== */
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+/* ========== 6.7 拖拽排序 ========== */
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key2','key3','key4','key5'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.8 填空填词 ========== */
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查红色标记的输入框';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.9 连线匹配 ========== */
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      var result = document.getElementById('matchResult');
+      result.textContent = '✅ 全部配对正确！';
+      result.className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    selectedLeft.classList.add('wrong-shake');
+    el.classList.add('wrong-shake');
+    var s = selectedLeft;
+    setTimeout(function(){ s.classList.remove('selected','wrong-shake'); }, 500);
+    setTimeout(function(e){ e.classList.remove('wrong-shake'); }, 500, el);
+    selectedLeft = null;
+  }
+}
+
+/* ========== 6.10 翻转卡 ========== */
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+}
+
+/* ========== 6.11 知识结构图节点展开 ========== */
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+/* ========== 6.12 deep-card 折叠 ========== */
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+/* ========== 6.13 因果拼图（第④关） ========== */
+var puzzleData = [
+  {
+    id: 0,
+    title: '链条一：幕府统治的危机',
+    badge: 'c1',
+    pieces: [
+      { text: '德川幕府推行锁国政策，日本与外界隔绝', order: 0 },
+      { text: '美国黑船来航，日本被迫开放港口', order: 1 },
+      { text: '幕府统治动摇，中下级武士发动倒幕运动', order: 2 }
+    ]
+  },
+  {
+    id: 1,
+    title: '链条二：明治维新的推行',
+    badge: 'c2',
+    pieces: [
+      { text: '倒幕运动成功，明治天皇亲政', order: 0 },
+      { text: '颁布《五条誓文》，推行全面改革', order: 1 },
+      { text: '废藩置县、殖产兴业、文明开化、实行征兵制', order: 2 }
+    ]
+  },
+  {
+    id: 2,
+    title: '链条三：改革的影响与启示',
+    badge: 'c3',
+    pieces: [
+      { text: '日本走上发展资本主义道路，跻身强国', order: 0 },
+      { text: '但保留军国主义残余，走上侵略扩张道路', order: 1 },
+      { text: '启示：改革的彻底性决定国家转型的成败', order: 2 }
+    ]
+  }
+];
+
+var puzzleChainProgress = [0, 0, 0];
+
+function initPuzzle() {
+  var container = document.getElementById('puzzleContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  puzzleChainProgress = [0, 0, 0];
+
+  puzzleData.forEach(function(chain, ci) {
+    var chainDiv = document.createElement('div');
+    chainDiv.className = 'puzzle-chain';
+    chainDiv.id = 'pchain-' + ci;
+
+    var header = document.createElement('div');
+    header.className = 'chain-header';
+    var badge = document.createElement('span');
+    badge.className = 'chain-badge ' + chain.badge;
+    badge.textContent = '链' + (ci + 1);
+    header.appendChild(badge);
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = chain.title;
+    header.appendChild(titleSpan);
+    var prog = document.createElement('span');
+    prog.className = 'chain-progress';
+    prog.id = 'cprog-' + ci;
+    prog.innerHTML = '进度：<strong id="cprogNum-' + ci + '">0</strong>/3';
+    header.appendChild(prog);
+    chainDiv.appendChild(header);
+
+    var slotsDiv = document.createElement('div');
+    slotsDiv.className = 'chain-slots';
+    slotsDiv.id = 'cslots-' + ci;
+    for (var s = 0; s < 3; s++) {
+      var slot = document.createElement('div');
+      slot.className = 'puzzle-slot';
+      slot.id = 'cslot-' + ci + '-' + s;
+      slot.textContent = '第' + (s + 1) + '步';
+      slotsDiv.appendChild(slot);
+    }
+    chainDiv.appendChild(slotsDiv);
+
+    var piecesDiv = document.createElement('div');
+    piecesDiv.className = 'puzzle-pieces';
+    piecesDiv.id = 'cpieces-' + ci;
+    var shuffled = chain.pieces.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = temp;
+    }
+    shuffled.forEach(function(piece, pi) {
+      var pDiv = document.createElement('div');
+      pDiv.className = 'puzzle-piece p' + (ci + 1);
+      pDiv.id = 'cpiece-' + ci + '-' + pi;
+      pDiv.setAttribute('data-chain', ci);
+      pDiv.setAttribute('data-order', piece.order);
+      pDiv.textContent = piece.text;
+      pDiv.addEventListener('click', function() {
+        handlePuzzleClick(parseInt(this.getAttribute('data-chain')), parseInt(this.getAttribute('data-order')));
+      });
+      piecesDiv.appendChild(pDiv);
+    });
+    chainDiv.appendChild(piecesDiv);
+    container.appendChild(chainDiv);
+  });
+}
+
+function handlePuzzleClick(chainIdx, order) {
+  if (puzzleChainProgress[chainIdx] >= 3) return;
+  var nextSlot = puzzleChainProgress[chainIdx];
+  if (order !== nextSlot) {
+    var pieces = document.querySelectorAll('#cpieces-' + chainIdx + ' .puzzle-piece');
+    pieces.forEach(function(p) {
+      if (parseInt(p.getAttribute('data-order')) === order) {
+        p.classList.add('wrong-shake');
+        setTimeout(function() { p.classList.remove('wrong-shake'); }, 500);
+      }
+    });
+    return;
+  }
+
+  var slot = document.getElementById('cslot-' + chainIdx + '-' + nextSlot);
+  var pieceEl = document.querySelector('#cpieces-' + chainIdx + ' .puzzle-piece[data-order="' + order + '"]');
+  if (!pieceEl || !slot) return;
+
+  pieceEl.classList.add('placed');
+  pieceEl.style.display = 'none';
+  slot.textContent = pieceEl.textContent;
+  slot.classList.add('filled', 'correct');
+
+  puzzleChainProgress[chainIdx]++;
+  document.getElementById('cprogNum-' + chainIdx).textContent = puzzleChainProgress[chainIdx];
+
+  if (puzzleChainProgress[chainIdx] >= 3) {
+    document.getElementById('pchain-' + chainIdx).classList.add('complete');
+  }
+
+  var allDone = true;
+  for (var i = 0; i < puzzleChainProgress.length; i++) {
+    if (puzzleChainProgress[i] < 3) { allDone = false; break; }
+  }
+  if (allDone) {
+    var result = document.getElementById('puzzleResult');
+    result.textContent = '🧩 全部因果链拼合正确！';
+    result.className = 'puzzle-result show pass';
+    stageDone.puzzle = true;
+    updateStageProgress();
+    document.getElementById('stagePuzzleDone').classList.add('show');
+  }
+}
+
+// 初始化拼图
+document.addEventListener('DOMContentLoaded', function() {
+  initPuzzle();
+});
+
+// 修复翻牌过关检测
+var origFlip = flipCard;
+flipCard = function(el) {
+  origFlip(el);
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+};
+</script>
+</body>
+</html>

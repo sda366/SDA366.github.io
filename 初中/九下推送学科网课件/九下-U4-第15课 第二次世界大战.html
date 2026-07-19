@@ -1,0 +1,1771 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下-U4-第15课 第二次世界大战</title>
+<style>
+/* ========== v2.0 全局 CSS 变量 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+  --gold: #f1c40f;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding:36px 20px 30px;
+  text-align:center;
+  color:#fff;
+  border-radius:0 0 36px 36px;
+  box-shadow:0 6px 30px rgba(61,43,140,0.20);
+  margin:0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background:linear-gradient(135deg,#f0edff,#e0daff);
+  border-radius:12px;
+  padding:20px 24px;
+  margin-bottom:24px;
+  border:1px solid var(--border);
+}
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item {
+  font-size:13.5pt;
+  padding:6px 8px;
+  border-bottom:1px dashed var(--border);
+  cursor:pointer;
+  transition:all 0.2s;
+  border-radius:6px;
+  background:transparent;
+}
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn {
+  display:block; margin:20px auto 10px;
+  background:linear-gradient(135deg,#7c6cf0,#5a4ac7);
+  color:#fff; border:none; border-radius:24px;
+  padding:12px 36px; font-size:16pt; font-weight:700;
+  cursor:pointer; transition:all 0.25s;
+  box-shadow:0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn {
+  flex:1; padding:14px 8px;
+  font-size:14pt; font-weight:700;
+  border:none; cursor:pointer;
+  text-align:center;
+  transition:all 0.25s;
+  background:#e8e0ff; color:#5a4ac7;
+  letter-spacing:1px;
+}
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ========== 闯关进度条 ========== */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background:var(--bg-card);
+  border-left:4px solid var(--primary);
+  border-radius:0 10px 10px 0;
+  padding:18px 22px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; }
+.kp-card li { margin:6px 0; font-size:14pt; }
+.kp-card p { font-size:14pt; line-height:1.8; }
+
+.timeline-bar {
+  background:#f0edff;
+  border-radius:8px;
+  padding:8px 16px;
+  font-size:12pt;
+  color:#5a4ac7;
+  text-align:center;
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+.link-bar {
+  border:2px dashed #d5cef0;
+  border-radius:10px;
+  padding:12px 16px;
+  margin-top:14px;
+  background:#faf8ff;
+  font-size:13pt;
+  color:#5a4ac7;
+}
+
+/* 标签 */
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-zhongkao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 挑战标题 ========== */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== ① 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item {
+  padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px;
+  cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s;
+}
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot {
+  min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:12pt;
+  transition:all 0.2s; background:#faf8ff; position:relative;
+}
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== ② 填空填词 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input {
+  width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px;
+  font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff;
+}
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== ③ 连线匹配 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item {
+  padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer;
+  transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center;
+}
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== ④ 因果拼图 ========== */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain {
+  background:#fff;
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:16px;
+  border:2px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:all 0.3s;
+}
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14pt;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:10px;
+}
+.puzzle-chain .chain-header .chain-badge {
+  display:inline-block;
+  padding:2px 12px;
+  border-radius:12px;
+  font-size:11pt;
+  color:#fff;
+}
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots {
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.puzzle-slot {
+  min-width:100px;
+  flex:1;
+  min-height:52px;
+  border:2px dashed #dcd4f5;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 10px;
+  font-size:11pt;
+  color:#aaa;
+  background:#faf8ff;
+  transition:all 0.3s;
+  text-align:center;
+}
+.puzzle-slot.filled {
+  border-style:solid;
+  border-color:var(--primary);
+  background:#f0edff;
+  color:#333;
+  font-weight:600;
+}
+.puzzle-slot.correct {
+  border-color:var(--green);
+  background:#d4efdf;
+  color:var(--green);
+}
+.puzzle-pieces {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:6px;
+}
+.puzzle-piece {
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:12pt;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.25s;
+  border:2px solid var(--border);
+  background:#fff;
+  user-select:none;
+  flex:1 1 auto;
+  min-width:80px;
+  text-align:center;
+}
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed {
+  opacity:0.3;
+  cursor:not-allowed;
+  transform:scale(0.95);
+  pointer-events:none;
+}
+.puzzle-piece.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.25); }
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-6px); }
+  75% { transform:translateX(6px); }
+}
+.puzzle-hint { font-size:11pt; color:#888; margin-top:6px; text-align:center; }
+.puzzle-result { text-align:center; padding:10px; border-radius:8px; font-weight:700; font-size:14pt; margin-top:8px; display:none; }
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.puzzle-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.chain-progress {
+  font-size:11pt;
+  color:#888;
+  margin-left:auto;
+}
+.chain-progress strong { color:var(--primary-dark); }
+
+/* ========== ⑤ 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back {
+  position:absolute; width:100%; height:100%; backface-visibility:hidden;
+  border-radius:12px; display:flex; align-items:center; justify-content:center;
+  padding:10px; font-size:11pt; text-align:center;
+}
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== 关卡通过横幅 ========== */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== Page2 手风琴 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s;
+}
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd {
+  background:linear-gradient(135deg,#e67e22,#f0ad4e);
+  color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700;
+  cursor:pointer; user-select:none;
+}
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== 对比表格 ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip {
+  padding:6px 14px; border:2px solid var(--border); border-radius:20px;
+  background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s;
+  font-weight:600; color:#5a4ac7;
+}
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+.col-body .a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.col-body .a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label {
+  display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px;
+  cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff;
+}
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node {
+  width:90%; border-radius:12px; padding:16px 20px; text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative;
+}
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100% { box-shadow:0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow:0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card {
+  background:#fff; border-radius:14px; padding:20px 16px 14px;
+  border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08);
+  position:relative; text-align:left;
+}
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+  .puzzle-slot { min-width:60px; font-size:10pt; }
+  .puzzle-piece { font-size:10.5pt; padding:8px 10px; min-width:60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0 封面页 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第四单元 · 资本主义经济危机和第二次世界大战</div>
+    <h1>第15课 · 第二次世界大战</h1>
+    <div class="hero-sub">统编版初中历史  九年级下册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解二战全面爆发、扩大、转折、结束的历程，把握1939—1945年的历史脉络。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过珍珠港事件、《联合国家宣言》、雅尔塔会议等史实，理解反法西斯同盟的形成与作用。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析二战胜利的原因与历史意义，理解世界反法西斯战争的正义性。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>认识中国人民抗日战争的世界意义，感悟和平的珍贵与反法西斯战争的伟大胜利。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1 知识要点 + 五关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">全面爆发与主要战场</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">反法西斯同盟与转折</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">雅尔塔会议与战争结束</button>
+  </div>
+
+  <!-- ===== Tab1：全面爆发与主要战场 ===== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1939年9月 — 1941年12月</div>
+      <h3>📌 二战全面爆发</h3>
+      <ul>
+        <li><strong>标志：</strong>1939年9月1日德军<strong class="kwd">“闪电战”</strong>突袭波兰，英法被迫宣战</li>
+        <li>轴心国同盟：1940年9月《德意日三国同盟条约》签署</li>
+        <li><strong>主要战场：</strong>欧洲西线、北非、欧洲东线、太平洋等</li>
+      </ul>
+      <h3>📌 战争扩大</h3>
+      <ul>
+        <li><strong>1940年：</strong>德军占领丹麦、挪威、荷兰、比利时；法国6周内投降</li>
+        <li><strong>1941年6月：</strong>德军入侵苏联，<strong class="kwd">莫斯科保卫战</strong>胜利，粉碎德军不可战胜神话</li>
+        <li><strong>1941年12月7日：</strong>日军<strong class="kwd">偷袭珍珠港</strong>，二战达到最大规模</li>
+        <li>中国战场是世界反法西斯战争的<strong class="kwd">东方主战场</strong></li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 珍珠港事件发生于1941年12月7日，太平洋战争爆发，二战达到最大规模。
+      </div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将二战重大事件按时间顺序排列</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">德军闪击波兰（1939年9月）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">法国投降（1940年6月）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">德国入侵苏联（1941年6月）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">珍珠港事件（1941年12月）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">《联合国家宣言》签署（1942年1月）</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">闪电战</div><div class="flash-back">德军采用的快速突击战术，1939年9月1日闪击波兰，二战全面爆发</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">珍珠港事件</div><div class="flash-back">1941年12月7日日军偷袭美国珍珠港，太平洋战争爆发，二战达到最大规模</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">莫斯科保卫战</div><div class="flash-back">1941年10月—1942年1月，苏军粉碎德军进攻，打破德军不可战胜神话</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">东方主战场</div><div class="flash-back">中国战场牵制大部分日本陆军，是世界反法西斯战争的重要组成部分</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab2：反法西斯同盟与转折 ===== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1942年 — 1944年</div>
+      <h3>📌 反法西斯同盟形成</h3>
+      <ul>
+        <li><strong>1942年1月：</strong>美、英、苏、中等26国签署<strong class="kwd">《联合国家宣言》</strong></li>
+        <li><strong>标志：</strong>世界反法西斯同盟正式形成</li>
+        <li>各国相互支援、协同作战，扭转战局</li>
+      </ul>
+      <h3>📌 战争转折</h3>
+      <ul>
+        <li><strong>1942—1943年：</strong>斯大林格勒保卫战——<strong class="kwd">二战转折点</strong></li>
+        <li><strong>1942年：</strong><strong class="kwd">中途岛海战</strong>——太平洋战争转折点</li>
+        <li><strong>1943年7月：</strong>墨索里尼垮台，意大利无条件投降</li>
+        <li><strong>1944年6月：</strong><strong class="kwd">诺曼底登陆</strong>——开辟欧洲第二战场</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 斯大林格勒保卫战是第二次世界大战的转折点，苏军扭转了苏德战场形势。
+      </div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词，完成二战转折的相关内容</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1942年1月，<input type="text" class="fill-input" data-answer="26" placeholder="？"> 个国家签署《联合国家宣言》。</div>
+      <div class="fill-blank-row">《联合国家宣言》的签署标志着世界 <input type="text" class="fill-input" data-answer="反法西斯同盟" placeholder="？"> 正式形成。</div>
+      <div class="fill-blank-row"><input type="text" class="fill-input" data-answer="斯大林格勒" placeholder="？"> 保卫战是第二次世界大战的转折点。</div>
+      <div class="fill-blank-row">1944年6月，盟军成功登陆 <input type="text" class="fill-input" data-answer="诺曼底" placeholder="？"> ，开辟欧洲第二战场。</div>
+      <div class="fill-blank-row">中途岛海战中，<input type="text" class="fill-input" data-answer="日本" placeholder="？"> 海军损失惨重，无力再发动大规模进攻。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将战役/事件与意义配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 战役/事件</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">斯大林格勒保卫战</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">中途岛海战</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">诺曼底登陆</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">《联合国家宣言》</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">莫斯科保卫战</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📋 意义</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">二战转折点</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">太平洋战争转折点</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">开辟欧洲第二战场</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">反法西斯同盟正式形成</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">打破德军不可战胜神话</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《联合国家宣言》</div><div class="flash-back">1942年1月26国签署，标志着世界反法西斯同盟正式形成</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">斯大林格勒保卫战</div><div class="flash-back">1942年7月—1943年2月，苏军获胜，是二战的转折点</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">诺曼底登陆</div><div class="flash-back">1944年6月6日盟军在法国诺曼底登陆，开辟欧洲第二战场</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">中途岛海战</div><div class="flash-back">1942年日军进攻中途岛失败，太平洋战场转折点</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab3：雅尔塔会议与战争结束 ===== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1945年2月 — 1945年9月</div>
+      <h3>📌 雅尔塔会议</h3>
+      <ul>
+        <li><strong>时间：</strong>1945年2月</li>
+        <li><strong>参会国首脑：</strong>罗斯福、丘吉尔、斯大林</li>
+        <li><strong>内容：</strong>彻底消灭德国法西斯；德国分区占领；决定战后成立<strong class="kwd">联合国</strong>；苏联承诺参加对日作战</li>
+      </ul>
+      <h3>📌 战争结束</h3>
+      <ul>
+        <li><strong>1945年5月8日：</strong>德国签署无条件投降书，欧洲战事结束</li>
+        <li><strong>1945年7月：</strong>波茨坦会议，发表<strong class="kwd">《波茨坦公告》</strong>敦促日本投降</li>
+        <li><strong>1945年8月：</strong>美国在广岛、长崎投下原子弹；苏联对日宣战</li>
+        <li><strong>1945年8月15日：</strong>日本宣布无条件投降；9月2日签署投降书</li>
+      </ul>
+      <h3>📊 二战历史影响</h3>
+      <ul>
+        <li>彻底粉碎法西斯和军国主义称霸世界的野心</li>
+        <li>彻底结束列强通过争夺殖民地瓜分世界的历史</li>
+        <li>促进世界<strong class="kwd">殖民体系瓦解</strong></li>
+        <li>对维护世界和平、促进共同发展产生深远影响</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 《开罗宣言》规定：日本所窃取的中国领土，如东北、台湾、澎湖列岛等归还中国。
+      </div>
+    </div>
+
+    <!-- ④ 因果拼图 -->
+    <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+    <div class="puzzle-container" id="puzzleContainer">
+      <!-- 由JS动态生成 -->
+    </div>
+    <div class="puzzle-result" id="puzzleResult"></div>
+    <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+    <!-- ⑤ 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">雅尔塔会议</div><div class="flash-back">1945年2月罗斯福、丘吉尔、斯大林会晤，决定战后成立联合国</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《波茨坦公告》</div><div class="flash-back">1945年7月中美英发表，敦促日本投降，重申《开罗宣言》条件</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《开罗宣言》</div><div class="flash-back">1943年中美英发表，规定日本窃取的中国领土（东北、台湾等）归还中国</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">原子弹</div><div class="flash-back">1945年8月美国在广岛、长崎投放，加速日本投降</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page2 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1：二战爆发与扩大 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>📍 重难点一：二战的全面爆发与扩大</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 全面爆发与扩大</div>
+        <div class="deep-card-bd">
+          <p>1939年9月1日德国闪击波兰，英法被迫宣战，二战全面爆发。1941年6月德国入侵苏联，1941年12月日本偷袭珍珠港，二战达到最大规模。</p>
+          <p>1940年9月《德意日三国同盟条约》签署，法西斯同盟正式建立。中国战场牵制大部分日本陆军，是世界反法西斯战争的东方主战场。</p>
+          <p><strong>简而言之：</strong>二战的全面爆发与扩大，反映了法西斯侵略的疯狂与反法西斯力量的逐渐觉醒。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与一战的对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：二战比一战规模更大、波及范围更广，是帝国主义矛盾与法西斯主义结合的产物。</p>
+          <p>纵向联系：二战的爆发与《凡尔赛条约》的不公正密切相关，德国纳粹利用复仇情绪上台是重要原因。</p>
+          <p><strong>这一联系说明：</strong>不公正的战后安排为新的战争埋下了隐患。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"1937年七七事变后，中国全民族抗战开始。1939年9月1日凌晨，德军以'闪电战'方式突袭波兰。波兰的盟国英、法被迫宣战，第二次世界大战全面爆发。"——教材正文</div>
+          <p><span class="tag-value">📖 历史解释</span> 二战从局部战争逐步发展为世界大战，反映了法西斯侵略的升级和反法西斯力量联合的滞后。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：为什么说珍珠港事件使二战达到最大规模？</p>
+          <p><strong>答案：</strong>珍珠港事件后美国对日宣战，德意对美宣战，太平洋战争爆发，战争波及全球更多地区和大国，达到最大规模。<strong>解析：</strong>需从参战国范围和战场扩展两方面回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2：反法西斯同盟 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>📍 重难点二：反法西斯同盟的形成与转折</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 同盟形成与转折</div>
+        <div class="deep-card-bd">
+          <p>1942年1月，26国签署《联合国家宣言》，世界反法西斯同盟正式形成。各国相互支援、协同作战，扭转了战争形势。</p>
+          <p>斯大林格勒保卫战是二战的转折点，中途岛海战是太平洋战场的转折点。1944年6月诺曼底登陆开辟了欧洲第二战场。</p>
+          <p><strong>简而言之：</strong>反法西斯同盟的形成是二战胜利的关键，同盟国的协同作战扭转了战局。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与中国抗日战争的关系</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：中国早在1931年就开始了抗日战争，是世界反法西斯战争的东方主战场。</p>
+          <p>纵向联系：中国的持久抗战牵制了大量日军，为世界反法西斯战争作出了巨大贡献。</p>
+          <p><strong>这一联系说明：</strong>中国抗日战争是世界反法西斯战争的重要组成部分。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"《联合国家宣言》的签署，标志着世界反法西斯同盟的正式形成。各国为了一个共同的目标，相互支援，协同作战，逐渐扭转了战争的形势。"——教材正文</div>
+          <p><span class="tag-value">📖 史料实证</span> 《联合国家宣言》的签署标志着反法西斯力量从分散走向联合，是战争胜利的重要保障。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：反法西斯同盟的形成对二战胜利有什么作用？</p>
+          <p><strong>答案：</strong>同盟的形成使各国团结协作，集中力量对抗法西斯，在战略上形成配合，最终扭转了战局，取得了胜利。<strong>解析：</strong>需从战略协同和力量集中两方面回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3：二战胜利与影响 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>📍 重难点三：二战的胜利与历史影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 胜利与影响</div>
+        <div class="deep-card-bd">
+          <p>1945年5月德国投降，9月日本投降，二战结束。雅尔塔会议和波茨坦会议协调了盟国行动，确立了战后国际秩序。</p>
+          <p>二战彻底粉碎了法西斯和军国主义称霸世界的野心，结束了列强瓜分世界的历史，促进了世界殖民体系的瓦解。</p>
+          <p><strong>简而言之：</strong>二战的胜利是反法西斯力量的伟大胜利，深刻改变了世界格局。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与战后世界格局的关系</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：二战后形成了以美苏为首的两极格局，联合国成立，世界殖民体系瓦解。</p>
+          <p>纵向联系：二战的教训促使国际社会更加重视和平与发展，联合国成为维护世界和平的重要机构。</p>
+          <p><strong>这一联系说明：</strong>战争的代价唤醒了人类对和平的珍视。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"第二次世界大战的胜利，彻底粉碎了法西斯主义和军国主义通过战争称霸世界的野心……对维护世界和平、促进共同发展产生了重大而深远的影响。"——教材正文</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 二战的胜利是世界各国人民共同斗争的结果，体现了正义必将战胜邪恶的历史规律。战争推动了世界格局的深刻变革，促进了民族解放运动的高涨。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：第二次世界大战的历史意义是什么？</p>
+          <p><strong>答案：</strong>彻底粉碎法西斯称霸野心，结束列强瓜分世界历史，促进殖民体系瓦解，对维护世界和平产生深远影响。<strong>解析：</strong>需从政治、国际关系、历史进程三方面分析。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page3 教材栏目解答 ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 相关史事1 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：轴心国一词的来源</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1936年10月，德国和意大利达成协调外交政策的协定。11月，墨索里尼说："从柏林到罗马的这一条垂直线不是区分线，而是一个轴心，所有怀着合作与和平愿望的欧洲国家都可以围绕这个轴心运转。"后来常说的"轴心国"一词，即来源于此。11月25日，德国与日本签订了《反共产国际协定》，意大利于1937年加入，法西斯同盟初步形成。1940年9月，三国在柏林签署了《德意日三国同盟条约》，法西斯同盟正式建立。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong>"轴心国"一词源于墨索里尼"柏林—罗马轴心"的说法，1940年9月德意日三国同盟条约签署，法西斯同盟正式建立。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事2 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：珍珠港事件</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1941年12月7日清晨，位于夏威夷群岛珍珠港的美国海军基地，沉浸在周末安逸的气氛中，睡梦中的美军没有察觉到战争正在逼近。此时，由数艘航空母舰组成的日本攻击舰队已悄然接近珍珠港。7时55分，日军飞机向珍珠港发动了攻击。日军在两个小时内出动350余架飞机。炸弹像暴雨般倾泻到珍珠港。美军仓促应战。日本以极小的代价重创美国太平洋舰队，炸沉了美军舰艇20余艘，炸毁美军飞机260多架，美军损失惨重。"珍珠港事件"极大地激发了美国人民的爱国热情。美国对日本宣战，加入反法西斯国家的行列。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong>1941年12月7日日军偷袭珍珠港，重创美国太平洋舰队，美国对日宣战，二战达到最大规模。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事3 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：中途岛海战</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1942年，为了压制美国海军力量，加强在太平洋地区的海上军事地位，日本决定进攻美国太平洋舰队的重要基地中途岛。美军事先了解了日军的作战计划，伺机反击。日军损失惨重，元气大伤，再也无力在太平洋地区发动大规模进攻。</p>
+      <div class="a" id="ans-p3-story3">
+        <strong>📝 要点归纳：</strong>1942年中途岛海战，美军获胜，日军损失惨重，是太平洋战场的转折点。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事4 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：开罗宣言</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1943年11月，中、美、英三国的首脑在开罗会唔，并于12月初发表《开罗宣言》。宣言明确规定：日本所窃取的中国领土，例如东北地区、台湾及其附属岛屿、澎湖群岛等，归还中国。</p>
+      <div class="a" id="ans-p3-story4">
+        <strong>📝 要点归纳：</strong>1943年《开罗宣言》明确规定日本窃取的中国领土（东北、台湾、澎湖等）归还中国，是确认中国领土主权的重要国际文件。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story4')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事5 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：柏林战役</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>苏军包围柏林以后，希特勒在柏林集中兵力，企图做垂死挣扎。苏军则调集了数倍于德军的军队、飞机和坦克。4月16日凌晨，苏军万炮齐发，对德军阵地进行了猛烈的轰炸。接着，在100多个巨型探照灯的照耀下，数千辆坦克引导苏军战士向德军阵地发动了进攻。经过10多天的激烈战斗，苏军逐渐攻入柏林市中心。希特勒见大势已去，在地下室饮弹自尽。</p>
+      <div class="a" id="ans-p3-story5">
+        <strong>📝 要点归纳：</strong>1945年4月苏军攻克柏林，希特勒自杀，德国投降在即，欧洲战事即将结束。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story5')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事6 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：二战的深远影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>第二次世界大战是人类历史上规模空前的战争，世界上大部分地区和人口卷入其中。第二次世界大战的胜利，彻底粉碎了法西斯主义和军国主义通过战争称霸世界的野心，彻底结束了列强通过争夺殖民地瓜分世界的历史，促进了世界殖民体系的瓦解，对维护世界和平、促进共同发展产生了重大而深远的影响。</p>
+      <div class="a" id="ans-p3-story6">
+        <strong>📝 要点归纳：</strong>二战是规模空前的战争，其胜利粉碎了法西斯称霸野心，促进了殖民体系瓦解，对世界和平与发展产生深远影响。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story6')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题1：</strong>下列历史事件，哪些发生在1941年？在正确选项后的括号里画√，错误的画×。</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案：</strong><br>
+        德国入侵苏联（√）<br>
+        日本偷袭位于珍珠港的美国海军基地（√）<br>
+        签署《联合国家宣言》（×）<br>
+        雅尔塔会议召开（×）
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案</button>
+      <p><strong>问题2：</strong>阅读有关第二次世界大战的书籍，谈一谈第二次世界大战给人类带来的灾难。</p>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案：</strong>二战导致数千万人死亡，无数城市被毁，经济遭到严重破坏，给人类带来了深重灾难。同时，法西斯的暴行（如纳粹屠杀犹太人）是人类历史上的惨痛教训。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：美国研制原子弹</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>原子弹是指利用核裂变链式反应放出的巨大能量造成杀伤破坏作用的核武器。1939年，美国总统罗斯福采纳爱因斯坦等科学家的建议，决定研制原子弹。后来，这一决定逐渐发展成代号为"曼哈顿"的庞大计划，动用了大约60万人。1945年8月6日和8月9日，美国先后在日本的广岛和长崎投放了原子弹，加速了日本法西斯的投降。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong>"曼哈顿计划"是美国研制原子弹的计划，1945年8月美国在广岛、长崎投下原子弹，加速了日本投降。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page4 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 q1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 二战全面爆发的标志是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 七七事变</label>
+      <label onclick="optClick(this,'B','q1')">B. 德军闪击波兰</label>
+      <label onclick="optClick(this,'C','q1')">C. 珍珠港事件</label>
+      <label onclick="optClick(this,'D','q1')">D. 德国入侵苏联</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：1939年9月1日德军闪击波兰，英法被迫宣战，二战全面爆发。<br>
+      ❌ 排除A：七七事变是日本全面侵华开始。<br>
+      ❌ 排除C：珍珠港事件使二战达到最大规模。<br>
+      ❌ 排除D：德国入侵苏联是二战的扩大。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 世界反法西斯同盟正式形成的标志是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 《德意日三国同盟条约》签署</label>
+      <label onclick="optClick(this,'B','q2')">B. 《联合国家宣言》签署</label>
+      <label onclick="optClick(this,'C','q2')">C. 斯大林格勒保卫战</label>
+      <label onclick="optClick(this,'D','q2')">D. 诺曼底登陆</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：1942年1月26国签署《联合国家宣言》，标志着世界反法西斯同盟正式形成。<br>
+      ❌ 排除A：是法西斯同盟建立。<br>
+      ❌ 排除C、D：是战争的重要战役。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 第二次世界大战的转折点是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 莫斯科保卫战</label>
+      <label onclick="optClick(this,'B','q3')">B. 斯大林格勒保卫战</label>
+      <label onclick="optClick(this,'C','q3')">C. 诺曼底登陆</label>
+      <label onclick="optClick(this,'D','q3')">D. 中途岛海战</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：斯大林格勒保卫战是第二次世界大战的转折点，苏军扭转了苏德战场形势。<br>
+      ❌ 排除A：莫斯科保卫战打破德军不可战胜神话。<br>
+      ❌ 排除C：诺曼底登陆开辟欧洲第二战场。<br>
+      ❌ 排除D：是太平洋战场的转折点。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 雅尔塔会议决定战后成立</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 国际联盟</label>
+      <label onclick="optClick(this,'B','q4')">B. 联合国</label>
+      <label onclick="optClick(this,'C','q4')">C. 北约</label>
+      <label onclick="optClick(this,'D','q4')">D. 华约</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：1945年雅尔塔会议决定战后成立联合国。<br>
+      ❌ 排除A：国际联盟是一战后成立。<br>
+      ❌ 排除C、D：北约和华约是冷战时期成立。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 二战胜利的历史意义包括</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 粉碎法西斯称霸野心</label>
+      <label onclick="optClick(this,'B','q5')">B. 结束列强瓜分世界的历史</label>
+      <label onclick="optClick(this,'C','q5')">C. 促进殖民体系瓦解</label>
+      <label onclick="optClick(this,'D','q5')">D. 以上都是</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：D<br>
+      📌 解题思路：A、B、C三项都是二战胜利的历史意义，因此D项“以上都是”正确。<br>
+      ❌ 排除A、B、C：每项都是二战的意义之一，但不全面。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题（不计分） -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">"第二次世界大战的胜利，彻底粉碎了法西斯主义和军国主义通过战争称霸世界的野心，彻底结束了列强通过争夺殖民地瓜分世界的历史，促进了世界殖民体系的瓦解，对维护世界和平、促进共同发展产生了重大而深远的影响。"——教材正文</div>
+    <div class="q-text">（1）二战胜利对世界殖民体系产生了什么影响？</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong>促进了世界殖民体系的瓦解。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+    <div class="q-text">（2）结合所学，二战胜利对世界和平与发展的意义是什么？</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong>粉碎了法西斯称霸野心，结束了列强瓜分世界的历史，促进了民族解放运动，为战后国际秩序的重建和世界和平奠定了基础。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== Page5 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">💥</span><strong>全面爆发与扩大</strong>
+        <p>闪击波兰 → 珍珠港事件 → 最大规模</p>
+        <div class="kg-detail"><p>1939年德国闪击波兰，二战全面爆发；1941年珍珠港事件使二战达到最大规模，中国战场是东方主战场。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🤝</span><strong>反法西斯同盟</strong>
+        <p>《联合国家宣言》→ 协同作战 → 转折</p>
+        <div class="kg-detail"><p>1942年26国签署《联合国家宣言》，反法西斯同盟形成，斯大林格勒战役是二战转折点，诺曼底登陆开辟第二战场。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>胜利与秩序</strong>
+        <p>雅尔塔会议 → 德国投降 → 日本投降</p>
+        <div class="kg-detail"><p>1945年雅尔塔会议决定战后秩序，5月德国投降，8月日本投降，二战结束，联合国成立。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌍</span><strong>历史影响</strong>
+        <p>粉碎法西斯 · 殖民体系瓦解 · 和平发展</p>
+        <div class="kg-detail"><p>二战粉碎法西斯称霸野心，结束列强瓜分世界历史，促进殖民体系瓦解，对世界和平与发展产生深远影响。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 战争：法西斯侵略</div>
+      <div class="kg-rule r2">🟠 团结：反法西斯同盟</div>
+      <div class="kg-rule r3">🟢 和平：联合国成立</div>
+      <div class="kg-rule r4">🔴 世界：殖民体系瓦解</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page6 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第四单元 · 资本主义经济危机和第二次世界大战</div>
+    <h1 style="font-size:22pt;">第15课 · 第二次世界大战</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>全面爆发与扩大</h3>
+        <ul>
+          <li><strong>全面爆发：</strong>1939年闪击波兰</li>
+          <li><strong>最大规模：</strong>1941年珍珠港事件</li>
+          <li><strong>东方主战场：</strong>中国战场</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>同盟与转折</h3>
+        <ul>
+          <li><strong>同盟：</strong>《联合国家宣言》</li>
+          <li><strong>转折：</strong>斯大林格勒战役</li>
+          <li><strong>第二战场：</strong>诺曼底登陆</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>胜利与影响</h3>
+        <ul>
+          <li><strong>胜利：</strong>1945年5月、9月</li>
+          <li><strong>会议：</strong>雅尔塔、波茨坦</li>
+          <li><strong>影响：</strong>粉碎法西斯、殖民体系瓦解</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    
+      
+    
+    
+<footer>
+    <p>统编版初中历史 · 九年级下册 · 第四单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+        <div class="bottom-nav">
+    <div><a href="九下-U4-第14课 法西斯国家的侵略扩张.html">← 上一课：第14课 法西斯国家的侵略扩张</a></div>
+    <div class="nav-center">第15课</div>
+    <div><a href="九下-U5-第16课 冷战的发生与两极格局的形成.html">下一课：第16课 冷战的发生与两极格局的形成 →</a></div>
+  </div>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+/* ========== 6.1 分页导航系统 ========== */
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+/* ========== 6.2 闯关进度追踪 ========== */
+var stageDone = { sort:false, fill:false, match:false, puzzle:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','puzzle','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+/* ========== 6.3 封面学习目标标记 ========== */
+var targetsDoneCount = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDoneCount = document.querySelectorAll('.target-item.done').length;
+  if (targetsDoneCount >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+/* ========== 6.4 标签页与手风琴 ========== */
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+function markMastered(btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+}
+
+/* ========== 6.5 答案显隐 + 选择题 ========== */
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+var correctAnswers = { q1:'B', q2:'B', q3:'B', q4:'B', q5:'D' };
+var mcDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+  // 自动显示答案解析
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+function resetQuiz() {
+  mcDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+    ex.querySelectorAll('.ans-btn').forEach(function(b) {
+      var parent = b.parentElement;
+      var ansDiv = parent.querySelector('.a');
+      if (ansDiv && ansDiv.classList.contains('show')) {
+        b.textContent = '隐藏答案';
+      } else {
+        b.textContent = '📝 查看解析';
+      }
+    });
+  });
+}
+
+/* ========== 6.6 栏目筛选 ========== */
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+/* ========== 6.7 拖拽排序 ========== */
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key2','key3','key4','key5'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.8 填空填词 ========== */
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查红色标记的输入框';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.9 连线匹配 ========== */
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      var result = document.getElementById('matchResult');
+      result.textContent = '✅ 全部配对正确！';
+      result.className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    selectedLeft.classList.add('wrong-shake');
+    el.classList.add('wrong-shake');
+    var s = selectedLeft;
+    setTimeout(function(){ s.classList.remove('selected','wrong-shake'); }, 500);
+    setTimeout(function(e){ e.classList.remove('wrong-shake'); }, 500, el);
+    selectedLeft = null;
+  }
+}
+
+/* ========== 6.10 翻转卡 ========== */
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+}
+
+/* ========== 6.11 知识结构图节点展开 ========== */
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+/* ========== 6.12 deep-card 折叠 ========== */
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+/* ========== 6.13 因果拼图（第④关） ========== */
+var puzzleData = [
+  {
+    id: 0,
+    title: '链条一：二战的爆发与扩大',
+    badge: 'c1',
+    pieces: [
+      { text: '1939年德国闪击波兰，二战全面爆发', order: 0 },
+      { text: '1941年德国入侵苏联、珍珠港事件，战争扩大', order: 1 },
+      { text: '二战达到最大规模，中国战场是东方主战场', order: 2 }
+    ]
+  },
+  {
+    id: 1,
+    title: '链条二：反法西斯同盟与转折',
+    badge: 'c2',
+    pieces: [
+      { text: '1942年《联合国家宣言》签署，反法西斯同盟形成', order: 0 },
+      { text: '斯大林格勒保卫战成为二战转折点', order: 1 },
+      { text: '诺曼底登陆开辟欧洲第二战场', order: 2 }
+    ]
+  },
+  {
+    id: 2,
+    title: '链条三：二战胜利与影响',
+    badge: 'c3',
+    pieces: [
+      { text: '1945年雅尔塔会议协调战后秩序，德国投降', order: 0 },
+      { text: '1945年8月日本投降，二战结束', order: 1 },
+      { text: '粉碎法西斯，促进殖民体系瓦解，影响深远', order: 2 }
+    ]
+  }
+];
+
+var puzzleChainProgress = [0, 0, 0];
+
+function initPuzzle() {
+  var container = document.getElementById('puzzleContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  puzzleChainProgress = [0, 0, 0];
+
+  puzzleData.forEach(function(chain, ci) {
+    var chainDiv = document.createElement('div');
+    chainDiv.className = 'puzzle-chain';
+    chainDiv.id = 'pchain-' + ci;
+
+    var header = document.createElement('div');
+    header.className = 'chain-header';
+    var badge = document.createElement('span');
+    badge.className = 'chain-badge ' + chain.badge;
+    badge.textContent = '链' + (ci + 1);
+    header.appendChild(badge);
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = chain.title;
+    header.appendChild(titleSpan);
+    var prog = document.createElement('span');
+    prog.className = 'chain-progress';
+    prog.id = 'cprog-' + ci;
+    prog.innerHTML = '进度：<strong id="cprogNum-' + ci + '">0</strong>/3';
+    header.appendChild(prog);
+    chainDiv.appendChild(header);
+
+    var slotsDiv = document.createElement('div');
+    slotsDiv.className = 'chain-slots';
+    slotsDiv.id = 'cslots-' + ci;
+    for (var s = 0; s < 3; s++) {
+      var slot = document.createElement('div');
+      slot.className = 'puzzle-slot';
+      slot.id = 'cslot-' + ci + '-' + s;
+      slot.textContent = '第' + (s + 1) + '步';
+      slotsDiv.appendChild(slot);
+    }
+    chainDiv.appendChild(slotsDiv);
+
+    var piecesDiv = document.createElement('div');
+    piecesDiv.className = 'puzzle-pieces';
+    piecesDiv.id = 'cpieces-' + ci;
+    var shuffled = chain.pieces.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = temp;
+    }
+    shuffled.forEach(function(piece, pi) {
+      var pDiv = document.createElement('div');
+      pDiv.className = 'puzzle-piece p' + (ci + 1);
+      pDiv.id = 'cpiece-' + ci + '-' + pi;
+      pDiv.setAttribute('data-chain', ci);
+      pDiv.setAttribute('data-order', piece.order);
+      pDiv.textContent = piece.text;
+      pDiv.addEventListener('click', function() {
+        handlePuzzleClick(parseInt(this.getAttribute('data-chain')), parseInt(this.getAttribute('data-order')));
+      });
+      piecesDiv.appendChild(pDiv);
+    });
+    chainDiv.appendChild(piecesDiv);
+    container.appendChild(chainDiv);
+  });
+}
+
+function handlePuzzleClick(chainIdx, order) {
+  if (puzzleChainProgress[chainIdx] >= 3) return;
+  var nextSlot = puzzleChainProgress[chainIdx];
+  if (order !== nextSlot) {
+    var pieces = document.querySelectorAll('#cpieces-' + chainIdx + ' .puzzle-piece');
+    pieces.forEach(function(p) {
+      if (parseInt(p.getAttribute('data-order')) === order) {
+        p.classList.add('wrong-shake');
+        setTimeout(function() { p.classList.remove('wrong-shake'); }, 500);
+      }
+    });
+    return;
+  }
+
+  var slot = document.getElementById('cslot-' + chainIdx + '-' + nextSlot);
+  var pieceEl = document.querySelector('#cpieces-' + chainIdx + ' .puzzle-piece[data-order="' + order + '"]');
+  if (!pieceEl || !slot) return;
+
+  pieceEl.classList.add('placed');
+  pieceEl.style.display = 'none';
+  slot.textContent = pieceEl.textContent;
+  slot.classList.add('filled', 'correct');
+
+  puzzleChainProgress[chainIdx]++;
+  document.getElementById('cprogNum-' + chainIdx).textContent = puzzleChainProgress[chainIdx];
+
+  if (puzzleChainProgress[chainIdx] >= 3) {
+    document.getElementById('pchain-' + chainIdx).classList.add('complete');
+  }
+
+  var allDone = true;
+  for (var i = 0; i < puzzleChainProgress.length; i++) {
+    if (puzzleChainProgress[i] < 3) { allDone = false; break; }
+  }
+  if (allDone) {
+    var result = document.getElementById('puzzleResult');
+    result.textContent = '🧩 全部因果链拼合正确！';
+    result.className = 'puzzle-result show pass';
+    stageDone.puzzle = true;
+    updateStageProgress();
+    document.getElementById('stagePuzzleDone').classList.add('show');
+  }
+}
+
+// 初始化拼图
+document.addEventListener('DOMContentLoaded', function() {
+  initPuzzle();
+});
+
+// 修复翻牌过关检测
+var origFlip = flipCard;
+flipCard = function(el) {
+  origFlip(el);
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+};
+</script>
+</body>
+</html>

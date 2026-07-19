@@ -1,0 +1,1745 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下-U1-第3课 美国内战</title>
+<style>
+/* ========== v2.0 全局 CSS 变量 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+  --gold: #f1c40f;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding:36px 20px 30px;
+  text-align:center;
+  color:#fff;
+  border-radius:0 0 36px 36px;
+  box-shadow:0 6px 30px rgba(61,43,140,0.20);
+  margin:0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background:linear-gradient(135deg,#f0edff,#e0daff);
+  border-radius:12px;
+  padding:20px 24px;
+  margin-bottom:24px;
+  border:1px solid var(--border);
+}
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item {
+  font-size:13.5pt;
+  padding:6px 8px;
+  border-bottom:1px dashed var(--border);
+  cursor:pointer;
+  transition:all 0.2s;
+  border-radius:6px;
+  background:transparent;
+}
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn {
+  display:block; margin:20px auto 10px;
+  background:linear-gradient(135deg,#7c6cf0,#5a4ac7);
+  color:#fff; border:none; border-radius:24px;
+  padding:12px 36px; font-size:16pt; font-weight:700;
+  cursor:pointer; transition:all 0.25s;
+  box-shadow:0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn {
+  flex:1; padding:14px 8px;
+  font-size:14pt; font-weight:700;
+  border:none; cursor:pointer;
+  text-align:center;
+  transition:all 0.25s;
+  background:#e8e0ff; color:#5a4ac7;
+  letter-spacing:1px;
+}
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ========== 闯关进度条 ========== */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background:var(--bg-card);
+  border-left:4px solid var(--primary);
+  border-radius:0 10px 10px 0;
+  padding:18px 22px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; }
+.kp-card li { margin:6px 0; font-size:14pt; }
+.kp-card p { font-size:14pt; line-height:1.8; }
+
+.timeline-bar {
+  background:#f0edff;
+  border-radius:8px;
+  padding:8px 16px;
+  font-size:12pt;
+  color:#5a4ac7;
+  text-align:center;
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+.link-bar {
+  border:2px dashed #d5cef0;
+  border-radius:10px;
+  padding:12px 16px;
+  margin-top:14px;
+  background:#faf8ff;
+  font-size:13pt;
+  color:#5a4ac7;
+}
+
+/* 标签 */
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-zhongkao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 挑战标题 ========== */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== ① 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item {
+  padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px;
+  cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s;
+}
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot {
+  min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:12pt;
+  transition:all 0.2s; background:#faf8ff; position:relative;
+}
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== ② 填空填词 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input {
+  width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px;
+  font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff;
+}
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== ③ 连线匹配 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item {
+  padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer;
+  transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center;
+}
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== ④ 因果拼图 ========== */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain {
+  background:#fff;
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:16px;
+  border:2px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:all 0.3s;
+}
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14pt;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:10px;
+}
+.puzzle-chain .chain-header .chain-badge {
+  display:inline-block;
+  padding:2px 12px;
+  border-radius:12px;
+  font-size:11pt;
+  color:#fff;
+}
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots {
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.puzzle-slot {
+  min-width:100px;
+  flex:1;
+  min-height:52px;
+  border:2px dashed #dcd4f5;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 10px;
+  font-size:11pt;
+  color:#aaa;
+  background:#faf8ff;
+  transition:all 0.3s;
+  text-align:center;
+}
+.puzzle-slot.filled {
+  border-style:solid;
+  border-color:var(--primary);
+  background:#f0edff;
+  color:#333;
+  font-weight:600;
+}
+.puzzle-slot.correct {
+  border-color:var(--green);
+  background:#d4efdf;
+  color:var(--green);
+}
+.puzzle-pieces {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:6px;
+}
+.puzzle-piece {
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:12pt;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.25s;
+  border:2px solid var(--border);
+  background:#fff;
+  user-select:none;
+  flex:1 1 auto;
+  min-width:80px;
+  text-align:center;
+}
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed {
+  opacity:0.3;
+  cursor:not-allowed;
+  transform:scale(0.95);
+  pointer-events:none;
+}
+.puzzle-piece.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.25); }
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-6px); }
+  75% { transform:translateX(6px); }
+}
+.puzzle-hint { font-size:11pt; color:#888; margin-top:6px; text-align:center; }
+.puzzle-result { text-align:center; padding:10px; border-radius:8px; font-weight:700; font-size:14pt; margin-top:8px; display:none; }
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.puzzle-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.chain-progress {
+  font-size:11pt;
+  color:#888;
+  margin-left:auto;
+}
+.chain-progress strong { color:var(--primary-dark); }
+
+/* ========== ⑤ 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back {
+  position:absolute; width:100%; height:100%; backface-visibility:hidden;
+  border-radius:12px; display:flex; align-items:center; justify-content:center;
+  padding:10px; font-size:11pt; text-align:center;
+}
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== 关卡通过横幅 ========== */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== Page2 手风琴 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s;
+}
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd {
+  background:linear-gradient(135deg,#e67e22,#f0ad4e);
+  color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700;
+  cursor:pointer; user-select:none;
+}
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== 对比表格 ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip {
+  padding:6px 14px; border:2px solid var(--border); border-radius:20px;
+  background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s;
+  font-weight:600; color:#5a4ac7;
+}
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+.col-body .a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.col-body .a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label {
+  display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px;
+  cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff;
+}
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node {
+  width:90%; border-radius:12px; padding:16px 20px; text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative;
+}
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100% { box-shadow:0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow:0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card {
+  background:#fff; border-radius:14px; padding:20px 16px 14px;
+  border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08);
+  position:relative; text-align:left;
+}
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+  .puzzle-slot { min-width:60px; font-size:10pt; }
+  .puzzle-piece { font-size:10.5pt; padding:8px 10px; min-width:60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0 封面页 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 殖民地人民的反抗与资本主义制度的扩展</div>
+    <h1>第3课 · 美国内战</h1>
+    <div class="hero-sub">统编版初中历史  九年级下册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解美国内战爆发的原因、进程和结局，把握19世纪中期美国历史发展的脉络。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过《宅地法》《解放黑人奴隶宣言》等史料，分析战争转折的关键因素。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>理解美国内战的性质——美国第二次资产阶级革命，分析其历史意义。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>认识林肯为维护国家统一和解放黑人奴隶作出的贡献，感悟国家统一的重要性。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1 知识要点 + 五关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">南北矛盾与内战爆发</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">北方的胜利</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">因果推演 · 综合闯关</button>
+  </div>
+
+  <!-- ===== Tab1：南北矛盾与内战爆发 ===== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 19世纪中期 — 1861年</div>
+      <h3>📌 南北矛盾的加剧</h3>
+      <ul>
+        <li><strong>经济类型差异：</strong>北方完成<strong class="kwd">工业革命</strong>，南方以<strong class="kwd">种植园经济</strong>为主，使用黑奴劳动</li>
+        <li><strong>关税分歧：</strong>南方反对提高关税（换取廉价工业品），北方要求提高关税（保护本国工业）</li>
+        <li><strong>西部土地之争：</strong>南方扩展奴隶制（蓄奴州），北方主张建立<strong class="kwd">自由州</strong></li>
+        <li><strong>废奴运动：</strong>北方有识之士坚决主张废除奴隶制</li>
+      </ul>
+      <h3>⚔️ 内战爆发</h3>
+      <ul>
+        <li><strong>导火线：</strong>1860年<strong class="kwd">林肯</strong>当选总统（主张限制奴隶制发展）</li>
+        <li><strong>爆发：</strong>南方7州退出联邦，成立<strong class="kwd">“南部同盟”</strong>，1861年4月南方挑起战争</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 林肯主张用和平方法逐步限制奴隶制，反对激化矛盾导致国家分裂。
+      </div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将美国内战前南北矛盾按正确逻辑顺序排列</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">南北经济类型差异（工业 vs 种植园）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">关税分歧（南方反对/北方要求提高）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">西部土地争夺（蓄奴州 vs 自由州）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">林肯当选总统（主张限制奴隶制）</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">南方7州退出联邦，内战爆发</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">林肯</div><div class="flash-back">1809—1865，美国第16任总统，主张限制奴隶制发展，领导北方赢得内战，维护国家统一</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">种植园经济</div><div class="flash-back">美国南方以奴隶劳动为基础的农业经济模式，大量使用黑奴，与北方工业经济形成对立</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">废奴运动</div><div class="flash-back">北方有识之士组织的反对奴隶制运动，揭露奴隶制罪恶，帮助黑奴逃亡，如“地下铁道”</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">南部同盟</div><div class="flash-back">1861年南方7个蓄奴州宣布退出联邦后成立的政权，标志着南北分裂，引发内战</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab2：北方的胜利 ===== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1862年 — 1865年</div>
+      <h3>📌 战争转折</h3>
+      <ul>
+        <li><strong>初期失利：</strong>南方蓄谋已久，北方在军事上屡屡失利</li>
+        <li><strong>关键措施：</strong>1862年颁布<strong class="kwd">《宅地法》</strong>和<strong class="kwd">《解放黑人奴隶宣言》</strong></li>
+        <li><strong>《宅地法》：</strong>鼓励农民到西部耕种，交纳10美元可获160英亩土地，连续耕种5年即归个人</li>
+        <li><strong>《解放黑人奴隶宣言》：</strong>1863年元旦起，南方叛乱地区奴隶永远获得自由，可加入北方军队</li>
+      </ul>
+      <h3>📊 结果与意义</h3>
+      <ul>
+        <li><strong>结果：</strong>1865年南方军队投降，北方获胜，<strong class="kwd">避免美国分裂</strong></li>
+        <li><strong>性质：</strong>美国历史上<strong class="kwd">第二次资产阶级革命</strong></li>
+        <li><strong>意义：</strong>维护国家统一，废除奴隶制，清除资本主义发展的最大障碍</li>
+        <li><strong>林肯遇刺：</strong>1865年被拥护奴隶制的狂热分子刺杀</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 《解放黑人奴隶宣言》仅解放叛乱地区的奴隶，不涉及边境蓄奴州，是策略性的政治文件。
+      </div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词，完成美国内战胜利的关键措施</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1862年，联邦政府颁布了 <input type="text" class="fill-input" data-answer="宅地法" placeholder="？"> ，鼓励农民到西部耕种。</div>
+      <div class="fill-blank-row">林肯发表了 <input type="text" class="fill-input" data-answer="解放黑人奴隶宣言" placeholder="？"> ，宣布叛乱地区奴隶获得自由。</div>
+      <div class="fill-blank-row">《解放黑人奴隶宣言》从 <input type="text" class="fill-input" data-answer="1863" placeholder="？"> 年元旦起生效。</div>
+      <div class="fill-blank-row">获得自由的奴隶可以以 <input type="text" class="fill-input" data-answer="自由人" placeholder="？"> 的身份加入北方军队。</div>
+      <div class="fill-blank-row">1865年，南方军队投降，美国内战以 <input type="text" class="fill-input" data-answer="北方" placeholder="？"> 获胜告终。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将措施与其作用配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 措施</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">《宅地法》</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">《解放黑人奴隶宣言》</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">林肯当选总统</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">北方军队获胜</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">林肯遇刺</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📋 作用/结果</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">鼓励农民到西部耕种，促进西部开发</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">调动黑人积极性，扭转战局</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">成为南方奴隶主发动战争的借口</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">避免美国分裂，废除奴隶制</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">被拥护奴隶制的狂热分子刺杀</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《宅地法》</div><div class="flash-back">1862年颁布，鼓励农民到西部耕种，交纳10美元可获160英亩土地，连续耕种5年即归个人所有</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《解放黑人奴隶宣言》</div><div class="flash-back">1863年元旦起生效，宣布南方叛乱地区奴隶永远获得自由，可加入北方军队</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">第二次资产阶级革命</div><div class="flash-back">美国内战的性质，废除了奴隶制，清除了资本主义发展的最大障碍</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">国家统一</div><div class="flash-back">林肯的首要目标，他认为“一幢裂开的房子是站立不住的”，坚决维护联邦统一</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab3：因果推演 · 综合闯关 ===== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <h3>🧩 因果推演 · 整体认知</h3>
+      <p>美国内战是北方资本主义制度与南方种植园奴隶制之间矛盾激化的结果。林肯领导北方获胜，维护了国家统一，废除了奴隶制，为美国资本主义的迅速发展扫清了障碍。</p>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 对比视角</span> 美国独立战争解决了民族独立问题，内战解决了国家统一和奴隶制问题，两者共同推动美国发展。
+      </div>
+    </div>
+
+    <!-- ④ 因果拼图 -->
+    <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+    <div class="puzzle-container" id="puzzleContainer">
+      <!-- 由JS动态生成 -->
+    </div>
+    <div class="puzzle-result" id="puzzleResult"></div>
+    <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+    <!-- ⑤ 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">南北战争</div><div class="flash-back">美国内战的别称，1861—1865年，北方工业资本主义与南方种植园奴隶制之间的战争</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">西进运动</div><div class="flash-back">美国独立后领土扩张中移民向西部迁徙的运动，促进了西部开发，但伴随对印第安人的驱赶</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">奴隶制</div><div class="flash-back">美国内战前南方种植园经济的基础，北方废奴运动与南方维护奴隶制的斗争是内战的核心矛盾</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page2 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1：内战原因 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>📍 重难点一：美国内战爆发的原因</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 南北矛盾的表现</div>
+        <div class="deep-card-bd">
+          <p>美国内战爆发的根本原因是北方资本主义制度与南方种植园奴隶制之间的矛盾。</p>
+          <p>具体表现：经济上，北方完成工业革命，南方以种植园经济为主；关税上，南方反对提高关税，北方要求提高关税；西部土地上，南方要扩展奴隶制，北方要建立自由州。</p>
+          <p><strong>简而言之：</strong>南北两种经济制度的矛盾不可调和，最终引发内战。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与独立战争的对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：独立战争解决了民族独立问题，内战解决了国家统一和奴隶制问题，两次革命共同奠定了美国发展的基础。</p>
+          <p>纵向联系：美国独立后领土扩张（西进运动）加剧了南北矛盾，因为新增土地上的奴隶制问题成为焦点。</p>
+          <p><strong>这一联系说明：</strong>国家发展过程中，制度性矛盾会随着领土扩张而激化。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“林肯主张限制奴隶制的发展，这成为南方奴隶主发动战争的借口。”——教材正文</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 林肯当选只是战争的导火线，根本原因是南北两种经济制度的矛盾。这体现了唯物史观中“经济基础决定上层建筑”的原理。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：为什么说美国内战是“两种经济制度之间的矛盾”？</p>
+          <p><strong>答案：</strong>北方工业资本主义需要自由劳动力和保护关税，南方种植园奴隶制依赖黑奴和自由贸易，两种制度在经济利益上根本对立。<strong>解析：</strong>需从经济基础和制度层面分析。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2：胜利原因 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>📍 重难点二：北方获胜的原因</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 转折与胜利</div>
+        <div class="deep-card-bd">
+          <p>战争初期北方屡屡失利，但1862年颁布的《宅地法》和《解放黑人奴隶宣言》扭转了战局。</p>
+          <p>《宅地法》鼓励农民到西部耕种，调动了农民积极性；《解放黑人奴隶宣言》宣布叛乱地区奴隶获得自由，吸引大量黑人加入北方军队。</p>
+          <p><strong>简而言之：</strong>两项法令调动了农民和黑人的积极性，为北方胜利提供了人力基础。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 法令的策略性</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：《解放黑人奴隶宣言》仅解放叛乱地区的奴隶，不涉及边境蓄奴州，体现了林肯的政治智慧——既打击南方，又避免激化边境州。</p>
+          <p>纵向联系：类似策略在俄国1861年改革中也有所体现——改革维护贵族利益，同时推动制度变革。</p>
+          <p><strong>这一联系说明：</strong>改革者常采取策略性措施，在变革与稳定之间寻求平衡。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“《宅地法》规定：凡年满21岁……只要交纳10美元登记费，就可以在美国西部得到一块不超过160英亩的土地。登记人连续耕种5年后，就可以成为这块土地的主人。”——材料研读</div>
+          <p><span class="tag-value">📖 史料实证</span> 《宅地法》以低廉价格和明确产权吸引农民西进，既促进了西部开发，也为北方军队提供了兵源和物资支持。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：《宅地法》如何促进了美国西部开发？</p>
+          <p><strong>答案：</strong>以低价吸引农民到西部耕种，连续耕种5年后获得土地所有权，激发了移民热情，加速了西部开发。<strong>解析：</strong>需从法律激励和实际效果两方面回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3：历史意义 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>📍 重难点三：美国内战的历史意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 性质与意义</div>
+        <div class="deep-card-bd">
+          <p>美国内战是美国历史上第二次资产阶级革命。它维护了国家统一，废除了奴隶制，清除了资本主义发展的最大障碍。</p>
+          <p>内战胜利后，美国资本主义迅速发展，为19世纪末成为世界头号工业强国奠定了基础。</p>
+          <p><strong>简而言之：</strong>内战消除了奴隶制障碍，为美国经济腾飞扫清了道路。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与世界历史的关联</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：美国内战与俄国1861年改革、日本明治维新几乎同时发生，都属于19世纪中期资本主义制度在全球扩展的浪潮。</p>
+          <p>纵向联系：内战后美国经济的快速发展，使其在19世纪末超越英国，成为世界第一工业国，改变了世界格局。</p>
+          <p><strong>这一联系说明：</strong>制度变革是国家崛起的关键条件。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“美国内战实质上是美国历史上第二次资产阶级革命。经过这场战争，美国维护了国家统一，废除了奴隶制，清除了资本主义发展的最大障碍。”——教材正文</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 教材评价揭示了内战的核心意义：废除奴隶制解放了生产力，为美国资本主义的迅速发展创造了条件。这是生产力决定生产关系、生产关系反作用于生产力的典型例证。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：为什么说美国内战是“第二次资产阶级革命”？</p>
+          <p><strong>答案：</strong>独立战争解决了民族独立，内战解决了国家统一和奴隶制问题，为资本主义发展清除了障碍。<strong>解析：</strong>需从革命的任务和意义两个维度作答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page3 教材栏目解答 ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+    <button class="filter-chip" onclick="filterCol('材料研读',this)">材料研读</button>
+    <button class="filter-chip" onclick="filterCol('问题思考',this)">问题思考</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 相关史事1 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：南方奴隶贸易</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>19世纪初，奴隶贸易被欧洲明令禁止。1807年，美国通过了废止奴隶贸易的法案。但是，由于种植园使用大量奴隶从事棉花种植，利润丰厚，因此，南方的奴隶贸易依然很繁盛。内战前夕，南方有400万黑奴，其中60%的黑奴在种植园劳动。奴隶主可以任意惩罚、买卖甚至杀害奴隶。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong>虽然美国1807年废止了奴隶贸易，但南方种植园经济对奴隶劳动力的依赖，使奴隶制依然繁盛，黑奴遭受残酷压迫。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事2 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：地下铁道</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>在北方，反对奴隶制的民众组成了2000多个废奴社，组织了帮助南方黑奴逃亡的“地下铁道”。北方的“乘务员”将南方的“乘客”，经过一个个“车站”（废奴派的住地），秘密转送到北方。黑人妇女塔布曼先后19次只身潜入南方，救出了300多名黑奴。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong>“地下铁道”是北方废奴主义者帮助黑奴逃亡的秘密网络，反映了北方人民反对奴隶制的坚定决心。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：林肯</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>林肯出生在肯塔基州一个贫困家庭，做过木工、店员、乡村邮务员等。因为贫困，林肯几乎没受过正规教育，但是他刻苦自励，勤学自修，成为律师，担任过州和联邦的议员。林肯同情奴隶，痛恨奴隶制，但他不同意采取过激的方式，激化南北矛盾，引起国家的分裂。他主张用和平的方法，逐步限制奴隶制，最终达到废除奴隶制的目的。</p>
+      <div class="a" id="ans-p3-people1">
+        <strong>📝 要点归纳：</strong>林肯出身贫寒，刻苦自励，同情奴隶但主张和平渐进的方式限制奴隶制，反对分裂国家。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-people1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 材料研读 -->
+  <div class="col-box" data-cat="材料研读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 材料研读：《宅地法》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>材料：</strong>《宅地法》规定：凡年满21岁，没有参加过叛乱，而且获得土地足以垦殖为目的的美国公民，只要交纳10美元登记费，就可以在美国西部得到一块不超过160英亩的土地。登记人连续耕种5年后，就可以成为这块土地的主人。</p>
+      <p><strong>问题：</strong>请思考：《宅地法》如何促进美国西部开发？</p>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 参考答案：</strong>《宅地法》以低廉的价格（10美元）和明确的产权（连续耕种5年归个人所有），吸引了大量移民到西部垦殖，加速了西部开发和农业资本主义的发展。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 问题思考 -->
+  <div class="col-box" data-cat="问题思考">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 问题思考</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>有人说，美国内战为资本主义的发展扫清了障碍。你同意这种说法吗？请说明理由。</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong>同意。内战废除了奴隶制，解放了生产力，为资本主义发展提供了自由劳动力和广阔市场；维护了国家统一，为国内市场的形成创造了条件。因此，内战扫清了美国资本主义发展的最大障碍。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题1：</strong>以下对19世纪中期美国南北方的描述，哪些是正确的？在正确选项后的括号里画“√”。</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案：</strong><br>
+        北方工业发达，希望提高关税（√）<br>
+        南方希望多出口棉花，换取廉价工业品（√）<br>
+        北方主张在西部新增的土地上建立蓄奴州（×）<br>
+        南方主张在西部新增的土地上建立自由州（×）
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案</button>
+      <p><strong>问题2：</strong>林肯在一次讲演中说：“一幢裂开的房子是站立不住的。我相信这个政府不能永远维持半奴隶和半自由的状态。我不期望联邦解散，我不期望房子崩塌，但我的确希望它停止分裂。”根据上述材料，你认为，林肯作为总统，他在内战中的首要目标是什么。</p>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案：</strong>林肯的首要目标是维护国家统一（联邦的完整），防止美国分裂。他反对奴隶制，但更不愿意看到联邦解散。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：西进运动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>美国独立后，在领土扩张的过程中，大批移民从东部迁往西部，这一现象被称为“西进运动”。移民们闯入西部茫茫林海和荒原，砍伐树木，开垦荒地，修建房屋，开发出一片生机勃勃的土地。随着西进运动的推进，美国西部出现了“小麦王国”“棉花王国”，新兴的工厂和城市也拔地而起。但是，在西进运动中，大批印第安人被屠杀或被驱赶到更远的地区。印第安人的被迫迁徙之路，被称为“血泪之路”。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong>西进运动促进了美国西部开发和资本主义发展，但也伴随着对印第安人的残酷驱赶和屠杀，是印第安人的“血泪之路”。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page4 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 q1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 美国内战爆发的根本原因是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 林肯当选为总统</label>
+      <label onclick="optClick(this,'B','q1')">B. 南方7州宣布退出联邦</label>
+      <label onclick="optClick(this,'C','q1')">C. 南北两种经济制度的矛盾</label>
+      <label onclick="optClick(this,'D','q1')">D. 西进运动加剧矛盾</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：南北两种经济制度（北方工业资本主义 vs 南方种植园奴隶制）的矛盾是内战爆发的根本原因。<br>
+      ❌ 排除A：林肯当选是直接原因（导火线）。<br>
+      ❌ 排除B：是内战爆发的标志，非根本原因。<br>
+      ❌ 排除D：是加剧矛盾的因素，非根本原因。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 《解放黑人奴隶宣言》宣布获得自由的奴隶是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 美国全国所有的奴隶</label>
+      <label onclick="optClick(this,'B','q2')">B. 南方叛乱地区的奴隶</label>
+      <label onclick="optClick(this,'C','q2')">C. 参加北方军队的奴隶</label>
+      <label onclick="optClick(this,'D','q2')">D. 边境蓄奴州的奴隶</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：《解放黑人奴隶宣言》仅解放南方叛乱地区的奴隶，不涉及边境蓄奴州，是策略性的政治文件。<br>
+      ❌ 排除A：不涉及边境蓄奴州。<br>
+      ❌ 排除C：是宣言的内容之一，但并非全部。<br>
+      ❌ 排除D：边境蓄奴州不在此列。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 美国内战中，林肯的首要目标是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 废除奴隶制</label>
+      <label onclick="optClick(this,'B','q3')">B. 维护国家统一</label>
+      <label onclick="optClick(this,'C','q3')">C. 发展资本主义</label>
+      <label onclick="optClick(this,'D','q3')">D. 限制奴隶制发展</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：林肯明确表示“我不期望联邦解散”，维护国家统一是他在内战中的首要目标。<br>
+      ❌ 排除A：他主张逐步限制奴隶制，并非首要目标。<br>
+      ❌ 排除C：是内战的结果，不是林肯个人的首要目标。<br>
+      ❌ 排除D：是他的一贯主张，但不是首要目标。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 美国内战的性质是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 民族解放战争</label>
+      <label onclick="optClick(this,'B','q4')">B. 第二次资产阶级革命</label>
+      <label onclick="optClick(this,'C','q4')">C. 奴隶制与自由制的战争</label>
+      <label onclick="optClick(this,'D','q4')">D. 维护国家统一的战争</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：内战废除了奴隶制，清除了资本主义发展的最大障碍，是第二次资产阶级革命。<br>
+      ❌ 排除A：独立战争是民族解放战争。<br>
+      ❌ 排除C：是内战的表现，非性质。<br>
+      ❌ 排除D：是内战的作用，非性质。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 以下哪项不属于美国内战中北方获胜的原因？</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 颁布《宅地法》调动农民积极性</label>
+      <label onclick="optClick(this,'B','q5')">B. 颁布《解放黑人奴隶宣言》</label>
+      <label onclick="optClick(this,'C','q5')">C. 南方蓄谋已久，军事准备充分</label>
+      <label onclick="optClick(this,'D','q5')">D. 黑人奴隶踊跃参军作战</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：南方蓄谋已久、军事准备充分是战争初期北方失利的原因，而非北方获胜的原因。<br>
+      ❌ 排除A：是北方获胜原因。<br>
+      ❌ 排除B：是北方获胜原因。<br>
+      ❌ 排除D：是北方获胜原因。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题（不计分） -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">“一幢裂开的房子是站立不住的。我相信这个政府不能永远维持半奴隶和半自由的状态。我不期望联邦解散，我不期望房子崩塌，但我的确希望它停止分裂。”——林肯</div>
+    <div class="q-text">（1）林肯所说的“裂开的房子”指的是什么？</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong>指美国南北分裂的局面，北方实行自由制度，南方实行奴隶制，国家面临分裂的危险。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+    <div class="q-text">（2）林肯在内战中的首要目标是什么？这体现了他的什么精神？</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong>首要目标是维护国家统一。这体现了林肯以国家大局为重、坚决维护联邦完整的责任感和爱国精神。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== Page5 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌍</span><strong>南北矛盾</strong>
+        <p>工业 vs 种植园，关税分歧，西部土地之争</p>
+        <div class="kg-detail"><p>北方完成工业革命，南方以种植园经济为主，双方在关税、西部土地、奴隶制等问题上矛盾不可调和。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚔️</span><strong>内战爆发</strong>
+        <p>林肯当选 → 南方退出联邦 → 1861年开战</p>
+        <div class="kg-detail"><p>1860年林肯当选总统成为导火线，南方7州退出联邦成立“南部同盟”，1861年4月南方挑起内战。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📜</span><strong>转折与胜利</strong>
+        <p>《宅地法》《解放黑人奴隶宣言》→ 北方获胜</p>
+        <div class="kg-detail"><p>1862年颁布两项法令，调动了农民和黑人的积极性，扭转战局，1865年北方获胜，避免了美国分裂。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>历史意义</strong>
+        <p>第二次资产阶级革命，扫清资本主义障碍</p>
+        <div class="kg-detail"><p>内战废除了奴隶制，维护了国家统一，为美国资本主义迅速发展创造了条件，是第二次资产阶级革命。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：国家统一 vs 分裂</div>
+      <div class="kg-rule r2">🟠 经济：工业资本主义 vs 种植园奴隶制</div>
+      <div class="kg-rule r3">🟢 文化：废奴运动与思想觉醒</div>
+      <div class="kg-rule r4">🔴 军事：北方获胜的关键转折</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page6 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 殖民地人民的反抗与资本主义制度的扩展</div>
+    <h1 style="font-size:22pt;">第3课 · 美国内战</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>南北矛盾与内战爆发</h3>
+        <ul>
+          <li><strong>根本原因：</strong>南北两种经济制度矛盾</li>
+          <li><strong>导火线：</strong>林肯当选总统（1860年）</li>
+          <li><strong>爆发：</strong>1861年南方挑起内战</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>北方胜利的关键</h3>
+        <ul>
+          <li><strong>《宅地法》：</strong>鼓励农民西进，促进开发</li>
+          <li><strong>《解放黑人奴隶宣言》：</strong>解放叛乱地区奴隶</li>
+          <li><strong>结果：</strong>1865年北方获胜，避免分裂</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>历史意义与启示</h3>
+        <ul>
+          <li><strong>性质：</strong>第二次资产阶级革命</li>
+          <li><strong>作用：</strong>废除奴隶制，扫清资本主义障碍</li>
+          <li><strong>启示：</strong>国家统一是发展的前提</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    
+      
+    
+    
+<footer>
+    <p>统编版初中历史 · 九年级下册 · 第一单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+        <div class="bottom-nav">
+    <div><a href="九下-U1-第2课 俄国的改革.html">← 上一课：第2课 俄国的改革</a></div>
+    <div class="nav-center">第3课</div>
+    <div><a href="九下-U1-第4课 日本明治维新.html">下一课：第4课 日本明治维新 →</a></div>
+  </div>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+/* ========== 6.1 分页导航系统 ========== */
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+/* ========== 6.2 闯关进度追踪 ========== */
+var stageDone = { sort:false, fill:false, match:false, puzzle:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','puzzle','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+/* ========== 6.3 封面学习目标标记 ========== */
+var targetsDoneCount = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDoneCount = document.querySelectorAll('.target-item.done').length;
+  if (targetsDoneCount >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+/* ========== 6.4 标签页与手风琴 ========== */
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+function markMastered(btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+}
+
+/* ========== 6.5 答案显隐 + 选择题 ========== */
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+var correctAnswers = { q1:'C', q2:'B', q3:'B', q4:'B', q5:'C' };
+var mcDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+  // 自动显示答案解析
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+function resetQuiz() {
+  mcDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+    ex.querySelectorAll('.ans-btn').forEach(function(b) {
+      var parent = b.parentElement;
+      var ansDiv = parent.querySelector('.a');
+      if (ansDiv && ansDiv.classList.contains('show')) {
+        b.textContent = '隐藏答案';
+      } else {
+        b.textContent = '📝 查看解析';
+      }
+    });
+  });
+}
+
+/* ========== 6.6 栏目筛选 ========== */
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+/* ========== 6.7 拖拽排序 ========== */
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key2','key3','key4','key5'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.8 填空填词 ========== */
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查红色标记的输入框';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.9 连线匹配 ========== */
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      var result = document.getElementById('matchResult');
+      result.textContent = '✅ 全部配对正确！';
+      result.className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    selectedLeft.classList.add('wrong-shake');
+    el.classList.add('wrong-shake');
+    var s = selectedLeft;
+    setTimeout(function(){ s.classList.remove('selected','wrong-shake'); }, 500);
+    setTimeout(function(e){ e.classList.remove('wrong-shake'); }, 500, el);
+    selectedLeft = null;
+  }
+}
+
+/* ========== 6.10 翻转卡 ========== */
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+}
+
+/* ========== 6.11 知识结构图节点展开 ========== */
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+/* ========== 6.12 deep-card 折叠 ========== */
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+/* ========== 6.13 因果拼图（第④关） ========== */
+var puzzleData = [
+  {
+    id: 0,
+    title: '链条一：南北矛盾激化',
+    badge: 'c1',
+    pieces: [
+      { text: '南北经济制度对立（工业 vs 种植园奴隶制）', order: 0 },
+      { text: '在关税、西部土地等问题上矛盾加剧', order: 1 },
+      { text: '林肯当选总统成为战争导火线', order: 2 }
+    ]
+  },
+  {
+    id: 1,
+    title: '链条二：战争转折与胜利',
+    badge: 'c2',
+    pieces: [
+      { text: '战争初期北方屡屡失利，首都受威胁', order: 0 },
+      { text: '颁布《宅地法》《解放黑人奴隶宣言》', order: 1 },
+      { text: '调动农民和黑人积极性，扭转战局获胜', order: 2 }
+    ]
+  },
+  {
+    id: 2,
+    title: '链条三：历史意义与规律',
+    badge: 'c3',
+    pieces: [
+      { text: '制度性矛盾阻碍资本主义发展', order: 0 },
+      { text: '通过战争手段解决矛盾，维护统一', order: 1 },
+      { text: '废除奴隶制，扫清障碍，第二次资产阶级革命', order: 2 }
+    ]
+  }
+];
+
+var puzzleChainProgress = [0, 0, 0];
+
+function initPuzzle() {
+  var container = document.getElementById('puzzleContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  puzzleChainProgress = [0, 0, 0];
+
+  puzzleData.forEach(function(chain, ci) {
+    var chainDiv = document.createElement('div');
+    chainDiv.className = 'puzzle-chain';
+    chainDiv.id = 'pchain-' + ci;
+
+    var header = document.createElement('div');
+    header.className = 'chain-header';
+    var badge = document.createElement('span');
+    badge.className = 'chain-badge ' + chain.badge;
+    badge.textContent = '链' + (ci + 1);
+    header.appendChild(badge);
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = chain.title;
+    header.appendChild(titleSpan);
+    var prog = document.createElement('span');
+    prog.className = 'chain-progress';
+    prog.id = 'cprog-' + ci;
+    prog.innerHTML = '进度：<strong id="cprogNum-' + ci + '">0</strong>/3';
+    header.appendChild(prog);
+    chainDiv.appendChild(header);
+
+    var slotsDiv = document.createElement('div');
+    slotsDiv.className = 'chain-slots';
+    slotsDiv.id = 'cslots-' + ci;
+    for (var s = 0; s < 3; s++) {
+      var slot = document.createElement('div');
+      slot.className = 'puzzle-slot';
+      slot.id = 'cslot-' + ci + '-' + s;
+      slot.textContent = '第' + (s + 1) + '步';
+      slotsDiv.appendChild(slot);
+    }
+    chainDiv.appendChild(slotsDiv);
+
+    var piecesDiv = document.createElement('div');
+    piecesDiv.className = 'puzzle-pieces';
+    piecesDiv.id = 'cpieces-' + ci;
+    var shuffled = chain.pieces.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = temp;
+    }
+    shuffled.forEach(function(piece, pi) {
+      var pDiv = document.createElement('div');
+      pDiv.className = 'puzzle-piece p' + (ci + 1);
+      pDiv.id = 'cpiece-' + ci + '-' + pi;
+      pDiv.setAttribute('data-chain', ci);
+      pDiv.setAttribute('data-order', piece.order);
+      pDiv.textContent = piece.text;
+      pDiv.addEventListener('click', function() {
+        handlePuzzleClick(parseInt(this.getAttribute('data-chain')), parseInt(this.getAttribute('data-order')));
+      });
+      piecesDiv.appendChild(pDiv);
+    });
+    chainDiv.appendChild(piecesDiv);
+    container.appendChild(chainDiv);
+  });
+}
+
+function handlePuzzleClick(chainIdx, order) {
+  if (puzzleChainProgress[chainIdx] >= 3) return;
+  var nextSlot = puzzleChainProgress[chainIdx];
+  if (order !== nextSlot) {
+    var pieces = document.querySelectorAll('#cpieces-' + chainIdx + ' .puzzle-piece');
+    pieces.forEach(function(p) {
+      if (parseInt(p.getAttribute('data-order')) === order) {
+        p.classList.add('wrong-shake');
+        setTimeout(function() { p.classList.remove('wrong-shake'); }, 500);
+      }
+    });
+    return;
+  }
+
+  var slot = document.getElementById('cslot-' + chainIdx + '-' + nextSlot);
+  var pieceEl = document.querySelector('#cpieces-' + chainIdx + ' .puzzle-piece[data-order="' + order + '"]');
+  if (!pieceEl || !slot) return;
+
+  pieceEl.classList.add('placed');
+  pieceEl.style.display = 'none';
+  slot.textContent = pieceEl.textContent;
+  slot.classList.add('filled', 'correct');
+
+  puzzleChainProgress[chainIdx]++;
+  document.getElementById('cprogNum-' + chainIdx).textContent = puzzleChainProgress[chainIdx];
+
+  if (puzzleChainProgress[chainIdx] >= 3) {
+    document.getElementById('pchain-' + chainIdx).classList.add('complete');
+  }
+
+  var allDone = true;
+  for (var i = 0; i < puzzleChainProgress.length; i++) {
+    if (puzzleChainProgress[i] < 3) { allDone = false; break; }
+  }
+  if (allDone) {
+    var result = document.getElementById('puzzleResult');
+    result.textContent = '🧩 全部因果链拼合正确！';
+    result.className = 'puzzle-result show pass';
+    stageDone.puzzle = true;
+    updateStageProgress();
+    document.getElementById('stagePuzzleDone').classList.add('show');
+  }
+}
+
+// 初始化拼图
+document.addEventListener('DOMContentLoaded', function() {
+  initPuzzle();
+});
+
+// 修复翻牌过关检测
+var origFlip = flipCard;
+flipCard = function(el) {
+  origFlip(el);
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+};
+</script>
+
+</body>
+</html>

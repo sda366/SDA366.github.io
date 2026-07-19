@@ -1,0 +1,1764 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下-U3-第10课 列宁与十月革命</title>
+<style>
+/* ========== v2.0 全局 CSS 变量 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+  --gold: #f1c40f;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding:36px 20px 30px;
+  text-align:center;
+  color:#fff;
+  border-radius:0 0 36px 36px;
+  box-shadow:0 6px 30px rgba(61,43,140,0.20);
+  margin:0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background:linear-gradient(135deg,#f0edff,#e0daff);
+  border-radius:12px;
+  padding:20px 24px;
+  margin-bottom:24px;
+  border:1px solid var(--border);
+}
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item {
+  font-size:13.5pt;
+  padding:6px 8px;
+  border-bottom:1px dashed var(--border);
+  cursor:pointer;
+  transition:all 0.2s;
+  border-radius:6px;
+  background:transparent;
+}
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn {
+  display:block; margin:20px auto 10px;
+  background:linear-gradient(135deg,#7c6cf0,#5a4ac7);
+  color:#fff; border:none; border-radius:24px;
+  padding:12px 36px; font-size:16pt; font-weight:700;
+  cursor:pointer; transition:all 0.25s;
+  box-shadow:0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn {
+  flex:1; padding:14px 8px;
+  font-size:14pt; font-weight:700;
+  border:none; cursor:pointer;
+  text-align:center;
+  transition:all 0.25s;
+  background:#e8e0ff; color:#5a4ac7;
+  letter-spacing:1px;
+}
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ========== 闯关进度条 ========== */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background:var(--bg-card);
+  border-left:4px solid var(--primary);
+  border-radius:0 10px 10px 0;
+  padding:18px 22px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; }
+.kp-card li { margin:6px 0; font-size:14pt; }
+.kp-card p { font-size:14pt; line-height:1.8; }
+
+.timeline-bar {
+  background:#f0edff;
+  border-radius:8px;
+  padding:8px 16px;
+  font-size:12pt;
+  color:#5a4ac7;
+  text-align:center;
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+.link-bar {
+  border:2px dashed #d5cef0;
+  border-radius:10px;
+  padding:12px 16px;
+  margin-top:14px;
+  background:#faf8ff;
+  font-size:13pt;
+  color:#5a4ac7;
+}
+
+/* 标签 */
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-zhongkao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 挑战标题 ========== */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== ① 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item {
+  padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px;
+  cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s;
+}
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot {
+  min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:12pt;
+  transition:all 0.2s; background:#faf8ff; position:relative;
+}
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== ② 填空填词 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input {
+  width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px;
+  font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff;
+}
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== ③ 连线匹配 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item {
+  padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer;
+  transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center;
+}
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== ④ 因果拼图 ========== */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain {
+  background:#fff;
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:16px;
+  border:2px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:all 0.3s;
+}
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14pt;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:10px;
+}
+.puzzle-chain .chain-header .chain-badge {
+  display:inline-block;
+  padding:2px 12px;
+  border-radius:12px;
+  font-size:11pt;
+  color:#fff;
+}
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots {
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.puzzle-slot {
+  min-width:100px;
+  flex:1;
+  min-height:52px;
+  border:2px dashed #dcd4f5;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 10px;
+  font-size:11pt;
+  color:#aaa;
+  background:#faf8ff;
+  transition:all 0.3s;
+  text-align:center;
+}
+.puzzle-slot.filled {
+  border-style:solid;
+  border-color:var(--primary);
+  background:#f0edff;
+  color:#333;
+  font-weight:600;
+}
+.puzzle-slot.correct {
+  border-color:var(--green);
+  background:#d4efdf;
+  color:var(--green);
+}
+.puzzle-pieces {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:6px;
+}
+.puzzle-piece {
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:12pt;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.25s;
+  border:2px solid var(--border);
+  background:#fff;
+  user-select:none;
+  flex:1 1 auto;
+  min-width:80px;
+  text-align:center;
+}
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed {
+  opacity:0.3;
+  cursor:not-allowed;
+  transform:scale(0.95);
+  pointer-events:none;
+}
+.puzzle-piece.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.25); }
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-6px); }
+  75% { transform:translateX(6px); }
+}
+.puzzle-hint { font-size:11pt; color:#888; margin-top:6px; text-align:center; }
+.puzzle-result { text-align:center; padding:10px; border-radius:8px; font-weight:700; font-size:14pt; margin-top:8px; display:none; }
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.puzzle-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.chain-progress {
+  font-size:11pt;
+  color:#888;
+  margin-left:auto;
+}
+.chain-progress strong { color:var(--primary-dark); }
+
+/* ========== ⑤ 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back {
+  position:absolute; width:100%; height:100%; backface-visibility:hidden;
+  border-radius:12px; display:flex; align-items:center; justify-content:center;
+  padding:10px; font-size:11pt; text-align:center;
+}
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== 关卡通过横幅 ========== */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== Page2 手风琴 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s;
+}
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd {
+  background:linear-gradient(135deg,#e67e22,#f0ad4e);
+  color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700;
+  cursor:pointer; user-select:none;
+}
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== 对比表格 ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip {
+  padding:6px 14px; border:2px solid var(--border); border-radius:20px;
+  background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s;
+  font-weight:600; color:#5a4ac7;
+}
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+.col-body .a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.col-body .a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label {
+  display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px;
+  cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff;
+}
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node {
+  width:90%; border-radius:12px; padding:16px 20px; text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative;
+}
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100% { box-shadow:0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow:0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card {
+  background:#fff; border-radius:14px; padding:20px 16px 14px;
+  border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08);
+  position:relative; text-align:left;
+}
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+  .puzzle-slot { min-width:60px; font-size:10pt; }
+  .puzzle-piece { font-size:10.5pt; padding:8px 10px; min-width:60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0 封面页 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第三单元 · 第一次世界大战和战后初期的世界</div>
+    <h1>第10课 · 列宁与十月革命</h1>
+    <div class="hero-sub">统编版初中历史  九年级下册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解二月革命和十月革命的时间脉络，把握1917年俄国历史的重大转折。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过彼得格勒武装起义、《和平法令》等史实，理解十月革命的进程与成果。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析十月革命的历史意义，理解其作为第一次胜利的社会主义革命的地位。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>认识十月革命对中国的影响，感悟革命领袖在关键时刻的担当与智慧。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1 知识要点 + 五关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">十月革命前的俄国</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">十月革命</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">苏维埃政权的建立</button>
+  </div>
+
+  <!-- ===== Tab1：十月革命前的俄国 ===== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1861年 — 1917年3月</div>
+      <h3>📌 背景</h3>
+      <ul>
+        <li>1861年农奴制改革后，俄国资本主义发展，但依然落后于西欧、北美</li>
+        <li>一战中俄国<strong class="kwd">接连失利</strong>，国内社会矛盾激化</li>
+        <li>反对战争和要求社会变革的呼声越来越高</li>
+      </ul>
+      <h3>📌 二月革命（1917年3月）</h3>
+      <ul>
+        <li>彼得格勒30多万人反战罢工、示威游行 → 发展为<strong class="kwd">武装起义</strong></li>
+        <li>沙皇尼古拉二世被迫<strong class="kwd">退位</strong>，推翻沙皇专制统治</li>
+        <li>建立了<strong class="kwd">资产阶级临时政府</strong></li>
+        <li>各地成立苏维埃，彼得格勒工兵代表苏维埃成为革命领导中心</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 二月革命推翻了沙皇专制，但临时政府继续一战，未满足人民对和平、土地和面包的要求。
+      </div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将十月革命前的俄国大事按时间顺序排列</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">1861年农奴制改革</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">一战爆发</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">二月革命推翻沙皇</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">列宁回国</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">十月革命</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">二月革命</div><div class="flash-back">1917年3月，推翻沙皇专制统治，建立资产阶级临时政府</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">临时政府</div><div class="flash-back">二月革命后建立，继续一战，未满足人民要求，引起更大不满</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">苏维埃</div><div class="flash-back">俄国无产阶级政权组织形式，十月革命后成为全国政权机关</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">彼得格勒</div><div class="flash-back">俄国首都，二月革命和十月革命的重要地点，革命领导中心</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab2：十月革命 ===== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1917年4月 — 1917年11月7日</div>
+      <h3>📌 背景</h3>
+      <ul>
+        <li>临时政府继续一战，俄军惨败，经济濒临崩溃</li>
+        <li>首都每人每天仅约<strong class="kwd">110克</strong>面包</li>
+        <li>临时政府迫害布尔什维克党人</li>
+      </ul>
+      <h3>📌 列宁与十月革命</h3>
+      <ul>
+        <li><strong>列宁：</strong>1917年4月回国，分析革命形势，提出<strong class="kwd">武装起义</strong>方针</li>
+        <li><strong>时间：</strong>1917年11月6日（俄历10月24日）开始</li>
+        <li><strong>过程：</strong>约20万起义者占领铁路、银行、发电站等战略要地</li>
+        <li><strong>标志：</strong>“<strong class="kwd">阿芙乐尔号</strong>”巡洋舰炮声为信号，攻占冬宫</li>
+        <li><strong>结果：</strong>推翻临时政府，十月革命胜利</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 十月革命因发生在俄历10月而得名，是人类历史上第一次胜利的社会主义革命。
+      </div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词，完成十月革命的关键信息</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1917年3月，俄国发生 <input type="text" class="fill-input" data-answer="二月革命" placeholder="？"> ，推翻沙皇专制。</div>
+      <div class="fill-blank-row">1917年4月，<input type="text" class="fill-input" data-answer="列宁" placeholder="？"> 回到彼得格勒，提出武装起义方针。</div>
+      <div class="fill-blank-row">十月革命发生在 <input type="text" class="fill-input" data-answer="彼得格勒" placeholder="？"> 。</div>
+      <div class="fill-blank-row">起义者包围了临时政府所在地 <input type="text" class="fill-input" data-answer="冬宫" placeholder="？"> 。</div>
+      <div class="fill-blank-row">全俄工兵代表苏维埃第二次代表大会宣布成立苏维埃政府，列宁任 <input type="text" class="fill-input" data-answer="人民委员会" placeholder="？"> 主席。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将事件与其意义配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 事件</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">二月革命</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">十月革命</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">《和平法令》</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">战时共产主义</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">苏维埃</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📋 意义</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">推翻沙皇专制统治</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">建立无产阶级专政国家</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">建议各交战国停战，退出一战</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">巩固苏维埃政权，保证国内战争胜利</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">俄国无产阶级政权组织形式</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">列宁</div><div class="flash-back">1870—1924，布尔什维克党领袖，领导十月革命，任人民委员会主席</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">彼得格勒起义</div><div class="flash-back">1917年11月6日开始，约20万起义者占领战略要地，攻占冬宫</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">冬宫</div><div class="flash-back">临时政府所在地，十月革命中被起义者攻占，临时政府被推翻</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">阿芙乐尔号</div><div class="flash-back">巡洋舰，以炮声为信号，指示起义者攻占冬宫</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tab3：苏维埃政权的建立 ===== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1917年11月 — 1920年</div>
+      <h3>📌 苏维埃政权的建立</h3>
+      <ul>
+        <li>全俄工兵代表苏维埃第二次代表大会召开，宣告全部政权归<strong class="kwd">苏维埃</strong></li>
+        <li>通过《<strong class="kwd">和平法令</strong>》，建议各交战国停战，退出一战</li>
+        <li>成立苏维埃政府，列宁任<strong class="kwd">人民委员会</strong>主席</li>
+      </ul>
+      <h3>📌 苏维埃政府的措施</h3>
+      <ul>
+        <li>废除旧国家机器，创建新政权机关；组建<strong class="kwd">红军</strong></li>
+        <li>大工业、铁路、银行收归国有，建立社会主义公有制</li>
+        <li>废除土地私有制，没收地主土地，分给农民耕种</li>
+        <li>废除不平等条约，退出<strong class="kwd">一战</strong></li>
+      </ul>
+      <h3>📌 巩固政权</h3>
+      <ul>
+        <li>粉碎国内外敌对势力武装干涉和叛乱</li>
+        <li>实行<strong class="kwd">战时共产主义</strong>政策（余粮收集制、取消自由贸易、统一分配生活必需品）</li>
+        <li>积极作用：巩固新政权，保证国内战争胜利；弊端：超出战时需要限度</li>
+      </ul>
+      <h3>📊 历史意义</h3>
+      <ul>
+        <li>人类历史上<strong class="kwd">第一次胜利的社会主义革命</strong></li>
+        <li>建立第一个无产阶级专政国家</li>
+        <li>推动国际无产阶级革命，鼓舞殖民地半殖民地解放斗争</li>
+      </ul>
+      <div class="link-bar">
+        <span class="tag-zhongkao">📌 中考常考</span> 毛泽东评价：“十月革命一声炮响，给我们送来了马克思列宁主义。”
+      </div>
+    </div>
+
+    <!-- ④ 因果拼图 -->
+    <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+    <div class="puzzle-container" id="puzzleContainer">
+      <!-- 由JS动态生成 -->
+    </div>
+    <div class="puzzle-result" id="puzzleResult"></div>
+    <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+    <!-- ⑤ 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《和平法令》</div><div class="flash-back">苏维埃政府通过的第一个重要法令，建议一战各交战国停战，退出一战</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">战时共产主义</div><div class="flash-back">内战时期实行的政策，包括余粮收集制、取消自由贸易等，巩固了政权但有弊端</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">十月革命意义</div><div class="flash-back">第一次胜利的社会主义革命，建立无产阶级专政，鼓舞殖民地半殖民地解放斗争</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">苏维埃政权</div><div class="flash-back">俄国无产阶级专政的政权组织形式，通过全俄工兵代表苏维埃代表大会行使权力</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page2 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1：十月革命背景 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>📍 重难点一：十月革命爆发的背景与原因</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 十月革命的背景</div>
+        <div class="deep-card-bd">
+          <p>十月革命爆发的根本原因是俄国资本主义发展不充分，社会矛盾尖锐。一战使俄国接连失利，经济濒临崩溃，人民反战情绪高涨。</p>
+          <p>二月革命推翻了沙皇专制，但临时政府继续一战，未满足人民对和平、土地和面包的要求。列宁领导的布尔什维克党提出“武装起义”方针，为十月革命准备了条件。</p>
+          <p><strong>简而言之：</strong>一战激化了俄国社会矛盾，临时政府无力解决，十月革命应运而生。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与法国大革命的对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：法国大革命是资产阶级革命，十月革命是无产阶级社会主义革命，两者都改变了各自国家的历史进程。</p>
+          <p>纵向联系：十月革命继承了巴黎公社的革命传统，是马克思主义理论的成功实践。</p>
+          <p><strong>这一联系说明：</strong>不同时代的革命反映了不同阶级的历史使命。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"临时政府没有满足人民对和平、土地和面包的要求，反而宣布继续履行沙皇政府的'义务'，将第一次世界大战进行到底，引起人民的更大不满。"——教材正文</div>
+          <p><span class="tag-value">📖 历史解释</span> 临时政府继续一战是其失去民心的关键原因，说明人民对和平与土地的要求是革命爆发的直接动力。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：为什么二月革命后俄国又爆发了十月革命？</p>
+          <p><strong>答案：</strong>二月革命后临时政府继续一战，未解决土地、和平问题，列宁提出武装起义方针，布尔什维克党领导人民推翻临时政府。<strong>解析：</strong>需从临时政府的失败和布尔什维克党的作用两方面回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2：十月革命过程 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>📍 重难点二：十月革命的过程与胜利</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 十月革命的过程</div>
+        <div class="deep-card-bd">
+          <p>1917年11月6日（俄历10月24日），列宁秘密来到彼得格勒的斯莫尔尼宫，亲自领导武装起义。约20万革命士兵和赤卫队员占领了铁路、银行、发电站等战略要地。</p>
+          <p>7日晚，起义者包围冬宫，以“阿芙乐尔号”巡洋舰炮声为信号，攻占冬宫，逮捕了临时政府主要领导人，革命胜利。</p>
+          <p><strong>简而言之：</strong>十月革命是列宁领导的武装起义，以彼得格勒为中心，推翻了临时政府。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与中国革命的关联</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：十月革命对中国革命产生了深远影响，毛泽东指出“十月革命一声炮响，给我们送来了马克思列宁主义”。</p>
+          <p>纵向联系：十月革命的道路为世界各国无产阶级革命提供了范例，也深刻影响了20世纪中国历史的走向。</p>
+          <p><strong>这一联系说明：</strong>十月革命不仅是俄国革命，也是世界社会主义运动的里程碑。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"1917年11月6日晚到7日清晨，包括革命士兵、赤卫队员等在内的约20万起义者占领了彼得格勒的铁路、银行、中央发电站、电话局等战略要地。"——相关史事</div>
+          <p><span class="tag-value">📖 史料实证</span> 起义者占领战略要地体现了武装起义的有组织性和高效性，是十月革命成功的重要保障。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：十月革命是如何取得胜利的？</p>
+          <p><strong>答案：</strong>在列宁领导下，起义者占领战略要地，攻占冬宫，推翻了临时政府，取得了十月革命的胜利。<strong>解析：</strong>需从领导、过程和结果三方面回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3：苏维埃政权 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>📍 重难点三：苏维埃政权的建立与历史意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 苏维埃政权</div>
+        <div class="deep-card-bd">
+          <p>全俄工兵代表苏维埃第二次代表大会宣告全部政权归苏维埃，通过《和平法令》，成立苏维埃政府，列宁任人民委员会主席。</p>
+          <p>苏维埃政府采取了一系列措施：废除旧国家机器，组建红军，大工业国有化，废除土地私有制，退出一战。</p>
+          <p><strong>简而言之：</strong>苏维埃政权的建立标志着俄国无产阶级专政的形成。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 与巴黎公社的对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：巴黎公社是无产阶级专政的第一次尝试，但仅存在72天；十月革命建立了长期稳定的无产阶级政权。</p>
+          <p>纵向联系：十月革命吸取了巴黎公社的经验教训，将马克思主义理论付诸实践并取得成功。</p>
+          <p><strong>这一联系说明：</strong>无产阶级革命需要成熟的理论指导和坚强的革命政党。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"十月革命是人类历史上第一次胜利的社会主义革命，建立了第一个无产阶级专政的国家，推动了国际无产阶级革命运动，鼓舞了殖民地半殖民地人民的解放斗争。"——教材正文</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 十月革命是马克思主义关于无产阶级革命理论的伟大实践，证明了社会主义制度取代资本主义制度的历史必然性。</p>
+          <p><span class="tag-zhongkao">🎯 中考拓展</span> 模拟题：为什么说十月革命是人类历史上第一次胜利的社会主义革命？</p>
+          <p><strong>答案：</strong>十月革命建立了无产阶级专政的国家，将社会主义从理论变为现实，为世界各国无产阶级革命提供了范例。<strong>解析：</strong>需从理论与实践的关系角度回答。</p>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered(this)">✅ 我已掌握</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page3 教材栏目解答 ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+    <button class="filter-chip" onclick="filterCol('材料研读',this)">材料研读</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 相关史事1 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：二月革命</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1917年3月，俄国首都彼得格勒30多万人举行了反战罢工和示威游行。示威游行发展为武装起义，得到士兵的支持。革命迅速扩及全国，各地相继成立苏维埃，彼得格勒工兵代表苏维埃成为全国革命的领导中心。正在前线的沙皇尼古拉二世被迫退位，资产阶级临时政府掌握了全国政权。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong>二月革命由反战罢工发展为武装起义，推翻沙皇专制，建立资产阶级临时政府。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：列宁</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>列宁（1870—1924），原名弗拉基米尔·伊里奇·乌里扬诺夫。1893年，他在彼得格勒（当时名为圣彼得堡）参加了秘密的马克思主义小组。1895年，他将分散的小组统一为工人阶级解放斗争协会。同年12月，列宁被捕，后被流放到西伯利亚。1917年4月，流亡在外的列宁回到彼得格勒，受到成千上万工人、士兵的热烈欢迎。</p>
+      <div class="a" id="ans-p3-people1">
+        <strong>📝 要点归纳：</strong>列宁是俄国马克思主义的早期传播者和布尔什维克党的领袖，1917年4月回国领导十月革命。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-people1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事2 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：彼得格勒武装起义</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1917年11月6日晚到7日清晨，包括革命士兵、赤卫队员等在内的约20万起义者占领了彼得格勒的铁路、银行、中央发电站、电话局等战略要地。7日晚，起义者包围了临时政府所在地冬宫，以'阿芙乐尔号'巡洋舰的炮声为信号，起义者突破防线，冲进冬宫，逮捕了临时政府主要领导人，临时政府被推翻。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong>约20万起义者占领战略要地，以“阿芙乐尔号”炮声为信号攻占冬宫，推翻临时政府。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 材料研读 -->
+  <div class="col-box" data-cat="材料研读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 材料研读：十月革命对中国的影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>材料：</strong>"十月革命一声炮响，给我们送来了马克思列宁主义。十月革命帮助了全世界的也帮助了中国的先进分子，用无产阶级的宇宙观作为观察国家命运的工具，重新考虑自己的问题。"——毛泽东《论人民民主专政》</p>
+      <p><strong>问题：</strong>结合所学知识，想一想：十月革命对中国产生了什么影响？</p>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 参考答案：</strong>十月革命促进了马克思主义在中国的传播，推动了中国先进分子用马克思主义观察国家命运，为中国共产党的成立和革命运动的发展提供了思想基础和理论指导。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事3 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：战时共产主义</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>在3年艰苦斗争中，为了战胜敌人，苏维埃政府宣布各项工作转入战时轨道，实行战时共产主义政策，包括实行余粮收集制、取消自由贸易、由国家统一分配一切生活必需品等。战时共产主义政策在巩固新生的苏维埃政权和保证国内战争的胜利等方面起到了积极作用。但是，这个政策中的许多措施，超出了战时需要的限度，存在着许多弊端。</p>
+      <div class="a" id="ans-p3-story3">
+        <strong>📝 要点归纳：</strong>战时共产主义政策包括余粮收集制、取消自由贸易等，巩固了政权但存在弊端。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题1：</strong>下列各项中，哪些与十月革命的爆发有关？请在正确选项后的括号里画√。</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案：</strong><br>
+        临时政府掌握政权（√）<br>
+        俄国退出第一次世界大战（×）<br>
+        全国食品极度短缺（√）<br>
+        工兵代表苏维埃掌握武装（√）
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案</button>
+      <p><strong>问题2：</strong>查阅资料，了解列宁在十月革命关键时刻发挥的重要作用。</p>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案：</strong>列宁在1917年4月回国后，提出了“武装起义”的方针，领导了彼得格勒武装起义，亲自在斯莫尔尼宫指挥，最终推翻了临时政府，建立了苏维埃政权。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：苏维埃</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>"苏维埃"一词是俄语"代表会议"或"会议"的汉语音译。十月革命胜利的当天，全俄工兵代表苏维埃第二次代表大会召开。大会通过了列宁起草的《告工人、士兵和农民书》，宣布"代表大会已经把政权掌握在自己手里"。从此，苏维埃成为俄国无产阶级专政的政权组织形式。1922年12月30日，苏维埃社会主义共和国联盟第一次代表大会通过了《苏联成立宣言》和《联盟条约》，宣告苏维埃社会主义共和国联盟成立。后来，苏联宪法明确规定，苏联最高苏维埃是苏联的最高国家政权机关。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong>"苏维埃"意为"代表会议"，十月革命后成为俄国无产阶级专政的政权组织形式，1922年苏联成立后成为国家政权机关。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page4 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 q1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 二月革命推翻了</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 罗曼诺夫王朝（沙皇专制）</label>
+      <label onclick="optClick(this,'B','q1')">B. 资产阶级临时政府</label>
+      <label onclick="optClick(this,'C','q1')">C. 布尔什维克党</label>
+      <label onclick="optClick(this,'D','q1')">D. 苏维埃政权</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：A<br>
+      📌 解题思路：二月革命推翻了沙皇尼古拉二世的专制统治，即罗曼诺夫王朝。<br>
+      ❌ 排除B：资产阶级临时政府在二月革命后建立。<br>
+      ❌ 排除C、D：均为后来成立。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 十月革命的领导人是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 斯大林</label>
+      <label onclick="optClick(this,'B','q2')">B. 列宁</label>
+      <label onclick="optClick(this,'C','q2')">C. 托洛茨基</label>
+      <label onclick="optClick(this,'D','q2')">D. 马克思</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：列宁是十月革命的主要领导者，1917年4月回国后提出武装起义方针。<br>
+      ❌ 排除A：斯大林后来成为苏联领导人。<br>
+      ❌ 排除C：托洛茨基参与革命但非主要领导人。<br>
+      ❌ 排除D：马克思是马克思主义创始人，未参与十月革命。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 十月革命中，起义者攻占的战略目标是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 克里姆林宫</label>
+      <label onclick="optClick(this,'B','q3')">B. 冬宫</label>
+      <label onclick="optClick(this,'C','q3')">C. 卢浮宫</label>
+      <label onclick="optClick(this,'D','q3')">D. 白宫</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：临时政府所在地冬宫被起义者攻占，标志着临时政府被推翻。<br>
+      ❌ 排除A：克里姆林宫在莫斯科，不是当时的战略目标。<br>
+      ❌ 排除C：卢浮宫在巴黎。<br>
+      ❌ 排除D：白宫在美国。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 苏维埃政府成立后，列宁担任的职务是</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 总统</label>
+      <label onclick="optClick(this,'B','q4')">B. 总理</label>
+      <label onclick="optClick(this,'C','q4')">C. 人民委员会主席</label>
+      <label onclick="optClick(this,'D','q4')">D. 总书记</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：全俄工兵代表苏维埃第二次代表大会宣布成立苏维埃政府，列宁任人民委员会主席。<br>
+      ❌ 排除A、B、D：均为不同政治体制下的职务名称。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 十月革命的历史意义不包括</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 第一次胜利的社会主义革命</label>
+      <label onclick="optClick(this,'B','q5')">B. 建立第一个无产阶级专政国家</label>
+      <label onclick="optClick(this,'C','q5')">C. 标志着资本主义时代的结束</label>
+      <label onclick="optClick(this,'D','q5')">D. 推动了国际无产阶级革命运动</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：十月革命是社会主义革命的胜利，但不意味着资本主义时代结束，世界仍处于资本主义与社会主义并存的时代。<br>
+      ❌ 排除A、B、D：均为十月革命的历史意义。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题（不计分） -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">"十月革命一声炮响，给我们送来了马克思列宁主义。十月革命帮助了全世界的也帮助了中国的先进分子，用无产阶级的宇宙观作为观察国家命运的工具，重新考虑自己的问题。"——毛泽东《论人民民主专政》</div>
+    <div class="q-text">（1）十月革命对中国产生了什么影响？</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong>十月革命促进了马克思主义在中国的传播，推动了中国先进分子用马克思主义观察国家命运，为中国共产党的成立和革命运动的发展提供了思想基础。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+    <div class="q-text">（2）为什么说十月革命是"第一次胜利的社会主义革命"？</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong>十月革命建立了无产阶级专政的国家，将社会主义从理论变为现实，是马克思主义革命理论的首次成功实践，为世界各国无产阶级革命提供了范例。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== Page5 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚡</span><strong>社会矛盾激化</strong>
+        <p>一战加剧危机 → 二月革命推翻沙皇</p>
+        <div class="kg-detail"><p>一战使俄国经济崩溃，反战情绪高涨。1917年3月二月革命推翻沙皇专制，但临时政府继续一战，未满足人民要求。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🔴</span><strong>十月革命</strong>
+        <p>列宁领导 → 彼得格勒起义 → 攻占冬宫</p>
+        <div class="kg-detail"><p>列宁提出武装起义方针，1917年11月6日彼得格勒起义开始，7日攻占冬宫，推翻临时政府，革命胜利。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>苏维埃政权</strong>
+        <p>《和平法令》→ 退出一战 → 巩固政权</p>
+        <div class="kg-detail"><p>全俄工兵代表苏维埃第二次代表大会通过《和平法令》，成立苏维埃政府，退出一战，实行战时共产主义政策，巩固新政权。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌍</span><strong>历史意义</strong>
+        <p>第一次社会主义革命 → 推动国际革命</p>
+        <div class="kg-detail"><p>十月革命是人类历史上第一次胜利的社会主义革命，建立了第一个无产阶级专政国家，推动了国际无产阶级革命和殖民地半殖民地解放斗争。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：无产阶级专政</div>
+      <div class="kg-rule r2">🟠 经济：社会主义公有制</div>
+      <div class="kg-rule r3">🟢 思想：马克思列宁主义</div>
+      <div class="kg-rule r4">🔴 国际：民族解放运动</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page6 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第三单元 · 第一次世界大战和战后初期的世界</div>
+    <h1 style="font-size:22pt;">第10课 · 列宁与十月革命</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>十月革命前的俄国</h3>
+        <ul>
+          <li><strong>背景：</strong>一战激化矛盾</li>
+          <li><strong>二月革命：</strong>推翻沙皇专制</li>
+          <li><strong>临时政府：</strong>继续一战，失去民心</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>十月革命</h3>
+        <ul>
+          <li><strong>领导：</strong>列宁</li>
+          <li><strong>过程：</strong>彼得格勒起义，攻占冬宫</li>
+          <li><strong>结果：</strong>推翻临时政府</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>苏维埃政权与意义</h3>
+        <ul>
+          <li><strong>措施：</strong>《和平法令》、退出一战</li>
+          <li><strong>意义：</strong>第一次胜利的社会主义革命</li>
+          <li><strong>影响：</strong>推动国际无产阶级革命</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    
+      
+    
+    
+<footer>
+    <p>统编版初中历史 · 九年级下册 · 第三单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+        <div class="bottom-nav">
+    <div><a href="九下-U3-第9课 一战后的国际关系.html">← 上一课：第9课 一战后的国际关系</a></div>
+    <div class="nav-center">第10课</div>
+    <div><a href="九下-U3-第11课 苏联的社会主义建设.html">下一课：第11课 苏联的社会主义建设 →</a></div>
+  </div>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+/* ========== 6.1 分页导航系统 ========== */
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+/* ========== 6.2 闯关进度追踪 ========== */
+var stageDone = { sort:false, fill:false, match:false, puzzle:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','puzzle','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+/* ========== 6.3 封面学习目标标记 ========== */
+var targetsDoneCount = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDoneCount = document.querySelectorAll('.target-item.done').length;
+  if (targetsDoneCount >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+/* ========== 6.4 标签页与手风琴 ========== */
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+function markMastered(btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+}
+
+/* ========== 6.5 答案显隐 + 选择题 ========== */
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+var correctAnswers = { q1:'A', q2:'B', q3:'B', q4:'C', q5:'C' };
+var mcDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+  // 自动显示答案解析
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+function resetQuiz() {
+  mcDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+    ex.querySelectorAll('.ans-btn').forEach(function(b) {
+      var parent = b.parentElement;
+      var ansDiv = parent.querySelector('.a');
+      if (ansDiv && ansDiv.classList.contains('show')) {
+        b.textContent = '隐藏答案';
+      } else {
+        b.textContent = '📝 查看解析';
+      }
+    });
+  });
+}
+
+/* ========== 6.6 栏目筛选 ========== */
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+/* ========== 6.7 拖拽排序 ========== */
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key2','key3','key4','key5'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.8 填空填词 ========== */
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查红色标记的输入框';
+    result.className = 'sort-result show fail';
+  }
+}
+
+/* ========== 6.9 连线匹配 ========== */
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      var result = document.getElementById('matchResult');
+      result.textContent = '✅ 全部配对正确！';
+      result.className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    selectedLeft.classList.add('wrong-shake');
+    el.classList.add('wrong-shake');
+    var s = selectedLeft;
+    setTimeout(function(){ s.classList.remove('selected','wrong-shake'); }, 500);
+    setTimeout(function(e){ e.classList.remove('wrong-shake'); }, 500, el);
+    selectedLeft = null;
+  }
+}
+
+/* ========== 6.10 翻转卡 ========== */
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+}
+
+/* ========== 6.11 知识结构图节点展开 ========== */
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+/* ========== 6.12 deep-card 折叠 ========== */
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+/* ========== 6.13 因果拼图（第④关） ========== */
+var puzzleData = [
+  {
+    id: 0,
+    title: '链条一：十月革命的背景',
+    badge: 'c1',
+    pieces: [
+      { text: '一战激化俄国社会矛盾，人民反战情绪高涨', order: 0 },
+      { text: '二月革命推翻沙皇，但临时政府继续一战', order: 1 },
+      { text: '临时政府失去民心，列宁提出武装起义方针', order: 2 }
+    ]
+  },
+  {
+    id: 1,
+    title: '链条二：十月革命的过程',
+    badge: 'c2',
+    pieces: [
+      { text: '列宁回国领导，提出武装起义方针', order: 0 },
+      { text: '1917年11月6日彼得格勒武装起义开始', order: 1 },
+      { text: '攻占冬宫，推翻临时政府，革命胜利', order: 2 }
+    ]
+  },
+  {
+    id: 2,
+    title: '链条三：苏维埃政权与历史意义',
+    badge: 'c3',
+    pieces: [
+      { text: '全俄工兵代表苏维埃第二次代表大会召开', order: 0 },
+      { text: '通过《和平法令》，成立苏维埃政府，退出一战', order: 1 },
+      { text: '第一次胜利的社会主义革命，推动国际革命运动', order: 2 }
+    ]
+  }
+];
+
+var puzzleChainProgress = [0, 0, 0];
+
+function initPuzzle() {
+  var container = document.getElementById('puzzleContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  puzzleChainProgress = [0, 0, 0];
+
+  puzzleData.forEach(function(chain, ci) {
+    var chainDiv = document.createElement('div');
+    chainDiv.className = 'puzzle-chain';
+    chainDiv.id = 'pchain-' + ci;
+
+    var header = document.createElement('div');
+    header.className = 'chain-header';
+    var badge = document.createElement('span');
+    badge.className = 'chain-badge ' + chain.badge;
+    badge.textContent = '链' + (ci + 1);
+    header.appendChild(badge);
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = chain.title;
+    header.appendChild(titleSpan);
+    var prog = document.createElement('span');
+    prog.className = 'chain-progress';
+    prog.id = 'cprog-' + ci;
+    prog.innerHTML = '进度：<strong id="cprogNum-' + ci + '">0</strong>/3';
+    header.appendChild(prog);
+    chainDiv.appendChild(header);
+
+    var slotsDiv = document.createElement('div');
+    slotsDiv.className = 'chain-slots';
+    slotsDiv.id = 'cslots-' + ci;
+    for (var s = 0; s < 3; s++) {
+      var slot = document.createElement('div');
+      slot.className = 'puzzle-slot';
+      slot.id = 'cslot-' + ci + '-' + s;
+      slot.textContent = '第' + (s + 1) + '步';
+      slotsDiv.appendChild(slot);
+    }
+    chainDiv.appendChild(slotsDiv);
+
+    var piecesDiv = document.createElement('div');
+    piecesDiv.className = 'puzzle-pieces';
+    piecesDiv.id = 'cpieces-' + ci;
+    var shuffled = chain.pieces.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = temp;
+    }
+    shuffled.forEach(function(piece, pi) {
+      var pDiv = document.createElement('div');
+      pDiv.className = 'puzzle-piece p' + (ci + 1);
+      pDiv.id = 'cpiece-' + ci + '-' + pi;
+      pDiv.setAttribute('data-chain', ci);
+      pDiv.setAttribute('data-order', piece.order);
+      pDiv.textContent = piece.text;
+      pDiv.addEventListener('click', function() {
+        handlePuzzleClick(parseInt(this.getAttribute('data-chain')), parseInt(this.getAttribute('data-order')));
+      });
+      piecesDiv.appendChild(pDiv);
+    });
+    chainDiv.appendChild(piecesDiv);
+    container.appendChild(chainDiv);
+  });
+}
+
+function handlePuzzleClick(chainIdx, order) {
+  if (puzzleChainProgress[chainIdx] >= 3) return;
+  var nextSlot = puzzleChainProgress[chainIdx];
+  if (order !== nextSlot) {
+    var pieces = document.querySelectorAll('#cpieces-' + chainIdx + ' .puzzle-piece');
+    pieces.forEach(function(p) {
+      if (parseInt(p.getAttribute('data-order')) === order) {
+        p.classList.add('wrong-shake');
+        setTimeout(function() { p.classList.remove('wrong-shake'); }, 500);
+      }
+    });
+    return;
+  }
+
+  var slot = document.getElementById('cslot-' + chainIdx + '-' + nextSlot);
+  var pieceEl = document.querySelector('#cpieces-' + chainIdx + ' .puzzle-piece[data-order="' + order + '"]');
+  if (!pieceEl || !slot) return;
+
+  pieceEl.classList.add('placed');
+  pieceEl.style.display = 'none';
+  slot.textContent = pieceEl.textContent;
+  slot.classList.add('filled', 'correct');
+
+  puzzleChainProgress[chainIdx]++;
+  document.getElementById('cprogNum-' + chainIdx).textContent = puzzleChainProgress[chainIdx];
+
+  if (puzzleChainProgress[chainIdx] >= 3) {
+    document.getElementById('pchain-' + chainIdx).classList.add('complete');
+  }
+
+  var allDone = true;
+  for (var i = 0; i < puzzleChainProgress.length; i++) {
+    if (puzzleChainProgress[i] < 3) { allDone = false; break; }
+  }
+  if (allDone) {
+    var result = document.getElementById('puzzleResult');
+    result.textContent = '🧩 全部因果链拼合正确！';
+    result.className = 'puzzle-result show pass';
+    stageDone.puzzle = true;
+    updateStageProgress();
+    document.getElementById('stagePuzzleDone').classList.add('show');
+  }
+}
+
+// 初始化拼图
+document.addEventListener('DOMContentLoaded', function() {
+  initPuzzle();
+});
+
+// 修复翻牌过关检测
+var origFlip = flipCard;
+flipCard = function(el) {
+  origFlip(el);
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    if (!stageDone.flips) {
+      stageDone.flips = true;
+      updateStageProgress();
+    }
+    var doneEls = document.querySelectorAll('.stage-done');
+    doneEls.forEach(function(d) {
+      if (d.id && d.id.indexOf('stageFlipsDone') !== -1) {
+        d.classList.add('show');
+      }
+    });
+  }
+};
+</script>
+</body>
+</html>
