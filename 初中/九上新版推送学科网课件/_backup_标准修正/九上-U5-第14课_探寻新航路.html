@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上-U5-第14课 探寻新航路（升级版）</title>
+<style>
+:root {
+ --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+ --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+ --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+ --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+ font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+ font-size: 14pt; background: var(--bg); color: #333;
+ line-height: 1.75; max-width: 900px; margin: 0 auto;
+ padding: 0 20px 80px; overflow-x: hidden;
+}
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+.pg-nav {
+ position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+ background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+ display: flex; align-items: center; justify-content: center; gap: 14px;
+ padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+ background: var(--primary); color: #fff; border: none; border-radius: 18px;
+ padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd.pt4 { background: linear-gradient(135deg, #27ae60, #58d68d); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+/* 已删除 .source-ref */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+.analysis { display: none; background: #fef9e7; border: 1px solid #f39c12; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 13pt; }
+.analysis.show { display: block; }
+.analysis .correct-answer { color: var(--green); font-weight: 700; font-size: 14pt; }
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+/* 因果拼图 */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain { background:#fff; border-radius:12px; padding:14px 18px; margin-bottom:16px; border:2px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.04); transition:all 0.3s; }
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header { display:flex; align-items:center; gap:10px; font-size:14pt; font-weight:700; color:var(--primary-dark); margin-bottom:10px; flex-wrap:wrap; }
+.puzzle-chain .chain-header .chain-badge { display:inline-block; padding:2px 12px; border-radius:12px; font-size:11pt; color:#fff; }
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots { display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+.puzzle-slot { min-width:100px; flex:1; min-height:52px; border:2px dashed #dcd4f5; border-radius:8px; display:flex; align-items:center; justify-content:center; padding:6px 10px; font-size:11pt; color:#aaa; background:#faf8ff; transition:all 0.3s; text-align:center; }
+.puzzle-slot.filled { border-style:solid; border-color:var(--primary); background:#f0edff; color:#333; font-weight:600; }
+.puzzle-slot.correct { border-color:var(--green); background:#d4efdf; color:var(--green); }
+.puzzle-pieces { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+.puzzle-piece { padding:10px 14px; border-radius:8px; font-size:12pt; font-weight:600; cursor:pointer; transition:all 0.25s; border:2px solid var(--border); background:#fff; user-select:none; flex:1 1 auto; min-width:80px; text-align:center; }
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed { opacity:0.3; cursor:not-allowed; transform:scale(0.95); pointer-events:none; }
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-6px); } 75% { transform:translateX(6px); } }
+.puzzle-result { text-align:center; padding:10px; border-radius:8px; font-weight:700; font-size:14pt; margin-top:8px; display:none; }
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.chain-progress { font-size:11pt; color:#888; margin-left:auto; }
+.chain-progress strong { color:var(--primary-dark); }
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:10.5pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10pt; line-height:1.5; }
+.flash-group-label { grid-column:1/-1; text-align:center; font-weight:700; font-size:13pt; color:var(--primary-dark); background:#ebe6ff; border-radius:8px; padding:6px 0; margin:4px 0; }
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,0.06);}50%{box-shadow:0 2px 20px rgba(124,108,240,0.18);} }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+@media (max-width:680px){ .recap-grid{grid-template-columns:1fr;} .flash-grid{grid-template-columns:repeat(3,1fr);} .learn-target .target-grid{grid-template-columns:1fr;} .match-cols{gap:16px;} .puzzle-slot{min-width:60px;font-size:10pt;} }
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0: 封面 ==================== -->
+<div class="page-slide active" id="page0">
+ <div class="hero-wrap">
+ <div class="hero-unit">第五单元 · 走向近代</div>
+ <h1>第14课 · 探寻新航路</h1>
+ <div class="hero-sub">统编版初中历史 九年级上册 · 新版</div>
+ </div>
+ <div class="learn-target" id="learnTargets">
+ <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+ <div class="target-grid">
+ <div class="target-item" onclick="toggleTarget(this)">🕐 <strong>时空观念：</strong>了解15-16世纪新航路开辟的历程，掌握四位航海家的航行时间与路线</div>
+ <div class="target-item" onclick="toggleTarget(this)">📜 <strong>史料实证：</strong>通过迪亚士、哥伦布、麦哲伦等航海家的航海实践，认识新航路开辟的史实</div>
+ <div class="target-item" onclick="toggleTarget(this)">🔍 <strong>历史解释：</strong>分析新航路开辟的原因和条件，理解“世界开始连为一个整体”的含义</div>
+ <div class="target-item" onclick="toggleTarget(this)">❤️ <strong>家国情怀：</strong>感受航海家的探险精神，认识世界由分散走向整体的历史意义</div>
+ </div>
+ <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+ </div>
+ <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1: 知识要点 + 5关闯关 ==================== -->
+<div class="page-slide" id="page1">
+ <div class="slide-header"><div class="module-num">模块一</div><div class="module-title">知识要点 · 闯关解锁</div></div>
+ <div class="stage-progress-wrap">
+ <div class="stage-progress-text"><span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong></div>
+ <div class="stage-progress-bar-bg"><div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div></div>
+ </div>
+ <div class="tab-bar">
+ <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 探寻新航路的热潮</button>
+ <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 哥伦布“发现”美洲</button>
+ <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 麦哲伦船队环球航行</button>
+ </div>
+
+ <!-- ==================== Tab1 ==================== -->
+ <div class="kp-card tab-panel active" id="tab1">
+ <div class="timeline-bar">📍 15世纪中期奥斯曼阻商道 → 地圆学说流行 → 渴望东方财富</div>
+ <h3>🌍 探寻新航路的热潮</h3>
+ <ul>
+ <li><strong>经济根源：</strong>手工工场和租地农场发展，<span class="kwd">商品经济</span>日趋发达，资产阶级渴求新市场</li>
+ <li><strong>社会根源：</strong>欧洲人渴望东方的丝绸、香料、黄金；<span class="kwd">《马可·波罗行纪》</span>激起向往</li>
+ <li><strong>商业危机：</strong>15世纪中期<span class="kwd">奥斯曼帝国</span>控制东西方商道，征收高额关税</li>
+ <li><strong>思想动力：</strong><span class="kwd">地圆学说</span>流行（托勒密《地理学指南》），航海经验证明地球是圆的</li>
+ </ul>
+ <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 新航路开辟的原因（经济/社会/商业/思想）和条件（地圆学说/航海技术）</div>
+
+ <!-- ① 拖拽排序 -->
+ <div class="challenge-title">🎮 挑战一：请将四位航海家的航行时间按先后顺序拖入槽位</div>
+ <div class="sort-pool" id="sortPool1">
+ <span class="sort-item" draggable="true" data-sortkey="event1" id="item_event1">达·伽马到达印度</span>
+ <span class="sort-item" draggable="true" data-sortkey="event2" id="item_event2">迪亚士到达好望角</span>
+ <span class="sort-item" draggable="true" data-sortkey="event3" id="item_event3">哥伦布到达美洲</span>
+ <span class="sort-item" draggable="true" data-sortkey="event4" id="item_event4">麦哲伦船队环球航行</span>
+ </div>
+ <div class="sort-slots">
+ <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+ <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+ <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+ <div class="sort-slot" data-slot="3"><span class="slot-label">最晚</span></div>
+ </div>
+ <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+ <div class="sort-result" id="sortResult"></div>
+ <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+ <!-- 翻转卡 Tab1: 6张 -->
+ <div class="flash-section">
+ <div class="flash-group-label">📌 新航路开辟的背景（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">商品经济</div><div class="flash-back">手工工场和租地农场发展，资产阶级渴求新市场，是经济根源</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《马可·波罗行纪》</div><div class="flash-back">描述东方富庶，激起欧洲人对东方的向往和想象</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">奥斯曼帝国</div><div class="flash-back">15世纪中期控制东西方商道，征收高额关税，导致欧洲商品昂贵</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">地圆学说</div><div class="flash-back">文艺复兴时期流行的地理学说，为远洋航行提供理论依据</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">航海技术</div><div class="flash-back">罗盘、星盘等工具进步，多桅帆船改进，为远航提供技术条件</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">西班牙与葡萄牙</div><div class="flash-back">两国王室支持航海探险，竞争开拓新航线</div></div></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ==================== Tab2 ==================== -->
+ <div class="kp-card tab-panel" id="tab2">
+ <div class="timeline-bar">📍 1487-1488迪亚士好望角 → 1492哥伦布美洲 → 1497-1498达·伽马印度</div>
+ <h3>⛵ 哥伦布“发现”美洲</h3>
+ <ul>
+ <li><strong>迪亚士（1487-1488，葡萄牙）：</strong>到达非洲<span class="kwd">好望角</span>，打开绕道非洲通往东方航路</li>
+ <li><strong>达·伽马（1497-1498，葡萄牙）：</strong>绕过好望角，到达<span class="kwd">印度西海岸</span>，带回大量香料和黄金</li>
+ <li><strong>哥伦布（1492，西班牙）：</strong>横渡大西洋，到达<span class="kwd">巴哈马群岛</span>（“发现”美洲），称当地人为“<span class="kwd">印第安人</span>”</li>
+ </ul>
+ <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 哥伦布到达美洲（1492年）、达·伽马到达印度（1497-1498年）</div>
+
+ <!-- ② 填空填词 -->
+ <div class="challenge-title">🎮 挑战二：填写新航路开辟的关键信息</div>
+ <div class="fill-blank-wrap" id="fillBlanks">
+ <div class="fill-blank-row">迪亚士到达非洲南端 <input type="text" class="fill-input" data-answer="好望角" placeholder="?"></div>
+ <div class="fill-blank-row">达·伽马到达 <input type="text" class="fill-input" data-answer="印度" placeholder="?"> 西海岸</div>
+ <div class="fill-blank-row">哥伦布称美洲当地人为“<input type="text" class="fill-input" data-answer="印第安人" placeholder="?">”</div>
+ <div class="fill-blank-row">麦哲伦船队完成了第一次 <input type="text" class="fill-input" data-answer="环球航行" placeholder="?"></div>
+ <div class="fill-blank-row">新航路开辟使世界开始连为一个 <input type="text" class="fill-input" data-answer="整体" placeholder="?"></div>
+ </div>
+ <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+ <div class="sort-result" id="fillResult"></div>
+ <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+ <!-- 翻转卡 Tab2: 6张 -->
+ <div class="flash-section">
+ <div class="flash-group-label">📌 航海家与航线（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">迪亚士</div><div class="flash-back">1487-1488年到达好望角，打开绕道非洲通往东方航路</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">好望角</div><div class="flash-back">迪亚士原称“风暴角”，葡萄牙国王改称“好望角”</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">达·伽马</div><div class="flash-back">1497-1498年到达印度西海岸，带回大量香料和黄金</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">哥伦布</div><div class="flash-back">1492年横渡大西洋到达巴哈马群岛，“发现”美洲</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">印第安人</div><div class="flash-back">哥伦布误认为到达印度，称当地人为“印第安人”</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">西班牙王室</div><div class="flash-back">支持哥伦布横渡大西洋，开辟通往美洲航线</div></div></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ==================== Tab3 ==================== -->
+ <div class="kp-card tab-panel" id="tab3">
+ <div class="timeline-bar">📍 1519-1522年麦哲伦船队环球航行 → 证明地圆说</div>
+ <h3>🌏 麦哲伦船队环球航行</h3>
+ <ul>
+ <li><strong>时间：</strong><span class="kwd">1519-1522年</span></li>
+ <li><strong>支持国：</strong>西班牙</li>
+ <li><strong>成就：</strong>第一次<span class="kwd">环球航行</span>，证明了<span class="kwd">地圆说</span>的正确</li>
+ <li><strong>关键事件：</strong>麦哲伦1521年在菲律宾被杀，剩余船员完成航行</li>
+ <li><strong>结果：</strong>出发5艘船265人，返回1艘船18人</li>
+ </ul>
+ <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 麦哲伦船队环球航行（1519-1522年）、证明地圆说、世界开始连为一个整体</div>
+
+ <!-- ③ 连线匹配 -->
+ <div class="challenge-title">🎮 挑战三：将航海家与成就配对</div>
+ <div class="match-area">
+ <div class="match-cols">
+ <div class="match-col">
+ <div class="match-col-label">📌 航海家</div>
+ <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">迪亚士</div>
+ <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">哥伦布</div>
+ <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">达·伽马</div>
+ <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">麦哲伦</div>
+ </div>
+ <div class="match-col">
+ <div class="match-col-label">📌 成就</div>
+ <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">环球航行</div>
+ <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">好望角</div>
+ <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">到达印度</div>
+ <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">到达美洲</div>
+ </div>
+ </div>
+ </div>
+ <div class="sort-result" id="matchResult"></div>
+ <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+ <!-- ④ 因果拼图 -->
+ <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+ <div class="puzzle-container" id="puzzleContainer"></div>
+ <div class="puzzle-result" id="puzzleResult"></div>
+ <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+ <!-- 翻转卡 Tab3: 6张 -->
+ <div class="flash-section">
+ <div class="flash-group-label">📌 环球航行与影响（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">麦哲伦</div><div class="flash-back">葡萄牙航海家，1519-1522年完成环球航行，1521年在菲律宾被杀</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">环球航行</div><div class="flash-back">1519-1522年麦哲伦船队完成，证明地圆说正确</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">地圆说</div><div class="flash-back">环球航行证明了地圆说，打破了中世纪“地是平的”观念</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">世界整体</div><div class="flash-back">新航路开辟使世界开始连为一个整体，世界观念逐步确立</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">殖民扩张</div><div class="flash-back">新航路开辟后，欧洲开始殖民扩张，推动资本原始积累</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">物种交流</div><div class="flash-back">新航路开辟促进了玉米、马铃薯等美洲物种传入欧洲和亚洲</div></div></div>
+ </div>
+ <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！</div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page2: 重难点解析（4个） ==================== -->
+<div class="page-slide" id="page2">
+ <div class="slide-header"><div class="module-num">模块二</div><div class="module-title">重难点解析</div></div>
+
+ <div class="acc-group" id="acc1">
+ <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+ <h3>🔵 重难点一：新航路开辟的原因与条件</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：新航路开辟的原因</div><div class="deep-card-bd"><ul><li><strong>经济根源：</strong>商品经济日趋发达，资产阶级渴求开拓新市场</li><li><strong>社会根源：</strong>欧洲人对东方香料、黄金的渴望</li><li><strong>商业危机：</strong>奥斯曼帝国阻断东西方商道</li><li><strong>思想动力：</strong>地圆学说流行，人文主义鼓励探险</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：新航路开辟的条件</div><div class="deep-card-bd"><ul><li><strong>技术条件：</strong>造船技术、航海技术（罗盘、星盘等）进步</li><li><strong>知识条件：</strong>地圆学说传播、地理知识丰富</li><li><strong>政治条件：</strong>葡萄牙、西班牙王室的支持</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：新航路开辟的历史必然性</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>新航路开辟是<strong>历史发展的必然</strong>：欧洲商品经济发展需要更广阔的市场；奥斯曼帝国阻断传统商道，迫使欧洲寻找新路；地圆学说的传播为远洋航行提供了理论依据；文艺复兴鼓励冒险和探索精神。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc2">
+ <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+ <h3>🟠 重难点二：哥伦布“发现”美洲</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：哥伦布的航行</div><div class="deep-card-bd"><ul><li><strong>时间：</strong>1492年8月出发，10月到达</li><li><strong>支持国：</strong>西班牙</li><li><strong>到达：</strong>巴哈马群岛中的圣萨尔瓦多岛</li><li><strong>认知：</strong>始终认为到达的是亚洲的印度，称当地人为“印第安人”</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：哥伦布航行的意义</div><div class="deep-card-bd"><ul><li>开辟了从欧洲横渡大西洋到美洲的新航线</li><li>开启了欧洲殖民扩张和掠夺的时代</li><li>促进了世界各地的联系和交流</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：对哥伦布的多角度评价</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>对哥伦布的评价应<strong>一分为二</strong>：积极——开辟新航线，促进世界连为一个整体；消极——给美洲原住民带来灾难（掠夺、殖民、文化破坏）。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc3">
+ <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+ <h3>🟣 重难点三：新航路开辟的影响</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：新航路开辟的历史影响</div><div class="deep-card-bd"><ul><li><strong>经济上：</strong>欧洲大西洋沿岸工商业繁荣，促进资本主义发展</li><li><strong>贸易上：</strong>欧洲与亚洲、非洲、美洲建立直接商业联系</li><li><strong>世界观上：</strong><strong>世界开始连为一个整体</strong>，世界观念逐步确立</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：新航路开辟的深远影响</div><div class="deep-card-bd"><ul><li>推动了欧洲的殖民扩张和资本原始积累</li><li>促进了世界各地区之间的物种交流（玉米、马铃薯等）</li><li>改变了世界贸易格局，大西洋沿岸成为新的贸易中心</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：从分散到整体——世界格局的变化</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>新航路开辟以前，世界各大洲之间相对隔绝；新航路开辟以后，世界开始连为一个整体，不同地区的文明开始频繁交往、相互影响，<strong>全球化的进程由此开始</strong>。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+
+ <!-- 新增 acc4 -->
+ <div class="acc-group" id="acc4">
+ <div class="acc-group-hd pt4" onclick="toggleAccGrp('acc4')">
+ <h3>🟢 重难点四：新航路开辟对世界历史进程的深远意义</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：世界由分散走向整体</div><div class="deep-card-bd"><p>新航路开辟以前，世界各文明相对孤立发展；新航路开辟后，各大洲建立了直接联系，世界市场的雏形开始出现，人类历史从分散走向整体。</p></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：对欧洲和世界的影响</div><div class="deep-card-bd"><ul><li><strong>对欧洲：</strong>商业革命、价格革命，加速封建制度瓦解，促进资本主义发展</li><li><strong>对世界：</strong>物种交流（玉米、马铃薯等传入欧亚），人口迁移，文化交融</li><li><strong>殖民影响：</strong>开启欧洲殖民扩张时代，给亚非拉地区带来灾难</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：全球化的开端</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>新航路开辟是世界历史的重要转折点，标志着<strong>全球化的开端</strong>。它打破了各地区的封闭状态，促进了世界文明的交流与碰撞，为近代世界体系的形成奠定了基础。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc4',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page3: 教材栏目解答（7个，删除引用） ==================== -->
+<div class="page-slide" id="page3">
+ <div class="slide-header"><div class="module-num">模块三</div><div class="module-title">教材栏目解答</div></div>
+ <div class="filter-bar">
+ <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+ <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+ <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+ <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：地圆学说的传播</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>中世纪时，大多数欧洲人认为地是平的。15世纪初，托勒密的《地理学指南》被翻译成拉丁文，地图学说逐渐流行。航海家们凭借经验也注意到：当船慢慢隐没在地平线时，最后消失的总是桅杆，船归航时又总是桅杆最先映入眼帘，这说明从大的范围看，地球应该是圆的。</p>
+ <div class="a" id="ans-p3-story1"><strong>📝 要点归纳：</strong><br>• 中世纪欧洲人普遍认为地是平的<br>• 15世纪初托勒密《地理学指南》传播地图学说<br>• 航海经验：桅杆最后消失——证明地球是圆的</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：好望角的由来</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>迪亚士到达非洲西南端事出偶然。船队因遭风暴袭击，漂向大海深处，结果绕过非洲大陆进入印度洋。返航途中，他们“发现”了非洲西南端的尖角。迪亚士感慨地称它为“风暴角”，葡萄牙国王约翰二世改称其为“好望角”。</p>
+ <div class="a" id="ans-p3-story2"><strong>📝 要点归纳：</strong><br>• 迪亚士原称“风暴角”<br>• 葡萄牙国王改称“好望角”<br>• 打开绕道非洲通往东方的航路</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="人物扫描">
+ <div class="col-header" onclick="toggleColBox(this)"><span>👤 人物扫描：哥伦布</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>哥伦布是意大利人，他坚信地圆说，读过《马可·波罗行纪》，向往东方。他曾游说葡萄牙王室，但葡萄牙正在向东发展，不愿寻找新航线。随后，他来到西班牙，获得西班牙王室的支持。</p>
+ <div class="a" id="ans-p3-profile1"><strong>📝 要点归纳：</strong><br>• 意大利人，坚信地圆说<br>• 向往东方，读过《马可·波罗行纪》<br>• 获西班牙王室支持</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-profile1')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：麦哲伦的环球航行</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>麦哲伦是葡萄牙人，他向葡萄牙国王提出航海计划未被采纳，转而效力西班牙。1519年出发时5艘船265人。船队穿越麦哲伦海峡进入“大南海”，因风平浪静称之为“太平洋”。1521年麦哲伦在菲律宾被土著杀死。剩下的船员经印度洋绕非洲，于1522年返回西班牙，完成了人类环绕地球航行的创举，此时只剩1艘船18人。</p>
+ <div class="a" id="ans-p3-story3"><strong>📝 要点归纳：</strong><br>• 麦哲伦：葡萄牙人，效力西班牙<br>• 1519年出发5艘船265人<br>• 1521年麦哲伦在菲律宾被杀<br>• 1522年返回1艘船18人</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="知识拓展">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📚 知识拓展：“美洲”名字的由来</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>哥伦布至死不知自己“发现”了“新大陆”。1499年，意大利学者亚美利哥·韦斯普奇随西班牙考察船航行，确信所在地区不是印度，而是一块独立的新世界。1507年，德国学者马丁·瓦尔德塞米勒绘制的地图第一次以亚美利哥的名字命名这块大陆为“亚美利加洲”，简称“美洲”。</p>
+ <div class="a" id="ans-p3-knowledge"><strong>📝 要点归纳：</strong><br>• 哥伦布至死不知自己“发现”了新大陆<br>• 亚美利哥·韦斯普奇确认新大陆<br>• 1507年德国学者以他命名“亚美利加洲”</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：达·伽马的航行</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>1497年，达·伽马从葡萄牙出发，绕过好望角，沿非洲东海岸北上，1498年到达印度西海岸。达·伽马带回的香料和黄金，让葡萄牙人获得了巨额利润，鼓励了他们继续开辟新航线的信心。</p>
+ <div class="a" id="ans-p3-story4"><strong>📝 要点归纳：</strong><br>• 1497-1498年到达印度<br>• 带回大量香料和黄金<br>• 利润丰厚，鼓励继续探险</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story4')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：奥斯曼帝国阻商道</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>1453年，奥斯曼帝国攻陷君士坦丁堡，控制了东西方贸易的重要商道。欧洲商人前往东方需要缴纳高额关税，欧洲市场上的东方商品价格昂贵，这成为欧洲人寻求新航路的直接原因。</p>
+ <div class="a" id="ans-p3-story5"><strong>📝 要点归纳：</strong><br>• 1453年奥斯曼控制商道<br>• 征收高额关税，商品昂贵<br>• 直接促使欧洲寻新航路</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story5')">📝 查看要点归纳</button>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page4: 课堂训练（10选择+2材料） ==================== -->
+<div class="page-slide" id="page4">
+ <div class="slide-header"><div class="module-num">模块四</div><div class="module-title">课堂训练</div></div>
+ <div class="score-banner"><div><div style="font-size:11pt;color:#888;">当前得分</div><div class="score-number" id="scoreVal">0</div></div><button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button></div>
+
+ <div class="exercise" id="q1"><div class="q-text"><strong>1.</strong> 迪亚士到达好望角是在（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q1','1487-1488年')">A. 1487-1488年</label><label onclick="optClick(this,'B','q1','1492年')">B. 1492年</label><label onclick="optClick(this,'C','q1','1497-1498年')">C. 1497-1498年</label><label onclick="optClick(this,'D','q1','1519-1522年')">D. 1519-1522年</label></div>
+ <div class="analysis" id="analysis-q1"><strong>答案：A</strong> 解析：迪亚士1487-1488年到达好望角。</div></div>
+
+ <div class="exercise" id="q2"><div class="q-text"><strong>2.</strong> 下列哪项不是新航路开辟的原因？（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q2','商品经济发展')">A. 商品经济发展</label><label onclick="optClick(this,'B','q2','奥斯曼帝国阻断商道')">B. 奥斯曼帝国阻断商道</label><label onclick="optClick(this,'C','q2','地圆学说流行')">C. 地圆学说流行</label><label onclick="optClick(this,'D','q2','工业革命推动')">D. 工业革命推动</label></div>
+ <div class="analysis" id="analysis-q2"><strong>答案：D</strong> 解析：工业革命发生在18世纪后期，远晚于新航路开辟。</div></div>
+
+ <div class="exercise" id="q3"><div class="q-text"><strong>3.</strong> 哥伦布到达美洲后，称当地人为“印第安人”，是因为他以为（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q3','到达的是非洲')">A. 到达的是非洲</label><label onclick="optClick(this,'B','q3','到达的是亚洲的印度')">B. 到达的是亚洲的印度</label><label onclick="optClick(this,'C','q3','到达的是欧洲')">C. 到达的是欧洲</label><label onclick="optClick(this,'D','q3','到达的是新大陆')">D. 到达的是新大陆</label></div>
+ <div class="analysis" id="analysis-q3"><strong>答案：B</strong> 解析：哥伦布始终认为他到达的是亚洲的印度。</div></div>
+
+ <div class="exercise" id="q4"><div class="q-text"><strong>4.</strong> 麦哲伦船队环球航行证明了（ ）的正确</div>
+ <div class="options"><label onclick="optClick(this,'A','q4','地心说')">A. 地心说</label><label onclick="optClick(this,'B','q4','地圆说')">B. 地圆说</label><label onclick="optClick(this,'C','q4','日心说')">C. 日心说</label><label onclick="optClick(this,'D','q4','神创论')">D. 神创论</label></div>
+ <div class="analysis" id="analysis-q4"><strong>答案：B</strong> 解析：麦哲伦船队首次环球航行，证明了地圆说。</div></div>
+
+ <div class="exercise" id="q5"><div class="q-text"><strong>5.</strong> 新航路开辟使世界开始连为一个整体，这主要体现在（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q5','欧洲大西洋沿岸经济繁荣')">A. 欧洲大西洋沿岸经济繁荣</label><label onclick="optClick(this,'B','q5','各大洲建立了直接商业联系')">B. 各大洲建立了直接商业联系</label><label onclick="optClick(this,'C','q5','促进了资本主义发展')">C. 促进了资本主义发展</label><label onclick="optClick(this,'D','q5','欧洲人到达了东方')">D. 欧洲人到达了东方</label></div>
+ <div class="analysis" id="analysis-q5"><strong>答案：B</strong> 解析：各大洲建立了直接商业联系，是世界连为一体的主要表现。</div></div>
+
+ <div class="exercise" id="q6"><div class="q-text"><strong>6.</strong> 达·伽马航行到达印度是在（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q6','1488年')">A. 1488年</label><label onclick="optClick(this,'B','q6','1492年')">B. 1492年</label><label onclick="optClick(this,'C','q6','1497-1498年')">C. 1497-1498年</label><label onclick="optClick(this,'D','q6','1519-1522年')">D. 1519-1522年</label></div>
+ <div class="analysis" id="analysis-q6"><strong>答案：C</strong> 解析：达·伽马1497-1498年到达印度西海岸。</div></div>
+
+ <div class="exercise" id="q7"><div class="q-text"><strong>7.</strong> 新航路开辟的直接原因是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q7','商品经济发展')">A. 商品经济发展</label><label onclick="optClick(this,'B','q7','奥斯曼帝国阻断商道')">B. 奥斯曼帝国阻断商道</label><label onclick="optClick(this,'C','q7','地圆学说流行')">C. 地圆学说流行</label><label onclick="optClick(this,'D','q7','人文主义兴起')">D. 人文主义兴起</label></div>
+ <div class="analysis" id="analysis-q7"><strong>答案：B</strong> 解析：奥斯曼帝国阻断商道是直接原因，A是根本原因，C、D是思想条件。</div></div>
+
+ <div class="exercise" id="q8"><div class="q-text"><strong>8.</strong> 麦哲伦船队完成环球航行时，返回的船只和人数是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q8','1艘船18人')">A. 1艘船18人</label><label onclick="optClick(this,'B','q8','2艘船30人')">B. 2艘船30人</label><label onclick="optClick(this,'C','q8','3艘船50人')">C. 3艘船50人</label><label onclick="optClick(this,'D','q8','5艘船265人')">D. 5艘船265人</label></div>
+ <div class="analysis" id="analysis-q8"><strong>答案：A</strong> 解析：麦哲伦船队出发5艘船265人，返回1艘船18人。</div></div>
+
+ <div class="exercise" id="q9"><div class="q-text"><strong>9.</strong> 下列关于新航路开辟影响的表述，不正确的是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q9','促进欧洲资本主义发展')">A. 促进欧洲资本主义发展</label><label onclick="optClick(this,'B','q9','世界开始连为一个整体')">B. 世界开始连为一个整体</label><label onclick="optClick(this,'C','q9','葡萄牙和西班牙衰落')">C. 葡萄牙和西班牙衰落</label><label onclick="optClick(this,'D','q9','开启了欧洲殖民扩张')">D. 开启了欧洲殖民扩张</label></div>
+ <div class="analysis" id="analysis-q9"><strong>答案：C</strong> 解析：新航路开辟初期，葡萄牙和西班牙率先殖民扩张，并未立即衰落。</div></div>
+
+ <div class="exercise" id="q10"><div class="q-text"><strong>10.</strong> 首次完成环球航行的航海家是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q10','迪亚士')">A. 迪亚士</label><label onclick="optClick(this,'B','q10','哥伦布')">B. 哥伦布</label><label onclick="optClick(this,'C','q10','达·伽马')">C. 达·伽马</label><label onclick="optClick(this,'D','q10','麦哲伦')">D. 麦哲伦</label></div>
+ <div class="analysis" id="analysis-q10"><strong>答案：D</strong> 解析：麦哲伦船队完成了第一次环球航行。</div></div>
+
+ <!-- 材料题 -->
+ <div class="exercise" id="mq1">
+ <div class="q-text"><strong>材料题一</strong> 阅读材料，回答问题：</div>
+ <div class="source-material"><p>"15世纪中期，奥斯曼帝国灭掉拜占庭帝国，控制了东西方贸易的所有重要商道，要求商人缴纳高额关税，使得从东方运往欧洲的商品价格更加昂贵。因此，欧洲人越发想要寻求通往东方的新航路。"</p></div>
+ <div class="q-text">（1）根据材料，奥斯曼帝国对东西方贸易产生了什么影响？</div>
+ <div class="a" id="ans-p4-mat1a"><p><strong>参考答案：</strong>奥斯曼帝国控制了东西方贸易商道，征收高额关税，导致欧洲商品价格昂贵，促使欧洲人寻求通往东方的新航路。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1a');trackMatQ('mq1')">📝 查看答案</button>
+ <div class="q-text" style="margin-top:10px;">（2）这反映了新航路开辟的什么原因？</div>
+ <div class="a" id="ans-p4-mat1b"><p><strong>参考答案：</strong>这反映了新航路开辟的<strong>直接原因</strong>——<strong>商业危机</strong>（传统商道被阻断）。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1b');trackMatQ('mq1')">📝 查看答案</button>
+ </div>
+
+ <div class="exercise" id="mq2">
+ <div class="q-text"><strong>材料题二</strong> 阅读材料，回答问题：</div>
+ <div class="source-material"><p>"新航路开辟以后，欧洲大西洋沿岸工商业经济繁荣起来，促进了资本主义的发展。同时，欧洲与亚洲、非洲、美洲之间建立起了直接的商业联系，往来日益密切。世界开始连为一个整体，世界的观念也从此逐步确立起来。"</p></div>
+ <div class="q-text">（1）根据材料，概括新航路开辟的影响。</div>
+ <div class="a" id="ans-p4-mat2a"><p><strong>参考答案：</strong>①欧洲大西洋沿岸工商业经济繁荣，促进资本主义发展；②欧洲与亚非美建立直接商业联系；③世界开始连为一个整体。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2a');trackMatQ('mq2')">📝 查看答案</button>
+ <div class="q-text" style="margin-top:10px;">（2）如何理解“世界开始连为一个整体”？</div>
+ <div class="a" id="ans-p4-mat2b"><p><strong>参考答案：</strong>新航路开辟以前，世界各大洲相对隔绝；新航路开辟后，各大洲建立了直接联系，不同地区的文明开始频繁交往、相互影响，<strong>全球化的进程由此开始</strong>。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2b');trackMatQ('mq2')">📝 查看答案</button>
+ </div>
+</div>
+
+<!-- ==================== Page5: 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+ <div class="slide-header"><div class="module-num">模块五</div><div class="module-title">知识结构图</div></div>
+ <div class="kg-wrap-simple">
+ <div class="kg-title">📊 知识结构 · 因果链</div>
+ <div class="kg-hint-banner"><span class="hint-icon">💡</span><span>知识结构图已生成。点击下方</span><span class="hint-click">各节点</span><span>查看详细解析与考点说明</span></div>
+ <div class="kg-chain">
+ <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">🌍</span><strong>新航路开辟原因</strong><p>商品经济·奥斯曼阻商·地圆学说</p><div class="kg-detail"><p><strong>考点解析：</strong>经济根源（商品经济发展）、直接原因（奥斯曼阻断商道）、思想动力（地圆学说）。</p></div></div>
+ <div class="kg-arrow">⬇️</div>
+ <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">⛵</span><strong>四位航海家</strong><p>迪亚士·达·伽马·哥伦布·麦哲伦</p><div class="kg-detail"><p><strong>考点解析：</strong>迪亚士好望角（1488）、哥伦布美洲（1492）、达·伽马印度（1498）、麦哲伦环球（1519-1522）。</p></div></div>
+ <div class="kg-arrow">⬇️</div>
+ <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">🌏</span><strong>证明地圆说</strong><p>麦哲伦船队·环球航行</p><div class="kg-detail"><p><strong>考点解析：</strong>1519-1522年麦哲伦船队完成环球航行，证明了地圆说的正确。</p></div></div>
+ <div class="kg-arrow">⬇️</div>
+ <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">📈</span><strong>历史影响</strong><p>世界整体·资本主义发展</p><div class="kg-detail"><p><strong>考点解析：</strong>世界开始连为一个整体，欧洲大西洋沿岸经济繁荣，促进资本主义发展。</p></div></div>
+ </div>
+ <div class="kg-rules-grid">
+ <div class="kg-rule r1">🔵 原因：经济·商业·思想</div>
+ <div class="kg-rule r2">🟠 过程：四位航海家</div>
+ <div class="kg-rule r3">🟢 成就：地圆说·环球</div>
+ <div class="kg-rule r4">🔴 影响：整体·资本主义</div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page6: 结束页（6卡） ==================== -->
+<div class="page-slide" id="page6">
+ <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+ <div class="hero-unit">第五单元 · 走向近代</div>
+ <h1 style="font-size:22pt;">第14课 · 探寻新航路</h1>
+ <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+ </div>
+ <section class="recap-section">
+ <h2 class="recap-title">📋 核心要点回顾</h2>
+ <div class="recap-grid">
+ <div class="recap-card"><div class="recap-card-num">一</div><h3>🌍 新航路开辟原因</h3><ul><li><strong>经济根源：</strong>商品经济发展</li><li><strong>直接原因：</strong>奥斯曼阻商道</li><li><strong>思想动力：</strong>地圆学说</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">二</div><h3>⛵ 四位航海家</h3><ul><li><strong>迪亚士：</strong>好望角（1488）</li><li><strong>哥伦布：</strong>美洲（1492）</li><li><strong>达·伽马：</strong>印度（1498）</li><li><strong>麦哲伦：</strong>环球（1519-1522）</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">三</div><h3>📈 历史影响</h3><ul><li><strong>世界观：</strong>世界连为一体</li><li><strong>经济：</strong>促进资本主义</li><li><strong>贸易：</strong>直接商业联系</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">四</div><h3>🔭 技术条件</h3><ul><li><strong>造船：</strong>多桅帆船改进</li><li><strong>导航：</strong>罗盘、星盘</li><li><strong>知识：</strong>地圆学说传播</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">五</div><h3>🌾 物种交流</h3><ul><li><strong>美洲：</strong>玉米、马铃薯传入</li><li><strong>欧洲：</strong>小麦、牲畜引入</li><li><strong>影响：</strong>丰富各地饮食</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">六</div><h3>🌐 全球化开端</h3><ul><li><strong>意义：</strong>世界从分散走向整体</li><li><strong>影响：</strong>开启全球交往</li><li><strong>地位：</strong>近代世界序幕</li></ul></div>
+ </div>
+ </section> <div class="bottom-nav">
+ <div><a href="九上-U5-第13课_西欧经济社会发展与文艺复兴运动.html">← 上一课：第13课 西欧经济社会发展与文艺复兴运动</a></div>
+ <div class="nav-center">第14课</div>
+ <div><a href="九上-U5-第15课_早期殖民掠夺.html">下一课：第15课 早期殖民掠夺 →</a></div>
+ </div>
+ <footer><p>统编版初中历史 · 九年级上册 · 第五单元</p><p>基于新版教材 · 交互式学习课件</p></footer>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+ <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+ <div class="pg-dots" id="pgDots">
+ <span class="pg-dot active" onclick="goPage(0)"></span><span class="pg-dot" onclick="goPage(1)"></span><span class="pg-dot" onclick="goPage(2)"></span><span class="pg-dot" onclick="goPage(3)"></span><span class="pg-dot" onclick="goPage(4)"></span><span class="pg-dot" onclick="goPage(5)"></span><span class="pg-dot" onclick="goPage(6)"></span>
+ </div>
+ <span class="pg-counter" id="pgCounter">1/7</span>
+ <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var totalPages=7,currentPage=0,pgDots=document.querySelectorAll('.pg-dot'),pgCounter=document.getElementById('pgCounter'),pgPrev=document.getElementById('pgPrev'),pgNext=document.getElementById('pgNext');
+function goPage(n){if(n<0||n>=totalPages)return;document.getElementById('page'+currentPage).classList.remove('active');pgDots[currentPage].classList.remove('active');currentPage=n;document.getElementById('page'+currentPage).classList.add('active');pgDots[currentPage].classList.add('active');pgCounter.textContent=(currentPage+1)+'/'+totalPages;pgPrev.disabled=(currentPage===0);pgNext.disabled=(currentPage===totalPages-1);window.scrollTo({top:0,behavior:'smooth'});}
+function nextPage(){if(currentPage<totalPages-1)goPage(currentPage+1);}
+function prevPage(){if(currentPage>0)goPage(currentPage-1);}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();nextPage();}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();prevPage();}});
+pgPrev.disabled=true;
+
+// ===== 闯关进度 =====
+var stageDone={sort:false,fill:false,match:false,puzzle:false,flips:false};
+function updateStageProgress(){var stages=['sort','fill','match','puzzle','flips'];var done=0;stages.forEach(function(s){if(stageDone[s])done++;});var pct=Math.round(done/5*100);var bar=document.getElementById('stageProgressBar');var lbl=document.getElementById('stageProgressLabel');if(bar)bar.style.width=pct+'%';if(lbl){if(done>=5)lbl.textContent='🏆 全部闯关完成！';else lbl.textContent=done+'/5 关完成';}}
+
+// ===== 学习目标 =====
+var targetsDone=0;
+function toggleTarget(el){el.classList.toggle('done');targetsDone=document.querySelectorAll('.target-item.done').length;if(targetsDone>=4){document.getElementById('targetsDone').classList.add('show');}else{document.getElementById('targetsDone').classList.remove('show');}}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId){document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});document.getElementById(tabId).classList.add('active');var btns=document.querySelectorAll('.tab-btn');for(var i=0;i<btns.length;i++){if(btns[i].getAttribute('onclick').indexOf(tabId)>=0){btns[i].classList.add('active');break;}}}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id){var grp=document.getElementById(id);if(grp)grp.classList.toggle('open');}
+function markMastered(grpId,btn){btn.classList.add('done');btn.textContent='✅ 已掌握';}
+
+// ===== 答案显隐 =====
+function toggleAnswer(id){var el=document.getElementById(id);if(el){el.classList.toggle('show');var btn=el.previousElementSibling;while(btn&&btn.tagName!=='BUTTON'){btn=btn.previousElementSibling;}if(btn&&btn.classList.contains('ans-btn')){btn.textContent=el.classList.contains('show')?'隐藏答案':'显示答案';}}}
+
+// ===== 选择题 =====
+var correctAnswers={q1:'A',q2:'D',q3:'B',q4:'B',q5:'B',q6:'C',q7:'B',q8:'A',q9:'C',q10:'D'};
+var mcDone={},matDone={},score=0;
+function updateScore(){document.getElementById('scoreVal').textContent=score;}
+function optClick(el,opt,qid){if(mcDone[qid])return;var correct=correctAnswers[qid];var opts=el.parentElement.querySelectorAll('label');opts.forEach(function(o){o.classList.add('disabled');var oText=o.textContent.trim().charAt(0);if(oText===correct){o.classList.add('correct');}else if(o===el){o.classList.add('wrong');}});mcDone[qid]=true;if(opt===correct)score++;updateScore();var analysis=document.getElementById('analysis-'+qid);if(analysis){analysis.classList.add('show');}}
+function trackMatQ(id){if(matDone[id])return;matDone[id]=true;score++;updateScore();}
+function resetQuiz(){mcDone={};matDone={};score=0;updateScore();document.querySelectorAll('.exercise').forEach(function(ex){ex.querySelectorAll('label').forEach(function(l){l.classList.remove('disabled','correct','wrong');});ex.querySelectorAll('.a').forEach(function(a){a.classList.remove('show');});});document.querySelectorAll('.analysis').forEach(function(a){a.classList.remove('show');});}
+
+// ===== 栏目筛选 =====
+function filterCol(cat,chip){document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active');});chip.classList.add('active');document.querySelectorAll('.col-box').forEach(function(box){if(cat==='all'||box.getAttribute('data-cat')===cat){box.classList.remove('filtered-out');}else{box.classList.add('filtered-out');}});}
+function toggleColBox(header){header.parentElement.classList.toggle('open');}
+
+// ===== 拖拽排序 =====
+(function initDragSort(){var items=document.querySelectorAll('#sortPool1 .sort-item');var slots=document.querySelectorAll('#page1 .sort-slot');items.forEach(function(item){item.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',item.getAttribute('data-sortkey'));item.classList.add('dragging');});item.addEventListener('dragend',function(e){item.classList.remove('dragging');});});slots.forEach(function(slot){slot.addEventListener('dragover',function(e){e.preventDefault();slot.classList.add('drag-over');});slot.addEventListener('dragleave',function(){slot.classList.remove('drag-over');});slot.addEventListener('drop',function(e){e.preventDefault();slot.classList.remove('drag-over');var key=e.dataTransfer.getData('text/plain');if(slot.querySelector('.sort-item')){var old=slot.querySelector('.sort-item');old.classList.remove('placed');document.getElementById('sortPool1').appendChild(old);}var item=document.getElementById('item_'+key);if(item){slot.appendChild(item);item.classList.add('placed');slot.classList.add('filled');}});slot.addEventListener('click',function(){var item=this.querySelector('.sort-item');if(item&&!item.classList.contains('dragging')){item.classList.remove('placed');this.classList.remove('filled');document.getElementById('sortPool1').appendChild(item);}});});var pool=document.getElementById('sortPool1');pool.addEventListener('dragover',function(e){e.preventDefault();});pool.addEventListener('drop',function(e){e.preventDefault();var key=e.dataTransfer.getData('text/plain');var item=document.getElementById('item_'+key);if(item&&item.classList.contains('placed')){item.classList.remove('placed');var parentSlot=item.parentElement;if(parentSlot.classList.contains('sort-slot')){parentSlot.classList.remove('filled');}pool.appendChild(item);}});})();
+
+function checkSort(){var correctOrder=['event2','event3','event1','event4'];var slots=document.querySelectorAll('#page1 .sort-slot');var result=document.getElementById('sortResult');var allFilled=true,allCorrect=true;slots.forEach(function(slot,i){var item=slot.querySelector('.sort-item');if(!item){allFilled=false;allCorrect=false;return;}if(item.getAttribute('data-sortkey')===correctOrder[i]){slot.classList.add('correct');slot.classList.remove('wrong');}else{slot.classList.add('wrong');slot.classList.remove('correct');allCorrect=false;}});if(!allFilled){result.textContent='❌ 请先将所有卡片拖入槽位';result.className='sort-result show fail';return;}if(allCorrect){result.textContent='✅ 完全正确！';result.className='sort-result show pass';stageDone.sort=true;updateStageProgress();document.getElementById('stageSortDone').classList.add('show');}else{result.textContent='❌ 顺序不对，请重试';result.className='sort-result show fail';}}
+
+// ===== 填空 =====
+function checkFillBlanks(){var inputs=document.querySelectorAll('#fillBlanks .fill-input');var allCorrect=true;inputs.forEach(function(inp){var answer=inp.getAttribute('data-answer');var val=inp.value.trim();if(val===answer){inp.classList.add('correct');inp.classList.remove('wrong');}else{inp.classList.add('wrong');inp.classList.remove('correct');allCorrect=false;}});var result=document.getElementById('fillResult');if(allCorrect){result.textContent='✅ 完全正确！';result.className='sort-result show pass';stageDone.fill=true;updateStageProgress();document.getElementById('stageFillDone').classList.add('show');}else{result.textContent='❌ 有错误，请检查';result.className='sort-result show fail';}}
+
+// ===== 连线匹配 =====
+var selectedLeft=null,matchedPairs=[];
+function selectMatch(el){if(el.classList.contains('matched'))return;document.querySelectorAll('.match-left.selected').forEach(function(e){e.classList.remove('selected');});el.classList.add('selected');selectedLeft=el;}
+function pairMatch(el){if(!selectedLeft)return;if(el.classList.contains('matched'))return;var leftCat=selectedLeft.getAttribute('data-match');var rightCat=el.getAttribute('data-match');if(leftCat===rightCat){selectedLeft.classList.add('matched');selectedLeft.classList.remove('selected');el.classList.add('matched');matchedPairs.push(leftCat);selectedLeft=null;if(matchedPairs.length>=4){document.getElementById('matchResult').textContent='✅ 全部配对正确！';document.getElementById('matchResult').className='sort-result show pass';stageDone.match=true;updateStageProgress();document.getElementById('stageMatchDone').classList.add('show');}}else{document.getElementById('matchResult').textContent='❌ 配对错误，请重试';document.getElementById('matchResult').className='sort-result show fail';}}
+
+// ===== 因果拼图 =====
+var puzzleData=[
+ {id:0,title:'链条一：新航路开辟的原因',badge:'c1',pieces:[{text:'欧洲商品经济发展，渴求新市场',order:0},{text:'奥斯曼帝国阻断东西方商道',order:1},{text:'地圆学说流行，推动远洋探险',order:2}]},
+ {id:1,title:'链条二：航海家的探索',badge:'c2',pieces:[{text:'迪亚士到达好望角（1488）',order:0},{text:'哥伦布横渡大西洋到达美洲（1492）',order:1},{text:'麦哲伦船队完成环球航行（1519-1522）',order:2}]},
+ {id:2,title:'链条三：新航路开辟的影响',badge:'c3',pieces:[{text:'欧洲与亚非美建立直接商业联系',order:0},{text:'世界开始连为一个整体',order:1},{text:'促进欧洲资本主义发展，开启全球化进程',order:2}]}
+];
+var puzzleChainProgress=[0,0,0];
+function initPuzzle(){var container=document.getElementById('puzzleContainer');if(!container)return;container.innerHTML='';puzzleChainProgress=[0,0,0];puzzleData.forEach(function(chain,ci){var chainDiv=document.createElement('div');chainDiv.className='puzzle-chain';chainDiv.id='pchain-'+ci;var header=document.createElement('div');header.className='chain-header';var badge=document.createElement('span');badge.className='chain-badge '+chain.badge;badge.textContent='链'+(ci+1);header.appendChild(badge);var titleSpan=document.createElement('span');titleSpan.textContent=chain.title;header.appendChild(titleSpan);var prog=document.createElement('span');prog.className='chain-progress';prog.id='cprog-'+ci;prog.innerHTML='进度：<strong id="cprogNum-'+ci+'">0</strong>/3';header.appendChild(prog);chainDiv.appendChild(header);var slotsDiv=document.createElement('div');slotsDiv.className='chain-slots';slotsDiv.id='cslots-'+ci;for(var s=0;s<3;s++){var slot=document.createElement('div');slot.className='puzzle-slot';slot.id='cslot-'+ci+'-'+s;slot.textContent='第'+(s+1)+'步';slotsDiv.appendChild(slot);}chainDiv.appendChild(slotsDiv);var piecesDiv=document.createElement('div');piecesDiv.className='puzzle-pieces';piecesDiv.id='cpieces-'+ci;var shuffled=chain.pieces.slice();for(var i=shuffled.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var temp=shuffled[i];shuffled[i]=shuffled[j];shuffled[j]=temp;}shuffled.forEach(function(piece,pi){var pDiv=document.createElement('div');pDiv.className='puzzle-piece p'+(ci+1);pDiv.id='cpiece-'+ci+'-'+pi;pDiv.setAttribute('data-chain',ci);pDiv.setAttribute('data-order',piece.order);pDiv.textContent=piece.text;pDiv.addEventListener('click',function(){handlePuzzleClick(parseInt(this.getAttribute('data-chain')),parseInt(this.getAttribute('data-order')));});piecesDiv.appendChild(pDiv);});chainDiv.appendChild(piecesDiv);container.appendChild(chainDiv);});}
+function handlePuzzleClick(chainIdx,order){if(puzzleChainProgress[chainIdx]>=3)return;var nextSlot=puzzleChainProgress[chainIdx];if(order!==nextSlot){var pieces=document.querySelectorAll('#cpieces-'+chainIdx+' .puzzle-piece');pieces.forEach(function(p){if(parseInt(p.getAttribute('data-order'))===order){p.classList.add('wrong-shake');setTimeout(function(){p.classList.remove('wrong-shake');},500);}});return;}var slot=document.getElementById('cslot-'+chainIdx+'-'+nextSlot);var pieceEl=document.querySelector('#cpieces-'+chainIdx+' .puzzle-piece[data-order="'+order+'"]');if(!pieceEl||!slot)return;pieceEl.classList.add('placed');pieceEl.style.display='none';slot.textContent=pieceEl.textContent;slot.classList.add('filled','correct');puzzleChainProgress[chainIdx]++;document.getElementById('cprogNum-'+chainIdx).textContent=puzzleChainProgress[chainIdx];if(puzzleChainProgress[chainIdx]>=3){var chainDiv=document.getElementById('pchain-'+chainIdx);if(chainDiv)chainDiv.classList.add('complete');}var allDone=true;for(var i=0;i<puzzleChainProgress.length;i++){if(puzzleChainProgress[i]<3){allDone=false;break;}}if(allDone){var result=document.getElementById('puzzleResult');result.textContent='🧩 全部因果链拼合正确！';result.className='puzzle-result show pass';stageDone.puzzle=true;updateStageProgress();document.getElementById('stagePuzzleDone').classList.add('show');}}
+
+// ===== 翻转卡 =====
+function flipCard(el){el.classList.toggle('flipped');var total=document.querySelectorAll('.flash-card').length;var flipped=document.querySelectorAll('.flash-card.flipped').length;if(total>0&&flipped>=total){stageDone.flips=true;updateStageProgress();var doneEl=document.getElementById('stageFlipsDone');if(doneEl)doneEl.classList.add('show');}}
+
+// ===== 知识图谱 =====
+function toggleKgDetail(node){node.classList.toggle('expanded');var badge=node.querySelector('.kg-expand-badge');if(badge){var arrow=badge.querySelector('.badge-arrow');if(node.classList.contains('expanded')){if(arrow)arrow.textContent='▼';badge.childNodes[badge.childNodes.length-1].textContent=' 收起详情';}else{if(arrow)arrow.textContent='▶';badge.childNodes[badge.childNodes.length-1].textContent=' 点击展开';}}}
+
+// ===== deep-card 折叠 =====
+(function(){var cards=document.querySelectorAll('.deep-card');cards.forEach(function(card){var hd=card.querySelector('.deep-card-hd');var bd=card.querySelector('.deep-card-bd');if(hd&&bd){hd.removeAttribute('onclick');hd.addEventListener('click',function(e){e.stopPropagation();bd.classList.toggle('show');hd.classList.toggle('active');});}});})();
+document.addEventListener('DOMContentLoaded',function(){initPuzzle();var firstBd=document.querySelector('.deep-card .deep-card-bd');if(firstBd){firstBd.classList.add('show');}});
+</script>
+</body>
+</html>

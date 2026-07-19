@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上-U4-第11课 阿拉伯帝国（升级版）</title>
+<style>
+:root {
+ --primary: #7c6cf0;
+ --primary-dark: #3d2b8c;
+ --primary-light: #b3a8ff;
+ --bg: #f5f3ff;
+ --card: #ffffff;
+ --border: #dcd4f5;
+ --green: #27ae60;
+ --red: #e74c3c;
+ --orange: #f39c12;
+ --blue: #3498db;
+ --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+ font-family: "PingFang SC", "Microsoft YaHei", "SimHei", sans-serif;
+ font-size: 14pt;
+ background: var(--bg);
+ color: #333;
+ line-height: 1.8;
+ max-width: 960px;
+ margin: 0 auto;
+ padding: 0 20px 80px;
+}
+.page-slide { display: none; min-height: 90vh; animation: fadeUp 0.4s ease; }
+.page-slide.active { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+.hero {
+ background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+ padding: 40px 24px 36px;
+ border-radius: 0 0 40px 40px;
+ color: #fff;
+ text-align: center;
+ margin: 0 -20px 30px;
+ box-shadow: 0 8px 32px rgba(108,92,231,0.25);
+}
+.hero .sub { font-size:13pt; opacity:0.8; letter-spacing:2px; }
+.hero h1 { font-size:28pt; margin:10px 0; font-weight:700; }
+.hero .meta { font-size:14pt; opacity:0.85; margin-top:6px; }
+
+.slide-header {
+ text-align:center;
+ padding:12px 0;
+ margin-bottom:20px;
+ border-bottom:3px solid var(--border);
+}
+.slide-header .num { color:var(--primary); font-weight:700; font-size:12pt; }
+.slide-header .title { font-size:20pt; font-weight:700; color:var(--primary-dark); }
+
+.pg-nav {
+ position:fixed; bottom:0; left:0; right:0; z-index:999;
+ background:rgba(255,255,255,0.92); backdrop-filter:blur(8px);
+ display:flex; align-items:center; justify-content:center; gap:12px;
+ padding:8px 16px; height:56px;
+ box-shadow:0 -2px 20px rgba(0,0,0,0.06);
+}
+.pg-nav button {
+ background:var(--primary); color:#fff; border:none; border-radius:20px;
+ padding:6px 18px; font-size:13pt; cursor:pointer; transition:0.2s;
+}
+.pg-nav button:hover { background:var(--primary-dark); transform:scale(1.04); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-dots { display:flex; gap:8px; }
+.pg-dot { width:12px; height:12px; border-radius:50%; background:#dfd8f0; cursor:pointer; transition:0.25s; }
+.pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-counter { font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+.target-grid {
+ display:grid; grid-template-columns:1fr 1fr; gap:10px;
+ background:var(--card); border-radius:14px; padding:20px; margin-bottom:24px;
+ border:1px solid var(--border);
+}
+.target-item { padding:8px 12px; border-radius:8px; cursor:pointer; transition:0.2s; border-left:4px solid var(--primary-light); }
+.target-item:hover { background:#f0edff; }
+.target-item.done { opacity:0.5; text-decoration:line-through; background:#e8f8f5; border-left-color:var(--green); }
+
+.btn-start {
+ display:block; margin:20px auto;
+ background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+ color:#fff; border:none; border-radius:30px;
+ padding:14px 40px; font-size:16pt; font-weight:700; cursor:pointer;
+ transition:0.3s; box-shadow:0 6px 24px rgba(108,92,231,0.3);
+}
+.btn-start:hover { transform:scale(1.05); box-shadow:0 8px 32px rgba(108,92,231,0.4); }
+
+.tab-bar {
+ display:flex; gap:0; border-radius:12px 12px 0 0; overflow:hidden;
+}
+.tab-btn {
+ flex:1; padding:14px 8px; font-weight:700; border:none; cursor:pointer;
+ background:#ebe6ff; color:var(--primary-dark); font-size:13pt;
+ transition:0.25s;
+}
+.tab-btn.active { background:var(--primary); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; background:var(--card); padding:20px; border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; }
+.tab-panel.active { display:block; }
+
+.kp-card { background:var(--card); border-radius:12px; padding:18px 22px; margin-bottom:16px; border-left:6px solid var(--primary); box-shadow:0 2px 12px rgba(0,0,0,0.04); }
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:24px; }
+.kp-card li { margin:6px 0; }
+.tag { background:var(--orange); color:#2d3436; border-radius:12px; padding:2px 12px; font-size:10pt; display:inline-block; }
+
+.progress-wrap { background:var(--card); border-radius:10px; padding:12px 16px; margin-bottom:16px; border:1px solid var(--border); }
+.progress-bar { background:#ebe6ff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.progress-fill { background:linear-gradient(90deg, var(--primary), var(--primary-light)); height:100%; width:0%; transition:width 0.5s; }
+.progress-label { display:flex; justify-content:space-between; font-size:11pt; color:#636e72; }
+
+.challenge-title { text-align:center; font-size:15pt; font-weight:700; color:var(--primary-dark); margin:16px 0 10px; }
+
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:10px 0; }
+.sort-item { padding:8px 18px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:600; transition:0.2s; }
+.sort-item.dragging { opacity:0.3; }
+.sort-item.placed { background:#e8f0fe; border-color:#a29bfe; cursor:default; pointer-events:none; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:12px 0; }
+.sort-slot { min-width:100px; min-height:48px; border:2px dashed #d5cef0; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d5f5e3; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-22px; font-size:10pt; color:#999; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; font-weight:700; margin-top:8px; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d5f5e3; color:var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); }
+
+.fill-input { width:120px; padding:6px 10px; border:2px solid #dfd8f0; border-radius:8px; font-size:13pt; text-align:center; transition:0.2s; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(108,92,231,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d5f5e3; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; }
+
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:120px; }
+.match-item { padding:10px 14px; border-radius:10px; border:2px solid #dfd8f0; background:#fff; cursor:pointer; text-align:center; transition:0.2s; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; }
+.match-item.matched { border-color:var(--green); background:#d5f5e3; cursor:default; opacity:0.7; }
+
+/* ========== ④ 因果拼图 ========== */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain {
+ background:#fff;
+ border-radius:12px;
+ padding:14px 18px;
+ margin-bottom:16px;
+ border:2px solid var(--border);
+ box-shadow:0 2px 8px rgba(0,0,0,0.04);
+ transition:all 0.3s;
+}
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header {
+ display:flex;
+ align-items:center;
+ gap:10px;
+ font-size:14pt;
+ font-weight:700;
+ color:var(--primary-dark);
+ margin-bottom:10px;
+ flex-wrap:wrap;
+}
+.puzzle-chain .chain-header .chain-badge {
+ display:inline-block;
+ padding:2px 12px;
+ border-radius:12px;
+ font-size:11pt;
+ color:#fff;
+}
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots {
+ display:flex;
+ gap:10px;
+ margin-bottom:10px;
+ flex-wrap:wrap;
+}
+.puzzle-slot {
+ min-width:100px;
+ flex:1;
+ min-height:52px;
+ border:2px dashed #dcd4f5;
+ border-radius:8px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:6px 10px;
+ font-size:11pt;
+ color:#aaa;
+ background:#faf8ff;
+ transition:all 0.3s;
+ text-align:center;
+}
+.puzzle-slot.filled {
+ border-style:solid;
+ border-color:var(--primary);
+ background:#f0edff;
+ color:#333;
+ font-weight:600;
+}
+.puzzle-slot.correct {
+ border-color:var(--green);
+ background:#d4efdf;
+ color:var(--green);
+}
+.puzzle-pieces {
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-top:6px;
+}
+.puzzle-piece {
+ padding:10px 14px;
+ border-radius:8px;
+ font-size:12pt;
+ font-weight:600;
+ cursor:pointer;
+ transition:all 0.25s;
+ border:2px solid var(--border);
+ background:#fff;
+ user-select:none;
+ flex:1 1 auto;
+ min-width:80px;
+ text-align:center;
+}
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed {
+ opacity:0.3;
+ cursor:not-allowed;
+ transform:scale(0.95);
+ pointer-events:none;
+}
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake {
+ 0%,100% { transform:translateX(0); }
+ 25% { transform:translateX(-6px); }
+ 75% { transform:translateX(6px); }
+}
+.puzzle-result {
+ text-align:center;
+ padding:10px;
+ border-radius:8px;
+ font-weight:700;
+ font-size:14pt;
+ margin-top:8px;
+ display:none;
+}
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.chain-progress {
+ font-size:11pt;
+ color:#888;
+ margin-left:auto;
+}
+.chain-progress strong { color:var(--primary-dark); }
+
+/* 原有样式保留 */
+.stage-done { display:none; background:#d5f5e3; border:2px solid var(--green); border-radius:12px; padding:12px; text-align:center; font-weight:700; color:var(--green); margin:12px 0; }
+.stage-done.show { display:block; }
+
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+.acc-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; cursor:pointer; user-select:none; background:var(--card); transition:0.2s; }
+.acc-hd:hover { background:#f0edff; }
+.acc-hd h3 { font-size:15pt; }
+.acc-hd .arrow { transition:transform 0.3s; }
+.acc-group.open .acc-hd .arrow { transform:rotate(180deg); }
+.acc-bd { display:none; background:var(--card); padding:0 20px 16px; border-top:1px solid var(--border); }
+.acc-group.open .acc-bd { display:block; }
+.acc-mastered { text-align:right; padding:8px 0; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:4px 16px; cursor:pointer; }
+.acc-mastered button.done { background:#b2bec3; pointer-events:none; }
+
+.deep-card { margin:10px 0; border-radius:10px; border:1px solid var(--border); overflow:hidden; }
+.deep-hd { background:linear-gradient(135deg, #6c5ce7, #a29bfe); color:#fff; padding:10px 16px; font-weight:700; cursor:pointer; }
+.deep-bd { display:none; padding:14px 18px; background:#faf8ff; }
+.deep-bd.show { display:block; }
+
+.exercise { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 20px; margin-bottom:18px; }
+.options label { display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px; cursor:pointer; transition:0.2s; background:#faf8ff; }
+.options label:hover { background:#f0edff; }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d5f5e3; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.analysis { display:none; background:#fef9e7; border:1px solid #fdcb6e; border-radius:8px; padding:12px; margin:10px 0; }
+.analysis.show { display:block; }
+
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:4px 16px; font-size:12pt; cursor:pointer; transition:0.2s; margin:6px 0; }
+.ans-btn:hover { background:var(--primary-dark); }
+.a { display:none; background:#f0edff; border-radius:8px; padding:12px; margin:8px 0; }
+.a.show { display:block; }
+
+.kg-wrap { background:var(--card); border-radius:14px; padding:24px; border:1px solid var(--border); }
+.kg-title { text-align:center; font-size:18pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.kg-node { border-radius:12px; padding:14px 18px; margin:8px 0; cursor:pointer; transition:0.3s; border:2px solid transparent; }
+.kg-node:hover { transform:scale(1.02); box-shadow:0 4px 20px rgba(108,92,231,0.15); }
+.kg-node .kg-detail { max-height:0; overflow:hidden; transition:0.4s; }
+.kg-node.expanded .kg-detail { max-height:200px; margin-top:8px; border-top:1px dashed var(--border); padding-top:8px; }
+.kg-node.c1 { background:#e8e0ff; border-color:var(--primary); }
+.kg-node.c2 { background:#fff3e0; border-color:#fdcb6e; }
+.kg-node.c3 { background:#d5f5e3; border-color:var(--green); }
+.kg-node.c4 { background:#fadbd8; border-color:var(--red); }
+
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px; }
+.recap-card { background:var(--card); border-radius:14px; padding:18px; border:1px solid var(--border); }
+.recap-card h3 { color:var(--primary-dark); border-bottom:2px solid var(--primary-light); padding-bottom:8px; margin-bottom:10px; font-size:14pt; }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { padding:4px 0 4px 18px; position:relative; font-size:12.5pt; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; color:var(--primary); }
+
+footer { text-align:center; padding:20px 0; border-top:2px solid var(--border); margin-top:30px; font-size:11pt; color:#999; }
+
+@media (max-width:680px) {
+ .target-grid { grid-template-columns:1fr; }
+ .flash-grid { grid-template-columns:repeat(3,1fr); }
+ .recap-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 0 封面 ==================== -->
+<div class="page-slide active" id="page0">
+ <div class="hero">
+ <div class="sub">第四单元 · 封建时代的亚洲国家</div>
+ <h1>第11课 · 阿拉伯帝国</h1>
+ <div class="meta">统编版初中历史 九年级上册 · 新版</div>
+ </div>
+
+ <div class="target-grid" id="targetGrid">
+ <div class="target-item" onclick="toggleTarget(this)">🕐 <strong>时空观念：</strong>了解阿拉伯帝国的建立发展时间与概况，了解阿拉伯半岛的统一</div>
+ <div class="target-item" onclick="toggleTarget(this)">📜 <strong>史料实证：</strong>了解穆罕默德创立伊斯兰教的原因、概况及统一阿拉伯半岛</div>
+ <div class="target-item" onclick="toggleTarget(this)">🔍 <strong>历史解释：</strong>分析阿拉伯帝国形成的进程，认识阿拉伯文化对世界文明的贡献</div>
+ <div class="target-item" onclick="toggleTarget(this)">❤️ <strong>家国情怀：</strong>了解阿拉伯民族、宗教和社会变化，体会文明的多样性</div>
+ </div>
+ <div style="text-align:center; color:var(--green); font-weight:700; display:none;" id="targetsDone">✅ 学习目标已全部了解，开始学习吧！</div>
+
+ <button class="btn-start" onclick="goPage(1)">📖 开始学习</button>
+</div>
+
+<!-- ==================== PAGE 1 知识闯关 ==================== -->
+<div class="page-slide" id="page1">
+ <div class="slide-header"><span class="num">模块一</span><div class="title">知识要点 · 闯关解锁</div></div>
+
+ <div class="progress-wrap">
+ <div class="progress-label"><span>🏆 闯关进度</span><strong id="progLabel">0/5</strong></div>
+ <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+ </div>
+
+ <div class="tab-bar">
+ <button class="tab-btn active" onclick="switchTab('tab1')">穆罕默德创立伊斯兰教</button>
+ <button class="tab-btn" onclick="switchTab('tab2')">阿拉伯帝国</button>
+ <button class="tab-btn" onclick="switchTab('tab3')">阿拉伯文化</button>
+ </div>
+
+ <!-- Tab1 -->
+ <div class="tab-panel active" id="tab1">
+ <div class="kp-card">
+ <h3>🕌 穆罕默德创立伊斯兰教</h3>
+ <ul>
+ <li><strong>背景：</strong>6世纪末7世纪初，阿拉伯半岛环境恶劣、部落仇杀、多神崇拜盛行</li>
+ <li><strong>创立：</strong><span class="tag">7世纪初</span>，<strong>穆罕默德</strong>创立伊斯兰教（“和平”“顺从”）</li>
+ <li><strong>622年：</strong>穆罕默德迁徙<span class="tag">麦地那</span>，建立<span class="tag">穆斯林公社</span>——<strong>阿拉伯国家雏形</strong>诞生</li>
+ <li><strong>630年：</strong>穆罕默德率穆斯林占领<span class="tag">麦加</span></li>
+ <li><strong>632年：</strong>穆罕默德逝世，阿拉伯半岛<span class="tag">基本统一</span></li>
+ </ul>
+ <div><span class="tag">中考常考</span> 7世纪初创立、622年迁徙麦地那、630年占领麦加</div>
+ </div>
+
+ <div class="challenge-title">🎮 挑战一：时间排序</div>
+ <div class="sort-pool" id="sortPool">
+ <span class="sort-item" draggable="true" data-key="e1">穆罕默德创立伊斯兰教</span>
+ <span class="sort-item" draggable="true" data-key="e2">迁徙麦地那建立公社</span>
+ <span class="sort-item" draggable="true" data-key="e3">占领麦加</span>
+ <span class="sort-item" draggable="true" data-key="e4">阿拉伯半岛基本统一</span>
+ </div>
+ <div class="sort-slots" id="sortSlots">
+ <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+ <div class="sort-slot" data-slot="1"><span class="slot-label">→</span></div>
+ <div class="sort-slot" data-slot="2"><span class="slot-label">→</span></div>
+ <div class="sort-slot" data-slot="3"><span class="slot-label">最晚</span></div>
+ </div>
+ <button class="ans-btn" onclick="checkSort()">✅ 提交</button>
+ <div class="sort-result" id="sortResult"></div>
+ <div class="stage-done" id="stageSort">🎉 第①关通过！</div>
+
+ <!-- 翻转卡 Tab1（6张） -->
+ <div class="flash-section" style="margin-top:20px;">
+ <div class="flash-group-label">📌 伊斯兰教创立（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">伊斯兰教</div><div class="flash-back">7世纪初穆罕默德创立，意为“和平”“顺从”</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">穆罕默德</div><div class="flash-back">约570—632年，622年迁徙麦地那，630年占领麦加</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">穆斯林公社</div><div class="flash-back">622年在麦地那建立，阿拉伯国家的雏形</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">麦加</div><div class="flash-back">伊斯兰教圣地，630年被穆罕默德占领</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">麦地那</div><div class="flash-back">622年穆罕默德迁徙之地，穆斯林公社所在地</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">哈里发</div><div class="flash-back">穆罕默德的继承者，集政权、军权、神权于一身</div></div></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Tab2 -->
+ <div class="tab-panel" id="tab2">
+ <div class="kp-card">
+ <h3>🌍 阿拉伯帝国</h3>
+ <ul>
+ <li><strong>扩张：</strong>穆罕默德逝世后，继承者继续扩张</li>
+ <li><strong>东线：</strong>北进叙利亚、东灭波斯、征服阿富汗和印度西北部</li>
+ <li><strong>西线：</strong>攻克埃及、横扫北非、占领西班牙</li>
+ <li><strong>顶峰：</strong><span class="tag">8世纪中期</span>，横跨<span class="tag">亚、欧、非</span>三大洲</li>
+ <li><strong>统治：</strong>哈里发中央集权（政权+军权+神权）</li>
+ <li><strong>灭亡：</strong><span class="tag">1258年</span>，蒙古人攻陷<span class="tag">巴格达</span></li>
+ </ul>
+ <div><span class="tag">中考常考</span> 8世纪中期地跨亚欧非、1258年蒙古灭亡</div>
+ </div>
+
+ <div class="challenge-title">🎮 挑战二：填空</div>
+ <div id="fillArea">
+ <div class="fill-blank">穆罕默德创立伊斯兰教是在 <input class="fill-input" data-ans="7" placeholder="?"> 世纪初</div>
+ <div class="fill-blank">穆罕默德迁徙麦地那是在 <input class="fill-input" data-ans="622" placeholder="?"> 年</div>
+ <div class="fill-blank">阿拉伯帝国地跨亚欧非三洲是在 <input class="fill-input" data-ans="8" placeholder="?"> 世纪中期</div>
+ <div class="fill-blank">阿拉伯帝国灭亡于 <input class="fill-input" data-ans="1258" placeholder="?"> 年</div>
+ </div>
+ <button class="ans-btn" onclick="checkFill()">✅ 提交</button>
+ <div class="sort-result" id="fillResult"></div>
+ <div class="stage-done" id="stageFill">🎉 第②关通过！</div>
+
+ <!-- 翻转卡 Tab2（6张） -->
+ <div class="flash-section" style="margin-top:20px;">
+ <div class="flash-group-label">📌 阿拉伯帝国（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">阿拉伯帝国</div><div class="flash-back">8世纪中期地跨亚欧非三洲，1258年被蒙古所灭</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">巴格达</div><div class="flash-back">阿拉伯帝国首都，1258年被蒙古攻陷</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">8世纪中期</div><div class="flash-back">阿拉伯帝国疆域达到顶峰，地跨亚欧非</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">751年</div><div class="flash-back">阿拉伯军队击败唐朝高仙芝，控制中亚</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">1258年</div><div class="flash-back">蒙古攻陷巴格达，阿拉伯帝国灭亡</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">地跨亚欧非</div><div class="flash-back">阿拉伯帝国是当时世界上疆域最大的帝国</div></div></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Tab3 -->
+ <div class="tab-panel" id="tab3">
+ <div class="kp-card">
+ <h3>📚 阿拉伯文化</h3>
+ <ul>
+ <li><strong>智慧宫：</strong><span class="tag">830年</span>，哈里发在巴格达设立，集科学院、图书馆、翻译馆于一体</li>
+ <li><strong>阿拉伯数字：</strong>改造古印度计数法，形成现在的<span class="tag">阿拉伯数字</span>，并创造完整的代数学</li>
+ <li><strong>医学成就：</strong>《医学集成》《医典》长期被欧洲医学界奉为经典</li>
+ <li><strong>文学瑰宝：</strong><span class="tag">《天方夜谭》</span>（《一千零一夜》）</li>
+ <li><strong>文化交流桥梁：</strong>将中国的<span class="tag">造纸术、指南针、火药</span>和印度的棉花、食糖等传入欧洲</li>
+ </ul>
+ <div><span class="tag">中考常考</span> 阿拉伯数字、《天方夜谭》、东西方文化交流桥梁</div>
+ </div>
+
+ <div class="challenge-title">🎮 挑战三：概念匹配</div>
+ <div class="match-area">
+ <div class="match-cols">
+ <div class="match-col"><div class="match-col-label">文化成就</div>
+ <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">阿拉伯数字</div>
+ <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">《医典》</div>
+ <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">《天方夜谭》</div>
+ </div>
+ <div class="match-col"><div class="match-col-label">内容/特点</div>
+ <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">改造古印度计数法</div>
+ <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">医学经典，被誉为“医学之王”</div>
+ <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">民间故事集，世界文学瑰宝</div>
+ </div>
+ </div>
+ </div>
+ <div class="sort-result" id="matchResult"></div>
+ <div class="stage-done" id="stageMatch">🎉 第③关通过！</div>
+
+ <!-- ===== ④ 因果拼图（新） ===== -->
+ <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+ <div class="puzzle-container" id="puzzleContainer"></div>
+ <div class="puzzle-result" id="puzzleResult"></div>
+ <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+ <!-- 翻转卡 Tab3（6张） -->
+ <div class="flash-section" style="margin-top:20px;">
+ <div class="flash-group-label">📌 阿拉伯文化（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">智慧宫</div><div class="flash-back">830年哈里发在巴格达设立，集科学院、图书馆、翻译馆于一体</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">阿拉伯数字</div><div class="flash-back">改造古印度计数法形成，创造完整代数学</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《天方夜谭》</div><div class="flash-back">又名《一千零一夜》，阿拉伯文学瑰宝</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">文化交流桥梁</div><div class="flash-back">将造纸术、指南针、火药等传入欧洲</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">花拉子密</div><div class="flash-back">阿拉伯数学家，创立代数学</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《医典》</div><div class="flash-back">阿拉伯医学经典，长期被欧洲奉为权威</div></div></div>
+ </div>
+ <div class="stage-done" id="stageFlash">🎉 第⑤关通过！</div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== PAGE 2 重难点 ==================== -->
+<div class="page-slide" id="page2">
+ <div class="slide-header"><span class="num">模块二</span><div class="title">重难点解析（4个）</div></div>
+
+ <div class="acc-group" id="acc1">
+ <div class="acc-hd" onclick="toggleAcc('acc1')"><h3>🔵 重难点一：伊斯兰教的创立与阿拉伯国家的诞生</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 基础理解：伊斯兰教的创立背景</div><div class="deep-bd show">6世纪末7世纪初，阿拉伯半岛环境恶劣、部落仇杀、多神崇拜盛行。穆罕默德阐述独尊安拉的宗教思想，7世纪初创立伊斯兰教。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 联系拓展：从迁徙到统一</div><div class="deep-bd">622年迁徙麦地那，建立穆斯林公社→阿拉伯国家雏形；630年占领麦加；632年阿拉伯半岛基本统一。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升：伊斯兰教对阿拉伯统一的作用</div><div class="deep-bd">伊斯兰教是阿拉伯半岛统一的思想纽带：打破部落隔阂，以共同信仰凝聚阿拉伯人；穆斯林公社成为统一国家的雏形。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc2">
+ <div class="acc-hd" onclick="toggleAcc('acc2')"><h3>🟠 重难点二：阿拉伯帝国的扩张与兴衰</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 基础理解：帝国的扩张</div><div class="deep-bd">东线：叙利亚→波斯→阿富汗→印度；西线：埃及→北非→西班牙。8世纪中期地跨亚欧非三大洲。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 联系拓展：帝国的衰落与灭亡</div><div class="deep-bd">9世纪中叶内讧不断，1258年蒙古攻陷巴格达灭亡。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升：阿拉伯帝国兴起的原因</div><div class="deep-bd">宗教力量：伊斯兰教统一阿拉伯半岛形成凝聚力；军事优势：阿拉伯骑兵战斗力强；对手衰弱：波斯、拜占庭长期征战国力削弱。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc3">
+ <div class="acc-hd" onclick="toggleAcc('acc3')"><h3>🟣 重难点三：阿拉伯文化的贡献</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 基础理解：阿拉伯文化的成就</div><div class="deep-bd">数学：改造古印度计数法→阿拉伯数字，创造代数学；医学：《医学集成》《医典》；文学：《天方夜谭》。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 联系拓展：文化交流的桥梁</div><div class="deep-bd">将中国造纸术、指南针、火药和印度棉花等传入欧洲；智慧宫（830年）集科学院、图书馆、翻译馆于一体。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升：阿拉伯文化的历史地位</div><div class="deep-bd">保存与发展了古希腊罗马、波斯、印度文化；担当东西方文化交流桥梁；阿拉伯数字、代数学、《医典》等影响深远。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc4">
+ <div class="acc-hd" onclick="toggleAcc('acc4')"><h3>🟢 重难点四：阿拉伯文化繁荣的原因</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 基础理解：文化繁荣的有利条件</div><div class="deep-bd">（1）帝国的形成为文化的吸收和传播奠定了基础；（2）统治者重视文化；（3）在吸收、消化外来文化的基础上，创造了有自己特色的阿拉伯文化。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 联系拓展：翻译运动与智慧宫</div><div class="deep-bd">830年哈里发在巴格达设立智慧宫，大量翻译希腊、波斯、印度的典籍，推动了文化的吸收、融合与创造。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升：文化繁荣的启示</div><div class="deep-bd">开放包容的文化政策、对外来文化的吸收与创新、统治者的重视与支持，是文化繁荣的重要条件。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc4',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== PAGE 3 教材栏目 ==================== -->
+<div class="page-slide" id="page3">
+ <div class="slide-header"><span class="num">模块三</span><div class="title">教材栏目 · 材料研读与拓展（7个）</div></div>
+
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">👤 人物扫描：穆罕默德</h3>
+ <p>穆罕默德（约570—632）出生于麦加城，幼年丧失父母，12岁时随商队到过巴勒斯坦和叙利亚，25岁时与麦加富孀结婚。此后潜心思考社会与人生问题，创立了伊斯兰教。</p>
+ <div class="a" id="ansProfile"><strong>要点归纳：</strong>约570—632年·麦加出生·幼年失怙·12岁随商队·25岁结婚·创立伊斯兰教</div>
+ <button class="ans-btn" onclick="toggleAns('ansProfile')">查看要点</button>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">📖 材料研读</h3>
+ <div style="background:#faf8ff; padding:12px 16px; border-left:4px solid var(--primary); margin:12px 0;">
+ <p>“辽阔的沙漠和氏族社会的环境中，阿拉伯人过着一种动荡的生活。各氏族、部落为争夺牧场、水源和牲畜等财物，经常发生战争。社会分化，劫掠战争和无休止的血亲复仇战争，加剧了社会不安的气氛。”</p>
+ </div>
+ <div class="q-text"><strong>问题：</strong>根据材料，概括伊斯兰教创立的背景。</div>
+ <div class="a" id="ansMat1"><strong>参考答案：</strong>环境恶劣、部落争夺不断、多神崇拜盛行、社会不安。</div>
+ <button class="ans-btn" onclick="toggleAns('ansMat1')">显示答案</button>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">📖 相关史事：哈里发中央集权统治</h3>
+ <p>阿拉伯帝国实行哈里发中央集权统治。哈里发为专制政体的最高首领，集政权、军权和神权于一身，控制着从中央到地方的军政、税收与宗教三大权力系统。</p>
+ <div class="a" id="ansStory"><strong>要点归纳：</strong>哈里发集政权、军权、神权于一身；军政、税收、宗教三大权力系统。</div>
+ <button class="ans-btn" onclick="toggleAns('ansStory')">查看要点</button>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">💡 问题思考</h3>
+ <p><strong>思考：</strong>阿拉伯帝国的建立有何影响？</p>
+ <div class="a" id="ansThink"><strong>参考答案：</strong>建立了地跨亚欧非三洲的大帝国，传播了伊斯兰教；促进了东西方贸易往来和经济交流；推动了阿拉伯文化繁荣。</div>
+ <button class="ans-btn" onclick="toggleAns('ansThink')">显示答案</button>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">🧩 课后活动</h3>
+ <div style="background:#f0edff; padding:12px; border-radius:8px;">
+ <p><strong>活动：</strong>查阅资料，以“阿拉伯文化对世界文明的贡献”为主题，制作一份简要的思维导图。</p>
+ </div>
+ <div class="a" id="ansActivity"><strong>示例：</strong>数学（阿拉伯数字、代数学）→医学（《医典》）→文学（《天方夜谭》）→桥梁（造纸术、指南针、火药传入欧洲）。</div>
+ <button class="ans-btn" onclick="toggleAns('ansActivity')">查看提示</button>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">📚 知识拓展：阿拉伯数字的传播</h3>
+ <p>阿拉伯人改造了古印度人从0到9的计数法，形成了我们现在使用的“阿拉伯数字”，并创造了完整的代数学。</p>
+ <div class="a" id="ansExt"><strong>要点：</strong>改造古印度计数法→阿拉伯数字；创造代数学。</div>
+ <button class="ans-btn" onclick="toggleAns('ansExt')">查看要点</button>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border);">
+ <h3 style="color:var(--primary-dark);">📖 相关史事：百年翻译运动</h3>
+ <p>阿拉伯帝国繁荣时期，哈里发重视知识。830年在巴格达设立“智慧宫”，集科学院、图书馆、翻译馆于一体。大量希腊、波斯、印度的典籍被译为阿拉伯文。</p>
+ <div class="a" id="ansTrans"><strong>要点：</strong>830年智慧宫设立；翻译希腊、波斯、印度典籍。</div>
+ <button class="ans-btn" onclick="toggleAns('ansTrans')">查看要点</button>
+ </div>
+</div>
+
+<!-- ==================== PAGE 4 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+ <div class="slide-header"><span class="num">模块四</span><div class="title">课堂训练 · 中考题型（10选择+2材料）</div></div>
+
+ <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); padding:12px 20px; border-radius:12px; border:1px solid var(--border); margin-bottom:16px;">
+ <span>🏅 得分：<strong id="scoreDisplay">0</strong></span>
+ <button onclick="resetQuiz()" style="background:transparent; border:2px solid var(--primary); border-radius:16px; padding:4px 14px; cursor:pointer;">🔄 重做</button>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>1.</strong> 改造古印度人从0到9的计数法，并创造了完整的代数学的是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q1')">A. 斯巴达人</label><label onclick="selectOpt(this,'B','q1')">B. 罗马人</label><label onclick="selectOpt(this,'C','q1')">C. 日耳曼人</label><label onclick="selectOpt(this,'D','q1')">D. 阿拉伯人</label></div>
+ <div class="analysis" id="ana-q1"><strong>答案：D</strong> 解析：阿拉伯人改造古印度计数法形成阿拉伯数字，并创造代数学。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>2.</strong> 西欧古典希腊罗马文化在中世纪初期实际上已被摧毁，正是通过阿拉伯人的翻译才保留了下来，并将其传回欧洲。由此可见阿拉伯人（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q2')">A. 保存和传播了古代欧洲文化</label><label onclick="selectOpt(this,'B','q2')">B. 批判了封建道德伦理观念</label><label onclick="selectOpt(this,'C','q2')">C. 用理性之光驱散了愚昧黑暗</label><label onclick="selectOpt(this,'D','q2')">D. 创造了有自己特色的文化</label></div>
+ <div class="analysis" id="ana-q2"><strong>答案：A</strong> 解析：阿拉伯人翻译希腊罗马著作使其免于失传并传回欧洲。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>3.</strong> 中国的造纸术、指南针、火药等重大发明和印度的棉花、食糖等都是由阿拉伯人传入欧洲的。这表明阿拉伯人（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q3')">A. 建立了地跨亚欧非三洲的大帝国</label><label onclick="selectOpt(this,'B','q3')">B. 创造了独具特色的阿拉伯文化</label><label onclick="selectOpt(this,'C','q3')">C. 传播了欧洲文明的成果</label><label onclick="selectOpt(this,'D','q3')">D. 担当了沟通东西方文化的角色</label></div>
+ <div class="analysis" id="ana-q3"><strong>答案：D</strong> 解析：阿拉伯人将中国和印度的文明成果传入欧洲，担当了沟通东西方文化的角色。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>4.</strong> 下列属于阿拉伯文化的是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q4')">A. 象形文字、太阳历、金字塔</label><label onclick="selectOpt(this,'B','q4')">B. 《医典》、《天方夜谭》、阿拉伯数字</label><label onclick="selectOpt(this,'C','q4')">C. 《汉谟拉比法典》、楔形文字、空中花园</label><label onclick="selectOpt(this,'D','q4')">D. 《荷马史诗》、《十二铜表法》、帕特农神庙</label></div>
+ <div class="analysis" id="ana-q4"><strong>答案：B</strong> 解析：《医典》《天方夜谭》、阿拉伯数字都是阿拉伯文化的代表。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>5.</strong> 阿拉伯文学的瑰宝是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q5')">A. 《掷铁饼者》</label><label onclick="selectOpt(this,'B','q5')">B. 《天方夜谭》</label><label onclick="selectOpt(this,'C','q5')">C. 《哈姆雷特》</label><label onclick="selectOpt(this,'D','q5')">D. 《复活》</label></div>
+ <div class="analysis" id="ana-q5"><strong>答案：B</strong> 解析：《天方夜谭》是阿拉伯文学的瑰宝。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>6.</strong> 阿拉伯人对世界文化的贡献有（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q6')">A. 改造0-9计数法 沟通东西方文化</label><label onclick="selectOpt(this,'B','q6')">B. 创立“儒略历” 编订《查士丁尼法典》</label><label onclick="selectOpt(this,'C','q6')">C. 传播造纸术 创造代数学</label><label onclick="selectOpt(this,'D','q6')">D. 《天方夜谭》 金字塔</label></div>
+ <div class="analysis" id="ana-q6"><strong>答案：A</strong> 解析：改造计数法形成阿拉伯数字、沟通东西方文化是阿拉伯人的贡献。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>7.</strong> 阿拉伯国家的雏形诞生于（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q7')">A. 麦加</label><label onclick="selectOpt(this,'B','q7')">B. 麦地那</label><label onclick="selectOpt(this,'C','q7')">C. 巴格达</label><label onclick="selectOpt(this,'D','q7')">D. 大马士革</label></div>
+ <div class="analysis" id="ana-q7"><strong>答案：B</strong> 解析：622年穆罕默德迁居麦地那建立穆斯林公社，阿拉伯国家雏形诞生。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>8.</strong> 阿拉伯帝国地跨亚欧非三洲是在（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q8')">A. 7世纪</label><label onclick="selectOpt(this,'B','q8')">B. 8世纪中期</label><label onclick="selectOpt(this,'C','q8')">C. 9世纪</label><label onclick="selectOpt(this,'D','q8')">D. 13世纪</label></div>
+ <div class="analysis" id="ana-q8"><strong>答案：B</strong> 解析：至8世纪中期，阿拉伯帝国版图横跨亚欧非三大洲。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>9.</strong> 阿拉伯帝国灭亡于（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q9')">A. 9世纪中叶</label><label onclick="selectOpt(this,'B','q9')">B. 11世纪</label><label onclick="selectOpt(this,'C','q9')">C. 1258年</label><label onclick="selectOpt(this,'D','q9')">D. 1453年</label></div>
+ <div class="analysis" id="ana-q9"><strong>答案：C</strong> 解析：1258年蒙古攻陷巴格达，阿拉伯帝国灭亡。</div>
+ </div>
+
+ <div class="exercise">
+ <div class="q-text"><strong>10.</strong> 830年，哈里发在巴格达设立“智慧宫”，其功能不包括（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q10')">A. 科学院</label><label onclick="selectOpt(this,'B','q10')">B. 图书馆</label><label onclick="selectOpt(this,'C','q10')">C. 翻译馆</label><label onclick="selectOpt(this,'D','q10')">D. 军事指挥所</label></div>
+ <div class="analysis" id="ana-q10"><strong>答案：D</strong> 解析：智慧宫集科学院、图书馆、翻译馆于一体。</div>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:18px; border:1px solid var(--border); margin-top:16px;">
+ <div class="q-text"><strong>材料题一</strong> 阅读材料，回答问题：</div>
+ <div style="background:#faf8ff; padding:12px; border-left:4px solid var(--primary); margin:8px 0;">
+ <p>“阿拉伯人广泛翻译古代波斯、印度、希腊和罗马的文献，融合东西方文化，在文学、艺术、科学和思想等领域取得重要成就。阿拉伯商人和旅行家成为东西方文化交流的桥梁，中国的造纸术、印度的数字等先后经阿拉伯人传入欧洲，促进了西欧文化的发展。”</p>
+ </div>
+ <div class="q-text">（1）根据材料，概括阿拉伯人为世界文化作出的贡献。</div>
+ <div class="a" id="ansMat2a"><strong>参考答案：</strong>广泛翻译古代文献，融合东西方文化；在文学、艺术、科学等领域取得成就；成为东西方文化交流的桥梁。</div>
+ <button class="ans-btn" onclick="toggleAns('ansMat2a')">显示答案</button>
+ </div>
+
+ <div style="background:var(--card); border-radius:12px; padding:18px; border:1px solid var(--border); margin-top:16px;">
+ <div class="q-text"><strong>材料题二</strong> 阅读材料，回答问题：</div>
+ <div style="background:#faf8ff; padding:12px; border-left:4px solid var(--primary); margin:8px 0;">
+ <p>“阿拉伯帝国时期出现了‘百年翻译运动’，学者翻译了大量的古印度、波斯和古希腊的医学、天文学、数学典籍。”</p>
+ </div>
+ <div class="q-text">（1）“百年翻译运动”有助于阿拉伯帝国哪一领域的发展？</div>
+ <div class="a" id="ansMat2b"><strong>参考答案：</strong>有助于阿拉伯帝国科技的发展。</div>
+ <button class="ans-btn" onclick="toggleAns('ansMat2b')">显示答案</button>
+ </div>
+</div>
+
+<!-- ==================== PAGE 5 知识结构 ==================== -->
+<div class="page-slide" id="page5">
+ <div class="slide-header"><span class="num">模块五</span><div class="title">知识结构 · 因果链</div></div>
+ <div class="kg-wrap">
+ <div class="kg-title">📊 阿拉伯帝国演进脉络</div>
+ <div style="text-align:center; margin-bottom:16px; color:#636e72; font-size:12pt;">点击节点展开详情</div>
+ <div>
+ <div class="kg-node c1" onclick="toggleKg(this)"><strong>🕌 伊斯兰教创立（7世纪初）</strong><p>穆罕默德 · 麦加传教</p><div class="kg-detail">7世纪初穆罕默德创立伊斯兰教；622年迁徙麦地那建立穆斯林公社；630年占领麦加；632年阿拉伯半岛基本统一。</div></div>
+ <div style="text-align:center; font-size:20pt; color:var(--primary);">⬇️</div>
+ <div class="kg-node c2" onclick="toggleKg(this)"><strong>🌍 阿拉伯帝国（8世纪中期）</strong><p>地跨亚欧非 · 哈里发统治</p><div class="kg-detail">8世纪中期地跨亚欧非三大洲；751年击败高仙芝控制中亚；1258年蒙古攻陷巴格达灭亡。</div></div>
+ <div style="text-align:center; font-size:20pt; color:var(--primary);">⬇️</div>
+ <div class="kg-node c3" onclick="toggleKg(this)"><strong>📚 阿拉伯文化</strong><p>智慧宫 · 阿拉伯数字 · 天方夜谭</p><div class="kg-detail">830年智慧宫（翻译运动）；改造古印度数字→阿拉伯数字；《医学集成》《医典》；《天方夜谭》。</div></div>
+ <div style="text-align:center; font-size:20pt; color:var(--primary);">⬇️</div>
+ <div class="kg-node c4" onclick="toggleKg(this)"><strong>🌉 文化交流桥梁</strong><p>造纸术 · 指南针 · 火药传入欧洲</p><div class="kg-detail">将中国造纸术、指南针、火药和印度棉花等传入欧洲；保存和传播了古希腊罗马文化。</div></div>
+ </div>
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px;">
+ <div style="background:#e8e0ff; padding:10px; border-radius:8px; text-align:center; font-weight:600;">宗教：伊斯兰教创立与统一</div>
+ <div style="background:#fff3e0; padding:10px; border-radius:8px; text-align:center; font-weight:600;">帝国：扩张与兴衰</div>
+ <div style="background:#d5f5e3; padding:10px; border-radius:8px; text-align:center; font-weight:600;">文化：吸收与创造</div>
+ <div style="background:#fadbd8; padding:10px; border-radius:8px; text-align:center; font-weight:600;">桥梁：东西方文化交流</div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== PAGE 6 结束页 ==================== -->
+<div class="page-slide" id="page6">
+ <div class="hero" style="border-radius:36px; margin-bottom:30px;">
+ <div class="sub">第四单元 · 封建时代的亚洲国家</div>
+ <h1 style="font-size:22pt;">第11课 · 阿拉伯帝国</h1>
+ <div class="meta" style="margin-top:12px;">✅ 本课学习完成</div>
+ </div>
+
+ <div class="recap-grid">
+ <div class="recap-card"><h3>🕌 伊斯兰教创立</h3><ul><li><strong>创立：</strong>7世纪初·穆罕默德</li><li><strong>迁徙：</strong>622年·麦地那</li><li><strong>公社：</strong>阿拉伯国家雏形</li><li><strong>统一：</strong>630年占领麦加</li></ul></div>
+ <div class="recap-card"><h3>🌍 阿拉伯帝国</h3><ul><li><strong>扩张：</strong>751年击败高仙芝</li><li><strong>疆域：</strong>8世纪中期地跨三洲</li><li><strong>统治：</strong>哈里发中央集权</li><li><strong>灭亡：</strong>1258年蒙古攻陷</li></ul></div>
+ <div class="recap-card"><h3>📚 阿拉伯文化</h3><ul><li><strong>智慧宫：</strong>830年·翻译运动</li><li><strong>数字：</strong>改造古印度计数法</li><li><strong>医学：</strong>《医学集成》《医典》</li><li><strong>文学：</strong>《天方夜谭》</li></ul></div>
+ <div class="recap-card"><h3>🌉 文化交流桥梁</h3><ul><li><strong>传入欧洲：</strong>造纸术·指南针·火药</li><li><strong>传入欧洲：</strong>印度棉花·食糖</li><li><strong>保存：</strong>古希腊罗马文化</li></ul></div>
+ <div class="recap-card"><h3>📐 数学成就</h3><ul><li><strong>阿拉伯数字：</strong>改造古印度计数法</li><li><strong>代数学：</strong>花拉子密创立</li><li><strong>影响：</strong>长期作为欧洲教材</li></ul></div>
+ <div class="recap-card"><h3>🗓️ 关键时间</h3><ul><li><strong>7世纪初：</strong>伊斯兰教创立</li><li><strong>622年：</strong>迁徙麦地那</li><li><strong>8世纪中期：</strong>帝国鼎盛</li><li><strong>1258年：</strong>帝国灭亡</li></ul></div>
+ </div>
+
+ <div style="display:flex; justify-content:space-between; margin:24px 0; padding:14px 20px; background:var(--card); border-radius:12px; border:1px solid var(--border);">
+ <span><a href="#" style="color:var(--primary); text-decoration:none;">← 第10课 古代日本</a></span>
+ <span style="font-weight:700; color:var(--primary-dark);">第11课</span>
+ <span><a href="#" style="color:var(--primary); text-decoration:none;">第12课 西欧经济和社会的发展 →</a></span>
+ </div>
+
+ <div class="bottom-nav">
+ <div><a href="九上-U4-第10课_封建时代的日本.html">← 上一课：第10课 封建时代的日本</a></div>
+ <div class="nav-center">第11课</div>
+ <div><a href="九上-U4-第12课_中古时期的非洲和美洲.html">下一课：第12课 中古时期的非洲和美洲 →</a></div>
+ </div>
+ <footer><p>统编版初中历史 · 九年级上册 · 第四单元</p><p>基于新版教材 · 交互式学习课件（升级版）</p></footer>
+</div>
+
+<!-- ==================== 导航栏 ==================== -->
+<div class="pg-nav">
+ <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+ <div class="pg-dots" id="pgDots">
+ <span class="pg-dot active" onclick="goPage(0)"></span>
+ <span class="pg-dot" onclick="goPage(1)"></span>
+ <span class="pg-dot" onclick="goPage(2)"></span>
+ <span class="pg-dot" onclick="goPage(3)"></span>
+ <span class="pg-dot" onclick="goPage(4)"></span>
+ <span class="pg-dot" onclick="goPage(5)"></span>
+ <span class="pg-dot" onclick="goPage(6)"></span>
+ </div>
+ <span class="pg-counter" id="pgCounter">1/7</span>
+ <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ========== 分页 ==========
+let curPage = 0, total = 7;
+const dots = document.querySelectorAll('#pgDots .pg-dot');
+const counter = document.getElementById('pgCounter');
+const prevBtn = document.getElementById('pgPrev');
+const nextBtn = document.getElementById('pgNext');
+
+function goPage(n) {
+ if (n<0 || n>=total) return;
+ document.getElementById('page'+curPage).classList.remove('active');
+ dots[curPage].classList.remove('active');
+ curPage = n;
+ document.getElementById('page'+curPage).classList.add('active');
+ dots[curPage].classList.add('active');
+ counter.textContent = (curPage+1)+'/'+total;
+ prevBtn.disabled = (curPage===0);
+ nextBtn.disabled = (curPage===total-1);
+ window.scrollTo({top:0, behavior:'smooth'});
+}
+function nextPage(){ if(curPage<total-1) goPage(curPage+1); }
+function prevPage(){ if(curPage>0) goPage(curPage-1); }
+document.addEventListener('keydown', e => {
+ if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'){ e.preventDefault(); nextPage(); }
+ if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); prevPage(); }
+});
+
+// ========== 学习目标 ==========
+let targetCount=0;
+function toggleTarget(el){
+ el.classList.toggle('done');
+ targetCount = document.querySelectorAll('#targetGrid .target-item.done').length;
+ document.getElementById('targetsDone').style.display = (targetCount>=4) ? 'block' : 'none';
+}
+
+// ========== 标签页 ==========
+function switchTab(id){
+ document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+ document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+ document.querySelector(`.tab-btn[onclick*="${id}"]`).classList.add('active');
+ document.getElementById(id).classList.add('active');
+}
+
+// ========== 闯关进度 ==========
+// 添加 puzzle 关卡
+let stage = {sort:false, fill:false, match:false, puzzle:false, flash:false};
+function updateProg(){
+ const done = Object.values(stage).filter(v=>v).length;
+ document.getElementById('progLabel').textContent = done+'/5';
+ document.getElementById('progFill').style.width = (done/5*100)+'%';
+}
+
+// ========== 拖拽排序 ==========
+let sortCorrect = ['e1','e2','e3','e4'];
+function initDrag(){
+ const items = document.querySelectorAll('#sortPool .sort-item');
+ const slots = document.querySelectorAll('#sortSlots .sort-slot');
+ items.forEach(item => {
+ item.addEventListener('dragstart', e => {
+ e.dataTransfer.setData('text/plain', item.dataset.key);
+ item.classList.add('dragging');
+ });
+ item.addEventListener('dragend', () => item.classList.remove('dragging'));
+ });
+ slots.forEach(slot => {
+ slot.addEventListener('dragover', e => e.preventDefault());
+ slot.addEventListener('drop', e => {
+ e.preventDefault();
+ const key = e.dataTransfer.getData('text/plain');
+ const item = document.getElementById('item_'+key);
+ if(!item) return;
+ const old = slot.querySelector('.sort-item');
+ if(old){ old.classList.remove('placed'); document.getElementById('sortPool').appendChild(old); }
+ slot.appendChild(item);
+ item.classList.add('placed');
+ slot.classList.add('filled');
+ });
+ slot.addEventListener('click', ()=>{
+ const item = slot.querySelector('.sort-item');
+ if(item){ item.classList.remove('placed'); slot.classList.remove('filled'); document.getElementById('sortPool').appendChild(item); }
+ });
+ });
+}
+initDrag();
+
+function checkSort(){
+ const slots = document.querySelectorAll('#sortSlots .sort-slot');
+ let allOk = true, filled = true;
+ slots.forEach((slot, i) => {
+ const item = slot.querySelector('.sort-item');
+ if(!item){ filled=false; allOk=false; return; }
+ if(item.dataset.key === sortCorrect[i]) { slot.classList.add('correct'); slot.classList.remove('wrong'); }
+ else { slot.classList.add('wrong'); slot.classList.remove('correct'); allOk=false; }
+ });
+ const res = document.getElementById('sortResult');
+ if(!filled){ res.textContent='❌ 请将所有卡片拖入槽位'; res.className='sort-result show fail'; return; }
+ if(allOk){
+ res.textContent='✅ 完全正确！'; res.className='sort-result show pass';
+ stage.sort=true; updateProg(); document.getElementById('stageSort').classList.add('show');
+ } else {
+ res.textContent='❌ 顺序不对，请重试'; res.className='sort-result show fail';
+ }
+}
+
+// ========== 填空 ==========
+function checkFill(){
+ const inputs = document.querySelectorAll('#fillArea .fill-input');
+ let allOk=true;
+ inputs.forEach(inp => {
+ const ans = inp.dataset.ans;
+ if(inp.value.trim()===ans){ inp.classList.add('correct'); inp.classList.remove('wrong'); }
+ else { inp.classList.add('wrong'); inp.classList.remove('correct'); allOk=false; }
+ });
+ const res = document.getElementById('fillResult');
+ if(allOk){
+ res.textContent='✅ 完全正确！'; res.className='sort-result show pass';
+ stage.fill=true; updateProg(); document.getElementById('stageFill').classList.add('show');
+ } else {
+ res.textContent='❌ 有错误，请检查'; res.className='sort-result show fail';
+ }
+}
+
+// ========== 匹配（挑战三） ==========
+let selectedLeft = null, matched = [];
+function selectMatch(el){
+ if(el.classList.contains('matched')) return;
+ document.querySelectorAll('.match-left.selected').forEach(e=>e.classList.remove('selected'));
+ el.classList.add('selected');
+ selectedLeft = el;
+}
+function pairMatch(el){
+ if(!selectedLeft || el.classList.contains('matched')) return;
+ if(selectedLeft.dataset.match === el.dataset.match){
+ selectedLeft.classList.add('matched'); selectedLeft.classList.remove('selected');
+ el.classList.add('matched');
+ matched.push(selectedLeft.dataset.match);
+ selectedLeft = null;
+ if(matched.length >= 3){
+ document.getElementById('matchResult').textContent='✅ 全部配对正确！';
+ document.getElementById('matchResult').className='sort-result show pass';
+ stage.match=true; updateProg(); document.getElementById('stageMatch').classList.add('show');
+ }
+ } else {
+ document.getElementById('matchResult').textContent='❌ 配对错误，请重试';
+ document.getElementById('matchResult').className='sort-result show fail';
+ }
+}
+
+// ========== ④ 因果拼图 ==========
+// 根据本课知识点定义三条因果链
+var puzzleData = [
+ {
+ id: 0,
+ title: '链条一：伊斯兰教的创立与阿拉伯统一',
+ badge: 'c1',
+ pieces: [
+ { text: '7世纪初穆罕默德创立伊斯兰教', order: 0 },
+ { text: '622年迁徙麦地那，建立穆斯林公社', order: 1 },
+ { text: '630年占领麦加，632年半岛基本统一', order: 2 }
+ ]
+ },
+ {
+ id: 1,
+ title: '链条二：阿拉伯帝国的扩张与兴衰',
+ badge: 'c2',
+ pieces: [
+ { text: '穆罕默德逝世后，继承者继续扩张', order: 0 },
+ { text: '8世纪中期地跨亚欧非三大洲', order: 1 },
+ { text: '1258年蒙古攻陷巴格达，帝国灭亡', order: 2 }
+ ]
+ },
+ {
+ id: 2,
+ title: '链条三：阿拉伯文化的贡献',
+ badge: 'c3',
+ pieces: [
+ { text: '830年智慧宫推动翻译运动，吸收外来文化', order: 0 },
+ { text: '在数学、医学、文学等领域取得辉煌成就', order: 1 },
+ { text: '担当东西方文化交流桥梁，影响深远', order: 2 }
+ ]
+ }
+];
+
+var puzzleChainProgress = [0, 0, 0];
+
+function initPuzzle() {
+ var container = document.getElementById('puzzleContainer');
+ if (!container) return;
+ container.innerHTML = '';
+ puzzleChainProgress = [0, 0, 0];
+
+ puzzleData.forEach(function(chain, ci) {
+ var chainDiv = document.createElement('div');
+ chainDiv.className = 'puzzle-chain';
+ chainDiv.id = 'pchain-' + ci;
+
+ var header = document.createElement('div');
+ header.className = 'chain-header';
+ var badge = document.createElement('span');
+ badge.className = 'chain-badge ' + chain.badge;
+ badge.textContent = '链' + (ci + 1);
+ header.appendChild(badge);
+ var titleSpan = document.createElement('span');
+ titleSpan.textContent = chain.title;
+ header.appendChild(titleSpan);
+ var prog = document.createElement('span');
+ prog.className = 'chain-progress';
+ prog.id = 'cprog-' + ci;
+ prog.innerHTML = '进度：<strong id="cprogNum-' + ci + '">0</strong>/3';
+ header.appendChild(prog);
+ chainDiv.appendChild(header);
+
+ var slotsDiv = document.createElement('div');
+ slotsDiv.className = 'chain-slots';
+ slotsDiv.id = 'cslots-' + ci;
+ for (var s = 0; s < 3; s++) {
+ var slot = document.createElement('div');
+ slot.className = 'puzzle-slot';
+ slot.id = 'cslot-' + ci + '-' + s;
+ slot.textContent = '第' + (s + 1) + '步';
+ slotsDiv.appendChild(slot);
+ }
+ chainDiv.appendChild(slotsDiv);
+
+ var piecesDiv = document.createElement('div');
+ piecesDiv.className = 'puzzle-pieces';
+ piecesDiv.id = 'cpieces-' + ci;
+ var shuffled = chain.pieces.slice();
+ for (var i = shuffled.length - 1; i > 0; i--) {
+ var j = Math.floor(Math.random() * (i + 1));
+ var temp = shuffled[i];
+ shuffled[i] = shuffled[j];
+ shuffled[j] = temp;
+ }
+ shuffled.forEach(function(piece, pi) {
+ var pDiv = document.createElement('div');
+ pDiv.className = 'puzzle-piece p' + (ci + 1);
+ pDiv.id = 'cpiece-' + ci + '-' + pi;
+ pDiv.setAttribute('data-chain', ci);
+ pDiv.setAttribute('data-order', piece.order);
+ pDiv.textContent = piece.text;
+ pDiv.addEventListener('click', function() {
+ handlePuzzleClick(parseInt(this.getAttribute('data-chain')), parseInt(this.getAttribute('data-order')));
+ });
+ piecesDiv.appendChild(pDiv);
+ });
+ chainDiv.appendChild(piecesDiv);
+ container.appendChild(chainDiv);
+ });
+}
+
+function handlePuzzleClick(chainIdx, order) {
+ if (puzzleChainProgress[chainIdx] >= 3) return;
+
+ var nextSlot = puzzleChainProgress[chainIdx];
+ if (order !== nextSlot) {
+ var pieces = document.querySelectorAll('#cpieces-' + chainIdx + ' .puzzle-piece');
+ pieces.forEach(function(p) {
+ if (parseInt(p.getAttribute('data-order')) === order) {
+ p.classList.add('wrong-shake');
+ setTimeout(function() { p.classList.remove('wrong-shake'); }, 500);
+ }
+ });
+ return;
+ }
+
+ var slot = document.getElementById('cslot-' + chainIdx + '-' + nextSlot);
+ var pieceEl = document.querySelector('#cpieces-' + chainIdx + ' .puzzle-piece[data-order="' + order + '"]');
+ if (!pieceEl || !slot) return;
+
+ pieceEl.classList.add('placed');
+ pieceEl.style.display = 'none';
+
+ slot.textContent = pieceEl.textContent;
+ slot.classList.add('filled', 'correct');
+
+ puzzleChainProgress[chainIdx]++;
+ document.getElementById('cprogNum-' + chainIdx).textContent = puzzleChainProgress[chainIdx];
+
+ if (puzzleChainProgress[chainIdx] >= 3) {
+ var chainDiv = document.getElementById('pchain-' + chainIdx);
+ if (chainDiv) chainDiv.classList.add('complete');
+ }
+
+ var allDone = true;
+ for (var i = 0; i < puzzleChainProgress.length; i++) {
+ if (puzzleChainProgress[i] < 3) { allDone = false; break; }
+ }
+ if (allDone) {
+ var result = document.getElementById('puzzleResult');
+ result.textContent = '🧩 全部因果链拼合正确！';
+ result.className = 'puzzle-result show pass';
+ stage.puzzle = true;
+ updateProg();
+ document.getElementById('stagePuzzleDone').classList.add('show');
+ }
+}
+
+// ========== 翻转卡 ==========
+function flipCard(el){
+ el.classList.toggle('flipped');
+ const total = document.querySelectorAll('.flash-card').length;
+ const flipped = document.querySelectorAll('.flash-card.flipped').length;
+ if(flipped >= total){
+ stage.flash=true; updateProg(); document.getElementById('stageFlash').classList.add('show');
+ }
+}
+
+// ========== 手风琴 ==========
+function toggleAcc(id){
+ document.getElementById(id).classList.toggle('open');
+}
+function markMastered(id, btn){
+ btn.classList.add('done');
+ btn.textContent='✅ 已掌握';
+}
+
+// ========== 深度卡片 ==========
+function toggleDeep(hd){
+ const bd = hd.nextElementSibling;
+ bd.classList.toggle('show');
+}
+
+// ========== 知识图谱 ==========
+function toggleKg(el){
+ el.classList.toggle('expanded');
+}
+
+// ========== 答案显隐 ==========
+function toggleAns(id){
+ document.getElementById(id).classList.toggle('show');
+}
+
+// ========== 选择题 ==========
+let score = 0;
+const ansMap = {q1:'D', q2:'A', q3:'D', q4:'B', q5:'B', q6:'A', q7:'B', q8:'B', q9:'C', q10:'D'};
+let qDone = {};
+function selectOpt(el, opt, qid){
+ if(qDone[qid]) return;
+ const correct = ansMap[qid];
+ const opts = el.parentElement.querySelectorAll('label');
+ opts.forEach(o => {
+ o.classList.add('disabled');
+ if(o.textContent.trim().charAt(0) === correct) o.classList.add('correct');
+ else if(o === el) o.classList.add('wrong');
+ });
+ qDone[qid]=true;
+ if(opt === correct) score++;
+ document.getElementById('scoreDisplay').textContent = score;
+ document.getElementById('ana-'+qid).classList.add('show');
+}
+function resetQuiz(){
+ qDone={}; score=0;
+ document.getElementById('scoreDisplay').textContent=0;
+ document.querySelectorAll('.exercise').forEach(ex => {
+ ex.querySelectorAll('label').forEach(l => l.classList.remove('disabled','correct','wrong'));
+ ex.querySelectorAll('.analysis').forEach(a => a.classList.remove('show'));
+ });
+}
+
+// 初始化拼图（页面加载后执行）
+document.addEventListener('DOMContentLoaded', function() {
+ initPuzzle();
+});
+</script>
+</body>
+</html>

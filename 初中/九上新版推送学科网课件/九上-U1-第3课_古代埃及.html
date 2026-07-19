@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上-U1-第3课 古代埃及（升级版）</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+  --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ========== Hero/封面 ========== */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 ========== */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== 闯关进度条 ========== */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* ========== 挑战标题 ========== */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== 知识卡片 ========== */
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-value { background: #e74c3c; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-soc { background: #3498db; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+
+/* ========== 手风琴组 ========== */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== deep-card 折叠三级卡片 ========== */
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+/* ========== 对比表格 ========== */
+.diff-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13pt; }
+.diff-table th { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 12px; text-align: center; }
+.diff-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: center; }
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== Page3 栏目筛选系统 ========== */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+/* ========== 通用答案区 ========== */
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== 材料引文 ========== */
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.q-group-title { font-size: 15pt; font-weight: 700; color: var(--primary-dark);
+  margin: 24px 0 12px; padding-left: 12px; border-left: 4px solid var(--primary); }
+
+
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== 填空填词 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== 连线匹配 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== SVG 地图标注 ========== */
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+/* ========== 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== 关卡通过动画 ========== */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+  .match-cols { gap: 16px; }
+}
+
+    /* ===== 挑战四：因果链拼图排序 ===== */
+    .causal-zone{background:#f0edff;border-radius:10px;padding:14px;margin-bottom:8px;}
+    .causal-instruction{font-size:12pt;color:#5a4ac7;margin-bottom:12px;line-height:1.5;}
+    .causal-chain{background:#fff;border-radius:10px;padding:12px;margin:10px 0;box-shadow:0 1px 4px rgba(124,108,240,.15);}
+    .causal-chain-title{font-weight:700;color:#4a3aa8;margin-bottom:8px;font-size:13pt;}
+    .causal-pieces{display:flex;flex-wrap:wrap;gap:10px;}
+    .causal-piece{position:relative;display:flex;align-items:center;gap:6px;background:#fff;border:2px solid #c9bff0;border-radius:10px;padding:10px 14px;font-size:12pt;cursor:pointer;transition:.15s;font-family:inherit;color:#333;line-height:1.3;}
+    .causal-piece:hover{border-color:#7c6cf0;background:#f5f2ff;}
+    .causal-piece.picked{border-color:#7c6cf0;background:#ece7ff;}
+    .causal-piece.correct{border-color:#27ae60;background:#e8f8ef;color:#1e7e45;}
+    .causal-piece.wrong{border-color:#e74c3c;background:#fdecea;animation:shake .4s;}
+    .causal-seq{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#7c6cf0;color:#fff;font-size:11pt;font-weight:700;flex:0 0 auto;}
+    .causal-piece.correct .causal-seq{background:#27ae60;}
+    .causal-feedback{margin-top:8px;font-size:12pt;font-weight:700;min-height:18px;}
+    .causal-chain.solved .causal-feedback{color:#27ae60;}
+    .causal-chain.wrong .causal-feedback{color:#e74c3c;}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0: 封面 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 文明的产生和古代亚非文明</div>
+    <h1>第3课 · 古代埃及</h1>
+    <div class="hero-sub">统编版初中历史  九年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>知道古埃及的地理位置、统一时间及兴衰历程，理解尼罗河对古埃及文明的重要性</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过金字塔的建造数据、象形文字释读等史料，了解古埃及文明的成就</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>解释金字塔与法老统治的关系，分析王权衰落的表现与原因</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感受古埃及文明的辉煌成就，尊重世界文明的多样性</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1: 知识要点 + 5关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 尼罗河与古埃及文明</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 金字塔</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 法老的统治</button>
+  </div>
+
+  <!-- ==================== Tab1 ==================== -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">📍 约前3500年出现国家 → 前3100年统一 → 图特摩斯三世军事帝国 → 前525年波斯征服</div>
+    <h3>🌊 尼罗河与古埃及文明</h3>
+    <ul>
+      <li><strong>地理位置：</strong>非洲东北角，<span class="kwd">尼罗河</span>贯穿南北，每年定期泛滥留下肥沃淤泥</li>
+      <li><strong>文明地位：</strong>古埃及被认为是"<span class="kwd">尼罗河的赠礼</span>"，是世界上最古老的文明之一</li>
+      <li><strong>统一与兴衰：</strong>约前3100年初步统一 → 图特摩斯三世时成军事帝国 → 前525年被<span class="kwd">波斯</span>征服</li>
+      <li><strong>科学文化成就：</strong><span class="kwd">太阳历</span>（365天）、<span class="kwd">象形文字</span>（最早文字之一）、数学、医学（木乃伊制作）</li>
+    </ul>
+    <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 古埃及文明被称为"尼罗河的赠礼"，常以选择题考查尼罗河对文明诞生的作用</div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：请将古埃及历史事件按时间先后顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="event1" id="item_event1">图特摩斯三世军事帝国</span>
+      <span class="sort-item" draggable="true" data-sortkey="event2" id="item_event2">波斯征服古埃及</span>
+      <span class="sort-item" draggable="true" data-sortkey="event3" id="item_event3">古埃及初步统一</span>
+      <span class="sort-item" draggable="true" data-sortkey="event4" id="item_event4">尼罗河下游出现国家</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">最晚</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">尼罗河</div><div class="flash-back">世界最长河流，贯穿埃及南北，定期泛滥留下肥沃淤泥，孕育了古埃及文明</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">太阳历</div><div class="flash-back">古埃及天文学成就，根据太阳和天狼星同时升起制定，每年365天</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">象形文字</div><div class="flash-back">古埃及最早的文字之一，19世纪被释读，为古埃及研究开启新纪元</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">木乃伊</div><div class="flash-back">古埃及人将遗体制作成木乃伊，增长了解剖知识，促进了医学发展</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">美尼斯（纳尔迈）</div><div class="flash-back">约前3100年初步统一上下埃及的国王，被视为古埃及统一国家的奠基者</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">军事帝国</div><div class="flash-back">新王国时期图特摩斯三世东征西讨，使古埃及版图空前辽阔，成为地跨亚非的军事帝国</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Tab2 ==================== -->
+  <div class="kp-card tab-panel" id="tab2">
+    <div class="timeline-bar">📍 胡夫金字塔 · 约公元前2600年 · 古王国时期</div>
+    <h3>🔺 金字塔</h3>
+    <ul>
+      <li><strong>定义：</strong>古埃及法老为自己修建的<span class="kwd">角锥体</span>状陵墓，因侧面形似汉字"金"而得名</li>
+      <li><strong>胡夫金字塔：</strong>约前2600年建成，原高约<span class="kwd">146米</span>，边长约<span class="kwd">230米</span>，用石约<span class="kwd">230万块</span>，每块约<span class="kwd">2.5吨</span></li>
+      <li><strong>狮身人面像：</strong>位于哈夫拉金字塔前，用一整块巨石雕成，高20余米，长50余米</li>
+      <li><strong>分布与演变：</strong>金字塔集中分布在尼罗河下游西岸沙漠边缘，由早期"马斯塔巴"平顶墓逐步演变为角锥体</li>
+      <li><strong>建筑技术：</strong>巨石相互叠砌、不用黏合剂却严丝合缝，借助斜坡、滚木、杠杆运输，体现高超的工程水平</li>
+      <li><strong>内部结构：</strong>金字塔内有墓室、通道与通风口，布局精密，反映古埃及人的天文与几何智慧</li>
+      <li><strong>历史地位：</strong>金字塔是<span class="kwd">古埃及文明的象征</span>，反映了古埃及社会经济发展的较高水平，也是古埃及人智慧的结晶</li>
+    </ul>
+    <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 金字塔是古埃及文明的象征，常以选择题考查胡夫金字塔的数据或金字塔的历史地位</div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写胡夫金字塔的关键数据</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">胡夫金字塔建于约 <input type="text" class="fill-input" data-answer="前2600" placeholder="?"> 年，原塔高约 <input type="text" class="fill-input" data-answer="146" placeholder="?"> 米</div>
+      <div class="fill-blank-row">基底每边长约 <input type="text" class="fill-input" data-answer="230" placeholder="?"> 米，用石约 <input type="text" class="fill-input" data-answer="230" placeholder="?"> 万块</div>
+      <div class="fill-blank-row">平均每块重约 <input type="text" class="fill-input" data-answer="2.5" placeholder="?"> 吨</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">金字塔</div><div class="flash-back">古埃及法老的角锥体陵墓，古埃及文明的象征，反映社会经济发展水平</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">胡夫金字塔</div><div class="flash-back">古埃及最大金字塔，约前2600年建成，原高146米，用石230万块</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">狮身人面像</div><div class="flash-back">位于哈夫拉金字塔前，用整块巨石雕成，高20余米，长50余米</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">马斯塔巴</div><div class="flash-back">古埃及早期的平顶长方形陵墓，是金字塔的前身，后逐渐演变为层级与角锥体金字塔</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">吉萨金字塔群</div><div class="flash-back">以胡夫、哈夫拉、孟考拉三座金字塔为代表的建筑群，是世界古代七大奇迹之一</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Tab3 ==================== -->
+  <div class="kp-card tab-panel" id="tab3">
+    <div class="timeline-bar">📍 法老 · 集军政财政神大权于一身 · "神之子"</div>
+    <h3>👑 法老的统治</h3>
+    <ul>
+      <li><strong>法老称号：</strong>古埃及国王称"<span class="kwd">法老</span>"，是最高统治者，集<span class="kwd">军、政、财、神</span>大权于一身</li>
+      <li><strong>神化王权：</strong>法老被认为是"<span class="kwd">神之子</span>"，具有无上权威；大臣见国王要匍匐在地、吻脚下土地</li>
+      <li><strong>制度特征：</strong>"法老"原意为"大房屋/宫殿"，新王国时期成为国王尊称；法老实行<span class="kwd">君主专制</span>，设维西尔（宰相）辅政</li>
+      <li><strong>神权政治：</strong>法老既是世俗君主又是<span class="kwd">最高祭司</span>，神权与王权合一，强化统治的合法性</li>
+      <li><strong>官僚与军队：</strong>法老掌控军队与官僚体系，地方由州长（诺姆长）治理，中央高度集权</li>
+      <li><strong>社会等级：</strong>以法老为首，其下为贵族、祭司、平民、奴隶，<span class="kwd">等级森严</span></li>
+      <li><strong>王权衰落：</strong>胡夫金字塔之后，金字塔越修越小，反映了<span class="kwd">王权的逐渐衰落</span>与地方割据、祭司势力膨胀</li>
+    </ul>
+    <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 法老集大权于一身、金字塔由大变小反映王权衰落，常以选择题或材料题考查</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将左侧法老权力与右侧对应表现连线配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 权力/称号</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">"神之子"</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">集军政财大权</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">王杖责打大臣</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">金字塔越修越小</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📌 表现/含义</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">王权衰落</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">政治权威</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">宗教权威</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">绝对威严</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+        <!-- ④ 因果链拼图排序 -->
+    <div class="challenge-title">🎮 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+    <div class="causal-zone" id="causalZone">
+      <div class="causal-instruction">💡 点击下方拼图块，按因果关系排出正确顺序 ①→②→③。排对一条即点亮该链，全部排对即通关。</div>
+      <div class="causal-chain" data-chain="1">
+        <div class="causal-chain-title">因果链1：尼罗河与国家统一</div>
+        <div class="causal-pieces">
+          <button class="causal-piece" data-correct="1" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">农业稳定、粮食充裕</span></button>
+          <button class="causal-piece" data-correct="0" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">尼罗河定期泛滥带来肥沃淤泥</span></button>
+          <button class="causal-piece" data-correct="2" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">国家统一与法老专制</span></button>
+        </div>
+        <div class="causal-feedback"></div>
+      </div>
+      <div class="causal-chain" data-chain="2">
+        <div class="causal-chain-title">因果链2：文明要素的产生</div>
+        <div class="causal-pieces">
+          <button class="causal-piece" data-correct="1" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">剩余产品与社会分工</span></button>
+          <button class="causal-piece" data-correct="0" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">尼罗河利于农业发展</span></button>
+          <button class="causal-piece" data-correct="2" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">太阳历、象形文字等成就产生</span></button>
+        </div>
+        <div class="causal-feedback"></div>
+      </div>
+      <div class="causal-chain" data-chain="3">
+        <div class="causal-chain-title">因果链3：金字塔的修建</div>
+        <div class="causal-pieces">
+          <button class="causal-piece" data-correct="2" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">征调人力修建金字塔（王陵）</span></button>
+          <button class="causal-piece" data-correct="0" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">法老集政权与神权于一身</span></button>
+          <button class="causal-piece" data-correct="1" onclick="causalPick(this)"><b class="causal-seq"></b><span class="causal-label">宣扬“太阳神之子”</span></button>
+        </div>
+        <div class="causal-feedback"></div>
+      </div>
+    </div>
+    <div class="stage-done" id="stageCausalDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">法老</div><div class="flash-back">古埃及国王的称号，集军政财政神大权于一身，被认为是"神之子"</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">图特摩斯三世</div><div class="flash-back">古埃及法老，统治时期古埃及成为强大的军事帝国，版图空前辽阔</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">王权衰落</div><div class="flash-back">胡夫金字塔后金字塔越修越小，反映法老王权逐渐衰落，社会矛盾激化</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">维西尔（宰相）</div><div class="flash-back">法老之下最高的行政官员，掌管行政、司法与财政，但权力完全来源于法老</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">神权政治</div><div class="flash-back">法老兼世俗君主与最高祭司，神权与王权合一，通过神化统治巩固君主专制</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page2: 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重难点1 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔵 重难点一：尼罗河对古埃及文明的影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：尼罗河的"赠礼"</div>
+        <div class="deep-card-bd">
+          <p>古埃及位于非洲东北角，尼罗河贯穿南北。每年尼罗河定期泛滥，退水后留下肥沃的黑色淤泥，非常有利于农业生产。因此，古埃及被称为"尼罗河的赠礼"。尼罗河不仅提供了农业基础，还促进了古埃及统一国家的形成。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：尼罗河与科学文化</div>
+        <div class="deep-card-bd">
+          <p>古埃及人根据尼罗河涨水规律制定了<strong>太阳历</strong>；测量水位和计算土地面积促进了<strong>数学</strong>发展；制作木乃伊增长了<strong>解剖知识</strong>，促进<strong>医学</strong>进步；<strong>象形文字</strong>的发明为记录文明提供了工具。</p>
+          <p class="source-material">📖 <strong>问题思考：</strong>尼罗河与古埃及科学文化的发展有什么关系？<br>
+          → 尼罗河定期泛滥的规律促使古埃及人观察天象，制定太阳历；洪水退后测量土地促进数学发展；制作木乃伊的实践促进医学发展；稳定的农业社会为文字和艺术创作提供了条件。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：文明与地理环境的关系</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>历史解释：</strong>古埃及文明是<strong>大河文明</strong>的典型代表。尼罗河定期泛滥、便于灌溉的自然条件，为古埃及农业文明提供了物质基础，进而催生了文字、天文、建筑等辉煌成就。这体现了<strong>地理环境影响文明发展</strong>的历史规律。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（选择题）</strong>古埃及被认为是"尼罗河的赠礼"，这主要是因为尼罗河（  ）</p>
+            <p style="font-size:12pt;">A. 提供了便利的水路交通<br>B. 定期泛滥带来肥沃土壤，促进农业发展<br>C. 为古埃及提供了丰富的矿产资源<br>D. 是古埃及与外界联系的唯一通道</p>
+            <div class="a" id="ans-p2-zhongkao1">
+              <strong>✅ 答案：B</strong><br>
+              <strong>解析：</strong>尼罗河定期泛滥，洪水退去后留下肥沃的黑色淤泥，非常有利于农业生产，因此古埃及被认为是"尼罗河的赠礼"。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao1')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点2 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🟠 重难点二：金字塔为何是古埃及文明的象征？</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：金字塔的建造</div>
+        <div class="deep-card-bd">
+          <p><strong>胡夫金字塔</strong>建于约公元前2600年，原塔高约146米，基底每边长约230米，用石约230万块，平均每块重约2.5吨。<strong>狮身人面像</strong>位于哈夫拉金字塔前，用一整块巨石雕成，高20余米，长50余米。金字塔是古埃及法老的陵墓，因侧面形似汉字"金"而得名。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：金字塔的历史意义</div>
+        <div class="deep-card-bd">
+          <p>金字塔是古埃及文明的象征，原因有三：</p>
+          <ul>
+            <li><strong>经济方面：</strong>反映了古埃及社会经济发展的较高水平</li>
+            <li><strong>政治方面：</strong>体现了法老的无限权力</li>
+            <li><strong>文化方面：</strong>是古埃及人智慧的结晶</li>
+          </ul>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：金字塔与法老权力</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>史料实证：</strong>金字塔不仅是法老的陵墓，更是法老<strong>无上权威</strong>的象征。修建金字塔需要动用全国的人力和物力，这只有在王权高度集中、国家组织能力强大的条件下才能实现。因此，金字塔是古埃及<strong>国家力量和文明成就</strong>的集中体现。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（材料题）</strong>"古埃及最大的金字塔是胡夫金字塔，建于约公元前2600年，原塔高约146米，基底每边长约230米，用石约230万块，平均每块重约2.5吨。"</p>
+            <p style="font-size:12pt;">问题：根据材料并结合所学，分析金字塔反映了古埃及怎样的社会状况？</p>
+            <div class="a" id="ans-p2-zhongkao2">
+              <strong>参考答案：</strong><br>
+              金字塔的宏伟规模反映了古埃及<strong>社会经济发展水平较高</strong>；大量人力物力的动员反映了<strong>法老拥有无限权力</strong>，能够集中全国力量；金字塔的精确建造反映了古埃及<strong>数学和天文学成就</strong>。金字塔是古埃及文明的集中体现。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao2')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点3 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🟣 重难点三：法老与金字塔的关系</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：法老的权力</div>
+        <div class="deep-card-bd">
+          <p>古埃及的国王称"<strong>法老</strong>"，是最高统治者，集<strong>军、政、财、神</strong>大权于一身。在宗教上，法老被认为是"<strong>神之子</strong>"，具有无上的权威。大臣见国王时要匍匐在地上，吻国王脚下的土地。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：王权的衰落</div>
+        <div class="deep-card-bd">
+          <p>随着社会矛盾的激化，王权受到多方面挑战。胡夫金字塔之后，金字塔<strong>越修越小</strong>，这反映了<strong>王权的逐渐衰落</strong>。金字塔的规模与法老的权力直接相关。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：法老与金字塔的互动关系</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>历史解释：</strong>法老与金字塔的关系可以概括为：<strong>金字塔是法老权力的物化表现</strong>。金字塔的宏伟规模体现了法老权力的强盛，而金字塔越修越小则直观反映了王权的衰落。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（选择题）</strong>胡夫金字塔之后，金字塔越修越小，这反映了（  ）</p>
+            <p style="font-size:12pt;">A. 古埃及建筑技术倒退<br>B. 法老王权逐渐衰落<br>C. 古埃及经济陷入停滞<br>D. 法老不再重视陵墓修建</p>
+            <div class="a" id="ans-p2-zhongkao3">
+              <strong>✅ 答案：B</strong><br>
+              <strong>解析：</strong>胡夫金字塔后金字塔越修越小，反映了法老王权的逐渐衰落。金字塔的规模与法老的权力直接相关。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao3')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点4 -->
+  <div class="acc-group" id="acc4">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc4')">
+      <h3>🔵 重难点四：古埃及文明的"中断"与古代大河文明的启示</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：古埃及文明为何中断</div>
+        <div class="deep-card-bd">
+          <p>古埃及文明并非延续至今。前525年，古埃及被<span class="kwd">波斯</span>征服；其后又相继被<span class="kwd">马其顿亚历山大</span>和<span class="kwd">罗马</span>征服。外族长期统治使古埃及原有的文字、宗教与政治制度逐渐衰落，文明发生中断，与古代中国文明绵延不绝形成鲜明对比。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：四大文明古国的命运</div>
+        <div class="deep-card-bd">
+          <p>世界公认的四大文明古国中，<strong>古代中国文明是唯一从未中断、延续至今</strong>的文明；而古埃及、古巴比伦、古印度文明都曾因外族入侵等原因出现中断或转型。这说明文明的延续既依赖于物质成就，也依赖于文字、典籍、制度等文化血脉的传承。</p>
+          <p class="source-material">📖 <strong>问题思考：</strong>同为"大河文明"，为何古埃及文明中断而中华文明延续至今？<br>→ 中华文明地处东亚，地理上相对自成一体又腹地广阔；统一的多民族国家与成熟的文字、史学传统，使文化血脉得以代际相传。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：尊重世界文明的多样性</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>家国情怀：</strong>古埃及文明虽已中断，却留下了金字塔、象形文字、太阳历等宝贵遗产，为人类文明作出了重要贡献。学习古埃及历史，有助于我们理解<strong>文明发展的多样性</strong>，尊重不同国家和民族的文化传统，树立平等的文明观。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（选择题）</strong>下列文明中，唯一延续至今、从未中断的是（  ）</p>
+            <p style="font-size:12pt;">A. 古埃及文明<br>B. 古巴比伦文明<br>C. 古印度文明<br>D. 中华文明</p>
+            <div class="a" id="ans-p2-zhongkao4">
+              <strong>✅ 答案：D</strong><br>
+              <strong>解析：</strong>在世界四大文明古国中，只有中华文明绵延不绝、延续至今；古埃及、古巴比伦、古印度文明都曾因外族入侵等原因出现中断。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao4')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc4',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page3: 教材栏目解答 ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('问题思考',this)">问题思考</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：太阳历、数学、医学与象形文字</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>古埃及人发现，每年7月，当太阳和天狼星在地平线上同时升起时，尼罗河就会开始涨水。他们据此制定了每年365天的太阳历。由于需要测量尼罗河的水位，大量洪水退去后的两岸土地，再加上建筑等方面的计算需要，古埃及人发展了数学。古埃及人将人的遗体制作成木乃伊，增长了解剖知识，从而促进了医学的发展。古埃及象形文字在19世纪被释读，为古埃及研究开启了一个新纪元。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong><br>• 太阳历：根据太阳与天狼星同时升起制定，每年365天<br>• 数学：测量水位、计算土地面积、建筑需求推动<br>• 医学：制作木乃伊增长解剖知识<br>• 象形文字：19世纪被释读
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="问题思考">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 问题思考：尼罗河与古埃及科学文化的关系</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>尼罗河与古埃及科学文化的发展有什么关系？</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong><br>尼罗河定期泛滥的规律促使古埃及人观察天象，制定了<strong>太阳历</strong>；洪水退去后测量土地促进了<strong>数学</strong>发展；尼罗河沿岸资源为<strong>医学</strong>研究提供了条件；稳定的农业社会为<strong>文字</strong>和<strong>艺术</strong>的创造提供了物质基础。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：胡夫金字塔与狮身人面像</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>古埃及最大的金字塔是胡夫金字塔，建于约公元前2600年，原塔高约146米，基底每边长约230米，用石约230万块，平均每块重2.5吨左右。在胡夫金字塔旁的哈夫拉金字塔前，还有一座狮身人面像，用一整块巨石雕成，高20余米，长50余米。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong><br>• 胡夫金字塔：约前2600年，高146米，边长230米，用石230万块<br>• 狮身人面像：哈夫拉金字塔前，高20余米，长50余米
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>1. 判断下列表述，在正确选项后面的括号里画√，错误的画×。</strong></p>
+      <ul style="font-size:13.5pt;list-style:none;padding-left:8px;">
+        <li style="margin:6px 0;">• 古埃及文明延续发展至今，文明进程历经曲折但未间断 （ <strong>×</strong> ）</li>
+        <li style="margin:6px 0;">• 古埃及在科学、文化领域取得很高的成就 （ <strong>√</strong> ）</li>
+        <li style="margin:6px 0;">• 古埃及国王给自己的陵墓取名"金字塔"，象征着无限的权力 （ <strong>×</strong> ）</li>
+      </ul>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 答案解析：</strong><br>第1句 ×：古埃及文明在波斯征服后逐渐衰落，并非延续至今。<br>第2句 √：古埃及在太阳历、象形文字、数学、医学等方面成就辉煌。<br>第3句 ×："金字塔"是中国人对埃及法老陵墓的称呼，非古埃及人命名。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看答案解析</button>
+
+      <p style="margin-top:16px;"><strong>2. 请查找资料，读读关于金字塔建造的故事，你认为哪种建造方法比较合理？</strong></p>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考思路：</strong><br>• 斜坡法：修建斜坡将巨石拉上塔身<br>• 螺旋法：沿金字塔四周修建螺旋上升的斜坡<br>• 滚木法：利用圆木作为滚轴减少摩擦<br>• 综合观点：可能综合使用了多种方法
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看参考思路</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：人类形成和原始社会</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>距今约三百万年，人类形成。人类最初经历的是原始社会。最初人们生活在母系氏族社会，财产公有。随着农业和畜牧业的发展，父系氏族社会逐渐取代母系氏族社会。在父系氏族社会后期，出现了剩余产品和家庭私有财产，私有制和奴隶制出现，原始社会开始解体。</p>
+      <div class="a" id="ans-p3-knowledge">
+        <strong>📝 要点归纳：</strong><br>• 人类形成：约300万年前<br>• 母系氏族：财产公有<br>• 父系氏族：男子主导 → 私有制出现<br>• 原始社会解体 → 阶级社会
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：图特摩斯三世与埃及帝国</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>在新王国时期，法老<span class="kwd">图特摩斯三世</span>在位时，古埃及不断对外扩张：向南征服努比亚，向东远征至叙利亚和巴勒斯坦地区，使古埃及的版图达到空前辽阔，成为地跨亚非两洲的军事帝国。他因此被后世称为"古埃及的拿破仑"。</p>
+      <div class="a" id="ans-p3-story3">
+        <strong>📝 要点归纳：</strong><br>• 时期：新王国时期<br>• 人物：图特摩斯三世<br>• 扩张：南征努比亚、东达叙利亚—巴勒斯坦<br>• 结果：古埃及成为地跨亚非的军事帝国
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：罗塞塔石碑与象形文字的破译</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>古埃及的象形文字长期无人能读。1799年，拿破仑军队在埃及罗塞塔镇发现一块<span class="kwd">罗塞塔石碑</span>，碑上用三种文字（圣书体、世俗体、古希腊文）刻写同一内容。法国学者商博良对照古希腊文，于1822年成功释读象形文字，自此打开了古埃及文明研究的大门。</p>
+      <div class="a" id="ans-p3-knowledge2">
+        <strong>📝 要点归纳：</strong><br>• 罗塞塔石碑：三语对照，关键破译线索<br>• 商博良：1822年释读象形文字<br>• 意义：为古埃及研究开启新纪元
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge2')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="问题思考">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 问题思考：从金字塔看古埃及人的来世信仰</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>古埃及人为何耗费巨大人力物力修建金字塔？这反映了他们怎样的观念？</p>
+      <div class="a" id="ans-p3-think2">
+        <strong>📝 参考答案：</strong><br>古埃及人相信<span class="kwd">"灵魂不灭"</span>，认为人死后灵魂会在来世继续生活，法老更被视作"神之子"。因此，他们为法老修建宏伟的金字塔作为永久安息之所，并设置大量随葬品。金字塔的修建，既体现了古埃及人对来世的强烈信仰，也反映出法老权力的至高无上。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think2')">📝 查看参考答案</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page4: 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <div class="q-group-title">一、选择题</div>
+<div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 古埃及被认为是"尼罗河的赠礼"，这主要是因为尼罗河（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 提供了便利的水路交通</label>
+      <label onclick="optClick(this,'B','q1')">B. 定期泛滥带来肥沃土壤，促进农业发展</label>
+      <label onclick="optClick(this,'C','q1')">C. 为古埃及提供了丰富的矿产资源</label>
+      <label onclick="optClick(this,'D','q1')">D. 是古埃及与外界联系的唯一通道</label>
+    </div>
+    <div class="a" id="exp-q1">
+      <strong>✅ 答案：B</strong><br>
+      <strong>解析：</strong>尼罗河定期泛滥，退水后留下肥沃的黑色淤泥，非常有利于农业生产。因此古希腊历史学家希罗多德说"埃及是尼罗河的赠礼"。A项水路交通虽是尼罗河的功能之一，但不是"赠礼"的核心含义；C项矿产资源与尼罗河泛滥无关；D项"唯一通道"表述过于绝对。
+    </div>
+  </div><div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 古埃及初步实现统一是在（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 约公元前3500年</label>
+      <label onclick="optClick(this,'B','q2')">B. 约公元前3100年</label>
+      <label onclick="optClick(this,'C','q2')">C. 公元前525年</label>
+      <label onclick="optClick(this,'D','q2')">D. 约公元前2600年</label>
+    </div>
+    <div class="a" id="exp-q2">
+      <strong>✅ 答案：B</strong><br>
+      <strong>解析：</strong>约公元前3500年（A项）是尼罗河下游出现国家的时间，尚未统一；约公元前3100年是古埃及初步实现统一的时间；公元前525年（C项）是波斯征服古埃及的时间；约公元前2600年（D项）是胡夫金字塔建成的时间。
+    </div>
+  </div><div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 胡夫金字塔之后，金字塔越修越小，这反映了（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 古埃及建筑技术倒退</label>
+      <label onclick="optClick(this,'B','q3')">B. 法老不再重视陵墓修建</label>
+      <label onclick="optClick(this,'C','q3')">C. 法老王权逐渐衰落</label>
+      <label onclick="optClick(this,'D','q3')">D. 古埃及经济陷入停滞</label>
+    </div>
+    <div class="a" id="exp-q3">
+      <strong>✅ 答案：C</strong><br>
+      <strong>解析：</strong>胡夫金字塔之后金字塔越修越小，是法老王权逐渐衰落的直观反映。金字塔的修建需要动用全国大量人力物力，只有在王权强盛时才能修建大规模金字塔；王权衰落时，法老可调动的资源减少，金字塔规模也随之缩小。A项并非技术倒退，而是王权弱化导致的资源不足；B项法老并非不重视，而是无力修建更大的陵墓；D项经济并非完全停滞，只是国家动员能力下降。
+    </div>
+  </div><div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 古埃及的国王被称为（  ），被认为是"神之子"</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 法老</label>
+      <label onclick="optClick(this,'B','q4')">B. 皇帝</label>
+      <label onclick="optClick(this,'C','q4')">C. 国王</label>
+      <label onclick="optClick(this,'D','q4')">D. 执政官</label>
+    </div>
+    <div class="a" id="exp-q4">
+      <strong>✅ 答案：A</strong><br>
+      <strong>解析：</strong>古埃及的国王称"法老"，是全国最高统治者，集军、政、财、神大权于一身，在宗教上被认为是"神之子"。B项"皇帝"是中国古代君主的称号；C项"国王"是泛称，不是古埃及特有的专称；D项"执政官"是古希腊雅典的官职。
+    </div>
+  </div><div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 下列关于古埃及文明的表述，正确的是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 古埃及文明延续至今从未中断</label>
+      <label onclick="optClick(this,'B','q5')">B. 金字塔是古埃及文明的象征</label>
+      <label onclick="optClick(this,'C','q5')">C. 古埃及人创造了字母文字</label>
+      <label onclick="optClick(this,'D','q5')">D. 古埃及的雕刻以平民为主要对象</label>
+    </div>
+    <div class="a" id="exp-q5">
+      <strong>✅ 答案：B</strong><br>
+      <strong>解析：</strong>金字塔是古埃及法老的角锥体陵墓，是古埃及文明的象征。A项错误：古埃及文明在波斯征服后逐渐衰落，并未延续至今；C项错误：古埃及人创造的是象形文字，不是字母文字（字母文字起源于腓尼基）；D项错误：古埃及雕刻主要表现法老和神祇，而非平民。
+    </div>
+  </div><div class="exercise" id="q6">
+    <div class="q-text"><strong>6.</strong> 古埃及人制定的太阳历，其依据是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q6')">A. 月亮的圆缺变化</label>
+      <label onclick="optClick(this,'B','q6')">B. 地球绕太阳公转一周</label>
+      <label onclick="optClick(this,'C','q6')">C. 太阳和天狼星同时升起的天象</label>
+      <label onclick="optClick(this,'D','q6')">D. 尼罗河泛滥的间隔</label>
+    </div>
+    <div class="a" id="exp-q6">
+      <strong>✅ 答案：C</strong><br>
+      <strong>解析：</strong>古埃及人发现每年7月太阳和天狼星同时升起时尼罗河开始涨水，据此制定每年365天的太阳历。A项对应阴历；B项是现代公历的科学依据；D项尼罗河泛滥是太阳历的间接参考，但直接依据为天象观测。
+    </div>
+  </div><div class="exercise" id="q7">
+    <div class="q-text"><strong>7.</strong> 古埃及人发明并使用的古老文字是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q7')">A. 楔形文字</label>
+      <label onclick="optClick(this,'B','q7')">B. 象形文字</label>
+      <label onclick="optClick(this,'C','q7')">C. 字母文字</label>
+      <label onclick="optClick(this,'D','q7')">D. 甲骨文</label>
+    </div>
+    <div class="a" id="exp-q7">
+      <strong>✅ 答案：B</strong><br>
+      <strong>解析：</strong>古埃及人发明的是象形文字，用图形表示事物或概念，是世界上最早的文字之一，19世纪被释读。A项楔形文字是两河流域苏美尔人的成就；C项字母文字起源于腓尼基；D项甲骨文是中国古代文字。
+    </div>
+  </div><div class="exercise" id="q8">
+    <div class="q-text"><strong>8.</strong> 著名的狮身人面像位于下列哪座金字塔前？（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q8')">A. 胡夫金字塔</label>
+      <label onclick="optClick(this,'B','q8')">B. 孟考拉金字塔</label>
+      <label onclick="optClick(this,'C','q8')">C. 哈夫拉金字塔</label>
+      <label onclick="optClick(this,'D','q8')">D. 左塞尔阶梯金字塔</label>
+    </div>
+    <div class="a" id="exp-q8">
+      <strong>✅ 答案：C</strong><br>
+      <strong>解析：</strong>狮身人面像位于哈夫拉金字塔前，用一整块巨石雕成，高20余米、长50余米。A项胡夫金字塔是最大金字塔，但狮身人面像并不在其前；D项左塞尔阶梯金字塔是早期层级金字塔。
+    </div>
+  </div><div class="exercise" id="q9">
+    <div class="q-text"><strong>9.</strong> 使古埃及成为地跨亚非两洲军事帝国的法老是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q9')">A. 美尼斯</label>
+      <label onclick="optClick(this,'B','q9')">B. 胡夫</label>
+      <label onclick="optClick(this,'C','q9')">C. 哈夫拉</label>
+      <label onclick="optClick(this,'D','q9')">D. 图特摩斯三世</label>
+    </div>
+    <div class="a" id="exp-q9">
+      <strong>✅ 答案：D</strong><br>
+      <strong>解析：</strong>新王国时期图特摩斯三世南征努比亚、东达叙利亚—巴勒斯坦，使古埃及成为地跨亚非的军事帝国。A项美尼斯是初步统一者；B、C项胡夫、哈夫拉属古王国时期，主要功绩在修建金字塔。
+    </div>
+  </div><div class="exercise" id="q10">
+    <div class="q-text"><strong>10.</strong> 古埃及文明走向衰亡、被外族征服的开端是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q10')">A. 前525年被波斯征服</label>
+      <label onclick="optClick(this,'B','q10')">B. 被亚历山大帝国征服</label>
+      <label onclick="optClick(this,'C','q10')">C. 被罗马帝国征服</label>
+      <label onclick="optClick(this,'D','q10')">D. 阿拉伯帝国征服</label>
+    </div>
+    <div class="a" id="exp-q10">
+      <strong>✅ 答案：A</strong><br>
+      <strong>解析：</strong>前525年古埃及被波斯征服，是古埃及文明由盛转衰、逐步中断的开端；其后又被马其顿、罗马相继征服。B、C项是后续的外族统治；D项阿拉伯帝国征服发生在更晚的时期，此时古埃及已并入伊斯兰世界。
+    </div>
+  </div><div class="q-group-title">二、材料题</div>
+<div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>"古埃及位于非洲东北角，尼罗河贯穿埃及南北。每年尼罗河定期泛滥，当洪水退去后，两岸留下肥沃的黑色淤泥，非常有利于农业生产。因此，古埃及被认为是'尼罗河的赠礼'。"</p>
+      <div class="source-ref">—— 统编版《世界历史》九年级上册</div>
+    </div>
+    <div class="q-text">（1）根据材料，概括尼罗河对古埃及农业的作用。</div>
+    <div class="a" id="ans-p4-mat1a">
+      <p><strong>参考答案：</strong>尼罗河定期泛滥，退水后留下肥沃黑色淤泥，有利于农业生产，为古埃及文明提供了物质基础。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1a');trackMatQ('mq1')">📝 查看答案</button>
+    <div class="q-text" style="margin-top:10px;">（2）结合所学，古埃及有哪些科学文化成就？</div>
+    <div class="a" id="ans-p4-mat1b">
+      <p><strong>参考答案：</strong>太阳历、象形文字、数学、医学、建筑（金字塔）等。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1b');trackMatQ('mq1')">📝 查看答案</button>
+  </div><div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>"古埃及最大的金字塔是胡夫金字塔，建于约公元前2600年，原塔高约146米，基底每边长约230米，用石约230万块，平均每块重约2.5吨左右。……金字塔的修建，反映了古埃及国王的无限权力。"</p>
+      <div class="source-ref">—— 统编版《世界历史》九年级上册</div>
+    </div>
+    <div class="q-text">（1）根据材料，概括胡夫金字塔的规模特点。</div>
+    <div class="a" id="ans-p4-mat2a">
+      <p><strong>参考答案：</strong>规模宏大：高约146米，边长约230米，用石230万块，每块2.5吨。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2a');trackMatQ('mq2')">📝 查看答案</button>
+    <div class="q-text" style="margin-top:10px;">（2）分析金字塔反映了法老怎样的政治地位？</div>
+    <div class="a" id="ans-p4-mat2b">
+      <p><strong>参考答案：</strong>金字塔反映了法老拥有无限权力，能够调动全国人力物力修建陵墓，是法老权力和地位的象征。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2b');trackMatQ('mq2')">📝 查看答案</button>
+  </div><div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>"古埃及的国王称'法老'。法老作为全国最高的统治者，集军、政、财、神等大权于一身。在宗教上，法老被认为是'神之子'，具有无上的权威。"</p>
+      <div class="source-ref">—— 统编版《世界历史》九年级上册</div>
+    </div>
+    <div class="q-text">（1）根据材料，概括法老在古埃及的地位。</div>
+    <div class="a" id="ans-p4-mat3a">
+      <p><strong>参考答案：</strong>法老是最高统治者，集军政财政神大权于一身，被视为"神之子"，拥有无上权威。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3a');trackMatQ('mq3')">📝 查看答案</button>
+    <div class="q-text" style="margin-top:10px;">（2）法老被称为"神之子"有何政治意义？</div>
+    <div class="a" id="ans-p4-mat3b">
+      <p><strong>参考答案：</strong>通过神化王权强化了法老的权威和统治合法性，有利于维护君主专制统治。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3b');trackMatQ('mq3')">📝 查看答案</button>
+  </div><div class="q-group-title">三、问答题</div>
+<div class="exercise" id="sq1">
+    <div class="q-text"><strong>简答题1</strong> 简述尼罗河对古埃及文明产生和发展的作用。</div>
+    <div class="a" id="ans-p4-sq1">
+      <p><strong>参考答案：</strong></p>
+      <p>① <strong>物质基础：</strong>尼罗河定期泛滥留下肥沃淤泥，有利于农业发展，使古埃及成为"粮仓"，为文明诞生提供物质保障；</p>
+      <p>② <strong>统一条件：</strong>尼罗河贯穿南北，便利的水路交通促进了上下埃及的联系与统一；</p>
+      <p>③ <strong>科学文化：</strong>观察泛滥规律制定太阳历，测量土地推动数学，制作木乃伊促进医学，地理环境孕育了古埃及的文化成就。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-sq1')">📝 查看答案</button>
+  </div><div class="exercise" id="sq2">
+    <div class="q-text"><strong>简答题2</strong> 为什么说金字塔是古埃及文明的象征？</div>
+    <div class="a" id="ans-p4-sq2">
+      <p><strong>参考答案：</strong></p>
+      <p>① <strong>经济方面：</strong>金字塔规模宏大，反映古埃及社会经济发展达到较高水平；</p>
+      <p>② <strong>政治方面：</strong>修建金字塔需调动全国人力物力，是法老无限权力的集中体现；</p>
+      <p>③ <strong>文化方面：</strong>金字塔凝结古埃及人的数学、天文与工程智慧，是古埃及人智慧与创造力的结晶，也是古埃及文明区别于其他文明的最显著标志。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-sq2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== Page5: 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌊</span><strong>自然基础：尼罗河</strong>
+        <p>非洲东北角 · 定期泛滥 · 肥沃淤泥</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>尼罗河是古埃及文明的物质基础，被称为"尼罗河的赠礼"。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📜</span><strong>科学文化成就</strong>
+        <p>太阳历 · 象形文字 · 数学 · 医学</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>太阳历（365天）、象形文字（最早文字之一）是高频考点。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🔺</span><strong>文明象征：金字塔</strong>
+        <p>法老陵墓 · 胡夫金字塔 · 狮身人面像</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>金字塔是古埃及文明的象征。胡夫金字塔数据常考。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">👑</span><strong>政治核心：法老统治</strong>
+        <p>集大权于一身 · "神之子" · 王权衰落</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>法老集军政财政神大权。金字塔由大变小反映王权衰落。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 地理：尼罗河孕育文明</div>
+      <div class="kg-rule r2">🟠 科技：太阳历·象形文字</div>
+      <div class="kg-rule r3">🟢 建筑：金字塔·狮身人面像</div>
+      <div class="kg-rule r4">🔴 政治：法老·王权衰落</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page6: 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 文明的产生和古代亚非文明</div>
+    <h1 style="font-size:22pt;">第3课 · 古代埃及</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>🌊 尼罗河与古埃及文明</h3>
+        <ul>
+          <li><strong>地理位置：</strong>非洲东北角，尼罗河贯穿</li>
+          <li><strong>文明摇篮：</strong>"尼罗河的赠礼"</li>
+          <li><strong>统一：</strong>前3100年初步统一</li>
+          <li><strong>文化：</strong>太阳历、象形文字</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>🔺 金字塔</h3>
+        <ul>
+          <li><strong>定义：</strong>法老角锥体陵墓</li>
+          <li><strong>胡夫金字塔：</strong>约前2600年</li>
+          <li><strong>数据：</strong>高146米，用石230万块</li>
+          <li><strong>地位：</strong>古埃及文明的象征</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>👑 法老的统治</h3>
+        <ul>
+          <li><strong>称号：</strong>法老，集大权于一身</li>
+          <li><strong>神化：</strong>"神之子"</li>
+          <li><strong>王权与金字塔：</strong>规模反映权力</li>
+          <li><strong>衰落：</strong>金字塔越修越小</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="recap-section">
+    <h2 class="recap-title">🎯 中考链接与巩固提升</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">①</div>
+        <h3>📌 常见设问</h3>
+        <ul>
+          <li><strong>因果类：</strong>尼罗河对古埃及文明产生和发展的作用</li>
+          <li><strong>地位类：</strong>为什么说金字塔是古埃及文明的象征</li>
+          <li><strong>特征类：</strong>法老的权力特点与金字塔由大变小反映的问题</li>
+          <li><strong>比较类：</strong>古埃及与古代中国文明的延续性差异</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">②</div>
+        <h3>📚 复习建议</h3>
+        <ul>
+          <li><strong>理时间轴：</strong>前3500小国 → 前3100统一 → 前2600胡夫 → 前525波斯征服</li>
+          <li><strong>记数据：</strong>胡夫金字塔146米、230万块、2.5吨常考</li>
+          <li><strong>抓关键词：</strong>"尼罗河的赠礼""神之子""文明的象征"</li>
+          <li><strong>做真题：</strong>结合本课10道选择题自测巩固</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">③</div>
+        <h3>🌍 拓展思考</h3>
+        <ul>
+          <li><strong>文明多样性：</strong>古埃及虽中断，却留下宝贵人类遗产</li>
+          <li><strong>地理环境：</strong>大河如何孕育早期文明（对比两河流域）</li>
+          <li><strong>王权物证：</strong>金字塔规模与法老权力大小的直接关联</li>
+          <li><strong>文化传承：</strong>文字（象形文字）是文明延续的命脉</li>
+        </ul>
+      </div>
+    </div>
+  </section>  <div class="bottom-nav">
+    <div><a href="九上-U1-第2课_古代两河流域.html">← 上一课：第2课 古代两河流域</a></div>
+    <div class="nav-center">第3课</div>
+    <div><a href="九上-U1-第4课_古代印度.html">下一课：第4课 古代印度 →</a></div>
+  </div>
+  <footer>
+    <p>统编版初中历史 · 九年级上册 · 第一单元</p>
+    <p>基于新版教材 · 交互式学习课件</p>
+  </footer>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, causal:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','causal','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标点击标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1:'B', q2:'B', q3:'C', q4:'A', q5:'B', q6:'C', q7:'B', q8:'C', q9:'D', q10:'A' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+  // 自动显示答案解析
+  var expEl = document.getElementById('exp-' + qid);
+  if (expEl) {
+    expEl.classList.add('show');
+    var btn = expEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) { btn.textContent = '隐藏答案'; }
+  }
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+  // 重置解析区的按钮文字
+  document.querySelectorAll('.exercise .ans-btn').forEach(function(b) { b.textContent = '📝 查看答案'; });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序 IIFE =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['event4','event3','event1','event2'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 4) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    document.getElementById('matchResult').textContent = '❌ 配对错误，请重试';
+    document.getElementById('matchResult').className = 'sort-result show fail';
+  }
+}
+
+// ===== 地图标注 IIFE =====
+function causalPick(btn) {
+  var chain = btn.closest('.causal-chain');
+  if (!chain || chain.classList.contains('solved')) return;
+  if (btn.classList.contains('picked')) return;
+  if (!chain._picks) chain._picks = [];
+  if (chain._picks.length >= 3) return;
+  chain._picks.push(btn);
+  var n = chain._picks.length;
+  btn.classList.add('picked');
+  btn.querySelector('.causal-seq').textContent = n;
+  if (n === 3) {
+    var ok = true;
+    for (var i = 0; i < 3; i++) {
+      if (parseInt(chain._picks[i].getAttribute('data-correct'), 10) !== i) { ok = false; break; }
+    }
+    var fb = chain.querySelector('.causal-feedback');
+    if (ok) {
+      chain.classList.add('solved');
+      chain.querySelectorAll('.causal-piece').forEach(function(p){ p.classList.remove('picked'); p.classList.add('correct'); });
+      if (fb) fb.textContent = '✅ 这条因果链顺序正确！';
+      checkAllCausal();
+    } else {
+      chain.classList.add('wrong');
+      if (fb) fb.textContent = '❌ 顺序不对，再想想因果逻辑～';
+      setTimeout(function(){
+        chain.classList.remove('wrong');
+        chain._picks = [];
+        chain.querySelectorAll('.causal-piece').forEach(function(p){
+          p.classList.remove('picked');
+          var s = p.querySelector('.causal-seq'); if (s) s.textContent = '';
+        });
+        if (fb) fb.textContent = '';
+      }, 1000);
+    }
+  }
+}
+function checkAllCausal() {
+  var chains = document.querySelectorAll('#causalZone .causal-chain');
+  var all = true;
+  chains.forEach(function(c){ if (!c.classList.contains('solved')) all = false; });
+  if (all) {
+    stageDone.causal = true;
+    var el = document.getElementById('stageCausalDone');
+    if (el) el.classList.add('show');
+    updateStageProgress();
+  }
+}
+(function initCausalPuzzle() {
+  // 拼图块已在 HTML 中预打乱，无需额外初始化
+})();
+
+// ===== 概念翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// ===== 知识图谱节点展开/收起 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== deep-card 折叠交互 IIFE =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+// 初始展开第一个 deep-card（便于示范）
+document.addEventListener('DOMContentLoaded', function() {
+  var firstBd = document.querySelector('.deep-card .deep-card-bd');
+  if (firstBd) { firstBd.classList.add('show'); }
+});
+</script>
+</body>
+</html>

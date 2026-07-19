@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上-U1-第4课 古代印度</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+  --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ========== Hero/封面 ========== */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 ========== */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== 闯关进度条 ========== */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* ========== 挑战标题 ========== */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== 知识卡片 ========== */
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+
+/* ========== 手风琴组 ========== */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== deep-card 折叠三级卡片 ========== */
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+/* ========== Page3 栏目筛选系统 ========== */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+/* ========== 通用答案区 ========== */
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== 材料引文 ========== */
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== 答案分析区（选择题专用） ========== */
+.analysis { display: none; background: #fef9e7; border: 1px solid #f39c12; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 13pt; }
+.analysis.show { display: block; }
+.analysis .correct-answer { color: var(--green); font-weight: 700; font-size: 14pt; }
+.analysis .wrong-answer { color: var(--red); font-weight: 700; font-size: 14pt; }
+
+/* ========== 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== 填空填词 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== 连线匹配 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== SVG 地图标注 ========== */
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+/* ========== 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== 关卡通过动画 ========== */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+  .match-cols { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0: 封面 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 文明的产生和古代亚非文明</div>
+    <h1>第4课 · 古代印度</h1>
+    <div class="hero-sub">统编版初中历史  九年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>知道古代印度河流域文明的兴衰历程，了解孔雀王朝的鼎盛时期</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过哈拉帕和摩亨佐·达罗遗址、种姓制度条文等，认识古代印度文明</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>理解种姓制度的特点及其对印度社会的影响，分析佛教创立的社会背景</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感受古代印度文明的辉煌成就，尊重世界文明的多样性</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1: 知识要点 + 5关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 古代印度河流域文明</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 森严的种姓制度</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 释迦牟尼创立佛教</button>
+  </div>
+
+  <!-- ==================== Tab1 ==================== -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">📍 哈拉帕遗址 → 前1500年雅利安人入侵 → 孔雀王朝（前324-前187年）</div>
+    <h3>🏛️ 古代印度河流域文明</h3>
+    <ul>
+      <li><strong>地理位置：</strong><span class="kwd">南亚次大陆</span>，文明最早出现在<span class="kwd">印度河流域</span>（发源于喜马拉雅山，流经今巴基斯坦）</li>
+      <li><strong>早期城邦：</strong><span class="kwd">哈拉帕</span>和<span class="kwd">摩亨佐·达罗</span>年代约前23世纪—前18世纪，城市经精心规划</li>
+      <li><strong>城市特征：</strong>分上城（政治中心）和下城（住宅/商业区），街道笔直宽阔、垂直交叉，有完整下水道系统</li>
+      <li><strong>气候与农业：</strong>热带季风气候，雨季播种、旱季收获，棉花种植与灌溉农业发达</li>
+      <li><strong>雅利安人：</strong>公元前1500年左右来自中亚的游牧部落侵入印度，在印度河、恒河流域定居</li>
+      <li><strong>孔雀王朝：</strong>前324-前187年，古代印度鼎盛时期，除半岛最南端外基本统一，<span class="kwd">华氏城</span>是当时最繁华城市之一</li>
+      <li><strong>文明贡献：</strong><span class="kwd">阿拉伯数字</span>实际起源于印度，经阿拉伯人传播；印度有"黄金之国""大象之国"美称</li>
+    </ul>
+    <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 阿拉伯数字起源于印度，哈拉帕和摩亨佐·达罗是早期文明遗址，常以选择题考查</div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：请将古代印度历史事件按时间先后顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="event1" id="item_event1">雅利安人侵入印度</span>
+      <span class="sort-item" draggable="true" data-sortkey="event2" id="item_event2">哈拉帕和摩亨佐·达罗遗址</span>
+      <span class="sort-item" draggable="true" data-sortkey="event3" id="item_event3">孔雀王朝建立</span>
+      <span class="sort-item" draggable="true" data-sortkey="event4" id="item_event4">佛教创立</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">最晚</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">哈拉帕</div><div class="flash-back">印度河流域早期文明遗址，精心规划的城市，有上城政治中心、下城住宅区和工商业活动区</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">摩亨佐·达罗</div><div class="flash-back">印度河流域早期文明遗址，与哈拉帕同为城市遗址，有完整的下水道系统</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">阿拉伯数字</div><div class="flash-back">实际起源于印度，经阿拉伯人传播到世界各地，是古代印度的重要文明贡献</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">华氏城</div><div class="flash-back">孔雀王朝首都，当时世界上最繁华、人口最多的大城市之一</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">雅利安人</div><div class="flash-back">前1500年左右来自中亚的游牧部落，侵入印度后在印度河、恒河流域定居，奠定种姓制度基础</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">印度河</div><div class="flash-back">古代印度文明最早发祥地，定期泛滥带来肥沃淤泥，孕育哈拉帕等早期城市</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Tab2 ==================== -->
+  <div class="kp-card tab-panel" id="tab2">
+    <div class="timeline-bar">📍 雅利安人建立 · 严格的社会等级制度</div>
+    <h3>📜 森严的种姓制度</h3>
+    <ul>
+      <li><strong>第一等级：<span class="kwd">婆罗门</span></strong>——掌管祭祀</li>
+      <li><strong>第二等级：<span class="kwd">刹帝利</span></strong>——掌管军事和行政权力</li>
+      <li><strong>第三等级：<span class="kwd">吠舍</span></strong>——从事农业、畜牧业和商业</li>
+      <li><strong>第四等级：<span class="kwd">首陀罗</span></strong>——被征服居民，为前三个等级服务</li>
+      <li><strong>贱民：</strong>"<span class="kwd">不可接触者</span>"，最卑贱，遭歧视和凌辱</li>
+      <li><strong>特点：</strong>世代相袭、贵贱分明、不得通婚、职业世袭</li>
+      <li><strong>影响：</strong>严重阻碍印度社会发展，强化社会不平等，其残余影响至今仍存</li>
+    </ul>
+    <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 种姓制度的四个等级及特点，常以选择题或材料题考查各等级的地位</div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写种姓制度的四个等级名称</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">第一等级（掌管祭祀）：<input type="text" class="fill-input" data-answer="婆罗门" placeholder="?"></div>
+      <div class="fill-blank-row">第二等级（掌管军政）：<input type="text" class="fill-input" data-answer="刹帝利" placeholder="?"></div>
+      <div class="fill-blank-row">第三等级（农工商）：<input type="text" class="fill-input" data-answer="吠舍" placeholder="?"></div>
+      <div class="fill-blank-row">第四等级（被征服者）：<input type="text" class="fill-input" data-answer="首陀罗" placeholder="?"></div>
+      <div class="fill-blank-row">等级之外最卑贱的 <input type="text" class="fill-input" data-answer="贱民" placeholder="?">（不可接触者）</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">婆罗门</div><div class="flash-back">种姓制度第一等级，掌管祭祀，地位最高</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">刹帝利</div><div class="flash-back">种姓制度第二等级，掌管军事和行政权力</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">吠舍</div><div class="flash-back">种姓制度第三等级，从事农业、畜牧业和商业</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">首陀罗</div><div class="flash-back">种姓制度第四等级，被征服居民，为前三个等级服务</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">贱民</div><div class="flash-back">又称"不可接触者"，位于种姓制度之外，社会地位最卑贱，遭受严重歧视与凌辱</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">种姓制度</div><div class="flash-back">雅利安人建立的严格社会等级制度，将人分为四等级加贱民，世代相袭不得通婚</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Tab3 ==================== -->
+  <div class="kp-card tab-panel" id="tab3">
+    <div class="timeline-bar">📍 公元前6世纪 · 乔达摩·悉达多 · 释迦牟尼</div>
+    <h3>☸️ 释迦牟尼创立佛教</h3>
+    <ul>
+      <li><strong>创立：</strong>公元前6世纪，创始人<span class="kwd">乔达摩·悉达多</span>，被称为"<span class="kwd">释迦牟尼</span>"</li>
+      <li><strong>背景：</strong>雅利安人统治下社会矛盾尖锐，种姓制度造成不平等，民众渴望解脱</li>
+      <li><strong>教义：</strong>反对婆罗门特权，提出"<span class="kwd">众生平等</span>"；宣扬"<span class="kwd">忍耐顺从</span>"</li>
+      <li><strong>传播：</strong>公元前3世纪后向外传播</li>
+      <li><strong>北传路线：</strong>前1世纪经<span class="kwd">中亚</span>传到中国→朝鲜/日本/越南</li>
+      <li><strong>南传路线：</strong>经<span class="kwd">锡兰</span>→缅甸/泰国/柬埔寨</li>
+      <li><strong>历史地位：</strong>世界三大宗教之一（与基督教、伊斯兰教并称），在印度本土约10世纪被印度教取代</li>
+    </ul>
+    <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 佛教的创立者、教义、传播路线，常以选择题或材料题考查</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将佛教传播路线与对应的传播地区配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 传播路线</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">北传</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">南传</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📌 传播地区</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">中亚→中国→朝鲜/日本/越南</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">锡兰→缅甸/泰国/柬埔寨</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：点击地图标注古代印度的关键地理位置</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 点击下方标注点，标记古代印度文明的关键地理位置</div>
+      <svg viewBox="0 0 420 280" style="width:100%;height:auto;background:#f0edff;border-radius:10px;">
+        <rect x="10" y="10" width="400" height="260" fill="#d5cef0" rx="8"/>
+        <!-- 印度河 -->
+        <path d="M 140 40 L 120 100 L 130 160 L 110 240" stroke="#3498db" stroke-width="5" fill="none" opacity="0.7"/>
+        <text x="85" y="140" font-size="9" fill="#2c3e50" transform="rotate(-15,85,140)">印度河</text>
+        <!-- 恒河 -->
+        <path d="M 230 120 L 280 140 L 330 120 L 370 140" stroke="#2980b9" stroke-width="5" fill="none" opacity="0.7"/>
+        <text x="275" y="100" font-size="9" fill="#2c3e50">恒河</text>
+        <!-- 华氏城 -->
+        <circle class="map-marker" data-point="pt-pataliputra" cx="280" cy="150" r="12" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <text x="265" y="175" font-size="9" fill="#333" font-weight="700">华氏城</text>
+        <!-- 中亚 -->
+        <circle class="map-marker" data-point="pt-centralasia" cx="320" cy="50" r="10" fill="#e67e22" stroke="#fff" stroke-width="2"/>
+        <text x="305" y="70" font-size="9" fill="#333">中亚</text>
+        <!-- 锡兰 -->
+        <circle class="map-marker" data-point="pt-ceylon" cx="340" cy="230" r="10" fill="#27ae60" stroke="#fff" stroke-width="2"/>
+        <text x="325" y="252" font-size="9" fill="#333">锡兰</text>
+        <!-- 标注 -->
+        <text x="30" y="30" font-size="9" fill="#555">青藏高原</text>
+        <text x="30" y="260" font-size="9" fill="#555">印度洋</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-pataliputra">✅ 华氏城</span>
+        <span class="map-check-item" data-point="pt-centralasia">✅ 中亚</span>
+        <span class="map-check-item" data-point="pt-ceylon">✅ 锡兰</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">释迦牟尼</div><div class="flash-back">佛教创始人，原名乔达摩·悉达多，释迦族王子，被尊为"佛陀"</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">众生平等</div><div class="flash-back">佛教提出的核心教义，反对婆罗门特权，不拒绝低种姓入教</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">忍耐顺从</div><div class="flash-back">佛教宣扬的教义，得到国王和富人支持，有利于社会秩序稳定</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">孔雀王朝</div><div class="flash-back">古代印度鼎盛时期（前324-前187年），基本实现统一，华氏城为首都</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">北传佛教</div><div class="flash-back">前1世纪经中亚传入中国，后传至朝鲜、日本、越南，以大乘佛教为主</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">南传佛教</div><div class="flash-back">经锡兰（今斯里兰卡）传到缅甸、泰国、柬埔寨，以小乘佛教为主</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page2: 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重难点1 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔵 重难点一：古代印度河流域文明</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：印度河流域的早期文明</div>
+        <div class="deep-card-bd">
+          <p>古代印度在地理上指<strong>南亚次大陆</strong>。文明最早出现在<strong>印度河流域</strong>，<strong>哈拉帕</strong>和<strong>摩亨佐·达罗</strong>是早期文明遗址，城市经过精心规划，有完整的下水道系统，说明当时已具有较高的文明水平。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：雅利安人与孔雀王朝</div>
+        <div class="deep-card-bd">
+          <ul>
+            <li><strong>雅利安人入侵：</strong>公元前1500年，来自中亚的游牧部落侵入印度，在印度河和恒河流域定居</li>
+            <li><strong>孔雀王朝：</strong>公元前324-前187年，古代印度鼎盛时期，除半岛最南端外基本统一</li>
+            <li><strong>华氏城：</strong>首都，当时世界上最繁华、人口最多的大城市之一</li>
+          </ul>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：古代印度的文明贡献</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>历史解释：</strong>古代印度对人类文明做出了重要贡献。其中最重要的是<strong>阿拉伯数字</strong>（实际起源于印度，经阿拉伯人传播到世界）。此外，印度有"<strong>黄金之国</strong>""<strong>大象之国</strong>"的美称，象兵是古代印度的重要兵种。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（选择题）</strong>世界广泛应用的"阿拉伯数字"实际上起源于（  ）</p>
+            <p style="font-size:12pt;">A. 古代埃及　B. 古代两河流域　C. 古代印度　D. 古代中国</p>
+            <div class="a" id="ans-p2-zhongkao1">
+              <strong>✅ 答案：C</strong><br>
+              <strong>解析：</strong>"阿拉伯数字"实际上起源于古代印度，后经阿拉伯人传播到世界各地。A是象形文字和太阳历，B是楔形文字和60进制。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao1')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点2 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🟠 重难点二：种姓制度</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：种姓制度的四个等级</div>
+        <div class="deep-card-bd">
+          <table class="diff-table">
+            <tr><th>等级</th><th>名称</th><th>职责/身份</th></tr>
+            <tr><td>第一等级</td><td><strong>婆罗门</strong></td><td>掌管祭祀</td></tr>
+            <tr><td>第二等级</td><td><strong>刹帝利</strong></td><td>掌管军事和行政权力</td></tr>
+            <tr><td>第三等级</td><td><strong>吠舍</strong></td><td>从事农业、畜牧业和商业</td></tr>
+            <tr><td>第四等级</td><td><strong>首陀罗</strong></td><td>被征服居民，为前三个等级服务</td></tr>
+            <tr><td>等级之外</td><td><strong>贱民</strong></td><td>"不可接触者"，最卑贱</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：种姓制度的特点</div>
+        <div class="deep-card-bd">
+          <ul>
+            <li><strong>世代相袭：</strong>各等级职业世袭，身份代代相传</li>
+            <li><strong>贵贱分明：</strong>各等级之间界限严格，地位悬殊</li>
+            <li><strong>不得通婚：</strong>不同等级的人不得通婚</li>
+            <li><strong>职业限制：</strong>低等级的人不得从事高等级的职业</li>
+          </ul>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：种姓制度的社会影响</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>历史解释：</strong>种姓制度是雅利安人建立的<strong>严格的社会等级制度</strong>。它将社会划分为四个等级，外加贱民，形成了<strong>等级森严</strong>的社会结构。种姓制度对印度社会产生了深远影响，是理解古代印度社会的重要钥匙。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（选择题）</strong>在古印度种姓制度中，掌管祭祀的是（  ）</p>
+            <p style="font-size:12pt;">A. 婆罗门　B. 刹帝利　C. 吠舍　D. 首陀罗</p>
+            <div class="a" id="ans-p2-zhongkao2">
+              <strong>✅ 答案：A</strong><br>
+              <strong>解析：</strong>婆罗门是种姓制度的第一等级，掌管祭祀。刹帝利掌管军政，吠舍从事农工商，首陀罗是被征服者。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao2')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点3 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🟣 重难点三：佛教的创立与传播</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：佛教的创立</div>
+        <div class="deep-card-bd">
+          <p><strong>时间：</strong>公元前6世纪</p>
+          <p><strong>创始人：</strong><strong>乔达摩·悉达多</strong>（释迦牟尼），释迦族王子，看到社会苦难后决心寻求解脱之道</p>
+          <p><strong>核心教义：</strong></p>
+          <ul>
+            <li><strong>众生平等：</strong>反对婆罗门特权，不拒绝低种姓入教</li>
+            <li><strong>忍耐顺从：</strong>得到国王和富人的支持</li>
+          </ul>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：佛教的传播路线</div>
+        <div class="deep-card-bd">
+          <ul>
+            <li><strong>北传：</strong>公元前1世纪经<strong>中亚</strong>传到中国新疆→中国内地→朝鲜/日本/越南</li>
+            <li><strong>南传：</strong>经<strong>锡兰</strong>（今斯里兰卡）→缅甸/泰国/柬埔寨</li>
+          </ul>
+          <p>佛教在印度本土约10世纪被印度教取代，但在世界其他地区继续传播发展。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：佛教的历史意义</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>历史解释：</strong>佛教的创立是古代印度<strong>社会矛盾</strong>的反映。早期佛教反对婆罗门特权，提出"众生平等"，反映了低种姓和民众对<strong>等级制度</strong>的不满。同时，佛教宣扬"忍耐顺从"，又维护了社会稳定。佛教是古代印度对世界文明的重要贡献之一。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（选择题）</strong>佛教创立于（  ）</p>
+            <p style="font-size:12pt;">A. 公元前18世纪　B. 公元前6世纪　C. 公元1世纪　D. 公元前3世纪</p>
+            <div class="a" id="ans-p2-zhongkao3">
+              <strong>✅ 答案：B</strong><br>
+              <strong>解析：</strong>佛教创立于公元前6世纪，创始人是乔达摩·悉达多。公元前3世纪后佛教开始向外传播。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao3')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点4 -->
+  <div class="acc-group" id="acc4">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc4')">
+      <h3>🟣 重难点四：古代印度文明的特征与历史地位</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解：大河文明的代表</div>
+        <div class="deep-card-bd">
+          <p>古代印度文明发祥于<strong>印度河流域</strong>，属于典型的<strong>大河文明</strong>。与古代埃及、两河流域、古代中国一样，大河流域水源充足、土地肥沃，为农业发展提供条件，孕育了灿烂的古代文明，被称为"印度河的赠礼"。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展：宗教与社会的互动</div>
+        <div class="deep-card-bd">
+          <ul>
+            <li><strong>种姓制度：</strong>雅利安人建立的严格等级制度，深刻影响印度社会几千年</li>
+            <li><strong>佛教兴起：</strong>正是针对种姓制度的不平等，释迦牟尼提出"众生平等"，反映了民众的诉求</li>
+            <li><strong>相互影响：</strong>宗教既反映社会矛盾，又反过来维护社会秩序（如佛教"忍耐顺从"得到统治者支持）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升：古代印度的历史贡献</div>
+        <div class="deep-card-bd">
+          <p>💡 <strong>历史解释：</strong>古代印度对人类文明贡献卓著：①<strong>阿拉伯数字</strong>（0—9计数法）深刻影响世界数学；②<strong>佛教</strong>成为世界三大宗教之一；③<strong>梵文史诗</strong>《摩诃婆罗多》《罗摩衍那》是文学瑰宝；④"黄金之国""大象之国"反映其经济与军事特色。</p>
+          <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:10px 0;">
+            <span class="tag-zhongkao">🎯 中考典型例题</span>
+            <p style="margin:6px 0;font-size:13pt;"><strong>（选择题）</strong>下列属于古代印度文明成果的是（  ）</p>
+            <p style="font-size:12pt;">A. 楔形文字　B. 阿拉伯数字　C. 太阳历　D. 《汉谟拉比法典》</p>
+            <div class="a" id="ans-p2-zhongkao4">
+              <strong>✅ 答案：B</strong><br>
+              <strong>解析：</strong>阿拉伯数字实际起源于古代印度，后经阿拉伯人传播到世界各地。A是古代两河流域，C是古代埃及，D是古巴比伦。
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao4')">📝 查看答案</button>
+          </div>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc4',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page3: 教材栏目解答 ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 相关史事1 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：哈拉帕和摩亨佐·达罗遗址</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>哈拉帕和摩亨佐·达罗都是城市遗址。从遗址看，这两座城市的建设都经过精心规划。城市分为上城和下城两部分：上城是政治中心，有高大的公共建筑；下城是住宅区和工商业活动区，街道笔直宽阔，垂直交叉，街区整齐划一，有完整的下水道系统。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong><br>
+        • <strong>上城：</strong>政治中心，高大的公共建筑<br>
+        • <strong>下城：</strong>住宅区和工商业活动区，街道笔直宽阔，垂直交叉<br>
+        • <strong>特点：</strong>精心规划，有完整下水道系统
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <!-- 相关史事2 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：黄金之国、大象之国与阿拉伯数字</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>传说，印度最早发现和使用的金属是黄金，因而印度有"黄金之国"的美称。印度也是"大象之国"，象兵是古代印度的重要兵种。传说，古代印度国王出游时，常动用上千头大象。古代印度人民创造了灿烂辉煌的文化。世界上广泛应用的"阿拉伯数字"，实际上起源于印度，后经阿拉伯人传播到世界各地。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong><br>
+        • <strong>黄金之国：</strong>印度最早发现和使用黄金<br>
+        • <strong>大象之国：</strong>象兵是重要兵种<br>
+        • <strong>阿拉伯数字：</strong>实际起源于印度，经阿拉伯人传播
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：乔达摩·悉达多</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>乔达摩·悉达多是印度北部迦毗罗城释迦族的王子。据说，他看到走投无路的乞丐，痛苦不堪的穷人、暴露出穷的尸体时，心灵受到极大震撼，感到人生苦短，于是决心寻求解脱人生苦难的道路。他离家修行，后来创立佛教，被尊为"佛陀"。</p>
+      <div class="a" id="ans-p3-profile1">
+        <strong>📝 要点归纳：</strong><br>
+        • <strong>身份：</strong>释迦族王子，迦毗罗城人<br>
+        • <strong>动机：</strong>看到乞丐、穷人、尸体，决心寻求解脱人生苦难<br>
+        • <strong>贡献：</strong>创立佛教，被尊为"佛陀"
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-profile1')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>1. 连线。</strong></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13pt;margin:8px 0;">
+        <div>金字塔</div><div>—— 尼罗河流域</div>
+        <div>种姓制度</div><div>—— 恒河流域</div>
+        <div>《汉谟拉比法典》</div><div>—— 两河流域</div>
+      </div>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案：</strong><br>
+        金字塔 → 尼罗河流域（古埃及）<br>
+        种姓制度 → 恒河流域（古代印度）<br>
+        《汉谟拉比法典》→ 两河流域（古巴比伦）
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看答案</button>
+
+      <p style="margin-top:16px;"><strong>2. 结合亚非文明地图，回答问题：</strong></p>
+      <p style="font-size:13pt;">（1）按从左至右的顺序写出古代文明的名称，并写出它们产生的大致时间。</p>
+      <div class="a" id="ans-p3-activity2a">
+        <strong>📝 参考答案：</strong><br>
+        <strong>从左至右：</strong>古代埃及（约前3100年）→ 古代两河流域（约前3500年）→ 古代印度（约前2500年）→ 古代中国（约前2070年）
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2a')">📝 查看答案</button>
+      <p style="font-size:13pt;margin-top:10px;">（2）这些古代文明是在什么样的地理环境中发生和发展的？为什么？</p>
+      <div class="a" id="ans-p3-activity2b">
+        <strong>📝 参考答案：</strong><br>
+        这些古代文明都发生在<strong>大河流域</strong>。原因：大河流域<strong>水源充足</strong>，<strong>土壤肥沃</strong>，有利于<strong>农业生产</strong>；稳定的农业为<strong>定居生活</strong>提供了物质基础，进而促进了文字、城市、国家等文明要素的产生。四大文明古国都是<strong>大河文明</strong>的典型代表。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2b')">📝 查看答案</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：《摩诃婆罗多》和《罗摩衍那》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>古代印度留下了丰富的文学遗产，其中，最著名的是《摩诃婆罗多》和《罗摩衍那》两部梵文史诗。这两部史诗是世界文学中少见的长诗，包含了丰富的内容，受到各国学者的重视。两部史诗的基本内容是神话性质的，但也反映了当时印度社会生活多方面的内容，还反映了雅利安人在向东、向南扩展中的一些斗争情况。</p>
+      <div class="a" id="ans-p3-knowledge">
+        <strong>📝 要点归纳：</strong><br>
+        • <strong>两部史诗：</strong>《摩诃婆罗多》和《罗摩衍那》<br>
+        • <strong>语言：</strong>梵文<br>
+        • <strong>内容：</strong>神话性质，但反映社会生活多方面内容<br>
+        • <strong>价值：</strong>世界文学中少见的长诗，受各国学者重视
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <!-- 相关史事3 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：阿育王与佛教的传播</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>孔雀王朝的<strong>阿育王</strong>基本统一印度，他后来皈依佛教，大力弘扬佛教，修建佛塔、刻石立柱宣扬教义。在阿育王支持下，佛教从前3世纪起迅速向外传播，逐渐成为世界性宗教。佛教石窟艺术（如阿旃陀石窟）也是古代印度的重要文化遗产。</p>
+      <div class="a" id="ans-p3-story3">
+        <strong>📝 要点归纳：</strong><br>
+        • <strong>阿育王：</strong>孔雀王朝国王，基本统一印度后皈依并弘扬佛教<br>
+        • <strong>举措：</strong>修建佛塔、刻石立柱宣扬教义<br>
+        • <strong>影响：</strong>推动佛教向外传播，留下石窟艺术等遗产
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展2 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：印度教的产生</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>佛教在印度本土传播的同时，印度教逐渐兴起。印度教由婆罗门教发展而来，吸收佛教、耆那教等元素，崇拜<strong>梵天、毗湿奴、湿婆</strong>三大主神，主张<strong>因果轮回</strong>。笈多王朝（约320—550年）时期印度教得到统治者支持，逐渐成为印度主要宗教，佛教在印度本土约10世纪后被印度教取代。</p>
+      <div class="a" id="ans-p3-knowledge2">
+        <strong>📝 要点归纳：</strong><br>
+        • <strong>来源：</strong>由婆罗门教发展而来，吸收佛教等元素<br>
+        • <strong>主神：</strong>梵天、毗湿奴、湿婆<br>
+        • <strong>地位：</strong>笈多王朝后成为印度主要宗教
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge2')">📝 查看要点归纳</button>
+    </div>
+  </div>
+
+  <!-- 课后活动2 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动：种姓制度对今天的影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>想一想：</strong>种姓制度在印度延续数千年，至今仍对印度社会产生残余影响。独立后的印度宪法明确规定废除种姓歧视，但低种姓群体在教育、就业、婚姻等方面仍面临不平等。印度政府通过保留配额、平权行动等措施努力消除其影响。这说明了什么？</p>
+      <div class="a" id="ans-p3-activity3">
+        <strong>📝 参考答案：</strong><br>
+        说明<strong>种姓制度影响深远</strong>，社会等级观念的改变需要长期努力；也说明印度政府致力于<strong>保障平等权利</strong>，推动社会公平。这启示我们：文明进步需要制度保障与持续的社会改革。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity3')">📝 查看答案</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page4: 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 古代印度文明最早出现在（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1','印度河流域')">A. 印度河流域</label>
+      <label onclick="optClick(this,'B','q1','恒河流域')">B. 恒河流域</label>
+      <label onclick="optClick(this,'C','q1','尼罗河流域')">C. 尼罗河流域</label>
+      <label onclick="optClick(this,'D','q1','两河流域')">D. 两河流域</label>
+    </div>
+    <div class="analysis" id="analysis-q1">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">A</span></p>
+      <p><strong>解析：</strong>古代印度文明最早出现在印度河流域，哈拉帕和摩亨佐·达罗是早期文明遗址。恒河流域是雅利安人进入后逐渐发展的地区。</p>
+    </div>
+  </div>
+
+  <!-- 选择题2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 在古印度种姓制度中，掌管军事和行政权力的是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2','婆罗门')">A. 婆罗门</label>
+      <label onclick="optClick(this,'B','q2','刹帝利')">B. 刹帝利</label>
+      <label onclick="optClick(this,'C','q2','吠舍')">C. 吠舍</label>
+      <label onclick="optClick(this,'D','q2','首陀罗')">D. 首陀罗</label>
+    </div>
+    <div class="analysis" id="analysis-q2">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">B</span></p>
+      <p><strong>解析：</strong>刹帝利是种姓制度第二等级，掌管军事和行政权力。婆罗门掌管祭祀，吠舍从事农工商，首陀罗是被征服居民。</p>
+    </div>
+  </div>
+
+  <!-- 选择题3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 佛教的创始人是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3','汉谟拉比')">A. 汉谟拉比</label>
+      <label onclick="optClick(this,'B','q3','乔达摩·悉达多')">B. 乔达摩·悉达多</label>
+      <label onclick="optClick(this,'C','q3','图特摩斯三世')">C. 图特摩斯三世</label>
+      <label onclick="optClick(this,'D','q3','亚历山大')">D. 亚历山大</label>
+    </div>
+    <div class="analysis" id="analysis-q3">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">B</span></p>
+      <p><strong>解析：</strong>佛教创始人是乔达摩·悉达多，后来被称为"释迦牟尼"。汉谟拉比是古巴比伦国王，图特摩斯三世是古埃及法老，亚历山大是马其顿国王。</p>
+    </div>
+  </div>
+
+  <!-- 选择题4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 孔雀王朝的首都是（  ），当时是世界上最繁华的城市之一</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4','哈拉帕')">A. 哈拉帕</label>
+      <label onclick="optClick(this,'B','q4','摩亨佐·达罗')">B. 摩亨佐·达罗</label>
+      <label onclick="optClick(this,'C','q4','华氏城')">C. 华氏城</label>
+      <label onclick="optClick(this,'D','q4','迦毗罗城')">D. 迦毗罗城</label>
+    </div>
+    <div class="analysis" id="analysis-q4">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">C</span></p>
+      <p><strong>解析：</strong>华氏城是孔雀王朝的首都，当时是世界上人口最多、最繁华的大城市之一。哈拉帕和摩亨佐·达罗是早期文明遗址，迦毗罗城是释迦牟尼的故乡。</p>
+    </div>
+  </div>
+
+  <!-- 选择题5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 下列哪项不属于种姓制度的特点？（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5','世代相袭')">A. 世代相袭</label>
+      <label onclick="optClick(this,'B','q5','贵贱分明')">B. 贵贱分明</label>
+      <label onclick="optClick(this,'C','q5','不同等级可以通婚')">C. 不同等级可以通婚</label>
+      <label onclick="optClick(this,'D','q5','低等级不得从事高等级职业')">D. 低等级不得从事高等级职业</label>
+    </div>
+    <div class="analysis" id="analysis-q5">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">C</span></p>
+      <p><strong>解析：</strong>种姓制度的特点是世代相袭、贵贱分明、不同等级不得通婚、低等级不得从事高等级职业。C项"不同等级可以通婚"不符合史实，是错误的。</p>
+    </div>
+  </div>
+
+  <!-- 材料题 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>"雅利安人进入印度后，逐渐建立了严格的社会等级制度，史称'种姓制度'。在这一制度中，第一等级是婆罗门，掌管祭祀；第二等级是刹帝利，掌管军事和行政权力；第三等级是吠舍，从事农业、畜牧业和商业；第四等级是首陀罗，主要由被征服居民构成，从事农业、畜牧业、捕鱼业和手工业，要为前三个等级服务。"</p>
+      <div class="source-ref">—— 统编版《世界历史》九年级上册</div>
+    </div>
+    <div class="q-text">（1）根据材料，种姓制度分为哪几个等级？请按顺序写出名称。</div>
+    <div class="a" id="ans-p4-mat1a">
+      <p><strong>参考答案：</strong>种姓制度分为四个等级：<strong>婆罗门、刹帝利、吠舍、首陀罗</strong>。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1a');trackMatQ('mq1')">📝 查看答案</button>
+    <div class="q-text" style="margin-top:10px;">（2）首陀罗主要由哪些人构成？他们的地位如何？</div>
+    <div class="a" id="ans-p4-mat1b">
+      <p><strong>参考答案：</strong>首陀罗主要由<strong>被征服居民</strong>构成，处于社会最底层，要为前三个等级服务，地位低下。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1b');trackMatQ('mq1')">📝 查看答案</button>
+  </div>
+
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>"佛教创立于公元前6世纪。创始人乔达摩·悉达多，后来被称为'释迦牟尼'。早期佛教反对第一等级婆罗门的特权，提出'众生平等'，不拒绝低种姓的人入教；同时，佛教宣扬'忍耐顺从'，得到国王和一些富人的支持。"</p>
+      <div class="source-ref">—— 统编版《世界历史》九年级上册</div>
+    </div>
+    <div class="q-text">（1）根据材料，佛教提出了什么主张？</div>
+    <div class="a" id="ans-p4-mat2a">
+      <p><strong>参考答案：</strong>佛教提出了<strong>"众生平等"</strong>的主张，反对婆罗门特权，不拒绝低种姓入教。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2a');trackMatQ('mq2')">📝 查看答案</button>
+    <div class="q-text" style="margin-top:10px;">（2）佛教的教义中哪一点得到了国王和富人的支持？为什么？</div>
+    <div class="a" id="ans-p4-mat2b">
+      <p><strong>参考答案：</strong>佛教宣扬"<strong>忍耐顺从</strong>"得到了国王和富人的支持。因为这一教义有利于维护<strong>社会秩序</strong>和<strong>统治稳定</strong>，鼓励人们安于现状、服从统治。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2b');trackMatQ('mq2')">📝 查看答案</button>
+  </div>
+
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>"公元前3世纪后，佛教开始向外传播。公元前1世纪，佛教经中亚传到中国新疆，再传入中国内地，后又传到朝鲜、日本和越南等国。佛教往南经锡兰，传到缅甸、泰国、柬埔寨等国。"</p>
+      <div class="source-ref">—— 统编版《世界历史》九年级上册</div>
+    </div>
+    <div class="q-text">（1）根据材料，佛教向外传播的时间是什么？</div>
+    <div class="a" id="ans-p4-mat3a">
+      <p><strong>参考答案：</strong>佛教在<strong>公元前3世纪后</strong>开始向外传播。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3a');trackMatQ('mq3')">📝 查看答案</button>
+    <div class="q-text" style="margin-top:10px;">（2）根据材料，概括佛教的两条传播路线。</div>
+    <div class="a" id="ans-p4-mat3b">
+      <p><strong>参考答案：</strong>①<strong>北传：</strong>经中亚传到中国→朝鲜/日本/越南；②<strong>南传：</strong>经锡兰→缅甸/泰国/柬埔寨。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3b');trackMatQ('mq3')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题6 -->
+  <div class="exercise" id="q6">
+    <div class="q-text"><strong>6.</strong> 早期佛教反对婆罗门的特权，主张（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q6','众生平等')">A. 众生平等</label>
+      <label onclick="optClick(this,'B','q6','等级世袭')">B. 等级世袭</label>
+      <label onclick="optClick(this,'C','q6','种姓制度')">C. 种姓制度</label>
+      <label onclick="optClick(this,'D','q6','婆罗门至上')">D. 婆罗门至上</label>
+    </div>
+    <div class="analysis" id="analysis-q6">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">A</span></p>
+      <p><strong>解析：</strong>早期佛教反对第一等级婆罗门的特权，提出"众生平等"，不拒绝低种姓的人入教。B、C、D都是种姓制度的内容，与佛教主张相反。</p>
+    </div>
+  </div>
+
+  <!-- 选择题7 -->
+  <div class="exercise" id="q7">
+    <div class="q-text"><strong>7.</strong> 古印度"黄金之国""大象之国"的美称，反映了其（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q7','黄金与大象的传说')">A. 黄金与大象的传说</label>
+      <label onclick="optClick(this,'B','q7','经济与军事特色')">B. 经济与军事特色</label>
+      <label onclick="optClick(this,'C','q7','宗教与哲学')">C. 宗教与哲学</label>
+      <label onclick="optClick(this,'D','q7','地理与气候')">D. 地理与气候</label>
+    </div>
+    <div class="analysis" id="analysis-q7">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">B</span></p>
+      <p><strong>解析：</strong>印度最早发现和使用黄金，故有"黄金之国"美称；"大象之国"则因象兵是古代印度重要兵种。两者反映了古代印度在经济（黄金）与军事（象兵）方面的特色。</p>
+    </div>
+  </div>
+
+  <!-- 选择题8 -->
+  <div class="exercise" id="q8">
+    <div class="q-text"><strong>8.</strong> 佛教传入中国内地，大约是在（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q8','公元前6世纪')">A. 公元前6世纪</label>
+      <label onclick="optClick(this,'B','q8','公元前3世纪')">B. 公元前3世纪</label>
+      <label onclick="optClick(this,'C','q8','公元前1世纪')">C. 公元前1世纪</label>
+      <label onclick="optClick(this,'D','q8','公元1世纪')">D. 公元1世纪</label>
+    </div>
+    <div class="analysis" id="analysis-q8">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">C</span></p>
+      <p><strong>解析：</strong>佛教在公元前3世纪后开始向外传播，公元前1世纪经中亚传到中国新疆，再传入中国内地。公元前6世纪是佛教创立时间。</p>
+    </div>
+  </div>
+
+  <!-- 选择题9 -->
+  <div class="exercise" id="q9">
+    <div class="q-text"><strong>9.</strong> 下列属于古代印度文学遗产的是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q9','《摩诃婆罗多》')">A. 《摩诃婆罗多》</label>
+      <label onclick="optClick(this,'B','q9','《荷马史诗》')">B. 《荷马史诗》</label>
+      <label onclick="optClick(this,'C','q9','《天方夜谭》')">C. 《天方夜谭》</label>
+      <label onclick="optClick(this,'D','q9','《被征服的被征服者》')">D. 《被征服的被征服者》</label>
+    </div>
+    <div class="analysis" id="analysis-q9">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">A</span></p>
+      <p><strong>解析：</strong>《摩诃婆罗多》和《罗摩衍那》是古代印度的梵文史诗，属世界文学瑰宝。B是古希腊，C是阿拉伯，D为干扰项。</p>
+    </div>
+  </div>
+
+  <!-- 选择题10 -->
+  <div class="exercise" id="q10">
+    <div class="q-text"><strong>10.</strong> 古代印度文明所处的地理环境，属于（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q10','海洋文明')">A. 海洋文明</label>
+      <label onclick="optClick(this,'B','q10','大河文明')">B. 大河文明</label>
+      <label onclick="optClick(this,'C','q10','草原文明')">C. 草原文明</label>
+      <label onclick="optClick(this,'D','q10','山地文明')">D. 山地文明</label>
+    </div>
+    <div class="analysis" id="analysis-q10">
+      <strong>📖 答案分析：</strong>
+      <p>正确答案：<span class="correct-answer">B</span></p>
+      <p><strong>解析：</strong>古代印度文明发祥于印度河流域，与古代埃及、两河流域、古代中国同属"大河文明"（农耕文明）。海洋文明以古希腊为代表。</p>
+    </div>
+  </div>
+
+  <!-- 简答题1 -->
+  <div class="exercise" id="sq1">
+    <div class="q-text"><strong>简答题1</strong> 简述种姓制度的内容及其对印度社会的影响。</div>
+    <div class="a" id="ans-p4-sq1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>内容：</strong>种姓制度将社会成员分为四个等级——婆罗门（掌祭祀）、刹帝利（掌军政）、吠舍（农工商）、首陀罗（被征服者），等级之外还有"贱民"（不可接触者）；各等级世代相袭、贵贱分明、不得通婚。</p>
+      <p><strong>影响：</strong>① 形成了等级森严的社会结构，严重阻碍了印度社会的进步；② 强化了社会不平等，其残余影响至今仍存在；③ 也促使佛教等反对等级制度的宗教兴起。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-sq1')">📝 查看答案</button>
+  </div>
+
+  <!-- 简答题2 -->
+  <div class="exercise" id="sq2">
+    <div class="q-text"><strong>简答题2</strong> 为什么说佛教的创立既反映了社会矛盾，又维护了社会秩序？</div>
+    <div class="a" id="ans-p4-sq2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>反映社会矛盾：</strong>早期佛教反对婆罗门特权，提出"众生平等"，不拒绝低种姓入教，反映了雅利安人统治下低种姓民众对种姓制度不平等的不满与诉求。</p>
+      <p><strong>维护社会秩序：</strong>佛教同时宣扬"忍耐顺从"，引导民众安于现状、服从现实，这得到了国王和富人的支持，有利于维护社会稳定和统治秩序。因此，佛教既有批判现实的一面，也有缓和矛盾、维护秩序的一面。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-sq2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== Page5: 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌊</span><strong>文明摇篮：印度河流域</strong>
+        <p>哈拉帕 · 摩亨佐·达罗 · 南亚次大陆</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>古代印度文明最早出现在印度河流域，哈拉帕和摩亨佐·达罗是早期城市遗址，精心规划，有完整下水道系统。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">👑</span><strong>鼎盛时期：孔雀王朝</strong>
+        <p>前324-前187年 · 华氏城 · 基本统一</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>孔雀王朝是古代印度鼎盛时期，除半岛最南端外基本统一，华氏城是当时最繁华的城市之一。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📜</span><strong>社会结构：种姓制度</strong>
+        <p>婆罗门 · 刹帝利 · 吠舍 · 首陀罗</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>种姓制度是雅利安人建立的严格等级制度，世代相袭、贵贱分明、不得通婚。四等级＋贱民。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">☸️</span><strong>宗教传播：佛教</strong>
+        <p>众生平等 · 忍耐顺从 · 南北传播</p>
+        <div class="kg-detail"><p><strong>考点解析：</strong>佛教前6世纪由释迦牟尼创立，提出众生平等、忍耐顺从。前3世纪后向外传播，前1世纪传入中国。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 地理：印度河孕育文明</div>
+      <div class="kg-rule r2">🟠 政治：孔雀王朝鼎盛</div>
+      <div class="kg-rule r3">🟢 社会：种姓制度等级森严</div>
+      <div class="kg-rule r4">🔴 宗教：佛教创立传播</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page6: 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 文明的产生和古代亚非文明</div>
+    <h1 style="font-size:22pt;">第4课 · 古代印度</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>🏛️ 古代印度河流域文明</h3>
+        <ul>
+          <li><strong>位置：</strong>南亚次大陆，印度河流域</li>
+          <li><strong>遗址：</strong>哈拉帕、摩亨佐·达罗</li>
+          <li><strong>入侵：</strong>前1500年雅利安人</li>
+          <li><strong>鼎盛：</strong>孔雀王朝（前324-前187年）</li>
+          <li><strong>贡献：</strong>阿拉伯数字</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>📜 森严的种姓制度</h3>
+        <ul>
+          <li><strong>一等：</strong>婆罗门（祭祀）</li>
+          <li><strong>二等：</strong>刹帝利（军政）</li>
+          <li><strong>三等：</strong>吠舍（农工商）</li>
+          <li><strong>四等：</strong>首陀罗（被征服者）</li>
+          <li><strong>特点：</strong>世代相袭·不得通婚</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>☸️ 释迦牟尼创立佛教</h3>
+        <ul>
+          <li><strong>创立：</strong>前6世纪·释迦牟尼</li>
+          <li><strong>教义：</strong>众生平等·忍耐顺从</li>
+          <li><strong>北传：</strong>中亚→中国→东亚</li>
+          <li><strong>南传：</strong>锡兰→东南亚</li>
+          <li><strong>价值：</strong>世界三大宗教之一</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="recap-section">
+    <h2 class="recap-title">🎯 中考链接与巩固提升</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">考</div>
+        <h3>📌 常见中考设问</h3>
+        <ul>
+          <li><strong>选择：</strong>阿拉伯数字起源、种姓制度等级、佛教创立者与教义</li>
+          <li><strong>材料：</strong>据种姓制度/佛教材料，概括等级、主张或传播路线</li>
+          <li><strong>综合：</strong>比较四大文明古国的地理环境与特征（大河文明）</li>
+          <li><strong>识图：</strong>在亚非文明地图上指认印度河、恒河、华氏城</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">学</div>
+        <h3>📚 复习建议</h3>
+        <ul>
+          <li><strong>抓主线：</strong>印度河文明→孔雀王朝→种姓制度→佛教传播</li>
+          <li><strong>记等级：</strong>婆罗门/刹帝利/吠舍/首陀罗＋贱民，口诀记职责</li>
+          <li><strong>辨路线：</strong>北传（中亚→中国→东亚）、南传（锡兰→东南亚）</li>
+          <li><strong>联单元：</strong>与埃及、两河、中国对照，归纳大河文明共性</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">思</div>
+        <h3>💡 拓展思考</h3>
+        <ul>
+          <li><strong>制度之思：</strong>种姓制度为何能延续千年？其残余说明了什么？</li>
+          <li><strong>宗教之思：</strong>佛教为何既反特权又倡"忍耐顺从"？</li>
+          <li><strong>文明之思：</strong>同为大河文明，为何古代印度未如中国延续至今？</li>
+          <li><strong>贡献之思：</strong>阿拉伯数字如何改变世界数学？</li>
+        </ul>
+      </div>
+    </div>
+  </section>  <div class="bottom-nav">
+    <div><a href="九上-U1-第3课_古代埃及.html">← 上一课：第3课 古代埃及</a></div>
+    <div class="nav-center">第4课</div>
+    <div><a href="九上-U2-第5课_古代希腊.html">下一课：第5课 古代希腊 →</a></div>
+  </div>
+  <footer>
+    <p>统编版初中历史 · 九年级上册 · 第一单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标点击标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题（含答案解析） =====
+var correctAnswers = { q1:'A', q2:'B', q3:'B', q4:'C', q5:'C', q6:'A', q7:'B', q8:'C', q9:'A', q10:'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid, correctText) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+  var analysis = document.getElementById('analysis-' + qid);
+  if (analysis) { analysis.classList.add('show'); }
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+  document.querySelectorAll('.analysis').forEach(function(a) { a.classList.remove('show'); });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序 IIFE =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['event2','event1','event4','event3'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 2) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    document.getElementById('matchResult').textContent = '❌ 配对错误，请重试';
+    document.getElementById('matchResult').className = 'sort-result show fail';
+  }
+}
+
+// ===== 地图标注 IIFE =====
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ===== 概念翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// ===== 知识图谱节点展开/收起 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== deep-card 折叠交互 IIFE =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var firstBd = document.querySelector('.deep-card .deep-card-bd');
+  if (firstBd) { firstBd.classList.add('show'); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上-U6-第17课 美国的独立（升级版）</title>
+<style>
+:root {
+ --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+ --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+ --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+ --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+ font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+ font-size: 14pt; background: var(--bg); color: #333;
+ line-height: 1.75; max-width: 900px; margin: 0 auto;
+ padding: 0 20px 80px; overflow-x: hidden;
+}
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+.pg-nav {
+ position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+ background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+ display: flex; align-items: center; justify-content: center; gap: 14px;
+ padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+ background: var(--primary); color: #fff; border: none; border-radius: 18px;
+ padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd.pt4 { background: linear-gradient(135deg, #27ae60, #58d68d); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+/* 已删除 .source-ref */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+.analysis { display: none; background: #fef9e7; border: 1px solid #f39c12; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 13pt; }
+.analysis.show { display: block; }
+.analysis .correct-answer { color: var(--green); font-weight: 700; font-size: 14pt; }
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+/* 因果拼图 */
+.puzzle-container { margin:16px 0; }
+.puzzle-chain { background:#fff; border-radius:12px; padding:14px 18px; margin-bottom:16px; border:2px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.04); transition:all 0.3s; }
+.puzzle-chain.complete { border-color:var(--green); background:#f0fdf4; }
+.puzzle-chain .chain-header { display:flex; align-items:center; gap:10px; font-size:14pt; font-weight:700; color:var(--primary-dark); margin-bottom:10px; flex-wrap:wrap; }
+.puzzle-chain .chain-header .chain-badge { display:inline-block; padding:2px 12px; border-radius:12px; font-size:11pt; color:#fff; }
+.chain-badge.c1 { background:#7c6cf0; }
+.chain-badge.c2 { background:#f39c12; }
+.chain-badge.c3 { background:#27ae60; }
+.chain-slots { display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+.puzzle-slot { min-width:100px; flex:1; min-height:52px; border:2px dashed #dcd4f5; border-radius:8px; display:flex; align-items:center; justify-content:center; padding:6px 10px; font-size:11pt; color:#aaa; background:#faf8ff; transition:all 0.3s; text-align:center; }
+.puzzle-slot.filled { border-style:solid; border-color:var(--primary); background:#f0edff; color:#333; font-weight:600; }
+.puzzle-slot.correct { border-color:var(--green); background:#d4efdf; color:var(--green); }
+.puzzle-pieces { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+.puzzle-piece { padding:10px 14px; border-radius:8px; font-size:12pt; font-weight:600; cursor:pointer; transition:all 0.25s; border:2px solid var(--border); background:#fff; user-select:none; flex:1 1 auto; min-width:80px; text-align:center; }
+.puzzle-piece:hover { transform:scale(1.03); box-shadow:0 2px 12px rgba(0,0,0,0.10); }
+.puzzle-piece.p1 { border-color:#7c6cf0; color:#5a4ac7; }
+.puzzle-piece.p2 { border-color:#f39c12; color:#d97706; }
+.puzzle-piece.p3 { border-color:#27ae60; color:#065f46; }
+.puzzle-piece.placed { opacity:0.3; cursor:not-allowed; transform:scale(0.95); pointer-events:none; }
+.puzzle-piece.wrong-shake { animation:shake 0.4s; border-color:var(--red); }
+@keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-6px); } 75% { transform:translateX(6px); } }
+.puzzle-result { text-align:center; padding:10px; border-radius:8px; font-weight:700; font-size:14pt; margin-top:8px; display:none; }
+.puzzle-result.show { display:block; }
+.puzzle-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.chain-progress { font-size:11pt; color:#888; margin-left:auto; }
+.chain-progress strong { color:var(--primary-dark); }
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:10.5pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10pt; line-height:1.5; }
+.flash-group-label { grid-column:1/-1; text-align:center; font-weight:700; font-size:13pt; color:var(--primary-dark); background:#ebe6ff; border-radius:8px; padding:6px 0; margin:4px 0; }
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,0.06);}50%{box-shadow:0 2px 20px rgba(124,108,240,0.18);} }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+@media (max-width:680px){ .recap-grid{grid-template-columns:1fr;} .flash-grid{grid-template-columns:repeat(3,1fr);} .learn-target .target-grid{grid-template-columns:1fr;} .match-cols{gap:16px;} .puzzle-slot{min-width:60px;font-size:10pt;} }
+</style>
+</head>
+<body>
+
+<!-- ==================== Page0: 封面 ==================== -->
+<div class="page-slide active" id="page0">
+ <div class="hero-wrap">
+ <div class="hero-unit">第六单元 · 资本主义制度的初步确立</div>
+ <h1>第17课 · 美国的独立</h1>
+ <div class="hero-sub">统编版初中历史 九年级上册 · 新版</div>
+ </div>
+ <div class="learn-target" id="learnTargets">
+ <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+ <div class="target-grid">
+ <div class="target-item" onclick="toggleTarget(this)">🕐 <strong>时空观念：</strong>了解美国独立战争的历程，掌握1775年来克星顿枪声、1776年《独立宣言》、1777年萨拉托加大捷、1783年英国承认美国独立等关键节点</div>
+ <div class="target-item" onclick="toggleTarget(this)">📜 <strong>史料实证：</strong>通过《独立宣言》和1787年美国宪法，认识美国资产阶级革命的重要文献</div>
+ <div class="target-item" onclick="toggleTarget(this)">🔍 <strong>历史解释：</strong>理解《独立宣言》和1787年宪法的历史地位，分析美国独立战争的双重性质</div>
+ <div class="target-item" onclick="toggleTarget(this)">❤️ <strong>家国情怀：</strong>认识美国独立战争对世界近代历史发展的深远影响</div>
+ </div>
+ <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+ </div>
+ <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== Page1: 知识要点 + 5关闯关 ==================== -->
+<div class="page-slide" id="page1">
+ <div class="slide-header"><div class="module-num">模块一</div><div class="module-title">知识要点 · 闯关解锁</div></div>
+ <div class="stage-progress-wrap">
+ <div class="stage-progress-text"><span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong></div>
+ <div class="stage-progress-bar-bg"><div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div></div>
+ </div>
+ <div class="tab-bar">
+ <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 独立战争的序幕</button>
+ <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 华盛顿与独立战争</button>
+ <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 《独立宣言》与美国宪法</button>
+ </div>
+
+ <!-- ==================== Tab1 ==================== -->
+ <div class="kp-card tab-panel active" id="tab1">
+ <div class="timeline-bar">📍 17世纪13个殖民地 → 1765年新税法 → 1773年波士顿倾茶 → 1775年来克星顿枪声</div>
+ <h3>⚔️ 独立战争的序幕</h3>
+ <ul>
+ <li><strong>13个殖民地：</strong>17世纪起英国在北美建立</li>
+ <li><strong>矛盾激化：</strong>1765年新税法 → 1773年<span class="kwd">波士顿倾茶事件</span></li>
+ <li><strong>导火索：</strong>1774年第一届大陆会议</li>
+ <li><strong>爆发标志：</strong><span class="kwd">1775年4月19日，来克星顿枪声</span></li>
+ <li><strong>“一分钟人”：</strong>随时转换身份的民兵，独立战争主力军</li>
+ </ul>
+ <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 来克星顿枪声标志着美国独立战争的爆发</div>
+
+ <!-- ① 拖拽排序 -->
+ <div class="challenge-title">🎮 挑战一：请将独立战争历程按时间先后顺序拖入槽位</div>
+ <div class="sort-pool" id="sortPool1">
+ <span class="sort-item" draggable="true" data-sortkey="event1" id="item_event1">《独立宣言》发表</span>
+ <span class="sort-item" draggable="true" data-sortkey="event2" id="item_event2">来克星顿枪声</span>
+ <span class="sort-item" draggable="true" data-sortkey="event3" id="item_event3">萨拉托加大捷</span>
+ <span class="sort-item" draggable="true" data-sortkey="event4" id="item_event4">约克镇战役英军投降</span>
+ <span class="sort-item" draggable="true" data-sortkey="event5" id="item_event5">英国承认美国独立</span>
+ </div>
+ <div class="sort-slots">
+ <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+ <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+ <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+ <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+ <div class="sort-slot" data-slot="4"><span class="slot-label">最晚</span></div>
+ </div>
+ <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+ <div class="sort-result" id="sortResult"></div>
+ <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+ <!-- 翻转卡 Tab1: 6张 -->
+ <div class="flash-section">
+ <div class="flash-group-label">📌 独立战争序幕（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">来克星顿枪声</div><div class="flash-back">1775年4月19日，美国独立战争爆发的标志</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">波士顿倾茶事件</div><div class="flash-back">1773年12月，波士顿市民将300多箱茶叶抛入大海，激化矛盾</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">一分钟人</div><div class="flash-back">独立战争时期随时转换身份的民兵，是赢得战争胜利的主力军</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">北美13个殖民地</div><div class="flash-back">17世纪起英国在北美大西洋沿岸建立的殖民地</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">第一届大陆会议</div><div class="flash-back">1774年召开，成为独立战争的导火索</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">英国殖民压迫</div><div class="flash-back">英国颁布新税法，限制殖民地经济发展，引发北美人民反抗</div></div></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ==================== Tab2 ==================== -->
+ <div class="kp-card tab-panel" id="tab2">
+ <div class="timeline-bar">📍 1775年第二届大陆会议 → 1776年《独立宣言》 → 1777年萨拉托加 → 1781年约克镇 → 1783年英国承认</div>
+ <h3>🏛️ 华盛顿与独立战争</h3>
+ <ul>
+ <li><strong>1775年5月：</strong>第二届大陆会议，组建<span class="kwd">大陆军</span>，委任<span class="kwd">华盛顿</span>为总司令</li>
+ <li><strong>1776年7月4日：</strong><span class="kwd">《独立宣言》</span>发表</li>
+ <li><strong>1777年：</strong><span class="kwd">萨拉托加大捷</span>——独立战争转折点</li>
+ <li><strong>1781年：</strong>约克镇战役英军投降</li>
+ <li><strong>1783年：</strong>英国承认美国独立</li>
+ </ul>
+ <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 华盛顿任大陆军总司令、《独立宣言》发表、萨拉托加大捷（转折点）</div>
+
+ <!-- ② 填空填词 -->
+ <div class="challenge-title">🎮 挑战二：填写美国独立战争的关键信息</div>
+ <div class="fill-blank-wrap" id="fillBlanks">
+ <div class="fill-blank-row">美国独立战争爆发的标志是 <input type="text" class="fill-input" data-answer="来克星顿" placeholder="?"> 枪声</div>
+ <div class="fill-blank-row">大陆军总司令是 <input type="text" class="fill-input" data-answer="华盛顿" placeholder="?"></div>
+ <div class="fill-blank-row">《独立宣言》起草者是 <input type="text" class="fill-input" data-answer="杰斐逊" placeholder="?"></div>
+ <div class="fill-blank-row">独立战争的转折点是 <input type="text" class="fill-input" data-answer="萨拉托加" placeholder="?"> 大捷</div>
+ <div class="fill-blank-row">1787年，美国制定了 <input type="text" class="fill-input" data-answer="1787" placeholder="?"> 年宪法</div>
+ </div>
+ <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+ <div class="sort-result" id="fillResult"></div>
+ <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+ <!-- 翻转卡 Tab2: 6张 -->
+ <div class="flash-section">
+ <div class="flash-group-label">📌 独立战争进程（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">华盛顿</div><div class="flash-back">弗吉尼亚种植园主之子，独立战争总司令，1789年当选美国第一任总统</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">大陆军</div><div class="flash-back">1775年第二届大陆会议决定组建，华盛顿任总司令</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">萨拉托加大捷</div><div class="flash-back">1777年，独立战争的转折点，法国参战支持美国</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">约克镇战役</div><div class="flash-back">1781年英军投降，独立战争结束</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">1783年</div><div class="flash-back">英国被迫承认美国独立</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">法国参战</div><div class="flash-back">萨拉托加大捷后法国公开参战支持美国</div></div></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ==================== Tab3 ==================== -->
+ <div class="kp-card tab-panel" id="tab3">
+ <div class="timeline-bar">📍 1776年《独立宣言》 → 1787年美国宪法 → 联邦制共和国</div>
+ <h3>📜 《独立宣言》与美国宪法</h3>
+ <ul>
+ <li><strong>《独立宣言》</strong>（1776年7月4日）：起草者<span class="kwd">杰斐逊</span></li>
+ <li><strong>核心思想：</strong>人人生而平等，享有生命权、自由权和追求幸福的权利</li>
+ <li><strong>历史地位：</strong>第一个以国家名义明确表述资产阶级政治要求的纲领性文献，被称为“<span class="kwd">第一个人权宣言</span>”</li>
+ <li><strong>1787年宪法：</strong>依据<span class="kwd">分权制衡</span>原则，<span class="kwd">三权分立</span>（行政/立法/司法）</li>
+ <li><strong>历史地位：</strong><span class="kwd">世界上第一部资产阶级成文宪法</span></li>
+ </ul>
+ <div class="link-bar">📌 <span class="tag-zhongkao">中考常考</span> 《独立宣言》被称为“第一个人权宣言”，1787年宪法体现分权制衡和三权分立</div>
+
+ <!-- ③ 连线匹配 -->
+ <div class="challenge-title">🎮 挑战三：将人物与贡献/职务配对</div>
+ <div class="match-area">
+ <div class="match-cols">
+ <div class="match-col"><div class="match-col-label">📌 人物</div>
+ <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">华盛顿</div>
+ <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">杰斐逊</div>
+ </div>
+ <div class="match-col"><div class="match-col-label">📌 贡献/职务</div>
+ <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">起草《独立宣言》</div>
+ <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">大陆军总司令、第一任总统</div>
+ </div>
+ </div>
+ </div>
+ <div class="sort-result" id="matchResult"></div>
+ <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+ <!-- ④ 因果拼图 -->
+ <div class="challenge-title">🧩 挑战四：将每条因果链的三块拼图按正确顺序排列（①→②→③）</div>
+ <div class="puzzle-container" id="puzzleContainer"></div>
+ <div class="puzzle-result" id="puzzleResult"></div>
+ <div class="stage-done" id="stagePuzzleDone">🎉 第④关通过！</div>
+
+ <!-- 翻转卡 Tab3: 6张 -->
+ <div class="flash-section">
+ <div class="flash-group-label">📌 建国文献（点击翻面）</div>
+ <div class="flash-grid">
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《独立宣言》</div><div class="flash-back">1776年7月4日发表，宣告北美13个殖民地独立，被称为“第一个人权宣言”</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">杰斐逊</div><div class="flash-back">《独立宣言》的主要起草者</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">第一个人权宣言</div><div class="flash-back">《独立宣言》的地位，以国家名义明确表述资产阶级政治要求</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">1787年美国宪法</div><div class="flash-back">世界上第一部资产阶级成文宪法，确立分权制衡和三权分立原则</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">分权制衡</div><div class="flash-back">1787年宪法的核心原则，联邦政府与地方政府分享权力</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">三权分立</div><div class="flash-back">行政权（总统）、立法权（国会）、司法权（最高法院）相互制衡</div></div></div>
+ </div>
+ <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！</div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page2: 重难点解析（4个） ==================== -->
+<div class="page-slide" id="page2">
+ <div class="slide-header"><div class="module-num">模块二</div><div class="module-title">重难点解析</div></div>
+
+ <div class="acc-group" id="acc1">
+ <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+ <h3>🔵 重难点一：美国独立战争的过程</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：独立战争的历程</div><div class="deep-card-bd"><ul><li><strong>1775年：</strong>来克星顿枪声（爆发）</li><li><strong>1776年：</strong>《独立宣言》（宣告独立）</li><li><strong>1777年：</strong>萨拉托加大捷（转折点）</li><li><strong>1781年：</strong>约克镇战役（英军投降）</li><li><strong>1783年：</strong>英国承认美国独立</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：华盛顿的贡献</div><div class="deep-card-bd"><ul><li>担任大陆军总司令，领导独立战争</li><li>1789年当选美国第一任总统</li><li>主持制宪会议，制定1787年宪法</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：独立战争的双重性质</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>美国独立战争具有<strong>双重性质</strong>：<strong>民族解放战争</strong>（反抗英国殖民统治）和<strong>资产阶级革命</strong>（建立资产阶级共和国）。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc2">
+ <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+ <h3>🟠 重难点二：《独立宣言》的历史地位</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：《独立宣言》的内容</div><div class="deep-card-bd"><ul><li><strong>时间：</strong>1776年7月4日</li><li><strong>起草者：</strong>杰斐逊</li><li><strong>核心：</strong>人人生而平等，享有生命权、自由权和追求幸福的权利</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：《独立宣言》的地位</div><div class="deep-card-bd"><ul><li><strong>第一个</strong>以国家名义明确表述资产阶级政治要求的纲领性文献</li><li>被称为“<strong>第一个人权宣言</strong>”</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：《独立宣言》的局限性</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>《独立宣言》虽然宣扬人权，但<strong>没有宣布废除奴隶制</strong>，黑人和印第安人不享有天赋人权，反映了资产阶级的阶级局限性。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc3">
+ <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+ <h3>🟣 重难点三：1787年美国宪法</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：宪法的制定</div><div class="deep-card-bd"><ul><li><strong>时间：</strong>1787年，地点：费城，主持：华盛顿</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：宪法的原则</div><div class="deep-card-bd"><ul><li><strong>分权制衡：</strong>联邦政府与地方政府分享权力</li><li><strong>三权分立：</strong>行政（总统）、立法（国会）、司法（最高法院）</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：1787年宪法的评价</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>1787年美国宪法具有<strong>双重性</strong>：<strong>进步性</strong>——世界上第一部资产阶级成文宪法，确立了分权制衡原则；<strong>局限性</strong>——允许奴隶制存在，不承认妇女、黑人和印第安人的政治权利。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+
+ <!-- 新增 acc4 -->
+ <div class="acc-group" id="acc4">
+ <div class="acc-group-hd pt4" onclick="toggleAccGrp('acc4')">
+ <h3>🟢 重难点四：美国独立战争的历史意义</h3><span class="acc-arrow">▼</span>
+ </div>
+ <div class="acc-group-bd">
+ <div class="deep-card"><div class="deep-card-hd">📘 基础理解：对美国的深远影响</div><div class="deep-card-bd"><ul><li><strong>政治：</strong>摆脱英国殖民统治，实现了国家独立</li><li><strong>制度：</strong>确立了资产阶级共和政体，为美国发展奠定基础</li><li><strong>经济：</strong>为资本主义发展开辟了道路</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展：对世界的影响</div><div class="deep-card-bd"><ul><li><strong>思想：</strong>《独立宣言》推动了人权思想的传播</li><li><strong>示范：</strong>为拉丁美洲独立运动和法国大革命提供了范例</li><li><strong>制度：</strong>1787年宪法为各国制度建设提供了借鉴</li></ul></div></div>
+ <div class="deep-card"><div class="deep-card-hd">🎯 素养提升：世界近代史的开端性事件</div><div class="deep-card-bd"><p>💡 <strong>历史解释：</strong>美国独立战争是<strong>世界近代史的重要事件</strong>。它不仅是北美殖民地人民争取民族解放的战争，也是<strong>资产阶级革命</strong>的典范。它所确立的<strong>共和制度</strong>和<strong>宪法原则</strong>，对后来世界各国的政治制度建设产生了深远影响。</p></div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc4',this)">✅ 我已掌握</button></div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page3: 教材栏目解答（7个，删除引用） ==================== -->
+<div class="page-slide" id="page3">
+ <div class="slide-header"><div class="module-num">模块三</div><div class="module-title">教材栏目解答</div></div>
+ <div class="filter-bar">
+ <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+ <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+ <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+ <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：七年战争与波士顿倾茶事件</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>1756—1763年，英国与法国为了争夺在北美的殖民地进行了7年的战争。为了转嫁因战争导致的巨大财政亏空，英国在北美洲殖民地颁布了一系列税法，但遭到抵制。1773年12月16日，一些波士顿市民示威，要求上东印度公司的商船，把300多箱茶叶抛入大海。倾茶事件发生后，英国当局认为波士顿是反叛中心，颁布了高压法令，关闭波士顿港口，派军队进驻该市，禁止市民集会。</p>
+ <div class="a" id="ans-p3-story1"><strong>📝 要点归纳：</strong><br>• 1756-1763年英法七年战争<br>• 英国转嫁财政亏空，颁布新税法<br>• 1773年波士顿倾茶事件<br>• 英国颁布高压法令，矛盾激化</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：“一分钟人”民兵</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>独立战争时期，许多地方的青壮年男子都参加了抵抗英军的战斗。每当英军将至，他们就拿起武器走出家门，进行武装抵抗；击退英军后，他们就回家从事农业和工商业劳动。例如，在来克星顿，小镇里的人称自己是“一分钟人”，因为他们可以随时转换自己的身份。在独立战争时期，美国各地都有大批类似这种“一分钟人”的民兵，他们是赢得战争胜利的主力军。</p>
+ <div class="a" id="ans-p3-story2"><strong>📝 要点归纳：</strong><br>• “一分钟人”：随时转换身份的民兵<br>• 平时务农/务工，战时拿起武器<br>• 是赢得独立战争胜利的主力军</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="人物扫描">
+ <div class="col-header" onclick="toggleColBox(this)"><span>👤 人物扫描：乔治·华盛顿</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>乔治·华盛顿是弗吉尼亚州一位种植园主的儿子，早年任军队担任过指挥官。美国独立战争爆发后，他努力将各州团结起来，联合起来，坚持不懈地对抗英军，最终赢得了美国的独立。1789年，他当选美国第一任总统。美国首都华盛顿是以他的名字命名的。</p>
+ <div class="a" id="ans-p3-profile1"><strong>📝 要点归纳：</strong><br>• 弗吉尼亚种植园主之子<br>• 早年担任军队指挥官<br>• 独立战争总司令，1789年第一任总统<br>• 美国首都以他命名</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-profile1')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="知识拓展">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📚 知识拓展：美国宪法的修正</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>1787年美国宪法通过后，为了弥补其缺陷，美国国会陆续通过了宪法修正案。1791年通过的10条宪法修正案，被称为“权利法案”，保障了公民的言论自由、出版自由、宗教信仰自由等权利。此后，随着时代发展，美国宪法不断修正，以适应社会发展的需要。</p>
+ <div class="a" id="ans-p3-knowledge"><strong>📝 要点归纳：</strong><br>• 1791年通过“权利法案”（前10条修正案）<br>• 保障言论自由、出版自由、宗教信仰自由等<br>• 宪法不断修正以适应社会发展</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：萨拉托加战役</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>1777年，美军在萨拉托加战役中击败英军，取得大捷。这次胜利扭转了美国独立战争的局势，是独立战争的转折点。萨拉托加大捷增强了美国人民的信心，也促使法国、西班牙等欧洲国家公开承认美国并参战，支援美国。</p>
+ <div class="a" id="ans-p3-story3"><strong>📝 要点归纳：</strong><br>• 1777年美军击败英军<br>• 独立战争的转折点<br>• 法国、西班牙等国参战支持美国</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="人物扫描">
+ <div class="col-header" onclick="toggleColBox(this)"><span>👤 人物扫描：杰斐逊</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>托马斯·杰斐逊是美国《独立宣言》的主要起草人。他深受启蒙思想影响，强调天赋人权，主张人民有权推翻暴政。杰斐逊后来还担任了美国第三任总统（1801—1809年），为美国早期发展作出了重要贡献。</p>
+ <div class="a" id="ans-p3-profile2"><strong>📝 要点归纳：</strong><br>• 《独立宣言》主要起草人<br>• 深受启蒙思想影响<br>• 美国第三任总统</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-profile2')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="知识拓展">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📚 知识拓展：三权分立的实践</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>美国1787年宪法确立了三权分立原则。总统掌握行政权，国会掌握立法权，最高法院掌握司法权。三者各司其职、相互制衡。例如，总统可以否决国会通过的法案，国会可以弹劾总统，最高法院可以宣布总统或国会的法令违宪。</p>
+ <div class="a" id="ans-p3-knowledge2"><strong>📝 要点归纳：</strong><br>• 总统：行政权（可以否决法案、任命法官）<br>• 国会：立法权（可以弹劾总统、批准任命）<br>• 最高法院：司法权（可以宣布法令违宪）</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge2')">📝 查看要点归纳</button>
+ </div>
+ </div>
+
+ <div class="col-box" data-cat="相关史事">
+ <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事：约克镇战役</span><span class="col-toggle">▼</span></div>
+ <div class="col-body"><p>1781年，华盛顿率领美法联军在约克镇与英军展开决战。英军将领康沃利斯陷入重围，走投无路，率8000多人投降。约克镇战役的胜利标志着独立战争的实际结束。1783年，英国正式承认美国独立。</p>
+ <div class="a" id="ans-p3-story4"><strong>📝 要点归纳：</strong><br>• 1781年美法联军包围约克镇<br>• 英军康沃利斯率8000人投降<br>• 标志着独立战争实际结束</div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p3-story4')">📝 查看要点归纳</button>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page4: 课堂训练（10选择+2材料） ==================== -->
+<div class="page-slide" id="page4">
+ <div class="slide-header"><div class="module-num">模块四</div><div class="module-title">课堂训练</div></div>
+ <div class="score-banner"><div><div style="font-size:11pt;color:#888;">当前得分</div><div class="score-number" id="scoreVal">0</div></div><button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button></div>
+
+ <div class="exercise" id="q1"><div class="q-text"><strong>1.</strong> 美国独立战争爆发的标志是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q1','波士顿倾茶事件')">A. 波士顿倾茶事件</label><label onclick="optClick(this,'B','q1','来克星顿枪声')">B. 来克星顿枪声</label><label onclick="optClick(this,'C','q1','《独立宣言》发表')">C. 《独立宣言》发表</label><label onclick="optClick(this,'D','q1','萨拉托加大捷')">D. 萨拉托加大捷</label></div>
+ <div class="analysis" id="analysis-q1"><strong>答案：B</strong> 解析：1775年来克星顿枪声标志着美国独立战争爆发。</div></div>
+
+ <div class="exercise" id="q2"><div class="q-text"><strong>2.</strong> 《独立宣言》的起草者是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q2','华盛顿')">A. 华盛顿</label><label onclick="optClick(this,'B','q2','杰斐逊')">B. 杰斐逊</label><label onclick="optClick(this,'C','q2','克伦威尔')">C. 克伦威尔</label><label onclick="optClick(this,'D','q2','拿破仑')">D. 拿破仑</label></div>
+ <div class="analysis" id="analysis-q2"><strong>答案：B</strong> 解析：《独立宣言》由杰斐逊起草。</div></div>
+
+ <div class="exercise" id="q3"><div class="q-text"><strong>3.</strong> 美国独立战争的转折点是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q3','来克星顿枪声')">A. 来克星顿枪声</label><label onclick="optClick(this,'B','q3','萨拉托加大捷')">B. 萨拉托加大捷</label><label onclick="optClick(this,'C','q3','约克镇战役')">C. 约克镇战役</label><label onclick="optClick(this,'D','q3','《独立宣言》发表')">D. 《独立宣言》发表</label></div>
+ <div class="analysis" id="analysis-q3"><strong>答案：B</strong> 解析：1777年萨拉托加大捷是独立战争的转折点。</div></div>
+
+ <div class="exercise" id="q4"><div class="q-text"><strong>4.</strong> 英国被迫承认美国独立是在（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q4','1776年')">A. 1776年</label><label onclick="optClick(this,'B','q4','1781年')">B. 1781年</label><label onclick="optClick(this,'C','q4','1783年')">C. 1783年</label><label onclick="optClick(this,'D','q4','1787年')">D. 1787年</label></div>
+ <div class="analysis" id="analysis-q4"><strong>答案：C</strong> 解析：1783年英国承认美国独立。</div></div>
+
+ <div class="exercise" id="q5"><div class="q-text"><strong>5.</strong> 1787年美国宪法确立的原则是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q5','君主立宪')">A. 君主立宪</label><label onclick="optClick(this,'B','q5','分权制衡')">B. 分权制衡</label><label onclick="optClick(this,'C','q5','民主集中制')">C. 民主集中制</label><label onclick="optClick(this,'D','q5','人民民主专政')">D. 人民民主专政</label></div>
+ <div class="analysis" id="analysis-q5"><strong>答案：B</strong> 解析：1787年宪法依据分权制衡原则设计。</div></div>
+
+ <div class="exercise" id="q6"><div class="q-text"><strong>6.</strong> 美国独立战争具有双重性质，其中不包括（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q6','民族解放战争')">A. 民族解放战争</label><label onclick="optClick(this,'B','q6','资产阶级革命')">B. 资产阶级革命</label><label onclick="optClick(this,'C','q6','反封建斗争')">C. 反封建斗争</label><label onclick="optClick(this,'D','q6','反殖民斗争')">D. 反殖民斗争</label></div>
+ <div class="analysis" id="analysis-q6"><strong>答案：C</strong> 解析：美国独立战争是反抗英国殖民统治，不存在反封建斗争。</div></div>
+
+ <div class="exercise" id="q7"><div class="q-text"><strong>7.</strong> 《独立宣言》被称为“第一个人权宣言”，主要原因是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q7','宣告了美国独立')">A. 宣告了美国独立</label><label onclick="optClick(this,'B','q7','明确表述了资产阶级政治要求')">B. 明确表述了资产阶级政治要求</label><label onclick="optClick(this,'C','q7','宣布废除奴隶制')">C. 宣布废除奴隶制</label><label onclick="optClick(this,'D','q7','确立了共和制度')">D. 确立了共和制度</label></div>
+ <div class="analysis" id="analysis-q7"><strong>答案：B</strong> 解析：它是第一个以国家名义明确表述资产阶级政治要求的纲领性文献。</div></div>
+
+ <div class="exercise" id="q8"><div class="q-text"><strong>8.</strong> 1787年美国宪法的局限性不包括（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q8','允许奴隶制存在')">A. 允许奴隶制存在</label><label onclick="optClick(this,'B','q8','不承认黑人政治权利')">B. 不承认黑人政治权利</label><label onclick="optClick(this,'C','q8','不承认妇女政治权利')">C. 不承认妇女政治权利</label><label onclick="optClick(this,'D','q8','确立了君主制')">D. 确立了君主制</label></div>
+ <div class="analysis" id="analysis-q8"><strong>答案：D</strong> 解析：1787年宪法确立的是共和制，不是君主制。</div></div>
+
+ <div class="exercise" id="q9"><div class="q-text"><strong>9.</strong> 美国独立战争中，大陆军的总司令是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q9','杰斐逊')">A. 杰斐逊</label><label onclick="optClick(this,'B','q9','华盛顿')">B. 华盛顿</label><label onclick="optClick(this,'C','q9','克伦威尔')">C. 克伦威尔</label><label onclick="optClick(this,'D','q9','拿破仑')">D. 拿破仑</label></div>
+ <div class="analysis" id="analysis-q9"><strong>答案：B</strong> 解析：华盛顿担任大陆军总司令。</div></div>
+
+ <div class="exercise" id="q10"><div class="q-text"><strong>10.</strong> 美国独立战争对世界历史的影响是（ ）</div>
+ <div class="options"><label onclick="optClick(this,'A','q10','确立了君主立宪制')">A. 确立了君主立宪制</label><label onclick="optClick(this,'B','q10','为各国资产阶级革命提供了范例')">B. 为各国资产阶级革命提供了范例</label><label onclick="optClick(this,'C','q10','巩固了封建制度')">C. 巩固了封建制度</label><label onclick="optClick(this,'D','q10','导致美国分裂')">D. 导致美国分裂</label></div>
+ <div class="analysis" id="analysis-q10"><strong>答案：B</strong> 解析：美国独立战争为其他国家提供了范例。</div></div>
+
+ <!-- 材料题 -->
+ <div class="exercise" id="mq1">
+ <div class="q-text"><strong>材料题一</strong> 阅读材料，回答问题：</div>
+ <div class="source-material"><p>"1776年7月4日，大陆会议通过了由杰斐逊起草的《独立宣言》，宣布人人生而平等，享有生命权、自由权和追求幸福的权利。宣言列举了英国殖民统治的种种暴政，号召殖民地人民反对英国的殖民统治，宣告北美13个殖民地脱离英国而独立。"</p></div>
+ <div class="q-text">（1）根据材料，《独立宣言》宣告了什么？</div>
+ <div class="a" id="ans-p4-mat1a"><p><strong>参考答案：</strong>《独立宣言》宣告北美13个殖民地<strong>脱离英国而独立</strong>。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1a');trackMatQ('mq1')">📝 查看答案</button>
+ <div class="q-text" style="margin-top:10px;">（2）根据材料，《独立宣言》宣称人人生而平等，享有哪三项权利？</div>
+ <div class="a" id="ans-p4-mat1b"><p><strong>参考答案：</strong>人人生而平等，享有<strong>生命权、自由权和追求幸福</strong>的权利。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1b');trackMatQ('mq1')">📝 查看答案</button>
+ </div>
+
+ <div class="exercise" id="mq2">
+ <div class="q-text"><strong>材料题二</strong> 阅读材料，回答问题：</div>
+ <div class="source-material"><p>"1787年，各州派出代表齐聚费城，由华盛顿主持召开了制宪会议，经过争论和妥协，最终制定出美国宪法。宪法依据分权制衡原则设计了一个联邦制共和国：行政、立法、司法三权分立，总统、国会与最高法院及其相关机构各司其职，相互制衡；联邦政府与地方政府分享权力；总统和议员由选举产生。"</p></div>
+ <div class="q-text">（1）根据材料，1787年美国宪法依据什么原则设计？</div>
+ <div class="a" id="ans-p4-mat2a"><p><strong>参考答案：</strong>1787年美国宪法依据<strong>分权制衡</strong>原则设计。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2a');trackMatQ('mq2')">📝 查看答案</button>
+ <div class="q-text" style="margin-top:10px;">（2）根据材料，三权分立是指哪三种权力？</div>
+ <div class="a" id="ans-p4-mat2b"><p><strong>参考答案：</strong>三权分立是指<strong>行政权</strong>（总统）、<strong>立法权</strong>（国会）、<strong>司法权</strong>（最高法院）三权分立，相互制衡。</p></div>
+ <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2b');trackMatQ('mq2')">📝 查看答案</button>
+ </div>
+</div>
+
+<!-- ==================== Page5: 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+ <div class="slide-header"><div class="module-num">模块五</div><div class="module-title">知识结构图</div></div>
+ <div class="kg-wrap-simple">
+ <div class="kg-title">📊 知识结构 · 因果链</div>
+ <div class="kg-hint-banner"><span class="hint-icon">💡</span><span>知识结构图已生成。点击下方</span><span class="hint-click">各节点</span><span>查看详细解析与考点说明</span></div>
+ <div class="kg-chain">
+ <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">⚔️</span><strong>矛盾激化</strong><p>殖民压迫 · 波士顿倾茶</p><div class="kg-detail"><p><strong>考点解析：</strong>英国殖民压迫、波士顿倾茶事件激化矛盾，1775年来克星顿枪声爆发战争。</p></div></div>
+ <div class="kg-arrow">⬇️</div>
+ <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">📜</span><strong>独立宣言</strong><p>1776年 · 杰斐逊 · 第一个人权宣言</p><div class="kg-detail"><p><strong>考点解析：</strong>1776年7月4日《独立宣言》发表，宣告北美13个殖民地独立，被称为“第一个人权宣言”。</p></div></div>
+ <div class="kg-arrow">⬇️</div>
+ <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">🏛️</span><strong>1787年宪法</strong><p>分权制衡 · 三权分立 · 联邦制</p><div class="kg-detail"><p><strong>考点解析：</strong>1787年宪法确立分权制衡和三权分立原则，是世界上第一部资产阶级成文宪法。</p></div></div>
+ <div class="kg-arrow">⬇️</div>
+ <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)"><span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span><span class="kg-icon">🌍</span><strong>历史影响</strong><p>民族独立 · 资产阶级革命</p><div class="kg-detail"><p><strong>考点解析：</strong>美国独立战争既是民族解放战争，也是资产阶级革命，对世界影响深远。</p></div></div>
+ </div>
+ <div class="kg-rules-grid">
+ <div class="kg-rule r1">🔵 起因：殖民压迫导致革命</div>
+ <div class="kg-rule r2">🟠 转折：萨拉托加大捷</div>
+ <div class="kg-rule r3">🟢 纲领：《独立宣言》</div>
+ <div class="kg-rule r4">🔴 确立：1787年宪法</div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== Page6: 结束页（6卡） ==================== -->
+<div class="page-slide" id="page6">
+ <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+ <div class="hero-unit">第六单元 · 资本主义制度的初步确立</div>
+ <h1 style="font-size:22pt;">第17课 · 美国的独立</h1>
+ <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+ </div>
+ <section class="recap-section">
+ <h2 class="recap-title">📋 核心要点回顾</h2>
+ <div class="recap-grid">
+ <div class="recap-card"><div class="recap-card-num">一</div><h3>⚔️ 独立战争历程</h3><ul><li><strong>爆发：</strong>1775年来克星顿</li><li><strong>转折：</strong>1777年萨拉托加</li><li><strong>结束：</strong>1783年英国承认</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">二</div><h3>📜 《独立宣言》</h3><ul><li><strong>时间：</strong>1776年7月4日</li><li><strong>起草：</strong>杰斐逊</li><li><strong>地位：</strong>第一个人权宣言</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">三</div><h3>🏛️ 华盛顿贡献</h3><ul><li><strong>职务：</strong>大陆军总司令</li><li><strong>贡献：</strong>领导独立战争</li><li><strong>成就：</strong>首任总统</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">四</div><h3>📜 1787年宪法</h3><ul><li><strong>原则：</strong>分权制衡</li><li><strong>三权：</strong>行政·立法·司法</li><li><strong>地位：</strong>第一部成文宪法</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">五</div><h3>⚖️ 三权分立</h3><ul><li><strong>总统：</strong>行政权</li><li><strong>国会：</strong>立法权</li><li><strong>最高法院：</strong>司法权</li></ul></div>
+ <div class="recap-card"><div class="recap-card-num">六</div><h3>🌍 历史意义</h3><ul><li><strong>性质：</strong>民族解放+资产阶级革命</li><li><strong>影响：</strong>为各国提供范例</li><li><strong>价值：</strong>推动人权思想传播</li></ul></div>
+ </div>
+ </section>
+ <div class="bottom-nav">
+ <div><a href="九上-U6-第16课_英国资产阶级革命.html">← 上一课：第16课 英国资产阶级革命</a></div>
+ <div class="nav-center">第17课</div>
+ <div><a href="九上-U6-第18课_法国大革命和拿破仑帝国.html">下一课：第18课 法国大革命和拿破仑帝国 →</a></div>
+ </div>
+ <footer><p>统编版初中历史 · 九年级上册 · 第六单元</p><p>基于新版教材 · 交互式学习课件</p></footer>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+ <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+ <div class="pg-dots" id="pgDots">
+ <span class="pg-dot active" onclick="goPage(0)"></span><span class="pg-dot" onclick="goPage(1)"></span><span class="pg-dot" onclick="goPage(2)"></span><span class="pg-dot" onclick="goPage(3)"></span><span class="pg-dot" onclick="goPage(4)"></span><span class="pg-dot" onclick="goPage(5)"></span><span class="pg-dot" onclick="goPage(6)"></span>
+ </div>
+ <span class="pg-counter" id="pgCounter">1/7</span>
+ <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var totalPages=7,currentPage=0,pgDots=document.querySelectorAll('.pg-dot'),pgCounter=document.getElementById('pgCounter'),pgPrev=document.getElementById('pgPrev'),pgNext=document.getElementById('pgNext');
+function goPage(n){if(n<0||n>=totalPages)return;document.getElementById('page'+currentPage).classList.remove('active');pgDots[currentPage].classList.remove('active');currentPage=n;document.getElementById('page'+currentPage).classList.add('active');pgDots[currentPage].classList.add('active');pgCounter.textContent=(currentPage+1)+'/'+totalPages;pgPrev.disabled=(currentPage===0);pgNext.disabled=(currentPage===totalPages-1);window.scrollTo({top:0,behavior:'smooth'});}
+function nextPage(){if(currentPage<totalPages-1)goPage(currentPage+1);}
+function prevPage(){if(currentPage>0)goPage(currentPage-1);}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();nextPage();}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();prevPage();}});
+pgPrev.disabled=true;
+
+// ===== 闯关进度 =====
+var stageDone={sort:false,fill:false,match:false,puzzle:false,flips:false};
+function updateStageProgress(){var stages=['sort','fill','match','puzzle','flips'];var done=0;stages.forEach(function(s){if(stageDone[s])done++;});var pct=Math.round(done/5*100);var bar=document.getElementById('stageProgressBar');var lbl=document.getElementById('stageProgressLabel');if(bar)bar.style.width=pct+'%';if(lbl){if(done>=5)lbl.textContent='🏆 全部闯关完成！';else lbl.textContent=done+'/5 关完成';}}
+
+// ===== 学习目标 =====
+var targetsDone=0;
+function toggleTarget(el){el.classList.toggle('done');targetsDone=document.querySelectorAll('.target-item.done').length;if(targetsDone>=4){document.getElementById('targetsDone').classList.add('show');}else{document.getElementById('targetsDone').classList.remove('show');}}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId){document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});document.getElementById(tabId).classList.add('active');var btns=document.querySelectorAll('.tab-btn');for(var i=0;i<btns.length;i++){if(btns[i].getAttribute('onclick').indexOf(tabId)>=0){btns[i].classList.add('active');break;}}}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id){var grp=document.getElementById(id);if(grp)grp.classList.toggle('open');}
+function markMastered(grpId,btn){btn.classList.add('done');btn.textContent='✅ 已掌握';}
+
+// ===== 答案显隐 =====
+function toggleAnswer(id){var el=document.getElementById(id);if(el){el.classList.toggle('show');var btn=el.previousElementSibling;while(btn&&btn.tagName!=='BUTTON'){btn=btn.previousElementSibling;}if(btn&&btn.classList.contains('ans-btn')){btn.textContent=el.classList.contains('show')?'隐藏答案':'显示答案';}}}
+
+// ===== 选择题 =====
+var correctAnswers={q1:'B',q2:'B',q3:'B',q4:'C',q5:'B',q6:'C',q7:'B',q8:'D',q9:'B',q10:'B'};
+var mcDone={},matDone={},score=0;
+function updateScore(){document.getElementById('scoreVal').textContent=score;}
+function optClick(el,opt,qid){if(mcDone[qid])return;var correct=correctAnswers[qid];var opts=el.parentElement.querySelectorAll('label');opts.forEach(function(o){o.classList.add('disabled');var oText=o.textContent.trim().charAt(0);if(oText===correct){o.classList.add('correct');}else if(o===el){o.classList.add('wrong');}});mcDone[qid]=true;if(opt===correct)score++;updateScore();var analysis=document.getElementById('analysis-'+qid);if(analysis){analysis.classList.add('show');}}
+function trackMatQ(id){if(matDone[id])return;matDone[id]=true;score++;updateScore();}
+function resetQuiz(){mcDone={};matDone={};score=0;updateScore();document.querySelectorAll('.exercise').forEach(function(ex){ex.querySelectorAll('label').forEach(function(l){l.classList.remove('disabled','correct','wrong');});ex.querySelectorAll('.a').forEach(function(a){a.classList.remove('show');});});document.querySelectorAll('.analysis').forEach(function(a){a.classList.remove('show');});}
+
+// ===== 栏目筛选 =====
+function filterCol(cat,chip){document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active');});chip.classList.add('active');document.querySelectorAll('.col-box').forEach(function(box){if(cat==='all'||box.getAttribute('data-cat')===cat){box.classList.remove('filtered-out');}else{box.classList.add('filtered-out');}});}
+function toggleColBox(header){header.parentElement.classList.toggle('open');}
+
+// ===== 拖拽排序 =====
+(function initDragSort(){var items=document.querySelectorAll('#sortPool1 .sort-item');var slots=document.querySelectorAll('#page1 .sort-slot');items.forEach(function(item){item.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',item.getAttribute('data-sortkey'));item.classList.add('dragging');});item.addEventListener('dragend',function(e){item.classList.remove('dragging');});});slots.forEach(function(slot){slot.addEventListener('dragover',function(e){e.preventDefault();slot.classList.add('drag-over');});slot.addEventListener('dragleave',function(){slot.classList.remove('drag-over');});slot.addEventListener('drop',function(e){e.preventDefault();slot.classList.remove('drag-over');var key=e.dataTransfer.getData('text/plain');if(slot.querySelector('.sort-item')){var old=slot.querySelector('.sort-item');old.classList.remove('placed');document.getElementById('sortPool1').appendChild(old);}var item=document.getElementById('item_'+key);if(item){slot.appendChild(item);item.classList.add('placed');slot.classList.add('filled');}});slot.addEventListener('click',function(){var item=this.querySelector('.sort-item');if(item&&!item.classList.contains('dragging')){item.classList.remove('placed');this.classList.remove('filled');document.getElementById('sortPool1').appendChild(item);}});});var pool=document.getElementById('sortPool1');pool.addEventListener('dragover',function(e){e.preventDefault();});pool.addEventListener('drop',function(e){e.preventDefault();var key=e.dataTransfer.getData('text/plain');var item=document.getElementById('item_'+key);if(item&&item.classList.contains('placed')){item.classList.remove('placed');var parentSlot=item.parentElement;if(parentSlot.classList.contains('sort-slot')){parentSlot.classList.remove('filled');}pool.appendChild(item);}});})();
+
+function checkSort(){var correctOrder=['event2','event1','event3','event4','event5'];var slots=document.querySelectorAll('#page1 .sort-slot');var result=document.getElementById('sortResult');var allFilled=true,allCorrect=true;slots.forEach(function(slot,i){var item=slot.querySelector('.sort-item');if(!item){allFilled=false;allCorrect=false;return;}if(item.getAttribute('data-sortkey')===correctOrder[i]){slot.classList.add('correct');slot.classList.remove('wrong');}else{slot.classList.add('wrong');slot.classList.remove('correct');allCorrect=false;}});if(!allFilled){result.textContent='❌ 请先将所有卡片拖入槽位';result.className='sort-result show fail';return;}if(allCorrect){result.textContent='✅ 完全正确！';result.className='sort-result show pass';stageDone.sort=true;updateStageProgress();document.getElementById('stageSortDone').classList.add('show');}else{result.textContent='❌ 顺序不对，请重试';result.className='sort-result show fail';}}
+
+// ===== 填空 =====
+function checkFillBlanks(){var inputs=document.querySelectorAll('#fillBlanks .fill-input');var allCorrect=true;inputs.forEach(function(inp){var answer=inp.getAttribute('data-answer');var val=inp.value.trim();if(val===answer){inp.classList.add('correct');inp.classList.remove('wrong');}else{inp.classList.add('wrong');inp.classList.remove('correct');allCorrect=false;}});var result=document.getElementById('fillResult');if(allCorrect){result.textContent='✅ 完全正确！';result.className='sort-result show pass';stageDone.fill=true;updateStageProgress();document.getElementById('stageFillDone').classList.add('show');}else{result.textContent='❌ 有错误，请检查';result.className='sort-result show fail';}}
+
+// ===== 连线匹配 =====
+var selectedLeft=null,matchedPairs=[];
+function selectMatch(el){if(el.classList.contains('matched'))return;document.querySelectorAll('.match-left.selected').forEach(function(e){e.classList.remove('selected');});el.classList.add('selected');selectedLeft=el;}
+function pairMatch(el){if(!selectedLeft)return;if(el.classList.contains('matched'))return;var leftCat=selectedLeft.getAttribute('data-match');var rightCat=el.getAttribute('data-match');if(leftCat===rightCat){selectedLeft.classList.add('matched');selectedLeft.classList.remove('selected');el.classList.add('matched');matchedPairs.push(leftCat);selectedLeft=null;if(matchedPairs.length>=2){document.getElementById('matchResult').textContent='✅ 全部配对正确！';document.getElementById('matchResult').className='sort-result show pass';stageDone.match=true;updateStageProgress();document.getElementById('stageMatchDone').classList.add('show');}}else{document.getElementById('matchResult').textContent='❌ 配对错误，请重试';document.getElementById('matchResult').className='sort-result show fail';}}
+
+// ===== 因果拼图 =====
+var puzzleData=[
+ {id:0,title:'链条一：独立战争的爆发',badge:'c1',pieces:[{text:'英国殖民压迫，颁布新税法',order:0},{text:'波士顿倾茶事件激化矛盾',order:1},{text:'1775年来克星顿枪声爆发',order:2}]},
+ {id:1,title:'链条二：独立战争的胜利',badge:'c2',pieces:[{text:'华盛顿任大陆军总司令',order:0},{text:'1777年萨拉托加大捷（转折点）',order:1},{text:'1781年约克镇英军投降',order:2}]},
+ {id:2,title:'链条三：美国的建国',badge:'c3',pieces:[{text:'1776年《独立宣言》发表',order:0},{text:'1783年英国承认美国独立',order:1},{text:'1787年宪法确立联邦共和制',order:2}]}
+];
+var puzzleChainProgress=[0,0,0];
+function initPuzzle(){var container=document.getElementById('puzzleContainer');if(!container)return;container.innerHTML='';puzzleChainProgress=[0,0,0];puzzleData.forEach(function(chain,ci){var chainDiv=document.createElement('div');chainDiv.className='puzzle-chain';chainDiv.id='pchain-'+ci;var header=document.createElement('div');header.className='chain-header';var badge=document.createElement('span');badge.className='chain-badge '+chain.badge;badge.textContent='链'+(ci+1);header.appendChild(badge);var titleSpan=document.createElement('span');titleSpan.textContent=chain.title;header.appendChild(titleSpan);var prog=document.createElement('span');prog.className='chain-progress';prog.id='cprog-'+ci;prog.innerHTML='进度：<strong id="cprogNum-'+ci+'">0</strong>/3';header.appendChild(prog);chainDiv.appendChild(header);var slotsDiv=document.createElement('div');slotsDiv.className='chain-slots';slotsDiv.id='cslots-'+ci;for(var s=0;s<3;s++){var slot=document.createElement('div');slot.className='puzzle-slot';slot.id='cslot-'+ci+'-'+s;slot.textContent='第'+(s+1)+'步';slotsDiv.appendChild(slot);}chainDiv.appendChild(slotsDiv);var piecesDiv=document.createElement('div');piecesDiv.className='puzzle-pieces';piecesDiv.id='cpieces-'+ci;var shuffled=chain.pieces.slice();for(var i=shuffled.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var temp=shuffled[i];shuffled[i]=shuffled[j];shuffled[j]=temp;}shuffled.forEach(function(piece,pi){var pDiv=document.createElement('div');pDiv.className='puzzle-piece p'+(ci+1);pDiv.id='cpiece-'+ci+'-'+pi;pDiv.setAttribute('data-chain',ci);pDiv.setAttribute('data-order',piece.order);pDiv.textContent=piece.text;pDiv.addEventListener('click',function(){handlePuzzleClick(parseInt(this.getAttribute('data-chain')),parseInt(this.getAttribute('data-order')));});piecesDiv.appendChild(pDiv);});chainDiv.appendChild(piecesDiv);container.appendChild(chainDiv);});}
+function handlePuzzleClick(chainIdx,order){if(puzzleChainProgress[chainIdx]>=3)return;var nextSlot=puzzleChainProgress[chainIdx];if(order!==nextSlot){var pieces=document.querySelectorAll('#cpieces-'+chainIdx+' .puzzle-piece');pieces.forEach(function(p){if(parseInt(p.getAttribute('data-order'))===order){p.classList.add('wrong-shake');setTimeout(function(){p.classList.remove('wrong-shake');},500);}});return;}var slot=document.getElementById('cslot-'+chainIdx+'-'+nextSlot);var pieceEl=document.querySelector('#cpieces-'+chainIdx+' .puzzle-piece[data-order="'+order+'"]');if(!pieceEl||!slot)return;pieceEl.classList.add('placed');pieceEl.style.display='none';slot.textContent=pieceEl.textContent;slot.classList.add('filled','correct');puzzleChainProgress[chainIdx]++;document.getElementById('cprogNum-'+chainIdx).textContent=puzzleChainProgress[chainIdx];if(puzzleChainProgress[chainIdx]>=3){var chainDiv=document.getElementById('pchain-'+chainIdx);if(chainDiv)chainDiv.classList.add('complete');}var allDone=true;for(var i=0;i<puzzleChainProgress.length;i++){if(puzzleChainProgress[i]<3){allDone=false;break;}}if(allDone){var result=document.getElementById('puzzleResult');result.textContent='🧩 全部因果链拼合正确！';result.className='puzzle-result show pass';stageDone.puzzle=true;updateStageProgress();document.getElementById('stagePuzzleDone').classList.add('show');}}
+
+// ===== 翻转卡 =====
+function flipCard(el){el.classList.toggle('flipped');var total=document.querySelectorAll('.flash-card').length;var flipped=document.querySelectorAll('.flash-card.flipped').length;if(total>0&&flipped>=total){stageDone.flips=true;updateStageProgress();var doneEl=document.getElementById('stageFlipsDone');if(doneEl)doneEl.classList.add('show');}}
+
+// ===== 知识图谱 =====
+function toggleKgDetail(node){node.classList.toggle('expanded');var badge=node.querySelector('.kg-expand-badge');if(badge){var arrow=badge.querySelector('.badge-arrow');if(node.classList.contains('expanded')){if(arrow)arrow.textContent='▼';badge.childNodes[badge.childNodes.length-1].textContent=' 收起详情';}else{if(arrow)arrow.textContent='▶';badge.childNodes[badge.childNodes.length-1].textContent=' 点击展开';}}}
+
+// ===== deep-card 折叠 =====
+(function(){var cards=document.querySelectorAll('.deep-card');cards.forEach(function(card){var hd=card.querySelector('.deep-card-hd');var bd=card.querySelector('.deep-card-bd');if(hd&&bd){hd.removeAttribute('onclick');hd.addEventListener('click',function(e){e.stopPropagation();bd.classList.toggle('show');hd.classList.toggle('active');});}});})();
+document.addEventListener('DOMContentLoaded',function(){initPuzzle();var firstBd=document.querySelector('.deep-card .deep-card-bd');if(firstBd){firstBd.classList.add('show');}});
+</script>
+</body>
+</html>

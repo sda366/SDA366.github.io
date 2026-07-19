@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上-U4-第10课 封建时代的日本（升级版）</title>
+<style>
+:root {
+ --primary: #6c5ce7;
+ --primary-dark: #2d1b69;
+ --primary-light: #a29bfe;
+ --bg: #f8f6ff;
+ --card: #ffffff;
+ --border: #dfd8f0;
+ --green: #00b894;
+ --red: #e17055;
+ --orange: #fdcb6e;
+ --blue: #0984e3;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+ font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+ font-size: 14pt;
+ background: var(--bg);
+ color: #2d3436;
+ line-height: 1.8;
+ max-width: 960px;
+ margin: 0 auto;
+ padding: 0 20px 80px;
+}
+.page-slide { display: none; min-height: 90vh; animation: fadeUp 0.4s ease; }
+.page-slide.active { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+.hero {
+ background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+ padding: 40px 24px 36px;
+ border-radius: 0 0 40px 40px;
+ color: #fff;
+ text-align: center;
+ margin: 0 -20px 30px;
+ box-shadow: 0 8px 32px rgba(108,92,231,0.25);
+}
+.hero .sub { font-size:13pt; opacity:0.8; letter-spacing:2px; }
+.hero h1 { font-size:28pt; margin:10px 0; font-weight:700; }
+.hero .meta { font-size:14pt; opacity:0.85; margin-top:6px; }
+
+.slide-header {
+ text-align:center;
+ padding:12px 0;
+ margin-bottom:20px;
+ border-bottom:3px solid var(--border);
+}
+.slide-header .num { color:var(--primary); font-weight:700; font-size:12pt; }
+.slide-header .title { font-size:20pt; font-weight:700; color:var(--primary-dark); }
+
+/* 导航 */
+.pg-nav {
+ position:fixed; bottom:0; left:0; right:0; z-index:999;
+ background:rgba(255,255,255,0.92); backdrop-filter:blur(8px);
+ display:flex; align-items:center; justify-content:center; gap:12px;
+ padding:8px 16px; height:56px;
+ box-shadow:0 -2px 20px rgba(0,0,0,0.06);
+}
+.pg-nav button {
+ background:var(--primary); color:#fff; border:none; border-radius:20px;
+ padding:6px 18px; font-size:13pt; cursor:pointer; transition:0.2s;
+}
+.pg-nav button:hover { background:var(--primary-dark); transform:scale(1.04); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-dots { display:flex; gap:8px; }
+.pg-dot { width:12px; height:12px; border-radius:50%; background:#dfd8f0; cursor:pointer; transition:0.25s; }
+.pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-counter { font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* 学习目标 */
+.target-grid {
+ display:grid; grid-template-columns:1fr 1fr; gap:10px;
+ background:var(--card); border-radius:14px; padding:20px; margin-bottom:24px;
+ border:1px solid var(--border);
+}
+.target-item { padding:8px 12px; border-radius:8px; cursor:pointer; transition:0.2s; border-left:4px solid var(--primary-light); }
+.target-item:hover { background:#f0edff; }
+.target-item.done { opacity:0.5; text-decoration:line-through; background:#e8f8f5; border-left-color:var(--green); }
+
+/* 按钮 */
+.btn-start {
+ display:block; margin:20px auto;
+ background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+ color:#fff; border:none; border-radius:30px;
+ padding:14px 40px; font-size:16pt; font-weight:700; cursor:pointer;
+ transition:0.3s; box-shadow:0 6px 24px rgba(108,92,231,0.3);
+}
+.btn-start:hover { transform:scale(1.05); box-shadow:0 8px 32px rgba(108,92,231,0.4); }
+
+/* 标签页 */
+.tab-bar {
+ display:flex; gap:0; border-radius:12px 12px 0 0; overflow:hidden;
+}
+.tab-btn {
+ flex:1; padding:14px 8px; font-weight:700; border:none; cursor:pointer;
+ background:#ebe6ff; color:var(--primary-dark); font-size:13pt;
+ transition:0.25s;
+}
+.tab-btn.active { background:var(--primary); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; background:var(--card); padding:20px; border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; }
+.tab-panel.active { display:block; }
+
+/* 知识卡片 */
+.kp-card { background:var(--card); border-radius:12px; padding:18px 22px; margin-bottom:16px; border-left:6px solid var(--primary); box-shadow:0 2px 12px rgba(0,0,0,0.04); }
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:24px; }
+.kp-card li { margin:6px 0; }
+.tag { background:var(--orange); color:#2d3436; border-radius:12px; padding:2px 12px; font-size:10pt; display:inline-block; }
+
+/* 闯关进度 */
+.progress-wrap { background:var(--card); border-radius:10px; padding:12px 16px; margin-bottom:16px; border:1px solid var(--border); }
+.progress-bar { background:#ebe6ff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.progress-fill { background:linear-gradient(90deg, var(--primary), var(--primary-light)); height:100%; width:0%; transition:width 0.5s; }
+.progress-label { display:flex; justify-content:space-between; font-size:11pt; color:#636e72; }
+
+/* 挑战 */
+.challenge-title { text-align:center; font-size:15pt; font-weight:700; color:var(--primary-dark); margin:16px 0 10px; }
+
+/* 拖拽排序（挑战一） */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:10px 0; }
+.sort-item { padding:8px 18px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:600; transition:0.2s; }
+.sort-item.dragging { opacity:0.3; }
+.sort-item.placed { background:#e8f0fe; border-color:#a29bfe; cursor:default; pointer-events:none; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:12px 0; }
+.sort-slot { min-width:100px; min-height:48px; border:2px dashed #d5cef0; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d5f5e3; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-22px; font-size:10pt; color:#999; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; font-weight:700; margin-top:8px; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d5f5e3; color:var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); }
+
+/* 填空（挑战二） */
+.fill-input { width:120px; padding:6px 10px; border:2px solid #dfd8f0; border-radius:8px; font-size:13pt; text-align:center; transition:0.2s; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(108,92,231,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d5f5e3; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; }
+
+/* 匹配（挑战三） */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:120px; }
+.match-item { padding:10px 14px; border-radius:10px; border:2px solid #dfd8f0; background:#fff; cursor:pointer; text-align:center; transition:0.2s; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; }
+.match-item.matched { border-color:var(--green); background:#d5f5e3; cursor:default; opacity:0.7; }
+
+/* 因果连线（挑战四，取代地图标注） */
+.cause-area { background:#faf8ff; border-radius:12px; padding:16px; border:1px solid var(--border); }
+.cause-cols { display:flex; gap:40px; justify-content:center; flex-wrap:wrap; }
+.cause-col { display:flex; flex-direction:column; gap:8px; min-width:140px; }
+.cause-item { padding:10px 14px; border-radius:10px; border:2px solid #dfd8f0; background:#fff; cursor:pointer; text-align:center; transition:0.2s; }
+.cause-item.selected { border-color:var(--primary); background:#f0edff; }
+.cause-item.matched { border-color:var(--green); background:#d5f5e3; cursor:default; opacity:0.7; }
+.cause-line { display:flex; align-items:center; font-size:20pt; color:var(--primary); }
+
+/* 翻转卡（挑战五） */
+.flash-grid {
+ display: grid;
+ grid-template-columns: repeat(6, 1fr);
+ gap: 10px;
+}
+.flash-card {
+ perspective: 700px;
+ height: 140px;
+ cursor: pointer;
+}
+.flash-inner {
+ position: relative;
+ width: 100%;
+ height: 100%;
+ transition: transform 0.5s;
+ transform-style: preserve-3d;
+}
+.flash-card.flipped .flash-inner { transform: rotateY(180deg); }
+.flash-front, .flash-back {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ backface-visibility: hidden;
+ border-radius: 12px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 10px;
+ text-align: center;
+ font-size: 10.5pt;
+ word-break: break-word;
+}
+.flash-front {
+ background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+ color: #fff;
+ font-weight: 700;
+}
+.flash-back {
+ background: #fff;
+ color: #333;
+ transform: rotateY(180deg);
+ border: 2px solid var(--primary);
+}
+.flash-group-label {
+ grid-column: 1 / -1;
+ text-align: center;
+ font-weight: 700;
+ font-size: 13pt;
+ color: var(--primary-dark);
+ background: #ebe6ff;
+ border-radius: 8px;
+ padding: 6px 0;
+ margin: 4px 0;
+}
+
+.stage-done { display:none; background:#d5f5e3; border:2px solid var(--green); border-radius:12px; padding:12px; text-align:center; font-weight:700; color:var(--green); margin:12px 0; }
+.stage-done.show { display:block; }
+
+/* 手风琴重难点 */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+.acc-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; cursor:pointer; user-select:none; background:var(--card); transition:0.2s; }
+.acc-hd:hover { background:#f0edff; }
+.acc-hd h3 { font-size:15pt; }
+.acc-hd .arrow { transition:transform 0.3s; }
+.acc-group.open .acc-hd .arrow { transform:rotate(180deg); }
+.acc-bd { display:none; background:var(--card); padding:0 20px 16px; border-top:1px solid var(--border); }
+.acc-group.open .acc-bd { display:block; }
+.acc-mastered { text-align:right; padding:8px 0; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:4px 16px; cursor:pointer; }
+.acc-mastered button.done { background:#b2bec3; pointer-events:none; }
+
+/* 深化卡片 */
+.deep-card { margin:10px 0; border-radius:10px; border:1px solid var(--border); overflow:hidden; }
+.deep-hd { background:linear-gradient(135deg, #6c5ce7, #a29bfe); color:#fff; padding:10px 16px; font-weight:700; cursor:pointer; }
+.deep-bd { display:none; padding:14px 18px; background:#faf8ff; }
+.deep-bd.show { display:block; }
+
+/* 选择题 */
+.exercise { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 20px; margin-bottom:18px; }
+.options label { display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px; cursor:pointer; transition:0.2s; background:#faf8ff; }
+.options label:hover { background:#f0edff; }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d5f5e3; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.analysis { display:none; background:#fef9e7; border:1px solid #fdcb6e; border-radius:8px; padding:12px; margin:10px 0; }
+.analysis.show { display:block; }
+
+/* 答案按钮 */
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:4px 16px; font-size:12pt; cursor:pointer; transition:0.2s; margin:6px 0; }
+.ans-btn:hover { background:var(--primary-dark); }
+.a { display:none; background:#f0edff; border-radius:8px; padding:12px; margin:8px 0; }
+.a.show { display:block; }
+
+/* 知识结构图 */
+.kg-wrap { background:var(--card); border-radius:14px; padding:24px; border:1px solid var(--border); }
+.kg-title { text-align:center; font-size:18pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.kg-node { border-radius:12px; padding:14px 18px; margin:8px 0; cursor:pointer; transition:0.3s; border:2px solid transparent; }
+.kg-node:hover { transform:scale(1.02); box-shadow:0 4px 20px rgba(108,92,231,0.15); }
+.kg-node .kg-detail { max-height:0; overflow:hidden; transition:0.4s; }
+.kg-node.expanded .kg-detail { max-height:200px; margin-top:8px; border-top:1px dashed var(--border); padding-top:8px; }
+.kg-node.c1 { background:#e8e0ff; border-color:var(--primary); }
+.kg-node.c2 { background:#fff3e0; border-color:#fdcb6e; }
+.kg-node.c3 { background:#d5f5e3; border-color:var(--green); }
+.kg-node.c4 { background:#fadbd8; border-color:var(--red); }
+
+/* 结束页总结卡 */
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px; }
+.recap-card { background:var(--card); border-radius:14px; padding:18px; border:1px solid var(--border); }
+.recap-card h3 { color:var(--primary-dark); border-bottom:2px solid var(--primary-light); padding-bottom:8px; margin-bottom:10px; font-size:14pt; }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { padding:4px 0 4px 18px; position:relative; font-size:12.5pt; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; color:var(--primary); }
+
+footer { text-align:center; padding:20px 0; border-top:2px solid var(--border); margin-top:30px; font-size:11pt; color:#999; }
+
+@media (max-width:680px) {
+ .target-grid { grid-template-columns:1fr; }
+ .flash-grid { grid-template-columns:repeat(3,1fr); }
+ .recap-grid { grid-template-columns:1fr; }
+ .cause-cols { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 0 封面 ==================== -->
+<div class="page-slide active" id="page0">
+ <div class="hero">
+ <div class="sub">第四单元 · 封建时代的亚洲</div>
+ <h1>第10课 · 封建时代的日本</h1>
+ <div class="meta">统编版初中历史 九年级上册 · 新版</div>
+ </div>
+
+ <div class="target-grid" id="targetGrid">
+ <div class="target-item" onclick="toggleTarget(this)">🏛️ <strong>唯物史观：</strong>理解大化改新是日本从奴隶制向封建制过渡的关键</div>
+ <div class="target-item" onclick="toggleTarget(this)">⏳ <strong>时空观念：</strong>梳理5—12世纪日本政治制度的演变脉络</div>
+ <div class="target-item" onclick="toggleTarget(this)">📜 <strong>史料实证：</strong>通过遣唐使、大化改新诏书等史料认识日本社会变革</div>
+ <div class="target-item" onclick="toggleTarget(this)">🔍 <strong>历史解释：</strong>分析大化改新与幕府统治的因果关系</div>
+ <div class="target-item" onclick="toggleTarget(this)">❤️ <strong>家国情怀：</strong>感受中华文化对东亚文明的深远影响</div>
+ </div>
+ <div style="text-align:center; color:var(--green); font-weight:700; display:none;" id="targetsDone">✅ 学习目标已全部了解，开始学习吧！</div>
+
+ <button class="btn-start" onclick="goPage(1)">📖 开始学习</button>
+</div>
+
+<!-- ==================== PAGE 1 知识闯关 ==================== -->
+<div class="page-slide" id="page1">
+ <div class="slide-header"><span class="num">模块一</span><div class="title">知识要点 · 闯关解锁</div></div>
+
+ <div class="progress-wrap">
+ <div class="progress-label"><span>🏆 闯关进度</span><strong id="progLabel">0/5</strong></div>
+ <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+ </div>
+
+ <div class="tab-bar">
+ <button class="tab-btn active" onclick="switchTab('tab1')">6世纪前的日本</button>
+ <button class="tab-btn" onclick="switchTab('tab2')">大化改新</button>
+ <button class="tab-btn" onclick="switchTab('tab3')">幕府统治</button>
+ </div>
+
+ <!-- Tab1 -->
+ <div class="tab-panel active" id="tab1">
+ <div class="kp-card">
+ <h3>🏯 6世纪前的日本</h3>
+ <ul>
+ <li><strong>早期国家：</strong>1—2世纪，日本有100多个小国</li>
+ <li><strong>统一：</strong>5世纪，本州中部的<strong>大和政权</strong>基本实现统一</li>
+ <li><strong>统治者：</strong>“大王”（依靠贵族统治）</li>
+ <li><strong>部民制度：</strong>居民以“部”组织生产（田部、海部、锻冶部等），部民是贵族的私有民，地位近似奴隶</li>
+ </ul>
+ <div><span class="tag">中考常考</span> 大和统一（5世纪）、部民制</div>
+ </div>
+
+ <div class="challenge-title">🎮 挑战一：时间排序</div>
+ <div class="sort-pool" id="sortPool">
+ <span class="sort-item" draggable="true" data-key="e1">大化改新开始</span>
+ <span class="sort-item" draggable="true" data-key="e2">日本有100多个小国</span>
+ <span class="sort-item" draggable="true" data-key="e3">大和政权基本统一</span>
+ <span class="sort-item" draggable="true" data-key="e4">镰仓幕府建立</span>
+ </div>
+ <div class="sort-slots" id="sortSlots">
+ <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+ <div class="sort-slot" data-slot="1"><span class="slot-label">→</span></div>
+ <div class="sort-slot" data-slot="2"><span class="slot-label">→</span></div>
+ <div class="sort-slot" data-slot="3"><span class="slot-label">最晚</span></div>
+ </div>
+ <button class="ans-btn" onclick="checkSort()">✅ 提交</button>
+ <div class="sort-result" id="sortResult"></div>
+ <div class="stage-done" id="stageSort">🎉 第①关通过！</div>
+ </div>
+
+ <!-- Tab2 -->
+ <div class="tab-panel" id="tab2">
+ <div class="kp-card">
+ <h3>📜 大化改新（646年）</h3>
+ <ul>
+ <li><strong>背景：</strong>日本积极吸收中国文化（遣唐使）</li>
+ <li><strong>时间：</strong>646年，孝德天皇（年号“大化”）</li>
+ <li><strong>仿效：</strong>唐朝典章制度</li>
+ <li><strong>政治：</strong>建立以天皇为中心的中央集权制度，地方设国、郡、里</li>
+ <li><strong>经济：</strong>废除私地私民，土地收归国有（公地公民），六年授田，统一赋税</li>
+ <li><strong>意义：</strong>使日本成为中央集权制的封建国家</li>
+ </ul>
+ <div><span class="tag">中考常考</span> 646年、仿唐、中央集权、公地公民</div>
+ </div>
+
+ <div class="challenge-title">🎮 挑战二：填空</div>
+ <div id="fillArea">
+ <div class="fill-blank">大化改新开始于 <input class="fill-input" data-ans="646" placeholder="?"> 年</div>
+ <div class="fill-blank">仿效 <input class="fill-input" data-ans="唐朝" placeholder="?"> 的典章制度</div>
+ <div class="fill-blank">政治上建立以 <input class="fill-input" data-ans="天皇" placeholder="?"> 为中心的中央集权</div>
+ <div class="fill-blank">每隔 <input class="fill-input" data-ans="六" placeholder="?"> 年授田一次</div>
+ <div class="fill-blank">使日本成为中央集权制的 <input class="fill-input" data-ans="封建" placeholder="?"> 国家</div>
+ </div>
+ <button class="ans-btn" onclick="checkFill()">✅ 提交</button>
+ <div class="sort-result" id="fillResult"></div>
+ <div class="stage-done" id="stageFill">🎉 第②关通过！</div>
+ </div>
+
+ <!-- Tab3 -->
+ <div class="tab-panel" id="tab3">
+ <div class="kp-card">
+ <h3>⚔️ 幕府统治</h3>
+ <ul>
+ <li><strong>庄园制：</strong>贵族、寺院建立庄园，享有“不输不入”特权</li>
+ <li><strong>武士集团：</strong>地方豪强武装青壮，以血缘和主从制结合</li>
+ <li><strong>源平合战：</strong>12世纪晚期，源氏击败平氏</li>
+ <li><strong>镰仓幕府：</strong>源赖朝获“征夷大将军”，设幕府于镰仓</li>
+ <li><strong>特点：</strong>天皇大权旁落，幕府将军掌握实权，持续近700年</li>
+ <li><strong>武士道：</strong>武士效忠主公而非国家</li>
+ </ul>
+ <div><span class="tag">中考常考</span> 源赖朝、征夷大将军、天皇虚位</div>
+ </div>
+
+ <div class="challenge-title">🎮 挑战三：概念匹配</div>
+ <div class="match-area">
+ <div class="match-cols">
+ <div class="match-col"><div class="match-col-label">概念</div>
+ <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">源赖朝</div>
+ <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">征夷大将军</div>
+ <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">镰仓</div>
+ </div>
+ <div class="match-col"><div class="match-col-label">对应</div>
+ <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">幕府建立者</div>
+ <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">幕府所在地</div>
+ <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">幕府首领称号</div>
+ </div>
+ </div>
+ </div>
+ <div class="sort-result" id="matchResult"></div>
+ <div class="stage-done" id="stageMatch">🎉 第③关通过！</div>
+
+ <!-- 挑战四：因果连线（取代地图标注） -->
+ <div class="challenge-title">🎮 挑战四：因果连线</div>
+ <div class="cause-area">
+ <div class="cause-cols">
+ <div class="cause-col"><div class="match-col-label">事件（因）</div>
+ <div class="cause-item cause-left" data-cause="c1" onclick="selectCause(this)">大和政权统一</div>
+ <div class="cause-item cause-left" data-cause="c2" onclick="selectCause(this)">大化改新</div>
+ <div class="cause-item cause-left" data-cause="c3" onclick="selectCause(this)">源平合战</div>
+ <div class="cause-item cause-left" data-cause="c4" onclick="selectCause(this)">镰仓幕府建立</div>
+ </div>
+ <div class="cause-col"><div class="match-col-label">结果（果）</div>
+ <div class="cause-item cause-right" data-cause="c1" onclick="pairCause(this)">基本统一日本</div>
+ <div class="cause-item cause-right" data-cause="c2" onclick="pairCause(this)">确立封建制度</div>
+ <div class="cause-item cause-right" data-cause="c3" onclick="pairCause(this)">源氏获胜</div>
+ <div class="cause-item cause-right" data-cause="c4" onclick="pairCause(this)">幕府统治开始</div>
+ </div>
+ </div>
+ </div>
+ <div class="sort-result" id="causeResult"></div>
+ <div class="stage-done" id="stageCause">🎉 第④关通过！</div>
+
+ <!-- 挑战五：翻转卡 -->
+ <div class="challenge-title">🎮 挑战五：翻转卡（全部翻完即通关）</div>
+ <div class="flash-grid" id="flashGrid">
+ <div class="flash-group-label">📌 6世纪前的日本</div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">1—2世纪</div><div class="flash-back">日本有100多个小国</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">5世纪</div><div class="flash-back">大和政权基本统一日本</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">大王</div><div class="flash-back">大和政权的最高统治者</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">部民制</div><div class="flash-back">贵族私有民，近似奴隶，以“部”组织生产</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">田部·海部</div><div class="flash-back">部民组织的生产部门</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">大和政权</div><div class="flash-back">兴起于本州中部，5世纪基本统一</div></div></div>
+
+ <div class="flash-group-label">📜 大化改新</div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">646年</div><div class="flash-back">大化改新开始</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">孝德天皇</div><div class="flash-back">推行大化改新的天皇</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">遣唐使</div><div class="flash-back">日本向唐朝派遣的使者，学习中国文化</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">仿唐制度</div><div class="flash-back">大化改新仿效唐朝典章制度</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">中央集权</div><div class="flash-back">建立以天皇为中心的政治体制</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">公地公民</div><div class="flash-back">土地收归国有，统一授田和赋税</div></div></div>
+
+ <div class="flash-group-label">⚔️ 幕府统治</div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">庄园制</div><div class="flash-back">贵族、寺院建立的庄园，享有“不输不入”特权</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">源平合战</div><div class="flash-back">12世纪晚期，源氏击败平氏</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">源赖朝</div><div class="flash-back">镰仓幕府建立者</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">征夷大将军</div><div class="flash-back">幕府首领的称号</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">镰仓幕府</div><div class="flash-back">日本首个幕府，将军掌握实权</div></div></div>
+ <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">武士道</div><div class="flash-back">武士效忠主公而非国家</div></div></div>
+ </div>
+ <div class="stage-done" id="stageFlash">🎉 第⑤关通过！</div>
+ </div>
+</div>
+
+<!-- ==================== PAGE 2 重难点 ==================== -->
+<div class="page-slide" id="page2">
+ <div class="slide-header"><span class="num">模块二</span><div class="title">重难点解析</div></div>
+
+ <div class="acc-group" id="acc1">
+ <div class="acc-hd" onclick="toggleAcc('acc1')"><h3>🔵 大化改新的历史意义</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 背景与内容</div><div class="deep-bd show">6—9世纪日本积极吸收中国文化，646年孝德天皇仿唐改革，政治中央集权，经济土地国有，确立封建制度。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 中华文化影响</div><div class="deep-bd">遣唐使、文字、建筑、律令制度均受唐影响，是东亚文明交流的典范。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升</div><div class="deep-bd">大化改新是日本历史上的重要转折点，从奴隶制过渡到封建社会，确立了中央集权。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc2">
+ <div class="acc-hd" onclick="toggleAcc('acc2')"><h3>🟠 幕府统治的特点</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 庄园与武士</div><div class="deep-bd">庄园享有“不输不入”特权，地方豪强组建武士集团，形成主从制。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 镰仓幕府建立</div><div class="deep-bd">12世纪源平合战，源赖朝获征夷大将军，设幕府于镰仓，天皇虚位。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升</div><div class="deep-bd">幕府统治是日本二元政治的体现，将军实际掌权，持续近700年，影响深远。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc3">
+ <div class="acc-hd" onclick="toggleAcc('acc3')"><h3>🟣 武士与武士道</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 武士起源</div><div class="deep-bd">地方豪强为保护庄园而武装，以血缘和主从制结合，形成军事集团。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 武士道精神</div><div class="deep-bd">忠诚、勇武、名誉，效忠主公而非国家，是日本封建社会的独特文化。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升</div><div class="deep-bd">武士集团深刻影响了日本政治、社会和文化，幕府统治和武士道成为日本历史的重要特征。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+
+ <div class="acc-group" id="acc4">
+ <div class="acc-hd" onclick="toggleAcc('acc4')"><h3>🟢 大化改新与唐朝文化的联系</h3><span class="arrow">▼</span></div>
+ <div class="acc-bd">
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">📘 遣唐使的作用</div><div class="deep-bd">日本先后派出十几批遣唐使，全面学习唐朝的律令、文字、建筑、佛教等，为大化改新提供了制度蓝本。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🔗 制度借鉴</div><div class="deep-bd">大化改新在政治、经济、文化上均效仿唐朝，如中央集权、均田制、赋税制度等，体现了中华文明对东亚的辐射。</div></div>
+ <div class="deep-card"><div class="deep-hd" onclick="toggleDeep(this)">🎯 素养提升</div><div class="deep-bd">理解文明交流互鉴的重要性，日本主动学习唐朝先进文化，推动了自身社会变革，是“和魂汉才”的体现。</div></div>
+ <div class="acc-mastered"><button onclick="markMastered('acc4',this)">✅ 已掌握</button></div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== PAGE 3 教材栏目 ==================== -->
+<div class="page-slide" id="page3">
+ <div class="slide-header"><span class="num">模块三</span><div class="title">教材栏目 · 材料研读与拓展</div></div>
+
+ <!-- 栏目1：材料研读（删除页码） -->
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">📖 材料研读</h3>
+ <div style="background:#faf8ff; padding:12px 16px; border-left:4px solid var(--primary); margin:12px 0;">
+ <p>“6—9世纪，日本积极吸收中国文化。……从646年开始，日本仿效唐朝的典章制度，进行了一系列改革，史称‘大化改新’。”</p>
+ <div style="font-size:12pt; color:#636e72;">——统编版《世界历史》九年级上册</div>
+ </div>
+ <div class="q-text"><strong>问题：</strong>根据材料，大化改新仿效了哪个国家的制度？其目的是什么？</div>
+ <div class="a" id="ansMat1"><strong>参考答案：</strong>仿效唐朝制度。目的是建立中央集权的封建国家，巩固统治。</div>
+ <button class="ans-btn" onclick="toggleAns('ansMat1')">显示答案</button>
+ </div>
+
+ <!-- 栏目2：知识拓展 · 遣唐使 -->
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">📚 知识拓展 · 遣唐使</h3>
+ <p>日本先后向唐朝派遣十几次遣唐使，学习中国的律令、文化、科技，对日本社会变革产生了巨大推动。著名人物有阿倍仲麻吕、吉备真备等。</p>
+ <div class="a" id="ansExt1"><strong>要点：</strong>遣唐使是中日文化交流的桥梁，促进了日本大化改新和封建化进程。</div>
+ <button class="ans-btn" onclick="toggleAns('ansExt1')">查看要点</button>
+ </div>
+
+ <!-- 栏目3：历史地图 -->
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">🌍 历史地图 · 日本列岛</h3>
+ <p>观察地图，指出大和政权兴起于本州中部，镰仓幕府设于本州东部沿海。</p>
+ <div class="a" id="ansMap">大和政权兴起于本州中部（今奈良一带），镰仓幕府位于本州东部的镰仓（今神奈川县）。</div>
+ <button class="ans-btn" onclick="toggleAns('ansMap')">查看说明</button>
+ </div>
+
+ <!-- 栏目4：课后活动 -->
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">🧩 课后活动</h3>
+ <div style="background:#f0edff; padding:12px; border-radius:8px;">
+ <p><strong>活动：</strong>查阅资料，以“大化改新与唐朝制度”为主题，制作一份简要的对比表格，并谈谈你的认识。</p>
+ </div>
+ <div class="a" id="ansActivity"><strong>示例：</strong>政治：唐朝三省六部→日本二官八省；经济：均田制→班田收授法；文化：律令、文字、建筑等。认识：日本善于吸收外来文化，并结合本国实际进行创新。</div>
+ <button class="ans-btn" onclick="toggleAns('ansActivity')">查看提示</button>
+ </div>
+
+ <!-- 栏目5：问题思考 -->
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">💡 问题思考</h3>
+ <p><strong>思考：</strong>日本为什么要学习唐朝？大化改新的成功给日本带来了什么影响？</p>
+ <div class="a" id="ansThink"><strong>参考答案：</strong>日本为摆脱落后、加强统治而学习唐朝；大化改新使日本进入封建社会，推动了社会进步，增强了国力。</div>
+ <button class="ans-btn" onclick="toggleAns('ansThink')">显示答案</button>
+ </div>
+
+ <!-- 栏目6：相关史事 -->
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:16px;">
+ <h3 style="color:var(--primary-dark);">📖 相关史事 · 遣唐使阿倍仲麻吕</h3>
+ <p>阿倍仲麻吕（698—770），日本奈良时期的遣唐使，入唐后改名晁衡，在唐朝考中进士，与李白、王维等文人交好，为中日文化交流作出重要贡献。</p>
+ <div class="a" id="ansStory">阿倍仲麻吕是中日友好交往的见证，体现了唐朝开放包容的文化氛围。</div>
+ <button class="ans-btn" onclick="toggleAns('ansStory')">查看解读</button>
+ </div>
+
+ <!-- 栏目7：人物扫描 -->
+ <div style="background:var(--card); border-radius:12px; padding:20px; border:1px solid var(--border);">
+ <h3 style="color:var(--primary-dark);">👤 人物扫描 · 源赖朝</h3>
+ <p>源赖朝（1147—1199），日本镰仓幕府首任征夷大将军，在源平合战中击败平氏，建立武家政权，开创了幕府统治时代。</p>
+ <div class="a" id="ansPerson">源赖朝是日本幕府时代的开创者，其建立的镰仓幕府延续近700年，深刻影响了日本政治格局。</div>
+ <button class="ans-btn" onclick="toggleAns('ansPerson')">查看解读</button>
+ </div>
+</div>
+
+<!-- ==================== PAGE 4 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+ <div class="slide-header"><span class="num">模块四</span><div class="title">课堂训练 · 中考题型（10选择+2材料）</div></div>
+
+ <div style="display:flex; justify-content:space-between; align-items:center; background:var(--card); padding:12px 20px; border-radius:12px; border:1px solid var(--border); margin-bottom:16px;">
+ <span>🏅 得分：<strong id="scoreDisplay">0</strong></span>
+ <button onclick="resetQuiz()" style="background:transparent; border:2px solid var(--primary); border-radius:16px; padding:4px 14px; cursor:pointer;">🔄 重做</button>
+ </div>
+
+ <!-- 选择题 1-10 -->
+ <div class="exercise">
+ <div class="q-text"><strong>1.</strong> 大化改新是日本历史上的重要事件，其内容不包括（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q1')">A. 建立中央集权制度</label><label onclick="selectOpt(this,'B','q1')">B. 废除世袭贵族特权</label><label onclick="selectOpt(this,'C','q1')">C. 实行土地国有</label><label onclick="selectOpt(this,'D','q1')">D. 推行幕府统治</label></div>
+ <div class="analysis" id="ana-q1"><strong>答案：D</strong> 解析：幕府统治是12世纪以后，大化改新是建立中央集权，不包括幕府。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>2.</strong> 日本大化改新仿效的是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q2')">A. 秦朝制度</label><label onclick="selectOpt(this,'B','q2')">B. 汉朝制度</label><label onclick="selectOpt(this,'C','q2')">C. 唐朝制度</label><label onclick="selectOpt(this,'D','q2')">D. 宋朝制度</label></div>
+ <div class="analysis" id="ana-q2"><strong>答案：C</strong> 解析：大化改新仿效唐朝典章制度。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>3.</strong> 大化改新在经济上（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q3')">A. 废除私地私民，土地收归国有</label><label onclick="selectOpt(this,'B','q3')">B. 允许土地自由买卖</label><label onclick="selectOpt(this,'C','q3')">C. 实行重农抑商</label><label onclick="selectOpt(this,'D','q3')">D. 推行科举制度</label></div>
+ <div class="analysis" id="ana-q3"><strong>答案：A</strong> 解析：大化改新废除私地私民，实行公地公民。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>4.</strong> 幕府统治时期，日本天皇的地位是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q4')">A. 掌握实权</label><label onclick="selectOpt(this,'B','q4')">B. 虚位元首</label><label onclick="selectOpt(this,'C','q4')">C. 与将军共治</label><label onclick="selectOpt(this,'D','q4')">D. 被武士废除</label></div>
+ <div class="analysis" id="ana-q4"><strong>答案：B</strong> 解析：幕府将军掌握实权，天皇成为礼仪性摆设。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>5.</strong> 武士道强调武士效忠的对象是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q5')">A. 天皇</label><label onclick="selectOpt(this,'B','q5')">B. 国家</label><label onclick="selectOpt(this,'C','q5')">C. 主公</label><label onclick="selectOpt(this,'D','q5')">D. 幕府</label></div>
+ <div class="analysis" id="ana-q5"><strong>答案：C</strong> 解析：武士道强调效忠主公，而非国家或天皇。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>6.</strong> 日本大和政权统一全国是在（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q6')">A. 1—2世纪</label><label onclick="selectOpt(this,'B','q6')">B. 5世纪</label><label onclick="selectOpt(this,'C','q6')">C. 646年</label><label onclick="selectOpt(this,'D','q6')">D. 12世纪晚期</label></div>
+ <div class="analysis" id="ana-q6"><strong>答案：B</strong> 解析：5世纪大和政权基本实现统一。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>7.</strong> 关于大化改新，以下说法正确的是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q7')">A. 由源赖朝主持</label><label onclick="selectOpt(this,'B','q7')">B. 使日本进入封建社会</label><label onclick="selectOpt(this,'C','q7')">C. 确立了幕府统治</label><label onclick="selectOpt(this,'D','q7')">D. 仿效明朝制度</label></div>
+ <div class="analysis" id="ana-q7"><strong>答案：B</strong> 解析：大化改新使日本从奴隶社会过渡到封建社会。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>8.</strong> 镰仓幕府的首领称（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q8')">A. 天皇</label><label onclick="selectOpt(this,'B','q8')">B. 大王</label><label onclick="selectOpt(this,'C','q8')">C. 征夷大将军</label><label onclick="selectOpt(this,'D','q8')">D. 太政大臣</label></div>
+ <div class="analysis" id="ana-q8"><strong>答案：C</strong> 解析：幕府首领称为“征夷大将军”。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>9.</strong> 日本庄园享有“不输不入”特权，其含义是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q9')">A. 庄园可向国家纳税</label><label onclick="selectOpt(this,'B','q9')">B. 庄园免受国家干涉，不纳税，不入地方官管辖</label><label onclick="selectOpt(this,'C','q9')">C. 庄园农民可以自由迁移</label><label onclick="selectOpt(this,'D','q9')">D. 庄园土地由国家分配</label></div>
+ <div class="analysis" id="ana-q9"><strong>答案：B</strong> 解析：“不输不入”指庄园不向国家纳税，不受地方官管理。</div>
+ </div>
+ <div class="exercise">
+ <div class="q-text"><strong>10.</strong> 大化改新后，日本政治制度的特点是（ ）</div>
+ <div class="options"><label onclick="selectOpt(this,'A','q10')">A. 地方封建割据</label><label onclick="selectOpt(this,'B','q10')">B. 中央集权</label><label onclick="selectOpt(this,'C','q10')">C. 君主立宪</label><label onclick="selectOpt(this,'D','q10')">D. 民主共和</label></div>
+ <div class="analysis" id="ana-q10"><strong>答案：B</strong> 解析：大化改新建立以天皇为中心的中央集权制度。</div>
+ </div>
+
+ <!-- 材料题一 -->
+ <div style="background:var(--card); border-radius:12px; padding:18px; border:1px solid var(--border); margin-top:16px;">
+ <div class="q-text"><strong>材料题一</strong> 阅读下列材料：</div>
+ <div style="background:#faf8ff; padding:12px; border-left:4px solid var(--primary); margin:8px 0;">
+ “日本孝德天皇仿效唐朝制度，进行改革，建立中央集权制度，实行土地国有，统一赋税。改革后，日本社会发生了根本性变化。”
+ </div>
+ <div class="q-text">(1) 材料反映的是哪一历史事件？(2) 该事件对日本社会产生了什么影响？</div>
+ <div class="a" id="ansMat2"><strong>参考答案：</strong>(1) 大化改新；(2) 使日本从奴隶社会过渡到封建社会，确立了中央集权制度，推动了社会进步。</div>
+ <button class="ans-btn" onclick="toggleAns('ansMat2')">显示答案</button>
+ </div>
+
+ <!-- 材料题二 -->
+ <div style="background:var(--card); border-radius:12px; padding:18px; border:1px solid var(--border); margin-top:16px;">
+ <div class="q-text"><strong>材料题二</strong> 阅读下列材料：</div>
+ <div style="background:#faf8ff; padding:12px; border-left:4px solid var(--primary); margin:8px 0;">
+ “12世纪晚期，源氏武士集团击败平氏，源赖朝获得‘征夷大将军’称号，在镰仓设立幕府。此后，天皇权力旁落，幕府将军成为实际统治者。”
+ </div>
+ <div class="q-text">(1) 材料中“幕府”的建立者是谁？(2) 幕府统治时期天皇的地位如何？</div>
+ <div class="a" id="ansMat3"><strong>参考答案：</strong>(1) 源赖朝；(2) 天皇成为虚位元首，只有礼仪性职能，实权掌握在幕府将军手中。</div>
+ <button class="ans-btn" onclick="toggleAns('ansMat3')">显示答案</button>
+ </div>
+</div>
+
+<!-- ==================== PAGE 5 知识结构 ==================== -->
+<div class="page-slide" id="page5">
+ <div class="slide-header"><span class="num">模块五</span><div class="title">知识结构 · 因果链</div></div>
+ <div class="kg-wrap">
+ <div class="kg-title">📊 日本封建时代演进脉络</div>
+ <div style="text-align:center; margin-bottom:16px; color:#636e72; font-size:12pt;">点击节点展开详情</div>
+ <div>
+ <div class="kg-node c1" onclick="toggleKg(this)"><strong>🏯 大和统一（5世纪）</strong><p>大王统治 · 部民制度</p><div class="kg-detail">大和政权兴起于本州中部，基本统一日本，部民是贵族的私有民，地位近似奴隶。</div></div>
+ <div style="text-align:center; font-size:20pt; color:var(--primary);">⬇️</div>
+ <div class="kg-node c2" onclick="toggleKg(this)"><strong>📜 大化改新（646年）</strong><p>仿唐 · 中央集权 · 封建国家</p><div class="kg-detail">646年孝德天皇仿唐改革，政治上中央集权，经济上土地国有，日本进入封建社会。</div></div>
+ <div style="text-align:center; font-size:20pt; color:var(--primary);">⬇️</div>
+ <div class="kg-node c3" onclick="toggleKg(this)"><strong>⚔️ 幕府统治（12世纪起）</strong><p>源赖朝 · 征夷大将军 · 镰仓幕府</p><div class="kg-detail">源赖朝建立镰仓幕府，将军掌握实权，天皇虚位，持续近700年。</div></div>
+ <div style="text-align:center; font-size:20pt; color:var(--primary);">⬇️</div>
+ <div class="kg-node c4" onclick="toggleKg(this)"><strong>🗡️ 武士道</strong><p>效忠主公 · 影响深远</p><div class="kg-detail">武士集团长期统治形成了武士道，强调忠诚、勇武，效忠对象是主公而非国家。</div></div>
+ </div>
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px;">
+ <div style="background:#e8e0ff; padding:10px; border-radius:8px; text-align:center; font-weight:600;">政治：统一→集权→幕府</div>
+ <div style="background:#fff3e0; padding:10px; border-radius:8px; text-align:center; font-weight:600;">经济：部民→公地公民→庄园</div>
+ <div style="background:#d5f5e3; padding:10px; border-radius:8px; text-align:center; font-weight:600;">文化：中华文化影响</div>
+ <div style="background:#fadbd8; padding:10px; border-radius:8px; text-align:center; font-weight:600;">特征：武士与幕府统治</div>
+ </div>
+ </div>
+</div>
+
+<!-- ==================== PAGE 6 结束页 ==================== -->
+<div class="page-slide" id="page6">
+ <div class="hero" style="border-radius:36px; margin-bottom:30px;">
+ <div class="sub">第四单元 · 封建时代的亚洲</div>
+ <h1 style="font-size:22pt;">第10课 · 封建时代的日本</h1>
+ <div class="meta" style="margin-top:12px;">✅ 本课学习完成</div>
+ </div>
+
+ <!-- 6卡总结 -->
+ <div class="recap-grid">
+ <div class="recap-card"><h3>🌱 早期国家</h3><ul><li>1—2世纪：100多个小国</li><li>5世纪：大和政权统一</li><li>统治者称“大王”</li></ul></div>
+ <div class="recap-card"><h3>🧑‍🌾 部民制度</h3><ul><li>以“部”组织生产</li><li>部民为贵族私有民</li><li>地位近似奴隶</li></ul></div>
+ <div class="recap-card"><h3>📜 大化改新（646）</h3><ul><li>孝德天皇</li><li>仿效唐朝制度</li><li>中央集权</li><li>公地公民</li></ul></div>
+ <div class="recap-card"><h3>🏯 大化改新意义</h3><ul><li>日本进入封建社会</li><li>中央集权制确立</li><li>中日文化交流典范</li></ul></div>
+ <div class="recap-card"><h3>⚔️ 幕府统治</h3><ul><li>庄园制与武士集团</li><li>源平合战</li><li>源赖朝·镰仓幕府</li><li>天皇虚位</li></ul></div>
+ <div class="recap-card"><h3>🗡️ 武士道</h3><ul><li>忠诚·勇武·名誉</li><li>效忠主公</li><li>持续影响日本文化</li></ul></div>
+ </div>
+
+ <!-- 底部导航 -->
+ <div style="display:flex; justify-content:space-between; margin:24px 0; padding:14px 20px; background:var(--card); border-radius:12px; border:1px solid var(--border);">
+ <span><a href="#" style="color:var(--primary); text-decoration:none;">← 第8课 西欧庄园</a></span>
+ <span style="font-weight:700; color:var(--primary-dark);">第10课</span>
+ <span><a href="#" style="color:var(--primary); text-decoration:none;">第9课 拜占庭帝国 →</a></span>
+ </div>
+
+ <div class="bottom-nav">
+ <div><a href="九上导航页.html">← 第四单元 · 中古时期的亚洲、非洲和美洲</a></div>
+ <div class="nav-center">第10课</div>
+ <div><a href="九上-U4-第11课_阿拉伯帝国.html">下一课：第11课 阿拉伯帝国 →</a></div>
+ </div>
+ <footer><p>统编版初中历史 · 九年级上册 · 第四单元</p><p>基于新版教材 · 交互式学习课件</p></footer>
+</div>
+
+<!-- ==================== 导航栏 ==================== -->
+<div class="pg-nav">
+ <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+ <div class="pg-dots" id="pgDots">
+ <span class="pg-dot active" onclick="goPage(0)"></span>
+ <span class="pg-dot" onclick="goPage(1)"></span>
+ <span class="pg-dot" onclick="goPage(2)"></span>
+ <span class="pg-dot" onclick="goPage(3)"></span>
+ <span class="pg-dot" onclick="goPage(4)"></span>
+ <span class="pg-dot" onclick="goPage(5)"></span>
+ <span class="pg-dot" onclick="goPage(6)"></span>
+ </div>
+ <span class="pg-counter" id="pgCounter">1/7</span>
+ <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ========== 分页 ==========
+let curPage = 0, total = 7;
+const dots = document.querySelectorAll('#pgDots .pg-dot');
+const counter = document.getElementById('pgCounter');
+const prevBtn = document.getElementById('pgPrev');
+const nextBtn = document.getElementById('pgNext');
+
+function goPage(n) {
+ if (n<0 || n>=total) return;
+ document.getElementById('page'+curPage).classList.remove('active');
+ dots[curPage].classList.remove('active');
+ curPage = n;
+ document.getElementById('page'+curPage).classList.add('active');
+ dots[curPage].classList.add('active');
+ counter.textContent = (curPage+1)+'/'+total;
+ prevBtn.disabled = (curPage===0);
+ nextBtn.disabled = (curPage===total-1);
+ window.scrollTo({top:0, behavior:'smooth'});
+}
+function nextPage(){ if(curPage<total-1) goPage(curPage+1); }
+function prevPage(){ if(curPage>0) goPage(curPage-1); }
+document.addEventListener('keydown', e => {
+ if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'){ e.preventDefault(); nextPage(); }
+ if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); prevPage(); }
+});
+
+// ========== 学习目标 ==========
+let targetCount=0;
+function toggleTarget(el){
+ el.classList.toggle('done');
+ targetCount = document.querySelectorAll('#targetGrid .target-item.done').length;
+ document.getElementById('targetsDone').style.display = (targetCount>=5) ? 'block' : 'none';
+}
+
+// ========== 标签页 ==========
+function switchTab(id){
+ document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+ document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+ document.querySelector(`.tab-btn[onclick*="${id}"]`).classList.add('active');
+ document.getElementById(id).classList.add('active');
+}
+
+// ========== 闯关进度 ==========
+let stage = {sort:false, fill:false, match:false, cause:false, flash:false};
+function updateProg(){
+ const done = Object.values(stage).filter(v=>v).length;
+ document.getElementById('progLabel').textContent = done+'/5';
+ document.getElementById('progFill').style.width = (done/5*100)+'%';
+}
+
+// ========== 拖拽排序（挑战一） ==========
+let sortCorrect = ['e2','e3','e1','e4'];
+function initDrag(){
+ const items = document.querySelectorAll('#sortPool .sort-item');
+ const slots = document.querySelectorAll('#sortSlots .sort-slot');
+ items.forEach(item => {
+ item.addEventListener('dragstart', e => {
+ e.dataTransfer.setData('text/plain', item.dataset.key);
+ item.classList.add('dragging');
+ });
+ item.addEventListener('dragend', () => item.classList.remove('dragging'));
+ });
+ slots.forEach(slot => {
+ slot.addEventListener('dragover', e => e.preventDefault());
+ slot.addEventListener('drop', e => {
+ e.preventDefault();
+ const key = e.dataTransfer.getData('text/plain');
+ const item = document.getElementById('item_'+key);
+ if(!item) return;
+ const old = slot.querySelector('.sort-item');
+ if(old){ old.classList.remove('placed'); document.getElementById('sortPool').appendChild(old); }
+ slot.appendChild(item);
+ item.classList.add('placed');
+ slot.classList.add('filled');
+ });
+ slot.addEventListener('click', ()=>{
+ const item = slot.querySelector('.sort-item');
+ if(item){ item.classList.remove('placed'); slot.classList.remove('filled'); document.getElementById('sortPool').appendChild(item); }
+ });
+ });
+}
+initDrag();
+
+function checkSort(){
+ const slots = document.querySelectorAll('#sortSlots .sort-slot');
+ let allOk = true, filled = true;
+ slots.forEach((slot, i) => {
+ const item = slot.querySelector('.sort-item');
+ if(!item){ filled=false; allOk=false; return; }
+ if(item.dataset.key === sortCorrect[i]) { slot.classList.add('correct'); slot.classList.remove('wrong'); }
+ else { slot.classList.add('wrong'); slot.classList.remove('correct'); allOk=false; }
+ });
+ const res = document.getElementById('sortResult');
+ if(!filled){ res.textContent='❌ 请将所有卡片拖入槽位'; res.className='sort-result show fail'; return; }
+ if(allOk){
+ res.textContent='✅ 完全正确！'; res.className='sort-result show pass';
+ stage.sort=true; updateProg(); document.getElementById('stageSort').classList.add('show');
+ } else {
+ res.textContent='❌ 顺序不对，请重试'; res.className='sort-result show fail';
+ }
+}
+
+// ========== 填空（挑战二） ==========
+function checkFill(){
+ const inputs = document.querySelectorAll('#fillArea .fill-input');
+ let allOk=true;
+ inputs.forEach(inp => {
+ const ans = inp.dataset.ans;
+ if(inp.value.trim()===ans){ inp.classList.add('correct'); inp.classList.remove('wrong'); }
+ else { inp.classList.add('wrong'); inp.classList.remove('correct'); allOk=false; }
+ });
+ const res = document.getElementById('fillResult');
+ if(allOk){
+ res.textContent='✅ 完全正确！'; res.className='sort-result show pass';
+ stage.fill=true; updateProg(); document.getElementById('stageFill').classList.add('show');
+ } else {
+ res.textContent='❌ 有错误，请检查'; res.className='sort-result show fail';
+ }
+}
+
+// ========== 匹配（挑战三） ==========
+let selectedLeft = null, matched = [];
+function selectMatch(el){
+ if(el.classList.contains('matched')) return;
+ document.querySelectorAll('.match-left.selected').forEach(e=>e.classList.remove('selected'));
+ el.classList.add('selected');
+ selectedLeft = el;
+}
+function pairMatch(el){
+ if(!selectedLeft || el.classList.contains('matched')) return;
+ if(selectedLeft.dataset.match === el.dataset.match){
+ selectedLeft.classList.add('matched'); selectedLeft.classList.remove('selected');
+ el.classList.add('matched');
+ matched.push(selectedLeft.dataset.match);
+ selectedLeft = null;
+ if(matched.length >= 3){
+ document.getElementById('matchResult').textContent='✅ 全部配对正确！';
+ document.getElementById('matchResult').className='sort-result show pass';
+ stage.match=true; updateProg(); document.getElementById('stageMatch').classList.add('show');
+ }
+ } else {
+ document.getElementById('matchResult').textContent='❌ 配对错误，请重试';
+ document.getElementById('matchResult').className='sort-result show fail';
+ }
+}
+
+// ========== 因果连线（挑战四） ==========
+let selectedCause = null, causeMatched = [];
+function selectCause(el){
+ if(el.classList.contains('matched')) return;
+ document.querySelectorAll('.cause-left.selected').forEach(e=>e.classList.remove('selected'));
+ el.classList.add('selected');
+ selectedCause = el;
+}
+function pairCause(el){
+ if(!selectedCause || el.classList.contains('matched')) return;
+ if(selectedCause.dataset.cause === el.dataset.cause){
+ selectedCause.classList.add('matched'); selectedCause.classList.remove('selected');
+ el.classList.add('matched');
+ causeMatched.push(selectedCause.dataset.cause);
+ selectedCause = null;
+ if(causeMatched.length >= 4){
+ document.getElementById('causeResult').textContent='✅ 全部因果关系正确！';
+ document.getElementById('causeResult').className='sort-result show pass';
+ stage.cause=true; updateProg(); document.getElementById('stageCause').classList.add('show');
+ }
+ } else {
+ document.getElementById('causeResult').textContent='❌ 因果不匹配，请重试';
+ document.getElementById('causeResult').className='sort-result show fail';
+ }
+}
+
+// ========== 翻转卡（挑战五） ==========
+function flipCard(el){
+ el.classList.toggle('flipped');
+ const total = document.querySelectorAll('.flash-card').length;
+ const flipped = document.querySelectorAll('.flash-card.flipped').length;
+ if(flipped >= total){
+ stage.flash=true; updateProg(); document.getElementById('stageFlash').classList.add('show');
+ }
+}
+
+// ========== 手风琴 ==========
+function toggleAcc(id){
+ document.getElementById(id).classList.toggle('open');
+}
+function markMastered(id, btn){
+ btn.classList.add('done');
+ btn.textContent='✅ 已掌握';
+}
+
+// ========== 深度卡片 ==========
+function toggleDeep(hd){
+ const bd = hd.nextElementSibling;
+ bd.classList.toggle('show');
+}
+
+// ========== 知识图谱 ==========
+function toggleKg(el){
+ el.classList.toggle('expanded');
+}
+
+// ========== 答案显隐 ==========
+function toggleAns(id){
+ document.getElementById(id).classList.toggle('show');
+}
+
+// ========== 选择题（10道） ==========
+let score = 0;
+const ansMap = {
+ q1:'D', q2:'C', q3:'A', q4:'B', q5:'C',
+ q6:'B', q7:'B', q8:'C', q9:'B', q10:'B'
+};
+let qDone = {};
+function selectOpt(el, opt, qid){
+ if(qDone[qid]) return;
+ const correct = ansMap[qid];
+ const opts = el.parentElement.querySelectorAll('label');
+ opts.forEach(o => {
+ o.classList.add('disabled');
+ if(o.textContent.trim().charAt(0) === correct) o.classList.add('correct');
+ else if(o === el) o.classList.add('wrong');
+ });
+ qDone[qid]=true;
+ if(opt === correct) score++;
+ document.getElementById('scoreDisplay').textContent = score;
+ document.getElementById('ana-'+qid).classList.add('show');
+}
+function resetQuiz(){
+ qDone={}; score=0;
+ document.getElementById('scoreDisplay').textContent=0;
+ document.querySelectorAll('.exercise').forEach(ex => {
+ ex.querySelectorAll('label').forEach(l => l.classList.remove('disabled','correct','wrong'));
+ ex.querySelectorAll('.analysis').forEach(a => a.classList.remove('show'));
+ });
+}
+</script>
+</body>
+</html>
