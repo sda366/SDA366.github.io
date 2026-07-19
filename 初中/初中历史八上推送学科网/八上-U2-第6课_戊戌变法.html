@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6课 戊戌变法 · 八上</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ========== Page0 封面 ========== */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+.targets-done { display:none; background: #d4efdf; border:2px solid var(--green); border-radius:10px; padding:10px 16px; text-align:center; font-size:13pt; font-weight:700; color:var(--green); margin-top:12px; }
+.targets-done.show { display:block; }
+
+/* ========== Page1 标签页 & 闯关 ========== */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; padding-top:12px; }
+.tab-panel.active { display: block; }
+
+/* 闯关进度条 */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.tag-zhongkao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+
+/* 挑战通过横幅 */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; padding:4px 8px; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== 填空 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:140px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== 连线 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:100px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== 地图标注 ========== */
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-zone svg { max-width:100%; height:auto; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+/* ========== 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== Page2 手风琴 & deep-card ========== */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; padding: 0 0 12px 0; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+.deep-card { margin: 10px 18px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+.diff-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13pt; }
+.diff-table th { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 12px; text-align: center; }
+.diff-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: center; }
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== Page3 栏目 ========== */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); flex-wrap:wrap; }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+  .pg-nav { gap: 6px; flex-wrap:wrap; height:auto; padding:6px 10px; }
+  .pg-nav button { font-size:11pt; padding:4px 10px; }
+  .kg-rules-grid { grid-template-columns:1fr; }
+  .match-cols { gap:14px; }
+  .hero-wrap h1 { font-size:20pt; }
+  body { padding:0 10px 100px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 0: 封面 -->
+<!-- ============================================================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第二单元 · 早期现代化的初步探索和民族危机加剧</div>
+    <h1>第6课 · 戊戌变法</h1>
+    <div class="hero-sub">统编版初中历史  八年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解戊戌变法（1898年）的历史背景和进程，梳理从公车上书到百日维新的时间线。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过梁启超《变法通议》、严复《天演论》等文献，认识维新思想的核心主张，理解变法措施的进步性。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析戊戌变法兴起的原因，理解变法失败的原因，认识戊戌变法的历史意义和局限性。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感悟谭嗣同“为变法流血牺牲”的英雄气概，体会康有为、梁启超等维新派的救亡图存精神。</div>
+    </div>
+    <div class="targets-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: 知识要点 + 五关闯关 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">一 · 公车上书</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">二 · 维新运动</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">三 · 百日维新</button>
+  </div>
+
+  <!-- ======== TAB1 公车上书 ======== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1888年—1895年 · 从上书到公车上书</div>
+      <h3>📜 康有为与公车上书</h3>
+      <ul>
+        <li>背景：19世纪八九十年代，知识分子认识到洋务运动不足以救国，必须学习<span class="kwd">西方制度</span>。</li>
+        <li>1888年，<span class="kwd">康有为</span>第一次上书光绪皇帝，提出变法主张。</li>
+        <li>1895年春，《马关条约》签订前夕，康有为、<span class="kwd">梁启超</span>联合各省举人上书，史称"<span class="kwd">公车上书</span>"。</li>
+        <li>公车上书内容：请求<span class="kwd">拒和、迁都、变法</span>。</li>
+        <li>意义：虽未上达，但拉开了<span class="kwd">维新运动</span>的序幕。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>公车上书</strong>的时间、内容和意义。</div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：请将戊戌变法兴起的关键事件按时间顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="step1" id="item_step1">康有为第一次上书光绪皇帝，提出变法主张</span>
+      <span class="sort-item" draggable="true" data-sortkey="step2" id="item_step2">《马关条约》签订，民族危机加深</span>
+      <span class="sort-item" draggable="true" data-sortkey="step3" id="item_step3">康有为、梁启超联合举人"公车上书"</span>
+      <span class="sort-item" draggable="true" data-sortkey="step4" id="item_step4">维新人士在全国组织学会、创办报刊</span>
+      <span class="sort-item" draggable="true" data-sortkey="step5" id="item_step5">德国强占胶州湾，康有为上书痛陈紧迫性</span>
+      <span class="sort-item" draggable="true" data-sortkey="step6" id="item_step6">光绪帝颁布"明定国是"诏书，变法开始</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+      <div class="sort-slot" data-slot="5"><span class="slot-label">第6步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">公车上书</div><div class="flash-back">1895年春，康有为、梁启超联合各省应试举人上书光绪皇帝，请求拒和、迁都、变法，拉开了维新运动的序幕。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">维新变法</div><div class="flash-back">19世纪八九十年代，以康有为、梁启超为代表的知识分子主张学习西方制度，开展变法救国运动。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">康有为</div><div class="flash-back">广东南海人，1891年收徒讲学宣传维新思想，多次上书光绪帝，是戊戌变法的核心人物。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== TAB2 维新运动 ======== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1895年—1898年 · 维新思想的传播</div>
+      <h3>📰 维新运动的开展</h3>
+      <ul>
+        <li>公车上书失败后，维新人士在全国组织<span class="kwd">学会</span>、创办<span class="kwd">报刊</span>。</li>
+        <li>上海《<span class="kwd">时务报</span>》：梁启超发表《变法通议》，"法者天下之公器也，变法者天下之公理也"。</li>
+        <li>天津《<span class="kwd">国闻报</span>》：严复主持，以"通上下之情""通中外之故"为目的。</li>
+        <li>严复翻译《<span class="kwd">天演论</span>》，宣传"物竞天择""适者生存"的进化理论。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>《时务报》《国闻报》《天演论》</strong>等维新报刊和著作。</div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：请在下划线处填入正确答案</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 1895年，康有为、梁启超联合各省举人上书，史称"<input class="fill-input" type="text" data-answer="公车上书" placeholder="______">"。</div>
+      <div class="fill-blank-row">2. 维新运动期间，梁启超在上海主持《<input class="fill-input" type="text" data-answer="时务报" placeholder="______">》，发表《变法通议》。</div>
+      <div class="fill-blank-row">3. 严复在天津主持《<input class="fill-input" type="text" data-answer="国闻报" placeholder="______">》，号召变法图强。</div>
+      <div class="fill-blank-row">4. 严复翻译《<input class="fill-input" type="text" data-answer="天演论" placeholder="______">》，宣传"物竞天择""适者生存"的进化理论。</div>
+      <div class="fill-blank-row">5. 1898年，光绪帝颁布"<input class="fill-input" type="text" data-answer="明定国是" placeholder="______">"诏书，宣布实行变法。</div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《时务报》</div><div class="flash-back">上海出版的维新派报刊，梁启超任主笔，发表《变法通议》等文章，影响广泛。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《国闻报》</div><div class="flash-back">天津出版的维新派报刊，严复主持，以"通上下之情""通中外之故"为目的，号召变法图强。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《天演论》</div><div class="flash-back">严复翻译的著作，宣传"物竞天择""适者生存"的进化理论，在思想界产生重大影响。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== TAB3 百日维新 ======== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1898年6月—9月 · 百日维新</div>
+      <h3>⚡ 百日维新</h3>
+      <ul>
+        <li>背景：1897年德国强占<span class="kwd">胶州湾</span>，光绪帝"不甘作亡国之君"。</li>
+        <li>开始：1898年6月11日，颁布"<span class="kwd">明定国是</span>"诏书（农历戊戌年）。</li>
+        <li>主要措施：政治—裁撤冗官冗员，允许士民上书言事；经济—鼓励私人兴办工矿企业；教育—废除八股文，创办<span class="kwd">京师大学堂</span>；军事—裁减绿营，训练新式军队。</li>
+        <li>失败：<span class="kwd">慈禧太后</span>发动政变，软禁光绪帝，废除变法诏令。</li>
+        <li>戊戌六君子：谭嗣同、刘光第、林旭、杨锐、杨深秀、康广仁遇害。</li>
+        <li>历时103天，又称"<span class="kwd">百日维新</span>"。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>百日维新的主要措施</strong>和<strong>戊戌六君子</strong>，以材料题考查<strong>戊戌变法的意义</strong>。</div>
+    </div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：请将左侧人物与右侧对应事迹配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">👤 人物</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">康有为</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">梁启超</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">严复</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">谭嗣同</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">光绪帝</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📌 事迹</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">公车上书，领导戊戌变法</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">《变法通议》，"法者天下之公器"</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">翻译《天演论》，宣传进化论</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">戊戌六君子，为变法流血牺牲</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">颁布"明定国是"诏书，支持变法</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：请点击标注图中戊戌变法的重要地点</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 点击下方地图上的标注点，标记戊戌变法重要地点</div>
+      <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- 简化中国东部轮廓 -->
+        <polygon points="60,260 100,270 160,260 220,250 280,260 340,250 380,240 400,220 390,190 370,160 350,130 330,100 310,80 280,60 250,50 210,55 180,70 150,90 120,120 100,160 80,200 60,230" fill="#f0edff" stroke="#7c6cf0" stroke-width="2"/>
+        <!-- 标注点 -->
+        <circle class="map-marker" data-point="pt-beijing" cx="250" cy="90" r="12" fill="#e74c3c" stroke="#fff" stroke-width="2"/>
+        <text x="240" y="80" font-size="9" fill="#333" text-anchor="middle">北京</text>
+        <circle class="map-marker" data-point="pt-tianjin" cx="280" cy="120" r="12" fill="#e67e22" stroke="#fff" stroke-width="2"/>
+        <text x="270" y="115" font-size="9" fill="#333" text-anchor="middle">天津</text>
+        <circle class="map-marker" data-point="pt-shanghai" cx="330" cy="170" r="12" fill="#f1c40f" stroke="#fff" stroke-width="2"/>
+        <text x="320" y="165" font-size="9" fill="#333" text-anchor="middle">上海</text>
+        <circle class="map-marker" data-point="pt-guangzhou" cx="280" cy="240" r="12" fill="#27ae60" stroke="#fff" stroke-width="2"/>
+        <text x="270" y="255" font-size="9" fill="#333" text-anchor="middle">广州</text>
+        <circle class="map-marker" data-point="pt-jiaozhou" cx="220" cy="180" r="12" fill="#8e44ad" stroke="#fff" stroke-width="2"/>
+        <text x="210" y="175" font-size="9" fill="#333" text-anchor="middle">胶州湾</text>
+        <text x="210" y="280" font-size="9" fill="#888" text-anchor="middle">● 戊戌变法重要地点</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-beijing">○ 北京</span>
+        <span class="map-check-item" data-point="pt-tianjin">○ 天津</span>
+        <span class="map-check-item" data-point="pt-shanghai">○ 上海</span>
+        <span class="map-check-item" data-point="pt-guangzhou">○ 广州</span>
+        <span class="map-check-item" data-point="pt-jiaozhou">○ 胶州湾</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">百日维新</div><div class="flash-back">1898年6月11日—9月21日，光绪帝推行变法，历时103天，因慈禧政变而失败。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">戊戌六君子</div><div class="flash-back">谭嗣同、刘光第、林旭、杨锐、杨深秀、康广仁六人，在戊戌政变中被捕遇害。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">京师大学堂</div><div class="flash-back">百日维新期间创办的中国近代第一所国立大学，后发展为北京大学。</div></div></div>
+      </div>
+    </div>
+    <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: 重难点解析 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1 -->
+  <div class="acc-group open" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔵 重点一：戊戌变法兴起的原因</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <p><strong>外因：</strong>甲午战争惨败，《马关条约》签订，民族危机空前严重。</p>
+          <p><strong>内因：</strong>洋务运动未能实现"自强""求富"目标，知识分子认识到必须学习西方政治制度。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>思想基础：</strong></p>
+          <p>① 康有为、梁启超等维新派宣传变法思想；</p>
+          <p>② 严复翻译《天演论》，宣传"物竞天择""适者生存"；</p>
+          <p>③ 《时务报》《国闻报》等报刊推动维新思想传播。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2023·河北）</strong>戊戌变法兴起的直接原因是（　）</p>
+          <p>A. 洋务运动的失败　B. 《马关条约》的签订　C. 德国强占胶州湾　D. 公车上书</p>
+          <div class="a" id="ans-p2-zhongkao1">
+            <strong>✅ 答案：B</strong><br>
+            <strong>解析：</strong>《马关条约》的签订使民族危机空前严重，直接推动了戊戌变法的兴起。公车上书是变法兴起的标志性事件。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao1')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🟠 重点二：百日维新的主要措施</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <table class="diff-table" style="width:100%;">
+            <tr><th>类别</th><th>主要措施</th></tr>
+            <tr><td><strong>政治</strong></td><td>裁撤冗官冗员，允许士民上书言事</td></tr>
+            <tr><td><strong>经济</strong></td><td>鼓励私人兴办工矿企业，改革财政</td></tr>
+            <tr><td><strong>教育</strong></td><td>废除八股文，创办京师大学堂</td></tr>
+            <tr><td><strong>军事</strong></td><td>裁减绿营，训练新式军队</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>进步性：</strong></p>
+          <p>① 政治上：冲击了封建专制制度；</p>
+          <p>② 经济上：有利于民族资本主义发展；</p>
+          <p>③ 教育上：废八股、创办新式学堂，传播新思想。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2022·山西）</strong>百日维新期间，光绪帝颁布的变法诏令中，最能体现"学习西方政治制度"的是（　）</p>
+          <p>A. 裁撤冗官冗员，允许士民上书言事　B. 鼓励私人兴办工矿企业　C. 废除八股文　D. 训练新式军队</p>
+          <div class="a" id="ans-p2-zhongkao2">
+            <strong>✅ 答案：A</strong><br>
+            <strong>解析：</strong>裁撤冗官、允许上书言事，冲击了封建专制制度，体现了对西方政治制度的学习。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao2')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🟣 难点：戊戌变法的历史意义与失败原因</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <p><strong>失败原因：</strong></p>
+          <p>① 顽固派势力强大（慈禧太后掌握实权）；</p>
+          <p>② 资产阶级维新派力量弱小，缺乏群众基础；</p>
+          <p>③ 变法措施激进，触动顽固派利益。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>历史意义：</strong></p>
+          <p>① 戊戌变法是一场<span class="kwd">救亡图存的爱国运动</span>；</p>
+          <p>② 传播了资产阶级思想，促进了民族觉醒；</p>
+          <p>③ 是中国近代史上一次重要的政治改革；</p>
+          <p>④ 为后来的革命提供了经验教训。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2021·广东）</strong>戊戌变法失败的根本原因是（　）</p>
+          <p>A. 顽固派势力强大　B. 资产阶级维新派力量弱小　C. 缺乏群众基础　D. 没有触动封建制度</p>
+          <div class="a" id="ans-p2-zhongkao3">
+            <strong>✅ 答案：B</strong><br>
+            <strong>解析：</strong>资产阶级维新派力量弱小，依靠没有实权的光绪帝，无法与顽固派抗衡，是失败的根本原因。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao3')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 3: 教材栏目解答 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+    <button class="filter-chip" onclick="filterCol('想一想',this)">想一想</button>
+    <button class="filter-chip" onclick="filterCol('学史崇德',this)">学史崇德</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 人物扫描 康有为 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：康有为</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>康有为，广东南海人。自幼熟读经史，20岁时到香港和上海游历，对西方政治理论有了初步了解。此后，他广泛阅读当时能够搜集到的西学书籍、报刊，钻研西学知识。1891年正式在广州收徒讲学，宣传维新思想，培养变法人才。</p>
+      <div class="a" id="ans-p3-person1">
+        <strong>📝 人物评价：</strong><br>
+        ① 康有为是<span class="kwd">维新变法</span>的核心人物，主张学习西方政治制度。<br>
+        ② 他创办万木草堂，培养变法人才，宣传维新思想。<br>
+        ③ 他多次上书光绪皇帝，推动戊戌变法的开展。<br>
+        ④ 康有为的思想和实践对中国近代化产生了重要影响。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-person1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描 梁启超 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：梁启超</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>梁启超，广东新会人。自幼聪颖好学，有"神童"之誉，11岁中秀才，16岁中举人。1890年，梁启超慕名拜访康有为。他自认为对经文诗词颇有所知，康有为却指出那些都是无用之学，并向他讲解变法救国的道理。梁启超听完大为震撼，于是拜康有为做老师，后来成为维新运动的骨干。</p>
+      <div class="a" id="ans-p3-person2">
+        <strong>📝 人物评价：</strong><br>
+        ① 梁启超是维新运动的<span class="kwd">主要骨干</span>，拜康有为为师。<br>
+        ② 他在《时务报》上发表《变法通议》，宣传变法思想。<br>
+        ③ 他的文章议论新颖、通俗易懂，在思想界产生重大影响。<br>
+        ④ 梁启超是近代中国著名的<span class="kwd">启蒙思想家</span>。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-person2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描 严复 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：严复</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>严复，福建侯官人。早年就读于福州船政学堂，后赴英国学习海军。留学期间，广泛涉猎西方各种政治学术理论。甲午战争爆发后，在天津《直报》上发表《原强》《救亡决论》等政论文章，号召救亡图存。同时致力于翻译事业，所译《天演论》宣传"物竞天择""适者生存"的进化理论，在当时思想界产生重大影响。</p>
+      <div class="a" id="ans-p3-person3">
+        <strong>📝 人物评价：</strong><br>
+        ① 严复是维新运动的重要代表人物。<br>
+        ② 他翻译《天演论》，宣传<span class="kwd">进化论</span>，推动思想启蒙。<br>
+        ③ 他的"物竞天择""适者生存"思想，激励国人救亡图存。<br>
+        ④ 严复是近代中国著名的<span class="kwd">启蒙思想家</span>和翻译家。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-person3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 想一想 -->
+  <div class="col-box" data-cat="想一想">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 想一想：梁启超认为变法最重要的措施是什么？</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>材料：梁启超《变法通议》："变法之本，在育人才，人才之兴，在开学校，学校之立，在变科举，而一切要其大成，在变官制。"</p>
+      <p><strong>问题：</strong>梁启超认为变法最重要的措施是什么？</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong><br>
+        ① 梁启超认为变法最重要的措施是<span class="kwd">变官制</span>（改革政治制度）。<br>
+        ② 逻辑链条：变官制→变科举→开学校→育人才→变法成功。<br>
+        ③ 说明梁启超认识到<span class="kwd">政治制度变革</span>是变法的根本所在。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 学史崇德 谭嗣同 -->
+  <div class="col-box" data-cat="学史崇德">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>⭐ 学史崇德：谭嗣同</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>戊戌政变时，谭嗣同拒绝出走，他说："各国变法无不从流血而成，今中国未闻有因变法而流血者，此国之所以不昌也。有之请自嗣同始！"谭嗣同等人被捕后，被押往菜市口行刑。他正气凛然地喊道："有心杀贼，无力回天。死得其所，快哉快哉！"随后倒在屠刀之下。谭嗣同矢志为变法献身的精神，激励更多后来者继续探索救国之路。</p>
+      <div class="a" id="ans-p3-virtue1">
+        <strong>📝 人物评价：</strong><br>
+        ① 谭嗣同是<span class="kwd">戊戌六君子</span>之一，为变法献出了生命。<br>
+        ② "各国变法无不从流血而成"体现了他<span class="kwd">勇于牺牲</span>的精神。<br>
+        ③ "死得其所，快哉快哉"展现了他<span class="kwd">大无畏</span>的英雄气概。<br>
+        ④ 谭嗣同的精神激励了无数后来者继续探索救国之路。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-virtue1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>1.</strong> 结合所学知识，说说戊戌变法对中国社会产生了哪些影响。</p>
+      <p><strong>2.</strong> 观点辨析：A. 康有为、梁启超领导的是一场救亡图存的爱国运动；B. 戊戌变法与洋务运动一样，都主张向西方学习；C. 戊戌变法失败了，但它对近代中国社会产生了积极影响。你同意哪种观点？请说明理由。</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案（第1题）：</strong><br>
+        ① 戊戌变法是一场<span class="kwd">救亡图存的爱国运动</span>。<br>
+        ② 它传播了<span class="kwd">资产阶级思想</span>，促进了民族觉醒。<br>
+        ③ 它是中国近代史上一次重要的<span class="kwd">政治改革</span>。<br>
+        ④ 戊戌变法的失败证明了资产阶级改良道路在中国<span class="kwd">行不通</span>。<br>
+        ⑤ 它留下的经验教训为后来的革命提供了借鉴。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案（第1题）</button>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案（第2题）：</strong><br>
+        <strong>三种观点都正确，但角度不同：</strong><br>
+        A．"救亡图存的爱国运动"——强调变法的<span class="kwd">爱国性</span>（甲午战败后民族危机）。<br>
+        B．"都主张向西方学习"——指出共性，但洋务学<span class="kwd">技术</span>，维新学<span class="kwd">制度</span>。<br>
+        C．"失败但有积极影响"——强调变法的<span class="kwd">历史意义</span>（思想启蒙、民族觉醒）。<br>
+        <strong>综合评价：</strong>戊戌变法是中国近代史上一次<span class="kwd">爱国救亡</span>的政治运动，虽然失败了，但传播了新思想，促进了民族觉醒，具有重要的历史意义。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看参考答案（第2题）</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：京师大学堂</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>百日维新期间，清政府为广育人才，讲求时务，决定创办京师大学堂。变法失败后，京师大学堂得以保留下来，不过规模非常有限，学生总数仅200余人。八国联军占领北京期间，京师大学堂停办，1902年复校，增设预备科及速成科等。1905年，清政府宣布废除科举制度。同年，京师大学堂设政法、文学、格致、工科四科，到1910年已设有经、法、文、格致、农、工、商七科。辛亥革命后，京师大学堂改名为北京大学，原师范馆发展为北京师范大学。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong><br>
+        ① 京师大学堂创办于<span class="kwd">百日维新</span>期间，是中国近代第一所国立大学。<br>
+        ② 变法失败后，京师大学堂<span class="kwd">得以保留</span>，继续发展。<br>
+        ③ 1905年科举废除后，京师大学堂进一步发展壮大。<br>
+        ④ 辛亥革命后改名为<span class="kwd">北京大学</span>，原师范馆发展为北京师范大学。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 4: 课堂训练 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 公车上书发生在（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 1894年</label>
+      <label onclick="optClick(this,'B','q1')">B. 1895年</label>
+      <label onclick="optClick(this,'C','q1')">C. 1898年</label>
+      <label onclick="optClick(this,'D','q1')">D. 1899年</label>
+    </div>
+    <div class="a" id="ans-p4-q1"><strong>✅ 答案：B</strong> — 1895年春，《马关条约》签订前夕，康有为、梁启超联合举人上书。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 严复翻译的《天演论》宣传的核心思想是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 民主与科学</label>
+      <label onclick="optClick(this,'B','q2')">B. 物竞天择，适者生存</label>
+      <label onclick="optClick(this,'C','q2')">C. 自强求富</label>
+      <label onclick="optClick(this,'D','q2')">D. 变法图强</label>
+    </div>
+    <div class="a" id="ans-p4-q2"><strong>✅ 答案：B</strong> — 严复翻译《天演论》，宣传进化论思想。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 百日维新期间创办的中国近代第一所国立大学是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 京师同文馆</label>
+      <label onclick="optClick(this,'B','q3')">B. 京师大学堂</label>
+      <label onclick="optClick(this,'C','q3')">C. 福州船政学堂</label>
+      <label onclick="optClick(this,'D','q3')">D. 北洋水师学堂</label>
+    </div>
+    <div class="a" id="ans-p4-q3"><strong>✅ 答案：B</strong> — 京师大学堂是百日维新期间创办的，后发展为北京大学。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 戊戌六君子中，为变法献身并留下"有心杀贼，无力回天。死得其所，快哉快哉"名言的是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 康有为</label>
+      <label onclick="optClick(this,'B','q4')">B. 梁启超</label>
+      <label onclick="optClick(this,'C','q4')">C. 谭嗣同</label>
+      <label onclick="optClick(this,'D','q4')">D. 严复</label>
+    </div>
+    <div class="a" id="ans-p4-q4"><strong>✅ 答案：C</strong> — 谭嗣同是戊戌六君子之一，为变法献身。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 戊戌变法又被称为"百日维新"的原因是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 变法持续了100天</label>
+      <label onclick="optClick(this,'B','q5')">B. 变法历时103天</label>
+      <label onclick="optClick(this,'C','q5')">C. 变法发生在光绪年间</label>
+      <label onclick="optClick(this,'D','q5')">D. 变法是在1898年</label>
+    </div>
+    <div class="a" id="ans-p4-q5"><strong>✅ 答案：B</strong> — 戊戌变法从1898年6月11日到9月21日，历时103天。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 1 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "各国变法无不从流血而成，今中国未闻有因变法而流血者，此国之所以不昌也。有之请自嗣同始！"<br>
+      <div class="source-ref">——谭嗣同</div>
+    </div>
+    <div class="q-text">（1）材料中的"嗣同"指的是谁？</div>
+    <div class="q-text">（2）这段话体现了"嗣同"怎样的精神品质？</div>
+    <div class="a" id="ans-p4-mat1">
+      <strong>参考答案：</strong><br>
+      （1）"嗣同"指的是<span class="kwd">谭嗣同</span>。<br>
+      （2）体现了谭嗣同<span class="kwd">勇于牺牲</span>的爱国精神。他认识到变法成功需要流血牺牲，愿意成为第一个为变法流血的人，展现了<span class="kwd">大无畏</span>的英雄气概和<span class="kwd">救亡图存</span>的坚定信念。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1'); trackMatQ('mq1')">📝 查看答案（本题计入得分）</button>
+  </div>
+
+  <!-- 材料题 2 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "变法之本，在育人才，人才之兴，在开学校，学校之立，在变科举，而一切要其大成，在变官制。"<br>
+      <div class="source-ref">——梁启超《变法通议》</div>
+    </div>
+    <div class="q-text">（1）梁启超认为变法最根本的措施是什么？</div>
+    <div class="q-text">（2）这反映了维新派怎样的主张？</div>
+    <div class="a" id="ans-p4-mat2">
+      <strong>参考答案：</strong><br>
+      （1）梁启超认为变法最根本的措施是<span class="kwd">变官制</span>（改革政治制度）。<br>
+      （2）这反映了维新派主张<span class="kwd">学习西方政治制度</span>，进行政治改革。与洋务派只学技术不同，维新派认识到政治制度的变革才是根本。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2'); trackMatQ('mq2')">📝 查看答案（本题计入得分）</button>
+  </div>
+
+  <!-- 材料题 3 -->
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "1898年6月11日，光绪皇帝颁布'明定国是'诏书，宣布实行变法。1898年是农历戊戌年，历史上称这次变法为'戊戌变法'。"<br>
+      <div class="source-ref">——统编版教材</div>
+    </div>
+    <div class="q-text">（1）"明定国是"诏书是在哪一年颁布的？</div>
+    <div class="q-text">（2）戊戌变法历时多少天？为什么又被称为"百日维新"？</div>
+    <div class="a" id="ans-p4-mat3">
+      <strong>参考答案：</strong><br>
+      （1）"明定国是"诏书颁布于<span class="kwd">1898年</span>。<br>
+      （2）戊戌变法历时<span class="kwd">103天</span>。因为变法从1898年6月11日到9月21日，历时仅103天，所以又被称为"<span class="kwd">百日维新</span>"。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3'); trackMatQ('mq3')">📝 查看答案（本题计入得分）</button>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 5: 知识结构图 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📜</span><strong>背景与兴起（公车上书）</strong>
+        <p>甲午战败→民族危机→康梁上书→维新运动序幕</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 1888年康有为第一次上书。<br>② 1895年《马关条约》签订，民族危机加深。<br>③ 公车上书：请求拒和、迁都、变法。<br>④ 公车上书拉开了维新运动的序幕。<br>📌 常以选择题考查"公车上书的时间和意义"。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📰</span><strong>维新运动（思想传播）</strong>
+        <p>学会·报刊·著作 → 维新思想广泛传播</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 《时务报》：梁启超《变法通议》。<br>② 《国闻报》：严复主持，号召变法。<br>③ 《天演论》：严复翻译，宣传进化论。<br>📌 常以选择题考查"维新报刊和著作"。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚡</span><strong>百日维新（1898年）</strong>
+        <p>明定国是 → 变法措施 → 慈禧政变 → 六君子遇害</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 1898年6月11日，颁布"明定国是"诏书。<br>② 措施：政治（裁冗官）、经济（兴工矿）、教育（废八股·京师大学堂）、军事（裁绿营）。<br>③ 戊戌政变：慈禧软禁光绪帝。<br>④ 戊戌六君子：谭嗣同、刘光第、林旭、杨锐、杨深秀、康广仁。<br>📌 常以选择题考查"百日维新的措施和六君子"。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">💡</span><strong>意义与教训</strong>
+        <p>爱国救亡·思想启蒙·改良道路行不通</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 爱国性：救亡图存的爱国运动。<br>② 进步性：传播资产阶级思想，促进民族觉醒。<br>③ 局限性：资产阶级改良道路在中国行不通。<br>④ 教训：需要更彻底的革命。<br>📌 常以材料题考查"戊戌变法的历史意义"。</p></div>
+      </div>
+    </div>
+
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：学习西方制度，冲击封建专制</div>
+      <div class="kg-rule r2">🟠 经济：鼓励兴办工矿企业，发展资本主义</div>
+      <div class="kg-rule r3">🟢 思想：传播维新思想，促进民族觉醒</div>
+      <div class="kg-rule r4">🔴 教训：改良道路行不通，需彻底革命</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 6: 结束页 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第二单元 · 早期现代化的初步探索和民族危机加剧</div>
+    <h1 style="font-size:22pt;">第6课 · 戊戌变法</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>康有为与公车上书</h3>
+        <ul>
+          <li>1895年，康有为、梁启超联合举人<strong>公车上书</strong>。</li>
+          <li>内容：请求<strong>拒和、迁都、变法</strong>。</li>
+          <li>拉开了<strong>维新运动</strong>的序幕。</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>维新运动的开展</h3>
+        <ul>
+          <li>报刊：《<strong>时务报</strong>》（梁启超）、《<strong>国闻报</strong>》（严复）。</li>
+          <li>严复译《<strong>天演论</strong>》，宣传进化论。</li>
+          <li>维新思想广泛传播，推动变法。</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>百日维新</h3>
+        <ul>
+          <li>1898年<strong>戊戌变法</strong>，历时103天。</li>
+          <li>措施：政治、经济、教育、军事改革。</li>
+          <li><strong>戊戌六君子</strong>遇害，变法失败。</li>
+          <li>意义：<strong>爱国救亡、思想启蒙</strong>。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <div class="bottom-nav">
+    <div><a href="八上-U2-第5课_甲午中日战争与列强瓜分中国狂潮.html">← 上一课：第5课 甲午中日战争与列强瓜分中国狂潮</a></div>
+    <div><a href="八上导航页.html">🏠 返回导航页</a></div>
+    <div class="nav-center">第6课</div>
+    <div><a href="八上-U2-第7课_义和团运动和八国联军侵华.html">下一课：第7课 义和团运动和八国联军侵华 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版初中历史 · 八年级上册 · 第二单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- 底部翻页导航 -->
+<!-- ============================================================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- JavaScript -->
+<!-- ============================================================ -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标点击标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1:'B', q2:'B', q3:'B', q4:'C', q5:'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序（IIFE） =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['step1','step2','step3','step4','step5','step6'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    document.getElementById('matchResult').textContent = '❌ 配对错误，请重试';
+    document.getElementById('matchResult').className = 'sort-result show fail';
+    setTimeout(function(){ document.getElementById('matchResult').className = 'sort-result'; }, 1200);
+  }
+}
+
+// ===== 地图标注 =====
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.85)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ===== 翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// ===== 知识结构图节点展开 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== deep-card 折叠（IIFE） =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+// 页面加载完成后，确保第一页显示正确
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.page-slide').forEach(function(p, i) {
+    if (i === 0) p.classList.add('active');
+    else p.classList.remove('active');
+  });
+  pgDots.forEach(function(d, i) {
+    if (i === 0) d.classList.add('active');
+    else d.classList.remove('active');
+  });
+  pgCounter.textContent = '1/7';
+  pgPrev.disabled = true;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第8课 中国同盟会 · 八上</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ========== Page0 封面 ========== */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+.targets-done { display:none; background: #d4efdf; border:2px solid var(--green); border-radius:10px; padding:10px 16px; text-align:center; font-size:13pt; font-weight:700; color:var(--green); margin-top:12px; }
+.targets-done.show { display:block; }
+
+/* ========== Page1 标签页 & 闯关 ========== */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; padding-top:12px; }
+.tab-panel.active { display: block; }
+
+/* 闯关进度条 */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.tag-zhongkao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+
+/* 挑战通过横幅 */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; padding:4px 8px; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== 填空 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:140px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== 连线 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:100px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== 地图标注 ========== */
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-zone svg { max-width:100%; height:auto; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+/* ========== 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== Page2 手风琴 & deep-card ========== */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; padding: 0 0 12px 0; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+.deep-card { margin: 10px 18px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+.diff-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13pt; }
+.diff-table th { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 12px; text-align: center; }
+.diff-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: center; }
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== Page3 栏目 ========== */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); flex-wrap:wrap; }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+  .pg-nav { gap: 6px; flex-wrap:wrap; height:auto; padding:6px 10px; }
+  .pg-nav button { font-size:11pt; padding:4px 10px; }
+  .kg-rules-grid { grid-template-columns:1fr; }
+  .match-cols { gap:14px; }
+  .hero-wrap h1 { font-size:20pt; }
+  body { padding:0 10px 100px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 0: 封面 -->
+<!-- ============================================================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第三单元 · 资产阶级民主革命与中华民国的建立</div>
+    <h1>第8课 · 中国同盟会</h1>
+    <div class="hero-sub">统编版初中历史  八年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解孙中山早期革命活动的时间线索，认识中国同盟会成立的背景和意义，掌握三民主义的基本内容。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过章士钊《孙逸仙·自序》、孙中山《黄花岗烈士事略序》等材料，理解孙中山革命领袖地位和黄花岗起义的历史意义。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析中国同盟会作为第一个全国性资产阶级革命政党的历史地位，理解三民主义作为革命纲领的进步性与局限性。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感悟孙中山、黄兴、徐锡麟、秋瑾、黄花岗七十二烈士等革命党人“以天下为己任”的牺牲精神，体会革命先驱救亡图存的爱国情怀。</div>
+    </div>
+    <div class="targets-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: 知识要点 + 五关闯关 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">一 · 孙中山早年革命活动</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">二 · 同盟会与三民主义</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">三 · 革命党人武装起义</button>
+  </div>
+
+  <!-- ======== TAB1 孙中山早年革命活动 ======== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1894—1905年 · 从上书到同盟会</div>
+      <h3>🌟 孙中山早年的革命活动</h3>
+      <ul>
+        <li>1894年夏，<span class="kwd">上书李鸿章</span>提出变法建议，遭冷遇，认识到只有推翻清政府才能救中国。</li>
+        <li>1894年11月，在檀香山成立<span class="kwd">兴中会</span>，提出“振兴中华”，号召“驱除鞑虏，恢复中国，创立合众政府”。</li>
+        <li>1895年，<span class="kwd">广州起义</span>失败，陆皓东等牺牲。</li>
+        <li>1896年秋，<span class="kwd">伦敦蒙难</span>，被清政府诱捕，获释后宣扬革命主张。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>兴中会</strong>的成立时间和<strong>广州起义</strong>。</div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：请将孙中山早期革命活动按时间顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="step1" id="item_step1">上书李鸿章提出变法建议，遭冷遇</span>
+      <span class="sort-item" draggable="true" data-sortkey="step2" id="item_step2">在檀香山成立兴中会，提出"振兴中华"</span>
+      <span class="sort-item" draggable="true" data-sortkey="step3" id="item_step3">在广州发动武装起义，失败，陆皓东牺牲</span>
+      <span class="sort-item" draggable="true" data-sortkey="step4" id="item_step4">在伦敦被清政府诱捕，获释后宣扬革命主张</span>
+      <span class="sort-item" draggable="true" data-sortkey="step5" id="item_step5">在日本东京成立中国同盟会</span>
+      <span class="sort-item" draggable="true" data-sortkey="step6" id="item_step6">在《民报》发刊词中阐发三民主义</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+      <div class="sort-slot" data-slot="5"><span class="slot-label">第6步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">兴中会</div><div class="flash-back">1894年11月，孙中山在檀香山成立的中国第一个革命团体，提出"振兴中华"，号召"驱除鞑虏，恢复中国，创立合众政府"。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">广州起义</div><div class="flash-back">1895年，孙中山联络陆皓东等人在广州发动武装起义，因消息泄露失败，陆皓东等人被捕牺牲。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">伦敦蒙难</div><div class="flash-back">1896年秋，孙中山在伦敦被清政府使馆人员诱捕，后因英国政府干涉获释，他借此宣扬革命主张。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== TAB2 同盟会与三民主义 ======== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1905年 · 同盟会成立与三民主义</div>
+      <h3>🏛️ 中国同盟会与三民主义</h3>
+      <ul>
+        <li><strong>成立：</strong>1905年8月，<span class="kwd">日本东京</span>，联合兴中会、华兴会、光复会等。</li>
+        <li><strong>政治纲领：</strong>“驱除鞑虏，恢复中华，<span class="kwd">创立民国</span>，平均地权”。</li>
+        <li><strong>领导机构：</strong>推举孙中山为<span class="kwd">同盟会总理</span>，机关报《<span class="kwd">民报</span>》。</li>
+        <li><strong>性质：</strong>第一个全国规模的、统一的<span class="kwd">资产阶级革命政党</span>。</li>
+        <li><strong>三民主义：</strong>孙中山在《民报》发刊词中阐发——<span class="kwd">民族主义</span>（驱除鞑虏）、<span class="kwd">民权主义</span>（创立民国）、<span class="kwd">民生主义</span>（平均地权）。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>同盟会成立的时间、地点、纲领</strong>和<strong>三民主义</strong>的内涵。</div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：请在下划线处填入正确答案</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 1905年8月，孙中山在日本 <input class="fill-input" type="text" data-answer="东京" placeholder="______"> 成立中国同盟会。</div>
+      <div class="fill-blank-row">2. 同盟会的政治纲领是“驱除鞑虏，恢复中华，<input class="fill-input" type="text" data-answer="创立民国" placeholder="______">，平均地权”。</div>
+      <div class="fill-blank-row">3. 同盟会的机关报是《<input class="fill-input" type="text" data-answer="民报" placeholder="______">》。</div>
+      <div class="fill-blank-row">4. 孙中山在《民报》发刊词中将纲领阐发为 <input class="fill-input" type="text" data-answer="民族" placeholder="______">、民权、民生三大主义。</div>
+      <div class="fill-blank-row">5. 邹容撰写的宣传革命思想的著作是《<input class="fill-input" type="text" data-answer="革命军" placeholder="______">》。</div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">中国同盟会</div><div class="flash-back">1905年8月，孙中山在日本东京联合兴中会、华兴会、光复会等成立的第一个全国规模的、统一的资产阶级革命政党。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">三民主义</div><div class="flash-back">孙中山在《民报》发刊词中阐发的革命思想：民族主义（驱除鞑虏）、民权主义（创立民国）、民生主义（平均地权）。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《民报》</div><div class="flash-back">中国同盟会的机关报，孙中山在发刊词中正式阐发三民主义，成为资产阶级革命的指导思想。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== TAB3 革命党人武装起义 ======== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1906—1911年 · 血与火的考验</div>
+      <h3>⚔️ 革命党人发动的武装起义</h3>
+      <ul>
+        <li><strong>萍浏醴起义：</strong>1906年冬，同盟会成立后<span class="kwd">第一次</span>武装起义，失败但声望大振。</li>
+        <li><strong>安庆起义：</strong>1907年夏，<span class="kwd">徐锡麟</span>刺杀安徽巡抚，失败殉难；<span class="kwd">秋瑾</span>策应就义。</li>
+        <li><strong>黄花岗起义：</strong>1911年4月，<span class="kwd">黄兴</span>率100余人攻入两广总督衙门，苦战一昼夜失败（收殓72具遗骸）。</li>
+        <li><strong>意义：</strong>革命党人不屈不挠的精神鼓舞了全国人民斗志，“不半载而武昌之大革命以成”。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>黄花岗起义</strong>和<strong>黄花岗七十二烈士</strong>，以材料题考查<strong>起义的历史意义</strong>。</div>
+    </div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：请将左侧人物与右侧对应事迹配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">👤 人物</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">孙中山</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">黄兴</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">章炳麟</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">陈天华</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">徐锡麟</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📌 事迹</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">中国同盟会总理，三民主义倡导者</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">与孙中山并称“孙黄”，领导黄花岗起义</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">撰写《驳康有为论革命书》，宣传反清革命</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">撰写《猛回头》《警世钟》，宣传革命</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">安庆起义，刺杀安徽巡抚，英勇就义</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：请点击标注图中革命党人武装起义的重要地点</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 点击下方地图上的标注点，标记革命党人武装起义重要地点</div>
+      <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- 简化中国轮廓 -->
+        <polygon points="60,260 100,270 160,260 220,250 280,260 340,250 380,240 400,220 390,190 370,160 350,130 330,100 310,80 280,60 250,50 210,55 180,70 150,90 120,120 100,160 80,200 60,230" fill="#f0edff" stroke="#7c6cf0" stroke-width="2"/>
+        <!-- 标注点 -->
+        <circle class="map-marker" data-point="pt-pingxiang" cx="220" cy="180" r="12" fill="#e74c3c" stroke="#fff" stroke-width="2"/>
+        <text x="210" y="195" font-size="9" fill="#333" text-anchor="middle">萍乡</text>
+        <circle class="map-marker" data-point="pt-anqing" cx="280" cy="140" r="12" fill="#e67e22" stroke="#fff" stroke-width="2"/>
+        <text x="270" y="130" font-size="9" fill="#333" text-anchor="middle">安庆</text>
+        <circle class="map-marker" data-point="pt-shaoxing" cx="310" cy="160" r="12" fill="#f1c40f" stroke="#fff" stroke-width="2"/>
+        <text x="300" y="175" font-size="9" fill="#333" text-anchor="middle">绍兴</text>
+        <circle class="map-marker" data-point="pt-guangzhou" cx="280" cy="240" r="12" fill="#27ae60" stroke="#fff" stroke-width="2"/>
+        <text x="270" y="255" font-size="9" fill="#333" text-anchor="middle">广州</text>
+        <circle class="map-marker" data-point="pt-tokyo" cx="350" cy="60" r="12" fill="#8e44ad" stroke="#fff" stroke-width="2"/>
+        <text x="340" y="50" font-size="9" fill="#333" text-anchor="middle">东京</text>
+        <text x="210" y="280" font-size="9" fill="#888" text-anchor="middle">● 革命党人武装起义重要地点</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-pingxiang">○ 萍乡</span>
+        <span class="map-check-item" data-point="pt-anqing">○ 安庆</span>
+        <span class="map-check-item" data-point="pt-shaoxing">○ 绍兴</span>
+        <span class="map-check-item" data-point="pt-guangzhou">○ 广州</span>
+        <span class="map-check-item" data-point="pt-tokyo">○ 东京</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">萍浏醴起义</div><div class="flash-back">1906年冬，同盟会成立后领导的第一次武装起义，奋战一个多月后失败，但同盟会声望大振。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">黄花岗起义</div><div class="flash-back">1911年4月，黄兴率100余名革命党人攻入两广总督衙门，苦战一昼夜失败，收殓72具遗骸，称“黄花岗七十二烈士”。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">黄花岗七十二烈士</div><div class="flash-back">黄花岗起义中牺牲的革命烈士，孙中山评价“碧血横飞，浩气四塞”，激励了武昌起义的爆发。</div></div></div>
+      </div>
+    </div>
+    <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: 重难点解析 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1 -->
+  <div class="acc-group open" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔵 重点一：中国同盟会的成立与历史意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <p><strong>成立：</strong>1905年8月，日本东京，联合兴中会、华兴会、光复会等革命团体。</p>
+          <p><strong>纲领：</strong>“驱除鞑虏，恢复中华，创立民国，平均地权”。</p>
+          <p><strong>性质：</strong>第一个全国规模的、统一的资产阶级革命政党。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>历史意义：</strong></p>
+          <p>① 使全国资产阶级革命派有了统一的领导机构和奋斗目标。</p>
+          <p>② 有力推动了全国革命运动的发展。</p>
+          <p>③ 为辛亥革命奠定了组织基础。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2023·山东）</strong>中国同盟会成立的历史意义是（　）</p>
+          <p>A. 标志着中国近代史上第一次革命运动爆发　B. 使全国资产阶级革命派有了统一的领导和奋斗目标　C. 推翻了清政府　D. 建立了中华民国</p>
+          <div class="a" id="ans-p2-zhongkao1">
+            <strong>✅ 答案：B</strong><br>
+            <strong>解析：</strong>同盟会的成立使全国资产阶级革命派有了统一的领导机构和奋斗目标，有力推动了全国革命运动的发展。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao1')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🟠 重点二：三民主义的内涵与地位</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <p><strong>民族主义：</strong>“驱除鞑虏，恢复中华”——推翻清王朝统治，反对民族压迫。</p>
+          <p><strong>民权主义：</strong>“创立民国”——推翻君主专制政体，建立资产阶级民主共和国。</p>
+          <p><strong>民生主义：</strong>“平均地权”——核定地价，国家收购土地，解决贫富不均。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>地位：</strong>三民主义是孙中山领导资产阶级革命的指导思想。</p>
+          <p><strong>进步性：</strong>反映了中国人民要求民族独立、民主自由、改善民生的强烈愿望。</p>
+          <p><strong>局限性：</strong>没有明确提出反帝主张，没有彻底的土地革命纲领。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2022·广东）</strong>孙中山将同盟会纲领阐发为三民主义，其中“民权主义”的核心内容是（　）</p>
+          <p>A. 驱除鞑虏　B. 恢复中华　C. 创立民国　D. 平均地权</p>
+          <div class="a" id="ans-p2-zhongkao2">
+            <strong>✅ 答案：C</strong><br>
+            <strong>解析：</strong>民权主义就是“创立民国”，即推翻君主专制政体，建立资产阶级民主共和国。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao2')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🟣 难点：黄花岗起义的历史意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <p><strong>时间：</strong>1911年4月</p>
+          <p><strong>领导人：</strong>黄兴</p>
+          <p><strong>结果：</strong>失败，收殓72具烈士遗骸，称“黄花岗七十二烈士”。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>历史意义：</strong></p>
+          <p>① 革命党人不屈不挠的精神和视死如归的英雄气概，极大地鼓舞了全国人民的斗志。</p>
+          <p>② 孙中山评价：“不半载而武昌之大革命以成”——为武昌起义的爆发准备了条件。</p>
+          <p>③ 体现了资产阶级革命党人的牺牲精神。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2021·福建）</strong>孙中山说：“是役也，碧血横飞，浩气四塞……不半载而武昌之大革命以成。”这里的“是役”指的是（　）</p>
+          <p>A. 萍浏醴起义　B. 安庆起义　C. 黄花岗起义　D. 武昌起义</p>
+          <div class="a" id="ans-p2-zhongkao3">
+            <strong>✅ 答案：C</strong><br>
+            <strong>解析：</strong>材料出自孙中山《〈黄花岗烈士事略〉序》，评价的是黄花岗起义的历史意义。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao3')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 3: 教材栏目解答 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('材料研读',this)">材料研读</button>
+    <button class="filter-chip" onclick="filterCol('人物扫描',this)">人物扫描</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 相关史事 伦敦被诱捕 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：伦敦蒙难</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1896年秋，孙中山在伦敦被清政府使馆人员诱捕，后因英国政府干涉获释。此事在当时成为国际事件，各种报纸争相报道。他借此机会撰文宣扬自己的政治主张，使国际社会对孙中山的革命思想有了一定的认识。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong><br>
+        ① 伦敦蒙难是孙中山革命生涯中的一次重要经历。<br>
+        ② 清政府企图诱捕孙中山，但英国政府干涉使其获释。<br>
+        ③ 孙中山借此机会向国际社会<span class="kwd">宣扬革命主张</span>，提高了国际知名度。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事 华兴会与光复会 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：华兴会与光复会</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1904年2月，华兴会在长沙正式成立，黄兴为会长。华兴会成立后，计划在湖南、湖北等省策划反清起义。后因事机败露，黄兴、宋教仁、陈天华等骨干成员流亡日本。1904年10月，光复会在上海成立，蔡元培为会长。光复会成立后，陶成章、徐锡麟等人在浙江等地联络会党，为起义作准备。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong><br>
+        ① 华兴会（1904年，长沙，黄兴）和光复会（1904年，上海，蔡元培）是同盟会成立前重要的革命团体。<br>
+        ② 它们为同盟会的成立和革命运动的发展奠定了基础。<br>
+        ③ 后来这些团体联合成立中国同盟会。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事 三民主义内涵 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：三民主义的内涵</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>三民主义从民族、民权和民生三方面阐发了同盟会“驱除鞑虏，恢复中华，创立民国，平均地权”的政治纲领。民族主义就是“驱除鞑虏，恢复中华”，即推翻清王朝的统治，反对民族压迫；民权主义就是“创立民国”，即推翻君主专制政体，建立资产阶级民主共和国；民生主义就是“平均地权”，即核定全国地价，国家根据核定地价征收地租税，同时逐步向地主收买土地，实现土地国有，解决贫富不均等社会问题。</p>
+      <div class="a" id="ans-p3-story3">
+        <strong>📝 要点归纳：</strong><br>
+        ① <span class="kwd">民族主义</span>——推翻清王朝，反对民族压迫。<br>
+        ② <span class="kwd">民权主义</span>——推翻君主专制，建立资产阶级民主共和国。<br>
+        ③ <span class="kwd">民生主义</span>——平均地权，解决贫富不均。<br>
+        ④ 三民主义是孙中山资产阶级革命的指导思想。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 人物扫描 黄兴 -->
+  <div class="col-box" data-cat="人物扫描">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>👤 人物扫描：黄兴</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>黄兴，湖南善化人。留学日本期间投身革命，先后组织拒俄义勇队、华兴会等团体，与孙中山共同策划成立中国同盟会；多次领导反清武装起义，身先士卒，屡仆屡起。武昌起义爆发后，出任湖北军政府战时总司令，指挥起义军在汉口、汉阳与清军血战。在革命党内黄兴与孙中山并称“孙黄”。</p>
+      <div class="a" id="ans-p3-person1">
+        <strong>📝 人物评价：</strong><br>
+        ① 黄兴是同盟会的重要领导人，与孙中山并称“<span class="kwd">孙黄</span>”。<br>
+        ② 他多次领导反清武装起义，身先士卒，英勇无畏。<br>
+        ③ 武昌起义后担任战时总司令，为辛亥革命作出了重要贡献。<br>
+        ④ 黄兴是<span class="kwd">资产阶级革命家</span>的杰出代表。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-person1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 材料研读 章士钊 -->
+  <div class="col-box" data-cat="材料研读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 材料研读：章士钊《孙逸仙·自序》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>“孙逸仙者，近今谈革命者之初祖，实行革命者之北辰，此有耳目者所同认。……孙逸仙者，非一氏之私号，乃新中国发现之名词也。有孙逸仙，而中国始可为……”</p>
+      <p><strong>问题：</strong>谈谈章士钊对孙中山革命领袖地位的认识。</p>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 参考答案：</strong><br>
+        ① 章士钊称孙中山为“革命者之初祖”“实行革命者之北辰”，认为他是<span class="kwd">革命的先驱和领袖</span>。<br>
+        ② “孙逸仙”已成为“新中国”的象征，说明孙中山的革命思想和实践具有<span class="kwd">开创性</span>意义。<br>
+        ③ “有孙逸仙，而中国始可为”说明孙中山为中国的进步开辟了道路，体现了对他的<span class="kwd">高度评价</span>。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 材料研读 黄花岗 -->
+  <div class="col-box" data-cat="材料研读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 材料研读：孙中山《〈黄花岗烈士事略〉序》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>“是役也，碧血横飞，浩气四塞，草木为之含悲，风云因而变色，全国久蛰之人心，乃大兴奋，怒愤所积，如怒涛排壑，不可遏抑，不半载而武昌之大革命以成，则斯役之价值，直可惊天地，泣鬼神，与武昌革命之役并寿。”</p>
+      <p><strong>问题：</strong>说说黄花岗起义的历史意义。</p>
+      <div class="a" id="ans-p3-material2">
+        <strong>📝 参考答案：</strong><br>
+        ① 黄花岗起义中，革命党人<span class="kwd">视死如归</span>的精神极大地鼓舞了全国人民的斗志。<br>
+        ② 起义唤醒了“全国久蛰之人心”，使革命情绪高涨。<br>
+        ③ 孙中山认为黄花岗起义为<span class="kwd">武昌起义</span>的爆发准备了条件，“不半载而武昌之大革命以成”。<br>
+        ④ 黄花岗起义具有“惊天地，泣鬼神”的历史价值。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>1.</strong> 阅读材料，回答问题。</p>
+      <p>陈天华《猛回头》：“列位：你通过现在的朝廷，仍是满洲的吗？多少是洋人的了。列位若还不信，请看近来朝廷所做的事，那一件不是奉洋人的号令？……朝廷固然是不可违拒，难道这洋人的朝廷也不该违拒么？”</p>
+      <p><strong>问题：</strong>材料反映了当时怎样的社会现实？表达了作者怎样的主张？</p>
+      <p><strong>2.</strong> 阅读关于革命党人事迹的书籍，讲述一位革命党人为革命不惜抛头颅、洒热血的故事情。</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案（第1题）：</strong><br>
+        ① 社会现实：清政府已沦为<span class="kwd">“洋人的朝廷”</span>，成为帝国主义统治中国的工具。<br>
+        ② 作者主张：清政府已经不可信赖，应该<span class="kwd">推翻清政府</span>，进行反清革命。<br>
+        ③ 这反映了资产阶级革命派要求<span class="kwd">推翻清政府、建立民主共和</span>的强烈愿望。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案（第1题）</button>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案（第2题）：</strong><br>
+        示例：<strong>秋瑾</strong><br>
+        秋瑾，浙江绍兴人，近代民主革命志士。1907年，她积极联络会党，准备在浙江策应徐锡麟的安庆起义。起义失败后，秋瑾被捕，面对严刑拷打，她坚贞不屈，只留下“秋风秋雨愁煞人”一句遗言，从容就义。秋瑾以自己的生命践行了革命理想，被誉为“<span class="kwd">鉴湖女侠</span>”，是近代中国女性革命的先驱。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看参考答案（第2题）</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：《苏报》案</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>《苏报》于1896年在上海创办，1900年由湖南巡抚官徐际沅接办后逐渐转向革命。1903年5月章士钊担任主笔后，对《苏报》大加改良。6月，《苏报》发文介绍邹容的《革命军》，不久又摘登章炳麟的《驳康有为论革命书》，积极宣扬反清革命主张。6月底，清政府勾结上海租界当局抓捕章炳麟等人，邹容主动投案，随后《苏报》被封。次年5月，章炳麟、邹容分别被判处三年和两年监禁，邹容后来不幸在狱中病逝，年仅20岁。“《苏报》案”进一步暴露了清政府的反动本质，使革命浪潮空前高涨起来。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong><br>
+        ① 《苏报》案是清政府镇压革命言论的<span class="kwd">政治事件</span>。<br>
+        ② 章炳麟、邹容因宣传革命思想被捕，邹容在狱中病逝。<br>
+        ③ 《苏报》案暴露了清政府的<span class="kwd">反动本质</span>，激起了更多人的革命情绪。<br>
+        ④ 它推动了革命浪潮的<span class="kwd">空前高涨</span>。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 4: 课堂训练 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 中国同盟会成立于（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 1894年</label>
+      <label onclick="optClick(this,'B','q1')">B. 1905年</label>
+      <label onclick="optClick(this,'C','q1')">C. 1906年</label>
+      <label onclick="optClick(this,'D','q1')">D. 1911年</label>
+    </div>
+    <div class="a" id="ans-p4-q1"><strong>✅ 答案：B</strong> — 1905年8月，孙中山在日本东京成立中国同盟会。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 同盟会政治纲领中，“创立民国”体现的是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 民族主义</label>
+      <label onclick="optClick(this,'B','q2')">B. 民权主义</label>
+      <label onclick="optClick(this,'C','q2')">C. 民生主义</label>
+      <label onclick="optClick(this,'D','q2')">D. 民主主义</label>
+    </div>
+    <div class="a" id="ans-p4-q2"><strong>✅ 答案：B</strong> — “创立民国”是民权主义的核心内容。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 同盟会成立后领导的第一次武装起义是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 广州起义</label>
+      <label onclick="optClick(this,'B','q3')">B. 萍浏醴起义</label>
+      <label onclick="optClick(this,'C','q3')">C. 安庆起义</label>
+      <label onclick="optClick(this,'D','q3')">D. 黄花岗起义</label>
+    </div>
+    <div class="a" id="ans-p4-q3"><strong>✅ 答案：B</strong> — 1906年冬的萍浏醴起义是同盟会成立后第一次武装起义。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 被称为“黄花岗七十二烈士”的起义发生在（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 1907年安庆</label>
+      <label onclick="optClick(this,'B','q4')">B. 1911年广州</label>
+      <label onclick="optClick(this,'C','q4')">C. 1906年萍乡</label>
+      <label onclick="optClick(this,'D','q4')">D. 1905年东京</label>
+    </div>
+    <div class="a" id="ans-p4-q4"><strong>✅ 答案：B</strong> — 1911年4月，黄兴领导的广州起义，收殓72具遗骸称“黄花岗七十二烈士”。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 孙中山在《民报》发刊词中阐发的三民主义不包括（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 民族主义</label>
+      <label onclick="optClick(this,'B','q5')">B. 民权主义</label>
+      <label onclick="optClick(this,'C','q5')">C. 民生主义</label>
+      <label onclick="optClick(this,'D','q5')">D. 民主主义</label>
+    </div>
+    <div class="a" id="ans-p4-q5"><strong>✅ 答案：D</strong> — 三民主义是民族、民权、民生三大主义，不包括“民主主义”。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 1 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "孙逸仙者，近今谈革命者之初祖，实行革命者之北辰，此有耳目者所同认。"<br>
+      <div class="source-ref">——章士钊《孙逸仙·自序》</div>
+    </div>
+    <div class="q-text">（1）材料中的“孙逸仙”是谁？</div>
+    <div class="q-text">（2）材料对“孙逸仙”有怎样的评价？</div>
+    <div class="a" id="ans-p4-mat1">
+      <strong>参考答案：</strong><br>
+      （1）“孙逸仙”是<span class="kwd">孙中山</span>。<br>
+      （2）章士钊称孙中山为“<span class="kwd">革命者之初祖</span>”“实行革命者之北辰”，认为他是革命的先驱和领袖，是引导革命的灯塔。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1'); trackMatQ('mq1')">📝 查看答案（本题计入得分）</button>
+  </div>
+
+  <!-- 材料题 2 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "驱除鞑虏，恢复中华，创立民国，平均地权。"<br>
+      <div class="source-ref">——同盟会政治纲领</div>
+    </div>
+    <div class="q-text">（1）这个纲领是哪一年在哪个组织提出的？</div>
+    <div class="q-text">（2）孙中山在《民报》发刊词中如何阐发这一纲领？</div>
+    <div class="a" id="ans-p4-mat2">
+      <strong>参考答案：</strong><br>
+      （1）1905年，<span class="kwd">中国同盟会</span>在日本东京成立时提出。<br>
+      （2）孙中山将纲领阐发为<span class="kwd">三民主义</span>——民族主义（驱除鞑虏，恢复中华）、民权主义（创立民国）、民生主义（平均地权）。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2'); trackMatQ('mq2')">📝 查看答案（本题计入得分）</button>
+  </div>
+
+  <!-- 材料题 3 -->
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "是役也，碧血横飞，浩气四塞……不半载而武昌之大革命以成。"<br>
+      <div class="source-ref">——孙中山《〈黄花岗烈士事略〉序》</div>
+    </div>
+    <div class="q-text">（1）“是役”指的是哪次起义？</div>
+    <div class="q-text">（2）孙中山认为这次起义有什么历史意义？</div>
+    <div class="a" id="ans-p4-mat3">
+      <strong>参考答案：</strong><br>
+      （1）“是役”指的是<span class="kwd">黄花岗起义</span>（1911年4月，广州）。<br>
+      （2）孙中山认为黄花岗起义的烈士精神极大地鼓舞了全国人民，为<span class="kwd">武昌起义</span>的爆发准备了条件，“不半载而武昌之大革命以成”，具有“惊天地，泣鬼神”的历史价值。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3'); trackMatQ('mq3')">📝 查看答案（本题计入得分）</button>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 5: 知识结构图 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌟</span><strong>孙中山早期革命活动</strong>
+        <p>上书 → 兴中会 → 广州起义 → 伦敦蒙难</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 1894年上书李鸿章遭冷遇，转向革命。<br>② 1894年11月成立兴中会，提出“振兴中华”。<br>③ 1895年广州起义失败，陆皓东牺牲。<br>④ 1896年伦敦蒙难，宣扬革命主张。<br>📌 常以选择题考查“兴中会”和“广州起义”。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>中国同盟会（1905年）</strong>
+        <p>东京成立 · 政治纲领 · 机关报《民报》</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 1905年8月，日本东京。<br>② 纲领：驱除鞑虏，恢复中华，创立民国，平均地权。<br>③ 性质：第一个全国性资产阶级革命政党。<br>④ 机关报：《民报》。<br>📌 常以选择题考查“同盟会的时间、地点、纲领”。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📖</span><strong>三民主义</strong>
+        <p>民族 · 民权 · 民生</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 民族主义：驱除鞑虏，恢复中华（反满）。<br>② 民权主义：创立民国（民主共和）。<br>③ 民生主义：平均地权（土地问题）。<br>④ 三民主义是孙中山资产阶级革命的指导思想。<br>📌 常以选择题考查“三民主义的内涵”。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚔️</span><strong>武装起义（1906—1911）</strong>
+        <p>萍浏醴 · 安庆 · 黄花岗 → 武昌起义</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 萍浏醴起义（1906）：同盟会首次起义，失败。<br>② 安庆起义（1907）：徐锡麟、秋瑾就义。<br>③ 黄花岗起义（1911）：黄兴领导，七十二烈士。<br>④ 意义：鼓舞斗志，为武昌起义准备了条件。<br>📌 常以选择题考查“黄花岗起义”。</p></div>
+      </div>
+    </div>
+
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：同盟会是第一个全国性资产阶级革命政党</div>
+      <div class="kg-rule r2">🟠 思想：三民主义成为革命的指导思想</div>
+      <div class="kg-rule r3">🟢 军事：多次武装起义锻炼了革命队伍</div>
+      <div class="kg-rule r4">🔴 影响：为辛亥革命奠定了组织和思想基础</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 6: 结束页 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第三单元 · 资产阶级民主革命与中华民国的建立</div>
+    <h1 style="font-size:22pt;">第8课 · 中国同盟会</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>孙中山早期革命活动</h3>
+        <ul>
+          <li>1894年上书李鸿章遭冷遇，转向革命。</li>
+          <li>1894年成立<strong>兴中会</strong>，提出“振兴中华”。</li>
+          <li>1895年<strong>广州起义</strong>失败，陆皓东牺牲。</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>中国同盟会与三民主义</h3>
+        <ul>
+          <li>1905年<strong>东京</strong>成立，纲领：“驱除鞑虏，恢复中华，<strong>创立民国</strong>，平均地权”。</li>
+          <li>机关报《<strong>民报</strong>》，三民主义：<strong>民族、民权、民生</strong>。</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>革命党人武装起义</h3>
+        <ul>
+          <li>1906年<strong>萍浏醴起义</strong>（同盟会首次）。</li>
+          <li>1907年<strong>安庆起义</strong>（徐锡麟、秋瑾）。</li>
+          <li>1911年<strong>黄花岗起义</strong>（黄兴，七十二烈士）。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <div class="bottom-nav">
+    <div><a href="八上-U2-第7课_义和团运动和八国联军侵华.html">← 上一课：第7课 义和团运动和八国联军侵华</a></div>
+    <div><a href="八上导航页.html">🏠 返回导航页</a></div>
+    <div class="nav-center">第8课</div>
+    <div><a href="八上-U3-第9课_辛亥革命.html">下一课：第9课 辛亥革命 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版初中历史 · 八年级上册 · 第三单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- 底部翻页导航 -->
+<!-- ============================================================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- JavaScript -->
+<!-- ============================================================ -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标点击标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1:'B', q2:'B', q3:'B', q4:'B', q5:'D' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序（IIFE） =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['step1','step2','step3','step4','step5','step6'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    document.getElementById('matchResult').textContent = '❌ 配对错误，请重试';
+    document.getElementById('matchResult').className = 'sort-result show fail';
+    setTimeout(function(){ document.getElementById('matchResult').className = 'sort-result'; }, 1200);
+  }
+}
+
+// ===== 地图标注 =====
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.85)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ===== 翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// ===== 知识结构图节点展开 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== deep-card 折叠（IIFE） =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+// 页面加载完成后，确保第一页显示正确
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.page-slide').forEach(function(p, i) {
+    if (i === 0) p.classList.add('active');
+    else p.classList.remove('active');
+  });
+  pgDots.forEach(function(d, i) {
+    if (i === 0) d.classList.add('active');
+    else d.classList.remove('active');
+  });
+  pgCounter.textContent = '1/7';
+  pgPrev.disabled = true;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第7课 义和团运动和八国联军侵华 · 八上</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ========== Page0 封面 ========== */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+.targets-done { display:none; background: #d4efdf; border:2px solid var(--green); border-radius:10px; padding:10px 16px; text-align:center; font-size:13pt; font-weight:700; color:var(--green); margin-top:12px; }
+.targets-done.show { display:block; }
+
+/* ========== Page1 标签页 & 闯关 ========== */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; padding-top:12px; }
+.tab-panel.active { display: block; }
+
+/* 闯关进度条 */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.tag-zhongkao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+
+/* 挑战通过横幅 */
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 拖拽排序 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; padding:4px 8px; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* ========== 填空 ========== */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:140px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* ========== 连线 ========== */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:100px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+/* ========== 地图标注 ========== */
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-zone svg { max-width:100%; height:auto; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+/* ========== 翻转卡 ========== */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* ========== Page2 手风琴 & deep-card ========== */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; padding: 0 0 12px 0; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+.deep-card { margin: 10px 18px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+.diff-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13pt; }
+.diff-table th { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 12px; text-align: center; }
+.diff-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: center; }
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== Page3 栏目 ========== */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); flex-wrap:wrap; }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== Page6 结束页 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+  .pg-nav { gap: 6px; flex-wrap:wrap; height:auto; padding:6px 10px; }
+  .pg-nav button { font-size:11pt; padding:4px 10px; }
+  .kg-rules-grid { grid-template-columns:1fr; }
+  .match-cols { gap:14px; }
+  .hero-wrap h1 { font-size:20pt; }
+  body { padding:0 10px 100px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 0: 封面 -->
+<!-- ============================================================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第二单元 · 早期现代化的初步探索和民族危机加剧</div>
+    <h1>第7课 · 义和团运动和八国联军侵华</h1>
+    <div class="hero-sub">统编版初中历史  八年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解义和团运动（1898—1901年）和八国联军侵华战争的时间进程，梳理从山东起义到《辛丑条约》签订的历史脉络。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过义和团揭帖、瓦德西笔记等史料，认识义和团运动的性质与特点，分析《辛丑条约》条款的内容和影响。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>理解“扶清灭洋”口号的进步性与局限性，分析中国完全沦为半殖民地半封建社会的过程和标志。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感悟义和团和爱国官兵抗击八国联军的斗争精神，铭记八国联军侵华的民族屈辱，认识“落后就要挨打”的历史教训。</div>
+    </div>
+    <div class="targets-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: 知识要点 + 五关闯关 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">一 · 义和团运动</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">二 · 抗击八国联军</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">三 · 《辛丑条约》</button>
+  </div>
+
+  <!-- ======== TAB1 义和团运动 ======== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1898—1900年 · 从山东到京津</div>
+      <h3>🔥 义和团运动</h3>
+      <ul>
+        <li>起源：由义和拳、民间秘密结社和练拳习武组织发展而来，主要成员是<span class="kwd">农民</span>。</li>
+        <li>背景：帝国主义侵略加剧、外国传教士猖獗、华北干旱严重。</li>
+        <li>口号：<span class="kwd">“扶清灭洋”</span>——“灭洋”体现反帝斗争意志（但有盲目排外性）；“扶清”对清政府本质认识不清（抱有幻想）。</li>
+        <li>局限性：带有<span class="kwd">迷信色彩</span>（降神附体、刀枪不入）。</li>
+        <li>清政府态度：时“剿”时“抚”，客观上有利于义和团发展。</li>
+        <li>1900年夏，义和团深入<span class="kwd">京津地区</span>，影响很大。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>义和团的口号</strong>和<strong>局限性</strong>，以材料题考查<strong>“扶清灭洋”的评价</strong>。</div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：请将义和团运动从兴起到失败的关键事件按时间顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="step1" id="item_step1">山东冠县梨园屯因教堂占地引发冲突，义和拳起义</span>
+      <span class="sort-item" draggable="true" data-sortkey="step2" id="item_step2">义和团提出"扶清灭洋"口号，迅速发展</span>
+      <span class="sort-item" draggable="true" data-sortkey="step3" id="item_step3">义和团深入京津地区，影响很大</span>
+      <span class="sort-item" draggable="true" data-sortkey="step4" id="item_step4">八国联军入侵，义和团在廊坊阻击侵略军</span>
+      <span class="sort-item" draggable="true" data-sortkey="step5" id="item_step5">八国联军攻陷北京，慈禧下令剿杀义和团</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">义和团运动</div><div class="flash-back">19世纪末，由义和拳等组织发展而来的反帝斗争组织，提出"扶清灭洋"口号，沉重打击了帝国主义瓜分中国的野心。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">"扶清灭洋"</div><div class="flash-back">义和团的口号。"灭洋"体现反帝斗争意志，但有盲目排外性；"扶清"反映对清政府本质认识不清，抱有幻想。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">义和团局限性</div><div class="flash-back">带有迷信色彩（降神附体、刀枪不入），被清政府利用和镇压，最终在中外反动势力联合镇压下失败。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== TAB2 抗击八国联军 ======== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1900年6月—8月 · 抗击侵略</div>
+      <h3>⚔️ 抗击八国联军</h3>
+      <ul>
+        <li><strong>八国联军：</strong>英、美、法、德、俄、日、奥匈、意（1900年6月）。</li>
+        <li><strong>廊坊阻击战：</strong>义和团破坏铁路，阻击联军，联军被迫撤回天津。</li>
+        <li>各国联合舰队攻占<span class="kwd">大沽炮台</span>。</li>
+        <li>慈禧太后发布“<span class="kwd">宣战诏书</span>”。</li>
+        <li><strong>天津保卫战：</strong><span class="kwd">聂士成</span>殉国，7月中旬天津失陷。</li>
+        <li>1900年8月14日，八国联军攻陷<span class="kwd">北京</span>，慈禧携光绪西逃。</li>
+        <li>义和团在中外反动势力镇压下失败。</li>
+        <li><strong>意义：</strong>沉重打击了帝国主义<span class="kwd">瓜分中国</span>的野心。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>八国联军的组成</strong>和<strong>廊坊阻击战</strong>，以材料题考查<strong>义和团运动的历史意义</strong>。</div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：请在下划线处填入正确答案</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 1900年6月，英、美、俄、日、法等八国组织联军，由英国海军司令 <input class="fill-input" type="text" data-answer="西摩尔" placeholder="______"> 率领入侵。</div>
+      <div class="fill-blank-row">2. 义和团在 <input class="fill-input" type="text" data-answer="廊坊" placeholder="______"> 一带阻击八国联军，迫使联军撤回天津。</div>
+      <div class="fill-blank-row">3. 在天津保卫战中，直隶提督 <input class="fill-input" type="text" data-answer="聂士成" placeholder="______"> 殉国。</div>
+      <div class="fill-blank-row">4. <input class="fill-input" type="text" data-answer="1900" placeholder="______"> 年8月14日，八国联军攻陷北京。</div>
+      <div class="fill-blank-row">5. 八国联军统帅 <input class="fill-input" type="text" data-answer="瓦德西" placeholder="______"> 承认"中国群众尚含有无限蓬勃生气"。</div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">八国联军</div><div class="flash-back">1900年6月，英、美、法、德、俄、日、奥匈、意八国组织联军，由西摩尔率领入侵中国。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">廊坊阻击战</div><div class="flash-back">义和团破坏铁路，在廊坊阻击八国联军，打死打伤联军多人，迫使其撤回天津。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">聂士成</div><div class="flash-back">直隶提督，在天津保卫战中率部与八国联军激战，壮烈殉国。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== TAB3 《辛丑条约》 ======== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 1901年9月 · 丧权辱国</div>
+      <h3>📜 《辛丑条约》的签订</h3>
+      <ul>
+        <li><strong>签订：</strong>1901年9月，清政府与<span class="kwd">11国</span>签订。</li>
+        <li><strong>主要内容：</strong></li>
+        <li>① 惩办“首祸诸臣”，华北停科举5年。</li>
+        <li>② 赔款白银<span class="kwd">4.5亿两</span>（本息9.8亿两）。</li>
+        <li>③ 划定<span class="kwd">东交民巷</span>为使馆界，不准中国人居住。</li>
+        <li>④ 拆毁大沽炮台，外国驻军铁路沿线。</li>
+        <li>⑤ 严禁人民参加反帝活动。</li>
+        <li>⑥ 改总理衙门为<span class="kwd">外务部</span>，班列六部之前。</li>
+        <li><strong>影响：</strong>中国近代史上赔款数目最庞大、主权丧失最严重的不平等条约；清政府成为帝国主义统治中国的工具；中国<span class="kwd">完全陷入半殖民地半封建社会</span>的深渊。</li>
+      </ul>
+      <div class="link-bar">📌 中考常考：常以选择题考查<strong>《辛丑条约》的内容</strong>，以材料题考查<strong>中国完全沦为半殖民地半封建社会</strong>的标志和原因。</div>
+    </div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：请将左侧《辛丑条约》条款与右侧对应的内容配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📜 条款</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">赔款</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">使馆界</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">军事</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">外交</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">政治</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📌 具体内容</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">白银4.5亿两，本息9.8亿两</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">划定东交民巷为使馆界，不准中国人居住</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">拆毁大沽炮台，外国驻军铁路沿线</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">改总理衙门为外务部，班列六部之前</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">严禁人民参加各种形式的反帝活动</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：请点击标注图中八国联军侵华的重要地点</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 点击下方地图上的标注点，标记八国联军侵华重要地点</div>
+      <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- 简化中国东部轮廓 -->
+        <polygon points="60,260 100,270 160,260 220,250 280,260 340,250 380,240 400,220 390,190 370,160 350,130 330,100 310,80 280,60 250,50 210,55 180,70 150,90 120,120 100,160 80,200 60,230" fill="#f0edff" stroke="#7c6cf0" stroke-width="2"/>
+        <!-- 标注点 -->
+        <circle class="map-marker" data-point="pt-langfang" cx="270" cy="110" r="12" fill="#e74c3c" stroke="#fff" stroke-width="2"/>
+        <text x="260" y="100" font-size="9" fill="#333" text-anchor="middle">廊坊</text>
+        <circle class="map-marker" data-point="pt-tianjin" cx="300" cy="140" r="12" fill="#e67e22" stroke="#fff" stroke-width="2"/>
+        <text x="290" y="135" font-size="9" fill="#333" text-anchor="middle">天津</text>
+        <circle class="map-marker" data-point="pt-beijing" cx="260" cy="90" r="12" fill="#f1c40f" stroke="#fff" stroke-width="2"/>
+        <text x="250" y="80" font-size="9" fill="#333" text-anchor="middle">北京</text>
+        <circle class="map-marker" data-point="pt-dagu" cx="310" cy="170" r="12" fill="#27ae60" stroke="#fff" stroke-width="2"/>
+        <text x="300" y="185" font-size="9" fill="#333" text-anchor="middle">大沽</text>
+        <circle class="map-marker" data-point="pt-dongjiaominxiang" cx="255" cy="95" r="12" fill="#8e44ad" stroke="#fff" stroke-width="2"/>
+        <text x="240" y="70" font-size="9" fill="#333" text-anchor="middle">东交民巷</text>
+        <text x="210" y="280" font-size="9" fill="#888" text-anchor="middle">● 八国联军侵华重要地点</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-langfang">○ 廊坊</span>
+        <span class="map-check-item" data-point="pt-tianjin">○ 天津</span>
+        <span class="map-check-item" data-point="pt-beijing">○ 北京</span>
+        <span class="map-check-item" data-point="pt-dagu">○ 大沽</span>
+        <span class="map-check-item" data-point="pt-dongjiaominxiang">○ 东交民巷</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《辛丑条约》</div><div class="flash-back">1901年9月，清政府与11国签订，是中国近代史上赔款数目最庞大、主权丧失最严重的不平等条约。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">东交民巷使馆界</div><div class="flash-back">《辛丑条约》划定北京东交民巷为使馆界，允许各国派兵驻守，不准中国人居住。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">完全沦为半殖民地</div><div class="flash-back">《辛丑条约》签订后，清政府成为帝国主义统治中国的工具，中国完全陷入半殖民地半封建社会的深渊。</div></div></div>
+      </div>
+    </div>
+    <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: 重难点解析 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴组1 -->
+  <div class="acc-group open" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔵 重点一：如何评价义和团“扶清灭洋”口号</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <p><strong>“灭洋”：</strong>鲜明地表达了中国人民反对帝国主义的斗争意志，是进步的、爱国的。</p>
+          <p><strong>“扶清”：</strong>反映义和团对清政府本质认识不清，抱有幻想，具有盲目性。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>局限性：</strong></p>
+          <p>① 盲目排外——对洋人、轮船、铁路等统统排斥；</p>
+          <p>② 迷信色彩——相信降神附体、刀枪不入；</p>
+          <p>③ 没有科学理论指导——以宗教迷信和组织形式发动群众。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2023·河南）</strong>义和团“扶清灭洋”口号中的“灭洋”体现了（　）</p>
+          <p>A. 农民阶级的盲目排外　B. 反对帝国主义的斗争意志　C. 对清政府的本质认识不清　D. 迷信色彩</p>
+          <div class="a" id="ans-p2-zhongkao1">
+            <strong>✅ 答案：B</strong><br>
+            <strong>解析：</strong>“灭洋”鲜明地表达了中国人民反对帝国主义的斗争意志，体现了义和团运动的爱国性。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao1')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴组2 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🟠 重点二：《辛丑条约》的内容与影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <table class="diff-table" style="width:100%;">
+            <tr><th>方面</th><th>内容</th></tr>
+            <tr><td><strong>赔款</strong></td><td>4.5亿两（本息9.8亿两）</td></tr>
+            <tr><td><strong>使馆界</strong></td><td>东交民巷，不准中国人居住</td></tr>
+            <tr><td><strong>军事</strong></td><td>拆大沽炮台，外国驻军铁路沿线</td></tr>
+            <tr><td><strong>政治</strong></td><td>严禁人民参加反帝活动</td></tr>
+            <tr><td><strong>外交</strong></td><td>改总理衙门为外务部，班列六部之前</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>影响：</strong></p>
+          <p>① 中国近代史上赔款数目最庞大、主权丧失最严重的条约；</p>
+          <p>② 清政府成为帝国主义统治中国的工具（“洋人的朝廷”）；</p>
+          <p>③ 中国完全陷入半殖民地半封建社会的深渊。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2022·福建）</strong>《辛丑条约》中，最能体现清政府成为“洋人的朝廷”的条款是（　）</p>
+          <p>A. 赔款4.5亿两　B. 划定东交民巷使馆界　C. 严禁人民参加反帝活动　D. 拆毁大沽炮台</p>
+          <div class="a" id="ans-p2-zhongkao2">
+            <strong>✅ 答案：C</strong><br>
+            <strong>解析：</strong>严禁人民参加反帝活动，说明清政府完全站在帝国主义一边，镇压中国人民的反抗，成为“洋人的朝廷”。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao2')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴组3 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🟣 难点：中国如何一步步沦为半殖民地半封建社会</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解</div>
+        <div class="deep-card-bd">
+          <p><strong>四次战争与四个条约：</strong></p>
+          <p>① 鸦片战争——《南京条约》——开始沦为半殖民地半封建社会</p>
+          <p>② 第二次鸦片战争——《北京条约》——半殖民地化程度加深</p>
+          <p>③ 甲午中日战争——《马关条约》——半殖民地化程度大大加深</p>
+          <p>④ 八国联军侵华战争——《辛丑条约》——完全沦为半殖民地半封建社会</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展</div>
+        <div class="deep-card-bd">
+          <p><strong>“完全沦为”的标志：</strong></p>
+          <p>① 清政府成为帝国主义统治中国的工具；</p>
+          <p>② 严禁人民反帝，中国成为列强共同控制下的半殖民地；</p>
+          <p>③ 中国丧失了最后一点独立自主的地位。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🎯 素养提升</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-zhongkao">中考典型例题</span></p>
+          <p><strong>（2021·山东）</strong>中国完全沦为半殖民地半封建社会的标志是（　）</p>
+          <p>A.《南京条约》签订　B.《北京条约》签订　C.《马关条约》签订　D.《辛丑条约》签订</p>
+          <div class="a" id="ans-p2-zhongkao3">
+            <strong>✅ 答案：D</strong><br>
+            <strong>解析：</strong>《辛丑条约》签订后，清政府成为帝国主义统治中国的工具，中国完全陷入半殖民地半封建社会的深渊。
+          </div>
+          <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao3')">📝 查看解析</button>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 3: 教材栏目解答 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('材料研读',this)">材料研读</button>
+    <button class="filter-chip" onclick="filterCol('读地图',this)">读地图</button>
+    <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+    <button class="filter-chip" onclick="filterCol('想一想',this)">想一想</button>
+    <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+    <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+  </div>
+
+  <!-- 材料研读 揭帖 -->
+  <div class="col-box" data-cat="材料研读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 材料研读：《只因为鬼子闹中原》揭帖</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>"神助拳，义和团，只因鬼子闹中原。……天无雨，地焦旱，全是教堂止住天。……兵法艺，都学全，要平鬼子不费难。拆铁道，拔线杆，紧急毁坏火轮船。大法国，心胆寒，英美德俄尽消然。洋鬼子，尽除完，大清一统靖江山。"</p>
+      <p><strong>问题：</strong>你能从揭帖中获取关于义和团的哪些信息？</p>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 参考答案：</strong><br>
+        ① 义和团运动兴起的原因是"<span class="kwd">鬼子闹中原</span>"（帝国主义侵略）。<br>
+        ② 义和团把自然灾害（天无雨、地焦旱）与教堂联系起来，说明其认识具有<span class="kwd">迷信色彩</span>。<br>
+        ③ 义和团采取拆铁道、拔线杆等方式反抗侵略，体现了<span class="kwd">盲目排外</span>的一面。<br>
+        ④ 义和团的目标是"<span class="kwd">尽除洋鬼子</span>"，体现了反帝斗争意志。<br>
+        ⑤ 提出"<span class="kwd">大清一统</span>"，体现了"扶清"思想。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 材料研读 瓦德西 -->
+  <div class="col-box" data-cat="材料研读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 材料研读：瓦德西《瓦德西拳乱笔记》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>八国联军统帅瓦德西说："吾人对于中国群众，不能视为已成丧师或已失德性之人。彼等在实际上，尚含有无限蓬勃生气……"</p>
+      <p><strong>问题：</strong>你如何理解瓦德西这段话？</p>
+      <div class="a" id="ans-p3-material2">
+        <strong>📝 参考答案：</strong><br>
+        ① 瓦德西承认中国人民群众<span class="kwd">具有旺盛的生命力</span>和反抗精神。<br>
+        ② 义和团运动虽然失败了，但它显示了中国人民<span class="kwd">不可征服</span>的力量。<br>
+        ③ 这成为帝国主义列强<span class="kwd">不敢灭亡中国</span>的重要原因之一。<br>
+        ④ 瓦德西的话从反面证明了义和团运动<span class="kwd">沉重打击了帝国主义瓜分中国的野心</span>。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 读地图 -->
+  <div class="col-box" data-cat="读地图">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🗺️ 读地图：义和团运动和八国联军侵华战争形势图</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题1：</strong>观察义和团反帝斗争的地区。</p>
+      <p><strong>问题2：</strong>指出八国联军入侵路线和义和团抗击侵略的重要战场。</p>
+      <div class="a" id="ans-p3-map1">
+        <strong>📝 参考答案：</strong><br>
+        <strong>① 义和团反帝斗争地区：</strong><br>
+        山东、直隶（河北）→ 京津地区。义和团从山东发展到直隶，进入天津、北京。<br>
+        <strong>② 八国联军入侵路线：</strong><br>
+        天津→廊坊→北京（1900年6月从天津乘火车向北京进犯，在廊坊被阻击）。<br>
+        <strong>③ 重要战场：</strong><br>
+        廊坊（阻击八国联军）、天津（老龙头火车站、紫竹林租界）、北京（攻陷）。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-map1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 相关史事 抢劫 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：八国联军占领北京的暴行</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>联军统帅瓦德西在给德皇的报告中供认，"联军占领北京之后，曾特许军队公开抢劫三日，其后更继以私人抢劫"，"所有中国此次所受毁损及抢劫之损失，其详数将永远不能查出，但为数必极重大无疑"。《永乐大典》等珍贵图书文物均被洗劫一空。户部银库的300万两存银全被日本劫掠。当时的北京城到处残垣断壁，尸骸枕藉。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong><br>
+        ① 八国联军占领北京后，进行了<span class="kwd">公开抢劫</span>，充分暴露了侵略者的凶恶本性。<br>
+        ② 《永乐大典》等珍贵文物被劫，是中华文化的<span class="kwd">巨大损失</span>。<br>
+        ③ 八国联军的暴行给中国人民带来了<span class="kwd">深重灾难</span>。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事 俄国入侵 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：俄国入侵东北（海兰泡、江东六十四屯）</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1900年7月中旬，俄国以保护中东铁路为名，调集约15万军队，兵分七路，大举入侵中国东北。到10月底，东北地区全部沦陷。其间，俄军先后制造了血洗海兰泡、强占江东六十四屯等惨案。在海兰泡，俄军把居住在当地的中国居民5000多人赶往黑龙江边，强迫他们渡江。当时江水湍急、狂风呼啸，跳进江水的人很快溺亡。对不敌下水的，俄军就刀砍斧劈，开枪射击。最后侥幸过江的不足百人。在江东六十四屯，俄军放火烧毁各屯房屋，残酷屠杀当地中国居民2000多人。</p>
+      <div class="a" id="ans-p3-story2">
+        <strong>📝 要点归纳：</strong><br>
+        ① 俄国趁八国联军侵华之机，大举入侵中国东北。<br>
+        ② 制造了<span class="kwd">海兰泡惨案</span>（5000多人遇难）和<span class="kwd">江东六十四屯惨案</span>（2000多人遇难）。<br>
+        ③ 这些暴行是帝国主义侵略中国的<span class="kwd">罪证</span>，给中国人民带来了巨大灾难。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 相关史事 慈禧 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事：慈禧“量中华之物力，结与国之欢心”</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>1900年底，经过反复谈判，列强向清政府提出正式"议和"条件。慈禧太后对列强没有把她作为"祸首"来惩办感激涕零。随后，她在上谕中保证，今后要"量中华之物力，结与国之欢心"。</p>
+      <div class="a" id="ans-p3-story3">
+        <strong>📝 要点归纳：</strong><br>
+        ① 慈禧太后对列强没有惩办自己<span class="kwd">感激涕零</span>，完全丧失了民族气节。<br>
+        ② “量中华之物力，结与国之欢心”表明清政府彻底<span class="kwd">投降卖国</span>。<br>
+        ③ 这充分说明清政府成为帝国主义统治中国的<span class="kwd">工具</span>（“洋人的朝廷”）。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 想一想 -->
+  <div class="col-box" data-cat="想一想">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 想一想：这些条款对中国造成怎样的影响？</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>这些条款对中国造成怎样的影响？（指《辛丑条约》条款）</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong><br>
+        ① <strong>赔款：</strong>4.5亿两白银，本息9.8亿两，加重人民负担，使中国经济更加困难。<br>
+        ② <strong>使馆界：</strong>东交民巷成为"国中之国"，严重损害中国主权。<br>
+        ③ <strong>军事：</strong>拆大沽炮台、外国驻军铁路沿线，中国丧失国防自主权。<br>
+        ④ <strong>政治：</strong>严禁人民反帝，清政府成为"洋人的朝廷"。<br>
+        ⑤ <strong>外交：</strong>外务部班列六部之前，中国外交进一步受列强控制。<br>
+        <strong>总体影响：</strong>中国<span class="kwd">完全陷入半殖民地半封建社会</span>的深渊。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>1.</strong> 填充表格（战争、条约、影响）。</p>
+      <p><strong>2.</strong> 为什么说《辛丑条约》签订后，清政府成了"洋人的朝廷"？</p>
+      <div class="a" id="ans-p3-activity1">
+        <strong>📝 参考答案（第1题）：</strong><br>
+        <table class="diff-table" style="width:100%;">
+          <tr><th>战争</th><th>条约</th><th>影响</th></tr>
+          <tr><td>鸦片战争</td><td>《南京条约》</td><td>开始沦为半殖民地半封建社会</td></tr>
+          <tr><td>第二次鸦片战争</td><td>《北京条约》</td><td>半殖民地化程度加深</td></tr>
+          <tr><td>甲午中日战争</td><td>《马关条约》</td><td>半殖民地化程度大大加深</td></tr>
+          <tr><td>八国联军侵华战争</td><td>《辛丑条约》</td><td>完全沦为半殖民地半封建社会</td></tr>
+        </table>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案（第1题）</button>
+      <div class="a" id="ans-p3-activity2">
+        <strong>📝 参考答案（第2题）：</strong><br>
+        ① <strong>严禁人民反帝：</strong>清政府彻底站在帝国主义一边，镇压中国人民的反抗。<br>
+        ② <strong>慈禧太后："量中华之物力，结与国之欢心"</strong>——完全投降卖国。<br>
+        ③ <strong>外交上：</strong>外务部班列六部之前，受列强控制。<br>
+        ④ <strong>军事上：</strong>允许外国驻军中国腹地（铁路沿线）。<br>
+        ⑤ 清政府成为帝国主义统治中国的<span class="kwd">忠实工具</span>。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity2')">📝 查看参考答案（第2题）</button>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 知识拓展：清末新政与北洋军阀</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>《辛丑条约》签订后，清政府为应对统治危机，不得不推行新政，在官制、军事、商业、教育等方面进行一系列改革。这些改革大多流于形式，但客观上有利于民族资本主义发展，使民族资产阶级进一步壮大。新政期间，直隶总督兼北洋大臣袁世凯奉命在新建陆军基础上编练北洋常备军。他大力培植私人势力，逐渐形成以他为首的北洋军阀集团。</p>
+      <div class="a" id="ans-p3-ext1">
+        <strong>📝 要点归纳：</strong><br>
+        ① 清末新政是《辛丑条约》后清政府为<span class="kwd">应对统治危机</span>推行的改革。<br>
+        ② 改革在客观上有利于<span class="kwd">民族资本主义</span>发展。<br>
+        ③ 袁世凯编练<span class="kwd">北洋常备军</span>，形成北洋军阀集团。<br>
+        ④ 北洋军阀集团的形成为后来的军阀混战埋下了伏笔。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-ext1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 4: 课堂训练 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 义和团运动提出的口号是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 自强求富</label>
+      <label onclick="optClick(this,'B','q1')">B. 扶清灭洋</label>
+      <label onclick="optClick(this,'C','q1')">C. 变法图强</label>
+      <label onclick="optClick(this,'D','q1')">D. 民主科学</label>
+    </div>
+    <div class="a" id="ans-p4-q1"><strong>✅ 答案：B</strong> — 义和团提出“扶清灭洋”口号。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 八国联军不包括（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 英国</label>
+      <label onclick="optClick(this,'B','q2')">B. 法国</label>
+      <label onclick="optClick(this,'C','q2')">C. 德国</label>
+      <label onclick="optClick(this,'D','q2')">D. 西班牙</label>
+    </div>
+    <div class="a" id="ans-p4-q2"><strong>✅ 答案：D</strong> — 八国联军包括英、美、法、德、俄、日、奥匈、意，不包括西班牙。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 在天津保卫战中壮烈殉国的清军将领是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 左宝贵</label>
+      <label onclick="optClick(this,'B','q3')">B. 邓世昌</label>
+      <label onclick="optClick(this,'C','q3')">C. 聂士成</label>
+      <label onclick="optClick(this,'D','q3')">D. 丁汝昌</label>
+    </div>
+    <div class="a" id="ans-p4-q3"><strong>✅ 答案：C</strong> — 直隶提督聂士成在天津保卫战中壮烈殉国。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 《辛丑条约》中，清政府赔偿的银两数额是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 2100万银元</label>
+      <label onclick="optClick(this,'B','q4')">B. 2亿两</label>
+      <label onclick="optClick(this,'C','q4')">C. 4.5亿两</label>
+      <label onclick="optClick(this,'D','q4')">D. 9.8亿两</label>
+    </div>
+    <div class="a" id="ans-p4-q4"><strong>✅ 答案：C</strong> — 《辛丑条约》赔款白银4.5亿两，本息共计9.8亿两。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看答案</button>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 中国完全沦为半殖民地半封建社会的标志是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 《南京条约》的签订</label>
+      <label onclick="optClick(this,'B','q5')">B. 《北京条约》的签订</label>
+      <label onclick="optClick(this,'C','q5')">C. 《马关条约》的签订</label>
+      <label onclick="optClick(this,'D','q5')">D. 《辛丑条约》的签订</label>
+    </div>
+    <div class="a" id="ans-p4-q5"><strong>✅ 答案：D</strong> — 《辛丑条约》签订后，清政府成为帝国主义统治中国的工具，中国完全陷入半殖民地半封建社会的深渊。</div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 1 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "神助拳，义和团，只因鬼子闹中原。……洋鬼子，尽除完，大清一统靖江山。"<br>
+      <div class="source-ref">——《只因为鬼子闹中原》揭帖</div>
+    </div>
+    <div class="q-text">（1）揭帖反映了义和团怎样的斗争目标？</div>
+    <div class="q-text">（2）揭帖体现了义和团运动的哪些特点？</div>
+    <div class="a" id="ans-p4-mat1">
+      <strong>参考答案：</strong><br>
+      （1）斗争目标是"<span class="kwd">尽除洋鬼子</span>"（反对帝国主义侵略），维护"大清一统"（扶清）。<br>
+      （2）特点：<br>
+      ① 反帝爱国性——"只因鬼子闹中原"；<br>
+      ② 迷信色彩——"神助拳"；<br>
+      ③ 盲目排外——"尽除洋鬼子"；<br>
+      ④ "扶清"思想——"大清一统靖江山"。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1'); trackMatQ('mq1')">📝 查看答案（本题计入得分）</button>
+  </div>
+
+  <!-- 材料题 2 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "吾人对于中国群众，不能视为已成丧师或已失德性之人。彼等在实际上，尚含有无限蓬勃生气……"<br>
+      <div class="source-ref">——瓦德西《瓦德西拳乱笔记》</div>
+    </div>
+    <div class="q-text">（1）瓦德西是哪个国家的将领？担任什么职务？</div>
+    <div class="q-text">（2）瓦德西这段话说明了什么？</div>
+    <div class="a" id="ans-p4-mat2">
+      <strong>参考答案：</strong><br>
+      （1）瓦德西是<span class="kwd">德国</span>将领，担任<span class="kwd">八国联军统帅</span>。<br>
+      （2）说明了：<br>
+      ① 义和团运动显示了中国人民<span class="kwd">不可征服</span>的力量；<br>
+      ② 帝国主义列强认识到中国人民<span class="kwd">具有旺盛的生命力</span>；<br>
+      ③ 义和团运动<span class="kwd">沉重打击了帝国主义瓜分中国的野心</span>。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2'); trackMatQ('mq2')">📝 查看答案（本题计入得分）</button>
+  </div>
+
+  <!-- 材料题 3 -->
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      "《辛丑条约》是中国近代史上赔款数目最庞大、主权丧失最严重的不平等条约。从此，清政府成为帝国主义列强统治中国的工具，中国完全陷入半殖民地半封建社会的深渊。"<br>
+      <div class="source-ref">——统编版教材</div>
+    </div>
+    <div class="q-text">（1）《辛丑条约》是哪一年签订的？清政府与多少个国家签订？</div>
+    <div class="q-text">（2）为什么说《辛丑条约》后中国完全沦为半殖民地半封建社会？</div>
+    <div class="a" id="ans-p4-mat3">
+      <strong>参考答案：</strong><br>
+      （1）《辛丑条约》签订于<span class="kwd">1901年</span>，清政府与<span class="kwd">11国</span>签订。<br>
+      （2）原因：<br>
+      ① 清政府成为帝国主义统治中国的<span class="kwd">工具</span>（"洋人的朝廷"）；<br>
+      ② 严禁人民反帝，中国丧失反抗侵略的能力；<br>
+      ③ 中国丧失了最后一点独立自主的地位；<br>
+      ④ 列强从政治、经济、军事、外交等方面全面控制了中国。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3'); trackMatQ('mq3')">📝 查看答案（本题计入得分）</button>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 5: 知识结构图 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🔥</span><strong>义和团运动兴起</strong>
+        <p>帝国主义侵略加剧 → 扶清灭洋 → 深入京津</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 1898年山东冠县起义，揭开序幕。<br>② 口号："扶清灭洋"。<br>③ 进步性：反帝爱国。<br>④ 局限性：盲目排外、迷信色彩、对清本质认识不清。<br>⑤ 清政府时剿时抚，利于发展。<br>📌 常以选择题考查"口号"和"局限性"。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚔️</span><strong>抗击八国联军</strong>
+        <p>廊坊阻击战 → 天津保卫战 → 北京陷落</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 八国联军：英、美、法、德、俄、日、奥匈、意。<br>② 廊坊阻击战：义和团阻击联军，迫使其撤回天津。<br>③ 天津保卫战：聂士成殉国。<br>④ 1900年8月14日北京陷落，慈禧西逃。<br>⑤ 义和团失败，但沉重打击了列强瓜分中国的野心。<br>📌 常以选择题考查"八国联军组成"和"重要战场"。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📜</span><strong>《辛丑条约》（1901年）</strong>
+        <p>赔款·使馆界·驻军·反帝禁令·外务部</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 赔款4.5亿两（本息9.8亿两）。<br>② 东交民巷使馆界，不准中国人居住。<br>③ 拆大沽炮台，外国驻军铁路沿线。<br>④ 严禁人民参加反帝活动。<br>⑤ 改总理衙门为外务部，班列六部之前。<br>📌 常以选择题考查"《辛丑条约》的内容"。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">💔</span><strong>结果与影响</strong>
+        <p>完全沦为半殖民地半封建社会</p>
+        <div class="kg-detail"><p><strong>考点要点：</strong><br>① 清政府成为"洋人的朝廷"。<br>② 中国完全陷入半殖民地半封建社会的深渊。<br>③ 近代中国半殖民地化程度：开始→加深→大大加深→完全沦为。<br>④ 民族危机空前严重。<br>📌 常以材料题考查"中国沦为半殖民地半封建社会的过程"。</p></div>
+      </div>
+    </div>
+
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：清政府成为洋人朝廷，完全沦为半殖民地</div>
+      <div class="kg-rule r2">🟠 经济：巨额赔款加重人民负担，经济更加困难</div>
+      <div class="kg-rule r3">🟢 军事：国防权丧失，列强驻军中国腹地</div>
+      <div class="kg-rule r4">🔴 外交：外务部班列六部之前，外交受控</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 6: 结束页 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第二单元 · 早期现代化的初步探索和民族危机加剧</div>
+    <h1 style="font-size:22pt;">第7课 · 义和团运动和八国联军侵华</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>义和团运动</h3>
+        <ul>
+          <li>口号：<strong>“扶清灭洋”</strong>。</li>
+          <li>进步性：反帝爱国，打击了帝国主义瓜分中国的野心。</li>
+          <li>局限性：盲目排外、迷信色彩、对清政府认识不清。</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>抗击八国联军</h3>
+        <ul>
+          <li>八国联军：英、美、法、德、俄、日、奥匈、意。</li>
+          <li><strong>廊坊阻击战</strong>、<strong>天津保卫战</strong>（聂士成殉国）。</li>
+          <li>1900年8月14日<strong>北京陷落</strong>。</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>《辛丑条约》</h3>
+        <ul>
+          <li>1901年签订，赔款<strong>4.5亿两</strong>。</li>
+          <li>划定<strong>东交民巷</strong>使馆界。</li>
+          <li>中国<strong>完全沦为半殖民地半封建社会</strong>。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <div class="bottom-nav">
+    <div><a href="八上-U2-第6课_戊戌变法.html">← 上一课：第6课 戊戌变法</a></div>
+    <div><a href="八上导航页.html">🏠 返回导航页</a></div>
+    <div class="nav-center">第7课</div>
+    <div><a href="八上-U3-第8课_中国同盟会.html">下一课：第8课 中国同盟会 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版初中历史 · 八年级上册 · 第二单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- 底部翻页导航 -->
+<!-- ============================================================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- JavaScript -->
+<!-- ============================================================ -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标点击标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1:'B', q2:'D', q3:'C', q4:'C', q5:'D' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序（IIFE） =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['step1','step2','step3','step4','step5'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    document.getElementById('matchResult').textContent = '❌ 配对错误，请重试';
+    document.getElementById('matchResult').className = 'sort-result show fail';
+    setTimeout(function(){ document.getElementById('matchResult').className = 'sort-result'; }, 1200);
+  }
+}
+
+// ===== 地图标注 =====
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.85)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ===== 翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// ===== 知识结构图节点展开 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== deep-card 折叠（IIFE） =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+// 页面加载完成后，确保第一页显示正确
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.page-slide').forEach(function(p, i) {
+    if (i === 0) p.classList.add('active');
+    else p.classList.remove('active');
+  });
+  pgDots.forEach(function(d, i) {
+    if (i === 0) d.classList.add('active');
+    else d.classList.remove('active');
+  });
+  pgCounter.textContent = '1/7';
+  pgPrev.disabled = true;
+});
+</script>
+</body>
+</html>

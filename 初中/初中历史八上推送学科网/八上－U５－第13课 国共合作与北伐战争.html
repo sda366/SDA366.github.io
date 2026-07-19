@@ -1,0 +1,2484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第13课 国共合作与北伐战争 — 八年级历史上册</title>
+    <style>
+        /* ========== CSS 变量与全局 ========== */
+        :root {
+            --primary: #7c6cf0;
+            --primary-dark: #3d2b8c;
+            --primary-light: #b3a8ff;
+            --bg: #f5f3ff;
+            --bg-card: #faf8ff;
+            --border: #dcd4f5;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --orange: #f39c12;
+            --blue: #3498db;
+            --purple: #8e44ad;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "SimHei", "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14pt;
+            background: var(--bg);
+            color: #333;
+            line-height: 1.75;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            overflow-x: hidden;
+        }
+
+        /* ========== 分页幻灯片系统 ========== */
+        .page-slide {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding-top: 10px;
+            animation: slideIn 0.35s ease;
+        }
+        .page-slide.active {
+            display: block;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            padding: 14px 0 10px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+        }
+        .slide-header .module-num {
+            font-size: 12pt;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .slide-header .module-title {
+            font-size: 18pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        /* ========== Hero 封面 ========== */
+        .hero-wrap {
+            background: linear-gradient(135deg, #3d2b8c, #5a4ac7, #7c6cf0);
+            padding: 36px 20px 30px;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 0 36px 36px;
+            box-shadow: 0 6px 30px rgba(61, 43, 140, 0.20);
+            margin: 0 -20px 28px;
+        }
+        .hero-wrap .hero-unit {
+            font-size: 13pt;
+            opacity: 0.82;
+            letter-spacing: 2px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        .hero-wrap h1 {
+            font-size: 26pt;
+            margin: 10px 0 8px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #fff;
+        }
+        .hero-wrap .hero-sub {
+            font-size: 14pt;
+            opacity: 0.85;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .learn-target {
+            background: linear-gradient(135deg, #f0edff, #e0daff);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+        .learn-target h3 {
+            color: var(--primary-dark);
+            font-size: 16pt;
+            margin-bottom: 12px;
+        }
+        .learn-target .target-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+        }
+        .learn-target .target-item {
+            font-size: 13.5pt;
+            padding: 6px 8px;
+            border-bottom: 1px dashed var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 6px;
+        }
+        .learn-target .target-item:hover {
+            background: rgba(124, 108, 240, 0.08);
+        }
+        .learn-target .target-item.done {
+            opacity: 0.45;
+            text-decoration: line-through;
+            color: #999;
+            background: rgba(39, 174, 96, 0.06);
+        }
+        .stage-done {
+            display: none;
+            background: linear-gradient(135deg, #d4efdf, #a9dfbf);
+            border: 2px solid var(--green);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin: 12px 0;
+            text-align: center;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--green);
+            animation: fadeInUp 0.4s ease;
+        }
+        .stage-done.show {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        #targetsDone {
+            display: none;
+            margin-top: 12px;
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--green);
+        }
+        #targetsDone.show {
+            display: block;
+        }
+
+        .start-btn {
+            display: block;
+            margin: 20px auto 10px;
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 36px;
+            font-size: 16pt;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 14px rgba(124, 108, 240, 0.30);
+        }
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(124, 108, 240, 0.40);
+        }
+
+        /* ========== 标签页 ========== */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 14px 8px;
+            font-size: 14pt;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s;
+            background: #e8e0ff;
+            color: #5a4ac7;
+            letter-spacing: 1px;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+        }
+        .tab-btn:hover:not(.active) {
+            background: #d5cef0;
+        }
+        .tab-panel {
+            display: none;
+            background: #fff;
+            padding: 18px 20px;
+            border-radius: 0 0 12px 12px;
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* ========== 闯关进度条 ========== */
+        .stage-progress-wrap {
+            background: #e8e0ff;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+        }
+        .stage-progress-bar-bg {
+            background: #fff;
+            border-radius: 6px;
+            height: 8px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+        .stage-progress-bar-fill {
+            background: linear-gradient(90deg, #7c6cf0, #5a4ac7);
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        .stage-progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11pt;
+            color: #888;
+        }
+        .stage-progress-text strong {
+            color: var(--primary-dark);
+        }
+
+        /* ========== 挑战标题 ========== */
+        .challenge-title {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 10px 0;
+            padding: 8px;
+            background: #f0edff;
+            border-radius: 10px;
+        }
+
+        /* ========== 知识卡片 ========== */
+        .kp-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            padding: 18px 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(124, 108, 240, 0.08);
+        }
+        .kp-card h3 {
+            color: var(--primary-dark);
+            font-size: 16pt;
+            margin-bottom: 10px;
+        }
+        .kp-card ul {
+            padding-left: 22px;
+        }
+        .kp-card li {
+            margin: 6px 0;
+            font-size: 14pt;
+        }
+
+        .timeline-bar {
+            background: #f0edff;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 12pt;
+            color: #5a4ac7;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .link-bar {
+            border: 2px dashed #d5cef0;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 14px;
+            background: #faf8ff;
+            font-size: 13pt;
+            color: #5a4ac7;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 10px;
+            font-size: 11pt;
+            font-weight: 700;
+            margin-right: 6px;
+        }
+        .tag-event {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .tag-key {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .tag-cause {
+            background: #fce4ec;
+            color: #c62828;
+        }
+        .tag-effect {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .tag-zhongkao {
+            background: var(--orange);
+            color: #fff;
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 11pt;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        /* ========== 手风琴组 ========== */
+        .acc-group {
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .acc-group-hd {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 22px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.25s;
+        }
+        .acc-group-hd.pt1 {
+            background: linear-gradient(135deg, #3498db, #5dade2);
+        }
+        .acc-group-hd.pt2 {
+            background: linear-gradient(135deg, #e67e22, #f0ad4e);
+        }
+        .acc-group-hd.pt3 {
+            background: linear-gradient(135deg, #8e44ad, #a569bd);
+        }
+        .acc-group-hd h3 {
+            color: #fff;
+            font-size: 15pt;
+            margin: 0;
+        }
+        .acc-group-hd .acc-arrow {
+            color: #fff;
+            font-size: 18pt;
+            transition: transform 0.3s;
+        }
+        .acc-group.open .acc-arrow {
+            transform: rotate(180deg);
+        }
+        .acc-group-bd {
+            display: none;
+            background: #fff;
+            border: 1px solid #eee;
+            border-top: none;
+            padding: 16px 22px;
+        }
+        .acc-group.open .acc-group-bd {
+            display: block;
+        }
+        .acc-mastered {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 22px;
+            background: #faf8ff;
+            border-top: 1px solid #eee;
+        }
+        .acc-mastered button {
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 6px 16px;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .acc-mastered button:hover {
+            transform: scale(1.05);
+        }
+        .acc-mastered button.done {
+            background: #ccc;
+            pointer-events: none;
+        }
+
+        /* ========== deep-card 折叠 ========== */
+        .deep-card {
+            margin: 10px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+        .deep-card-hd {
+            background: linear-gradient(135deg, #e67e22, #f0ad4e);
+            color: #fff;
+            padding: 10px 16px;
+            font-size: 13.5pt;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .deep-card-hd:hover {
+            filter: brightness(1.05);
+        }
+        .deep-card-hd .dc-arrow {
+            float: right;
+            font-size: 14pt;
+            transition: transform 0.3s;
+        }
+        .deep-card-hd.active .dc-arrow {
+            transform: rotate(180deg);
+        }
+        .deep-card-bd {
+            display: none;
+            background: #fff;
+            padding: 14px 18px;
+            border: 1px solid #eee;
+            border-top: none;
+            font-size: 13pt;
+        }
+        .deep-card-bd.show {
+            display: block;
+        }
+
+        /* ========== Page3 栏目系统 ========== */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .filter-chip {
+            padding: 6px 14px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: #fff;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            color: #5a4ac7;
+        }
+        .filter-chip:hover {
+            border-color: var(--primary);
+            background: #f0edff;
+        }
+        .filter-chip.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .col-box {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(124, 108, 240, 0.06);
+            transition: all 0.3s;
+        }
+        .col-box.filtered-out {
+            display: none;
+        }
+        .col-header {
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 15pt;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .col-header .col-toggle {
+            font-size: 16pt;
+            transition: transform 0.3s;
+        }
+        .col-box.open .col-toggle {
+            transform: rotate(180deg);
+        }
+        .col-body {
+            display: none;
+            padding: 16px 20px;
+            background: #fff;
+            font-size: 13.5pt;
+        }
+        .col-box.open .col-body {
+            display: block;
+        }
+
+        /* ========== 答案区 ========== */
+        .a {
+            display: none;
+            background: #f0edff;
+            border: 1px solid #d5cef0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0;
+            font-size: 14pt;
+        }
+        .a.show {
+            display: block;
+        }
+        .ans-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 12pt;
+            cursor: pointer;
+            margin: 6px 0;
+            transition: all 0.2s;
+        }
+        .ans-btn:hover {
+            transform: scale(1.05);
+            background: #5a4ac7;
+        }
+
+        /* ========== Page4 课堂训练 ========== */
+        .score-banner {
+            background: linear-gradient(135deg, #f0edff, #e0daff);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+        .score-number {
+            font-size: 22pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        .score-reset {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 16px;
+            padding: 4px 14px;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .score-reset:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        .exercise {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+        }
+        .q-text {
+            font-size: 14pt;
+            margin: 10px 0 6px;
+        }
+        .options label {
+            display: block;
+            padding: 8px 14px;
+            margin: 4px 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14pt;
+            transition: all 0.2s;
+            background: #faf8ff;
+        }
+        .options label:hover {
+            background: #f0edff;
+            border-color: var(--primary);
+        }
+        .options label.disabled {
+            pointer-events: none;
+        }
+        .options label.correct {
+            background: #d4efdf;
+            border-color: var(--green);
+            color: var(--green);
+            font-weight: 700;
+        }
+        .options label.wrong {
+            background: #fadbd8;
+            border-color: var(--red);
+            color: var(--red);
+        }
+        .source-material {
+            border-left: 4px solid var(--primary);
+            padding: 8px 14px;
+            margin: 8px 0;
+            background: #faf8ff;
+            font-size: 13pt;
+        }
+        .source-ref {
+            text-align: right;
+            color: #888;
+            font-size: 10pt;
+            margin-bottom: 8px;
+        }
+
+        /* ========== Page5 知识结构图 ========== */
+        .kg-wrap-simple {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 2px 12px rgba(124, 108, 240, 0.08);
+        }
+        .kg-title {
+            text-align: center;
+            font-size: 17pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+        .kg-chain {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .kg-node {
+            width: 90%;
+            border-radius: 12px;
+            padding: 16px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .kg-node:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(124, 108, 240, 0.25);
+        }
+        .kg-node:active {
+            transform: scale(0.98);
+        }
+        .kg-node.left {
+            align-self: flex-start;
+        }
+        .kg-node.right {
+            align-self: flex-end;
+        }
+        .kg-node.c1 {
+            background: #e8e0ff;
+            border: 2px solid #7c6cf0;
+        }
+        .kg-node.c2 {
+            background: #fff3e0;
+            border: 2px solid #f0ad4e;
+        }
+        .kg-node.c3 {
+            background: #e0f2e9;
+            border: 2px solid #27ae60;
+        }
+        .kg-node.c4 {
+            background: #fdecea;
+            border: 2px solid #e74c3c;
+        }
+        .kg-node strong {
+            display: block;
+            font-size: 14pt;
+            margin: 6px 0;
+        }
+        .kg-node p {
+            font-size: 12pt;
+            color: #555;
+            margin: 4px 0;
+        }
+        .kg-icon {
+            font-size: 22pt;
+        }
+        .kg-arrow {
+            font-size: 20pt;
+            color: var(--primary);
+            margin: 4px 0;
+        }
+        @keyframes kgPulse {
+            0%,
+            100% {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            }
+            50% {
+                box-shadow: 0 2px 20px rgba(124, 108, 240, 0.18);
+            }
+        }
+        .kg-node.pulse {
+            animation: kgPulse 3s ease-in-out infinite;
+        }
+        .kg-expand-badge {
+            position: absolute;
+            top: -10px;
+            right: -8px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 11pt;
+            font-weight: 600;
+            padding: 3px 10px 3px 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(124, 108, 240, 0.35);
+            white-space: nowrap;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+        .kg-expand-badge .badge-arrow {
+            display: inline-block;
+            margin-right: 3px;
+            transition: transform 0.3s;
+        }
+        .kg-node.expanded .kg-expand-badge {
+            background: #27ae60;
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.35);
+        }
+        .kg-node.expanded .kg-expand-badge .badge-arrow {
+            transform: rotate(180deg);
+        }
+        .kg-detail {
+            max-height: 0;
+            overflow: hidden;
+            font-size: 12pt;
+            color: #666;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            transition: all 0.4s ease;
+        }
+        .kg-node.expanded .kg-detail {
+            max-height: 300px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #ddd;
+        }
+        .kg-node.expanded {
+            animation: none;
+        }
+        .kg-hint-banner {
+            background: linear-gradient(135deg, #e8e0ff, #f3e8ff);
+            border: 1.5px dashed var(--primary);
+            border-radius: 10px;
+            padding: 10px 18px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13pt;
+            font-weight: 600;
+            color: var(--primary-dark);
+            flex-wrap: wrap;
+        }
+        .kg-hint-banner .hint-click {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 12pt;
+            margin: 0 4px;
+        }
+        .kg-rules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .kg-rule {
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12.5pt;
+            text-align: center;
+            font-weight: 600;
+        }
+        .kg-rule.r1 {
+            background: #e8e0ff;
+            color: #5a4ac7;
+        }
+        .kg-rule.r2 {
+            background: #fff3e0;
+            color: #e67e22;
+        }
+        .kg-rule.r3 {
+            background: #e0f2e9;
+            color: #27ae60;
+        }
+        .kg-rule.r4 {
+            background: #fdecea;
+            color: #e74c3c;
+        }
+
+        /* ========== 结束页 ========== */
+        .recap-section {
+            margin-bottom: 24px;
+        }
+        .recap-title {
+            text-align: center;
+            font-size: 17pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+        }
+        .recap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .recap-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px 16px 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 3px 12px rgba(124, 108, 240, 0.08);
+            position: relative;
+            text-align: left;
+        }
+        .recap-card-num {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 14pt;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .recap-card h3 {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 4px 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        .recap-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .recap-card ul li {
+            font-size: 12.5pt;
+            line-height: 1.7;
+            padding: 4px 0 4px 18px;
+            position: relative;
+            color: #444;
+        }
+        .recap-card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--primary);
+            font-size: 10pt;
+        }
+        .recap-card ul li strong {
+            color: var(--primary-dark);
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 14px 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(124, 108, 240, 0.08);
+            font-size: 12pt;
+        }
+        .bottom-nav a {
+            color: #5a4ac7;
+            text-decoration: none;
+        }
+        .bottom-nav .nav-center {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0 10px;
+            border-top: 2px solid var(--border);
+            margin-top: 24px;
+            font-size: 12pt;
+            color: #999;
+        }
+        footer p {
+            margin: 4px 0;
+        }
+
+        /* ========== 底部翻页导航栏 ========== */
+        .pg-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: #fff;
+            box-shadow: 0 -2px 16px rgba(124, 108, 240, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 8px 16px;
+            height: 52px;
+        }
+        .pg-nav button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 18px;
+            padding: 6px 16px;
+            font-size: 13pt;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .pg-nav button:hover {
+            background: #5a4ac7;
+            transform: scale(1.05);
+        }
+        .pg-nav button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .pg-nav .pg-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .pg-nav .pg-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dcd4f5;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .pg-nav .pg-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+        .pg-nav .pg-dot:hover:not(.active) {
+            background: var(--primary-light);
+        }
+        .pg-nav .pg-counter {
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ========== 五关专用 CSS ========== */
+        .sort-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+        .sort-item {
+            padding: 8px 16px;
+            background: #fff;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            cursor: grab;
+            font-weight: 700;
+            font-size: 13pt;
+            color: #5a4ac7;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        .sort-item:active {
+            cursor: grabbing;
+        }
+        .sort-item.dragging {
+            opacity: 0.35;
+        }
+        .sort-item.placed {
+            background: #e0daff;
+            cursor: default;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .sort-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+            justify-content: center;
+        }
+        .sort-slot {
+            min-width: 90px;
+            min-height: 46px;
+            border: 2px dashed #dcd4f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12pt;
+            transition: all 0.2s;
+            background: #faf8ff;
+            position: relative;
+            padding: 4px 8px;
+        }
+        .sort-slot.filled {
+            border-style: solid;
+            background: #f0edff;
+        }
+        .sort-slot.correct {
+            border-color: var(--green);
+            background: #d4efdf;
+        }
+        .sort-slot.wrong {
+            border-color: var(--red);
+            background: #fadbd8;
+        }
+        .sort-slot .slot-label {
+            position: absolute;
+            top: -20px;
+            font-size: 10pt;
+            color: #999;
+            white-space: nowrap;
+        }
+        .sort-check-btn {
+            display: block;
+            margin: 10px auto;
+        }
+        .sort-result {
+            display: none;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-weight: 700;
+            font-size: 13pt;
+        }
+        .sort-result.show {
+            display: block;
+        }
+        .sort-result.pass {
+            background: #d4efdf;
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+        .sort-result.fail {
+            background: #fadbd8;
+            color: var(--red);
+            border: 1px solid var(--red);
+        }
+
+        .fill-blank-wrap {
+            margin: 14px 0;
+        }
+        .fill-blank-row {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 13pt;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .fill-input {
+            width: 110px;
+            padding: 8px 12px;
+            border: 2px solid #dcd4f5;
+            border-radius: 8px;
+            font-size: 13pt;
+            text-align: center;
+            transition: all 0.2s;
+            background: #faf8ff;
+        }
+        .fill-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 108, 240, 0.15);
+        }
+        .fill-input.correct {
+            border-color: var(--green);
+            background: #d4efdf;
+            color: var(--green);
+            font-weight: 700;
+        }
+        .fill-input.wrong {
+            border-color: var(--red);
+            background: #fadbd8;
+            color: var(--red);
+        }
+
+        .match-area {
+            background: #faf8ff;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            border: 1px solid var(--border);
+        }
+        .match-cols {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .match-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 110px;
+        }
+        .match-col-label {
+            text-align: center;
+            font-weight: 700;
+            font-size: 12pt;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+        .match-item {
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #dcd4f5;
+            background: #fff;
+            text-align: center;
+        }
+        .match-item.selected {
+            border-color: var(--primary);
+            background: #f0edff;
+            box-shadow: 0 0 0 3px rgba(124, 108, 240, 0.2);
+        }
+        .match-item.matched {
+            border-color: var(--green);
+            background: #d4efdf;
+            color: var(--green);
+            cursor: default;
+            opacity: 0.75;
+        }
+
+        .map-zone {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            margin: 14px auto;
+            background: #faf8ff;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+        .map-instruction {
+            font-size: 11pt;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        .map-marker {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .map-marker:hover {
+            filter: brightness(0.9);
+        }
+        .map-checklist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .map-check-item {
+            font-size: 11pt;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .map-check-item.done {
+            background: #d4efdf;
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .flash-section {
+            margin: 18px 0;
+        }
+        .flash-section-title {
+            text-align: center;
+            font-size: 13pt;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .flash-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .flash-card {
+            perspective: 700px;
+            height: 140px;
+            cursor: pointer;
+        }
+        .flash-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        .flash-card.flipped .flash-inner {
+            transform: rotateY(180deg);
+        }
+        .flash-front,
+        .flash-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            font-size: 11pt;
+            text-align: center;
+        }
+        .flash-front {
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+            font-weight: 700;
+        }
+        .flash-back {
+            background: #fff;
+            color: #333;
+            transform: rotateY(180deg);
+            border: 2px solid var(--primary);
+            font-size: 10.5pt;
+            line-height: 1.5;
+        }
+
+        /* ========== 自主思考提示框 ========== */
+        .think-box {
+            background: #f0edff;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-left: 4px solid var(--primary);
+        }
+        .think-box .think-title {
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        .think-box ul {
+            margin-left: 20px;
+            font-size: 13pt;
+        }
+
+        @media (max-width: 680px) {
+            .recap-grid {
+                grid-template-columns: 1fr;
+            }
+            .flash-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .learn-target .target-grid {
+                grid-template-columns: 1fr;
+            }
+            .kg-rules-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-wrap h1 {
+                font-size: 22pt;
+            }
+            .pg-nav {
+                gap: 8px;
+                padding: 6px 10px;
+                height: 48px;
+            }
+            .pg-nav button {
+                font-size: 11pt;
+                padding: 4px 12px;
+            }
+            .pg-nav .pg-dots {
+                gap: 5px;
+            }
+            .pg-nav .pg-dot {
+                width: 10px;
+                height: 10px;
+            }
+            .pg-nav .pg-counter {
+                font-size: 11pt;
+                min-width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 0 : 封面                                                  -->
+    <!-- ============================================================ -->
+    <div class="page-slide active" id="page0">
+        <div class="hero-wrap">
+            <div class="hero-unit">第五单元 · 从国共合作到农村革命根据地的建立</div>
+            <h1>第13课 国共合作与北伐战争</h1>
+            <div class="hero-sub">统编版初中历史  八年级上册</div>
+        </div>
+
+        <div class="learn-target" id="learnTargets">
+            <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+            <div class="target-grid">
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>了解国共合作实现、北伐战争及国民革命失败的基本史实，认识其历史意义。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过黄埔军校对联、北伐战争形势图等，理解国共合作的历史背景与作用。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析北伐战争胜利进军的原因，认识国民革命失败的原因与教训。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感悟国共合作中革命先驱的爱国精神，体会李大钊等共产党人为革命献身的崇高品质。</div>
+            </div>
+            <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+        </div>
+
+        <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 1 : 知识要点 + 五关闯关                                   -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page1">
+        <div class="slide-header">
+            <div class="module-num">模块一</div>
+            <div class="module-title">知识要点 · 闯关解锁</div>
+        </div>
+
+        <!-- 闯关进度条 -->
+        <div class="stage-progress-wrap">
+            <div class="stage-progress-text">
+                <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+            </div>
+            <div class="stage-progress-bar-bg">
+                <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+            </div>
+        </div>
+
+        <!-- 标签页 -->
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTabV2('tab1')">一、国共合作</button>
+            <button class="tab-btn" onclick="switchTabV2('tab2')">二、北伐进军</button>
+            <button class="tab-btn" onclick="switchTabV2('tab3')">三、叛变与失败</button>
+        </div>
+
+        <!-- ===== TAB1 : 国共合作的实现 ===== -->
+        <div class="tab-panel active" id="tab1">
+            <div class="kp-card">
+                <h3>📌 国共合作的实现</h3>
+                <div class="timeline-bar">⏳ 1923年 — 1924年</div>
+                <ul>
+                    <li><span class="tag tag-key">1923年6月</span> 中共三大在广州召开，决定同国民党合作，建立革命统一战线。</li>
+                    <li><span class="tag tag-key">1924年1月</span> 国民党一大在广州召开，确定联俄、联共、扶助农工三大政策。</li>
+                    <li><span class="tag tag-event">新三民主义</span> 对三民主义作出新解释，成为国共合作的政治基础。</li>
+                    <li><span class="tag tag-event">1924年5月</span> 黄埔军校成立，蒋介石任校长，周恩来任政治部主任。</li>
+                </ul>
+                <div class="link-bar">🔑 <strong>核心认识：</strong>国民党一大的召开标志着国共两党合作的正式建立，国民革命由此开始。<br>📌 <strong>中考常考：</strong>新三民主义的内容、黄埔军校的建立。</div>
+            </div>
+
+            <!-- ① 拖拽排序 -->
+            <div class="challenge-title">🎮 挑战一：将国共合作实现的关键事件按时间排序</div>
+            <div class="sort-pool" id="sortPool1">
+                <span class="sort-item" draggable="true" data-sortkey="a" id="item_a">国民党一大召开</span>
+                <span class="sort-item" draggable="true" data-sortkey="b" id="item_b">黄埔军校成立</span>
+                <span class="sort-item" draggable="true" data-sortkey="c" id="item_c">中共三大召开</span>
+                <span class="sort-item" draggable="true" data-sortkey="d" id="item_d">北伐战争誓师</span>
+            </div>
+            <div class="sort-slots">
+                <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+                <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+                <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+                <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+            </div>
+            <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+            <div class="sort-result" id="sortResult"></div>
+            <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+            <!-- 翻转卡 Tab1 -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">国共合作</div><div class="flash-back">1924年国民党一大召开标志着国共两党合作的正式建立，国民革命由此开始。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">新三民主义</div><div class="flash-back">在民族主义中突出反帝，民权主义强调民主权利为平民共有，民生主义确定平均地权、节制资本。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">黄埔军校</div><div class="flash-back">1924年5月孙中山在广州创办，蒋介石任校长，周恩来任政治部主任，培养了大批军事政治人才。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">三大政策</div><div class="flash-back">联俄、联共、扶助农工，是国民党一大的核心政策，确立了国共合作的政治基础。</div></div></div>
+                </div>
+                <div class="stage-done" id="stageFlipsDone1">🎉 第⑤关（翻转卡·子目一）通过！</div>
+            </div>
+        </div>
+
+        <!-- ===== TAB2 : 北伐胜利进军 ===== -->
+        <div class="tab-panel" id="tab2">
+            <div class="kp-card">
+                <h3>📌 北伐胜利进军</h3>
+                <div class="timeline-bar">⏳ 1926年7月 — 1927年初</div>
+                <ul>
+                    <li><span class="tag tag-key">1926年7月</span> 国民革命军10万人誓师北伐，蒋介石任总司令。</li>
+                    <li><span class="tag tag-key">汀泗桥、贺胜桥</span> 北伐军以叶挺独立团为先锋，连克汀泗桥和贺胜桥。</li>
+                    <li><span class="tag tag-event">武昌</span> 北伐军一鼓作气攻下武昌城，击溃吴佩孚主力。</li>
+                    <li><span class="tag tag-event">江西</span> 歼灭孙传芳主力，一路沿长江东下攻占南京。</li>
+                    <li><span class="tag tag-effect">工农支持</span> 各地工农运动蓬勃发展，上海工人三次武装起义胜利。</li>
+                </ul>
+                <div class="link-bar">🔑 <strong>核心认识：</strong>北伐军从珠江流域打到长江流域，震动全国，是国共合作推动的成果。<br>📌 <strong>中考常考：</strong>北伐战争的主要战场、叶挺独立团的贡献、工农运动支持。</div>
+            </div>
+
+            <!-- ② 填空填词 -->
+            <div class="challenge-title">🎮 挑战二：填写关键词，完成北伐战争的关键信息</div>
+            <div class="fill-blank-wrap" id="fillBlanks">
+                <div class="fill-blank-row"><span>① 北伐军总司令是</span><input class="fill-input" type="text" data-answer="蒋介石" placeholder="答案"> <span>。</span></div>
+                <div class="fill-blank-row"><span>② 北伐军以</span><input class="fill-input" type="text" data-answer="叶挺" placeholder="答案"> <span>领导的独立团为先锋。</span></div>
+                <div class="fill-blank-row"><span>③ 北伐军在湖北连克</span><input class="fill-input" type="text" data-answer="汀泗桥" placeholder="答案"> <span>和贺胜桥。</span></div>
+                <div class="fill-blank-row"><span>④ 1927年1月，国民政府从广州迁到</span><input class="fill-input" type="text" data-answer="武汉" placeholder="答案"> <span>。</span></div>
+            </div>
+            <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+            <div class="sort-result" id="fillResult"></div>
+            <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+            <!-- 翻转卡 Tab2 -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">北伐战争</div><div class="flash-back">1926年7月国民革命军誓师北伐，目标是推翻吴佩孚、孙传芳、张作霖等北洋军阀的统治。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">叶挺独立团</div><div class="flash-back">北伐军的先锋部队，在汀泗桥、贺胜桥战役中英勇善战，为攻占武昌立下赫赫战功。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">汀泗桥战役</div><div class="flash-back">北伐战争初期关键战役，北伐军以叶挺独立团为先锋，击败吴佩孚精锐部队。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">上海工人武装起义</div><div class="flash-back">中国共产党领导上海工人先后发动三次武装起义，最终取得胜利，迎接北伐军进入上海。</div></div></div>
+                </div>
+                <div class="stage-done" id="stageFlipsDone2">🎉 第⑤关（翻转卡·子目二）通过！</div>
+            </div>
+        </div>
+
+        <!-- ===== TAB3 : 叛变革命与南京国民政府 ===== -->
+        <div class="tab-panel" id="tab3">
+            <div class="kp-card">
+                <h3>📌 叛变革命与南京国民政府的建立</h3>
+                <div class="timeline-bar">⏳ 1927年4月 — 1928年底</div>
+                <ul>
+                    <li><span class="tag tag-cause">1927年4月</span> 蒋介石在上海发动四一二反革命政变，在南京建立国民政府。</li>
+                    <li><span class="tag tag-cause">1927年7月</span> 汪精卫在武汉召开会议决定"分共"，国民革命失败。</li>
+                    <li><span class="tag tag-event">李大钊就义</span> 1927年4月28日，李大钊在北京英勇就义。</li>
+                    <li><span class="tag tag-event">宁汉合流</span> 武汉国民政府与南京国民政府合并。</li>
+                    <li><span class="tag tag-key">1928年底</span> 张学良宣布"东北易帜"，南京国民政府在形式上统一全国。</li>
+                </ul>
+                <div class="link-bar">🔑 <strong>历史教训：</strong>国民革命的失败证明，必须坚持无产阶级领导权，必须建立革命武装。<br>📌 <strong>中考常考：</strong>四一二政变、李大钊就义、东北易帜。</div>
+            </div>
+
+            <!-- ③ 连线匹配 -->
+            <div class="challenge-title">🎮 挑战三：将人物与对应事迹配对</div>
+            <div class="match-area">
+                <div class="match-cols">
+                    <div class="match-col">
+                        <div class="match-col-label">人物</div>
+                        <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">蒋介石</div>
+                        <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">汪精卫</div>
+                        <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">李大钊</div>
+                        <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">张学良</div>
+                        <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">宋庆龄</div>
+                    </div>
+                    <div class="match-col">
+                        <div class="match-col-label">事迹</div>
+                        <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">发动四一二政变</div>
+                        <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">七一五"分共"</div>
+                        <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">英勇就义</div>
+                        <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">东北易帜</div>
+                        <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">斥责叛变革命</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sort-result" id="matchResult"></div>
+            <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+            <!-- ④ 地图标注 -->
+            <div class="challenge-title">🎮 挑战四：点击地图标注北伐战争相关地点</div>
+            <div class="map-zone" id="mapContainer">
+                <div class="map-instruction">💡 点击下方圆点标注北伐战争相关地点（共6处）</div>
+                <svg viewBox="0 0 420 240" style="width:100%;height:auto;background:#eef5f7;border-radius:10px;">
+                    <path d="M60,60 L110,30 L180,20 L240,25 L310,20 L370,40 L390,80 L400,130 L380,170 L350,200 L310,215 L250,220 L190,218 L130,210 L90,195 L60,170 L45,130 L40,90 Z" fill="#d5e8f0" stroke="#7c6cf0" stroke-width="2"/>
+                    <circle class="map-marker" data-point="pt-guangzhou" cx="215" cy="195" r="12" fill="#7c6cf0" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-changsha" cx="225" cy="155" r="12" fill="#7c6cf0" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-tingsi" cx="240" cy="140" r="12" fill="#7c6cf0" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-wuchang" cx="250" cy="135" r="12" fill="#7c6cf0" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-shanghai" cx="310" cy="130" r="12" fill="#7c6cf0" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-nanjing" cx="280" cy="150" r="12" fill="#7c6cf0" stroke="#fff" stroke-width="3"/>
+                    <text x="210" y="183" font-size="9pt" fill="#333">广州</text>
+                    <text x="220" y="143" font-size="9pt" fill="#333">长沙</text>
+                    <text x="235" y="128" font-size="9pt" fill="#333">汀泗桥</text>
+                    <text x="245" y="123" font-size="9pt" fill="#333">武昌</text>
+                    <text x="305" y="118" font-size="9pt" fill="#333">上海</text>
+                    <text x="275" y="138" font-size="9pt" fill="#333">南京</text>
+                </svg>
+                <div class="map-checklist" id="mapChecklist">
+                    <span class="map-check-item" data-point="pt-guangzhou">广州（誓师）</span>
+                    <span class="map-check-item" data-point="pt-changsha">长沙（攻占）</span>
+                    <span class="map-check-item" data-point="pt-tingsi">汀泗桥（激战）</span>
+                    <span class="map-check-item" data-point="pt-wuchang">武昌（攻占）</span>
+                    <span class="map-check-item" data-point="pt-shanghai">上海（工人起义）</span>
+                    <span class="map-check-item" data-point="pt-nanjing">南京（攻占）</span>
+                </div>
+                <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+            </div>
+
+            <!-- 翻转卡 Tab3 -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">四一二政变</div><div class="flash-back">1927年4月12日，蒋介石在上海发动反革命政变，大肆捕杀共产党员和革命群众。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">李大钊</div><div class="flash-back">中国最早的马克思主义者，1927年4月28日在北京英勇就义，表现了对党的无限忠诚。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">宁汉合流</div><div class="flash-back">1927年武汉国民政府与南京国民政府合并，南京国民政府成为国民党一党专政的政府。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">东北易帜</div><div class="flash-back">1928年底张学良宣布"服从国民政府，改易旗帜"，南京国民政府在形式上统一全国。</div></div></div>
+                </div>
+                <div class="stage-done" id="stageFlipsDone3">🎉 第⑤关（翻转卡·子目三）通过！</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 2 : 重难点解析                                           -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page2">
+        <div class="slide-header">
+            <div class="module-num">模块二</div>
+            <div class="module-title">重难点解析</div>
+        </div>
+
+        <!-- 手风琴1 -->
+        <div class="acc-group open" id="acc1">
+            <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+                <h3>🔍 重点一：国共合作为什么能够实现？</h3>
+                <span class="acc-arrow">▼</span>
+            </div>
+            <div class="acc-group-bd">
+                <p><strong>① 中共的需要：</strong>工人运动受挫后，中共认识到必须建立革命统一战线，联合一切革命力量。</p>
+                <p><strong>② 国民党的需要：</strong>孙中山多次革命失败后，深感需要改造国民党，注入新鲜血液。</p>
+                <p><strong>③ 共同目标：</strong>都主张打倒北洋军阀，实现民族独立和国家统一。</p>
+                <p><strong>④ 共产国际推动：</strong>共产国际积极促进国共合作，提供了组织和资金支持。</p>
+
+                <div class="deep-card">
+                    <div class="deep-card-hd">📖 基础理解 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>国共合作是国共两党在共同目标基础上的联合——都希望推翻北洋军阀统治，实现民族独立。同时，共产国际的推动也起了重要作用。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>国共合作与辛亥革命的"联合"有本质不同：辛亥革命时革命党与旧势力合作，缺乏共同纲领；国共合作有明确的新三民主义作为政治基础，合作更为深入。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-zhongkao">🎯 中考典型例题</span></p>
+                        <p><strong>（选择题）国共合作正式建立的标志是（　）</strong></p>
+                        <p>A. 中共三大召开　B. 国民党一大召开<br>C. 黄埔军校成立　D. 北伐战争开始</p>
+                        <div class="a" id="ans-p2-zhongkao1"><strong>📝 答案：B。</strong>1924年1月国民党一大的召开，标志着国共两党合作的正式建立。</div>
+                        <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao1')">📝 查看答案</button>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+
+        <!-- 手风琴2 -->
+        <div class="acc-group" id="acc2">
+            <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+                <h3>🔍 重点二：北伐战争为什么能胜利进军？</h3>
+                <span class="acc-arrow">▼</span>
+            </div>
+            <div class="acc-group-bd">
+                <p><strong>① 国共合作的推动：</strong>国共两党合作，共同领导北伐战争，提供了组织和政治保障。</p>
+                <p><strong>② 黄埔军校的贡献：</strong>培养了大批军事和政治人才，为北伐军提供了骨干力量。</p>
+                <p><strong>③ 工农运动的支持：</strong>各地工农运动蓬勃发展，给北伐军以巨大的支持。</p>
+                <p><strong>④ 将士英勇作战：</strong>叶挺独立团等部队英勇善战，连克强敌。</p>
+                <p><strong>⑤ 军阀内部矛盾：</strong>北洋军阀内部不统一，吴佩孚、孙传芳、张作霖各怀私心。</p>
+
+                <div class="deep-card">
+                    <div class="deep-card-hd">📖 基础理解 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>北伐战争胜利进军是多种因素共同作用的结果：国共合作提供了组织保证，黄埔军校输送了军事人才，工农运动提供了群众基础，将士英勇作战是关键。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>北伐战争的胜利与辛亥革命相比：辛亥革命主要依靠新军和会党，北伐战争则有明确的革命纲领、国共两党的领导和广泛群众支持。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-zhongkao">🎯 中考典型例题</span></p>
+                        <p><strong>（材料题）北伐战争中，叶挺独立团在汀泗桥、贺胜桥战役中发挥了什么作用？</strong></p>
+                        <p>问题：结合所学知识，分析北伐战争胜利的原因。</p>
+                        <div class="a" id="ans-p2-zhongkao2"><strong>📝 参考答案：</strong>叶挺独立团作为北伐先锋，在汀泗桥、贺胜桥战役中英勇作战，连克强敌，为北伐军攻占武昌立下赫赫战功。北伐战争胜利的原因：①国共合作提供了组织保障；②黄埔军校输送了军事人才；③工农运动广泛支持；④将士英勇作战。</div>
+                        <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao2')">📝 查看答案</button>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+
+        <!-- 手风琴3 -->
+        <div class="acc-group" id="acc3">
+            <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+                <h3>🔍 难点：国民革命为什么失败了？</h3>
+                <span class="acc-arrow">▼</span>
+            </div>
+            <div class="acc-group-bd">
+                <p><strong>① 国民党右派叛变：</strong>蒋介石、汪精卫先后背叛革命，发动反革命政变。</p>
+                <p><strong>② 帝国主义干涉：</strong>帝国主义支持蒋介石等反动势力，镇压中国革命。</p>
+                <p><strong>③ 中共年幼缺乏经验：</strong>中共处于幼年时期，对革命领导权认识不足，缺乏武装斗争经验。</p>
+                <p><strong>④ 放弃革命领导权：</strong>中共在国共合作中放弃了革命领导权，没有建立自己的武装。</p>
+
+                <div class="deep-card">
+                    <div class="deep-card-hd">📖 基础理解 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>国民革命的失败是多种因素综合作用的结果，根本原因在于中共在国共合作中放弃了革命领导权，没有建立自己的革命武装。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>国民革命的失败与辛亥革命的失败有相似之处：都因革命阵营内部叛变而失败。但国民革命中工人运动广泛兴起，为后来中共独立领导革命积累了经验。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-zhongkao">🎯 中考典型例题</span></p>
+                        <p><strong>（选择题）国民革命失败给中国共产党的最深刻教训是（　）</strong></p>
+                        <p>A. 必须联合国民党　B. 必须建立革命武装<br>C. 必须发动农民运动　D. 必须依靠共产国际</p>
+                        <div class="a" id="ans-p2-zhongkao3"><strong>📝 答案：B。</strong>国民革命失败后，中国共产党深刻认识到必须建立自己的革命武装，独立领导革命斗争。</div>
+                        <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao3')">📝 查看答案</button>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 3 : 教材栏目解答                                         -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page3">
+        <div class="slide-header">
+            <div class="module-num">模块三</div>
+            <div class="module-title">教材栏目解答</div>
+        </div>
+
+        <div class="filter-bar">
+            <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+            <button class="filter-chip" onclick="filterCol('相关史事',this)">相关史事</button>
+            <button class="filter-chip" onclick="filterCol('材料研读',this)">材料研读</button>
+            <button class="filter-chip" onclick="filterCol('读地图',this)">读地图</button>
+            <button class="filter-chip" onclick="filterCol('想一想',this)">想一想</button>
+            <button class="filter-chip" onclick="filterCol('学史崇德',this)">学史崇德</button>
+            <button class="filter-chip" onclick="filterCol('课后活动',this)">课后活动</button>
+            <button class="filter-chip" onclick="filterCol('知识拓展',this)">知识拓展</button>
+        </div>
+
+        <!-- ===== 相关史事① ===== -->
+        <div class="col-box" data-cat="相关史事">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>📚 相关史事：新三民主义的解释</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p>国民党一大通过的宣言，对三民主义作出顺应时代潮流的新解释。在民族主义中突出了反对帝国主义的内容；在民权主义中强调了民主权利应为一般平民所共有；在民生主义中确定以平均地权、节制资本为两大原则。会后不久，孙中山又提出"耕者有其田"的口号。经过重新解释的三民主义被称为"新三民主义"。</p>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>新三民主义与旧三民主义相比，"新"在哪里？</li>
+                        <li>新三民主义为什么成为国共合作的政治基础？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-story1"><strong>📝 要点归纳：</strong>新三民主义在民族、民权、民生三大方面都有了新的内容，特别是突出了反对帝国主义、强调民主权利为平民共有、提出节制资本等，这与中共的民主革命纲领有共同之处，因此成为国共合作的政治基础。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 材料研读 ===== -->
+        <div class="col-box" data-cat="材料研读">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>📜 材料研读：黄埔军校门口对联</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <div class="source-material">
+                    "升官发财请往他处，贪生畏死勿入斯门。横批：革命者来。"
+                    <div class="source-ref">——黄埔军校门口对联</div>
+                </div>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>这副对联反映了黄埔军校怎样的办学宗旨？</li>
+                        <li>它与当时其他军校有什么不同？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-material1"><strong>📝 参考答案：</strong>这副对联体现了黄埔军校培养革命军人的宗旨——不是为了升官发财，而是为了革命事业。它要求学生不怕牺牲、勇于献身，与当时其他军阀军校有着本质区别，反映了国共合作时期革命军队的精神面貌。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看参考答案</button>
+            </div>
+        </div>
+
+        <!-- ===== 读地图 ===== -->
+        <div class="col-box" data-cat="读地图">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>🗺️ 读地图：北伐战争形势图</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p><strong>问题1：</strong>北伐战争所要推翻的三个北洋军阀集团所统治的区域：</p>
+                <ul style="margin-left:20px; margin-top:4px;">
+                    <li><strong>吴佩孚：</strong>占据湖南、湖北、河南等地（长江中游）</li>
+                    <li><strong>孙传芳：</strong>占据江西、江苏、浙江、安徽等地（长江下游）</li>
+                    <li><strong>张作霖：</strong>占据东北三省及北京、天津等地（北方）</li>
+                </ul>
+                <p style="margin-top:8px;"><strong>问题2：</strong>北伐军进军路线：</p>
+                <ul style="margin-left:20px; margin-top:4px;">
+                    <li>从广州誓师北伐，向北进军</li>
+                    <li>第一路：攻占长沙→汀泗桥→贺胜桥→武昌（击溃吴佩孚）</li>
+                    <li>第二路：东进攻占江西（歼灭孙传芳）</li>
+                    <li>第三路：沿长江东下，攻占南京、上海</li>
+                </ul>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>北伐军的进军路线反映了怎样的战略意图？</li>
+                        <li>为什么北伐军能迅速从珠江流域打到长江流域？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-map1"><strong>📝 要点归纳：</strong>北伐军采取"集中兵力、各个击破"的战略，先集中主力打击吴佩孚（占据长江中游），再回师东进攻歼孙传芳（长江下游），最后挥师北上张作霖，体现了正确的战略战术。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-map1')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 想一想 ===== -->
+        <div class="col-box" data-cat="想一想">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>💡 想一想：北伐战争节节胜利的原因</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>国共合作对北伐战争有什么作用？</li>
+                        <li>黄埔军校培养的军事人才起到什么作用？</li>
+                        <li>人民群众对北伐战争的支持表现在哪些方面？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-think1"><strong>📝 参考答案：</strong>①国共合作的建立为北伐提供了组织保障和政治动员；②黄埔军校培养了大批军事骨干，为北伐军提供了干部基础；③工农运动的广泛开展给北伐军以巨大支持（如上海工人三次武装起义）；④北伐军将士英勇作战，如叶挺独立团在汀泗桥、贺胜桥的浴血奋战；⑤北洋军阀内部不统一，各自为政，为北伐军各个击破创造了条件。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+            </div>
+        </div>
+
+        <!-- ===== 学史崇德 ===== -->
+        <div class="col-box" data-cat="学史崇德">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>❤️ 学史崇德：李大钊英勇就义</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p>1927年4月6日，奉系军阀张作霖勾结帝国主义，闯进苏联大使馆驻地，逮捕李大钊等人。李大钊在敌人的威逼利诱和严刑面前，严守党的机密，始终坚贞不屈。4月28日，奉系军阀对李大钊等人处以绞刑。李大钊第一个走向绞刑架，慷慨赴死，表现了对党无限忠诚的崇高精神和坚定的共产主义信念。</p>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>李大钊面对死亡时表现出了怎样的精神品质？</li>
+                        <li>他的牺牲对你有什么启示？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-virtue1"><strong>📝 要点归纳：</strong>李大钊面对死亡坚贞不屈、视死如归，表现了对共产主义理想的坚定信念、对党和人民的无限忠诚。他是中国共产主义运动的先驱，他的牺牲是中国革命史上光辉的一页，体现了伟大建党精神中"不怕牺牲、英勇斗争"的崇高品质。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-virtue1')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 课后活动 ===== -->
+        <div class="col-box" data-cat="课后活动">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>📝 课后活动：中共在国民革命中的作用</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>中共在国共合作中发挥了怎样的作用？</li>
+                        <li>中共对北伐战争有何贡献？</li>
+                        <li>中共在国民革命中有什么经验教训？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-activity1"><strong>📝 参考答案：</strong>①中共在推动国共合作、改造国民党方面发挥了重要作用；②中共组织发动工农运动，为北伐战争提供了广泛的群众支持；③中共党员在北伐军中担任政治工作，推动了部队的革命化；④国民革命的失败使中共认识到必须坚持无产阶级领导权、必须建立革命武装。这些经验教训为中共独立领导新民主主义革命奠定了基础。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-activity1')">📝 查看参考答案</button>
+            </div>
+        </div>
+
+        <!-- ===== 知识拓展 ===== -->
+        <div class="col-box" data-cat="知识拓展">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>📖 知识拓展：宋庆龄斥责国民党反动派</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p>1927年7月14日，宋庆龄拒绝出席汪精卫秘密召开的"分共"会议，在汉口发表《为抗议违反孙中山的革命原则和政策的声明》，抗议国民党反动派背叛孙中山革命原则和政策的行径，斥责他们已"不再是孙中山的真实信徒"，表示坚决维护孙中山的新三民主义。她严正指出："本党若于执行委员对孙中山的原则和政策所作的解释，在我看来，是违背了孙中山的意思和理想的。因此，对于本党新政策的执行，我将不再参加。"宋庆龄公开宣布退出国民党中央执行委员会，与蒋、汪之流决裂。</p>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>宋庆龄为什么斥责国民党反动派？</li>
+                        <li>她的声明体现了什么精神？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-knowledge1"><strong>📝 要点归纳：</strong>宋庆龄是孙中山革命事业最坚定的捍卫者之一。她公开斥责蒋介石、汪精卫背叛革命的行为，坚决维护孙中山的新三民主义，体现了一位革命先驱的正义感和崇高气节，也反映了国民党左派对反动派叛变革命的强烈不满。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-knowledge1')">📝 查看要点</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 4 : 课堂训练                                             -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page4">
+        <div class="slide-header">
+            <div class="module-num">模块四</div>
+            <div class="module-title">课堂训练</div>
+        </div>
+
+        <div class="score-banner">
+            <div>
+                <div style="font-size:11pt;color:#888;">当前得分</div>
+                <div class="score-number" id="scoreVal">0</div>
+            </div>
+            <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+        </div>
+
+        <!-- 选择题1 -->
+        <div class="exercise" id="q1">
+            <div class="q-text"><strong>1.</strong> 国共合作正式建立的标志是：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q1')">A. 中共三大召开</label>
+                <label onclick="optClick(this,'B','q1')">B. 国民党一大召开</label>
+                <label onclick="optClick(this,'C','q1')">C. 黄埔军校成立</label>
+                <label onclick="optClick(this,'D','q1')">D. 北伐战争开始</label>
+            </div>
+            <div class="a" id="ans-p4-q1"><strong>📝 答案：B。</strong>1924年1月国民党一大的召开，标志着国共两党合作的正式建立。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题2 -->
+        <div class="exercise" id="q2">
+            <div class="q-text"><strong>2.</strong> 黄埔军校的校长是：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q2')">A. 孙中山</label>
+                <label onclick="optClick(this,'B','q2')">B. 蒋介石</label>
+                <label onclick="optClick(this,'C','q2')">C. 廖仲恺</label>
+                <label onclick="optClick(this,'D','q2')">D. 周恩来</label>
+            </div>
+            <div class="a" id="ans-p4-q2"><strong>📝 答案：B。</strong>黄埔军校校长是蒋介石，孙中山兼任军校总理，周恩来曾任政治部主任。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题3 -->
+        <div class="exercise" id="q3">
+            <div class="q-text"><strong>3.</strong> 北伐战争中被称为"铁军"的部队是：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q3')">A. 黄埔学生军</label>
+                <label onclick="optClick(this,'B','q3')">B. 叶挺独立团</label>
+                <label onclick="optClick(this,'C','q3')">C. 国民革命军第一军</label>
+                <label onclick="optClick(this,'D','q3')">D. 广西桂军</label>
+            </div>
+            <div class="a" id="ans-p4-q3"><strong>📝 答案：B。</strong>叶挺独立团在北伐战争中英勇善战，连克汀泗桥、贺胜桥，被誉为"铁军"。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题4 -->
+        <div class="exercise" id="q4">
+            <div class="q-text"><strong>4.</strong> 四一二反革命政变发生于：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q4')">A. 1926年</label>
+                <label onclick="optClick(this,'B','q4')">B. 1927年4月</label>
+                <label onclick="optClick(this,'C','q4')">C. 1927年7月</label>
+                <label onclick="optClick(this,'D','q4')">D. 1928年</label>
+            </div>
+            <div class="a" id="ans-p4-q4"><strong>📝 答案：B。</strong>1927年4月12日，蒋介石在上海发动四一二反革命政变。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题5 -->
+        <div class="exercise" id="q5">
+            <div class="q-text"><strong>5.</strong> 1928年底宣布东北易帜的是：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q5')">A. 张作霖</label>
+                <label onclick="optClick(this,'B','q5')">B. 张学良</label>
+                <label onclick="optClick(this,'C','q5')">C. 吴佩孚</label>
+                <label onclick="optClick(this,'D','q5')">D. 孙传芳</label>
+            </div>
+            <div class="a" id="ans-p4-q5"><strong>📝 答案：B。</strong>1928年底张学良宣布"服从国民政府，改易旗帜"，史称东北易帜。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📖 查看解析</button>
+        </div>
+
+        <!-- 材料题 -->
+        <div class="exercise" id="mq1">
+            <div class="q-text"><strong>材料题</strong> 阅读材料，回答问题：</div>
+            <div class="source-material">
+                "1926年7月，国民革命军10万人誓师北伐，蒋介石任北伐军总司令。北伐军以叶挺领导的第四军独立团为先锋，连克汀泗桥和贺胜桥，一鼓作气将国民革命军的旗帜插上武昌城头。"
+                <div class="source-ref">——统编版八年级上册教材</div>
+            </div>
+            <div class="source-material" style="margin-top:8px;">
+                "1927年4月12日，蒋介石策划上海流氓武装袭击工人纠察队。随后，蒋介石军队以'工人内讧'为由，强行收缴工人纠察队的枪支，打死打伤工人300多人。"
+                <div class="source-ref">——统编版八年级上册教材</div>
+            </div>
+            <div class="q-text">（1）根据材料一，概括北伐战争初期取得的主要战果。</div>
+            <div class="a" id="ans-p4-mat1a"><strong>📝 参考答案：</strong>北伐军以叶挺独立团为先锋，连克汀泗桥、贺胜桥，攻占武昌城，击溃吴佩孚主力。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1a');trackMatQ('mq1')">📝 查看答案</button>
+
+            <div class="q-text" style="margin-top:10px;">（2）结合材料二和所学知识，分析国民革命失败的原因。</div>
+            <div class="a" id="ans-p4-mat1b"><strong>📝 参考答案：</strong>①帝国主义支持蒋介石等反动势力；②国民党右派发动反革命政变（四一二政变、七一五"分共"）；③中共在国共合作中放弃了革命领导权，没有建立自己的武装；④中共缺乏革命斗争经验。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1b');trackMatQ('mq1')">📝 查看答案</button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 5 : 知识结构图                                           -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page5">
+        <div class="slide-header">
+            <div class="module-num">模块五</div>
+            <div class="module-title">知识结构图</div>
+        </div>
+
+        <div class="kg-wrap-simple">
+            <div class="kg-title">📊 知识结构 · 因果链</div>
+            <div class="kg-hint-banner">
+                <span class="hint-icon">💡</span>
+                <span>知识结构图已生成。点击下方</span>
+                <span class="hint-click">各节点</span>
+                <span>查看详细解析与考点说明</span>
+            </div>
+            <div class="kg-chain">
+                <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">🤝</span><strong>国共合作</strong>
+                    <p>中共三大 → 国民党一大 → 新三民主义 → 黄埔军校</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>国共合作实现的标志、新三民主义的内容、黄埔军校的贡献。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+
+                <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">⚔️</span><strong>北伐战争</strong>
+                    <p>1926.7誓师 → 汀泗桥贺胜桥 → 武昌 → 上海工人起义</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>北伐战争的目标、主要战役、叶挺独立团的贡献、工农运动的支持。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+
+                <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">💔</span><strong>叛变革命</strong>
+                    <p>四一二政变 → 七一五"分共" → 李大钊就义 → 宁汉合流</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>四一二政变、七一五"分共"、李大钊的英勇事迹。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+
+                <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">📌</span><strong>历史教训</strong>
+                    <p>必须坚持无产阶级领导权 → 必须建立革命武装</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>国民革命失败的原因与教训，为中共独立领导革命提供了经验。</p></div>
+                </div>
+            </div>
+
+            <div class="kg-rules-grid">
+                <div class="kg-rule r1">🔵 政治：国共合作推动国民革命</div>
+                <div class="kg-rule r2">🟠 军事：北伐战争取得重大胜利</div>
+                <div class="kg-rule r3">🟢 教训：必须掌握革命领导权</div>
+                <div class="kg-rule r4">🔴 启示：必须建立革命武装</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 6 : 结束页                                               -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page6">
+        <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+            <div class="hero-unit">第五单元 · 从国共合作到农村革命根据地的建立</div>
+            <h1 style="font-size:22pt;">第13课 国共合作与北伐战争</h1>
+            <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+        </div>
+
+        <section class="recap-section">
+            <h2 class="recap-title">📋 核心要点回顾</h2>
+            <div class="recap-grid">
+                <div class="recap-card">
+                    <div class="recap-card-num">一</div>
+                    <h3>国共合作</h3>
+                    <ul>
+                        <li><strong>中共三大：</strong>1923年，决定合作</li>
+                        <li><strong>国民党一大：</strong>1924年，合作正式建立</li>
+                        <li><strong>新三民主义：</strong>联俄、联共、扶助农工</li>
+                        <li><strong>黄埔军校：</strong>培养军事人才</li>
+                    </ul>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-card-num">二</div>
+                    <h3>北伐战争</h3>
+                    <ul>
+                        <li><strong>1926年7月：</strong>誓师北伐</li>
+                        <li><strong>汀泗桥贺胜桥：</strong>叶挺独立团</li>
+                        <li><strong>武昌：</strong>击溃吴佩孚</li>
+                        <li><strong>工农支持：</strong>上海工人起义</li>
+                    </ul>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-card-num">三</div>
+                    <h3>叛变与失败</h3>
+                    <ul>
+                        <li><strong>四一二政变：</strong>1927年4月</li>
+                        <li><strong>李大钊：</strong>英勇就义</li>
+                        <li><strong>宁汉合流：</strong>南京政府</li>
+                        <li><strong>东北易帜：</strong>形式统一</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+          <div class="bottom-nav">
+    <div><a href="八上-U４－第12课%20中国共产党的诞生.html">← 上一课：第12课 中国共产党的诞生</a></div>
+    <div><a href="八上导航页.html">🏠 返回导航页</a></div>
+    <div class="nav-center">第13课</div>
+    <div><a href="八上－U5-第14课%20毛泽东开辟井冈山道路.html">下一课：第14课 毛泽东开辟井冈山道路 →</a></div>
+  </div>
+
+        <footer>
+            <p>统编版初中历史 · 八年级上册 · 第五单元</p>
+            <p>基于教材内容整理 · 仅供教学参考使用</p>
+        </footer>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 底部翻页导航栏                                                -->
+    <!-- ============================================================ -->
+    <div class="pg-nav">
+        <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+        <div class="pg-dots" id="pgDots">
+            <span class="pg-dot active" onclick="goPage(0)"></span>
+            <span class="pg-dot" onclick="goPage(1)"></span>
+            <span class="pg-dot" onclick="goPage(2)"></span>
+            <span class="pg-dot" onclick="goPage(3)"></span>
+            <span class="pg-dot" onclick="goPage(4)"></span>
+            <span class="pg-dot" onclick="goPage(5)"></span>
+            <span class="pg-dot" onclick="goPage(6)"></span>
+        </div>
+        <span class="pg-counter" id="pgCounter">1/7</span>
+        <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript                                                    -->
+    <!-- ============================================================ -->
+    <script>
+        // ===== 分页导航 =====
+        var totalPages = 7;
+        var currentPage = 0;
+        var pgDots = document.querySelectorAll('.pg-dot');
+        var pgCounter = document.getElementById('pgCounter');
+        var pgPrev = document.getElementById('pgPrev');
+        var pgNext = document.getElementById('pgNext');
+
+        function goPage(n) {
+            if (n < 0 || n >= totalPages) return;
+            document.getElementById('page' + currentPage).classList.remove('active');
+            pgDots[currentPage].classList.remove('active');
+            currentPage = n;
+            document.getElementById('page' + currentPage).classList.add('active');
+            pgDots[currentPage].classList.add('active');
+            pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+            pgPrev.disabled = (currentPage === 0);
+            pgNext.disabled = (currentPage === totalPages - 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+
+        function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                nextPage();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                prevPage();
+            } else if (e.key === 'Home') { e.preventDefault();
+                goPage(0); } else if (e.key === 'End') { e.preventDefault();
+                goPage(totalPages - 1); }
+        });
+        pgPrev.disabled = true;
+
+        // ===== 闯关进度追踪 =====
+        var stageDone = { sort: false, fill: false, match: false, map: false, flips: false };
+
+        function updateStageProgress() {
+            var stages = ['sort', 'fill', 'match', 'map', 'flips'];
+            var done = 0;
+            stages.forEach(function(s) { if (stageDone[s]) done++; });
+            var pct = Math.round(done / 5 * 100);
+            var bar = document.getElementById('stageProgressBar');
+            var lbl = document.getElementById('stageProgressLabel');
+            if (bar) bar.style.width = pct + '%';
+            if (lbl) {
+                if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+                else lbl.textContent = done + '/5 关完成';
+            }
+            if (done >= 5) {
+                document.querySelectorAll('.stage-done').forEach(function(el) { el.classList.add('show'); });
+            }
+        }
+
+        // ===== 学习目标点击标记 =====
+        var targetsDone = 0;
+
+        function toggleTarget(el) {
+            el.classList.toggle('done');
+            targetsDone = document.querySelectorAll('.target-item.done').length;
+            if (targetsDone >= 4) {
+                document.getElementById('targetsDone').classList.add('show');
+            } else {
+                document.getElementById('targetsDone').classList.remove('show');
+            }
+        }
+
+        // ===== 标签页切换 =====
+        function switchTabV2(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+            document.getElementById(tabId).classList.add('active');
+            var btns = document.querySelectorAll('.tab-btn');
+            for (var i = 0; i < btns.length; i++) {
+                if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+            }
+        }
+
+        // ===== 手风琴组 =====
+        function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+
+        function markMastered(grpId, btn) { btn.classList.add('done');
+            btn.textContent = '✅ 已掌握'; }
+
+        // ===== 答案显隐 =====
+        function toggleAnswer(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.classList.toggle('show');
+                var btn = el.previousElementSibling;
+                while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+                if (btn && btn.classList.contains('ans-btn')) {
+                    btn.textContent = el.classList.contains('show') ? '隐藏答案' : '查看答案';
+                }
+            }
+        }
+
+        // ===== 选择题 =====
+        var correctAnswers = { q1: 'B', q2: 'B', q3: 'B', q4: 'B', q5: 'B' };
+        var mcDone = {};
+        var matDone = {};
+        var score = 0;
+
+        function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+        function optClick(el, opt, qid) {
+            if (mcDone[qid]) return;
+            var correct = correctAnswers[qid];
+            var opts = el.parentElement.querySelectorAll('label');
+            opts.forEach(function(o) {
+                o.classList.add('disabled');
+                var oText = o.textContent.trim().charAt(0);
+                if (oText === correct) { o.classList.add('correct'); } else if (o === el) { o.classList.add('wrong'); }
+            });
+            mcDone[qid] = true;
+            if (opt === correct) score++;
+            updateScore();
+        }
+
+        function trackMatQ(id) {
+            if (matDone[id]) return;
+            matDone[id] = true;
+            score++;
+            updateScore();
+        }
+
+        function resetQuiz() {
+            mcDone = {};
+            matDone = {};
+            score = 0;
+            updateScore();
+            document.querySelectorAll('.exercise').forEach(function(ex) {
+                ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled', 'correct', 'wrong'); });
+                ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+            });
+        }
+
+        // ===== 栏目筛选 =====
+        function filterCol(cat, chip) {
+            document.querySelectorAll('#page3 .filter-chip').forEach(function(c) { c.classList.remove('active'); });
+            chip.classList.add('active');
+            document.querySelectorAll('#page3 .col-box').forEach(function(box) {
+                if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); } else { box
+                        .classList.add('filtered-out'); }
+            });
+        }
+
+        function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+        // ===== 拖拽排序（IIFE） =====
+        (function initDragSort() {
+            var items = document.querySelectorAll('#sortPool1 .sort-item');
+            var slots = document.querySelectorAll('#page1 .sort-slot');
+            items.forEach(function(item) {
+                item.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+                    item.classList.add('dragging');
+                });
+                item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+            });
+            slots.forEach(function(slot) {
+                slot.addEventListener('dragover', function(e) { e.preventDefault();
+                    slot.classList.add('drag-over'); });
+                slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+                slot.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    slot.classList.remove('drag-over');
+                    var key = e.dataTransfer.getData('text/plain');
+                    if (slot.querySelector('.sort-item')) {
+                        var old = slot.querySelector('.sort-item');
+                        old.classList.remove('placed');
+                        document.getElementById('sortPool1').appendChild(old);
+                    }
+                    var item = document.getElementById('item_' + key);
+                    if (item) { slot.appendChild(item);
+                        item.classList.add('placed');
+                        slot.classList.add('filled'); }
+                });
+                slot.addEventListener('click', function() {
+                    var item = this.querySelector('.sort-item');
+                    if (item && !item.classList.contains('dragging')) {
+                        item.classList.remove('placed');
+                        this.classList.remove('filled');
+                        document.getElementById('sortPool1').appendChild(item);
+                    }
+                });
+            });
+            var pool = document.getElementById('sortPool1');
+            pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+            pool.addEventListener('drop', function(e) {
+                e.preventDefault();
+                var key = e.dataTransfer.getData('text/plain');
+                var item = document.getElementById('item_' + key);
+                if (item && item.classList.contains('placed')) {
+                    item.classList.remove('placed');
+                    var parentSlot = item.parentElement;
+                    if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+                    pool.appendChild(item);
+                }
+            });
+        })();
+
+        function checkSort() {
+            var correctOrder = ['c', 'a', 'b', 'd'];
+            var slots = document.querySelectorAll('#page1 .sort-slot');
+            var result = document.getElementById('sortResult');
+            var allFilled = true;
+            var allCorrect = true;
+            slots.forEach(function(slot, i) {
+                var item = slot.querySelector('.sort-item');
+                if (!item) { allFilled = false;
+                    allCorrect = false; return; }
+                if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+                    slot.classList.add('correct');
+                    slot.classList.remove('wrong');
+                } else {
+                    slot.classList.add('wrong');
+                    slot.classList.remove('correct');
+                    allCorrect = false;
+                }
+            });
+            if (!allFilled) {
+                result.textContent = '❌ 请先将所有卡片拖入槽位';
+                result.className = 'sort-result show fail';
+                return;
+            }
+            if (allCorrect) {
+                result.textContent = '✅ 完全正确！';
+                result.className = 'sort-result show pass';
+                stageDone.sort = true;
+                updateStageProgress();
+                document.getElementById('stageSortDone').classList.add('show');
+            } else {
+                result.textContent = '❌ 顺序不对，请重试';
+                result.className = 'sort-result show fail';
+            }
+        }
+
+        // ===== 填空填词 =====
+        function checkFillBlanks() {
+            var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+            var allCorrect = true;
+            inputs.forEach(function(inp) {
+                var answer = inp.getAttribute('data-answer');
+                var val = inp.value.trim();
+                if (val === answer) { inp.classList.add('correct');
+                    inp.classList.remove('wrong'); } else { inp.classList.add('wrong');
+                    inp.classList.remove('correct');
+                    allCorrect = false; }
+            });
+            var result = document.getElementById('fillResult');
+            if (allCorrect) {
+                result.textContent = '✅ 完全正确！';
+                result.className = 'sort-result show pass';
+                stageDone.fill = true;
+                updateStageProgress();
+                document.getElementById('stageFillDone').classList.add('show');
+            } else {
+                result.textContent = '❌ 有错误，请检查';
+                result.className = 'sort-result show fail';
+            }
+        }
+
+        // ===== 连线匹配 =====
+        var selectedLeft = null;
+        var matchedPairs = [];
+
+        function selectMatch(el) {
+            if (el.classList.contains('matched')) return;
+            document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+            el.classList.add('selected');
+            selectedLeft = el;
+        }
+
+        function pairMatch(el) {
+            if (!selectedLeft) return;
+            if (el.classList.contains('matched')) return;
+            var leftCat = selectedLeft.getAttribute('data-match');
+            var rightCat = el.getAttribute('data-match');
+            if (leftCat === rightCat) {
+                selectedLeft.classList.add('matched');
+                selectedLeft.classList.remove('selected');
+                el.classList.add('matched');
+                matchedPairs.push(leftCat);
+                selectedLeft = null;
+                if (matchedPairs.length >= 5) {
+                    document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+                    document.getElementById('matchResult').className = 'sort-result show pass';
+                    stageDone.match = true;
+                    updateStageProgress();
+                    document.getElementById('stageMatchDone').classList.add('show');
+                }
+            } else {
+                document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+                selectedLeft = null;
+            }
+        }
+
+        // ===== 地图标注（IIFE） =====
+        (function initMapMarkers() {
+            var markers = document.querySelectorAll('#mapContainer .map-marker');
+            var found = {};
+            markers.forEach(function(m) {
+                m.addEventListener('click', function() {
+                    var pt = m.getAttribute('data-point');
+                    if (found[pt]) return;
+                    m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+                    m.setAttribute('stroke', '#27ae60');
+                    found[pt] = true;
+                    var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+                    checkItems.forEach(function(ci) {
+                        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+                    });
+                    var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+                    var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+                    if (allFound >= total) {
+                        stageDone.map = true;
+                        updateStageProgress();
+                        document.getElementById('stageMapDone').classList.add('show');
+                    }
+                });
+                m.style.cursor = 'pointer';
+            });
+        })();
+
+        // ===== 翻转卡 =====
+        function flipCard(el) {
+            el.classList.toggle('flipped');
+            var total = document.querySelectorAll('.flash-card').length;
+            var flipped = document.querySelectorAll('.flash-card.flipped').length;
+            if (total > 0 && flipped >= total) {
+                stageDone.flips = true;
+                updateStageProgress();
+                ['stageFlipsDone1', 'stageFlipsDone2', 'stageFlipsDone3'].forEach(function(id) {
+                    var el2 = document.getElementById(id);
+                    if (el2) el2.classList.add('show');
+                });
+            }
+        }
+
+        // ===== 知识图谱节点展开 =====
+        function toggleKgDetail(node) {
+            node.classList.toggle('expanded');
+            var badge = node.querySelector('.kg-expand-badge');
+            if (badge) {
+                var arrow = badge.querySelector('.badge-arrow');
+                if (node.classList.contains('expanded')) {
+                    if (arrow) arrow.textContent = '▼';
+                    badge.childNodes[badge.childNodes.length - 1].textContent = ' 收起详情';
+                } else {
+                    if (arrow) arrow.textContent = '▶';
+                    badge.childNodes[badge.childNodes.length - 1].textContent = ' 点击展开';
+                }
+            }
+        }
+
+        // ===== deep-card 折叠（IIFE · 无内联 onclick） =====
+        (function() {
+            var cards = document.querySelectorAll('.deep-card');
+            cards.forEach(function(card) {
+                var hd = card.querySelector('.deep-card-hd');
+                var bd = card.querySelector('.deep-card-bd');
+                if (hd && bd) {
+                    hd.removeAttribute('onclick');
+                    hd.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        bd.classList.toggle('show');
+                        hd.classList.toggle('active');
+                    });
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

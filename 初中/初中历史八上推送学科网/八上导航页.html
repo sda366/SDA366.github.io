@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八年级历史上册 · 课件导航页</title>
+<style>
+  :root{
+    --bg:#f4f1ea; --ink:#2b2620; --muted:#8a7f6d;
+    --card:#ffffff; --line:#e7e0d2;
+    --u1:#c0392b; --u2:#d68910; --u3:#8e44ad; --u4:#2471a3; --u5:#148f77; --u6:#a93226; --u7:#b7950b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;background:
+      radial-gradient(circle at 12% 8%,rgba(192,57,43,.05),transparent 40%),
+      radial-gradient(circle at 88% 92%,rgba(36,113,163,.05),transparent 42%),
+      var(--bg);
+    color:var(--ink);line-height:1.7;padding:36px 18px 60px;}
+  .wrap{max-width:1080px;margin:0 auto;}
+
+  .top{
+    position:relative;overflow:hidden;border-radius:20px;padding:44px 32px 36px;text-align:center;color:#f7f1e6;
+    background:linear-gradient(135deg,#231a17 0%,#5c1f1a 48%,#a93226 100%);
+    box-shadow:0 16px 40px rgba(92,31,26,.32);
+  }
+  .top::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 15%,rgba(255,255,255,.10),transparent 45%);pointer-events:none;}
+  .ribbon{position:relative;display:inline-block;letter-spacing:6px;font-size:13px;color:#e8b84b;opacity:.92;margin-bottom:14px;
+    padding:4px 18px;border:1px solid rgba(232,184,75,.4);border-radius:20px;font-weight:700;}
+  .top h1{font-size:30px;letter-spacing:3px;font-weight:800;position:relative;text-shadow:0 2px 8px rgba(0,0,0,.3);}
+  .top .sub{margin-top:10px;font-size:15px;opacity:.9;position:relative;}
+  .top .pill{display:inline-block;margin-top:16px;padding:6px 18px;border-radius:20px;background:rgba(232,184,75,.16);color:#f3d98a;font-size:13px;position:relative;}
+
+  .stats{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap;}
+  .stat{flex:1;min-width:120px;background:var(--card);border-radius:14px;padding:16px 10px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.05);}
+  .stat b{display:block;font-size:26px;font-weight:800;color:#a93226;line-height:1.1;}
+  .stat span{font-size:12px;color:var(--muted);}
+  .stat.ok b{color:#1e7e45;}
+
+  .note{margin:18px 0 6px;padding:13px 18px;background:#fbf6e9;border:1px solid #ecd9a8;border-radius:12px;font-size:13px;color:#7a5d10;display:flex;gap:10px;align-items:flex-start;}
+  .note b{color:#6b4f0c;}
+
+  .unit{background:var(--card);border-radius:16px;margin:16px 0;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06);}
+  .unit-head{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line);}
+  .unit-badge{width:44px;height:44px;flex:0 0 44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 4px 10px rgba(0,0,0,.18);}
+  .unit-name{font-size:17px;font-weight:700;color:#3a2f25;}
+  .unit-meta{font-size:12.5px;color:var(--muted);margin-top:2px;}
+
+  .u1 .unit-badge{background:linear-gradient(135deg,#a93226,#c0392b);} .u1 .lesson{border-left-color:var(--u1);} .u1 .lesson:hover{background:#fbeee9;}
+  .u2 .unit-badge{background:linear-gradient(135deg,#b9770e,#d68910);} .u2 .lesson{border-left-color:var(--u2);} .u2 .lesson:hover{background:#fbf2e2;}
+  .u3 .unit-badge{background:linear-gradient(135deg,#7d3c98,#8e44ad);} .u3 .lesson{border-left-color:var(--u3);} .u3 .lesson:hover{background:#f4ecf8;}
+  .u4 .unit-badge{background:linear-gradient(135deg,#1f5f8b,#2471a3);} .u4 .lesson{border-left-color:var(--u4);} .u4 .lesson:hover{background:#e9f1f8;}
+  .u5 .unit-badge{background:linear-gradient(135deg,#117a63,#148f77);} .u5 .lesson{border-left-color:var(--u5);} .u5 .lesson:hover{background:#e6f5f0;}
+  .u6 .unit-badge{background:linear-gradient(135deg,#922b21,#a93226);} .u6 .lesson{border-left-color:var(--u6);} .u6 .lesson:hover{background:#fbeeee;}
+  .u7 .unit-badge{background:linear-gradient(135deg,#9c7d09,#b7950b);} .u7 .lesson{border-left-color:var(--u7);} .u7 .lesson:hover{background:#faf3df;}
+
+  .lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;padding:18px 22px 22px;}
+  .lesson{position:relative;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);
+    padding:14px 16px;border-radius:11px;border:1px solid var(--line);border-left:4px solid #ccc;background:#fafbfc;transition:.18s ease;}
+  .lesson:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(92,31,26,.16);border-color:transparent;}
+  .lesson .lno{font-size:12px;font-weight:700;color:#a93226;}
+  .lesson .lt{font-size:15px;font-weight:600;}
+  .lesson .badge{position:absolute;top:11px;right:12px;font-size:11px;padding:2px 9px;border-radius:10px;background:#e6f6ec;color:#1e8e4e;}
+  .lesson .badge.act{background:#fef0e0;color:#c8741a;}
+
+  .foot{text-align:center;color:#a99c86;font-size:12px;padding:26px 0 4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="ribbon">1840 ──────── 1949</div>
+    <h1>八年级历史上册 · 课件导航</h1>
+    <div class="sub">统编版初中历史 · 中国近代史（鸦片战争 → 人民解放战争）</div>
+    <div class="pill">交互式课件 · 含闯关答题与知识梳理</div>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>7</b><span>单元</span></div>
+    <div class="stat"><b>21</b><span>正文课时</span></div>
+    <div class="stat"><b>1</b><span>活动课</span></div>
+    <div class="stat ok"><b>22</b><span>已制作课件</span></div>
+    <div class="stat ok"><b>0</b><span>待补充</span></div>
+  </div>
+
+  <div class="note">
+    <span>📌</span>
+    <div><b>说明：</b>本导航按教材单元整理八年级上册全部 22 课；每课结束页均设有「上一课 / 返回导航页 / 下一课」连接，可沿历史脉络逐课学习。标记 <span style="color:#c8741a;font-weight:700;">活动</span> 为配套活动课。</div>
+  </div>
+
+  <section class="unit u-一">
+    <div class="unit-head">
+      <div class="unit-badge">一</div>
+      <div><div class="unit-name">第一单元 · 中国开始沦为半殖民地半封建社会</div><div class="unit-meta">第1–3课 · 3课时</div></div>
+    </div>
+    <div class="lesson-grid">
+      <a class="lesson" href="八上-U1-第1课_鸦片战争.html"><span class="lno">第1课</span><span class="lt">鸦片战争</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U1-第2课_第二次鸦片战争.html"><span class="lno">第2课</span><span class="lt">第二次鸦片战争</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U1-第3课_太平天国运动.html"><span class="lno">第3课</span><span class="lt">太平天国运动</span> <span class="badge">✓ 已制作</span></a>
+    </div>
+  </section>
+  <section class="unit u-二">
+    <div class="unit-head">
+      <div class="unit-badge">二</div>
+      <div><div class="unit-name">第二单元 · 早期现代化的初步探索和民族危机加剧</div><div class="unit-meta">第4–7课 · 4课时</div></div>
+    </div>
+    <div class="lesson-grid">
+      <a class="lesson" href="八上-U2-第4课_洋务运动和边疆危机.html"><span class="lno">第4课</span><span class="lt">洋务运动和边疆危机</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U2-第5课_甲午中日战争与列强瓜分中国狂潮.html"><span class="lno">第5课</span><span class="lt">甲午中日战争与列强瓜分中国狂潮</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U2-第6课_戊戌变法.html"><span class="lno">第6课</span><span class="lt">戊戌变法</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U2-第7课_义和团运动和八国联军侵华.html"><span class="lno">第7课</span><span class="lt">义和团运动和八国联军侵华</span> <span class="badge">✓ 已制作</span></a>
+    </div>
+  </section>
+  <section class="unit u-三">
+    <div class="unit-head">
+      <div class="unit-badge">三</div>
+      <div><div class="unit-name">第三单元 · 资产阶级民主革命与中华民国的建立</div><div class="unit-meta">第8–10课 · 3课时</div></div>
+    </div>
+    <div class="lesson-grid">
+      <a class="lesson" href="八上-U3-第8课_中国同盟会.html"><span class="lno">第8课</span><span class="lt">中国同盟会</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U3-第9课_辛亥革命.html"><span class="lno">第9课</span><span class="lt">辛亥革命</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U3-第10课%20帝制复辟与军阀割据.html"><span class="lno">第10课</span><span class="lt">帝制复辟与军阀割据</span> <span class="badge">✓ 已制作</span></a>
+    </div>
+  </section>
+  <section class="unit u-四">
+    <div class="unit-head">
+      <div class="unit-badge">四</div>
+      <div><div class="unit-name">第四单元 · 新民主主义革命的兴起</div><div class="unit-meta">第11–12课 · 2课时</div></div>
+    </div>
+    <div class="lesson-grid">
+      <a class="lesson" href="八上-U4-第11课%20五四运动.html"><span class="lno">第11课</span><span class="lt">五四运动</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上-U４－第12课%20中国共产党的诞生.html"><span class="lno">第12课</span><span class="lt">中国共产党的诞生</span> <span class="badge">✓ 已制作</span></a>
+    </div>
+  </section>
+  <section class="unit u-五">
+    <div class="unit-head">
+      <div class="unit-badge">五</div>
+      <div><div class="unit-name">第五单元 · 从国共合作到农村革命根据地的建立</div><div class="unit-meta">第13–15课 · 3课时</div></div>
+    </div>
+    <div class="lesson-grid">
+      <a class="lesson" href="八上－U５－第13课%20国共合作与北伐战争.html"><span class="lno">第13课</span><span class="lt">国共合作与北伐战争</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上－U5-第14课%20毛泽东开辟井冈山道路.html"><span class="lno">第14课</span><span class="lt">毛泽东开辟井冈山道路</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上－U５－第15课%20·%20中国工农红军长征与遵义会议.html"><span class="lno">第15课</span><span class="lt">中国工农红军长征与遵义会议</span> <span class="badge">✓ 已制作</span></a>
+    </div>
+  </section>
+  <section class="unit u-六">
+    <div class="unit-head">
+      <div class="unit-badge">六</div>
+      <div><div class="unit-name">第六单元 · 中华民族的抗日战争</div><div class="unit-meta">第16–19课 · 4课时</div></div>
+    </div>
+    <div class="lesson-grid">
+      <a class="lesson" href="八上－U６－%20第16课%20·%20从九一八事变到西安事变.html"><span class="lno">第16课</span><span class="lt">从九一八事变到西安事变</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上－U６－第17课%20·%20七七事变与全民族抗战.html"><span class="lno">第17课</span><span class="lt">七七事变与全民族抗战</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上－U６－第18课%20·%20全民族抗战中的正面战场和敌后战场.html"><span class="lno">第18课</span><span class="lt">全民族抗战中的正面战场和敌后战场</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上－U６－第19课%20%20抗日战争的胜利.html"><span class="lno">第19课</span><span class="lt">抗日战争的胜利</span> <span class="badge">✓ 已制作</span></a>
+    </div>
+  </section>
+  <section class="unit u-七">
+    <div class="unit-head">
+      <div class="unit-badge">七</div>
+      <div><div class="unit-name">第七单元 · 人民解放战争</div><div class="unit-meta">第20–22课 · 3课时</div></div>
+    </div>
+    <div class="lesson-grid">
+      <a class="lesson" href="八上－U７－第20课%20国民党挑起内战.html"><span class="lno">第20课</span><span class="lt">国民党挑起内战</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上－U７－第21课%20人民解放战争的胜利.html"><span class="lno">第21课</span><span class="lt">人民解放战争的胜利</span> <span class="badge">✓ 已制作</span></a>
+      <a class="lesson" href="八上－U７－第22课%20活动课%20探寻红色文化的历史基因.html"><span class="lno">第22课</span><span class="lt">活动课 探寻红色文化的历史基因</span> <span class="badge act">活动课</span></a>
+    </div>
+  </section>
+
+  <div class="foot">八年级历史上册课件导航页 · 依据统编版教材单元结构整理 · 生成于 2026-07-19</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第22课 活动课 探寻红色文化的历史基因 — 八年级历史上册</title>
+    <style>
+        /* ========== CSS 变量与全局 ========== */
+        :root {
+            --primary: #7c6cf0;
+            --primary-dark: #3d2b8c;
+            --primary-light: #b3a8ff;
+            --bg: #f5f3ff;
+            --bg-card: #faf8ff;
+            --border: #dcd4f5;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --orange: #f39c12;
+            --blue: #3498db;
+            --purple: #8e44ad;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+            font-size: 14pt;
+            background: var(--bg);
+            color: #333;
+            line-height: 1.75;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            overflow-x: hidden;
+        }
+
+        /* ========== 分页幻灯片系统 ========== */
+        .page-slide {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding-top: 10px;
+            animation: slideIn 0.35s ease;
+        }
+        .page-slide.active {
+            display: block;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            padding: 14px 0 10px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+        }
+        .slide-header .module-num {
+            font-size: 12pt;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .slide-header .module-title {
+            font-size: 18pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        /* ========== Hero 封面 ========== */
+        .hero-wrap {
+            background: linear-gradient(135deg, #3d2b8c, #5a4ac7, #7c6cf0);
+            padding: 36px 20px 30px;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 0 36px 36px;
+            box-shadow: 0 6px 30px rgba(61, 43, 140, 0.20);
+            margin: 0 -20px 28px;
+        }
+        .hero-wrap .hero-unit {
+            font-size: 13pt;
+            opacity: 0.82;
+            letter-spacing: 2px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        .hero-wrap h1 {
+            font-size: 26pt;
+            margin: 10px 0 8px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #fff;
+        }
+        .hero-wrap .hero-sub {
+            font-size: 14pt;
+            opacity: 0.85;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .learn-target {
+            background: linear-gradient(135deg, #f0edff, #e0daff);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+        .learn-target h3 {
+            color: var(--primary-dark);
+            font-size: 16pt;
+            margin-bottom: 12px;
+        }
+        .learn-target .target-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+        }
+        .learn-target .target-item {
+            font-size: 13.5pt;
+            padding: 6px 8px;
+            border-bottom: 1px dashed var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 6px;
+        }
+        .learn-target .target-item:hover {
+            background: rgba(124, 108, 240, 0.08);
+        }
+        .learn-target .target-item.done {
+            opacity: 0.45;
+            text-decoration: line-through;
+            color: #999;
+            background: rgba(39, 174, 96, 0.06);
+        }
+        .stage-done {
+            display: none;
+            background: linear-gradient(135deg, #d4efdf, #a9dfbf);
+            border: 2px solid var(--green);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin: 12px 0;
+            text-align: center;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--green);
+            animation: fadeInUp 0.4s ease;
+        }
+        .stage-done.show {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        #targetsDone {
+            display: none;
+            margin-top: 12px;
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--green);
+        }
+        #targetsDone.show {
+            display: block;
+        }
+
+        .start-btn {
+            display: block;
+            margin: 20px auto 10px;
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 36px;
+            font-size: 16pt;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 14px rgba(124, 108, 240, 0.30);
+        }
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(124, 108, 240, 0.40);
+        }
+
+        /* ========== 标签页 ========== */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 14px 8px;
+            font-size: 14pt;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s;
+            background: #e8e0ff;
+            color: #5a4ac7;
+            letter-spacing: 1px;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+        }
+        .tab-btn:hover:not(.active) {
+            background: #d5cef0;
+        }
+        .tab-panel {
+            display: none;
+            background: #fff;
+            padding: 18px 20px;
+            border-radius: 0 0 12px 12px;
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* ========== 闯关进度条 ========== */
+        .stage-progress-wrap {
+            background: #e8e0ff;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+        }
+        .stage-progress-bar-bg {
+            background: #fff;
+            border-radius: 6px;
+            height: 8px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+        .stage-progress-bar-fill {
+            background: linear-gradient(90deg, #7c6cf0, #5a4ac7);
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        .stage-progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11pt;
+            color: #888;
+        }
+        .stage-progress-text strong {
+            color: var(--primary-dark);
+        }
+
+        /* ========== 挑战标题 ========== */
+        .challenge-title {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 10px 0;
+            padding: 8px;
+            background: #f0edff;
+            border-radius: 10px;
+        }
+
+        /* ========== 知识卡片 ========== */
+        .kp-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            padding: 18px 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(124, 108, 240, 0.08);
+        }
+        .kp-card h3 {
+            color: var(--primary-dark);
+            font-size: 16pt;
+            margin-bottom: 10px;
+        }
+        .kp-card ul {
+            padding-left: 22px;
+        }
+        .kp-card li {
+            margin: 6px 0;
+            font-size: 14pt;
+        }
+
+        .timeline-bar {
+            background: #f0edff;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 12pt;
+            color: #5a4ac7;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .link-bar {
+            border: 2px dashed #d5cef0;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 14px;
+            background: #faf8ff;
+            font-size: 13pt;
+            color: #5a4ac7;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 10px;
+            font-size: 11pt;
+            font-weight: 700;
+            margin-right: 6px;
+        }
+        .tag-event {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .tag-key {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .tag-effect {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .tag-zhongkao {
+            background: var(--orange);
+            color: #fff;
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 11pt;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .tag-red {
+            background: #c62828;
+            color: #fff;
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 11pt;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        /* ========== 手风琴组 ========== */
+        .acc-group {
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .acc-group-hd {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 22px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.25s;
+        }
+        .acc-group-hd.pt1 {
+            background: linear-gradient(135deg, #c62828, #e53935);
+        }
+        .acc-group-hd.pt2 {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+        }
+        .acc-group-hd.pt3 {
+            background: linear-gradient(135deg, #8e44ad, #a569bd);
+        }
+        .acc-group-hd h3 {
+            color: #fff;
+            font-size: 15pt;
+            margin: 0;
+        }
+        .acc-group-hd .acc-arrow {
+            color: #fff;
+            font-size: 18pt;
+            transition: transform 0.3s;
+        }
+        .acc-group.open .acc-arrow {
+            transform: rotate(180deg);
+        }
+        .acc-group-bd {
+            display: none;
+            background: #fff;
+            border: 1px solid #eee;
+            border-top: none;
+            padding: 16px 22px;
+        }
+        .acc-group.open .acc-group-bd {
+            display: block;
+        }
+        .acc-mastered {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 22px;
+            background: #faf8ff;
+            border-top: 1px solid #eee;
+        }
+        .acc-mastered button {
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 6px 16px;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .acc-mastered button:hover {
+            transform: scale(1.05);
+        }
+        .acc-mastered button.done {
+            background: #ccc;
+            pointer-events: none;
+        }
+
+        /* ========== deep-card 折叠 ========== */
+        .deep-card {
+            margin: 10px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+        .deep-card-hd {
+            background: linear-gradient(135deg, #e67e22, #f0ad4e);
+            color: #fff;
+            padding: 10px 16px;
+            font-size: 13.5pt;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .deep-card-hd:hover {
+            filter: brightness(1.05);
+        }
+        .deep-card-hd .dc-arrow {
+            float: right;
+            font-size: 14pt;
+            transition: transform 0.3s;
+        }
+        .deep-card-hd.active .dc-arrow {
+            transform: rotate(180deg);
+        }
+        .deep-card-bd {
+            display: none;
+            background: #fff;
+            padding: 14px 18px;
+            border: 1px solid #eee;
+            border-top: none;
+            font-size: 13pt;
+        }
+        .deep-card-bd.show {
+            display: block;
+        }
+
+        /* ========== Page3 栏目系统 ========== */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .filter-chip {
+            padding: 6px 14px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: #fff;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            color: #5a4ac7;
+        }
+        .filter-chip:hover {
+            border-color: var(--primary);
+            background: #f0edff;
+        }
+        .filter-chip.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .col-box {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(124, 108, 240, 0.06);
+            transition: all 0.3s;
+        }
+        .col-box.filtered-out {
+            display: none;
+        }
+        .col-header {
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 15pt;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .col-header .col-toggle {
+            font-size: 16pt;
+            transition: transform 0.3s;
+        }
+        .col-box.open .col-toggle {
+            transform: rotate(180deg);
+        }
+        .col-body {
+            display: none;
+            padding: 16px 20px;
+            background: #fff;
+            font-size: 13.5pt;
+        }
+        .col-box.open .col-body {
+            display: block;
+        }
+
+        /* ========== 答案区 ========== */
+        .a {
+            display: none;
+            background: #f0edff;
+            border: 1px solid #d5cef0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0;
+            font-size: 14pt;
+        }
+        .a.show {
+            display: block;
+        }
+        .ans-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 12pt;
+            cursor: pointer;
+            margin: 6px 0;
+            transition: all 0.2s;
+        }
+        .ans-btn:hover {
+            transform: scale(1.05);
+            background: #5a4ac7;
+        }
+
+        /* ========== Page4 课堂训练 ========== */
+        .score-banner {
+            background: linear-gradient(135deg, #f0edff, #e0daff);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+        .score-number {
+            font-size: 22pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        .score-reset {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 16px;
+            padding: 4px 14px;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .score-reset:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        .exercise {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+        }
+        .q-text {
+            font-size: 14pt;
+            margin: 10px 0 6px;
+        }
+        .options label {
+            display: block;
+            padding: 8px 14px;
+            margin: 4px 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14pt;
+            transition: all 0.2s;
+            background: #faf8ff;
+        }
+        .options label:hover {
+            background: #f0edff;
+            border-color: var(--primary);
+        }
+        .options label.disabled {
+            pointer-events: none;
+        }
+        .options label.correct {
+            background: #d4efdf;
+            border-color: var(--green);
+            color: var(--green);
+            font-weight: 700;
+        }
+        .options label.wrong {
+            background: #fadbd8;
+            border-color: var(--red);
+            color: var(--red);
+        }
+        .source-material {
+            border-left: 4px solid var(--primary);
+            padding: 8px 14px;
+            margin: 8px 0;
+            background: #faf8ff;
+            font-size: 13pt;
+        }
+        .source-ref {
+            text-align: right;
+            color: #888;
+            font-size: 10pt;
+            margin-bottom: 8px;
+        }
+        .think-box {
+            background: #f0edff;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-left: 4px solid var(--primary);
+        }
+        .think-box .think-title {
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        .think-box ul {
+            margin-left: 20px;
+            font-size: 13pt;
+        }
+
+        /* ========== Page5 知识结构图 ========== */
+        .kg-wrap-simple {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 2px 12px rgba(124, 108, 240, 0.08);
+        }
+        .kg-title {
+            text-align: center;
+            font-size: 17pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+        .kg-chain {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .kg-node {
+            width: 90%;
+            border-radius: 12px;
+            padding: 16px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .kg-node:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(124, 108, 240, 0.25);
+        }
+        .kg-node:active {
+            transform: scale(0.98);
+        }
+        .kg-node.left {
+            align-self: flex-start;
+        }
+        .kg-node.right {
+            align-self: flex-end;
+        }
+        .kg-node.c1 {
+            background: #fce4ec;
+            border: 2px solid #c62828;
+        }
+        .kg-node.c2 {
+            background: #fff3e0;
+            border: 2px solid #f0ad4e;
+        }
+        .kg-node.c3 {
+            background: #e0f2e9;
+            border: 2px solid #27ae60;
+        }
+        .kg-node.c4 {
+            background: #e8e0ff;
+            border: 2px solid #7c6cf0;
+        }
+        .kg-node strong {
+            display: block;
+            font-size: 14pt;
+            margin: 6px 0;
+        }
+        .kg-node p {
+            font-size: 12pt;
+            color: #555;
+            margin: 4px 0;
+        }
+        .kg-icon {
+            font-size: 22pt;
+        }
+        .kg-arrow {
+            font-size: 20pt;
+            color: var(--primary);
+            margin: 4px 0;
+        }
+        @keyframes kgPulse {
+            0%,
+            100% {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            }
+            50% {
+                box-shadow: 0 2px 20px rgba(124, 108, 240, 0.18);
+            }
+        }
+        .kg-node.pulse {
+            animation: kgPulse 3s ease-in-out infinite;
+        }
+        .kg-expand-badge {
+            position: absolute;
+            top: -10px;
+            right: -8px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 11pt;
+            font-weight: 600;
+            padding: 3px 10px 3px 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(124, 108, 240, 0.35);
+            white-space: nowrap;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+        .kg-expand-badge .badge-arrow {
+            display: inline-block;
+            margin-right: 3px;
+            transition: transform 0.3s;
+        }
+        .kg-node.expanded .kg-expand-badge {
+            background: #27ae60;
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.35);
+        }
+        .kg-node.expanded .kg-expand-badge .badge-arrow {
+            transform: rotate(180deg);
+        }
+        .kg-detail {
+            max-height: 0;
+            overflow: hidden;
+            font-size: 12pt;
+            color: #666;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            transition: all 0.4s ease;
+        }
+        .kg-node.expanded .kg-detail {
+            max-height: 300px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #ddd;
+        }
+        .kg-node.expanded {
+            animation: none;
+        }
+        .kg-hint-banner {
+            background: linear-gradient(135deg, #e8e0ff, #f3e8ff);
+            border: 1.5px dashed var(--primary);
+            border-radius: 10px;
+            padding: 10px 18px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13pt;
+            font-weight: 600;
+            color: var(--primary-dark);
+            flex-wrap: wrap;
+        }
+        .kg-hint-banner .hint-click {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 12pt;
+            margin: 0 4px;
+        }
+        .kg-rules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .kg-rule {
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12.5pt;
+            text-align: center;
+            font-weight: 600;
+        }
+        .kg-rule.r1 {
+            background: #fce4ec;
+            color: #c62828;
+        }
+        .kg-rule.r2 {
+            background: #fff3e0;
+            color: #e67e22;
+        }
+        .kg-rule.r3 {
+            background: #e0f2e9;
+            color: #27ae60;
+        }
+        .kg-rule.r4 {
+            background: #e8e0ff;
+            color: #5a4ac7;
+        }
+
+        /* ========== 结束页 ========== */
+        .recap-section {
+            margin-bottom: 24px;
+        }
+        .recap-title {
+            text-align: center;
+            font-size: 17pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+        }
+        .recap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .recap-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px 16px 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 3px 12px rgba(124, 108, 240, 0.08);
+            position: relative;
+            text-align: left;
+        }
+        .recap-card-num {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 14pt;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .recap-card h3 {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 4px 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        .recap-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .recap-card ul li {
+            font-size: 12.5pt;
+            line-height: 1.7;
+            padding: 4px 0 4px 18px;
+            position: relative;
+            color: #444;
+        }
+        .recap-card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--primary);
+            font-size: 10pt;
+        }
+        .recap-card ul li strong {
+            color: var(--primary-dark);
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 14px 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(124, 108, 240, 0.08);
+            font-size: 12pt;
+        }
+        .bottom-nav a {
+            color: #5a4ac7;
+            text-decoration: none;
+        }
+        .bottom-nav .nav-center {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0 10px;
+            border-top: 2px solid var(--border);
+            margin-top: 24px;
+            font-size: 12pt;
+            color: #999;
+        }
+        footer p {
+            margin: 4px 0;
+        }
+
+        /* ========== 底部翻页导航栏 ========== */
+        .pg-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: #fff;
+            box-shadow: 0 -2px 16px rgba(124, 108, 240, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 8px 16px;
+            height: 52px;
+        }
+        .pg-nav button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 18px;
+            padding: 6px 16px;
+            font-size: 13pt;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .pg-nav button:hover {
+            background: #5a4ac7;
+            transform: scale(1.05);
+        }
+        .pg-nav button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .pg-nav .pg-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .pg-nav .pg-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dcd4f5;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .pg-nav .pg-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+        .pg-nav .pg-dot:hover:not(.active) {
+            background: var(--primary-light);
+        }
+        .pg-nav .pg-counter {
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ========== 五关专用 CSS ========== */
+        .sort-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+        .sort-item {
+            padding: 8px 16px;
+            background: #fff;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            cursor: grab;
+            font-weight: 700;
+            font-size: 13pt;
+            color: #5a4ac7;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        .sort-item:active {
+            cursor: grabbing;
+        }
+        .sort-item.dragging {
+            opacity: 0.35;
+        }
+        .sort-item.placed {
+            background: #e0daff;
+            cursor: default;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .sort-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+            justify-content: center;
+        }
+        .sort-slot {
+            min-width: 90px;
+            min-height: 46px;
+            border: 2px dashed #dcd4f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12pt;
+            transition: all 0.2s;
+            background: #faf8ff;
+            position: relative;
+            padding: 4px 8px;
+        }
+        .sort-slot.filled {
+            border-style: solid;
+            background: #f0edff;
+        }
+        .sort-slot.correct {
+            border-color: var(--green);
+            background: #d4efdf;
+        }
+        .sort-slot.wrong {
+            border-color: var(--red);
+            background: #fadbd8;
+        }
+        .sort-slot .slot-label {
+            position: absolute;
+            top: -20px;
+            font-size: 10pt;
+            color: #999;
+            white-space: nowrap;
+        }
+        .sort-check-btn {
+            display: block;
+            margin: 10px auto;
+        }
+        .sort-result {
+            display: none;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-weight: 700;
+            font-size: 13pt;
+        }
+        .sort-result.show {
+            display: block;
+        }
+        .sort-result.pass {
+            background: #d4efdf;
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+        .sort-result.fail {
+            background: #fadbd8;
+            color: var(--red);
+            border: 1px solid var(--red);
+        }
+
+        .fill-blank-wrap {
+            margin: 14px 0;
+        }
+        .fill-blank-row {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 13pt;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .fill-input {
+            width: 110px;
+            padding: 8px 12px;
+            border: 2px solid #dcd4f5;
+            border-radius: 8px;
+            font-size: 13pt;
+            text-align: center;
+            transition: all 0.2s;
+            background: #faf8ff;
+        }
+        .fill-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 108, 240, 0.15);
+        }
+        .fill-input.correct {
+            border-color: var(--green);
+            background: #d4efdf;
+            color: var(--green);
+            font-weight: 700;
+        }
+        .fill-input.wrong {
+            border-color: var(--red);
+            background: #fadbd8;
+            color: var(--red);
+        }
+
+        .match-area {
+            background: #faf8ff;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            border: 1px solid var(--border);
+        }
+        .match-cols {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .match-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 110px;
+        }
+        .match-col-label {
+            text-align: center;
+            font-weight: 700;
+            font-size: 12pt;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+        .match-item {
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12pt;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #dcd4f5;
+            background: #fff;
+            text-align: center;
+        }
+        .match-item.selected {
+            border-color: var(--primary);
+            background: #f0edff;
+            box-shadow: 0 0 0 3px rgba(124, 108, 240, 0.2);
+        }
+        .match-item.matched {
+            border-color: var(--green);
+            background: #d4efdf;
+            color: var(--green);
+            cursor: default;
+            opacity: 0.75;
+        }
+
+        .map-zone {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            margin: 14px auto;
+            background: #faf8ff;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+        .map-instruction {
+            font-size: 11pt;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        .map-marker {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .map-marker:hover {
+            filter: brightness(0.9);
+        }
+        .map-checklist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .map-check-item {
+            font-size: 11pt;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .map-check-item.done {
+            background: #d4efdf;
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .flash-section {
+            margin: 18px 0;
+        }
+        .flash-section-title {
+            text-align: center;
+            font-size: 13pt;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .flash-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .flash-card {
+            perspective: 700px;
+            height: 140px;
+            cursor: pointer;
+        }
+        .flash-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        .flash-card.flipped .flash-inner {
+            transform: rotateY(180deg);
+        }
+        .flash-front,
+        .flash-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            font-size: 11pt;
+            text-align: center;
+        }
+        .flash-front {
+            background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+            color: #fff;
+            font-weight: 700;
+        }
+        .flash-back {
+            background: #fff;
+            color: #333;
+            transform: rotateY(180deg);
+            border: 2px solid var(--primary);
+            font-size: 10.5pt;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 680px) {
+            .recap-grid,
+            .kg-rules-grid {
+                grid-template-columns: 1fr;
+            }
+            .flash-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .learn-target .target-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-wrap h1 {
+                font-size: 22pt;
+            }
+            .pg-nav {
+                gap: 8px;
+                padding: 6px 10px;
+                height: 48px;
+            }
+            .pg-nav button {
+                font-size: 11pt;
+                padding: 4px 12px;
+            }
+            .pg-nav .pg-dots {
+                gap: 5px;
+            }
+            .pg-nav .pg-dot {
+                width: 10px;
+                height: 10px;
+            }
+            .pg-nav .pg-counter {
+                font-size: 11pt;
+                min-width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 0 : 封面                                                  -->
+    <!-- ============================================================ -->
+    <div class="page-slide active" id="page0">
+        <div class="hero-wrap">
+            <div class="hero-unit">第七单元 · 人民解放战争</div>
+            <h1>第22课 活动课<br>探寻红色文化的历史基因</h1>
+            <div class="hero-sub">统编版初中历史  八年级上册</div>
+        </div>
+        <div class="learn-target" id="learnTargets">
+            <h3>🎯 活动目标（点击标记已了解 → 闯关解锁红色基因）</h3>
+            <div class="target-grid">
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>通过梳理新民主主义革命时期的重要人物、事件、旧址，理解红色文化的形成脉络。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过历史图像、影视剧等多元史料，获取红色文化的历史信息，形成历史解释。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>认识中国共产党人的精神谱系，理解红色文化是党和人民共同创造的先进文化。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>感悟红色文化的历史基因，传承红色基因，涵养家国情怀，明确新时代青年的责任担当。</div>
+            </div>
+            <div class="stage-done" id="targetsDone">✅ 活动目标已全部了解，可以开始活动！</div>
+        </div>
+        <button class="start-btn" onclick="goPage(1)">🚩 开始探寻 →</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 1 : 知识要点 + 五关闯关                                   -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page1">
+        <div class="slide-header">
+            <div class="module-num">模块一</div>
+            <div class="module-title">红色基因 · 闯关解锁</div>
+        </div>
+        <div class="stage-progress-wrap">
+            <div class="stage-progress-text">
+                <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+            </div>
+            <div class="stage-progress-bar-bg">
+                <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+            </div>
+        </div>
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTabV2('tab1')">一、红色精神谱系</button>
+            <button class="tab-btn" onclick="switchTabV2('tab2')">二、红色地标</button>
+            <button class="tab-btn" onclick="switchTabV2('tab3')">三、学史方法</button>
+        </div>
+
+        <!-- ===== TAB1 : 红色精神谱系 ===== -->
+        <div class="tab-panel active" id="tab1">
+            <div class="kp-card">
+                <h3>📌 中国共产党人的精神谱系</h3>
+                <div class="timeline-bar">⏳ 1921年 — 1949年</div>
+                <ul>
+                    <li><span class="tag tag-red">红船精神</span> 开天辟地、敢为人先的首创精神，坚定理想、百折不挠的奋斗精神，立党为公、忠诚为民的奉献精神。</li>
+                    <li><span class="tag tag-red">井冈山精神</span> 坚定信念、艰苦奋斗，实事求是、敢闯新路，依靠群众、勇于胜利。</li>
+                    <li><span class="tag tag-red">长征精神</span> 不怕牺牲、排除万难、勇往直前，坚韧不拔、众志成城。</li>
+                    <li><span class="tag tag-red">抗战精神</span> 天下兴亡、匹夫有责的爱国情怀，视死如归、宁死不屈的民族气节。</li>
+                    <li><span class="tag tag-red">西柏坡精神</span> 谦虚谨慎、艰苦奋斗、敢于斗争、敢于胜利。</li>
+                </ul>
+                <div class="link-bar">🔑 <strong>核心认识：</strong>红色文化是中国共产党在领导中国人民进行革命斗争过程中形成的先进文化，是中华民族宝贵的精神财富。<br>📌 <strong>活动任务：</strong>梳理各时期精神谱系，理解其历史内涵。</div>
+            </div>
+
+            <!-- ① 拖拽排序 -->
+            <div class="challenge-title">🎮 挑战一：将中国共产党人的精神谱系按时间排序</div>
+            <div class="sort-pool" id="sortPool1">
+                <span class="sort-item" draggable="true" data-sortkey="a" id="item_a">抗战精神</span>
+                <span class="sort-item" draggable="true" data-sortkey="b" id="item_b">红船精神</span>
+                <span class="sort-item" draggable="true" data-sortkey="c" id="item_c">西柏坡精神</span>
+                <span class="sort-item" draggable="true" data-sortkey="d" id="item_d">井冈山精神</span>
+                <span class="sort-item" draggable="true" data-sortkey="e" id="item_e">长征精神</span>
+            </div>
+            <div class="sort-slots">
+                <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+                <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+                <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+                <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+                <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+            </div>
+            <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+            <div class="sort-result" id="sortResult"></div>
+            <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+            <!-- 翻转卡 Tab1 -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 红色精神翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">红船精神</div><div class="flash-back">中共一大在嘉兴南湖红船上完成，体现了开天辟地、敢为人先的首创精神。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">井冈山精神</div><div class="flash-back">毛泽东开辟井冈山革命根据地，坚定信念、艰苦奋斗，敢闯新路。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">长征精神</div><div class="flash-back">红军长征二万五千里，不怕牺牲、排除万难、勇往直前。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">西柏坡精神</div><div class="flash-back">七届二中全会提出“两个务必”，谦虚谨慎、艰苦奋斗、敢于胜利。</div></div></div>
+                </div>
+                <div class="stage-done" id="stageFlipsDone1">🎉 第⑤关（翻转卡·子目一）通过！</div>
+            </div>
+        </div>
+
+        <!-- ===== TAB2 : 红色地标 ===== -->
+        <div class="tab-panel" id="tab2">
+            <div class="kp-card">
+                <h3>📌 红色地标 · 革命圣地</h3>
+                <div class="timeline-bar">⏳ 新民主主义革命时期</div>
+                <ul>
+                    <li><span class="tag tag-red">上海</span> 中共一大会址，中国共产党的诞生地。</li>
+                    <li><span class="tag tag-red">嘉兴南湖</span> 红船，中国共产党梦想起航的地方。</li>
+                    <li><span class="tag tag-red">井冈山</span> 中国第一个农村革命根据地。</li>
+                    <li><span class="tag tag-red">瑞金</span> 中华苏维埃共和国临时中央政府所在地。</li>
+                    <li><span class="tag tag-red">延安</span> 抗日战争和解放战争的指挥中枢。</li>
+                    <li><span class="tag tag-red">西柏坡</span> 七届二中全会召开地，“进京赶考”出发地。</li>
+                </ul>
+                <div class="link-bar">🔑 <strong>核心认识：</strong>红色地标是红色文化的物质载体，见证了中国共产党领导人民从胜利走向胜利的光辉历程。<br>📌 <strong>活动任务：</strong>结合地图标注红色地标，设计红色研学路线。</div>
+            </div>
+
+            <!-- ② 填空填词 -->
+            <div class="challenge-title">🎮 挑战二：填写红色地标名称，完成红色足迹地图</div>
+            <div class="fill-blank-wrap" id="fillBlanks">
+                <div class="fill-blank-row"><span>① 中共一大会址位于</span><input class="fill-input" type="text" data-answer="上海" placeholder="答案"> <span>。</span></div>
+                <div class="fill-blank-row"><span>② 中共一大最后一天转移到</span><input class="fill-input" type="text" data-answer="嘉兴南湖" placeholder="答案"> <span>的游船上。</span></div>
+                <div class="fill-blank-row"><span>③ 中国第一个农村革命根据地是</span><input class="fill-input" type="text" data-answer="井冈山" placeholder="答案"> <span>。</span></div>
+                <div class="fill-blank-row"><span>④ 中华苏维埃共和国临时中央政府所在地是</span><input class="fill-input" type="text" data-answer="瑞金" placeholder="答案"> <span>。</span></div>
+                <div class="fill-blank-row"><span>⑤ 抗日战争和解放战争的指挥中枢是</span><input class="fill-input" type="text" data-answer="延安" placeholder="答案"> <span>。</span></div>
+            </div>
+            <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+            <div class="sort-result" id="fillResult"></div>
+            <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+            <!-- 翻转卡 Tab2 -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 红色地标翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">上海</div><div class="flash-back">中共一大会址，中国共产党诞生地，红色文化的起点。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">嘉兴南湖</div><div class="flash-back">红船所在地，中共一大最后一天的会址，中国共产党梦想起航的地方。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">延安</div><div class="flash-back">抗日战争和解放战争的指挥中枢，革命圣地，吸引无数知识青年奔赴。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">西柏坡</div><div class="flash-back">七届二中全会召开地，“进京赶考”出发地，中国革命最后一个农村指挥所。</div></div></div>
+                </div>
+                <div class="stage-done" id="stageFlipsDone2">🎉 第⑤关（翻转卡·子目二）通过！</div>
+            </div>
+        </div>
+
+        <!-- ===== TAB3 : 学史方法 ===== -->
+        <div class="tab-panel" id="tab3">
+            <div class="kp-card">
+                <h3>📌 学史方法 · 如何探寻红色基因</h3>
+                <div class="timeline-bar">📖 方法指导</div>
+                <ul>
+                    <li><span class="tag tag-key">评价历史人物</span> 从时代背景、事件梳理、阶级属性、历史贡献等角度综合评价。</li>
+                    <li><span class="tag tag-key">图像获取信息</span> 看标题、观方位、察细节、想背景、作解释五步法。</li>
+                    <li><span class="tag tag-key">影视剧提取信息</span> 遵循“大事不虚、小事不拘”原则，区分历史真实与艺术虚构。</li>
+                </ul>
+                <div class="link-bar">🔑 <strong>核心认识：</strong>掌握正确的学史方法，才能从红色文化中汲取历史智慧，传承红色基因。<br>📌 <strong>活动任务：</strong>运用学史方法解读红色史料，完成探究任务。</div>
+            </div>
+
+            <!-- ③ 连线匹配 -->
+            <div class="challenge-title">🎮 挑战三：将学史方法与具体操作配对</div>
+            <div class="match-area">
+                <div class="match-cols">
+                    <div class="match-col">
+                        <div class="match-col-label">学史方法</div>
+                        <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">评价历史人物</div>
+                        <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">图像获取信息</div>
+                        <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">影视剧提取信息</div>
+                    </div>
+                    <div class="match-col">
+                        <div class="match-col-label">操作要点</div>
+                        <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">五个角度综合考量</div>
+                        <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">五步法层层深入</div>
+                        <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">大事不虚、小事不拘</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sort-result" id="matchResult"></div>
+            <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+            <!-- ④ 地图标注 -->
+            <div class="challenge-title">🎮 挑战四：点击地图标注红色地标</div>
+            <div class="map-zone" id="mapContainer">
+                <div class="map-instruction">💡 点击下方圆点标注红色地标（共6处）</div>
+                <svg viewBox="0 0 420 240" style="width:100%;height:auto;background:#eef5f7;border-radius:10px;">
+                    <path d="M60,60 L110,30 L180,20 L240,25 L310,20 L370,40 L390,80 L400,130 L380,170 L350,200 L310,215 L250,220 L190,218 L130,210 L90,195 L60,170 L45,130 L40,90 Z" fill="#d5e8f0" stroke="#7c6cf0" stroke-width="2"/>
+                    <circle class="map-marker" data-point="pt-shanghai" cx="280" cy="150" r="12" fill="#c62828" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-jiaxing" cx="290" cy="168" r="12" fill="#c62828" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-jinggang" cx="235" cy="175" r="12" fill="#c62828" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-ruijin" cx="250" cy="185" r="12" fill="#c62828" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-yanan" cx="175" cy="105" r="12" fill="#c62828" stroke="#fff" stroke-width="3"/>
+                    <circle class="map-marker" data-point="pt-xibaipo" cx="195" cy="90" r="12" fill="#c62828" stroke="#fff" stroke-width="3"/>
+                    <text x="275" y="138" font-size="9pt" fill="#333">上海</text>
+                    <text x="285" y="156" font-size="9pt" fill="#333">嘉兴</text>
+                    <text x="230" y="163" font-size="9pt" fill="#333">井冈山</text>
+                    <text x="245" y="173" font-size="9pt" fill="#333">瑞金</text>
+                    <text x="170" y="93" font-size="9pt" fill="#333">延安</text>
+                    <text x="190" y="78" font-size="9pt" fill="#333">西柏坡</text>
+                </svg>
+                <div class="map-checklist" id="mapChecklist">
+                    <span class="map-check-item" data-point="pt-shanghai">上海（中共一大）</span>
+                    <span class="map-check-item" data-point="pt-jiaxing">嘉兴南湖（红船）</span>
+                    <span class="map-check-item" data-point="pt-jinggang">井冈山（根据地）</span>
+                    <span class="map-check-item" data-point="pt-ruijin">瑞金（中华苏维埃）</span>
+                    <span class="map-check-item" data-point="pt-yanan">延安（革命圣地）</span>
+                    <span class="map-check-item" data-point="pt-xibaipo">西柏坡（七届二中全会）</span>
+                </div>
+                <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+            </div>
+
+            <!-- 翻转卡 Tab3 -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 学史方法翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">评价历史人物</div><div class="flash-back">从时代背景、事件梳理、阶级属性、历史贡献等角度综合考量。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">图像获取信息</div><div class="flash-back">看标题、观方位、察细节、想背景、作解释五步法层层深入。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">大事不虚、小事不拘</div><div class="flash-back">重大历史题材影视剧创作原则，主要人物和事件有史实依据，细节可合理虚构。</div></div></div>
+                </div>
+                <div class="stage-done" id="stageFlipsDone3">🎉 第⑤关（翻转卡·子目三）通过！</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 2 : 重难点解析                                           -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page2">
+        <div class="slide-header">
+            <div class="module-num">模块二</div>
+            <div class="module-title">重难点解析</div>
+        </div>
+
+        <!-- 手风琴1 -->
+        <div class="acc-group open" id="acc1">
+            <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+                <h3>🔍 重点一：红色文化的历史基因是什么？</h3>
+                <span class="acc-arrow">▼</span>
+            </div>
+            <div class="acc-group-bd">
+                <p><strong>① 红色文化的内涵：</strong>中国共产党在领导中国人民进行革命、建设、改革过程中形成的先进文化，以红色为精神底色。</p>
+                <p><strong>② 历史基因：</strong>开天辟地、敢为人先的首创精神；坚定理想、百折不挠的奋斗精神；立党为公、忠诚为民的奉献精神。</p>
+                <p><strong>③ 核心要素：</strong>革命遗址、革命文物、革命精神、红色文艺作品等，共同构成了红色文化体系。</p>
+                <p><strong>④ 时代价值：</strong>红色文化是中华民族宝贵的精神财富，为中华民族伟大复兴提供强大精神动力。</p>
+
+                <div class="deep-card">
+                    <div class="deep-card-hd">📖 基础理解 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>红色文化的历史基因就是中国共产党人的初心使命——为中国人民谋幸福，为中华民族谋复兴。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>从红船精神到西柏坡精神，红色文化的基因一脉相承，体现了中国共产党人坚定的理想信念和为民情怀。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-zhongkao">🎯 实践探究题</span></p>
+                        <p><strong>（论述）请结合所学，谈谈你对红色文化历史基因的理解。</strong></p>
+                        <div class="a" id="ans-p2-zhongkao1"><strong>📝 参考答案：</strong>红色文化的历史基因是中国共产党人初心使命的历史沉淀，体现在红船精神、井冈山精神、长征精神等精神谱系中。其核心是坚定的理想信念、深厚的为民情怀和不屈的斗争意志，是激励中国人民不断前进的强大精神动力。</div>
+                        <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao1')">📝 查看答案</button>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+
+        <!-- 手风琴2 -->
+        <div class="acc-group" id="acc2">
+            <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+                <h3>🔍 重点二：如何运用学史方法探寻红色基因？</h3>
+                <span class="acc-arrow">▼</span>
+            </div>
+            <div class="acc-group-bd">
+                <p><strong>① 评价历史人物：</strong>将人物置于特定时代背景，分阶段梳理其活动，从阶级属性和历史贡献综合评价。</p>
+                <p><strong>② 解读历史图像：</strong>从标题、画面焦点、人物细节、历史背景等方面层层深入，揭示图像反映的时代风貌。</p>
+                <p><strong>③ 分析影视作品：</strong>依据“大事不虚、小事不拘”原则，区分历史真实与艺术加工，把握历史发展的主线。</p>
+
+                <div class="deep-card">
+                    <div class="deep-card-hd">📖 基础理解 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>学史方法是打开红色文化宝库的钥匙，掌握正确方法才能准确理解红色文化的深刻内涵。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>例如，评价毛泽东同志时，既要看到他在各个时期的贡献，也要结合当时的历史条件，全面客观地评价。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-zhongkao">🎯 实践探究题</span></p>
+                        <p><strong>（操作）假如你要解读一幅红色历史图像，请列出你的解读步骤。</strong></p>
+                        <div class="a" id="ans-p2-zhongkao2"><strong>📝 参考答案：</strong>① 阅读标题，明确主题；② 依方位、按系统观察图像，找出焦点；③ 看表象细节，判断人物身份、情绪；④ 联系背景，形成历史想象；⑤ 逐层解释，作出历史评价。</div>
+                        <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao2')">📝 查看答案</button>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+
+        <!-- 手风琴3 -->
+        <div class="acc-group" id="acc3">
+            <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+                <h3>🔍 难点：如何传承红色基因？</h3>
+                <span class="acc-arrow">▼</span>
+            </div>
+            <div class="acc-group-bd">
+                <p><strong>① 知史爱党：</strong>通过学习党史，深刻认识红色政权来之不易、新中国来之不易、中国特色社会主义来之不易。</p>
+                <p><strong>② 知行合一：</strong>将红色精神内化于心、外化于行，在学习和生活中践行艰苦奋斗、勇于奉献的精神。</p>
+                <p><strong>③ 创新传播：</strong>借助新媒体技术、红色研学旅行等新形式，让红色文化“活”起来，吸引更多青年参与。</p>
+                <p><strong>④ 时代担当：</strong>新时代青年要自觉传承红色基因，为实现中华民族伟大复兴贡献青春力量。</p>
+
+                <div class="deep-card">
+                    <div class="deep-card-hd">📖 基础理解 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>传承红色基因不是一句口号，而是要落实到具体的行动中，让红色精神在新时代焕发新的光芒。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd"><p>红色研学旅行、革命故事会、主题班会等都是传承红色基因的有效载体，能够让学生在体验中感悟历史。</p></div>
+                </div>
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 <span class="dc-arrow">▼</span></div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-zhongkao">🎯 实践探究题</span></p>
+                        <p><strong>（设计）请为学校设计一个传承红色基因的实践活动方案。</strong></p>
+                        <div class="a" id="ans-p2-zhongkao3"><strong>📝 参考答案：</strong>① 活动主题：“追寻红色足迹”研学旅行；② 活动内容：参观革命纪念馆、聆听革命故事、诵读红色家书；③ 活动形式：实地参观+主题班会+成果展示；④ 预期目标：让学生感悟红色精神，增强历史使命感。</div>
+                        <button class="ans-btn" onclick="toggleAnswer('ans-p2-zhongkao3')">📝 查看答案</button>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 3 : 教材栏目解答                                         -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page3">
+        <div class="slide-header">
+            <div class="module-num">模块三</div>
+            <div class="module-title">活动指导 · 学史方法</div>
+        </div>
+        <div class="filter-bar">
+            <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+            <button class="filter-chip" onclick="filterCol('活动目标',this)">活动目标</button>
+            <button class="filter-chip" onclick="filterCol('活动任务',this)">活动任务</button>
+            <button class="filter-chip" onclick="filterCol('活动过程',this)">活动过程</button>
+            <button class="filter-chip" onclick="filterCol('学史方法',this)">学史方法</button>
+        </div>
+
+        <!-- ===== 活动目标 ===== -->
+        <div class="col-box" data-cat="活动目标">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>🎯 活动目标</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p><strong>1.</strong> 通过查阅资料、调研访谈、实地考察、研学旅行、专题研讨等多种方式，培养多渠道获取和处理有关红色文化历史信息的能力，提高书面和口头语言表达的能力，培育时空观念、史料实证、历史解释等核心素养。</p>
+                <p style="margin-top:8px;"><strong>2.</strong> 通过对新民主主义革命时期的革命史事、英雄人物、革命精神等内容的学习，知道红色文化的形成过程和基本内容，认识红色文化是党和人民共同创造的、极具中国特色的先进文化；明确新时代青年学生的责任担当，传承红色基因，涵养家国情怀。</p>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>本课的活动目标与普通课文有什么不同？</li>
+                        <li>你打算通过哪些方式达成这些目标？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-goal1"><strong>📝 要点归纳：</strong>活动课强调“做中学”，通过多种实践方式培养历史核心素养，重点在于通过探究红色文化，理解其历史内涵，并内化为自身的家国情怀和责任担当。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-goal1')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 活动任务 ===== -->
+        <div class="col-box" data-cat="活动任务">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>📋 活动任务</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p><strong>1.</strong> 通过历史和语文、道德与法治、地理、艺术等课程的学习，整理各课程中有关中国共产党在新民主主义革命时期的重要人物、事件、旧址及作品等，梳理出这一时期中国共产党人的精神谱系，完成跨学科主题学习知识图谱。</p>
+                <p style="margin-top:8px;"><strong>2.</strong> 通过鉴赏革命影视剧、演唱革命歌曲、朗诵革命诗歌、编排革命历史剧、举办革命故事会等多种活动方式，感受并理解红色文化。</p>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>跨学科主题学习对你理解红色文化有什么帮助？</li>
+                        <li>你准备选择哪种活动方式来感受红色文化？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-task1"><strong>📝 要点归纳：</strong>跨学科整合能够从多角度理解红色文化的丰富内涵；多样化的活动方式能够调动多种感官，使红色文化入脑入心。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-task1')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 活动过程 ===== -->
+        <div class="col-box" data-cat="活动过程">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>📌 活动过程</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p><strong>1. 提出问题：</strong>新民主主义革命时期，有哪些以“红”命名的人、事、物？有哪些精神可纳入中国共产党人的精神谱系？如何认识革命精神，弘扬革命传统，传承红色基因？</p>
+                <p style="margin-top:8px;"><strong>2. 合作探究：</strong>全班分组确定主题，制订计划，分工协作。收集整理各科相关知识，联系文旅部门了解当地红色资源，实地参观博物馆、纪念馆，走访相关人物并作记录。</p>
+                <p style="margin-top:8px;"><strong>3. 形成成果：</strong>完成“探寻红色文化的历史基因”跨学科知识图谱，撰写访谈记录、心得体会、研究报告，整理图片音视频及课件。</p>
+                <p style="margin-top:8px;"><strong>4. 成果展示：</strong>举办主题班会，各组汇报展示，交流研讨，形成全班成果。可通过黑板报、手抄报、网页、视频等形式宣传展示。</p>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>在合作探究中，你认为哪个环节最重要？为什么？</li>
+                        <li>你希望以什么形式展示你们的成果？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-process1"><strong>📝 要点归纳：</strong>活动过程体现了“问题驱动—合作探究—成果生成—展示交流”的项目式学习模式，重在培养自主学习、合作探究和创新能力。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-process1')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 学史方法①：评价历史人物 ===== -->
+        <div class="col-box" data-cat="学史方法">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>📖 学史方法：如何评价历史人物</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p>评价历史人物应从五个方面入手：</p>
+                <ul style="margin-left:20px; margin-top:4px;">
+                    <li><strong>1.</strong> 确定时代背景，弄清生卒年和国别。</li>
+                    <li><strong>2.</strong> 分阶段梳理人物参与的历史事件及作用。</li>
+                    <li><strong>3.</strong> 从政治、经济、文化等方面了解其活动。</li>
+                    <li><strong>4.</strong> 了解阶级属性，揭示其代表的阶级利益。</li>
+                    <li><strong>5.</strong> 看其对解决社会主要矛盾和推动历史进步的作用，作出肯定或否定评价。</li>
+                </ul>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>以毛泽东为例，运用以上方法你会如何评价？</li>
+                        <li>评价历史人物时应注意避免什么？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-method1"><strong>📝 要点归纳：</strong>评价历史人物要坚持历史唯物主义，将人物置于特定时代背景下，全面、客观、辩证地分析其功过，看其是否顺应历史发展潮流。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-method1')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 学史方法②：图像获取信息 ===== -->
+        <div class="col-box" data-cat="学史方法">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>🖼️ 学史方法：如何从历史图像中获取信息</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p>从历史图像中获取信息可从五个角度考虑：</p>
+                <ul style="margin-left:20px; margin-top:4px;">
+                    <li><strong>1.</strong> 阅读标题，了解主题。</li>
+                    <li><strong>2.</strong> 依方位、按系统观察图像，找焦点。</li>
+                    <li><strong>3.</strong> 看表象细节（穿着、神情、动作等）。</li>
+                    <li><strong>4.</strong> 联系背景，形成历史想象。</li>
+                    <li><strong>5.</strong> 逐层解释，先描述再分析，最后评价。</li>
+                </ul>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>本课教材中《中国土地法大纲》的宣传画，你会如何解读？</li>
+                        <li>图像史料与文字史料相比有何优势？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-method2"><strong>📝 要点归纳：</strong>图像史料直观生动，能够弥补文字史料的不足。解读图像要由表及里、层层深入，才能揭示其背后的历史信息。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-method2')">📝 查看要点</button>
+            </div>
+        </div>
+
+        <!-- ===== 学史方法③：影视剧获取信息 ===== -->
+        <div class="col-box" data-cat="学史方法">
+            <div class="col-header" onclick="toggleColBox(this)">
+                <span>🎬 学史方法：如何从重大历史题材影视剧中获取信息</span>
+                <span class="col-toggle">▼</span>
+            </div>
+            <div class="col-body">
+                <p>从重大历史题材影视剧中提取信息，需注意：</p>
+                <ul style="margin-left:20px; margin-top:4px;">
+                    <li><strong>1.</strong> 遵循“大事不虚、小事不拘”原则，主要人物和事件有史实依据。</li>
+                    <li><strong>2.</strong> 细节、次要人物、对话可虚构，但须符合历史逻辑。</li>
+                    <li><strong>3.</strong> 观察场景、服饰、台词、动作等，感受时代氛围和历史风貌。</li>
+                </ul>
+                <div class="think-box">
+                    <p class="think-title">💭 自主思考：</p>
+                    <ul>
+                        <li>你看过的革命历史题材影视剧中，哪些情节给你留下了深刻印象？</li>
+                        <li>观看影视剧时，你如何区分历史真实与艺术虚构？</li>
+                    </ul>
+                </div>
+                <div class="a" id="ans-p3-method3"><strong>📝 要点归纳：</strong>重大历史题材影视剧是学习历史的辅助手段，但要将其与历史著作区分开，不能完全等同于历史真实。要在欣赏中思考，在思考中鉴别。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-method3')">📝 查看要点</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 4 : 课堂训练                                             -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page4">
+        <div class="slide-header">
+            <div class="module-num">模块四</div>
+            <div class="module-title">课堂训练</div>
+        </div>
+        <div class="score-banner">
+            <div>
+                <div style="font-size:11pt;color:#888;">当前得分</div>
+                <div class="score-number" id="scoreVal">0</div>
+            </div>
+            <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+        </div>
+
+        <!-- 选择题1 -->
+        <div class="exercise" id="q1">
+            <div class="q-text"><strong>1.</strong> 红船精神的核心是：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q1')">A. 坚定信念、艰苦奋斗</label>
+                <label onclick="optClick(this,'B','q1')">B. 开天辟地、敢为人先</label>
+                <label onclick="optClick(this,'C','q1')">C. 实事求是、敢闯新路</label>
+                <label onclick="optClick(this,'D','q1')">D. 谦虚谨慎、艰苦奋斗</label>
+            </div>
+            <div class="a" id="ans-p4-q1"><strong>📝 答案：B。</strong>红船精神的核心是开天辟地、敢为人先的首创精神。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题2 -->
+        <div class="exercise" id="q2">
+            <div class="q-text"><strong>2.</strong> 中共一大会址位于：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q2')">A. 北京</label>
+                <label onclick="optClick(this,'B','q2')">B. 上海</label>
+                <label onclick="optClick(this,'C','q2')">C. 广州</label>
+                <label onclick="optClick(this,'D','q2')">D. 武汉</label>
+            </div>
+            <div class="a" id="ans-p4-q2"><strong>📝 答案：B。</strong>中共一大会址位于上海望志路106号（今兴业路76号）。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题3 -->
+        <div class="exercise" id="q3">
+            <div class="q-text"><strong>3.</strong> 评价历史人物时，主要看其对（　）的作用。</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q3')">A. 个人利益</label>
+                <label onclick="optClick(this,'B','q3')">B. 解决社会主要矛盾和推动历史进步</label>
+                <label onclick="optClick(this,'C','q3')">C. 当时舆论</label>
+                <label onclick="optClick(this,'D','q3')">D. 后人评价</label>
+            </div>
+            <div class="a" id="ans-p4-q3"><strong>📝 答案：B。</strong>评价历史人物主要看其对解决社会主要矛盾和推动历史进步的作用。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题4 -->
+        <div class="exercise" id="q4">
+            <div class="q-text"><strong>4.</strong> 从历史图像中获取信息时，第一个步骤是：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q4')">A. 观察细节</label>
+                <label onclick="optClick(this,'B','q4')">B. 联系背景</label>
+                <label onclick="optClick(this,'C','q4')">C. 阅读标题</label>
+                <label onclick="optClick(this,'D','q4')">D. 逐层解释</label>
+            </div>
+            <div class="a" id="ans-p4-q4"><strong>📝 答案：C。</strong>阅读标题是了解图像主题的第一步。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📖 查看解析</button>
+        </div>
+
+        <!-- 选择题5 -->
+        <div class="exercise" id="q5">
+            <div class="q-text"><strong>5.</strong> 重大历史题材影视剧的创作原则是：</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q5')">A. 完全虚构</label>
+                <label onclick="optClick(this,'B','q5')">B. 完全真实</label>
+                <label onclick="optClick(this,'C','q5')">C. 大事不虚、小事不拘</label>
+                <label onclick="optClick(this,'D','q5')">D. 以细节为主</label>
+            </div>
+            <div class="a" id="ans-p4-q5"><strong>📝 答案：C。</strong>重大历史题材影视剧遵循“大事不虚、小事不拘”的创作原则。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📖 查看解析</button>
+        </div>
+
+        <!-- ===== 实践探究题1 ===== -->
+        <div class="exercise" id="mq1">
+            <div class="q-text"><strong>实践探究题1</strong> 阅读材料，回答问题：</div>
+            <div class="source-material">
+                "1921年，浙江嘉兴南湖的一条游船见证了中国历史上‘开天辟地的大事变’——中国共产党的诞生。这条游船因而获得了一个永载中国革命史册的名字——红船。"
+                <div class="source-ref">——统编版八年级上册教材</div>
+            </div>
+            <div class="q-text">（1）材料中的“开天辟地的大事变”指的是什么？为什么称其为“开天辟地”？</div>
+            <div class="a" id="ans-p4-mat1a"><strong>📝 参考答案：</strong>指中国共产党的诞生。因为中国共产党的诞生是中国历史上开天辟地的大事变，从此中国革命有了坚强的领导核心，中国人民有了主心骨，中国革命的面貌焕然一新。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1a');trackMatQ('mq1')">📝 查看答案</button>
+            <div class="q-text" style="margin-top:10px;">（2）结合所学知识，谈谈红船精神的内涵及其现实意义。</div>
+            <div class="a" id="ans-p4-mat1b"><strong>📝 参考答案：</strong>红船精神内涵：开天辟地、敢为人先的首创精神，坚定理想、百折不挠的奋斗精神，立党为公、忠诚为民的奉献精神。现实意义：红船精神激励我们在新时代继续发扬首创精神、奋斗精神和奉献精神，为实现中华民族伟大复兴而不懈努力。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1b');trackMatQ('mq1')">📝 查看答案</button>
+        </div>
+
+        <!-- ===== 实践探究题2 ===== -->
+        <div class="exercise" id="mq2">
+            <div class="q-text"><strong>实践探究题2</strong> 阅读材料，回答问题：</div>
+            <div class="source-material">
+                "1949年3月，中共中央在西柏坡召开七届二中全会。毛泽东告诫全党，夺取全国胜利只是万里长征走完第一步，中国革命以后的路更长，工作更伟大、更艰苦。他强调，务必保持谦虚、谨慎、不骄、不躁的作风，务必保持艰苦奋斗的作风。"
+                <div class="source-ref">——统编版八年级上册教材</div>
+            </div>
+            <div class="q-text">（1）“两个务必”的具体内容是什么？</div>
+            <div class="a" id="ans-p4-mat2a"><strong>📝 参考答案：</strong>务必保持谦虚、谨慎、不骄、不躁的作风，务必保持艰苦奋斗的作风。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2a');trackMatQ('mq2')">📝 查看答案</button>
+            <div class="q-text" style="margin-top:10px;">（2）结合“进京赶考”的故事，谈谈你对“两个务必”历史意义的理解。</div>
+            <div class="a" id="ans-p4-mat2b"><strong>📝 参考答案：</strong>“两个务必”体现了中国共产党在革命即将取得全国胜利时的清醒头脑和忧患意识。“进京赶考”的故事表明，中国共产党人时刻保持谦虚谨慎、艰苦奋斗的作风，决不能骄傲自满、贪图享乐。这一精神在今天依然具有重要的现实意义，警示我们在任何时候都要保持清醒头脑，永远保持奋斗精神。</div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2b');trackMatQ('mq2')">📝 查看答案</button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 5 : 知识结构图                                           -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page5">
+        <div class="slide-header">
+            <div class="module-num">模块五</div>
+            <div class="module-title">知识结构图</div>
+        </div>
+        <div class="kg-wrap-simple">
+            <div class="kg-title">📊 红色文化历史基因 · 结构图</div>
+            <div class="kg-hint-banner">
+                <span class="hint-icon">💡</span>
+                <span>知识结构图已生成。点击下方</span>
+                <span class="hint-click">各节点</span>
+                <span>查看详细解析与考点说明</span>
+            </div>
+            <div class="kg-chain">
+                <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">🚩</span><strong>红色起点</strong>
+                    <p>1921 红船启航 → 中共一大 → 开天辟地</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>红船精神、中共一大的历史意义。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+                <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">⛰️</span><strong>红色道路</strong>
+                    <p>井冈山→瑞金→长征→延安→西柏坡</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>红色地标、革命根据地的开辟、长征精神、延安精神、西柏坡精神。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+                <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">📖</span><strong>红色基因</strong>
+                    <p>精神谱系 → 红色文化 → 先进文化</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>中国共产党人的精神谱系、红色文化的内涵与时代价值。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+                <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">🌟</span><strong>传承与担当</strong>
+                    <p>学史方法 → 传承路径 → 新时代责任</p>
+                    <div class="kg-detail"><p><strong>考点：</strong>评价历史人物、解读图像、分析影视剧的方法，新时代青年如何传承红色基因。</p></div>
+                </div>
+            </div>
+            <div class="kg-rules-grid">
+                <div class="kg-rule r1">🔴 起点：红船精神</div>
+                <div class="kg-rule r2">🟠 道路：艰苦卓绝</div>
+                <div class="kg-rule r3">🟢 基因：精神谱系</div>
+                <div class="kg-rule r4">🔵 传承：时代担当</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 6 : 结束页                                               -->
+    <!-- ============================================================ -->
+    <div class="page-slide" id="page6">
+        <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+            <div class="hero-unit">第七单元 · 人民解放战争</div>
+            <h1 style="font-size:22pt;">第22课 活动课<br>探寻红色文化的历史基因</h1>
+            <div class="hero-sub" style="margin-top:14px;">✅ 活动圆满完成</div>
+        </div>
+        <section class="recap-section">
+            <h2 class="recap-title">📋 核心要点回顾</h2>
+            <div class="recap-grid">
+                <div class="recap-card">
+                    <div class="recap-card-num">一</div>
+                    <h3>红色精神谱系</h3>
+                    <ul>
+                        <li><strong>红船精神：</strong>开天辟地、敢为人先</li>
+                        <li><strong>井冈山精神：</strong>坚定信念、敢闯新路</li>
+                        <li><strong>长征精神：</strong>不怕牺牲、勇往直前</li>
+                        <li><strong>西柏坡精神：</strong>两个务必</li>
+                    </ul>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-card-num">二</div>
+                    <h3>红色地标</h3>
+                    <ul>
+                        <li><strong>上海：</strong>中共一大会址</li>
+                        <li><strong>嘉兴南湖：</strong>红船</li>
+                        <li><strong>井冈山：</strong>革命根据地</li>
+                        <li><strong>延安、西柏坡：</strong>指挥中枢</li>
+                    </ul>
+                </div>
+                <div class="recap-card">
+                    <div class="recap-card-num">三</div>
+                    <h3>学史方法</h3>
+                    <ul>
+                        <li><strong>评价人物：</strong>五个角度</li>
+                        <li><strong>解读图像：</strong>五步法</li>
+                        <li><strong>影视剧：</strong>大事不虚、小事不拘</li>
+                        <li><strong>传承：</strong>知史爱党、知行合一</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+          <div class="bottom-nav">
+    <div><a href="八上－U７－第21课%20人民解放战争的胜利.html">← 上一课：第21课 人民解放战争的胜利</a></div>
+    <div><a href="八上导航页.html">🏠 返回导航页</a></div>
+    <div class="nav-center">第22课</div>
+    <div style="color:#b0a8d0;font-weight:600;">已是最后一课 →</div>
+  </div>
+        <footer>
+            <p>统编版初中历史 · 八年级上册 · 第七单元</p>
+            <p>基于教材内容整理 · 仅供教学参考使用</p>
+        </footer>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 底部翻页导航栏                                                -->
+    <!-- ============================================================ -->
+    <div class="pg-nav">
+        <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+        <div class="pg-dots" id="pgDots">
+            <span class="pg-dot active" onclick="goPage(0)"></span>
+            <span class="pg-dot" onclick="goPage(1)"></span>
+            <span class="pg-dot" onclick="goPage(2)"></span>
+            <span class="pg-dot" onclick="goPage(3)"></span>
+            <span class="pg-dot" onclick="goPage(4)"></span>
+            <span class="pg-dot" onclick="goPage(5)"></span>
+            <span class="pg-dot" onclick="goPage(6)"></span>
+        </div>
+        <span class="pg-counter" id="pgCounter">1/7</span>
+        <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript                                                    -->
+    <!-- ============================================================ -->
+    <script>
+        // ===== 分页导航 =====
+        var totalPages = 7;
+        var currentPage = 0;
+        var pgDots = document.querySelectorAll('.pg-dot');
+        var pgCounter = document.getElementById('pgCounter');
+        var pgPrev = document.getElementById('pgPrev');
+        var pgNext = document.getElementById('pgNext');
+
+        function goPage(n) {
+            if (n < 0 || n >= totalPages) return;
+            document.getElementById('page' + currentPage).classList.remove('active');
+            pgDots[currentPage].classList.remove('active');
+            currentPage = n;
+            document.getElementById('page' + currentPage).classList.add('active');
+            pgDots[currentPage].classList.add('active');
+            pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+            pgPrev.disabled = (currentPage === 0);
+            pgNext.disabled = (currentPage === totalPages - 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+
+        function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                nextPage();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                prevPage();
+            } else if (e.key === 'Home') { e.preventDefault();
+                goPage(0); } else if (e.key === 'End') { e.preventDefault();
+                goPage(totalPages - 1); }
+        });
+        pgPrev.disabled = true;
+
+        // ===== 闯关进度追踪 =====
+        var stageDone = { sort: false, fill: false, match: false, map: false, flips: false };
+
+        function updateStageProgress() {
+            var stages = ['sort', 'fill', 'match', 'map', 'flips'];
+            var done = 0;
+            stages.forEach(function(s) { if (stageDone[s]) done++; });
+            var pct = Math.round(done / 5 * 100);
+            var bar = document.getElementById('stageProgressBar');
+            var lbl = document.getElementById('stageProgressLabel');
+            if (bar) bar.style.width = pct + '%';
+            if (lbl) {
+                if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+                else lbl.textContent = done + '/5 关完成';
+            }
+            if (done >= 5) {
+                document.querySelectorAll('.stage-done').forEach(function(el) { el.classList.add('show'); });
+            }
+        }
+
+        // ===== 学习目标点击标记 =====
+        var targetsDone = 0;
+
+        function toggleTarget(el) {
+            el.classList.toggle('done');
+            targetsDone = document.querySelectorAll('.target-item.done').length;
+            if (targetsDone >= 4) {
+                document.getElementById('targetsDone').classList.add('show');
+            } else {
+                document.getElementById('targetsDone').classList.remove('show');
+            }
+        }
+
+        // ===== 标签页切换 =====
+        function switchTabV2(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+            document.getElementById(tabId).classList.add('active');
+            var btns = document.querySelectorAll('.tab-btn');
+            for (var i = 0; i < btns.length; i++) {
+                if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+            }
+        }
+
+        // ===== 手风琴组 =====
+        function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+
+        function markMastered(grpId, btn) { btn.classList.add('done');
+            btn.textContent = '✅ 已掌握'; }
+
+        // ===== 答案显隐 =====
+        function toggleAnswer(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.classList.toggle('show');
+                var btn = el.previousElementSibling;
+                while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+                if (btn && btn.classList.contains('ans-btn')) {
+                    btn.textContent = el.classList.contains('show') ? '隐藏答案' : '查看答案';
+                }
+            }
+        }
+
+        // ===== 选择题 =====
+        var correctAnswers = { q1: 'B', q2: 'B', q3: 'B', q4: 'C', q5: 'C' };
+        var mcDone = {};
+        var matDone = {};
+        var score = 0;
+
+        function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+        function optClick(el, opt, qid) {
+            if (mcDone[qid]) return;
+            var correct = correctAnswers[qid];
+            var opts = el.parentElement.querySelectorAll('label');
+            opts.forEach(function(o) {
+                o.classList.add('disabled');
+                var oText = o.textContent.trim().charAt(0);
+                if (oText === correct) { o.classList.add('correct'); } else if (o === el) { o.classList.add('wrong'); }
+            });
+            mcDone[qid] = true;
+            if (opt === correct) score++;
+            updateScore();
+        }
+
+        function trackMatQ(id) {
+            if (matDone[id]) return;
+            matDone[id] = true;
+            score++;
+            updateScore();
+        }
+
+        function resetQuiz() {
+            mcDone = {};
+            matDone = {};
+            score = 0;
+            updateScore();
+            document.querySelectorAll('.exercise').forEach(function(ex) {
+                ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled', 'correct', 'wrong'); });
+                ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+            });
+        }
+
+        // ===== 栏目筛选 =====
+        function filterCol(cat, chip) {
+            document.querySelectorAll('#page3 .filter-chip').forEach(function(c) { c.classList.remove('active'); });
+            chip.classList.add('active');
+            document.querySelectorAll('#page3 .col-box').forEach(function(box) {
+                if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); } else { box
+                        .classList.add('filtered-out'); }
+            });
+        }
+
+        function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+        // ===== 拖拽排序（IIFE） =====
+        (function initDragSort() {
+            var items = document.querySelectorAll('#sortPool1 .sort-item');
+            var slots = document.querySelectorAll('#page1 .sort-slot');
+            items.forEach(function(item) {
+                item.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+                    item.classList.add('dragging');
+                });
+                item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+            });
+            slots.forEach(function(slot) {
+                slot.addEventListener('dragover', function(e) { e.preventDefault();
+                    slot.classList.add('drag-over'); });
+                slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+                slot.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    slot.classList.remove('drag-over');
+                    var key = e.dataTransfer.getData('text/plain');
+                    if (slot.querySelector('.sort-item')) {
+                        var old = slot.querySelector('.sort-item');
+                        old.classList.remove('placed');
+                        document.getElementById('sortPool1').appendChild(old);
+                    }
+                    var item = document.getElementById('item_' + key);
+                    if (item) { slot.appendChild(item);
+                        item.classList.add('placed');
+                        slot.classList.add('filled'); }
+                });
+                slot.addEventListener('click', function() {
+                    var item = this.querySelector('.sort-item');
+                    if (item && !item.classList.contains('dragging')) {
+                        item.classList.remove('placed');
+                        this.classList.remove('filled');
+                        document.getElementById('sortPool1').appendChild(item);
+                    }
+                });
+            });
+            var pool = document.getElementById('sortPool1');
+            pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+            pool.addEventListener('drop', function(e) {
+                e.preventDefault();
+                var key = e.dataTransfer.getData('text/plain');
+                var item = document.getElementById('item_' + key);
+                if (item && item.classList.contains('placed')) {
+                    item.classList.remove('placed');
+                    var parentSlot = item.parentElement;
+                    if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+                    pool.appendChild(item);
+                }
+            });
+        })();
+
+        function checkSort() {
+            var correctOrder = ['b', 'd', 'e', 'a', 'c'];
+            var slots = document.querySelectorAll('#page1 .sort-slot');
+            var result = document.getElementById('sortResult');
+            var allFilled = true;
+            var allCorrect = true;
+            slots.forEach(function(slot, i) {
+                var item = slot.querySelector('.sort-item');
+                if (!item) { allFilled = false;
+                    allCorrect = false; return; }
+                if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+                    slot.classList.add('correct');
+                    slot.classList.remove('wrong');
+                } else {
+                    slot.classList.add('wrong');
+                    slot.classList.remove('correct');
+                    allCorrect = false;
+                }
+            });
+            if (!allFilled) {
+                result.textContent = '❌ 请先将所有卡片拖入槽位';
+                result.className = 'sort-result show fail';
+                return;
+            }
+            if (allCorrect) {
+                result.textContent = '✅ 完全正确！';
+                result.className = 'sort-result show pass';
+                stageDone.sort = true;
+                updateStageProgress();
+                document.getElementById('stageSortDone').classList.add('show');
+            } else {
+                result.textContent = '❌ 顺序不对，请重试';
+                result.className = 'sort-result show fail';
+            }
+        }
+
+        // ===== 填空填词 =====
+        function checkFillBlanks() {
+            var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+            var allCorrect = true;
+            inputs.forEach(function(inp) {
+                var answer = inp.getAttribute('data-answer');
+                var val = inp.value.trim();
+                if (val === answer) { inp.classList.add('correct');
+                    inp.classList.remove('wrong'); } else { inp.classList.add('wrong');
+                    inp.classList.remove('correct');
+                    allCorrect = false; }
+            });
+            var result = document.getElementById('fillResult');
+            if (allCorrect) {
+                result.textContent = '✅ 完全正确！';
+                result.className = 'sort-result show pass';
+                stageDone.fill = true;
+                updateStageProgress();
+                document.getElementById('stageFillDone').classList.add('show');
+            } else {
+                result.textContent = '❌ 有错误，请检查';
+                result.className = 'sort-result show fail';
+            }
+        }
+
+        // ===== 连线匹配 =====
+        var selectedLeft = null;
+        var matchedPairs = [];
+
+        function selectMatch(el) {
+            if (el.classList.contains('matched')) return;
+            document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+            el.classList.add('selected');
+            selectedLeft = el;
+        }
+
+        function pairMatch(el) {
+            if (!selectedLeft) return;
+            if (el.classList.contains('matched')) return;
+            var leftCat = selectedLeft.getAttribute('data-match');
+            var rightCat = el.getAttribute('data-match');
+            if (leftCat === rightCat) {
+                selectedLeft.classList.add('matched');
+                selectedLeft.classList.remove('selected');
+                el.classList.add('matched');
+                matchedPairs.push(leftCat);
+                selectedLeft = null;
+                if (matchedPairs.length >= 3) {
+                    document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+                    document.getElementById('matchResult').className = 'sort-result show pass';
+                    stageDone.match = true;
+                    updateStageProgress();
+                    document.getElementById('stageMatchDone').classList.add('show');
+                }
+            } else {
+                document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+                selectedLeft = null;
+            }
+        }
+
+        // ===== 地图标注（IIFE） =====
+        (function initMapMarkers() {
+            var markers = document.querySelectorAll('#mapContainer .map-marker');
+            var found = {};
+            markers.forEach(function(m) {
+                m.addEventListener('click', function() {
+                    var pt = m.getAttribute('data-point');
+                    if (found[pt]) return;
+                    m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+                    m.setAttribute('stroke', '#27ae60');
+                    found[pt] = true;
+                    var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+                    checkItems.forEach(function(ci) {
+                        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+                    });
+                    var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+                    var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+                    if (allFound >= total) {
+                        stageDone.map = true;
+                        updateStageProgress();
+                        document.getElementById('stageMapDone').classList.add('show');
+                    }
+                });
+                m.style.cursor = 'pointer';
+            });
+        })();
+
+        // ===== 翻转卡 =====
+        function flipCard(el) {
+            el.classList.toggle('flipped');
+            var total = document.querySelectorAll('.flash-card').length;
+            var flipped = document.querySelectorAll('.flash-card.flipped').length;
+            if (total > 0 && flipped >= total) {
+                stageDone.flips = true;
+                updateStageProgress();
+                ['stageFlipsDone1', 'stageFlipsDone2', 'stageFlipsDone3'].forEach(function(id) {
+                    var el2 = document.getElementById(id);
+                    if (el2) el2.classList.add('show');
+                });
+            }
+        }
+
+        // ===== 知识图谱节点展开 =====
+        function toggleKgDetail(node) {
+            node.classList.toggle('expanded');
+            var badge = node.querySelector('.kg-expand-badge');
+            if (badge) {
+                var arrow = badge.querySelector('.badge-arrow');
+                if (node.classList.contains('expanded')) {
+                    if (arrow) arrow.textContent = '▼';
+                    badge.childNodes[badge.childNodes.length - 1].textContent = ' 收起详情';
+                } else {
+                    if (arrow) arrow.textContent = '▶';
+                    badge.childNodes[badge.childNodes.length - 1].textContent = ' 点击展开';
+                }
+            }
+        }
+
+        // ===== deep-card 折叠（IIFE · 无内联 onclick） =====
+        (function() {
+            var cards = document.querySelectorAll('.deep-card');
+            cards.forEach(function(card) {
+                var hd = card.querySelector('.deep-card-hd');
+                var bd = card.querySelector('.deep-card-bd');
+                if (hd && bd) {
+                    hd.removeAttribute('onclick');
+                    hd.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        bd.classList.toggle('show');
+                        hd.classList.toggle('active');
+                    });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
