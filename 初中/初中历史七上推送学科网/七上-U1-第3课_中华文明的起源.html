@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3课 中华文明的起源 — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========== 浮动阅读进度条 ========== */
+#readingProgress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: transparent;
+  z-index: 10000;
+}
+#readingProgress .bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3d2b8c, #7c6cf0, #b3a8ff);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.15s linear;
+}
+
+/* ========== Navbar ========== */
+.navbar {
+  position: sticky;
+  top: 4px;
+  z-index: 999;
+  background: #fff;
+  padding: 12px 0 10px;
+  border-bottom: 3px solid var(--primary);
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(124,108,240,0.10);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+.navbar a {
+  color: #5a4ac7;
+  text-decoration: none;
+  font-size: 13pt;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 16px;
+  transition: all 0.25s;
+}
+.navbar a:hover, .navbar a.visited {
+  background: #f0edff;
+  color: var(--primary-dark);
+}
+.navbar a.visited::after { content: " ✓"; color: var(--green); font-size: 10pt; }
+
+/* ========== Section 公共 ========== */
+section { margin: 28px 0; }
+.section-title {
+  font-size: 20pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  border-left: 5px solid var(--primary);
+  padding-left: 14px;
+  margin-bottom: 18px;
+}
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.learn-target h3 {
+  color: var(--primary-dark);
+  font-size: 16pt;
+  margin-bottom: 12px;
+}
+.learn-target .target-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.learn-target .target-item {
+  font-size: 13.5pt;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+  cursor: default;
+  transition: all 0.2s;
+}
+.learn-target .target-item.completed {
+  color: var(--green);
+  border-bottom-color: var(--green);
+}
+
+/* ========== 段落过渡提示按钮 ========== */
+.section-next-hint {
+  text-align: center;
+  margin: 20px 0 8px;
+}
+.section-next-hint button {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 28px;
+  font-size: 14pt;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(124,108,240,0.20);
+  transition: all 0.25s;
+}
+.section-next-hint button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(124,108,240,0.30);
+}
+
+/* ========== 标签页切换（sec1） ========== */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.tab-btn {
+  flex: 1;
+  padding: 14px 8px;
+  font-size: 14pt;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  background: #e8e0ff;
+  color: #5a4ac7;
+  letter-spacing: 1px;
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+}
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== 时间轴横条 ========== */
+.timeline-bar {
+  background: #f0edff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12pt;
+  color: #5a4ac7;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 {
+  color: var(--primary-dark);
+  font-size: 16pt;
+  margin-bottom: 10px;
+}
+.kp-card ul { padding-left: 22px; }
+.kp-card li { margin: 6px 0; font-size: 14pt; }
+
+/* ========== 贯通框 ========== */
+.link-bar {
+  border: 2px dashed #d5cef0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 14px;
+  background: #faf8ff;
+  font-size: 13pt;
+  color: #5a4ac7;
+}
+
+/* ========== 标签 ========== */
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao {
+  background: #f39c12; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-value {
+  background: #e74c3c; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-soc {
+  background: #3498db; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+
+/* ========== 手风琴组（sec2） ========== */
+.acc-group {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.acc-group-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s;
+}
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 22px;
+  background: #faf8ff;
+  border-top: 1px solid #eee;
+}
+.acc-mastered button {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 6px 16px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== 折叠三级卡片 ========== */
+.deep-card {
+  margin: 10px 18px 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.deep-card-hd {
+  background: linear-gradient(135deg, #e67e22, #f0ad4e);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 13.5pt;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+.deep-card-bd {
+  display: none;
+  background: #fff;
+  padding: 14px 18px;
+  border: 1px solid #eee;
+  border-top: none;
+  font-size: 13pt;
+}
+.deep-card-bd.show { display: block; }
+
+/* ========== 对比表格 ========== */
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 13pt;
+}
+.diff-table th {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+}
+.diff-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== 栏目容器 ========== */
+.col-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.06);
+  transition: all 0.3s;
+}
+.col-box.filtered-out { display: none; }
+.col-header {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 15pt;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body {
+  display: none;
+  padding: 16px 20px;
+  background: #fff;
+  font-size: 13.5pt;
+}
+.col-box.open .col-body { display: block; }
+
+/* ========== 筛选按钮条（sec3） ========== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.filter-chip {
+  padding: 6px 14px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+  color: #5a4ac7;
+}
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ========== 引文材料 ========== */
+.source-material {
+  border-left: 4px solid var(--primary);
+  padding: 8px 14px;
+  margin: 8px 0;
+  background: #faf8ff;
+  font-size: 13pt;
+}
+.source-ref {
+  text-align: right;
+  color: #888;
+  font-size: 10pt;
+  margin-bottom: 8px;
+}
+
+/* ========== 题目区域 ========== */
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.exercise {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+.options label {
+  display: block;
+  padding: 8px 14px;
+  margin: 4px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14pt;
+  transition: all 0.2s;
+  background: #faf8ff;
+}
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== 答题计分器 ========== */
+.score-banner {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+.score-number {
+  font-size: 22pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.score-label { font-size: 12pt; color: #888; }
+.score-reset {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+/* ========== 答案区 ========== */
+.a { display: none; }
+.a.show { display: block; }
+.a {
+  background: #f0edff;
+  border: 1px solid #d5cef0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 10px 0;
+  font-size: 14pt;
+}
+
+/* ========== 答案按钮 ========== */
+.ans-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 12pt;
+  cursor: pointer;
+  margin: 6px 0;
+  transition: all 0.2s;
+}
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(124,108,240,0.08);
+}
+.kg-title {
+  text-align: center;
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node {
+  width: 90%;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.kg-node.left { align-self: flex-start; }
+.kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+.kg-detail { display: none; font-size: 11pt; color: #666; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded .kg-detail { display: block; }
+.kg-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.kg-rule {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5pt;
+  text-align: center;
+  font-weight: 600;
+}
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== 页脚 ========== */
+footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  border-top: 2px solid var(--border);
+  margin-top: 30px;
+  font-size: 12px;
+  color: #999;
+}
+footer p { margin: 4px 0; }
+
+/* ========== 底部导航 ========== */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(124,108,240,0.08);
+  font-size: 12pt;
+}
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+/* ========== 返回顶部 ========== */
+#backTop {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 18pt;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(124,108,240,0.30);
+  z-index: 1000;
+  transition: all 0.2s;
+}
+#backTop:hover { transform: scale(1.1); background: #5a4ac7; }
+</style>
+</head>
+<body>
+
+<!-- ========== 浮动进度条 ========== -->
+<div id="readingProgress"><div class="bar"></div></div>
+
+<!-- ========== Hero 标题区 ========== -->
+<div style="background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);padding:36px 20px 30px;
+            text-align:center;color:#fff;border-radius:0 0 36px 36px;
+            box-shadow:0 6px 30px rgba(61,43,140,0.20);margin:0 -20px 28px;">
+  <div style="font-size:13pt;opacity:0.82;letter-spacing:2px;font-weight:300;margin-bottom:10px;">
+    第一单元 · 史前时期：原始社会与中华文明的起源
+  </div>
+  <h1 style="font-size:26pt;margin:10px 0 8px;font-weight:700;letter-spacing:3px;color:#fff;">
+    第3课 · 中华文明的起源
+  </h1>
+  <div style="font-size:14pt;opacity:0.85;letter-spacing:2px;font-weight:300;">
+    统编版初中历史  七年级上册
+  </div>
+</div>
+
+<!-- ========== Navbar 导航条 ========== -->
+<div class="navbar" id="mainNav">
+  <a href="#sec1">一、知识要点</a>
+  <a href="#sec2">二、重难点解析</a>
+  <a href="#sec3">三、教材栏目</a>
+  <a href="#sec4">四、课堂训练</a>
+  <a href="#sec5">五、结构图</a>
+</div>
+
+<!-- ========== 学习目标 ========== -->
+<div class="learn-target" id="learnTargets">
+  <h3>🎯 学习目标（核心素养导向）</h3>
+  <div class="target-grid">
+    <div class="target-item" data-target="1">🕐 <strong>时空观念：</strong>知道良渚古城与陶寺古城的位置和年代，了解炎黄联盟的形成与尧舜禹禅让的时间线索。</div>
+    <div class="target-item" data-target="2">📜 <strong>史料实证：</strong>通过良渚、陶寺考古发现，理解私有制、阶级和早期国家的产生，区分神话传说与历史史实。</div>
+    <div class="target-item" data-target="3">🔍 <strong>历史解释：</strong>分析文明诞生的基本标志，阐释炎帝、黄帝在华夏族形成过程中的作用。</div>
+    <div class="target-item" data-target="4">❤️ <strong>家国情怀：</strong>认识中华文明五千年源远流长，增强民族自豪感；学习大禹的创新精神和奉献精神。</div>
+  </div>
+</div>
+
+<!-- ========== Section 1：知识要点（标签页切换） ========== -->
+<section id="sec1">
+  <h2 class="section-title">一、知识要点</h2>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab1')">🏛️ 早期国家与文明起源</button>
+    <button class="tab-btn" onclick="switchTab('tab2')">🌏 良渚古城与陶寺古城</button>
+    <button class="tab-btn" onclick="switchTab('tab3')">🐉 远古的传说</button>
+  </div>
+
+  <div class="kp-card tab-panel active" id="tab1" style="border-radius:10px;">
+    <div class="timeline-bar">距今约5000多年前 — 牛河梁遗址 — 早期国家萌芽</div>
+    <h3>（一）早期国家和文明的起源</h3>
+    <ul>
+      <li>距今约<span class="kwd">5000多年前</span>，原始社会<span class="kwd">农业</span>和<span class="kwd">畜牧业</span>发展，人口显著增长，早期<span class="kwd">城市</span>逐步形成。</li>
+      <li>出现城墙、城壕、大型<span class="kwd">水利设施</span>，部分人脱离生产从事管理，掌握政治、经济、军事和祭祀权力的<span class="kwd">王</span>出现。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> <span class="kwd">私有制</span>、<span class="kwd">阶级</span>和<span class="kwd">国家</span>的产生是人类进入<span class="kwd">文明社会</span>的重要标志。</li>
+      <li>文明诞生的基本标志：阶级的产生、国家的形成和文字的出现。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>农业生产力发展→剩余产品→私有制→阶级分化→早期国家，体现了生产力决定生产关系的基本规律。牛河梁遗址的祭坛和玉器，反映当时已出现社会等级分化。</p>
+    </div>
+  </div>
+
+  <div class="kp-card tab-panel" id="tab2" style="border-radius:10px;">
+    <div class="timeline-bar">良渚（约5300-4300年前 · 长江下游） — 陶寺（约4300-4000年前 · 黄河中游）</div>
+    <h3>（二）良渚古城与陶寺古城</h3>
+    <table class="diff-table">
+      <tr><th>比较项目</th><th>良渚古城</th><th>陶寺古城</th></tr>
+      <tr><td>地理位置</td><td><span class="kwd">浙江余杭</span>（长江下游）</td><td><span class="kwd">山西襄汾</span>（黄河中游）</td></tr>
+      <tr><td>距今时间</td><td>约5300-4300年</td><td>约4300-4000年</td></tr>
+      <tr><td>城市规模</td><td>宫殿区+内城+外城，内城约300万m²</td><td>面积达280万m²，含宫城和高等级建筑</td></tr>
+      <tr><td>突出成就</td><td><span class="kwd">水利系统</span>——同期世界上规模最大</td><td><span class="kwd">阶级分化严重</span>；各地文化汇聚中原</td></tr>
+      <tr><td>历史意义</td><td>证实约5000年前<span class="kwd">长江下游</span>已出现早期国家</td><td>表明<span class="kwd">黄河中游</span>已出现早期国家</td></tr>
+    </table>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>良渚和陶寺一南一北，分别代表长江流域和黄河流域的早期文明成就，共同证明中华文明具有<span class="kwd">多元起源</span>的特点。陶寺随葬品来源广泛，反映了<span class="kwd">各地文化汇聚中原</span>的趋势，为后来华夏文明的形成奠定基础。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 以选择题或材料题考查良渚"实证中华五千年文明史"的意义，以及陶寺与"尧都平阳"的关联。</p>
+    </div>
+  </div>
+
+  <div class="kp-card tab-panel" id="tab3" style="border-radius:10px;">
+    <div class="timeline-bar">距今五六千年 — 阪泉之战·涿鹿之战 — 尧→舜→禹禅让</div>
+    <h3>（三）远古的传说</h3>
+    <ul>
+      <li>距今<span class="kwd">五六千年</span>前，中国进入传说中的部落联盟时期。<span class="kwd">黄帝</span>、<span class="kwd">炎帝</span>和蚩尤是其中影响较大的部落首领。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> <strong>阪泉之战：</strong>黄帝vs炎帝→炎帝归顺，形成<span class="kwd">炎黄联盟</span>。 <strong>涿鹿之战：</strong>炎黄联盟vs蚩尤→蚩尤战败，其部落归附。</li>
+      <li>炎黄联盟经过长期发展，逐渐形成<span class="kwd">华夏族</span>。炎帝和黄帝被尊为中华民族的<span class="kwd">人文初祖</span>。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> <span class="kwd">禅让制</span>：尧→舜→禹，将首领之位传给<span class="kwd">贤德</span>之人，是原始部落联盟<span class="kwd">民主推选</span>首领的制度。</li>
+      <li><strong>大禹治水：</strong>采用<span class="kwd">疏导</span>的方法治水成功（其父鲧用"堵"失败），体现了创新精神和奉献精神。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>远古传说虽非信史，但蕴含真实历史信息。大禹治水成功后威望空前，为其子启建立中国历史上<span class="kwd">第一个王朝——夏朝</span>创造了条件，标志着"天下为公"到"天下为家"的转变。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 2：重难点解析（手风琴组） ========== -->
+<section id="sec2">
+  <h2 class="section-title">二、重难点解析</h2>
+
+  <!-- 重点一：文明诞生的标志 -->
+  <div class="acc-group" id="accGrp1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('accGrp1')">
+      <h3>🔵 重点一：文明诞生的标志 —— 私有制、阶级与国家的产生</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】文明诞生的基本条件与标志</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> 文明诞生的基本标志是<span class="kwd">阶级的产生</span>、<span class="kwd">国家的形成</span>和<span class="kwd">文字的出现</span>。其逻辑链条为：原始农业和畜牧业发展→生产力提高→剩余产品→私有制产生→社会阶级分化→早期国家形成。</p>
+          <p><span class="tag-soc">🔵 史实支撑</span> 牛河梁遗址的<span class="kwd">祭坛、积石冢和玉猪龙</span>等发现，表明距今约5000多年的辽河流域已出现社会等级分化和原始宗教祭祀活动，是早期国家萌芽的重要考古证据。</p>
+          <p>早期国家的特征：以王为首的统治阶级依靠社会规范和<span class="kwd">暴力</span>对内进行管理和统治，对外发动战争；修建城墙、城壕和大型水利设施等公共工程。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】早期国家与部落联盟的区别</div>
+        <div class="deep-card-bd">
+          <table class="diff-table">
+            <tr><th>比较项</th><th>部落联盟</th><th>早期国家</th></tr>
+            <tr><td>首领产生</td><td>民主推举（禅让）</td><td>世袭或权力集中</td></tr>
+            <tr><td>社会结构</td><td>相对平等</td><td>阶级分化明显</td></tr>
+            <tr><td>公共权力</td><td>松散，无强制力</td><td>凌驾于社会之上，有暴力机关</td></tr>
+            <tr><td>城市设施</td><td>简单聚落</td><td>城墙、宫殿、水利系统等大型工程</td></tr>
+            <tr><td>对应阶段</td><td>尧舜禹禅让时期</td><td>良渚、陶寺，夏朝建立</td></tr>
+          </table>
+          <p>从部落联盟到早期国家的演进，体现了中国早期社会从"天下为公"到"天下为家"的历史性转变。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】从考古发现看中华文明的连续性</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 良渚、陶寺等遗址的考古发现，以实物证据证实了中华文明<span class="kwd">五千年</span>历史并非传说。习近平指出："良渚遗址是实证中华五千年文明史的圣地"。中华文明是世界上唯一未曾中断的古老文明，这是我们文化自信的根源。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （材料题）考古学家科林·伦福儒指出："良渚遗址的复杂程度和阶级制度，已经达到了'国家'的标准。"结合所学，请回答：良渚古城遗址的考古发现说明了什么？为什么说它是"实证中华五千年文明史的圣地"？</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc1-zk')">显示答案</button>
+          <div class="a" id="acc1-zk"><strong>答案：</strong>良渚古城遗址的考古发现证实，距今约5000年前，长江下游地区已经出现早期国家。良渚拥有宫殿区、内城和外城等复杂城市结构，以及同期世界上规模最大的水利系统，社会阶级分化明显，具备了早期国家的基本特征。因此，良渚遗址以实物证据证实了中华文明五千年的悠久历史。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp1', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重点二：良渚与陶寺比较 -->
+  <div class="acc-group" id="accGrp2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('accGrp2')">
+      <h3>🟠 重点二：良渚古城与陶寺古城 —— 南北两大文明遗址</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】良渚与陶寺的基本史实</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>良渚古城</strong>（浙江余杭，距今约5300-4300年）：规模宏大，有宫殿区、内城、外城，最令人惊叹的是由人工水坝和自然山体组成的<span class="kwd">水利系统</span>，是同期世界上规模最大的水利工程。</p>
+          <p><strong>陶寺古城</strong>（山西襄汾，距今约4300-4000年）：城内有宫城和高等级建筑基址，大型墓葬随葬品丰富多样且来源广泛，小型墓葬却无随葬品——说明<span class="kwd">阶级分化严重</span>，且<span class="kwd">各地文化因素汇聚中原</span>。</p>
+          <p>碳十四测年表明，陶寺文化的主体年代与古籍中<span class="kwd">尧舜</span>的时代大致吻合，历史文献中"尧都平阳"的说法得到考古印证。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】良渚与陶寺的共性与差异</div>
+        <div class="deep-card-bd">
+          <p><strong>共性：</strong>①都发现了规模宏大的古城和大型公共工程；②都出现明显的阶级分化；③都属于早期国家形态，说明中国境内多地在新石器时代晚期几乎同时进入文明阶段——体现了<span class="kwd">中华文明多元起源</span>的特征。</p>
+          <p><strong>差异：</strong>良渚以恢宏的水利系统见长，突出<span class="kwd">工程技术</span>成就；陶寺以阶级分化明显和各地文化汇聚中原为特点，突出<span class="kwd">社会组织</span>的复杂性和文化整合趋势。陶寺还出现了铜环和朱书符号，接近文字产生的前夜。</p>
+          <p>两者的差异体现了中国早期文明的<span class="kwd">多元一体</span>格局——"多元"在于不同地域各有特色，"一体"在于文化因素不断汇聚中原，最终凝聚为华夏文明。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】中华文明多元一体格局的形成</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 良渚在长江下游、陶寺在黄河中游，一南一北交相辉映，证明中华文明的起源并非"单一中心"，而是"<span class="kwd">满天星斗</span>"。从多元起源到汇聚中原、再到形成统一的华夏文明，这一过程体现了中华文明强大的<span class="kwd">包容性</span>和<span class="kwd">凝聚力</span>。</p>
+          <p>梁启超说："华夏民族，非一族所成。太古以来，诸族错居，接触交通，各去小异而大同，渐化合以成一族之形。"这正是中华文明多元一体格局的经典概括。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）近年来的考古发现表明，距今5000年前后，长江下游的良渚、黄河中游的陶寺等遗址都出现了早期国家的特征。这说明中华文明的起源具有（  ）A. 单一性  B. 多元性  C. 封闭性  D. 偶然性</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc2-zk')">显示答案</button>
+          <div class="a" id="acc2-zk"><strong>答案：B。解析：</strong>良渚在长江下游、陶寺在黄河中游，多地同时出现早期国家特征，体现了中华文明多元起源的特点。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp2', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 难点：远古传说与历史事实 -->
+  <div class="acc-group" id="accGrp3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('accGrp3')">
+      <h3>🟣 难点：远古传说与历史事实的区分</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】神话传说与历史史实的关系</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> 远古传说是在<span class="kwd">文字产生前</span>通过口耳相传形式保存下来的故事，它<span class="kwd">不是完全真实的历史</span>，但它<span class="kwd">反映了一定的真实历史信息</span>。</p>
+          <p><strong>如何分辨：</strong>①神话传说往往带有<span class="kwd">神异色彩</span>和夸张成分（如黄帝大战蚩尤、神农尝百草）；②历史史实需要<span class="kwd">考古发现</span>和<span class="kwd">文献互证</span>（如陶寺遗址与"尧都平阳"的吻合）。</p>
+          <p><span class="tag-soc">🔵 史实支撑</span> 《史记·五帝本纪》记载黄帝的事迹虽带有传说性质，但陕西黄陵县的黄帝陵庙和湖南炎陵县的炎帝陵庙，反映了后世对人文初祖的尊崇，是中华民族<span class="kwd">文化认同</span>的体现。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】炎帝黄帝的发明与考古印证</div>
+        <div class="deep-card-bd">
+          <table class="diff-table">
+            <tr><th>传说内容</th><th>文献出处</th><th>可能的考古印证</th></tr>
+            <tr><td>黄帝建造宫室</td><td>《古史考》"黄帝作车"</td><td>良渚、陶寺的宫殿基址</td></tr>
+            <tr><td>黄帝之妻嫘祖养蚕缫丝</td><td>《史记·五帝本纪》</td><td>良渚出土丝织品残片</td></tr>
+            <tr><td>神农尝百草、始有医药</td><td>《史记·补三皇本纪》</td><td>反映早期先民对自然的探索</td></tr>
+            <tr><td>仓颉造字</td><td>《易系辞》</td><td>陶寺朱书符号陶壶</td></tr>
+          </table>
+          <p>这些对应说明：传说虽非信史，但蕴含着先民真实的生活创造和技术进步。考古发现为我们"<span class="kwd">用事实说话</span>"提供了依据。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】从大禹治水看民族精神传承</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 大禹"劳身焦思，居外十三年，过家门不敢入"（《史记·夏本纪》），体现了<span class="kwd">创新精神</span>（以疏导替代堵塞）、<span class="kwd">奉献精神</span>（舍小家为大家）和<span class="kwd">责任担当</span>。这些品质至今仍是中华民族精神的核心内涵。</p>
+          <p>大禹治水的成功保障了人们正常的生产生活，同时也使他在人们心中树立起崇高威望，为其子启建立中国历史上第一个王朝——<span class="kwd">夏朝</span>创造了条件，标志着禅让制向<span class="kwd">世袭制</span>的转变。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （材料题）阅读材料："禹吸取父亲治水失败的教训，改用疏导的方法开凿河渠疏导洪水入海，最终解除水患。"——改编自《史记·夏本纪》。问题：大禹治水成功的原因是什么？从他身上可以学到什么精神？</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc3-zk')">显示答案</button>
+          <div class="a" id="acc3-zk"><strong>答案：</strong>原因：①总结父亲鲧治水失败的教训，改用疏导的方法；②以身作则，坚持不懈。精神：创新精神（治水方法的革新）、奉献精神（三过家门而不入）、高度的社会责任感、实干精神。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp3', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 3：教材栏目（分类筛选） ========== -->
+<section id="sec3">
+  <h2 class="section-title">三、教材栏目解答</h2>
+
+  <div class="filter-bar">
+    <span class="filter-chip active" onclick="filterCol('all', this)">📋 全部</span>
+    <span class="filter-chip" onclick="filterCol('related', this)">📖 相关史事</span>
+    <span class="filter-chip" onclick="filterCol('think', this)">💭 想一想</span>
+    <span class="filter-chip" onclick="filterCol('material', this)">📜 材料研读</span>
+    <span class="filter-chip" onclick="filterCol('homework', this)">📝 课后活动</span>
+    <span class="filter-chip" onclick="filterCol('expand', this)">🔍 知识拓展</span>
+  </div>
+
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">牛河梁遗址位于辽宁朝阳，属于西辽河流域的红山文化，距今约5800—5000年。遗址中有祭坛、女神庙和埋葬着贵族的积石冢，反映了红山文化晚期的社会分化和祭祀礼仪。</div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="think">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💭 想一想</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p class="q-text"><strong>问题一：</strong>从良渚古城和陶寺古城的考古发现，谈谈为什么说当时已进入文明社会。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col1')">显示答案</button>
+      <div class="a" id="exp-col1">
+        <p><strong>答案：</strong>私有制、阶级和国家的产生是人类进入文明社会的重要标志。良渚古城的考古发现——宫殿区、内城、外城及大型水利工程，贵族墓地与普通墓葬对比鲜明，证明阶级分化已经非常明显；陶寺古城面积达280万平方米，有宫城和高等级建筑基址，大型墓葬集中分布且随葬品丰富，小型墓却无随葬品，同样证明阶级分化严重。两处遗址都表明早期国家已经出现，所以说当时已进入文明社会。</p>
+      </div>
+      <p class="q-text" style="margin-top:14px;"><strong>问题二：</strong>从大禹治水的事迹中可以看到大禹什么样的精神？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col2')">显示答案</button>
+      <div class="a" id="exp-col2">
+        <p><strong>答案：</strong>①<strong>创新精神：</strong>吸取父亲鲧用"堵塞"失败的教训，改用"疏导"的方法治水成功；②<strong>奉献精神：</strong>"三过其门而不入"，舍小家为大家；③<strong>坚持不懈的毅力：</strong>经过10多年努力终于消除水患；④<strong>高度的社会责任感：</strong>以天下苍生为己任，公而忘私。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="material">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 材料研读</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">华夏民族，非一族所成。太古以来，诸族错居，接触交通，各去小异而大同，渐化合以成一族之形，后世所谓诸夏是也。</div>
+      <div class="source-ref">——梁启超《太古及三代载记》</div>
+      <p class="q-text"><strong>问题：</strong>从材料中可以看出华夏族的形成有什么特点？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col3')">显示答案</button>
+      <div class="a" id="exp-col3">
+        <p><strong>答案：</strong>由材料可知，华夏族由错居杂处的众多民族，在不断的交往、交流过程中逐渐融合而成。华夏族并非由单一部落发展而来，而是各部落"各去小异而大同"，经过长期接触、交流、融合，最终"渐化合以成一族之形"。这体现了中华文明<span class="kwd">多元一体</span>的形成特点。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="homework">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p class="q-text"><strong>问题：</strong>说说考古发现的遗迹遗物和远古传说对认识中华文明起源的意义。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col4')">显示答案</button>
+      <div class="a" id="exp-col4">
+        <p><strong>答案：</strong>考古发现的遗址遗物为认识中华文明起源提供了重要依据。例如良渚古城遗址、陶寺古城遗址出土的大量遗物，证实了当时我国长江下游地区和黄河中游地区已经出现了早期国家，实证了中华文明五千多年的历史。远古传说蕴含着一定的历史信息，传说华夏族由炎黄部落联盟逐渐发展形成，因此后人尊崇炎帝和黄帝为中华民族的人文初祖，海内外的华人也以"炎黄子孙"自称。考古发现与远古传说相互印证，共同帮助我们认识中华文明的起源。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="expand">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 知识拓展</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>中华文明探源工程</strong></p>
+      <p>中华文明探源工程以考古学、历史学为基础，广泛采用地质学、地理学、物理学、化学、生物学等自然科学的方法进行综合研究，提出了判断进入文明社会标准的中国方案。它揭示了中华文明起源、形成与早期发展的历史进程，将"中华文明五千年"从传说论证为可信的历史，为增强中华民族文化自信提供了强大的精神动力。</p>
+      <p style="margin-top:8px;"><strong>点拨：</strong>本课所学的良渚古城（距今约5000年）、陶寺古城（距今约4300—4000年）、牛河梁遗址（红山文化，距今约5800—5000年），都是中华文明探源工程的重要研究对象。探源工程的结论——<span class="kwd">中华文明具有多元一体的起源特征</span>——正是本课的核心结论。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 4：课堂训练（答题计分器） ========== -->
+<section id="sec4">
+  <h2 class="section-title">四、课堂训练</h2>
+
+  <!-- 计分器 -->
+  <div class="score-banner">
+    <div>
+      <div class="score-label">📊 计分板（共7题：选择5题 + 材料2题）</div>
+      <div class="score-number"><span id="scoreVal">0</span> / 7</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题1 -->
+  <div class="exercise" id="q1">
+    <p class="q-text"><strong>1.</strong> 人类进入文明社会的重要标志不包括（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 私有制的产生</label>
+      <label onclick="optClick(this,'B','q1')">B. 阶级的产生</label>
+      <label onclick="optClick(this,'C','q1')">C. 国家的产生</label>
+      <label onclick="optClick(this,'D','q1')">D. 铁器的出现</label>
+    </div>
+    <div class="a" id="exp-q1"><strong>答案：D</strong><br><strong>解析：</strong>本题为逆向选择题。私有制、阶级和国家的产生是人类进入文明社会的重要标志，而铁器出现于文明社会形成之后（约春秋时期才普遍使用），不属于文明诞生的基本标志。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q1')">显示答案</button>
+  </div>
+
+  <!-- 选择题2 -->
+  <div class="exercise" id="q2">
+    <p class="q-text"><strong>2.</strong> 考古发现是研究历史的重要依据。下列考古发现中，能够证实距今约5000年长江下游地区已出现早期国家的是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 牛河梁遗址的积石冢</label>
+      <label onclick="optClick(this,'B','q2')">B. 良渚古城的宫殿区和水坝</label>
+      <label onclick="optClick(this,'C','q2')">C. 半坡遗址的人面鱼纹彩陶盆</label>
+      <label onclick="optClick(this,'D','q2')">D. 陶寺古城的观象台</label>
+    </div>
+    <div class="a" id="exp-q2"><strong>答案：B</strong><br><strong>解析：</strong>良渚古城位于浙江余杭（长江下游），距今约5300—4300年，拥有宫殿区、内城、外城和同期世界上最大的水利系统，证实了距今约5000年长江下游地区已出现早期国家。A在辽河流域，C属仰韶文化（更早），D在黄河中游。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q2')">显示答案</button>
+  </div>
+
+  <!-- 选择题3 -->
+  <div class="exercise" id="q3">
+    <p class="q-text"><strong>3.</strong> 梁启超说："华夏民族，非一族所成。太古以来，诸族错居，接触交通，各去小异而大同，渐化合以成一族之形。"这段话主要说明华夏族的形成特点是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 由单一民族发展而来</label>
+      <label onclick="optClick(this,'B','q3')">B. 发祥地仅限于黄河流域</label>
+      <label onclick="optClick(this,'C','q3')">C. 由众多部落长期交融而成</label>
+      <label onclick="optClick(this,'D','q3')">D. 是炎帝和黄帝单独创造的</label>
+    </div>
+    <div class="a" id="exp-q3"><strong>答案：C</strong><br><strong>解析：</strong>材料中"诸族错居，接触交通，各去小异而大同"明确表达了华夏族是由众多部落长期交往、融合而成的，而非单一民族或炎黄单独创造。这是理解中华民族多元一体格局的关键史料。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q3')">显示答案</button>
+  </div>
+
+  <!-- 选择题4 -->
+  <div class="exercise" id="q4">
+    <p class="q-text"><strong>4.</strong> 尧年老时召开部落联盟议事会议商讨继位者，经民主推举和长期考察，确认舜才德出众，将首领之位传于舜；舜年老时又将首领之位传于治水有功的禹。这种传位方式被称为（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 世袭制</label>
+      <label onclick="optClick(this,'B','q4')">B. 分封制</label>
+      <label onclick="optClick(this,'C','q4')">C. 科举制</label>
+      <label onclick="optClick(this,'D','q4')">D. 禅让制</label>
+    </div>
+    <div class="a" id="exp-q4"><strong>答案：D</strong><br><strong>解析：</strong>禅让制是原始社会末期部落联盟民主推选首领的制度，核心标准是"贤德"，将首领之位传给才德出众之人。尧传舜、舜传禹是禅让制的典型。世袭制始于夏朝启，分封制始于西周，科举制始于隋朝。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q4')">显示答案</button>
+  </div>
+
+  <!-- 选择题5 -->
+  <div class="exercise" id="q5">
+    <p class="q-text"><strong>5.</strong> 良渚古城发现大型水利系统，陶寺古城大型墓葬随葬品来源广泛，这两处遗址的考古成果共同说明了（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 当时已进入铁器时代</label>
+      <label onclick="optClick(this,'B','q5')">B. 中华文明具有多元一体的特征</label>
+      <label onclick="optClick(this,'C','q5')">C. 当时已经出现成熟的文字系统</label>
+      <label onclick="optClick(this,'D','q5')">D. 部落联盟已成为主要的政治形式</label>
+    </div>
+    <div class="a" id="exp-q5"><strong>答案：B</strong><br><strong>解析：</strong>良渚（长江下游）代表南方文明成就，陶寺（黄河中游）代表北方文明成就，且陶寺随葬品来源广泛反映各地文化汇聚中原的趋势。两地同时出现早期国家，共同证明中华文明多元起源（多元）和汇聚中原（一体）的特征。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q5')">显示答案</button>
+  </div>
+
+  <!-- 材料题一 -->
+  <div class="exercise" id="mq1">
+    <p class="q-text"><strong>题一</strong> （中难度）阅读下列材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料一：</strong>良渚遗址的复杂程度和阶级制度，已经达到了"国家"的标准。<br>
+      <strong>材料二：</strong>良渚遗址是实证中华五千年文明史的圣地，是不可多得的宝贵财富。
+    </div>
+    <div class="source-ref">——材料一：考古学家科林·伦福儒；材料二：习近平</div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 良渚古城位于今天哪个省份？距今约多少年？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1a'); trackMatQ('mq1a')">显示答案</button>
+    <div class="a" id="exp-m1a"><strong>答案：</strong>良渚古城位于今天<span class="kwd">浙江省</span>（浙江余杭），距今约<span class="kwd">5300—4300年</span>。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 为什么说良渚遗址是"实证中华五千年文明史的圣地"？请结合良渚古城的考古发现加以说明。</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1b'); trackMatQ('mq1b')">显示答案</button>
+    <div class="a" id="exp-m1b"><strong>答案：</strong>①良渚古城规模宏大，有宫殿区、内城和外城等多重结构；②建有由人工水坝和自然山体组成的大型水利系统，是同期世界上规模最大的水利工程；③社会阶级分化明显，具备早期国家的基本特征。这些考古发现以实物证据证实了距今约5000年前中国已出现早期国家，因此良渚遗址是"实证中华五千年文明史的圣地"。</div>
+  </div>
+
+  <!-- 材料题二 -->
+  <div class="exercise" id="mq2">
+    <p class="q-text"><strong>题二</strong> （较难）阅读下列材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料一：</strong>华夏民族，非一族所成。太古以来，诸族错居，接触交通，各去小异而大同，渐化合以成一族之形，后世所谓诸夏是也。<br>
+      <strong>材料二：</strong>"劳身焦思，居外十三年，过家门不敢入"。
+    </div>
+    <div class="source-ref">——材料一：梁启超《饮冰室合集》；材料二：《史记·夏本纪》</div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 材料一中梁启超论述了华夏族的形成特点，请概括这一特点。结合所学知识，指出炎帝和黄帝在华夏族形成过程中的作用。</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2a'); trackMatQ('mq2a')">显示答案</button>
+    <div class="a" id="exp-m2a"><strong>答案：</strong>特点：华夏族是由众多部落长期交往、融合而成的，具有<span class="kwd">多元一体</span>的特征。作用：炎帝和黄帝通过阪泉之战结成<span class="kwd">炎黄联盟</span>，又在涿鹿之战中击败蚩尤，联盟不断壮大，吸收融合其他部落，最终形成华夏族。炎帝和黄帝被尊为中华民族的<span class="kwd">人文初祖</span>。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 材料二描述的是哪一位历史人物的事迹？从他治水成功的原因中，我们可以得到什么启示？（要求：结合材料，从创新精神和社会责任两个角度回答）</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2b'); trackMatQ('mq2b')">显示答案</button>
+    <div class="a" id="exp-m2b"><strong>答案：</strong>描述的是<span class="kwd">大禹</span>治水的事迹。启示：①<strong>创新精神：</strong>大禹吸取父亲鲧用"堵塞"失败的教训，改用"疏导"的方法治水成功，说明面对困难要善于总结经验、勇于创新；②<strong>社会责任感：</strong>"居外十三年，过家门不敢入"体现了大禹以天下为己任的奉献精神和高度责任感，启发我们要有担当意识，将个人奋斗与社会需要相结合。</div>
+  </div>
+</section>
+
+<!-- ========== Section 5：知识结构图 ========== -->
+<section id="sec5">
+  <h2 class="section-title">五、结构图</h2>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <p style="text-align:center;font-size:12px;color:#999;margin-bottom:16px;">💡 点击节点查看详情</p>
+    <div class="kg-chain">
+      <div class="kg-node left c1" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🌾</span>
+        <strong>农业发展与早期国家萌芽</strong>
+        <p>农业、畜牧业发展 → 人口增长 → 早期城市形成</p>
+        <p>私有制产生 → 阶级分化 → 牛河梁遗址</p>
+        <div class="kg-detail">原始农业和畜牧业发展→生产力提高→剩余产品→私有制产生→社会阶级分化→早期国家形成。牛河梁遗址的祭坛、积石冢和玉猪龙，证实距今约5000多年已出现社会等级分化和原始宗教活动。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🏛️</span>
+        <strong>南北两大文明遗址</strong>
+        <p>良渚古城（长江下游）↔ 陶寺古城（黄河中游）</p>
+        <p>水利系统·阶级分化 ← 文化汇聚中原 → 多元一体</p>
+        <div class="kg-detail">良渚：世界最大同期水利系统+多重城市结构；陶寺：阶级分化严重+各地文化汇聚中原。一南一北，共同证明中华文明"满天星斗"的多元起源格局和"汇聚中原、凝聚为一"的一体趋势。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🐉</span>
+        <strong>华夏族的形成与文明传承</strong>
+        <p>炎黄联盟 → 华夏族 → 尧舜禹禅让 → 大禹治水</p>
+        <p>夏朝建立 → 中华文明延绵不绝</p>
+        <div class="kg-detail">距今五六千年→部落联盟时期→阪泉之战+涿鹿之战→炎黄联盟形成华夏族→尧舜禹禅让（贤德推举）→大禹治水（疏导创新）→启建夏朝→世袭制取代禅让制→天下为公→天下为家。中华文明五千年，延绵至今，是唯一未曾中断的古老文明。</div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 生产力：农业进步 → 剩余产品 → 私有制</div>
+      <div class="kg-rule r2">🟠 社会结构：阶级分化 → 早期国家 → 公共权力</div>
+      <div class="kg-rule r3">🟢 文化认同：炎黄联盟 → 华夏族 → 多元一体</div>
+      <div class="kg-rule r4">🔴 制度演进：禅让制（贤德）→ 世袭制（夏朝启）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 页脚 ========== -->
+<footer>
+  <p>统编版初中历史 · 七年级上册 · 第一单元</p>
+  <p>基于教材内容整理 · 仅供教学参考使用</p>
+</footer>
+
+<!-- ========== 底部导航 ========== -->
+  <div class="bottom-nav">
+  <div><a href="七上-U1-第2课_原始农业与史前社会.html">← 上一课：第2课 原始农业与史前社会</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第3课</div>
+  <div><a href="七上-U2-第4课_夏商西周王朝的更替.html">下一课：第4课 夏商西周王朝的更替 →</a></div>
+  </div>
+
+<!-- ========== 返回顶部 ========== -->
+<button id="backTop" onclick="scrollToTop()" title="返回顶部">↑</button>
+
+<script>
+// ===== 浮动进度条 =====
+window.addEventListener('scroll', function() {
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var progress = scrollHeight > 0 ? Math.min((scrollTop / scrollHeight) * 100, 100) : 0;
+  document.querySelector('#readingProgress .bar').style.width = progress + '%';
+});
+
+// ===== Navbar 已读标记 =====
+(function() {
+  var sections = ['sec1','sec2','sec3','sec4','sec5'];
+  var links = document.querySelectorAll('#mainNav a');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = sections.indexOf(entry.target.id);
+        if (idx >= 0 && links[idx]) links[idx].classList.add('visited');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+})();
+
+// ===== 答案显隐切换 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题答案对照 =====
+var correctAnswers = { q1: 'D', q2: 'B', q3: 'C', q4: 'D', q5: 'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() {
+  document.getElementById('scoreVal').textContent = score;
+}
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) {
+      o.classList.add('correct');
+    } else if (o === el) {
+      o.classList.add('wrong');
+    }
+  });
+  document.getElementById('exp-' + qid).classList.add('show');
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+  score++;
+  updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {};
+  matDone = {};
+  score = 0;
+  updateScore();
+  var exercises = document.querySelectorAll('.exercise');
+  exercises.forEach(function(ex) {
+    var labels = ex.querySelectorAll('label');
+    labels.forEach(function(l) {
+      l.classList.remove('disabled', 'correct', 'wrong');
+    });
+    var answers = ex.querySelectorAll('.a');
+    answers.forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== sec1 标签页切换 =====
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== sec2 手风琴组 =====
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+
+function markMastered(grpId, btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+  var grp = document.getElementById(grpId);
+  if (grp) {
+    grp.querySelector('.acc-group-hd').style.opacity = '0.7';
+  }
+}
+
+// ===== sec3 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) {
+      box.classList.remove('filtered-out');
+    } else {
+      box.classList.add('filtered-out');
+    }
+  });
+}
+
+function toggleColBox(header) {
+  var box = header.parentElement;
+  box.classList.toggle('open');
+}
+
+// ===== sec5 节点点击展开详情 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+}
+
+// ===== 平滑返回顶部 =====
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('backTop');
+  if (window.pageYOffset > 300) btn.style.display = 'block';
+  else btn.style.display = 'none';
+});
+
+// ===== deep-card 折叠交互 =====
+(function() {
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card) {
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.addEventListener('click', function() {
+        bd.classList.toggle('show');
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2课 原始农业与史前社会 — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --gold: #f1c40f;
+  --blue: #3498db;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========== 浮动阅读进度条 ========== */
+#readingProgress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: transparent;
+  z-index: 10000;
+}
+#readingProgress .bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#3d2b8c,#7c6cf0,#b3a8ff);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.15s linear;
+}
+
+/* ========== Navbar ========== */
+.navbar {
+  position: sticky;
+  top: 4px;
+  z-index: 999;
+  background: #fff;
+  padding: 12px 0 10px;
+  border-bottom: 3px solid var(--primary);
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(124,108,240,0.10);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+.navbar a {
+  color: #5a4ac7;
+  text-decoration: none;
+  font-size: 13pt;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 16px;
+  transition: all 0.25s;
+}
+.navbar a:hover, .navbar a.visited {
+  background: #f0edff;
+  color: var(--primary-dark);
+}
+.navbar a.visited::after { content: " ✓"; color:var(--green); font-size:10pt; }
+
+/* ========== Section 公共 ========== */
+section { margin: 28px 0; }
+.section-title {
+  font-size: 20pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  border-left: 5px solid var(--primary);
+  padding-left: 14px;
+  margin-bottom: 18px;
+}
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.learn-target h3 {
+  color: var(--primary-dark);
+  font-size: 16pt;
+  margin-bottom: 12px;
+}
+.learn-target .target-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.learn-target .target-item {
+  font-size: 13.5pt;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+  cursor: default;
+  transition: all 0.2s;
+}
+.learn-target .target-item.completed {
+  color: var(--green);
+  border-bottom-color: var(--green);
+}
+
+/* ========== 段落过渡提示按钮 ========== */
+.section-next-hint {
+  text-align: center;
+  margin: 20px 0 8px;
+}
+.section-next-hint button {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 28px;
+  font-size: 14pt;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(124,108,240,0.20);
+  transition: all 0.25s;
+}
+.section-next-hint button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(124,108,240,0.30);
+}
+
+/* ========== 标签页切换（sec1） ========== */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.tab-btn {
+  flex: 1;
+  padding: 14px 8px;
+  font-size: 14pt;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  background: #e8e0ff;
+  color: #5a4ac7;
+  letter-spacing: 1px;
+}
+.tab-btn.active {
+  background: linear-gradient(135deg,#7c6cf0,#5a4ac7);
+  color: #fff;
+}
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== 时间轴横条 ========== */
+.timeline-bar {
+  background: #f0edff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12pt;
+  color: #5a4ac7;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 {
+  color: var(--primary-dark);
+  font-size: 16pt;
+  margin-bottom: 10px;
+}
+.kp-card ul { padding-left: 22px; }
+.kp-card li { margin: 6px 0; font-size: 14pt; }
+
+/* ========== 贯通框/联系框 ========== */
+.link-bar {
+  border: 2px dashed #d5cef0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 14px;
+  background: #faf8ff;
+  font-size: 13pt;
+  color: #5a4ac7;
+}
+
+/* ========== 标签 ========== */
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao {
+  background: #f39c12; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-value {
+  background: #e74c3c; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-soc {
+  background: #3498db; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+
+/* ========== 手风琴组（sec2） ========== */
+.acc-group {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.acc-group-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s;
+}
+.acc-group-hd.pt1 { background: linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+
+/* 手风琴掌握按钮 */
+.acc-mastered {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 22px;
+  background: #faf8ff;
+  border-top: 1px solid #eee;
+}
+.acc-mastered button {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 6px 16px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== 折叠三级卡片 ========== */
+.deep-card {
+  margin: 10px 18px 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.deep-card-hd {
+  background: linear-gradient(135deg, #e67e22, #f0ad4e);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 13.5pt;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+.deep-card-bd {
+  display: none;
+  background: #fff;
+  padding: 14px 18px;
+  border: 1px solid #eee;
+  border-top: none;
+  font-size: 13pt;
+}
+.deep-card-bd.show { display: block; }
+
+/* ========== 对比表格 ========== */
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 13pt;
+}
+.diff-table th {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+}
+.diff-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== 栏目容器 ========== */
+.col-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.06);
+  transition: all 0.3s;
+}
+.col-box.filtered-out { display: none; }
+.col-header {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 15pt;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body {
+  display: none;
+  padding: 16px 20px;
+  background: #fff;
+  font-size: 13.5pt;
+}
+.col-box.open .col-body { display: block; }
+
+/* ========== 筛选按钮条（sec3） ========== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.filter-chip {
+  padding: 6px 14px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+  color: #5a4ac7;
+}
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ========== 引文材料 ========== */
+.source-material {
+  border-left: 4px solid var(--primary);
+  padding: 8px 14px;
+  margin: 8px 0;
+  background: #faf8ff;
+  font-size: 13pt;
+}
+.source-ref {
+  text-align: right;
+  color: #888;
+  font-size: 10pt;
+  margin-bottom: 8px;
+}
+
+/* ========== 题目区域 ========== */
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.exercise {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+.options label {
+  display: block;
+  padding: 8px 14px;
+  margin: 4px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14pt;
+  transition: all 0.2s;
+  background: #faf8ff;
+}
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== 答题计分器 ========== */
+.score-banner {
+  background: linear-gradient(135deg,#f0edff,#e0daff);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+.score-number {
+  font-size: 22pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.score-label { font-size: 12pt; color: #888; }
+.score-reset {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+/* ========== 答案区 ========== */
+.a { display: none; }
+.a.show { display: block; }
+.a {
+  background: #f0edff;
+  border: 1px solid #d5cef0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 10px 0;
+  font-size: 14pt;
+}
+.col-body .a { font-size: 12pt; }
+.col-body .a p { font-size: 12pt; }
+.col-body .a strong { font-size: 12pt; }
+
+/* ========== 答案按钮 ========== */
+.ans-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 12pt;
+  cursor: pointer;
+  margin: 6px 0;
+  transition: all 0.2s;
+}
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(124,108,240,0.08);
+}
+.kg-title {
+  text-align: center;
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node {
+  width: 90%;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.kg-node.left { align-self: flex-start; }
+.kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+.kg-detail { display: none; font-size: 11pt; color: #666; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded .kg-detail { display: block; }
+.kg-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.kg-rule {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5pt;
+  text-align: center;
+  font-weight: 600;
+}
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== 页脚 ========== */
+footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  border-top: 2px solid var(--border);
+  margin-top: 30px;
+  font-size: 12px;
+  color: #999;
+}
+footer p { margin: 4px 0; }
+
+/* ========== 底部导航 ========== */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(124,108,240,0.08);
+  font-size: 12pt;
+}
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+/* ========== 返回顶部 ========== */
+#backTop {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 18pt;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(124,108,240,0.30);
+  z-index: 1000;
+  transition: all 0.2s;
+}
+#backTop:hover { transform: scale(1.1); background: #5a4ac7; }
+
+/* ========== 补充练习标注 ========== */
+.sup-note {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+
+<!-- ========== 浮动进度条 ========== -->
+<div id="readingProgress"><div class="bar"></div></div>
+
+<!-- ========== Hero 标题区 ========== -->
+<div style="background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);padding:36px 20px 30px;
+            text-align:center;color:#fff;border-radius:0 0 36px 36px;
+            box-shadow:0 6px 30px rgba(61,43,140,0.20);margin:0 -20px 28px;">
+  <div style="font-size:13pt;opacity:0.82;letter-spacing:2px;font-weight:300;margin-bottom:10px;">
+    第一单元 · 史前时期：原始社会与中华文明的起源
+  </div>
+  <h1 style="font-size:26pt;margin:10px 0 8px;font-weight:700;letter-spacing:3px;color:#fff;">
+    第2课 · 原始农业与史前社会
+  </h1>
+  <div style="font-size:14pt;opacity:0.85;letter-spacing:2px;font-weight:300;">
+    统编版初中历史  七年级上册
+  </div>
+</div>
+
+<!-- ========== Navbar 导航条 ========== -->
+<div class="navbar" id="mainNav">
+  <a href="#sec1">一、知识要点</a>
+  <a href="#sec2">二、重难点解析</a>
+  <a href="#sec3">三、教材栏目</a>
+  <a href="#sec4">四、课堂训练</a>
+  <a href="#sec5">五、结构图</a>
+</div>
+
+<!-- ========== 学习目标 ========== -->
+<div class="learn-target" id="learnTargets">
+  <h3>🎯 学习目标（核心素养导向）</h3>
+  <div class="target-grid">
+    <div class="target-item" data-target="1">🔵 <strong>时空观念：</strong>识读地图，了解河姆渡遗址和半坡遗址的地理位置，认识南北原始农业的时空差异。</div>
+    <div class="target-item" data-target="2">🔍 <strong>史料实证：</strong>通过考古发现（农作物遗存、建筑遗迹），理解原始农业产生和发展的证据。</div>
+    <div class="target-item" data-target="3">📖 <strong>历史解释：</strong>概括河姆渡人和半坡居民生产生活的异同，解释南北方原始农业差异的原因。</div>
+    <div class="target-item" data-target="4">❤️ <strong>家国情怀：</strong>认识中国是世界上最早种植水稻和粟的国家之一，增强民族自豪感。</div>
+  </div>
+</div>
+
+<!-- ========== Section 1：知识要点（标签页切换） ========== -->
+<section id="sec1">
+  <h2 class="section-title">一、知识要点</h2>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab1')">🌾 原始农业的产生</button>
+    <button class="tab-btn" onclick="switchTab('tab2')">🏠 河姆渡人的生活</button>
+    <button class="tab-btn" onclick="switchTab('tab3')">🏺 半坡居民的生活</button>
+  </div>
+
+  <div class="kp-card tab-panel active" id="tab1" style="border-radius:10px;">
+    <div class="timeline-bar">约1万年前 — 距今约7000年 — 距今约6000年</div>
+    <h3>一、原始农业的产生</h3>
+    <ul>
+      <li>距今约<span class="kwd">1万年前</span>，我国进入<span class="kwd">新石器时代</span>（使用<span class="kwd">磨制石器</span>）。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span>原始农业兴起的标志：<span class="kwd">农作物种植</span>、<span class="kwd">家畜饲养</span>、<span class="kwd">聚落</span>的出现和磨制石器的发展。</li>
+      <li>中国是世界上最早种植<span class="kwd">水稻</span>和<span class="kwd">粟</span>（小米）的国家之一。</li>
+      <li>原始农业的出现使人类从"攫取经济"（采集、狩猎）过渡到"<span class="kwd">生产经济</span>"，是人类经济史上的一次重大革命。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>原始农业的产生是远古人类在采集和狩猎过程中长期经验积累的结果。火的运用、工具的改进（从打制到磨制）为农业的出现提供了条件。农业的产生使人类开始定居生活，形成了聚落，为文明的诞生奠定了基础。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查原始农业兴起的标志；以材料题考查"农业革命"的意义。</p>
+    </div>
+  </div>
+
+  <div class="kp-card tab-panel" id="tab2" style="border-radius:10px;">
+    <div class="timeline-bar">距今约7000年 · 浙江余姚 · 长江流域</div>
+    <h3>二、河姆渡人的生活</h3>
+    <ul>
+      <li><span class="kwd">河姆渡遗址</span>位于浙江省<span class="kwd">余姚</span>市（<span class="kwd">长江流域</span>），距今约<span class="kwd">7000年</span>，是长江流域原始农耕文明的代表。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span>河姆渡人住在<span class="kwd">干栏式建筑</span>中（通风防潮、适应南方多雨环境），这是中国最早的<span class="kwd">木结构建筑</span>之一。</li>
+      <li>河姆渡人种植<span class="kwd">水稻</span>（世界最早的水稻种植地之一），使用<span class="kwd">骨耜</span>等工具耕种。</li>
+      <li>河姆渡人饲养猪、狗、水牛等家畜，还使用<span class="kwd">天然漆</span>，掌握了<span class="kwd">凿井</span>技术。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>河姆渡遗址的发现，证明长江流域也是中华文明的重要发源地之一。干栏式建筑和稻作农业，体现了南方先民因地制宜的智慧，与北方黄河流域的粟作农业共同构成中华早期农耕文明的南北双源头。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查河姆渡遗址的地理位置（长江流域）、房屋样式（干栏式）、农作物（水稻）。</p>
+    </div>
+  </div>
+
+  <div class="kp-card tab-panel" id="tab3" style="border-radius:10px;">
+    <div class="timeline-bar">距今约6000年 · 陕西西安 · 黄河流域</div>
+    <h3>三、半坡居民的生活</h3>
+    <ul>
+      <li><span class="kwd">半坡遗址</span>位于陕西省<span class="kwd">西安</span>市（<span class="kwd">黄河流域</span>），距今约<span class="kwd">6000年</span>，是黄河流域原始农耕文明的代表。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span>半坡居民住在<span class="kwd">半地穴式圆形房屋</span>中（保暖防寒、适应北方气候），种植<span class="kwd">粟</span>（小米）。</li>
+      <li>半坡居民生活用具主要是<span class="kwd">彩陶</span>，代表作品是<span class="kwd">人面鱼纹彩陶盆</span>（反映了捕鱼在生产中的重要地位）。</li>
+      <li>半坡居民饲养猪、狗等家畜，使用磨制石器、骨器、角器等工具，还会<span class="kwd">纺织</span>和制衣。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>半坡居民的生活方式体现了黄河流域先民适应北方寒冷干旱自然环境的智慧。半地穴式房屋和粟作农业与河姆渡的干栏式建筑和稻作农业形成鲜明对比，揭示了自然环境对人类生产生活方式的深刻影响。原始农业为下一课中华文明的起源奠定了物质基础。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以表格/图示形式综合考查河姆渡与半坡的比较（农作物、房屋、地理环境等）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 2：重难点解析（手风琴组） ========== -->
+<section id="sec2">
+  <h2 class="section-title">二、重难点解析</h2>
+
+  <!-- 重点一：原始农业的产生及意义 -->
+  <div class="acc-group" id="accGrp1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('accGrp1')">
+      <h3>🔵 重点一：原始农业的产生及意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】原始农业兴起的标志与条件</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> 原始农业兴起的四大标志：①农作物种植（水稻、粟）；②家畜饲养（猪、狗等）；③聚落出现（定居生活）；④磨制石器（新石器时代）。</p>
+          <p><span class="tag-soc">🔵 史实支撑</span> 考古学家在河姆渡遗址发现了大量稻谷遗存，在半坡遗址发现了粟的遗存和储存粮食的窖穴，证实了原始农业的存在。</p>
+          <p>原始农业产生的原因：①长期的采集和狩猎积累了动植物生长规律的认识；②工具的不断改进（打制石器→磨制石器）；③气候环境变化（距今约1万年前冰期结束，气候变暖）。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】原始农业与采集狩猎经济的比较</div>
+        <div class="deep-card-bd">
+          <table class="diff-table">
+            <tr><th>比较项</th><th>采集狩猎经济</th><th>原始农业经济</th></tr>
+            <tr><td>经济类型</td><td>攫取经济（依赖自然）</td><td>生产经济（改造自然）</td></tr>
+            <tr><td>生活方式</td><td>迁徙、游动</td><td>定居、聚落</td></tr>
+            <tr><td>食物来源</td><td>野生动植物</td><td>种植+饲养</td></tr>
+            <tr><td>社会组织</td><td>原始人群</td><td>氏族、部落</td></tr>
+            <tr><td>工具类型</td><td>打制石器</td><td>磨制石器</td></tr>
+            <tr><td>人口规模</td><td>较小（几十人）</td><td>扩大（数百人）</td></tr>
+          </table>
+          <p>原始农业的出现是人类经济史上的一次划时代变革，被称为"农业革命"。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】农业革命——人类文明的基石</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 中国是世界上农业起源最早的国家之一，河姆渡的稻作农业和半坡的粟作农业分别代表了中国南北方两大农耕传统。中华民族的先民们用智慧和勤劳，驯化了野生植物，创造了灿烂的农耕文明。</p>
+          <p>农业的产生使人类生活发生了根本性变化：①有了稳定的食物来源；②开始定居生活，形成聚落；③促进了社会分工和文明进步。这正是唯物史观中"经济基础决定上层建筑"的生动体现。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）原始农业兴起和发展的重要标志包括<br>①农作物种植 ②家畜饲养的出现 ③聚落的发展 ④铁制农具的使用<br>A. ①②③&emsp;B. ①②④&emsp;C. ①③④&emsp;D. ②③④</p>
+          <button class="ans-btn" onclick="toggleAnswer('exp-zk1')">显示答案</button>
+          <div class="a" id="exp-zk1"><strong>答案：A</strong><br><strong>解析：</strong>原始农业兴起的标志是①②③三项。④铁制农具在春秋时期才开始使用，属于文明时代后的生产力进步，不在原始社会时期，应排除。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp1',this)">✅ 我已理解「重点一」</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重点二：河姆渡与半坡的对比 -->
+  <div class="acc-group" id="accGrp2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('accGrp2')">
+      <h3>🟠 重点二：河姆渡人与半坡居民的比较</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】河姆渡人的生活概况</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> 河姆渡遗址发现于1973年，位于浙江余姚。河姆渡人使用骨耜耕地，种植水稻，住干栏式建筑。中国是世界上最早种植水稻的国家之一。</p>
+          <p><span class="tag-soc">🔵 史实支撑</span> 在河姆渡遗址中发现了大量人工栽培的水稻遗存（稻谷、稻秆、稻叶堆积），厚度达20~50厘米，有的地方甚至超过1米，这充分证明河姆渡人已掌握了水稻种植技术。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】河姆渡与半坡——南北方原始农耕的对比</div>
+        <div class="deep-card-bd">
+          <table class="diff-table">
+            <tr><th>比较项</th><th>河姆渡人</th><th>半坡居民</th></tr>
+            <tr><td>距今时间</td><td>约7000年</td><td>约6000年</td></tr>
+            <tr><td>发现地点</td><td>浙江余姚（长江流域）</td><td>陕西西安（黄河流域）</td></tr>
+            <tr><td>房屋样式</td><td>干栏式建筑</td><td>半地穴式圆形房屋</td></tr>
+            <tr><td>农作物</td><td>水稻</td><td>粟（小米）</td></tr>
+            <tr><td>生产工具</td><td>骨耜</td><td>磨制石器、骨器</td></tr>
+            <tr><td>特色技术</td><td>凿井、天然漆</td><td>彩陶制造</td></tr>
+            <tr><td>家畜饲养</td><td>猪、狗、水牛</td><td>猪、狗</td></tr>
+          </table>
+          <p>差异的根本原因：南北方自然地理环境不同——南方湿润多雨，需防潮通风；北方寒冷干旱，需保暖防寒。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】一方水土养一方人——自然环境对文明形态的影响</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 河姆渡和半坡的不同生活方式告诉我们：中华民族的先民们在不同的自然环境中创造了各具特色的文化，这正是中华文明多元一体的体现。无论是长江流域的稻作文化，还是黄河流域的粟作文化，都是中华早期文明的伟大创造。</p>
+          <p>从整体看，南北方虽然各有特色，但都进入了农耕时代，都过着定居生活，都使用磨制石器。这种"和而不同"的文化格局，为日后中华文明的统一与融合奠定了基础。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （材料题）阅读材料：河姆渡人住干栏式建筑，以水稻为主要农作物；半坡居民住半地穴式圆形房屋，以粟为主要农作物。问题：河姆渡人与半坡居民在生产生活方式上为何存在这些差异？这说明了什么道理？</p>
+          <button class="ans-btn" onclick="toggleAnswer('exp-zk2')">显示答案</button>
+          <div class="a" id="exp-zk2"><strong>答案：</strong>差异原因：河姆渡遗址位于长江流域，气候湿润多雨，干栏式建筑通风防潮、适应多雨环境，适合水稻种植；半坡遗址位于黄河流域，气候寒冷干燥，半地穴式房屋保暖防寒，适合粟（耐旱作物）种植。这说明自然环境对人类生产生活方式有深刻影响，体现了"因地制宜"的生存智慧。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp2',this)">✅ 我已理解「重点二」</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 难点：新旧石器时代转型 -->
+  <div class="acc-group" id="accGrp3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('accGrp3')">
+      <h3>🟣 难点：新旧石器时代的区别——生产力发展的里程碑</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】新石器时代的基本特征</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> 距今约1万年前，我国进入新石器时代。新石器时代的特征是：①使用磨制石器（更精细、更锋利）；②产生了原始农业和畜牧业；③开始定居生活，出现聚落；④发明了陶器。</p>
+          <p><span class="tag-soc">🔵 史实支撑</span> 旧石器时代以北京人为代表（打制石器），新石器时代以河姆渡人和半坡居民为代表（磨制石器）。从"打制"到"磨制"不仅是技术上的进步，更是人类控制自然能力的飞跃。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】新旧石器时代转型的原因</div>
+        <div class="deep-card-bd">
+          <p>从旧石器时代到新石器时代约经历了200多万年，这个转变是多种因素促成的：</p>
+          <p>①<strong>气候因素：</strong>距今约1万年前冰期结束，全球气候变暖，动植物资源更加丰富，为农业的产生提供了客观条件。</p>
+          <p>②<strong>人口因素：</strong>随着人口的增加，传统的采集和狩猎已无法满足食物需求，迫使人类寻找新的食物来源。</p>
+          <p>③<strong>技术积累：</strong>旧石器时代数百万年的工具制造经验为新石器时代磨制石器的出现奠定了技术基础。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】生产力发展推动社会进步</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 从旧石器时代到新石器时代的转变，正是"生产力决定生产关系"这一唯物史观基本原理的生动体现。中国境内从南到北广泛分布的原始农业遗址，充分说明中华文明的诞生有着深厚的物质基础和广泛的群众性。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）下列选项中，属于新石器时代特征的是<br>A. 使用打制石器，以采集和狩猎为生<br>B. 使用磨制石器，产生了原始农业<br>C. 已能制造青铜器，建立了国家<br>D. 使用铁制农具，生产力大大提高</p>
+          <button class="ans-btn" onclick="toggleAnswer('exp-zk3')">显示答案</button>
+          <div class="a" id="exp-zk3"><strong>答案：B</strong><br><strong>解析：</strong>A属于旧石器时代特征（北京人等），B是新石器时代的正确特征，C属于青铜时代（夏商周），D属于铁器时代（春秋战国）。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp3',this)">✅ 我已理解「难点」</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 3：教材栏目解答（分类筛选 + 手风琴展开） ========== -->
+<section id="sec3">
+  <h2 class="section-title">三、教材栏目</h2>
+
+  <div class="filter-bar">
+    <span class="filter-chip active" onclick="filterCol('all',this)">📋 全部</span>
+    <span class="filter-chip" onclick="filterCol('相关史事',this)">📖 相关史事</span>
+    <span class="filter-chip" onclick="filterCol('读地图',this)">🗺️ 读地图</span>
+    <span class="filter-chip" onclick="filterCol('想一想',this)">💭 想一想</span>
+    <span class="filter-chip" onclick="filterCol('课后活动',this)">📝 课后活动</span>
+    <span class="filter-chip" onclick="filterCol('补充练习',this)">✏️ 补充练习</span>
+    <span class="filter-chip" onclick="filterCol('知识拓展',this)">🔍 知识拓展</span>
+  </div>
+
+  <!-- 相关史事 ×5 合并为一个可展开面板 -->
+  <div class="col-box" data-cat="相关史事">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 相关史事（共5则）</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">在距今约1万年的新石器时代早期，我国出现了最早的人工栽培的农作物。长江中下游的先民开始栽培稻，北方地区的先民开始栽培粟和黍。我国是世界上最早人工栽培水稻、粟和黍的国家。</div>
+      <p style="margin-top:4px;"><strong>点拨：</strong>揭示了原始农业起源——我国是世界农业起源地之一。</p>
+      <hr style="border-color:#eee;margin:12px 0;">
+      <div class="source-material">农业生产要有固定的土地，人们便在适宜耕种的地方定居下来。在定居生活中，人们学会了烧制陶器来储存粮食和水，用石磨和磨棒加工粮食。随着定居生活，还出现了饲养家畜、使用磨制石器、制作装饰品等新的生活方式。</div>
+      <p style="margin-top:4px;"><strong>点拨：</strong>农业→定居→陶器、磨制石器、家畜饲养的连锁反应。</p>
+      <hr style="border-color:#eee;margin:12px 0;">
+      <div class="source-material">贾湖遗址位于河南舞阳，距今约9000—7500年。遗址中发现炭化稻粒、骨笛、刻画符号和墓葬等遗迹。其中，骨笛是目前世界上发现的年代最早、仍可演奏的管乐器，被誉为"中华第一笛"。</div>
+      <p style="margin-top:4px;"><strong>点拨：</strong>贾湖骨笛和刻画符号体现了远古先民在音乐艺术和早期符号表达上的创造智慧。</p>
+      <hr style="border-color:#eee;margin:12px 0;">
+      <div class="source-material">半坡遗址还出土了纺轮，说明半坡居民已掌握了原始的纺织技术；在一些陶器上发现有刻画符号，有学者认为这是我国早期文字的雏形。</div>
+      <p style="margin-top:4px;"><strong>点拨：</strong>纺轮标志着原始手工业分工；陶器刻符引发汉字起源讨论。</p>
+      <hr style="border-color:#eee;margin:12px 0;">
+      <div class="source-material">龙山文化距今约4500—4000年，因首先发现于山东历城龙山镇而得名。陶器以黑陶为主，其中蛋壳黑陶杯壁薄如蛋壳，制作精美，代表了很高的工艺水平。</div>
+      <p style="margin-top:4px;"><strong>点拨：</strong>蛋壳黑陶杯是新石器时代制陶技艺的巅峰之作，壁厚仅0.5—1毫米。</p>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="读地图">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🗺️ 读地图</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>中国境内新石器时代重要遗址分布图（见教材P10）。</p>
+      <p class="q-text"><strong>问题：</strong>观察中国境内主要的新石器时代重要遗址分布图，找一找不同文化遗址的分布范围和规律。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col-map')">显示答案</button>
+      <div class="a" id="exp-col-map">
+        <p><strong>答案：</strong>我国新石器时代遗址分布广泛，主要沿<span class="kwd">黄河</span>和<span class="kwd">长江</span>两大流域分布，具有<span class="kwd">满天星斗</span>的特点。黄河流域有半坡（仰韶文化）、大汶口文化、龙山文化等；长江流域有河姆渡、屈家岭等文化。不同区域的遗址各具特色，体现了中华文明<span class="kwd">多元起源</span>的特征。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="想一想">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💭 想一想</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p class="q-text"><strong>问题：</strong>半坡居民和河姆渡居民的房屋样式为什么不同？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col-think')">显示答案</button>
+      <div class="a" id="exp-col-think">
+        <p><strong>答案：</strong>这与两地不同的<span class="kwd">自然地理环境</span>密切相关。河姆渡遗址位于长江流域，气候<span class="kwd">炎热潮湿</span>，干栏式建筑架空离地，有利于<span class="kwd">通风防潮</span>和防虫蛇；半坡遗址位于黄河流域，气候<span class="kwd">寒冷干燥</span>，半地穴式房屋一半在地下，有利于<span class="kwd">保暖防寒</span>。这体现了远古人类<span class="kwd">因地制宜</span>、适应自然的生存智慧。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="课后活动">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📝 课后活动</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p class="q-text"><strong>1.</strong> 下列哪些现象表明了原始农业的起源和发展？请在□内画"√"。</p>
+      <p style="margin:8px 0;padding:10px;background:#f8f5ff;border-radius:8px;line-height:1.9;">
+        □ 农作物的出现 &nbsp;&nbsp; □ 家畜饲养 &nbsp;&nbsp; □ 定居生活<br>
+        □ 磨制石器 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; □ 人工取火 &nbsp;&nbsp; □ 制作陶器
+      </p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col-hw1')">显示答案</button>
+      <div class="a" id="exp-col-hw1">
+        <p><strong>答案：</strong>全部六项均应画"√"。解析：原始农业的起源和发展是一个连锁反应过程——农作物出现 → 定居生活 → 陶器制作+磨制石器 → 家畜饲养 → 人工取火，六个方面共同构成原始农耕生活的完整图景。</p>
+      </div>
+
+      <p class="q-text" style="margin-top:14px;"><strong>2.</strong> 查阅资料，选择纸张、木棍、黏土等材料，仿制本课中你感兴趣的一件文物，配上文字说明，向同学说说你所仿制文物的特征。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col-hw2')">显示答案</button>
+      <div class="a" id="exp-col-hw2">
+        <p><strong>参考示例：</strong></p>
+        <p><strong>示例一：河姆渡骨耜</strong>——用硬纸板剪成三角形耜身 + 小木棍作手柄。骨耜以水牛等动物的肩胛骨制成，上端绑扎木柄，用于翻土耕作，是适应水田环境的创造性工具。</p>
+        <p style="margin-top:6px;"><strong>示例二：半地穴式房屋模型</strong>——黏土捏塑圆形房屋主体 + 木棍搭尖顶。一部分在地下、一部分在地上，有利于黄河流域冬季保暖防寒。</p>
+        <p style="margin-top:6px;"><strong>示例三：人面鱼纹彩陶盆</strong>——白色超轻黏土捏成圆盆 + 彩色马克笔绘制图案。盆内绘人面与鱼结合图案，可能与图腾崇拜或渔猎生活有关。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="补充练习">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>✏️ 补充练习</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p class="sup-note">（教师补充练习，非教材课后活动）</p>
+      <p class="q-text"><strong>1.</strong> 列表比较河姆渡人和半坡居民在生产生活上的异同。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col-sup1')">显示答案</button>
+      <div class="a" id="exp-col-sup1">
+        <p><strong>参考答案：</strong></p>
+        <p><strong>相同点：</strong>都使用磨制石器；都从事原始农业生产；都会建造房屋，过定居生活；都饲养家畜；都会制造陶器。</p>
+        <p><strong>不同点：</strong>①地点：河姆渡在浙江余姚（长江流域），半坡在陕西西安（黄河流域）。②农作物：河姆渡种水稻，半坡种粟。③房屋：河姆渡为干栏式建筑，半坡为半地穴式圆形房屋。④特色：河姆渡使用骨耜、掌握凿井技术；半坡擅长彩陶制造。</p>
+      </div>
+      <p class="q-text" style="margin-top:14px;"><strong>2.</strong> 原始农业的产生给人类社会带来了哪些变化？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col-sup2')">显示答案</button>
+      <div class="a" id="exp-col-sup2">
+        <p><strong>参考答案：</strong>①人类开始过定居生活，形成聚落；②有了比较稳定的食物来源，人口增加；③促进了社会分工（如制陶、纺织等手工业）；④推动了社会组织的演变（从原始群到氏族）；⑤为文明的诞生奠定了物质基础。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="知识拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 知识拓展</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">仰韶文化距今约7000—5000年，因1921年首先发现于河南渑池仰韶村而得名。它的代表性器物是彩陶，彩陶上绘有各种图案。仰韶文化是中国新石器时代文化中延续时间最长、影响最为深远的一支，被誉为"黄河中游远古文化的源头"。</div>
+      <p style="margin-top:6px;"><strong>简要点拨：</strong>仰韶文化以彩陶闻名，半坡遗址出土的人面鱼纹彩陶盆是其经典代表。它上承旧石器时代，下启龙山文化，是黄河中游地区从新石器时代向文明时代演进的关键环节。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 4：课堂训练（带计分器） ========== -->
+<section id="sec4">
+  <h2 class="section-title">四、课堂训练</h2>
+
+  <div class="score-banner">
+    <div>
+      <div class="score-number"><span id="scoreVal">0</span> / 7</div>
+      <div class="score-label">已答题 · 正确率</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 -->
+  <div class="exercise" id="q1">
+    <p class="q-text"><strong>1.</strong> 我国最早种植水稻的原始居民是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 北京人</label>
+      <label onclick="optClick(this,'B','q1')">B. 半坡居民</label>
+      <label onclick="optClick(this,'C','q1')">C. 河姆渡人</label>
+      <label onclick="optClick(this,'D','q1')">D. 山顶洞人</label>
+    </div>
+    <div class="a" id="exp-q1"><strong>答案：C</strong><br><strong>解析：</strong>河姆渡人生活在长江流域（浙江余姚），距今约7000年，种植水稻。半坡居民种植粟（小米），北京人和山顶洞人以采集狩猎为生，尚未从事农业生产。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q1')">显示答案</button>
+  </div>
+
+  <div class="exercise" id="q2">
+    <p class="q-text"><strong>2.</strong> 半坡居民居住的半地穴式圆形房屋，主要适应了（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 炎热潮湿的气候</label>
+      <label onclick="optClick(this,'B','q2')">B. 寒冷干燥的气候</label>
+      <label onclick="optClick(this,'C','q2')">C. 多雨多水的环境</label>
+      <label onclick="optClick(this,'D','q2')">D. 山地丛林的条件</label>
+    </div>
+    <div class="a" id="exp-q2"><strong>答案：B</strong><br><strong>解析：</strong>半坡遗址位于黄河流域（陕西西安），气候寒冷干燥，半地穴式圆形房屋一半在地下，有利于保暖防寒。A是河姆渡干栏式建筑适应的环境。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q2')">显示答案</button>
+  </div>
+
+  <div class="exercise" id="q3">
+    <p class="q-text"><strong>3.</strong> 下列属于原始农业兴起和发展重要标志的有（  ）<br>①农作物种植 ②家畜饲养的出现 ③磨制石器的发展 ④聚落的发展</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. ①②③</label>
+      <label onclick="optClick(this,'B','q3')">B. ①③④</label>
+      <label onclick="optClick(this,'C','q3')">C. ②③④</label>
+      <label onclick="optClick(this,'D','q3')">D. ①②③④</label>
+    </div>
+    <div class="a" id="exp-q3"><strong>答案：D</strong><br><strong>解析：</strong>农作物种植、家畜饲养的出现、磨制石器的发展和聚落的发展，均是原始农业兴起和发展的四大重要标志，缺一不可。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q3')">显示答案</button>
+  </div>
+
+  <div class="exercise" id="q4">
+    <p class="q-text"><strong>4.</strong> 考古发现是研究历史的重要依据。下列考古发现能够帮助我们了解河姆渡人生活的是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 北京人头盖骨化石</label>
+      <label onclick="optClick(this,'B','q4')">B. 打制石器和灰烬层</label>
+      <label onclick="optClick(this,'C','q4')">C. 骨耜和稻谷遗存</label>
+      <label onclick="optClick(this,'D','q4')">D. 人面鱼纹彩陶盆</label>
+    </div>
+    <div class="a" id="exp-q4"><strong>答案：C</strong><br><strong>解析：</strong>A属于北京人；B属于旧石器时代的北京人遗址用火证据；C骨耜是河姆渡人的特色农具，稻谷遗存证明河姆渡人种植水稻；D属于半坡居民的特色文物。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q4')">显示答案</button>
+  </div>
+
+  <div class="exercise" id="q5">
+    <p class="q-text"><strong>5.</strong> "春种一粒粟，秋收万颗子。"诗句中的"粟"最早由哪一原始居民种植（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 河姆渡人</label>
+      <label onclick="optClick(this,'B','q5')">B. 半坡居民</label>
+      <label onclick="optClick(this,'C','q5')">C. 北京人</label>
+      <label onclick="optClick(this,'D','q5')">D. 良渚居民</label>
+    </div>
+    <div class="a" id="exp-q5"><strong>答案：B</strong><br><strong>解析：</strong>"粟"即小米，最早由半坡居民种植。河姆渡人种植水稻，北京人以采集狩猎为生，良渚居民时代较晚。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q5')">显示答案</button>
+  </div>
+
+  <!-- 材料解析题一 -->
+  <div class="exercise" id="mq1">
+    <p class="q-text"><strong>题一</strong></p>
+    <div class="source-material">材料：在河姆渡遗址中，考古工作者发现了大量堆积的稻谷、稻秆和稻叶，厚度达20~50厘米，有些地方超过1米。此外，还发现了骨耜等农具。</div>
+    <div class="source-ref">——根据教材整理</div>
+    <p class="q-text"><strong>(1)</strong> 材料中的考古发现说明了什么？河姆渡人生活在哪一流域？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1a'); trackMatQ('mq1a')">显示答案</button>
+    <div class="a" id="exp-m1a"><strong>答案：</strong>说明河姆渡人已经掌握了水稻种植技术，稻作农业达到了一定规模。河姆渡人生活在长江流域（浙江余姚）。</div>
+    <p class="q-text" style="margin-top:12px;"><strong>(2)</strong> 结合所学知识，说明原始农业的产生给人类社会带来了哪些重要变化。</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1b'); trackMatQ('mq1b')">显示答案</button>
+    <div class="a" id="exp-m1b"><strong>答案：</strong>①人类开始过定居生活，形成聚落；②有了稳定的食物来源；③促进了社会分工和文明进步；④标志人类从"攫取经济"过渡到"生产经济"，是人类经济史上的一次重大革命。</div>
+  </div>
+
+  <!-- 材料解析题二 -->
+  <div class="exercise" id="mq2">
+    <p class="q-text"><strong>题二</strong></p>
+    <div class="source-material">材料一：河姆渡人的干栏式建筑，以桩木为基础，上面架设楼板，房顶覆盖茅草，通风防潮。<br>材料二：半坡居民居住在半地穴式圆形房屋中，屋内有灶坑，一半在地下，一半在地上，保暖防寒。</div>
+    <div class="source-ref">——根据教材整理</div>
+    <p class="q-text"><strong>(1)</strong> 分析河姆渡人和半坡居民的房屋样式为什么不同？说明了什么？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2a'); trackMatQ('mq2a')">显示答案</button>
+    <div class="a" id="exp-m2a"><strong>答案：</strong>房屋样式不同是因为两地自然地理环境不同：河姆渡地处长江流域（南方），气候炎热潮湿，干栏式建筑通风防潮；半坡地处黄河流域（北方），气候寒冷干燥，半地穴式房屋保暖防寒。这说明自然环境对人类生产生活方式有深刻影响，远古先民懂得因地制宜。</div>
+    <p class="q-text" style="margin-top:12px;"><strong>(2)</strong> 两处遗址的发现对研究中华文明的起源有什么意义？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2b'); trackMatQ('mq2b')">显示答案</button>
+    <div class="a" id="exp-m2b"><strong>答案：</strong>①两处遗址分别代表了长江流域和黄河流域的原始农耕文明，证明中国南北都是人类早期文明的重要发源地。②说明中华文明的起源是"多元一体"的，不同地区各有特色，又相互影响、共同发展。③体现了中华先民在漫长的生产实践中创造灿烂文明的伟大能力，增强了我们的民族自豪感。</div>
+  </div>
+</section>
+
+<!-- ========== Section 5：知识结构图 ========== -->
+<section id="sec5">
+  <h2 class="section-title">五、结构图</h2>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <p style="text-align:center;font-size:12px;color:#999;margin-bottom:16px;">💡 点击节点查看详情</p>
+    <div class="kg-chain">
+      <div class="kg-node left c1" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🌡️</span>
+        <strong>原始农业的兴起（约1万年前）</strong>
+        <p>气候变暖 + 工具进步 → 进入新石器时代</p>
+        <p>标志：种植/饲养/聚落/磨制石器</p>
+        <div class="kg-detail">全球冰期结束，气候转暖；数百万年打制石器经验积累；人类对动植物生长规律的认识提升。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🌾</span>
+        <strong>南北方原始农耕的繁荣</strong>
+        <p>河姆渡（长江·水稻·干栏式）</p>
+        <p>半坡（黄河·粟·半地穴式）</p>
+        <div class="kg-detail">南方：温暖多雨→干栏式建筑+水稻；北方：寒冷干燥→半地穴式房屋+粟。"一方水土养一方人"。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🏙️</span>
+        <strong>定居生活与文明萌芽</strong>
+        <p>聚落形成 · 社会分工 · 手工业发展</p>
+        <p>为中华文明起源奠定物质基础</p>
+        <div class="kg-detail">农业剩余→人口增长→社会分工（制陶/纺织/建筑）→贫富分化→阶级萌芽→早期国家→中华文明诞生。</div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 经济：攫取经济→生产经济，农耕+畜牧</div>
+      <div class="kg-rule r2">🟠 技术：打制石器→磨制石器，骨耜+彩陶</div>
+      <div class="kg-rule r3">🟢 生活：迁徙游动→定居聚落，南稻北粟</div>
+      <div class="kg-rule r4">🔴 启示：因地制宜，劳动创造文明</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 页脚 ========== -->
+<footer>
+  <p>统编版初中历史 · 七年级上册 · 第一单元</p>
+  <p>基于教材内容整理 · 仅供教学参考使用</p>
+</footer>
+
+<!-- ========== 底部导航 ========== -->
+  <div class="bottom-nav">
+  <div><a href="七上-U1-第1课_远古时期的人类活动.html">← 上一课：第1课 远古时期的人类活动</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第2课</div>
+  <div><a href="七上-U1-第3课_中华文明的起源.html">下一课：第3课 中华文明的起源 →</a></div>
+  </div>
+
+<!-- ========== 返回顶部 ========== -->
+<button id="backTop" onclick="scrollToTop()" title="返回顶部">↑</button>
+
+<script>
+// ===== 浮动进度条 =====
+window.addEventListener('scroll', function() {
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var progress = scrollHeight > 0 ? Math.min((scrollTop / scrollHeight) * 100, 100) : 0;
+  document.querySelector('#readingProgress .bar').style.width = progress + '%';
+});
+
+// ===== Navbar 已读标记 =====
+(function() {
+  var sections = ['sec1','sec2','sec3','sec4','sec5'];
+  var links = document.querySelectorAll('#mainNav a');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = sections.indexOf(entry.target.id);
+        if (idx >= 0 && links[idx]) links[idx].classList.add('visited');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+})();
+
+// ===== 答案显隐切换 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题答案对照 =====
+var correctAnswers = { q1: 'C', q2: 'B', q3: 'D', q4: 'C', q5: 'B' };
+var mcDone = {};   // 记录已作答的选择题
+var matDone = {};  // 记录已查看的材料题
+var score = 0;
+
+function updateScore() {
+  document.getElementById('scoreVal').textContent = score;
+}
+
+// 选择题点击交互
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return; // 已作答不再计分
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) {
+      o.classList.add('correct');
+    } else if (o === el) {
+      o.classList.add('wrong');
+    }
+  });
+  document.getElementById('exp-' + qid).classList.add('show');
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+// 材料题查看计分
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+  score++;
+  updateScore();
+}
+
+// 重置测验
+function resetQuiz() {
+  mcDone = {};
+  matDone = {};
+  score = 0;
+  updateScore();
+  var exercises = document.querySelectorAll('.exercise');
+  exercises.forEach(function(ex) {
+    var labels = ex.querySelectorAll('label');
+    labels.forEach(function(l) {
+      l.classList.remove('disabled', 'correct', 'wrong');
+    });
+    var answers = ex.querySelectorAll('.a');
+    answers.forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== sec1 标签页切换 =====
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== sec2 手风琴组 =====
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+
+// ===== sec2 掌握标记 =====
+function markMastered(grpId, btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+  var grp = document.getElementById(grpId);
+  if (grp) {
+    grp.querySelector('.acc-group-hd').style.opacity = '0.7';
+  }
+}
+
+// ===== sec3 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) {
+      box.classList.remove('filtered-out');
+    } else {
+      box.classList.add('filtered-out');
+    }
+  });
+}
+
+// ===== sec3 col-box 折叠 =====
+function toggleColBox(header) {
+  var box = header.parentElement;
+  box.classList.toggle('open');
+}
+
+// ===== sec5 节点点击展开详情 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+}
+
+// ===== 平滑返回顶部 =====
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 返回顶部按钮滚动监听
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('backTop');
+  if (window.pageYOffset > 300) btn.style.display = 'block';
+  else btn.style.display = 'none';
+});
+
+// ===== deep-card 折叠交互（IIFE） =====
+(function() {
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card) {
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.addEventListener('click', function() {
+        bd.classList.toggle('show');
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

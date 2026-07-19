@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第7课 百家争鸣 — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide {
+  display: none;
+  min-height: calc(100vh - 80px);
+  padding-top: 10px;
+  animation: slideIn 0.35s ease;
+}
+.page-slide.active { display: block; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-header {
+  text-align: center;
+  padding: 14px 0 10px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+.slide-header .module-num {
+  font-size: 12pt;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.slide-header .module-title {
+  font-size: 18pt;
+  color: var(--primary-dark);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* ========== 结束页：核心要点回顾 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title {
+  text-align: center; font-size: 17pt; font-weight: 700;
+  color: var(--primary-dark); margin-bottom: 16px;
+}
+.recap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.recap-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 16px 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 3px 12px rgba(124,108,240,0.08);
+  position: relative;
+  text-align: left;
+}
+.recap-card-num {
+  position: absolute; top: -12px; left: 16px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14pt; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.recap-card h3 {
+  font-size: 14pt; font-weight: 700;
+  color: var(--primary-dark);
+  margin: 4px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary-light);
+}
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li {
+  font-size: 12.5pt; line-height: 1.7;
+  padding: 4px 0 4px 18px;
+  position: relative;
+  color: #444;
+}
+.recap-card ul li::before {
+  content: '▸'; position: absolute; left: 0; top: 4px;
+  color: var(--primary); font-size: 10pt;
+}
+.recap-card ul li strong { color: var(--primary-dark); }
+
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: #fff;
+  box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 8px 16px;
+  height: 52px;
+}
+.pg-nav button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 6px 16px;
+  font-size: 13pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #dcd4f5;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter {
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding: 36px 20px 30px;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 0 36px 36px;
+  box-shadow: 0 6px 30px rgba(61,43,140,0.20);
+  margin: 0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.learn-target h3 {
+  color: var(--primary-dark);
+  font-size: 16pt;
+  margin-bottom: 12px;
+}
+.learn-target .target-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.learn-target .target-item {
+  font-size: 13.5pt;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+/* ========== 标签页切换 ========== */
+.tab-bar {
+  display: flex; gap: 0;
+  margin-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.tab-btn {
+  flex: 1; padding: 14px 8px;
+  font-size: 14pt; font-weight: 700;
+  border: none; cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  background: #e8e0ff; color: #5a4ac7;
+  letter-spacing: 1px;
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+}
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== 时间轴横条 ========== */
+.timeline-bar {
+  background: #f0edff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12pt;
+  color: #5a4ac7;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; }
+.kp-card li { margin: 6px 0; font-size: 14pt; }
+
+/* ========== 贯通框 ========== */
+.link-bar {
+  border: 2px dashed #d5cef0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 14px;
+  background: #faf8ff;
+  font-size: 13pt;
+  color: #5a4ac7;
+}
+
+/* ========== 标签 ========== */
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao {
+  background: #f39c12; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-value {
+  background: #e74c3c; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-soc {
+  background: #3498db; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+
+/* ========== 手风琴组 ========== */
+.acc-group {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.acc-group-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s;
+}
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 22px;
+  background: #faf8ff;
+  border-top: 1px solid #eee;
+}
+.acc-mastered button {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 6px 16px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== 折叠三级卡片 ========== */
+.deep-card {
+  margin: 10px 18px 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.deep-card-hd {
+  background: linear-gradient(135deg, #e67e22, #f0ad4e);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 13.5pt;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+/* ========== 对比表格 ========== */
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 13pt;
+}
+.diff-table th {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+}
+.diff-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== 栏目容器 ========== */
+.col-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.06);
+  transition: all 0.3s;
+}
+.col-box.filtered-out { display: none; }
+.col-header {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 15pt;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+.col-body .a p { font-size: 12pt; }
+
+/* ========== 筛选按钮条 ========== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.filter-chip {
+  padding: 6px 14px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+  color: #5a4ac7;
+}
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ========== 引文材料 ========== */
+.source-material {
+  border-left: 4px solid var(--primary);
+  padding: 8px 14px;
+  margin: 8px 0;
+  background: #faf8ff;
+  font-size: 13pt;
+}
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ========== 题目区域 ========== */
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.exercise {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+.options label {
+  display: block;
+  padding: 8px 14px;
+  margin: 4px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14pt;
+  transition: all 0.2s;
+  background: #faf8ff;
+}
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== 答题计分器 ========== */
+.score-banner {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-label { font-size: 12pt; color: #888; }
+.score-reset {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+/* ========== 答案区 ========== */
+.a { display: none; }
+.a.show { display: block; }
+.a {
+  background: #f0edff;
+  border: 1px solid #d5cef0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 10px 0;
+  font-size: 14pt;
+}
+
+/* ========== 答案按钮 ========== */
+.ans-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 12pt;
+  cursor: pointer;
+  margin: 6px 0;
+  transition: all 0.2s;
+}
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(124,108,240,0.08);
+}
+.kg-title {
+  text-align: center;
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node {
+  width: 90%;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.kg-node.left { align-self: flex-start; }
+.kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+.kg-detail { display: none; font-size: 11pt; color: #666; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded .kg-detail { display: block; }
+.kg-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.kg-rule {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5pt;
+  text-align: center;
+  font-weight: 600;
+}
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== 页脚 ========== */
+footer {
+  text-align: center;
+  padding: 20px 0 10px;
+  border-top: 2px solid var(--border);
+  margin-top: 24px;
+  font-size: 12px;
+  color: #999;
+}
+footer p { margin: 4px 0; }
+
+/* ========== 底部导航（结束页内） ========== */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(124,108,240,0.08);
+  font-size: 12pt;
+}
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+/* ========== 封面页"开始学习"按钮 ========== */
+.start-btn {
+  display: block;
+  margin: 20px auto 10px;
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 36px;
+  font-size: 16pt;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+</style>
+</head>
+<body>
+
+<!-- ============================ 第 0 页：封面 ============================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第二单元 · 夏商周时期：奴隶制王朝的更替和向封建社会的过渡</div>
+    <h1>第7课 · 百家争鸣</h1>
+    <div class="hero-sub">统编版初中历史  七年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（核心素养导向）</h3>
+    <div class="target-grid">
+      <div class="target-item" data-target="1">🕐 <strong>时空观念：</strong>知道老子、孔子生活在春秋后期，孟子、荀子、墨子、庄子、韩非等生活在战国时期，理解"百家争鸣"出现的历史背景与时代特征。</div>
+      <div class="target-item" data-target="2">📜 <strong>史料实证：</strong>通过《论语》《道德经》《战国策》等文献材料，分析孔子"为政以德"、老子"无为而治"及诸子百家的核心主张。</div>
+      <div class="target-item" data-target="3">🔍 <strong>历史解释：</strong>分析百家争鸣局面形成的背景，理解各学派主张与时代变革的关系，阐释百家争鸣对中华文化的深远影响。</div>
+      <div class="target-item" data-target="4">❤️ <strong>家国情怀：</strong>感受先秦诸子的智慧与担当，体会"富贵不能淫，贫贱不能移，威武不能屈"的大丈夫精神，增强文化自信和价值观认同。</div>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================ 第 1 页：知识要点 ============================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点</div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab1')">🌿 老子和《道德经》</button>
+    <button class="tab-btn" onclick="switchTab('tab2')">📖 孔子和儒家学说</button>
+    <button class="tab-btn" onclick="switchTab('tab3')">🏛️ 百家争鸣</button>
+  </div>
+
+  <!-- Tab 1: 老子和《道德经》 -->
+  <div class="kp-card tab-panel active" id="tab1" style="border-radius:10px;">
+    <div class="timeline-bar">春秋后期 · 楚国人 · 周朝史官 · 道家学派创始人 · 《道德经》</div>
+    <h3>（一）老子和《道德经》</h3>
+    <ul>
+      <li>老子姓李，名耳，字聃，<span class="kwd">春秋后期</span>楚国人。</li>
+      <li>做过周朝的<span class="kwd">史官</span>，掌管王室的典籍，学识渊博。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 老子思想的核心是<span class="kwd">"道"</span>：认为"道"是孕育万物的总根源，也是万事万物运行的总规律，人们要顺应事物内在规律来行事。</li>
+      <li>善于从<span class="kwd">正反两方面</span>思考问题，认为一切事物都有对立面（难和易、长和短、前和后等），对立的双方能够<span class="kwd">互相转化</span>。</li>
+      <li>处世上提倡安于柔弱的地位，主张<span class="kwd">以退为进，以柔克刚</span>。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 政治上主张<span class="kwd">"无为而治"</span>，追求"小国寡民"的理想社会。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 老子是<span class="kwd">道家学派创始人</span>，学说集中在《老子》（又称<span class="kwd">《道德经》</span>）一书中。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>老子做周朝史官→掌管典籍→学识渊博→核心思想"道"→万物有对立面且能互相转化→处世以柔克刚→政治"无为而治"→道家学派创始人→《道德经》传世。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查"老子思想核心"（"道"）、"政治主张"（无为而治）、"学派归属"（道家创始人）。注意区分老子的"无为而治"与孔子的"为政以德"。</p>
+    </div>
+  </div>
+
+  <!-- Tab 2: 孔子和儒家学说 -->
+  <div class="kp-card tab-panel" id="tab2" style="border-radius:10px;">
+    <div class="timeline-bar">春秋后期 · 鲁国人 · 思想核心"仁" · 为政以德 · 有教无类 · 儒家创始人 · 《论语》</div>
+    <h3>（二）孔子和儒家学说</h3>
+    <ul>
+      <li>孔子名丘，字仲尼，<span class="kwd">春秋后期</span>鲁国人，出身下层没落贵族。</li>
+      <li>从小学习礼乐，年轻时做过小吏，后收徒办学。</li>
+      <li>中年曾在鲁国从政，不久周游列国宣扬政治主张，晚年回家乡从事教育、整理编订文化典籍。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 孔子思想的核心是<span class="kwd">"仁"</span>：仁者爱人，要有爱心和同情心；主张"己所不欲，勿施于人""己欲立而立人，己欲达而达人"。</li>
+      <li>将"仁"作为处理人与人关系的<span class="kwd">最高行为准则和道德规范</span>。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 政治上主张恢复西周的<span class="kwd">礼乐文明</span>，重建社会政治秩序；反对苛政，提出<span class="kwd">"为政以德"</span>，要求统治者爱惜民力、体察民意。</li>
+      <li>只有实行<span class="kwd">德政</span>才能使民众心悦诚服。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">教育家孔子：</p>
+    <ul>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 兴办<span class="kwd">私学</span>，打破贵族垄断教育，主张<span class="kwd">有教无类</span>。</li>
+      <li>注重道德教育和文化知识教育，总结<span class="kwd">因材施教、举一反三</span>等教学原则和方法。</li>
+      <li>先后培养了<span class="kwd">三千弟子</span>。</li>
+      <li>晚年整理修订古代重要典籍，对传承我国古代文化经典和学术思想作出巨大贡献。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 孔子是<span class="kwd">儒家学派创始人</span>，其思想由弟子整理成<span class="kwd">《论语》</span>一书。</li>
+      <li>儒家学说后来成为我国封建社会的<span class="kwd">统治思想</span>。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>孔子出身没落贵族→学习礼乐→收徒办学（有教无类）→从政周游列国→思想核心"仁"→政治"为政以德"→恢复礼乐文明→晚年整理典籍→儒家创始人→《论语》传世→后世成为封建社会统治思想。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查"孔子思想核心"（"仁"）、"政治主张"（为政以德）、"教育贡献"（有教无类、因材施教）、"学派归属"（儒家创始人）。注意区分孔子"为政以德"与老子"无为而治"。</p>
+    </div>
+  </div>
+
+  <!-- Tab 3: 百家争鸣 -->
+  <div class="kp-card tab-panel" id="tab3" style="border-radius:10px;">
+    <div class="timeline-bar">战国时期 · 旧制度瓦解 · 私学勃兴 · 儒墨道法兵 · 百家争鸣 · 思想文化高峰</div>
+    <h3>（三）百家争鸣</h3>
+    <ul>
+      <li>战国时期，旧的社会制度进一步瓦解，新的社会制度逐步确立。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> "学在官府"格局被打破，<span class="kwd">私学勃兴</span>，诸子百家纷纷涌现，学术思想领域非常活跃。</li>
+      <li>其中<span class="kwd">儒家、墨家、道家、法家</span>等学派的影响最大。</li>
+    </ul>
+    <table class="diff-table">
+      <tr><th>学派</th><th>代表人物</th><th>核心主张</th></tr>
+      <tr><td><strong>儒家</strong></td><td>孟子</td><td>实行"仁政"；"民为贵，社稷次之，君为轻"；"仁者无敌"</td></tr>
+      <tr><td></td><td>荀子</td><td>主张礼治，提倡礼法并用，明确尊卑等级</td></tr>
+      <tr><td><strong>墨家</strong></td><td>墨子</td><td>"兼爱""非攻"；选贤能治国；批判贵族奢侈，提倡节俭</td></tr>
+      <tr><td><strong>道家</strong></td><td>庄子</td><td>顺应自然和民心；追求精神自由，保持人格独立</td></tr>
+      <tr><td><strong>法家</strong></td><td>韩非</td><td>以法治国；树立君主权威；建立中央集权专制统治</td></tr>
+      <tr><td><strong>兵家</strong></td><td>孙武</td><td>著有《孙子兵法》，奠定古代军事理论基础</td></tr>
+    </table>
+    <ul>
+      <li><strong>孟子</strong>：主张实行<span class="kwd">"仁政"</span>，要求统治者不要过分盘剥民众；提出<span class="kwd">"民为贵，社稷次之，君为轻"</span>（民贵君轻）的思想；认为得民心才能得天下；拥护正义之战，强调"仁者无敌"。</li>
+      <li><strong>荀子</strong>：主张实行<span class="kwd">礼治</span>，提倡<span class="kwd">礼法并用</span>，明确尊卑等级，以维系社会秩序。</li>
+      <li><strong>墨子</strong>：墨家创始人，主张<span class="kwd">"兼爱""非攻"</span>，要求人们互爱互利，反对各国相互攻伐兼并、残害生命；提出要选贤能的人治理国家，主张统一思想；批判贵族的奢侈生活，提倡节俭。</li>
+      <li><strong>庄子</strong>：战国时期道家代表，强调要顺应自然和民心，认为人生应追求精神自由，保持人格独立。</li>
+      <li><strong>韩非</strong>：法家集大成者，反对空谈仁义，强调<span class="kwd">以法治国</span>，树立君主的权威，建立<span class="kwd">中央集权专制统治</span>。</li>
+      <li><strong>孙武</strong>：兵家创始人，春秋末期人，著有<span class="kwd">《孙子兵法》</span>，奠定了我国古代军事理论的基础。战国时期吴起、孙膑等撰有兵法著作。</li>
+    </ul>
+    <p style="font-weight:700;margin:14px 0 6px;color:var(--primary-dark);">百家争鸣的意义</p>
+    <ul>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 促进了思想文化的繁荣，成为我国古代<span class="kwd">第一次思想文化发展的高峰</span>。</li>
+      <li>为古代思想文化的发展<span class="kwd">奠定了基础</span>。</li>
+      <li>对后世产生了十分重要而<span class="kwd">深远的影响</span>。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>战国时期旧制度瓦解+新制度确立→"学在官府"被打破→私学勃兴→诸子百家涌现→各学派阐明政治主张→互相争鸣辩论→促进思想文化繁荣→古代第一次思想文化发展高峰→为后世思想文化奠定基础。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查"各学派代表人物与主张的匹配"（孟子-仁政/民贵君轻、墨子-兼爱非攻、庄子-顺应自然、韩非-以法治国）、"百家争鸣的意义"（第一次思想文化高峰）。注意区分各学派核心主张。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 2 页：重难点解析 ============================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重点一：孔子的思想主张及其教育贡献 -->
+  <div class="acc-group" id="accGrp1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('accGrp1')">
+      <h3>🔵 重点一：孔子 — 思想主张与教育贡献</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】孔子的思想核心"仁"与政治主张</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>思想核心——"仁"：</strong></p>
+          <p>①<strong>"仁者爱人"</strong>——要有爱心和同情心，这是"仁"的基本含义。</p>
+          <p>②<strong>"己所不欲，勿施于人"</strong>——自己不愿承受的事，不要强加给别人。</p>
+          <p>③<strong>"己欲立而立人，己欲达而达人"</strong>——自己想要站得住，也要帮助别人站得住；自己想要通达，也要帮助别人通达。</p>
+          <p>④将"仁"作为处理人与人关系的<strong>最高行为准则和道德规范</strong>。</p>
+          <p><strong>政治主张：</strong></p>
+          <p>①主张恢复西周的<strong>礼乐文明</strong>，重建社会政治秩序。</p>
+          <p>②反对苛政，提出<strong>"为政以德"</strong>——要求统治者爱惜民力、体察民意。</p>
+          <p>③只有实行<strong>德政</strong>才能使民众心悦诚服。</p>
+          <table class="diff-table">
+            <tr><th>比较项</th><th>孔子</th><th>老子</th></tr>
+            <tr><td>思想核心</td><td>"仁"</td><td>"道"</td></tr>
+            <tr><td>政治主张</td><td>为政以德</td><td>无为而治</td></tr>
+            <tr><td>对秩序的态度</td><td>恢复礼乐文明</td><td>追求"小国寡民"</td></tr>
+            <tr><td>学派归属</td><td>儒家创始人</td><td>道家创始人</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】孔子的教育贡献与文化传承</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span> 孔子不仅是思想家，更是伟大的<strong>教育家</strong>和<strong>文化传承者</strong>：</p>
+          <p>①<strong>兴办私学：</strong>打破贵族垄断教育的局面，使平民也有机会接受教育。</p>
+          <p>②<strong>有教无类：</strong>不分贵贱贫富，人人都有受教育的权利——这是教育公平思想的先驱。</p>
+          <p>③<strong>因材施教：</strong>根据每个学生的特点采取不同的教学方法。</p>
+          <p>④<strong>举一反三：</strong>启发式教学，引导学生触类旁通、独立思考。</p>
+          <p>⑤<strong>培养了三千弟子</strong>——其中贤者七十二人，遍布各国，传播了孔子的思想。</p>
+          <p>⑥<strong>整理文化典籍：</strong>晚年整理修订古代重要典籍，对传承我国古代文化经典和学术思想作出巨大贡献。</p>
+          <p><strong>儒家学说的历史地位：</strong>孔子是儒家学派创始人，其思想由弟子整理成《论语》一书。儒家学说后来成为我国封建社会的统治思想，影响中国两千余年。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】孔子思想的现实意义</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 孔子的思想至今仍有深远的现实意义：</p>
+          <p>①<strong>"仁者爱人"——和谐人际关系：</strong>在现代社会，"仁"的精神体现为关爱他人、尊重他人，是构建和谐社会的道德基础。</p>
+          <p>②<strong>"己所不欲，勿施于人"——换位思考：</strong>这一原则被世界誉为"黄金法则"，是处理人际关系和国际关系的基本准则。</p>
+          <p>③<strong>"为政以德"——德治理念：</strong>统治者应以德服人、体察民意，这对现代治理仍有启示——权力应受到道德约束，以民为本。</p>
+          <p>④<strong>"有教无类"——教育公平：</strong>人人享有受教育的权利，是现代教育制度的基本理念。</p>
+          <p>⑤<strong>"因材施教"——个性化教育：</strong>尊重学生个体差异，是现代教育的重要原则。</p>
+          <p>孔子的思想跨越两千多年，至今仍在影响中国人的价值观和行为准则，是中华文明的重要组成部分。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）孔子主张"为政以德"，其含义是（  ）A. 以法治国，严刑峻法  B. 统治者应爱惜民力，体察民意，实行德政  C. 无为而治，顺其自然  D. 兼爱非攻，互爱互利</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc1-zk')">显示答案</button>
+          <div class="a" id="acc1-zk"><strong>答案：B。</strong>解析：孔子提出"为政以德"，要求统治者爱惜民力、体察民意，只有实行德政才能使民众心悦诚服。A是法家韩非的主张；C是道家老子的主张；D是墨家墨子的主张。关键区分各学派的政治主张——孔子儒家=为政以德，老子道家=无为而治，韩非法家=以法治国，墨子墨家=兼爱非攻。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp1', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重点二：老子的思想主张 -->
+  <div class="acc-group" id="accGrp2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('accGrp2')">
+      <h3>🟠 重点二：老子 — "道"与无为而治</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】老子思想的核心——"道"</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>老子其人：</strong>姓李，名耳，字聃，春秋后期楚国人，做过周朝史官，掌管王室典籍，学识渊博。道家学派创始人，学说集中在《道德经》中。</p>
+          <p><strong>思想核心——"道"：</strong></p>
+          <p>①"道"是<strong>孕育万物的总根源</strong>——天地万物皆由"道"而生。</p>
+          <p>②"道"是<strong>万事万物运行的总规律</strong>——人们要顺应事物内在规律来行事。</p>
+          <p>③"道"体现了老子对宇宙本源的哲学思考，是中国古代哲学的重要概念。</p>
+          <p><strong>朴素的辩证法思想：</strong></p>
+          <p>①善于从<strong>正反两方面</strong>思考问题。</p>
+          <p>②认为一切事物都有<strong>对立面</strong>——难和易、长和短、前和后等。</p>
+          <p>③对立的双方能够<strong>互相转化</strong>——这是老子辩证法的核心，祸福相依、物极必反。</p>
+          <p>④处世上提倡安于柔弱的地位，主张<strong>以退为进，以柔克刚</strong>。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】"无为而治"与"小国寡民"</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span> <strong>政治主张——"无为而治"：</strong></p>
+          <p>①"无为"并非什么都不做，而是<strong>不妄为、不强为</strong>，顺应自然规律和社会规律来治理。</p>
+          <p>②反对过多干预民众生活，反对繁苛政令，让民众自然发展。</p>
+          <p>③追求<strong>"小国寡民"</strong>的理想社会——国家小、人口少，人们安居乐业，不相往来，回归淳朴自然的生活。</p>
+          <table class="diff-table">
+            <tr><th>比较项</th><th>老子"无为而治"</th><th>孔子"为政以德"</th></tr>
+            <tr><td>核心理念</td><td>顺应自然，不妄为</td><td>以德服人，爱惜民力</td></tr>
+            <tr><td>对礼乐态度</td><td>不强调礼乐</td><td>恢复西周礼乐文明</td></tr>
+            <tr><td>理想社会</td><td>小国寡民</td><td>有序的礼乐社会</td></tr>
+            <tr><td>哲学基础</td><td>"道"与辩证法</td><td>"仁"</td></tr>
+          </table>
+          <p><strong>老子的辩证法对后世的影响：</strong>"祸兮，福之所倚；福兮，祸之所伏"——对立面互相转化的思想深刻影响了中国人的思维方式，成为中华民族智慧的重要组成部分。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】老子思想的哲学价值</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 老子是中国古代伟大的哲学家，其思想的深远价值体现在：</p>
+          <p>①<strong>宇宙观：</strong>"道"作为万物本源的思想，开创了中国哲学对宇宙本源的探讨，影响深远。</p>
+          <p>②<strong>辩证思维：</strong>对立面互相转化的思想，是中国古代辩证法的精华，至今仍有方法论意义——看问题要全面，事物发展到极点就会向反面转化。</p>
+          <p>③<strong>"以柔克刚"的智慧：</strong>在处世哲学上，老子主张柔弱胜刚强，这种智慧在人际交往、国家治理中都有借鉴价值。</p>
+          <p>④<strong>"无为而治"的治理智慧：</strong>不过度干预、尊重规律的理念，对现代社会治理仍有启示——政府应减少不必要的干预，让市场和社会自然发展。</p>
+          <p>老子和孔子共同构成了中国传统文化的重要源头——道家和儒家思想交相辉映，塑造了中华民族的精神品格。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）老子认为"一切事物都有对立面，对立的双方能够互相转化"。下列说法最能体现这一思想的是（  ）A. 为政以德  B. 祸兮福之所倚  C. 兼爱非攻  D. 民贵君轻</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc2-zk')">显示答案</button>
+          <div class="a" id="acc2-zk"><strong>答案：B。</strong>解析："祸兮福之所倚"意为灾祸中倚靠着福气——祸福互相转化，最能体现老子对立面互相转化的辩证法思想。A"为政以德"是孔子的政治主张；C"兼爱非攻"是墨子的主张；D"民贵君轻"是孟子的主张。关键抓住"对立面互相转化"这一核心——祸与福正是对立面，且能互相转化。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp2', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 难点：百家争鸣的形成背景及影响 -->
+  <div class="acc-group" id="accGrp3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('accGrp3')">
+      <h3>🟣 难点：百家争鸣 — 形成背景、各派主张与深远影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】百家争鸣的形成背景</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>百家争鸣出现的历史背景：</strong></p>
+          <table class="diff-table">
+            <tr><th>背景维度</th><th>具体表现</th></tr>
+            <tr><td><strong>政治</strong></td><td>旧的社会制度进一步瓦解，新的社会制度逐步确立；诸侯兼并战争激烈，各国统治者招揽人才</td></tr>
+            <tr><td><strong>经济</strong></td><td>铁器和牛耕推广，生产力提高，社会经济繁荣，为学术活动提供物质基础</td></tr>
+            <tr><td><strong>教育</strong></td><td>"学在官府"格局被打破，私学勃兴，士人阶层崛起，学术思想领域非常活跃</td></tr>
+            <tr><td><strong>社会</strong></td><td>新旧制度交替，社会剧烈变革，不同阶层提出各自的政治主张和解决方案</td></tr>
+          </table>
+          <p><strong>各学派的主张都是对时代问题的回应：</strong></p>
+          <p>①<strong>儒家</strong>（孟子、荀子）——主张以德治国、礼治，恢复社会秩序。</p>
+          <p>②<strong>墨家</strong>（墨子）——代表平民利益，反对战争，主张兼爱互利。</p>
+          <p>③<strong>道家</strong>（庄子）——面对乱世，追求精神自由，顺应自然。</p>
+          <p>④<strong>法家</strong>（韩非）——主张以法治国、中央集权，适应了统一的历史趋势。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】各学派主张比较与现实意义</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span> <strong>诸子百家核心主张对比：</strong></p>
+          <table class="diff-table">
+            <tr><th>学派</th><th>代表</th><th>核心主张</th><th>代表利益</th><th>治国理念</th></tr>
+            <tr><td>儒家</td><td>孟子</td><td>仁政、民贵君轻</td><td>统治阶层</td><td>德治</td></tr>
+            <tr><td>儒家</td><td>荀子</td><td>礼治、礼法并用</td><td>统治阶层</td><td>礼法并重</td></tr>
+            <tr><td>墨家</td><td>墨子</td><td>兼爱、非攻、节俭</td><td>平民阶层</td><td>选贤任能</td></tr>
+            <tr><td>道家</td><td>庄子</td><td>顺应自然、精神自由</td><td>隐士阶层</td><td>无为</td></tr>
+            <tr><td>法家</td><td>韩非</td><td>以法治国、中央集权</td><td>君主</td><td>法治</td></tr>
+            <tr><td>兵家</td><td>孙武</td><td>《孙子兵法》</td><td>军事</td><td>—</td></tr>
+          </table>
+          <p><strong>各学派主张的现实意义：</strong></p>
+          <p>①<strong>儒家的"仁政""民贵君轻"</strong>——以民为本的治理理念，是现代民主思想的历史渊源。</p>
+          <p>②<strong>墨家的"兼爱""非攻"</strong>——和平、博爱精神，与构建和谐世界的理念相通。</p>
+          <p>③<strong>道家的"顺应自然"</strong>——人与自然和谐相处，是生态文明建设的智慧源泉。</p>
+          <p>④<strong>法家的"以法治国"</strong>——法治精神，是现代依法治国理念的历史借鉴。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】百家争鸣的深远影响与文化自信</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> <strong>百家争鸣的历史意义：</strong></p>
+          <p>①<strong>促进了思想文化的繁荣</strong>——各学派互相辩论、互相启发，形成了思想碰撞的盛况。</p>
+          <p>②<strong>古代第一次思想文化发展的高峰</strong>——中国思想史上前所未有的繁荣局面。</p>
+          <p>③<strong>为古代思想文化的发展奠定了基础</strong>——儒家、道家、法家等思想在此后两千多年中持续影响中国社会。</p>
+          <p>④<strong>对后世产生了十分重要而深远的影响</strong>——儒家成为封建社会统治思想，法家思想指导了秦的统一，道家思想影响了中国人的精神世界。</p>
+          <p><strong>稷下学宫——百家争鸣的缩影：</strong>齐国在都城临淄稷门附近设置稷下学宫，聚集道家、儒家、法家等学派学者成百上千人，在此讲学、辩论、著书。荀子曾在此游学，成为学术领袖。稷下学宫对促进战国学术繁荣起了重要作用。</p>
+          <p><strong>文化自信：</strong>百家争鸣是中华文明的"轴心时代"——在同一历史时期，古希腊、古印度也出现了思想繁荣（如苏格拉底、柏拉图、释迦牟尼）。中国先秦诸子的智慧与世界上其他文明交相辉映，共同构成了人类文明的伟大精神财富。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）战国时期，诸子百家中主张"兼爱""非攻"的学派是（  ）A. 儒家  B. 墨家  C. 道家  D. 法家</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc3-zk')">显示答案</button>
+          <div class="a" id="acc3-zk"><strong>答案：B。</strong>解析：墨家创始人墨子主张"兼爱""非攻"，要求人们互爱互利，反对各国相互攻伐兼并、残害生命。A儒家主张"仁政""民贵君轻"（孟子）或"礼治"（荀子）；C道家主张顺应自然、精神自由（庄子）；D法家主张以法治国、中央集权（韩非）。关键区分各学派核心主张——"兼爱""非攻"是墨家的标志性主张。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp3', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 3 页：教材栏目 ============================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-chip active" onclick="filterCol('all', this)">📋 全部</span>
+    <span class="filter-chip" onclick="filterCol('related', this)">📖 相关史事</span>
+    <span class="filter-chip" onclick="filterCol('material', this)">📜 材料研读</span>
+    <span class="filter-chip" onclick="filterCol('virtue', this)">💝 学史崇德</span>
+    <span class="filter-chip" onclick="filterCol('think', this)">💭 想一想</span>
+    <span class="filter-chip" onclick="filterCol('homework', this)">📝 课后活动</span>
+    <span class="filter-chip" onclick="filterCol('expand', this)">🔍 知识拓展</span>
+  </div>
+
+  <!-- 相关史事1："子"尊称 -->
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事 · "子"尊称的由来</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">"子"是一种尊称。春秋前期，一般称卿大夫为"子"。春秋后期，由于学者著书立说和讲学之风兴起，人们也用"子"来尊称著名的学者和老师。</div>
+      <p style="margin-top:8px;"><strong>要点提示：</strong>"子"从最初称呼卿大夫，到后来用于尊称学者和老师，反映了春秋后期社会的一个重大变化——<strong>私学兴起，学者地位提升</strong>。孔子被称为"子"（如"子曰"），老子被称为"老子"，墨子、庄子等也都以"子"尊称。这说明在"学在官府"格局被打破后，学者和教师在社会上获得了崇高的地位，"知识"和"学问"成为受人尊敬的资本。</p>
+    </div>
+  </div>
+
+  <!-- 材料研读：为政以德 -->
+  <div class="col-box" data-cat="material">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📜 材料研读 · "为政以德"</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">子曰："为政以德，譬如北辰，居其所而众星共之。"<br>子曰："道之以政，齐之以刑，民免而无耻；道之以德，齐之以礼，有耻且格。"</div>
+      <div class="source-ref">——《论语·为政》</div>
+      <p class="q-text"><strong>问题：</strong>你认为孔子提倡"为政以德""道之以德，齐之以礼"有什么积极意义？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col1')">显示答案</button>
+      <div class="a" id="exp-col1">
+        <p><strong>答案：</strong>孔子提倡"为政以德""道之以德，齐之以礼"的积极意义：</p>
+        <p>①<strong>"为政以德"——以德服人：</strong>统治者以道德教化治理国家，就像北极星一样，自己安居其位，群星都环绕着它——说明德政能赢得民众的真心拥护。</p>
+        <p>②<strong>"道之以政，齐之以刑，民免而无耻"：</strong>仅靠政令和刑罚来治理，民众虽然不敢犯罪但不会有羞耻之心——只是慑于惩罚而不敢为，并非发自内心地认同。</p>
+        <p>③<strong>"道之以德，齐之以礼，有耻且格"：</strong>用道德来引导，用礼仪来规范，民众不仅有羞耻之心，还能自觉改正错误——这是发自内心的认同和自律。</p>
+        <p>④<strong>积极意义：</strong>孔子强调道德教化优于单纯的刑罚，重视培养民众的道德自觉和社会责任感——这一思想对后世"德主刑辅"的治国理念产生了深远影响，在现代社会仍有借鉴价值：治理国家不仅需要法治，也需要德治。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 相关史事2：韦编三绝 -->
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事 · 韦编三绝</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">孔子晚年时十分喜欢研读《易》。当时书籍主要写在简牍上，再用绳子将这些简牍按顺序编连起来。为了深入学习这部书，孔子把《易》翻阅了许多遍，甚至编连简牍的绳子都被磨断了好几次，不断换上新的再读。这就是成语"韦编三绝"的来历。</div>
+      <p style="margin-top:8px;"><strong>要点提示：</strong>"韦编三绝"是孔子勤奋好学的生动写照。①<strong>"韦"指皮绳</strong>，古代用皮绳编连竹简；②<strong>"三绝"指多次磨断</strong>，"三"是虚数，表示多次；③这个故事体现了孔子活到老学到老的精神——晚年仍刻苦研读，反复阅读；④也反映了古代书籍的形式——竹简用绳子编连成册，翻阅多了绳子会磨断。成语"韦编三绝"后来用来形容读书刻苦勤奋。</p>
+    </div>
+  </div>
+
+  <!-- 学史崇德：大丈夫 -->
+  <div class="col-box" data-cat="virtue">
+    <div class="col-header" onclick="toggleColBox(this)"><span>💝 学史崇德 · "大丈夫"精神</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">孟子在与人探讨什么是"大丈夫"时说："富贵不能淫，贫贱不能移，威武不能屈，此之谓大丈夫。"在孟子看来，不会被富贵扰乱心智，不会因贫贱改变操守，不会被威武屈服意志，这才是真正的大丈夫。这种精神对后人树立正确的价值观、人生观有重要影响。</div>
+      <p style="margin-top:8px;"><strong>要点提示：</strong>孟子提出的"大丈夫"标准是中国传统道德精神的典范：</p>
+      <p>①<strong>"富贵不能淫"</strong>——面对财富和地位诱惑，不迷失本心，不丧失原则。</p>
+      <p>②<strong>"贫贱不能移"</strong>——身处贫困和低贱，不改变志向和操守，不随波逐流。</p>
+      <p>③<strong>"威武不能屈"</strong>——面对权势和武力威胁，不屈服于压力，坚持正义。</p>
+      <p>这三种精神构成了中国传统文化中"刚健有为、自强不息"的人格理想。从文天祥"人生自古谁无死，留取丹心照汗青"，到林则徐虎门销烟，无数仁人志士以"大丈夫"精神为信念，在民族危亡之际挺身而出。这种精神至今仍是培养正确价值观、人生观的重要思想资源。</p>
+    </div>
+  </div>
+
+  <!-- 相关史事3：墨子科学 -->
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事 · 《墨子》中的科学</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">《墨子》一书包含许多科学理论。其中，《经上》《经下》等篇目被合称为《墨经》，论述了数学、力学、光学等相关的许多基本要素，记载了杠杆、小孔成像等方面的研究。《墨子》还详细介绍了城门结构、城池防御设施构造、弩机等器械制造工艺，对我国古代军事技术的发展产生较大影响。</div>
+      <p style="margin-top:8px;"><strong>要点提示：</strong>墨子不仅是思想家，也是科学家。①<strong>数学、力学、光学</strong>——《墨经》论述了这些领域的基本要素，体现了墨家对自然科学的重视；②<strong>杠杆、小孔成像</strong>——这些研究在中国科技史上占有重要地位，小孔成像实验比西方早了数百年；③<strong>军事技术</strong>——城门结构、防御设施、弩机制造等，反映了墨家"非攻"但不忽视防御的实用思想；④墨家的科学精神与儒、道、法等学派形成鲜明对比——墨家更注重<strong>实用技术和自然科学</strong>的研究。</p>
+    </div>
+  </div>
+
+  <!-- 想一想 -->
+  <div class="col-box" data-cat="think">
+    <div class="col-header" onclick="toggleColBox(this)"><span>💭 想一想</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p class="q-text"><strong>问题：</strong>为什么说百家争鸣促进了思想文化的繁荣？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col2')">显示答案</button>
+      <div class="a" id="exp-col2">
+        <p><strong>答案：</strong>百家争鸣促进了思想文化的繁荣，原因如下：</p>
+        <p>①<strong>思想碰撞激发创造力：</strong>各学派之间互相辩论、互相质疑、互相启发，在争鸣中不断完善各自的理论，形成了活跃的思想碰撞局面。不同观点的交锋推动了思想的深化和发展。</p>
+        <p>②<strong>多元并存丰富文化内涵：</strong>儒、墨、道、法、兵等学派从不同角度提出治国理政的方案，涵盖了政治、伦理、哲学、军事等多个领域，极大地丰富了中国古代思想文化的内容。</p>
+        <p>③<strong>私学兴起扩大文化传播：</strong>"学在官府"被打破，私学勃兴，学者收徒讲学、著书立说，知识从贵族垄断走向社会传播，更多人有机会学习和思考。</p>
+        <p>④<strong>回应时代问题推动思想深化：</strong>战国时期社会剧烈变革，诸子百家针对如何治国、如何处世等现实问题提出各自方案，思想与现实的紧密结合推动了理论的深化。</p>
+        <p>⑤<strong>奠定后世思想基础：</strong>百家争鸣成为我国古代第一次思想文化发展的高峰，为后来两千多年的思想文化发展奠定了基础——儒家成为统治思想，法家指导了秦的统一，道家影响了中国人的精神世界。</p>
+        <p>正因如此，百家争鸣不仅在当时促进了思想文化的繁荣，而且对后世产生了十分重要而深远的影响。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="homework">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📝 课后活动</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p class="q-text"><strong>第1题：</strong>说说下列孔子言论对我们今天的学习有什么指导意义。</p>
+      <div class="source-material" style="margin:8px 0;">
+        知之为知之，不知为不知，是知也。<br>
+        三人行，必有我师焉。<br>
+        学而不思则罔，思而不学则殆。<br>
+        温故而知新，可以为师矣。<br>
+        敏而好学，不耻下问，是以谓之文也。
+      </div>
+      <div class="source-ref">——《论语》</div>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col3')">显示答案</button>
+      <div class="a" id="exp-col3">
+        <p><strong>答案：</strong>五句孔子言论对今天学习的指导意义：</p>
+        <p>①<strong>"知之为知之，不知为不知，是知也"</strong>——学习要有实事求是的态度，知道就是知道，不知道就是不知道，这才是真正的智慧。指导我们诚实面对自己的知识水平，不不懂装懂。</p>
+        <p>②<strong>"三人行，必有我师焉"</strong>——几个人同行，其中一定有值得我学习的人。指导我们善于向身边的人学习，取人之长补己之短，保持谦虚的学习态度。</p>
+        <p>③<strong>"学而不思则罔，思而不学则殆"</strong>——只学习不思考就会迷惑，只思考不学习就会危险。指导我们学习与思考相结合，既要广泛学习又要深入思考，不能偏废其一。</p>
+        <p>④<strong>"温故而知新，可以为师矣"</strong>——温习旧知识能从中获得新理解，就可以做老师了。指导我们重视复习巩固，在温习中加深理解、获得新知，强调学习的螺旋上升。</p>
+        <p>⑤<strong>"敏而好学，不耻下问"</strong>——聪敏而好学，不以向地位低的人请教为耻。指导我们勤奋好学，虚心求教，不以向不如自己的人请教为耻辱，保持求知欲。</p>
+        <p style="margin-top:8px;">这五句话涵盖了<strong>学习态度、学习方法、学习精神</strong>三个方面，至今仍是指导学生学习的经典格言。</p>
+      </div>
+      <p class="q-text" style="margin-top:14px;"><strong>第2题：</strong>阅读材料，回答问题。</p>
+      <div class="source-material" style="margin:8px 0;">
+        古者圣王之为政，列德而尚贤，虽在农与工肆之人，有能则举之，高予之爵，重予之禄，任之以事……
+      </div>
+      <div class="source-ref">——《墨子·尚贤上》</div>
+      <p style="margin-top:8px;"><strong>(1)</strong> 墨子的这段话表达了怎样的主张？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col4a')">显示答案</button>
+      <div class="a" id="exp-col4a">
+        <p><strong>答案：</strong>墨子的这段话表达了<strong>"尚贤"</strong>的主张：</p>
+        <p>①<strong>"列德而尚贤"</strong>——为政要排列德行、崇尚贤能，把有德有才的人选拔出来。</p>
+        <p>②<strong>"虽在农与工肆之人，有能则举之"</strong>——即使是农民和工匠等平民出身的人，只要有才能就应提拔任用。</p>
+        <p>③<strong>"高予之爵，重予之禄，任之以事"</strong>——给予高爵位、厚俸禄、委以重任。</p>
+        <p>核心主张是：<strong>选贤任能，不分贵贱出身</strong>——打破贵族垄断官职的特权，让有才能的平民也有机会参与治理国家。</p>
+      </div>
+      <p style="margin-top:10px;"><strong>(2)</strong> 结合墨子生活的时代，说说他为什么会提出这样的主张。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col4b')">显示答案</button>
+      <div class="a" id="exp-col4b">
+        <p><strong>答案：</strong>墨子提出"尚贤"主张的原因，结合其生活的战国时代背景：</p>
+        <p>①<strong>时代背景：</strong>战国时期，旧的社会制度进一步瓦解，新的社会制度逐步确立。贵族世袭特权阻碍社会发展，各国在兼并竞争中亟需真正有才能的人才。</p>
+        <p>②<strong>代表平民利益：</strong>墨子代表平民阶层的利益，"农与工肆之人"正是平民阶层。他主张平民中的贤能之人也应被重用，是对贵族垄断政治的挑战。</p>
+        <p>③<strong>适应变法潮流：</strong>战国时期各国变法（如商鞅变法废除世袭特权、奖励军功），都在打破旧贵族特权。墨子的"尚贤"主张与这一历史潮流一致。</p>
+        <p>④<strong>战争需要人才：</strong>战国兼并战争激烈，各国迫切需要军事和政治人才。仅靠世袭贵族已不能满足需求，必须从平民中选拔贤能。</p>
+        <p>⑤<strong>"兼爱"思想的延伸：</strong>墨子主张"兼爱"，认为人应互爱互利。"尚贤"正是"兼爱"在政治上的体现——不分贵贱，唯才是举。</p>
+        <p>墨子的"尚贤"思想在战国时代具有进步意义，对后世选官制度（如科举制）也有深远影响。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 知识拓展：稷下学宫 -->
+  <div class="col-box" data-cat="expand">
+    <div class="col-header" onclick="toggleColBox(this)"><span>🔍 知识拓展 · 稷下学宫</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>稷（jì）下学宫</strong></p>
+      <p>战国时期，齐国为招揽人才，在都城临淄稷门附近设置讲学的专门场所，被称为"稷下学宫"。聚集在这里的学者，来自道家、儒家、法家等学派，兴盛时有成百上千人。他们在此讲学、辩论、著书，阐明自己的政治主张，形成争鸣的局面。据说荀子曾在这里游学，成为当时颇有威望的学术领袖。稷下学宫对促进战国时期的学术繁荣起了重要作用。</p>
+      <p style="margin-top:8px;"><strong>点拨：</strong>稷下学宫是百家争鸣的典型缩影和重要场所。①<strong>齐国设立</strong>——体现了诸侯国对人才的重视，各国统治者招揽人才以增强国力；②<strong>多学派汇聚</strong>——道家、儒家、法家等学者齐聚一堂，讲学辩论，正是"百家争鸣"的生动写照；③<strong>荀子在此游学</strong>——荀子受稷下学宫多元思想的影响，形成了"礼法并用"的主张，融合了儒家和法家的思想；④<strong>学术自由</strong>——学者们可以自由讲学、辩论、著书，这种宽松的学术环境是百家争鸣繁荣的重要条件。稷下学宫可以说是中国古代最早的"大学"和"智库"。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 4 页：课堂训练 ============================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="score-label">📊 计分板（共9题：选择5题 + 材料4题）</div>
+      <div class="score-number"><span id="scoreVal">0</span> / 9</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题1 -->
+  <div class="exercise" id="q1">
+    <p class="q-text"><strong>1.</strong> 孔子思想的核心是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. "道"</label>
+      <label onclick="optClick(this,'B','q1')">B. "仁"</label>
+      <label onclick="optClick(this,'C','q1')">C. "兼爱"</label>
+      <label onclick="optClick(this,'D','q1')">D. "法"</label>
+    </div>
+    <div class="a" id="exp-q1"><strong>答案：B</strong><br><strong>解析：</strong>孔子思想的核心是"仁"——仁者爱人，要有爱心和同情心。A"道"是老子思想的核心；C"兼爱"是墨子的主张；D"法"是法家韩非的主张。关键区分各思想家的核心概念——孔子="仁"，老子="道"，墨子="兼爱""非攻"。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q1')">显示答案</button>
+  </div>
+
+  <!-- 选择题2 -->
+  <div class="exercise" id="q2">
+    <p class="q-text"><strong>2.</strong> 老子在政治上主张（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 为政以德</label>
+      <label onclick="optClick(this,'B','q2')">B. 无为而治</label>
+      <label onclick="optClick(this,'C','q2')">C. 以法治国</label>
+      <label onclick="optClick(this,'D','q2')">D. 民贵君轻</label>
+    </div>
+    <div class="a" id="exp-q2"><strong>答案：B</strong><br><strong>解析：</strong>老子政治上主张"无为而治"，追求"小国寡民"的理想社会。A"为政以德"是孔子的政治主张；C"以法治国"是法家韩非的主张；D"民贵君轻"是孟子（儒家）的主张。关键区分老子的"无为而治"与孔子的"为政以德"——两者虽都反对苛政，但理念不同：老子强调顺应自然不干预，孔子强调以德服人。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q2')">显示答案</button>
+  </div>
+
+  <!-- 选择题3 -->
+  <div class="exercise" id="q3">
+    <p class="q-text"><strong>3.</strong> 战国时期，主张"兼爱""非攻"的思想家是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 孟子</label>
+      <label onclick="optClick(this,'B','q3')">B. 庄子</label>
+      <label onclick="optClick(this,'C','q3')">C. 墨子</label>
+      <label onclick="optClick(this,'D','q3')">D. 韩非</label>
+    </div>
+    <div class="a" id="exp-q3"><strong>答案：C</strong><br><strong>解析：</strong>墨家创始人墨子主张"兼爱""非攻"，要求人们互爱互利，反对各国相互攻伐兼并、残害生命。A孟子是儒家代表，主张"仁政""民贵君轻"；B庄子是道家代表，主张顺应自然、追求精神自由；D韩非是法家集大成者，主张以法治国、中央集权。关键区分各学派标志性主张——"兼爱""非攻"=墨子。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q3')">显示答案</button>
+  </div>
+
+  <!-- 选择题4 -->
+  <div class="exercise" id="q4">
+    <p class="q-text"><strong>4.</strong> 下列思想家中，主张"以法治国"的是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 孔子</label>
+      <label onclick="optClick(this,'B','q4')">B. 老子</label>
+      <label onclick="optClick(this,'C','q4')">C. 墨子</label>
+      <label onclick="optClick(this,'D','q4')">D. 韩非</label>
+    </div>
+    <div class="a" id="exp-q4"><strong>答案：D</strong><br><strong>解析：</strong>法家集大成者韩非反对空谈仁义，强调以法治国，树立君主的权威，建立中央集权专制统治。A孔子主张"为政以德"；B老子主张"无为而治"；C墨子主张"兼爱""非攻"。法家的核心特征就是"法治"和"中央集权"，韩非是法家学说的集大成者。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q4')">显示答案</button>
+  </div>
+
+  <!-- 选择题5 -->
+  <div class="exercise" id="q5">
+    <p class="q-text"><strong>5.</strong> 百家争鸣局面出现的根本原因是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 私学兴起，学者众多</label>
+      <label onclick="optClick(this,'B','q5')">B. 旧制度瓦解，社会剧烈变革</label>
+      <label onclick="optClick(this,'C','q5')">C. 诸侯争霸，战争频繁</label>
+      <label onclick="optClick(this,'D','q5')">D. 铁器和牛耕的使用</label>
+    </div>
+    <div class="a" id="exp-q5"><strong>答案：B</strong><br><strong>解析：</strong>百家争鸣局面出现的根本原因是战国时期旧的社会制度进一步瓦解，新的社会制度逐步确立——社会处于剧烈变革之中，不同阶层和利益集团针对如何治国理政提出各自的主张。A私学兴起是百家争鸣的条件之一，但不是根本原因；C战争频繁是社会变革的表现之一；D铁器和牛耕推动了经济发展，是社会变革的经济基础，但不是百家争鸣的直接原因。根本原因要从"社会变革"这一宏观角度理解——正因为社会在剧变，才需要不同的思想方案来回应时代问题。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q5')">显示答案</button>
+  </div>
+
+  <!-- 材料题一 -->
+  <div class="exercise" id="mq1">
+    <p class="q-text"><strong>题一</strong> （中难度）阅读下列材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料一：</strong>子曰："为政以德，譬如北辰，居其所而众星共之。"<br>
+      <strong>材料二：</strong>道之以政，齐之以刑，民免而无耻；道之以德，齐之以礼，有耻且格。
+    </div>
+    <div class="source-ref">——《论语·为政》</div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 根据材料一，孔子认为统治者应该怎样治理国家？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1a'); trackMatQ('mq1a')">显示答案</button>
+    <div class="a" id="exp-m1a"><strong>答案：</strong>根据材料一，孔子认为统治者应该<strong>"为政以德"</strong>——以道德教化治理国家。孔子以北极星作比喻：统治者如果实行德政，就像北极星一样安居其位，群星（民众）都会环绕归附——说明德政能赢得民众的真心拥护和爱戴，而不需要依靠强力和刑罚。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 根据材料二，比较"道之以政，齐之以刑"与"道之以德，齐之以礼"的效果差异。这反映了孔子怎样的治国理念？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1b'); trackMatQ('mq1b')">显示答案</button>
+    <div class="a" id="exp-m1b"><strong>答案：</strong>两种方式的效果差异：<br>①<strong>"道之以政，齐之以刑"——民免而无耻：</strong>仅靠政令引导、刑罚规范，民众虽然不敢犯罪（免），但不会有羞耻之心（无耻），只是慑于惩罚而表面服从，并非发自内心认同。<br>②<strong>"道之以德，齐之以礼"——有耻且格：</strong>用道德引导、礼仪规范，民众不仅有羞耻之心（有耻），还能自觉改正错误（格），是发自内心的认同和自律。<br><strong>反映的治国理念：</strong>孔子认为<strong>德治优于刑治</strong>——道德教化比单纯的政令刑罚更有效。他主张以德服人、以礼规范，培养民众的道德自觉，使人心悦诚服。这反映了孔子"德主刑辅"、重视道德教化的治国理念，对后世"德治"传统产生了深远影响。</div>
+  </div>
+
+  <!-- 材料题二 -->
+  <div class="exercise" id="mq2">
+    <p class="q-text"><strong>题二</strong> （较难）阅读下列材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料一：</strong>百家争鸣促进了思想文化的繁荣，成为我国古代第一次思想文化发展的高峰，为古代思想文化的发展奠定了基础，对后世产生了十分重要而深远的影响。<br>
+      <strong>材料二：</strong>战国时期，齐国在都城临淄稷门附近设置讲学的专门场所，被称为"稷下学宫"。聚集在这里的学者，来自道家、儒家、法家等学派，兴盛时有成百上千人。
+    </div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 根据材料一和所学知识，分析百家争鸣为什么能"促进思想文化的繁荣"。</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2a'); trackMatQ('mq2a')">显示答案</button>
+    <div class="a" id="exp-m2a"><strong>答案：</strong>百家争鸣能促进思想文化繁荣的原因：<br>①<strong>思想碰撞激发创造力：</strong>各学派互相辩论、互相质疑、互相启发，在争鸣中不断完善各自理论，形成活跃的思想碰撞局面。<br>②<strong>多元并存丰富文化内涵：</strong>儒、墨、道、法、兵等学派从不同角度提出治国方案，涵盖政治、伦理、哲学、军事等领域，极大丰富了中国古代思想文化内容。<br>③<strong>私学兴起扩大文化传播：</strong>"学在官府"被打破，私学勃兴，知识从贵族垄断走向社会传播，更多人有机会学习和思考。<br>④<strong>回应时代问题推动思想深化：</strong>战国社会剧烈变革，诸子百家针对现实问题提出方案，思想与现实的结合推动了理论深化。<br>这些因素共同促成了思想文化的空前繁荣，使之成为古代第一次思想文化发展的高峰。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 根据材料二和所学知识，说说稷下学宫与百家争鸣的关系。百家争鸣对后世有什么深远影响？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2b'); trackMatQ('mq2b')">显示答案</button>
+    <div class="a" id="exp-m2b"><strong>答案：</strong><strong>稷下学宫与百家争鸣的关系：</strong><br>①稷下学宫是百家争鸣的<strong>典型缩影和重要场所</strong>——齐国设立学宫招揽人才，道家、儒家、法家等学派学者齐聚一堂，讲学辩论，正是"百家争鸣"的生动写照。<br>②稷下学宫为百家争鸣提供了<strong>学术自由的平台</strong>——学者可以自由讲学、辩论、著书，这种宽松的学术环境是百家争鸣繁荣的重要条件。<br>③稷下学宫<strong>促进了各学派的交流和融合</strong>——如荀子在此游学，受多元思想影响，形成了"礼法并用"的主张，融合了儒家和法家思想。<br><strong>百家争鸣对后世的深远影响：</strong><br>①<strong>奠定思想基础：</strong>为古代思想文化的发展奠定了基础——儒家成为封建社会统治思想，影响中国两千余年。<br>②<strong>指导政治实践：</strong>法家思想指导了秦的统一，韩非的中央集权理论为后世帝制提供了理论依据。<br>③<strong>塑造精神世界：</strong>道家思想影响了中国人的精神追求和处世哲学，与儒家互补。<br>④<strong>文化自信的源泉：</strong>百家争鸣是中华文明的"轴心时代"，先秦诸子的智慧至今仍在影响中国人的价值观，是文化自信的重要来源。</div>
+  </div>
+</div>
+
+<!-- ============================ 第 5 页：知识结构图 ============================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 百家争鸣因果链</div>
+    <p style="text-align:center;font-size:12px;color:#999;margin-bottom:16px;">💡 点击节点查看详情</p>
+    <div class="kg-chain">
+      <div class="kg-node left c1" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🌿</span>
+        <strong>老子 · 道家创始人</strong>
+        <p>春秋后期 · 楚国人 · 周朝史官</p>
+        <p>核心"道" · 辩证法 · 无为而治 · 《道德经》</p>
+        <div class="kg-detail">老子做周朝史官→掌管典籍→学识渊博→核心思想"道"（万物本源+运行规律）→朴素辩证法（对立面互相转化）→处世以柔克刚→政治"无为而治"→追求"小国寡民"→道家学派创始人→《道德经》传世。与孔子并称中国古代两大思想源头。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">📖</span>
+        <strong>孔子 · 儒家创始人</strong>
+        <p>春秋后期 · 鲁国人 · 三千弟子</p>
+        <p>核心"仁" · 为政以德 · 有教无类 · 《论语》</p>
+        <div class="kg-detail">孔子出身没落贵族→学习礼乐→收徒办学（有教无类·因材施教）→思想核心"仁"（仁者爱人·己所不欲勿施于人）→政治"为政以德"（恢复礼乐文明·反对苛政）→晚年整理典籍→儒家创始人→《论语》传世→后世成为封建社会统治思想。教育贡献：兴办私学+有教无类+因材施教+举一反三+三千弟子。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🏛️</span>
+        <strong>百家争鸣 · 诸子百家</strong>
+        <p>战国时期 · 旧制度瓦解 · 私学勃兴</p>
+        <p>儒墨道法兵 · 各派争鸣 · 稷下学宫</p>
+        <div class="kg-detail">战国旧制度瓦解+新制度确立→"学在官府"被打破→私学勃兴→诸子百家涌现→儒家（孟子仁政/荀子礼治）+墨家（墨子兼爱非攻）+道家（庄子顺应自然）+法家（韩非以法治国）+兵家（孙武孙子兵法）→稷下学宫讲学辩论→互相争鸣→形成思想碰撞的繁荣局面。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🌟</span>
+        <strong>思想高峰 · 深远影响</strong>
+        <p>第一次思想文化发展高峰</p>
+        <p>奠定基础 · 影响后世两千余年</p>
+        <div class="kg-detail">百家争鸣→促进思想文化繁荣→古代第一次思想文化发展的高峰→为古代思想文化发展奠定基础→对后世产生深远影响。儒家成为封建社会统治思想→法家指导秦统一→道家影响中国人精神世界→"大丈夫"精神（富贵不能淫·贫贱不能移·威武不能屈）→文化自信的源泉→中华文明"轴心时代"。</div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 老子：核心"道" · 辩证法 · 无为而治</div>
+      <div class="kg-rule r2">🟠 孔子：核心"仁" · 为政以德 · 有教无类</div>
+      <div class="kg-rule r3">🟢 百家：儒墨道法兵 · 各有主张 · 争鸣繁荣</div>
+      <div class="kg-rule r4">🔴 意义：第一次思想高峰 · 奠定基础 · 影响深远</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 6 页：结束页 ============================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第二单元 · 夏商周时期</div>
+    <h1 style="font-size:22pt;">第7课 · 百家争鸣</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>老子和《道德经》</h3>
+        <ul>
+          <li>核心思想是<strong>"道"</strong>，万物根源和运行规律</li>
+          <li>一切事物都有<strong>对立面</strong>，对立双方可相互转化</li>
+          <li>政治主张<strong>"无为而治"</strong>，道家学派创始人</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>孔子和儒家学说</h3>
+        <ul>
+          <li>思想核心<strong>"仁"</strong>，主张"为政以德"</li>
+          <li>教育：<strong>有教无类</strong>、因材施教、举一反三</li>
+          <li>儒家学说后来成为我国封建社会统治思想</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>百家争鸣</h3>
+        <ul>
+          <li><strong>儒</strong>（孟子·荀子）<strong>墨</strong>（墨子）<strong>道</strong>（庄子）<strong>法</strong>（韩非）<strong>兵</strong>（孙武）</li>
+          <li>孟子"民贵君轻"、墨子"兼爱非攻"、韩非"以法治国"</li>
+          <li>意义：古代<strong>第一次思想文化发展高峰</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav" style="margin:20px 0;">
+    <div><a href="七上-U2-第6课_战国时期的社会变革.html">← 上一课：第6课 战国时期的社会变革</a></div>
+    <div class="nav-center">第7课</div>
+    <div><a href="七上-U2-第8课_夏商周时期的科技与文化.html">下一课：第8课 夏商周时期的科技与文化 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版初中历史 · 七年级上册 · 第二单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================ 底部翻页导航 ============================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+// 键盘翻页
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') {
+    e.preventDefault(); goPage(0);
+  } else if (e.key === 'End') {
+    e.preventDefault(); goPage(totalPages - 1);
+  }
+});
+
+pgPrev.disabled = true;
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1: 'B', q2: 'B', q3: 'C', q4: 'D', q5: 'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() {
+  document.getElementById('scoreVal').textContent = score;
+}
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  document.getElementById('exp-' + qid).classList.add('show');
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+  score++;
+  updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {};
+  matDone = {};
+  score = 0;
+  updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) {
+      l.classList.remove('disabled', 'correct', 'wrong');
+    });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== 标签页切换 =====
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+
+function markMastered(grpId, btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+  var grp = document.getElementById(grpId);
+  if (grp) { grp.querySelector('.acc-group-hd').style.opacity = '0.7'; }
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) {
+      box.classList.remove('filtered-out');
+    } else {
+      box.classList.add('filtered-out');
+    }
+  });
+}
+
+function toggleColBox(header) {
+  var box = header.parentElement;
+  box.classList.toggle('open');
+}
+
+// ===== 知识图谱 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+}
+
+// ===== deep-card 折叠 =====
+(function() {
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card) {
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.addEventListener('click', function() { bd.classList.toggle('show'); });
+    }
+  });
+})();
+</script>
+
+  <div class="bottom-nav">
+  <div><a href="七上-U2-第6课_战国时期的社会变革.html">← 上一课：第6课 战国时期的社会变革</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第7课</div>
+  <div><a href="七上-U2-第8课_夏商周时期的科技与文化.html">下一课：第8课 夏商周时期的科技与文化 →</a></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第8课 夏商周时期的科技与文化 — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide {
+  display: none;
+  min-height: calc(100vh - 80px);
+  padding-top: 10px;
+  animation: slideIn 0.35s ease;
+}
+.page-slide.active { display: block; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-header {
+  text-align: center;
+  padding: 14px 0 10px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+.slide-header .module-num {
+  font-size: 12pt;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.slide-header .module-title {
+  font-size: 18pt;
+  color: var(--primary-dark);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* ========== 结束页：核心要点回顾 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title {
+  text-align: center; font-size: 17pt; font-weight: 700;
+  color: var(--primary-dark); margin-bottom: 16px;
+}
+.recap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.recap-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 16px 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 3px 12px rgba(124,108,240,0.08);
+  position: relative;
+  text-align: left;
+}
+.recap-card-num {
+  position: absolute; top: -12px; left: 16px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14pt; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.recap-card h3 {
+  font-size: 14pt; font-weight: 700;
+  color: var(--primary-dark);
+  margin: 4px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary-light);
+}
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li {
+  font-size: 12.5pt; line-height: 1.7;
+  padding: 4px 0 4px 18px;
+  position: relative;
+  color: #444;
+}
+.recap-card ul li::before {
+  content: '▸'; position: absolute; left: 0; top: 4px;
+  color: var(--primary); font-size: 10pt;
+}
+.recap-card ul li strong { color: var(--primary-dark); }
+
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: #fff;
+  box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 8px 16px;
+  height: 52px;
+}
+.pg-nav button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 6px 16px;
+  font-size: 13pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #dcd4f5;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter {
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding: 36px 20px 30px;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 0 36px 36px;
+  box-shadow: 0 6px 30px rgba(61,43,140,0.20);
+  margin: 0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.learn-target h3 {
+  color: var(--primary-dark);
+  font-size: 16pt;
+  margin-bottom: 12px;
+}
+.learn-target .target-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.learn-target .target-item {
+  font-size: 13.5pt;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+/* ========== 标签页切换 ========== */
+.tab-bar {
+  display: flex; gap: 0;
+  margin-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.tab-btn {
+  flex: 1; padding: 14px 8px;
+  font-size: 14pt; font-weight: 700;
+  border: none; cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  background: #e8e0ff; color: #5a4ac7;
+  letter-spacing: 1px;
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+}
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== 时间轴横条 ========== */
+.timeline-bar {
+  background: #f0edff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12pt;
+  color: #5a4ac7;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; }
+.kp-card li { margin: 6px 0; font-size: 14pt; }
+
+/* ========== 贯通框 ========== */
+.link-bar {
+  border: 2px dashed #d5cef0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 14px;
+  background: #faf8ff;
+  font-size: 13pt;
+  color: #5a4ac7;
+}
+
+/* ========== 标签 ========== */
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao {
+  background: #f39c12; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-value {
+  background: #e74c3c; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-soc {
+  background: #3498db; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+
+/* ========== 手风琴组 ========== */
+.acc-group {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.acc-group-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s;
+}
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 22px;
+  background: #faf8ff;
+  border-top: 1px solid #eee;
+}
+.acc-mastered button {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 6px 16px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== 折叠三级卡片 ========== */
+.deep-card {
+  margin: 10px 18px 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.deep-card-hd {
+  background: linear-gradient(135deg, #e67e22, #f0ad4e);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 13.5pt;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+/* ========== 对比表格 ========== */
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 13pt;
+}
+.diff-table th {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+}
+.diff-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== 栏目容器 ========== */
+.col-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.06);
+  transition: all 0.3s;
+}
+.col-box.filtered-out { display: none; }
+.col-header {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 15pt;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+.col-body .a p { font-size: 12pt; }
+
+/* ========== 筛选按钮条 ========== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.filter-chip {
+  padding: 6px 14px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+  color: #5a4ac7;
+}
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ========== 引文材料 ========== */
+.source-material {
+  border-left: 4px solid var(--primary);
+  padding: 8px 14px;
+  margin: 8px 0;
+  background: #faf8ff;
+  font-size: 13pt;
+}
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ========== 题目区域 ========== */
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.exercise {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+.options label {
+  display: block;
+  padding: 8px 14px;
+  margin: 4px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14pt;
+  transition: all 0.2s;
+  background: #faf8ff;
+}
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+/* ========== 答题计分器 ========== */
+.score-banner {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-label { font-size: 12pt; color: #888; }
+.score-reset {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+/* ========== 答案区 ========== */
+.a { display: none; }
+.a.show { display: block; }
+.a {
+  background: #f0edff;
+  border: 1px solid #d5cef0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 10px 0;
+  font-size: 14pt;
+}
+
+/* ========== 答案按钮 ========== */
+.ans-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 12pt;
+  cursor: pointer;
+  margin: 6px 0;
+  transition: all 0.2s;
+}
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(124,108,240,0.08);
+}
+.kg-title {
+  text-align: center;
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node {
+  width: 90%;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.kg-node.left { align-self: flex-start; }
+.kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+.kg-detail { display: none; font-size: 11pt; color: #666; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded .kg-detail { display: block; }
+.kg-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.kg-rule {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5pt;
+  text-align: center;
+  font-weight: 600;
+}
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== 页脚 ========== */
+footer {
+  text-align: center;
+  padding: 20px 0 10px;
+  border-top: 2px solid var(--border);
+  margin-top: 24px;
+  font-size: 12px;
+  color: #999;
+}
+footer p { margin: 4px 0; }
+
+/* ========== 底部导航（结束页内） ========== */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(124,108,240,0.08);
+  font-size: 12pt;
+}
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+/* ========== 封面页"开始学习"按钮 ========== */
+.start-btn {
+  display: block;
+  margin: 20px auto 10px;
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 36px;
+  font-size: 16pt;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+</style>
+</head>
+<body>
+
+<!-- ============================ 第 0 页：封面 ============================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第二单元 · 夏商周时期：奴隶制王朝的更替和向封建社会的过渡</div>
+    <h1>第8课 · 夏商周时期的科技与文化</h1>
+    <div class="hero-sub">统编版初中历史  七年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（核心素养导向）</h3>
+    <div class="target-grid">
+      <div class="target-item" data-target="1">🕐 <strong>时空观念：</strong>知道夏商周时期在天文、历法、医学、文字、青铜铸造、文学等领域的重要成就，理解这些成就所处的历史时代。</div>
+      <div class="target-item" data-target="2">📜 <strong>史料实证：</strong>通过甲骨文、青铜器铭文、《诗经》《楚辞》等史料，认识夏商周时期科技与文化的发展水平，理解甲骨文的历史地位。</div>
+      <div class="target-item" data-target="3">🔍 <strong>历史解释：</strong>分析甲骨文、青铜器、《诗经》和楚辞的文化价值，理解三星堆文化与中原文化的关系，阐释夏商周科技文化对后世的深远影响。</div>
+      <div class="target-item" data-target="4">❤️ <strong>家国情怀：</strong>感受中华先民的智慧与创造力，体会屈原忧国忧民的爱国精神，增强文化自信和对中华文明的认同感。</div>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================ 第 1 页：知识要点 ============================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点</div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab1')">⭐ 天文、历法和医学</button>
+    <button class="tab-btn" onclick="switchTab('tab2')">📜 甲骨文与青铜器</button>
+    <button class="tab-btn" onclick="switchTab('tab3')">📖 《诗经》和楚辞</button>
+  </div>
+
+  <!-- Tab 1: 天文、历法和医学 -->
+  <div class="kp-card tab-panel active" id="tab1" style="border-radius:10px;">
+    <div class="timeline-bar">夏商周 · 天文观测 · 历法完备 · 二十四节气 · 扁鹊四诊法 · 《黄帝内经》</div>
+    <h3>（一）天文、历法和医学</h3>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">天文</p>
+    <ul>
+      <li>原始社会末期，先民已从事<span class="kwd">天文观测和记录</span>，总结日月星辰运行规律。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 商朝甲骨文有许多<span class="kwd">日食、月食</span>记载。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 《诗经》记载了公元前776年9月6日的日食，是传世文献中我国历史上<span class="kwd">第一次有确切日期的日食记录</span>。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 《春秋》记载了公元前613年彗星扫过北斗，有研究认为这颗彗星就是著名的<span class="kwd">哈雷彗星</span>。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">历法</p>
+    <ul>
+      <li>夏朝时可能有了历法。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 到商朝历法逐渐完备，一年分为<span class="kwd">12个月</span>，大月30天，小月29天，闰年增加一个月。</li>
+      <li>甲骨文中开始出现<span class="kwd">干支纪日</span>。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 战国时期，人们已经把一年分为<span class="kwd">二十四节气</span>。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">医学</p>
+    <ul>
+      <li>夏商时期人们已掌握一定的医药知识和技术。</li>
+      <li>传说中<span class="kwd">神农尝百草</span>，认识了一些治病药物。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 战国时期名医<span class="kwd">扁鹊</span>能用针刺、按摩、汤药治疗疾病，发明了切脉诊法，使用<span class="kwd">望、闻、问、切</span>四种诊断疾病的方法，一直被中医沿用。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> <span class="kwd">《黄帝内经》</span>是中医学的奠基之作，总结当时的医学经验，讲述了人体内脏部位和血脉循行情况，介绍了针灸、按摩等治疗方法。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>原始社会末期天文观测→商朝甲骨文记录日食月食→历法逐渐完备（12月+闰月+干支纪日）→战国二十四节气→天文历法发展推动农业。医学方面：神农尝百草→夏商医药知识→战国扁鹊望闻问切四诊法→《黄帝内经》奠基中医学。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查"第一次有确切日期的日食记录"（《诗经》）、"哈雷彗星最早记录"（《春秋》）、"二十四节气"（战国）、"四诊法"（扁鹊）、《黄帝内经》的地位（中医学奠基之作）。</p>
+    </div>
+  </div>
+
+  <!-- Tab 2: 甲骨文与青铜器 -->
+  <div class="kp-card tab-panel" id="tab2" style="border-radius:10px;">
+    <div class="timeline-bar">商朝 · 甲骨文 · 金文 · 青铜铸造 · 三星堆 · 有文字可考的历史从商朝开始</div>
+    <h3>（二）甲骨文与青铜器</h3>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">甲骨文</p>
+    <ul>
+      <li>商朝时期人们常用龟甲和牛、羊等兽骨对许多事情进行占卜，把记录占卜情况的文字刻在甲骨上，这些文字被称为<span class="kwd">"甲骨文"</span>。</li>
+      <li>河南、陕西、山东等地出土了大量商周时期的甲骨，其中商朝有字甲骨约<span class="kwd">15万片</span>，单字计<span class="kwd">4400个以上</span>，已经识别的字在<span class="kwd">1500个以上</span>。</li>
+      <li>甲骨文记载内容丰富，涉及祭祀、战争、农牧业、官制、刑法、医药、天文历法等。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 甲骨文已经具备了<span class="kwd">汉字的基本结构</span>，是汉字发展的重要阶段，也是我国已发现的古代文字中年代最早、体系较为完整的<span class="kwd">成熟文字</span>。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 目前所知，我国有文字可考的历史从<span class="kwd">商朝</span>开始。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">金文</p>
+    <ul>
+      <li>商朝中晚期开始，钟、鼎等青铜器上铸刻有文字，因古人称铜为金，所以这种文字被称为<span class="kwd">"金文"</span>。</li>
+      <li>西周时期青铜器上文字的数量明显增加。</li>
+      <li>金文内容丰富，涉及祭祀典礼、军事行动、法律诉讼等方面。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">青铜器</p>
+    <ul>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 商周时期青铜铸造业由<span class="kwd">国家掌控</span>，规模宏大，组织严密，分工细致，制作工艺高超。</li>
+      <li>工匠能准确掌握铜、锡、铅的比例来制作各种器具。</li>
+      <li>青铜器数量增多，种类逐渐丰富，主要用于<span class="kwd">祭祀及军事</span>等方面，成为王公贵族身份地位乃至国家权力的<span class="kwd">象征</span>。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">三星堆遗址</p>
+    <ul>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 长江上游地区的四川广汉<span class="kwd">三星堆遗址</span>出土了数以万计的珍贵文物，有金杖、青铜树、青铜面具和青铜人像等，造型奇特，展现了夏商时期丰富多彩的<span class="kwd">古蜀文明</span>。</li>
+      <li>三星堆遗址还出土了中原夏商王朝系统的玉礼器和青铜器，表明它与中原王朝具有<span class="kwd">密切关系</span>。</li>
+    </ul>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>商朝占卜→刻甲骨→甲骨文（成熟文字·汉字基本结构）→我国有文字可考的历史从商朝开始→同时期青铜器铸刻金文→青铜铸造业国家掌控→祭祀军事用器→身份权力象征→三星堆遗址展现古蜀文明→与中原文化密切关系。甲骨文+青铜器+三星堆共同构成夏商周文明的重要标志。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查"甲骨文的历史地位"（成熟文字·汉字基本结构·有文字可考从商朝开始）、"金文"（青铜器上的文字）、"三星堆"（古蜀文明·与中原密切关系）。注意区分甲骨文（刻在甲骨上）与金文（铸在青铜器上）。</p>
+    </div>
+  </div>
+
+  <!-- Tab 3: 《诗经》和楚辞 -->
+  <div class="kp-card tab-panel" id="tab3" style="border-radius:10px;">
+    <div class="timeline-bar">西周至春秋 · 《诗经》305篇 · 风·雅·颂 · 战国 · 屈原 · 楚辞 · 《离骚》 · 古典诗歌两大源头</div>
+    <h3>（三）《诗经》和楚辞</h3>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">《诗经》</p>
+    <ul>
+      <li>西周和春秋时期，从平民到贵族的社会各阶层人士，在生产生活、祭祀典礼等各种场合，创作并传唱诗歌。</li>
+      <li>这些诗歌被收集整理成我国现存第一部诗歌总集<span class="kwd">《诗经》</span>。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 《诗经》共有<span class="kwd">305篇</span>诗歌，分为<span class="kwd">"风""雅""颂"</span>三部分。</li>
+      <li>《诗经》关注现实，所收诗歌中有的反映民俗民情，有的歌颂美好爱情，有的赞扬劳动者勤劳勇敢，有的批判统治者剥削压迫。</li>
+      <li>《诗经》保存了丰富的先秦史料。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">楚辞</p>
+    <ul>
+      <li>战国时期，楚国的<span class="kwd">屈原</span>等人吸收民歌精华，采用楚国方言，用浓郁的情感和丰富的想象，创作出一种新体诗歌<span class="kwd">楚辞</span>。</li>
+      <li>屈原写了许多优秀诗篇，代表作<span class="kwd">《离骚》</span>充分表达了对祖国和人民的热爱，是千古传诵的抒情长诗。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 《诗经》和楚辞是我国古典诗歌的<span class="kwd">两大源头</span>，对后世诗歌创作影响深远。</li>
+    </ul>
+    <table class="diff-table">
+      <tr><th>比较项</th><th>《诗经》</th><th>楚辞</th></tr>
+      <tr><td>时期</td><td>西周—春秋</td><td>战国</td></tr>
+      <tr><td>代表人物</td><td>各阶层人士（集体创作）</td><td>屈原（个人创作）</td></tr>
+      <tr><td>语言特色</td><td>四言为主，质朴写实</td><td>楚国方言，情感浓郁，想象丰富</td></tr>
+      <tr><td>内容特点</td><td>关注现实，反映社会生活</td><td>抒发爱国情感，追求理想</td></tr>
+      <tr><td>历史地位</td><td>第一部诗歌总集</td><td>新体诗歌，抒情长诗《离骚》</td></tr>
+      <tr><td>共同影响</td><td colspan="2">古典诗歌两大源头，对后世影响深远</td></tr>
+    </table>
+    <div class="link-bar">
+      <p>🔗 <strong>内在联系：</strong>西周春秋各阶层创作诗歌→收集整理→《诗经》（305篇·风雅颂·关注现实·保存先秦史料）→战国屈原吸收民歌精华→楚国方言→楚辞（《离骚》·爱国情感）→《诗经》和楚辞共同构成古典诗歌两大源头→对后世诗歌创作影响深远。</p>
+      <p style="margin-top:6px;"><span class="tag-zhongkao">📌 中考常考</span> 常以选择题考查"第一部诗歌总集"（《诗经》）、"《诗经》的组成部分"（风雅颂）、"楚辞代表人物"（屈原）、"代表作"（《离骚》）、"古典诗歌两大源头"（《诗经》和楚辞）。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 2 页：重难点解析 ============================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重点一：甲骨文的特点及其历史地位 -->
+  <div class="acc-group" id="accGrp1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('accGrp1')">
+      <h3>🔵 重点一：甲骨文 — 特点及其历史地位</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】甲骨文的发现与特点</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>甲骨文的含义：</strong>商朝时期人们常用龟甲和牛、羊等兽骨对许多事情进行占卜，把记录占卜情况的文字刻在甲骨上，这些文字被称为"甲骨文"。</p>
+          <p><strong>甲骨文的发现：</strong>清朝末年，河南安阳农民从地下挖掘出刻有符号的兽骨等，当作龙骨卖给中药店作药材。1899年，官员王懿荣发现龙骨上刻着符号，认为这是古文字，把药店里所有带符号的龙骨都买下来。学者经过研究，认定这些符号就是商朝的文字。</p>
+          <p><strong>甲骨文的特点：</strong></p>
+          <p>①<strong>数量庞大：</strong>商朝有字甲骨约15万片，单字计4400个以上，已经识别的字在1500个以上。</p>
+          <p>②<strong>内容丰富：</strong>涉及祭祀、战争、农牧业、官制、刑法、医药、天文历法等。</p>
+          <p>③<strong>结构成熟：</strong>已经具备了汉字的基本结构，是汉字发展的重要阶段。</p>
+          <p>④<strong>体系完整：</strong>是我国已发现的古代文字中年代最早、体系较为完整的成熟文字。</p>
+          <table class="diff-table">
+            <tr><th>比较项</th><th>甲骨文</th><th>金文</th></tr>
+            <tr><td>载体</td><td>龟甲、兽骨</td><td>青铜器（钟、鼎等）</td></tr>
+            <tr><td>时期</td><td>商朝</td><td>商朝中晚期—西周</td></tr>
+            <tr><td>方式</td><td>刻写</td><td>铸刻</td></tr>
+            <tr><td>内容</td><td>占卜记录</td><td>祭祀、军事、法律等</td></tr>
+            <tr><td>历史地位</td><td>成熟文字·有文字可考从商朝开始</td><td>文字数量增加·史料价值高</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】甲骨文的历史地位与汉字传承</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span> <strong>甲骨文的历史地位：</strong></p>
+          <p>①<strong>"我国有文字可考的历史从商朝开始"</strong>——这是甲骨文最重要的历史地位。在甲骨文发现之前，商朝的历史仅见于后世文献记载，缺乏同时代的文字证据。甲骨文的发现，使商朝历史从"传说"变为"信史"。</p>
+          <p>②<strong>汉字发展的重要阶段：</strong>甲骨文已经具备了汉字的基本结构（象形、指事、会意、形声等造字方法），说明汉字在商朝已经发展成熟。此后三千多年，汉字一脉相承，从未中断。</p>
+          <p>③<strong>研究商朝社会的第一手史料：</strong>甲骨文记载的祭祀、战争、农牧业、天文历法等内容，为研究商朝政治、经济、文化、社会生活提供了珍贵的原始资料。</p>
+          <p><strong>汉字的传承：</strong>甲骨文→金文→篆书→隶书→楷书→行书，汉字的演变一脉相承，从未中断，这是中华文明连续性的重要标志。世界上其他古文明（如古埃及象形文字、古巴比伦楔形文字）都已经消亡，唯有汉字沿用至今。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】甲骨文与文化自信</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> 甲骨文的发现与研究，对增强文化自信具有重要意义：</p>
+          <p>①<strong>印证了中华文明的悠久：</strong>甲骨文证明中国在商朝已有成熟的文字系统，中华文明有文字可考的历史达三千多年，是世界四大文明古国中唯一没有中断的文明。</p>
+          <p>②<strong>汉字的生命力：</strong>从甲骨文到今天的楷书，汉字一脉相承，体现了中华文化的强大生命力。汉字不仅是记录语言的工具，更是中华文明的载体和纽带。</p>
+          <p>③<strong>王懿荣的发现精神：</strong>王懿荣从药材中的"龙骨"上发现古文字，体现了学者的敏锐洞察力和严谨求实的精神。这一发现改写了中国学术史，使商朝历史成为信史。</p>
+          <p>④<strong>甲骨学的国际影响：</strong>甲骨文研究已成为国际性学问（甲骨学），与敦煌学、简牍学并称为中国三大显学，体现了中华文化的世界影响力。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）我国有文字可考的历史开始于（  ）A. 夏朝  B. 商朝  C. 西周  D. 春秋</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc1-zk')">显示答案</button>
+          <div class="a" id="acc1-zk"><strong>答案：B。</strong>解析：商朝的甲骨文已经具备了汉字的基本结构，是我国已发现的古代文字中年代最早、体系较为完整的成熟文字。因此，目前所知我国有文字可考的历史从商朝开始。A夏朝目前尚未发现成熟的文字；C西周已有金文，但有文字可考的历史从商朝甲骨文算起；D春秋时期文字记载更多，但不是起点。关键记忆"有文字可考=商朝=甲骨文"。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp1', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重点二：青铜器工艺成就及其象征意义 -->
+  <div class="acc-group" id="accGrp2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('accGrp2')">
+      <h3>🟠 重点二：青铜器 — 工艺成就、象征意义与三星堆</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】青铜铸造工艺与象征意义</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>青铜铸造业的特点：</strong></p>
+          <p>①<strong>国家掌控：</strong>商周时期青铜铸造业由国家掌控，说明青铜铸造是重要的国家产业。</p>
+          <p>②<strong>规模宏大：</strong>生产规模大，能铸造大型器物。</p>
+          <p>③<strong>组织严密，分工细致：</strong>有专门的管理机构和工匠队伍，工序分明。</p>
+          <p>④<strong>制作工艺高超：</strong>工匠能准确掌握铜、锡、铅的比例来制作各种器具。</p>
+          <p><strong>青铜器的用途与象征意义：</strong></p>
+          <p>①主要用于<strong>祭祀及军事</strong>等方面——"国之大事，在祀与戎"。</p>
+          <p>②成为王公贵族<strong>身份地位</strong>乃至<strong>国家权力</strong>的象征——青铜器的数量、大小、纹饰代表使用者的等级和权力。</p>
+          <p>③"鼎"在古代被视为国家政权的象征——"问鼎中原"就是争夺国家权力的代名词。</p>
+          <p><strong>金文：</strong>商朝中晚期开始，钟、鼎等青铜器上铸刻有文字，因古人称铜为金，所以这种文字被称为"金文"。西周时期青铜器上文字的数量明显增加，内容涉及祭祀典礼、军事行动、法律诉讼等，具有重要的史料价值。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】三星堆遗址与古蜀文明</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span> <strong>三星堆遗址的发现：</strong></p>
+          <p>长江上游地区的四川广汉三星堆遗址出土了数以万计的珍贵文物：</p>
+          <p>①<strong>金杖</strong>——象征权力的器物，与中原用鼎象征权力不同，体现了古蜀文明的独特性。</p>
+          <p>②<strong>青铜树</strong>——造型神奇，可能反映古蜀人的神话信仰。</p>
+          <p>③<strong>青铜面具和青铜人像</strong>——造型奇特，面容与中原人不同，展现了古蜀文明独特的艺术风格。</p>
+          <p><strong>三星堆与中原文化的关系：</strong></p>
+          <p>①三星堆遗址还出土了中原夏商王朝系统的<strong>玉礼器和青铜器</strong>，表明它与中原王朝具有密切关系。</p>
+          <p>②这说明夏商时期，中华大地上不同区域文明之间已有交流和联系。</p>
+          <p>③三星堆文化既有自身独特的特征，又与中原文化有密切关系，体现了中华文明<strong>"多元一体"</strong>的发展特征。</p>
+          <table class="diff-table">
+            <tr><th>比较项</th><th>中原青铜文明</th><th>三星堆文明</th></tr>
+            <tr><td>地理位置</td><td>黄河流域（河南安阳等）</td><td>长江上游（四川广汉）</td></tr>
+            <tr><td>代表性器物</td><td>鼎、簋等礼器</td><td>金杖、青铜树、面具、人像</td></tr>
+            <tr><td>权力象征</td><td>鼎</td><td>金杖</td></tr>
+            <tr><td>艺术风格</td><td>庄重威严</td><td>造型奇特</td></tr>
+            <tr><td>共同点</td><td colspan="2">同属夏商时期文明；三星堆出土中原系统玉礼器和青铜器，关系密切</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】中华文明的"多元一体"</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> <strong>从青铜器和三星堆看中华文明的特征：</strong></p>
+          <p>①<strong>多元起源：</strong>中华文明不是从单一中心发展起来的，而是黄河流域、长江流域等多个区域文明共同发展，形成了"满天星斗"的格局。中原青铜文明和三星堆文明是其中两颗耀眼的明星。</p>
+          <p>②<strong>一体交融：</strong>三星堆出土中原系统的玉礼器和青铜器，说明不同区域文明之间早有交流。中华文明在多元发展中逐渐走向交融一体，形成了以中原为核心、多区域文明共同参与的文明共同体。</p>
+          <p>③<strong>连续不断：</strong>从夏商周的青铜文明到今天，中华文明延续三千多年从未中断，是世界上唯一没有中断的古老文明。青铜器上的金文到今天的汉字，一脉相承。</p>
+          <p>④<strong>包容创新：</strong>中华文明善于吸收不同区域文化的精华，在交流融合中不断创新。三星堆文化既保留了自身特色，又吸收了中原文化因素，正是这种包容性的体现。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）四川广汉三星堆遗址出土的代表性文物是（  ）A. 司母戊鼎  B. 金杖、青铜面具  C. 甲骨文  D. 编钟</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc2-zk')">显示答案</button>
+          <div class="a" id="acc2-zk"><strong>答案：B。</strong>解析：三星堆遗址出土了金杖、青铜树、青铜面具和青铜人像等，造型奇特，展现了夏商时期丰富多彩的古蜀文明。A司母戊鼎是中原商朝青铜器的代表；C甲骨文是商朝刻在龟甲兽骨上的文字；D编钟是战国时期的青铜乐器（如曾侯乙编钟）。关键区分三星堆的标志性文物——金杖、青铜树、面具、人像，与中原青铜器风格迥异。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp2', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 难点+重点三：《诗经》和楚辞的文学地位及深远影响 -->
+  <div class="acc-group" id="accGrp3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('accGrp3')">
+      <h3>🟣 难点：《诗经》和楚辞 — 文学地位与对后世的影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】《诗经》——我国第一部诗歌总集</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>《诗经》概况：</strong></p>
+          <p>①<strong>时间：</strong>西周和春秋时期的诗歌。</p>
+          <p>②<strong>性质：</strong>我国现存第一部诗歌总集。</p>
+          <p>③<strong>篇数：</strong>共有305篇诗歌。</p>
+          <p>④<strong>结构：</strong>分为"风""雅""颂"三部分。</p>
+          <table class="diff-table">
+            <tr><th>部分</th><th>内容</th><th>来源</th></tr>
+            <tr><td><strong>"风"</strong></td><td>各诸侯国民间歌谣</td><td>民间采集</td></tr>
+            <tr><td><strong>"雅"</strong></td><td>宫廷宴饮、朝会乐歌</td><td>贵族创作</td></tr>
+            <tr><td><strong>"颂"</strong></td><td>宗庙祭祀乐歌</td><td>官方制作</td></tr>
+          </table>
+          <p><strong>《诗经》的特点与价值：</strong></p>
+          <p>①<strong>关注现实：</strong>反映民俗民情、歌颂美好爱情、赞扬劳动者勤劳勇敢、批判统治者剥削压迫。</p>
+          <p>②<strong>保存丰富的先秦史料：</strong>对研究西周至春秋的社会生活具有极高价值。</p>
+          <p>③<strong>奠定中国诗歌现实主义传统：</strong>《诗经》是中国古典诗歌现实主义的源头。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】楚辞与屈原——浪漫主义诗歌的源头</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span> <strong>楚辞：</strong></p>
+          <p>①<strong>产生时间：</strong>战国时期。</p>
+          <p>②<strong>代表人物：</strong>屈原等人。</p>
+          <p>③<strong>创作特点：</strong>吸收民歌精华，采用楚国方言，用浓郁的情感和丰富的想象，创作出一种新体诗歌。</p>
+          <p>④<strong>代表作：</strong>《离骚》——充分表达了对祖国和人民的热爱，是千古传诵的抒情长诗。</p>
+          <p><strong>屈原的爱国精神：</strong></p>
+          <p>屈原出身楚国贵族，担任重要官职，后遭排挤流放。流放期间，他忧国忧民的心志从未改变。公元前278年，楚国都城被秦军占领，屈原无比悲愤，于五月初五投汨罗江自尽。人们用种种方式追思他，据说每年的端午节就是为了纪念屈原这位伟大的爱国诗人。</p>
+          <p><strong>《诗经》与楚辞的对比：</strong></p>
+          <table class="diff-table">
+            <tr><th>比较项</th><th>《诗经》</th><th>楚辞</th></tr>
+            <tr><td>时期</td><td>西周—春秋</td><td>战国</td></tr>
+            <tr><td>创作方式</td><td>集体创作</td><td>个人创作（屈原等）</td></tr>
+            <tr><td>风格</td><td>现实主义，质朴写实</td><td>浪漫主义，想象丰富</td></tr>
+            <tr><td>语言</td><td>四言为主，中原雅言</td><td>楚国方言，句式灵活</td></tr>
+            <tr><td>文学地位</td><td>古典诗歌现实主义源头</td><td>古典诗歌浪漫主义源头</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】夏商周科技文化的整体特征与深远影响</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> <strong>《诗经》和楚辞是古典诗歌的两大源头：</strong></p>
+          <p>①<strong>现实主义传统：</strong>《诗经》关注现实、反映社会生活的创作传统，影响了后世从汉乐府到唐诗的现实主义诗歌创作。</p>
+          <p>②<strong>浪漫主义传统：</strong>楚辞浓郁的情感和丰富的想象，开创了浪漫主义传统，影响了从汉赋到李白诗歌的浪漫主义创作。</p>
+          <p>③<strong>两大源头交相辉映：</strong>现实主义（《诗经》）与浪漫主义（楚辞）共同构成了中国古典诗歌的两大传统，如同长江黄河，源远流长，滋养了后世两千多年的文学创作。</p>
+          <p><strong>夏商周科技与文化对后世的深远影响：</strong></p>
+          <p>①<strong>天文历法：</strong>二十四节气至今仍指导农业生产，被列入联合国教科文组织人类非物质文化遗产名录。</p>
+          <p>②<strong>医学：</strong>扁鹊的四诊法（望闻问切）至今仍是中医的基本诊断方法；《黄帝内经》至今仍是中医理论的经典。</p>
+          <p>③<strong>文字：</strong>从甲骨文到今天的汉字，一脉相承，中华文明因汉字而从未中断。</p>
+          <p>④<strong>青铜器：</strong>青铜文明奠定了中国礼乐文化的基础，"鼎"作为国家政权的象征沿用至今。</p>
+          <p>⑤<strong>文学：</strong>《诗经》和楚辞作为中国古典诗歌的两大源头，影响了后世全部文学创作。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> （选择题）我国现存第一部诗歌总集是（  ）A. 《楚辞》  B. 《诗经》  C. 《离骚》  D. 《论语》</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc3-zk')">显示答案</button>
+          <div class="a" id="acc3-zk"><strong>答案：B。</strong>解析：《诗经》共有305篇诗歌，分为"风""雅""颂"三部分，是我国现存第一部诗歌总集。A《楚辞》是战国时期屈原等人创作的新体诗歌，不是"总集"且时间晚于《诗经》；C《离骚》是屈原的代表作，是楚辞的代表作而非"第一部诗歌总集"；D《论语》是记录孔子言行的语录体著作，不是诗歌总集。关键记忆"第一部诗歌总集=《诗经》=305篇=风雅颂"。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp3', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 3 页：教材栏目 ============================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-chip active" onclick="filterCol('all', this)">📋 全部</span>
+    <span class="filter-chip" onclick="filterCol('think', this)">💭 想一想</span>
+    <span class="filter-chip" onclick="filterCol('related', this)">📖 相关史事</span>
+    <span class="filter-chip" onclick="filterCol('material', this)">📜 材料研读</span>
+    <span class="filter-chip" onclick="filterCol('virtue', this)">💝 学史崇德</span>
+    <span class="filter-chip" onclick="filterCol('homework', this)">📝 课后活动</span>
+    <span class="filter-chip" onclick="filterCol('expand', this)">🔍 知识拓展</span>
+  </div>
+
+  <!-- 想一想 -->
+  <div class="col-box" data-cat="think">
+    <div class="col-header" onclick="toggleColBox(this)"><span>💭 想一想 · 二十四节气的意义</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p class="q-text"><strong>问题：</strong>制定历法、分出二十四节气的意义是什么？</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col1')">显示答案</button>
+      <div class="a" id="exp-col1">
+        <p><strong>答案：</strong>制定历法、分出二十四节气的意义：</p>
+        <p>①<strong>指导农业生产：</strong>二十四节气是根据太阳在黄道上的位置划分的，准确反映了一年中季节、气候、物候的变化规律。农民可以根据节气安排播种、收获等农事活动，如"清明前后，种瓜种豆""白露早，寒露迟，秋分种麦正当时"。</p>
+        <p>②<strong>预测天气变化：</strong>节气帮助人们预判雨雪、霜冻等天气变化，提前做好防灾准备，减少自然灾害对农业的损失。</p>
+        <p>③<strong>安排社会生活：</strong>节气还与祭祀、节庆等社会活动密切相关，如清明祭祖、冬至祭天等，成为社会生活的重要节点。</p>
+        <p>④<strong>体现科学精神：</strong>二十四节气的制定需要长期的天文观测和数据积累，体现了先民对自然规律的深入观察和科学总结。</p>
+        <p>⑤<strong>文化遗产价值：</strong>二十四节气至今仍指导中国人的生产生活，2016年被列入联合国教科文组织人类非物质文化遗产名录，是中华文明对世界的贡献。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 相关史事1：《黄帝内经》 -->
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事 · 《黄帝内经》</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">《黄帝内经》是中医学的奠基之作。这本书托名"黄帝"，真实作者不详。书中基本内容约写成于战国后期，到西汉时一直有增补修订。《黄帝内经》运用阴阳五行学说，对生命的形成、疾病的起因、心理现象和生理现象的关系等进行阐释，主张治疗疾病要顺乎自然，要对症下药。</div>
+      <p style="margin-top:8px;"><strong>要点提示：</strong>①<strong>"托名黄帝"</strong>——古人为提高著作权威性，常托名黄帝等传说中的圣王；②<strong>成书过程</strong>——基本内容约写成于战国后期，到西汉一直有增补修订，是集体智慧的结晶；③<strong>理论体系</strong>——运用阴阳五行学说阐释生命和疾病，将哲学思想融入医学；④<strong>治疗原则</strong>——顺乎自然、对症下药，体现了中医"整体观念"和"辨证论治"的特色；⑤<strong>历史地位</strong>——中医学的奠基之作，至今仍是中医理论的经典著作。</p>
+    </div>
+  </div>
+
+  <!-- 相关史事2：甲骨文发现 -->
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事 · 甲骨文的发现</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">清朝末年，河南安阳的农民从地下挖掘出刻有符号的兽骨等，当作龙骨卖给中药店作药材。1899年，官员王懿（yì）荣得了病，派人买药后发现龙骨上刻着符号，认为这是古文字，就把药店里所有带符号的龙骨都买下来。学者经过研究，认定这些符号就是商朝的文字。</div>
+      <p style="margin-top:8px;"><strong>要点提示：</strong>①<strong>"龙骨"当药材</strong>——甲骨文在被识别前，长期被当作中药材使用，说明其价值未被认识；②<strong>王懿荣的发现</strong>（1899年）——因病买药偶然发现龙骨上的符号，凭借学者素养判断为古文字，体现了敏锐的洞察力；③<strong>全部收购</strong>——把药店里所有带符号的龙骨都买下来，为甲骨文的收集和研究奠定了基础；④<strong>学者认定</strong>——经过研究认定是商朝文字，使商朝历史从"传说"变为"信史"；⑤<strong>发现地点</strong>——河南安阳，正是商朝晚期都城殷墟的所在地。甲骨文的发现是中国学术史上的重大事件。</p>
+    </div>
+  </div>
+
+  <!-- 材料研读：《诗经·秦风·无衣》 -->
+  <div class="col-box" data-cat="material">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📜 材料研读 · 《诗经·秦风·无衣》</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">"岂曰无衣？与子同裳。王于兴师，修我甲兵，与子偕行。"</div>
+      <div class="source-ref">——《诗经·秦风·无衣》</div>
+      <p class="q-text"><strong>问题：</strong>说说诗句反映的时代特征。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col2')">显示答案</button>
+      <div class="a" id="exp-col2">
+        <p><strong>答案：</strong>这首诗反映的时代特征：</p>
+        <p>①<strong>战争频繁：</strong>"王于兴师，修我甲兵"——君王发兵出征，士兵修整铠甲兵器，反映了春秋战国时期战争频繁的社会现实。诸侯争霸、兼并战争不断，军事活动是当时社会生活的重要组成部分。</p>
+        <p>②<strong>同仇敌忾的精神：</strong>"岂曰无衣？与子同裳"——谁说没有衣服？我和你同穿一件战裙。体现了士兵们团结一心、同甘共苦的精神，面对战争毫不畏惧。</p>
+        <p>③<strong>尚武风气：</strong>"与子偕行"——和你一同出征。诗中充满了昂扬向上的战斗精神，反映了秦国尚武的社会风气——秦国最终统一六国，与其尚武传统密切相关。</p>
+        <p>④<strong>民歌反映现实：</strong>这首诗出自《诗经·秦风》，是秦国民间歌谣，说明《诗经》"风"的部分真实反映了各诸侯国的社会生活。《无衣》反映的战争主题，正是春秋战国时期社会动荡、战争频繁的时代特征的真实写照。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 学史崇德：屈原 -->
+  <div class="col-box" data-cat="virtue">
+    <div class="col-header" onclick="toggleColBox(this)"><span>💝 学史崇德 · 屈原的爱国精神</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">屈原出身于楚国贵族，担任重要官职，后来因遭到排挤而被流放。流放期间，他忧国忧民的心志从未改变。公元前278年，楚国都城被秦军占领。屈原知道后无比悲愤，带着至死不离开楚国的决心，于五月初五投汨罗江自尽。屈原为国为民而死，人们用种种方式追思他。据说，每年的端午节就是为了纪念屈原这位伟大的爱国诗人。</div>
+      <p style="margin-top:8px;"><strong>要点提示：</strong>屈原是中国历史上伟大的爱国诗人，他的精神值得后人铭记：</p>
+      <p>①<strong>忧国忧民：</strong>即使被流放，屈原"忧国忧民的心志从未改变"——他始终关心国家命运和人民疾苦，在《离骚》中写下"长太息以掩涕兮，哀民生之多艰"等名句。</p>
+      <p>②<strong>至死不渝：</strong>楚国都城被秦军占领后，屈原"带着至死不离开楚国的决心"投江自尽——他对祖国的忠诚至死不渝，宁死不愿离开故土。</p>
+      <p>③<strong>以死明志：</strong>屈原投汨罗江不是逃避，而是以死表达对国家沦亡的悲愤和对祖国的忠贞——这种"以身殉国"的精神感动了后世无数人。</p>
+      <p>④<strong>端午纪念：</strong>人们用端午节纪念屈原——赛龙舟、吃粽子等习俗都与追思屈原有关，说明爱国者永远活在人民心中。</p>
+      <p>⑤<strong>文化影响：</strong>屈原的爱国精神成为中华民族精神的重要组成部分，影响了后世无数仁人志士——从文天祥到林则徐，"先天下之忧而忧"的家国情怀一脉相承。</p>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="homework">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📝 课后活动</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p class="q-text"><strong>第1题：</strong>你能辨认出下列甲骨文是什么字吗？试试看。（图示4个甲骨文：人、大、从、北）</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col3')">显示答案</button>
+      <div class="a" id="exp-col3">
+        <p><strong>答案：</strong>教材图示的4个甲骨文分别是：</p>
+        <p>①<strong>"人"</strong>——象形字。甲骨文"人"像一个侧身站立、弯腰垂臂的人形，简洁地勾勒出人的侧面轮廓。</p>
+        <p>②<strong>"大"</strong>——象形字。甲骨文"大"像一个正面站立、张开双臂双腿的人形，表示"大"的意思——人以张开双臂为"大"。</p>
+        <p>③<strong>"从"</strong>——会意字。甲骨文"从"由两个"人"组成，一前一后，表示"跟随"的意思——一个人跟着另一个人就是"从"。</p>
+        <p>④<strong>"北"</strong>——会意字。甲骨文"北"由两个背对背的"人"组成，表示"背对、背离"的意思——"北"的本义是"背"，后来引申为方位词"北方"。</p>
+        <p style="margin-top:8px;"><strong>甲骨文造字方法：</strong>从这4个字可以看出甲骨文已具备象形（人、大）、会意（从、北）等造字方法，说明甲骨文已是成熟的文字体系。象形是描摹事物形状，会意是用两个或多个符号组合表达新义。</p>
+      </div>
+      <p class="q-text" style="margin-top:14px;"><strong>第2题：</strong>结合所学，说说夏商周时期科技与文化的成就对后世有什么深远影响。</p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col4')">显示答案</button>
+      <div class="a" id="exp-col4">
+        <p><strong>答案：</strong>夏商周时期科技与文化成就对后世的深远影响：</p>
+        <p><strong>①天文历法方面：</strong></p>
+        <p>·商朝历法一年12个月、大月30天、小月29天、闰年加一个月的体系，为后世历法奠定了基础。</p>
+        <p>·战国时期确定的二十四节气，至今仍指导着农业生产和人们的日常生活，2016年被列入联合国教科文组织人类非物质文化遗产名录。</p>
+        <p>·干支纪日法沿用至今，如"甲子""乙丑"等仍用于农历纪年。</p>
+        <p><strong>②医学方面：</strong></p>
+        <p>·扁鹊发明的望、闻、问、切四诊法，至今仍是中医诊断疾病的基本方法。</p>
+        <p>·《黄帝内经》作为中医学的奠基之作，其阴阳五行、整体观念、辨证论治等理论至今仍是中医理论的核心。</p>
+        <p><strong>③文字方面：</strong></p>
+        <p>·甲骨文具备了汉字的基本结构，是汉字发展的重要阶段。从甲骨文→金文→篆书→隶书→楷书，汉字一脉相承，三千多年从未中断，使中华文明成为世界上唯一没有中断的古老文明。</p>
+        <p>·"我国有文字可考的历史从商朝开始"——甲骨文使商朝历史成为信史。</p>
+        <p><strong>④青铜器方面：</strong></p>
+        <p>·商周青铜铸造工艺为后世金属铸造技术奠定了基础。</p>
+        <p>·青铜礼器成为中华礼乐文化的重要载体，"鼎"作为国家政权象征的文化传统延续至今。</p>
+        <p><strong>⑤文学方面：</strong></p>
+        <p>·《诗经》作为中国古典诗歌现实主义的源头，影响了从汉乐府到唐诗的现实主义创作传统。</p>
+        <p>·楚辞作为中国古典诗歌浪漫主义的源头，影响了从汉赋到李白诗歌的浪漫主义创作传统。</p>
+        <p>·《诗经》和楚辞共同构成古典诗歌两大源头，滋养了后世两千多年的文学创作。</p>
+        <p style="margin-top:8px;"><strong>总结：</strong>夏商周时期的科技与文化成就奠定了中华文明的基础，在天文历法、医学、文字、青铜器、文学等领域都对后世产生了深远而持久的影响，是中华文明连续性和创造性的重要体现。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 知识拓展：曾侯乙编钟 -->
+  <div class="col-box" data-cat="expand">
+    <div class="col-header" onclick="toggleColBox(this)"><span>🔍 知识拓展 · 曾侯乙编钟</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>曾侯乙编钟</strong></p>
+      <p>1978年，湖北随州曾侯乙墓出土了一整套战国时期的编钟，这就是闻名中外的曾侯乙编钟。全套编钟共65件，分3层8组悬挂在长7.48米、高2.65米的钟架上。其中，上层3组共19件钮钟，中下层5组共45件甬钟和1件镈（bó）钟。编钟上有铭文3700多字，内容为编号、记事、标音等。曾侯乙编钟是我国迄今发现的保存最好、音律最全、音域最广、气势最宏伟的编钟，至今还能演奏乐曲。</p>
+      <p style="margin-top:8px;"><strong>点拨：</strong>曾侯乙编钟是夏商周时期青铜铸造工艺和音乐文化的杰出代表：①<strong>铸造工艺高超</strong>——65件编钟分3层8组悬挂，每件钟都能发出两个不同的乐音，体现了精准的合金配比和铸造技术；②<strong>音乐成就卓越</strong>——音律最全、音域最广，跨越五个八度，能演奏完整的乐曲，说明战国时期音乐已高度发展；③<strong>铭文价值</strong>——3700多字铭文用于编号、记事、标音，是研究战国音乐史的重要史料；④<strong>"一钟双音"</strong>——每件钟的正鼓部和侧鼓部各能发出一个乐音，这一技术令现代科学家惊叹；⑤<strong>文化意义</strong>——编钟是礼乐制度的重要器物，"钟鸣鼎食"代表贵族的生活方式，曾侯乙编钟体现了先秦礼乐文明的辉煌。至今还能演奏乐曲，说明其工艺之精湛，历经2400多年仍能发出美妙乐音。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 4 页：课堂训练 ============================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="score-label">📊 计分板（共9题：选择5题 + 材料4题）</div>
+      <div class="score-number"><span id="scoreVal">0</span> / 9</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题1 -->
+  <div class="exercise" id="q1">
+    <p class="q-text"><strong>1.</strong> 传世文献中我国历史上第一次有确切日期的日食记录见于（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 商朝甲骨文</label>
+      <label onclick="optClick(this,'B','q1')">B. 《春秋》</label>
+      <label onclick="optClick(this,'C','q1')">C. 《诗经》</label>
+      <label onclick="optClick(this,'D','q1')">D. 《周易》</label>
+    </div>
+    <div class="a" id="exp-q1"><strong>答案：C</strong><br><strong>解析：</strong>《诗经》记载了公元前776年9月6日的日食，是传世文献中我国历史上第一次有确切日期的日食记录。A商朝甲骨文虽有日食、月食记载，但没有确切日期的"传世文献"记录；B《春秋》记载的是公元前613年彗星扫过北斗（哈雷彗星），不是日食记录；D《周易》不是天文记录文献。关键区分"第一次有确切日期的日食记录"=《诗经》，"哈雷彗星最早记录"=《春秋》。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q1')">显示答案</button>
+  </div>
+
+  <!-- 选择题2 -->
+  <div class="exercise" id="q2">
+    <p class="q-text"><strong>2.</strong> 我国有文字可考的历史开始于（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 夏朝</label>
+      <label onclick="optClick(this,'B','q2')">B. 商朝</label>
+      <label onclick="optClick(this,'C','q2')">C. 西周</label>
+      <label onclick="optClick(this,'D','q2')">D. 春秋</label>
+    </div>
+    <div class="a" id="exp-q2"><strong>答案：B</strong><br><strong>解析：</strong>商朝的甲骨文已经具备了汉字的基本结构，是我国已发现的古代文字中年代最早、体系较为完整的成熟文字，因此我国有文字可考的历史从商朝开始。A夏朝目前尚未发现成熟的文字；C西周已有金文，但有文字可考的历史从商朝甲骨文算起；D春秋时期文字记载更多，但不是起点。关键记忆"有文字可考=商朝=甲骨文"。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q2')">显示答案</button>
+  </div>
+
+  <!-- 选择题3 -->
+  <div class="exercise" id="q3">
+    <p class="q-text"><strong>3.</strong> 战国时期，人们已经把一年分为（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 四季</label>
+      <label onclick="optClick(this,'B','q3')">B. 十二个月</label>
+      <label onclick="optClick(this,'C','q3')">C. 二十四节气</label>
+      <label onclick="optClick(this,'D','q3')">D. 二十八宿</label>
+    </div>
+    <div class="a" id="exp-q3"><strong>答案：C</strong><br><strong>解析：</strong>战国时期，人们已经把一年分为二十四节气。二十四节气是根据太阳在黄道上的位置划分的，准确反映了一年中季节、气候、物候的变化规律，至今仍指导农业生产。A"四季"是基本的季节划分，不是战国时期的新成就；B"十二个月"是商朝历法的特点（一年12个月，大月30天，小月29天）；D"二十八宿"是星空划分体系，不是"把一年分为"的内容。关键记忆"二十四节气=战国时期"。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q3')">显示答案</button>
+  </div>
+
+  <!-- 选择题4 -->
+  <div class="exercise" id="q4">
+    <p class="q-text"><strong>4.</strong> 四川广汉三星堆遗址出土的代表性文物是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 司母戊鼎</label>
+      <label onclick="optClick(this,'B','q4')">B. 甲骨文</label>
+      <label onclick="optClick(this,'C','q4')">C. 金杖、青铜面具</label>
+      <label onclick="optClick(this,'D','q4')">D. 曾侯乙编钟</label>
+    </div>
+    <div class="a" id="exp-q4"><strong>答案：C</strong><br><strong>解析：</strong>三星堆遗址出土了金杖、青铜树、青铜面具和青铜人像等，造型奇特，展现了夏商时期丰富多彩的古蜀文明。A司母戊鼎是中原商朝青铜器的代表，出土地点在河南安阳；B甲骨文是商朝刻在龟甲兽骨上的文字，出土地点主要在河南安阳殷墟；D曾侯乙编钟是战国时期青铜乐器，出土于湖北随州。关键区分三星堆的标志性文物——金杖、青铜树、面具、人像，与中原青铜器风格迥异。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q4')">显示答案</button>
+  </div>
+
+  <!-- 选择题5 -->
+  <div class="exercise" id="q5">
+    <p class="q-text"><strong>5.</strong> 下列关于《诗经》的表述，正确的是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 屈原创作的诗歌集</label>
+      <label onclick="optClick(this,'B','q5')">B. 我国现存第一部诗歌总集，共305篇</label>
+      <label onclick="optClick(this,'C','q5')">C. 分为"赋""比""兴"三部分</label>
+      <label onclick="optClick(this,'D','q5')">D. 战国时期楚国的新体诗歌</label>
+    </div>
+    <div class="a" id="exp-q5"><strong>答案：B</strong><br><strong>解析：</strong>《诗经》是我国现存第一部诗歌总集，共有305篇诗歌，分为"风""雅""颂"三部分。A屈原创作的是楚辞（如《离骚》），不是《诗经》；C《诗经》分为"风""雅""颂"三部分，"赋""比""兴"是《诗经》的表现手法，不是组成部分；D战国时期楚国的新体诗歌是楚辞，不是《诗经》。《诗经》收集的是西周和春秋时期的诗歌。关键记忆"《诗经》=第一部诗歌总集=305篇=风雅颂"。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q5')">显示答案</button>
+  </div>
+
+  <!-- 材料题一 -->
+  <div class="exercise" id="mq1">
+    <p class="q-text"><strong>题一</strong> （中难度）阅读下列材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料一：</strong>商朝时期人们常用龟甲和牛、羊等兽骨对许多事情进行占卜，把记录占卜情况的文字刻在甲骨上，这些文字被称为"甲骨文"。<br>
+      <strong>材料二：</strong>甲骨文已经具备了汉字的基本结构，是汉字发展的重要阶段，也是我国已发现的古代文字中年代最早、体系较为完整的成熟文字。
+    </div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 根据材料一，甲骨文是怎样产生的？甲骨文的主要用途是什么？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1a'); trackMatQ('mq1a')">显示答案</button>
+    <div class="a" id="exp-m1a"><strong>答案：</strong>甲骨文的产生和用途：<br><strong>产生方式：</strong>商朝时期人们常用龟甲和牛、羊等兽骨对许多事情进行占卜，把记录占卜情况的文字刻在甲骨上，这些文字就是甲骨文。即甲骨文是<strong>占卜活动的记录</strong>，刻写在龟甲和兽骨上。<br><strong>主要用途：</strong>记录占卜的内容，涉及祭祀、战争、农牧业、官制、刑法、医药、天文历法等。商朝人通过占卜来预测吉凶，甲骨文就是这些占卜活动的文字记录，反映了商朝人"无事不卜"的社会习俗。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 根据材料二和所学知识，说说甲骨文的历史地位。为什么说"我国有文字可考的历史从商朝开始"？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1b'); trackMatQ('mq1b')">显示答案</button>
+    <div class="a" id="exp-m1b"><strong>答案：</strong><strong>甲骨文的历史地位：</strong><br>①甲骨文已经具备了汉字的基本结构，是汉字发展的重要阶段。<br>②是我国已发现的古代文字中年代最早、体系较为完整的成熟文字。<br>③记载内容丰富，是研究商朝社会的第一手史料。<br><strong>"我国有文字可考的历史从商朝开始"的原因：</strong><br>①"有文字可考"意味着同时代的文字记录可以印证历史——甲骨文是商朝人自己留下的文字记录，是研究商朝历史的直接证据。<br>②在甲骨文发现之前，商朝的历史主要见于后世文献（如司马迁《史记·殷本纪》）的追述，缺乏同时代的文字证据，被视为"传说时代"。<br>③甲骨文的发现使商朝历史有了文字实物的支撑，从"传说"变为"信史"——因此说"我国有文字可考的历史从商朝开始"。<br>④甲骨文已识别1500个以上的单字，内容涉及商朝社会各方面，足以支撑对商朝历史的系统研究。</div>
+  </div>
+
+  <!-- 材料题二 -->
+  <div class="exercise" id="mq2">
+    <p class="q-text"><strong>题二</strong> （较难）阅读下列材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料一：</strong>西周和春秋时期，从平民到贵族的社会各阶层人士，在生产生活、祭祀典礼等各种场合，创作并传唱诗歌。这些诗歌被收集整理成我国现存第一部诗歌总集《诗经》。<br>
+      <strong>材料二：</strong>战国时期，楚国的屈原等人吸收民歌精华，采用楚国方言，用浓郁的情感和丰富的想象，创作出一种新体诗歌楚辞。
+    </div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 根据材料一和所学知识，《诗经》有什么特点？它分为哪三部分？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2a'); trackMatQ('mq2a')">显示答案</button>
+    <div class="a" id="exp-m2a"><strong>答案：</strong><strong>《诗经》的特点：</strong><br>①<strong>来源广泛：</strong>从平民到贵族的社会各阶层人士在各种场合创作并传唱。<br>②<strong>关注现实：</strong>反映民俗民情、歌颂美好爱情、赞扬劳动者勤劳勇敢、批判统治者剥削压迫。<br>③<strong>保存丰富的先秦史料。</strong><br>④<strong>第一部诗歌总集：</strong>我国现存第一部诗歌总集，共305篇。<br><strong>《诗经》分为"风""雅""颂"三部分：</strong><br>·"风"——各诸侯国民间歌谣，出自民间。<br>·"雅"——宫廷宴饮、朝会乐歌，出自贵族。<br>·"颂"——宗庙祭祀乐歌，出自官方。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 根据材料一、二和所学知识，比较《诗经》和楚辞的异同，并说明它们对后世的影响。</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2b'); trackMatQ('mq2b')">显示答案</button>
+    <div class="a" id="exp-m2b"><strong>答案：</strong><strong>《诗经》和楚辞的异同：</strong><br><strong>相同点：</strong>①都是先秦时期的重要诗歌作品；②都是中国古典诗歌的源头；③都吸收了民歌精华；④都对后世诗歌创作产生了深远影响。<br><strong>不同点：</strong><br>·<strong>时期不同：</strong>《诗经》是西周至春秋时期；楚辞是战国时期。<br>·<strong>创作方式不同：</strong>《诗经》是各阶层集体创作、收集整理而成；楚辞是屈原等个人创作。<br>·<strong>语言风格不同：</strong>《诗经》以四言为主，质朴写实；楚辞采用楚国方言，情感浓郁，想象丰富。<br>·<strong>文学传统不同：</strong>《诗经》开创现实主义传统；楚辞开创浪漫主义传统。<br><strong>对后世的影响：</strong><br>①《诗经》和楚辞是我国古典诗歌的两大源头，对后世诗歌创作影响深远。<br>②《诗经》的现实主义传统影响了汉乐府、唐诗（如杜甫）等现实主义诗歌创作。<br>③楚辞的浪漫主义传统影响了汉赋、李白诗歌等浪漫主义创作。<br>④两大源头交相辉映，共同滋养了后世两千多年的中国文学创作。</div>
+  </div>
+</div>
+
+<!-- ============================ 第 5 页：知识结构图 ============================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 夏商周科技与文化因果链</div>
+    <p style="text-align:center;font-size:12px;color:#999;margin-bottom:16px;">💡 点击节点查看详情</p>
+    <div class="kg-chain">
+      <div class="kg-node left c1" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">⭐</span>
+        <strong>天文 · 历法 · 医学</strong>
+        <p>日食月食 · 二十四节气 · 扁鹊四诊 · 《黄帝内经》</p>
+        <div class="kg-detail">原始社会天文观测→商朝甲骨文记录日食月食→《诗经》记载第一次有确切日期的日食（前776年）→《春秋》记载哈雷彗星（前613年）→商朝历法完备（12月+闰月+干支纪日）→战国二十四节气→医学：神农尝百草→夏商医药知识→战国扁鹊望闻问切四诊法→《黄帝内经》奠基中医学。天文历法指导农业，医学奠基中医理论。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">📜</span>
+        <strong>甲骨文 · 金文 · 青铜器</strong>
+        <p>成熟文字 · 有文字可考从商朝开始 · 国家掌控铸造 · 三星堆</p>
+        <div class="kg-detail">商朝占卜→刻甲骨→甲骨文（15万片·4400单字·已识别1500+·具备汉字基本结构·成熟文字）→我国有文字可考的历史从商朝开始→同时期金文铸于青铜器→西周金文数量增加→青铜铸造业国家掌控（规模宏大·分工细致·工艺高超）→祭祀军事用器→身份权力象征→三星堆遗址（金杖·青铜树·面具·人像·古蜀文明·与中原密切关系）→中华文明"多元一体"。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">📖</span>
+        <strong>《诗经》 · 楚辞</strong>
+        <p>第一部诗歌总集 · 风·雅·颂 · 屈原 · 《离骚》</p>
+        <div class="kg-detail">西周春秋各阶层创作诗歌→收集整理→《诗经》（305篇·风雅颂·关注现实·保存先秦史料·现实主义源头）→战国屈原吸收民歌精华→楚国方言→楚辞（情感浓郁·想象丰富·《离骚》爱国精神·浪漫主义源头）→屈原投汨罗江以身殉国→端午节纪念→《诗经》和楚辞=古典诗歌两大源头。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4" onclick="toggleKgDetail(this)">
+        <span class="kg-icon">🌟</span>
+        <strong>深远影响 · 文明传承</strong>
+        <p>二十四节气至今 · 四诊法至今 · 汉字一脉相承 · 诗歌两大源头</p>
+        <div class="kg-detail">夏商周科技文化对后世深远影响：①天文历法——二十四节气至今指导农业（非遗）+干支纪日沿用；②医学——四诊法至今+《黄帝内经》仍是中医经典；③文字——甲骨文→金文→篆书→隶书→楷书，一脉相承，中华文明因汉字从未中断；④青铜器——礼乐文化基础+"鼎"象征政权；⑤文学——《诗经》现实主义+楚辞浪漫主义=古典诗歌两大源头。中华文明连续性与创造性的重要体现。</div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 天文历法医学：日食·节气·四诊·《黄帝内经》</div>
+      <div class="kg-rule r2">🟠 甲骨文青铜器：成熟文字·有文字可考·三星堆</div>
+      <div class="kg-rule r3">🟢 诗经与楚辞：305篇·风雅颂·《离骚》·两大源头</div>
+      <div class="kg-rule r4">🔴 深远影响：节气至今·汉字传承·诗歌源头·文化自信</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 6 页：结束页 ============================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第二单元 · 夏商周时期</div>
+    <h1 style="font-size:22pt;">第8课 · 夏商周时期的科技与文化</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成 · 第二单元 结束</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>天文、历法和医学</h3>
+        <ul>
+          <li>甲骨文中有<strong>日食、月食</strong>记载</li>
+          <li>战国时期分出<strong>二十四节气</strong></li>
+          <li>扁鹊四诊法（望闻问切），《黄帝内经》奠基</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>甲骨文与青铜器</h3>
+        <ul>
+          <li><strong>甲骨文</strong>：年代最早、体系完整的成熟文字</li>
+          <li>我国<strong>有文字可考的历史从商朝开始</strong></li>
+          <li>青铜器象征权力；金文铸刻；三星堆古蜀文明</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>《诗经》和楚辞</h3>
+        <ul>
+          <li><strong>《诗经》</strong>：第一部诗歌总集，风·雅·颂</li>
+          <li><strong>楚辞</strong>：屈原创作，《离骚》千古传诵</li>
+          <li>二者是<strong>我国古典诗歌的两大源头</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav" style="margin:20px 0;">
+    <div><a href="七上-U2-第7课_百家争鸣.html">← 上一课：第7课 百家争鸣</a></div>
+    <div class="nav-center">第8课</div>
+    <div><a href="七上-U3-第9课_秦统一中国.html">下一课：第9课 秦统一中国 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版初中历史 · 七年级上册 · 第二单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================ 底部翻页导航 ============================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+// 键盘翻页
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') {
+    e.preventDefault(); goPage(0);
+  } else if (e.key === 'End') {
+    e.preventDefault(); goPage(totalPages - 1);
+  }
+});
+
+pgPrev.disabled = true;
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1: 'C', q2: 'B', q3: 'C', q4: 'C', q5: 'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() {
+  document.getElementById('scoreVal').textContent = score;
+}
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  document.getElementById('exp-' + qid).classList.add('show');
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+  score++;
+  updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {};
+  matDone = {};
+  score = 0;
+  updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) {
+      l.classList.remove('disabled', 'correct', 'wrong');
+    });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== 标签页切换 =====
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+
+function markMastered(grpId, btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+  var grp = document.getElementById(grpId);
+  if (grp) { grp.querySelector('.acc-group-hd').style.opacity = '0.7'; }
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) {
+      box.classList.remove('filtered-out');
+    } else {
+      box.classList.add('filtered-out');
+    }
+  });
+}
+
+function toggleColBox(header) {
+  var box = header.parentElement;
+  box.classList.toggle('open');
+}
+
+// ===== 知识图谱 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+}
+
+// ===== deep-card 折叠 =====
+(function() {
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card) {
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.addEventListener('click', function() { bd.classList.toggle('show'); });
+    }
+  });
+})();
+</script>
+
+  <div class="bottom-nav">
+  <div><a href="七上-U2-第7课_百家争鸣.html">← 上一课：第7课 百家争鸣</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第8课</div>
+  <div><a href="七上-U3-第9课_秦统一中国.html">下一课：第9课 秦统一中国 →</a></div>
+  </div>
+</body>
+</html>

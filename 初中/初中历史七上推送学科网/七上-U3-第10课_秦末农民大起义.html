@@ -1,0 +1,1866 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第10课 秦末农民大起义 — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide {
+  display: none;
+  min-height: calc(100vh - 80px);
+  padding-top: 10px;
+  animation: slideIn 0.35s ease;
+}
+.page-slide.active { display: block; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-header {
+  text-align: center;
+  padding: 14px 0 10px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+.slide-header .module-num {
+  font-size: 12pt;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.slide-header .module-title {
+  font-size: 18pt;
+  color: var(--primary-dark);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* ========== 结束页：核心要点回顾 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title {
+  text-align: center; font-size: 17pt; font-weight: 700;
+  color: var(--primary-dark); margin-bottom: 16px;
+}
+.recap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.recap-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 16px 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 3px 12px rgba(124,108,240,0.08);
+  position: relative;
+  text-align: left;
+}
+.recap-card-num {
+  position: absolute; top: -12px; left: 16px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14pt; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.recap-card h3 {
+  font-size: 14pt; font-weight: 700;
+  color: var(--primary-dark);
+  margin: 4px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary-light);
+}
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li {
+  font-size: 12.5pt; line-height: 1.7;
+  padding: 4px 0 4px 18px;
+  position: relative;
+  color: #444;
+}
+.recap-card ul li::before {
+  content: '▸'; position: absolute; left: 0; top: 4px;
+  color: var(--primary); font-size: 10pt;
+}
+.recap-card ul li strong { color: var(--primary-dark); }
+
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: #fff;
+  box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 8px 16px;
+  height: 52px;
+}
+.pg-nav button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 6px 16px;
+  font-size: 13pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #dcd4f5;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter {
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* ========== Hero 标题区 ========== */
+.hero-wrap {
+  background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0);
+  padding: 36px 20px 30px;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 0 36px 36px;
+  box-shadow: 0 6px 30px rgba(61,43,140,0.20);
+  margin: 0 -20px 28px;
+}
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+/* ========== 学习目标面板 ========== */
+.learn-target {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.learn-target h3 {
+  color: var(--primary-dark);
+  font-size: 16pt;
+  margin-bottom: 12px;
+}
+.learn-target .target-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.learn-target .target-item {
+  font-size: 13.5pt;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.learn-target .target-item:hover { color: var(--primary); }
+.learn-target .target-item.checked { color: var(--green); font-weight: 600; }
+.learn-target .target-item.checked::before { content: '✅ '; }
+
+/* ========== 标签页切换 ========== */
+.tab-bar {
+  display: flex; gap: 0;
+  margin-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.tab-btn {
+  flex: 1; padding: 14px 8px;
+  font-size: 14pt; font-weight: 700;
+  border: none; cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  background: #e8e0ff; color: #5a4ac7;
+  letter-spacing: 1px;
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+}
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ========== 时间轴横条 ========== */
+.timeline-bar {
+  background: #f0edff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12pt;
+  color: #5a4ac7;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* ========== 知识卡片 ========== */
+.kp-card {
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.08);
+}
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; }
+.kp-card li { margin: 6px 0; font-size: 14pt; }
+
+/* ========== 贯通框 ========== */
+.link-bar {
+  border: 2px dashed #d5cef0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 14px;
+  background: #faf8ff;
+  font-size: 13pt;
+  color: #5a4ac7;
+}
+
+/* ========== 标签 ========== */
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-zhongkao {
+  background: #f39c12; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-value {
+  background: #e74c3c; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+.tag-soc {
+  background: #3498db; color: #fff; border-radius: 12px;
+  padding: 2px 10px; font-size: 11pt; display: inline-block;
+  margin-right: 4px;
+}
+
+/* ========== 手风琴组 ========== */
+.acc-group {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.acc-group-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s;
+}
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #e74c3c, #ec7063); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 22px;
+  background: #faf8ff;
+  border-top: 1px solid #eee;
+}
+.acc-mastered button {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 6px 16px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== 折叠三级卡片 ========== */
+.deep-card {
+  margin: 10px 18px 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.deep-card-hd {
+  background: linear-gradient(135deg, #e67e22, #f0ad4e);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 13.5pt;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+/* ========== 对比表格 ========== */
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 13pt;
+}
+.diff-table th {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+}
+.diff-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== 栏目容器 ========== */
+.col-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.06);
+  transition: all 0.3s;
+}
+.col-box.filtered-out { display: none; }
+.col-header {
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 15pt;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+/* ========== 筛选按钮条 ========== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.filter-chip {
+  padding: 6px 14px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+  color: #5a4ac7;
+}
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ========== 引文材料 / 题目 / 解答 ========== */
+.source-material {
+  border-left: 4px solid var(--primary);
+  padding: 8px 14px;
+  margin: 8px 0;
+  background: #faf8ff;
+  font-size: 13pt;
+}
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.exercise {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+.options label {
+  display: block;
+  padding: 8px 14px;
+  margin: 4px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14pt;
+  transition: all 0.2s;
+  background: #faf8ff;
+}
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+.score-banner {
+  background: linear-gradient(135deg, #f0edff, #e0daff);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-label { font-size: 12pt; color: #888; }
+.score-reset {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 12pt;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.a { display: none; }
+.a.show { display: block; }
+.a {
+  background: #f0edff;
+  border: 1px solid #d5cef0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 10px 0;
+  font-size: 14pt;
+}
+
+.ans-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 12pt;
+  cursor: pointer;
+  margin: 6px 0;
+  transition: all 0.2s;
+}
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(124,108,240,0.08);
+}
+.kg-title {
+  text-align: center;
+  font-size: 17pt;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node {
+  width: 90%;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  animation: kgPulse 3s ease-in-out infinite;
+}
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; }
+.kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+/* 脉冲呼吸动画 */
+@keyframes kgPulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); }
+}
+/* 徽章 */
+.kg-expand-badge {
+  position: absolute;
+  top: -10px; right: -8px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px 3px 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(124,108,240,0.35);
+  white-space: nowrap;
+  transition: all 0.3s;
+  z-index: 2;
+}
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail {
+  max-height: 0;
+  overflow: hidden;
+  font-size: 11pt;
+  color: #666;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  transition: all 0.4s ease;
+}
+.kg-node.expanded .kg-detail {
+  max-height: 300px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #ddd;
+}
+.kg-node.expanded { animation: none; }
+/* 提示横幅 */
+.kg-hint-banner {
+  background: linear-gradient(135deg, #e8e0ff, #f3e8ff);
+  border: 1.5px dashed var(--primary);
+  border-radius: 10px;
+  padding: 10px 18px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+.kg-hint-banner .hint-icon { font-size: 18px; }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12px; margin: 0 4px; }
+.kg-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.kg-rule {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5pt;
+  text-align: center;
+  font-weight: 600;
+}
+.kg-rule.r1 { background: #fdecea; color: #e74c3c; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #e8e0ff; color: #5a4ac7; }
+
+/* ========== 页脚 ========== */
+footer {
+  text-align: center;
+  padding: 20px 0 10px;
+  border-top: 2px solid var(--border);
+  margin-top: 24px;
+  font-size: 12px;
+  color: #999;
+}
+footer p { margin: 4px 0; }
+
+/* ========== 底部导航（结束页内） ========== */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(124,108,240,0.08);
+  font-size: 12pt;
+}
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+/* ========== 封面页"开始学习"按钮 ========== */
+.start-btn {
+  display: block;
+  margin: 20px auto 10px;
+  background: linear-gradient(135deg, #7c6cf0, #5a4ac7);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 36px;
+  font-size: 16pt;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(124,108,240,0.30);
+}
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+
+/* ================================================================ */
+/* 🆕 交互升级：新增CSS (v2.0 闯关解锁版)                            */
+/* ================================================================ */
+
+/* 闯关进度条 */
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+/* 挑战任务标题 */
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* 拖拽排序 */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item {
+  padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px;
+  cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s;
+}
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot {
+  min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:12pt;
+  transition:all 0.2s; background:#faf8ff; position:relative;
+}
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+/* 填空填词 */
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input {
+  width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px;
+  font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff;
+}
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+/* 连线匹配 */
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item {
+  padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s;
+  border:2px solid #dcd4f5; background:#fff; text-align:center;
+}
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+.match-item.hint { animation:pulse 0.6s ease 3; }
+@keyframes pulse { 0%,100%{border-color:#dcd4f5} 50%{border-color:var(--orange);box-shadow:0 0 0 3px rgba(243,156,18,0.3)} }
+
+/* 记忆翻转卡 */
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back {
+  position:absolute; width:100%; height:100%; backface-visibility:hidden;
+  border-radius:12px; display:flex; align-items:center; justify-content:center;
+  padding:10px; font-size:11pt; text-align:center;
+}
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+/* 地图点击标注 */
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-svg-container { position:relative; display:inline-block; }
+.map-marker {
+  position:absolute; width:22px; height:22px; border-radius:50%; 
+  background:rgba(124,108,240,0.5); cursor:pointer; transition:all 0.2s;
+  border:2px solid var(--primary); z-index:2; transform:translate(-50%,-50%);
+}
+.map-marker:hover { transform:translate(-50%,-50%) scale(1.4); background:rgba(124,108,240,0.9); }
+.map-marker.found { background:rgba(39,174,96,0.8); border-color:var(--green); }
+.map-hint { position:absolute; background:#fff; border:1px solid #ddd; border-radius:6px; padding:4px 8px; font-size:10pt; white-space:nowrap; pointer-events:none; opacity:0; transition:opacity 0.2s; transform:translate(-50%,-130%); z-index:3; }
+.map-marker:hover .map-hint, .map-marker.found .map-hint { opacity:1; }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+/* 完成解锁提示 */
+.stage-done {
+  display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green);
+  border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center;
+  font-size:14pt; font-weight:700; color:var(--green);
+  animation:fadeInUp 0.4s ease;
+}
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+@media (max-width:680px) {
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .match-cols { gap:14px; }
+  .sort-pool { gap:5px; }
+  .sort-slots { gap:5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ 第 0 页：封面 ============================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第三单元 · 秦汉时期：统一多民族封建国家的建立和巩固</div>
+    <h1>第10课 · 秦末农民大起义</h1>
+    <div class="hero-sub">统编版初中历史  七年级上册</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">🕐 <strong>时空观念：</strong>知道秦末农民大起义的时间（前209年大泽乡起义、前207年秦亡），识读秦末起义形势图，了解起义从爆发到秦亡的时空进程。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">📜 <strong>史料实证：</strong>通过《史记·陈涉世家》和贾谊《过秦论》等文献，认识秦的暴政与农民起义爆发的关系，理解"王侯将相宁有种乎"的内涵。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">🔍 <strong>历史解释：</strong>分析秦朝速亡的原因（暴政是根本），理解陈胜吴广起义的首创精神和项羽、刘邦在秦亡中的作用。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">❤️ <strong>家国情怀：</strong>认识人民群众在历史进程中的伟大作用，体会陈胜吴广不畏强暴、敢于反抗的革命精神。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================ 第 1 页：知识要点（交互升级版） ============================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/4 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">🔥 秦的暴政</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">⚔️ 陈胜、吴广起义</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">🏁 秦朝的灭亡</button>
+  </div>
+
+  <!-- ========================= Tab 1 — 秦的暴政 ========================= -->
+  <div class="kp-card tab-panel active" id="tab1" style="border-radius:10px;">
+    <div class="timeline-bar">赋税沉重 · 徭役繁重 · 刑罚严酷 · 秦二世残暴 · 焚书坑儒</div>
+    <h3>（一）秦的暴政</h3>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">赋税沉重</p>
+    <ul>
+      <li>秦始皇对农民征收<span class="kwd">沉重的赋税</span>，迫使农民将收获物的<span class="kwd">2/3</span>上缴国家。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">徭役繁重</p>
+    <ul>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 秦朝大规模征发徭役，修<span class="kwd">骊山陵</span>、建<span class="kwd">阿房宫</span>、筑<span class="kwd">万里长城</span>，全国役使劳力数百万人。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">刑罚严酷</p>
+    <ul>
+      <li>秦朝法律<span class="kwd">非常严苛</span>，实行<span class="kwd">连坐</span>、<span class="kwd">族诛</span>等刑罚。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">秦二世更加残暴</p>
+    <ul>
+      <li>公元前210年秦始皇死后，秦二世（<span class="kwd">胡亥</span>）继位，统治更加残暴。</li>
+    </ul>
+
+    <!-- 🆕 挑战一：拖拽排序——秦暴政事件时间线 -->
+    <div class="challenge-title">🎮 挑战一：将秦暴政的关键事件按时间先后拖入正确槽位</div>
+    <p style="text-align:center;font-size:11pt;color:#888;margin-bottom:8px;">拖动下方事件卡片到对应的序号槽位中</p>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-id="FZ" id="item_FZ">赋税沉重</span>
+      <span class="sort-item" draggable="true" data-id="YL" id="item_YL">徭役繁重</span>
+      <span class="sort-item" draggable="true" data-id="XF" id="item_XF">刑罚严酷</span>
+      <span class="sort-item" draggable="true" data-id="FS" id="item_FS">焚书坑儒</span>
+      <span class="sort-item" draggable="true" data-id="HE" id="item_HE">秦二世继位更加残暴</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-answer="FZ"><span class="slot-label">① (最早)</span></div>
+      <div class="sort-slot" data-answer="YL"><span class="slot-label">②</span></div>
+      <div class="sort-slot" data-answer="XF"><span class="slot-label">③</span></div>
+      <div class="sort-slot" data-answer="FS"><span class="slot-label">④</span></div>
+      <div class="sort-slot" data-answer="HE"><span class="slot-label">⑤ (最晚)</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort('sortPool1')">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult1"></div>
+    <div class="stage-done" id="stage1Done">✅ 关卡一通过！了解了秦暴政的层层升级过程。</div>
+
+    <!-- 翻转卡：核心概念记忆 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 点击卡片翻转 — 核心概念记忆</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">秦的暴政四大表现是？</div><div class="flash-back">赋税沉重（2/3上缴）<br>徭役繁重（数百万劳力）<br>刑罚严酷（连坐、族诛）<br>焚书坑儒（思想控制）</div></div>
+        </div>
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">秦二世是谁？</div><div class="flash-back">胡亥，秦始皇死后继位，统治比秦始皇更加残暴，对民众的剥削压迫变本加厉。</div></div>
+        </div>
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">"焚书坑儒"是什么？</div><div class="flash-back">秦始皇为加强思想控制，焚烧诸子百家书籍，坑杀儒生方士，摧残文化、钳制思想。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================= Tab 2 — 陈胜吴广起义 ========================= -->
+  <div class="kp-card tab-panel" id="tab2" style="border-radius:10px;">
+    <div class="timeline-bar">公元前209年 · 大泽乡 · 遇雨失期 · "王侯将相宁有种乎" · 张楚政权</div>
+    <h3>（二）陈胜、吴广起义</h3>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">起义爆发</p>
+    <ul>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 公元前209年夏，被征发戍守渔阳的农民<span class="kwd">陈胜</span>和<span class="kwd">吴广</span>，在<span class="kwd">大泽乡</span>（今安徽宿州）遇雨误期，按秦律"失期当斩"，被迫发动起义。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">"王侯将相宁有种乎"</p>
+    <ul>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 陈胜高呼"<span class="kwd">王侯将相宁有种乎</span>"，号召大家起来反抗秦朝暴政，体现了不畏强权、敢于反抗的精神。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">张楚政权</p>
+    <ul>
+      <li>起义军攻占<span class="kwd">陈县</span>后，陈胜自立为王，建立"<span class="kwd">张楚</span>"政权。这是中国历史上<strong>第一次大规模的农民起义</strong>。</li>
+    </ul>
+
+    <!-- 🆕 挑战二：填空填词——大泽乡起义关键信息 -->
+    <div class="challenge-title">🎮 挑战二：填写大泽乡起义的关键信息</div>
+    <p style="text-align:center;font-size:11pt;color:#888;margin-bottom:8px;">在空白处填入正确的内容（输入后按Tab跳到下一空）</p>
+    <div class="fill-blank-wrap">
+      <div class="fill-blank-row"><span>起义时间：公元前</span><input class="fill-input" data-answer="209" placeholder="年份" id="fill1">年，发生在<span class="kwd">夏季</span>。</div>
+      <div class="fill-blank-row"><span>起义地点：</span><input class="fill-input" data-answer="大泽乡" placeholder="地点" id="fill2">（今安徽宿州）。</div>
+      <div class="fill-blank-row"><span>发动者：</span><input class="fill-input" data-answer="陈胜" placeholder="人物" id="fill3"><span>和吴广。</span></div>
+      <div class="fill-blank-row"><span>起义口号：</span><input class="fill-input" data-answer="王侯将相宁有种乎" placeholder="口号" id="fill4" style="width:200px;"></div>
+      <div class="fill-blank-row"><span>建立政权：</span><input class="fill-input" data-answer="张楚" placeholder="政权名" id="fill5"><span>，都城在陈县。</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stage2Done">✅ 关卡二通过！掌握了大泽乡起义的核心信息。</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 点击卡片翻转 — 关键人物与意义</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">陈胜吴广的身份？</div><div class="flash-back">贫苦农民出身。陈胜是阳城人，吴广是阳夏人（今河南境内）。代表下层人民反抗暴政的力量。</div></div>
+        </div>
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">"张楚"的"张"是什么意思？</div><div class="flash-back">"张大楚国"之意，表明陈胜要恢复楚国、号召原楚地人民反抗秦朝。</div></div>
+        </div>
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">这次起义的历史地位？</div><div class="flash-back">中国历史上第一次大规模的农民起义，具有首创精神。司马迁在《史记》中为之立"陈涉世家"。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================= Tab 3 — 秦朝的灭亡 ========================= -->
+  <div class="kp-card tab-panel" id="tab3" style="border-radius:10px;">
+    <div class="timeline-bar">公元前207年 · 巨鹿之战 · 破釜沉舟 · 刘邦入咸阳 · 秦王子婴投降</div>
+    <h3>（三）秦朝的灭亡</h3>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">巨鹿之战</p>
+    <ul>
+      <li>陈胜吴广起义失败后，<span class="kwd">项羽</span>和<span class="kwd">刘邦</span>领导的起义军成为反秦主力。</li>
+      <li><span class="tag-zhongkao">📌 中考常考</span> 公元前207年，项羽在<span class="kwd">巨鹿</span>（今河北平乡）与秦军主力决战，<span class="kwd">破釜沉舟</span>，以少胜多，大败秦军主力。</li>
+    </ul>
+    <p style="font-weight:700;margin:10px 0 6px;color:var(--primary-dark);">刘邦入咸阳</p>
+    <ul>
+      <li>巨鹿之战消灭秦军主力后，<span class="kwd">刘邦</span>率军西进，攻入<span class="kwd">咸阳</span>。</li>
+      <li>秦王子婴出城投降，秦朝灭亡。从公元前221年统一到公元前207年灭亡，秦朝仅存在了<strong>15年</strong>。</li>
+    </ul>
+
+    <!-- 🆕 挑战三：连线匹配——事件与特点配对 -->
+    <div class="challenge-title">🎮 挑战三：将左列事件与右列特点一一配对</div>
+    <p style="text-align:center;font-size:11pt;color:#888;margin-bottom:8px;">先在左列点击选中一项，再在右列点击对应配对</p>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📋 事件</div>
+          <div class="match-item" onclick="selectMatch(this)" data-id="a1">大泽乡起义</div>
+          <div class="match-item" onclick="selectMatch(this)" data-id="a2">巨鹿之战</div>
+          <div class="match-item" onclick="selectMatch(this)" data-id="a3">刘邦入咸阳</div>
+          <div class="match-item" onclick="selectMatch(this)" data-id="a4">秦二世继位</div>
+          <div class="match-item" onclick="selectMatch(this)" data-id="a5">陈胜称王</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">🏷️ 特点/意义</div>
+          <div class="match-item" onclick="pairMatch(this)" data-id="b1" data-pair="a3">秦朝灭亡标志（前207）</div>
+          <div class="match-item" onclick="pairMatch(this)" data-id="b2" data-pair="a1">第一次大规模农民起义（前209）</div>
+          <div class="match-item" onclick="pairMatch(this)" data-id="b3" data-pair="a2">破釜沉舟·消灭秦军主力</div>
+          <div class="match-item" onclick="pairMatch(this)" data-id="b4" data-pair="a4">暴政加剧，矛盾激化</div>
+          <div class="match-item" onclick="pairMatch(this)" data-id="b5" data-pair="a5">建立张楚政权</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stage3Done">✅ 关卡三通过！理清了秦末各事件之间的关系。</div>
+
+    <!-- 秦末起义关键地点地图标注 -->
+    <div class="challenge-title">🗺️ 挑战四：点击地图上的关键地点进行标注</div>
+    <div class="map-zone">
+      <div class="map-instruction">点击下方地图中的标记点，在右侧清单中查看已标注地点（共6处）</div>
+      <div class="map-svg-container">
+        <svg viewBox="0 0 500 380" width="100%" style="max-width:460px;">
+          <!-- 黄河 -->
+          <path d="M60,120 Q120,100 180,125 Q240,145 300,120 Q360,95 420,110" fill="none" stroke="#f0ad4e" stroke-width="3" stroke-dasharray="8,4"/>
+          <text x="250" y="105" font-size="11" fill="#f0ad4e" text-anchor="middle">黄 河</text>
+          <!-- 长江 -->
+          <path d="M80,240 Q140,225 200,240 Q280,260 360,235 Q400,230 430,240" fill="none" stroke="#3498db" stroke-width="3" stroke-dasharray="8,4"/>
+          <text x="420" y="235" font-size="10" fill="#3498db">长 江</text>
+          <!-- 标记点 -->
+          <div class="map-marker" style="left:30%;top:55%;" data-loc="咸阳" onclick="markMap(this)"><div class="map-hint">咸阳（秦都）</div></div>
+          <div class="map-marker" style="left:62%;top:40%;" data-loc="大泽乡" onclick="markMap(this)"><div class="map-hint">大泽乡（首义地）</div></div>
+          <div class="map-marker" style="left:55%;top:61%;" data-loc="陈县" onclick="markMap(this)"><div class="map-hint">陈县（张楚政权）</div></div>
+          <div class="map-marker" style="left:48%;top:22%;" data-loc="巨鹿" onclick="markMap(this)"><div class="map-hint">巨鹿（决战地）</div></div>
+          <div class="map-marker" style="left:68%;top:50%;" data-loc="沛县" onclick="markMap(this)"><div class="map-hint">沛县（刘邦起兵）</div></div>
+          <div class="map-marker" style="left:75%;top:62%;" data-loc="吴" onclick="markMap(this)"><div class="map-hint">吴（项羽起兵）</div></div>
+        </svg>
+      </div>
+      <div class="map-checklist" id="mapCheck10">
+        <span class="map-check-item" data-loc="咸阳">咸阳</span>
+        <span class="map-check-item" data-loc="大泽乡">大泽乡</span>
+        <span class="map-check-item" data-loc="陈县">陈县</span>
+        <span class="map-check-item" data-loc="巨鹿">巨鹿</span>
+        <span class="map-check-item" data-loc="沛县">沛县</span>
+        <span class="map-check-item" data-loc="吴">吴</span>
+      </div>
+    </div>
+    <div class="sort-result" id="mapResult"></div>
+    <div class="stage-done" id="stage4Done">✅ 关卡四通过！在地图上找到全部6个关键地点。</div>
+
+    <!-- 翻转卡 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 点击卡片翻转 — 核心人物与战役</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">项羽的关键战役是什么？</div><div class="flash-back">巨鹿之战（前207年），破釜沉舟，以少胜多，消灭秦军主力。是反秦斗争的决定性胜利。</div></div>
+        </div>
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">刘邦入咸阳发生了什么？</div><div class="flash-back">前207年，刘邦率军攻入咸阳，秦王子婴出城投降，秦朝灭亡。秦仅存15年（前221-前207）。</div></div>
+        </div>
+        <div class="flash-card" onclick="this.classList.toggle('flipped')">
+          <div class="flash-inner"><div class="flash-front">秦亡的根本原因是什么？</div><div class="flash-back">秦的暴政（赋税沉重、徭役繁重、刑罚严酷、焚书坑儒）导致社会矛盾空前激化。根本原因≠直接导火索（遇雨误期）。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 2 页：重难点解析 ============================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重点一：秦的暴政——原因与表现 -->
+  <div class="acc-group" id="accGrp1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('accGrp1')">
+      <h3>🔴 重点一：秦的暴政 — 原因与表现</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】秦的暴政主要体现在哪些方面？</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span> <strong>秦的暴政四大表现：</strong></p>
+          <p>① <strong>赋税沉重：</strong>农民将2/3收获物上缴国家，负担极其沉重。</p>
+          <p>② <strong>徭役繁重：</strong>修骊山陵（70多万人）、建阿房宫、筑万里长城，全国役使劳力数百万人。</p>
+          <p>③ <strong>刑罚严酷：</strong>实行连坐、族诛等刑罚，一人犯法亲属邻里都要受牵连。</p>
+          <p>④ <strong>思想控制：</strong>焚书坑儒，摧残文化，钳制思想。</p>
+          <p>⑤ <strong>秦二世变本加厉：</strong>前210年秦始皇死后，胡亥继位，统治更加残暴。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】秦朝速亡的根本原因与直接原因</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span> <strong>秦朝速亡的原因分析：</strong></p>
+          <p><strong>根本原因：</strong>秦的暴政——赋税沉重、徭役繁重、刑罚严酷、焚书坑儒。</p>
+          <p><strong>直接原因（导火索）：</strong>陈胜吴广等戍卒因遇雨误期，按秦律"失期当斩"，被迫在大泽乡揭竿而起。</p>
+          <p>💡 <strong>中考链接：</strong>注意区分"根本原因"（暴政）和"直接原因"（遇雨误期）。</p>
+          <table class="diff-table">
+            <tr><th>原因类型</th><th>具体内容</th><th>性质</th></tr>
+            <tr><td>根本原因</td><td>秦的暴政</td><td>秦朝灭亡的根本因素</td></tr>
+            <tr><td>直接原因</td><td>戍卒遇雨误期</td><td>起义的直接导火索</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】从历史唯物主义的视角看秦的暴政</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span> <strong>人民群众是历史的创造者</strong>——秦朝虽然建立了强大的中央集权制度，但由于暴政失去民心，最终被农民起义推翻。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> "秦二世……繁刑严诛，吏治刻深，赏罚不当，赋敛无度。"——贾谊《过秦论》</p>
+          <p><strong>问题：</strong>结合材料，分析秦朝灭亡的原因。</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc1-zk')">显示答案</button>
+          <div class="a" id="acc1-zk"><strong>答案：</strong>根本原因是秦的暴政。具体表现：①赋税沉重（2/3上缴）；②徭役繁重（数百万劳力）；③刑罚严酷（连坐、族诛）；④秦二世更加残暴。结论：秦朝因暴政失去民心，最终被农民大起义推翻，印证了"得民心者得天下，失民心者失天下"的历史规律。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp1', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重点二：陈胜吴广起义——首创精神 -->
+  <div class="acc-group" id="accGrp2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('accGrp2')">
+      <h3>🟠 重点二：陈胜吴广起义 — 首创精神与历史意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】陈胜吴广起义的经过是怎样的？</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span></p>
+          <p>① <strong>时间：</strong>公元前209年。</p>
+          <p>② <strong>地点：</strong>大泽乡（今安徽宿州）。</p>
+          <p>③ <strong>原因：</strong>戍卒遇雨误期，"失期当斩"。</p>
+          <p>④ <strong>口号：</strong>"王侯将相宁有种乎"。</p>
+          <p>⑤ <strong>发展：</strong>攻占陈县，建立"张楚"政权。</p>
+          <p>⑥ <strong>结果：</strong>被秦军镇压，陈胜、吴广先后被杀。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】为什么陈胜吴广起义虽然失败但反秦浪潮没有平息？</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 史实支撑</span></p>
+          <p>① <strong>暴政未改变：</strong>秦的暴政依然在继续，人民的苦难没有减轻。</p>
+          <p>② <strong>各地响应：</strong>全国各地反秦浪潮已形成，项羽、刘邦继起。</p>
+          <p>③ <strong>首创精神激励：</strong>"王侯将相宁有种乎"激发了更多人的反抗勇气。</p>
+          <p>④ <strong>秦朝元气大伤：</strong>起义沉重打击了秦朝统治基础。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【素养提升】陈胜吴广起义的首创精神与历史意义</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 家国情怀</span></p>
+          <p>① <strong>首创意义：</strong>中国历史上第一次大规模的农民起义，开创了农民武装反抗暴政的先河。</p>
+          <p>② <strong>革命精神：</strong>"王侯将相宁有种乎"体现了反对天命、不畏强权的精神。</p>
+          <p>③ <strong>历史地位：</strong>司马迁在《史记》中为陈胜立"世家"（《陈涉世家》），体现了不以成败论英雄的史学观。</p>
+          <p><span class="tag-zhongkao">🎯 中考典型例题</span> 司马迁在《史记》中专门为陈胜立"世家"，你怎么理解？</p>
+          <button class="ans-btn" onclick="toggleAnswer('acc2-zk')">显示答案</button>
+          <div class="a" id="acc2-zk"><strong>答案：</strong>①陈胜是中国历史上第一次大规模农民起义的领袖，具有首创精神；②陈胜起义揭开了推翻秦朝的序幕；③司马迁不以成败论英雄，肯定陈胜在历史转折中的巨大作用。关键记忆"陈涉世家=首创精神+不以成败论英雄"。</div>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp2', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 难点：项羽、刘邦与秦朝灭亡 -->
+  <div class="acc-group" id="accGrp3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('accGrp3')">
+      <h3>🟣 难点：项羽、刘邦与秦朝灭亡的历史逻辑</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">【基础理解】巨鹿之战与刘邦入咸阳</div>
+        <div class="deep-card-bd show">
+          <p><span class="tag-zhongkao">🎯 中考常考</span></p>
+          <p><strong>巨鹿之战（前207年）：</strong>项羽"破釜沉舟"，以少胜多消灭秦军主力。</p>
+          <p><strong>刘邦入咸阳（前207年）：</strong>在项羽与秦军主力决战时，刘邦率军攻入咸阳。秦王子婴投降，秦朝灭亡。秦朝从统一到灭亡仅存15年。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">【联系拓展】项羽与刘邦在反秦斗争中的不同作用</div>
+        <div class="deep-card-bd">
+          <table class="diff-table">
+            <tr><th>比较项</th><th>项羽</th><th>刘邦</th></tr>
+            <tr><td>出身</td><td>楚国贵族后代</td><td>泗水亭长</td></tr>
+            <tr><td>关键战役</td><td>巨鹿之战</td><td>西进入咸阳</td></tr>
+            <tr><td>特点</td><td>破釜沉舟，勇猛善战</td><td>善于用人，战略灵活</td></tr>
+            <tr><td>历史作用</td><td>军事上击败秦朝</td><td>政治上结束秦朝</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="acc-mastered">
+        <button onclick="markMastered('accGrp3', this)">✓ 我已理解</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 3 页：教材栏目 ============================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-chip active" onclick="filterCol('all', this)">📋 全部</span>
+    <span class="filter-chip" onclick="filterCol('related', this)">📖 相关史事</span>
+    <span class="filter-chip" onclick="filterCol('material', this)">📜 材料研读</span>
+    <span class="filter-chip" onclick="filterCol('map', this)">🗺️ 读地图</span>
+    <span class="filter-chip" onclick="filterCol('people', this)">👤 人物扫描</span>
+    <span class="filter-chip" onclick="filterCol('think', this)">💭 想一想</span>
+    <span class="filter-chip" onclick="filterCol('homework', this)">📝 课后活动</span>
+    <span class="filter-chip" onclick="filterCol('expand', this)">🔍 知识拓展</span>
+  </div>
+
+  <!-- 相关史事1 -->
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事 · 秦朝征发徭役的规模</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">秦始皇修建骊山陵和阿房宫，役使70多万人。征伐南方，调发50万士兵。北击匈奴，连年调动40万士兵和大量民夫。</div>
+      <p style="margin-top:8px;"><strong>要点：</strong>①三组数字——修陵/宫70多万、征南50万、击北40万——反映出徭役规模之大；②秦朝人口约2000万，三项合计占用近200万人，即约十分之一的人口；③大量劳动力脱离生产，导致田地荒芜。</p>
+    </div>
+  </div>
+
+  <!-- 材料研读 -->
+  <div class="col-box" data-cat="material">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📜 材料研读 · 贾谊《过秦论》</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">"秦二世……繁刑严诛，吏治刻深，赏罚不当，赋敛无度。"</div>
+      <div class="source-ref">——贾谊《过秦论》</div>
+      <p class="q-text"><strong>问题：根据材料，概括秦二世的暴政有哪些表现？这导致了什么后果？</strong></p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col1')">显示答案</button>
+      <div class="a" id="exp-col1">
+        <p><strong>表现：</strong>①"繁刑严诛"——刑罚繁多严酷；②"吏治刻深"——官吏统治苛刻残酷；③"赏罚不当"——赏罚不公平；④"赋敛无度"——赋税征收无度。</p>
+        <p><strong>后果：</strong>秦二世的暴政加剧了社会矛盾，使广大农民无法生存，最终爆发陈胜吴广起义和全国性反秦浪潮，秦朝迅速灭亡。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 读地图 -->
+  <div class="col-box" data-cat="map">
+    <div class="col-header" onclick="toggleColBox(this)"><span>🗺️ 读地图 · 秦末起义形势图</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p class="q-text"><strong>问题1：指出陈胜吴广起义爆发的地点。</strong></p>
+      <p><strong>答：</strong>大泽乡（今安徽宿州），位于秦朝东南部。起义军攻占陈县（今河南淮阳）后建立张楚政权。</p>
+      <p class="q-text" style="margin-top:10px;"><strong>问题2：起义活动主要集中在哪些地区？</strong></p>
+      <p><strong>答：</strong>集中在原关东六国地区，特别是原楚国地域（今河南、安徽、江苏一带），对秦灭六国积怨较深。</p>
+      <p class="q-text" style="margin-top:10px;"><strong>问题3：指出巨鹿的位置和战略意义。</strong></p>
+      <p><strong>答：</strong>巨鹿位于今河北平乡。项羽在此消灭秦军主力后，秦朝失去镇压起义的军事力量，刘邦得以顺利入关。</p>
+    </div>
+  </div>
+
+  <!-- 人物扫描 -->
+  <div class="col-box" data-cat="people">
+    <div class="col-header" onclick="toggleColBox(this)"><span>👤 人物扫描 · 陈胜、吴广</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">陈胜，阳城（今河南登封）人；吴广，阳夏（今河南太康）人。他们都是贫苦农民出身。公元前209年，在大泽乡揭竿而起，发动了中国历史上第一次大规模的农民起义。</div>
+      <p style="margin-top:8px;"><strong>要点：</strong>①两人都是<strong>贫苦农民</strong>出身；②"<strong>揭竿而起</strong>"——"斩木为兵，揭竿为旗"；③<strong>阳城、阳夏</strong>——今河南境内，考试可能在地图题中出现。</p>
+    </div>
+  </div>
+
+  <!-- 想一想 -->
+  <div class="col-box" data-cat="think">
+    <div class="col-header" onclick="toggleColBox(this)"><span>💭 想一想</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p class="q-text"><strong>问题：陈胜、吴广起义虽然失败了，但反秦的浪潮并没有平息。这是为什么？</strong></p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col2')">显示答案</button>
+      <div class="a" id="exp-col2">
+        <p>① <strong>根本原因未消除：</strong>秦的暴政依然在继续，人民的苦难没有减轻。</p>
+        <p>② <strong>各地纷纷响应：</strong>全国起义军形成燎原之势，项羽、刘邦等继起。</p>
+        <p>③ <strong>首创精神的激励：</strong>"王侯将相宁有种乎"激发了更多人的反抗。</p>
+        <p>④ <strong>秦朝元气大伤：</strong>起义沉重打击了秦朝统治力量。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 相关史事2：巨鹿之战 -->
+  <div class="col-box" data-cat="related">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 相关史事 · 巨鹿之战</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <div class="source-material">公元前207年，项羽率领起义军在巨鹿与秦军主力展开大战。他命令部下破釜沉舟，只带三天口粮，表示决一死战的决心。起义军勇猛无比，将秦军主力消灭。</div>
+      <p style="margin-top:8px;"><strong>要点：</strong>①<strong>时间</strong>——前207年；②<strong>"破釜沉舟"</strong>——砸碎锅灶、凿沉渡船，只带三天口粮；③<strong>结果</strong>——消灭秦军主力；④成语"破釜沉舟"来源于此。</p>
+    </div>
+  </div>
+
+  <!-- 课后活动 -->
+  <div class="col-box" data-cat="homework">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📝 课后活动</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p class="q-text"><strong>第1题：下列与秦朝速亡有关的举措有哪些？</strong></p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col3')">显示答案</button>
+      <div class="a" id="exp-col3">
+        <table class="diff-table">
+          <tr><th>举措</th><th>是否相关</th><th>理由</th></tr>
+          <tr><td>焚书坑儒</td><td>✓</td><td>摧残文化、钳制思想</td></tr>
+          <tr><td>强征赋税</td><td>✓</td><td>农民2/3收获物上缴</td></tr>
+          <tr><td>严刑苛法</td><td>✓</td><td>连坐、族诛</td></tr>
+          <tr><td>修骊山陵</td><td>✓</td><td>役使70多万人</td></tr>
+          <tr><td>修建长城</td><td>✓</td><td>加重徭役负担</td></tr>
+          <tr><td>统一文字</td><td>✗</td><td>促进文化交流的进步举措</td></tr>
+        </table>
+      </div>
+      <p class="q-text" style="margin-top:14px;"><strong>第2题：说一说陈胜、吴广起义在中国历史上的地位。</strong></p>
+      <button class="ans-btn" onclick="toggleAnswer('exp-col4')">显示答案</button>
+      <div class="a" id="exp-col4">
+        <p>① <strong>历史地位：</strong>中国历史上<strong>第一次大规模的农民起义</strong>，具有首创意义。</p>
+        <p>② <strong>对秦朝的影响：</strong>沉重打击了秦朝的统治基础，点燃了全国反秦的燎原之火。</p>
+        <p>③ <strong>对后世的影响：</strong>"王侯将相宁有种乎"为后世农民起义提供精神动力。</p>
+        <p>④ <strong>司马迁的肯定：</strong>为陈胜立"世家"（《陈涉世家》），体现了不以成败论英雄的史学观。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 知识拓展 -->
+  <div class="col-box" data-cat="expand">
+    <div class="col-header" onclick="toggleColBox(this)"><span>🔍 知识拓展 · 各路反秦势力</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p>陈胜吴广起义爆发后，各地反秦势力纷纷响应。项梁、项羽叔侄在吴（今江苏苏州）起兵；刘邦在沛县（今江苏沛县）起义，称"沛公"。萧何、曹参、樊哙、周勃等后来成为西汉开国名臣的人物也加入反秦队伍。他们的军队逐渐成为反秦的主力。</p>
+      <p style="margin-top:8px;"><strong>点拨：</strong>①反秦力量广泛——既有农民起义也有旧贵族，形成广泛的"反秦统一战线"；②刘邦善于用人——队伍中聚集了大量人才（萧何、曹参等）；③社会全面崩溃——各阶层都起来反抗，说明秦朝统治已失去所有支持；④为下一课（第11课楚汉之争）做铺垫。</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================ 第 4 页：课堂训练 ============================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div class="score-label">📊 计分板（共7题：选择5题 + 材料2题）</div>
+      <div class="score-number"><span id="scoreVal">0</span> / 7</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题1 -->
+  <div class="exercise" id="q1">
+    <p class="q-text"><strong>1.</strong> 中国历史上第一次大规模的农民起义是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 国人暴动</label>
+      <label onclick="optClick(this,'B','q1')">B. 陈胜、吴广起义</label>
+      <label onclick="optClick(this,'C','q1')">C. 刘邦起义</label>
+      <label onclick="optClick(this,'D','q1')">D. 项羽起义</label>
+    </div>
+    <div class="a" id="exp-q1"><strong>答案：B</strong><br><strong>解析：</strong>公元前209年，陈胜、吴广在大泽乡发动起义，是中国历史上第一次大规模的农民起义。A国人暴动发生在西周（前841年），是平民暴动但不是农民起义。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q1')">显示答案</button>
+  </div>
+
+  <!-- 选择题2 -->
+  <div class="exercise" id="q2">
+    <p class="q-text"><strong>2.</strong> 陈胜在大泽乡起义时高呼的口号是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. "苍天已死，黄天当立"</label>
+      <label onclick="optClick(this,'B','q2')">B. "王侯将相宁有种乎"</label>
+      <label onclick="optClick(this,'C','q2')">C. "均田免赋"</label>
+      <label onclick="optClick(this,'D','q2')">D. "等贵贱，均贫富"</label>
+    </div>
+    <div class="a" id="exp-q2"><strong>答案：B</strong><br><strong>解析：</strong>陈胜在大泽乡起义时高呼"王侯将相宁有种乎"。A是东汉黄巾起义口号；C是明末李自成起义口号；D是南宋钟相杨幺起义口号。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q2')">显示答案</button>
+  </div>
+
+  <!-- 选择题3 -->
+  <div class="exercise" id="q3">
+    <p class="q-text"><strong>3.</strong> 项羽消灭秦军主力的战役是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 长平之战</label>
+      <label onclick="optClick(this,'B','q3')">B. 逐鹿之战</label>
+      <label onclick="optClick(this,'C','q3')">C. 巨鹿之战</label>
+      <label onclick="optClick(this,'D','q3')">D. 牧野之战</label>
+    </div>
+    <div class="a" id="exp-q3"><strong>答案：C</strong><br><strong>解析：</strong>公元前207年，项羽在巨鹿与秦军主力决战，破釜沉舟，以少胜多。A长平之战是战国秦赵之间的战役；注意区分"巨鹿"和"逐鹿"。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q3')">显示答案</button>
+  </div>
+
+  <!-- 选择题4 -->
+  <div class="exercise" id="q4">
+    <p class="q-text"><strong>4.</strong> 秦朝灭亡的标志是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 陈胜吴广起义爆发</label>
+      <label onclick="optClick(this,'B','q4')">B. 巨鹿之战秦军主力被歼</label>
+      <label onclick="optClick(this,'C','q4')">C. 秦王子婴投降刘邦</label>
+      <label onclick="optClick(this,'D','q4')">D. 刘邦建立汉朝</label>
+    </div>
+    <div class="a" id="exp-q4"><strong>答案：C</strong><br><strong>解析：</strong>公元前207年，刘邦率军攻入咸阳，秦王子婴出城投降，秦朝灭亡。A是反秦的开始；B消灭了主力但秦朝尚未灭亡；D（前202年）在秦亡之后。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q4')">显示答案</button>
+  </div>
+
+  <!-- 选择题5 -->
+  <div class="exercise" id="q5">
+    <p class="q-text"><strong>5.</strong> （较难）秦末农民大起义爆发的根本原因是（  ）</p>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 戍卒遇雨误期</label>
+      <label onclick="optClick(this,'B','q5')">B. 陈胜吴广的号召</label>
+      <label onclick="optClick(this,'C','q5')">C. 秦的暴政</label>
+      <label onclick="optClick(this,'D','q5')">D. 六国旧贵族趁机起兵</label>
+    </div>
+    <div class="a" id="exp-q5"><strong>答案：C</strong><br><strong>解析：</strong>根本原因是秦的暴政（赋税沉重、徭役繁重、刑罚严酷），A遇雨误期只是直接导火索。注意区分"根本原因"和"直接原因"。</div>
+    <button class="ans-btn" onclick="toggleAnswer('exp-q5')">显示答案</button>
+  </div>
+
+  <!-- 材料题一 -->
+  <div class="exercise" id="mq1">
+    <p class="q-text"><strong>题一</strong> （中难度）阅读下列材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料一：</strong>"王侯将相宁有种乎！"<br>
+      <span style="color:#888;font-size:10pt;">——《史记·陈涉世家》</span><br><br>
+      <strong>材料二：</strong>"项羽乃悉引兵渡河，皆沉船，破釜甑，烧庐舍，持三日粮，以示士卒必死，无一还心。"<br>
+      <span style="color:#888;font-size:10pt;">——《史记·项羽本纪》</span>
+    </div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 材料一反映了陈胜怎样的思想？他在何时何地发动了起义？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1a'); trackMatQ('mq1a')">显示答案</button>
+    <div class="a" id="exp-m1a"><strong>答案：</strong>反映了陈胜反对天命、不畏强权、敢于反抗的思想。公元前209年，在大泽乡（今安徽宿州）发动起义。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 材料二描述的是哪场战役？"破釜沉舟"体现了什么精神？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m1b'); trackMatQ('mq1b')">显示答案</button>
+    <div class="a" id="exp-m1b"><strong>答案：</strong>巨鹿之战（前207年）。"破釜沉舟"体现了项羽决一死战、义无反顾的精神。此战以少胜多消灭秦军主力，加速了秦朝灭亡。</div>
+  </div>
+
+  <!-- 材料题二 -->
+  <div class="exercise" id="mq2">
+    <p class="q-text"><strong>题二</strong> （较难）阅读材料，回答问题。</p>
+    <div class="source-material">
+      <strong>材料：</strong>陈胜虽已死，其所置遣侯王将相竟亡秦，由涉首事也。高祖时为陈涉置守冢三十家砀，至今血食。<br>
+      <span style="color:#888;font-size:10pt;">——《史记·陈涉世家》</span>
+    </div>
+    <p style="margin-top:10px;"><strong>(1)</strong> 材料中说"由涉首事也"是什么意思？这说明了什么？</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2a'); trackMatQ('mq2a')">显示答案</button>
+    <div class="a" id="exp-m2a"><strong>答案：</strong>"由涉首事也"意为"是由陈胜首先发起的"。说明：①陈胜吴广的首创精神——中国历史上第一次大规模农民起义；②历史不以成败论英雄；③刘邦建立汉朝后为陈胜安排守墓，体现后世对他历史地位的肯定。</div>
+    <p style="margin-top:10px;"><strong>(2)</strong> 结合所学知识，谈谈你对"人民群众是历史的创造者"这一观点在秦末农民大起义中体现的理解。</p>
+    <button class="ans-btn" onclick="toggleAnswer('exp-m2b'); trackMatQ('mq2b')">显示答案</button>
+    <div class="a" id="exp-m2b"><strong>答案：</strong>秦朝因暴政失去民心，被陈胜吴广领导的农民起义推翻。这充分说明人民的力士是巨大的——再强大的政权如果压迫人民，也必然走向灭亡。秦暴政→陈胜吴广首义→项羽刘邦继起→秦亡汉兴，人民群众的起义是推动历史发展的直接力量，印证了"得民心者得天下，失民心者失天下"的历史规律。</div>
+  </div>
+</div>
+
+<!-- ============================ 第 5 页：知识结构图 ============================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 秦末农民大起义因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🔥</span>
+        <strong>秦的暴政（原因）</strong>
+        <p>赋税沉重 + 徭役繁重 + 刑罚严酷 + 焚书坑儒</p>
+        <div class="kg-detail">①赋税：农民将2/3收获物上缴国家。②徭役：修骊山陵（70多万人）、阿房宫、长城，役使劳力数百万人。③刑罚：连坐、族诛。④思想控制：焚书坑儒。⑤秦二世更加残暴。结论：秦的暴政使社会矛盾空前激化，是起义爆发的根本原因。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚔️</span>
+        <strong>大泽乡起义（爆发）</strong>
+        <p>前209年 · 陈胜吴广 · "王侯将相宁有种乎" · 张楚政权</p>
+        <div class="kg-detail">导火索：戍卒遇雨误期，"失期当斩"。地点：大泽乡（今安徽宿州）。口号："王侯将相宁有种乎"——体现了不畏强权、敢于反抗的精神。过程：攻占陈县，建立"张楚"政权。结果：被秦军镇压。意义：中国历史上第一次大规模农民起义，首创精神激励后人。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">💢</span>
+        <strong>项羽巨鹿之战（转折）</strong>
+        <p>前207年 · 破釜沉舟 · 消灭秦军主力</p>
+        <div class="kg-detail">时间：公元前207年。地点：巨鹿（今河北平乡）。策略：项羽"破釜沉舟"，只带三天口粮，决一死战。结果：以少胜多，大败秦军主力。意义：秦朝失去了镇压起义的军事力量，是反秦斗争的决定性胜利。刘邦得以顺利西进入关。</div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏁</span>
+        <strong>秦朝灭亡（结局）</strong>
+        <p>前207年 · 刘邦入咸阳 · 秦王子婴投降</p>
+        <div class="kg-detail">结局：刘邦攻入咸阳，秦王子婴出城投降，秦朝灭亡。秦朝从公元前221年统一到公元前207年灭亡，仅存15年。意义：强大的秦朝因暴政失去民心，被农民起义推翻。印证了"得民心者得天下，失民心者失天下"的历史规律。陈胜首义→项羽灭秦主力→刘邦灭秦→楚汉之争（第11课）。</div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔴 原因：秦暴政（赋税/徭役/刑罚/思想控制）</div>
+      <div class="kg-rule r2">🟠 爆发：大泽乡起义（前209年·张楚·首创）</div>
+      <div class="kg-rule r3">🟢 转折：巨鹿之战（前207年·破釜沉舟）</div>
+      <div class="kg-rule r4">🔵 结果：秦亡（前207年·刘邦入咸阳·子婴降）</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 第 6 页：结束页 ============================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第三单元 · 秦汉时期：统一多民族封建国家的建立和巩固</div>
+    <h1 style="font-size:22pt;">第10课 · 秦末农民大起义</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>秦的暴政</h3>
+        <ul>
+          <li><strong>赋税沉重</strong>：农民2/3收获物上缴</li>
+          <li><strong>徭役繁重</strong>：修陵·阿房·长城，役使数百万人</li>
+          <li><strong>刑罚严酷</strong>：连坐、族诛</li>
+          <li><strong>秦二世</strong>继位后变本加厉</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>陈胜吴广起义</h3>
+        <ul>
+          <li><strong>前209年</strong>，大泽乡（今安徽宿州）</li>
+          <li>口号："<strong>王侯将相宁有种乎</strong>"</li>
+          <li>建立<strong>张楚</strong>政权，陈胜自立为王</li>
+          <li>中国历史上<strong>第一次农民大起义</strong></li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>秦朝灭亡</h3>
+        <ul>
+          <li><strong>巨鹿之战</strong>（前207）：项羽破釜沉舟，消灭秦军主力</li>
+          <li><strong>刘邦入咸阳</strong>（前207）：秦王子婴投降，<strong>秦亡</strong></li>
+          <li>秦仅存<strong>15年</strong>（前221-前207）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav" style="margin:20px 0;">
+    <div><a href="七上-U3-第9课_秦统一中国.html">← 上一课：第9课 秦统一中国</a></div>
+    <div class="nav-center">第10课</div>
+    <div><a href="七上-U3-第11课_西汉建立和文景之治.html">下一课：第11课 西汉建立和文景之治 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版初中历史 · 七年级上册 · 第三单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================ 底部翻页导航 ============================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') {
+    e.preventDefault(); goPage(0);
+  } else if (e.key === 'End') {
+    e.preventDefault(); goPage(totalPages - 1);
+  }
+});
+
+pgPrev.disabled = true;
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1: 'B', q2: 'B', q3: 'C', q4: 'C', q5: 'C' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() {
+  document.getElementById('scoreVal').textContent = score;
+}
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+  score++;
+  updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {};
+  matDone = {};
+  score = 0;
+  updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) {
+      l.classList.remove('disabled', 'correct', 'wrong');
+    });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== 标签页切换（兼容v2） =====
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== 手风琴组 =====
+function toggleAccGrp(id) {
+  var grp = document.getElementById(id);
+  if (grp) grp.classList.toggle('open');
+}
+
+function markMastered(grpId, btn) {
+  btn.classList.add('done');
+  btn.textContent = '✅ 已掌握';
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) {
+      box.classList.remove('filtered-out');
+    } else {
+      box.classList.add('filtered-out');
+    }
+  });
+}
+
+function toggleColBox(header) {
+  var box = header.parentElement;
+  box.classList.toggle('open');
+}
+
+// ===== 知识图谱 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== 学习目标点击标记 =====
+var targetsChecked = 0;
+function toggleTarget(el) {
+  el.classList.toggle('checked');
+  targetsChecked = document.querySelectorAll('.target-item.checked').length;
+  if (targetsChecked >= 4) {
+    document.getElementById('targetsDone').classList.add('show');
+  }
+}
+
+// =============================================
+// 🆕 交互升级 JS：拖拽排序
+// =============================================
+(function() {
+  var items = document.querySelectorAll('.sort-item');
+  var slots = document.querySelectorAll('.sort-slot');
+
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text', item.getAttribute('data-id'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function() {
+      item.classList.remove('dragging');
+    });
+  });
+
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.style.borderColor = '#7c6cf0'; });
+    slot.addEventListener('dragleave', function() { if (!slot.querySelector('.sort-item')) slot.style.borderColor = ''; });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault();
+      slot.style.borderColor = '';
+      var id = e.dataTransfer.getData('text');
+      var srcItem = document.getElementById('item_' + id);
+      if (!srcItem) return;
+      // Remove existing item in this slot
+      var existing = slot.querySelector('.sort-item');
+      if (existing) {
+        document.getElementById('sortPool1').appendChild(existing);
+        existing.classList.remove('placed');
+      }
+      // Remove from old slot
+      var oldSlot = srcItem.parentElement;
+      if (oldSlot && oldSlot.classList.contains('sort-slot')) oldSlot.classList.remove('filled');
+      // Place
+      slot.appendChild(srcItem);
+      slot.classList.add('filled');
+      srcItem.classList.add('placed');
+    });
+  });
+})();
+
+var sortCorrectOrder = ['FZ','YL','XF','FS','HE'];
+
+function checkSort(poolId) {
+  var slots = document.querySelectorAll('.sort-slot');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(s, i) {
+    var item = s.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; s.classList.add('wrong'); }
+    else if (item.getAttribute('data-id') !== sortCorrectOrder[i]) {
+      allCorrect = false;
+      s.classList.add('wrong');
+    } else {
+      s.classList.add('correct');
+    }
+  });
+  var resultEl = document.getElementById('sortResult1');
+  resultEl.classList.add('show');
+  if (!allFilled) resultEl.textContent = '❌ 请先将所有卡片拖入槽位再提交';
+  else if (allCorrect) {
+    resultEl.className = 'sort-result show pass';
+    resultEl.textContent = '✅ 完全正确！暴政五步：赋税→徭役→刑罚→焚书→二世加剧';
+    document.getElementById('stage1Done').classList.add('show');
+    updateStage();
+  } else {
+    resultEl.className = 'sort-result show fail';
+    resultEl.textContent = '❌ 顺序有误。提示：赋税沉重→徭役繁重→刑罚严酷→焚书坑儒→秦二世继位。请重排后再提交。';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('.fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var ans = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === ans) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var resultEl = document.getElementById('fillResult');
+  resultEl.classList.add('show');
+  if (allCorrect) {
+    resultEl.className = 'sort-result show pass';
+    resultEl.textContent = '✅ 全部正确！5个空全部填对：209/大泽乡/陈胜/王侯将相宁有种乎/张楚';
+    document.getElementById('stage2Done').classList.add('show');
+    updateStage();
+  } else {
+    resultEl.className = 'sort-result show fail';
+    resultEl.textContent = '❌ 部分有误，请检查红色标记的空格后重新提交。';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedMatch = null;
+var matchedPairs = {};
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-item.selected').forEach(function(m) { m.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedMatch = el;
+}
+function pairMatch(el) {
+  if (!selectedMatch) return;
+  if (el.classList.contains('matched')) return;
+  var aid = selectedMatch.getAttribute('data-id');
+  var bid = el.getAttribute('data-id');
+  var pair = el.getAttribute('data-pair');
+  if (pair === aid) {
+    selectedMatch.classList.add('matched');
+    selectedMatch.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs[aid] = true;
+    selectedMatch = null;
+    if (Object.keys(matchedPairs).length >= 5) {
+      var resultEl = document.getElementById('matchResult');
+      resultEl.classList.add('show');
+      resultEl.className = 'sort-result show pass';
+      resultEl.textContent = '✅ 5组全部配对成功！大泽乡→首义 巨鹿→破釜沉舟 咸阳→秦亡 秦二世→暴政加剧 陈胜→张楚';
+      document.getElementById('stage3Done').classList.add('show');
+      updateStage();
+    }
+  } else {
+    selectedMatch.classList.add('hint');
+    setTimeout(function() { selectedMatch.classList.remove('hint'); }, 1500);
+  }
+}
+
+// ===== 进度条 =====
+var stageDone = { s1: false, s2: false, s3: false, s4: false };
+function updateStage() {
+  var done = 0;
+  if (document.getElementById('stage1Done').classList.contains('show')) { done++; stageDone.s1 = true; }
+  if (document.getElementById('stage2Done').classList.contains('show')) { done++; stageDone.s2 = true; }
+  if (document.getElementById('stage3Done').classList.contains('show')) { done++; stageDone.s3 = true; }
+  if (document.getElementById('stage4Done').classList.contains('show')) { done++; stageDone.s4 = true; }
+  document.getElementById('stageProgressLabel').textContent = done + '/4 关完成';
+  document.getElementById('stageProgressBar').style.width = (done * 25) + '%';
+}
+
+// ===== 地图标注 =====
+var mapFound10 = {};
+function markMap(el) {
+  var loc = el.getAttribute('data-loc');
+  el.classList.add('found');
+  mapFound10[loc] = true;
+  var checkItems = document.querySelectorAll('#mapCheck10 .map-check-item');
+  checkItems.forEach(function(ci) {
+    if (ci.getAttribute('data-loc') === loc) ci.classList.add('done');
+  });
+  if (Object.keys(mapFound10).length >= 6) {
+    var resultEl = document.getElementById('mapResult');
+    resultEl.classList.add('show');
+    resultEl.className = 'sort-result show pass';
+    resultEl.textContent = '✅ 全部6个地点已标注！咸阳→大泽乡→陈县→巨鹿→沛县→吴';
+    document.getElementById('stage4Done').classList.add('show');
+    updateStage();
+  }
+}
+
+// ===== deep-card 折叠 =====
+(function() {
+  document.querySelectorAll('.deep-card-hd').forEach(function(hd) {
+    hd.addEventListener('click', function() {
+      this.nextElementSibling.classList.toggle('show');
+    });
+  });
+})();
+</script>
+  <div class="bottom-nav">
+  <div><a href="七上-U3-第9课_秦统一中国.html">← 上一课：第9课 秦统一中国</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第10课</div>
+  <div><a href="七上-U3-第11课_西汉建立和文景之治.html">下一课：第11课 西汉建立和文景之治 →</a></div>
+  </div>
+</body>
+</html>

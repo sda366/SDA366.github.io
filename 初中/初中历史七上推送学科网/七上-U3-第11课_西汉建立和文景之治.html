@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第11课 西汉建立和"文景之治" — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+  --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:"SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:14pt; background:var(--bg); color:#333; line-height:1.75;
+  max-width:900px; margin:0 auto; padding:0 20px 80px; overflow-x:hidden;
+}
+
+/* ========== 分页幻灯片 ========== */
+.page-slide { display:none; min-height:calc(100vh - 80px); padding-top:10px; animation:slideIn .35s ease; }
+.page-slide.active { display:block; }
+@keyframes slideIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 封面 ========== */
+.hero-cover { text-align:center; padding:50px 28px 40px; background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); color:#fff; border-radius:20px; position:relative; overflow:hidden; }
+.hero-cover .unit-tag { font-size:12pt; opacity:.82; letter-spacing:2px; margin-bottom:10px; }
+.hero-cover h1 { font-size:24pt; margin:8px 0; font-weight:700; letter-spacing:2px; }
+.hero-cover .sub { font-size:13pt; opacity:.85; margin-bottom:28px; }
+.hero-goals { background:rgba(255,255,255,.15); border-radius:16px; padding:20px 24px; text-align:left; max-width:680px; margin:0 auto; }
+.hero-goals h3 { font-size:14pt; margin-bottom:12px; color:#fff; text-align:center; }
+.goal-item { display:flex; align-items:center; gap:10px; padding:8px 12px; margin-bottom:6px; background:rgba(255,255,255,.08); border-radius:10px; cursor:pointer; transition:all .2s; user-select:none; }
+.goal-item:hover { background:rgba(255,255,255,.18); }
+.goal-item .goal-check { width:22px; height:22px; border:2px solid rgba(255,255,255,.5); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11pt; transition:all .25s; }
+.goal-item.done .goal-check { background:var(--green); border-color:var(--green); }
+.goal-item .goal-text { font-size:12pt; }
+.goal-item.done .goal-text { text-decoration:line-through; opacity:.6; }
+.goal-all-done { display:none; text-align:center; margin-top:16px; background:rgba(39,174,96,.25); padding:10px; border-radius:10px; font-size:13pt; animation:bounceIn .5s ease; }
+.goal-all-done.show { display:block; }
+@keyframes bounceIn { 0%{transform:scale(.6);opacity:0;} 60%{transform:scale(1.08);} 100%{transform:scale(1);opacity:1;} }
+
+/* ========== 闯关进度条 ========== */
+.stage-bar { background:#fff; border-radius:14px; padding:14px 18px; margin-bottom:18px; border:2px solid var(--border); }
+.stage-bar-title { font-size:13pt; font-weight:700; color:var(--primary-dark); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.stage-track { display:flex; gap:8px; flex-wrap:wrap; }
+.stage-dot { flex:1; min-width:55px; padding:8px 4px; text-align:center; border-radius:10px; font-size:10pt; background:#eee; color:#999; transition:all .3s; }
+.stage-dot.done { background:var(--primary); color:#fff; font-weight:700; }
+.stage-dot.current { background:#ffd54f; color:#333; font-weight:700; animation:stagePulse 1.2s ease infinite; }
+@keyframes stagePulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,213,79,.5);} 50%{box-shadow:0 0 0 8px rgba(255,213,79,0);} }
+.stage-badge { display:inline-block; background:var(--green); color:#fff; border-radius:20px; padding:4px 14px; font-size:11pt; margin-left:auto; }
+.stage-badge.pending { background:#ccc; }
+
+/* ========== 标签页（原版） ========== */
+.tab-nav { display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+.tab-btn { flex:1; min-width:90px; padding:10px 12px; border:2px solid var(--border); background:#fff; border-radius:12px; font-size:12pt; cursor:pointer; transition:all .25s; }
+.tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:700; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+.kp-card { background:var(--bg-card); border-radius:14px; padding:16px 20px; margin-bottom:14px; border-left:4px solid var(--primary); }
+.kp-card h4 { color:var(--primary-dark); font-size:14pt; margin-bottom:8px; }
+.kp-card ul { padding-left:20px; }
+.kp-card li { margin-bottom:6px; }
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.timeline-bar { background:#f0edff; border-radius:12px; padding:12px 18px; margin-bottom:16px; text-align:center; font-size:13pt; color:#5a4ac7; }
+.link-bar { border:2px dashed #d5cef0; border-radius:12px; padding:14px 18px; margin-bottom:16px; background:#fdfbff; font-size:13pt; }
+
+/* ========== 拖拽排序 ========== */
+.sort-zone { background:#fff; border:2px dashed var(--primary); border-radius:14px; padding:16px; margin-bottom:14px; }
+.sort-zone h4 { color:var(--primary-dark); font-size:13pt; margin-bottom:10px; text-align:center; }
+.sort-slots { display:flex; flex-direction:column; gap:8px; }
+.sort-slot { display:flex; align-items:center; gap:10px; padding:8px 14px; border:2px dashed #ddd; border-radius:10px; background:#fafafa; min-height:44px; transition:all .25s; }
+.sort-slot .slot-num { width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12pt; font-weight:700; flex-shrink:0; }
+.sort-slot .slot-label { font-size:11pt; color:#999; flex-shrink:0; }
+.sort-slot .slot-content { flex:1; font-size:12pt; }
+.sort-slot.filled { border-color:var(--primary); background:var(--bg-card); }
+.sort-slot.correct { border-color:var(--green); background:#e8f8f0; }
+.sort-slot.wrong { border-color:var(--red); background:#fdecea; }
+.sort-items { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.sort-item { padding:10px 16px; background:linear-gradient(135deg,#f0edff,#e0daff); border:2px solid var(--primary); border-radius:10px; font-size:13pt; cursor:grab; user-select:none; transition:all .2s; }
+.sort-item:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(124,108,240,.2); }
+.sort-item:active { cursor:grabbing; }
+.sort-item.used { opacity:.3; pointer-events:none; }
+.sort-result { display:none; text-align:center; margin-top:14px; padding:12px; border-radius:10px; font-size:14pt; font-weight:700; }
+.sort-result.pass { display:block; background:#e8f8f0; color:var(--green); border:2px solid var(--green); }
+.sort-result.fail { display:block; background:#fdecea; color:var(--red); border:2px solid var(--red); }
+
+/* ========== 填空填词 ========== */
+.fill-zone { background:#fff; border-radius:14px; padding:20px; margin-bottom:14px; border:2px solid var(--border); }
+.fill-zone h4 { color:var(--primary-dark); text-align:center; margin-bottom:14px; font-size:14pt; }
+.fill-blank { display:inline-block; width:100px; border:none; border-bottom:3px solid var(--primary); text-align:center; font-size:13pt; padding:4px 8px; margin:0 4px; background:#faf8ff; outline:none; transition:all .2s; }
+.fill-blank:focus { background:#ede8ff; }
+.fill-blank.correct { border-color:var(--green); background:#e8f8f0; color:var(--green); font-weight:700; }
+.fill-blank.wrong { border-color:var(--red); background:#fdecea; }
+.fill-submit { display:block; margin:16px auto 0; padding:10px 28px; background:var(--primary); color:#fff; border:none; border-radius:20px; font-size:14pt; cursor:pointer; transition:all .2s; }
+.fill-submit:hover { transform:scale(1.05); }
+.fill-feedback { text-align:center; margin-top:12px; font-size:13pt; font-weight:700; display:none; }
+.fill-feedback.show { display:block; }
+
+/* ========== 连线匹配 ========== */
+.match-section { display:flex; gap:16px; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; }
+.match-col { flex:1; min-width:180px; }
+.match-col h4 { text-align:center; color:var(--primary-dark); font-size:13pt; margin-bottom:10px; }
+.match-item { padding:10px 14px; background:#fff; border:2px solid var(--border); border-radius:10px; margin-bottom:8px; cursor:pointer; transition:all .2s; font-size:12pt; text-align:center; }
+.match-item:hover { border-color:var(--primary); }
+.match-item.selected { background:var(--primary); color:#fff; border-color:var(--primary); }
+.match-item.paired { background:#e8f8f0; border-color:var(--green); color:var(--green); cursor:default; pointer-events:none; }
+.match-feedback { text-align:center; margin-top:12px; font-size:14pt; font-weight:700; display:none; }
+.match-feedback.show { display:block; }
+
+/* ========== 地图标注 ========== */
+.map-zone { background:#fff; border-radius:14px; padding:20px; border:2px solid var(--border); margin-bottom:14px; }
+.map-zone h4 { text-align:center; color:var(--primary-dark); margin-bottom:10px; font-size:14pt; }
+.map-canvas { position:relative; width:100%; max-width:500px; margin:0 auto 14px; cursor:crosshair; }
+.map-check-list { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.map-check-item { padding:6px 14px; background:#eee; border-radius:20px; font-size:12pt; transition:all .2s; }
+.map-check-item.found { background:var(--green); color:#fff; }
+
+/* ========== 翻转卡 ========== */
+.flip-section { margin-top:20px; }
+.flip-section h4 { text-align:center; color:var(--primary-dark); margin-bottom:12px; font-size:13pt; }
+.flip-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+.flip-card { perspective:600px; height:110px; }
+.flip-inner { position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d; cursor:pointer; }
+.flip-card.flipped .flip-inner { transform:rotateY(180deg); }
+.flip-front,.flip-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:12px; font-size:12pt; text-align:center; }
+.flip-front { background:linear-gradient(135deg,#f0edff,#e0daff); border:2px solid var(--primary); color:var(--primary-dark); font-weight:700; }
+.flip-back { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); color:#fff; transform:rotateY(180deg); }
+
+/* ========== 知识结构图 v2.0（徽章+脉冲） ========== */
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(124,108,240,.08);} 50%{box-shadow:0 4px 20px rgba(124,108,240,.25);} }
+.kg-hint-banner { background:#fffbf0; border:2px dashed #f0ad4e; border-radius:12px; padding:12px 18px; margin-bottom:18px; text-align:center; font-size:13pt; color:#e67e22; display:flex; align-items:center; justify-content:center; gap:8px; }
+.kg-hint-banner strong { color:#d35400; }
+.kg-wrap-simple { background:#fff; border-radius:16px; padding:24px; }
+.kg-title { font-size:16pt; font-weight:700; color:var(--primary-dark); text-align:center; margin-bottom:16px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.kg-node {
+  width:80%; padding:16px 20px; border-radius:14px; text-align:center;
+  cursor:pointer; transition:all .3s; position:relative;
+  animation:kgPulse 3s ease-in-out infinite;
+}
+.kg-node:hover { transform:translateY(-2px); box-shadow:0 4px 20px rgba(124,108,240,.25)!important; border-color:var(--primary)!important; }
+.kg-node.expanded { animation:none; }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#ede8ff; border:2px solid var(--primary); }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e8f5e9; border:2px solid var(--green); }
+.kg-node.c4 { background:#fce4ec; border:2px solid var(--red); }
+.kg-node strong { display:block; font-size:14pt; margin-bottom:6px; }
+.kg-node p { font-size:12pt; color:#555; margin:0; }
+.kg-icon { font-size:18pt; display:block; margin-bottom:4px; }
+.kg-arrow { font-size:18pt; color:var(--primary); }
+.kg-expand-badge {
+  position:absolute; top:8px; right:12px;
+  background:var(--primary); color:#fff; font-size:9pt;
+  padding:2px 10px; border-radius:12px; font-weight:700; transition:all .3s;
+}
+.kg-node.expanded .kg-expand-badge { background:var(--green); }
+.kg-detail { max-height:0; overflow:hidden; transition:max-height .4s ease; font-size:12pt; color:#555; margin-top:8px; padding:0 8px; border-top:1px dashed var(--border); }
+.kg-node.expanded .kg-detail { max-height:300px; padding-top:8px; }
+.kg-rules-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.kg-rule { flex:1; min-width:140px; padding:12px 14px; border-radius:10px; font-size:12pt; font-weight:700; text-align:center; }
+.kg-rule.r1 { background:#ede8ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e8f5e9; color:var(--green); }
+.kg-rule.r4 { background:#fce4ec; color:var(--red); }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,.08); position:relative; text-align:left; }
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:1px dashed var(--border); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { padding:4px 0; font-size:12pt; color:#555; border-bottom:1px dotted #eee; }
+.recap-card ul li:last-child { border-bottom:none; }
+
+/* ========== 底部导航 ========== */
+.pg-nav { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#fff; border-radius:40px; padding:10px 24px; box-shadow:0 4px 20px rgba(124,108,240,.18); display:flex; align-items:center; gap:12px; z-index:1000; }
+.pg-nav button { width:36px; height:36px; border-radius:50%; border:2px solid var(--border); background:#fff; color:#5a4ac7; font-size:16pt; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; }
+.pg-nav button:hover { background:var(--primary); color:#fff; border-color:var(--primary); }
+.pg-nav .pg-dots { display:flex; gap:6px; }
+.pg-nav .pg-dot { width:10px; height:10px; border-radius:50%; background:var(--border); cursor:pointer; transition:all .2s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-info { font-size:11pt; color:#888; min-width:60px; text-align:center; }
+.pg-nav .pg-info span { color:var(--primary); font-weight:700; }
+
+/* ========== 手风琴/重难点（原版保留） ========== */
+.acc-global-ctrl { text-align:right; margin-bottom:12px; }
+.acc-group { background:#fff; border-radius:16px; margin-bottom:16px; box-shadow:0 2px 12px rgba(124,108,240,.08); overflow:hidden; }
+.acc-group-header { background:linear-gradient(135deg,#f0edff,#e0daff); padding:14px 18px; cursor:pointer; display:flex; align-items:center; gap:10px; font-size:14pt; font-weight:700; color:var(--primary-dark); user-select:none; }
+.acc-group-header .acc-group-arrow { transition:transform .3s; margin-left:auto; }
+.acc-group.open .acc-group-arrow { transform:rotate(180deg); }
+.acc-group-body { display:none; padding:0 18px 16px; }
+.acc-group.open .acc-group-body { display:block; }
+.deep-card { background:#fff; border:1px solid #e0daff; border-radius:12px; margin-bottom:10px; overflow:hidden; }
+.deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; cursor:pointer; font-weight:700; font-size:13pt; user-select:none; }
+.deep-card-bd { display:none; padding:14px 16px; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+.understood-btn { background:#f0edff; color:#5a4ac7; border:2px solid var(--border); margin-top:12px; padding:8px 18px; border-radius:20px; font-size:13pt; cursor:pointer; transition:all .2s; }
+.understood-btn.done { background:var(--green); color:#fff; border-color:var(--green); }
+.tag-zhongkao { display:inline-block; background:var(--orange); color:#fff; border-radius:12px; padding:2px 10px; font-size:10pt; margin-left:8px; }
+
+/* ========== 栏目筛选（原版保留） ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.filter-chip { padding:6px 16px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all .2s; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+.col-box { background:#fff; border-radius:14px; margin-bottom:14px; overflow:hidden; box-shadow:0 2px 8px rgba(124,108,240,.06); }
+.col-header { background:linear-gradient(135deg,var(--primary),#5a4ac7); color:#fff; padding:12px 18px; font-weight:700; font-size:14pt; cursor:pointer; }
+.col-body { display:none; padding:14px 18px; }
+.col-box.open .col-body { display:block; }
+.hidden-by-filter { display:none; }
+.source-material { border-left:4px solid var(--primary); background:var(--bg-card); padding:10px 14px; margin:8px 0; font-size:12pt; color:#555; border-radius:0 8px 8px 0; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-top:2px; }
+
+/* ========== 课堂训练（原版保留） ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); padding:14px 20px; border-radius:14px; margin-bottom:20px; display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:14pt; }
+.score-num { font-size:22pt; font-weight:800; color:var(--primary); min-width:30px; text-align:center; }
+.exercise { background:var(--bg-card); border-radius:14px; padding:18px 20px; margin-bottom:14px; border-left:4px solid var(--primary); }
+.q-text { font-size:14pt; margin-bottom:10px; }
+.options { display:flex; flex-direction:column; gap:6px; }
+.options label { display:block; padding:10px 16px; border:2px solid var(--border); border-radius:10px; cursor:pointer; font-size:14pt; transition:all .2s; }
+.options label:hover { border-color:var(--primary); background:var(--bg-card); }
+.options label.correct { background:#d5f5e3; border-color:var(--green); color:var(--green); }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.options label.disabled { pointer-events:none; }
+.ans-btn { background:var(--primary); color:#fff; border:none; padding:8px 18px; border-radius:20px; font-size:13pt; cursor:pointer; transition:all .2s; }
+.ans-btn:hover { transform:scale(1.04); }
+.a { display:none; margin-top:12px; padding:12px 16px; background:#f0edff; border-radius:10px; font-size:14pt; }
+.a.show { display:block; }
+.exercise .a { display:none; margin-top:12px; padding:12px 16px; background:#f0edff; border-radius:10px; font-size:14pt; }
+.exercise .a.show { display:block; }
+.toggle-btn { margin-top:8px; background:var(--primary); color:#fff; border:none; padding:8px 20px; border-radius:20px; font-size:13pt; cursor:pointer; }
+
+/* ========== 导航链接 ========== */
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding:12px 18px; background:#fff; border-radius:14px; box-shadow:0 2px 8px rgba(124,108,240,.06); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; font-weight:700; }
+.bottom-nav a:hover { color:var(--primary); }
+.bottom-nav .current { color:#888; font-size:12pt; }
+.page-footer { text-align:center; padding:18px; font-size:12px; color:#aaa; }
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 0: 封面 ===== -->
+<div class="page-slide active" id="page0">
+<div class="hero-cover">
+<div class="unit-tag">第三单元 · 秦汉时期：统一多民族封建国家的建立和巩固</div>
+<h1>第11课 · 西汉建立和"文景之治"</h1>
+<div class="sub">统编版初中历史  七年级上册</div>
+<div class="hero-goals">
+<h3>🎯 学习目标 · 点击逐条标记</h3>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">知道楚汉之争与西汉建立的基本史实</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">理解汉高祖休养生息政策的原因和内容</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">掌握"文景之治"的表现与历史意义</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">认识统治者治国方略对国家发展的影响</div></div>
+<div class="goal-all-done" id="goalAllDone">🎉 全部学习目标已确认！开始探索吧 →</div>
+</div>
+</div>
+</div>
+
+<!-- ===== PAGE 1: 知识要点（交互版） ===== -->
+<div class="page-slide" id="page1">
+<div class="slide-header"><div class="module-num">模块一</div><div class="module-title">知识要点</div></div>
+
+<!-- 闯关进度条 -->
+<div class="stage-bar">
+<div class="stage-bar-title">🏆 互动闯关进度 <span class="stage-badge pending" id="stageBadge">0/5 关</span></div>
+<div class="stage-track">
+<div class="stage-dot current" id="st0">①排序</div>
+<div class="stage-dot" id="st1">②填空</div>
+<div class="stage-dot" id="st2">③连线</div>
+<div class="stage-dot" id="st3">④地图</div>
+<div class="stage-dot" id="st4">⑤翻转</div>
+</div>
+</div>
+
+<div class="tab-nav">
+<button class="tab-btn active" onclick="switchTabV2(0)">楚汉之争与西汉建立</button>
+<button class="tab-btn" onclick="switchTabV2(1)">汉高祖的休养生息政策</button>
+<button class="tab-btn" onclick="switchTabV2(2)">"文景之治"</button>
+</div>
+
+<!-- Tab 0：楚汉之争与西汉建立 -->
+<div class="tab-panel active" id="tp0">
+<div class="timeline-bar">⏳ 公元前206年 — 公元前202年 · 楚汉之争至西汉建立</div>
+
+<!-- 闯关1：拖拽排序——事件时间线 -->
+<div class="sort-zone">
+<h4>🔄 闯关一 · 拖拽排序：楚汉之争的关键事件</h4>
+<p style="text-align:center;font-size:12pt;color:#888;margin-bottom:12px;">按住下方事件卡片拖动到对应的时间槽位中</p>
+<div class="sort-slots" id="sortSlots0">
+<div class="sort-slot" id="slot0_0"><span class="slot-num">1</span><span class="slot-label">第一步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_1"><span class="slot-num">2</span><span class="slot-label">第二步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_2"><span class="slot-num">3</span><span class="slot-label">第三步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_3"><span class="slot-num">4</span><span class="slot-label">第四步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_4"><span class="slot-num">5</span><span class="slot-label">第五步</span><span class="slot-content"></span></div>
+</div>
+<div class="sort-items" id="sortItems0">
+<div class="sort-item" draggable="true" data-value="1" ondragstart="dragStart(event)" ondragend="dragEnd(event)">刘邦入咸阳"约法三章"</div>
+<div class="sort-item" draggable="true" data-value="3" ondragstart="dragStart(event)" ondragend="dragEnd(event)">垓下之战项羽兵败</div>
+<div class="sort-item" draggable="true" data-value="2" ondragstart="dragStart(event)" ondragend="dragEnd(event)">楚汉之争展开</div>
+<div class="sort-item" draggable="true" data-value="5" ondragstart="dragStart(event)" ondragend="dragEnd(event)">汉高祖推行休养生息</div>
+<div class="sort-item" draggable="true" data-value="4" ondragstart="dragStart(event)" ondragend="dragEnd(event)">公元前202年西汉建立</div>
+</div>
+<div class="sort-result" id="sortResult0"></div>
+<div style="text-align:center;margin-top:14px;"><button class="fill-submit" onclick="checkSort(0)">✅ 提交检验</button><button class="ans-btn" onclick="resetSort(0)" style="background:#999;margin-left:8px;">🔄 重置</button></div>
+</div>
+
+<!-- 知识卡片 -->
+<div class="kp-card"><h4>楚汉之争（前206—前202年）</h4>
+<ul><li><span class="kwd">刘邦</span>与<span class="kwd">项羽</span>为争夺帝位展开长达四年的战争，史称"<span class="kwd">楚汉之争</span>"</li>
+<li>刘邦<span class="kwd">约法三章</span>，赢得民心；项羽刚愎自用，失去人心</li>
+<li>公元前202年，<span class="kwd">垓下之战</span>项羽兵败自刎，刘邦取得最终胜利</li></ul>
+</div>
+<div class="kp-card"><h4>西汉建立（前202年）</h4>
+<ul><li>公元前202年，刘邦建立汉朝，定都<span class="kwd">长安</span>，史称<span class="kwd">西汉</span></li>
+<li>刘邦即<span class="kwd">汉高祖</span></li></ul>
+</div>
+<div class="link-bar">🔗 <strong>内在联系：</strong>秦朝的暴政导致速亡，刘邦吸取秦亡教训，为后来的休养生息政策奠定思想基础。<span class="tag-zhongkao">📌 中考常考</span></div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡 · 点击翻转</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">楚汉之争</div><div class="flip-back">刘邦vs项羽，争夺帝位的四年战争（前206—前202）</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">约法三章</div><div class="flip-back">刘邦入咸阳后废秦苛法，赢得关中百姓拥护</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">垓下之战</div><div class="flip-back">前202年项羽被围垓下，兵败自刎，刘邦统一全国</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 1：休养生息 -->
+<div class="tab-panel" id="tp1">
+<div class="timeline-bar">⏳ 公元前202年 — 公元前195年 · 汉高祖统治时期</div>
+
+<!-- 闯关2：填空填词 -->
+<div class="fill-zone">
+<h4>✏️ 闯关二 · 填空填词：休养生息政策的关键信息</h4>
+<p style="text-align:center;font-size:12pt;color:#888;margin-bottom:16px;">在空白处填入正确内容后点击"提交检验"</p>
+<p style="line-height:2.4;font-size:13pt;">
+汉高祖吸取<span class="kwd">秦朝速亡</span>的教训，采纳大臣<input type="text" class="fill-blank" id="fb0_0" placeholder="？">的建议，推行休养生息政策。主要内容包括：实行<input type="text" class="fill-blank" id="fb0_1" placeholder="？">（赋税制度），让士兵还乡务农，释放<input type="text" class="fill-blank" id="fb0_2" placeholder="？">，对匈奴实行<input type="text" class="fill-blank" id="fb0_3" placeholder="？">政策。这些措施使社会经济逐步恢复，为后来的<input type="text" class="fill-blank" id="fb0_4" placeholder="？">奠定基础。
+</p>
+<div class="fill-feedback" id="fbFeedback0"></div>
+<div style="text-align:center;margin-top:14px;"><button class="fill-submit" onclick="checkFillBlanks(0)">✅ 提交检验</button></div>
+</div>
+
+<div class="kp-card"><h4>休养生息政策的背景</h4>
+<ul><li>西汉初年，社会<span class="kwd">残破</span>，经济凋敝，人口锐减</li>
+<li>汉高祖吸取<span class="kwd">秦朝速亡</span>的教训</li>
+<li>大臣<span class="kwd">陆贾</span>提出"<span class="kwd">居马上得之，宁可以马上治之乎</span>"</li></ul>
+</div>
+<div class="kp-card"><h4>休养生息政策的内容</h4>
+<ul><li><strong>轻徭薄赋：</strong>减轻赋税，实行<span class="kwd">十五税一</span></li>
+<li><strong>恢复生产：</strong>让<span class="kwd">士兵还乡务农</span>，释放奴婢</li>
+<li><strong>和亲政策：</strong>对匈奴实行<span class="kwd">和亲</span></li>
+<li><strong>减轻刑罚：</strong>废除秦朝<span class="kwd">严刑峻法</span></li></ul>
+</div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">十五税一</div><div class="flip-back">汉高祖将田租定为收获物的1/15，减轻农民负担</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">陆贾《新语》</div><div class="flip-back">主张"以文治天下"，从军事征服转向文治建设</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">和亲政策</div><div class="flip-back">汉初对匈奴采取和亲缓和外部矛盾，换取和平</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 2：文景之治 -->
+<div class="tab-panel" id="tp2">
+<div class="timeline-bar">⏳ 公元前180年 — 公元前141年 · 文帝景帝时期</div>
+
+<!-- 闯关3：连线匹配——政策与效果 -->
+<div class="match-section">
+<div class="match-col"><h4>📋 政策措施（左侧）</h4>
+<div class="match-item" id="left0_0" onclick="selectMatch(0,'left',0)">轻徭薄赋·三十税一</div>
+<div class="match-item" id="left0_1" onclick="selectMatch(0,'left',1)">提倡节俭·以身作则</div>
+<div class="match-item" id="left0_2" onclick="selectMatch(0,'left',2)">以农为本·发展生产</div>
+<div class="match-item" id="left0_3" onclick="selectMatch(0,'left',3)">减轻刑罚·废除肉刑</div>
+</div>
+<div class="match-col"><h4>📋 历史效果（右侧）</h4>
+<div class="match-item" id="right0_0" onclick="selectMatch(0,'right',0)">粮仓丰实·国库充裕</div>
+<div class="match-item" id="right0_1" onclick="selectMatch(0,'right',1)">社会风气崇尚节俭</div>
+<div class="match-item" id="right0_2" onclick="selectMatch(0,'right',2)">犯罪率大幅下降</div>
+<div class="match-item" id="right0_3" onclick="selectMatch(0,'right',3)">百姓负担减轻·休养生息</div>
+</div>
+</div>
+<div class="match-feedback" id="matchFeedback0"></div>
+
+<div class="kp-card"><h4>"文景之治"的表现</h4>
+<ul><li>社会经济恢复发展，<span class="kwd">粮仓</span>丰实，<span class="kwd">国库</span>充裕</li>
+<li>社会秩序安定，<span class="kwd">犯罪率</span>大幅下降</li>
+<li>文帝景帝以身作则，提倡<span class="kwd">节俭</span></li>
+<li>史称"<span class="kwd">文景之治</span>"，是中国历史上第一个治世</li></ul>
+</div>
+<div class="link-bar">🔗 <strong>内在联系：</strong>"文景之治"是汉初休养生息政策的延续和发展，为后来汉武帝大一统奠定物质基础。<span class="tag-zhongkao">📌 中考常考</span></div>
+
+<!-- 闯关4：地图标注——西汉初期关键地点 -->
+<div class="map-zone">
+<h4>🗺️ 闯关四 · 地图标注：点击下方地点查看位置</h4>
+<div class="map-canvas" style="height:0;overflow:hidden;"><svg viewBox="0 0 500 400" id="mapSvg"></svg></div>
+<div class="map-check-list" id="mapCheckList">
+<div class="map-check-item" onclick="markMap(this,'咸阳')">🏙️ 咸阳（秦都）</div>
+<div class="map-check-item" onclick="markMap(this,'长安')">🏛️ 长安（西汉都城）</div>
+<div class="map-check-item" onclick="markMap(this,'垓下')">⚔️ 垓下（决战地）</div>
+<div class="map-check-item" onclick="markMap(this,'洛阳')">🏯 洛阳</div>
+<div class="map-check-item" onclick="markMap(this,'乌江')">🌊 乌江（项羽自刎）</div>
+</div>
+</div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">文景之治</div><div class="flip-back">文帝景帝时期出现的治世，中国历史上第一个治世</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">三十税一</div><div class="flip-back">文景时期将田租降为收获物的1/30，进一步减轻负担</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">以农为本</div><div class="flip-back">文景帝重视农业，将农业视为国家根本</div></div></div>
+</div></div>
+</div>
+</div>
+
+<!-- ===== PAGE 2: 重难点解析（原版保留） ===== -->
+<div class="page-slide" id="page2">
+<div class="slide-header"><div class="module-num">模块二</div><div class="module-title">重难点解析</div></div>
+<div class="acc-global-ctrl">
+<button class="ans-btn" onclick="expandAllGroups()">📖 全部展开</button>
+<button class="ans-btn" onclick="collapseAllGroups()">📕 全部折叠</button>
+<span id="understoodCount" style="margin-left:12px;color:var(--primary);font-size:13pt;"></span>
+</div>
+
+<div class="acc-group open" id="accGroup0">
+<div class="acc-group-header" onclick="toggleAccGroup(0)">
+<span>📌</span><span>重点一 · 刘邦为什么能战胜项羽？汉高祖为什么要休养生息？</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card"><div class="deep-card-hd">【基础理解】楚汉之争中刘邦取胜的原因</div>
+<div class="deep-card-bd"><p>刘邦取胜的关键在于<strong>得民心</strong>。入咸阳后"约法三章"，废除秦朝苛法，赢得关中百姓拥护；项羽则刚愎自用、残暴失人心。刘邦善于用人，有萧何、张良、韩信等杰出人才辅佐。</p>
+<div style="margin-top:10px;background:#fffaf0;padding:10px 14px;border-radius:8px;">🎯 <strong>中考典型例题：</strong><br>"项羽兵败垓下，刘邦建立汉朝"，这一结果最能说明什么？<br><strong>A.</strong> 军事力量决定一切 <strong>B.</strong> 得民心者得天下 <strong>C.</strong> 地理优势最为关键 <strong>D.</strong> 偶然因素起决定作用<br><strong>答案：B</strong> · 解析：刘邦约法三章得民心，项羽残暴失人心，体现了人心向背的决定性作用。</div></div></div>
+<div class="deep-card"><div class="deep-card-hd">【联系拓展】汉高祖休养生息政策的深层原因</div>
+<div class="deep-card-bd"><p>汉高祖推行休养生息政策并非偶然：①秦朝速亡的<strong>前车之鉴</strong>；②西汉初年经济凋敝（"自天子不能具醇驷，而将相或乘牛车"）；③陆贾等大臣建议"以文治天下"。这一政策直接奠定了西汉前期的治国方向。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【素养提升】从"得民心者得天下"到家国情怀</div>
+<div class="deep-card-bd"><p>刘邦约法三章、休养生息的历史告诉我们：<strong>统治者必须以民为本</strong>。秦朝暴政速亡，汉初轻徭薄赋迎来"文景之治"，这种鲜明对比深刻揭示了治国需要顺应民心、关注民生的道理。</p></div></div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(0,this)">✓ 我已理解</button>
+</div></div>
+
+<div class="acc-group" id="accGroup1">
+<div class="acc-group-header" onclick="toggleAccGroup(1)">
+<span>🌟</span><span>重点二 · "文景之治"的表现与历史意义</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card"><div class="deep-card-hd">【基础理解】"文景之治"的具体表现</div>
+<div class="deep-card-bd"><p>①<strong>经济上</strong>：继续轻徭薄赋，将田租由十五税一降为三十税一，甚至多年免收田租。②<strong>政治上</strong>：减轻刑罚，废除肉刑；提倡节俭。③<strong>结果上</strong>：国库充实，"太仓之粟陈陈相因"，社会经济全面恢复。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【联系拓展】"文景之治"对后世的影响</div>
+<div class="deep-card-bd"><p>"文景之治"是中国历史上<strong>第一个著名的治世</strong>，为汉武帝大一统提供了雄厚的物质基础。后世将"文景之治"与"贞观之治""开元盛世"并称中国历史上三大治世。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【素养提升】"文景之治"对今天的启示</div>
+<div class="deep-card-bd"><p>汉文帝和汉景帝以身作则、提倡节俭的精神，在今天仍具有深刻的现实意义。文帝"惜十家之产"、不用金银铜装饰、只用瓦器葬，这种<strong>克勤克俭</strong>的执政理念告诉我们：领导者的品行直接影响国家治理的质量。</p>
+<div style="margin-top:10px;background:#fffaf0;padding:10px 14px;border-radius:8px;">🎯 <strong>中考典型例题：</strong><br>"文景之治"的出现，主要是由于统治者实行了什么政策？<br><strong>A.</strong> 严刑峻法 <strong>B.</strong> 重农抑商 <strong>C.</strong> 休养生息 <strong>D.</strong> 对外扩张<br><strong>答案：C</strong> · 解析：文景之治是汉初休养生息政策的延续和深化。</div></div></div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(1,this)">✓ 我已理解</button>
+</div></div>
+
+<div class="acc-group" id="accGroup2">
+<div class="acc-group-header" onclick="toggleAccGroup(2)">
+<span>🔍</span><span>难点 · 秦亡汉兴的历史逻辑</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card"><div class="deep-card-hd">【基础理解】秦朝速亡与汉朝兴盛的根本原因</div>
+<div class="deep-card-bd"><p>秦朝实行<strong>暴政</strong>，仅15年即灭亡；汉朝实行<strong>休养生息</strong>，延续400多年。一亡一兴之间，"得民心者得天下"的历史规律清晰可见。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【联系拓展】治国方略与国家命运的关系</div>
+<div class="deep-card-bd"><p>秦朝的<strong>"霸道"</strong>（严刑峻法）与汉初的<strong>"王道"</strong>（仁政德治）形成鲜明对比，说明治国方略必须顺应时代需要和民心所向。</p></div></div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(2,this)">✓ 我已理解</button>
+</div></div>
+</div>
+
+<!-- ===== PAGE 3: 教材栏目（原版保留，删除页码标注） ===== -->
+<div class="page-slide" id="page3">
+<div class="slide-header"><div class="module-num">模块三</div><div class="module-title">教材栏目解答</div></div>
+<div class="filter-bar">
+<button class="filter-chip active" onclick="filterCategory('all')">📋 全部</button>
+<button class="filter-chip" onclick="filterCategory('xiangguan')">📖 相关史事</button>
+<button class="filter-chip" onclick="filterCategory('xiangyixiang')">💭 想一想</button>
+<button class="filter-chip" onclick="filterCategory('cailiao')">📜 材料研读</button>
+<button class="filter-chip" onclick="filterCategory('kehou')">📝 课后活动</button>
+<button class="filter-chip" onclick="filterCategory('zhishi')">🔍 知识拓展</button>
+</div>
+
+<div class="col-box open" data-category="xiangguan">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📖 相关史事① · 约法三章</div>
+<div class="col-body"><p>刘邦率军进入咸阳后，与关中父老"约法三章"："杀人者死，伤人及盗抵罪。"废除了秦朝的严刑苛法。这一举措赢得了关中百姓的拥护，为刘邦后来在楚汉之争中取胜奠定了群众基础。</p></div>
+</div>
+<div class="col-box" data-category="xiangguan">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📖 相关史事② · 陆贾论治国</div>
+<div class="col-body"><p>汉高祖让陆贾总结秦亡的教训，陆贾著《新语》一书，提出"居马上得之，宁可以马上治之乎"的观点，主张以文治天下。汉高祖采纳了陆贾的建议，逐步推行休养生息政策。</p></div>
+</div>
+<div class="col-box" data-category="xiangguan">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📖 相关史事③ · 汉文帝的节俭</div>
+<div class="col-body"><p>汉文帝以节俭著称。他想建一座露台，但计算费用后说：这相当于十户中等人家的财产。于是放弃了这个计划。他平时穿衣也以朴素为主，陵墓只用瓦器，不用金银铜装饰，为中国古代帝王中节俭的典范。</p></div>
+</div>
+<div class="col-box" data-category="xiangyixiang">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">💭 想一想 · 汉高祖为什么要采取休养生息政策？</div>
+<div class="col-body"><div class="a show"><p><strong>答案：</strong>①西汉初年社会经济凋敝，需要恢复发展；②秦朝速亡的教训使汉高祖认识到过度剥削民众是秦亡的根本原因；③陆贾等大臣建议"以文治天下"；④为巩固新建的西汉政权，必须赢得民心。</p></div></div>
+</div>
+<div class="col-box" data-category="cailiao">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📜 材料研读 · 《汉书·景帝纪》</div>
+<div class="col-body"><div class="source-material">"汉兴，扫除烦苛，与民休息。至于孝文，加之以恭俭，孝景遵业，五六十载之间，至于移风易俗，黎民醇厚。"</div><div class="source-ref">——《汉书·景帝纪》</div>
+<p style="margin-top:10px;"><strong>问：</strong>材料中描述了文景时期怎样的局面？这一局面出现的原因是什么？</p>
+<div class="a show"><p><strong>答案：</strong>文景时期出现了社会安定、风气淳厚的局面。原因在于汉初实行休养生息政策，至文帝、景帝时延续了这一政策，"与民休息""加之以恭俭"，使社会经济持续恢复发展，民风变得淳朴。</p></div></div>
+</div>
+<div class="col-box" data-category="kehou">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📝 课后活动① · 以农为本</div>
+<div class="col-body"><p>贾谊说："驱民而归之农，皆著于本。"晁错说："务民于农桑。"</p><p><strong>问：</strong>汉文帝汉景帝为什么实行以农为本的政策？</p>
+<div class="a show"><p><strong>答案：</strong>①农业是古代社会最主要的生产部门；②西汉初年经济残破，粮食严重不足；③秦朝对农民剥削过重导致速亡的教训；④只有农业发展，百姓安居乐业，社会才能稳定。</p></div></div>
+</div>
+<div class="col-box" data-category="kehou">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📝 课后活动② · 休养生息的好处</div>
+<div class="col-body"><p><strong>问：</strong>与秦朝的横征暴敛相比，汉初实行的休养生息政策对百姓有什么好处？</p>
+<div class="a show"><p><strong>答案：</strong>①减轻了农民的赋税负担；②废除了严刑峻法；③经济逐步恢复，粮食充裕；④社会秩序安定，百姓安居乐业。</p></div></div>
+</div>
+<div class="col-box" data-category="zhishi">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">🔍 知识拓展 · 马王堆汉墓</div>
+<div class="col-body"><p>1972—1974年，在湖南长沙发掘了马王堆汉墓，这是西汉长沙国丞相轪侯利苍的家族墓地。三座墓葬共出土文物3000多件，其中一件<strong>素纱单衣</strong>重量不到50克，薄如蝉翼，反映了西汉纺织技术的高超水平。</p></div>
+</div>
+</div>
+
+<!-- ===== PAGE 4: 课堂训练（原版保留） ===== -->
+<div class="page-slide" id="page4">
+<div class="slide-header"><div class="module-num">模块四</div><div class="module-title">课堂训练</div></div>
+<div class="score-banner" id="scoreBanner">
+<span>📊 选择题得分：</span><span class="score-num" id="choiceScore">0</span><span> / 5</span>
+<span style="margin:0 16px">|</span>
+<span>📝 材料题：</span><span class="score-num" id="materialUnderstood">0</span><span> / 2 已理解</span>
+<button class="ans-btn" onclick="resetQuiz()" style="margin-left:16px">🔄 重新作答</button>
+</div>
+
+<div class="exercise" id="q1"><p class="q-text"><strong>1.</strong> 公元前202年，刘邦打败项羽，建立汉朝，定都（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q1')">A. 洛阳</label>
+<label onclick="optClick(this,'B','q1')">B. 咸阳</label>
+<label onclick="optClick(this,'C','q1')">C. 长安</label>
+<label onclick="optClick(this,'D','q1')">D. 建康</label>
+</div><div class="a" id="exp-q1"><strong>答案：C</strong><br><strong>解析：</strong>公元前202年刘邦建西汉定都长安。洛阳是东汉都城，咸阳是秦都，建康是东晋南朝都城。</div></div>
+
+<div class="exercise" id="q2"><p class="q-text"><strong>2.</strong> 汉高祖实行休养生息政策的根本目的是（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q2')">A. 发展农业生产</label>
+<label onclick="optClick(this,'B','q2')">B. 减轻农民负担</label>
+<label onclick="optClick(this,'C','q2')">C. 巩固西汉统治</label>
+<label onclick="optClick(this,'D','q2')">D. 打击地方势力</label>
+</div><div class="a" id="exp-q2"><strong>答案：C</strong><br><strong>解析：</strong>汉高祖吸取秦亡教训，根本目的是巩固政权，发展生产和减轻负担都是手段。</div></div>
+
+<div class="exercise" id="q3"><p class="q-text"><strong>3.</strong> "文景之治"时期，统治者减轻赋税，将田租降为（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q3')">A. 十税一</label>
+<label onclick="optClick(this,'B','q3')">B. 十五税一</label>
+<label onclick="optClick(this,'C','q3')">C. 三十税一</label>
+<label onclick="optClick(this,'D','q3')">D. 免收田租</label>
+</div><div class="a" id="exp-q3"><strong>答案：C</strong><br><strong>解析：</strong>汉高祖时十五税一，文帝景帝进一步降为三十税一。注意区分两个时期的税率。</div></div>
+
+<div class="exercise" id="q4"><p class="q-text"><strong>4.</strong> 下列关于汉文帝的表述，正确的是（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q4')">A. 建立了西汉王朝</label>
+<label onclick="optClick(this,'B','q4')">B. 以节俭著称，提倡"以农为本"</label>
+<label onclick="optClick(this,'C','q4')">C. 实行了"约法三章"</label>
+<label onclick="optClick(this,'D','q4')">D. 废除了分封制</label>
+</div><div class="a" id="exp-q4"><strong>答案：B</strong><br><strong>解析：</strong>汉文帝以节俭著称。建西汉和约法三章是刘邦（A、C），废分封制是秦朝（D）。</div></div>
+
+<div class="exercise" id="q5"><p class="q-text"><strong>5.</strong> 从秦朝的"暴政速亡"到西汉的"文景之治"，最能说明（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q5')">A. 统治者个人素质决定国家命运</label>
+<label onclick="optClick(this,'B','q5')">B. 治国政策顺应民心则兴，背离民心则亡</label>
+<label onclick="optClick(this,'C','q5')">C. 军事力量的强弱决定政权存亡</label>
+<label onclick="optClick(this,'D','q5')">D. 国家疆域的大小决定统治时间</label>
+</div><div class="a" id="exp-q5"><strong>答案：B</strong><br><strong>解析：</strong>秦暴政速亡vs汉休养生息兴盛，说明"得民心者得天下，失民心者失天下"。</div></div>
+
+<div class="exercise" id="m1"><p class="q-text"><strong>材料题一：</strong></p>
+<div class="source-material">"汉兴，接秦之弊，诸侯并起，民失作业而大饥馑。凡米石五千，人相食，死者过半……上于是约法省禁，轻田租，什五而税一。"</div>
+<div class="source-ref">——《汉书·食货志》</div>
+<p class="q-text">（1）材料反映了西汉初年怎样的社会状况？（2）"上"指的是谁？他采取了什么措施？</p>
+<button class="toggle-btn" onclick="toggleAnswer('ans-m1')">📝 显示答案</button>
+<button class="ans-btn understood-btn material" onclick="markMaterial(this)" style="margin-left:8px">✓ 我已理解</button>
+<div class="a" id="ans-m1"><p><strong>答案：</strong>（1）社会残破，经济凋敝，粮食奇缺，物价飞涨，人口锐减。（2）"上"指汉高祖刘邦。他采取了休养生息政策：减轻田租（十五税一）、让士兵还乡务农、释放奴婢、减轻刑罚等。</p></div></div>
+
+<div class="exercise" id="m2"><p class="q-text"><strong>材料题二：</strong></p>
+<div class="source-material">"文帝即位，躬修俭节，思安百姓……乃下诏赐民十二年租税之半。明年，遂除民田之租税。"</div>
+<div class="source-ref">——《汉书·食货志》</div>
+<p class="q-text">（1）材料中的"文帝"是谁？他的治国理念有什么特点？（2）说明"文景之治"对中国历史的重要意义。</p>
+<button class="toggle-btn" onclick="toggleAnswer('ans-m2')">📝 显示答案</button>
+<button class="ans-btn understood-btn material" onclick="markMaterial(this)" style="margin-left:8px">✓ 我已理解</button>
+<div class="a" id="ans-m2"><p><strong>答案：</strong>（1）"文帝"是汉文帝刘恒。他以节俭著称，实行以农为本的政策。（2）"文景之治"是中国历史上第一个治世，为汉武帝大一统提供了物质基础。</p></div></div>
+</div>
+
+<!-- ===== PAGE 5: 知识结构图（v2.0 徽章+脉冲+提示横幅） ===== -->
+<div class="page-slide" id="page5">
+<div class="slide-header"><div class="module-num">模块五</div><div class="module-title">知识结构图</div></div>
+<div class="kg-wrap-simple">
+<div class="kg-title">📊 知识结构 · 因果链</div>
+<div class="kg-hint-banner">
+<span style="font-size:20pt;">👆</span>
+<div>每个节点都有一个 <strong>紫色"点击展开"徽章</strong> 正在脉冲提示，点击任意节点即可展开详细内容！</div>
+</div>
+<div class="kg-chain">
+<div class="kg-node left c1" onclick="toggleKgDetail(this)">
+<span class="kg-icon">⚡</span><strong>秦朝暴政速亡</strong>
+<p>严刑峻法、横征暴敛 → 陈胜吴广起义 → 秦朝灭亡</p>
+<div class="kg-expand-badge">▶ 点击展开</div>
+<div class="kg-detail"><p>秦朝统治仅15年（前221—前207），暴政是速亡的根本原因。这为汉朝治国提供了深刻教训。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node right c2" onclick="toggleKgDetail(this)">
+<span class="kg-icon">🏛️</span><strong>西汉建立与休养生息</strong>
+<p>刘邦建汉（前202）→ 吸取秦亡教训 → 轻徭薄赋</p>
+<div class="kg-expand-badge">▶ 点击展开</div>
+<div class="kg-detail"><p>汉高祖推行"十五税一"、释放奴婢、和亲匈奴，为西汉社会经济的恢复奠定基础。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node left c3" onclick="toggleKgDetail(this)">
+<span class="kg-icon">🌾</span><strong>"文景之治"</strong>
+<p>文帝景帝延续休养生息 → 三十税一 → 以农为本</p>
+<div class="kg-expand-badge">▶ 点击展开</div>
+<div class="kg-detail"><p>文帝提倡节俭，景帝继续减税，出现了"太仓之粟陈陈相因"的繁荣局面。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node right c4" onclick="toggleKgDetail(this)">
+<span class="kg-icon">🏆</span><strong>为汉武帝大一统奠基</strong>
+<p>物质积累 → 国力强盛 → 大一统时代到来</p>
+<div class="kg-expand-badge">▶ 点击展开</div>
+<div class="kg-detail"><p>文景时期的积累为汉武帝北击匈奴、开拓疆土、推行大一统提供了雄厚的经济军事基础。</p></div>
+</div>
+</div>
+<div class="kg-rules-grid">
+<div class="kg-rule r1">🔵 政治：休养生息，以德化民</div>
+<div class="kg-rule r2">🟠 经济：轻徭薄赋，以农为本</div>
+<div class="kg-rule r3">🟢 文化：陆贾《新语》，文治天下</div>
+<div class="kg-rule r4">🔴 教训：秦亡汉兴，民心向背</div>
+</div>
+</div>
+</div>
+
+<!-- ===== PAGE 6: 结束页 ===== -->
+<div class="page-slide" id="page6">
+<div class="slide-header"><div class="module-num">📚</div><div class="module-title">第11课 · 西汉建立和"文景之治"</div></div>
+<div class="recap-section">
+<div class="recap-title">🔑 核心要点回顾</div>
+<div class="recap-grid">
+<div class="recap-card"><span class="recap-card-num">1</span><h3>⚔️ 楚汉之争与西汉建立</h3><ul><li>刘邦vs项羽，四年争夺</li><li>约法三章，赢得民心</li><li>前202年建汉，定都长安</li></ul></div>
+<div class="recap-card"><span class="recap-card-num">2</span><h3>🌱 休养生息政策</h3><ul><li>吸取秦亡教训</li><li>轻徭薄赋，十五税一</li><li>士兵还乡，释放奴婢</li></ul></div>
+<div class="recap-card"><span class="recap-card-num">3</span><h3>☀️ "文景之治"</h3><ul><li>文帝以节俭著称</li><li>三十税一，以农为本</li><li>国库充裕，社会安定</li></ul></div>
+</div></div>
+<div class="bottom-nav" style="margin-top:24px">
+<a href="#">← 第10课 秦末农民大起义</a>
+<span class="current">第11课</span>
+<a href="#">第12课 大一统王朝的巩固 →</a>
+</div>
+<div class="page-footer"><p>统编版初中历史 七年级上册</p><p>基于教材内容整理 · 仅供教学参考使用</p></div>
+</div>
+
+<!-- ===== 底部导航栏 ===== -->
+<div class="pg-nav">
+<button onclick="prevPage()" title="上一页 (←)">◀</button>
+<div class="pg-dots" id="pgDots"></div>
+<button onclick="nextPage()" title="下一页 (→)">▶</button>
+<span class="pg-info"><span id="curPg">1</span> / 7</span>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var currentPage=0,totalPages=7;
+(function initDots(){var d=document.getElementById('pgDots');for(var i=0;i<totalPages;i++){var s=document.createElement('span');s.className='pg-dot'+(i===0?' active':'');s.onclick=(function(n){return function(){goPage(n);};})(i);d.appendChild(s);}})();
+function goPage(n){if(n<0||n>=totalPages)return;document.querySelectorAll('.page-slide').forEach(function(s,i){s.classList.toggle('active',i===n);});document.querySelectorAll('.pg-dot').forEach(function(d,i){d.classList.toggle('active',i===n);});currentPage=n;document.getElementById('curPg').textContent=n+1;}
+function nextPage(){goPage(currentPage+1);}
+function prevPage(){goPage(currentPage-1);}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();nextPage();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevPage();}else if(e.key==='Home'){e.preventDefault();goPage(0);}else if(e.key==='End'){e.preventDefault();goPage(totalPages-1);}});
+
+// ===== 学习目标标记 =====
+var goalCount=0;
+function toggleGoal(el){if(!el.classList.contains('done')){el.classList.add('done');goalCount++;if(goalCount>=4){document.getElementById('goalAllDone').classList.add('show');}}}
+
+// ===== 标签页切换 v2 =====
+function switchTabV2(idx){document.querySelectorAll('.tab-btn').forEach(function(b,i){b.classList.toggle('active',i===idx);});document.querySelectorAll('.tab-panel').forEach(function(p,i){p.classList.toggle('active',i===idx);});}
+
+// ===== 拖拽排序 =====
+var draggedItem=null;
+function dragStart(e){draggedItem=e.target;e.target.style.opacity='.5';}
+function dragEnd(e){e.target.style.opacity='1';draggedItem=null;}
+(function(){
+var slots=document.querySelectorAll('.sort-slot');
+slots.forEach(function(s){
+s.addEventListener('dragover',function(e){e.preventDefault();});
+s.addEventListener('drop',function(e){e.preventDefault();if(draggedItem&&!s.querySelector('.sort-item')&&!draggedItem.classList.contains('used')){draggedItem.classList.add('used');var label=s.querySelector('.slot-content');if(label)label.textContent=draggedItem.textContent;s.appendChild(draggedItem);s.classList.add('filled');}});
+});
+})();
+
+function checkSort(tabIdx){
+var order=[{slot:'slot'+tabIdx+'_0',ans:'1'},{slot:'slot'+tabIdx+'_1',ans:'2'},{slot:'slot'+tabIdx+'_2',ans:'3'},{slot:'slot'+tabIdx+'_3',ans:'4'},{slot:'slot'+tabIdx+'_4',ans:'5'}];
+var allFilled=true,allCorrect=true;
+order.forEach(function(o){
+var s=document.getElementById(o.slot);
+var item=s? s.querySelector('.sort-item'):null;
+if(!item){allFilled=false;s? s.classList.remove('correct','wrong'):null;return;}
+var val=item.getAttribute('data-value');
+if(val===o.ans){s.classList.add('correct');s.classList.remove('wrong');}else{s.classList.add('wrong');s.classList.remove('correct');allCorrect=false;}
+});
+var rst=document.getElementById('sortResult'+tabIdx);
+if(!allFilled){rst.className='sort-result fail';rst.innerHTML='⚠️ 请将所有事件拖入槽位后再提交！';return;}
+rst.className=allCorrect?'sort-result pass':'sort-result fail';
+rst.innerHTML=allCorrect?'✅ 全部正确！排序完美！':'❌ 部分错误，请重新排列，提示：按时间从早到晚';
+if(allCorrect)updateStage(0);
+}
+function resetSort(tabIdx){
+var slots=document.querySelectorAll('#sortSlots'+tabIdx+' .sort-slot');
+var items=document.querySelectorAll('#sortItems'+tabIdx+' .sort-item');
+slots.forEach(function(s){var c=s.querySelector('.slot-content');if(c)c.textContent='';var i=s.querySelector('.sort-item');if(i){items.forEach(function(it){if(it.getAttribute('data-value')===i.getAttribute('data-value')){it.classList.remove('used');}});i.remove();}s.classList.remove('filled','correct','wrong');});
+document.getElementById('sortResult'+tabIdx).className='sort-result';
+}
+
+// ===== 填空填词 =====
+var fbAnswers={0:['陆贾','十五税一','奴婢','和亲','文景之治']};
+function checkFillBlanks(tabIdx){
+var ans=fbAnswers[tabIdx],allCorrect=true;
+for(var i=0;i<ans.length;i++){
+var el=document.getElementById('fb'+tabIdx+'_'+i);
+if(!el)continue;
+var v=el.value.trim().replace(/\s+/g,'');
+if(v===ans[i]){el.className='fill-blank correct';}else{el.className='fill-blank wrong';allCorrect=false;}
+}
+var fb=document.getElementById('fbFeedback'+tabIdx);fb.className='fill-feedback show';
+fb.textContent=allCorrect?'✅ 全部正确！太棒了！':'❌ 有错误，红框标注的词汇需要调整';
+fb.style.color=allCorrect?'var(--green)':'var(--red)';
+if(allCorrect)updateStage(1);
+}
+
+// ===== 连线匹配 =====
+var matchPair={0:[[0,3],[1,1],[2,0],[3,2]]};
+var matchSel={},matchCount={};
+function selectMatch(tidx,col,idx){
+var key='_'+col+'_'+idx;
+if(matchCount[tidx]&&matchCount[tidx][key])return;
+if(!matchSel[tidx]){matchSel[tidx]={left:null,right:null};matchCount[tidx]={};}
+if(col==='left'){matchSel[tidx].left=idx;document.querySelectorAll('#left'+tidx+'_'+'*[id^=left]').forEach(function(el){el.classList.toggle('selected',el.id==='left'+tidx+'_'+idx);});}
+else{matchSel[tidx].right=idx;document.querySelectorAll('#right'+tidx+'_'+'*[id^=right]').forEach(function(el){el.classList.toggle('selected',el.id==='right'+tidx+'_'+idx);});}
+if(matchSel[tidx].left!==null&&matchSel[tidx].right!==null){pairMatch(tidx);}
+}
+function pairMatch(tidx){var l=matchSel[tidx].left,r=matchSel[tidx].right;var correct=false;matchPair[tidx].forEach(function(p){if(p[0]===l&&p[1]===r)correct=true;});var lEl=document.getElementById('left'+tidx+'_'+l),rEl=document.getElementById('right'+tidx+'_'+r);if(correct){[lEl,rEl].forEach(function(el){el.classList.add('paired');el.classList.remove('selected');});matchCount[tidx]['_left_'+l]=true;matchCount[tidx]['_right_'+r]=true;}else{[lEl,rEl].forEach(function(el){el.classList.remove('selected');});}matchSel[tidx]={left:null,right:null};var totalPaired=Object.keys(matchCount[tidx]).length/2;if(totalPaired>=4){var fb=document.getElementById('matchFeedback'+tidx);fb.className='match-feedback show';fb.style.color=totalPaired===4?'var(--green)':'var(--red)';fb.textContent=totalPaired===4?'✅ 全部连线正确！'+String.fromCodePoint(0x1F389):'连线中，请继续...';if(totalPaired===4)updateStage(2);}
+}
+
+// ===== 地图标注 =====
+var mapFound={};
+function markMap(el,name){if(mapFound[name])return;mapFound[name]=true;el.classList.add('found');el.textContent='✅ '+el.textContent;if(Object.keys(mapFound).length>=5)updateStage(3);}
+
+// ===== 翻转卡完成标记 =====
+var flippedCards={};
+(function(){var cards=document.querySelectorAll('.flip-card');cards.forEach(function(c){c.addEventListener('click',function(){var h=c.querySelector('.flip-front');if(h){var t=h.textContent.trim();if(!flippedCards[t]){flippedCards[t]=true;if(Object.keys(flippedCards).length>=9)updateStage(4);}}});});})();
+
+// ===== 闯关进度 =====
+var stageDone={0:false,1:false,2:false,3:false,4:false};
+function updateStage(n){if(stageDone[n])return;stageDone[n]=true;var st=document.getElementById('st'+n);if(st){st.classList.remove('current');st.classList.add('done');}var next=document.getElementById('st'+(n+1));if(next)next.classList.add('current');var cnt=0;for(var k in stageDone){if(stageDone[k])cnt++;}var badge=document.getElementById('stageBadge');badge.textContent=cnt+'/5 关';if(cnt>=5){badge.classList.remove('pending');badge.textContent='🎉 全部通关！';}
+}
+
+// ===== 手风琴 =====
+function toggleAccGroup(idx){var g=document.getElementById('accGroup'+idx);if(g)g.classList.toggle('open');}
+function expandAllGroups(){document.querySelectorAll('.acc-group').forEach(function(g){g.classList.add('open');});}
+function collapseAllGroups(){document.querySelectorAll('.acc-group').forEach(function(g){g.classList.remove('open');});}
+var understoodCount=0,understoodGroups={};
+function markUnderstood(gi,btn){if(understoodGroups[gi])return;understoodGroups[gi]=true;understoodCount++;btn.classList.add('done');btn.textContent='✓ 已理解';btn.disabled=true;document.getElementById('understoodCount').textContent='（'+understoodCount+'/3 组已理解）';}
+(function(){var cards=document.querySelectorAll('.deep-card');cards.forEach(function(c){var h=c.querySelector('.deep-card-hd'),b=c.querySelector('.deep-card-bd');if(h&&b){h.addEventListener('click',function(){b.classList.toggle('show');});}});})();
+
+// ===== 栏目筛选 =====
+function filterCategory(cat){document.querySelectorAll('.filter-chip').forEach(function(c){var isActive=false;if(cat==='all')isActive=c.textContent.indexOf('全部')>=0;else isActive=c.getAttribute('onclick')&&c.getAttribute('onclick').indexOf("'"+cat+"'")>=0;c.classList.toggle('active',isActive);});document.querySelectorAll('.col-box').forEach(function(b){if(cat==='all'||b.getAttribute('data-category')===cat){b.classList.remove('hidden-by-filter');}else{b.classList.add('hidden-by-filter');}});}
+
+// ===== 课堂训练 =====
+var correctAnswers={q1:'C',q2:'C',q3:'C',q4:'B',q5:'B'};
+var choiceScore=0,answeredQuestions={};
+function optClick(el,opt,qid){if(answeredQuestions[qid])return;answeredQuestions[qid]=true;var correct=correctAnswers[qid];el.parentElement.querySelectorAll('label').forEach(function(o){o.classList.add('disabled');var t=o.textContent.trim().charAt(0);if(t===correct)o.classList.add('correct');else if(o===el)o.classList.add('wrong');});if(opt===correct){choiceScore++;document.getElementById('choiceScore').textContent=choiceScore;}document.getElementById('exp-'+qid).classList.add('show');}
+function toggleAnswer(id){var el=document.getElementById(id);if(el){el.classList.toggle('show');var btn=el.previousElementSibling;while(btn&&btn.tagName!=='BUTTON')btn=btn.previousElementSibling;if(btn)btn.textContent=el.classList.contains('show')?'📝 隐藏答案':'📝 显示答案';}}
+var materialUnderstood=0;
+function markMaterial(btn){if(btn.classList.contains('done'))return;btn.classList.add('done');btn.textContent='✓ 已理解';btn.disabled=true;materialUnderstood++;document.getElementById('materialUnderstood').textContent=materialUnderstood;}
+function resetQuiz(){choiceScore=0;answeredQuestions={};materialUnderstood=0;document.getElementById('choiceScore').textContent='0';document.getElementById('materialUnderstood').textContent='0';document.querySelectorAll('.options label').forEach(function(l){l.classList.remove('disabled','correct','wrong');});document.querySelectorAll('.a').forEach(function(a){a.classList.remove('show');});document.querySelectorAll('.understood-btn.material').forEach(function(b){b.classList.remove('done');b.textContent='✓ 我已理解';b.disabled=false;});}
+
+// ===== 知识结构图展开 =====
+function toggleKgDetail(node){node.classList.toggle('expanded');var badge=node.querySelector('.kg-expand-badge');if(badge){badge.textContent=node.classList.contains('expanded')?'▼ 收起详情':'▶ 点击展开';}}
+</script>
+  <div class="bottom-nav">
+  <div><a href="七上-U3-第10课_秦末农民大起义.html">← 上一课：第10课 秦末农民大起义</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第11课</div>
+  <div><a href="七上-U3-第12课_大一统王朝的巩固.html">下一课：第12课 大一统王朝的巩固 →</a></div>
+  </div>
+</body>
+</html>

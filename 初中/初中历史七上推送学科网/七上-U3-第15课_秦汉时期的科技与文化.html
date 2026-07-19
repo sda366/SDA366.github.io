@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第15课 秦汉时期的科技与文化 — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+  --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:"SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:14pt; background:var(--bg); color:#333; line-height:1.75;
+  max-width:900px; margin:0 auto; padding:0 20px 80px; overflow-x:hidden;
+}
+
+/* ========== 分页幻灯片 ========== */
+.page-slide { display:none; min-height:calc(100vh - 80px); padding-top:10px; animation:slideIn .35s ease; }
+.page-slide.active { display:block; }
+@keyframes slideIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 封面 ========== */
+.hero-cover { text-align:center; padding:50px 28px 40px; background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); color:#fff; border-radius:20px; position:relative; overflow:hidden; }
+.hero-cover .unit-tag { font-size:12pt; opacity:.82; letter-spacing:2px; margin-bottom:10px; }
+.hero-cover h1 { font-size:24pt; margin:8px 0; font-weight:700; letter-spacing:2px; }
+.hero-cover .sub { font-size:13pt; opacity:.85; margin-bottom:28px; }
+.hero-goals { background:rgba(255,255,255,.15); border-radius:16px; padding:20px 24px; text-align:left; max-width:680px; margin:0 auto; }
+.hero-goals h3 { font-size:14pt; margin-bottom:12px; color:#fff; text-align:center; }
+.goal-item { display:flex; align-items:center; gap:10px; padding:8px 12px; margin-bottom:6px; background:rgba(255,255,255,.08); border-radius:10px; cursor:pointer; transition:all .2s; user-select:none; }
+.goal-item:hover { background:rgba(255,255,255,.18); }
+.goal-item .goal-check { width:22px; height:22px; border:2px solid rgba(255,255,255,.5); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11pt; transition:all .25s; }
+.goal-item.done .goal-check { background:var(--green); border-color:var(--green); }
+.goal-item .goal-text { font-size:12pt; }
+.goal-item.done .goal-text { text-decoration:line-through; opacity:.6; }
+.goal-all-done { display:none; text-align:center; margin-top:16px; background:rgba(39,174,96,.25); padding:10px; border-radius:10px; font-size:13pt; animation:bounceIn .5s ease; }
+.goal-all-done.show { display:block; }
+@keyframes bounceIn { 0%{transform:scale(.6);opacity:0;} 60%{transform:scale(1.08);} 100%{transform:scale(1);opacity:1;} }
+
+/* ========== 闯关进度条 ========== */
+.stage-bar { background:#fff; border-radius:14px; padding:14px 18px; margin-bottom:18px; border:2px solid var(--border); }
+.stage-bar-title { font-size:13pt; font-weight:700; color:var(--primary-dark); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.stage-track { display:flex; gap:8px; flex-wrap:wrap; }
+.stage-dot { flex:1; min-width:55px; padding:8px 4px; text-align:center; border-radius:10px; font-size:10pt; background:#eee; color:#999; transition:all .3s; }
+.stage-dot.done { background:var(--primary); color:#fff; font-weight:700; }
+.stage-dot.current { background:#ffd54f; color:#333; font-weight:700; animation:stagePulse 1.2s ease infinite; }
+@keyframes stagePulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,213,79,.5);} 50%{box-shadow:0 0 0 8px rgba(255,213,79,0);} }
+.stage-badge { display:inline-block; background:var(--green); color:#fff; border-radius:20px; padding:4px 14px; font-size:11pt; margin-left:auto; }
+.stage-badge.pending { background:#ccc; }
+
+/* ========== 标签页 ========== */
+.tab-nav { display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
+.tab-btn { flex:1; min-width:70px; padding:10px 8px; border:2px solid var(--border); background:#fff; border-radius:12px; font-size:11pt; cursor:pointer; transition:all .25s; }
+.tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:700; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+.kp-card { background:var(--bg-card); border-radius:14px; padding:16px 20px; margin-bottom:14px; border-left:4px solid var(--primary); }
+.kp-card h4 { color:var(--primary-dark); font-size:14pt; margin-bottom:8px; }
+.kp-card ul { padding-left:20px; }
+.kp-card li { margin-bottom:6px; }
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.timeline-bar { background:#f0edff; border-radius:12px; padding:12px 18px; margin-bottom:16px; text-align:center; font-size:13pt; color:#5a4ac7; }
+.link-bar { border:2px dashed #d5cef0; border-radius:12px; padding:14px 18px; margin-bottom:16px; background:#fdfbff; font-size:13pt; }
+
+/* ========== 拖拽排序 ========== */
+.sort-zone { background:#fff; border:2px dashed var(--primary); border-radius:14px; padding:16px; margin-bottom:14px; }
+.sort-zone h4 { color:var(--primary-dark); font-size:13pt; margin-bottom:10px; text-align:center; }
+.sort-slots { display:flex; flex-direction:column; gap:8px; }
+.sort-slot { display:flex; align-items:center; gap:10px; padding:8px 14px; border:2px dashed #ddd; border-radius:10px; background:#fafafa; min-height:44px; transition:all .25s; }
+.sort-slot .slot-num { width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12pt; font-weight:700; flex-shrink:0; }
+.sort-slot .slot-label { font-size:11pt; color:#999; flex-shrink:0; }
+.sort-slot .slot-content { flex:1; font-size:12pt; }
+.sort-slot.filled { border-color:var(--primary); background:var(--bg-card); }
+.sort-slot.correct { border-color:var(--green); background:#e8f8f0; }
+.sort-slot.wrong { border-color:var(--red); background:#fdecea; }
+.sort-items { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.sort-item { padding:10px 16px; background:linear-gradient(135deg,#f0edff,#e0daff); border:2px solid var(--primary); border-radius:10px; font-size:13pt; cursor:grab; user-select:none; transition:all .2s; }
+.sort-item:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(124,108,240,.2); }
+.sort-item:active { cursor:grabbing; }
+.sort-item.used { opacity:.3; pointer-events:none; }
+.sort-result { display:none; text-align:center; margin-top:14px; padding:12px; border-radius:10px; font-size:14pt; font-weight:700; }
+.sort-result.pass { display:block; background:#e8f8f0; color:var(--green); border:2px solid var(--green); }
+.sort-result.fail { display:block; background:#fdecea; color:var(--red); border:2px solid var(--red); }
+
+/* ========== 填空填词 ========== */
+.fill-zone { background:#fff; border-radius:14px; padding:20px; margin-bottom:14px; border:2px solid var(--border); }
+.fill-zone h4 { color:var(--primary-dark); text-align:center; margin-bottom:14px; font-size:14pt; }
+.fill-blank { display:inline-block; width:100px; border:none; border-bottom:3px solid var(--primary); text-align:center; font-size:13pt; padding:4px 8px; margin:0 4px; background:#faf8ff; outline:none; transition:all .2s; }
+.fill-blank:focus { background:#ede8ff; }
+.fill-blank.correct { border-color:var(--green); background:#e8f8f0; color:var(--green); font-weight:700; }
+.fill-blank.wrong { border-color:var(--red); background:#fdecea; }
+.fill-submit { display:block; margin:16px auto 0; padding:10px 28px; background:var(--primary); color:#fff; border:none; border-radius:20px; font-size:14pt; cursor:pointer; transition:all .2s; }
+.fill-submit:hover { transform:scale(1.05); }
+.fill-feedback { text-align:center; margin-top:12px; font-size:13pt; font-weight:700; display:none; }
+.fill-feedback.show { display:block; }
+
+/* ========== 连线匹配 ========== */
+.match-section { display:flex; gap:16px; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; }
+.match-col { flex:1; min-width:180px; }
+.match-col h4 { text-align:center; color:var(--primary-dark); font-size:13pt; margin-bottom:10px; }
+.match-item { padding:10px 14px; background:#fff; border:2px solid var(--border); border-radius:10px; margin-bottom:8px; cursor:pointer; transition:all .2s; font-size:12pt; text-align:center; }
+.match-item:hover { border-color:var(--primary); }
+.match-item.selected { background:var(--primary); color:#fff; border-color:var(--primary); }
+.match-item.paired { background:#e8f8f0; border-color:var(--green); color:var(--green); cursor:default; pointer-events:none; }
+.match-feedback { text-align:center; margin-top:12px; font-size:14pt; font-weight:700; display:none; }
+.match-feedback.show { display:block; }
+
+/* ========== 地图标注 ========== */
+.map-zone { background:#fff; border-radius:14px; padding:20px; border:2px solid var(--border); margin-bottom:14px; }
+.map-zone h4 { text-align:center; color:var(--primary-dark); margin-bottom:10px; font-size:14pt; }
+.map-canvas { position:relative; width:100%; max-width:500px; margin:0 auto 14px; cursor:crosshair; }
+.map-check-list { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.map-check-item { padding:6px 14px; background:#eee; border-radius:20px; font-size:12pt; transition:all .2s; cursor:pointer; }
+.map-check-item.found { background:var(--green); color:#fff; }
+
+/* ========== 翻转卡 ========== */
+.flip-section { margin-top:20px; }
+.flip-section h4 { text-align:center; color:var(--primary-dark); margin-bottom:12px; font-size:13pt; }
+.flip-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+.flip-card { perspective:600px; height:110px; }
+.flip-inner { position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d; cursor:pointer; }
+.flip-card.flipped .flip-inner { transform:rotateY(180deg); }
+.flip-front,.flip-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:12px; font-size:12pt; text-align:center; }
+.flip-front { background:linear-gradient(135deg,#f0edff,#e0daff); border:2px solid var(--primary); color:var(--primary-dark); font-weight:700; }
+.flip-back { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); color:#fff; transform:rotateY(180deg); }
+
+/* ========== 知识结构图 v2.0（徽章+脉冲） ========== */
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(124,108,240,.08);} 50%{box-shadow:0 4px 20px rgba(124,108,240,.25);} }
+.kg-hint-banner { background:#fffbf0; border:2px dashed #f0ad4e; border-radius:12px; padding:12px 18px; margin-bottom:18px; text-align:center; font-size:13pt; color:#e67e22; display:flex; align-items:center; justify-content:center; gap:8px; }
+.kg-hint-banner strong { color:#d35400; }
+.kg-wrap-simple { background:#fff; border-radius:16px; padding:24px; }
+.kg-title { font-size:16pt; font-weight:700; color:var(--primary-dark); text-align:center; margin-bottom:16px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.kg-node {
+  width:80%; padding:16px 20px; border-radius:14px; text-align:center;
+  cursor:pointer; transition:all .3s; position:relative;
+  animation:kgPulse 3s ease-in-out infinite;
+}
+.kg-node:hover { transform:translateY(-2px); box-shadow:0 4px 20px rgba(124,108,240,.25)!important; border-color:var(--primary)!important; }
+.kg-node.expanded { animation:none; }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#ede8ff; border:2px solid var(--primary); }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e8f5e9; border:2px solid var(--green); }
+.kg-node.c4 { background:#fce4ec; border:2px solid var(--red); }
+.kg-node strong { display:block; font-size:14pt; margin-bottom:6px; }
+.kg-node p { font-size:12pt; color:#555; margin:0; }
+.kg-icon { font-size:18pt; display:block; margin-bottom:4px; }
+.kg-arrow { font-size:18pt; color:var(--primary); }
+.kg-expand-badge {
+  position:absolute; top:8px; right:12px;
+  background:var(--primary); color:#fff; font-size:9pt;
+  padding:2px 10px; border-radius:12px; font-weight:700; transition:all .3s;
+}
+.kg-node.expanded .kg-expand-badge { background:var(--green); }
+.kg-detail { max-height:0; overflow:hidden; transition:max-height .4s ease; font-size:12pt; color:#555; margin-top:8px; padding:0 8px; border-top:1px dashed var(--border); }
+.kg-node.expanded .kg-detail { max-height:300px; padding-top:8px; }
+.kg-rules-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.kg-rule { flex:1; min-width:140px; padding:12px 14px; border-radius:10px; font-size:12pt; font-weight:700; text-align:center; }
+.kg-rule.r1 { background:#ede8ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e8f5e9; color:var(--green); }
+.kg-rule.r4 { background:#fce4ec; color:var(--red); }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,.08); position:relative; text-align:left; }
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:1px dashed var(--border); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { padding:4px 0; font-size:12pt; color:#555; border-bottom:1px dotted #eee; }
+.recap-card ul li:last-child { border-bottom:none; }
+
+/* ========== 底部导航 ========== */
+.pg-nav { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#fff; border-radius:40px; padding:10px 24px; box-shadow:0 4px 20px rgba(124,108,240,.18); display:flex; align-items:center; gap:12px; z-index:1000; }
+.pg-nav button { width:36px; height:36px; border-radius:50%; border:2px solid var(--border); background:#fff; color:#5a4ac7; font-size:16pt; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; }
+.pg-nav button:hover { background:var(--primary); color:#fff; border-color:var(--primary); }
+.pg-nav .pg-dots { display:flex; gap:6px; }
+.pg-nav .pg-dot { width:10px; height:10px; border-radius:50%; background:var(--border); cursor:pointer; transition:all .2s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-info { font-size:11pt; color:#888; min-width:60px; text-align:center; }
+.pg-nav .pg-info span { color:var(--primary); font-weight:700; }
+
+/* ========== 手风琴/重难点 ========== */
+.acc-global-ctrl { text-align:right; margin-bottom:12px; }
+.acc-group { background:#fff; border-radius:16px; margin-bottom:16px; box-shadow:0 2px 12px rgba(124,108,240,.08); overflow:hidden; }
+.acc-group-header { background:linear-gradient(135deg,#f0edff,#e0daff); padding:14px 18px; cursor:pointer; display:flex; align-items:center; gap:10px; font-size:14pt; font-weight:700; color:var(--primary-dark); user-select:none; }
+.acc-group-header .acc-group-arrow { transition:transform .3s; margin-left:auto; }
+.acc-group.open .acc-group-arrow { transform:rotate(180deg); }
+.acc-group-body { display:none; padding:0 18px 16px; }
+.acc-group.open .acc-group-body { display:block; }
+.deep-card { background:#fff; border:1px solid #e0daff; border-radius:12px; margin-bottom:10px; overflow:hidden; }
+.deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; cursor:pointer; font-weight:700; font-size:13pt; user-select:none; }
+.deep-card-bd { display:none; padding:14px 16px; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+.understood-btn { background:#f0edff; color:#5a4ac7; border:2px solid var(--border); margin-top:12px; padding:8px 18px; border-radius:20px; font-size:13pt; cursor:pointer; transition:all .2s; }
+.understood-btn.done { background:var(--green); color:#fff; border-color:var(--green); }
+.tag-zhongkao { display:inline-block; background:var(--orange); color:#fff; border-radius:12px; padding:2px 10px; font-size:10pt; margin-left:8px; }
+
+/* ========== 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.filter-chip { padding:6px 16px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all .2s; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+.col-box { background:#fff; border-radius:14px; margin-bottom:14px; overflow:hidden; box-shadow:0 2px 8px rgba(124,108,240,.06); }
+.col-header { background:linear-gradient(135deg,var(--primary),#5a4ac7); color:#fff; padding:12px 18px; font-weight:700; font-size:14pt; cursor:pointer; }
+.col-body { display:none; padding:14px 18px; }
+.col-box.open .col-body { display:block; }
+.hidden-by-filter { display:none; }
+.source-material { border-left:4px solid var(--primary); background:var(--bg-card); padding:10px 14px; margin:8px 0; font-size:12pt; color:#555; border-radius:0 8px 8px 0; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-top:2px; }
+
+/* ========== 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); padding:14px 20px; border-radius:14px; margin-bottom:20px; display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:14pt; }
+.score-num { font-size:22pt; font-weight:800; color:var(--primary); min-width:30px; text-align:center; }
+.exercise { background:var(--bg-card); border-radius:14px; padding:18px 20px; margin-bottom:14px; border-left:4px solid var(--primary); }
+.q-text { font-size:14pt; margin-bottom:10px; }
+.options { display:flex; flex-direction:column; gap:6px; }
+.options label { display:block; padding:10px 16px; border:2px solid var(--border); border-radius:10px; cursor:pointer; font-size:14pt; transition:all .2s; }
+.options label:hover { border-color:var(--primary); background:var(--bg-card); }
+.options label.correct { background:#d5f5e3; border-color:var(--green); color:var(--green); }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.options label.disabled { pointer-events:none; }
+.ans-btn { background:var(--primary); color:#fff; border:none; padding:8px 18px; border-radius:20px; font-size:13pt; cursor:pointer; transition:all .2s; margin-left:8px; }
+.ans-btn:hover { transform:scale(1.04); }
+.a { display:none; margin-top:12px; padding:12px 16px; background:#f0edff; border-radius:10px; font-size:14pt; }
+.a.show { display:block; }
+
+/* ========== 导航链接 ========== */
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding:12px 18px; background:#fff; border-radius:14px; box-shadow:0 2px 8px rgba(124,108,240,.06); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; font-weight:700; }
+.bottom-nav a:hover { color:var(--primary); }
+.bottom-nav .current { color:#888; font-size:12pt; }
+.page-footer { text-align:center; padding:18px; font-size:12px; color:#aaa; }
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 0: 封面 ===== -->
+<div class="page-slide active" id="page0">
+<div class="hero-cover">
+<div class="unit-tag">第三单元 · 秦汉时期：统一多民族封建国家的建立和巩固</div>
+<h1>第15课 · 秦汉时期的科技与文化</h1>
+<div class="sub">统编版初中历史  七年级上册</div>
+<div class="hero-goals">
+<h3>🎯 学习目标 · 点击逐条标记</h3>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">了解造纸术的发明与蔡伦改进造纸术的基本史实</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">掌握医学、数学与农学的主要成就及其代表人物</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">理解《史记》的史学价值与司马迁的治史精神</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">认识道教兴起和佛教传入的社会文化影响</div></div>
+<div class="goal-all-done" id="goalAllDone">🎉 全部学习目标已确认！开始探索吧 →</div>
+</div>
+</div>
+</div>
+
+<!-- ===== PAGE 1: 知识要点（交互版） ===== -->
+<div class="page-slide" id="page1">
+<div class="slide-header"><div class="module-num">模块一</div><div class="module-title">知识要点</div></div>
+
+<!-- 闯关进度条 -->
+<div class="stage-bar">
+<div class="stage-bar-title">🏆 互动闯关进度 <span class="stage-badge pending" id="stageBadge">0/5 关</span></div>
+<div class="stage-track">
+<div class="stage-dot current" id="st0">①排序</div>
+<div class="stage-dot" id="st1">②填空</div>
+<div class="stage-dot" id="st2">③连线</div>
+<div class="stage-dot" id="st3">④地图</div>
+<div class="stage-dot" id="st4">⑤翻转</div>
+</div>
+</div>
+
+<div class="tab-nav">
+<button class="tab-btn active" onclick="switchTabV2(0)">造纸术的发明</button>
+<button class="tab-btn" onclick="switchTabV2(1)">医学数学与农学</button>
+<button class="tab-btn" onclick="switchTabV2(2)">司马迁与《史记》</button>
+<button class="tab-btn" onclick="switchTabV2(3)">道教和佛教</button>
+</div>
+
+<!-- Tab 0: 造纸术的发明 -->
+<div class="tab-panel active" id="tp0">
+<div class="timeline-bar">⏳ 西汉 → 105年（蔡伦改进造纸术）— 造纸术的发明与改进</div>
+
+<!-- 闯关1：拖拽排序——造纸术发展历程 -->
+<div class="sort-zone">
+<h4>🔄 闯关一 · 拖拽排序：造纸术发展的关键事件</h4>
+<p style="text-align:center;font-size:12pt;color:#888;margin-bottom:12px;">按住下方事件卡片拖动到对应的时间槽位中</p>
+<div class="sort-slots" id="sortSlots0">
+<div class="sort-slot" id="slot0_0"><span class="slot-num">1</span><span class="slot-label">第一步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_1"><span class="slot-num">2</span><span class="slot-label">第二步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_2"><span class="slot-num">3</span><span class="slot-label">第三步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_3"><span class="slot-num">4</span><span class="slot-label">第四步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_4"><span class="slot-num">5</span><span class="slot-label">第五步</span><span class="slot-content"></span></div>
+</div>
+<div class="sort-items" id="sortItems0">
+<div class="sort-item" draggable="true" data-value="1" ondragstart="dragStart(event)" ondragend="dragEnd(event)">商朝用龟甲兽骨，西周用青铜器——书写材料笨重</div>
+<div class="sort-item" draggable="true" data-value="2" ondragstart="dragStart(event)" ondragend="dragEnd(event)">春秋战国用竹简木牍和丝帛——笨重不便或价格昂贵</div>
+<div class="sort-item" draggable="true" data-value="3" ondragstart="dragStart(event)" ondragend="dragEnd(event)">西汉掌握造纸基本方法——但纸比较粗糙</div>
+<div class="sort-item" draggable="true" data-value="4" ondragstart="dragStart(event)" ondragend="dragEnd(event)">东汉蔡伦用树皮麻头破布旧渔网改进造纸术</div>
+<div class="sort-item" draggable="true" data-value="5" ondragstart="dragStart(event)" ondragend="dragEnd(event)">"蔡侯纸"质优价廉便于推广，造纸术成为四大发明之一</div>
+</div>
+<div class="sort-result" id="sortResult0"></div>
+<div style="text-align:center;margin-top:14px;"><button class="fill-submit" onclick="checkSort(0)">✅ 提交检验</button><button class="ans-btn" onclick="resetSort(0)" style="background:#999;">🔄 重置</button></div>
+</div>
+
+<!-- 知识卡片 -->
+<div class="kp-card"><h4>一、纸发明前的书写材料</h4>
+<ul><li>商朝用<span class="kwd">龟甲和兽骨</span>，西周用<span class="kwd">青铜器</span></li><li>春秋战国用<span class="kwd">竹简和木牍</span>，笨重不便；也用<span class="kwd">丝帛</span>，价格昂贵</li></ul></div>
+<div class="kp-card"><h4>二、造纸术的发明（西汉）</h4>
+<ul><li>西汉时，人们已经掌握了<span class="kwd">造纸的基本方法</span></li><li>早期的纸比较粗糙，使用不普遍</li></ul></div>
+<div class="kp-card"><h4>三、蔡伦改进造纸术（105年）<span class="tag-zhongkao">📌 中考常考</span></h4>
+<ul><li>东汉时<span class="kwd">蔡伦</span>改进造纸工艺，用<span class="kwd">树皮、麻头、破布、旧渔网</span>为原料</li><li>纸的质量<span class="kwd">大大提高</span>，原料<span class="kwd">容易找到且便宜</span>，便于推广</li><li>后人把这种纸称为<span class="kwd">"蔡侯纸"</span></li><li>造纸术是<span class="kwd">中国古代四大发明</span>之一，对世界文明作出巨大贡献</li></ul></div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡 · 点击翻转</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">甲骨</div><div class="flip-back">商朝用龟甲和兽骨刻写文字，是最早的成熟文字载体</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">简牍</div><div class="flip-back">竹简和木牍是纸张发明前的主要书写材料，笨重不便</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">蔡侯纸</div><div class="flip-back">东汉蔡伦改进造纸术所造，质优价廉，因蔡伦封龙亭侯得名</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">四大发明</div><div class="flip-back">造纸术与印刷术、火药、指南针并称中国古代四大发明</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 1: 医学数学与农学 -->
+<div class="tab-panel" id="tp1">
+<div class="timeline-bar">⚕️ 📐 东汉 — 张仲景、华佗、《九章算术》、张衡</div>
+
+<!-- 闯关2：填空填词——医学数学成就 -->
+<div class="fill-zone">
+<h4>✏️ 闯关二 · 填空填词：秦汉医学数学成就</h4>
+<p style="text-align:center;font-size:12pt;color:#888;margin-bottom:16px;">在空白处填入正确内容后点击"提交检验"</p>
+<p style="line-height:2.4;font-size:13pt;">
+东汉末年，张仲景著《<input type="text" class="fill-blank" id="fb0_0" placeholder="？">》，提出"<input type="text" class="fill-blank" id="fb0_1" placeholder="？">"和"<input type="text" class="fill-blank" id="fb0_2" placeholder="？">"理论，被称为"<input type="text" class="fill-blank" id="fb0_3" placeholder="？">"。华佗发明"<input type="text" class="fill-blank" id="fb0_4" placeholder="？">"用于全身麻醉，创编"<input type="text" class="fill-blank" id="fb0_5" placeholder="？">"健身操。东汉《<input type="text" class="fill-blank" id="fb0_6" placeholder="？">》是当时世界上先进的数学著作。张衡发明了<input type="text" class="fill-blank" id="fb0_7" placeholder="？">和<input type="text" class="fill-blank" id="fb0_8" placeholder="？">。
+</p>
+<div class="fill-feedback" id="fbFeedback0"></div>
+<div style="text-align:center;margin-top:14px;"><button class="fill-submit" onclick="checkFillBlanks(0)">✅ 提交检验</button></div>
+</div>
+
+<div class="kp-card"><h4>一、医学成就</h4>
+<ul><li><span class="kwd">张仲景</span>（东汉末年，"医圣"）：著<span class="kwd">《伤寒杂病论》</span>，提出<span class="kwd">"辨证施治"</span>和<span class="kwd">"治未病"</span>理论<span class="tag-zhongkao">📌 中考常考</span></li><li><span class="kwd">华佗</span>（东汉末年）：发明<span class="kwd">"麻沸散"</span>（全身麻醉），善于<span class="kwd">外科手术</span>；创编<span class="kwd">"五禽戏"</span></li></ul></div>
+<div class="kp-card"><h4>二、数学与农学成就</h4>
+<ul><li><span class="kwd">《九章算术》</span>：东汉时期写成，总结了周秦以来的数学成就，是当时世界上<span class="kwd">先进的数学著作</span></li><li>涉及分数运算、正负数、方程等</li><li><span class="kwd">《氾胜之书》</span>：西汉时期总结北方农业生产经验的农书</li><li><span class="kwd">张衡</span>：发明<span class="kwd">地动仪</span>（测定地震方位），造<span class="kwd">浑天仪</span>（演示天象）</li></ul></div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">《伤寒杂病论》</div><div class="flip-back">张仲景著，提出"辨证施治"原则，奠定中医临床医学基础</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">麻沸散</div><div class="flip-back">华佗发明的全身麻醉药剂，使大型外科手术成为可能</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">五禽戏</div><div class="flip-back">华佗模仿虎鹿熊猿鸟五种动物创编的健身操</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">地动仪</div><div class="flip-back">张衡发明，能测定地震方位，比欧洲早1700多年</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 2: 司马迁与《史记》 -->
+<div class="tab-panel" id="tp2">
+<div class="timeline-bar">📖 西汉 — 司马迁著《史记》</div>
+
+<!-- 闯关3：连线匹配——《史记》关键概念 -->
+<div class="match-section">
+<div class="match-col"><h4>📋 概念（左选）</h4>
+<div class="match-item" id="left0_0" onclick="selectMatch(0,'left',0)">司马迁</div>
+<div class="match-item" id="left0_1" onclick="selectMatch(0,'left',1)">《史记》</div>
+<div class="match-item" id="left0_2" onclick="selectMatch(0,'left',2)">纪传体</div>
+<div class="match-item" id="left0_3" onclick="selectMatch(0,'left',3)">"史家之绝唱"</div>
+</div>
+<div class="match-col"><h4>🎯 解释（右选配对）</h4>
+<div class="match-item" id="right0_0" onclick="pairMatch(0,0)">西汉史学家，继承父志著史</div>
+<div class="match-item" id="right0_1" onclick="pairMatch(0,1)">第一部纪传体通史，记载黄帝至汉武帝</div>
+<div class="match-item" id="right0_2" onclick="pairMatch(0,2)">以人物传记为中心的史书体例</div>
+<div class="match-item" id="right0_3" onclick="pairMatch(0,3)">鲁迅对《史记》的赞誉</div>
+</div>
+</div>
+<div class="match-feedback" id="matchFeedback0"></div>
+
+<div class="kp-card"><h4>一、司马迁与《史记》<span class="tag-zhongkao">📌 中考常考</span></h4>
+<ul><li><span class="kwd">司马迁</span>：西汉史学家，继承父志著史</li><li>受<span class="kwd">宫刑</span>后仍坚持著书："人固有一死，或重于泰山，或轻于鸿毛"</li></ul></div>
+<div class="kp-card"><h4>二、《史记》的内容与价值</h4>
+<ul><li>记述从<span class="kwd">黄帝到汉武帝</span>的历史，共<span class="kwd">130篇</span></li><li>中国古代第一部<span class="kwd">纪传体通史</span><span class="tag-zhongkao">📌 中考常考</span></li><li>文笔优美，具有<span class="kwd">很高的文学价值</span>；秉笔直书，具有<span class="kwd">很高的史学价值</span></li></ul></div>
+<div class="link-bar">💡 <strong>内在联系</strong>：继承父志→游历全国搜集史料→受宫刑发愤著书→完成130篇《史记》→成为"史家之绝唱"</div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">司马迁</div><div class="flip-back">西汉史学家，受宫刑后忍辱负重，以"重于泰山"之志完成《史记》</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">纪传体通史</div><div class="flip-back">以人物传记为中心，跨越多个朝代记述历史的体例，由《史记》开创</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">秉笔直书</div><div class="flip-back">史学家不隐恶、不虚美，据实记录历史的崇高史学精神</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 3: 道教和佛教 -->
+<div class="tab-panel" id="tp3">
+<div class="timeline-bar">🛕 东汉 — 道教的兴起 与 佛教的传入</div>
+
+<div class="kp-card"><h4>一、道教的兴起</h4>
+<ul><li>兴起于<span class="kwd">东汉末年</span>，吸收民间流行的神仙方术和道家思想</li><li>主要派别：<span class="kwd">张角</span>创立的<span class="kwd">太平道</span>、<span class="kwd">张陵</span>创立的<span class="kwd">五斗米道</span></li><li>张角利用太平道发动了<span class="kwd">黄巾起义</span></li></ul></div>
+<div class="kp-card"><h4>二、佛教的传入<span class="tag-zhongkao">📌 中考常考</span></h4>
+<ul><li>产生于<span class="kwd">古印度</span>，<span class="kwd">两汉之际</span>传入中国</li><li>东汉明帝时修建<span class="kwd">白马寺</span>（中国第一座佛教寺院）</li><li>佛教的传入丰富了中国的文化，对<span class="kwd">思想、艺术、建筑</span>等产生深远影响</li></ul></div>
+<div class="link-bar">💡 <strong>内在联系</strong>：秦汉大一统格局→丝绸之路开通→中外文化交流→佛教传入中国→道教也在本土兴起→儒、道、佛并存的多元文化格局初步形成</div>
+
+<!-- 闯关4：地图标注——佛教传入路线 -->
+<div class="map-zone">
+<h4>🗺️ 闯关四 · 点击标注：佛教传入中国路线</h4>
+<svg class="map-canvas" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="300" fill="#faf8ff" rx="12"/>
+  <rect x="20" y="20" width="560" height="260" fill="#f0edff" rx="10" stroke="#dcd4f5" stroke-width="2"/>
+  <!-- 佛教传入路线 -->
+  <path d="M80,160 L180,120 L260,100 L360,105 L450,115 L530,140" fill="none" stroke="#e67e22" stroke-width="3" stroke-dasharray="8,4" opacity=".6"/>
+  <text x="310" y="70" font-size="10" fill="#e67e22" text-anchor="middle">— — 佛教传入路线 — —</text>
+  <!-- 古印度 -->
+  <circle cx="80" cy="160" r="14" fill="#999" stroke="#666" stroke-width="2" opacity=".5" id="mapPoint1" onclick="markMapEv(this,'古印度','mapLoc1')" style="cursor:pointer"/>
+  <text x="80" y="185" font-size="10" fill="#666" text-anchor="middle">古印度（起源）</text>
+  <!-- 中亚 -->
+  <circle cx="180" cy="120" r="14" fill="#999" stroke="#666" stroke-width="2" opacity=".5" id="mapPoint2" onclick="markMapEv(this,'中亚','mapLoc2')" style="cursor:pointer"/>
+  <text x="180" y="145" font-size="10" fill="#666" text-anchor="middle">中亚</text>
+  <!-- 西域 -->
+  <circle cx="280" cy="100" r="14" fill="#999" stroke="#666" stroke-width="2" opacity=".5" id="mapPoint3" onclick="markMapEv(this,'西域','mapLoc3')" style="cursor:pointer"/>
+  <text x="280" y="125" font-size="10" fill="#666" text-anchor="middle">西域（今新疆）</text>
+  <!-- 河西走廊 -->
+  <circle cx="380" cy="105" r="14" fill="#999" stroke="#666" stroke-width="2" opacity=".5" id="mapPoint4" onclick="markMapEv(this,'河西走廊','mapLoc4')" style="cursor:pointer"/>
+  <text x="380" y="130" font-size="10" fill="#666" text-anchor="middle">河西走廊</text>
+  <!-- 长安 -->
+  <circle cx="480" cy="115" r="14" fill="#999" stroke="#666" stroke-width="2" opacity=".5" id="mapPoint5" onclick="markMapEv(this,'长安','mapLoc5')" style="cursor:pointer"/>
+  <text x="480" y="140" font-size="10" fill="#666" text-anchor="middle">长安</text>
+  <!-- 洛阳/白马寺 -->
+  <circle cx="530" cy="140" r="14" fill="#999" stroke="#666" stroke-width="2" opacity=".5" id="mapPoint6" onclick="markMapEv(this,'洛阳白马寺','mapLoc6')" style="cursor:pointer"/>
+  <text x="555" y="155" font-size="9" fill="#666">洛阳</text>
+  <text x="555" y="167" font-size="9" fill="#666">白马寺</text>
+  <!-- 图例 -->
+  <rect x="20" y="220" width="270" height="30" rx="6" fill="#fff" stroke="#dcd4f5"/>
+  <text x="40" y="240" font-size="10" fill="#888">💡 点击灰色圆点标注佛教传入路线地点</text>
+</svg>
+<div class="map-check-list">
+<span class="map-check-item" id="mapLoc1">📍 古印度（起源）</span>
+<span class="map-check-item" id="mapLoc2">📍 中亚</span>
+<span class="map-check-item" id="mapLoc3">📍 西域（今新疆）</span>
+<span class="map-check-item" id="mapLoc4">📍 河西走廊</span>
+<span class="map-check-item" id="mapLoc5">📍 长安</span>
+<span class="map-check-item" id="mapLoc6">📍 洛阳白马寺</span>
+</div>
+</div>
+
+<!-- 闯关5：翻转卡——道教佛教对比 -->
+<div class="flip-section"><h4>🧠 闯关五 · 概念翻转卡：道教 vs 佛教</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">道教（本土宗教）</div><div class="flip-back">兴起于东汉末年，吸收神仙方术和道家思想；太平道（张角）和五斗米道（张陵）</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">太平道</div><div class="flip-back">张角创立，以符水治病吸引信众，后发动黄巾起义</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">佛教（域外传入）</div><div class="flip-back">产生于古印度，两汉之际经丝绸之路传入中国</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">白马寺</div><div class="flip-back">东汉明帝时修建，位于洛阳，是中国第一座佛教寺院</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">黄巾起义</div><div class="flip-back">东汉末年张角以太平道为旗帜发动的大规模农民起义</div></div></div>
+</div></div>
+</div>
+</div>
+
+<!-- ===== PAGE 2: 重难点解析 ===== -->
+<div class="page-slide" id="page2">
+<div class="slide-header"><div class="module-num">模块二</div><div class="module-title">重难点解析</div></div>
+<div class="acc-global-ctrl">
+<button class="ans-btn" onclick="expandAllGroups()" style="margin-left:0;">📖 全部展开</button>
+<button class="ans-btn" onclick="collapseAllGroups()">📕 全部折叠</button>
+<span id="understoodCount" style="margin-left:12px;color:var(--primary);font-size:13pt"></span>
+</div>
+
+<!-- 手风琴组 1：造纸术 -->
+<div class="acc-group" id="accGroup0">
+<div class="acc-group-header" onclick="toggleAccGroup(0)">
+<span class="acc-group-icon">📌</span>
+<span>重点一 · 造纸术的发明与蔡伦的贡献</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card"><div class="deep-card-hd">【基础理解】纸发明前的书写材料及局限</div>
+<div class="deep-card-bd"><p>商朝用龟甲兽骨，西周用青铜器，春秋战国用竹简木牍和丝帛。竹木简笨重不便携带，丝帛价格昂贵不易普及。这些书写材料的局限性促使人们寻找更轻便、廉价的替代品，为造纸术的发明提供了社会需求。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【联系拓展】蔡伦改进造纸术的重要意义</div>
+<div class="deep-card-bd"><p>蔡伦用树皮、麻头、破布、旧渔网等废旧材料为原料，降低了造纸成本。改进后的纸轻薄柔韧、原料易得，便于大量生产。造纸术推动了文化教育事业的发展，后来传播到世界各地，是中国对世界文明的伟大贡献。</p><p style="margin-top:8px;background:#fdf3e0;padding:10px 14px;border-radius:8px;font-size:12pt;"><span class="tag-zhongkao">🎯 中考典型例题</span> 蔡伦改进造纸术的主要特点是（　）<br>A. 使用昂贵原料 B. 原料易得、工艺简便 C. 只有贵族能用 D. 纸张非常粗糙<br><strong>答案：B</strong>　解析：蔡伦用树皮麻头破布旧渔网等废旧材料造纸，原料容易找到且便宜。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【素养提升】造纸术对世界文明的影响</div>
+<div class="deep-card-bd"><p>造纸术经阿拉伯人传到欧洲，取代了羊皮纸和纸草，极大降低了书写成本，促进了文化普及、科学传播和教育推广。没有造纸术和印刷术，欧洲的文艺复兴和宗教改革无从谈起。造纸术体现了中国古人的创新精神和智慧。</p></div></div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(0,this)">✓ 我已理解</button>
+</div></div>
+
+<!-- 手风琴组 2：司马迁与《史记》 -->
+<div class="acc-group" id="accGroup1">
+<div class="acc-group-header" onclick="toggleAccGroup(1)">
+<span class="acc-group-icon">📌</span>
+<span>重点二 · 司马迁与《史记》</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card"><div class="deep-card-hd">【基础理解】《史记》的内容与体例</div>
+<div class="deep-card-bd"><p>《史记》记述从黄帝到汉武帝约3000年历史，共130篇，分为本纪、世家、列传、表、书五种体例。它是中国古代第一部纪传体通史。"纪传体"以人物传记为中心叙述历史，区别于编年体。《史记》秉笔直书，成为后世历代正史的典范。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【联系拓展】司马迁的治史精神</div>
+<div class="deep-card-bd"><p>司马迁因李陵之祸受宫刑，忍辱负重，以"人固有一死，或重于泰山，或轻于鸿毛"的信念坚持著史。他游历全国各地搜集史料，力求"实录"。"秉笔直书"的精神使《史记》具有很高的史学价值，文笔优美又使其具有很高的文学价值，鲁迅称其为"史家之绝唱，无韵之离骚"。</p><p style="margin-top:8px;background:#fdf3e0;padding:10px 14px;border-radius:8px;font-size:12pt;"><span class="tag-zhongkao">🎯 中考典型例题</span> 鲁迅称赞《史记》"史家之绝唱，无韵之离骚"是因为（　）<br>A. 第一部编年体史书 B. 既有很高史学价值又有很高文学价值<br>C. 只记载汉武帝时期 D. 是司马迁一人创作<br><strong>答案：B</strong>　解析："史家之绝唱"强调史学价值，"无韵之离骚"强调文学价值。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【素养提升】《史记》在中国史学史上的地位</div>
+<div class="deep-card-bd"><p>《史记》开创了纪传体通史的体例，成为此后两千多年中国"正史"的模板。《汉书》《后汉书》等二十四史均沿袭纪传体。司马迁的治史精神——实事求是、不畏权势、秉笔直书——为中国史学确立了崇高传统。</p></div></div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(1,this)">✓ 我已理解</button>
+</div></div>
+
+<!-- 手风琴组 3：道教与佛教 -->
+<div class="acc-group" id="accGroup2">
+<div class="acc-group-header" onclick="toggleAccGroup(2)">
+<span class="acc-group-icon">🔍</span>
+<span>难点 · 道教兴起与佛教传入的社会背景</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card"><div class="deep-card-hd">【基础理解】道教与佛教的基本情况</div>
+<div class="deep-card-bd"><p>道教兴起于东汉末年，是中国本土宗教，吸收民间神仙方术和道家思想，追求长生不老。主要派别：太平道（张角）、五斗米道（张陵）。佛教产生于古印度，两汉之际经丝绸之路传入中国，东汉明帝时修建白马寺。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【联系拓展】道教兴起和佛教传入的社会土壤</div>
+<div class="deep-card-bd"><p>东汉中后期，外戚宦官交替专权，政治腐败，社会动荡，民众生活困苦。道教以符水治病、替天行道吸引大量下层民众，成为黄巾起义的思想武器。佛教的因果报应、轮回转世说为苦难中的人们提供了精神慰藉。</p><p style="margin-top:8px;background:#fdf3e0;padding:10px 14px;border-radius:8px;font-size:12pt;"><span class="tag-zhongkao">🎯 中考典型例题</span> 道教起于东汉末年并迅速发展，与下列哪一社会背景直接相关？（　）<br>A. 汉武帝独尊儒术 B. 东汉中后期政治腐败社会动荡 C. 张骞出使西域 D. 秦始皇焚书坑儒<br><strong>答案：B</strong>　解析：东汉中后期政治腐败、社会动荡，民众生活困苦，道教满足了人们的精神寄托。</p></div></div>
+<div class="deep-card"><div class="deep-card-hd">【素养提升】儒、道、佛并存的多元文化格局</div>
+<div class="deep-card-bd"><p>两汉时期，儒家思想确立了正统地位，道教在民间兴起，佛教从域外传入，中国思想文化领域呈现出多元并存的格局。这种开放性体现了中华文明包容并蓄的特点，深刻影响了此后两千年的中国文化。</p></div></div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(2,this)">✓ 我已理解</button>
+</div></div>
+</div>
+
+<!-- ===== PAGE 3: 教材栏目 ===== -->
+<div class="page-slide" id="page3">
+<div class="slide-header"><div class="module-num">模块三</div><div class="module-title">教材栏目</div></div>
+<div class="filter-bar">
+<button class="filter-chip active" onclick="filterCategory('all')">📋 全部</button>
+<button class="filter-chip" onclick="filterCategory('renwu')">👤 人物扫描</button>
+<button class="filter-chip" onclick="filterCategory('xiangyixiang')">💭 想一想</button>
+<button class="filter-chip" onclick="filterCategory('cailiao')">📜 材料研读</button>
+<button class="filter-chip" onclick="filterCategory('xueshi')">❤️ 学史崇德</button>
+<button class="filter-chip" onclick="filterCategory('xiangguan')">📖 相关史事</button>
+<button class="filter-chip" onclick="filterCategory('kehou')">📝 课后活动</button>
+<button class="filter-chip" onclick="filterCategory('zhishi')">🔍 知识拓展</button>
+</div>
+
+<div class="col-box" data-category="renwu" onclick="this.classList.toggle('open')">
+<div class="col-header">👤 人物扫描 · 蔡伦</div>
+<div class="col-body">
+<div class="source-material">蔡伦（？-121），桂阳人，宦官出身。他总结了西汉以来的造纸经验，改进造纸术，用树皮、麻头、破布、旧渔网等为原料造纸，提高了纸张质量，降低了成本，使纸逐渐取代竹简和丝帛。</div>
+<div class="source-ref">——人物扫描</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>讲解：</strong>蔡伦是东汉时人，他的贡献在于"改进"而非"发明"造纸术——西汉已掌握造纸基本方法。因曾封龙亭侯，故称"蔡侯纸"。</div></div></div>
+
+<div class="col-box" data-category="xiangyixiang" onclick="this.classList.toggle('open')">
+<div class="col-header">💭 想一想</div>
+<div class="col-body">
+<div class="source-material">纸的发明对文化、教育、社会生活等方面产生了哪些影响？</div>
+<div class="source-ref">——想一想</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>参考答案：</strong>①降低了书写成本，使书籍的抄写和传播更加便捷，推动了文化教育事业的发展；②便于日常生活中的书写、记录和交流；③取代竹简和丝帛，轻便廉价，使更多人能够使用；④造纸术传播到世界后，促进了世界文明的进步。</div></div></div>
+
+<div class="col-box" data-category="cailiao" onclick="this.classList.toggle('open')">
+<div class="col-header">📜 材料研读 · 张仲景</div>
+<div class="col-body">
+<div class="source-material">张仲景在《伤寒论·序》中写道："感往昔之沦丧，伤横夭之莫救，乃勤求古训，博采众方……"</div>
+<div class="source-ref">——《伤寒杂病论》序</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>问题：</strong>这段材料反映了张仲景怎样的精神？<br><strong>参考答案：</strong>反映了张仲景救死扶伤的医者仁心；体现了勤奋钻研的治学态度（"勤求古训，博采众方"），广泛搜集民间药方，著成《伤寒杂病论》。</div></div></div>
+
+<div class="col-box" data-category="xueshi" onclick="this.classList.toggle('open')">
+<div class="col-header">❤️ 学史崇德 · 司马迁著史精神</div>
+<div class="col-body">
+<div class="source-material">司马迁因李陵之祸受宫刑，但他忍辱负重，发愤著书。他说："人固有一死，或重于泰山，或轻于鸿毛。"他游历全国各地，搜集史料，终于完成《史记》130篇。</div>
+<div class="source-ref">——学史崇德</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>讲解：</strong>司马迁受宫刑后不轻生、不放弃，以"重于泰山"的信念完成《史记》，体现了坚韧不拔的意志和崇高的历史使命感。</div></div></div>
+
+<div class="col-box" data-category="xiangguan" onclick="this.classList.toggle('open')">
+<div class="col-header">📖 相关史事 · 秦汉历法与科技</div>
+<div class="col-body">
+<div class="source-material">秦汉统一后，统一了历法，通用的历法是"颛顼历"，汉武帝时改用"太初历"。秦汉时期，人们用漏壶、日晷等计时工具。汉朝的张衡制造了演示天象的浑天仪，还研制了能测定地震方位的候风地动仪。</div>
+<div class="source-ref">——相关史事</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>讲解：</strong>秦汉时期在天文历法方面取得了重要成就。统一历法便于全国统一管理农业生产和社会生活。张衡的地动仪比欧洲早1700多年。</div></div></div>
+
+<div class="col-box" data-category="xiangguan" onclick="this.classList.toggle('open')">
+<div class="col-header">📖 相关史事 · 王充与《论衡》</div>
+<div class="col-body">
+<div class="source-material">东汉思想家王充著《论衡》一书，对当时流行的迷信思想进行了批判，提出了唯物主义的观点。王充认为天地万物都是由"气"构成的，人死后精神也随之消亡，不存在鬼神。</div>
+<div class="source-ref">——相关史事</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>讲解：</strong>王充是东汉杰出的唯物主义思想家，《论衡》一书批判了当时流行的谶纬迷信思想，在迷信盛行的时代非常难能可贵。</div></div></div>
+
+<div class="col-box" data-category="xiangguan" onclick="this.classList.toggle('open')">
+<div class="col-header">📖 相关史事 · 班固《汉书》</div>
+<div class="col-body">
+<div class="source-material">班固继承其父班彪的事业，撰写《汉书》。《汉书》记载了从汉高祖到王莽时期的历史，共100篇。《汉书》是中国第一部纪传体断代史，为后世断代史书的编写提供了范例。</div>
+<div class="source-ref">——相关史事</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>讲解：</strong>班固《汉书》与司马迁《史记》并称"史汉"。《史记》=纪传体通史；《汉书》=纪传体断代史。两者共同奠定了纪传体史书的体例基础。</div></div></div>
+
+<div class="col-box" data-category="kehou" onclick="this.classList.toggle('open')">
+<div class="col-header">📝 课后活动 · 题1</div>
+<div class="col-body">
+<div class="source-material">请列举三位秦汉时期的科技代表人物，并分别说明他们的主要贡献。</div>
+<div class="source-ref">——课后活动</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>参考答案：</strong>①蔡伦——改进造纸术，"蔡侯纸"质优价廉，便利书写和文化传播。②张仲景——著《伤寒杂病论》，提出"辨证施治"，被称为"医圣"。③华佗——发明"麻沸散"，创编"五禽戏"。其他可选：张衡（地动仪、浑天仪）、司马迁（《史记》）。</div></div></div>
+
+<div class="col-box" data-category="kehou" onclick="this.classList.toggle('open')">
+<div class="col-header">📝 课后活动 · 题2</div>
+<div class="col-body">
+<div class="source-material">《史记》中记载了许多著名的历史故事和成语典故，如"破釜沉舟""一以当十"等。请查阅资料，再找出两个出自《史记》的成语典故。</div>
+<div class="source-ref">——课后活动</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>参考答案：</strong>①"负荆请罪"——出自《廉颇蔺相如列传》，比喻主动认错赔礼。②"完璧归赵"——出自《廉颇蔺相如列传》，比喻原物完好归还。③"指鹿为马"——出自《秦始皇本纪》，赵高颠倒黑白。④"图穷匕见"——出自《刺客列传》，荆轲刺秦王的故事。（任选其二）</div></div></div>
+
+<div class="col-box" data-category="zhishi" onclick="this.classList.toggle('open')">
+<div class="col-header">🔍 知识拓展 · 汉赋与乐府诗</div>
+<div class="col-body">
+<div class="source-material">两汉时期，文学成就突出，代表形式是汉赋和乐府诗。汉赋的代表人物有司马相如、扬雄、班固、张衡等，以铺陈描写为主，辞藻华丽。乐府诗是由乐府机构采集民歌整理而成的，代表作品有《孔雀东南飞》等。</div>
+<div class="source-ref">——知识拓展</div>
+<div class="a" style="display:block;margin-top:8px;font-size:12pt;"><strong>讲解：</strong>汉赋是汉代最具特色的文学体裁，讲究铺陈排比，语言华丽。乐府诗来自民间，语言质朴。汉赋和乐府诗共同构成了两汉文学的主要成就。</div></div></div>
+</div>
+
+<!-- ===== PAGE 4: 课堂训练 ===== -->
+<div class="page-slide" id="page4">
+<div class="slide-header"><div class="module-num">模块四</div><div class="module-title">课堂训练</div></div>
+<div class="score-banner" id="scoreBanner">
+<span class="score-text">📊 选择题得分：</span>
+<span class="score-num" id="choiceScore">0</span>
+<span class="score-text"> / 5</span>
+<span style="margin:0 16px">|</span>
+<span class="score-text">📝 材料题：</span>
+<span class="score-num" id="materialUnderstood">0</span>
+<span class="score-text"> / 2 已理解</span>
+<button class="ans-btn" onclick="resetQuiz()" style="margin-left:16px">🔄 重新作答</button>
+</div>
+
+<div class="exercise" id="q1">
+<p class="q-text"><strong>1.</strong> 东汉时改进造纸术的人物是（　）<span class="tag-zhongkao">基础</span></p>
+<div class="options">
+<label onclick="optClick(this,'A','q1')">A. 张衡</label>
+<label onclick="optClick(this,'B','q1')">B. 蔡伦</label>
+<label onclick="optClick(this,'C','q1')">C. 张仲景</label>
+<label onclick="optClick(this,'D','q1')">D. 华佗</label>
+</div>
+<div class="a" id="exp-q1"><strong>答案：B</strong><br>蔡伦于105年改进造纸术，用树皮、麻头、破布、旧渔网等为原料，被称为"蔡侯纸"。</div>
+</div>
+
+<div class="exercise" id="q2">
+<p class="q-text"><strong>2.</strong> 被称为"医圣"，著有《伤寒杂病论》的是（　）<span class="tag-zhongkao">基础</span></p>
+<div class="options">
+<label onclick="optClick(this,'A','q2')">A. 华佗</label>
+<label onclick="optClick(this,'B','q2')">B. 蔡伦</label>
+<label onclick="optClick(this,'C','q2')">C. 张仲景</label>
+<label onclick="optClick(this,'D','q2')">D. 司马迁</label>
+</div>
+<div class="a" id="exp-q2"><strong>答案：C</strong><br>张仲景是东汉末年医学家，著有《伤寒杂病论》，提出"辨证施治"，被尊称为"医圣"。</div>
+</div>
+
+<div class="exercise" id="q3">
+<p class="q-text"><strong>3.</strong> 下列关于《史记》的说法，正确的是（　）<span class="tag-zhongkao">中等</span></p>
+<div class="options">
+<label onclick="optClick(this,'A','q3')">A. 它是中国第一部编年体史书</label>
+<label onclick="optClick(this,'B','q3')">B. 它记载了从秦始皇到汉武帝的历史</label>
+<label onclick="optClick(this,'C','q3')">C. 它是中国古代第一部纪传体通史</label>
+<label onclick="optClick(this,'D','q3')">D. 它是东汉班固所著</label>
+</div>
+<div class="a" id="exp-q3"><strong>答案：C</strong><br>《史记》是西汉司马迁所著的第一部纪传体通史，记述从黄帝到汉武帝的历史。A错在"编年体"；B错在起于黄帝；D错在作者是司马迁。</div>
+</div>
+
+<div class="exercise" id="q4">
+<p class="q-text"><strong>4.</strong> 佛教传入中国是在（　）<span class="tag-zhongkao">中等</span></p>
+<div class="options">
+<label onclick="optClick(this,'A','q4')">A. 西汉初年</label>
+<label onclick="optClick(this,'B','q4')">B. 两汉之际</label>
+<label onclick="optClick(this,'C','q4')">C. 东汉末年</label>
+<label onclick="optClick(this,'D','q4')">D. 三国时期</label>
+</div>
+<div class="a" id="exp-q4"><strong>答案：B</strong><br>佛教产生于古印度，两汉之际经丝绸之路传入中国。东汉明帝时修建白马寺。</div>
+</div>
+
+<div class="exercise" id="q5">
+<p class="q-text"><strong>5.</strong> 以下关于秦汉科技文化成就的表述，不正确的是（　）<span class="tag-zhongkao">较难</span></p>
+<div class="options">
+<label onclick="optClick(this,'A','q5')">A. 西汉时期已经掌握了造纸的基本方法</label>
+<label onclick="optClick(this,'B','q5')">B. 华佗发明了"麻沸散"，用于外科手术</label>
+<label onclick="optClick(this,'C','q5')">C. 《九章算术》是东汉时期的数学著作</label>
+<label onclick="optClick(this,'D','q5')">D. 道教是西汉初年由张陵创立的</label>
+</div>
+<div class="a" id="exp-q5"><strong>答案：D</strong><br>道教兴起于东汉末年（非西汉初年），由张角（太平道）和张陵（五斗米道）创立。A、B、C均为正确表述。</div>
+</div>
+
+<div class="exercise" id="m1">
+<p class="q-text"><strong>材料解析题一（中难）</strong></p>
+<p>阅读材料：</p>
+<div class="source-material">材料一：西汉时，人们已经掌握了造纸的基本方法。但早期的纸比较粗糙。东汉时，蔡伦改进造纸术，用树皮、麻头、破布、旧渔网等为原料造纸。</div>
+<div class="source-material">材料二：造纸术后来传播到世界各地，极大地促进了人类文明的发展。</div>
+<p style="margin-top:10px"><strong>问题：</strong>（1）蔡伦改进造纸术的"改进"体现在哪些方面？（2）造纸术的发明对世界文明有何重要意义？</p>
+<div class="a" id="exp-m1"><strong>参考答案：</strong><br>（1）原料方面：采用树皮、麻头、破布、旧渔网等废旧廉价材料，降低成本；质量方面：纸的质量大大提高，轻薄柔韧；原料来源广泛，便于推广普及。<br>（2）造纸术是四大发明之一，传播到世界各地后降低了书写成本，推动了文化教育的普及和科学传播，促进了世界文明的进步与发展。</div>
+<button class="ans-btn understood-btn material" onclick="markMaterialUnderstood(this,'m1')">✓ 我已理解</button>
+</div>
+
+<div class="exercise" id="m2">
+<p class="q-text"><strong>材料解析题二（较难）</strong></p>
+<p>阅读材料：</p>
+<div class="source-material">材料一：司马迁在《报任安书》中说："人固有一死，或重于泰山，或轻于鸿毛。"他游历全国各地，历时十余年完成《史记》130篇。</div>
+<div class="source-material">材料二：东汉中后期，外戚宦官交替专权，政治腐败，社会动荡。道教以符水治病吸引民众，张角利用太平道发动了黄巾起义。</div>
+<p style="margin-top:10px"><strong>问题：</strong>（1）司马迁身上体现了哪些优秀品质？（2）分析道教在东汉末年兴起与当时社会状况的关系。</p>
+<div class="a" id="exp-m2"><strong>参考答案：</strong><br>（1）坚韧不拔的意志（受宫刑不放弃）；严谨求实的治学态度（游历搜集史料）；崇高的历史使命感（"重于泰山"）。<br>（2）东汉中后期政治腐败、社会动荡、民众生活困苦，道教以符水治病、替天行道等口号给苦难中的人民提供了精神寄托。道教的兴起与当时社会的黑暗动荡直接相关，反映了人民对现实不满、渴望改变命运的心理需求。</div>
+<button class="ans-btn understood-btn material" onclick="markMaterialUnderstood(this,'m2')">✓ 我已理解</button>
+</div>
+</div>
+
+<!-- ===== PAGE 5: 知识结构图 ===== -->
+<div class="page-slide" id="page5">
+<div class="slide-header"><div class="module-num">模块五</div><div class="module-title">知识结构图</div></div>
+<div class="kg-wrap-simple">
+<div class="kg-title">📊 秦汉科技与文化 · 因果链</div>
+<div class="kg-hint-banner">
+💡 <strong>点击</strong>下方各 <span style="background:var(--primary);color:#fff;border-radius:10px;padding:2px 8px;font-size:10pt;">节点</span> 展开详情 — 每个节点都可折叠查看深层分析
+</div>
+<div class="kg-chain">
+<div class="kg-node left c1" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">📜</span>
+<strong>科技发展（原因）</strong>
+<p>秦汉统一为科技发展提供了稳定环境；社会需要更轻便的书写材料</p>
+<div class="kg-detail"><p>秦汉大一统国家的建立，经济繁荣、社会稳定，为科学技术的发展创造了良好条件。竹简木牍笨重、丝帛昂贵等现实困难，推动了造纸术的改进。同时，医疗实践的需要促进了医学进步。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node right c2" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">🔬</span>
+<strong>辉煌成就（表现）</strong>
+<p>造纸术改进·《伤寒杂病论》·麻沸散·《史记》·地动仪</p>
+<div class="kg-detail"><p>蔡伦改进造纸术；张仲景著《伤寒杂病论》奠定中医临床基础；华佗发明麻沸散开创外科麻醉；司马迁著《史记》开纪传体先河；张衡发明地动仪领先世界。科技文化成就是秦汉强盛国力的体现。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node left c3" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">🌏</span>
+<strong>文化繁荣（影响）</strong>
+<p>造纸术便利文化传播·《史记》树立史学典范·道教佛教丰富思想</p>
+<div class="kg-detail"><p>造纸术的改进使书写材料轻便廉价，促进了文化教育普及。《史记》成为历代正史范本。道教兴起和佛教传入丰富了思想文化，儒道佛并存的格局初步形成，体现了中华文明包容并蓄的特点。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node right c4" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">🏛️</span>
+<strong>世界贡献（价值）</strong>
+<p>造纸术传播世界·中医经典传承至今·丝绸之路文化交流</p>
+<div class="kg-detail"><p>造纸术经阿拉伯传入欧洲，是人类文明史上的伟大发明。《伤寒杂病论》至今仍是中医必读经典。秦汉文化通过丝绸之路与世界对话，为中华文明赢得了世界声誉。秦汉科技文化是中华文明的璀璨明珠。</p></div>
+</div>
+</div>
+<div class="kg-rules-grid">
+<div class="kg-rule r1">🔵 科技：造纸术·地动仪·浑天仪</div>
+<div class="kg-rule r2">🟠 医学：伤寒杂病论·麻沸散·五禽戏</div>
+<div class="kg-rule r3">🟢 史学：《史记》纪传体通史</div>
+<div class="kg-rule r4">🔴 思想：道教兴起·佛教传入</div>
+</div>
+</div>
+</div>
+
+<!-- ===== PAGE 6: 结束页 ===== -->
+<div class="page-slide" id="page6">
+<div class="slide-header"><div class="module-num">模块六</div><div class="module-title">本课小结</div></div>
+<div class="recap-section">
+<div class="recap-title">📋 核心要点回顾</div>
+<div class="recap-grid">
+<div class="recap-card"><div class="recap-card-num">1</div>
+<h3>📜 造纸术的发明</h3>
+<ul>
+<li>西汉掌握造纸基本方法</li>
+<li>东汉蔡伦改进造纸术（105年）</li>
+<li>"蔡侯纸"质优价廉</li>
+<li>四大发明之一，影响世界</li>
+</ul>
+</div>
+<div class="recap-card"><div class="recap-card-num">2</div>
+<h3>⚕️ 医学数学与农学</h3>
+<ul>
+<li>张仲景《伤寒杂病论》"医圣"</li>
+<li>华佗"麻沸散"·外科手术</li>
+<li>《九章算术》先进数学著作</li>
+<li>张衡地动仪·浑天仪</li>
+</ul>
+</div>
+<div class="recap-card"><div class="recap-card-num">3</div>
+<h3>📖 司马迁与《史记》</h3>
+<ul>
+<li>第一部纪传体通史（130篇）</li>
+<li>记载黄帝至汉武帝</li>
+<li>秉笔直书·史学价值高</li>
+<li>"史家之绝唱，无韵之离骚"</li>
+</ul>
+</div>
+<div class="recap-card"><div class="recap-card-num">4</div>
+<h3>🛕 道教和佛教</h3>
+<ul>
+<li>道教：东汉末年兴起</li>
+<li>太平道（张角）·五斗米道（张陵）</li>
+<li>佛教：两汉之际传入中国</li>
+<li>白马寺·丰富中国文化</li>
+</ul>
+</div>
+</div>
+</div>
+  <div class="bottom-nav">
+  <div><a href="七上-U3-第14课_丝绸之路的开通与经营西域.html">← 上一课：第14课 丝绸之路的开通与经营西域</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第15课</div>
+  <div><a href="七上-U4-第16课_三国鼎立.html">下一课：第16课 三国鼎立 →</a></div>
+  </div>
+<div class="page-footer">
+<p>统编版初中历史 · 七年级上册 第三单元</p>
+<p>基于教材内容整理 · 仅供教学参考使用</p>
+</div>
+</div>
+
+<!-- ========== 底部导航 ========== -->
+<div class="pg-nav" id="pgNav">
+<button onclick="goPage(-1)" title="上一页">◀</button>
+<div class="pg-dots">
+<span class="pg-dot active" onclick="goToPage(0)"></span>
+<span class="pg-dot" onclick="goToPage(1)"></span>
+<span class="pg-dot" onclick="goToPage(2)"></span>
+<span class="pg-dot" onclick="goToPage(3)"></span>
+<span class="pg-dot" onclick="goToPage(4)"></span>
+<span class="pg-dot" onclick="goToPage(5)"></span>
+<span class="pg-dot" onclick="goToPage(6)"></span>
+</div>
+<button onclick="goPage(1)" title="下一页">▶</button>
+<div class="pg-info"><span id="currentPageNum">1</span>/7</div>
+</div>
+
+<script>
+// ========== 分页导航 ==========
+var currentPage=0;
+var totalPages=7;
+function goToPage(n){
+if(n<0||n>=totalPages)return;
+document.querySelectorAll('.page-slide').forEach(function(s,i){s.classList.toggle('active',i===n)});
+document.querySelectorAll('.pg-dot').forEach(function(d,i){d.classList.toggle('active',i===n)});
+currentPage=n;document.getElementById('currentPageNum').textContent=n+1;
+window.scrollTo({top:0,behavior:'smooth'});
+}
+function goPage(delta){ goToPage(currentPage+delta); }
+document.addEventListener('keydown',function(e){
+if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();if(currentPage>0)goToPage(currentPage-1)}
+if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();if(currentPage<totalPages-1)goToPage(currentPage+1)}
+if(e.key==='Home'){e.preventDefault();goToPage(0)}
+if(e.key==='End'){e.preventDefault();goToPage(totalPages-1)}
+});
+
+// ========== 封面目标标记 ==========
+var goalCount=0;
+function toggleGoal(el){if(!el.classList.contains('done')){el.classList.add('done');goalCount++;if(goalCount>=4){document.getElementById('goalAllDone').classList.add('show');}}}
+
+// ========== 标签页切换 ==========
+function switchTabV2(idx){
+document.querySelectorAll('.tab-btn').forEach(function(b,i){b.classList.toggle('active',i===idx)});
+document.querySelectorAll('.tab-panel').forEach(function(p,i){p.classList.toggle('active',i===idx)});
+}
+
+// ========== 拖拽排序 ==========
+var draggedItem=null;
+var sortAnswers={0:[1,2,3,4,5]};
+var sortFilled={0:{}};
+
+function dragStart(e){draggedItem=e.target;e.target.style.opacity='.5';}
+function dragEnd(e){e.target.style.opacity='1';draggedItem=null;}
+
+document.addEventListener('DOMContentLoaded',function(){
+document.querySelectorAll('.sort-slot').forEach(function(slot){
+slot.addEventListener('dragover',function(e){e.preventDefault()});
+slot.addEventListener('drop',function(e){
+e.preventDefault();
+if(!draggedItem)return;
+var tab=parseInt(slot.id.split('_')[0].replace('slot',''));
+var i=parseInt(slot.id.split('_')[1]);
+if(sortFilled[tab][i])return;
+var val=parseInt(draggedItem.getAttribute('data-value'));
+sortFilled[tab][i]=val;
+slot.querySelector('.slot-content').textContent=draggedItem.textContent.trim();
+slot.classList.add('filled');
+draggedItem.classList.add('used');
+});
+});
+});
+
+function checkSort(tabIdx){
+var allFilled=true;var keys=0;
+for(var k in sortFilled[tabIdx]){keys++;allFilled=allFilled&&sortFilled[tabIdx][k]!==undefined;}
+if(keys<5||!allFilled){alert('请先将所有事件卡片拖入槽位中');return;}
+var correct=true;
+for(var j=0;j<5;j++){
+var slot=document.getElementById('slot'+tabIdx+'_'+j);
+if(sortFilled[tabIdx][j]===sortAnswers[tabIdx][j]){slot.classList.add('correct')}else{slot.classList.add('wrong');correct=false}
+}
+var result=document.getElementById('sortResult'+tabIdx);
+result.classList.add(correct?'pass':'fail');
+result.textContent=correct?'🎉 恭喜！排序完全正确！':'❌ 排序有误，请查看红色标记后点击"重置"重试';
+result.style.display='block';
+if(correct)updateStage(0);
+}
+
+function resetSort(tabIdx){
+sortFilled[tabIdx]={};
+document.querySelectorAll('#sortSlots'+tabIdx+' .sort-slot').forEach(function(s){
+s.classList.remove('filled','correct','wrong');s.querySelector('.slot-content').textContent='';
+});
+document.querySelectorAll('#sortItems'+tabIdx+' .sort-item').forEach(function(it){it.classList.remove('used')});
+var result=document.getElementById('sortResult'+tabIdx);
+result.classList.remove('pass','fail');result.style.display='none';
+}
+
+// ========== 填空填词 ==========
+var fillAnswers={0:['伤寒杂病论','辨证施治','治未病','医圣','麻沸散','五禽戏','九章算术','地动仪','浑天仪']};
+function checkFillBlanks(tabIdx){
+var correct=true;
+for(var i=0;i<fillAnswers[tabIdx].length;i++){
+var inp=document.getElementById('fb'+tabIdx+'_'+i);
+if(!inp)continue;
+var ans=fillAnswers[tabIdx][i];
+if(inp.value.trim()===ans){inp.classList.add('correct');inp.classList.remove('wrong')}else{inp.classList.add('wrong');inp.classList.remove('correct');correct=false}
+}
+var fb=document.getElementById('fbFeedback'+tabIdx);
+fb.classList.add('show');
+if(correct){fb.style.color='var(--green)';fb.textContent='🎉 全部正确！';updateStage(1)}else{fb.style.color='var(--red)';fb.textContent='❌ 部分错误，请修改红色标记处后重新提交'}
+}
+
+// ========== 连线匹配 ==========
+var matchAnswers={0:{0:0,1:1,2:2,3:3}};
+var matchSelected={0:null};
+var matchPaired={0:{}};
+function selectMatch(tidx,col,idx){
+var key=col+'_'+idx;
+if(matchSelected[tidx]&&matchSelected[tidx].key===key){matchSelected[tidx]=null;document.getElementById(col+'0_'+idx).classList.remove('selected');return;}
+if(matchSelected[tidx]){var prev=document.getElementById(matchSelected[tidx].key);if(prev)prev.classList.remove('selected')}
+var el=document.getElementById(col+'0_'+idx);
+if(!el||el.classList.contains('paired'))return;
+matchSelected[tidx]={col:col,idx:idx,key:col+'0_'+idx};
+el.classList.add('selected');
+}
+function pairMatch(tidx,idx){
+var sel=matchSelected[tidx];
+if(!sel||sel.col==='right')return;
+if(matchPaired[tidx][sel.idx])return;
+var elL=document.getElementById('left0_'+sel.idx);
+var elR=document.getElementById('right0_'+idx);
+if(!elL||!elR||elR.classList.contains('paired'))return;
+var correctPair=matchAnswers[tidx][sel.idx]===idx;
+if(correctPair){
+elL.classList.add('paired');elR.classList.add('paired');
+elL.classList.remove('selected');elR.classList.remove('selected');
+matchPaired[tidx][sel.idx]=true;
+var allPaired=true;
+for(var k in matchAnswers[tidx]){if(!matchPaired[tidx][k])allPaired=false}
+if(allPaired){
+var fb=document.getElementById('matchFeedback'+tidx);
+fb.classList.add('show');fb.style.color='var(--green)';
+fb.textContent='🎉 全部连线正确！';
+updateStage(2);
+}
+}else{
+elL.classList.remove('selected');
+var fb=document.getElementById('matchFeedback'+tidx);
+fb.classList.add('show');fb.style.color='var(--red)';
+fb.textContent='❌ 配对错误，请重新选择';
+setTimeout(function(){fb.classList.remove('show')},1500);
+}
+matchSelected[tidx]=null;
+}
+
+// ========== 地图标注 ==========
+var mapFound={};
+function markMapEv(el,name,itemId){
+if(mapFound[name])return;
+mapFound[name]=true;
+el.setAttribute('fill','#27ae60');el.setAttribute('stroke','#27ae60');el.style.opacity='1';
+var item=document.getElementById(itemId);
+if(item){item.classList.add('found');item.textContent='✅ '+item.textContent.replace('📍 ','');}
+if(Object.keys(mapFound).length>=6)updateStage(3);
+}
+
+// ========== 闯关进度条 ==========
+var stageDone={};
+function updateStage(n){
+if(stageDone[n])return;
+stageDone[n]=true;
+var st=document.getElementById('st'+n);
+if(st){st.classList.remove('current');st.classList.add('done')}
+var next=document.getElementById('st'+(n+1));
+if(next)next.classList.add('current');
+var cnt=0;for(var k in stageDone){if(stageDone[k])cnt++;}
+var badge=document.getElementById('stageBadge');
+badge.textContent=cnt+'/5 关';if(cnt>=5){badge.classList.remove('pending');badge.textContent='🎉 全部通关！';}
+if(n===4)return;
+if(n===3){
+var allFlips=document.querySelectorAll('.flip-card');
+function watchFlips(){
+var cnt=0;
+allFlips.forEach(function(f){if(f.classList.contains('flipped'))cnt++;});
+if(cnt>=16&&!stageDone[4])updateStage(4);
+}
+allFlips.forEach(function(f){if(!f._watched){f._watched=true;f.addEventListener('click',function(){setTimeout(watchFlips,600)})}});
+}
+}
+
+// ========== 知识结构图 ==========
+function toggleKgDetail(node){
+node.classList.toggle('expanded');
+var badge=node.querySelector('.kg-expand-badge');
+if(badge){badge.textContent=node.classList.contains('expanded')?'▼ 收起详情':'▶ 点击展开';}
+}
+
+// ========== 手风琴 ==========
+function toggleAccGroup(index){var g=document.getElementById('accGroup'+index);if(g)g.classList.toggle('open');}
+function expandAllGroups(){document.querySelectorAll('.acc-group').forEach(function(g){g.classList.add('open')})}
+function collapseAllGroups(){document.querySelectorAll('.acc-group').forEach(function(g){g.classList.remove('open')})}
+
+// ========== 我已理解 ==========
+var understoodCount=0;var understoodGroups={};
+function markUnderstood(groupIndex,btn){
+if(understoodGroups[groupIndex])return;
+understoodGroups[groupIndex]=true;understoodCount++;
+btn.classList.add('done');btn.textContent='✓ 已理解';btn.disabled=true;
+document.getElementById('understoodCount').textContent='（'+understoodCount+'/3 组已理解）';
+}
+
+// ========== 材料题已理解 ==========
+var materialCount=0;var materialAnswered={};
+function markMaterialUnderstood(btn,qid){
+if(materialAnswered[qid])return;
+materialAnswered[qid]=true;materialCount++;
+btn.classList.add('done');btn.textContent='✓ 已理解';btn.disabled=true;
+document.getElementById('materialUnderstood').textContent=materialCount;
+}
+
+// ========== 栏目筛选 ==========
+function filterCategory(cat){
+var chips=document.querySelectorAll('.filter-chip');
+chips.forEach(function(c){
+var isActive=false;
+if(cat==='all')isActive=c.textContent.indexOf('全部')>=0;
+else isActive=c.getAttribute('onclick').indexOf("'"+cat+"'")>=0;
+c.classList.toggle('active',isActive);
+});
+var boxes=document.querySelectorAll('.col-box');
+boxes.forEach(function(b){
+if(cat==='all'||b.getAttribute('data-category')===cat)b.classList.remove('hidden-by-filter');
+else b.classList.add('hidden-by-filter');
+});
+}
+
+// ========== 选择题 ==========
+var correctAnswers={q1:'B',q2:'C',q3:'C',q4:'B',q5:'D'};
+var choiceScore=0;var answeredQuestions={};
+function optClick(el,opt,qid){
+if(answeredQuestions[qid])return;
+answeredQuestions[qid]=true;
+var correct=correctAnswers[qid];
+var opts=el.parentElement.querySelectorAll('label');
+opts.forEach(function(o){
+o.classList.add('disabled');
+var oText=o.textContent.trim().charAt(0);
+if(oText===correct)o.classList.add('correct');
+else if(o===el)o.classList.add('wrong');
+});
+if(opt===correct){choiceScore++;document.getElementById('choiceScore').textContent=choiceScore}
+document.getElementById('exp-'+qid).classList.add('show');
+}
+
+// ========== 重新作答 ==========
+function resetQuiz(){
+choiceScore=0;answeredQuestions={};
+document.getElementById('choiceScore').textContent='0';
+document.querySelectorAll('.options label').forEach(function(l){l.classList.remove('disabled','correct','wrong')});
+document.querySelectorAll('.exercise .a').forEach(function(a){a.classList.remove('show')});
+materialCount=0;materialAnswered={};
+document.getElementById('materialUnderstood').textContent='0';
+document.querySelectorAll('.understood-btn.material').forEach(function(b){b.classList.remove('done');b.textContent='✓ 我已理解';b.disabled=false});
+}
+
+// ========== deep-card 折叠 ==========
+(function(){
+var cards=document.querySelectorAll('.deep-card');
+cards.forEach(function(card){
+var hd=card.querySelector('.deep-card-hd');
+var bd=card.querySelector('.deep-card-bd');
+if(hd&&bd){hd.addEventListener('click',function(){bd.classList.toggle('show');hd.classList.toggle('active')})}
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第12课 大一统王朝的巩固 — 统编版初中历史 七年级上册</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+  --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:"SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:14pt; background:var(--bg); color:#333; line-height:1.75;
+  max-width:900px; margin:0 auto; padding:0 20px 80px; overflow-x:hidden;
+}
+
+/* ========== 分页幻灯片 ========== */
+.page-slide { display:none; min-height:calc(100vh - 80px); padding-top:10px; animation:slideIn .35s ease; }
+.page-slide.active { display:block; }
+@keyframes slideIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 封面 ========== */
+.hero-cover { text-align:center; padding:50px 28px 40px; background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); color:#fff; border-radius:20px; position:relative; overflow:hidden; }
+.hero-cover .unit-tag { font-size:12pt; opacity:.82; letter-spacing:2px; margin-bottom:10px; }
+.hero-cover h1 { font-size:24pt; margin:8px 0; font-weight:700; letter-spacing:2px; }
+.hero-cover .sub { font-size:13pt; opacity:.85; margin-bottom:28px; }
+.hero-goals { background:rgba(255,255,255,.15); border-radius:16px; padding:20px 24px; text-align:left; max-width:680px; margin:0 auto; }
+.hero-goals h3 { font-size:14pt; margin-bottom:12px; color:#fff; text-align:center; }
+.goal-item { display:flex; align-items:center; gap:10px; padding:8px 12px; margin-bottom:6px; background:rgba(255,255,255,.08); border-radius:10px; cursor:pointer; transition:all .2s; user-select:none; }
+.goal-item:hover { background:rgba(255,255,255,.18); }
+.goal-item .goal-check { width:22px; height:22px; border:2px solid rgba(255,255,255,.5); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11pt; transition:all .25s; }
+.goal-item.done .goal-check { background:var(--green); border-color:var(--green); }
+.goal-item .goal-text { font-size:12pt; }
+.goal-item.done .goal-text { text-decoration:line-through; opacity:.6; }
+.goal-all-done { display:none; text-align:center; margin-top:16px; background:rgba(39,174,96,.25); padding:10px; border-radius:10px; font-size:13pt; animation:bounceIn .5s ease; }
+.goal-all-done.show { display:block; }
+@keyframes bounceIn { 0%{transform:scale(.6);opacity:0;} 60%{transform:scale(1.08);} 100%{transform:scale(1);opacity:1;} }
+
+/* ========== 闯关进度条 ========== */
+.stage-bar { background:#fff; border-radius:14px; padding:14px 18px; margin-bottom:18px; border:2px solid var(--border); }
+.stage-bar-title { font-size:13pt; font-weight:700; color:var(--primary-dark); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.stage-track { display:flex; gap:8px; flex-wrap:wrap; }
+.stage-dot { flex:1; min-width:55px; padding:8px 4px; text-align:center; border-radius:10px; font-size:10pt; background:#eee; color:#999; transition:all .3s; }
+.stage-dot.done { background:var(--primary); color:#fff; font-weight:700; }
+.stage-dot.current { background:#ffd54f; color:#333; font-weight:700; animation:stagePulse 1.2s ease infinite; }
+@keyframes stagePulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,213,79,.5);} 50%{box-shadow:0 0 0 8px rgba(255,213,79,0);} }
+.stage-badge { display:inline-block; background:var(--green); color:#fff; border-radius:20px; padding:4px 14px; font-size:11pt; margin-left:auto; }
+.stage-badge.pending { background:#ccc; }
+
+/* ========== 标签页 ========== */
+.tab-nav { display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
+.tab-btn { flex:1; min-width:70px; padding:10px 8px; border:2px solid var(--border); background:#fff; border-radius:12px; font-size:11pt; cursor:pointer; transition:all .25s; }
+.tab-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); font-weight:700; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+.kp-card { background:var(--bg-card); border-radius:14px; padding:16px 20px; margin-bottom:14px; border-left:4px solid var(--primary); }
+.kp-card h4 { color:var(--primary-dark); font-size:14pt; margin-bottom:8px; }
+.kp-card ul { padding-left:20px; }
+.kp-card li { margin-bottom:6px; }
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.timeline-bar { background:#f0edff; border-radius:12px; padding:12px 18px; margin-bottom:16px; text-align:center; font-size:13pt; color:#5a4ac7; }
+.link-bar { border:2px dashed #d5cef0; border-radius:12px; padding:14px 18px; margin-bottom:16px; background:#fdfbff; font-size:13pt; }
+
+/* ========== 拖拽排序 ========== */
+.sort-zone { background:#fff; border:2px dashed var(--primary); border-radius:14px; padding:16px; margin-bottom:14px; }
+.sort-zone h4 { color:var(--primary-dark); font-size:13pt; margin-bottom:10px; text-align:center; }
+.sort-slots { display:flex; flex-direction:column; gap:8px; }
+.sort-slot { display:flex; align-items:center; gap:10px; padding:8px 14px; border:2px dashed #ddd; border-radius:10px; background:#fafafa; min-height:44px; transition:all .25s; }
+.sort-slot .slot-num { width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12pt; font-weight:700; flex-shrink:0; }
+.sort-slot .slot-label { font-size:11pt; color:#999; flex-shrink:0; }
+.sort-slot .slot-content { flex:1; font-size:12pt; }
+.sort-slot.filled { border-color:var(--primary); background:var(--bg-card); }
+.sort-slot.correct { border-color:var(--green); background:#e8f8f0; }
+.sort-slot.wrong { border-color:var(--red); background:#fdecea; }
+.sort-items { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.sort-item { padding:10px 16px; background:linear-gradient(135deg,#f0edff,#e0daff); border:2px solid var(--primary); border-radius:10px; font-size:13pt; cursor:grab; user-select:none; transition:all .2s; }
+.sort-item:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(124,108,240,.2); }
+.sort-item:active { cursor:grabbing; }
+.sort-item.used { opacity:.3; pointer-events:none; }
+.sort-result { display:none; text-align:center; margin-top:14px; padding:12px; border-radius:10px; font-size:14pt; font-weight:700; }
+.sort-result.pass { display:block; background:#e8f8f0; color:var(--green); border:2px solid var(--green); }
+.sort-result.fail { display:block; background:#fdecea; color:var(--red); border:2px solid var(--red); }
+
+/* ========== 填空填词 ========== */
+.fill-zone { background:#fff; border-radius:14px; padding:20px; margin-bottom:14px; border:2px solid var(--border); }
+.fill-zone h4 { color:var(--primary-dark); text-align:center; margin-bottom:14px; font-size:14pt; }
+.fill-blank { display:inline-block; width:100px; border:none; border-bottom:3px solid var(--primary); text-align:center; font-size:13pt; padding:4px 8px; margin:0 4px; background:#faf8ff; outline:none; transition:all .2s; }
+.fill-blank:focus { background:#ede8ff; }
+.fill-blank.correct { border-color:var(--green); background:#e8f8f0; color:var(--green); font-weight:700; }
+.fill-blank.wrong { border-color:var(--red); background:#fdecea; }
+.fill-submit { display:block; margin:16px auto 0; padding:10px 28px; background:var(--primary); color:#fff; border:none; border-radius:20px; font-size:14pt; cursor:pointer; transition:all .2s; }
+.fill-submit:hover { transform:scale(1.05); }
+.fill-feedback { text-align:center; margin-top:12px; font-size:13pt; font-weight:700; display:none; }
+.fill-feedback.show { display:block; }
+
+/* ========== 连线匹配 ========== */
+.match-section { display:flex; gap:16px; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; }
+.match-col { flex:1; min-width:180px; }
+.match-col h4 { text-align:center; color:var(--primary-dark); font-size:13pt; margin-bottom:10px; }
+.match-item { padding:10px 14px; background:#fff; border:2px solid var(--border); border-radius:10px; margin-bottom:8px; cursor:pointer; transition:all .2s; font-size:12pt; text-align:center; }
+.match-item:hover { border-color:var(--primary); }
+.match-item.selected { background:var(--primary); color:#fff; border-color:var(--primary); }
+.match-item.paired { background:#e8f8f0; border-color:var(--green); color:var(--green); cursor:default; pointer-events:none; }
+.match-feedback { text-align:center; margin-top:12px; font-size:14pt; font-weight:700; display:none; }
+.match-feedback.show { display:block; }
+
+/* ========== 地图标注 ========== */
+.map-zone { background:#fff; border-radius:14px; padding:20px; border:2px solid var(--border); margin-bottom:14px; }
+.map-zone h4 { text-align:center; color:var(--primary-dark); margin-bottom:10px; font-size:14pt; }
+.map-canvas { position:relative; width:100%; max-width:500px; margin:0 auto 14px; cursor:crosshair; }
+.map-check-list { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.map-check-item { padding:6px 14px; background:#eee; border-radius:20px; font-size:12pt; transition:all .2s; cursor:pointer; }
+.map-check-item.found { background:var(--green); color:#fff; }
+
+/* ========== 翻转卡 ========== */
+.flip-section { margin-top:20px; }
+.flip-section h4 { text-align:center; color:var(--primary-dark); margin-bottom:12px; font-size:13pt; }
+.flip-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+.flip-card { perspective:600px; height:110px; }
+.flip-inner { position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d; cursor:pointer; }
+.flip-card.flipped .flip-inner { transform:rotateY(180deg); }
+.flip-front,.flip-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:12px; font-size:12pt; text-align:center; }
+.flip-front { background:linear-gradient(135deg,#f0edff,#e0daff); border:2px solid var(--primary); color:var(--primary-dark); font-weight:700; }
+.flip-back { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); color:#fff; transform:rotateY(180deg); }
+
+/* ========== 知识结构图 v2.0（徽章+脉冲） ========== */
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(124,108,240,.08);} 50%{box-shadow:0 4px 20px rgba(124,108,240,.25);} }
+.kg-hint-banner { background:#fffbf0; border:2px dashed #f0ad4e; border-radius:12px; padding:12px 18px; margin-bottom:18px; text-align:center; font-size:13pt; color:#e67e22; display:flex; align-items:center; justify-content:center; gap:8px; }
+.kg-hint-banner strong { color:#d35400; }
+.kg-wrap-simple { background:#fff; border-radius:16px; padding:24px; }
+.kg-title { font-size:16pt; font-weight:700; color:var(--primary-dark); text-align:center; margin-bottom:16px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.kg-node {
+  width:80%; padding:16px 20px; border-radius:14px; text-align:center;
+  cursor:pointer; transition:all .3s; position:relative;
+  animation:kgPulse 3s ease-in-out infinite;
+}
+.kg-node:hover { transform:translateY(-2px); box-shadow:0 4px 20px rgba(124,108,240,.25)!important; border-color:var(--primary)!important; }
+.kg-node.expanded { animation:none; }
+.kg-node.left { align-self:flex-start; }
+.kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#ede8ff; border:2px solid var(--primary); }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e8f5e9; border:2px solid var(--green); }
+.kg-node.c4 { background:#fce4ec; border:2px solid var(--red); }
+.kg-node strong { display:block; font-size:14pt; margin-bottom:6px; }
+.kg-node p { font-size:12pt; color:#555; margin:0; }
+.kg-icon { font-size:18pt; display:block; margin-bottom:4px; }
+.kg-arrow { font-size:18pt; color:var(--primary); }
+.kg-expand-badge {
+  position:absolute; top:8px; right:12px;
+  background:var(--primary); color:#fff; font-size:9pt;
+  padding:2px 10px; border-radius:12px; font-weight:700; transition:all .3s;
+}
+.kg-node.expanded .kg-expand-badge { background:var(--green); }
+.kg-detail { max-height:0; overflow:hidden; transition:max-height .4s ease; font-size:12pt; color:#555; margin-top:8px; padding:0 8px; border-top:1px dashed var(--border); }
+.kg-node.expanded .kg-detail { max-height:300px; padding-top:8px; }
+.kg-rules-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.kg-rule { flex:1; min-width:140px; padding:12px 14px; border-radius:10px; font-size:12pt; font-weight:700; text-align:center; }
+.kg-rule.r1 { background:#ede8ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e8f5e9; color:var(--green); }
+.kg-rule.r4 { background:#fce4ec; color:var(--red); }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,.08); position:relative; text-align:left; }
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:1px dashed var(--border); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { padding:4px 0; font-size:12pt; color:#555; border-bottom:1px dotted #eee; }
+.recap-card ul li:last-child { border-bottom:none; }
+
+/* ========== 底部导航 ========== */
+.pg-nav { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#fff; border-radius:40px; padding:10px 24px; box-shadow:0 4px 20px rgba(124,108,240,.18); display:flex; align-items:center; gap:12px; z-index:1000; }
+.pg-nav button { width:36px; height:36px; border-radius:50%; border:2px solid var(--border); background:#fff; color:#5a4ac7; font-size:16pt; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; }
+.pg-nav button:hover { background:var(--primary); color:#fff; border-color:var(--primary); }
+.pg-nav .pg-dots { display:flex; gap:6px; }
+.pg-nav .pg-dot { width:10px; height:10px; border-radius:50%; background:var(--border); cursor:pointer; transition:all .2s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-info { font-size:11pt; color:#888; min-width:60px; text-align:center; }
+.pg-nav .pg-info span { color:var(--primary); font-weight:700; }
+
+/* ========== 手风琴/重难点（原版保留） ========== */
+.acc-global-ctrl { text-align:right; margin-bottom:12px; }
+.acc-group { background:#fff; border-radius:16px; margin-bottom:16px; box-shadow:0 2px 12px rgba(124,108,240,.08); overflow:hidden; }
+.acc-group-header { background:linear-gradient(135deg,#f0edff,#e0daff); padding:14px 18px; cursor:pointer; display:flex; align-items:center; gap:10px; font-size:14pt; font-weight:700; color:var(--primary-dark); user-select:none; }
+.acc-group-header .acc-group-arrow { transition:transform .3s; margin-left:auto; }
+.acc-group.open .acc-group-arrow { transform:rotate(180deg); }
+.acc-group-body { display:none; padding:0 18px 16px; }
+.acc-group.open .acc-group-body { display:block; }
+.deep-card { background:#fff; border:1px solid #e0daff; border-radius:12px; margin-bottom:10px; overflow:hidden; }
+.deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; cursor:pointer; font-weight:700; font-size:13pt; user-select:none; }
+.deep-card-bd { display:none; padding:14px 16px; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+.understood-btn { background:#f0edff; color:#5a4ac7; border:2px solid var(--border); margin-top:12px; padding:8px 18px; border-radius:20px; font-size:13pt; cursor:pointer; transition:all .2s; }
+.understood-btn.done { background:var(--green); color:#fff; border-color:var(--green); }
+.tag-zhongkao { display:inline-block; background:var(--orange); color:#fff; border-radius:12px; padding:2px 10px; font-size:10pt; margin-left:8px; }
+
+/* ========== 栏目筛选（原版保留） ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.filter-chip { padding:6px 16px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all .2s; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+.col-box { background:#fff; border-radius:14px; margin-bottom:14px; overflow:hidden; box-shadow:0 2px 8px rgba(124,108,240,.06); }
+.col-header { background:linear-gradient(135deg,var(--primary),#5a4ac7); color:#fff; padding:12px 18px; font-weight:700; font-size:14pt; cursor:pointer; }
+.col-body { display:none; padding:14px 18px; }
+.col-box.open .col-body { display:block; }
+.hidden-by-filter { display:none; }
+.source-material { border-left:4px solid var(--primary); background:var(--bg-card); padding:10px 14px; margin:8px 0; font-size:12pt; color:#555; border-radius:0 8px 8px 0; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-top:2px; }
+
+/* ========== 课堂训练（原版保留） ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); padding:14px 20px; border-radius:14px; margin-bottom:20px; display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:14pt; }
+.score-num { font-size:22pt; font-weight:800; color:var(--primary); min-width:30px; text-align:center; }
+.exercise { background:var(--bg-card); border-radius:14px; padding:18px 20px; margin-bottom:14px; border-left:4px solid var(--primary); }
+.q-text { font-size:14pt; margin-bottom:10px; }
+.options { display:flex; flex-direction:column; gap:6px; }
+.options label { display:block; padding:10px 16px; border:2px solid var(--border); border-radius:10px; cursor:pointer; font-size:14pt; transition:all .2s; }
+.options label:hover { border-color:var(--primary); background:var(--bg-card); }
+.options label.correct { background:#d5f5e3; border-color:var(--green); color:var(--green); }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+.options label.disabled { pointer-events:none; }
+.ans-btn { background:var(--primary); color:#fff; border:none; padding:8px 18px; border-radius:20px; font-size:13pt; cursor:pointer; transition:all .2s; }
+.ans-btn:hover { transform:scale(1.04); }
+.a { display:none; margin-top:12px; padding:12px 16px; background:#f0edff; border-radius:10px; font-size:14pt; }
+.a.show { display:block; }
+.exercise .a { display:none; margin-top:12px; padding:12px 16px; background:#f0edff; border-radius:10px; font-size:14pt; }
+.exercise .a.show { display:block; }
+.toggle-btn { margin-top:8px; background:var(--primary); color:#fff; border:none; padding:8px 20px; border-radius:20px; font-size:13pt; cursor:pointer; }
+
+/* ========== 导航链接 ========== */
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding:12px 18px; background:#fff; border-radius:14px; box-shadow:0 2px 8px rgba(124,108,240,.06); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; font-weight:700; }
+.bottom-nav a:hover { color:var(--primary); }
+.bottom-nav .current { color:#888; font-size:12pt; }
+.page-footer { text-align:center; padding:18px; font-size:12px; color:#aaa; }
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 0: 封面 ===== -->
+<div class="page-slide active" id="page0">
+<div class="hero-cover">
+<div class="unit-tag">第三单元 · 秦汉时期：统一多民族封建国家的建立和巩固</div>
+<h1>第12课 · 大一统王朝的巩固</h1>
+<div class="sub">统编版初中历史  七年级上册</div>
+<div class="hero-goals">
+<h3>🎯 学习目标 · 点击逐条标记</h3>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">知道汉武帝削弱地方势力的措施</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">理解加强经济管控和尊崇儒术的内容</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">掌握北击匈奴与开拓边疆的史实</div></div>
+<div class="goal-item" onclick="toggleGoal(this)"><div class="goal-check"></div><div class="goal-text">认识汉武帝巩固大一统的历史意义</div></div>
+<div class="goal-all-done" id="goalAllDone">🎉 全部学习目标已确认！开始探索吧 →</div>
+</div>
+</div>
+</div>
+
+<!-- ===== PAGE 1: 知识要点（交互版） ===== -->
+<div class="page-slide" id="page1">
+<div class="slide-header"><div class="module-num">模块一</div><div class="module-title">知识要点</div></div>
+
+<!-- 闯关进度条 -->
+<div class="stage-bar">
+<div class="stage-bar-title">🏆 互动闯关进度 <span class="stage-badge pending" id="stageBadge">0/5 关</span></div>
+<div class="stage-track">
+<div class="stage-dot current" id="st0">①排序</div>
+<div class="stage-dot" id="st1">②填空</div>
+<div class="stage-dot" id="st2">③连线</div>
+<div class="stage-dot" id="st3">④地图</div>
+<div class="stage-dot" id="st4">⑤翻转</div>
+</div>
+</div>
+
+<div class="tab-nav">
+<button class="tab-btn active" onclick="switchTabV2(0)">削弱地方势力</button>
+<button class="tab-btn" onclick="switchTabV2(1)">加强经济管控</button>
+<button class="tab-btn" onclick="switchTabV2(2)">尊崇儒术</button>
+<button class="tab-btn" onclick="switchTabV2(3)">北击匈奴</button>
+</div>
+
+<!-- Tab 0：削弱地方势力 -->
+<div class="tab-panel active" id="tp0">
+<div class="timeline-bar">⏳ 汉武帝时期（前141—前87年）· 政治集权</div>
+
+<!-- 闯关1：拖拽排序——削弱地方势力事件时序 -->
+<div class="sort-zone">
+<h4>🔄 闯关一 · 拖拽排序：削弱地方势力的关键事件</h4>
+<p style="text-align:center;font-size:12pt;color:#888;margin-bottom:12px;">按住下方事件卡片拖动到对应的时间槽位中</p>
+<div class="sort-slots" id="sortSlots0">
+<div class="sort-slot" id="slot0_0"><span class="slot-num">1</span><span class="slot-label">第一步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_1"><span class="slot-num">2</span><span class="slot-label">第二步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_2"><span class="slot-num">3</span><span class="slot-label">第三步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_3"><span class="slot-num">4</span><span class="slot-label">第四步</span><span class="slot-content"></span></div>
+<div class="sort-slot" id="slot0_4"><span class="slot-num">5</span><span class="slot-label">第五步</span><span class="slot-content"></span></div>
+</div>
+<div class="sort-items" id="sortItems0">
+<div class="sort-item" draggable="true" data-value="1" ondragstart="dragStart(event)" ondragend="dragEnd(event)">汉初实行郡国并行制，诸侯王势力膨胀</div>
+<div class="sort-item" draggable="true" data-value="2" ondragstart="dragStart(event)" ondragend="dragEnd(event)">汉景帝时期爆发"七国之乱"</div>
+<div class="sort-item" draggable="true" data-value="3" ondragstart="dragStart(event)" ondragend="dragEnd(event)">主父偃向汉武帝提出"推恩令"建议</div>
+<div class="sort-item" draggable="true" data-value="4" ondragstart="dragStart(event)" ondragend="dragEnd(event)">汉武帝颁布推恩令，王国封地越分越小</div>
+<div class="sort-item" draggable="true" data-value="5" ondragstart="dragStart(event)" ondragend="dragEnd(event)">设13州部刺史制度，监督地方官吏</div>
+</div>
+<div class="sort-result" id="sortResult0"></div>
+<div style="text-align:center;margin-top:14px;"><button class="fill-submit" onclick="checkSort(0)">✅ 提交检验</button><button class="ans-btn" onclick="resetSort(0)" style="background:#999;margin-left:8px;">🔄 重置</button></div>
+</div>
+
+<!-- 知识卡片 -->
+<div class="kp-card"><h4>推恩令（主父偃建议）</h4>
+<ul><li>诸侯王死后，除嫡长子继承王位外，可将封地<span class="kwd">分封给其他子弟</span></li>
+<li>表面上恩赐宗室，实则<span class="kwd">分化王国力量</span></li>
+<li>结果：王国越分越小，再也无力对抗中央</li></ul>
+</div>
+<div class="kp-card"><h4>刺史制度</h4>
+<ul><li>把全国划分为<span class="kwd">13个州部</span>，每州设<span class="kwd">刺史</span></li>
+<li>刺史负责<span class="kwd">监督地方官吏</span>和豪强<span class="tag-zhongkao">📌 中考常考</span></li>
+<li>加强了中央对地方的控制</li></ul>
+</div>
+<div class="link-bar">🔗 <strong>关键理解：</strong>推恩令的妙处在于"兵不血刃"——以"恩惠"之名行"削弱"之实，避免了汉景帝强行削藩引发七国之乱的教训。</div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡 · 点击翻转</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">推恩令</div><div class="flip-back">诸侯王可将封地分给所有子弟，使王国越分越小，无力对抗中央</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">刺史制度</div><div class="flip-back">全国划为13州部，每州设刺史监督地方官吏和豪强</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">郡国并行制</div><div class="flip-back">汉初同时实行郡县制和分封制，诸侯王拥有封地和军队</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 1：加强经济管控 -->
+<div class="tab-panel" id="tp1">
+<div class="timeline-bar">⏳ 经济统一是国家统一的基础</div>
+
+<!-- 闯关2：填空填词 -->
+<div class="fill-zone">
+<h4>✏️ 闯关二 · 填空填词：经济管控的关键措施</h4>
+<p style="text-align:center;font-size:12pt;color:#888;margin-bottom:16px;">在空白处填入正确内容后点击"提交检验"</p>
+<p style="line-height:2.4;font-size:13pt;">
+汉武帝为加强经济管控，把<input type="text" class="fill-blank" id="fb0_0" placeholder="？">权收归中央，在全国统一铸造<input type="text" class="fill-blank" id="fb0_1" placeholder="？">；在全国各地设置<input type="text" class="fill-blank" id="fb0_2" placeholder="？">和<input type="text" class="fill-blank" id="fb0_3" placeholder="？">，将盐铁经营权收归中央；还在全国范围内<input type="text" class="fill-blank" id="fb0_4" placeholder="？">，调剂物资，使国家牢牢掌握了经济命脉。
+</p>
+<div class="fill-feedback" id="fbFeedback0"></div>
+<div style="text-align:center;margin-top:14px;"><button class="fill-submit" onclick="checkFillBlanks(0)">✅ 提交检验</button></div>
+</div>
+
+<div class="kp-card"><h4>铸币权收归中央</h4>
+<ul><li>把<span class="kwd">铸币权</span>收归中央，统一铸造<span class="kwd">五铢钱</span></li>
+<li>打击地方私铸货币，稳定经济秩序</li></ul>
+</div>
+<div class="kp-card"><h4>盐铁官营</h4>
+<ul><li>在全国设<span class="kwd">盐官</span>和<span class="kwd">铁官</span>，实行<span class="kwd">盐铁官营</span></li>
+<li>把盐铁经营权收归中央，增加国家财政收入</li></ul>
+</div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">五铢钱</div><div class="flip-back">汉武帝统一铸造的标准货币，将铸币权收归中央</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">盐铁官营</div><div class="flip-back">在全国设盐官和铁官，盐铁经营权由国家垄断</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">平抑物价</div><div class="flip-back">国家在全国范围内调剂物资、平抑物价，控制经济</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 2：尊崇儒术 -->
+<div class="tab-panel" id="tp2">
+<div class="timeline-bar">⏳ 思想统一奠定政治统一</div>
+
+<!-- 闯关3：连线匹配——措施与效果 -->
+<div class="match-section">
+<div class="match-col"><h4>📋 思想文化措施（左选）</h4>
+<div class="match-item" id="left0_0" onclick="selectMatch(0,'left',0)">董仲舒建议"罢黜百家，独尊儒术"</div>
+<div class="match-item" id="left0_1" onclick="selectMatch(0,'left',1)">在长安设立太学</div>
+<div class="match-item" id="left0_2" onclick="selectMatch(0,'left',2)">以儒家五经为教材</div>
+<div class="match-item" id="left0_3" onclick="selectMatch(0,'left',3)">实行察举制选拔人才</div>
+</div>
+<div class="match-col"><h4>📋 影响与效果（右选）</h4>
+<div class="match-item" id="right0_0" onclick="selectMatch(0,'right',0)">儒学成为封建正统思想</div>
+<div class="match-item" id="right0_1" onclick="selectMatch(0,'right',1)">培养儒学人才输送官吏</div>
+<div class="match-item" id="right0_2" onclick="selectMatch(0,'right',2)">确立儒学教育标准体系</div>
+<div class="match-item" id="right0_3" onclick="selectMatch(0,'right',3)">打破贵族世袭，扩大统治基础</div>
+</div>
+</div>
+<div class="match-feedback" id="matchFeedback0"></div>
+
+<div class="kp-card"><h4>"罢黜百家，独尊儒术"</h4>
+<ul><li><span class="kwd">董仲舒</span>建议："诸不在六艺之科孔子之术者，皆绝其道"</li>
+<li>汉武帝采纳，把<span class="kwd">儒家学说</span>立为正统思想<span class="tag-zhongkao">📌 中考高频</span></li></ul>
+</div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">独尊儒术</div><div class="flip-back">汉武帝采纳董仲舒建议，儒学成为封建正统思想</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">太学</div><div class="flip-back">汉武帝在长安设立的最高学府，以五经为教材</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">察举制</div><div class="flip-back">各郡国按人口比例推荐人才，打破贵族世袭</div></div></div>
+</div></div>
+</div>
+
+<!-- Tab 3：北击匈奴 -->
+<div class="tab-panel" id="tp3">
+<div class="timeline-bar">⏳ 公元前119年 漠北战役</div>
+
+<!-- 闯关4：地图标注——关键地点 -->
+<div class="map-zone">
+<h4>🗺️ 闯关四 · 地图标注：北击匈奴的关键地点</h4>
+<p style="text-align:center;font-size:12pt;color:#888;margin-bottom:14px;">在下方SVG简图中依次点击标注西汉北部边疆的关键地点</p>
+<div class="map-canvas">
+<svg viewBox="0 0 500 400" style="width:100%;">
+<rect width="500" height="400" fill="#faf8ff" rx="12"/>
+<rect x="80" y="100" width="340" height="200" fill="#ede8ff" rx="8" stroke="#7c6cf0" stroke-dasharray="8,4"/>
+<text x="350" y="130" font-size="11" fill="#7c6cf0">河西走廊</text>
+<circle id="mmloc1" cx="200" cy="200" r="18" fill="#fce4ec" stroke="#e74c3c" stroke-width="2" onclick="markMapEv(this,'长安','mmitem1')" style="cursor:pointer"/>
+<text x="186" y="195" font-size="10" fill="#e74c3c" text-anchor="middle" style="pointer-events:none">1</text>
+<circle id="mmloc2" cx="350" cy="130" r="15" fill="#e8f5e9" stroke="#27ae60" stroke-width="2" onclick="markMapEv(this,'河西走廊','mmitem2')" style="cursor:pointer"/>
+<text x="340" y="132" font-size="9" fill="#27ae60" text-anchor="middle" style="pointer-events:none">2</text>
+<circle id="mmloc3" cx="230" cy="80" r="15" fill="#fff3e0" stroke="#f0ad4e" stroke-width="2" onclick="markMapEv(this,'漠北','mmitem3')" style="cursor:pointer"/>
+<text x="220" y="82" font-size="9" fill="#f0ad4e" text-anchor="middle" style="pointer-events:none">3</text>
+<circle id="mmloc4" cx="280" cy="115" r="14" fill="#e0daff" stroke="#7c6cf0" stroke-width="2" onclick="markMapEv(this,'武威','mmitem4')" style="cursor:pointer"/>
+<text x="272" y="117" font-size="9" fill="#7c6cf0" text-anchor="middle" style="pointer-events:none">4</text>
+<circle id="mmloc5" cx="380" cy="155" r="14" fill="#fce4ec" stroke="#e74c3c" stroke-width="2" onclick="markMapEv(this,'敦煌','mmitem5')" style="cursor:pointer"/>
+<text x="372" y="157" font-size="9" fill="#e74c3c" text-anchor="middle" style="pointer-events:none">5</text>
+<polygon points="100,20 400,60 500,100 80,80" fill="rgba(241,196,15,.2)" stroke="#f1c40f" stroke-width="1"/>
+<text x="400" y="50" font-size="9" fill="#f1c40f">匈奴</text>
+</svg>
+</div>
+<div class="map-check-list">
+<span class="map-check-item" id="mmitem1" onclick="document.getElementById('mmloc1').click()">📍 长安</span>
+<span class="map-check-item" id="mmitem2" onclick="document.getElementById('mmloc2').click()">📍 河西走廊</span>
+<span class="map-check-item" id="mmitem3" onclick="document.getElementById('mmloc3').click()">📍 漠北</span>
+<span class="map-check-item" id="mmitem4" onclick="document.getElementById('mmloc4').click()">📍 武威</span>
+<span class="map-check-item" id="mmitem5" onclick="document.getElementById('mmloc5').click()">📍 敦煌</span>
+</div>
+</div>
+
+<div class="kp-card"><h4>北击匈奴</h4>
+<ul><li>前119年，<span class="kwd">卫青</span>和<span class="kwd">霍去病</span>率骑兵北征，<span class="kwd">漠北战役</span>大败匈奴</li>
+<li>霍去病豪言："<span class="kwd">匈奴未灭，无以家为也</span>"</li></ul>
+</div>
+<div class="kp-card"><h4>河西四郡</h4>
+<ul><li>击败匈奴后设四郡：<span class="kwd">武威、张掖、酒泉、敦煌</span></li>
+<li>意义：打通了通往<span class="kwd">西域</span>的通道，促进中西交流</li></ul>
+</div>
+
+<!-- 翻转卡 -->
+<div class="flip-section"><h4>🧠 概念翻转卡</h4>
+<div class="flip-grid">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">漠北战役</div><div class="flip-back">前119年，卫青霍去病率军大败匈奴，匈奴无力再与西汉对抗</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">河西四郡</div><div class="flip-back">武威、张掖、酒泉、敦煌，在河西走廊由东向西排列</div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front">霍去病名言</div><div class="flip-back">"匈奴未灭，无以家为也"——以国为重的爱国情怀</div></div></div>
+</div></div>
+</div>
+
+</div>
+</div>
+
+<!-- ===== PAGE 2: 重难点解析 ===== -->
+<div class="page-slide" id="page2">
+<div class="slide-header"><div class="module-num">模块二</div><div class="module-title">重难点解析</div></div>
+<div class="acc-global-ctrl">
+<button class="ans-btn" onclick="expandAllGroups()">📖 全部展开</button>
+<button class="ans-btn" onclick="collapseAllGroups()">📕 全部折叠</button>
+<span id="understoodCount" style="margin-left:12px;color:var(--primary);font-size:13pt;"></span>
+</div>
+
+<div class="acc-group open" id="accGroup0">
+<div class="acc-group-header" onclick="toggleAccGroup(0)">
+<span class="acc-group-icon">📌</span>
+<span>重点一 · 推恩令——如何巧妙解决王国问题？</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【基础理解】推恩令的巧妙之处</div>
+<div class="deep-card-bd show">
+<p>推恩令的高明在于<strong>不直接削除封国</strong>，而是用"恩赐"的名义，让诸侯王把土地分给所有儿子，而非仅嫡长子。表面上是对宗室的"恩惠"，实际上让王国土地越分越小，血缘越远越疏，<strong>自然瓦解</strong>了王国势力。汉武帝之前，汉景帝"削藩"引发七国之乱；而推恩令"兵不血刃"地解决了王国问题。</p>
+<div style="margin-top:10px;background:#fffaf0;padding:10px 14px;border-radius:8px;">
+🎯 <strong>中考典型例题：</strong><br>汉武帝采纳主父偃建议实行"推恩令"，其最直接的效果是（ ）<br>
+<strong>A.</strong> 增加了国家财政收入 <strong>B.</strong> 削弱了王国势力 <strong>C.</strong> 击败了匈奴 <strong>D.</strong> 独尊了儒家<br>
+<strong>答案：B</strong> · 解析：推恩令使王国封地越分越小，直接削弱了王国势力。
+</div>
+</div>
+</div>
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【联系拓展】郡县制→郡国并行→推恩令的演变逻辑</div>
+<div class="deep-card-bd">
+<p>秦朝废分封行郡县→汉初郡国并行（保留一定分封）→七国之乱暴露弊端→推恩令解决王国问题。这一演变说明：<strong>加强中央集权是历史发展的趋势</strong>，但需要找到合适的策略。汉景帝"削藩"过于激烈引发叛乱，汉武帝"推恩令"则"以柔克刚"，体现了治国智慧。</p>
+</div>
+</div>
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【素养提升】推恩令与刺史制度——"恩威并施"的治国艺术</div>
+<div class="deep-card-bd">
+<p>推恩令（分化诸侯王）体现"恩"，刺史制度（监督地方）体现"威"。汉武帝一方面用"推恩"使诸侯王无法对抗中央，另一方面建立刺史制度加强对地方的监控。这种<strong>"恩威并施"的治理模式</strong>，成为后世中央集权制度的重要组成部分。今天中国的地方监察体系（如巡视制度）也继承了这一传统智慧。</p>
+</div>
+</div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(0,this)">✓ 我已理解</button>
+</div>
+</div>
+
+<div class="acc-group" id="accGroup1">
+<div class="acc-group-header" onclick="toggleAccGroup(1)">
+<span class="acc-group-icon">🌟</span>
+<span>重点二 · "罢黜百家，独尊儒术"的历史影响</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【基础理解】为什么是儒家？</div>
+<div class="deep-card-bd show">
+<p>董仲舒改造后的儒学吸收了法家、道家、阴阳家等思想，强调<strong>"大一统"和"君权神授"</strong>，符合汉武帝加强中央集权的需要。相比秦朝法家的"严刑峻法"和汉初道家的"无为而治"，儒家既提供了统一的意识形态，又强调"以德化民"，<strong>更有利于长期统治</strong>。</p>
+</div>
+</div>
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【联系拓展】秦始皇焚书坑儒 vs 汉武帝独尊儒术</div>
+<div class="deep-card-bd">
+<p>两者目的相似（统一思想），但<strong>手段和效果截然不同</strong>。秦始皇用<strong>暴力压制</strong>（焚书坑儒），激化了社会矛盾；汉武帝用<strong>引导推举</strong>（兴办太学、察举制），使儒家成为长治久安的思想工具。这一对比说明：思想统治需要引导而非压制，"堵不如疏"。</p>
+<div style="margin-top:10px;background:#fffaf0;padding:10px 14px;border-radius:8px;">
+🎯 <strong>中考典型例题：</strong><br>秦始皇"焚书坑儒"与汉武帝"独尊儒术"，两者的共同目的是（ ）<br>
+<strong>A.</strong> 发展文化教育 <strong>B.</strong> 巩固统一 <strong>C.</strong> 镇压人民 <strong>D.</strong> 排斥儒学<br>
+<strong>答案：B</strong> · 解析：两者目的都在于统一思想，加强中央集权，巩固统一。
+</div>
+</div>
+</div>
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【素养提升】"独尊儒术"的深远影响</div>
+<div class="deep-card-bd">
+<p>从汉武帝开始，儒学成为中国古代社会的<strong>正统思想</strong>，影响长达两千年。儒家强调的"忠君爱国""仁义礼智信""修身齐家治国平天下"成为中华民族的核心价值观。但也应认识到，文化上的"独尊"限制了思想多元化，这是历史的局限性。</p>
+</div>
+</div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(1,this)">✓ 我已理解</button>
+</div>
+</div>
+
+<div class="acc-group" id="accGroup2">
+<div class="acc-group-header" onclick="toggleAccGroup(2)">
+<span class="acc-group-icon">🔍</span>
+<span>难点 · 汉武帝巩固大一统的多维措施及其逻辑</span>
+<span class="acc-group-arrow">▼</span>
+</div>
+<div class="acc-group-body">
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【基础理解】政治、经济、思想、军事四维统一</div>
+<div class="deep-card-bd show">
+<p>汉武帝从四个维度巩固大一统：①<strong>政治</strong>——推恩令 + 刺史制度，削弱地方加强中央；②<strong>经济</strong>——统一铸币 + 盐铁官营，控制经济命脉；③<strong>思想</strong>——独尊儒术 + 兴办太学，统一意识形态；④<strong>军事</strong>——北击匈奴 + 河西四郡，巩固北部边疆。这四个维度相辅相成，缺一不可。</p>
+</div>
+</div>
+<div class="deep-card">
+<div class="deep-card-hd" onclick="this.nextElementSibling.classList.toggle('show')">【联系拓展】从"无为"到"有为"的转变</div>
+<div class="deep-card-bd">
+<p>汉初"无为而治"（休养生息）适应了战后恢复的需要，文景之治积累了雄厚国力。到汉武帝时，<strong>时代需求从"休养生息"转向"开疆拓土"</strong>，从"无为"转向"有为"。没有文景时期的积累，就没有汉武帝的"有为"；反之，如果汉武帝不顺势"有为"，积累也会丧失。</p>
+</div>
+</div>
+<button class="ans-btn understood-btn" onclick="markUnderstood(2,this)">✓ 我已理解</button>
+</div>
+</div>
+
+</div>
+
+<!-- ===== PAGE 3: 教材栏目 ===== -->
+<div class="page-slide" id="page3">
+<div class="slide-header"><div class="module-num">模块三</div><div class="module-title">教材栏目解答</div></div>
+<div class="filter-bar">
+<button class="filter-chip active" onclick="filterCategory('all')">📋 全部</button>
+<button class="filter-chip" onclick="filterCategory('xiangguan')">📖 相关史事</button>
+<button class="filter-chip" onclick="filterCategory('renwu')">👤 人物扫描</button>
+<button class="filter-chip" onclick="filterCategory('ditu')">🗺️ 读地图</button>
+<button class="filter-chip" onclick="filterCategory('cailiao')">📜 材料研读</button>
+<button class="filter-chip" onclick="filterCategory('xiangyixiang')">💭 想一想</button>
+<button class="filter-chip" onclick="filterCategory('kehou')">📝 课后活动</button>
+<button class="filter-chip" onclick="filterCategory('zhishi')">🔍 知识拓展</button>
+</div>
+
+<div class="col-box open" data-category="xiangguan">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📖 相关史事① · 郡国并行与七国之乱</div>
+<div class="col-body">
+<p>汉初实行郡国并行制，诸侯王拥有封地和军队，势力庞大。汉景帝时期，晁错建议"削藩"，引发了以吴王刘濞为首的<strong>七国之乱</strong>。虽然叛乱最终被平定，但王国问题未能根本解决。这为汉武帝推行"推恩令"提供了历史教训。</p>
+</div>
+</div>
+
+<div class="col-box" data-category="xiangguan">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📖 相关史事② · 汉武帝时期的经济发展</div>
+<div class="col-body">
+<p>汉武帝重视农业生产，治理黄河水患，推广先进的农具<span class="kwd">耧车</span>。手工业也取得突出成就，其中<span class="kwd">长信宫灯</span>以其精美的造型和巧妙的设计闻名于世，代表了西汉高超的工艺水平。</p>
+</div>
+</div>
+
+<div class="col-box" data-category="xiangguan">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📖 相关史事③ · 刺史制度</div>
+<div class="col-body">
+<p>汉武帝把全国划分为<strong>13个州部</strong>，每州部设刺史一人。刺史级别不高，但代表中央监督地方官吏和豪强。这一制度使中央能够及时了解地方情况，有效<strong>加强了中央对地方的控制</strong>，是中国古代监察制度的重要发展。</p>
+</div>
+</div>
+
+<div class="col-box" data-category="xiangguan">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📖 相关史事④ · 西南夷与南方开发</div>
+<div class="col-body">
+<p>汉武帝时期还加强了对西南和南方的开发。在西南夷地区设置郡县，在南方设置了<strong>南海等九郡</strong>，大大拓展了西汉的疆域，促进了各民族之间的经济文化交流。</p>
+</div>
+</div>
+
+<div class="col-box" data-category="renwu">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">👤 人物扫描 · 卫青与霍去病</div>
+<div class="col-body">
+<p><strong>卫青</strong>：出身卑微，姐姐是汉武帝的皇后卫子夫。他七次率军出击匈奴，战功卓著，官至大将军。卫青为人谦恭低调，深得将士爱戴。</p>
+<p><strong>霍去病</strong>：卫青的外甥，年仅18岁便随军出征，曾率800名骑兵孤军深入数百里，斩杀匈奴2000余人。他先后六次出击匈奴。汉武帝为他修建府邸，他说："<strong>匈奴未灭，无以家为也。</strong>"24岁英年早逝。</p>
+</div>
+</div>
+
+<div class="col-box" data-category="ditu">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">🗺️ 读地图 · 西汉形势图</div>
+<div class="col-body">
+<p>观察西汉形势图，重点关注<strong>河西四郡</strong>的位置：</p>
+<p>从东向西依次为：<strong>武威 → 张掖 → 酒泉 → 敦煌</strong>。四郡位于河西走廊，是中原通往西域的咽喉要道。</p>
+</div>
+</div>
+
+<div class="col-box" data-category="cailiao">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📜 材料研读 · 董仲舒建议</div>
+<div class="col-body">
+<div class="source-material">"诸不在六艺之科孔子之术者，皆绝其道，勿使并进。邪辟之说灭息，然后统纪可一而法度可明，民知所从矣。"</div>
+<div class="source-ref">——董仲舒《举贤良对策》</div>
+<p style="margin-top:10px;"><strong>问：</strong>董仲舒这段话表达了什么意思？汉武帝采纳后产生了什么影响？</p>
+<div class="a show"><p><strong>答案：</strong>董仲舒主张把儒家学说以外的各家学说都排斥掉，只推举儒家学说，使思想统一。汉武帝采纳后，"罢黜百家，独尊儒术"，儒学成为中国封建社会的正统思想。</p></div>
+</div>
+</div>
+
+<div class="col-box" data-category="xiangyixiang">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">💭 想一想 · 汉武帝与国力鼎盛</div>
+<div class="col-body">
+<p><strong>问：</strong>汉武帝采取的措施与西汉国力鼎盛有什么关系？</p>
+<div class="a show"><p><strong>答案：</strong>汉武帝巩固大一统的措施使西汉国力达到鼎盛。政治上加强中央集权；经济上盐铁官营等增加了财政收入；思想上独尊儒术统一了思想文化；军事上北击匈奴拓展了疆域。</p></div>
+</div>
+</div>
+
+<div class="col-box" data-category="kehou">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📝 课后活动① · 解决王国问题的措施</div>
+<div class="col-body">
+<p><strong>问：</strong>梳理汉武帝为解决王国问题采取的措施及作用。</p>
+<div class="a show"><p><strong>答案：</strong>①实行"推恩令"——使王国封地越分越小，无力对抗中央；②建立刺史制度——把全国划为13州部，派刺史监督地方；③找借口削爵夺地——直接废除部分王国。</p></div>
+</div>
+</div>
+
+<div class="col-box" data-category="kehou">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">📝 课后活动② · 秦汉对儒家态度比较</div>
+<div class="col-body">
+<p><strong>问：</strong>秦始皇和汉武帝对儒家学派的态度有什么不同？有什么相同之处？</p>
+<div class="a show"><p><strong>答案：</strong><strong>不同：</strong>秦始皇"焚书坑儒"用暴力打击儒家；汉武帝"独尊儒术"把儒家确立为正统。<strong>相同：</strong>目的都是为了统一思想，加强中央集权。一个用"压"、一个用"立"。</p></div>
+</div>
+</div>
+
+<div class="col-box" data-category="zhishi">
+<div class="col-header" onclick="this.parentElement.classList.toggle('open')">🔍 知识拓展 · 察举制</div>
+<div class="col-body">
+<p>察举制是汉武帝时期建立的重要选官制度。各郡国每年按人口比例向中央<strong>推荐人才</strong>，由中央考核后授予官职。察举制打破了贵族世袭官职的传统，使有才能的人有机会被选入政府，扩大了统治基础，是科举制度的前身。</p>
+</div>
+</div>
+
+</div>
+
+<!-- ===== PAGE 4: 课堂训练 ===== -->
+<div class="page-slide" id="page4">
+<div class="slide-header"><div class="module-num">模块四</div><div class="module-title">课堂训练</div></div>
+<div class="score-banner" id="scoreBanner">
+<span class="score-text">📊 选择题得分：</span>
+<span class="score-num" id="choiceScore">0</span>
+<span class="score-text"> / 5</span>
+<span style="margin:0 16px">|</span>
+<span class="score-text">📝 材料题：</span>
+<span class="score-num" id="materialUnderstood">0</span>
+<span class="score-text"> / 2 已理解</span>
+<button class="ans-btn" onclick="resetQuiz()" style="margin-left:16px">🔄 重新作答</button>
+</div>
+
+<div class="exercise" id="q1">
+<p class="q-text"><strong>1.</strong> 汉武帝时建议实行"推恩令"的大臣是（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q1')">A. 董仲舒</label>
+<label onclick="optClick(this,'B','q1')">B. 主父偃</label>
+<label onclick="optClick(this,'C','q1')">C. 晁错</label>
+<label onclick="optClick(this,'D','q1')">D. 陆贾</label>
+</div>
+<div class="a" id="exp-q1"><strong>答案：B</strong><br><strong>解析：</strong>董仲舒建议"独尊儒术"（A），晁错建议"削藩"引发七国之乱（C）。推恩令由主父偃提出。</div>
+</div>
+
+<div class="exercise" id="q2">
+<p class="q-text"><strong>2.</strong> 汉武帝为加强中央对地方的控制，把全国划分为（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q2')">A. 36郡</label>
+<label onclick="optClick(this,'B','q2')">B. 13个州部</label>
+<label onclick="optClick(this,'C','q2')">C. 9个行省</label>
+<label onclick="optClick(this,'D','q2')">D. 7个王国</label>
+</div>
+<div class="a" id="exp-q2"><strong>答案：B</strong><br><strong>解析：</strong>汉武帝设13州部，每州设刺史。36郡是秦朝地方制度，9行省是元朝的。</div>
+</div>
+
+<div class="exercise" id="q3">
+<p class="q-text"><strong>3.</strong> 董仲舒主张"罢黜百家，独尊儒术"，这里的"百家"指的是（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q3')">A. 一百家学说</label>
+<label onclick="optClick(this,'B','q3')">B. 儒家以外的各家学说</label>
+<label onclick="optClick(this,'C','q3')">C. 道家学说</label>
+<label onclick="optClick(this,'D','q3')">D. 法家学说</label>
+</div>
+<div class="a" id="exp-q3"><strong>答案：B</strong><br><strong>解析：</strong>"罢黜百家"指排斥儒家以外的各派学说（道家、法家、墨家等）。"百家"是泛指。</div>
+</div>
+
+<div class="exercise" id="q4">
+<p class="q-text"><strong>4.</strong> 漠北战役后，西汉在河西走廊设置的"河西四郡"不包括（ ）</p>
+<div class="options">
+<label onclick="optClick(this,'A','q4')">A. 武威</label>
+<label onclick="optClick(this,'B','q4')">B. 张掖</label>
+<label onclick="optClick(this,'C','q4')">C. 洛阳</label>
+<label onclick="optClick(this,'D','q4')">D. 敦煌</label>
+</div>
+<div class="a" id="exp-q4"><strong>答案：C</strong><br><strong>解析：</strong>河西四郡为武威、张掖、酒泉、敦煌。洛阳在河南，是东汉都城，不属于河西走廊。</div>
+</div>
+
+<div class="exercise" id="q5">
+<p class="q-text"><strong>5.</strong> 汉武帝巩固大一统的措施中，属于经济方面的有（ ）<br>①推恩令 ②铸五铢钱 ③盐铁官营 ④独尊儒术</p>
+<div class="options">
+<label onclick="optClick(this,'A','q5')">A. ①②</label>
+<label onclick="optClick(this,'B','q5')">B. ②③</label>
+<label onclick="optClick(this,'C','q5')">C. ③④</label>
+<label onclick="optClick(this,'D','q5')">D. ①④</label>
+</div>
+<div class="a" id="exp-q5"><strong>答案：B</strong><br><strong>解析：</strong>①推恩令属于政治措施，④独尊儒术属于思想文化措施。②③（铸五铢钱+盐铁官营）属于经济管控。</div>
+</div>
+
+<div class="exercise" id="m1">
+<p class="q-text"><strong>材料题一：</strong></p>
+<div class="source-material">"诸侯王或欲推私恩分子弟邑者，令各条上，朕且临定其号名。"</div>
+<div class="source-ref">——《汉书·武帝纪》（推恩令）</div>
+<p class="q-text">（1）材料中的"推私恩分子弟邑"是什么意思？（2）推恩令为什么能成功解决王国问题？</p>
+<button class="ans-btn" onclick="toggleAnswer('ans-m1')">📝 显示答案</button>
+<button class="ans-btn understood-btn material" onclick="markMaterial(this)" style="margin-left:8px">✓ 我已理解</button>
+<div class="a" id="ans-m1"><p><strong>答案：</strong><br>（1）意思是：诸侯王可以把封地分封给自己的子弟（不止嫡长子），使王国土地越分越小。<br>（2）推恩令名义上是"恩赐"宗室子弟，诸侯王难以公开反对；实际上使王国封地不断分割，日益缩小，不再具有对抗中央的实力。这是一种"兵不血刃"的巧妙策略。</p></div>
+</div>
+
+<div class="exercise" id="m2">
+<p class="q-text"><strong>材料题二：</strong></p>
+<div class="source-material">汉初七十余年间，国家无事，府库余财。至武帝之初，七十年间，国家亡事，非遇水旱，则民人给家足，都鄙廪庾尽满，而府库余财。</div>
+<div class="source-ref">——《汉书·食货志》</div>
+<p class="q-text">（1）材料描述的繁荣局面是在什么基础上形成的？（2）汉武帝如何利用这一基础巩固了大一统王朝？</p>
+<button class="ans-btn" onclick="toggleAnswer('ans-m2')">📝 显示答案</button>
+<button class="ans-btn understood-btn material" onclick="markMaterial(this)" style="margin-left:8px">✓ 我已理解</button>
+<div class="a" id="ans-m2"><p><strong>答案：</strong><br>（1）是在汉初休养生息和"文景之治"的基础上形成的。经过七十多年的积累，国家经济富足。<br>（2）汉武帝利用雄厚的国力，在经济上铸五铢钱、盐铁官营；政治上推恩令和刺史制度；思想文化上独尊儒术、兴太学；军事上北击匈奴。</p></div>
+</div>
+
+</div>
+
+<!-- ===== PAGE 5: 知识结构图 ===== -->
+<div class="page-slide" id="page5">
+<div class="slide-header"><div class="module-num">模块五</div><div class="module-title">知识结构图</div></div>
+<div class="kg-wrap-simple">
+<div class="kg-title">📊 知识结构 · 因果链</div>
+<div class="kg-hint-banner">
+<span style="background:#fff;border:2px solid var(--primary);color:var(--primary);border-radius:12px;padding:2px 12px;font-size:11pt;font-weight:700;">各节点</span>
+<strong>可点击展开详情</strong>，右上角徽章提示
+</div>
+<div class="kg-chain">
+<div class="kg-node left c1" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">📦</span>
+<strong>文景之治奠定基础</strong>
+<p>休养生息70余年 → 国库充实 → 社会安定</p>
+<div class="kg-detail"><p>汉初七十多年的积累为汉武帝的"有为"提供了雄厚的物质条件。没有文景之治就没有汉武帝的大一统。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node right c2" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">⚙️</span>
+<strong>政治经济双管齐下</strong>
+<p>推恩令+刺史→集权 / 五铢钱+盐铁官营→控财</p>
+<div class="kg-detail"><p>政治上削弱地方势力，经济上掌控国家命脉，"两手抓"确保中央权威。推恩令更是中国古代政治智慧的杰出体现。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node left c3" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">📚</span>
+<strong>思想文化统一</strong>
+<p>董仲舒建议 → 独尊儒术 → 太学培养人才</p>
+<div class="kg-detail"><p>"罢黜百家，独尊儒术"从思想上实现大一统，儒学从此成为中国两千多年封建社会的正统思想。</p></div>
+</div>
+<div class="kg-arrow">⬇️</div>
+<div class="kg-node right c4" onclick="toggleKgDetail(this)">
+<span class="kg-expand-badge">▶ 点击展开</span>
+<span class="kg-icon">🏹</span>
+<strong>对外开拓巩固边疆</strong>
+<p>卫青霍去病 → 漠北战役 → 河西四郡</p>
+<div class="kg-detail"><p>军事上的胜利打通了通往西域的道路，河西四郡的设置标志着西汉对河西走廊的有效管辖，为丝绸之路的开通奠基。</p></div>
+</div>
+</div>
+<div class="kg-rules-grid">
+<div class="kg-rule r1">🔵 政治：推恩令、刺史制度</div>
+<div class="kg-rule r2">🟠 经济：五铢钱、盐铁官营</div>
+<div class="kg-rule r3">🟢 思想：独尊儒术、兴太学</div>
+<div class="kg-rule r4">🔴 军事：北击匈奴、河西四郡</div>
+</div>
+</div>
+</div>
+
+<!-- ===== PAGE 6: 结束页 ===== -->
+<div class="page-slide" id="page6">
+<div class="slide-header"><div class="module-num">本课结束</div><div class="module-title">第12课 · 大一统王朝的巩固</div></div>
+<div class="recap-section">
+<div class="recap-title">🔑 核心要点回顾</div>
+<div class="recap-grid">
+<div class="recap-card">
+<div class="recap-card-num">1</div>
+<h3>削弱地方势力</h3>
+<ul>
+<li>推恩令分化王国力量</li>
+<li>13州部设刺史监督</li>
+<li>找借口削爵夺地</li>
+<li>大大加强中央集权</li>
+</ul>
+</div>
+<div class="recap-card">
+<div class="recap-card-num">2</div>
+<h3>加强经济管控</h3>
+<ul>
+<li>统一铸造五铢钱</li>
+<li>盐铁官营增收国库</li>
+<li>平抑物价调剂物资</li>
+<li>国家控制经济命脉</li>
+</ul>
+</div>
+<div class="recap-card">
+<div class="recap-card-num">3</div>
+<h3>尊崇儒术</h3>
+<ul>
+<li>董仲舒"独尊儒术"</li>
+<li>长安设太学培养人才</li>
+<li>五经为教材</li>
+<li>儒学成正统思想</li>
+</ul>
+</div>
+<div class="recap-card">
+<div class="recap-card-num">4</div>
+<h3>北击匈奴</h3>
+<ul>
+<li>卫青霍去病率军北征</li>
+<li>漠北战役大败匈奴</li>
+<li>设河西四郡</li>
+<li>打通西域通道</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="bottom-nav" style="margin-top:24px">
+<a href="#">← 上一课：第11课 西汉建立和"文景之治"</a>
+<span class="current">第12课</span>
+<a href="#">下一课：第13课 东汉的兴衰 →</a>
+</div>
+<div class="page-footer">
+<p>统编版初中历史 七年级上册</p>
+<p>基于教材内容整理 · 仅供教学参考使用</p>
+</div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="pg-nav">
+<button onclick="prevPage()" title="上一页 (←)">◀</button>
+<div class="pg-dots" id="pgDots"></div>
+<button onclick="nextPage()" title="下一页 (→)">▶</button>
+<span class="pg-info"><span id="curPg">1</span> / 7</span>
+</div>
+
+<script>
+// ===== 分页导航 =====
+var currentPage=0,totalPages=7;
+(function initDots(){var d=document.getElementById('pgDots');for(var i=0;i<totalPages;i++){var s=document.createElement('span');s.className='pg-dot'+(i===0?' active':'');s.onclick=(function(n){return function(){goPage(n);};})(i);d.appendChild(s);}})();
+function goPage(n){if(n<0||n>=totalPages)return;document.querySelectorAll('.page-slide').forEach(function(s,i){s.classList.toggle('active',i===n);});document.querySelectorAll('.pg-dot').forEach(function(d,i){d.classList.toggle('active',i===n);});currentPage=n;document.getElementById('curPg').textContent=n+1;}
+function nextPage(){goPage(currentPage+1);}
+function prevPage(){goPage(currentPage-1);}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();nextPage();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevPage();}else if(e.key==='Home'){e.preventDefault();goPage(0);}else if(e.key==='End'){e.preventDefault();goPage(totalPages-1);}});
+
+// ===== 学习目标标记 =====
+var goalCount=0;
+function toggleGoal(el){if(!el.classList.contains('done')){el.classList.add('done');goalCount++;if(goalCount>=4){document.getElementById('goalAllDone').classList.add('show');}}}
+
+// ===== 标签页切换 v2 =====
+function switchTabV2(idx){document.querySelectorAll('.tab-btn').forEach(function(b,i){b.classList.toggle('active',i===idx);});document.querySelectorAll('.tab-panel').forEach(function(p,i){p.classList.toggle('active',i===idx);});}
+
+// ===== 拖拽排序 =====
+var draggedItem=null;
+function dragStart(e){draggedItem=e.target;e.target.style.opacity='.5';}
+function dragEnd(e){e.target.style.opacity='1';draggedItem=null;}
+(function(){
+var slots=document.querySelectorAll('.sort-slot');
+slots.forEach(function(s){
+s.addEventListener('dragover',function(e){e.preventDefault();});
+s.addEventListener('drop',function(e){e.preventDefault();if(draggedItem&&!s.querySelector('.sort-item')&&!draggedItem.classList.contains('used')){draggedItem.classList.add('used');var label=s.querySelector('.slot-content');if(label)label.textContent=draggedItem.textContent;s.appendChild(draggedItem);s.classList.add('filled');}});
+});
+})();
+
+function checkSort(tabIdx){
+var order=[{slot:'slot'+tabIdx+'_0',ans:'1'},{slot:'slot'+tabIdx+'_1',ans:'2'},{slot:'slot'+tabIdx+'_2',ans:'3'},{slot:'slot'+tabIdx+'_3',ans:'4'},{slot:'slot'+tabIdx+'_4',ans:'5'}];
+var allFilled=true,allCorrect=true;
+order.forEach(function(o){
+var s=document.getElementById(o.slot);
+var item=s? s.querySelector('.sort-item'):null;
+if(!item){allFilled=false;s?s.classList.remove('correct','wrong'):null;return;}
+var val=item.getAttribute('data-value');
+if(val===o.ans){s.classList.add('correct');s.classList.remove('wrong');}else{s.classList.add('wrong');s.classList.remove('correct');allCorrect=false;}
+});
+var rst=document.getElementById('sortResult'+tabIdx);
+if(!allFilled){rst.className='sort-result fail';rst.innerHTML='⚠️ 请将所有事件拖入槽位后再提交！';return;}
+rst.className=allCorrect?'sort-result pass':'sort-result fail';
+rst.innerHTML=allCorrect?'✅ 全部正确！排序完美！':'❌ 部分错误，提示：按时间从早到晚';
+if(allCorrect)updateStage(0);
+}
+function resetSort(tabIdx){
+var slots=document.querySelectorAll('#sortSlots'+tabIdx+' .sort-slot');
+var items=document.querySelectorAll('#sortItems'+tabIdx+' .sort-item');
+slots.forEach(function(s){var c=s.querySelector('.slot-content');if(c)c.textContent='';var i=s.querySelector('.sort-item');if(i){items.forEach(function(it){if(it.getAttribute('data-value')===i.getAttribute('data-value')){it.classList.remove('used');}});i.remove();}s.classList.remove('filled','correct','wrong');});
+document.getElementById('sortResult'+tabIdx).className='sort-result';
+}
+
+// ===== 填空填词 =====
+var fbAnswers={0:['铸币','五铢钱','盐官','铁官','平抑物价']};
+function checkFillBlanks(tabIdx){
+var ans=fbAnswers[tabIdx],allCorrect=true;
+for(var i=0;i<ans.length;i++){
+var el=document.getElementById('fb'+tabIdx+'_'+i);
+if(!el)continue;
+var v=el.value.trim().replace(/\s+/g,'');
+if(v===ans[i]){el.className='fill-blank correct';}else{el.className='fill-blank wrong';allCorrect=false;}
+}
+var fb=document.getElementById('fbFeedback'+tabIdx);fb.className='fill-feedback show';
+fb.textContent=allCorrect?'✅ 全部正确！太棒了！':'❌ 有错误，红框标注的词汇需要调整';
+fb.style.color=allCorrect?'var(--green)':'var(--red)';
+if(allCorrect)updateStage(1);
+}
+
+// ===== 连线匹配 =====
+var matchPair={0:[[0,0],[1,1],[2,2],[3,3]]};
+var matchSel={},matchCount={};
+function selectMatch(tidx,col,idx){
+var key='_'+col+'_'+idx;
+if(matchCount[tidx]&&matchCount[tidx][key])return;
+if(!matchSel[tidx]){matchSel[tidx]={left:null,right:null};matchCount[tidx]={};}
+if(col==='left'){matchSel[tidx].left=idx;document.querySelectorAll('[id^=left'+tidx+'_]').forEach(function(el){el.classList.toggle('selected',el.id==='left'+tidx+'_'+idx);});}
+else{matchSel[tidx].right=idx;document.querySelectorAll('[id^=right'+tidx+'_]').forEach(function(el){el.classList.toggle('selected',el.id==='right'+tidx+'_'+idx);});}
+if(matchSel[tidx].left!==null&&matchSel[tidx].right!==null){pairMatch(tidx);}
+}
+function pairMatch(tidx){var l=matchSel[tidx].left,r=matchSel[tidx].right;var correct=false;matchPair[tidx].forEach(function(p){if(p[0]===l&&p[1]===r)correct=true;});var lEl=document.getElementById('left'+tidx+'_'+l),rEl=document.getElementById('right'+tidx+'_'+r);if(correct){[lEl,rEl].forEach(function(el){el.classList.add('paired');el.classList.remove('selected');});matchCount[tidx]['_left_'+l]=true;matchCount[tidx]['_right_'+r]=true;}else{[lEl,rEl].forEach(function(el){el.classList.remove('selected');});}matchSel[tidx]={left:null,right:null};var totalPaired=Object.keys(matchCount[tidx]).length/2;if(totalPaired>=4){var fb=document.getElementById('matchFeedback'+tidx);fb.className='match-feedback show';fb.style.color=totalPaired===4?'var(--green)':'var(--red)';fb.textContent=totalPaired===4?'✅ 全部连线正确！\uD83C\uDF89':'连线中，请继续...';if(totalPaired===4)updateStage(2);}
+}
+
+// ===== 地图标注 =====
+var mapFound={};
+function markMapEv(el,name,itemId){if(mapFound[name])return;mapFound[name]=true;el.setAttribute('fill','#27ae60');el.setAttribute('stroke','#27ae60');el.style.opacity='1';var item=document.getElementById(itemId);if(item){item.classList.add('found');item.textContent='✅ '+item.textContent.replace('📍 ','');}if(Object.keys(mapFound).length>=5)updateStage(3);}
+
+// ===== 翻转卡完成标记 =====
+var flippedCards={};
+(function(){var cards=document.querySelectorAll('.flip-card');cards.forEach(function(c){c.addEventListener('click',function(){var h=c.querySelector('.flip-front');if(h){var t=h.textContent.trim();if(!flippedCards[t]){flippedCards[t]=true;if(Object.keys(flippedCards).length>=12)updateStage(4);}}});});})();
+
+// ===== 闯关进度 =====
+var stageDone={0:false,1:false,2:false,3:false,4:false};
+function updateStage(n){if(stageDone[n])return;stageDone[n]=true;var st=document.getElementById('st'+n);if(st){st.classList.remove('current');st.classList.add('done');}var next=document.getElementById('st'+(n+1));if(next)next.classList.add('current');var cnt=0;for(var k in stageDone){if(stageDone[k])cnt++;}var badge=document.getElementById('stageBadge');badge.textContent=cnt+'/5 关';if(cnt>=5){badge.classList.remove('pending');badge.textContent='🎉 全部通关！';}
+}
+
+// ===== 手风琴 =====
+function toggleAccGroup(idx){var g=document.getElementById('accGroup'+idx);if(g)g.classList.toggle('open');}
+function expandAllGroups(){document.querySelectorAll('.acc-group').forEach(function(g){g.classList.add('open');});}
+function collapseAllGroups(){document.querySelectorAll('.acc-group').forEach(function(g){g.classList.remove('open');});}
+var understoodCount=0,understoodGroups={};
+function markUnderstood(gi,btn){if(understoodGroups[gi])return;understoodGroups[gi]=true;understoodCount++;btn.classList.add('done');btn.textContent='✓ 已理解';btn.disabled=true;document.getElementById('understoodCount').textContent='（'+understoodCount+'/3 组已理解）';}
+
+// ===== 栏目筛选 =====
+function filterCategory(cat){document.querySelectorAll('.filter-chip').forEach(function(c){var isActive=false;if(cat==='all')isActive=c.textContent.indexOf('全部')>=0;else isActive=c.getAttribute('onclick')&&c.getAttribute('onclick').indexOf("'"+cat+"'")>=0;c.classList.toggle('active',isActive);});document.querySelectorAll('.col-box').forEach(function(b){if(cat==='all'||b.getAttribute('data-category')===cat){b.classList.remove('hidden-by-filter');}else{b.classList.add('hidden-by-filter');}});}
+
+// ===== 课堂训练 =====
+var correctAnswers={q1:'B',q2:'B',q3:'B',q4:'C',q5:'B'};
+var choiceScore=0,answeredQuestions={};
+function optClick(el,opt,qid){if(answeredQuestions[qid])return;answeredQuestions[qid]=true;var correct=correctAnswers[qid];el.parentElement.querySelectorAll('label').forEach(function(o){o.classList.add('disabled');var t=o.textContent.trim().charAt(0);if(t===correct)o.classList.add('correct');else if(o===el)o.classList.add('wrong');});if(opt===correct){choiceScore++;document.getElementById('choiceScore').textContent=choiceScore;}document.getElementById('exp-'+qid).classList.add('show');}
+function toggleAnswer(id){var el=document.getElementById(id);if(el){el.classList.toggle('show');var btn=el.previousElementSibling;while(btn&&btn.tagName!=='BUTTON')btn=btn.previousElementSibling;if(btn)btn.textContent=el.classList.contains('show')?'📝 隐藏答案':'📝 显示答案';}}
+var materialUnderstood=0;
+function markMaterial(btn){if(btn.classList.contains('done'))return;btn.classList.add('done');btn.textContent='✓ 已理解';btn.disabled=true;materialUnderstood++;document.getElementById('materialUnderstood').textContent=materialUnderstood;}
+function resetQuiz(){choiceScore=0;answeredQuestions={};materialUnderstood=0;document.getElementById('choiceScore').textContent='0';document.getElementById('materialUnderstood').textContent='0';document.querySelectorAll('.options label').forEach(function(l){l.classList.remove('disabled','correct','wrong');});document.querySelectorAll('.exercise .a').forEach(function(a){a.classList.remove('show');});document.querySelectorAll('.a.show').forEach(function(a){a.classList.remove('show');});document.querySelectorAll('.understood-btn.material').forEach(function(b){b.classList.remove('done');b.textContent='✓ 我已理解';b.disabled=false;});}
+
+// ===== 知识结构图展开 =====
+function toggleKgDetail(node){node.classList.toggle('expanded');var badge=node.querySelector('.kg-expand-badge');if(badge){badge.textContent=node.classList.contains('expanded')?'▼ 收起详情':'▶ 点击展开';}}
+</script>
+  <div class="bottom-nav">
+  <div><a href="七上-U3-第11课_西汉建立和文景之治.html">← 上一课：第11课 西汉建立和文景之治</a></div>
+  <div><a href="七上导航页.html">🏠 返回导航页</a></div>
+  <div class="nav-center">第12课</div>
+  <div><a href="七上-U3-第13课_东汉的兴衰.html">下一课：第13课 东汉的兴衰 →</a></div>
+  </div>
+</body>
+</html>
