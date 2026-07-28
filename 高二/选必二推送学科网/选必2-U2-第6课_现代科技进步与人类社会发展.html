@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选必2-U2-第6课 现代科技进步与人类社会发展</title>
+    <style>
+        /* ===== 全局重置与变量 ===== */
+        :root {
+            --primary: #7c6cf0;
+            --primary-dark: #3d2b8c;
+            --primary-light: #b3a8ff;
+            --bg: #f5f3ff;
+            --bg-card: #faf8ff;
+            --border: #dcd4f5;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --orange: #f39c12;
+            --blue: #3498db;
+            --purple: #8e44ad;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: "SimHei", "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14pt;
+            background: var(--bg);
+            color: #333;
+            line-height: 1.75;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            overflow-x: hidden;
+        }
+        .page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+        .page-slide.active { display: block; }
+        @keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+        .slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+        .slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+        .slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+        /* ===== 底部导航 ===== */
+        .pg-nav { position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12); display:flex; align-items:center; justify-content:center; gap:14px; padding:8px 16px; height:52px; }
+        .pg-nav button { background:var(--primary); color:#fff; border:none; border-radius:18px; padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+        .pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+        .pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+        .pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+        .pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+        .pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+        .pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+        .pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+        /* ===== Hero & 封面 ===== */
+        .hero-wrap { background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding:36px 20px 30px; text-align:center; color:#fff; border-radius:0 0 36px 36px; box-shadow:0 6px 30px rgba(61,43,140,0.20); margin:0 -20px 28px; }
+        .hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+        .hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+        .hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+        .learn-target { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:20px 24px; margin-bottom:24px; border:1px solid var(--border); }
+        .learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+        .learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+        .learn-target .target-item { font-size:13.5pt; padding:6px 8px; border-bottom:1px dashed var(--border); cursor:pointer; transition:all 0.2s; border-radius:6px; }
+        .learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+        .start-btn { display:block; margin:20px auto 10px; background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; border:none; border-radius:24px; padding:12px 36px; font-size:16pt; font-weight:700; cursor:pointer; transition:all 0.25s; box-shadow:0 4px 14px rgba(124,108,240,0.30); }
+        .start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+        /* ===== 通用组件 ===== */
+        .timeline-bar { background:#f0edff; border-radius:8px; padding:8px 16px; font-size:12pt; color:#5a4ac7; text-align:center; margin-bottom:12px; }
+        .kp-card { background:var(--bg-card); border-left:4px solid var(--primary); border-radius:0 10px 10px 0; padding:18px 22px; margin-bottom:20px; box-shadow:0 2px 8px rgba(124,108,240,0.08); }
+        .kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+        .kp-card ul { padding-left:22px; } .kp-card li { margin:6px 0; font-size:14pt; }
+        .link-bar { border:2px dashed #d5cef0; border-radius:10px; padding:12px 16px; margin-top:14px; background:#faf8ff; font-size:13pt; color:#5a4ac7; }
+        .kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+        .tag-gaokao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; }
+        .tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; }
+        .tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; }
+
+        /* ===== Page1: 闯关 ===== */
+        .tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+        .tab-btn { flex:1; padding:14px 8px; font-size:14pt; font-weight:700; border:none; cursor:pointer; background:#e8e0ff; color:#5a4ac7; }
+        .tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+        .tab-panel { display:none; } .tab-panel.active { display:block; }
+        .stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+        .stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+        .stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+        .stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+        .stage-progress-text strong { color:var(--primary-dark); }
+        .challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+        /* 拖拽排序 */
+        .sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+        .sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+        .sort-item:active { cursor:grabbing; } .sort-item.dragging { opacity:0.35; }
+        .sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+        .sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+        .sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+        .sort-slot.filled { border-style:solid; background:#f0edff; }
+        .sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+        .sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+        .sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; }
+        .sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+        .sort-result.show { display:block; }
+        .sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+        .sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+        /* 填空 */
+        .fill-blank-wrap { margin:14px 0; }
+        .fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+        .fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; background:#faf8ff; }
+        .fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+        .fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+        .fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+        /* 连线 */
+        .match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+        .match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+        .match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+        .match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); }
+        .match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+        .match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+        .match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+        /* 地图标注 */
+        .map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; }
+        .map-marker { cursor:pointer; transition:all 0.2s; }
+        .map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+        .map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); }
+        .map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+        /* 翻转卡 */
+        .flash-section { margin:18px 0; }
+        .flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+        .flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+        .flash-card { perspective:700px; height:140px; cursor:pointer; }
+        .flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+        .flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+        .flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+        .flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+        .flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; }
+
+        .stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+        .stage-done.show { display:block; }
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+        /* ===== Page2: 重难点 ===== */
+        .acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+        .acc-group-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s; }
+        .acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+        .acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+        .acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+        .acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+        .acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+        .acc-group.open .acc-arrow { transform:rotate(180deg); }
+        .acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+        .acc-group.open .acc-group-bd { display:block; }
+        .acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+        .acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+        .acc-mastered button:hover { transform:scale(1.05); } .acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+        .deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+        .deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700; cursor:pointer; user-select:none; }
+        .deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+        .deep-card-bd.show { display:block; }
+
+        /* ===== Page3: 教材栏目 ===== */
+        .filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+        .filter-chip { padding:6px 14px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s; font-weight:600; color:#5a4ac7; }
+        .filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; }
+        .col-box.filtered-out { display:none; }
+        .col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+        .col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+        .col-box.open .col-toggle { transform:rotate(180deg); }
+        .col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+        .col-box.open .col-body { display:block; }
+        .source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+
+        /* ===== Page4: 课堂训练 ===== */
+        .score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+        .score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+        .score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; }
+        .score-reset:hover { background:var(--primary); color:#fff; }
+        .exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+        .q-text { font-size:14pt; margin:10px 0 6px; }
+        .options label { display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff; }
+        .options label:hover { background:#f0edff; border-color:var(--primary); }
+        .options label.disabled { pointer-events:none; }
+        .options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+        .options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+
+        /* ===== Page5: 知识结构 ===== */
+        .kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+        .kg-chain { display:flex; flex-direction:column; align-items:center; }
+        .kg-node { width:90%; border-radius:12px; padding:16px 20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative; }
+        .kg-node:hover { transform:scale(1.03); }
+        .kg-node.left { align-self:flex-start; } .kg-node.right { align-self:flex-end; }
+        .kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; } .kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+        .kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; } .kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+        .kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+        @keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,0.06)} 50%{box-shadow:0 2px 20px rgba(124,108,240,0.18)} }
+        .kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+        .kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px; border-radius:12px; white-space:nowrap; z-index:2; }
+        .kg-detail { max-height:0; overflow:hidden; font-size:12pt; transition:all 0.4s ease; }
+        .kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+        .kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+        .kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+        .kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+        .kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; } .kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+        .kg-rule.r3 { background:#e0f2e9; color:#27ae60; } .kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+        /* ===== Page6: 结束页 ===== */
+        .recap-section { margin-bottom:24px; }
+        .recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+        .recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+        .recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08); position:relative; }
+        .recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+        .recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+        .recap-card ul { list-style:none; padding:0; }
+        .recap-card ul li { font-size:12.5pt; padding:4px 0 4px 18px; position:relative; color:#444; }
+        .recap-card ul li::before { content:'▸'; position:absolute; left:0; color:var(--primary); }
+        .bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; font-size:12pt; }
+        .bottom-nav a { color:#5a4ac7; text-decoration:none; }
+        .bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+        footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+        footer p { margin:4px 0; }
+        @media (max-width:680px) { .recap-grid { grid-template-columns:1fr; } .flash-grid { grid-template-columns:1fr 1fr; } }
+
+        /* ===== 答案显隐 ===== */
+        .a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+        .a.show { display:block; }
+        .ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+        .ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== Page 0: 封面 ==================== -->
+    <div class="page-slide active" id="page0">
+        <div class="hero-wrap">
+            <div class="hero-unit">第二单元 · 生产工具与劳作方式</div>
+            <h1>第6课 · 现代科技进步与人类社会发展</h1>
+            <div class="hero-sub">统编版高中历史  选择性必修2 经济与社会生活</div>
+        </div>
+        <div class="learn-target" id="learnTargets">
+            <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+            <div class="target-grid">
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>理解科技是生产力发展的核心动力，分析科技革命对社会形态变革的推动作用。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>梳理20世纪中期以来计算机、航天、海洋等领域的重大科技成就及其时序。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>运用教材中学思之窗、史料阅读等栏目，多角度论证科技对社会生活的影响。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>阐释现代科技进步如何推动生产方式变革与人类视野拓展，评价其双重影响。</div>
+                <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识中国在北斗、嫦娥、奋斗者号等领域的重大成就，增强民族自豪感与科技强国信念。</div>
+            </div>
+            <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+        </div>
+        <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+    </div>
+
+    <!-- ==================== Page 1: 知识要点 + 5关闯关 ==================== -->
+    <div class="page-slide" id="page1">
+        <div class="slide-header"><div class="module-num">模块一</div><div class="module-title">知识要点 · 闯关解锁</div></div>
+        <div class="stage-progress-wrap">
+            <div class="stage-progress-text"><span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong></div>
+            <div class="stage-progress-bar-bg"><div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div></div>
+        </div>
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 科技发展</button>
+            <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 革命意义</button>
+        </div>
+
+        <!-- ===== Tab 1 ===== -->
+        <div class="kp-card tab-panel active" id="tab1">
+            <h3>🔬 现代科学技术的发展</h3>
+            <ul>
+                <li><strong>计算机：</strong>1946年埃尼阿克问世；1969年军用网络→互联网，20C90年代商业化。</li>
+                <li><strong>人工智能：</strong>20C50年代提出，涵盖机器人、语音/图像识别、自然语言处理；无人仓库/码头/工厂涌现。</li>
+                <li><strong>航天：</strong>1957年苏联首颗卫星；中国北斗全球组网（2020）、嫦娥四号月球背面软着陆（2019）。</li>
+                <li><strong>海洋：</strong>美国深海研究；中国奋斗者号坐底10909米（2020），跻身世界领先。</li>
+                <li><strong>原子能/新材料/生物：</strong>原子能民用（核电站、医学）；高分子/纳米材料；DNA双螺旋结构揭示。</li>
+            </ul>
+            <div class="link-bar">📌 <strong>高考常考：</strong>科技革命与生产力跃迁的关系；中国科技成就的意义；人工智能的双重影响。</div>
+
+            <!-- 关卡① 拖拽排序 -->
+            <div class="challenge-title">🎮 挑战一：请将以下科技事件按时间先后顺序拖入槽位</div>
+            <div class="sort-pool" id="sortPool1">
+                <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">A. 埃尼阿克问世</span>
+                <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">B. 苏联首颗卫星</span>
+                <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">C. 互联网商业化</span>
+                <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">D. 奋斗者号坐底</span>
+                <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">E. 嫦娥四号登月背</span>
+                <span class="sort-item" draggable="true" data-sortkey="key6" id="item_key6">F. 北斗全球组网</span>
+            </div>
+            <div class="sort-slots">
+                <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+                <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+                <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+                <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+                <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+                <div class="sort-slot" data-slot="5"><span class="slot-label">第6步</span></div>
+            </div>
+            <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+            <div class="sort-result" id="sortResult"></div>
+            <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+            <!-- 翻转卡 (Tab1) -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">埃尼阿克</div><div class="flash-back">1946年美国军方研制，世界上第一台电子计算机，开启计算机时代。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">人工智能</div><div class="flash-back">20C50年代提出，通过计算机模拟人的思维，涵盖机器人、语音图像识别等。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">奋斗者号</div><div class="flash-back">2020年中国载人潜水器，在马里亚纳海沟坐底10909米，世界领先水平。</div></div></div>
+                </div>
+            </div>
+            <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！（翻转卡全部翻完）</div>
+        </div>
+
+        <!-- ===== Tab 2 ===== -->
+        <div class="kp-card tab-panel" id="tab2">
+            <h3>🌍 现代科技进步的革命性意义</h3>
+            <ul>
+                <li><strong>生产力飞跃：</strong>计算机与AI推动粗放型→集约型，劳动力退出一线，依赖技术革新。</li>
+                <li><strong>生产方式变革：</strong>现代企业管理制度（市场导向、技术优势、员工激励）逐步发展。</li>
+                <li><strong>文化生活新态：</strong>互联网、移动通信、全媒体发展，丰富大众文化，推动电子商务。</li>
+                <li><strong>人类视野拓展：</strong>“地球村”形成，信息交流促进知识共享；但应用不当亦有负面影响。</li>
+            </ul>
+            <div class="link-bar">📌 <strong>高考常考：</strong>科技革命对劳作方式的影响；互联网时代的社会变迁；科技与人文的交叉融合。</div>
+
+            <!-- 关卡② 填空填词 -->
+            <div class="challenge-title">🎮 挑战二：补全下列关键信息</div>
+            <div class="fill-blank-wrap" id="fillBlanks">
+                <div class="fill-blank-row">1. 1946年，美国军方研制出第一台电子计算机 <span class="kwd">______</span> 。<input class="fill-input" data-answer="埃尼阿克" placeholder="填名称"></div>
+                <div class="fill-blank-row">2. 1957年，<span class="kwd">______</span> 发射了世界上第一颗人造地球卫星。<input class="fill-input" data-answer="苏联" placeholder="填国名"></div>
+                <div class="fill-blank-row">3. 中国自主研发的 <span class="kwd">______</span> 全球卫星导航系统于2020年提前完成全球组网。<input class="fill-input" data-answer="北斗" placeholder="填系统名"></div>
+                <div class="fill-blank-row">4. 2020年，中国“奋斗者号”载人潜水器在 <span class="kwd">______</span> 海沟成功坐底。<input class="fill-input" data-answer="马里亚纳" placeholder="填海沟名"></div>
+            </div>
+            <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+            <div class="sort-result" id="fillResult"></div>
+            <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+            <!-- 关卡③ 连线匹配 -->
+            <div class="challenge-title">🎮 挑战三：将科技领域与对应成就/影响连线</div>
+            <div class="match-area">
+                <div class="match-cols">
+                    <div class="match-col">
+                        <div class="match-col-label">左列 (领域)</div>
+                        <div class="match-item match-left" data-match="A" onclick="selectMatch(this)">💻 计算机</div>
+                        <div class="match-item match-left" data-match="B" onclick="selectMatch(this)">🚀 航天</div>
+                        <div class="match-item match-left" data-match="C" onclick="selectMatch(this)">🌊 海洋</div>
+                        <div class="match-item match-left" data-match="D" onclick="selectMatch(this)">⚛️ 原子能</div>
+                    </div>
+                    <div class="match-col">
+                        <div class="match-col-label">右列 (成就)</div>
+                        <div class="match-item match-right" data-match="A" onclick="pairMatch(this)">埃尼阿克 / 互联网</div>
+                        <div class="match-item match-right" data-match="B" onclick="pairMatch(this)">北斗 / 嫦娥四号</div>
+                        <div class="match-item match-right" data-match="C" onclick="pairMatch(this)">奋斗者号</div>
+                        <div class="match-item match-right" data-match="D" onclick="pairMatch(this)">核电站 / 医学诊断</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sort-result" id="matchResult"></div>
+            <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+            <!-- 关卡④ 地图标注 -->
+            <div class="challenge-title">🎮 挑战四：点击地图标注点，标记重大科技事件位置</div>
+            <div class="map-zone" id="mapContainer">
+                <svg viewBox="0 0 400 220" style="width:100%; height:auto; background:#faf8ff; border-radius:10px;">
+                    <rect x="10" y="10" width="380" height="200" fill="#e8f0fe" stroke="#b0c4de" stroke-width="2" rx="8"/>
+                    <text x="30" y="40" font-size="12" fill="#555">抽象示意图</text>
+                    <!-- 标记点 -->
+                    <circle class="map-marker" data-point="P1" cx="160" cy="120" r="14" fill="#7c6cf0" stroke="#fff" stroke-width="3"/>
+                    <text x="145" y="125" font-size="10" fill="#fff" font-weight="bold">西昌</text>
+                    <circle class="map-marker" data-point="P2" cx="70" cy="70" r="14" fill="#e67e22" stroke="#fff" stroke-width="3"/>
+                    <text x="55" y="75" font-size="10" fill="#fff" font-weight="bold">月球</text>
+                    <circle class="map-marker" data-point="P3" cx="340" cy="170" r="14" fill="#27ae60" stroke="#fff" stroke-width="3"/>
+                    <text x="325" y="175" font-size="10" fill="#fff" font-weight="bold">海沟</text>
+                    <text x="280" y="190" font-size="9" fill="#888">马里亚纳海沟</text>
+                </svg>
+                <div class="map-checklist" id="mapChecklist">
+                    <span class="map-check-item" data-point="P1">🔴 西昌卫星发射</span>
+                    <span class="map-check-item" data-point="P2">🟠 月球背面着陆</span>
+                    <span class="map-check-item" data-point="P3">🟢 马里亚纳海沟</span>
+                </div>
+            </div>
+            <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+            <!-- 翻转卡 (Tab2) -->
+            <div class="flash-section">
+                <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+                <div class="flash-grid">
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">集约型生产</div><div class="flash-back">依赖技术革新与市场导向，充分利用现代科技实现利润增长的生产方式。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">地球村</div><div class="flash-back">交通和通信技术进步使世界各地联系紧密，信息交流即时化、全球化。</div></div></div>
+                    <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">全媒体</div><div class="flash-back">汇集多种渠道信息的传播形态，为人们认识世界提供不同视角。</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Page 2: 重难点解析（三级递进） ==================== -->
+    <div class="page-slide" id="page2">
+        <div class="slide-header"><div class="module-num">模块二</div><div class="module-title">重难点解析 · 三级递进深化</div></div>
+
+        <!-- 重难点1 -->
+        <div class="acc-group open" id="acc1">
+            <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')"><h3>📘 重难点一：现代科技发展的主要领域与标志性成就</h3><span class="acc-arrow">▼</span></div>
+            <div class="acc-group-bd">
+                <!-- 基础理解 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">📘 基础理解 · 科技领域概览</div>
+                    <div class="deep-card-bd show">
+                        <p>现代科技主要涵盖计算机与人工智能、航天、海洋、原子能、新材料、生物技术六大领域。计算机从1946年埃尼阿克起步，互联网于20世纪90年代商业化；人工智能涵盖机器人与智能识别；航天以1957年苏联卫星为开端，中国在北斗、探月方面成就突出；海洋技术以深海探测为核心，中国奋斗者号引领世界。</p>
+                        <p><strong>简而言之：</strong>现代科技是计算机、航天、海洋等多领域协同突破的成果，极大拓展了人类对自然界的认知与改造能力。</p>
+                    </div>
+                </div>
+                <!-- 联系拓展 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 · 科技与生产方式变革</div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-soc">🟢 比较史学</span> 横向联系：本课子目一与子目二紧密衔接——领域成就是“因”，生产方式与社会生活变革是“果”。纵向联系：与前工业时代的经验性技术相比，现代科技以科学理论为基础，系统性、指数级地提升了生产效率。</p>
+                        <p><strong>这一联系说明：</strong>科技发展的广度与深度直接决定了社会形态的演进速度，从蒸汽时代到信息时代，每一次跨越都源于关键科技的群体性突破。</p>
+                    </div>
+                </div>
+                <!-- 素养提升 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 · 唯物史观与高考拓展</div>
+                    <div class="deep-card-bd">
+                        <div class="source-material">“第二次世界大战后，发达国家在计算机与人工智能技术的引领下，航天、海洋、原子能、生物、新材料等方面的技术迅速发展。” —— 教材正文</div>
+                        <p><span class="tag-value">❤️ 唯物史观</span> 生产力决定生产关系：尖端科技是衡量国家综合实力的重要标志，中国的科技成就体现了社会主义制度集中力量办大事的优势。</p>
+                        <p><span class="tag-gaokao">🎯 高考拓展</span> （2023·全国乙卷改编）有学者认为，20世纪中后期以来的科技革命“使人类从体力劳动的解放走向脑力劳动的解放”。结合所学，说明这一观点的合理性。<br>
+                        <strong>答案：</strong>计算机与人工智能替代了大量重复性脑力劳动（如数据分析、语言处理），推动生产自动化、管理智能化，促使劳动者向创造性岗位转移。<br>
+                        <strong>解析：</strong>该题考查科技革命对劳动形态的影响，需从“脑力替代”角度切入，紧扣集约型生产方式与现代管理制度。</p>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+
+        <!-- 重难点2 -->
+        <div class="acc-group" id="acc2">
+            <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')"><h3>📘 重难点二：现代科技如何推动生产力跃迁</h3><span class="acc-arrow">▼</span></div>
+            <div class="acc-group-bd">
+                <!-- 基础理解 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">📘 基础理解 · 生产力内涵</div>
+                    <div class="deep-card-bd">
+                        <p>生产力包括劳动者、劳动工具和劳动对象。现代科技通过升级工具（如智能机器人）、拓展对象（如深海、太空）、提升劳动者素质（如数字化技能），实现了生产力的整体跃迁。计算机与AI使生产从“粗放型”（依赖人力与资源投入）转向“集约型”（依赖技术与管理创新）。</p>
+                        <p><strong>简而言之：</strong>现代科技通过智能化工具与管理革新，使生产力要素发生质变，大幅度提升了单位投入的产出效率。</p>
+                    </div>
+                </div>
+                <!-- 联系拓展 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 · 劳作方式与管理制度</div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-soc">🟢 比较史学</span> 横向联系：子目二指出“大量劳动力从生产线上退下来”，与子目一“无人车间”直接呼应。纵向联系：对比工业革命时期“机器替代体力”，现代科技实现“脑力辅助与自动化”，企业管理制度随之从泰勒制向扁平化、网络化转变。</p>
+                        <p><strong>这一联系说明：</strong>科技进步不仅改变工具，更重塑了人与生产的关系，推动了组织管理形式的现代化演进。</p>
+                    </div>
+                </div>
+                <!-- 素养提升 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 · 历史解释与高考拓展</div>
+                    <div class="deep-card-bd">
+                        <div class="source-material">“计算机与人工智能技术带来了生产力的巨大飞跃，促使劳作方式由粗放型转化为集约型。” —— 教材正文</div>
+                        <p><span class="tag-value">❤️ 唯物史观</span> 技术是生产力的核心要素，中国“无人工厂”的涌现证明，智能化是后工业时代提升竞争力的关键路径。</p>
+                        <p><span class="tag-gaokao">🎯 高考拓展</span> （2024·山东模拟）分析“互联网+制造业”对传统生产模式的重构。<br>
+                        <strong>答案：</strong>互联网实现了数据实时共享与远程控制，推动生产定制化、供应链协同化，促使企业从大规模标准化生产转向个性化柔性制造。<br>
+                        <strong>解析：</strong>需结合“集约型”生产概念，强调信息技术在生产组织中的渗透效应。</p>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+
+        <!-- 重难点3 -->
+        <div class="acc-group" id="acc3">
+            <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')"><h3>📘 重难点三：科技革命的双重影响与人类未来</h3><span class="acc-arrow">▼</span></div>
+            <div class="acc-group-bd">
+                <!-- 基础理解 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">📘 基础理解 · 双重影响</div>
+                    <div class="deep-card-bd">
+                        <p>积极方面：科技极大提高了物质生产水平，丰富了文化生活（如互联网、全媒体），拓展了人类视野（“地球村”）。消极方面：技术应用不当可能导致资源过度开发、数字鸿沟、隐私安全等问题。教材强调“现代科技应用不当，也会带来负面影响”。</p>
+                        <p><strong>简而言之：</strong>科技是双刃剑，其正向价值依赖于合理应用与社会治理的同步跟进。</p>
+                    </div>
+                </div>
+                <!-- 联系拓展 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">🔗 联系拓展 · 人文关怀与学科交叉</div>
+                    <div class="deep-card-bd">
+                        <p><span class="tag-soc">🟢 比较史学</span> 横向联系：本课学习拓展引用习近平讲话，强调“自然科学和人文社会科学交叉融合”。纵向联系：从启蒙时代“科学与理性”到现代“科技伦理”，反映出人类对技术社会效应的反思日益深化。</p>
+                        <p><strong>这一联系说明：</strong>科技发展必须与人文价值观相协调，跨学科融合是应对未来复杂性挑战的必然选择。</p>
+                    </div>
+                </div>
+                <!-- 素养提升 -->
+                <div class="deep-card">
+                    <div class="deep-card-hd">📈 素养提升 · 家国情怀与高考拓展</div>
+                    <div class="deep-card-bd">
+                        <div class="source-material">“互联网让世界变成了‘鸡犬之声相闻’的地球村……世界因互联网而更趋多彩。” —— 习近平《第二届世界互联网大会开幕式讲话》</div>
+                        <p><span class="tag-value">❤️ 唯物史观</span> 科技发展不仅改变生产力，也重塑全球治理格局。中国在北斗、5G等领域的技术突破，为全球科技治理贡献了中国方案。</p>
+                        <p><span class="tag-gaokao">🎯 高考拓展</span> （2023·广东卷）有观点认为“科技进步加剧了全球不平等”。你如何评价这一观点？<br>
+                        <strong>答案：</strong>该观点有一定合理性。发达国家掌握核心技术，获取超额利润；发展中国家面临技术依附与产业升级困境。但中国等新兴国家的实践表明，坚持自主创新能够打破技术垄断，推动更加公平的全球科技秩序。<br>
+                        <strong>解析：</strong>需从唯物史观出发，既承认技术的非均衡扩散效应，也要看到后发国家通过创新实现赶超的可能性。</p>
+                    </div>
+                </div>
+                <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Page 3: 教材栏目解答 ==================== -->
+    <div class="page-slide" id="page3">
+        <div class="slide-header"><div class="module-num">模块三</div><div class="module-title">教材栏目解答</div></div>
+        <div class="filter-bar">
+            <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+            <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+            <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+            <button class="filter-chip" onclick="filterCol('史料阅读',this)">史料阅读</button>
+            <button class="filter-chip" onclick="filterCol('问题探究',this)">问题探究</button>
+            <button class="filter-chip" onclick="filterCol('学习拓展',this)">学习拓展</button>
+        </div>
+
+        <!-- 学思之窗 -->
+        <div class="col-box open" data-cat="学思之窗">
+            <div class="col-header" onclick="toggleColBox(this)"><span>📖 学思之窗：原子能的影响</span><span class="col-toggle">▼</span></div>
+            <div class="col-body">
+                <div class="source-material">“第二次世界大战期间，（美国）新墨西哥沙漠地带的一声爆炸标志了人类对原子动力的利用。将原子弹投在广岛和长崎是这一动力首次用于军事目的。今天，原子动力已用于其他许多目的，如核动力船、生物医学研究、医学诊断和治疗以及核动力厂。” —— 斯塔夫里阿诺斯《全球通史》</div>
+                <p><strong>问题：</strong>结合材料，思考原子能给人类生活带来了怎样的变化。</p>
+                <div class="a" id="ans-p3-atom"><strong>📝 要点归纳：</strong>原子能从军事武器（原子弹）向民用领域（核动力船、医学诊断、核电站）转变，体现了科技应用从战争破坏向和平利用的转型，极大地推动了能源结构优化与医疗技术进步，但也需警惕核安全风险。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-atom')">📝 查看解析</button>
+            </div>
+        </div>
+
+        <!-- 历史纵横 -->
+        <div class="col-box" data-cat="历史纵横">
+            <div class="col-header" onclick="toggleColBox(this)"><span>📖 历史纵横：生物技术</span><span class="col-toggle">▼</span></div>
+            <div class="col-body">
+                <p><strong>内容：</strong>二战后西方科学家发现DNA双螺旋结构，揭示了遗传信息的构成和传递途径，推动微生物学、分子遗传学等分支迅猛发展。</p>
+                <div class="a" id="ans-p3-bio"><strong>📝 要点归纳：</strong>DNA双螺旋结构的发现是生物技术的里程碑，从分子水平解释了生命遗传密码，为基因工程、生物医药等现代生物技术奠定了科学基础。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-bio')">📝 查看解析</button>
+            </div>
+        </div>
+
+        <!-- 史料阅读 -->
+        <div class="col-box" data-cat="史料阅读">
+            <div class="col-header" onclick="toggleColBox(this)"><span>📖 史料阅读：习近平论信息革命</span><span class="col-toggle">▼</span></div>
+            <div class="col-body">
+                <div class="source-material">“纵观世界文明史，人类先后经历了农业革命、工业革命、信息革命。……互联网让世界变成了‘鸡犬之声相闻’的地球村……” —— 习近平（2015）</div>
+                <div class="a" id="ans-p3-internet"><strong>📝 要点归纳：</strong>习主席将信息革命与农业、工业革命并列，凸显互联网对生产生活、国家治理、人类认知的深刻改造。“地球村”形象描绘了信息时代全球互联互通的新格局。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-internet')">📝 查看解析</button>
+            </div>
+        </div>
+
+        <!-- 问题探究 -->
+        <div class="col-box" data-cat="问题探究">
+            <div class="col-header" onclick="toggleColBox(this)"><span>📖 问题探究：AI在救灾中的作用</span><span class="col-toggle">▼</span></div>
+            <div class="col-body">
+                <div class="source-material">“机器人在2013年四川芦山地震排查中，4台飞行机器人排查6个乡镇，获取50平方千米空中信息，排查高层危楼50余栋，大大提高了救援效率。”</div>
+                <p><strong>问题：</strong>结合材料，思考人工智能技术在救灾方面发挥了怎样的作用。</p>
+                <div class="a" id="ans-p3-relief"><strong>📝 要点归纳：</strong>AI（无人机/机器人）在灾后快速获取大面积地理信息，提升高危区域排查效率，减少救援人员风险，体现科技在公共安全与人道救援中的巨大应用价值。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-relief')">📝 查看解析</button>
+            </div>
+        </div>
+
+        <!-- 学习拓展 -->
+        <div class="col-box" data-cat="学习拓展">
+            <div class="col-header" onclick="toggleColBox(this)"><span>📖 学习拓展：学科交叉融合</span><span class="col-toggle">▼</span></div>
+            <div class="col-body">
+                <div class="source-material">“信息、生命、制造、能源、空间、海洋等的原创突破……学科之间、科学和技术之间……日益呈现交叉融合趋势……” —— 习近平（2018）</div>
+                <p><strong>问题：</strong>谈一谈你对“自然科学和人文社会科学之间日益呈现交叉融合趋势”的理解。</p>
+                <div class="a" id="ans-p3-cross"><strong>📝 要点归纳：</strong>现代科技问题（如AI伦理、基因编辑、气候变化）已超出单一学科范畴。自然科学的突破需要人文社科提供价值判断与法律规范，而社科研究也依赖技术手段（如大数据）。二者融合是应对复杂全球性挑战的必然路径。</div>
+                <button class="ans-btn" onclick="toggleAnswer('ans-p3-cross')">📝 查看解析</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Page 4: 课堂训练 ==================== -->
+    <div class="page-slide" id="page4">
+        <div class="slide-header"><div class="module-num">模块四</div><div class="module-title">课堂训练</div></div>
+        <div class="score-banner">
+            <div><div style="font-size:11pt;color:#888;">当前得分</div><div class="score-number" id="scoreVal">0</div></div>
+            <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+        </div>
+
+        <!-- 选择题 -->
+        <div class="exercise" id="q1">
+            <div class="q-text"><strong>1.</strong> 世界上第一台电子计算机“埃尼阿克”问世于（ ）</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q1')">A. 1936年</label>
+                <label onclick="optClick(this,'B','q1')">B. 1946年</label>
+                <label onclick="optClick(this,'C','q1')">C. 1957年</label>
+                <label onclick="optClick(this,'D','q1')">D. 1969年</label>
+            </div>
+        </div>
+        <div class="exercise" id="q2">
+            <div class="q-text"><strong>2.</strong> 下列哪项不属于人工智能技术的应用领域？（ ）</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q2')">A. 机器人制造</label>
+                <label onclick="optClick(this,'B','q2')">B. 语音识别</label>
+                <label onclick="optClick(this,'C','q2')">C. 核动力发电</label>
+                <label onclick="optClick(this,'D','q2')">D. 自然语言处理</label>
+            </div>
+        </div>
+        <div class="exercise" id="q3">
+            <div class="q-text"><strong>3.</strong> 中国“奋斗者号”载人潜水器在马里亚纳海沟创造的中国载人深潜新纪录为（ ）</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q3')">A. 6000米</label>
+                <label onclick="optClick(this,'B','q3')">B. 7062米</label>
+                <label onclick="optClick(this,'C','q3')">C. 10909米</label>
+                <label onclick="optClick(this,'D','q3')">D. 11034米</label>
+            </div>
+        </div>
+        <div class="exercise" id="q4">
+            <div class="q-text"><strong>4.</strong> 现代科技促使劳作方式由粗放型转化为集约型，其中“集约型”主要依赖（ ）</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q4')">A. 劳动力数量增加</label>
+                <label onclick="optClick(this,'B','q4')">B. 技术革新与市场导向</label>
+                <label onclick="optClick(this,'C','q4')">C. 资源大规模开采</label>
+                <label onclick="optClick(this,'D','q4')">D. 土地面积扩大</label>
+            </div>
+        </div>
+        <div class="exercise" id="q5">
+            <div class="q-text"><strong>5.</strong> 习近平指出互联网使世界变成了“地球村”，这一观点主要强调了（ ）</div>
+            <div class="options">
+                <label onclick="optClick(this,'A','q5')">A. 全球信息交流的便捷性</label>
+                <label onclick="optClick(this,'B','q5')">B. 各国经济水平趋同</label>
+                <label onclick="optClick(this,'C','q5')">C. 文化差异完全消失</label>
+                <label onclick="optClick(this,'D','q5')">D. 国际政治冲突减少</label>
+            </div>
+        </div>
+
+        <!-- 材料题 -->
+        <div class="exercise" id="mq1">
+            <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题。</div>
+            <div class="source-material">“计算机与人工智能技术带来了生产力的巨大飞跃，促使劳作方式由粗放型转化为集约型。大量的劳动力从生产线上退下来，人们越来越依赖技术革新来实现利润增长。” —— 教材正文</div>
+            <p><strong>问题：</strong>根据材料，概括现代科技如何改变生产与劳动形态？（6分）</p>
+            <div class="a" id="ans-p4-mat1">
+                <p><strong>参考答案：</strong></p>
+                <p>① 技术革新成为利润增长的核心驱动力（2分）；② 生产线劳动力需求减少，劳动者向技术、管理岗位转移（2分）；③ 生产模式从依赖人力与资源转向依赖技术创新与高效管理（2分）。</p>
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+            <button class="ans-btn" style="background:#27ae60;" onclick="trackMatQ('mq1')">✅ 我已作答，计分</button>
+        </div>
+        <div class="exercise" id="mq2">
+            <div class="q-text"><strong>材料题2</strong> 阅读材料，结合所学分析。</div>
+            <div class="source-material">“纵观世界文明史，人类先后经历了农业革命、工业革命、信息革命。……互联网让世界变成了‘鸡犬之声相闻’的地球村。” —— 习近平（2015）</div>
+            <p><strong>问题：</strong>如何理解“信息革命”与前两次革命的本质区别？（6分）</p>
+            <div class="a" id="ans-p4-mat2">
+                <p><strong>参考答案：</strong></p>
+                <p>① 农业革命以土地与人力为基础，工业革命以机器与能源为基础，信息革命以知识与数据为核心（2分）；② 前两次革命拓展了物质生产能力，信息革命则重塑了信息传播与认知方式，实现了时空压缩（2分）；③ 信息革命促使生产生活全面数字化，并催生了全球互联的新社会形态（2分）。</p>
+            </div>
+            <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+            <button class="ans-btn" style="background:#27ae60;" onclick="trackMatQ('mq2')">✅ 我已作答，计分</button>
+        </div>
+    </div>
+
+    <!-- ==================== Page 5: 知识结构图 ==================== -->
+    <div class="page-slide" id="page5">
+        <div class="slide-header"><div class="module-num">模块五</div><div class="module-title">知识结构图</div></div>
+        <div class="kg-wrap-simple">
+            <div class="kg-title" style="text-align:center;font-size:16pt;font-weight:700;color:var(--primary-dark);margin-bottom:12px;">📊 知识结构 · 因果链</div>
+            <div class="kg-hint-banner">
+                <span class="hint-icon">💡</span><span>知识结构图已生成。点击下方</span>
+                <span class="hint-click">各节点</span><span>查看详细解析与考点说明</span>
+            </div>
+            <div class="kg-chain">
+                <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">🚀</span><strong>背景（科技发展的驱动力）</strong>
+                    <p>二战后冷战竞争、经济恢复需求、国家战略支持</p>
+                    <div class="kg-detail"><p>💡 解析：美苏对峙推动航天与军事技术突破；战后重建对生产效率提出要求；政府与企业大规模研发投入。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+                <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">💻</span><strong>核心领域突破</strong>
+                    <p>计算机/AI · 航天 · 海洋 · 原子能 · 新材料 · 生物</p>
+                    <div class="kg-detail"><p>📖 解析：各领域相互促进（如新材料支撑航天，AI辅助生物研究），形成技术生态。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+                <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">⚙️</span><strong>生产方式变革</strong>
+                    <p>粗放型→集约型 · 劳动力转移 · 现代管理制度</p>
+                    <div class="kg-detail"><p>📈 解析：自动化与智能化减少一线工人，技术与管理创新成为利润核心。</p></div>
+                </div>
+                <div class="kg-arrow">⬇️</div>
+                <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+                    <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+                    <span class="kg-icon">🌍</span><strong>社会与视野影响</strong>
+                    <p>文化生活新态 · 地球村 · 双刃剑（机遇与挑战）</p>
+                    <div class="kg-detail"><p>🌏 解析：网络与通信促进全球化，但数字鸿沟、安全风险并存，需人文引导。</p></div>
+                </div>
+            </div>
+            <div class="kg-rules-grid">
+                <div class="kg-rule r1">🔵 政治：国家战略推动</div>
+                <div class="kg-rule r2">🟠 经济：产业升级核心</div>
+                <div class="kg-rule r3">🟢 文化：全媒体与认知</div>
+                <div class="kg-rule r4">🔴 军事：安全技术驱动</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Page 6: 结束页 ==================== -->
+    <div class="page-slide" id="page6">
+        <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+            <div class="hero-unit">第二单元 · 生产工具与劳作方式</div>
+            <h1 style="font-size:22pt;">第6课 · 现代科技进步与人类社会发展</h1>
+            <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+        </div>
+        <section class="recap-section">
+            <h2 class="recap-title">📋 核心要点回顾</h2>
+            <div class="recap-grid">
+                <div class="recap-card"><div class="recap-card-num">一</div><h3>科技领域成就</h3><ul><li>计算机与AI（埃尼阿克/互联网/无人车间）</li><li>航天（北斗/嫦娥）与海洋（奋斗者号）</li><li>原子能、新材料、生物技术（DNA）</li></ul></div>
+                <div class="recap-card"><div class="recap-card-num">二</div><h3>生产力变革</h3><ul><li>粗放→集约型生产</li><li>劳动力转移与现代管理</li><li>技术革新驱动利润增长</li></ul></div>
+                <div class="recap-card"><div class="recap-card-num">三</div><h3>社会与人类视野</h3><ul><li>文化生活新模式（全媒体/电商）</li><li>“地球村”与信息共享</li><li>科技双刃剑与学科交叉融合</li></ul></div>
+            </div>
+        </section>
+        <div class="bottom-nav">
+            <div><a href="选必2-U2-第5课_工业革命与工厂制度.html">← 上一课：第5课 工业革命与工厂制度</a></div>
+            <div class="nav-center">第6课</div>
+            <div><a href="选必2-U3-第7课 古代的商业贸易.html">下一课：第7课 古代的商业贸易 →</a></div>
+        </div>
+        <footer>
+            <p>统编版高中历史 · 选择性必修2 经济与社会生活 · 第二单元</p>
+            <p>基于教材内容整理 · 仅供教学参考使用</p>
+        </footer>
+    </div>
+
+    <!-- ==================== 底部导航 ==================== -->
+    <div class="pg-nav">
+        <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+        <div class="pg-dots" id="pgDots">
+            <span class="pg-dot active" onclick="goPage(0)"></span>
+            <span class="pg-dot" onclick="goPage(1)"></span>
+            <span class="pg-dot" onclick="goPage(2)"></span>
+            <span class="pg-dot" onclick="goPage(3)"></span>
+            <span class="pg-dot" onclick="goPage(4)"></span>
+            <span class="pg-dot" onclick="goPage(5)"></span>
+            <span class="pg-dot" onclick="goPage(6)"></span>
+        </div>
+        <span class="pg-counter" id="pgCounter">1/7</span>
+        <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+    </div>
+
+    <!-- ==================== JavaScript ==================== -->
+    <script>
+        // ===== 分页导航 =====
+        var totalPages = 7,
+            currentPage = 0;
+        var pgDots = document.querySelectorAll('.pg-dot'),
+            pgCounter = document.getElementById('pgCounter');
+        var pgPrev = document.getElementById('pgPrev'),
+            pgNext = document.getElementById('pgNext');
+
+        function goPage(n) {
+            if (n < 0 || n >= totalPages) return;
+            document.getElementById('page' + currentPage).classList.remove('active');
+            pgDots[currentPage].classList.remove('active');
+            currentPage = n;
+            document.getElementById('page' + currentPage).classList.add('active');
+            pgDots[currentPage].classList.add('active');
+            pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+            pgPrev.disabled = (currentPage === 0);
+            pgNext.disabled = (currentPage === totalPages - 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+
+        function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault();
+                nextPage(); } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e
+                    .preventDefault();
+                prevPage(); } else if (e.key === 'Home') { e.preventDefault();
+                goPage(0); } else if (e.key === 'End') { e.preventDefault();
+                goPage(totalPages - 1); }
+        });
+        pgPrev.disabled = true;
+
+        // ===== 闯关进度 =====
+        var stageDone = { sort: false, fill: false, match: false, map: false, flips: false };
+
+        function updateStageProgress() {
+            var stages = ['sort', 'fill', 'match', 'map', 'flips'],
+                done = 0;
+            stages.forEach(function(s) { if (stageDone[s]) done++; });
+            var pct = Math.round(done / 5 * 100);
+            var bar = document.getElementById('stageProgressBar');
+            var lbl = document.getElementById('stageProgressLabel');
+            if (bar) bar.style.width = pct + '%';
+            if (lbl) { if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+                else lbl.textContent = done + '/5 关完成'; }
+        }
+
+        // ===== 学习目标标记 =====
+        var targetsDone = 0;
+
+        function toggleTarget(el) {
+            el.classList.toggle('done');
+            targetsDone = document.querySelectorAll('.target-item.done').length;
+            document.getElementById('targetsDone').classList.toggle('show', targetsDone >= 5);
+        }
+
+        // ===== 标签页 & 手风琴 =====
+        function switchTabV2(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(function(b) {
+                if (b.getAttribute('onclick').indexOf(tabId) >= 0) b.classList.add('active');
+            });
+        }
+
+        function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+
+        function markMastered(grpId, btn) { btn.classList.add('done');
+            btn.textContent = '✅ 已掌握'; }
+
+        // ===== 答案显隐 + 选择题 =====
+        function toggleAnswer(id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.classList.toggle('show');
+            var btn = el.previousElementSibling;
+            while (btn && btn.tagName !== 'BUTTON') btn = btn.previousElementSibling;
+            if (btn && btn.classList.contains('ans-btn')) btn.textContent = el.classList.contains('show') ? '隐藏答案' :
+                '显示答案';
+        }
+
+        var correctAnswers = { q1: 'B', q2: 'C', q3: 'C', q4: 'B', q5: 'A' };
+        var mcDone = {},
+            matDone = {},
+            score = 0;
+
+        function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+        function optClick(el, opt, qid) {
+            if (mcDone[qid]) return;
+            var correct = correctAnswers[qid];
+            el.parentElement.querySelectorAll('label').forEach(function(o) {
+                o.classList.add('disabled');
+                if (o.textContent.trim().charAt(0) === correct) o.classList.add('correct');
+                else if (o === el) o.classList.add('wrong');
+            });
+            mcDone[qid] = true;
+            if (opt === correct) score++;
+            updateScore();
+        }
+
+        function trackMatQ(id) {
+            if (matDone[id]) return;
+            matDone[id] = true;
+            score++;
+            updateScore();
+        }
+
+        function resetQuiz() {
+            mcDone = {};
+            matDone = {};
+            score = 0;
+            updateScore();
+            document.querySelectorAll('.exercise').forEach(function(ex) {
+                ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled', 'correct',
+                        'wrong'); });
+                ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+            });
+        }
+
+        // ===== 栏目筛选 =====
+        function filterCol(cat, chip) {
+            document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+            chip.classList.add('active');
+            document.querySelectorAll('.col-box').forEach(function(box) {
+                if (cat === 'all' || box.getAttribute('data-cat') === cat) box.classList.remove('filtered-out');
+                else box.classList.add('filtered-out');
+            });
+        }
+
+        function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+        // ===== 拖拽排序 (①) =====
+        (function initDragSort() {
+            var items = document.querySelectorAll('#sortPool1 .sort-item');
+            var slots = document.querySelectorAll('#page1 .sort-slot');
+            items.forEach(function(item) {
+                item.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+                    item.classList.add('dragging');
+                });
+                item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+            });
+            slots.forEach(function(slot) {
+                slot.addEventListener('dragover', function(e) { e.preventDefault(); });
+                slot.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    var key = e.dataTransfer.getData('text/plain');
+                    if (slot.querySelector('.sort-item')) {
+                        var old = slot.querySelector('.sort-item');
+                        old.classList.remove('placed');
+                        document.getElementById('sortPool1').appendChild(old);
+                    }
+                    var item = document.getElementById('item_' + key);
+                    if (item) { slot.appendChild(item);
+                        item.classList.add('placed');
+                        slot.classList.add('filled'); }
+                });
+                slot.addEventListener('click', function() {
+                    var item = this.querySelector('.sort-item');
+                    if (item && !item.classList.contains('dragging')) {
+                        item.classList.remove('placed');
+                        this.classList.remove('filled');
+                        document.getElementById('sortPool1').appendChild(item);
+                    }
+                });
+            });
+            var pool = document.getElementById('sortPool1');
+            pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+            pool.addEventListener('drop', function(e) {
+                e.preventDefault();
+                var key = e.dataTransfer.getData('text/plain');
+                var item = document.getElementById('item_' + key);
+                if (item && item.classList.contains('placed')) {
+                    item.classList.remove('placed');
+                    if (item.parentElement.classList.contains('sort-slot')) item.parentElement.classList.remove(
+                        'filled');
+                    pool.appendChild(item);
+                }
+            });
+        })();
+
+        function checkSort() {
+            var correctOrder = ['key1', 'key2', 'key3', 'key4', 'key5', 'key6'];
+            var slots = document.querySelectorAll('#page1 .sort-slot');
+            var result = document.getElementById('sortResult');
+            var allFilled = true,
+                allCorrect = true;
+            slots.forEach(function(slot, i) {
+                var item = slot.querySelector('.sort-item');
+                if (!item) { allFilled = false;
+                    allCorrect = false; return; }
+                if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+                    slot.classList.add('correct');
+                    slot.classList.remove('wrong');
+                } else {
+                    slot.classList.add('wrong');
+                    slot.classList.remove('correct');
+                    allCorrect = false;
+                }
+            });
+            if (!allFilled) { result.textContent = '❌ 请先将所有卡片拖入槽位';
+                result.className = 'sort-result show fail'; return; }
+            if (allCorrect) {
+                result.textContent = '✅ 完全正确！';
+                result.className = 'sort-result show pass';
+                stageDone.sort = true;
+                updateStageProgress();
+                document.getElementById('stageSortDone').classList.add('show');
+            } else {
+                result.textContent = '❌ 顺序不对，请重试';
+                result.className = 'sort-result show fail';
+            }
+        }
+
+        // ===== 填空填词 (②) =====
+        function checkFillBlanks() {
+            var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+            var allCorrect = true;
+            inputs.forEach(function(inp) {
+                var ans = inp.getAttribute('data-answer');
+                if (inp.value.trim() === ans) { inp.classList.add('correct');
+                    inp.classList.remove('wrong'); } else { inp.classList.add('wrong');
+                    inp.classList.remove('correct');
+                    allCorrect = false; }
+            });
+            var r = document.getElementById('fillResult');
+            if (allCorrect) {
+                r.textContent = '✅ 完全正确！';
+                r.className = 'sort-result show pass';
+                stageDone.fill = true;
+                updateStageProgress();
+                document.getElementById('stageFillDone').classList.add('show');
+            } else {
+                r.textContent = '❌ 有错误，请检查';
+                r.className = 'sort-result show fail';
+            }
+        }
+
+        // ===== 连线匹配 (③) =====
+        var selectedLeft = null,
+            matchedPairs = [];
+
+        function selectMatch(el) {
+            if (el.classList.contains('matched')) return;
+            document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+            el.classList.add('selected');
+            selectedLeft = el;
+        }
+
+        function pairMatch(el) {
+            if (!selectedLeft || el.classList.contains('matched')) return;
+            var lc = selectedLeft.getAttribute('data-match'),
+                rc = el.getAttribute('data-match');
+            if (lc === rc) {
+                selectedLeft.classList.add('matched');
+                selectedLeft.classList.remove('selected');
+                el.classList.add('matched');
+                matchedPairs.push(lc);
+                selectedLeft = null;
+                if (matchedPairs.length >= 4) {
+                    document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+                    document.getElementById('matchResult').className = 'sort-result show pass';
+                    stageDone.match = true;
+                    updateStageProgress();
+                    document.getElementById('stageMatchDone').classList.add('show');
+                }
+            }
+        }
+
+        // ===== 地图标注 (④) =====
+        (function initMapMarkers() {
+            var markers = document.querySelectorAll('#mapContainer .map-marker'),
+                found = {};
+            markers.forEach(function(m) {
+                m.addEventListener('click', function() {
+                    var pt = m.getAttribute('data-point');
+                    if (found[pt]) return;
+                    m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+                    m.setAttribute('stroke', '#27ae60');
+                    found[pt] = true;
+                    document.querySelectorAll('#mapChecklist .map-check-item').forEach(function(ci) {
+                        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+                    });
+                    if (document.querySelectorAll('#mapChecklist .map-check-item.done').length >=
+                        document.querySelectorAll('#mapChecklist .map-check-item').length) {
+                        stageDone.map = true;
+                        updateStageProgress();
+                        document.getElementById('stageMapDone').classList.add('show');
+                    }
+                });
+                m.style.cursor = 'pointer';
+            });
+        })();
+
+        // ===== 翻转卡 (⑤) =====
+        function flipCard(el) {
+            el.classList.toggle('flipped');
+            var total = document.querySelectorAll('.flash-card').length;
+            var flipped = document.querySelectorAll('.flash-card.flipped').length;
+            if (total > 0 && flipped >= total) {
+                stageDone.flips = true;
+                updateStageProgress();
+                var de = document.getElementById('stageFlipsDone');
+                if (de) de.classList.add('show');
+            }
+        }
+
+        // ===== 知识图谱展开 + deep-card折叠IIFE =====
+        function toggleKgDetail(node) {
+            node.classList.toggle('expanded');
+            var badge = node.querySelector('.kg-expand-badge');
+            if (badge) {
+                var arrow = badge.querySelector('.badge-arrow');
+                if (node.classList.contains('expanded')) { if (arrow) arrow.textContent = '▼';
+                    badge.childNodes[badge.childNodes.length - 1].textContent = ' 收起详情'; } else { if (arrow) arrow
+                        .textContent = '▶';
+                    badge.childNodes[badge.childNodes.length - 1].textContent = ' 点击展开'; }
+            }
+        }
+
+        (function() {
+            document.querySelectorAll('.deep-card').forEach(function(card) {
+                var hd = card.querySelector('.deep-card-hd'),
+                    bd = card.querySelector('.deep-card-bd');
+                if (hd && bd) {
+                    hd.removeAttribute('onclick');
+                    hd.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        bd.classList.toggle('show');
+                        hd.classList.toggle('active');
+                    });
+                }
+            });
+        })();
+
+        // ===== 默认显示第一个deep-card内容 (保证初始有show) =====
+        // 已在HTML中给第一个deep-card-bd加了show，其他默认隐藏。
+        // 手动控制：确保Page2打开时第一个deep-card可见，但我们在HTML中已设定 show，其他未设。
+        // 为保持一致性，将第一个deep-card的bd设为show。
+        // 由于在HTML中第一个deep-card-bd有 class="show"，IIFE不会覆盖。
+        console.log('✅ courseware-builder-senior v3.0.1 已加载');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2课 新航路开辟后的食物物种交流 · 统编版选必二</title>
+<style>
+/* ============================================================
+   CSS 变量与全局
+   ============================================================ */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   分页幻灯片系统
+   ============================================================ */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ============================================================
+   底部翻页导航栏
+   ============================================================ */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ============================================================
+   Hero / 封面
+   ============================================================ */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size: 13pt; opacity: 0.82; letter-spacing: 2px; font-weight: 300; margin-bottom: 10px; }
+.hero-wrap h1 { font-size: 26pt; margin: 10px 0 8px; font-weight: 700; letter-spacing: 3px; color: #fff; }
+.hero-wrap .hero-sub { font-size: 14pt; opacity: 0.85; letter-spacing: 2px; font-weight: 300; }
+
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity: 0.45; text-decoration: line-through; color: #999; background: rgba(39,174,96,0.06); }
+.stage-done { display: none; background: linear-gradient(135deg,#d4efdf,#a9dfbf); border: 2px solid var(--green); border-radius: 14px; padding: 14px 18px; margin: 12px 0; text-align: center; font-size: 14pt; font-weight: 700; color: var(--green); animation: fadeInUp 0.4s ease; }
+.stage-done.show { display: block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+
+/* ============================================================
+   Page1: 标签页 / 闯关进度 / 翻转卡 / 五关样式
+   ============================================================ */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.stage-progress-wrap { background: #e8e0ff; border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; }
+.stage-progress-bar-bg { background: #fff; border-radius: 6px; height: 8px; overflow: hidden; margin: 6px 0; }
+.stage-progress-bar-fill { background: linear-gradient(90deg,#7c6cf0,#5a4ac7); height: 100%; border-radius: 6px; transition: width 0.5s ease; width: 0%; }
+.stage-progress-text { display: flex; justify-content: space-between; font-size: 11pt; color: #888; }
+.stage-progress-text strong { color: var(--primary-dark); }
+
+.challenge-title { text-align: center; font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 10px 0; padding: 8px; background: #f0edff; border-radius: 10px; }
+
+/* 知识卡片 */
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; }
+.kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-gaokao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-value { background: #e74c3c; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-soc { background: #3498db; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+
+/* 拖拽排序 */
+.sort-pool { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; justify-content: center; }
+.sort-item { padding: 8px 16px; background: #fff; border: 2px solid var(--primary); border-radius: 10px; cursor: grab; font-weight: 700; font-size: 13pt; color: #5a4ac7; user-select: none; transition: all 0.2s; }
+.sort-item:active { cursor: grabbing; }
+.sort-item.dragging { opacity: 0.35; }
+.sort-item.placed { background: #e0daff; cursor: default; pointer-events: none; opacity: 0.6; }
+.sort-slots { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; justify-content: center; }
+.sort-slot { min-width: 90px; min-height: 46px; border: 2px dashed #dcd4f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12pt; transition: all 0.2s; background: #faf8ff; position: relative; }
+.sort-slot.filled { border-style: solid; background: #f0edff; }
+.sort-slot.correct { border-color: var(--green); background: #d4efdf; }
+.sort-slot.wrong { border-color: var(--red); background: #fadbd8; }
+.sort-slot .slot-label { position: absolute; top: -20px; font-size: 10pt; color: #999; white-space: nowrap; }
+.sort-check-btn { display: block; margin: 10px auto; }
+.sort-result { display: none; text-align: center; padding: 8px; border-radius: 8px; margin-top: 8px; font-weight: 700; font-size: 13pt; }
+.sort-result.show { display: block; }
+.sort-result.pass { background: #d4efdf; color: var(--green); border: 1px solid var(--green); }
+.sort-result.fail { background: #fadbd8; color: var(--red); border: 1px solid var(--red); }
+
+/* 填空 */
+.fill-blank-wrap { margin: 14px 0; }
+.fill-blank-row { display: flex; align-items: center; margin: 8px 0; font-size: 13pt; flex-wrap: wrap; gap: 6px; }
+.fill-input { width: 110px; padding: 8px 12px; border: 2px solid #dcd4f5; border-radius: 8px; font-size: 13pt; text-align: center; transition: all 0.2s; background: #faf8ff; }
+.fill-input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color: var(--green); background: #d4efdf; color: var(--green); font-weight: 700; }
+.fill-input.wrong { border-color: var(--red); background: #fadbd8; color: var(--red); }
+
+/* 连线匹配 */
+.match-area { background: #faf8ff; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid var(--border); }
+.match-cols { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+.match-col { display: flex; flex-direction: column; gap: 8px; min-width: 110px; }
+.match-col-label { text-align: center; font-weight: 700; font-size: 12pt; color: var(--primary-dark); margin-bottom: 4px; }
+.match-item { padding: 10px 14px; border-radius: 10px; font-size: 12pt; cursor: pointer; transition: all 0.2s; border: 2px solid #dcd4f5; background: #fff; text-align: center; }
+.match-item.selected { border-color: var(--primary); background: #f0edff; box-shadow: 0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color: var(--green); background: #d4efdf; color: var(--green); cursor: default; opacity: 0.75; }
+
+/* 地图标注 */
+.map-zone { position: relative; width: 100%; max-width: 520px; margin: 14px auto; background: #faf8ff; border: 2px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; }
+.map-instruction { font-size: 11pt; color: #888; margin-bottom: 8px; }
+.map-marker { cursor: pointer; transition: all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+.map-check-item { font-size: 11pt; padding: 4px 10px; border-radius: 8px; background: #fff; border: 1px solid var(--border); transition: all 0.2s; }
+.map-check-item.done { background: #d4efdf; border-color: var(--green); color: var(--green); }
+
+/* 翻转卡 */
+.flash-section { margin: 18px 0; }
+.flash-section-title { text-align: center; font-size: 13pt; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700; }
+.flash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.flash-card { perspective: 700px; height: 140px; cursor: pointer; }
+.flash-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+.flash-card.flipped .flash-inner { transform: rotateY(180deg); }
+.flash-front, .flash-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 10px; font-size: 11pt; text-align: center; }
+.flash-front { background: linear-gradient(135deg,#7c6cf0,#5a4ac7); color: #fff; font-weight: 700; }
+.flash-back { background: #fff; color: #333; transform: rotateY(180deg); border: 2px solid var(--primary); font-size: 10.5pt; line-height: 1.5; }
+
+/* 手风琴 */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* deep-card 折叠 */
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+.deep-card-bd .source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.deep-card-bd .source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ============================================================
+   Page3: 栏目筛选
+   ============================================================ */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+/* ============================================================
+   Page4: 课堂训练
+   ============================================================ */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* 通用答案区 */
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ============================================================
+   Page5: 知识结构图
+   ============================================================ */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; }
+.kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ============================================================
+   Page6: 结束页
+   ============================================================ */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+  .match-cols { gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     Page0 — 封面页
+     ============================================================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 食物生产与社会生活</div>
+    <h1>第2课 · 新航路开辟后的食物物种交流</h1>
+    <div class="hero-sub">统编版高中历史  选择性必修二</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>从全球史视角理解新航路开辟如何推动食物物种的全球流动及其对人类社会发展的深远影响。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>掌握美洲作物外传和欧亚作物传入美洲的时空线索，辨识不同物种传播的路线与阶段。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>通过方志、族谱、农书等史料（如《金薯传习录》《遵生八笺》）印证食物物种传播的历史。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>分析食物物种交流对全球人口增长、饮食结构、经济发展和生态环境的多维影响。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识外来作物对中国明清时期农业发展和粮食安全的重要贡献，理解文明交流互鉴的意义。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================================================
+     Page1 — 知识要点 · 闯关解锁
+     ============================================================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 美洲物种外传</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 物种传入美洲</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 交流的影响</button>
+  </div>
+
+  <!-- ====== Tab1：子目一 ====== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">🌍 15世纪末—16世纪初 · 哥伦布大交换开启</div>
+      <h3>🌽 美洲物种的外传</h3>
+      <ul>
+        <li><strong>新航路开辟前：</strong>物种交流主要在邻近地区或各大洲内部进行。丝绸之路促成跨洲交流：葡萄、苜蓿传入中国，樱桃、杏传入罗马。</li>
+        <li><strong>核心物种：</strong>玉米、马铃薯、甘薯、番茄、辣椒、南瓜等由<span class="kwd">哥伦布</span>等人带到欧洲，后传播到亚洲、非洲。</li>
+        <li><strong>玉米传播：</strong>16世纪中叶南欧种植→17世纪欧洲仅次于小麦的粮食作物。传入中国途径：西北（西亚/中亚）、西南（印度/缅甸）、东南（菲律宾）。清朝乾隆、嘉庆年间大规模推广，鸦片战争前遍布全国。</li>
+        <li><strong>马铃薯与甘薯：</strong>16世纪末马铃薯在欧洲推广；甘薯引入欧洲后传播缓慢。明朝万历年间甘薯由陈振龙从菲律宾（吕宋）引入福建，救荒有功。</li>
+        <li><strong>番茄与辣椒：</strong>番茄最初作观赏植物，18世纪中叶作食用栽培，明朝万历年间传入中国。辣椒原产拉丁美洲，15世纪入西班牙，16世纪传欧洲，明朝传入中国称"番椒"。</li>
+      </ul>
+      <div class="link-bar">📌 <strong>高考常考：</strong>常以方志、族谱类史料考查甘薯、玉米传入中国的具体途径与时间（如《金薯传习录》记载陈振龙引种甘薯）。</div>
+    </div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将美洲作物传播事件按时间先后拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="step1" id="item_step1">哥伦布将美洲作物带回欧洲</span>
+      <span class="sort-item" draggable="true" data-sortkey="step2" id="item_step2">玉米在南欧广泛种植</span>
+      <span class="sort-item" draggable="true" data-sortkey="step3" id="item_step3">玉米成为欧洲第二大粮食作物</span>
+      <span class="sort-item" draggable="true" data-sortkey="step4" id="item_step4">甘薯由陈振龙引入中国福建</span>
+      <span class="sort-item" draggable="true" data-sortkey="step5" id="item_step5">番茄开始作食用栽培</span>
+      <span class="sort-item" draggable="true" data-sortkey="step6" id="item_step6">玉米种植遍布中国全国</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+      <div class="sort-slot" data-slot="5"><span class="slot-label">第6步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🌽 哥伦布大交换</div><div class="flash-back">新航路开辟后，美洲与欧亚非之间发生的大规模生物、文化、人口交流，食物物种是核心内容。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🥔 马铃薯</div><div class="flash-back">原产美洲，16世纪末在欧洲推广，提高了欧洲人的抗饥荒能力，深刻改变欧洲饮食结构。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🍅 番茄</div><div class="flash-back">原产美洲，最初作观赏植物，18世纪中叶开始食用栽培，明朝万历年间传入中国。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🌶️ 辣椒</div><div class="flash-back">原产拉丁美洲，15世纪入西班牙，16世纪传欧洲，明朝传入中国，初称"番椒"。</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsTab1">🎉 本组翻转卡全部完成！</div>
+    </div>
+  </div>
+
+  <!-- ====== Tab2：子目二 ====== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">🔄 16—18世纪 · 欧亚物种涌入美洲</div>
+      <h3>🌾 其他地区物种在美洲的推广</h3>
+      <ul>
+        <li><strong>粮食作物：</strong><span class="kwd">小麦</span>由欧洲移民带到美洲，最初供富人享用，后迅速推广，成主要粮食作物，面粉食品种类繁多，小麦产业兴盛。</li>
+        <li><strong>水稻：</strong>由西班牙人带到美洲，18世纪中期成为北美<span class="kwd">第二大农作物</span>（仅次于小麦），大量用于出口。</li>
+        <li><strong>水果与蔬菜：</strong>苹果、葡萄、甜橙、柠檬、黄瓜、豌豆等传入美洲。</li>
+        <li><strong>经济作物：</strong>甘蔗传入美洲，推动种植园经济发展。</li>
+        <li><strong>禽畜：</strong>鸡、牛、驴、马、猪、羊等传入美洲，繁衍生息，改变动物群落，推动农业发展。</li>
+        <li><strong>咖啡传播：</strong>原产非洲→6世纪入阿拉伯→15世纪传欧洲→17世纪荷兰种到锡兰、印度、印尼→18世纪初传入拉美。17世纪初欧洲第一家咖啡馆在威尼斯开业，随后遍及欧美。</li>
+      </ul>
+      <div class="link-bar">📌 <strong>高考常考：</strong>常以"小麦和水稻对美洲社会的影响"或"咖啡传播与全球贸易"为切入点考查物种交流的全球性。</div>
+    </div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填入正确答案</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 小麦由欧洲移民带到美洲，最初仅供 <input class="fill-input" data-answer="富人" placeholder="___"> 享用。</div>
+      <div class="fill-blank-row">2. 18世纪中期，水稻成为北美第 <input class="fill-input" data-answer="二" placeholder="___"> 大农作物。</div>
+      <div class="fill-blank-row">3. 咖啡原产于 <input class="fill-input" data-answer="非洲" placeholder="___">，6世纪传入阿拉伯半岛。</div>
+      <div class="fill-blank-row">4. 17世纪初，<input class="fill-input" data-answer="威尼斯" placeholder="___"> 商人开设了欧洲第一家咖啡馆。</div>
+      <div class="fill-blank-row">5. 欧洲移民将 <input class="fill-input" data-answer="鸡" placeholder="___">、牛、驴、马、猪、羊等禽畜传入美洲。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：配对物种与传入美洲后的影响</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📍 物种</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">小麦</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">水稻</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">咖啡</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">禽畜</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">甘蔗</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📋 影响</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">成为主要粮食作物，面粉产业兴盛</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">18世纪中期成北美第二大农作物</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">传入拉美，成日后世界主产区</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">改变动物群落，推动农业发展</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">推动美洲种植园经济发展</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：点击标注传入中国的三条主要路线</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 点击下方标记点标注玉米传入中国的三条路线</div>
+      <svg viewBox="0 0 420 200" style="width:100%;height:auto;background:#f5f3ff;border-radius:10px;">
+        <rect x="10" y="20" width="400" height="160" rx="20" fill="#e8e0ff" stroke="#dcd4f5" stroke-width="1"/>
+        <!-- 三条路线示意 -->
+        <text x="30" y="45" font-size="9" fill="#888">⬆ 西北路线</text>
+        <circle class="map-marker" data-point="pt-northwest" cx="100" cy="45" r="12" fill="#7c6cf0" stroke="#5a4ac7" stroke-width="2"/>
+        <text x="30" y="85" font-size="9" fill="#888">⬆ 西南路线</text>
+        <circle class="map-marker" data-point="pt-southwest" cx="230" cy="85" r="12" fill="#7c6cf0" stroke="#5a4ac7" stroke-width="2"/>
+        <text x="30" y="130" font-size="9" fill="#888">⬆ 东南路线</text>
+        <circle class="map-marker" data-point="pt-southeast" cx="350" cy="120" r="12" fill="#7c6cf0" stroke="#5a4ac7" stroke-width="2"/>
+        <text x="110" y="35" font-size="8" fill="#3d2b8c" font-weight="700">西亚·中亚</text>
+        <text x="230" y="75" font-size="8" fill="#3d2b8c" font-weight="700">印度·缅甸</text>
+        <text x="340" y="110" font-size="8" fill="#3d2b8c" font-weight="700">菲律宾</text>
+        <text x="175" y="170" font-size="8" fill="#3d2b8c" font-weight="700">中 国</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-northwest">⬜ 西北路线（西亚/中亚）</span>
+        <span class="map-check-item" data-point="pt-southwest">⬜ 西南路线（印度/缅甸）</span>
+        <span class="map-check-item" data-point="pt-southeast">⬜ 东南路线（菲律宾）</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🌾 小麦</div><div class="flash-back">由欧洲移民带到美洲，最初供富人享用，后被迅速推广，成为主要粮食作物。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🍚 水稻</div><div class="flash-back">西班牙人带到美洲，18世纪中期成北美第二大农作物，大量出口。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">☕ 咖啡</div><div class="flash-back">原产非洲，经阿拉伯传至欧洲，18世纪初传入拉美，咖啡馆风靡欧美。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🐄 禽畜</div><div class="flash-back">鸡、牛、马、羊等传入美洲，繁衍生息，改变动物群落，推动农业。</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsTab2">🎉 本组翻转卡全部完成！</div>
+    </div>
+  </div>
+
+  <!-- ====== Tab3：子目三 ====== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">🌏 全球性影响 · 16世纪至今</div>
+      <h3>🌏 食物物种交流带来的影响</h3>
+      <ul>
+        <li><strong>人口增长：</strong>提高全球粮食产量，世界人口激增。玉米适应非洲干旱环境；玉米、甘薯丰富中国粮食种类；马铃薯提高欧洲抗饥荒能力。</li>
+        <li><strong>饮食结构改变：</strong>马铃薯在欧洲、小麦在北美推广，改变食物结构，丰富食物种类。</li>
+        <li><strong>畜牧业发展：</strong>玉米、马铃薯、甘薯用作饲料，促进畜牧业，提供更多肉蛋奶。</li>
+        <li><strong>经济与贸易：</strong>北美水稻大量出口；中国外来作物高产增加粮食供应，促进商品经济发展。</li>
+        <li><strong>生态环境：</strong>马牛羊等繁殖超载；殖民者滥伐原始森林。中国明清时期引进玉米、甘薯扩大耕地，但<span class="kwd">过度垦荒</span>导致水土流失。</li>
+      </ul>
+      <div class="link-bar">📌 <strong>高考常考：</strong>常以"食物物种交流的利弊"或"外来作物对中国的影响"为主题考查辩证分析能力，要求从积极与消极两方面作答。</div>
+    </div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">📈 人口激增</div><div class="flash-back">食物物种全球交流提高粮食产量，使世界人口大幅增长。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🍽️ 饮食结构</div><div class="flash-back">马铃薯、小麦等在各地推广，深刻改变全球饮食结构与习惯。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🌳 生态环境</div><div class="flash-back">外来物种和垦荒活动对地表植被造成破坏，导致水土流失。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">💰 商品经济</div><div class="flash-back">外来作物高产促进粮食商品化，推动各地商品经济发展。</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsTab3">🎉 本组翻转卡全部完成！</div>
+    </div>
+    <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！全部翻转卡已翻完！</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page2 — 重难点解析
+     ============================================================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴1 -->
+  <div class="acc-group open" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔵 重点一：美洲物种的全球传播路线</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <p><strong>玉米、马铃薯、甘薯、番茄、辣椒的传播路径：</strong></p>
+      <ul style="padding-left:24px;font-size:13.5pt;">
+        <li><strong>美洲→欧洲：</strong>哥伦布等航海家将作物带回西班牙、葡萄牙，逐渐扩散至全欧。</li>
+        <li><strong>欧洲→亚洲/非洲：</strong>通过殖民扩张、贸易航线传播。玉米、甘薯经多条路线传入中国。</li>
+        <li><strong>传入中国的三条路线：</strong>西北（西亚/中亚）、西南（印度/缅甸）、东南（菲律宾）。</li>
+      </ul>
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 传播时间脉络</div>
+        <div class="deep-card-bd">
+          <p>16世纪中叶玉米在南欧种植，17世纪成欧洲第二大粮食作物；16世纪末马铃薯在欧洲推广；明朝万历年间甘薯、番茄、辣椒相继传入中国；清朝乾隆、嘉庆年间玉米大规模推广。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 丝绸之路与全球航路</div>
+        <div class="deep-card-bd">
+          <p>新航路开辟前，物种交流以丝绸之路等陆路为主（葡萄、苜蓿传入中国）。新航路开辟后，海路成为物种传播的主渠道，速度更快、规模更大。<span class="tag-soc">🟢 比较史学</span> 比较陆路与海路物种传播的异同。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-gaokao">🎯 高考拓展</span> 阅读《金薯传习录》《凤阳陈氏族谱》片段，概括甘薯传入中国的具体过程，并分析其史料价值。（提取信息+史料价值判断）</p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴2 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🟠 重点二：欧亚物种在美洲的推广</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <p><strong>小麦和水稻对美洲影响最大：</strong></p>
+      <ul style="padding-left:24px;font-size:13.5pt;">
+        <li><strong>小麦：</strong>最初仅供富人→迅速推广→成主要粮食→面粉食品种类繁多→小麦产业兴盛</li>
+        <li><strong>水稻：</strong>西班牙人带入→18世纪中期成北美第二大农作物→大量出口</li>
+        <li><strong>禽畜：</strong>鸡牛马羊等传入，改变动物群落，推动农业发展</li>
+      </ul>
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 咖啡与咖啡馆文化</div>
+        <div class="deep-card-bd">
+          <p>咖啡原产非洲，经阿拉伯传至欧洲，17世纪荷兰人种到东南亚，18世纪初传入拉丁美洲。咖啡馆成为欧洲和北美社交的重要场所，深刻影响社会生活。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 物种交流与殖民扩张</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🔵 社会学视角</span> 物种传播与殖民扩张密切相关——欧洲移民将作物和禽畜带到美洲，改变了美洲的农业面貌和社会结构，也推动了种植园经济和奴隶贸易的发展。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 中外关联</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-gaokao">🎯 高考拓展</span> 比较小麦在美洲的推广与玉米在中国推广的异同，分析物种传入对不同文明的影响。（中外关联·比较史学）</p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴3 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🟣 难点：食物物种交流的多维影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <p><strong>从四个维度辩证分析：</strong></p>
+      <ul style="padding-left:24px;font-size:13.5pt;">
+        <li><strong>人口：</strong>全球粮食产量提高→人口激增（积极）</li>
+        <li><strong>饮食：</strong>食物种类丰富，结构改变（积极）</li>
+        <li><strong>经济：</strong>促进商品经济发展与对外贸易（积极）</li>
+        <li><strong>生态：</strong>滥伐森林、水土流失、物种超载（消极）</li>
+      </ul>
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 中国案例</div>
+        <div class="deep-card-bd">
+          <p>明清时期玉米、甘薯引入中国，使荒山、丘陵得以利用，扩大耕地面积，但也导致过度垦荒和水土流失。正反两面需辩证看待。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 全球视野</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 比较美洲作物在非洲、亚洲、欧洲的不同影响：非洲缓解干旱饥荒，亚洲增加粮食种类，欧洲改变饮食结构。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观升华</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 唯物史观</span> 物种交流本质上是生产力发展的结果（新航路开辟推动全球联系），同时物种交流又成为推动全球人口增长、经济变革和社会转型的重要生产力因素。体现了"生产力→交往→生产力"的辩证运动。</p>
+          <p style="margin-top:8px;"><span class="tag-gaokao">🎯 高考拓展</span> 开放性评述题：以新航路开辟后的食物物种交流为例，谈谈你对"交流推动人类文明进步"的理解。</p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page3 — 教材栏目解答
+     ============================================================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('学习聚焦',this)">学习聚焦</button>
+    <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+    <button class="filter-chip" onclick="filterCol('史料阅读',this)">史料阅读</button>
+    <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+    <button class="filter-chip" onclick="filterCol('思考点',this)">思考点</button>
+    <button class="filter-chip" onclick="filterCol('问题探究',this)">问题探究</button>
+    <button class="filter-chip" onclick="filterCol('学习拓展',this)">学习拓展</button>
+  </div>
+
+  <!-- 学习聚焦1 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>新航路开辟后，美洲的物种陆续传播到欧洲、亚洲、非洲等地。</p>
+      <div class="a" id="ans-p3-focus1">
+        <strong>📝 要点归纳：</strong>本学习聚焦点明了"哥伦布大交换"的核心方向——美洲作物向外传播。玉米、马铃薯、甘薯、番茄、辣椒等物种从此走向世界，深刻改变了全球农业格局和饮食文化。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 学思之窗 -->
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 学思之窗 · 甘薯传入中国</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material"><strong>材料一：</strong>番薯种出海外后，明万历间，闽人陈振龙贸易其地，得藤苗及栽种之法入中国。值闽中旱饥，振龙于经纶自于巡抚金学曾令试为种时，大有收获，可充谷食之半。自是疏确之地遍行栽播。<br>——陈世元《金薯传习录》</div>
+      <div class="source-material"><strong>材料二：</strong>万历庚辰，客有泛舟之安南者，公偕往。比至，首长廷礼宾馆，每宴会，辄飨土产曰薯者，味甘美。公视其种，顾于首饮，获之。……未几间闻道归。……壬午夏，乃抵家焉。……初，公至自安南也，以薯非等物，载花砖，冤白日，实已甚盛，振嗟益美，念来自首，因名"番薯"云。<br>——《凤阳陈氏族谱》</div>
+      <p><strong>问题：</strong>依据上述材料，谈谈甘薯是如何传入中国的。</p>
+      <div class="a" id="ans-p3-source1">
+        <strong>📝 参考答案：</strong><br>
+        据两则材料记载，甘薯传入中国的过程如下：<br>
+        ① <strong>时间：</strong>明朝万历年间（材料一"明万历间"，材料二"万历庚辰"即1580年，壬午即1582年）。<br>
+        ② <strong>人物：</strong>福建人陈振龙（材料一"闽人陈振龙"，材料二"公"指陈振龙）。<br>
+        ③ <strong>来源地：</strong>从海外（吕宋/菲律宾）或安南（今越南）获得薯种（材料一"贸易其地"，材料二"泛舟之安南"）。<br>
+        ④ <strong>传入方式：</strong>陈振龙将藤苗及栽种之法带回中国（材料一"得藤苗及栽种之法入中国"）。<br>
+        ⑤ <strong>推广原因：</strong>福建发生旱灾饥荒，试种成功后大获丰收，可充谷食之半，因此在瘠薄之地广泛种植（材料一"值闽中旱饥""可充谷食之半""疏确之地遍行栽播"）。<br>
+        ⑥ <strong>命名由来：</strong>因来自外番，故名"番薯"（材料二"念来自首，因名'番薯'"）。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-source1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 史料阅读1 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 王象晋《二如亭群芳谱》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">番薯：一名六月柿，茎似高，高四五尺，叶似艾，花似榴，一枝结五实或三四实，一树三三十实，蜂作架，最堪观。火令火，未足为喻。草未也，未自西蕃，故名。</div>
+      <div class="source-ref">——王象晋《二如亭群芳谱》</div>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 史料解读：</strong>这段史料描绘了番茄（番薯/六月柿）的植物形态——茎高四五尺，叶似艾，花似石榴，结果实多，适合搭架观赏。反映了番茄传入中国初期主要作为观赏植物栽培，也印证了"未自西蕃，故名"的来源。史料价值：为研究番茄在中国传播的早期形态提供了文献依据。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 史料阅读2 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 高濂《遵生八笺》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">番椒：丛生，白花。子叶无毛，味辣，色红，甚可玩。</div>
+      <div class="source-ref">——高濂《遵生八笺》</div>
+      <div class="a" id="ans-p3-material2">
+        <strong>📝 史料解读：</strong>这段史料记载了辣椒（番椒）的形态特征——丛生、白花、叶无毛、味辣、色红。强调"甚可玩"表明辣椒传入中国初期也是作为观赏植物栽培，这与番茄传入初期的情形相似。史料价值：为研究辣椒传入中国的早期形态和用途提供了可靠依据。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 历史纵横 -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>☕ 历史纵横 · 咖啡与咖啡馆</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>咖啡原产于非洲，6世纪传入阿拉伯半岛，15世纪后传播到欧洲，被称为"阿拉伯酒"。17世纪中叶，荷兰人将咖啡种植到锡兰岛，后传到印度、印度尼西亚等地。18世纪初，咖啡传入拉丁美洲，这里成了日后世界咖啡的主产区。</p>
+      <p>17世纪初，威尼斯商人开设了欧洲第一家咖啡馆。此后，英国的牛津、伦敦，法国的巴黎、马赛等地相继开设咖啡馆。17世纪末18世纪初，咖啡馆在欧洲各个城市纷纷出现，并推广到北美的波士顿、纽约、费城。从此，欧洲和北美的社会生活有了喝咖啡的习惯。人们在咖啡馆休闲聊天，喝咖啡成了社交的重要场所。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong><br>
+        <strong>传播脉络：</strong>非洲→阿拉伯（6世纪）→欧洲（15世纪）→东南亚（17世纪荷兰）→拉美（18世纪初）。<br>
+        <strong>文化意义：</strong>咖啡馆的兴起是物种交流深刻影响社会生活的典型例证——咖啡不仅是一种饮品，更塑造了欧洲和北美近代社会的公共生活空间和社交文化。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 学习聚焦2 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>食物物种交流丰富了人们的食物种类，改变了人们的饮食习惯，对贸易和环境产生了重要影响。</p>
+      <div class="a" id="ans-p3-focus2">
+        <strong>📝 要点归纳：</strong>本学习聚焦总结了食物物种交流的三大影响维度——饮食（丰富种类、改变习惯）、经济（推动贸易）、生态（环境影响）。提醒学生从多角度、辩证地认识物种交流的后果。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 思考点 -->
+  <div class="col-box" data-cat="思考点">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 思考点</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>食物物种交流怎样影响了人们的日常生活？</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong><br>
+        （1）<strong>饮食内容：</strong>食物种类极大丰富，马铃薯、玉米、番茄、辣椒等成为各地日常食材，改变了传统饮食结构。<br>
+        （2）<strong>饮食习惯：</strong>喝咖啡在欧洲和北美成为日常习惯，咖啡馆成为社交场所。<br>
+        （3）<strong>粮食安全：</strong>外来高产作物提高了抗饥荒能力，如甘薯救荒、马铃薯帮助爱尔兰度过荒年。<br>
+        （4）<strong>经济生活：</strong>粮食商品化程度提高，农产品进入市场交易，促进商品经济发展。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 史料阅读3 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 袁景晖《建始县志》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">邑境山多田少，居民倍增，稻谷不足以给，则于山上种包谷、洋芋、荞麦、燕麦或蕨蒿之类。深林剪伐殆尽，巨阜危峰，一望皆包谷也。</div>
+      <div class="source-ref">——袁景晖《建始县志》</div>
+      <div class="a" id="ans-p3-material3">
+        <strong>📝 史料解读：</strong>这段史料记载了湖北建始县因人口增长、耕地不足，在山上种植包谷（玉米）、洋芋（马铃薯）等外来作物的情景。"深林剪伐殆尽，巨阜危峰，一望皆包谷"反映了外来作物推广对当地生态环境的影响——原始森林被砍伐，山地被大规模开垦种植玉米。史料价值：为研究外来作物推广与生态环境变化的关系提供了具体的地方史料证据。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 问题探究 -->
+  <div class="col-box" data-cat="问题探究">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>❓ 问题探究</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>16世纪末，中国福建发生饥荒，饥民依靠甘薯得以度荒。17世纪上半叶，英国入侵爱尔兰，捣毁庄稼，致使大多数农作物歉收乃至颗粒无收，唯有生长在地下的马铃薯安然无恙，帮助爱尔兰人度过荒年。爱尔兰成了以马铃薯为主食的国家。</p>
+      <p><strong>问题：</strong>农作物的交流，从哪些方面影响了人类社会？</p>
+      <div class="a" id="ans-p3-problem1">
+        <strong>📝 参考答案：</strong><br>
+        农作物交流对人类社会的影响体现在以下方面：<br>
+        （1）<strong>保障粮食安全：</strong>甘薯在中国福建救荒、马铃薯在爱尔兰度荒，证明了外来作物在应对饥荒中的关键作用，提高了人类抗风险能力。<br>
+        （2）<strong>改变饮食结构：</strong>马铃薯成为爱尔兰主食，玉米、甘薯在中国广泛种植，深刻改变了各地居民的日常饮食。<br>
+        （3）<strong>促进人口增长：</strong>粮食产量提高为人口增长提供了物质基础，推动了全球人口激增。<br>
+        （4）<strong>推动经济发展：</strong>高产作物增加了粮食供应总量，剩余粮食进入市场，促进了商品经济发展。<br>
+        （5）<strong>影响生态环境：</strong>外来作物推广扩大了耕地面积，但也可能导致森林砍伐和水土流失等环境问题。<br>
+        （6）<strong>塑造文化认同：</strong>马铃薯成为爱尔兰文化符号，咖啡文化塑造了欧洲社交方式，物种交流深刻影响了社会文化。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-problem1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 学习拓展 -->
+  <div class="col-box" data-cat="学习拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 学习拓展 · 菠萝在中国的引种</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">露兜子产广东，一名波罗……又名番薯子。形如兰，叶密长大，抽茎结子，其叶去皮存筋，即波罗麻布也。</div>
+      <div class="source-ref">——吴其濬《植物名实图考》</div>
+      <p><strong>任务：</strong>查找资料，写一篇短文介绍美洲的菠萝在中国引种和传播的情况。</p>
+      <div class="a" id="ans-p3-extend1">
+        <strong>📝 拓展参考：</strong><br>
+        <strong>菠萝（Ananas comosus）</strong>原产南美洲热带地区，是哥伦布到达美洲后发现的著名水果之一。<br>
+        <strong>传入中国的时间与路线：</strong>菠萝于16世纪末至17世纪初（明末）传入中国，主要通过两条路线：一是由葡萄牙人从美洲带到澳门，再传入广东；二是由西班牙人从菲律宾带到福建、广东沿海。<br>
+        <strong>传播与推广：</strong>早期菠萝主要在广东、福建、海南等东南沿海地区种植。清代逐渐向内陆推广，福建、广东成为主产区。地方志记载菠萝在清代广东已广泛种植，被称为"波罗"或"露兜子"。<br>
+        <strong>名称由来：</strong>"菠萝"一词源于葡萄牙语"abacaxi"或西班牙语"piña"的音译，传入中国后又称"波罗""黄梨""番薯子"等。<br>
+        <strong>影响与意义：</strong>菠萝的引入丰富了中国的果品资源，推动了南方热带水果种植业的发展，也成为对外贸易的重要商品之一。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-extend1')">📝 查看拓展参考</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page4 — 课堂训练
+     ============================================================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 q1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 《金薯传习录》记载："番薯种出海外后，明万历间，闽人陈振龙贸易其地，得藤苗及栽种之法入中国。"据此可知，甘薯传入中国的途径是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 通过丝绸之路从西亚传入</label>
+      <label onclick="optClick(this,'B','q1')">B. 由福建人从海外引入</label>
+      <label onclick="optClick(this,'C','q1')">C. 由西班牙人从美洲直接带入</label>
+      <label onclick="optClick(this,'D','q1')">D. 通过印度缅甸从西南传入</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <p><strong>✅ 正确答案：B</strong></p>
+      <p><strong>📖 解析：</strong>材料明确记载"闽人陈振龙贸易其地，得藤苗及栽种之法入中国"，即福建人陈振龙从海外（菲律宾/吕宋）引入甘薯。A项是玉米传入的路线之一；C项与材料不符；D项是玉米传入的另一路线。故选B。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：史料实证 · 甘薯传入中国</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 16世纪中叶玉米在南欧地区广泛种植，到17世纪成为欧洲仅次于小麦的粮食作物。这表明玉米在欧洲的传播（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 经历了从观赏到食用的转变</label>
+      <label onclick="optClick(this,'B','q2')">B. 从庭院种植迅速推广为大田作物</label>
+      <label onclick="optClick(this,'C','q2')">C. 最初由哥伦布作为食物带回</label>
+      <label onclick="optClick(this,'D','q2')">D. 替代小麦成为欧洲主粮</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <p><strong>✅ 正确答案：B</strong></p>
+      <p><strong>📖 解析：</strong>材料表明玉米最初在庭院种植供观赏，16世纪中叶在南欧广泛种植，17世纪成第二大粮食作物，经历了从庭院到大田的迅速推广。A项"观赏到食用"是番茄的传播特点；C项哥伦布带回玉米是事实但材料未涉及；D项"替代小麦"表述错误，玉米是"仅次于小麦"。故选B。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：美洲物种在欧洲的传播</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 高濂《遵生八笺》记载番椒"丛生，白花。子叶无毛，味辣，色红，甚可玩"。这段史料可用于研究（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 辣椒传入中国初期的用途</label>
+      <label onclick="optClick(this,'B','q3')">B. 辣椒从美洲传入欧洲的路线</label>
+      <label onclick="optClick(this,'C','q3')">C. 明清时期辣椒的烹饪方法</label>
+      <label onclick="optClick(this,'D','q3')">D. 辣椒在中国各地的传播过程</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <p><strong>✅ 正确答案：A</strong></p>
+      <p><strong>📖 解析：</strong>材料记载辣椒"甚可玩"，说明当时主要作为观赏植物栽培，可用于研究辣椒传入中国初期的用途。材料未涉及传入欧洲的路线、烹饪方法或各地传播过程，B、C、D均与材料内容无关。故选A。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：史料实证 · 辣椒传入中国</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 17世纪末18世纪初，咖啡馆在欧洲和北美纷纷出现，成为人们休闲社交的重要场所。这一现象反映了（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 物种交流对社会生活的深刻影响</label>
+      <label onclick="optClick(this,'B','q4')">B. 欧洲农业结构发生根本变化</label>
+      <label onclick="optClick(this,'C','q4')">C. 咖啡取代茶成为欧洲主要饮品</label>
+      <label onclick="optClick(this,'D','q4')">D. 工业革命推动了城市生活变革</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <p><strong>✅ 正确答案：A</strong></p>
+      <p><strong>📖 解析：</strong>咖啡原产非洲，经阿拉伯传入欧洲，咖啡馆的兴起是咖啡这一外来物种深刻影响社会生活的体现。B项咖啡的传播不代表农业结构根本变化；C项"取代茶"表述绝对化；D项咖啡馆兴起在工业革命之前（17世纪末18世纪初）。故选A。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：物种交流与社会生活</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 q5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 袁景晖《建始县志》记载："邑境山多田少，居民倍增，稻谷不足以给，则于山上种包谷、洋芋……深林剪伐殆尽，巨阜危峰，一望皆包谷也。"这反映了（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 外来作物推广带来了生态问题</label>
+      <label onclick="optClick(this,'B','q5')">B. 玉米完全取代了传统农作物</label>
+      <label onclick="optClick(this,'C','q5')">C. 明清时期农业技术停滞不前</label>
+      <label onclick="optClick(this,'D','q5')">D. 南方地区普遍推广水稻种植</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <p><strong>✅ 正确答案：A</strong></p>
+      <p><strong>📖 解析：</strong>材料记载因人口增长，在山上种植玉米、马铃薯等外来作物，导致"深林剪伐殆尽"，反映了外来作物推广带来的森林破坏和水土流失等生态问题。B项"完全取代"过于绝对；C项材料未涉及农业技术；D项与材料"种包谷、洋芋"矛盾。故选A。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：生态史观 · 外来作物与环境</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题1 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题一</strong> 阅读下列材料，回答问题。</div>
+    <div class="source-material"><strong>材料一：</strong>番薯种出海外后，明万历间，闽人陈振龙贸易其地，得藤苗及栽种之法入中国。值闽中旱饥，振龙于经纶自于巡抚金学曾令试为种时，大有收获，可充谷食之半。自是疏确之地遍行栽播。<br>——陈世元《金薯传习录》</div>
+    <div class="source-material"><strong>材料二：</strong>邑境山多田少，居民倍增，稻谷不足以给，则于山上种包谷、洋芋、荞麦、燕麦或蕨蒿之类。深林剪伐殆尽，巨阜危峰，一望皆包谷也。<br>——袁景晖《建始县志》</div>
+    <div class="q-text">（1）根据材料一，概括甘薯传入中国后迅速推广的原因。（提取信息）</div>
+    <div class="q-text">（2）根据材料二，指出外来作物推广带来了什么负面后果。（概括归纳）</div>
+    <div class="q-text">（3）综合上述材料，谈谈你对外来作物传播的认识。（历史解释）</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）提取信息：</strong>①甘薯高产，可充谷食之半，解决了粮食短缺问题；②适合在瘠薄土地上种植（"疏确之地遍行栽播"）；③在饥荒时期试种成功，得到官方支持（巡抚金学曾令试为种）。</p>
+      <p><strong>（2）概括归纳：</strong>外来作物的推广导致原始森林被砍伐殆尽（"深林剪伐殆尽"），生态环境遭到破坏，水土流失加剧。</p>
+      <p><strong>（3）历史解释：</strong>外来作物传播具有双重影响：一方面，高产作物缓解了人口增长带来的粮食压力，保障了粮食安全；另一方面，盲目开垦荒山、丘陵导致森林破坏和生态恶化。因此，在引进和推广外来物种时，应注重可持续发展，兼顾经济效益与生态保护。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1'); trackMatQ('mq1')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题2 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题二</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">咖啡原产于非洲，6世纪传入阿拉伯半岛，15世纪后传播到欧洲，被称为"阿拉伯酒"。17世纪中叶，荷兰人将咖啡种植到锡兰岛，后传到印度、印度尼西亚等地。18世纪初，咖啡传入拉丁美洲，这里成了日后世界咖啡的主产区。17世纪初，威尼斯商人开设了欧洲第一家咖啡馆。此后，英国的牛津、伦敦，法国的巴黎、马赛等地相继开设咖啡馆。17世纪末18世纪初，咖啡馆在欧洲各个城市纷纷出现，并推广到北美的波士顿、纽约、费城。从此，欧洲和北美的社会生活有了喝咖啡的习惯。</div>
+    <div class="q-text">（1）根据材料，概括咖啡传播的时空脉络。（提取信息）</div>
+    <div class="q-text">（2）结合材料，说明咖啡馆的兴起反映了物种交流的什么影响？（历史解释）</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）提取信息：</strong>咖啡原产非洲→6世纪传入阿拉伯半岛→15世纪传入欧洲→17世纪中叶荷兰人种到锡兰，后传印度、印尼→18世纪初传入拉丁美洲，成为世界主产区。</p>
+      <p><strong>（2）历史解释：</strong>咖啡馆的兴起反映了物种交流深刻影响了人们的日常生活和社会文化。咖啡不仅是一种饮品，更塑造了近代欧洲和北美的公共社交空间——人们在咖啡馆休闲、聊天、交流信息，咖啡馆成为社会生活的重要场所。这体现了物种交流超越食物本身的社会文化意义。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2'); trackMatQ('mq2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page5 — 知识结构图
+     ============================================================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⛵</span><strong>新航路开辟</strong>
+        <p>15世纪末 · 全球联系建立</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>哥伦布到达美洲，开启"哥伦布大交换"，世界从分散走向整体，为食物物种全球交流提供了前提条件。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌽</span><strong>美洲作物外传</strong>
+        <p>玉米·马铃薯·甘薯·番茄·辣椒</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>美洲作物经欧洲传播至亚洲、非洲。玉米在欧亚广泛种植，马铃薯提高欧洲抗饥荒能力，甘薯在中国救荒推广。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌾</span><strong>欧亚物种传入美洲</strong>
+        <p>小麦·水稻·咖啡·禽畜</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>小麦和水稻成美洲主要作物，咖啡在拉美形成主产区，禽畜改变美洲动物群落和农业面貌。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌏</span><strong>全球性影响</strong>
+        <p>人口·饮食·经济·生态</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>食物物种交流提高全球粮食产量，促进人口增长；改变饮食结构，丰富食物种类；推动商品经济发展；但也导致森林破坏、水土流失等生态问题。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：物种交流与殖民扩张相伴而生</div>
+      <div class="kg-rule r2">🟠 经济：高产作物推动全球贸易与商品经济</div>
+      <div class="kg-rule r3">🟢 文化：咖啡文化、饮食结构深刻变革</div>
+      <div class="kg-rule r4">🔴 生态：外来物种推广导致环境问题</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page6 — 结束页
+     ============================================================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 食物生产与社会生活</div>
+    <h1 style="font-size:22pt;">第2课 · 新航路开辟后的食物物种交流</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>🌽 美洲物种全球传播</h3>
+        <ul>
+          <li>玉米、马铃薯、甘薯、番茄、辣椒等传入欧亚非</li>
+          <li>玉米：16世纪南欧→17世纪欧洲第二大粮食</li>
+          <li>甘薯：明万历年间陈振龙从菲律宾引入中国</li>
+          <li>传入中国三条路线：西北·西南·东南</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>🌾 欧亚物种传入美洲</h3>
+        <ul>
+          <li>小麦：成美洲主要粮食，面粉产业兴盛</li>
+          <li>水稻：18世纪中期北美第二大农作物</li>
+          <li>咖啡：非洲→阿拉伯→欧洲→拉美主产区</li>
+          <li>禽畜：鸡牛羊马等改变美洲动物群落</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>🌏 全球性多维影响</h3>
+        <ul>
+          <li>人口：粮食增产推动全球人口激增</li>
+          <li>饮食：改变食物结构，丰富日常餐桌</li>
+          <li>经济：促进商品经济和对外贸易</li>
+          <li>生态：森林破坏、水土流失等环境问题</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav">
+    <div><a href="选必2-U1-第1课_从食物采集到食物生产.html">← 上一课：第1课 从食物采集到食物生产</a></div>
+    <div class="nav-center">第2课</div>
+    <div><a href="选必2-U1-第3课_现代食物的生产储备与食品安全.html">下一课：第3课 现代食物的生产、储备与食品安全 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版高中历史 · 选择性必修二 · 第一单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================================================
+     底部翻页导航栏
+     ============================================================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================================================
+     JavaScript
+     ============================================================ -->
+<script>
+// ============================================================
+// 1. 分页导航
+// ============================================================
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ============================================================
+// 2. 闯关进度追踪
+// ============================================================
+var stageDone = { sort: false, fill: false, match: false, map: false, flips: false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ============================================================
+// 3. 学习目标点击标记
+// ============================================================
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  var targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ============================================================
+// 4. 标签页切换
+// ============================================================
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ============================================================
+// 5. 手风琴组
+// ============================================================
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ============================================================
+// 6. 答案显隐
+// ============================================================
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '📝 查看解析';
+    }
+  }
+}
+
+// ============================================================
+// 7. 选择题 + 计分
+// ============================================================
+var correctAnswers = { q1: 'B', q2: 'B', q3: 'A', q4: 'A', q5: 'A' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ============================================================
+// 8. 栏目筛选 + 折叠
+// ============================================================
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ============================================================
+// 9. 拖拽排序（IIFE）
+// ============================================================
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['step1','step2','step3','step4','step5','step6'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ============================================================
+// 10. 填空填词
+// ============================================================
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ============================================================
+// 11. 连线匹配
+// ============================================================
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    var totalPairs = document.querySelectorAll('.match-left').length;
+    if (matchedPairs.length >= totalPairs) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    el.style.borderColor = '#e74c3c';
+    setTimeout(function() { el.style.borderColor = ''; }, 300);
+    selectedLeft.style.borderColor = '#e74c3c';
+    setTimeout(function() { selectedLeft.style.borderColor = ''; }, 300);
+  }
+}
+
+// ============================================================
+// 12. 地图标注（IIFE）
+// ============================================================
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ============================================================
+// 13. 翻转卡
+// ============================================================
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var tab = el.closest('.tab-panel');
+  if (tab) {
+    var total = tab.querySelectorAll('.flash-card').length;
+    var flipped = tab.querySelectorAll('.flash-card.flipped').length;
+    var doneId = null;
+    if (tab.id === 'tab1') doneId = 'stageFlipsTab1';
+    else if (tab.id === 'tab2') doneId = 'stageFlipsTab2';
+    else if (tab.id === 'tab3') doneId = 'stageFlipsTab3';
+    if (doneId && total > 0 && flipped >= total) {
+      document.getElementById(doneId).classList.add('show');
+    }
+  }
+  var allTotal = document.querySelectorAll('.flash-card').length;
+  var allFlipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (allTotal > 0 && allFlipped >= allTotal) {
+    stageDone.flips = true;
+    updateStageProgress();
+    document.getElementById('stageFlipsDone').classList.add('show');
+  }
+}
+
+// ============================================================
+// 14. 知识结构图节点展开
+// ============================================================
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length - 1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length - 1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ============================================================
+// 15. deep-card 折叠（IIFE）
+// ============================================================
+(function() {
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card) {
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateStageProgress();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6课 古代人类的迁徙和区域文化的形成</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12; --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero & 封面 ========== */
+.hero-wrap { background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding:36px 20px 30px; text-align:center; color:#fff; border-radius:0 0 36px 36px; box-shadow:0 6px 30px rgba(61,43,140,0.20); margin:0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+.learn-target { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:20px 24px; margin-bottom:24px; border:1px solid var(--border); }
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item { font-size:13.5pt; padding:6px 8px; border-bottom:1px dashed var(--border); cursor:pointer; transition:all 0.2s; border-radius:6px; }
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn { display:block; margin:20px auto 10px; background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; border:none; border-radius:24px; padding:12px 36px; font-size:16pt; font-weight:700; cursor:pointer; transition:all 0.25s; box-shadow:0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 & Page1 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn { flex:1; padding:14px 8px; font-size:14pt; font-weight:700; border:none; cursor:pointer; text-align:center; transition:all 0.25s; background:#e8e0ff; color:#5a4ac7; letter-spacing:1px; }
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* 时间轴、知识卡片、贯通框 */
+.timeline-bar { background:#f0edff; border-radius:8px; padding:8px 16px; font-size:12pt; color:#5a4ac7; text-align:center; margin-bottom:12px; letter-spacing:1px; }
+.kp-card { background:var(--bg-card); border-left:4px solid var(--primary); border-radius:0 10px 10px 0; padding:18px 22px; margin-bottom:20px; box-shadow:0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; } .kp-card li { margin:6px 0; font-size:14pt; }
+.link-bar { border:2px dashed #d5cef0; border-radius:10px; padding:12px 16px; margin-top:14px; background:#faf8ff; font-size:13pt; color:#5a4ac7; }
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-gaokao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 手风琴组 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s; }
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700; cursor:pointer; user-select:none; }
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== diff-table ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip { padding:6px 14px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s; font-weight:600; color:#5a4ac7; }
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label { display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff; }
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node { width:90%; border-radius:12px; padding:16px 20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative; }
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; } .kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,0.06);}50%{box-shadow:0 2px 20px rgba(124,108,240,0.18);} }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08); position:relative; text-align:left; }
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 五关交互专用 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter:brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== -->
+<!-- PAGE 0 — 封面页 -->
+<!-- ============================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第三单元 · 人口迁徙、文化交融与认同</div>
+    <h1>第6课 · 古代人类的迁徙和区域文化的形成</h1>
+    <div class="hero-sub">统编版高中历史  文化交流与传播（选必三）</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>运用生产力与生产关系原理，理解游牧民族迁徙对区域文化发展的推动作用</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>梳理印欧人迁徙和亚欧游牧民族大迁徙的时间脉络与空间分布</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>通过《赫梯法典》、塔西佗《日耳曼尼亚志》等史料，认识古代民族迁徙的史实</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>阐释游牧民族迁徙对农耕世界与游牧世界互动的历史意义</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识民族迁徙与文化交融在人类文明发展中的重要作用</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 1 — 知识要点 + 五关闯关 -->
+<!-- ============================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 印欧人迁徙</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 亚欧大迁徙</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 迁徙的意义</button>
+  </div>
+
+  <!-- ====== TAB1 印欧人的迁徙 ====== -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">📅 前3000-前1000年印欧人迁徙 → 前17世纪赫梯帝国 → 前6世纪波斯帝国</div>
+    <h3>印欧人的迁徙及其对早期区域文化的影响</h3>
+    <ul>
+      <li><span class="kwd">印欧人</span>：可能起源于东欧平原的游牧民，驯养马匹，发明马拉战车</li>
+      <li><span class="kwd">迁徙时间</span>：公元前2千纪起，延续数百年甚至上千年，进入西起欧洲、东到印度的广大地区</li>
+      <li><span class="kwd">赫梯人</span>：前17世纪在小亚细亚建立帝国，前14世纪鼎盛，多次与埃及争霸，前13世纪末衰落</li>
+      <li><span class="kwd">波斯人</span>：前6世纪崛起于伊朗高原，建立历史上第一个地跨亚非欧三洲的大帝国</li>
+      <li><span class="kwd">希腊人</span>：前2000年左右进入巴尔干，与当地居民融合，希腊文明成为西方文明源头</li>
+      <li><span class="kwd">雅利安人</span>：从印度河流域推进到恒河流域，种姓制度和佛教对东南亚产生重大影响</li>
+    </ul>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将以下印欧人迁徙形成的民族按时间先后拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">赫梯人</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">希腊人</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">波斯人</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">雅利安人</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第二</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第三</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">最晚</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">印欧人</div><div class="flash-back">可能起源于东欧平原的游牧民，驯养马匹，制造马拉战车，公元前2千纪起大规模迁徙。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">赫梯帝国</div><div class="flash-back">前17世纪建立于小亚细亚，前14世纪鼎盛，与埃及争霸，前13世纪末因内战和海上民族冲击衰落。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">波斯帝国</div><div class="flash-back">前6世纪崛起，地跨亚非欧三洲，统治下西亚北非文明统一，与希腊文明深入交流。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">雅利安人</div><div class="flash-back">从印度河流域推进到恒河流域，将马和铁带入印度，种姓制度和佛教对东南亚产生重大影响。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 印欧人迁徙形成的四大民族及其文化贡献常以<span class="kwd">比较类</span>选择题考查。
+    </div>
+  </div>
+
+  <!-- ====== TAB2 亚欧游牧民族大迁徙 ====== -->
+  <div class="kp-card tab-panel" id="tab2">
+    <div class="timeline-bar">📅 前2-2世纪汉朝罗马强盛 → 3-6世纪大迁徙 → 7-8世纪阿拉伯扩张</div>
+    <h3>亚欧游牧民族大迁徙对区域文化发展的影响</h3>
+    <ul>
+      <li><span class="kwd">前2-2世纪</span>：匈奴势力扩张；大月氏西迁建立贵霜帝国；日耳曼人南迁与罗马接触</li>
+      <li><span class="kwd">3-6世纪大迁徙</span>：匈奴内迁中原、鲜卑氏人羌人内迁（北方民族大交融）、北方人口南迁（江南开发）</li>
+      <li><span class="kwd">日耳曼人</span>：利用罗马衰落进入帝国并建立国家，476年灭亡西罗马帝国</li>
+      <li><span class="kwd">阿拉伯人</span>：7世纪开始扩张，8世纪中期建立地跨亚非欧三洲的帝国</li>
+    </ul>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将游牧民族迁徙与影响配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 迁徙事件</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">大月氏西迁</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">匈奴内迁</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">日耳曼人南迁</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">北方人口南迁</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">阿拉伯扩张</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">🎯 影响</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">建立贵霜帝国</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">北方民族大交融</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">灭亡西罗马帝国</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">促进江南开发</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">建立地跨三洲帝国</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">贵霜帝国</div><div class="flash-back">大月氏人西迁后建立，势力一度到达印度北部，是丝绸之路上的重要国家。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">北方民族大交融</div><div class="flash-back">3-6世纪匈奴、鲜卑、氏人、羌人内迁中原，形成中国北方民族大交融。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">江南开发</div><div class="flash-back">北方人口南迁带来先进生产工具和技术，促进了江南地区的开发。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">西罗马灭亡</div><div class="flash-back">476年日耳曼人灭亡西罗马帝国，标志着西欧古典时代的终结和中世纪的开始。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 3-6世纪亚欧大迁徙常以<span class="kwd">综合类</span>选择题考查，注意东西方迁徙的联动性。
+    </div>
+  </div>
+
+  <!-- ====== TAB3 迁徙的意义 ====== -->
+  <div class="kp-card tab-panel" id="tab3">
+    <div class="timeline-bar">📅 游牧世界与农耕世界互动 → 文化碰撞交融 → 新国家崛起</div>
+    <h3>游牧民族迁徙的历史意义</h3>
+    <ul>
+      <li><span class="kwd">政治格局改变</span>：赫梯、波斯、贵霜、阿拉伯等新国家崛起，西罗马灭亡</li>
+      <li><span class="kwd">文化交融</span>：各区域文化在碰撞交往中发生变化，吸收其他民族文化促进自身发展</li>
+      <li><span class="kwd">技术传播</span>：游牧世界向农耕世界学习技术，农耕世界也吸收游牧世界的军事技术</li>
+      <li><span class="kwd">扩大通道</span>：游牧民族迁徙扩大了欧亚大陆的交流通道，推动世界历史发展</li>
+    </ul>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 印欧人可能起源于<input class="fill-input" data-answer="东欧平原" placeholder="？"></div>
+      <div class="fill-blank-row">2. 赫梯帝国因<input class="fill-input" data-answer="海上民族" placeholder="？">冲击而瓦解</div>
+      <div class="fill-blank-row">3. 大月氏人西迁建立了<input class="fill-input" data-answer="贵霜帝国" placeholder="？"></div>
+      <div class="fill-blank-row">4. 476年日耳曼人灭亡了<input class="fill-input" data-answer="西罗马帝国" placeholder="？"></div>
+      <div class="fill-blank-row">5. 8世纪中期阿拉伯人建立起地跨亚非欧三洲的<input class="fill-input" data-answer="阿拉伯帝国" placeholder="？"></div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：点击标注印欧人迁徙形成的文明区域</div>
+    <div class="map-zone" id="mapContainer">
+      <svg viewBox="0 0 440 240" style="width:100%;height:auto;background:#f0f0e8;border-radius:12px;">
+        <!-- 亚欧大陆轮廓示意 -->
+        <path d="M40,120 L60,80 L100,50 L160,30 L220,25 L280,30 L340,50 L380,80 L390,120 L370,160 L330,190 L280,210 L220,215 L160,210 L100,195 L60,175 L40,150 Z" fill="#d4d0c8" stroke="#999" stroke-width="1.5"/>
+        <path d="M80,70 L120,40 L180,20 L240,18 L290,25 L320,45 L310,60 L270,50 L210,45 L150,50 L100,60 Z" fill="#c8c4ba" stroke="#999" stroke-width="1.5"/>
+        <!-- 标注点 -->
+        <circle class="map-marker" data-point="pt-hittite" cx="200" cy="110" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-persia" cx="220" cy="140" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-greece" cx="160" cy="100" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-india" cx="290" cy="160" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-arab" cx="230" cy="175" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <text x="190" y="100" font-size="9" fill="#333" font-weight="700">赫梯</text>
+        <text x="210" y="130" font-size="9" fill="#333" font-weight="700">波斯</text>
+        <text x="145" y="92" font-size="9" fill="#333" font-weight="700">希腊</text>
+        <text x="280" y="152" font-size="9" fill="#333" font-weight="700">印度</text>
+        <text x="220" y="168" font-size="9" fill="#333" font-weight="700">阿拉伯</text>
+      </svg>
+      <div class="map-instruction">💡 点击紫色圆点标注印欧人迁徙形成的文明</div>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-hittite">赫梯</span>
+        <span class="map-check-item" data-point="pt-persia">波斯</span>
+        <span class="map-check-item" data-point="pt-greece">希腊</span>
+        <span class="map-check-item" data-point="pt-india">印度</span>
+        <span class="map-check-item" data-point="pt-arab">阿拉伯</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">文化交融</div><div class="flash-back">游牧民族迁徙使各区域文化在碰撞交往中变化，各民族吸收其他民族文化促进自身发展。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">游牧与农耕互动</div><div class="flash-back">游牧世界冲击农耕世界，扩大交流通道，彼此学习对方所需技术，推动世界历史发展。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">海上民族</div><div class="flash-back">公元前1200年左右东部地中海民族迁徙浪潮，赫梯帝国因海上民族冲击而瓦解。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">政治格局重组</div><div class="flash-back">大迁徙使亚欧大陆从东到西政治格局改变，一批新国家崛起。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·中频</span> 游牧民族迁徙的历史意义常以<span class="kwd">材料题</span>考查，需结合吴于廑“游牧世界与农耕世界”理论分析。
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 2 — 重难点解析（v3.0.1 深化固化） -->
+<!-- ============================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重难点一：印欧人迁徙对区域文化的影响 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔑 重难点一：印欧人迁徙对亚欧大陆区域文化形成的影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 印欧人迁徙的四大方向与四大民族</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>印欧人起源于东欧平原，公元前2千纪起大规模迁徙，凭借马和马拉战车的军事优势，分别形成赫梯人（小亚细亚）、波斯人（伊朗高原）、希腊人（巴尔干）、雅利安人（印度河流域→恒河流域）。</p>
+          <p><strong>核心影响：</strong>赫梯人建立帝国与埃及争霸；波斯人建立地跨三洲帝国；希腊人成为西方文明源头；雅利安人将种姓制度和佛教传入印度并影响东南亚。</p>
+          <p><strong>简而言之：</strong>印欧人迁徙是“文明的播种”——四大方向分别开出了赫梯、波斯、希腊、印度四朵文明之花，深刻塑造了亚欧大陆中西部的文化版图。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 印欧人迁徙与亚欧大陆文化走廊的形成</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>印欧人迁徙覆盖了从欧洲到印度的大走廊，与后来丝绸之路的路线高度重合。赫梯—波斯—希腊—印度的文明链条，构成了亚欧大陆最早的“文化传播带”。</p>
+          <p><strong>纵向联系：</strong>印欧人迁徙（前2000-前1000年）→波斯帝国（前6世纪）统一西亚北非→亚历山大东征（前4世纪）促进希腊化→丝绸之路（前2世纪后）全面贯通——每一次重大文化传播都沿着大致相同的路线展开。</p>
+          <p><strong>这一联系说明：</strong>地理通道一旦被“走通”，就会成为持续的文明交流走廊。印欧人开辟的迁徙路线，为后来的波斯、希腊、罗马、阿拉伯等文明提供了传播通道，是世界历史走向“整体化”的先声。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证：从《赫梯法典》看社会结构</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“第六十一条：假如任何人获得良种的马而消除它的烙印，它的主人发现了它，则消除烙印的人应交付七匹马……同时用自己的房屋担保。第六十四条：假如任何人盗窃牲畜的马，则其案件也如此（即赔偿十匹马，并用自己的房屋担保）。”——《赫梯法典》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 《赫梯法典》对马的高度重视，反映了<b>马作为关键军事资源的社会地位</b>。印欧人凭借马和战车征服定居文明，马在赫梯社会中具有极高的经济价值和军事价值。严苛的惩罚（七匹马/十匹马）说明马是<b>社会财富和军事力量的核心象征</b>，这体现了<b>经济基础（军事技术）决定上层建筑（法律保护）</b>的唯物史观原理。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>阅读材料，结合所学，分析马在赫梯社会中的重要性及其反映的社会特征。（10分）</p>
+          <p><strong>答案：</strong>①马是赫梯人军事扩张的核心工具（马拉战车）；②马具有极高的经济价值（偷马赔偿十匹马+房屋担保）；③马的烙印制度反映私有财产观念；④《赫梯法典》对马的保护体现了军事贵族的社会地位。</p>
+          <p><strong>解析：</strong>需从“军事价值→经济价值→社会结构”三层分析。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点二：亚欧游牧民族大迁徙的政治与文化影响 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🔄 重难点二：亚欧游牧民族大迁徙的政治格局与文化交融</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 3-6世纪大迁徙的东西方联动</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>3-6世纪亚欧大陆游牧民族大规模迁徙，东西方联动：东方匈奴/鲜卑/氐人/羌人内迁中原，北方人口南迁；西方日耳曼人进入罗马帝国，476年灭亡西罗马帝国。</p>
+          <p><strong>核心影响：</strong>东方：中国北方民族大交融、江南开发；西方：日耳曼人建立各王国、西罗马灭亡；中间：阿拉伯帝国7-8世纪崛起，地跨三洲。</p>
+          <p><strong>简而言之：</strong>3-6世纪大迁徙是亚欧大陆的“大洗牌”——旧帝国（汉朝/罗马）衰落，新民族（匈奴/日耳曼/阿拉伯）登上历史舞台，世界历史进入新的阶段。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 阿图尔夫的转变与日耳曼人的罗马化</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>西哥特人首领阿图尔夫从“消除罗马”到“复兴罗马”的转变，反映了游牧民族征服定居文明后的普遍规律——从军事征服者转变为文明继承者。</p>
+          <p><strong>纵向联系：</strong>日耳曼人学习罗马法律、基督教、拉丁语，形成“罗马-日耳曼”混合文化，为中古西欧文明奠定了基础。这与匈奴内迁后学习汉文化、北魏孝文帝改革的性质相似。</p>
+          <p><strong>这一联系说明：</strong>游牧民族征服农耕文明后，往往被被征服者的更高文明所“征服”——这是文化传播的“逆征服”现象，也是人类文明“落后征服先进、先进同化落后”的历史辩证法。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料解读塔西佗《日耳曼尼亚志》</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“如果他们的本土长年安静无事，那么很多高贵的青年就要自愿地去找寻那些正在发生战争的部落。一则因为他们的天性好动而好战；再则因为他们在危难之中容易博得声誉；三则因为只有在干戈扰攘之中才能维持人数众多的侍从……日耳曼人中，没有一个部落是居住在城郭内的，就是个别的住宅也不容许彼此毗连。他们零星散落地逐水泉、草地或树林而居。”——[古罗马]塔西佗《日耳曼尼亚志》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 塔西佗的描述反映了日耳曼人<b>处于从原始社会向阶级社会过渡的阶段</b>。“好战”“逐声誉”“维持侍从”反映了军事民主制和贵族等级的萌芽；“逐水泉草地而居”反映了游牧/半游牧的生产方式。这体现了<b>生产力决定生产关系</b>——日耳曼人尚未发展出农业文明，因此无法建立城郭和固定住宅，社会组织停留在部落军事民主制阶段。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>阅读材料，结合所学，分析塔西佗所描述的日耳曼人的社会特征及其与罗马文明的差异。（12分）</p>
+          <p><strong>答案：</strong>①社会结构：部落军事民主制，尚武好战；②生活方式：游牧/半游牧，逐水草而居；③与罗马差异：罗马是城市文明/农业文明/法律文明，日耳曼是部落文明/军事文明；④历史趋势：日耳曼人进入罗马后，从征服者转变为文明继承者，推动了西欧封建化进程。</p>
+          <p><strong>解析：</strong>需从“社会特征→与罗马对比→历史趋势”三层展开。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点三：游牧世界与农耕世界的互动 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🌟 重难点三：游牧世界与农耕世界的互动及历史意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · “游牧—农耕”互动的基本模式</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>游牧世界与农耕世界是人类文明的两大基本形态。游牧民族（印欧人、匈奴、日耳曼人、阿拉伯人等）不断冲击农耕文明（中国、罗马、印度等），二者在冲突中相互学习、共同进步。</p>
+          <p><strong>互动模式：</strong>①军事冲突（游牧入侵农耕）；②贸易交流（丝绸之路等）；③技术传播（游牧学农耕技术/农耕学游牧军事技术）；④民族融合（征服者被被征服者文明同化）。</p>
+          <p><strong>简而言之：</strong>游牧与农耕不是“二元对立”，而是“辩证互动”——游牧民族的冲击打破了农耕文明的封闭性，农耕文明的先进性则同化了游牧民族，二者共同推动了人类文明的进步。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 吴于廑“游牧世界对农耕世界的冲击”理论</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>吴于廑先生指出，游牧世界对农耕世界的冲击“为历史发展为世界史带来了有积极意义的影响”——不仅扩大了交流通道，还使双方“彼此都向对方学得自己所缺少的某些技术”。</p>
+          <p><strong>纵向联系：</strong>从印欧人迁徙（前2000年）到匈奴西迁（前2-2世纪）到日耳曼人迁徙（3-6世纪）到阿拉伯扩张（7-8世纪），游牧民族的每一次大规模冲击都带来了欧亚大陆政治格局的重组和文化传播的加速。</p>
+          <p><strong>这一联系说明：</strong>游牧民族迁徙是世界历史从“分散”走向“整体”的重要动力——每一次迁徙都打破了一个旧的文化圈，构建了一个更大的互动网络。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析游牧民族迁徙的推动作用</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“游牧世界对农耕世界的冲击，为历史之发展为世界史带来了不少有积极意义的影响。首先是两者之间扩大了通道，彼此都向对方学得自己所缺少的某些技术。”——吴于廑《世界历史上的游牧世界与农耕世界》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 从唯物史观看，游牧民族迁徙是<b>生产力发展不平衡导致的必然现象</b>。游牧社会的生产力（马匹、战车）使其具有军事优势；农耕社会的生产力（农业、手工业）使其具有文明优势。两者的碰撞是<b>物质力量与精神力量的辩证统一</b>——军事征服者最终被被征服者的先进文明所征服，体现了“落后的生产力被先进的生产力取代”的历史规律。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>阅读材料，结合所学，分析游牧民族迁徙对世界历史发展的积极意义。（12分）</p>
+          <p><strong>答案：</strong>①扩大了欧亚大陆的交流通道（丝绸之路等）；②打破了区域封闭性，推动了世界历史的整体化；③游牧民族的军事技术（马、战车、骑射）传入农耕世界；④农耕世界的文明成果（文字、法律、宗教）同化了游牧民族；⑤推动了新国家的崛起（阿拉伯帝国等）和旧帝国的转型；⑥为后来全球化的开端奠定了基础。</p>
+          <p><strong>解析：</strong>需从“通道扩大→技术传播→文明同化→政治重组→世界历史发展”五维度展开。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 3 — 教材栏目解答 -->
+<!-- ============================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('学习聚焦',this)">学习聚焦</button>
+    <button class="filter-chip" onclick="filterCol('史料阅读',this)">史料阅读</button>
+    <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+    <button class="filter-chip" onclick="filterCol('思考点',this)">思考点</button>
+    <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+    <button class="filter-chip" onclick="filterCol('探究与拓展',this)">探究与拓展</button>
+  </div>
+
+  <!-- 学习聚焦 1 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦 · 印欧人迁徙的影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>印欧人的迁徙推动了亚欧大陆中西部几个重要文化区域的形成和发展。</p>
+      <div class="a" id="ans-p3-focus1">
+        <strong>📝 要点解析：</strong>“亚欧大陆中西部”指从欧洲到印度的广阔地带；“重要文化区域”指赫梯、波斯、希腊、印度等文明；“形成和发展”强调迁徙是这些文明产生的重要动因——游牧民族与当地居民融合，催生了新的文明形态。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 史料阅读：《赫梯法典》 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 《赫梯法典》关于马的规定</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“第六十一条：假如任何人获得良种的马而消除它的烙印，它的主人发现了它，则消除烙印的人应交付七匹马……同时用自己的房屋担保。第六十四条：假如任何人盗窃牲畜的马，则其案件也如此（即赔偿十匹马，并用自己的房屋担保）。”——周一良、吴于廑主编，林志纯主编《世界通史资料选辑·上古部分》</p>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 史料解读：</strong>①马在赫梯社会中具有极高价值（偷马赔偿十匹马+房屋担保）；②“烙印”反映了对马匹所有权的法律保护；③马是军事扩张的核心工具（马拉战车）；④反映了赫梯社会的军事贵族特征。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 历史纵横：海上民族 -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🧠 历史纵横 · 海上民族</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>公元前1200年左右，东部地中海区域出现了一股较大的民族迁徙浪潮。埃及文献称这些移民为“海上国家的人”，现代学者称他们为“海上民族”。他们或来自小亚细亚，或来自叙利亚和巴勒斯坦，或分别自居。他们带着家眷，寻找新的定居地，有时也会受雇于埃及和赫梯，充当雇佣兵。虽然他们并未建立统一国家，也无文字传世，但他们的行动大大改变了东部地中海区域的民族构成。赫梯帝国因海上民族的冲击而瓦解。海上民族也在巴勒斯坦、塞浦路斯岛等地定居下来。</p>
+      <div class="a" id="ans-p3-history1">
+        <strong>📝 要点归纳：</strong>①前1200年左右东部地中海民族迁徙浪潮；②“海上民族”是埃及文献中的称呼；③来源多元（小亚细亚/叙利亚/巴勒斯坦等）；④赫梯帝国因海上民族冲击而瓦解；⑤改变了东部地中海民族构成。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-history1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 思考点 -->
+  <div class="col-box" data-cat="思考点">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 思考点 · 印欧人迁徙对早期区域文化的影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>印欧人的迁徙对早期区域文化产生了哪些重要影响？</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong>①赫梯人：建立帝国，与埃及争霸；②波斯人：建立地跨三洲帝国，统一西亚北非文明；③希腊人：形成希腊文明，成为西方文明源头；④雅利安人：将马和铁带入印度，种姓制度和佛教影响东南亚。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 学习聚焦 2 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦 · 亚欧游牧民族大迁徙的意义</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>亚欧游牧民族大迁徙促进了区域文化的发展。</p>
+      <div class="a" id="ans-p3-focus2">
+        <strong>📝 要点解析：</strong>“促进”强调迁徙并非只有破坏性，更有建设性——文化在碰撞中交融、在冲突中创新；“区域文化”指中国北方/江南、西欧、西亚北非等各区域文化均因迁徙而发生变化。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 史料阅读：塔西佗《日耳曼尼亚志》 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 塔西佗《日耳曼尼亚志》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“如果他们的本土长年安静无事，那么很多高贵的青年就要自愿地去找寻那些正在发生战争的部落。一则因为他们的天性好动而好战；再则因为他们在危难之中容易博得声誉；三则因为只有在干戈扰攘之中才能维持人数众多的侍从……日耳曼人中，没有一个部落是居住在城郭内的，就是个别的住宅也不容许彼此毗连。他们零星散落地逐水泉、草地或树林而居。”——[古罗马]塔西佗著，马雅等译《日耳曼尼亚志》</p>
+      <div class="a" id="ans-p3-material2">
+        <strong>📝 史料解读：</strong>①日耳曼人尚武好战、崇尚声誉；②军事领袖靠“侍从”维持势力；③无城郭、逐水草而居→游牧/半游牧生活方式；④反映了日耳曼人处于部落军事民主制阶段；⑤与罗马文明形成鲜明对比。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 学思之窗：阿图尔夫的转变 -->
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 学思之窗 · 阿图尔夫对罗马态度的转变</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“最初，我强烈要求消除罗马这一名字，使罗马的全部土地成为哥特帝国的领土……不过，众多的经验告诉我：桀骜不驯的哥特人从不遵守法律，而没有法律的国家将因不成国。因此，我选择了较为安全的道路，希望通过哥特的力量来恢复、增强罗马之荣光。”——阿图尔夫</p>
+      <p><strong>问题：</strong>阿图尔夫最初对罗马帝国是什么态度？后来为什么会发生转变？</p>
+      <div class="a" id="ans-p3-think2">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>最初态度：</strong>阿图尔夫最初持“取代”态度——希望用哥特帝国替代罗马帝国。</p>
+        <p><strong>转变原因：</strong>①哥特人“不遵守法律”，无法建立有序国家；②罗马的法律制度是国家治理的必要基础；③阿图尔夫认识到罗马文明的优越性，从“征服者”转变为“文明继承者”。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think2')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 探究与拓展：问题探究 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔬 探究与拓展 · 游牧世界与农耕世界的相互学习</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“游牧世界对农耕世界的冲击，为历史之发展为世界史带来了不少有积极意义的影响。首先是两者之间扩大了通道，彼此都向对方学得自己所缺少的某些技术。”——吴于廑《世界历史上的游牧世界与农耕世界》</p>
+      <p><strong>问题：</strong>结合相关史事，看看农耕民族与游牧民族是如何相互学习的。</p>
+      <div class="a" id="ans-p3-explore1">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>游牧民族向农耕民族学习：</strong>①日耳曼人学习罗马法律、基督教和拉丁语；②匈奴内迁后学习汉族的农业技术和行政制度；③阿拉伯人吸收希腊、罗马、印度、波斯的科学文化。</p>
+        <p><strong>农耕民族向游牧民族学习：</strong>①中国向北方游牧民族学习骑射、马匹驯养；②罗马向日耳曼人学习骑兵战术；③波斯帝国吸收游牧民族的军事组织方式。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 探究与拓展：学习拓展 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 探究与拓展 · 农耕民族迁徙的原因与影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>阅读相关论著，想一想：农耕民族迁徙的主要原因是为什么？对移入地的文化产生了哪些重要影响？</p>
+      <div class="a" id="ans-p3-explore2">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>主要原因：</strong>①战乱（如中国北方战乱导致人口南迁）；②环境变化（干旱、气候变迁）；③人口压力（人口增长超出土地承载力）；④政治原因（被征服后被迫迁徙）。</p>
+        <p><strong>对移入地文化的影响：</strong>①带来先进的生产工具和技术（如北方移民促进江南开发）；②促进文化交流与融合（如客家人保留中原文化传统，同时融入南方文化）；③改变移入地的民族构成和语言分布；④推动移入地的经济和社会进步。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore2')">📝 查看参考答案</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 4 — 课堂训练（v3.0.2 固化版） -->
+<!-- ============================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 印欧人可能起源于（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 伊朗高原</label>
+      <label onclick="optClick(this,'B','q1')">B. 东欧平原</label>
+      <label onclick="optClick(this,'C','q1')">C. 中亚草原</label>
+      <label onclick="optClick(this,'D','q1')">D. 印度河流域</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：印欧人可能起源于东欧平原，是游牧民，驯养了马匹，后来大规模迁徙。<br>
+      ❌ 排除A：伊朗高原是波斯人后来的定居地；<br>
+      ❌ 排除C：中亚草原是后期游牧民族活动的区域；<br>
+      ❌ 排除D：印度河流域是雅利安人迁徙的目的地。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 历史上第一个地跨亚非欧三洲的大帝国是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 赫梯帝国</label>
+      <label onclick="optClick(this,'B','q2')">B. 波斯帝国</label>
+      <label onclick="optClick(this,'C','q2')">C. 亚历山大帝国</label>
+      <label onclick="optClick(this,'D','q2')">D. 阿拉伯帝国</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：波斯帝国于公元前6世纪崛起，征服了东到印度河流域、西到巴尔干、包括埃及在内的广大地区，是第一个地跨三洲的大帝国。<br>
+      ❌ 排除A：赫梯帝国只控制小亚细亚和叙利亚巴勒斯坦；<br>
+      ❌ 排除C：亚历山大帝国晚于波斯帝国；<br>
+      ❌ 排除D：阿拉伯帝国晚于波斯帝国。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 赫梯帝国衰落的原因包括（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 波斯人征服</label>
+      <label onclick="optClick(this,'B','q3')">B. 海上民族冲击和内乱</label>
+      <label onclick="optClick(this,'C','q3')">C. 罗马帝国扩张</label>
+      <label onclick="optClick(this,'D','q3')">D. 阿拉伯人入侵</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：赫梯帝国前13世纪末因陷入内战逐渐衰落，同时海上民族的冲击加速了其瓦解。<br>
+      ❌ 排除A：波斯人崛起时赫梯已灭亡；<br>
+      ❌ 排除C：罗马帝国晚于赫梯；<br>
+      ❌ 排除D：阿拉伯帝国晚于赫梯。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 3-6世纪中国北方人口南迁带来的影响是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 北方经济衰落</label>
+      <label onclick="optClick(this,'B','q4')">B. 促进江南开发</label>
+      <label onclick="optClick(this,'C','q4')">C. 南方人口减少</label>
+      <label onclick="optClick(this,'D','q4')">D. 民族矛盾激化</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：北方人口南迁带去了先进的生产工具和技术，促进了江南地区的开发。<br>
+      ❌ 排除A：北方经济虽受战乱影响但并未全面衰落；<br>
+      ❌ 排除C：南方人口因移民而增加；<br>
+      ❌ 排除D：民族交融是更主要的趋势。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 阿图尔夫对罗马帝国态度转变反映的普遍规律是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 游牧民族永远排斥农耕文明</label>
+      <label onclick="optClick(this,'B','q5')">B. 征服者往往被被征服者的文明同化</label>
+      <label onclick="optClick(this,'C','q5')">C. 罗马法律落后于哥特传统</label>
+      <label onclick="optClick(this,'D','q5')">D. 日耳曼人比罗马人更文明</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：阿图尔夫从“消除罗马”到“复兴罗马”的转变，体现了游牧民族征服定居文明后，往往被被征服者的更高文明所同化的普遍规律。<br>
+      ❌ 排除A：与史实相反；<br>
+      ❌ 排除C：阿图尔夫恰恰认识到罗马法律的优越性；<br>
+      ❌ 排除D：不符合史实。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题 1（高难度·唯物史观升华）— 不计分 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p><strong>材料一：</strong>“游牧世界对农耕世界的冲击，为历史之发展为世界史带来了不少有积极意义的影响。首先是两者之间扩大了通道，彼此都向对方学得自己所缺少的某些技术。”——吴于廑</p>
+      <p><strong>材料二：</strong>“日耳曼人中，没有一个部落是居住在城郭内的……他们零星散落地逐水泉、草地或树林而居。”——塔西佗《日耳曼尼亚志》</p>
+    </div>
+    <div class="q-text">（1）材料一认为游牧民族迁徙有什么积极意义？（2分）</div>
+    <div class="q-text">（2）材料二反映了日耳曼人怎样的生活方式？（4分）</div>
+    <div class="q-text">（3）从唯物史观角度，分析游牧民族与农耕民族互动的历史意义。（6分）</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>扩大了欧亚大陆的交流通道，使游牧和农耕世界相互学习彼此的技术。（2分）</p>
+      <p><strong>（2）</strong>日耳曼人无城郭、无固定住宅，逐水泉草地而居，反映了游牧/半游牧的生活方式，处于部落军事民主制阶段。（4分）</p>
+      <p><strong>（3）</strong>从唯物史观看，游牧民族迁徙是<b>生产力发展不平衡导致的必然现象</b>。游牧社会的军事技术（马、战车）使其具有军事优势；农耕社会的农业技术、法律文明具有制度优势。二者的碰撞是<b>物质力量与精神力量的辩证统一</b>——军事征服者最终被被征服者的先进文明所同化。这种互动打破了文明封闭性，推动了世界历史从分散走向整体。（6分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 2（中难度）— 不计分 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>“第六十一条：假如任何人获得良种的马而消除它的烙印……应交付七匹马……用自己的房屋担保。”——《赫梯法典》</p>
+    </div>
+    <div class="q-text">（1）材料反映了赫梯社会中马的什么地位？（2分）</div>
+    <div class="q-text">（2）结合所学，分析马在印欧人迁徙中的作用。（4分）</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>马具有极高的经济价值和法律保护地位（偷马赔偿十匹马+房屋担保）。（2分）</p>
+      <p><strong>（2）</strong>①马是印欧人迁徙的核心交通工具；②马拉战车提供军事优势，帮助印欧人征服定居居民；③马提高了迁徙速度和效率；④马成为游牧民族区别于农耕民族的标志性技术。（每点1分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 3（中难度）— 不计分 -->
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>“4世纪中后期，遭到匈奴进攻的西哥特人进入罗马帝国境内，并于410年攻占罗马城。”——统编版教材</p>
+    </div>
+    <div class="q-text">（1）材料反映了什么历史事件？（2分）</div>
+    <div class="q-text">（2）结合所学，概述3-6世纪亚欧游牧民族大迁徙的主要表现。（4分）</div>
+    <div class="a" id="ans-p4-mat3">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>反映了日耳曼人（西哥特人）在匈奴进攻压力下进入罗马帝国，最终攻占罗马城的历史事件。（2分）</p>
+      <p><strong>（2）</strong>①东方：匈奴、鲜卑、氐人、羌人内迁中原，形成北方民族大交融；②南方：北方人口南迁，促进江南开发；③西方：日耳曼人各支进入罗马帝国，476年灭亡西罗马帝国；④阿拉伯人7-8世纪扩张，建立地跨三洲帝国。（每点1分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 5 — 知识结构图 -->
+<!-- ============================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 古代人类的迁徙和区域文化的形成</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🐴</span><strong>印欧人迁徙</strong>
+        <p>赫梯·波斯·希腊·雅利安</p>
+        <div class="kg-detail"><p>📌 四大方向→四大文明。马和战车是关键技术。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌾</span><strong>3-6世纪大迁徙</strong>
+        <p>匈奴·日耳曼·鲜卑·阿拉伯</p>
+        <div class="kg-detail"><p>📌 东西联动：中国北方民族交融+江南开发；西罗马灭亡；阿拉伯崛起。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🔄</span><strong>游牧与农耕互动</strong>
+        <p>军事冲击·技术传播·文明同化</p>
+        <div class="kg-detail"><p>📌 吴于廑：扩大通道，相互学习，推动世界历史发展。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌍</span><strong>文化交融与认同</strong>
+        <p>政治重组·民族融合·文明新生</p>
+        <div class="kg-detail"><p>🚀 迁徙是文化交融的催化剂，推动人类文明从分散走向整体。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 印欧人：四大民族·文明播种</div>
+      <div class="kg-rule r2">🟠 大迁徙：东西联动·格局重组</div>
+      <div class="kg-rule r3">🟢 互动：游牧冲击·农耕同化</div>
+      <div class="kg-rule r4">🔴 意义：文化交融·世界历史</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 6 — 结束页 -->
+<!-- ============================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第三单元 · 人口迁徙、文化交融与认同</div>
+    <h1 style="font-size:22pt;">第6课 · 古代人类的迁徙和区域文化的形成</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>印欧人迁徙</h3>
+        <ul>
+          <li><strong>起源</strong>：东欧平原，驯养马匹</li>
+          <li><strong>四大民族</strong>：赫梯·波斯·希腊·雅利安</li>
+          <li><strong>影响</strong>：奠定亚欧大陆文明格局</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>亚欧大迁徙</h3>
+        <ul>
+          <li><strong>东方</strong>：匈奴内迁·民族交融·江南开发</li>
+          <li><strong>西方</strong>：日耳曼入主·西罗马灭亡</li>
+          <li><strong>中间</strong>：阿拉伯崛起·地跨三洲</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>迁徙的意义</h3>
+        <ul>
+          <li><strong>政治</strong>：新国家崛起·格局重组</li>
+          <li><strong>文化</strong>：碰撞交融·文明新生</li>
+          <li><strong>世界史</strong>：扩大通道·走向整体</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <div class="bottom-nav">
+    <div><a href="选必3-U2-第5课 南亚、东亚与美洲的文化.html">← 上一课：第5课</a></div>
+    <div class="nav-center">第6课</div>
+    <div><a href="选必3-U3-第7课 近代殖民活动和人口的跨地域转移.html">下一课：第7课 →</a></div>
+  </div>
+
+
+  <footer>
+    <p>统编版高中历史 · 文化交流与传播（选必三） · 第三单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================== -->
+<!-- 底部翻页导航 -->
+<!-- ============================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================== -->
+<!-- JavaScript -->
+<!-- ============================== -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); nextPage(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); prevPage(); }
+  else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题（含自动显示解析） =====
+var correctAnswers = { q1:'B', q2:'B', q3:'B', q4:'B', q5:'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+  document.querySelectorAll('.ans-btn').forEach(function(b) {
+    if (b.textContent.indexOf('隐藏') === -1) return;
+    b.textContent = b.textContent.replace('隐藏答案','显示答案');
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序 IIFE =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key2','key1','key4','key3'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    el.style.borderColor = '#e74c3c';
+    setTimeout(function() { el.style.borderColor = ''; }, 500);
+  }
+}
+
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

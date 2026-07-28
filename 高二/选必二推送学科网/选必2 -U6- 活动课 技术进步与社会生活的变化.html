@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选必2 活动课 技术进步与社会生活的变化</title>
+<style>
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+  --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-gaokao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-value { background: #e74c3c; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-soc { background: #3498db; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+.diff-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13pt; }
+.diff-table th { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 12px; text-align: center; }
+.diff-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: center; }
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 0: 封面页 ==================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">活动课</div>
+    <h1>技术进步与社会生活的变化</h1>
+    <div class="hero-sub">统编版高中历史  经济与社会生活（选必二）</div>
+  </div>
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>理解社会生产力发展是人类历史发展的决定性因素，技术进步推动社会生活的全面变革。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>梳理从手工劳动到智能技术的技术演进脉络，认识不同时代技术对社会生活的影响。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>学会搜集、整理、分析史料，从历史现象中提取有效信息，形成自己的历史解释。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>运用唯物史观分析技术与社会生活的互动关系，揭示历史现象背后的深层成因。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>从身边的生活现象出发，感受技术进步带来的变化，增强对中国特色社会主义现代化建设的认同。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ==================== PAGE 1: 知识要点 + 五关闯关 ==================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">活动主题与目标</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">活动过程（步骤一至三）</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">活动过程（步骤四至五）</button>
+  </div>
+
+  <!-- TAB1：活动主题与目标 -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">⏳ 唯物史观 · 技术变革 · 社会进步</div>
+    <h3>📌 理论框架与活动主题</h3>
+    <ul>
+      <li><strong>唯物史观核心观点：</strong>社会生产力的发展是人类历史发展过程中的决定性因素，推动着社会的进步</li>
+      <li><strong>技术变革历程：</strong>从手工劳动到机器生产，从蒸汽动力到智能技术</li>
+      <li><strong>技术变革的影响：</strong>衣、食、住、行到思维观念，从个人精神面貌到社会结构</li>
+      <li><strong>活动主题：</strong>以"技术进步与社会生活的变化"为主题，寻找身边的衣、食、住、行等物质文化痕迹以及精神文化痕迹</li>
+      <li><strong>活动目标：</strong>搜集资料→筛选研究对象→挖掘成因→形成历史解释</li>
+    </ul>
+    <div class="link-bar">📌 <strong>高考常考：</strong>唯物史观是历史学科核心素养之首，技术进步与社会生活的关系是<strong>开放性论述题</strong>的高频命题方向。</div>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将技术发展阶段按时间顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="A" id="item_A">蒸汽动力时代</span>
+      <span class="sort-item" draggable="true" data-sortkey="B" id="item_B">手工劳动时代</span>
+      <span class="sort-item" draggable="true" data-sortkey="C" id="item_C">智能技术时代</span>
+      <span class="sort-item" draggable="true" data-sortkey="D" id="item_D">信息革命时代</span>
+      <span class="sort-item" draggable="true" data-sortkey="E" id="item_E">电力技术时代</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1位（最早）</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2位</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3位</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4位</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5位（最晚）</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">唯物史观</div><div class="flash-back">社会生产力的发展是人类历史发展过程中的决定性因素，推动着社会的进步。生产力决定生产关系，经济基础决定上层建筑。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">技术进步</div><div class="flash-back">从手工劳动到机器生产，从蒸汽动力到智能技术，技术进步是人类社会发展的核心驱动力。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">社会生活</div><div class="flash-back">包括衣、食、住、行等物质文化以及思维观念、精神面貌等精神文化，是社会历史发展的产物。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">史论结合</div><div class="flash-back">历史研究的基本方法——以史料为依据，以理论为指导，将历史事实与历史解释有机结合。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">生产力</div><div class="flash-back">人类利用自然、改造自然的能力，是社会发展最根本的推动力量，技术进步是生产力发展的核心标志。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB2：活动过程（步骤一至三） -->
+  <div class="kp-card tab-panel" id="tab2">
+    <div class="timeline-bar">📝 研究方法 · 自主学习 · 制定计划</div>
+    <h3>📋 活动过程（步骤一至三）</h3>
+    <ul>
+      <li><strong>步骤一（自主学习）：</strong>选定历史时期和区域→梳理社会生活表现→聚焦与技术变革相关的内容</li>
+      <li><strong>步骤二（查阅资料）：</strong>锁定具体领域→研究时空范围、波及范围→寻找文字记载→提取历史信息</li>
+      <li><strong>步骤三（制定计划）：</strong>明确问题意识→制定研究计划→小组分工→确定成果呈现方式</li>
+      <li><strong>理论指导：</strong>生产力决定生产关系、经济基础决定上层建筑、社会存在决定社会意识</li>
+    </ul>
+    <div class="link-bar">📌 <strong>高考常考：</strong>历史研究方法（史料搜集、问题意识、史论结合）是<strong>综合探究题</strong>的核心能力要求。</div>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词，完成唯物史观与研究方法的要点</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">社会<input type="text" class="fill-input" data-answer="生产力" placeholder="______"> 的发展是人类历史发展过程中的决定性因素。</div>
+      <div class="fill-blank-row"><input type="text" class="fill-input" data-answer="生产" placeholder="______"> 关系必须适应生产力的发展状况。</div>
+      <div class="fill-blank-row">社会存在决定社会<input type="text" class="fill-input" data-answer="意识" placeholder="______"> 。</div>
+      <div class="fill-blank-row">历史研究的基本方法是<input type="text" class="fill-input" data-answer="史论结合" placeholder="______"> 。</div>
+      <div class="fill-blank-row">从手工劳动到机器生产，从蒸汽动力到<input type="text" class="fill-input" data-answer="智能" placeholder="______"> 技术，技术进步推动社会变革。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将活动步骤与核心任务配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📖 活动步骤</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">步骤一</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">步骤二</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">步骤三</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">步骤四</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">步骤五</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">🎯 核心任务</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">选定研究对象与领域</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">查阅资料，提取历史信息</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">制定计划，明确分工</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">撰写报告，修改打磨</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">分组展示，全班交流</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">生产力决定生产关系</div><div class="flash-back">唯物史观的核心原理之一——生产力是最革命、最活跃的因素，生产关系的变革必须适应生产力的发展。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">经济基础决定上层建筑</div><div class="flash-back">唯物史观的核心原理之一——社会的经济结构决定政治、法律、文化等上层建筑。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">社会存在决定社会意识</div><div class="flash-back">唯物史观的核心原理之一——人们的社会存在决定人们的意识，社会意识是社会存在的反映。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">史料实证</div><div class="flash-back">历史研究的重要方法——通过搜集、整理、辨析史料，获取历史信息，形成历史认识。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">问题意识</div><div class="flash-back">历史研究的核心素养——从历史现象中发现问题、提出问题，带着问题去研究和思考。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB3：活动过程（步骤四至五）+活动拓展 -->
+  <div class="kp-card tab-panel" id="tab3">
+    <div class="timeline-bar">📝 撰写报告 · 展示交流 · 拓展延伸</div>
+    <h3>📋 活动过程（步骤四至五）与活动拓展</h3>
+    <ul>
+      <li><strong>步骤四（撰写报告）：</strong>分析成因→厘清技术与成的关系→寻找证据→书面报告→讨论修改</li>
+      <li><strong>步骤五（展示交流）：</strong>分组展示→推选代表汇报→全班讨论→形成总结报告</li>
+      <li><strong>活动拓展：</strong>在学校网页、黑板报、校刊等平台展示；集思广益，完善研究成果</li>
+    </ul>
+    <div class="link-bar">📌 <strong>高考常考：</strong>研究性学习与成果展示是<strong>综合实践类试题</strong>的重要形式，考查学生的史料实证和历史解释能力。</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：点击标注技术进步改变生活的代表性现象</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 依次点击标注：手工劳动→蒸汽机→电力→计算机→智能手机</div>
+      <svg width="100%" height="180" viewBox="0 0 500 180" style="background:#f0edff;border-radius:10px;">
+        <rect x="30" y="60" width="70" height="50" rx="8" fill="#d5cef0" stroke="#7c6cf0" stroke-width="1.5"/>
+        <text x="45" y="90" font-size="10" fill="#5a4ac7" font-weight="700">手工劳动</text>
+        <text x="35" y="105" font-size="8" fill="#888">农业时代</text>
+
+        <rect x="130" y="60" width="70" height="50" rx="8" fill="#d5cef0" stroke="#7c6cf0" stroke-width="1.5"/>
+        <text x="145" y="90" font-size="10" fill="#5a4ac7" font-weight="700">蒸汽机</text>
+        <text x="135" y="105" font-size="8" fill="#888">工业革命</text>
+
+        <rect x="230" y="60" width="70" height="50" rx="8" fill="#d5cef0" stroke="#7c6cf0" stroke-width="1.5"/>
+        <text x="245" y="90" font-size="10" fill="#5a4ac7" font-weight="700">电力</text>
+        <text x="235" y="105" font-size="8" fill="#888">电气时代</text>
+
+        <rect x="330" y="60" width="70" height="50" rx="8" fill="#d5cef0" stroke="#7c6cf0" stroke-width="1.5"/>
+        <text x="333" y="90" font-size="10" fill="#5a4ac7" font-weight="700">计算机</text>
+        <text x="335" y="105" font-size="8" fill="#888">信息时代</text>
+
+        <circle class="map-marker" data-point="pt-smartphone" cx="440" cy="100" r="15" fill="#7c6cf0" stroke="#3d2b8c" stroke-width="2"/>
+        <text x="425" y="105" font-size="8" fill="#fff" font-weight="700" style="pointer-events:none;">智能手机</text>
+        <text x="427" y="118" font-size="8" fill="#888">智能时代</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-smartphone">⬜ 智能手机（智能时代）</span>
+        <span class="map-check-item" data-point="pt-hand">⬜ 手工劳动（农业时代）</span>
+        <span class="map-check-item" data-point="pt-steam">⬜ 蒸汽机（工业革命）</span>
+        <span class="map-check-item" data-point="pt-electric">⬜ 电力（电气时代）</span>
+        <span class="map-check-item" data-point="pt-computer">⬜ 计算机（信息时代）</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">工业革命</div><div class="flash-back">18—19世纪以蒸汽机为代表的技术革命，实现了从手工劳动到机器生产的飞跃，深刻改变了人类社会的生产方式和生活面貌。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">信息革命</div><div class="flash-back">20世纪中后期以计算机和互联网为代表的技术革命，实现了信息处理与传播的革命性突破，将人类社会带入信息时代。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">智能技术</div><div class="flash-back">21世纪以人工智能、大数据、物联网为代表的新一轮技术革命，正在深刻改变人类社会的生产方式、生活方式和思维方式。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">历史解释</div><div class="flash-back">在史料实证的基础上，对历史现象进行理性分析和客观评价的能力，是历史学科核心素养的重要组成部分。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">研究性学习</div><div class="flash-back">以问题为导向、以探究为核心的学习方式，强调自主学习、合作探究和成果表达，是培养历史学科核心素养的重要途径。</div></div></div>
+      </div>
+    </div>
+    <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！全部闯关完成！</div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: 重难点解析 ==================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 手风琴1：唯物史观与技术决定论 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>📌 重难点一：唯物史观与技术进步的互动关系</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card"><div class="deep-card-hd">📘 基础理解 · 唯物史观的核心原理</div><div class="deep-card-bd"><p>唯物史观认为：<strong>社会生产力的发展是人类历史发展过程中的决定性因素</strong>。生产力包括劳动者、劳动资料和劳动对象三要素，其中<strong>生产工具（技术）</strong>是生产力水平的核心标志。从石器到青铜器、铁器，从手工工具到机器，从蒸汽机到计算机，每一次技术革命都推动了生产力的飞跃。</p><p><strong>简而言之：</strong>技术是生产力的"硬核"，生产力的发展是社会进步的"引擎"——技术变，生产力变；生产力变，社会变。</p></div></div>
+      <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展 · 从技术革命到社会变革的链条</div><div class="deep-card-bd"><p><span class="tag-soc">🟢 比较史学</span> 横向联系：工业革命（蒸汽机→工厂制→城市化→阶级关系变化）与信息革命（计算机→互联网→数字经济→全球化）遵循相似的逻辑链条：<strong>技术突破→生产方式变革→社会结构重组→生活方式重塑</strong>。</p><p>纵向联系：本活动课与全册内容贯通——第8-10课（商业贸易）、第11-13课（交通）、第14-15课（医疗）都是技术变革推动社会生活的具体例证。<strong>技术是贯穿全册的"隐形主线"</strong>。</p><p><strong>这一联系说明：</strong>技术不是孤立的存在，它是社会有机体的"基因"——技术的改变会"表达"为生产方式、社会结构、生活方式的全方位改变。</p></div></div>
+      <div class="deep-card"><div class="deep-card-hd">📈 素养提升 · 唯物史观的运用</div><div class="deep-card-bd"><div class="source-material">"从手工劳动到机器生产，从蒸汽动力到智能技术，在技术进步的推动下，人类社会产生了复杂的变化。这种变化无处不在，无时不在。"——统编版选必二 活动课</div><p><span class="tag-value">❤️ 唯物史观</span> 这段引言揭示了<strong>技术进步与社会变化的内在逻辑</strong>：技术（生产力的核心）→生产方式变革→社会关系变化→社会生活变化。这一逻辑链条是<strong>唯物史观"生产力决定生产关系、经济基础决定上层建筑"</strong>原理的生动体现。</p><p><span class="tag-gaokao">🎯 高考拓展</span> 模拟题：结合所学，以"技术进步与社会生活的变化"为主题，运用唯物史观分析某一具体历史现象。（开放性论述题）</p><p><strong>答案示例：</strong>以"智能手机改变出行方式"为例——技术进步（移动互联网+GPS）→生产方式变化（网约车平台出现）→生活方式改变（出行方式从路边招手到手机叫车）→社会观念变化（共享经济理念普及）。这一链条体现了<strong>技术→生产→生活→观念</strong>的传导路径。<strong>解析：</strong>需紧扣"技术—生产—生活—观念"的逻辑链条，做到史论结合。</p><p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向：唯物史观·技术变革·社会生活</span></p></div></div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴2：社会生活的多维变化 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>📌 重难点二：社会生活的多维变化</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card"><div class="deep-card-hd">📘 基础理解 · 社会生活变化的四个维度</div><div class="deep-card-bd"><p>技术进步对社会生活的影响体现在<strong>四个维度</strong>：<strong>物质生活</strong>——衣（化纤、成衣）、食（冷链、速食）、住（电梯、钢筋混凝土）、行（汽车、高铁、飞机）；<strong>精神生活</strong>——思维观念、价值取向、审美趣味；<strong>社会结构</strong>——阶级关系、城乡结构、职业分化；<strong>文化面貌</strong>——大众传媒、消费文化、信息方式。</p><p><strong>简而言之：</strong>技术改变的不仅是"我们有什么"，更是"我们是谁"——它重塑了人的生活方式、思维方式和交往方式。</p></div></div>
+      <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展 · 技术与文化的互动</div><div class="deep-card-bd"><p><span class="tag-soc">🟢 比较史学</span> 横向联系：印刷术推动了文艺复兴和宗教改革，互联网推动了全球化文化交流，<strong>技术传播与文化扩散</strong>始终相伴而行。不同时代的技术决定了文化传播的速度、广度和深度。</p><p>纵向联系：本活动课与纲要上"中华优秀传统文化"、纲要下"文化传播"形成关联——<strong>技术是文化传播的"载体"</strong>，技术的进步不断拓展人类文化交流的边界。</p><p><strong>这一联系说明：</strong>技术不仅是"生产力"，也是"文化力"——它改变人们获取信息、表达情感、建立认同的方式，从而重塑了文化生态。</p></div></div>
+      <div class="deep-card"><div class="deep-card-hd">📈 素养提升 · 综合探究</div><div class="deep-card-bd"><div class="source-material">"从衣、食、住、行到人们的思维观念，从个人精神面貌到社会结构，都是历史发展的产物。"——统编版选必二 活动课</div><p><span class="tag-value">❤️ 历史解释</span> 这段话揭示了社会生活的<strong>整体性</strong>——物质生活与精神生活不是分离的，而是相互渗透、相互影响的。技术进步既改变了"看得见"的生活（衣、食、住、行），也改变了"看不见"的生活（思维观念、社会结构）。</p><p><span class="tag-gaokao">🎯 高考拓展</span> 模拟题：选择你身边的一个生活现象，分析技术进步是如何改变它的。（开放性探究题）</p><p><strong>答案示例：</strong>以"移动支付"为例——技术进步（智能手机+移动互联网+二维码）→支付方式变革（现金→扫码）→生活方式改变（不带钱包出门）→观念变化（信用消费普及）。<strong>解析：</strong>需从"技术—方式—生活—观念"四个层次展开，体现史论结合。</p><p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向：社会生活·技术变革·史论结合</span></p></div></div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 手风琴3：研究方法与历史解释 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>📌 重难点三：研究方法与历史解释</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card"><div class="deep-card-hd">📘 基础理解 · 历史研究的五步法</div><div class="deep-card-bd"><p>本活动课提供了历史研究的<strong>五步法</strong>：<strong>步骤一</strong>——选定研究对象（从生活现象入手）；<strong>步骤二</strong>——查阅资料（时空范围、文字记载）；<strong>步骤三</strong>——制定计划（问题意识、分工协作）；<strong>步骤四</strong>——撰写报告（分析成因、寻找证据）；<strong>步骤五</strong>——展示交流（分组汇报、全班讨论）。</p><p><strong>简而言之：</strong>历史研究是一个"从现象到问题，从资料到解释，从个人到集体"的递进过程——始于好奇，成于证据，终于表达。</p></div></div>
+      <div class="deep-card"><div class="deep-card-hd">🔗 联系拓展 · 史论结合的核心要义</div><div class="deep-card-bd"><p><span class="tag-soc">🟢 比较史学</span> "史论结合"是历史研究的<strong>核心方法论</strong>——"史"是史料事实，"论"是理论观点。只有史实没有理论是"资料汇编"，只有理论没有史实是"空头议论"。两者的结合才能产生<strong>有说服力的历史解释</strong>。</p><p>纵向联系：本活动课的研究方法贯穿高中历史学习全过程——从"是什么"（史实）到"为什么"（原因）到"怎么看"（评价），<strong>史料实证、历史解释、唯物史观</strong>三大核心素养在此得以综合运用。</p><p><strong>这一联系说明：</strong>方法比知识更重要——学会"如何研究历史"比记住"历史是什么"更具长远价值。</p></div></div>
+      <div class="deep-card"><div class="deep-card-hd">📈 素养提升 · 综合实践</div><div class="deep-card-bd"><div class="source-material">"挖掘社会生活背后的历史信息，对疑难问题给出自己的解释……对报告是否有问题意识，问题能否成立，是否有材料支持，论证能否令人信服进行全组讨论，不断修改打磨。"——统编版选必二 活动课</div><p><span class="tag-value">❤️ 史料实证+历史解释</span> 这段文字提出了历史研究的<strong>质量标尺</strong>：①<strong>问题意识</strong>——有没有提出真问题；②<strong>材料支持</strong>——有没有史料依据；③<strong>论证有力</strong>——逻辑是否严密；④<strong>反复打磨</strong>——是否经过讨论与修改。这四个标准是<strong>高水平历史研究的共同特征</strong>。</p><p><span class="tag-gaokao">🎯 高考拓展</span> 模拟题：结合本课活动步骤，谈谈你对"问题意识"在历史研究中重要性的认识。（开放性论述题）</p><p><strong>答案：</strong>"问题意识"是历史研究的起点和灵魂：①<strong>驱动探究</strong>——好问题能激发研究兴趣和方向；②<strong>聚焦证据</strong>——问题决定需要寻找什么史料；③<strong>引导解释</strong>——问题框定了历史解释的边界；④<strong>检验成果</strong>——研究成果的质量取决于是否回答了最初的问题。<strong>解析：</strong>需从"问题驱动研究"和"问题检验成果"两个维度展开，可结合自身学习体验。</p><p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向：研究方法·问题意识·史论结合</span></p></div></div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: 教材栏目解答（活动课栏目较少） ==================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">活动课要点梳理</div>
+  </div>
+
+  <!-- 引言理论 -->
+  <div class="col-box" data-cat="理论">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📌 唯物史观核心观点</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>"社会生产力的发展是人类历史发展过程中的决定性因素，推动着社会的进步。"</p>
+      <div class="a" id="ans-p3-theory1">
+        <p><strong>📝 要点归纳：</strong>这是唯物史观的核心命题——<strong>生产力→生产关系→上层建筑→社会进步</strong>。技术是生产力的核心要素，技术进步是生产力发展的主要标志，也是社会进步的根本动力。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-theory1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 活动主题 -->
+  <div class="col-box" data-cat="主题">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📌 活动主题与目标</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>"以'技术进步与社会生活的变化'为主题，寻找身边的衣、食、住、行等物质文化痕迹，以及某些精神文化痕迹，锁定某一历史现象。"</p>
+      <div class="a" id="ans-p3-theme1">
+        <p><strong>📝 要点归纳：</strong>活动主题的<strong>关键词</strong>：①<strong>技术进步</strong>——从手工到智能；②<strong>社会生活</strong>——衣、食、住、行+精神文化；③<strong>锁定现象</strong>——聚焦具体问题，以小见大。方法是<strong>从身边出发、从细节入手</strong>。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-theme1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 活动步骤 -->
+  <div class="col-box" data-cat="步骤">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📌 活动过程五步骤</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>步骤一：</strong>自主学习——选定时期和区域，梳理社会生活表现</p>
+      <p><strong>步骤二：</strong>查阅资料——锁定领域，研究时空范围，寻找文字记载</p>
+      <p><strong>步骤三：</strong>制定计划——明确问题意识，分工协作，确定成果呈现方式</p>
+      <p><strong>步骤四：</strong>撰写报告——分析成因，寻找证据，讨论修改</p>
+      <p><strong>步骤五：</strong>展示交流——分组展示，全班讨论，形成总结报告</p>
+      <div class="a" id="ans-p3-steps1">
+        <p><strong>📝 要点归纳：</strong>五步骤构成<strong>"选题—调研—计划—写作—展示"</strong>的完整研究链条。每一步都有明确的任务和目标，体现了<strong>研究性学习</strong>的完整流程。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-steps1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 活动拓展 -->
+  <div class="col-box" data-cat="拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📌 活动拓展与成果展示</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>"将本班的研究成果在学校网页、黑板报、校刊等多种平台上进行展示，发挥网络媒体的优势，集思广益，完善研究成果。"</p>
+      <div class="a" id="ans-p3-extend1">
+        <p><strong>📝 要点归纳：</strong>活动拓展强调<strong>成果的公开化与共享化</strong>：①<strong>多平台展示</strong>——网页、黑板报、校刊；②<strong>网络优势</strong>——扩大传播范围；③<strong>集思广益</strong>——通过反馈不断完善。这体现了<strong>开放学习</strong>的理念。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-extend1')">📝 查看解析</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: 课堂训练 ==================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+  <div class="score-banner">
+    <div><div style="font-size:11pt;color:#888;">当前得分</div><div class="score-number" id="scoreVal">0</div></div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 唯物史观认为，人类社会发展的决定性因素是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 政治制度</label>
+      <label onclick="optClick(this,'B','q1')">B. 社会生产力</label>
+      <label onclick="optClick(this,'C','q1')">C. 思想文化</label>
+      <label onclick="optClick(this,'D','q1')">D. 地理环境</label>
+    </div>
+    <div class="a" id="ans-p4-q1"><p><strong>✅ 正确答案：B</strong></p><p><strong>📝 解析：</strong>唯物史观认为，社会生产力的发展是人类历史发展过程中的决定性因素，推动着社会的进步。这是唯物史观的核心命题。</p><p><strong>❌ 错误辨析：</strong>A政治制度是上层建筑，由经济基础决定；C思想文化是社会意识的反映；D地理环境对历史发展有影响，但不是决定性因素。</p></div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看答案解析</button>
+  </div>
+
+  <!-- 选择题2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 下列技术变革中，最早出现的是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 蒸汽动力</label>
+      <label onclick="optClick(this,'B','q2')">B. 智能技术</label>
+      <label onclick="optClick(this,'C','q2')">C. 信息革命</label>
+      <label onclick="optClick(this,'D','q2')">D. 电力技术</label>
+    </div>
+    <div class="a" id="ans-p4-q2"><p><strong>✅ 正确答案：A</strong></p><p><strong>📝 解析：</strong>蒸汽动力是18—19世纪工业革命的核心技术，早于电力技术（19世纪末）、信息革命（20世纪中后期）和智能技术（21世纪）。</p><p><strong>❌ 错误辨析：</strong>B智能技术是21世纪的技术；C信息革命是20世纪中后期；D电力技术是19世纪末，晚于蒸汽动力。</p></div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看答案解析</button>
+  </div>
+
+  <!-- 选择题3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 活动课中，历史研究的第一步是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 撰写报告</label>
+      <label onclick="optClick(this,'B','q3')">B. 查阅资料</label>
+      <label onclick="optClick(this,'C','q3')">C. 选定研究对象</label>
+      <label onclick="optClick(this,'D','q3')">D. 展示交流</label>
+    </div>
+    <div class="a" id="ans-p4-q3"><p><strong>✅ 正确答案：C</strong></p><p><strong>📝 解析：</strong>活动课步骤一为"自主学习——选定时期和区域，梳理社会生活表现"，即选定研究对象是研究的起点。</p><p><strong>❌ 错误辨析：</strong>A撰写报告是步骤四；B查阅资料是步骤二；D展示交流是步骤五。</p></div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看答案解析</button>
+  </div>
+
+  <!-- 选择题4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> "史论结合"中，"史"指的是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 理论观点</label>
+      <label onclick="optClick(this,'B','q4')">B. 史料事实</label>
+      <label onclick="optClick(this,'C','q4')">C. 历史评价</label>
+      <label onclick="optClick(this,'D','q4')">D. 研究方法</label>
+    </div>
+    <div class="a" id="ans-p4-q4"><p><strong>✅ 正确答案：B</strong></p><p><strong>📝 解析：</strong>"史论结合"中"史"指史料事实（历史事实），“论”指理论观点（历史解释）。两者的结合是高质量历史研究的基本特征。</p><p><strong>❌ 错误辨析：</strong>A"论"才是理论观点；C历史评价是"论"的一部分；D研究方法是手段不是"史"的内容。</p></div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看答案解析</button>
+  </div>
+
+  <!-- 选择题5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 活动课的最终成果形式是（  ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 个人笔记</label>
+      <label onclick="optClick(this,'B','q5')">B. 书面研究报告</label>
+      <label onclick="optClick(this,'C','q5')">C. 课堂发言稿</label>
+      <label onclick="optClick(this,'D','q5')">D. 小组讨论记录</label>
+    </div>
+    <div class="a" id="ans-p4-q5"><p><strong>✅ 正确答案：B</strong></p><p><strong>📝 解析：</strong>活动课步骤四要求"完成书面研究报告"，这是研究活动的主要成果形式，是系统呈现研究成果的载体。</p><p><strong>❌ 错误辨析：</strong>A个人笔记是研究过程记录，不是最终成果；C课堂发言是展示形式；D小组讨论记录是研究过程中的材料。</p></div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看答案解析</button>
+  </div>
+
+  <!-- 材料题1 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">"社会生产力的发展是人类历史发展过程中的决定性因素，推动着社会的进步。从手工劳动到机器生产，从蒸汽动力到智能技术，在技术进步的推动下，人类社会产生了复杂的变化。"——统编版选必二 活动课</div>
+    <div class="source-material">"从衣、食、住、行到人们的思维观念，从个人精神面貌到社会结构，都是历史发展的产物。"——统编版选必二 活动课</div>
+    <div class="q-text"><strong>（1）</strong>根据材料一，概括技术进步与社会进步的关系。</div>
+    <div class="q-text"><strong>（2）</strong>根据材料二，指出技术进步对社会生活产生影响的主要领域。</div>
+    <div class="q-text"><strong>（3）</strong>结合所学，以一项具体技术为例，说明它是如何改变社会生活的。</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>技术进步是生产力发展的核心动力，生产力的发展是社会进步的决定性因素。从手工到机器、从蒸汽到智能，每一次技术突破都推动了社会向前发展。</p>
+      <p><strong>（2）</strong>①<strong>物质生活</strong>——衣、食、住、行；②<strong>精神文化</strong>——思维观念、精神面貌；③<strong>社会结构</strong>——个人与社会的整体形态。</p>
+      <p><strong>（3）</strong>以"互联网技术"为例：技术进步（互联网）→生产方式变革（电子商务、远程办公）→生活方式改变（网购、在线教育、社交媒体）→观念变化（共享经济、数字生活）。互联网从技术层面重塑了人们的购物方式、学习方式、社交方式和思维方式，深刻改变了当代社会生活。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1'); trackMatQ('mq1')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题2 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">"挖掘社会生活背后的历史信息，对疑难问题给出自己的解释……对报告是否有问题意识，问题能否成立，是否有材料支持，论证能否令人信服进行全组讨论，不断修改打磨。"——统编版选必二 活动课</div>
+    <div class="q-text"><strong>（1）</strong>根据材料，概括高质量历史研究的四个标准。</div>
+    <div class="q-text"><strong>（2）</strong>结合所学，解释"问题意识"在历史研究中的重要性。</div>
+    <div class="q-text"><strong>（3）</strong>你认为在历史研究中，"材料支持"和"论证有力"哪一个更重要？请说明理由。</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>①<strong>问题意识</strong>——有没有提出真问题；②<strong>问题成立</strong>——问题是否具有研究价值；③<strong>材料支持</strong>——是否有充分的史料依据；④<strong>论证有力</strong>——逻辑是否严密、解释是否令人信服。</p>
+      <p><strong>（2）</strong>"问题意识"是历史研究的起点和灵魂：①<strong>驱动方向</strong>——好问题决定研究的方向和深度；②<strong>聚焦证据</strong>——问题决定了需要寻找什么类型的史料；③<strong>引导解释</strong>——问题框定了历史解释的边界和角度；④<strong>检验标准</strong>——研究成果的价值取决于是否回答了研究问题。</p>
+      <p><strong>（3）</strong>两者同等重要，缺一不可。"材料支持"是历史研究的"地基"——没有扎实的史料基础，再好的论证也是空中楼阁；"论证有力"是历史研究的"框架"——仅有零散材料没有严密逻辑，无法形成有说服力的历史解释。好的历史研究必须做到<strong>"材料"与"论证"的统一</strong>，即"史论结合"。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2'); trackMatQ('mq2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ==================== PAGE 5: 知识结构图 ==================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 技术进步与社会生活的变化 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⚙️</span><strong>技术突破</strong>
+        <p>手工→蒸汽→电力→信息→智能</p>
+        <div class="kg-detail"><p><strong>🔍 详细解析：</strong>技术是生产力发展的核心标志。从手工劳动到机器生产，从蒸汽动力到智能技术，每一次技术突破都推动生产力跨越式发展。<br><span class="tag-gaokao">🎯 高考常考：</span>技术发展阶段的时序考查。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏭</span><strong>生产力飞跃</strong>
+        <p>生产效率·生产规模·产业结构</p>
+        <div class="kg-detail"><p><strong>🔍 详细解析：</strong>技术突破带来生产效率提升、生产规模扩大、产业结构升级。这是唯物史观"生产力决定生产关系"原理的体现。<br><span class="tag-gaokao">🎯 高考常考：</span>生产力与生产关系的辩证关系。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏙️</span><strong>社会结构变化</strong>
+        <p>阶级·城乡·职业·观念</p>
+        <div class="kg-detail"><p><strong>🔍 详细解析：</strong>生产力变化推动社会结构调整——阶级关系变动（无产阶级壮大）、城乡结构变化（城市化）、职业分化（新职业出现）、观念更新（思想解放）。<br><span class="tag-gaokao">🎯 高考常考：</span>技术变革与社会结构的互动。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌿</span><strong>生活变化</strong>
+        <p>衣·食·住·行·精神文化</p>
+        <div class="kg-detail"><p><strong>🔍 详细解析：</strong>最终在日常生活层面体现——衣食住行到思维观念，个人精神面貌到社会整体风貌，全方位重塑人类生活。<br><span class="tag-gaokao">🎯 高考常考：</span>从生活现象切入的历史解释题。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 理论：唯物史观·生产力决定论</div>
+      <div class="kg-rule r2">🟠 经济：技术→生产力→产业升级</div>
+      <div class="kg-rule r3">🟢 文化：技术→观念→生活方式</div>
+      <div class="kg-rule r4">🔴 方法：问题意识·史论结合·史料实证</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: 结束页 ==================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">活动课</div>
+    <h1 style="font-size:22pt;">技术进步与社会生活的变化</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>⚙️ 唯物史观与技术进步</h3>
+        <ul>
+          <li><strong>生产力决定论：</strong>社会发展决定性因素</li>
+          <li><strong>技术演进：</strong>手工→蒸汽→电力→信息→智能</li>
+          <li><strong>核心逻辑：</strong>技术→生产力→社会变革</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>🌿 社会生活的多维变化</h3>
+        <ul>
+          <li><strong>物质生活：</strong>衣、食、住、行</li>
+          <li><strong>精神文化：</strong>思维观念、价值取向</li>
+          <li><strong>社会结构：</strong>阶级、城乡、职业</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>📝 研究方法与历史解释</h3>
+        <ul>
+          <li><strong>五步法：</strong>选题→调研→计划→写作→展示</li>
+          <li><strong>核心：</strong>问题意识、史论结合</li>
+          <li><strong>标准：</strong>材料支持、论证有力</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav">
+    <div><a href="选必2 -U6-第15课 现代医疗卫生体系与社会生活.html">← 上一课：第15课 现代医疗卫生体系与社会生活</a></div>
+    <div class="nav-center">活动课</div>
+    <div><a href="选必二导航页.html">📚 返回导航页</a></div>
+  </div>
+
+  <footer>
+    <p>统编版高中历史 · 经济与社会生活（选必二） · 活动课</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ==================== 底部翻页导航 ==================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// 分页导航
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// 闯关进度
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// 学习目标
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// 标签页
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// 手风琴
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// 答案显隐
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// 选择题
+var correctAnswers = { q1:'B', q2:'A', q3:'C', q4:'B', q5:'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// 栏目筛选
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// 拖拽排序
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['B','A','E','D','C'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试（正确顺序：手工→蒸汽→电力→信息→智能）';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// 填空
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// 连线
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  }
+}
+
+// 地图标注
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.9)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// 翻转卡
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// 知识结构图
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// deep-card折叠
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+console.log('✅ 选必2 活动课 技术进步与社会生活的变化 课件已完整加载！7页全部就绪。');
+</script>
+</body>
+</html>

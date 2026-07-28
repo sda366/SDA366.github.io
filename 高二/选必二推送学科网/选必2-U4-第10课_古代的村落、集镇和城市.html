@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选必2 第10课 古代的村落、集镇和城市</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+  --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ========== Hero & 封面页 ========== */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== Page1 标签页 & 闯关 ========== */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* ========== 知识卡片 ========== */
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; } .kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+
+/* ========== 标签 ========== */
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-gaokao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-value { background: #e74c3c; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-soc { background: #3498db; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+
+/* ========== 手风琴组 ========== */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* ========== deep-card 三级递进 ========== */
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+
+/* ========== 对比表格 ========== */
+.diff-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13pt; }
+.diff-table th { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 12px; text-align: center; }
+.diff-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: center; }
+.diff-table tr:nth-child(even) { background: #faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ========== Page5 知识结构图 ========== */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; } .kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ========== 五关专用 CSS ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '▸'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+.bottom-nav .nav-center { font-weight: 700; color: var(--primary-dark); }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 0: 封面页 -->
+<!-- ============================================================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第四单元 · 村落、城镇与居住环境</div>
+    <h1>第10课 · 古代的村落、集镇和城市</h1>
+    <div class="hero-sub">统编版高中历史  经济与社会生活（选必二）</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>从生产力发展（农业革命→手工业与农业分离）理解居住形态演变（穴居→村落→集镇→城市）的内在逻辑。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>梳理古代村落、集镇、城市在人类文明史上的时空分布与演进脉络（两河流域→中国→古希腊罗马）。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>运用《周礼·考工记》《唐会要》等文献和耶莫、兴隆洼等考古遗址，论证古代居住形态的特点。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>解释世界各地民居特色与自然环境、经济水平、文化习俗之间的内在关联。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识中国古代村落、集镇、城市和民居的独特成就（四合院、徽派建筑、福建土楼等），增强文化自信。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: 知识要点 + 五关闯关 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 村落</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 集镇与城市</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 世界民居</button>
+  </div>
+
+  <!-- ===== TAB1：村落的生产 ===== -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">⏳ 距今8000多年前 · 从穴居到村落</div>
+    <h3>🏘️ 村落的产生与功能</h3>
+    <ul>
+      <li><strong>居住形式演变：</strong>穴居→巢居→半穴居→地面建筑</li>
+      <li><strong>村落形成条件：</strong>农业出现 → 筑屋定居 → 形成聚居点</li>
+      <li><strong>最早村落：</strong>两河流域（耶莫遗址，公元前7000-前5800年）</li>
+      <li><strong>中国代表：</strong>兴隆洼遗址（内蒙古赤峰，距今8000多年，170余座半穴居房址）</li>
+      <li><strong>村落功能：</strong>住宅、仓廪、地窖、公共活动场所 → 定居、繁衍、防卫、集体活动</li>
+    </ul>
+    <div class="link-bar">📌 <strong>高考常考：</strong>村落的产生与农业革命的关系常以<strong>唯物史观选择题</strong>考查；兴隆洼、耶莫等遗址常作为<strong>史料实证题</strong>的素材。</div>
+
+    <!-- ① 拖拽排序挑战 -->
+    <div class="challenge-title">🎮 挑战一：请将人类居住形式按时间先后拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="A" id="item_A">地面建筑</span>
+      <span class="sort-item" draggable="true" data-sortkey="B" id="item_B">半穴居</span>
+      <span class="sort-item" draggable="true" data-sortkey="C" id="item_C">巢居</span>
+      <span class="sort-item" draggable="true" data-sortkey="D" id="item_D">穴居</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1阶段（最早）</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2阶段</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3阶段</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4阶段（最晚）</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">兴隆洼遗址</div><div class="flash-back">内蒙古赤峰敖汉旗，距今8000多年，被誉为"华夏第一村"，发掘170余座半穴居房址。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">耶莫遗址</div><div class="flash-back">伊拉克北部，公元前7000-前5800年，21座房屋，有炉灶和地窖，是两河流域早期村落代表。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">村落</div><div class="flash-back">农业出现后人们筑屋定居形成的聚居点，建有住宅、仓廪、地窖和公共活动场所。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">穴居与巢居</div><div class="flash-back">远古人类在低洼潮湿处营巢而居，在高亢干燥处挖穴而居，是中国民居最早的两大类型。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">两河流域</div><div class="flash-back">村落最早出现的地区，苏美尔人生活的地区约公元前3500-前3100年形成早期城市。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB2：集镇的出现 + 城市的产生 ===== -->
+  <div class="kp-card tab-panel" id="tab2">
+    <div class="timeline-bar">⏳ 原始社会末期 — 明清 · 从集镇到城市</div>
+    <h3>🏛️ 集镇的兴起与城市的形成</h3>
+    <ul>
+      <li><strong>集镇形成：</strong>手工业与农业分离 → 手工业者集聚 → 商人介入 → 筑垒设防</li>
+      <li><strong>中国古代集镇：</strong>两宋工商业集镇发展 → 元朝运河沿岸兴起 → 明清专业分工（石门镇榨油、千家窑镇制陶、盛泽镇丝织）</li>
+      <li><strong>汉口镇：</strong>明成化年间汉水改道 → 明末"甲于全楚"商业巨镇 → 清嘉庆道光专业街巷</li>
+      <li><strong>城市产生：</strong>约公元前3500-前3100年两河流域苏美尔地区 → 世界主要农业区域相继产生</li>
+      <li><strong>城市功能：</strong>政治权力、军事防御、经济活动、宗教祭祀的中心场所</li>
+    </ul>
+    <div class="link-bar">📌 <strong>高考常考：</strong>中国古代集镇的发展历程常以<strong>时空观念题</strong>考查；汉口镇的兴起是<strong>明清商业发展</strong>的典型案例。</div>
+
+    <!-- ② 填空填词挑战 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词，完成古代集镇与城市的重要信息</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">原始社会末期，<input type="text" class="fill-input" data-answer="手工业" placeholder="______">与农业分离，手工业者集聚形成集镇的雏形。</div>
+      <div class="fill-blank-row">两宋时期，<input type="text" class="fill-input" data-answer="工商业" placeholder="______">者经营及定居的集镇发展起来。</div>
+      <div class="fill-blank-row">明朝成化年间，<input type="text" class="fill-input" data-answer="汉口" placeholder="______">因汉水改道而兴起，成为"甲于全楚"的商业巨镇。</div>
+      <div class="fill-blank-row">约公元前3500-前3100年，<input type="text" class="fill-input" data-answer="两河流域" placeholder="______">苏美尔人地区形成了早期城市。</div>
+      <div class="fill-blank-row">周朝城邑分为三等：天子王城、诸侯都邑、卿大夫的<input type="text" class="fill-input" data-answer="采邑" placeholder="______">。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交答案</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">集镇</div><div class="flash-back">手工业者与商人集聚形成的经济中心，筑垒设防以保护财产和人身安全。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">盛泽镇</div><div class="flash-back">明清时期江苏吴江的丝织业专业镇，体现了集镇的专业分工趋势。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">汉口镇</div><div class="flash-back">明成化年间因汉水改道兴起，明末成为"甲于全楚"的商业巨镇，清嘉庆道光形成专业街巷。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">城市</div><div class="flash-back">一定区域内政治权力、军事防御、经济活动、宗教祭祀的中心场所。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">石家河城址</div><div class="flash-back">湖北天门，距今4000多年，城外发现50余处村落文化遗址，是中国早期城市代表。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB3：世界各地的民居 ===== -->
+  <div class="kp-card tab-panel" id="tab3">
+    <div class="timeline-bar">⏳ 古代 · 世界各地民居的特色</div>
+    <h3>🏠 民居与自然环境、经济文化的互动</h3>
+    <ul>
+      <li><strong>两河流域：</strong>土坯房屋（黏土+芦苇），墙壁贴着墙壁建，前庭→前室→主室</li>
+      <li><strong>古埃及：</strong>泥木结构（木桩+树枝+黏土），防晒保温，庭院+柱廊</li>
+      <li><strong>中国古代：</strong>巢居→干栏式（南方），穴居→地面建筑（北方）；木构抬梁结构→明清砖木结构；窑洞/四合院/徽派民居/福建土楼</li>
+      <li><strong>古罗马：</strong>木/石/砖→混凝土；中庭为核心；3世纪出现多层复合式公寓</li>
+      <li><strong>北美印第安人：</strong>圆锥形帐篷（狩猎）；亚马孙：圆形公共居所（刀耕火种）</li>
+    </ul>
+    <div class="link-bar">📌 <strong>高考常考：</strong>世界各地民居的特点常以<strong>中外对比题</strong>考查；中国古代木构抬梁结构、徽派建筑等是<strong>文化自信类</strong>命题的高频素材。</div>
+
+    <!-- ③ 连线匹配挑战 -->
+    <div class="challenge-title">🎮 挑战三：将左侧地区与右侧对应的民居特点配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📍 地区</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">两河流域</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">古埃及</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">中国古代（北方）</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">古罗马</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">北美印第安人</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">🏷️ 民居特点</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">土坯房屋，墙壁贴着墙壁建，前庭→前室→主室</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">泥木结构，防晒保温，庭院+柱廊</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">穴居→地面建筑，木构抬梁结构，四合院</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">中庭为核心，混凝土+拱券，多层复合式公寓</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">圆锥形帐篷，适应狩猎生活方式</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- ④ 地图标注挑战 -->
+    <div class="challenge-title">🎮 挑战四：点击下方地图标注古代文明重要遗址/城市的位置</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 依次点击标注点：耶莫遗址 → 兴隆洼遗址 → 石家河城址 → 郑州商城 → 罗马城</div>
+      <svg width="100%" height="200" viewBox="0 0 500 200" style="background:#f0edff;border-radius:10px;">
+        <ellipse cx="130" cy="90" rx="50" ry="60" fill="#d5cef0" stroke="#7c6cf0" stroke-width="1.5" opacity="0.6"/>
+        <text x="108" y="95" font-size="10" fill="#5a4ac7" font-weight="700">欧洲</text>
+        <ellipse cx="300" cy="95" rx="60" ry="55" fill="#d5cef0" stroke="#7c6cf0" stroke-width="1.5" opacity="0.6"/>
+        <text x="278" y="100" font-size="10" fill="#5a4ac7" font-weight="700">亚洲</text>
+        <ellipse cx="200" cy="145" rx="90" ry="30" fill="#d5cef0" stroke="#7c6cf0" stroke-width="1.5" opacity="0.6"/>
+        <text x="178" y="150" font-size="10" fill="#5a4ac7" font-weight="700">非洲</text>
+
+        <circle class="map-marker" data-point="pt-jarmo" cx="280" cy="80" r="10" fill="#7c6cf0" stroke="#3d2b8c" stroke-width="2"/>
+        <text x="268" y="72" font-size="7" fill="#fff" font-weight="700" style="pointer-events:none;">耶莫</text>
+
+        <circle class="map-marker" data-point="pt-xinglongwa" cx="340" cy="70" r="10" fill="#7c6cf0" stroke="#3d2b8c" stroke-width="2"/>
+        <text x="326" y="62" font-size="7" fill="#fff" font-weight="700" style="pointer-events:none;">兴隆洼</text>
+
+        <circle class="map-marker" data-point="pt-shijiahe" cx="310" cy="100" r="10" fill="#7c6cf0" stroke="#3d2b8c" stroke-width="2"/>
+        <text x="298" y="92" font-size="7" fill="#fff" font-weight="700" style="pointer-events:none;">石家河</text>
+
+        <circle class="map-marker" data-point="pt-zhengzhou" cx="320" cy="92" r="10" fill="#7c6cf0" stroke="#3d2b8c" stroke-width="2"/>
+        <text x="308" y="84" font-size="7" fill="#fff" font-weight="700" style="pointer-events:none;">郑州</text>
+
+        <circle class="map-marker" data-point="pt-rome" cx="145" cy="70" r="10" fill="#7c6cf0" stroke="#3d2b8c" stroke-width="2"/>
+        <text x="135" y="62" font-size="7" fill="#fff" font-weight="700" style="pointer-events:none;">罗马</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-jarmo">⬜ 耶莫遗址（两河流域）</span>
+        <span class="map-check-item" data-point="pt-xinglongwa">⬜ 兴隆洼遗址（内蒙古）</span>
+        <span class="map-check-item" data-point="pt-shijiahe">⬜ 石家河城址（湖北）</span>
+        <span class="map-check-item" data-point="pt-zhengzhou">⬜ 郑州商城（河南）</span>
+        <span class="map-check-item" data-point="pt-rome">⬜ 罗马城（意大利）</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">木构抬梁结构</div><div class="flash-back">中国古代民居最普遍采用的结构方式，以木材为骨架，抬梁架设屋顶，体现了"土木工程"的智慧。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">四合院</div><div class="flash-back">中国北方传统民居典型代表，布局对称，主次分明，院落有序，体现了长幼有序的礼仪制度。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">徽派民居</div><div class="flash-back">中国南方传统民居代表，白墙黛瓦、马头墙，体现了江南水乡的地域文化特色。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">福建土楼</div><div class="flash-back">福建客家民居的代表，圆形或方形，以夯土筑成，具有防御功能和家族聚居特点。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">古罗马复合式公寓</div><div class="flash-back">3世纪古罗马为缓解住房紧缺出现的多层楼板叠加住宅，4世纪罗马城有近4.6万栋。</div></div></div>
+      </div>
+    </div>
+    <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！全部闯关完成！</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: 重难点解析（手风琴组） -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- ===== 手风琴组1：居住形态演变与生产力发展 ===== -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>📌 重难点一：居住形态演变与生产力发展的内在逻辑</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 居住形态演变的四阶段</div>
+        <div class="deep-card-bd">
+          <p>人类居住形式经历了<strong>四个阶段的演变</strong>：<strong>穴居</strong>——在高亢干燥处挖穴而居，适应寒冷和野兽威胁；<strong>巢居</strong>——在低洼潮湿处用树木营巢而居，躲避洪水猛兽；<strong>半穴居</strong>——部分在地下、部分在地面，是过渡形态；<strong>地面建筑</strong>——农业革命后，人们筑屋定居，形成村落。这一演变的核心驱动力是<strong>生产力的发展</strong>——从采集渔猎到农业种植，人类获得了稳定的食物来源，无需频繁迁徙，从而能够建设永久性居所。</p>
+          <p><strong>简而言之：</strong>居住形态的演变是生产力发展的"物质纪念碑"——穴居→巢居→半穴居→地面建筑，每一步都对应着人类改造自然能力的提升。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 农业革命与村落的出现</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：农业革命不仅是食物获取方式的变革，更是<strong>定居生活方式的起点</strong>。耶莫遗址（两河流域，公元前7000-前5800年）和兴隆洼遗址（中国，距今8000多年）都证明了农业与村落的共生关系——农业产生→剩余产品→人口增长→定居→村落形成。</p>
+          <p>纵向联系：本课"村落→集镇→城市"的演进与选必二第8课"世界市场"、第9课"20世纪经济"形成跨单元联动——生产力发展（农业→手工业→商业）推动聚居形态升级（村落→集镇→城市），体现了"生产力发展→社会分工→空间形态变化"的历史规律。</p>
+          <p><strong>这一联系说明：</strong>村落的出现不是偶然的，而是农业革命这一"生产力飞跃"的必然结果。有稳定的食物供给，才有稳定的居住形态——唯物史观的"物质生产决定社会存在"在这里得到了最直观的印证。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证与唯物史观分析</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"当尧之时，水逆行，泛滥于中国，蛇龙居之，民无所定，下者为巢，上者为营窟。"——《孟子·滕文公下》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 孟子记载的"下者为巢，上者为营窟"反映了早期人类根据<strong>地理环境差异</strong>选择不同居住方式：低洼处巢居、高亢处穴居。这体现了<strong>地理环境对物质生产方式的制约</strong>，以及人类<strong>主动适应自然</strong>的能动性。从巢居/穴居到村落，再到集镇、城市，每一次飞跃都根源于生产力的进步——农业、手工业、商业的依次分化，共同推动了人类聚居形态的升级。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> 模拟题：阅读材料并结合所学，从唯物史观角度分析人类居住形态从"穴居巢居"到"村落"再到"城市"的演进动力。（10分论述题）</p>
+          <p><strong>答案：</strong>演进动力在于生产力发展：①农业出现→定居→村落；②手工业与农业分离→手工业者集聚→集镇；③商业发展→商人介入→集镇繁荣→城市形成。每一次演进都是生产力与生产关系互动的结果，体现了"物质生产决定社会存在"的唯物史观原理。<strong>解析：</strong>需从"农业→手工业→商业"三层生产力逻辑展开，注意"空间形态变化是生产力进步的物化表现"这一核心观点。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向：居住形态·唯物史观·文明起源</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- ===== 手风琴组2：中国古代集镇与城市的发展 ===== -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>📌 重难点二：中国古代集镇与城市的发展脉络</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 中国古代集镇与城市的演进</div>
+        <div class="deep-card-bd">
+          <p>中国古代镇最初主要为<strong>军事目的</strong>而设，至<strong>两宋时期</strong>，工商业者经营及定居的集镇发展起来，有些镇因地理位置重要和人口增长，成为一级行政机构所在地。元朝<strong>漕运和海运</strong>发达，运河沿岸兴起很多工商业集镇。<strong>明清时期</strong>集镇进一步发展并出现<strong>专业分工</strong>——浙江崇德石门镇榨油、嘉善千家窑镇制陶、江苏吴江盛泽镇丝织，体现了手工业与商业的深度融合。汉口镇从明成化年间汉水改道后的荒滩，发展为明末"甲于全楚"的商业巨镇，再到清嘉庆道光年间形成白布街、花布街等专业街巷，是中国古代集镇兴衰的典型样本。</p>
+          <p><strong>简而言之：</strong>中国古代集镇经历了"军事镇→工商业镇→专业镇"的演进轨迹，反映了商品经济从萌芽到繁荣的历史进程。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 集镇发展与区域经济</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：中国古代集镇的发展与<strong>经济重心南移</strong>高度同步。两宋时期江南经济崛起，江浙一带丝织业、制陶业、榨油业集镇密集分布；明清时期江南成为全国经济最发达区域，盛泽镇（丝织）、景德镇（制瓷）等专业化集镇的出现，正是区域经济分工深化的表现。</p>
+          <p>纵向联系：本课"集镇与城市"与纲要上"宋元时期的商业与城市"、选必一"中国古代的户籍制度与社会治理"形成跨单元关联——集镇是<strong>城乡之间的纽带</strong>，既是商品交换的场所，也是国家治理的基层支点（"镇"成为行政机构的延伸）。</p>
+          <p><strong>这一联系说明：</strong>集镇的兴衰是中国古代经济结构变迁的"晴雨表"——农业经济→手工业兴起→商业繁荣→专业镇形成，完整呈现了传统社会向近代过渡的经济逻辑。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 历史解释与综合运用</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"匠人营国，方九里，旁三门。国中九经九纬，经涂九轨。左祖右社，面朝后市，市朝一夫。"——《周礼·考工记》</div>
+          <p><span class="tag-value">❤️ 历史解释</span> 《周礼·考工记》记载了周代城市布局的<strong>制度规范</strong>："方九里"规定了城市规模；"旁三门"体现了防御功能；"九经九纬"规划了道路系统；"左祖右社"反映了"敬天法祖"的礼制思想；"面朝后市"规划了政治（朝）与经济（市）的空间分区。这种"礼制性"城市布局，深刻影响了此后三千多年中国城市的规划理念。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> 模拟题：根据材料并结合所学，概括周代城市布局的特点，并分析其反映的政治与文化理念。（6分材料概括+分析题）</p>
+          <p><strong>答案：</strong>特点：规模制度规范、道路经纬分明、功能分区明确、礼制色彩浓厚。政治理念："王者必居天下之中"的中央集权意识。文化理念："敬天法祖""左祖右社"体现了宗法礼制对城市空间的塑造。<strong>解析：</strong>需注意"左祖右社""面朝后市"等关键词对应的政治/经济功能定位。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向：古代城市·礼制制度·空间规划</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- ===== 手风琴组3：世界各地民居的特色与成因 ===== -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>📌 重难点三：世界各地民居的特色及其成因</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 民居特色的三大决定因素</div>
+        <div class="deep-card-bd">
+          <p>世界各地民居的差异主要由<strong>三大因素</strong>决定：<strong>自然环境</strong>——两河流域缺乏木材→土坯房屋；古埃及气候炎热干燥→防晒保温设计；中国南方潮湿多雨→干栏式建筑；北美大平原游猎生活→圆锥形帐篷。<strong>经济发展水平</strong>——古罗马混凝土技术→多层复合式公寓；中国木构抬梁结构→大型宫殿与民居。<strong>文化习俗</strong>——中国古代"礼制"→四合院布局对称、主次分明；古罗马中庭→家庭团聚与祖先崇拜的空间表达。</p>
+          <p><strong>简而言之：</strong>民居是"地理环境+经济水平+文化习俗"的三维投影——有什么样的自然条件、经济水平和文化传统，就有什么样的民居形态。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 民居与文明交流</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 横向联系：不同文明的民居差异体现了<strong>地理环境对文明形态的塑造</strong>——两河流域的土坯房、古埃及的泥木房、中国的木构房、古罗马的混凝土建筑，各自基于当地可获取的建筑材料和技术水平，是"一方水土养一方建筑"的生动例证。</p>
+          <p>纵向联系：本课"民居"主题与纲要上"中华文明的起源""宋元时期的城市"、选必三"文化交流与传播"形成跨册联动——民居不仅是居住场所，更是<strong>文化传播的载体</strong>（如中国木构技术对东亚、东南亚的影响，古罗马混凝土技术对欧洲建筑的影响）。</p>
+          <p><strong>这一联系说明：</strong>民居是"凝固的文明史"——每一栋建筑都蕴含着技术、材料、审美、制度的多重信息，是研究人类文明形态的"活化石"。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 家国情怀与文化自信</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"王公已下，舍屋不得施重拱梁。三品已上堂舍，不得过五间九架……庶人所造堂舍，不得过三间四架。"——王溥《唐会要·舆服上》</div>
+          <p><span class="tag-value">❤️ 家国情怀</span> 《唐会要》记载的房屋建造等级规定，反映了中国古代<strong>"礼制"对日常生活的深刻塑造</strong>——建筑不仅是遮风避雨的居所，更是社会等级的物质表达。从窑洞、四合院到徽派民居、福建土楼，中国各地民居展现了<strong>丰富的地域文化多样性</strong>和<strong>卓越的建筑智慧</strong>。2018年，我国发行"民居"系列普通邮票，正是对这种文化遗产的自觉传承与弘扬。保护好、传承好这些民居文化遗产，是增强文化自信的重要途径。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> 模拟题：阅读材料并结合所学，分析唐朝房屋建造等级规定反映的社会特征，并结合一处中国民居遗产谈谈其文化价值。（8分材料+综合题）</p>
+          <p><strong>答案：</strong>特征：严格的等级制度、礼制规范日常生活、统治者通过建筑规制强化社会秩序。文化价值（以四合院为例）：布局对称体现"中正"理念；主次分明反映长幼有序的伦理；院落空间承载家族团聚的文化记忆。<strong>解析：</strong>需从"制度—空间—文化"三个层面解读，注意将"硬制度"与"软文化"结合起来分析。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向：民居文化·等级制度·文化遗产</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 3: 教材栏目解答 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('学习聚焦',this)">学习聚焦</button>
+    <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+    <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+    <button class="filter-chip" onclick="filterCol('思考点',this)">思考点</button>
+    <button class="filter-chip" onclick="filterCol('史料阅读',this)">史料阅读</button>
+    <button class="filter-chip" onclick="filterCol('探究与拓展',this)">探究与拓展</button>
+  </div>
+
+  <!-- 栏目1：学习聚焦（P56） -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📌 学习聚焦 · 村落</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>农业出现以后，人们筑屋定居，形成具有相当数量和规模的聚居点——村落。</p>
+      <div class="a" id="ans-p3-focus1"><p><strong>📝 要点归纳：</strong>学习聚焦揭示了<strong>村落产生的根本动因</strong>——"农业出现"是前提，"筑屋定居"是行为，"聚居点"是结果。农业革命使人类从<strong>迁徙的采集渔猎者</strong>转变为<strong>定居的农耕者</strong>，村落的出现标志着人类<strong>对自然空间的主动占有和改造</strong>，是人类文明史上的一次根本性飞跃。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 栏目2：历史纵横（P56） -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 历史纵横 · 耶莫遗址</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>耶莫遗址，年代约为公元前7000—前5800年，位于伊拉克北部基尔库克河畔，有21座房屋，每座房屋有好几个房间，房间里有炉灶和地窖。遗址中发现大量石制、骨制工具，装饰品和陶俑。</p>
+      <div class="a" id="ans-p3-story1"><p><strong>📝 要点归纳：</strong>耶莫遗址是<strong>两河流域早期村落的典型代表</strong>。其关键信息：①<strong>时间</strong>——公元前7000-前5800年，属于新石器时代；②<strong>规模</strong>——21座房屋，每个房屋有多房间，说明已有一定的<strong>功能分区</strong>（居住、储藏）；③<strong>技术</strong>——石制、骨制工具丰富，说明<strong>生产力已达到较高水平</strong>；④<strong>文化</strong>——装饰品和陶俑的出现，反映了<strong>精神文化生活</strong>的萌芽。这一遗址证明了两河流域是<strong>世界上最早出现村落的地区之一</strong>。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看要点</button>
+    </div>
+  </div>
+
+  <!-- 栏目3：学习聚焦（P57） -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📌 学习聚焦 · 集镇</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>随着商品交换的发展，集镇逐渐形成，促进了市场的繁荣。</p>
+      <div class="a" id="ans-p3-focus2"><p><strong>📝 要点归纳：</strong>学习聚焦构建了<strong>"商品交换→集镇形成→市场繁荣"</strong>的因果链：<strong>商品交换</strong>是动力（手工业者与商人集聚），<strong>集镇</strong>是空间载体，<strong>市场繁荣</strong>是结果。这一逻辑揭示了<strong>经济行为对空间形态的塑造</strong>——哪里有交易需求，哪里就会形成聚落；聚落越大，交易越繁荣。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 栏目4：历史纵横（P57） -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 历史纵横 · 汉口镇的兴起</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>明初年，汉口只是一片与汉阳城紧相连的荒滩，人迹罕至。成化年间，汉水改道，这里成为天然的避风港。各处商民在此建屋造屋，商船也来此停泊，市场开始出现。明末年，汉口已成为"甲于全楚"的商业巨镇。清朝嘉庆、道光年间，形成了白布街、花布街、棉花街、衣服街等各具特色的专业街巷，涌现出叶开泰药店、汪玉霞茶食店等名店名铺。</p>
+      <div class="a" id="ans-p3-story2"><p><strong>📝 要点归纳：</strong>汉口镇的兴起是<strong>地理环境+商业活动</strong>共同塑造的典型案例：①<strong>地理契机</strong>——汉水改道形成天然避风港；②<strong>市场集聚</strong>——商民建屋、商船停泊，市场自发形成；③<strong>经济地位</strong>——明末"甲于全楚"，全国性商业巨镇；④<strong>专业分工</strong>——清嘉庆道光年间形成各具特色的专业街巷（白布街、花布街等），标志着<strong>商业分工的精细化</strong>。汉口镇的兴起证明了中国古代<strong>内河航运对商业发展的关键作用</strong>。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story2')">📝 查看要点</button>
+    </div>
+  </div>
+
+  <!-- 栏目5：学习聚焦（P57） -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📌 学习聚焦 · 城市</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>城市具有政治、经济、军事和文化等多种功能。</p>
+      <div class="a" id="ans-p3-focus3"><p><strong>📝 要点归纳：</strong>城市的功能多元化体现了<strong>城市作为文明载体的综合性</strong>：<strong>政治功能</strong>——统治中心、权力中枢；<strong>经济功能</strong>——市场中心、手工业集聚地；<strong>军事功能</strong>——防御工事、驻军要塞；<strong>文化功能</strong>——宗教祭祀、教育传播。四大功能并非孤立存在，而是相互支撑、彼此强化——经济繁荣支撑政治权威，军事防卫保障经济安全，文化认同凝聚社会共识。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 栏目6：历史纵横（P58） -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 历史纵横 · 石家河城址</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>20世纪50—90年代，在长江中游发掘了位于湖北天门的石家河遗址群。石家河城址高，城内高台多及不同功能的建筑遗迹，在城外发现了密集分布的50余处村落文化遗址。</p>
+      <div class="a" id="ans-p3-story3"><p><strong>📝 要点归纳：</strong>石家河城址是<strong>长江流域早期城市的代表</strong>：①<strong>时间</strong>——距今4000多年，与黄河流域的夏商文明大致同时；②<strong>规模</strong>——城址规模较大，有不同功能的建筑遗迹，说明已有<strong>明确的功能分区</strong>；③<strong>城乡关系</strong>——城外50余处村落遗址密集分布，形成了<strong>"城—乡"二元空间结构</strong>的早期形态。这说明中国早期文明具有<strong>"多元一体"</strong>的特征——黄河流域和长江流域都是中华文明的重要发源地。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story3')">📝 查看要点</button>
+    </div>
+  </div>
+
+  <!-- 栏目7：学思之窗（P58） -->
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)"><span>🔍 学思之窗 · 《周礼·考工记》城市布局</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>"匠人营国，方九里，旁三门。国中九经九纬，经涂九轨。左祖右社，面朝后市，市朝一夫。"——《周礼·考工记》</p>
+      <p><strong>问题：</strong>上述材料对城市的布局有何规定？</p>
+      <div class="a" id="ans-p3-window1"><p><strong>📝 参考答案：</strong>①<strong>城市规模</strong>——"方九里"；②<strong>城门设置</strong>——"旁三门"；③<strong>道路规划</strong>——"九经九纬"；④<strong>功能分区</strong>——"左祖右社"（礼制祭祀）、"面朝后市"（政治/经济分区）；⑤<strong>空间等级</strong>——"市朝一夫"。这些规定体现了<strong>礼制对城市空间的全面塑造</strong>，是中国古代城市规划的经典范式。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-window1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 栏目8：思考点（P58） -->
+  <div class="col-box" data-cat="思考点">
+    <div class="col-header" onclick="toggleColBox(this)"><span>💡 思考点 · 城市产生的影响</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>问题：</strong>城市的产生对人类社会发展和人们的生活有哪些影响？</p>
+      <div class="a" id="ans-p3-think1"><p><strong>📝 参考答案：</strong>①<strong>政治</strong>——城市成为权力中心，推动国家形成；②<strong>经济</strong>——城市成为市场中心，促进社会分工；③<strong>文化</strong>——城市成为宗教祭祀和教育中心，推动文明积累；④<strong>生活</strong>——城市提供更丰富的生活设施（供水排水、公共浴场、市场等）；⑤<strong>城乡关系</strong>——形成"城乡二元结构"，推动社会结构复杂化。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 栏目9：历史纵横（P58） -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 历史纵横 · 古罗马城镇的管道系统</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>古罗马大多数城镇的供水来自水井。有的城镇通过渡槽从附近水源取水，供给城中的公共浴池，同时也供应饮用水与私人浴室用水。渡槽一般铺设在地面或埋设在地表以下。排水系统则通常用石头建造，一般建在街道下方，带走各地排出的污水。</p>
+      <div class="a" id="ans-p3-story4"><p><strong>📝 要点归纳：</strong>古罗马城镇供排水系统体现了<strong>古代城市基础设施建设的卓越成就</strong>：①<strong>供水系统</strong>——水井+蓄水池+渡槽多重保障；②<strong>排水系统</strong>——石头建造、街道下方、便于清理；③<strong>卫生理念</strong>——公共浴池与饮用水同源供水，重视<strong>公共健康</strong>；④<strong>工程技术</strong>——渡槽、排水道设计施工体现了古罗马<strong>实用主义工程学</strong>的高度水平。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story4')">📝 查看要点</button>
+    </div>
+  </div>
+
+  <!-- 栏目10：史料阅读（P60） -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)"><span>📖 史料阅读 · 《孟子·滕文公下》</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>"当尧之时，水逆行，泛滥于中国，蛇龙居之，民无所定，下者为巢，上者为营窟。"——《孟子·滕文公下》</p>
+      <div class="a" id="ans-p3-material1"><p><strong>📝 解读：</strong>记载了<strong>远古时期的居住状况</strong>：①<strong>历史背景</strong>——尧时洪水泛滥；②<strong>居住方式</strong>——"下者为巢，上者为营窟"，因地制宜；③<strong>历史价值</strong>——与考古发现相互印证，证实了<strong>早期人类居住方式的多元性与适应性</strong>。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解读</button>
+    </div>
+  </div>
+
+  <!-- 栏目11：学思之窗（P60） -->
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)"><span>🔍 学思之窗 · 《唐会要·舆服上》</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>"准营墙令：王公已下，舍屋不得施重拱梁。三品已上堂舍，不得过五间九架。厅厦两头门屋，不得过五间五架。……庶人所造堂舍，不得过三间四架，门屋一间两架，仍不得施楼阁。"——王溥《唐会要·舆服上》</p>
+      <p><strong>问题：</strong>你如何理解唐朝房屋建造的规定？</p>
+      <div class="a" id="ans-p3-window2"><p><strong>📝 参考答案：</strong>①<strong>严格的等级制度</strong>——从王公到庶民，房屋规模被明确规定；②<strong>礼制的物质化</strong>——建筑是社会等级的物质标识；③<strong>国家权力的渗透</strong>——国家通过立法规范日常生活；④<strong>防止奢靡之风</strong>——统治者通过建筑规制遏制社会攀比之风。这一规定是<strong>中国古代"礼法结合"治理模式</strong>在建筑领域的典型体现。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-window2')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 栏目12：探究与拓展（P62） -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)"><span>🔬 探究与拓展 · 艾希比尔村落</span><span class="col-toggle">▼</span></div>
+    <div class="col-body">
+      <p><strong>原文：</strong>德国费德尔湖畔的艾希比尔村落是新石器时代的遗址。该村落由24户住家组成。住家面向湖泊排列，全部是悬山式屋顶。村子中央是公共广场。面对广场的房间，可能是个集会场所，里面配备有炉子和面包窑。</p>
+      <p><strong>问题：</strong>观察图片，查阅相关资料，探究古代村落的选址特点。</p>
+      <div class="a" id="ans-p3-explore1"><p><strong>📝 参考答案：</strong>①<strong>靠近水源</strong>——便于取水、捕鱼和农业灌溉；②<strong>地势选择</strong>——一般选择地势较高、排水良好的地段；③<strong>生产便利</strong>——靠近可耕地、森林或草场；④<strong>防御需求</strong>——考虑天然屏障作为防御依托；⑤<strong>公共空间</strong>——公共广场/集会场所维系社区凝聚力。</p></div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore1')">📝 查看参考答案</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 4: 课堂训练（含全部选择题解析） -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div><div style="font-size:11pt;color:#888;">当前得分</div><div class="score-number" id="scoreVal">0</div></div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 人类居住形式从"穴居→巢居→半穴居→地面建筑"演变的根本动力是（ ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 气候变化</label>
+      <label onclick="optClick(this,'B','q1')">B. 生产力发展（农业革命）</label>
+      <label onclick="optClick(this,'C','q1')">C. 人口增长</label>
+      <label onclick="optClick(this,'D','q1')">D. 战争威胁</label>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+    <div class="a" id="ans-p4-q1">
+      <p><strong>✅ 正确答案：B</strong></p>
+      <p><strong>📖 解析：</strong>人类居住形式演变的<strong>根本动力是生产力发展，尤其是农业革命</strong>。农业革命使人类获得了稳定的食物来源，从迁徙的采集渔猎者转变为定居的农耕者，从而能够建设永久性地面建筑。A项气候变化是外部因素，C项人口增长是结果而非原因，D项战争威胁是次要因素。从唯物史观来看，"物质生产决定社会存在"——有稳定的食物供给，才有稳定的居住形态。</p>
+    </div>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 下列遗址中，被誉为"华夏第一村"的是（ ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 耶莫遗址</label>
+      <label onclick="optClick(this,'B','q2')">B. 石家河城址</label>
+      <label onclick="optClick(this,'C','q2')">C. 兴隆洼遗址</label>
+      <label onclick="optClick(this,'D','q2')">D. 郑州商城遗址</label>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+    <div class="a" id="ans-p4-q2">
+      <p><strong>✅ 正确答案：C</strong></p>
+      <p><strong>📖 解析：</strong><strong>兴隆洼遗址</strong>位于内蒙古赤峰敖汉旗，距今8000多年，发掘出170余座半穴居房址，被誉为"华夏第一村"。A项耶莫遗址位于两河流域（伊拉克北部），是两河流域早期村落的代表；B项石家河城址位于湖北天门（距今4000多年），是长江流域早期城市的代表；D项郑州商城是商朝早期都城遗址。</p>
+    </div>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 中国古代集镇在明清时期出现"专业分工"的典型表现是（ ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 白布街、花布街等专业街巷</label>
+      <label onclick="optClick(this,'B','q3')">B. 军事重镇的设置</label>
+      <label onclick="optClick(this,'C','q3')">C. 漕运和海运的发达</label>
+      <label onclick="optClick(this,'D','q3')">D. 都城规模扩大</label>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+    <div class="a" id="ans-p4-q3">
+      <p><strong>✅ 正确答案：A</strong></p>
+      <p><strong>📖 解析：</strong>明清时期集镇发展出现<strong>专业分工</strong>的典型表现是<strong>白布街、花布街、棉花街、衣服街等专业街巷</strong>的形成（以汉口镇为例），体现了商业分工的精细化。B项军事重镇是两宋之前的特征，C项漕运海运是元朝集镇发展的重要原因，D项都城规模扩大与集镇专业分工无直接关系。</p>
+    </div>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 根据《周礼·考工记》，周代城市中"左祖右社"的布局体现的是（ ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 军事防御功能</label>
+      <label onclick="optClick(this,'B','q4')">B. 经济贸易功能</label>
+      <label onclick="optClick(this,'C','q4')">C. 礼制与宗教功能</label>
+      <label onclick="optClick(this,'D','q4')">D. 居住生活功能</label>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+    <div class="a" id="ans-p4-q4">
+      <p><strong>✅ 正确答案：C</strong></p>
+      <p><strong>📖 解析：</strong>"左祖右社"的意思是<strong>东侧建祖庙（祭祀祖先），西侧建社稷坛（祭祀土地神和谷神）</strong>，体现了<strong>礼制与宗教功能</strong>，即"敬天法祖"的宗法礼制思想。A项军事防御体现在城墙和城门（"旁三门"），B项经济贸易体现在"后市"（市场在宫殿北面），D项居住生活体现在居民区布局。</p>
+    </div>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 下列哪一地区以"土坯房屋、墙壁贴着墙壁建、前庭→前室→主室"的民居为典型？（ ）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 古埃及</label>
+      <label onclick="optClick(this,'B','q5')">B. 两河流域</label>
+      <label onclick="optClick(this,'C','q5')">C. 古罗马</label>
+      <label onclick="optClick(this,'D','q5')">D. 中国北方</label>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+    <div class="a" id="ans-p4-q5">
+      <p><strong>✅ 正确答案：B</strong></p>
+      <p><strong>📖 解析：</strong><strong>两河流域</strong>雨水稀少，缺乏木材，因此用黏土和芦苇混合制成的<strong>土坯</strong>建造房屋；几户人家的房屋墙壁贴着墙壁建在一起；房屋结构由<strong>前庭→前室→主室</strong>构成。A项古埃及是泥木结构+庭院柱廊，C项古罗马是中庭+混凝土，D项中国北方是穴居→地面建筑+木构抬梁结构。</p>
+    </div>
+  </div>
+
+  <!-- 材料题 1（高难度 · 唯物史观升华） -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p><strong>材料一：</strong>"当尧之时，水逆行，泛滥于中国，蛇龙居之，民无所定，下者为巢，上者为营窟。"——《孟子·滕文公下》</p>
+      <p><strong>材料二：</strong>"匠人营国，方九里，旁三门。国中九经九纬，经涂九轨。左祖右社，面朝后市。"——《周礼·考工记》</p>
+      <p><strong>材料三：</strong>"准营墙令：王公已下，舍屋不得施重拱梁。三品已上堂舍，不得过五间九架……庶人所造堂舍，不得过三间四架。"——王溥《唐会要·舆服上》</p>
+    </div>
+    <div class="q-text">（1）根据材料一，概括远古时期人类的居住方式及原因。（2分）</div>
+    <div class="q-text">（2）根据材料二，概括周代城市布局的特点及其反映的理念。（4分）</div>
+    <div class="q-text">（3）综合三则材料，从唯物史观角度分析中国古代居住形态从"原始适应"到"礼制规范"的演变。（4分）</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>（1）参考答案：</strong>居住方式：<strong>巢居</strong>（低洼处）和<strong>穴居</strong>（高亢处）。原因：洪水泛滥，人们根据<strong>地理环境</strong>的不同（"下者""上者"）因地制宜选择居住方式。</p>
+      <p><strong>（2）参考答案：</strong>周代城市布局的特点：规模制度规范（"方九里"）、道路经纬分明（"九经九纬"）、功能分区明确（"左祖右社""面朝后市"）。反映的理念：<strong>"敬天法祖"的宗教礼制</strong>（左祖右社）、<strong>"王权至上"的政治权威</strong>（面朝）以及<strong>"工商并重"的经济意识</strong>（后市）。</p>
+      <p><strong>（3）参考答案：</strong>从"原始适应"到"礼制规范"的演变体现了<strong>生产力发展推动社会结构复杂化的历史逻辑</strong>：①<strong>原始适应阶段</strong>（材料一）：生产力水平低下，人类被动适应自然环境；②<strong>礼制规范阶段</strong>（材料二、三）：随着生产力发展（农业→手工业→城市），社会分化和等级制度形成，居住形态从"生存工具"转变为"身份标识"；③<strong>唯物史观视角</strong>：居住形态的演变是生产力发展的"物质见证"——从"为生存而居"到"为身份而居"，反映了人类从"被动适应自然"到"主动改造自然并建构社会秩序"的历史进程。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1'); trackMatQ('mq1')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 2（中难度） -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>"古罗马大多数城镇的供水来自水井。有的城镇通过渡槽从附近水源取水，供给城中的公共浴池，同时也供应饮用水与私人浴室用水。渡槽一般铺设在地面或埋设在地表以下。排水系统则通常用石头建造，一般建在街道下方，带走各地排出的污水。"</p>
+    </div>
+    <div class="q-text">（1）根据材料，概括古罗马城镇供水排水系统的特点。（2分）</div>
+    <div class="q-text">（2）结合所学，分析古罗马城镇基础设施建设对后世的影响。（4分）</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>（1）参考答案：</strong>特点：<strong>供水多样</strong>（水井+渡槽）、<strong>设施完善</strong>（公共浴池、私人浴室均有供水）、<strong>工程技术先进</strong>（渡槽铺设、石头排水管道）、<strong>便于维护</strong>（排水道内部空间较大，便于清理）。</p>
+      <p><strong>（2）参考答案：</strong>古罗马城镇基础设施建设对后世产生了深远影响：①<strong>工程技术传承</strong>——混凝土、拱券、渡槽等技术被后世欧洲建筑广泛采用；②<strong>城市标准确立</strong>——古罗马的道路系统和供水排水系统成为后来西方城市建设的标准模板；③<strong>公共健康理念</strong>——古罗马对公共浴池、饮用水供应的重视，影响了后世城市公共卫生事业的发展；④<strong>城市规划范本</strong>——古罗马的"中庭—列柱—多层公寓"等建筑形态，对欧洲中世纪及近代城市建筑产生了持续影响。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2'); trackMatQ('mq2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 5: 知识结构图 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 古代村落·集镇·城市演进</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌾</span>
+        <strong>农业革命 → 村落</strong>
+        <p>农业出现 → 定居 → 形成聚居点</p>
+        <div class="kg-detail"><p><strong>📌 考点链接：</strong>农业革命是人类文明史上的第一次伟大革命，村落的产生是农业革命的直接后果。<span class="tag-gaokao">🎯 高考常考：</span>兴隆洼遗址、耶莫遗址（选择题高频）</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏪</span>
+        <strong>社会分工 → 集镇</strong>
+        <p>手工业与农业分离 → 商人介入 → 筑垒设防</p>
+        <div class="kg-detail"><p><strong>📌 考点链接：</strong>两宋工商业集镇→元朝运河沿岸→明清专业分工（盛泽镇丝织、汉口镇商业）。<span class="tag-gaokao">🎯 高考常考：</span>中国古代集镇发展历程（材料题高频）</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span>
+        <strong>文明凝聚 → 城市</strong>
+        <p>政治权力+军事防御+经济活动+宗教祭祀</p>
+        <div class="kg-detail"><p><strong>📌 考点链接：</strong>两河流域苏美尔最早城市（前3500-前3100）；中国：石家河城址、郑州商城；周代城市布局制度（《考工记》）。<span class="tag-gaokao">🎯 高考常考：</span>周代城市布局、城市功能（综合分析题）</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏠</span>
+        <strong>民居特色 · 世界各地</strong>
+        <p>两河流域土坯房 · 古埃及泥木房 · 中国木构 · 古罗马混凝土</p>
+        <div class="kg-detail"><p><strong>📌 考点链接：</strong>民居由自然环境+经济水平+文化习俗三重因素决定；中国民居：窑洞/四合院/徽派民居/福建土楼。<span class="tag-gaokao">🎯 高考常考：</span>中外民居对比、中国民居文化遗产（文化自信类命题）</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 生产力主线：农业→手工业→商业→分工深化</div>
+      <div class="kg-rule r2">🟠 空间演变：穴居/巢居→村落→集镇→城市</div>
+      <div class="kg-rule r3">🟢 中外比较：两河流域→中国→古希腊罗马</div>
+      <div class="kg-rule r4">🔴 文化价值：礼制规范·智慧结晶·遗产传承</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 6: 结束页 -->
+<!-- ============================================================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第四单元 · 村落、城镇与居住环境</div>
+    <h1 style="font-size:22pt;">第10课 · 古代的村落、集镇和城市</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>🌾 村落的生产</h3>
+        <ul><li><strong>居住形式演变：</strong>穴居→巢居→半穴居→地面建筑</li><li><strong>村落形成条件：</strong>农业革命 → 筑屋定居</li><li><strong>代表遗址：</strong>耶莫遗址（两河流域）、兴隆洼遗址（中国）</li></ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>🏛️ 集镇与城市</h3>
+        <ul><li><strong>集镇形成：</strong>手工业者集聚 → 商人介入 → 筑垒设防</li><li><strong>中国集镇：</strong>两宋发展 → 元朝运河沿岸 → 明清专业分工</li><li><strong>城市功能：</strong>政治/军事/经济/宗教中心</li></ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>🏠 世界各地的民居</h3>
+        <ul><li><strong>两河流域：</strong>土坯房屋，前庭→前室→主室</li><li><strong>中国：</strong>木构抬梁结构 → 窑洞/四合院/徽派民居/土楼</li><li><strong>古罗马：</strong>中庭为核心，混凝土+拱券，多层公寓</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav">
+    <div><a href="选必2-U3- 第9课 20世纪以来人类的经济与生活.html">← 上一课：第9课 20世纪以来人类的经济与生活</a></div>
+    <div class="nav-center">第10课</div>
+    <div><a href="选必2-U4- 第11课 近代以来的城市化进程.html">下一课：第11课 近代以来的城市化进程 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版高中历史 · 经济与社会生活（选必二） · 第四单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- 底部翻页导航栏 -->
+<!-- ============================================================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); nextPage(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); prevPage(); }
+  else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) { if (done >= 5) lbl.textContent = '🏆 全部闯关完成！'; else lbl.textContent = done + '/5 关完成'; }
+}
+
+// ===== 学习目标 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) document.getElementById('targetsDone').classList.add('show');
+  else document.getElementById('targetsDone').classList.remove('show');
+}
+
+// ===== 标签页 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题 =====
+var correctAnswers = { q1:'B', q2:'C', q3:'A', q4:'C', q5:'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) o.classList.add('correct');
+    else if (o === el) o.classList.add('wrong');
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+function trackMatQ(id) { if (matDone[id]) return; matDone[id] = true; score++; updateScore(); }
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) box.classList.remove('filtered-out');
+    else box.classList.add('filtered-out');
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== ① 拖拽排序 =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) parentSlot.classList.remove('filled');
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['D','C','B','A'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true, allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) { slot.classList.add('correct'); slot.classList.remove('wrong'); }
+    else { slot.classList.add('wrong'); slot.classList.remove('correct'); allCorrect = false; }
+  });
+  if (!allFilled) { result.textContent = '❌ 请先将所有卡片拖入槽位'; result.className = 'sort-result show fail'; return; }
+  if (allCorrect) { result.textContent = '✅ 完全正确！'; result.className = 'sort-result show pass'; stageDone.sort = true; updateStageProgress(); document.getElementById('stageSortDone').classList.add('show'); }
+  else { result.textContent = '❌ 顺序不对，请重试（正确顺序：穴居→巢居→半穴居→地面建筑）'; result.className = 'sort-result show fail'; }
+}
+
+// ===== ② 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) { result.textContent = '✅ 完全正确！'; result.className = 'sort-result show pass'; stageDone.fill = true; updateStageProgress(); document.getElementById('stageFillDone').classList.add('show'); }
+  else { result.textContent = '❌ 有错误，请检查'; result.className = 'sort-result show fail'; }
+}
+
+// ===== ③ 连线匹配 =====
+var selectedLeft = null, matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected'); selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft || el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched'); selectedLeft.classList.remove('selected');
+    el.classList.add('matched'); matchedPairs.push(leftCat); selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true; updateStageProgress(); document.getElementById('stageMatchDone').classList.add('show');
+    }
+  }
+}
+
+// ===== ④ 地图标注 =====
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.9)'); m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      document.querySelectorAll('#mapChecklist .map-check-item').forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) { stageDone.map = true; updateStageProgress(); document.getElementById('stageMapDone').classList.add('show'); }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ===== ⑤ 翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) { stageDone.flips = true; updateStageProgress(); var doneEl = document.getElementById('stageFlipsDone'); if (doneEl) doneEl.classList.add('show'); }
+}
+
+// ===== 知识结构图 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) { if (arrow) arrow.textContent = '▼'; badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情'; }
+    else { if (arrow) arrow.textContent = '▶'; badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开'; }
+  }
+}
+
+// ===== deep-card 折叠 =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) { e.stopPropagation(); bd.classList.toggle('show'); hd.classList.toggle('active'); });
+    }
+  });
+})();
+
+console.log('✅ 选必2 第10课 古代的村落、集镇和城市 课件加载完成！');
+</script>
+</body>
+</html>

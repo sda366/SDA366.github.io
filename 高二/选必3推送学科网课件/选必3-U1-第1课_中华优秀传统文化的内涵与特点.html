@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1课 中华优秀传统文化的内涵与特点</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12; --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero & 封面 ========== */
+.hero-wrap { background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding:36px 20px 30px; text-align:center; color:#fff; border-radius:0 0 36px 36px; box-shadow:0 6px 30px rgba(61,43,140,0.20); margin:0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+.learn-target { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:20px 24px; margin-bottom:24px; border:1px solid var(--border); }
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item { font-size:13.5pt; padding:6px 8px; border-bottom:1px dashed var(--border); cursor:pointer; transition:all 0.2s; border-radius:6px; }
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn { display:block; margin:20px auto 10px; background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; border:none; border-radius:24px; padding:12px 36px; font-size:16pt; font-weight:700; cursor:pointer; transition:all 0.25s; box-shadow:0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 & Page1 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn { flex:1; padding:14px 8px; font-size:14pt; font-weight:700; border:none; cursor:pointer; text-align:center; transition:all 0.25s; background:#e8e0ff; color:#5a4ac7; letter-spacing:1px; }
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* 时间轴、知识卡片、贯通框 */
+.timeline-bar { background:#f0edff; border-radius:8px; padding:8px 16px; font-size:12pt; color:#5a4ac7; text-align:center; margin-bottom:12px; letter-spacing:1px; }
+.kp-card { background:var(--bg-card); border-left:4px solid var(--primary); border-radius:0 10px 10px 0; padding:18px 22px; margin-bottom:20px; box-shadow:0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; } .kp-card li { margin:6px 0; font-size:14pt; }
+.link-bar { border:2px dashed #d5cef0; border-radius:10px; padding:12px 16px; margin-top:14px; background:#faf8ff; font-size:13pt; color:#5a4ac7; }
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-gaokao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 手风琴组 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s; }
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700; cursor:pointer; user-select:none; }
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== diff-table ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip { padding:6px 14px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s; font-weight:600; color:#5a4ac7; }
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label { display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff; }
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node { width:90%; border-radius:12px; padding:16px 20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative; }
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; } .kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,0.06);}50%{box-shadow:0 2px 20px rgba(124,108,240,0.18);} }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08); position:relative; text-align:left; }
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 五关交互专用 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter:brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== -->
+<!-- PAGE 0 — 封面页 -->
+<!-- ============================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 源远流长的中华文化</div>
+    <h1>第1课 · 中华优秀传统文化的内涵与特点</h1>
+    <div class="hero-sub">统编版高中历史  文化交流与传播（选必三）</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>运用生产力与生产关系、经济基础与上层建筑原理，理解中华文化发展的内在动力</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>梳理中华文化从先秦到近代的发展脉络，把握各阶段特征</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>通过《礼记》《管子》《贞观政要》等史料，理解中华文化的核心内涵</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>阐释中华优秀传统文化“以人为本”“天人合一”“和而不同”等理念的内涵</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识中华优秀传统文化的当代价值，增强文化自信与民族认同</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 1 — 知识要点 + 五关闯关 -->
+<!-- ============================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 发展历程</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 文化内涵</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 特点价值</button>
+  </div>
+
+  <!-- ====== TAB1 子目一：中华文化发展历程 ====== -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">📅 约夏商周 → 秦汉 → 魏晋隋唐 → 宋元 → 明清 → 近代</div>
+    <h3>中华文化发展历程</h3>
+    <ul>
+      <li><span class="kwd">夏商周</span>：青铜时代，国家建立，汉字成熟，礼制发展</li>
+      <li><span class="kwd">秦朝</span>：推崇法家；<span class="kwd">西汉</span>：尊崇儒术，确立儒学正统地位</li>
+      <li>魏晋隋唐：儒佛道交汇融通，<span class="kwd">魏晋玄学</span>、<span class="kwd">唐朝佛学</span>繁荣</li>
+      <li><span class="kwd">宋代</span>：理学形成（朱熹“存天理，灭人欲”“格物致知”）</li>
+      <li>南宋/明：<span class="kwd">陆王心学</span>（陆九渊“心即理”→王守仁“致良知”“知行合一”）</li>
+      <li>明清之际：黄宗羲、顾炎武、王夫之批判理学、抨击专制、倡导<span class="kwd">经世致用</span></li>
+      <li>康雍乾：文字狱 → 思想钳制</li>
+      <li>近代：向西方学习 → <span class="kwd">新文化运动</span>（科学与民主）→ 五四后马克思主义传播</li>
+    </ul>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将以下历史事件按时间先后顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">夏商周青铜时代</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">汉武帝尊崇儒术</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">宋代理学形成</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">陆王心学传播</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">明清之际批判理学</span>
+      <span class="sort-item" draggable="true" data-sortkey="key6" id="item_key6">新文化运动</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第二</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第三</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第四</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第五</span></div>
+      <div class="sort-slot" data-slot="5"><span class="slot-label">最晚</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">青铜时代</div><div class="flash-back">夏商周时期，国家建立、农业手工业发展、汉字成熟，商朝青铜铸造工艺水平高。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">礼乐制度</div><div class="flash-back">西周周公制礼作乐，建立以人为中心的礼乐制度，礼器反映社会礼制发展。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">尊崇儒术</div><div class="flash-back">汉武帝接受董仲舒建议，确立儒学正统地位，成为两千多年传统文化主流。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">宋明理学</div><div class="flash-back">朱熹集大成，强调“存天理，灭人欲”“格物致知”；陆王心学主张“心即理”“致良知”。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 中华文化发展历程常以<span class="kwd">时序型</span>选择题考查，重点把握儒学地位变化、理学与心学的区别。
+    </div>
+  </div>
+
+  <!-- ====== TAB2 子目二：中华优秀传统文化的内涵 ====== -->
+  <div class="kp-card tab-panel" id="tab2">
+    <h3>中华优秀传统文化的核心内涵</h3>
+    <ul>
+      <li><span class="kwd">以人为本</span>：周公“敬天保民”→孔子“仁”→儒家伦理秩序</li>
+      <li><span class="kwd">民本思想</span>：管子“顺民心”→孔子“体察民情”→孟子“民贵君轻”</li>
+      <li><span class="kwd">天人合一</span>：老子“道法自然”→荀子“天行有常”“制天命而用之”</li>
+      <li><span class="kwd">家国情怀</span>：孟子“修身齐家治国平天下”→张载“横渠四句”→范仲淹、文天祥、顾炎武</li>
+      <li><span class="kwd">崇德尚贤</span>：西周“明德”→“为政以德”“见贤思齐”→墨子“尚贤”→《礼记》“天下为公，选贤与能”</li>
+      <li><span class="kwd">自强不息</span>：《周易》“天行健，君子以自强不息”→孟子“富贵不能淫”→屈原“上下而求索”</li>
+      <li><span class="kwd">和而不同</span>：太史伯“和实生物，同则不继”→孔子“和为贵”“君子和而不同”</li>
+    </ul>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 周公提出“<input class="fill-input" data-answer="敬天保民" placeholder="？">”的思想</div>
+      <div class="fill-blank-row">2. 孟子提出“民为贵，<input class="fill-input" data-answer="社稷次之" placeholder="？">，君为轻”</div>
+      <div class="fill-blank-row">3. 老子提出“人法地，地法天，天法道，<input class="fill-input" data-answer="道法自然" placeholder="？">”</div>
+      <div class="fill-blank-row">4. 张载：“为天地立心，为生民立命，<input class="fill-input" data-answer="为往圣继绝学" placeholder="？">，为万世开太平”</div>
+      <div class="fill-blank-row">5. 太史伯：“<input class="fill-input" data-answer="和实生物" placeholder="？">，同则不继”</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ③ 连线匹配（放在Tab2底部） -->
+    <div class="challenge-title">🎮 挑战三：将思想家与核心主张配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 思想家</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">孔子</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">孟子</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">老子</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">荀子</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">王守仁</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">🎯 核心主张</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">仁者爱人、为政以德</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">民贵君轻、仁政</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">道法自然、天人合一</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">天行有常、制天命而用之</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">致良知、知行合一</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">敬天保民</div><div class="flash-back">周公提出，强调统治者要敬重天命、保护百姓，是早期民本思想的体现。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">民贵君轻</div><div class="flash-back">孟子提出，人民放在第一位，社稷其次，君主最后，闪耀民本思想光辉。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">横渠四句</div><div class="flash-back">张载：“为天地立心，为生民立命，为往圣继绝学，为万世开太平。”家国情怀的集中表达。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">和而不同</div><div class="flash-back">孔子提出，强调君子与人和谐相处但不盲目附和，体现中华文化的包容智慧。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 中华文化内涵常以<span class="kwd">史料情境型</span>选择题考查，民本思想、家国情怀是近年命题热点。
+    </div>
+  </div>
+
+  <!-- ====== TAB3 子目三：中华优秀传统文化的特点与价值 ====== -->
+  <div class="kp-card tab-panel" id="tab3">
+    <h3>中华优秀传统文化的特点与价值</h3>
+    <ul>
+      <li><span class="kwd">本土性</span>：起源与发展具有本土性</li>
+      <li><span class="kwd">多样性</span>：博大精深、丰富多彩、领域广阔</li>
+      <li><span class="kwd">包容性</span>：博采众长、兼收并蓄</li>
+      <li><span class="kwd">凝聚力</span>：中华民族共同文化特质的体现</li>
+      <li><span class="kwd">连续性</span>：绵延不绝、传承至今</li>
+    </ul>
+    <p style="margin-top:10px;"><strong>当代价值：</strong>内在思想源泉和精神动力；维护团结统一；为治国理政和道德建设提供借鉴。</p>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：点击标注中华文化重要发源地</div>
+    <div class="map-zone" id="mapContainer">
+      <svg viewBox="0 0 400 240" style="width:100%;height:auto;background:#f5f1e8;border-radius:12px;">
+        <!-- 简化中国轮廓示意 -->
+        <path d="M100,180 L120,160 L160,150 L200,140 L240,150 L280,160 L320,170 L340,190 L320,210 L280,220 L240,225 L200,220 L160,215 L120,210 L100,200 Z" fill="#d4d0c8" stroke="#999" stroke-width="1.5"/>
+        <path d="M140,140 L160,120 L200,110 L240,115 L260,130 L250,145 L210,140 L170,145 Z" fill="#c8c4ba" stroke="#999" stroke-width="1.5"/>
+        <!-- 标注点 -->
+        <circle class="map-marker" data-point="pt-anyang" cx="170" cy="150" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-xian" cx="130" cy="165" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-luoyang" cx="155" cy="158" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-qufu" cx="210" cy="155" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-shaoxing" cx="250" cy="180" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <!-- 标签 -->
+        <text x="160" y="135" font-size="9" fill="#333" font-weight="700">安阳·殷墟</text>
+        <text x="105" y="155" font-size="9" fill="#333" font-weight="700">西安</text>
+        <text x="140" y="148" font-size="9" fill="#333" font-weight="700">洛阳</text>
+        <text x="200" y="145" font-size="9" fill="#333" font-weight="700">曲阜</text>
+        <text x="240" y="172" font-size="9" fill="#333" font-weight="700">绍兴</text>
+      </svg>
+      <div class="map-instruction">💡 点击上方紫色圆点标注文化发源地</div>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-anyang">安阳殷墟</span>
+        <span class="map-check-item" data-point="pt-xian">西安</span>
+        <span class="map-check-item" data-point="pt-luoyang">洛阳</span>
+        <span class="map-check-item" data-point="pt-qufu">曲阜</span>
+        <span class="map-check-item" data-point="pt-shaoxing">绍兴</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">本土性</div><div class="flash-back">中华文化起源与发展具有鲜明的本土性，是中华民族独立创造的文明成果。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">包容性</div><div class="flash-back">中华文化博采众长、兼收并蓄，积极吸纳外来文化（如佛教），体现开放胸怀。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">连续性</div><div class="flash-back">中华文化绵延不绝、传承至今，是世界四大文明中唯一未曾中断的文明。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">凝聚力</div><div class="flash-back">中华文化是中华民族共同文化特质的体现，维护着统一多民族国家的团结。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·中频</span> 中华文化特点常以<span class="kwd">比较类</span>选择题考查，注意与古埃及、古巴比伦等文明的对比。
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 2 — 重难点解析（v3.0.1 深化固化） -->
+<!-- ============================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重难点一：核心内涵 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔑 重难点一：中华优秀传统文化的核心内涵</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <!-- 第1层：基础理解 -->
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · “以人为本”与“民本思想”</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>“以人为本”强调人的价值和尊严，是中国古代政治哲学的核心命题。周公提出“敬天保民”，孔子提倡“仁者爱人”，儒家以此建立起规范社会关系的伦理秩序。“民本思想”是“以人为本”在政治领域的延伸，管子提出“政之所兴，在顺民心”，孟子提出“民为贵，社稷次之，君为轻”，将人民置于国家之上。</p>
+          <p><strong>核心要素：</strong>尊重人的生命与尊严、重视民意与民心、以德治国与仁政。</p>
+          <p><strong>简而言之：</strong>“以人为本”确立了人在社会中的核心地位，“民本思想”则将这一理念落实为“以民为天”的政治原则，二者共同构成中华传统政治文化的基石。</p>
+        </div>
+      </div>
+      <!-- 第2层：联系拓展 -->
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 七大内涵的内在逻辑</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>七大内涵形成“个体→社会→自然”的递进结构——<span class="kwd">以人为本</span>关注个体价值，<span class="kwd">民本思想</span>延伸至政治伦理，<span class="kwd">家国情怀</span>扩展至社会担当，<span class="kwd">崇德尚贤</span>规范选人用人，<span class="kwd">自强不息</span>塑造民族品格，<span class="kwd">天人合一</span>统摄人与自然，<span class="kwd">和而不同</span>升华至文明相处之道。</p>
+          <p><strong>纵向联系：</strong>从西周的“敬德保民”到春秋战国的“百家争鸣”，再到宋明的“理学心学”，七大内涵在历史演进中不断丰富和深化，形成层层递进的思想体系。</p>
+          <p><strong>这一联系说明：</strong>中华文化的核心内涵并非孤立存在，而是一个以“人”为中心、由内而外、由近及远的完整思想谱系，体现了中华文明对“人”与“社会”“自然”关系的系统性思考。</p>
+        </div>
+      </div>
+      <!-- 第3层：素养提升 -->
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析“天人合一”</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“人法地，地法天，天法道，道法自然。”——《老子》第二十五章<br>“天行有常，不为尧存，不为桀亡。”“制天命而用之。”——荀子《天论》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 从唯物史观看，“天人合一”思想本质上是农业文明时代人类对自然规律的朴素认知。生产力水平低下时，人类对自然的依赖催生了“顺应自然”的智慧；荀子“制天命而用之”则体现了人类在认识规律基础上主动改造自然的萌芽。这种思想反映了<b>生产力决定生产关系、社会存在决定社会意识</b>的基本原理——农耕经济奠定了“天人合一”的物质基础。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题（2024·全国卷改编）：</strong>阅读材料，结合所学，从唯物史观角度分析“天人合一”思想产生的经济根源及其对中华文化的影响。（12分）</p>
+          <p><strong>答案：</strong>经济根源：中国以农为本的经济形态，使人们对自然规律有深刻依赖，催生了“顺应自然”“不违农时”的智慧。影响：“天人合一”塑造了中华文化尊重自然、和谐共生的价值取向，影响了古代农业科技、建筑艺术、社会治理等方方面面，成为中华文化绵延不绝的重要精神支柱。</p>
+          <p><strong>解析：</strong>本题要求从“经济基础→思想观念→文化影响”三层递进论述，唯物史观是答题的理论框架。需注意“生产力→生产关系→上层建筑”的因果链条。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点二：发展历程中的关键转型 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🔄 重难点二：中华文化发展历程中的关键转型</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 儒学“正统地位”的确立</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>儒学正统地位是指儒家思想成为中国古代国家意识形态和主流文化的核心地位。秦朝以法家治国，焚书坑儒；西汉初年奉行黄老之学；汉武帝采纳董仲舒“罢黜百家，尊崇儒术”建议，将儒学确立为官方正统。</p>
+          <p><strong>关键要素：</strong>董仲舒改造儒学（天人感应、君权神授、三纲五常）→ 汉武帝设立太学、以儒经取士 → 儒学与政治权力深度绑定。</p>
+          <p><strong>简而言之：</strong>儒学从先秦诸子之一跃升为国家意识形态，经历了从“百家争鸣”到“独尊儒术”的转型，这一转变深刻影响了中国两千多年的政治与文化走向。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 宋明理学与明清批判的承继与突破</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>宋明理学（程朱理学、陆王心学）是儒学的哲学化升级，吸收了佛、道思想，将儒学从伦理规范提升至宇宙本体论高度。明清之际黄宗羲、顾炎武、王夫之则对理学展开批判，主张“经世致用”，抨击君主专制，体现了儒学内部的自我反思。</p>
+          <p><strong>纵向联系：</strong>从先秦儒学→汉代经学→宋明理学→明清实学，儒学经历了“伦理化→制度化→哲学化→批判化”的演进轨迹，每一次转型都回应了时代挑战。</p>
+          <p><strong>这一联系说明：</strong>儒学并非一成不变的教条，而是一个不断自我调适、回应时代问题的思想活体。宋明理学丰富了儒学的理论深度，明清批判则开启了对专制制度的反思，为近代思想变革埋下了伏笔。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料解读与历史解释</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“十月革命一声炮响，给我们送来了马克思列宁主义……用无产阶级的宇宙观作为观察国家命运的工具，重新考虑自己的问题。”——毛泽东《论人民民主专政》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 从唯物史观看，鸦片战争后中国被迫卷入世界资本主义体系，传统儒学无法应对“数千年未有之变局”。马克思主义的传入之所以能“重新考虑自己的问题”，是因为它提供了科学认识社会发展的理论工具，契合了中国救亡图存的时代需要。这体现了<b>社会存在决定社会意识</b>——民族危机的加深推动了思想范式的根本转换。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>阅读材料，结合所学，说明儒学从“正统”到“受冲击”再到“被反思”的演变历程及其原因。（开放性评述题）</p>
+          <p><strong>答案：</strong>演变：汉武帝确立正统→宋明理学哲学化→明清之际受批判→近代受西方冲击→新文化运动“打倒孔家店”。原因：传统儒学无法应对近代化挑战；西方思想传入提供新范式；救亡图存的时代主题推动思想转型。</p>
+          <p><strong>解析：</strong>本题需从“内因（儒学自身局限）+ 外因（西学冲击）+ 时代主题（救亡）”三维度分析。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·中频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点三：特点与当代价值 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🌟 重难点三：中华优秀传统文化的特点与当代价值</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 五大特点的含义</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>中华文化五大特点——<span class="kwd">本土性</span>（独立起源、自成体系）、<span class="kwd">多样性</span>（多民族共同创造、领域广阔）、<span class="kwd">包容性</span>（博采众长、兼收并蓄）、<span class="kwd">凝聚力</span>（共同文化特质、维护团结）、<span class="kwd">连续性</span>（绵延不绝、传承至今）。</p>
+          <p><strong>核心逻辑：</strong>本土性是根基，多样性是形态，包容性是动力，凝聚力是功能，连续性是结果。五者共同构成中华文化的“生命力密码”。</p>
+          <p><strong>简而言之：</strong>中华文化之所以能成为世界四大文明中唯一未曾中断的文明，正是因为这五大特点形成的“根基稳固—形态丰富—开放包容—内聚强大—传承不绝”的良性循环。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · “从未中断”的文明比较</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>古埃及文明、古巴比伦文明、古印度文明均因外族入侵或环境变迁而中断，中华文明却延续至今。关键在于：①地理环境的相对封闭性（东临大海、西有高原、北有戈壁、南有丛林）；②文字体系的连续性（汉字从甲骨文至今一脉相承）；③文化的强大包容性（外来文化被吸收而非取代）。</p>
+          <p><strong>纵向联系：</strong>从先秦的“夷夏之辨”到北魏孝文帝改革，从佛教传入到西学东渐，中华文化始终在“吸收—转化—创新”的循环中延续，体现了“和而不同”的智慧。</p>
+          <p><strong>这一联系说明：</strong>中华文明的连续性不是被动地“幸存”，而是主动地“消化吸收再创新”的结果。包容性不是失去自我，而是在坚守核心特质的基础上不断丰富自我。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 区分精华与糟粕的当代价值</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“传统文化在其形成和发展过程中，不可避免会受到当时人们的认识水平、时代条件、社会制度的局限性的制约和影响，因而也不可避免会存在陈旧过时或已成为糟粕性的东西。”——习近平（2014年9月24日）</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 从唯物史观看，传统文化是特定历史条件下的产物，既有超越时代的智慧（如“天人合一”“民本思想”），也有时代局限（如封建礼教对个性的束缚）。区分精华与糟粕的标准是：<b>是否符合人民利益、是否顺应历史潮流、是否有利于社会进步</b>。这体现了“辩证否定观”——既继承又批判，既弘扬又创新。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题（2025·新高考方向）：</strong>结合所学，谈谈你对“中华优秀传统文化的当代价值”的认识。（开放性论述题，12分）</p>
+          <p><strong>答案要点：</strong>①为治国理政提供借鉴（民本思想→以人民为中心）；②为道德建设提供资源（崇德尚贤→社会主义核心价值观）；③为生态文明提供智慧（天人合一→绿色发展）；④为文化自信提供根基（连续性→民族认同）；⑤为人类文明提供中国方案（和而不同→人类命运共同体）。</p>
+          <p><strong>解析：</strong>本题要求“认识”而非简单罗列，需从“历史→现实→未来”三维度展开，将传统文化与当代中国实践相结合，体现“古为今用、推陈出新”的方法论。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 3 — 教材栏目解答 -->
+<!-- ============================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('学习聚焦',this)">学习聚焦</button>
+    <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+    <button class="filter-chip" onclick="filterCol('史料阅读',this)">史料阅读</button>
+    <button class="filter-chip" onclick="filterCol('思考点',this)">思考点</button>
+    <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+    <button class="filter-chip" onclick="filterCol('探究与拓展',this)">探究与拓展</button>
+  </div>
+
+  <!-- 1. 学习聚焦 P2 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦 · 文化是民族的血脉</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>文化是民族的血脉。中华优秀传统文化是中华民族五千多年的智慧结晶。</p>
+      <div class="a" id="ans-p3-focus1">
+        <strong>📝 要点解析：</strong>“血脉”喻指文化如同血液流淌于民族肌体之中，是民族生存发展的精神命脉。“智慧结晶”强调中华优秀传统文化是历代先民在长期实践中积累的认知成果与价值选择，是中华民族区别于其他民族的精神标识。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 2. 历史纵横 P2：成熟的青铜文明 -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🏛️ 历史纵横 · 成熟的青铜文明</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>大约从夏朝开始，中国进入青铜时代。在青铜时代，国家建立，农业和手工业发展，汉字发展成熟。商朝的青铜铸造工艺水平相当高。西周时期，青铜礼器反映出中国古代社会礼制的发展与完善。到战国时期，随着铁器推广，青铜制造业逐渐衰落。</p>
+      <div class="a" id="ans-p3-history1">
+        <strong>📝 要点归纳：</strong>①青铜时代是中华文明早期国家形成的关键阶段（夏商周）；②青铜铸造技术代表当时最高生产力水平；③青铜礼器是礼乐制度的物质载体（“藏礼于器”）；④铁器推广标志着生产力新飞跃，青铜制造业衰落是技术进步的必然结果。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-history1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 3. 史料阅读 P2：《礼记·乐记》 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 《礼记·乐记》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“乐者，天地之和也。礼者，天地之序也。和，故百物皆化；序，故群物皆别。”——《礼记·乐记》</p>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 史料解读：</strong>材料将“乐”与“和”、“礼”与“序”对应，认为音乐体现天地和谐，礼仪体现天地秩序。和则万物化育生长，序则万物各有区别。反映了儒家“礼乐治国”的思想——通过礼乐教化实现社会和谐与等级秩序的统一。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 4. 思考点 P3 -->
+  <div class="col-box" data-cat="思考点">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 思考点 · 中华文化源远流长的原因</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>中华文化源远流长的原因是什么？</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong>①地理环境的相对封闭性提供了独立发展的空间；②汉字体系的延续性保证了文化传承的载体；③“和而不同”的包容性使外来文化被吸收而非取代；④农耕经济的稳定性提供了持续的物质基础；⑤“家国同构”的社会结构强化了文化认同与传承动力。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 5. 历史纵横 P3：陆王心学 -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🧠 历史纵横 · 陆王心学</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>南宋时期，理学家陆九渊把“心”作为宇宙万物的本原，提出“心”就是“理”的主张，强调“宇宙便是吾心，吾心即是宇宙”，他的学说被称为“心学”。明朝王守仁继承和发展了陆九渊的学说，宣扬“心外无物”“心外无理”，提出“致良知”“知行合一”的学说。这一学派被称为“陆王心学”。明中期以后，陆王心学得到广泛传播。</p>
+      <div class="a" id="ans-p3-history2">
+        <strong>📝 要点归纳：</strong>陆王心学是宋明理学的重要流派，核心命题是“心即理”——认为宇宙万物的本原在人的内心，无需向外格物，只需向内“致良知”。王守仁的“知行合一”强调道德认知与道德实践的统一。心学打破了程朱理学的僵化教条，注重个体内心的道德自觉，对后世思想解放有一定促进作用。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-history2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 6. 史料阅读 P4：毛泽东《论人民民主专政》 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 毛泽东《论人民民主专政》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“十月革命一声炮响，给我们送来了马克思列宁主义。十月革命帮助了全世界的也帮助了中国的先进分子，用无产阶级的宇宙观作为观察国家命运的工具，重新考虑自己的问题。”——毛泽东《论人民民主专政》，《毛泽东选集》第4卷</p>
+      <div class="a" id="ans-p3-material2">
+        <strong>📝 史料解读：</strong>材料强调十月革命对中国思想界的深刻影响。“无产阶级的宇宙观”即马克思主义唯物史观，它提供了科学分析中国社会问题的理论工具。“重新考虑自己的问题”意味着中国先进分子用新的世界观重新审视中国的前途命运，推动了中国从旧民主主义向新民主主义的转变。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 7. 史料阅读 P4：《管子·牧民》 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 《管子·牧民》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“政之所兴，在顺民心；政之所废，在逆民心。民恶忧劳，我佚乐之；民恶贫贱，我富贵之；民恶危坠，我存安之；民恶灭绝，我生育之。”——《管子·牧民》</p>
+      <div class="a" id="ans-p3-material3">
+        <strong>📝 史料解读：</strong>管子从政治成败的高度论证“顺民心”的重要性——民心向背决定政权兴废。统治者应当满足人民“忧劳→佚乐”“贫贱→富贵”“危坠→存安”“灭绝→生育”四大基本诉求。这是先秦民本思想的经典表达，体现了早期政治理性对“民心”的深刻认识。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 8. 史料阅读 P4：吴兢《贞观政要》 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 吴兢《贞观政要》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“为君之道，必须先存百姓。若损百姓以奉其身，犹割股以啖腹，腹饱而身毙。”——吴兢《贞观政要》卷1《君道》</p>
+      <div class="a" id="ans-p3-material4">
+        <strong>📝 史料解读：</strong>唐太宗以“割股啖腹”为喻，形象地说明了“君”与“民”的依存关系——损害百姓以自肥，如同割自己的肉吃，腹饱而身死。体现了贞观统治集团对“民为邦本”思想的深刻体认，是民本思想在政治实践中的具体运用。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material4')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 9. 学思之窗 P6 -->
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 学思之窗 · 中华优秀传统文化内涵选读</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文选段：</strong>“核心思想理念……如革故鼎新、与时俱进的思想，脚踏实地、实事求是的思想，惠民利民、安民富民的思想，道法自然、天人合一的思维等……中华传统美德……如天下兴亡、匹夫有责的担当意识，精忠报国、振兴中华的爱国情怀，崇德向善、见贤思齐的社会风尚……”——《关于实施中华优秀传统文化传承发展工程的意见》（2017年）</p>
+      <p><strong>问题：</strong>阅读材料，选取其中一项中华优秀传统文化，谈谈其蕴含的深刻思想内涵。</p>
+      <div class="a" id="ans-p3-think2">
+        <p><strong>📝 示例答案（选取“道法自然、天人合一”）：</strong></p>
+        <p>“道法自然、天人合一”蕴含了深刻的生态哲学与系统思维。“道法自然”强调人类活动应当效法自然规律，不妄为、不逾矩；“天人合一”将天、地、人视为有机整体，认为人与自然不是征服与被征服的关系，而是和谐共生的命运共同体。这一思想在当代启示我们：尊重自然、顺应自然、保护自然，走绿色发展之路，实现人与自然和谐共生的现代化。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think2')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 10. 探究与拓展 P7：问题探究 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔬 探究与拓展 · 核心概念探讨</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>中华文化博大精深，底蕴深厚。“德”“孝”“礼”“仁”“正”“俭”“公”“廉”“勤”“能”“敬”“义”“贤”“信”等，都是中华优秀文化中的核心概念，也由此形成厚德载物、天下为公、自强不息、以廉为本等基本理念。结合课文，查阅资料，列举更多的核心概念，探讨其在中华文化中占有怎样的地位，反映了怎样的精神。</p>
+      <div class="a" id="ans-p3-explore1">
+        <p><strong>📝 参考答案：</strong></p>
+        <p>可补充概念：<span class="kwd">“和”</span>（和谐共处）、<span class="kwd">“中”</span>（中庸之道）、<span class="kwd">“恕”</span>（推己及人）、<span class="kwd">“耻”</span>（知耻自省）、<span class="kwd">“诚”</span>（诚信为本）。</p>
+        <p><strong>地位与精神：</strong>这些概念构成中华文化的价值坐标体系——<span class="kwd">德</span>为根本（立德树人），<span class="kwd">孝</span>为根基（家国同构），<span class="kwd">礼</span>为规范（社会秩序），<span class="kwd">仁</span>为内核（以人为本），<span class="kwd">信</span>为准则（诚信社会）。它们共同反映了中华民族<b>重德性、尚伦理、讲信义、求和谐</b>的精神特质，是中华文明绵延不绝的内在价值支撑。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 11. 探究与拓展 P7：学习拓展 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 探究与拓展 · 精华与糟粕的区分</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文选段：</strong>“传统文化在其形成和发展过程中，不可避免会受到当时人们的认识水平、时代条件、社会制度的局限性的制约和影响，因而也不可避免会存在陈旧过时或已成为糟粕性的东西。这就要求人们在学习、研究、应用传统文化时坚持古为今用、推陈出新，结合新的实践和时代要求进行正确取舍……”——习近平（2014年9月24日）</p>
+      <p><strong>问题：</strong>如何区分中华传统文化的精华与糟粕？谈谈你对中华优秀传统文化当代价值的认识。</p>
+      <div class="a" id="ans-p3-explore2">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>区分标准：</strong>①看是否符合<b>人民利益</b>（以人民为中心 vs 维护少数人特权）；②看是否顺应<b>历史潮流</b>（促进社会进步 vs 阻碍发展）；③看是否有利于<b>人的全面发展</b>（解放个性 vs 束缚人性）。</p>
+        <p><strong>当代价值认识：</strong>中华优秀传统文化是中华民族的“根”与“魂”。在当代，它为社会主义核心价值观提供深厚滋养（如“民本→人民至上”“崇德→核心价值观”“和合→人类命运共同体”）；为治国理政提供历史智慧（如“为政以德”“民为邦本”）；为生态文明建设提供哲学基础（“天人合一”“道法自然”）；为文化自信提供精神支撑（“连续性”证明中华文明的强大生命力）。坚持“创造性转化、创新性发展”，让中华优秀传统文化在新时代焕发新的生机与活力。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore2')">📝 查看参考答案</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 4 — 课堂训练（v3.0.2 固化版：选择题含解析，材料题不计分） -->
+<!-- ============================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 《礼记·乐记》载：“乐者，天地之和也；礼者，天地之序也。”这体现了儒家（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 强调音乐与政治无关的独立价值</label>
+      <label onclick="optClick(this,'B','q1')">B. 主张通过礼乐教化实现社会和谐与秩序</label>
+      <label onclick="optClick(this,'C','q1')">C. 认为天地秩序是人为规定的产物</label>
+      <label onclick="optClick(this,'D','q1')">D. 否定礼乐对社会治理的实际作用</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：材料将“乐”与“和”、“礼”与“序”对应，强调礼乐与天地秩序同构，目的是通过礼乐教化实现社会和谐与等级秩序的统一。<br>
+      ❌ 排除A：材料明确将音乐与天地秩序关联，并非与政治无关；<br>
+      ❌ 排除C：儒家认为天地秩序是自然的，非人为规定；<br>
+      ❌ 排除D：材料正强调礼乐对社会治理的作用。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 孟子说：“民为贵，社稷次之，君为轻。”这一思想（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 否定了君主存在的必要性</label>
+      <label onclick="optClick(this,'B','q2')">B. 体现了民本思想的光辉</label>
+      <label onclick="optClick(this,'C','q2')">C. 主张人民直接管理国家</label>
+      <label onclick="optClick(this,'D','q2')">D. 是道家“无为而治”的体现</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：孟子明确将“民”置于“社稷”“君”之上，核心是民本思想，强调人民的重要性。<br>
+      ❌ 排除A：孟子并未否定君主，只是强调君主应以民为本；<br>
+      ❌ 排除C：孟子主张君主通过仁政管理，非直接民主；<br>
+      ❌ 排除D：这是儒家思想，非道家。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 宋代朱熹强调“存天理，灭人欲”，其核心意图是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 彻底否定人的一切自然欲望</label>
+      <label onclick="optClick(this,'B','q3')">B. 以天理规范人欲，维护封建伦理秩序</label>
+      <label onclick="optClick(this,'C','q3')">C. 倡导禁欲主义生活方式</label>
+      <label onclick="optClick(this,'D','q3')">D. 反对一切形式的道德约束</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：朱熹强调用天理（封建伦理）来约束和规范人欲，目的是维护封建统治秩序，并非彻底否定欲望。<br>
+      ❌ 排除A：朱熹并不否定基本生存欲望；<br>
+      ❌ 排除C：理学并非禁欲主义，而是节制；<br>
+      ❌ 排除D：朱熹恰恰强调道德约束。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 王守仁提出“致良知”“知行合一”，与朱熹“格物致知”相比，其突出特点是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 更强调通过向外探究事物获得知识</label>
+      <label onclick="optClick(this,'B','q4')">B. 更强调道德认知与道德实践的统一</label>
+      <label onclick="optClick(this,'C','q4')">C. 完全否定经典学习的必要性</label>
+      <label onclick="optClick(this,'D','q4')">D. 主张回到先秦原始儒学</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：王守仁的“知行合一”强调道德认知（知）与道德实践（行）不可分割，这是对朱熹“格物致知”（偏重向外探究）的重要发展。<br>
+      ❌ 排除A：这正是朱熹的特点，非王守仁；<br>
+      ❌ 排除C：王守仁不否定经典，但更重内心体悟；<br>
+      ❌ 排除D：王守仁是在理学框架内创新，非简单回归先秦。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 中华文化“从未中断”的原因不包括（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 汉字体系的延续性</label>
+      <label onclick="optClick(this,'B','q5')">B. 包容外来文化并转化为自身养分</label>
+      <label onclick="optClick(this,'C','q5')">C. 完全封闭的地理环境隔绝了外来入侵</label>
+      <label onclick="optClick(this,'D','q5')">D. “家国同构”的社会结构强化了文化认同</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：中华文化延续的原因包括汉字、包容性、社会结构等，但“完全封闭”不符合史实（如北方游牧民族多次南下，佛教西来等）。<br>
+      ❌ 排除A、B、D：三者均为公认的延续原因。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题 1（高难度 · 唯物史观升华）—— 不计分 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p><strong>材料一：</strong>“政之所兴，在顺民心；政之所废，在逆民心。”——《管子·牧民》</p>
+      <p><strong>材料二：</strong>“为君之道，必须先存百姓。若损百姓以奉其身，犹割股以啖腹，腹饱而身毙。”——吴兢《贞观政要》</p>
+      <p><strong>材料三：</strong>“民为贵，社稷次之，君为轻。”——孟子</p>
+    </div>
+    <div class="q-text">（1）三则材料共同反映了什么思想？（2分）</div>
+    <div class="q-text">（2）结合所学，概括这一思想在历史实践中的表现。（4分）</div>
+    <div class="q-text">（3）从唯物史观角度，分析这一思想产生的经济根源及其当代价值。（6分）</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>共同反映了中国古代的<strong>民本思想</strong>——认为民心向背决定国家兴衰，强调统治者要顺应民意、善待百姓。（2分）</p>
+      <p><strong>（2）</strong>历史实践表现：①先秦时期，孔子要求“体察民情”，孟子提出“仁政”；②汉代董仲舒提出“天人感应”约束君权；③唐太宗以“存百姓”为治国理念，开创“贞观之治”；④明清之际黄宗羲等批判君主专制，提出“天下为主，君为客”。（每点1分，答出4点即满分）</p>
+      <p><strong>（3）</strong>经济根源：中国以<strong>农耕经济</strong>为基础，农业生产依赖广大农民的辛勤劳动，统治者必须保障农民的基本生存条件才能维持统治，因此“重民”“保民”成为政治共识。这体现了<strong>社会存在决定社会意识</strong>——农业经济形态决定了民本思想的产生。（2分）<br>
+      当代价值：民本思想为“以人民为中心”的发展思想提供了历史根基，启示我们始终把人民利益放在首位，尊重人民主体地位，推进国家治理现代化。（2分）<br>
+      从唯物史观看，民本思想从“君本”到“民本”再到“人民主体”的演进，反映了<strong>生产力发展推动生产关系变革</strong>的历史逻辑。（2分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+    <!-- 材料题不调用 trackMatQ，不计分 -->
+  </div>
+
+  <!-- 材料题 2（中难度）—— 不计分 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>“天行健，君子以自强不息。”“地势坤，君子以厚德载物。”——《周易》</p>
+    </div>
+    <div class="q-text">（1）材料体现了中华文化的什么精神？（2分）</div>
+    <div class="q-text">（2）结合所学，列举两个体现这一精神的典型人物及其事迹。（4分）</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>体现了中华文化<strong>自强不息、厚德载物</strong>的精神——前者强调奋发向上、永不停息，后者强调宽厚包容、承载万物。（2分）</p>
+      <p><strong>（2）</strong>①<strong>屈原</strong>：面对楚国政治腐败，坚持“路曼曼其修远兮，吾将上下而求索”，体现了追求真理、不屈不挠的自强精神；②<strong>文天祥</strong>：南宋灭亡后坚贞不屈，“人生自古谁无死，留取丹心照汗青”，体现了忠贞报国、宁死不屈的民族气节。（每点2分，答出两个即可）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 3（中难度）—— 不计分 -->
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>“和实生物，同则不继。”——太史伯</p>
+      <p>“君子和而不同，小人同而不和。”——孔子</p>
+    </div>
+    <div class="q-text">（1）两则材料共同强调什么思想？（2分）</div>
+    <div class="q-text">（2）这一思想对中华文化的发展有何积极影响？（4分）</div>
+    <div class="a" id="ans-p4-mat3">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>共同强调<strong>“和而不同”</strong>的思想——认为不同事物之间相互配合、达到平衡（“和”）才能产生新事物，而非简单同一（“同”）。（2分）</p>
+      <p><strong>（2）</strong>积极影响：①使中华文化具有强大的<strong>包容性</strong>，能够吸收佛教等外来文化并转化为自身养分；②促进了<strong>思想创新</strong>，儒佛道融合催生了宋明理学；③塑造了中华民族<strong>和谐共处</strong>的处世哲学，为社会稳定和民族团结提供了思想基础；④为当代<strong>人类命运共同体</strong>理念提供了历史智慧。（每点1分，答出4点即满分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 5 — 知识结构图 -->
+<!-- ============================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 中华优秀传统文化</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>发展历程</strong>
+        <p>夏商周→秦汉→魏晋隋唐→宋元→明清→近代</p>
+        <div class="kg-detail"><p>🔑 关键节点：商周礼制、汉武帝尊儒、理学形成、明清批判、近代转型。<br>📌 高考常考：儒学地位变化、理学与心学区别、近代思想转型。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📖</span><strong>核心内涵</strong>
+        <p>以人为本 · 民本思想 · 天人合一 · 家国情怀 · 崇德尚贤 · 自强不息 · 和而不同</p>
+        <div class="kg-detail"><p>🧠 七大内涵逻辑：个体→社会→自然，“人”是中心。<br>📌 高考常考：民本思想（材料题高频）、天人合一（唯物史观分析）。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌟</span><strong>特点与价值</strong>
+        <p>本土性 · 多样性 · 包容性 · 凝聚力 · 连续性</p>
+        <div class="kg-detail"><p>💎 五大特点=生命力密码。当代价值：治国理政、道德建设、文化自信、生态文明。<br>📌 高考常考：特点比较（与古文明对比）、精华与糟粕的区分。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌍</span><strong>当代传承</strong>
+        <p>创造性转化 · 创新性发展 · 文化自信</p>
+        <div class="kg-detail"><p>🚀 古为今用、推陈出新。中华优秀传统文化是社会主义核心价值观的深厚源泉，为人类文明贡献中国智慧。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：民本思想·德治传统</div>
+      <div class="kg-rule r2">🟠 经济：农耕文明·天人合一</div>
+      <div class="kg-rule r3">🟢 文化：多元包容·和而不同</div>
+      <div class="kg-rule r4">🔴 精神：自强不息·家国情怀</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 6 — 结束页 -->
+<!-- ============================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 源远流长的中华文化</div>
+    <h1 style="font-size:22pt;">第1课 · 中华优秀传统文化的内涵与特点</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>发展历程</h3>
+        <ul>
+          <li><strong>先秦</strong>：诸子百家，奠定思想根基</li>
+          <li><strong>两汉</strong>：尊崇儒术，确立正统地位</li>
+          <li><strong>宋明</strong>：理学心学，哲学化升级</li>
+          <li><strong>明清</strong>：批判理学，经世致用</li>
+          <li><strong>近代</strong>：西学冲击，马克思主义传入</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>核心内涵</h3>
+        <ul>
+          <li><strong>以人为本</strong> → 民本思想</li>
+          <li><strong>天人合一</strong> → 道法自然</li>
+          <li><strong>家国情怀</strong> → 天下担当</li>
+          <li><strong>崇德尚贤</strong> → 天下为公</li>
+          <li><strong>自强不息</strong> → 和而不同</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>特点与价值</h3>
+        <ul>
+          <li><strong>五大特点</strong>：本土·多样·包容·凝聚·连续</li>
+          <li><strong>当代价值</strong>：治国理政·道德建设·文化自信</li>
+          <li><strong>传承原则</strong>：古为今用·推陈出新</li>
+          <li><strong>使命担当</strong>：创造性转化·创新性发展</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <div class="bottom-nav">
+    <div><a href="index.html">← 单元导言</a></div>
+    <div class="nav-center">第1课</div>
+    <div><a href="选必3-U1-第2课 · 中华文化的世界意义.html">下一课：第2课 →</a></div>
+  </div>
+
+
+  <footer>
+    <p>统编版高中历史 · 文化交流与传播（选必三） · 第一单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================== -->
+<!-- 底部翻页导航 -->
+<!-- ============================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================== -->
+<!-- JavaScript -->
+<!-- ============================== -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); nextPage(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); prevPage(); }
+  else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题（含自动显示解析） =====
+var correctAnswers = { q1:'B', q2:'B', q3:'B', q4:'B', q5:'C' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+
+  // v3.0.2 固化：自动显示该题的答案解析
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+// ===== 材料题追踪（v3.0.2 固化：不计分，仅标记已查看） =====
+function trackMatQ(id) {
+  // 材料题不计入 score，仅用于记录已查看状态
+  if (matDone[id]) return;
+  matDone[id] = true;
+  // 不执行 score++，不调用 updateScore()
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+  document.querySelectorAll('.ans-btn').forEach(function(b) {
+    if (b.textContent.indexOf('隐藏') === -1) return;
+    b.textContent = b.textContent.replace('隐藏答案','显示答案');
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序 IIFE =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key2','key3','key4','key5','key6'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    el.style.borderColor = '#e74c3c';
+    setTimeout(function() { el.style.borderColor = ''; }, 500);
+  }
+}
+
+// ===== 地图标注 IIFE =====
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ===== 翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// ===== 知识结构图节点展开 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== deep-card 折叠 IIFE =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

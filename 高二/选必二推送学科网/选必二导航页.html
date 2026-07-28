@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选必二 · 经济与社会生活 · 导航页</title>
+<style>
+/* ============================================================
+   全局变量
+   ============================================================ */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  min-height: 100vh;
+  color: #2d2d2d;
+}
+
+/* ============================================================
+   封面
+   ============================================================ */
+.cover {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #5a4bd1 100%);
+  color: #fff;
+  margin-bottom: 0;
+}
+.cover h1 {
+  font-size: 42pt;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+.cover .subtitle {
+  font-size: 20pt;
+  opacity: 0.9;
+  letter-spacing: 2px;
+}
+.cover .desc {
+  margin-top: 16px;
+  font-size: 13pt;
+  opacity: 0.75;
+  line-height: 1.8;
+}
+
+/* ============================================================
+   导航容器
+   ============================================================ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* ============================================================
+   单元块
+   ============================================================ */
+.unit-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(124,108,240,0.10);
+  transition: box-shadow 0.3s;
+}
+.unit-block:hover {
+  box-shadow: 0 6px 24px rgba(124,108,240,0.18);
+}
+
+/* 单元标题栏 */
+.unit-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, var(--primary) 0%, #8b7cf0 100%);
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s;
+}
+.unit-header:hover {
+  background: linear-gradient(135deg, #6d5de0 0%, #7c6cf0 100%);
+}
+.unit-header .unit-num {
+  font-size: 20pt;
+  font-weight: 700;
+  opacity: 0.95;
+}
+.unit-header .unit-title {
+  font-size: 18pt;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.unit-header .toggle-icon {
+  margin-left: auto;
+  font-size: 24pt;
+  transition: transform 0.3s;
+  line-height: 1;
+}
+.unit-header .toggle-icon.collapsed {
+  transform: rotate(-90deg);
+}
+
+/* 课列表 */
+.lesson-list {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lesson-list.hidden {
+  display: none;
+}
+
+/* 单课链接卡片 */
+.lesson-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #2d2d2d;
+  background: #f8f7ff;
+  border: 1px solid #eee8fd;
+  transition: all 0.25s;
+}
+.lesson-link:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateX(4px);
+  box-shadow: 0 3px 10px rgba(124,108,240,0.25);
+}
+.lesson-link:hover .lesson-badge {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+}
+.lesson-link:hover .lesson-arrow {
+  color: #fff;
+  opacity: 1;
+}
+
+.lesson-badge {
+  flex-shrink: 0;
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 11pt;
+  font-weight: 700;
+  padding: 2px 12px;
+  border-radius: 12px;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.lesson-label {
+  flex: 1;
+  font-size: 14pt;
+  font-weight: 500;
+}
+.lesson-arrow {
+  flex-shrink: 0;
+  font-size: 16pt;
+  color: var(--primary);
+  opacity: 0.5;
+  transition: all 0.25s;
+}
+
+/* 特殊：活动课 */
+.lesson-link.activity {
+  border-left: 4px solid var(--orange);
+}
+.lesson-link.activity:hover {
+  border-left-color: #fff;
+}
+.lesson-link.activity .lesson-badge {
+  background: #fdebd0;
+  color: #b7710f;
+}
+.lesson-link.activity:hover .lesson-badge {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 11pt;
+  color: #999;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width: 640px) {
+  .cover h1 { font-size: 28pt; }
+  .cover .subtitle { font-size: 16pt; }
+  .unit-header { padding: 14px 16px; }
+  .unit-header .unit-num { font-size: 16pt; }
+  .unit-header .unit-title { font-size: 15pt; }
+  .lesson-list { padding: 12px 16px; }
+  .lesson-link { padding: 10px 14px; }
+  .lesson-label { font-size: 13pt; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== 封面 ===================== -->
+<div class="cover">
+  <h1>📖 经济与社会生活</h1>
+  <div class="subtitle">统编版高中历史 · 选择性必修二</div>
+  <div class="desc">点击每课卡片，跳转对应课件 · 点击单元标题栏折叠/展开</div>
+</div>
+
+<div class="container">
+
+  <!-- ===================== 文件映射（工具函数） ===================== -->
+  <!--
+    文件名与课次对照（供本地引用）：
+    U1-第1课 → 选必2-U1-第1课_从食物采集到食物生产.html
+    U1-第2课 → 选必2-U1-第2课_新航路开辟后的食物物种交流.html
+    U1-第3课 → 选必2-U1-第3课_现代食物的生产储备与食品安全.html
+    U2-第4课 → 选必2-U2-第4课_古代的生产工具与劳作.html
+    U2-第5课 → 选必2-U2-第5课_工业革命与工厂制度.html
+    U2-第6课 → 选必2-U2-第6课_现代科技进步与人类社会发展.html
+    U3-第7课 → 选必2-U3-第7课 古代的商业贸易.html
+    U3-第8课 → 选必2-U3-第8课_世界市场与商业贸易.html
+    U3-第9课 → 选必2-U3- 第9课 20世纪以来人类的经济与生活.html
+    U4-第10课 → 选必2-U4-第10课_古代的村落、集镇和城市.html
+    U4-第11课 → 选必2-U4- 第11课 近代以来的城市化进程.html
+    U5-第12课 → 选必2 -U5-第12课 水陆交通的变迁.html
+    U5-第13课 → 选必2 -U5-第13课 现代交通运输的新变化.html
+    U6-第14课 → 选必2- U6-第14课 历史上的疫病与医学成就.html
+    U6-第15课 → 选必2 -U6-第15课 现代医疗卫生体系与社会生活.html
+    U6-活动课 → 选必2 -U6- 活动课 技术进步与社会生活的变化.html
+  -->
+
+  <!-- ============================================================
+       第一单元 · 食物生产与社会生活
+       ============================================================ -->
+  <div class="unit-block">
+    <div class="unit-header" onclick="toggleUnit(this)">
+      <span class="unit-num">第一单元</span>
+      <span class="unit-title">食物生产与社会生活</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="lesson-list">
+      <a class="lesson-link" href="选必2-U1-第1课_从食物采集到食物生产.html" target="_blank">
+        <span class="lesson-badge">第1课</span>
+        <span class="lesson-label">从食物采集到食物生产</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2-U1-第2课_新航路开辟后的食物物种交流.html" target="_blank">
+        <span class="lesson-badge">第2课</span>
+        <span class="lesson-label">新航路开辟后的食物物种交流</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2-U1-第3课_现代食物的生产储备与食品安全.html" target="_blank">
+        <span class="lesson-badge">第3课</span>
+        <span class="lesson-label">现代食物的生产、储备与食品安全</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       第二单元 · 生产工具与劳作方式
+       ============================================================ -->
+  <div class="unit-block">
+    <div class="unit-header" onclick="toggleUnit(this)">
+      <span class="unit-num">第二单元</span>
+      <span class="unit-title">生产工具与劳作方式</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="lesson-list">
+      <a class="lesson-link" href="选必2-U2-第4课_古代的生产工具与劳作.html" target="_blank">
+        <span class="lesson-badge">第4课</span>
+        <span class="lesson-label">古代的生产工具与劳作</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2-U2-第5课_工业革命与工厂制度.html" target="_blank">
+        <span class="lesson-badge">第5课</span>
+        <span class="lesson-label">工业革命与工厂制度</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2-U2-第6课_现代科技进步与人类社会发展.html" target="_blank">
+        <span class="lesson-badge">第6课</span>
+        <span class="lesson-label">现代科技进步与人类社会发展</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       第三单元 · 商业贸易与日常生活
+       ============================================================ -->
+  <div class="unit-block">
+    <div class="unit-header" onclick="toggleUnit(this)">
+      <span class="unit-num">第三单元</span>
+      <span class="unit-title">商业贸易与日常生活</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="lesson-list">
+      <a class="lesson-link" href="选必2-U3-第7课 古代的商业贸易.html" target="_blank">
+        <span class="lesson-badge">第7课</span>
+        <span class="lesson-label">古代的商业贸易</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2-U3-第8课_世界市场与商业贸易.html" target="_blank">
+        <span class="lesson-badge">第8课</span>
+        <span class="lesson-label">世界市场与商业贸易</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2-U3- 第9课 20世纪以来人类的经济与生活.html" target="_blank">
+        <span class="lesson-badge">第9课</span>
+        <span class="lesson-label">20世纪以来人类的经济与生活</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       第四单元 · 村落、城镇与居住环境
+       ============================================================ -->
+  <div class="unit-block">
+    <div class="unit-header" onclick="toggleUnit(this)">
+      <span class="unit-num">第四单元</span>
+      <span class="unit-title">村落、城镇与居住环境</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="lesson-list">
+      <a class="lesson-link" href="选必2-U4-第10课_古代的村落、集镇和城市.html" target="_blank">
+        <span class="lesson-badge">第10课</span>
+        <span class="lesson-label">古代的村落、集镇和城市</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2-U4- 第11课 近代以来的城市化进程.html" target="_blank">
+        <span class="lesson-badge">第11课</span>
+        <span class="lesson-label">近代以来的城市化进程</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       第五单元 · 交通与社会变迁
+       ============================================================ -->
+  <div class="unit-block">
+    <div class="unit-header" onclick="toggleUnit(this)">
+      <span class="unit-num">第五单元</span>
+      <span class="unit-title">交通与社会变迁</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="lesson-list">
+      <a class="lesson-link" href="选必2 -U5-第12课 水陆交通的变迁.html" target="_blank">
+        <span class="lesson-badge">第12课</span>
+        <span class="lesson-label">水陆交通的变迁</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2 -U5-第13课 现代交通运输的新变化.html" target="_blank">
+        <span class="lesson-badge">第13课</span>
+        <span class="lesson-label">现代交通运输的新变化</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       第六单元 · 医疗与公共卫生
+       ============================================================ -->
+  <div class="unit-block">
+    <div class="unit-header" onclick="toggleUnit(this)">
+      <span class="unit-num">第六单元</span>
+      <span class="unit-title">医疗与公共卫生</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="lesson-list">
+      <a class="lesson-link" href="选必2- U6-第14课 历史上的疫病与医学成就.html" target="_blank">
+        <span class="lesson-badge">第14课</span>
+        <span class="lesson-label">历史上的疫病与医学成就</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link" href="选必2 -U6-第15课 现代医疗卫生体系与社会生活.html" target="_blank">
+        <span class="lesson-badge">第15课</span>
+        <span class="lesson-label">现代医疗卫生体系与社会生活</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+      <a class="lesson-link activity" href="选必2 -U6- 活动课 技术进步与社会生活的变化.html" target="_blank">
+        <span class="lesson-badge">活动课</span>
+        <span class="lesson-label">技术进步与社会生活的变化</span>
+        <span class="lesson-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== 页脚 ===================== -->
+<div class="footer">
+  统编版高中历史 · 选择性必修二 · 经济与社会生活 &nbsp;|&nbsp;
+  <a href="#" onclick="expandAll(); return false;">展开全部</a> ·
+  <a href="#" onclick="collapseAll(); return false;">折叠全部</a>
+</div>
+
+<!-- ===================== JavaScript ===================== -->
+<script>
+/**
+ * 切换单个单元的折叠/展开状态
+ * @param {HTMLElement} headerEl - 单元标题栏 DOM 元素
+ */
+function toggleUnit(headerEl) {
+  // 当前单元标题栏的下一个兄弟元素就是课列表容器
+  var list = headerEl.nextElementSibling;
+  var icon = headerEl.querySelector('.toggle-icon');
+  if (list.classList.contains('hidden')) {
+    // 展开：移除 hidden 类，图标恢复向下
+    list.classList.remove('hidden');
+    icon.classList.remove('collapsed');
+  } else {
+    // 折叠：添加 hidden 类，图标旋转为向右
+    list.classList.add('hidden');
+    icon.classList.add('collapsed');
+  }
+}
+
+/**
+ * 展开所有单元
+ */
+function expandAll() {
+  var lists = document.querySelectorAll('.lesson-list');
+  var icons = document.querySelectorAll('.toggle-icon');
+  lists.forEach(function(el) { el.classList.remove('hidden'); });
+  icons.forEach(function(el) { el.classList.remove('collapsed'); });
+}
+
+/**
+ * 折叠所有单元
+ */
+function collapseAll() {
+  var lists = document.querySelectorAll('.lesson-list');
+  var icons = document.querySelectorAll('.toggle-icon');
+  lists.forEach(function(el) { el.classList.add('hidden'); });
+  icons.forEach(function(el) { el.classList.add('collapsed'); });
+}
+</script>
+
+</body>
+</html>

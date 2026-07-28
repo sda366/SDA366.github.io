@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1课 从食物采集到食物生产 · 统编版选必二</title>
+<style>
+/* ============================================================
+   CSS 变量与全局
+   ============================================================ */
+:root {
+  --primary: #7c6cf0;
+  --primary-dark: #3d2b8c;
+  --primary-light: #b3a8ff;
+  --bg: #f5f3ff;
+  --bg-card: #faf8ff;
+  --border: #dcd4f5;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --blue: #3498db;
+  --purple: #8e44ad;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt;
+  background: var(--bg);
+  color: #333;
+  line-height: 1.75;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   分页幻灯片系统
+   ============================================================ */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-header { text-align: center; padding: 14px 0 10px; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
+.slide-header .module-num { font-size: 12pt; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
+.slide-header .module-title { font-size: 18pt; color: var(--primary-dark); font-weight: 700; margin-top: 4px; }
+
+/* ============================================================
+   底部翻页导航栏
+   ============================================================ */
+.pg-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #fff; box-shadow: 0 -2px 16px rgba(124,108,240,0.12);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 8px 16px; height: 52px;
+}
+.pg-nav button {
+  background: var(--primary); color: #fff; border: none; border-radius: 18px;
+  padding: 6px 16px; font-size: 13pt; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pg-nav button:hover { background: #5a4ac7; transform: scale(1.05); }
+.pg-nav button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.pg-nav .pg-dots { display: flex; gap: 8px; align-items: center; }
+.pg-nav .pg-dot { width: 12px; height: 12px; border-radius: 50%; background: #dcd4f5; cursor: pointer; transition: all 0.25s; }
+.pg-nav .pg-dot.active { background: var(--primary); transform: scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background: var(--primary-light); }
+.pg-nav .pg-counter { font-size: 13pt; font-weight: 700; color: var(--primary-dark); min-width: 40px; text-align: center; }
+
+/* ============================================================
+   Hero / 封面
+   ============================================================ */
+.hero-wrap { background: linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding: 36px 20px 30px; text-align: center; color: #fff; border-radius: 0 0 36px 36px; box-shadow: 0 6px 30px rgba(61,43,140,0.20); margin: 0 -20px 28px; }
+.hero-wrap .hero-unit { font-size: 13pt; opacity: 0.82; letter-spacing: 2px; font-weight: 300; margin-bottom: 10px; }
+.hero-wrap h1 { font-size: 26pt; margin: 10px 0 8px; font-weight: 700; letter-spacing: 3px; color: #fff; }
+.hero-wrap .hero-sub { font-size: 14pt; opacity: 0.85; letter-spacing: 2px; font-weight: 300; }
+
+.learn-target { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+.learn-target h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 12px; }
+.learn-target .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+.learn-target .target-item { font-size: 13.5pt; padding: 6px 8px; border-bottom: 1px dashed var(--border); cursor: pointer; transition: all 0.2s; border-radius: 6px; }
+.learn-target .target-item:hover { background: rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity: 0.45; text-decoration: line-through; color: #999; background: rgba(39,174,96,0.06); }
+.stage-done { display: none; background: linear-gradient(135deg,#d4efdf,#a9dfbf); border: 2px solid var(--green); border-radius: 14px; padding: 14px 18px; margin: 12px 0; text-align: center; font-size: 14pt; font-weight: 700; color: var(--green); animation: fadeInUp 0.4s ease; }
+.stage-done.show { display: block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+.start-btn { display: block; margin: 20px auto 10px; background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; border: none; border-radius: 24px; padding: 12px 36px; font-size: 16pt; font-weight: 700; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(124,108,240,0.40); }
+
+/* ============================================================
+   Page1: 标签页 / 闯关进度 / 翻转卡 / 五关样式
+   ============================================================ */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-radius: 12px 12px 0 0; overflow: hidden; }
+.tab-btn { flex: 1; padding: 14px 8px; font-size: 14pt; font-weight: 700; border: none; cursor: pointer; text-align: center; transition: all 0.25s; background: #e8e0ff; color: #5a4ac7; letter-spacing: 1px; }
+.tab-btn.active { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; }
+.tab-btn:hover:not(.active) { background: #d5cef0; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.stage-progress-wrap { background: #e8e0ff; border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; }
+.stage-progress-bar-bg { background: #fff; border-radius: 6px; height: 8px; overflow: hidden; margin: 6px 0; }
+.stage-progress-bar-fill { background: linear-gradient(90deg,#7c6cf0,#5a4ac7); height: 100%; border-radius: 6px; transition: width 0.5s ease; width: 0%; }
+.stage-progress-text { display: flex; justify-content: space-between; font-size: 11pt; color: #888; }
+.stage-progress-text strong { color: var(--primary-dark); }
+
+.challenge-title { text-align: center; font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 10px 0; padding: 8px; background: #f0edff; border-radius: 10px; }
+
+/* 知识卡片 */
+.timeline-bar { background: #f0edff; border-radius: 8px; padding: 8px 16px; font-size: 12pt; color: #5a4ac7; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+.kp-card { background: var(--bg-card); border-left: 4px solid var(--primary); border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color: var(--primary-dark); font-size: 16pt; margin-bottom: 10px; }
+.kp-card ul { padding-left: 22px; }
+.kp-card li { margin: 6px 0; font-size: 14pt; }
+.link-bar { border: 2px dashed #d5cef0; border-radius: 10px; padding: 12px 16px; margin-top: 14px; background: #faf8ff; font-size: 13pt; color: #5a4ac7; }
+.kwd { background: #ffeb3b; padding: 1px 4px; border-radius: 3px; }
+.tag-gaokao { background: #f39c12; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-value { background: #e74c3c; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+.tag-soc { background: #3498db; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 11pt; display: inline-block; margin-right: 4px; }
+
+/* 拖拽排序 */
+.sort-pool { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; justify-content: center; }
+.sort-item { padding: 8px 16px; background: #fff; border: 2px solid var(--primary); border-radius: 10px; cursor: grab; font-weight: 700; font-size: 13pt; color: #5a4ac7; user-select: none; transition: all 0.2s; }
+.sort-item:active { cursor: grabbing; }
+.sort-item.dragging { opacity: 0.35; }
+.sort-item.placed { background: #e0daff; cursor: default; pointer-events: none; opacity: 0.6; }
+.sort-slots { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; justify-content: center; }
+.sort-slot { min-width: 90px; min-height: 46px; border: 2px dashed #dcd4f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12pt; transition: all 0.2s; background: #faf8ff; position: relative; }
+.sort-slot.filled { border-style: solid; background: #f0edff; }
+.sort-slot.correct { border-color: var(--green); background: #d4efdf; }
+.sort-slot.wrong { border-color: var(--red); background: #fadbd8; }
+.sort-slot .slot-label { position: absolute; top: -20px; font-size: 10pt; color: #999; white-space: nowrap; }
+.sort-check-btn { display: block; margin: 10px auto; }
+.sort-result { display: none; text-align: center; padding: 8px; border-radius: 8px; margin-top: 8px; font-weight: 700; font-size: 13pt; }
+.sort-result.show { display: block; }
+.sort-result.pass { background: #d4efdf; color: var(--green); border: 1px solid var(--green); }
+.sort-result.fail { background: #fadbd8; color: var(--red); border: 1px solid var(--red); }
+
+/* 填空 */
+.fill-blank-wrap { margin: 14px 0; }
+.fill-blank-row { display: flex; align-items: center; margin: 8px 0; font-size: 13pt; flex-wrap: wrap; gap: 6px; }
+.fill-input { width: 110px; padding: 8px 12px; border: 2px solid #dcd4f5; border-radius: 8px; font-size: 13pt; text-align: center; transition: all 0.2s; background: #faf8ff; }
+.fill-input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color: var(--green); background: #d4efdf; color: var(--green); font-weight: 700; }
+.fill-input.wrong { border-color: var(--red); background: #fadbd8; color: var(--red); }
+
+/* 连线匹配 */
+.match-area { background: #faf8ff; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid var(--border); }
+.match-cols { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+.match-col { display: flex; flex-direction: column; gap: 8px; min-width: 110px; }
+.match-col-label { text-align: center; font-weight: 700; font-size: 12pt; color: var(--primary-dark); margin-bottom: 4px; }
+.match-item { padding: 10px 14px; border-radius: 10px; font-size: 12pt; cursor: pointer; transition: all 0.2s; border: 2px solid #dcd4f5; background: #fff; text-align: center; }
+.match-item.selected { border-color: var(--primary); background: #f0edff; box-shadow: 0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color: var(--green); background: #d4efdf; color: var(--green); cursor: default; opacity: 0.75; }
+
+/* 地图标注 */
+.map-zone { position: relative; width: 100%; max-width: 520px; margin: 14px auto; background: #faf8ff; border: 2px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; }
+.map-instruction { font-size: 11pt; color: #888; margin-bottom: 8px; }
+.map-marker { cursor: pointer; transition: all 0.2s; }
+.map-marker:hover { filter: brightness(0.9); }
+.map-checklist { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+.map-check-item { font-size: 11pt; padding: 4px 10px; border-radius: 8px; background: #fff; border: 1px solid var(--border); transition: all 0.2s; }
+.map-check-item.done { background: #d4efdf; border-color: var(--green); color: var(--green); }
+
+/* 翻转卡 */
+.flash-section { margin: 18px 0; }
+.flash-section-title { text-align: center; font-size: 13pt; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700; }
+.flash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.flash-card { perspective: 700px; height: 140px; cursor: pointer; }
+.flash-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+.flash-card.flipped .flash-inner { transform: rotateY(180deg); }
+.flash-front, .flash-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 10px; font-size: 11pt; text-align: center; }
+.flash-front { background: linear-gradient(135deg,#7c6cf0,#5a4ac7); color: #fff; font-weight: 700; }
+.flash-back { background: #fff; color: #333; transform: rotateY(180deg); border: 2px solid var(--primary); font-size: 10.5pt; line-height: 1.5; }
+
+/* 手风琴 */
+.acc-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; cursor: pointer; user-select: none; transition: all 0.25s; }
+.acc-group-hd.pt1 { background: linear-gradient(135deg, #3498db, #5dade2); }
+.acc-group-hd.pt2 { background: linear-gradient(135deg, #e67e22, #f0ad4e); }
+.acc-group-hd.pt3 { background: linear-gradient(135deg, #8e44ad, #a569bd); }
+.acc-group-hd h3 { color: #fff; font-size: 15pt; margin: 0; }
+.acc-group-hd .acc-arrow { color: #fff; font-size: 18pt; transition: transform 0.3s; }
+.acc-group.open .acc-arrow { transform: rotate(180deg); }
+.acc-group-bd { display: none; background: #fff; border: 1px solid #eee; border-top: none; }
+.acc-group.open .acc-group-bd { display: block; }
+.acc-mastered { display: flex; justify-content: flex-end; padding: 10px 22px; background: #faf8ff; border-top: 1px solid #eee; }
+.acc-mastered button { background: var(--green); color: #fff; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.acc-mastered button:hover { transform: scale(1.05); }
+.acc-mastered button.done { background: #ccc; pointer-events: none; }
+
+/* deep-card 折叠 */
+.deep-card { margin: 10px 18px 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background: linear-gradient(135deg, #e67e22, #f0ad4e); color: #fff; padding: 10px 16px; font-size: 13.5pt; font-weight: 700; cursor: pointer; user-select: none; }
+.deep-card-bd { display: none; background: #fff; padding: 14px 18px; border: 1px solid #eee; border-top: none; font-size: 13pt; }
+.deep-card-bd.show { display: block; }
+.deep-card-bd .source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.deep-card-bd .source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* ============================================================
+   Page3: 栏目筛选
+   ============================================================ */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.filter-chip { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; background: #fff; font-size: 12pt; cursor: pointer; transition: all 0.2s; font-weight: 600; color: #5a4ac7; }
+.filter-chip:hover { border-color: var(--primary); background: #f0edff; }
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.col-box { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(124,108,240,0.06); transition: all 0.3s; }
+.col-box.filtered-out { display: none; }
+.col-header { background: linear-gradient(135deg, #7c6cf0, #5a4ac7); color: #fff; padding: 10px 20px; font-size: 15pt; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.col-header .col-toggle { font-size: 16pt; transition: transform 0.3s; }
+.col-box.open .col-toggle { transform: rotate(180deg); }
+.col-body { display: none; padding: 16px 20px; background: #fff; font-size: 13.5pt; }
+.col-box.open .col-body { display: block; }
+
+/* ============================================================
+   Page4: 课堂训练
+   ============================================================ */
+.score-banner { background: linear-gradient(135deg, #f0edff, #e0daff); border-radius: 12px; padding: 14px 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.score-number { font-size: 22pt; font-weight: 700; color: var(--primary-dark); }
+.score-reset { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 16px; padding: 4px 14px; font-size: 12pt; cursor: pointer; transition: all 0.2s; }
+.score-reset:hover { background: var(--primary); color: #fff; }
+
+.exercise { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+.q-text { font-size: 14pt; margin: 10px 0 6px; }
+
+.options label { display: block; padding: 8px 14px; margin: 4px 0; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14pt; transition: all 0.2s; background: #faf8ff; }
+.options label:hover { background: #f0edff; border-color: var(--primary); }
+.options label.disabled { pointer-events: none; }
+.options label.correct { background: #d4efdf; border-color: var(--green); color: var(--green); font-weight: 700; }
+.options label.wrong { background: #fadbd8; border-color: var(--red); color: var(--red); }
+
+.source-material { border-left: 4px solid var(--primary); padding: 8px 14px; margin: 8px 0; background: #faf8ff; font-size: 13pt; }
+.source-ref { text-align: right; color: #888; font-size: 10pt; margin-bottom: 8px; }
+
+/* 通用答案区 */
+.a { display: none; background: #f0edff; border: 1px solid #d5cef0; border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 14pt; }
+.a.show { display: block; }
+.ans-btn { background: var(--primary); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 12pt; cursor: pointer; margin: 6px 0; transition: all 0.2s; }
+.ans-btn:hover { transform: scale(1.05); background: #5a4ac7; }
+
+/* ============================================================
+   Page5: 知识结构图
+   ============================================================ */
+.kg-wrap-simple { background: #fff; border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+.kg-chain { display: flex; flex-direction: column; align-items: center; }
+.kg-node { width: 90%; border-radius: 12px; padding: 16px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; position: relative; }
+.kg-node:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform: scale(0.98); }
+.kg-node.left { align-self: flex-start; }
+.kg-node.right { align-self: flex-end; }
+.kg-node.c1 { background: #e8e0ff; border: 2px solid #7c6cf0; }
+.kg-node.c2 { background: #fff3e0; border: 2px solid #f0ad4e; }
+.kg-node.c3 { background: #e0f2e9; border: 2px solid #27ae60; }
+.kg-node.c4 { background: #fdecea; border: 2px solid #e74c3c; }
+.kg-node strong { display: block; font-size: 14pt; margin: 6px 0; }
+.kg-node p { font-size: 12pt; color: #555; margin: 4px 0; }
+.kg-icon { font-size: 22pt; }
+.kg-arrow { font-size: 20pt; color: var(--primary); margin: 4px 0; }
+
+@keyframes kgPulse { 0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.06); } 50% { box-shadow: 0 2px 20px rgba(124,108,240,0.18); } }
+.kg-node.pulse { animation: kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position: absolute; top: -10px; right: -8px; background: var(--primary); color: #fff; font-size: 11pt; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 12px; box-shadow: 0 2px 8px rgba(124,108,240,0.35); white-space: nowrap; transition: all 0.3s; z-index: 2; }
+.kg-expand-badge .badge-arrow { display: inline-block; margin-right: 3px; transition: transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform: rotate(180deg); }
+.kg-detail { max-height: 0; overflow: hidden; font-size: 12pt; color: #666; margin-top: 0; padding-top: 0; border-top: none; transition: all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height: 300px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ddd; }
+.kg-node.expanded { animation: none; }
+
+.kg-hint-banner { background: linear-gradient(135deg, #e8e0ff, #f3e8ff); border: 1.5px dashed var(--primary); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13pt; font-weight: 600; color: var(--primary-dark); }
+.kg-hint-banner .hint-click { display: inline-block; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 10px; font-size: 12pt; margin: 0 4px; }
+
+.kg-rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.kg-rule { padding: 10px 14px; border-radius: 10px; font-size: 12.5pt; text-align: center; font-weight: 600; }
+.kg-rule.r1 { background: #e8e0ff; color: #5a4ac7; }
+.kg-rule.r2 { background: #fff3e0; color: #e67e22; }
+.kg-rule.r3 { background: #e0f2e9; color: #27ae60; }
+.kg-rule.r4 { background: #fdecea; color: #e74c3c; }
+
+/* ============================================================
+   Page6: 结束页
+   ============================================================ */
+.recap-section { margin-bottom: 24px; }
+.recap-title { text-align: center; font-size: 17pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.recap-card { background: #fff; border-radius: 14px; padding: 20px 16px 14px; border: 1px solid var(--border); box-shadow: 0 3px 12px rgba(124,108,240,0.08); position: relative; text-align: left; }
+.recap-card-num { position: absolute; top: -12px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 14pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.recap-card h3 { font-size: 14pt; font-weight: 700; color: var(--primary-dark); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+.recap-card ul { list-style: none; padding: 0; }
+.recap-card ul li { font-size: 12.5pt; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; color: #444; }
+.recap-card ul li::before { content: '\25B8'; position: absolute; left: 0; top: 4px; color: var(--primary); font-size: 10pt; }
+.recap-card ul li strong { color: var(--primary-dark); }
+
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 14px 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 10px rgba(124,108,240,0.08); font-size: 12pt; }
+.bottom-nav a { color: #5a4ac7; text-decoration: none; }
+
+footer { text-align: center; padding: 20px 0 10px; border-top: 2px solid var(--border); margin-top: 24px; font-size: 12pt; color: #999; }
+footer p { margin: 4px 0; }
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width: 680px) {
+  .recap-grid { grid-template-columns: 1fr; }
+  .flash-grid { grid-template-columns: 1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns: 1fr; }
+  .match-cols { gap: 14px; }
+}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     Page0 — 封面页
+     ============================================================ -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 食物生产与社会生活</div>
+    <h1>第1课 · 从食物采集到食物生产</h1>
+    <div class="hero-sub">统编版高中历史  选择性必修二</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>理解生产力发展（农业革命）如何推动生产关系变革，私有制、阶级与国家产生。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>掌握世界主要农耕起源地（西亚、东亚、中美洲）及其代表性作物，认识不同文明农业特点。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>通过考古发现（水稻遗迹、画像石、陶瓶绘画等）印证农业起源与传播。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>分析农业革命如何使人类从食物采集者转变为食物生产者，并导致社会结构剧变。</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识中国是稻、粟等作物的发源地，感受中华文明对世界农业的贡献。</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================================================
+     Page1 — 知识要点 · 闯关解锁
+     ============================================================ -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 早期生产与生活</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 不同地区农业</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 生产关系变化</button>
+  </div>
+
+  <!-- ====== Tab1：子目一 ====== -->
+  <div class="tab-panel active" id="tab1">
+    <div class="kp-card">
+      <div class="timeline-bar">⏳ 约1万年前 · 原始农耕和畜牧出现</div>
+      <h3>🌾 人类早期生产与生活</h3>
+      <ul>
+        <li><strong>采集渔猎时代：</strong>依靠自然界现成动植物为生，使用木、骨、石工具，过着<span class="kwd">迁徙</span>生活，女性在采集经济中发挥主要作用。</li>
+        <li><strong>农业起源：</strong>约1万年前，人类掌握动植物生长规律，学会驯化。<span class="tag-gaokao">高频</span>三大农耕起源地：西亚（小麦、大麦）、东亚（粟、水稻）、中美洲（玉米、甘薯）。</li>
+        <li><strong>畜牧起源：</strong>约9000年前西亚饲养绵羊、山羊；约8500年前中国饲养猪、狗；约6000年前南美驯化骆马。</li>
+        <li><strong>农业的革命性意义：</strong>从<span class="kwd">食物采集者→食物生产者</span>，增加食物供应，加速人口增长；从迁徙过渡到定居，形成聚落；促进手工业与精神生活；推动天文历法、数学等科技发展。</li>
+      </ul>
+      <div class="link-bar">📌 <strong>高考常考：</strong>常以史料实证类选择题考查农业起源的标志性遗址（如长江中下游水稻遗迹），或从中外对比角度考查农耕文明的共性特征。</div>
+    </div>
+
+    <!-- ① 拖拽排序挑战 -->
+    <div class="challenge-title">🎮 挑战一：将以下事件按时间先后顺序拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="step1" id="item_step1">依靠采集渔猎为生</span>
+      <span class="sort-item" draggable="true" data-sortkey="step2" id="item_step2">掌握动植物生长规律</span>
+      <span class="sort-item" draggable="true" data-sortkey="step3" id="item_step3">约1万年前农耕畜牧出现</span>
+      <span class="sort-item" draggable="true" data-sortkey="step4" id="item_step4">食物增加，人口增长</span>
+      <span class="sort-item" draggable="true" data-sortkey="step5" id="item_step5">从迁徙过渡到定居</span>
+      <span class="sort-item" draggable="true" data-sortkey="step6" id="item_step6">手工业与科技发展</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">第1步</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第2步</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第3步</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第4步</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第5步</span></div>
+      <div class="sort-slot" data-slot="5"><span class="slot-label">第6步</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！排序完全正确！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🌾 食物采集者</div><div class="flash-back">依靠自然界现成动植物为生，使用木骨石工具，过着迁徙生活。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🌱 食物生产者</div><div class="flash-back">通过农耕和畜牧生产自己需要的产品，从迁徙过渡到定居。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🏘️ 聚落</div><div class="flash-back">农业出现后，人类从临时窝棚演变为长期住所，逐渐形成的定居点。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">📅 天文历法</div><div class="flash-back">农业生产需要掌握季节变化，推动了早期天文观测和历法发展。</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsTab1">🎉 本组翻转卡全部完成！</div>
+    </div>
+  </div>
+
+  <!-- ====== Tab2：子目二 ====== -->
+  <div class="tab-panel" id="tab2">
+    <div class="kp-card">
+      <div class="timeline-bar">🌍 世界主要农耕文明区 · 约公元前3500—前500年</div>
+      <h3>🌍 不同地区的食物生产与社会生活</h3>
+      <ul>
+        <li><strong>两河流域与尼罗河流域：</strong>种植大麦、小麦，饲养山羊、绵羊、牛。古巴比伦《汉谟拉比法典》规定土地、劳力等均可租赁；古埃及土地主要由王室和神庙占有，修建堤坝渠道控制洪水。</li>
+        <li><strong>古代中国：</strong>北方<span class="kwd">粟作</span>农业区 + 南方稻作农业区。商周土地归君主和贵族，农夫集体耕作；战国后铁器推广，<span class="kwd">铁犁牛耕</span>提高效率；家庭为基本生产单位，推行重农抑商；都江堰、龙首渠等水利工程；秦汉至隋唐形成精耕细作技术体系。</li>
+        <li><strong>古希腊与古罗马：</strong>种植大麦、小麦、葡萄、橄榄。只有公民拥有土地，奴隶劳动普遍（斯巴达希洛人全部为农业奴隶）。古罗马长期土地国有，后贵族兼并土地，小农破产。</li>
+        <li><strong>美洲：</strong>玉米、甘薯、马铃薯为主。阿兹特克：贵族私有 + 村社公有，家庭获份地终身使用，两年不耕作则收回。</li>
+      </ul>
+      <div class="link-bar">📌 <strong>高考常考：</strong>常以中外对比类选择题考查不同文明的土地制度与农业经营方式差异，材料题常要求分析地理环境对农业文明的影响。</div>
+    </div>
+
+    <!-- ② 填空填词挑战 -->
+    <div class="challenge-title">🎮 挑战二：在下方输入框中填入正确答案</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 西亚两河流域和尼罗河流域主要种植 <input class="fill-input" data-answer="大麦" placeholder="___"> 和小麦。</div>
+      <div class="fill-blank-row">2. 古埃及的土地主要由王室和 <input class="fill-input" data-answer="神庙" placeholder="___"> 占有。</div>
+      <div class="fill-blank-row">3. 古代中国北方是 <input class="fill-input" data-answer="粟作" placeholder="___"> 农业区，南方是稻作农业区。</div>
+      <div class="fill-blank-row">4. 战国以后，<input class="fill-input" data-answer="铁器" placeholder="___"> 得到推广，铁犁牛耕提高了农业效率。</div>
+      <div class="fill-blank-row">5. 在古希腊，只有 <input class="fill-input" data-answer="公民" placeholder="___"> 才能拥有土地。</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！全部填空正确！</div>
+
+    <!-- ③ 连线匹配挑战（嵌入Tab2） -->
+    <div class="challenge-title">🎮 挑战三：点击左侧地区，再点击右侧对应的农业特点配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📍 地区</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">两河流域</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">古埃及</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">古代中国</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">古希腊</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">阿兹特克</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">📋 农业特点</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">《汉谟拉比法典》规定土地、劳力等可租赁</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">修建堤坝渠道控制尼罗河洪水</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">铁犁牛耕，家庭生产，重农抑商</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">只有公民拥有土地，奴隶劳动普遍</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">村社公有，两年不耕作则收回</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！全部配对正确！</div>
+
+    <!-- ④ 地图标注挑战（嵌入Tab2） -->
+    <div class="challenge-title">🎮 挑战四：在下方示意图上点击标注四大文明古国的位置</div>
+    <div class="map-zone" id="mapContainer">
+      <div class="map-instruction">💡 点击下方四个标记点标注四大文明古国位置</div>
+      <svg viewBox="0 0 420 200" style="width:100%;height:auto;background:#f5f3ff;border-radius:10px;">
+        <rect x="10" y="20" width="400" height="160" rx="20" fill="#e8e0ff" stroke="#dcd4f5" stroke-width="1"/>
+        <text x="30" y="40" font-size="9" fill="#888">▲ 两河流域</text>
+        <circle class="map-marker" data-point="pt-mesopotamia" cx="120" cy="50" r="12" fill="#7c6cf0" stroke="#5a4ac7" stroke-width="2"/>
+        <text x="30" y="70" font-size="9" fill="#888">▲ 尼罗河流域</text>
+        <circle class="map-marker" data-point="pt-egypt" cx="90" cy="90" r="12" fill="#7c6cf0" stroke="#5a4ac7" stroke-width="2"/>
+        <text x="30" y="100" font-size="9" fill="#888">▲ 印度河流域</text>
+        <circle class="map-marker" data-point="pt-indus" cx="260" cy="80" r="12" fill="#7c6cf0" stroke="#5a4ac7" stroke-width="2"/>
+        <text x="30" y="130" font-size="9" fill="#888">▲ 黄河长江流域</text>
+        <circle class="map-marker" data-point="pt-china" cx="350" cy="110" r="12" fill="#7c6cf0" stroke="#5a4ac7" stroke-width="2"/>
+        <text x="110" y="38" font-size="8" fill="#3d2b8c" font-weight="700">两河流域</text>
+        <text x="78" y="78" font-size="8" fill="#3d2b8c" font-weight="700">尼罗河</text>
+        <text x="248" y="68" font-size="8" fill="#3d2b8c" font-weight="700">印度河</text>
+        <text x="340" y="98" font-size="8" fill="#3d2b8c" font-weight="700">黄河长江</text>
+      </svg>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-mesopotamia">⬜ 两河流域</span>
+        <span class="map-check-item" data-point="pt-egypt">⬜ 尼罗河流域</span>
+        <span class="map-check-item" data-point="pt-indus">⬜ 印度河流域</span>
+        <span class="map-check-item" data-point="pt-china">⬜ 黄河长江流域</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！全部标注完成！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🚜 精耕细作</div><div class="flash-back">秦汉至隋唐时期形成的北方旱田和南方水田农业技术体系。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">⚖️ 重农抑商</div><div class="flash-back">秦以后统治者推行的政策，重视农业、抑制商业发展。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">⛓️ 希洛人</div><div class="flash-back">被斯巴达人征服并变为农业奴隶的群体，承担所有农业劳动。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🌽 玉米</div><div class="flash-back">美洲的主要粮食作物，与甘薯、马铃薯共同支撑了印第安文明。</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsTab2">🎉 本组翻转卡全部完成！</div>
+    </div>
+  </div>
+
+  <!-- ====== Tab3：子目三 ====== -->
+  <div class="tab-panel" id="tab3">
+    <div class="kp-card">
+      <div class="timeline-bar">🏛️ 生产力发展 → 生产关系变革</div>
+      <h3>🏛️ 生产关系的变化</h3>
+      <ul>
+        <li><strong>性别分工变化：</strong>男子在农业生产中占主导，妇女退居从属地位，主要从事家务和家庭副业。</li>
+        <li><strong>私有制出现：</strong>剩余产品 → 氏族首领将公共财物据为己有 → <span class="kwd">贫富分化</span>。</li>
+        <li><strong>奴隶制出现：</strong>战争俘虏不再被杀死，变为奴隶 → 自由民与奴隶的差别。</li>
+        <li><strong>阶级与国家：</strong>剩余产品 + 私有制 → 阶级产生 → <span class="kwd">国家</span>诞生（阶级矛盾不可调和的产物）。</li>
+      </ul>
+      <div class="link-bar">📌 <strong>高考常考：</strong>常以唯物史观类材料题考查从生产力→生产关系→上层建筑的逻辑链条，引用恩格斯《家庭、私有制和国家的起源》等经典论述。</div>
+    </div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">💰 私有制</div><div class="flash-back">生产力发展带来剩余产品，氏族首领将公共财物据为己有，导致贫富分化。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">⛓️ 奴隶制</div><div class="flash-back">战争俘虏不再被杀死，而是变为奴隶，形成自由民与奴隶的差别。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">🏛️ 国家</div><div class="flash-back">阶级矛盾不可调和的产物，是调节阶级利益冲突的强制机关。</div></div></div>
+      </div>
+      <div class="stage-done" id="stageFlipsTab3">🎉 本组翻转卡全部完成！</div>
+    </div>
+    <div class="stage-done" id="stageFlipsDone">🎉 第⑤关通过！全部翻转卡已翻完！</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page2 — 重难点解析
+     ============================================================ -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <div class="acc-group open" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔵 重点一：农业革命的历史意义</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <p><strong>农业的出现是人类经济和社会生活的第一次革命。</strong>具体表现为：</p>
+      <ul style="padding-left:24px;font-size:13.5pt;">
+        <li><strong>经济层面：</strong>从食物采集者→食物生产者，初步改变纯粹依赖自然资源的状况，增加食物供应，改善生存条件，加速人口增长。</li>
+        <li><strong>生活方式：</strong>从迁徙→定居→聚落形成，从临时窝棚→长期住所。</li>
+        <li><strong>社会分工：</strong>一部分人从食物生产中解放出来，专门从事制陶、采矿、冶炼等手工业劳动。</li>
+        <li><strong>精神文化：</strong>原始音乐、文学和宗教因精神生活需要而产生。</li>
+        <li><strong>科学技术：</strong>天文历法、数学等学科获得较快发展。</li>
+      </ul>
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 农业革命的定义</div>
+        <div class="deep-card-bd">
+          <p>农业革命是指约1万年前，人类从依靠采集渔猎为生，转变为通过农耕和畜牧生产食物的历史性变革。它标志着人类从被动适应自然转向主动改造自然。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 农业革命与文明起源</div>
+        <div class="deep-card-bd">
+          <p>农业革命是文明起源的前提条件。稳定的食物供应使得人口增长、社会分工细化，进而推动城市、文字、国家等文明要素的出现。<span class="tag-gaokao">🎯 高考拓展</span> 常以"农业革命与文明起源的关系"为主题考查唯物史观，要求从生产力决定生产关系的角度进行论述。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 唯物史观</span> 农业革命的核心逻辑：<strong>生产力发展（农耕畜牧）→ 生产关系变化（私有制、阶级）→ 上层建筑变革（国家产生）</strong>。这是唯物史观"生产力决定生产关系"原理的典型例证。</p>
+          <p style="margin-top:8px;"><span class="tag-gaokao">🎯 高考拓展</span> 模拟题：阅读材料，结合所学，从唯物史观角度分析农业革命如何推动人类社会的演进。（开放性评述题）</p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🟠 重点二：世界主要农耕起源地与作物分布</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <table class="diff-table" style="width:100%;border-collapse:collapse;margin:12px 0;font-size:13pt;">
+        <thead><tr style="background:linear-gradient(135deg,#7c6cf0,#5a4ac7);color:#fff;padding:10px 12px;"><th>起源地</th><th>代表性作物</th><th>家畜驯化</th><th>文明代表</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td><strong>西亚</strong></td><td>小麦、大麦</td><td>绵羊、山羊（约9000年前）</td><td>古巴比伦</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:#faf8ff;"><td><strong>东亚（中国）</strong></td><td>粟、水稻</td><td>猪、狗（约8500年前）</td><td>古代中国</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td><strong>中美洲</strong></td><td>玉米、甘薯、马铃薯</td><td>骆马（约6000年前）</td><td>阿兹特克、玛雅</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13pt;margin-top:10px;"><span class="tag-soc">🔵 社会学视角</span> 不同文明的作物选择与地理环境密切相关——大河文明以谷物为主，美洲文明以薯类为主，反映了人类对自然环境的适应与改造。</p>
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 三大起源地</div>
+        <div class="deep-card-bd">
+          <p>世界农业起源于三大中心：西亚（小麦大麦）、东亚（粟水稻）、中美洲（玉米甘薯）。中国是稻、粟、黍等作物的发源地，长江中下游发现了大量人工栽培水稻的遗迹。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 农业传播与文明交流</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 大麦和小麦从西亚传入希腊，成为地中海地区主要粮食作物；玉米、甘薯在哥伦布大交换后传入欧亚。农业作物的传播是早期文明交流的重要内容。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 史料实证训练</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-gaokao">🎯 高考拓展</span> 材料题：阅读"东汉牛耕图画像石拓片"和"古希腊陶瓶收获图"，比较中国与古希腊农业生产的异同，并分析其背后的社会制度差异。</p>
+          <p style="margin-top:6px;"><span class="tag-value">🔴 高考命题方向</span> 中外农业文明对比是高考高频考点，常以图片史料+文字材料结合的方式考查。</p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🟣 难点：农业产生如何推动私有制、阶级与国家出现</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <p><strong>逻辑链条（唯物史观核心）</strong></p>
+      <ul style="padding-left:24px;font-size:13.5pt;">
+        <li><strong>第一步：</strong>农业生产力提高 → 剩余产品出现</li>
+        <li><strong>第二步：</strong>剩余产品 → 氏族首领将公共财物据为己有 → <strong>私有制</strong>诞生</li>
+        <li><strong>第三步：</strong>私有制 → 贫富分化 → 阶级产生（自由民与奴隶，富人与穷人）</li>
+        <li><strong>第四步：</strong>阶级矛盾不可调和 → <strong>国家</strong>作为强制机关出现</li>
+      </ul>
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 恩格斯经典论述</div>
+        <div class="deep-card-bd">
+          <div class="source-material">"除了自由和奴隶的差别以外，又出现了富人和穷人的差别……耕地起初是暂时地，后来便永久地分配给各个家庭使用，它向完全的私有财产的过渡，是逐渐进行的……"</div>
+          <div class="source-ref">——恩格斯《家庭、私有制和国家的起源》</div>
+          <p>这段论述揭示了私有制从公有财产向家庭私有逐渐过渡的过程，是理解国家起源的关键史料。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 中西对比</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> 中国商周时期"土地掌握在君主和各级贵族手中"，古希腊"只有公民才能拥有土地"，古罗马"长期实行土地国有"——不同文明的土地制度差异影响了各自的政治发展路径。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观升华</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-value">❤️ 唯物史观</span> 国家不是外部强加的，而是社会内部生产力与生产关系矛盾运动的产物。正如恩格斯所言："国家是阶级矛盾不可调和的产物。"</p>
+          <p style="margin-top:8px;"><span class="tag-gaokao">🎯 高考拓展</span> 开放性评述题：结合恩格斯《家庭、私有制和国家的起源》的相关论述，评述"私有制是国家产生的根源"这一观点。（要求：提取信息→概括归纳→历史解释→开放性评述）</p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page3 — 教材栏目解答
+     ============================================================ -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('学习聚焦',this)">学习聚焦</button>
+    <button class="filter-chip" onclick="filterCol('思考点',this)">思考点</button>
+    <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+    <button class="filter-chip" onclick="filterCol('史料阅读',this)">史料阅读</button>
+    <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+    <button class="filter-chip" onclick="filterCol('问题探究',this)">问题探究</button>
+    <button class="filter-chip" onclick="filterCol('学习拓展',this)">学习拓展</button>
+  </div>
+
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>农业出现以后，人类逐渐从食物采集者转变为食物生产者，人类的生活方式发生了巨大变化。</p>
+      <div class="a" id="ans-p3-focus1">
+        <strong>📝 要点归纳：</strong>学习聚焦点明了本课的核心主线——"从食物采集到食物生产"的转变，这一转变不仅改变了食物获取方式，更深刻影响了人类的生活方式、社会结构和文明进程。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="思考点">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 思考点</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>与食物采集者相比，食物生产者的生活发生了哪些变化？</p>
+      <div class="a" id="ans-p3-think1">
+        <strong>📝 参考答案：</strong><br>
+        （1）食物来源：从依赖自然界现成动植物→通过农耕畜牧生产食物，更加稳定可靠。<br>
+        （2）生活方式：从迁徙流动→定居生活，形成聚落。<br>
+        （3）社会分工：部分人从食物生产中解放出来，从事手工业、商业等。<br>
+        （4）人口与组织：食物供应增加促进人口增长，社会结构日益复杂，私有制、阶级和国家逐步产生。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 历史纵横 · 变水害为水利的古埃及人</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>为控制尼罗河河水泛滥，古埃及人修建堤坝、挖沟开渠。他们利用河谷的自然坡度修建一系列渠道，引水灌溉。这些体系既可控制洪水，又可灌溉耕地，保障农业生产。</p>
+      <div class="a" id="ans-p3-story1">
+        <strong>📝 要点归纳：</strong>古埃及人通过修建水利工程将水害变为水利，体现了人类利用自然、改造自然的智慧。尼罗河定期泛滥虽带来威胁，但也为河谷带来肥沃土壤，古埃及人通过渠道系统实现了灌溉与防洪的统一，为农业文明的发展提供了保障。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-story1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 崔《政论》</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">今辽东耕犁长四尺，回转相如，既用两牛，两人牵之，一人将耕，一人下种……</div>
+      <div class="source-ref">——崔《政论》</div>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 史料解读：</strong>这段史料记载了东汉辽东地区牛耕的具体操作方式——用两头牛牵引耕犁，两人牵牛，一人扶犁耕作，一人播种。反映了汉代铁犁牛耕技术的推广和精耕细作农业的发展水平。史料实证价值：印证了教材中"战国以后铁器推广，铁犁牛耕提高了农业生产效率"的结论。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 学思之窗 · 恩格斯论私有制与国家起源</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material">除了自由和奴隶的差别以外，又出现了富人和穷人的差别——随着新的分工，社会又有了新的阶级划分。各个家庭家长之间的财产差别，导致了各地社会一直保存着的旧的共同财产家庭公社；同时也导致了这种公社所实行的土地的共同耕作。耕地起初是暂时地，后来便永久地分配给各个家庭使用，它向完全的私有财产的过渡，是逐渐进行的……</div>
+      <div class="source-ref">——恩格斯《家庭、私有制和国家的起源》，《马克思恩格斯文集》第四卷</div>
+      <div class="a" id="ans-p3-source1">
+        <strong>📝 要点解读：</strong>恩格斯揭示了私有制产生的过程——从公有财产→家庭私有→完全私有，是一个渐进的过程。私有制的出现导致了阶级分化和利益冲突，最终推动了国家的产生。这是唯物史观分析社会演进的核心逻辑。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-source1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="问题探究">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>❓ 问题探究 · 农业起源的不同描述</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <div class="source-material"><strong>材料一：</strong>古者，民茹草饮水，采树木之实，食赢蛤之肉，时多疾病毒伤之害。于是神农乃始教民播种五谷，相土地宜燥湿肥饶高下；尝百草之滋味，水泉之甘苦，令民知所辟就。<br>——《淮南子·修务训》</div>
+      <div class="source-material" style="margin-top:8px;"><strong>材料二：</strong>古之人，皆食禽兽肉。至于神农，人民众多，禽兽不足。于是神农因天之时，分地之利，制耒耜，教民农作。<br>——班固《白虎通义·号》</div>
+      <p style="margin-top:8px;"><strong>问题：</strong>上面两段材料对远古人类生活和农业起源的描述有何不同？结合相关史实，谈谈你对这一问题的看法。</p>
+      <div class="a" id="ans-p3-problem1">
+        <strong>📝 参考答案：</strong><br>
+        <strong>不同之处：</strong><br>
+        材料一（《淮南子》）侧重描写远古人类面临"疾病毒伤"的生存困境，神农氏"尝百草"以帮助人们辨别可食之物，强调农业起源与解决生存危机的直接关联。<br>
+        材料二（《白虎通义》）则从人口增长与资源不足的角度解释农业起源——"人民众多，禽兽不足"，因此神农氏"制耒耜，教民农作"。<br>
+        <strong>看法：</strong>两则材料共同反映了农业起源的双重动因：<br>
+        一是生存压力（疾病、毒伤、资源不足）推动人们寻找新的食物来源；<br>
+        二是人类在实践中逐渐掌握了植物生长规律，积累了农业知识。<br>
+        从唯物史观看，农业起源是生产力发展的必然结果，是人类在与自然互动中不断积累经验、改进工具的产物。考古发现（如长江中下游水稻遗迹）为农业起源提供了实物证据。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-problem1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <div class="col-box" data-cat="学习拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📚 学习拓展 · 汉代蔬菜栽培</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p>汉朝在蔬菜栽培方面积累了丰富的经验，《汜胜之书》《四民月令》总结了多种蔬菜栽培技术，《汉书·召信臣传》还有温室栽培的记载。</p>
+      <p><strong>任务：</strong>查找资料，了解汉朝栽培的蔬菜有哪些种类。</p>
+      <div class="a" id="ans-p3-extend1">
+        <strong>📝 拓展参考：</strong><br>
+        汉代栽培的蔬菜种类丰富，据《汜胜之书》《四民月令》等文献记载，主要有：<br>
+        • <strong>叶菜类：</strong>葵（冬葵）、薤、韭、葱、蒜、芥、芸苔（油菜）<br>
+        • <strong>瓜果类：</strong>瓠（葫芦）、冬瓜、黄瓜、丝瓜<br>
+        • <strong>根茎类：</strong>萝卜、芋、山药<br>
+        • <strong>调味类：</strong>姜、花椒<br>
+        汉代已有温室栽培技术（《汉书·召信臣传》记载"太官园种冬生葱韭菜茹，覆以屋庑"），体现了当时农业技术的先进水平。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-extend1')">📝 查看拓展参考</button>
+    </div>
+  </div>
+</div>
+<!-- ============================================================
+     Page4 — 课堂训练（选择题含答案分析）
+     ============================================================ -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- ===== 选择题 q1 ===== -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 据考古发现，长江中下游新石器时代遗址中发现了大量人工栽培水稻的遗迹。据此可推知，当时该地区（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 已出现较为稳定的食物来源</label>
+      <label onclick="optClick(this,'B','q1')">B. 已出现国家的雏形</label>
+      <label onclick="optClick(this,'C','q1')">C. 已普遍使用铁制农具</label>
+      <label onclick="optClick(this,'D','q1')">D. 已形成精耕细作技术体系</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <p><strong>✅ 正确答案：A</strong></p>
+      <p><strong>📖 解析：</strong>人工栽培水稻遗迹表明当时已掌握种植技术，能够稳定获取食物来源。B项国家雏形出现于更晚的夏商时期；C项铁制农具的普遍使用是在战国以后；D项精耕细作技术体系形成于秦汉至隋唐时期。故选A。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：农业起源 · 史料实证</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- ===== 选择题 q2 ===== -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 《汉谟拉比法典》规定，土地、果园、资金、牲畜、工具、粮仓、劳力等都可以作为租赁的对象。这反映了古巴比伦（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 土地完全归王室所有</label>
+      <label onclick="optClick(this,'B','q2')">B. 商品经济高度发达</label>
+      <label onclick="optClick(this,'C','q2')">C. 私有经济较为活跃</label>
+      <label onclick="optClick(this,'D','q2')">D. 奴隶制已经消亡</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <p><strong>✅ 正确答案：C</strong></p>
+      <p><strong>📖 解析：</strong>多种对象可以租赁，说明土地、工具、劳力等均已进入流通领域，私有经济较为活跃。A项与"土地可租赁"矛盾；B项材料反映的是租赁关系而非商品交换；D项与史实不符，古巴比伦仍存在奴隶制。故选C。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：古代两河流域 · 经济制度</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- ===== 选择题 q3 ===== -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 战国以后，铁制农具得到推广，铁犁牛耕的应用极大地提高了农业生产效率。这直接推动了（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 集体农耕取代家庭生产</label>
+      <label onclick="optClick(this,'B','q3')">B. 以家庭为单位的个体生产成为主要形式</label>
+      <label onclick="optClick(this,'C','q3')">C. 土地公有制全面确立</label>
+      <label onclick="optClick(this,'D','q3')">D. 重农抑商政策被废除</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <p><strong>✅ 正确答案：B</strong></p>
+      <p><strong>📖 解析：</strong>铁犁牛耕提高了生产效率，使个体家庭有能力独立完成农业生产，推动了生产单位从集体向家庭的转变。A项说法与史实相反；C项土地公有制在战国后逐步瓦解而非确立；D项重农抑商政策在秦以后反而加强。故选B。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：古代中国 · 农业技术与社会变革</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- ===== 选择题 q4 ===== -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 在古希腊，只有公民才能拥有土地，农业生产中普遍使用奴隶劳动。这一现象说明古希腊（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 土地是公民权的核心标志</label>
+      <label onclick="optClick(this,'B','q4')">B. 农业经济已被工商业取代</label>
+      <label onclick="optClick(this,'C','q4')">C. 奴隶制已完全消灭</label>
+      <label onclick="optClick(this,'D','q4')">D. 城邦实行土地公有制</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <p><strong>✅ 正确答案：A</strong></p>
+      <p><strong>📖 解析：</strong>只有公民才能拥有土地，说明土地占有权是公民身份的重要体现。B项与史实不符，农业仍是古希腊经济基础；C项与"普遍使用奴隶劳动"矛盾；D项土地公有制在古希腊并不普遍。故选A。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：古希腊 · 城邦制度与土地所有权</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- ===== 选择题 q5 ===== -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 恩格斯指出："国家是阶级矛盾不可调和的产物。"以下最能佐证这一观点的是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 农业革命增加了食物供应</label>
+      <label onclick="optClick(this,'B','q5')">B. 私有制出现导致贫富分化</label>
+      <label onclick="optClick(this,'C','q5')">C. 聚落形成促进了定居生活</label>
+      <label onclick="optClick(this,'D','q5')">D. 天文历法推动了农业发展</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <p><strong>✅ 正确答案：B</strong></p>
+      <p><strong>📖 解析：</strong>私有制导致贫富分化，进而产生阶级对立，当阶级矛盾不可调和时国家应运而生。A、C、D三项均属于生产力或生活方式的变革，未直接涉及阶级矛盾。故选B。</p>
+      <p style="font-size:11pt;color:#888;margin-top:4px;">🔍 考点：唯物史观 · 国家的起源</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- ===== 材料题1（高难度·唯物史观升华） ===== -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题一</strong> 阅读下列材料，回答问题。</div>
+    <div class="source-material"><strong>材料一：</strong>除了自由和奴隶的差别以外，又出现了富人和穷人的差别——随着新的分工，社会又有了新的阶级划分。各个家庭家长之间的财产差别，导致了各地社会一直保存着的旧的共同财产家庭公社；同时也导致了这种公社所实行的土地的共同耕作。耕地起初是暂时地，后来便永久地分配给各个家庭使用，它向完全的私有财产的过渡，是逐渐进行的……<br>——恩格斯《家庭、私有制和国家的起源》</div>
+    <div class="source-material"><strong>材料二：</strong>在氏族社会中，为了生产更多的剩余产品，人们往往不再杀死战争中的俘虏，而是把他们变成奴隶。这样，在氏族社会中，就有了自由和奴隶的差别。<br>——统编版《经济与社会生活》第1课</div>
+    <div class="source-material"><strong>材料三：</strong>随着剩余产品的增加和私有制的出现，阶级产生了。为了调节阶级之间的利益冲突，需要有一个强制机关，国家应运而生。<br>——统编版《经济与社会生活》第1课</div>
+    <div class="q-text">（1）根据材料一，概括私有制产生的过程。（提取信息）</div>
+    <div class="q-text">（2）根据材料二，指出奴隶产生的主要来源。（概括归纳）</div>
+    <div class="q-text">（3）综合三则材料，说明私有制、阶级和国家三者之间的内在联系。（历史解释）</div>
+    <div class="q-text">（4）结合所学知识，从唯物史观角度评述"国家是阶级矛盾不可调和的产物"这一观点。（开放性评述）</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）提取信息：</strong>私有制的产生经历了渐进过程——从公有财产到家庭私有再到完全私有。随着财产差别扩大，共同财产家庭公社逐渐解体，耕地从暂时分配给家庭使用变为永久分配，逐步向完全私有财产过渡。</p>
+      <p><strong>（2）概括归纳：</strong>奴隶的主要来源是战争俘虏。随着生产力提高，剩余产品增加，人们不再杀死俘虏而是将其变为奴隶，以生产更多的剩余产品。</p>
+      <p><strong>（3）历史解释：</strong>私有制、阶级和国家三者是层层递进的关系：<br>① 生产力发展产生剩余产品 → 私有制出现；<br>② 私有制导致贫富分化 → 阶级产生（自由民与奴隶、富人与穷人）；<br>③ 阶级矛盾不可调和 → 国家作为强制机关产生。<br>三者环环相扣，构成了唯物史观中从经济基础到上层建筑演变的完整逻辑链条。</p>
+      <p><strong>（4）开放性评述：</strong><br>恩格斯"国家是阶级矛盾不可调和的产物"这一论断，深刻揭示了国家的本质。<br>从唯物史观看，国家不是外部强加于社会的力量，而是社会内部生产力与生产关系矛盾运动的必然结果。当社会发展到出现剩余产品、私有制和阶级的阶段时，原有的氏族制度已无法调节日益尖锐的利益冲突，需要一种"表面上凌驾于社会之上"的力量来维持秩序——这便是国家。<br>中国历史上夏朝的建立、古希腊城邦的形成等，都印证了这一规律。国家的产生标志着人类社会进入文明时代，但国家本质上是阶级统治的工具，这一认识对于我们理解历史上和现实中的国家形态具有重要的方法论意义。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1'); trackMatQ('mq1')">📝 查看答案</button>
+  </div>
+
+  <!-- ===== 材料题2（中难度） ===== -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题二</strong> 阅读材料，回答问题。</div>
+    <div class="source-material">今辽东耕犁长四尺，回转相如，既用两牛，两人牵之，一人将耕，一人下种……<br>——崔《政论》</div>
+    <div class="q-text">（1）材料反映的是哪个时期的农业生产状况？（提取信息）</div>
+    <div class="q-text">（2）结合所学知识，简述铁犁牛耕对古代中国农业发展的意义。（概括归纳）</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>东汉时期（辽东地区）。</p>
+      <p><strong>（2）</strong>铁犁牛耕的推广极大地提高了农业生产效率，促进了个体家庭生产成为主要形式，推动了精耕细作农业技术体系的形成，为秦汉以后农业经济的繁荣奠定了基础。</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2'); trackMatQ('mq2')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page5 — 知识结构图
+     ============================================================ -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 因果链</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌾</span><strong>农业革命</strong>
+        <p>约1万年前 · 农耕畜牧出现</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>人类从食物采集者转变为食物生产者，三大农耕起源地（西亚/东亚/中美洲）形成。农业的出现是经济和社会生活的第一次革命。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏘️</span><strong>生活方式变革</strong>
+        <p>迁徙→定居 · 聚落形成</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>农业使人类从迁徙过渡到定居，形成聚落。手工业（制陶/冶炼）、精神生活（音乐/文学/宗教）和科学技术（天文/数学）全面发展。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">💰</span><strong>生产关系变化</strong>
+        <p>私有制 · 阶级 · 奴隶制</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>剩余产品出现→私有制产生→贫富分化→阶级产生（自由民与奴隶）。性别分工变化，男子主导生产，妇女退居从属。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>国家诞生</strong>
+        <p>阶级矛盾不可调和的产物</p>
+        <div class="kg-detail"><p><strong>详细解析：</strong>阶级矛盾不可调和→国家作为强制机关出现。国家是调节阶级利益冲突的工具，标志着人类进入文明时代。核心逻辑：生产力→生产关系→上层建筑。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：国家作为阶级统治工具诞生</div>
+      <div class="kg-rule r2">🟠 经济：农业生产力→私有制→阶级</div>
+      <div class="kg-rule r3">🟢 文化：定居促进精神文化与科技发展</div>
+      <div class="kg-rule r4">🔴 社会：从迁徙到聚落，分工日益细化</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Page6 — 结束页
+     ============================================================ -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 食物生产与社会生活</div>
+    <h1 style="font-size:22pt;">第1课 · 从食物采集到食物生产</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>🌾 农业革命的意义</h3>
+        <ul>
+          <li>约1万年前，农耕畜牧出现，人类从采集渔猎转向食物生产</li>
+          <li>三大起源地：西亚（小麦/大麦）、东亚（粟/水稻）、中美洲（玉米/甘薯）</li>
+          <li>推动人口增长、定居生活、社会分工、科技发展</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>🌍 世界农业文明比较</h3>
+        <ul>
+          <li>两河流域：《汉谟拉比法典》规定多种租赁对象</li>
+          <li>古埃及：王室/神庙占有土地，修建水利控制洪水</li>
+          <li>古代中国：铁犁牛耕、家庭生产、精耕细作</li>
+          <li>古希腊罗马：公民拥有土地，奴隶劳动普遍</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>🏛️ 生产关系变革逻辑</h3>
+        <ul>
+          <li>生产力发展 → 剩余产品 → 私有制出现</li>
+          <li>私有制 → 贫富分化 → 阶级产生</li>
+          <li>阶级矛盾不可调和 → 国家诞生</li>
+          <li>核心线索：唯物史观生产力决定生产关系</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav">
+    <div><a href="#">← 上一课：单元导言</a></div>
+    <div class="nav-center">第1课</div>
+    <div><a href="选必2-U1-第2课_新航路开辟后的食物物种交流.html">下一课：第2课 新航路开辟后的食物物种交流 →</a></div>
+  </div>
+
+  <footer>
+    <p>统编版高中历史 · 选择性必修二 · 第一单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================================================
+     底部翻页导航栏
+     ============================================================ -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================================================
+     JavaScript
+     ============================================================ -->
+<script>
+// ============================================================
+// 1. 分页导航
+// ============================================================
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault(); nextPage();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault(); prevPage();
+  } else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ============================================================
+// 2. 闯关进度追踪
+// ============================================================
+var stageDone = { sort: false, fill: false, match: false, map: false, flips: false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ============================================================
+// 3. 学习目标点击标记
+// ============================================================
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  var targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ============================================================
+// 4. 标签页切换
+// ============================================================
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ============================================================
+// 5. 手风琴组
+// ============================================================
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ============================================================
+// 6. 答案显隐
+// ============================================================
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '📝 查看解析';
+    }
+  }
+}
+
+// ============================================================
+// 7. 选择题 + 计分
+// ============================================================
+var correctAnswers = { q1: 'A', q2: 'C', q3: 'B', q4: 'A', q5: 'B' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true; score++; updateScore();
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+}
+
+// ============================================================
+// 8. 栏目筛选 + 折叠
+// ============================================================
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ============================================================
+// 9. 拖拽排序（IIFE）
+// ============================================================
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['step1','step2','step3','step4','step5','step6'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ============================================================
+// 10. 填空填词
+// ============================================================
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ============================================================
+// 11. 连线匹配
+// ============================================================
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    var totalPairs = document.querySelectorAll('.match-left').length;
+    if (matchedPairs.length >= totalPairs) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    el.style.borderColor = '#e74c3c';
+    setTimeout(function() { el.style.borderColor = ''; }, 300);
+    selectedLeft.style.borderColor = '#e74c3c';
+    setTimeout(function() { selectedLeft.style.borderColor = ''; }, 300);
+  }
+}
+
+// ============================================================
+// 12. 地图标注（IIFE）
+// ============================================================
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ============================================================
+// 13. 翻转卡
+// ============================================================
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var tab = el.closest('.tab-panel');
+  if (tab) {
+    var total = tab.querySelectorAll('.flash-card').length;
+    var flipped = tab.querySelectorAll('.flash-card.flipped').length;
+    var doneId = null;
+    if (tab.id === 'tab1') doneId = 'stageFlipsTab1';
+    else if (tab.id === 'tab2') doneId = 'stageFlipsTab2';
+    else if (tab.id === 'tab3') doneId = 'stageFlipsTab3';
+    if (doneId && total > 0 && flipped >= total) {
+      document.getElementById(doneId).classList.add('show');
+    }
+  }
+  var allTotal = document.querySelectorAll('.flash-card').length;
+  var allFlipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (allTotal > 0 && allFlipped >= allTotal) {
+    stageDone.flips = true;
+    updateStageProgress();
+    document.getElementById('stageFlipsDone').classList.add('show');
+  }
+}
+
+// ============================================================
+// 14. 知识结构图节点展开
+// ============================================================
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length - 1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length - 1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ============================================================
+// 15. deep-card 折叠（IIFE）
+// ============================================================
+(function() {
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card) {
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+
+// ============================================================
+// 16. 闯关进度条在页面加载后自动更新
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  updateStageProgress();
+});
+</script>
+
+</body>
+</html>
+

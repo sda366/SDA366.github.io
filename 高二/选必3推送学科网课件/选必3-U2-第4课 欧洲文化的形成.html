@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4课 欧洲文化的形成</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12; --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero & 封面 ========== */
+.hero-wrap { background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding:36px 20px 30px; text-align:center; color:#fff; border-radius:0 0 36px 36px; box-shadow:0 6px 30px rgba(61,43,140,0.20); margin:0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+.learn-target { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:20px 24px; margin-bottom:24px; border:1px solid var(--border); }
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item { font-size:13.5pt; padding:6px 8px; border-bottom:1px dashed var(--border); cursor:pointer; transition:all 0.2s; border-radius:6px; }
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn { display:block; margin:20px auto 10px; background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; border:none; border-radius:24px; padding:12px 36px; font-size:16pt; font-weight:700; cursor:pointer; transition:all 0.25s; box-shadow:0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 & Page1 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn { flex:1; padding:14px 8px; font-size:14pt; font-weight:700; border:none; cursor:pointer; text-align:center; transition:all 0.25s; background:#e8e0ff; color:#5a4ac7; letter-spacing:1px; }
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* 时间轴、知识卡片、贯通框 */
+.timeline-bar { background:#f0edff; border-radius:8px; padding:8px 16px; font-size:12pt; color:#5a4ac7; text-align:center; margin-bottom:12px; letter-spacing:1px; }
+.kp-card { background:var(--bg-card); border-left:4px solid var(--primary); border-radius:0 10px 10px 0; padding:18px 22px; margin-bottom:20px; box-shadow:0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; } .kp-card li { margin:6px 0; font-size:14pt; }
+.link-bar { border:2px dashed #d5cef0; border-radius:10px; padding:12px 16px; margin-top:14px; background:#faf8ff; font-size:13pt; color:#5a4ac7; }
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-gaokao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 手风琴组 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s; }
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700; cursor:pointer; user-select:none; }
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== diff-table ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip { padding:6px 14px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s; font-weight:600; color:#5a4ac7; }
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label { display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff; }
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node { width:90%; border-radius:12px; padding:16px 20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative; }
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; } .kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,0.06);}50%{box-shadow:0 2px 20px rgba(124,108,240,0.18);} }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08); position:relative; text-align:left; }
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 五关交互专用 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter:brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== -->
+<!-- PAGE 0 — 封面页 -->
+<!-- ============================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第二单元 · 丰富多样的世界文化</div>
+    <h1>第4课 · 欧洲文化的形成</h1>
+    <div class="hero-sub">统编版高中历史  文化交流与传播（选必三）</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>运用经济基础与上层建筑原理，理解古希腊罗马文化对欧洲文明的奠基作用</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>梳理古典希腊→罗马→中古西欧→拜占庭→俄罗斯的文化演进脉络</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>通过《十二铜表法》《罗马民法大全》等史料，认识罗马法对后世的影响</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>阐释中古西欧王权与教权并立格局的形成及其文化影响</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识世界文化的多样性，理解文明交流互鉴的重要意义</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 1 — 知识要点 + 五关闯关 -->
+<!-- ============================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 古典希腊罗马</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 中古西欧</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 拜占庭俄罗斯</button>
+  </div>
+
+  <!-- ====== TAB1 古典希腊文化与罗马文化 ====== -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">📅 公元前5-4世纪（古典时代）→ 公元前450年（十二铜表法）→ 公元前27年（罗马帝国）</div>
+    <h3>古典希腊文化与罗马文化</h3>
+    <ul>
+      <li><span class="kwd">古希腊三大哲人</span>：苏格拉底（探讨人生哲理/社会伦理）、柏拉图（创建学园/为《几何原本》奠基）、亚里士多德（百科全书式学者）</li>
+      <li><span class="kwd">文学</span>：《荷马史诗》（西方文学创作源泉）、雅典戏剧（悲剧/喜剧）</li>
+      <li><span class="kwd">史学</span>：希罗多德《历史》（叙事体）、修昔底德《伯罗奔尼撒战争史》</li>
+      <li><span class="kwd">古罗马《十二铜表法》</span>：公元前450年，第一部成文法，维护贵族利益但限制权力滥用，奠定罗马法基础</li>
+      <li><span class="kwd">文学与史学</span>：卢克莱修、西塞罗、维吉尔；李维《罗马史》、塔西佗《编年史》</li>
+      <li><span class="kwd">建筑与历法</span>：万神殿、大竞技场；凯撒儒略历→世界通用公历</li>
+    </ul>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将以下事件按时间先后拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">荷马史诗形成</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">古希腊古典时代</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">《十二铜表法》颁布</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">罗马帝国建立</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">儒略历制定</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第二</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第三</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第四</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">最晚</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">苏格拉底</div><div class="flash-back">古希腊三大哲人之一，致力于探讨人生哲理和社会伦理，用对话形式传授哲学思想。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">柏拉图</div><div class="flash-back">创建学园，将哲学与数学融会贯通，为欧几里得《几何原本》奠定基础。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">亚里士多德</div><div class="flash-back">百科全书式学者，著作涵盖哲学、政治学、文学、天文学、物理学等领域。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《十二铜表法》</div><div class="flash-back">古罗马第一部成文法（公元前450年），限制了贵族滥用权力，奠定罗马法基础。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 古希腊三大哲人常以<span class="kwd">比较类</span>选择题考查；《十二铜表法》是罗马法常考重点。
+    </div>
+  </div>
+
+  <!-- ====== TAB2 中古西欧文化 ====== -->
+  <div class="kp-card tab-panel" id="tab2">
+    <div class="timeline-bar">📅 476年西罗马灭亡 → 496年克洛维皈依 → 756年丕平献土 → 1054年教会分裂</div>
+    <h3>中古西欧文化</h3>
+    <ul>
+      <li><span class="kwd">日耳曼人南下</span>：西罗马帝国灭亡，法兰克王国建立</li>
+      <li><span class="kwd">基督教与王权</span>：496年克洛维皈依基督教；756年丕平献土建立教皇国；<span class="kwd">王权与教权并立</span>的二元政治格局</li>
+      <li><span class="kwd">基督教文化</span>：《圣经》为文化载体，神学用形式逻辑论证教义（源自古希腊哲学）</li>
+      <li><span class="kwd">骑士文学</span>：反映骑士阶层道德理想，《罗兰之歌》为代表</li>
+      <li><span class="kwd">市民文学</span>：叙述市民家庭生活，抨击贵族和教士，《列那狐的故事》为代表</li>
+      <li>托马斯·阿奎那：《神学大全》，中古西欧著名神学家</li>
+    </ul>
+
+    <!-- ③ 连线匹配 -->
+    <div class="challenge-title">🎮 挑战三：将中古西欧文化成就与内容配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 文化成就</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">骑士文学</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">市民文学</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">《罗兰之歌》</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">《列那狐的故事》</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">《神学大全》</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">🎯 内容与特征</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">抒情诗与叙事诗，颂扬骑士英雄</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">叙述市民家庭生活，抨击贵族教士</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">骑士文学代表作，颂扬罗兰英雄</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">市民文学代表作，寓言故事</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">托马斯·阿奎那著，神学巨著</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">王权与教权并立</div><div class="flash-back">中古西欧基督教会与世俗王权互相利用、竞争共存的二元政治格局。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">骑士文学</div><div class="flash-back">反映骑士阶层道德理想，《罗兰之歌》为代表，抒情诗挑战教会禁欲主义。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">市民文学</div><div class="flash-back">叙述市民家庭生活，抨击贵族和教士，《列那狐的故事》为代表。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">托马斯·阿奎那</div><div class="flash-back">中古西欧著名神学家，《神学大全》是其代表作，用形式逻辑论证教义。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 中古西欧王权与教权并立格局常以<span class="kwd">背景类</span>选择题考查，骑士文学/市民文学为文艺复兴铺垫。
+    </div>
+  </div>
+
+  <!-- ====== TAB3 拜占庭、俄罗斯文化 ====== -->
+  <div class="kp-card tab-panel" id="tab3">
+    <div class="timeline-bar">📅 395年帝国分裂 → 1054年教会分裂 → 10世纪基辅罗斯接受基督教 → 1453年帝国灭亡</div>
+    <h3>拜占庭、俄罗斯文化</h3>
+    <ul>
+      <li><span class="kwd">拜占庭帝国</span>：395年罗马分裂，东罗马帝国（都城君士坦丁堡旧称拜占庭）</li>
+      <li><span class="kwd">东正教</span>：1054年基督教会分裂，东派教会称“东正教”，君士坦丁堡为中心</li>
+      <li><span class="kwd">《罗马民法大全》</span>：查士丁尼在位时编纂，传承罗马法，影响欧洲法学</li>
+      <li><span class="kwd">圣索菲亚大教堂</span>：君士坦丁堡，罗马式穹顶闻名</li>
+      <li><span class="kwd">俄罗斯文化</span>：10世纪基辅罗斯接受基督教，<span class="kwd">《伊戈尔远征记》</span>（12世纪，最杰出文学作品）</li>
+      <li>东正教中心转移至俄罗斯，塔式教堂为东正教象征</li>
+    </ul>
+
+    <!-- ② 填空填词 -->
+    <div class="challenge-title">🎮 挑战二：填写关键词</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 395年罗马帝国分裂为东西两部分，东罗马帝国又称<input class="fill-input" data-answer="拜占庭帝国" placeholder="？"></div>
+      <div class="fill-blank-row">2. 1054年基督教会分裂，东派教会称<input class="fill-input" data-answer="东正教" placeholder="？"></div>
+      <div class="fill-blank-row">3. 查士丁尼在位时编纂的<input class="fill-input" data-answer="《罗马民法大全》" placeholder="？">是拜占庭文化的标志性成就</div>
+      <div class="fill-blank-row">4. 君士坦丁堡的<input class="fill-input" data-answer="圣索菲亚大教堂" placeholder="？">以罗马式穹顶闻名</div>
+      <div class="fill-blank-row">5. 基辅罗斯时期最杰出的文学作品是<input class="fill-input" data-answer="《伊戈尔远征记》" placeholder="？"></div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：点击标注欧洲文化重要中心</div>
+    <div class="map-zone" id="mapContainer">
+      <svg viewBox="0 0 440 260" style="width:100%;height:auto;background:#f5f1e8;border-radius:12px;">
+        <!-- 欧洲轮廓示意 -->
+        <path d="M80,60 L100,40 L140,25 L180,20 L220,25 L260,35 L300,50 L340,70 L360,100 L350,130 L330,160 L300,180 L260,190 L220,195 L180,190 L140,180 L110,160 L90,130 L75,100 Z" fill="#d4d0c8" stroke="#999" stroke-width="1.5"/>
+        <path d="M120,30 L140,15 L180,10 L220,12 L250,20 L240,35 L210,30 L170,25 L130,30 Z" fill="#c8c4ba" stroke="#999" stroke-width="1.5"/>
+        <!-- 标注点 -->
+        <circle class="map-marker" data-point="pt-athens" cx="180" cy="80" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-rome" cx="150" cy="140" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-constantinople" cx="250" cy="110" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-moscow" cx="310" cy="70" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-kiev" cx="280" cy="90" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <!-- 标签 -->
+        <text x="168" y="72" font-size="9" fill="#333" font-weight="700">雅典</text>
+        <text x="138" y="134" font-size="9" fill="#333" font-weight="700">罗马</text>
+        <text x="235" y="102" font-size="9" fill="#333" font-weight="700">君士坦丁堡</text>
+        <text x="298" y="62" font-size="9" fill="#333" font-weight="700">莫斯科</text>
+        <text x="268" y="82" font-size="9" fill="#333" font-weight="700">基辅</text>
+      </svg>
+      <div class="map-instruction">💡 点击紫色圆点标注欧洲文化中心</div>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-athens">雅典</span>
+        <span class="map-check-item" data-point="pt-rome">罗马</span>
+        <span class="map-check-item" data-point="pt-constantinople">君士坦丁堡</span>
+        <span class="map-check-item" data-point="pt-moscow">莫斯科</span>
+        <span class="map-check-item" data-point="pt-kiev">基辅</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《罗马民法大全》</div><div class="flash-back">查士丁尼在位时编纂，传承罗马法，对欧洲法学思想和法律制度影响深远。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">圣索菲亚大教堂</div><div class="flash-back">君士坦丁堡，以其罗马式穹顶闻名，是拜占庭建筑艺术的代表。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">《伊戈尔远征记》</div><div class="flash-back">12世纪创作，反映古代斯拉夫民族历史传说，基辅罗斯最杰出文学作品。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">东正教</div><div class="flash-back">1054年教会分裂后形成，拜占庭帝国国教，后中心转移至俄罗斯。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·中频</span> 拜占庭文化常以<span class="kwd">综合类</span>选择题考查，《罗马民法大全》是罗马法传承的关键。
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 2 — 重难点解析（v3.0.1 深化固化） -->
+<!-- ============================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重难点一：古希腊三大哲人的思想贡献 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔑 重难点一：古希腊三大哲人的思想贡献</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 三大哲人的核心思想</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>苏格拉底、柏拉图、亚里士多德被后世称为“古希腊三大哲人”，是西方哲学的奠基者。苏格拉底以对话法探讨人生伦理；柏拉图创建学园，融会哲学与数学；亚里士多德是百科全书式学者，著作涵盖各领域。</p>
+          <p><strong>核心贡献：</strong>苏格拉底——“认识你自己”；柏拉图——“理念论”；亚里士多德——“逻辑学”与“形而上学”。</p>
+          <p><strong>简而言之：</strong>三大哲人完成了古希腊哲学从“自然哲学”向“人的哲学”的转向，奠定了西方理性主义传统和科学思维的基础。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 三大哲人的师承与影响</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>苏格拉底→柏拉图（师徒）→亚里士多德（师徒），形成了西方哲学史上最著名的师承链条。柏拉图重视“理念世界”，亚里士多德则更注重经验观察，二者奠定了西方哲学“理性主义”与“经验主义”两大传统。</p>
+          <p><strong>纵向联系：</strong>三大哲人的思想通过拜占庭帝国和阿拉伯世界保存，经中世纪经院哲学（托马斯·阿奎那）传承，最终为文艺复兴和近代科学革命提供了思想资源。</p>
+          <p><strong>这一联系说明：</strong>三大哲人的思想之所以影响深远，不仅在于其原创性，更在于其被后世不断“重新发现”和“重新解释”——每一次文化复兴都从他们那里汲取营养。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析希腊哲学繁荣的原因</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“古希腊哲学产生于希腊人对宇宙起源和人生意义等自然和社会问题的知识追求，古希腊哲学家力图用理性的思维方式认识世界和解释世界。”——统编版教材</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 古希腊哲学繁荣的深层原因是<b>城邦民主政治和商品经济发展</b>。城邦中公民参与公共事务需要辩论和说服能力，推动了理性思维和逻辑学的发展；海外贸易和殖民活动扩大了希腊人的视野，激发了对外部世界的探索欲望。这体现了<b>社会存在决定社会意识</b>——城邦制度（上层建筑）和商业经济（经济基础）共同塑造了古希腊人“理性求知”的精神特质。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>结合所学，从唯物史观角度分析古希腊哲学繁荣的社会条件。（10分）</p>
+          <p><strong>答案：</strong>①城邦民主政治：公民参政需要理性辩论；②商品经济发展：商业活动促进思想交流；③殖民扩张：拓宽视野，激发求知欲；④奴隶制经济：为少数人从事哲学思考提供物质基础。</p>
+          <p><strong>解析：</strong>需从“政治—经济—社会”三维度分析，唯物史观强调经济基础的决定性作用。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点二：中古西欧王权与教权并立 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🔄 重难点二：中古西欧王权与教权并立的二元格局</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 王权与教权并立的形成</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>王权与教权并立是中古西欧独特的政治格局——世俗君主掌握行政权力，基督教会掌握精神权威，二者相互利用、竞争共存。</p>
+          <p><strong>关键事件：</strong>496年克洛维皈依基督教（王权借助教权合法性）；756年丕平献土（教会获得世俗领地，建立教皇国）；1054年教会分裂（东西方基督教正式分化）。</p>
+          <p><strong>简而言之：</strong>王权与教权并立是中古西欧“二元政治”的核心特征——国王管“现世”，教皇管“灵魂”，二者在合作与斗争中共同塑造了西欧的政治文化。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 二元格局的文化影响</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>与拜占庭“政教合一”（皇帝兼教会最高领袖）不同，西欧的“二元格局”使王权与教权相互制约，为后来“有限政府”和“法治”观念提供了历史土壤。</p>
+          <p><strong>纵向联系：</strong>二元格局→经院哲学（用理性论证信仰）→文艺复兴（人文主义挑战教会权威）→宗教改革（打破教会垄断）→近代政教分离，构成了西欧从“神权”到“人权”的演进链条。</p>
+          <p><strong>这一联系说明：</strong>中古西欧的“二元格局”虽源于权力斗争，却在客观上为思想自由留下了空间——当王权和教权都不能完全压制对方时，新的思想便有了生长缝隙。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析基督教的文化控制</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“基督教会控制着西欧社会的精神生活。基督教文化的载体是阐述教义的《圣经》以及研究教义的神学。神学家用形式逻辑论证基督教教义，维护基督教会和封建主的统治。”——统编版教材</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 基督教会在中古西欧的精神垄断，本质上是<b>封建统治阶级维护统治的思想工具</b>。教会利用“原罪”“救赎”等教义教化民众服从世俗统治，同时利用《圣经》和神学垄断知识解释权。这体现了<b>上层建筑对经济基础的反作用</b>——封建经济需要稳定的统治秩序，基督教提供了这种秩序的精神合法性。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>阅读材料，结合所学，分析中古西欧基督教会在社会生活中的作用。（12分）</p>
+          <p><strong>答案：</strong>①精神控制：垄断《圣经》解释权；②政治影响：王权与教权并立；③文化传承：保存古希腊罗马典籍；④社会服务：修道院提供教育和医疗；⑤思想束缚：压制“异端”思想。</p>
+          <p><strong>解析：</strong>需从“积极（保存文化）”和“消极（思想控制）”两方面辩证分析。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点三：拜占庭文化的传承与影响 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🌟 重难点三：拜占庭文化的传承与对俄罗斯的影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 拜占庭文化的“承上启下”</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>拜占庭文化是融合古希腊罗马文化、基督教文化和西亚北非文化的独特文明。它地处欧亚非三洲交界，是古典文化向中世纪欧洲传播的“桥梁”。</p>
+          <p><strong>标志性成就：</strong>查士丁尼《罗马民法大全》（传承罗马法）、圣索菲亚大教堂（建筑艺术）、保存大量希腊古典书籍。</p>
+          <p><strong>简而言之：</strong>拜占庭文化是“古典文明的保存者”和“东正教文明的塑造者”——它既守护了希腊罗马的遗产，又为斯拉夫世界提供了宗教信仰和文化范式。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 东正教与俄罗斯文化</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>西欧中世纪以天主教文化为特征，东欧（俄罗斯）以东正教文化为特征。二者同源（基督教）但异流——天主教教皇至上，东正教强调“皇帝—教会”合一，形成了不同的政治文化传统。</p>
+          <p><strong>纵向联系：</strong>10世纪基辅罗斯接受基督教（东派）→拜占庭灭亡后东正教中心转移至莫斯科→东正教成为俄罗斯专制统治的工具→塔式教堂成为东正教象征。</p>
+          <p><strong>这一联系说明：</strong>宗教不仅是信仰体系，更是文明形态的塑造者。东正教为俄罗斯提供了文字（基里尔字母）、艺术（圣像画/塔式教堂）和政治理念（“第三罗马”），深刻塑造了俄罗斯的民族认同。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析拜占庭的地理优势</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“由于地处欧、亚、非三洲交界处，拜占庭帝国继承了古代希腊、罗马文化，融汇了基督教文化和来自西亚、北非的文化，形成了独具一格的拜占庭文化。”——统编版教材</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 拜占庭文化的“独特性”根源于其<b>优越的地理位置和商业地位</b>。君士坦丁堡扼守黑海与地中海之间的要道，是东西方贸易的枢纽。繁荣的商业经济为文化发展提供了物质基础，多元的商贸往来带来了多元的文化资源。这体现了<b>地理环境对文明发展的深刻影响</b>——一个文明的地理位置决定了其可接触的文化资源，进而塑造了其文化的开放性和包容性。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>结合所学，分析拜占庭帝国的地理位置对其文化发展的影响。（10分）</p>
+          <p><strong>答案：</strong>①欧亚非三洲交界→多元文化交融（希腊罗马/基督教/西亚北非）；②商贸枢纽→经济繁荣支撑文化发展；③桥头堡位置→成为古典文化向斯拉夫世界传播的中转站；④政治中心→君士坦丁堡成为东正教中心和文明象征。</p>
+          <p><strong>解析：</strong>需从“地理→经济→文化”三层递进分析。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·中频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 3 — 教材栏目解答 -->
+<!-- ============================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('学习聚焦',this)">学习聚焦</button>
+    <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+    <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+    <button class="filter-chip" onclick="filterCol('思考点',this)">思考点</button>
+    <button class="filter-chip" onclick="filterCol('探究与拓展',this)">探究与拓展</button>
+  </div>
+
+  <!-- 学习聚焦 1 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦 · 古希腊罗马文化的深远影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>古希腊、罗马创造的灿烂的文化，对欧洲文化的形成产生了深远影响。</p>
+      <div class="a" id="ans-p3-focus1">
+        <strong>📝 要点解析：</strong>“灿烂”强调古希腊罗马在哲学、文学、史学、法律、建筑等领域的卓越成就；“深远影响”指其通过拜占庭、阿拉伯、中世纪教会三条路径传承，成为文艺复兴、启蒙运动的思想源头。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 学思之窗：亚里士多德《诗学》论悲剧 -->
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 学思之窗 · 亚里士多德论悲剧</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“悲剧是对于一个严肃、完整、有一定长度的行动的摹仿；它的媒介是语言，具有各种悦耳之音，分别在剧的各部分使用；摹仿方式是借人物的动作来表达，而不是采用叙述法；借引起怜悯与恐惧来使这种情感得到陶冶。”——[古希腊]亚里士多德著，罗念生译《诗学》</p>
+      <p><strong>问题：</strong>从亚里士多德对悲剧的定义中了解古希腊戏剧的表演形式和教育功能。</p>
+      <div class="a" id="ans-p3-think1">
+        <p><strong>📝 参考答案：</strong></p>
+        <p>①<strong>表演形式</strong>：用语言和音乐，通过人物动作表达，而非叙述；②<strong>内容特征</strong>：严肃、完整、有一定长度（区别于喜剧）；③<strong>教育功能</strong>：“借引起怜悯与恐惧来使这种情感得到陶冶”——通过观众对悲剧人物的共情，达到情感净化（卡塔西斯）和道德教化的目的。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 历史纵横：骑士文学和市民文学 -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🧠 历史纵横 · 骑士文学和市民文学</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>骑士文学大多反映骑士阶层的道德和理想。抒情诗和叙事诗是骑士文学的重要组成部分。抒情诗的爱情主题是对教会禁欲主义的挑战。叙事诗主要颂扬国王的武功伟业和骑士英雄的传奇。歌颂骑士英雄罗兰的《罗兰之歌》是骑士文学的代表作。市民文学主要叙述市民家庭的爱情生活和悲欢离合，并抨击贵族的不体和教士的贪婪。市民文学体裁多样，有寓言、诗歌和戏剧等，代表作有《列那狐的故事》。</p>
+      <div class="a" id="ans-p3-history1">
+        <strong>📝 要点归纳：</strong>①骑士文学：歌颂骑士英雄，抒情诗挑战禁欲主义；②《罗兰之歌》：骑士文学代表作；③市民文学：反映市民生活，抨击贵族和教士；④《列那狐的故事》：市民文学代表作，寓言体；⑤两类文学反映了中古西欧社会从封建骑士向城市市民的转型。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-history1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 学习聚焦 2 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦 · 中古西欧基督教文化</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>在中古时期，西欧地区形成了以基督教文化为特征的地域文化。</p>
+      <div class="a" id="ans-p3-focus2">
+        <strong>📝 要点解析：</strong>“以基督教文化为特征”强调基督教是西欧中世纪文化的核心——从《圣经》到神学，从骑士文学到建筑艺术，无不打上基督教烙印。“地域文化”指区别于拜占庭东正教文化、伊斯兰文化等，西欧形成了独特的拉丁基督教文化圈。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 思考点：拜占庭地理位置 -->
+  <div class="col-box" data-cat="思考点">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 思考点 · 拜占庭地理位置对文化的影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>拜占庭帝国的地理位置对拜占庭文化的发展有何重要影响？</p>
+      <div class="a" id="ans-p3-think2">
+        <strong>📝 参考答案：</strong>①地处欧亚非三洲交界，有利于多元文化交流融合（希腊罗马+基督教+西亚北非）；②君士坦丁堡扼守黑海与地中海要道，商业繁荣为文化提供物质基础；③成为古典文化向斯拉夫世界传播的中转站；④地理位置使其成为东西方文明的交汇点，形成了独具特色的拜占庭文化。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think2')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 学习聚焦 3 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦 · 东正教文明区域</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>随着拜占庭帝国的兴衰和俄罗斯的崛起，在欧洲东部形成了东正教文明区域。</p>
+      <div class="a" id="ans-p3-focus3">
+        <strong>📝 要点解析：</strong>“拜占庭兴衰”指其传承古典文化并最终灭亡（1453年）；“俄罗斯崛起”指莫斯科公国继承东正教中心地位；“东正教文明区域”指包括希腊、巴尔干、俄罗斯等在内的东正教文化圈，与西欧天主教文化圈形成鲜明对照。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus3')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 学习拓展 1 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔬 学习拓展 · 古典与中古欧洲文化的联系与区别</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>结合所学，想一想：古典希腊文化、罗马文化与中古时期的欧洲文化有哪些联系和区别？</p>
+      <div class="a" id="ans-p3-explore1">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>联系：</strong>①中古西欧继承了古希腊罗马的哲学、法律和科学知识传统；②基督教会保存和传播了古典文化；③经院哲学继承了古希腊的理性思维方式；④罗马法为中古西欧法律制度提供了基础。</p>
+        <p><strong>区别：</strong>①古典文化以人为本（人文主义），中古文化以神为本（基督教神学）；②古典文化多元开放（多神教/城邦），中古文化一神独尊（基督教）；③古典文化崇尚理性，中古文化强调信仰；④古典文化在政治上以城邦/帝国为特征，中古文化以封建制和教权为特征。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 学习拓展 2：希罗多德与司马迁比较 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔬 学习拓展 · 希罗多德与司马迁的史学传统</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>希罗多德在《历史》第一卷开头语中说：“在这里发表出来的，乃是哈利卡尔那索斯人希罗多德的研究成果，他所以要把这些研究成果发表出来，是为了保存人类的历史，使之不致由于年深日久而被人们遗忘……特别是为了把他们发生纷争的原因给记载下来。”司马迁在《史记》撰写宗旨中说：“究天人之际，通古今之变，成一家之言。”</p>
+      <p><strong>问题：</strong>比较希罗多德《历史》和司马迁《史记》的撰写宗旨，思考东西方史学传统之异同。</p>
+      <div class="a" id="ans-p3-explore2">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>相同点：</strong>①都重视历史记载的“保存”功能；②都关注历史事件的“原因”分析；③都追求“真实”的历史记录；④都体现了史家的使命感。</p>
+        <p><strong>不同点：</strong>①希罗多德强调“保存人类的功业”和“纷争的原因”，注重<b>事件因果</b>；司马迁强调“通古今之变”“成一家之言”，注重<b>历史规律</b>和<b>个人见解</b>；②希罗多德偏向“叙事史”，司马迁偏向“以史为鉴”；③希罗多德有“研究”意识，司马迁有“究天人之际”的哲学高度。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore2')">📝 查看参考答案</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 4 — 课堂训练（v3.0.2 固化版） -->
+<!-- ============================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 被后世称为“百科全书式学者”的古希腊哲学家是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 苏格拉底</label>
+      <label onclick="optClick(this,'B','q1')">B. 柏拉图</label>
+      <label onclick="optClick(this,'C','q1')">C. 亚里士多德</label>
+      <label onclick="optClick(this,'D','q1')">D. 希罗多德</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：亚里士多德著作涵盖哲学、政治学、文学、天文学、物理学等，故称“百科全书式学者”。<br>
+      ❌ 排除A：苏格拉底以探讨人生伦理著称；<br>
+      ❌ 排除B：柏拉图以理念论和学园著称；<br>
+      ❌ 排除D：希罗多德是史学家，非哲学家。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 古罗马第一部成文法《十二铜表法》颁布于（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 公元前509年</label>
+      <label onclick="optClick(this,'B','q2')">B. 公元前450年</label>
+      <label onclick="optClick(this,'C','q2')">C. 公元前27年</label>
+      <label onclick="optClick(this,'D','q2')">D. 公元476年</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：《十二铜表法》颁布于公元前450年左右，是古罗马第一部成文法。<br>
+      ❌ 排除A：罗马共和国建立时间；<br>
+      ❌ 排除C：罗马帝国建立时间；<br>
+      ❌ 排除D：西罗马帝国灭亡时间。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 中古西欧“王权与教权并立”格局的形成，与下列哪一事件直接相关（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 西罗马帝国灭亡</label>
+      <label onclick="optClick(this,'B','q3')">B. 克洛维皈依基督教</label>
+      <label onclick="optClick(this,'C','q3')">C. 丕平献土</label>
+      <label onclick="optClick(this,'D','q3')">D. 以上都是</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：D<br>
+      📌 解题思路：西罗马灭亡为日耳曼人建国创造条件；克洛维皈依使王权获得教会支持；丕平献土使教会获得世俗权力。三者共同促成了王权与教权并立的格局。<br>
+      ❌ 排除A、B、C：均为片面选项。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 查士丁尼在位时编纂的《罗马民法大全》对后世最重要的贡献是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 确立了基督教为国教</label>
+      <label onclick="optClick(this,'B','q4')">B. 传承了罗马法，影响欧洲法学</label>
+      <label onclick="optClick(this,'C','q4')">C. 建立了东正教神学体系</label>
+      <label onclick="optClick(this,'D','q4')">D. 创造了拜占庭建筑风格</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：《罗马民法大全》是罗马法的集大成者，对欧洲法学思想和法律制度产生了深远影响。<br>
+      ❌ 排除A：基督教为国教是狄奥多西一世确立；<br>
+      ❌ 排除C：东正教神学体系是逐步形成的；<br>
+      ❌ 排除D：建筑风格是圣索菲亚大教堂的贡献。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 拜占庭帝国在文化上的独特地位在于（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 只保存了希腊文化</label>
+      <label onclick="optClick(this,'B','q5')">B. 只发展了基督教文化</label>
+      <label onclick="optClick(this,'C','q5')">C. 融合了古希腊罗马、基督教及西亚北非文化</label>
+      <label onclick="optClick(this,'D','q5')">D. 完全拒绝了西亚北非文化的影响</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：拜占庭地处欧亚非三洲交界，继承了古希腊罗马文化，融汇了基督教和西亚北非文化，形成独具一格的拜占庭文化。<br>
+      ❌ 排除A、B：片面，排除D：与史实相反。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题 1（高难度·唯物史观升华）— 不计分 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p><strong>材料一：</strong>“古希腊哲学产生于希腊人对宇宙起源和人生意义等自然和社会问题的知识追求，古希腊哲学家力图用理性的思维方式认识世界和解释世界。”——统编版教材</p>
+      <p><strong>材料二：</strong>亚里士多德是“百科全书式的学者”，其著作对欧洲科学知识系统的形成产生了重要影响。</p>
+    </div>
+    <div class="q-text">（1）材料一反映了古希腊哲学的什么特征？（2分）</div>
+    <div class="q-text">（2）材料二中“百科全书式的学者”如何理解？（4分）</div>
+    <div class="q-text">（3）从唯物史观角度，分析古希腊哲学繁荣的社会条件。（6分）</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>反映了古希腊哲学以理性思维认识世界、追求知识的特征。（2分）</p>
+      <p><strong>（2）</strong>亚里士多德的著作涵盖哲学、政治学、文学、天文学、物理学等多个领域，知识广博，体系完整，因此被称作“百科全书式的学者”。（4分）</p>
+      <p><strong>（3）</strong>①<strong>经济基础</strong>：奴隶制经济为少数人从事哲学思考提供物质条件；②<strong>政治条件</strong>：城邦民主政治需要公民具备理性辩论能力；③<strong>社会条件</strong>：商品经济发展和海外殖民拓展了希腊人的视野，激发了求知欲。这体现了<b>社会存在决定社会意识</b>——经济和政治条件共同塑造了古希腊理性求知的文化传统。（6分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 2（中难度）— 不计分 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>“悲剧是对于一个严肃、完整、有一定长度的行动的摹仿……借引起怜悯与恐惧来使这种情感得到陶冶。”——亚里士多德《诗学》</p>
+    </div>
+    <div class="q-text">（1）亚里士多德认为悲剧的教育功能是什么？（2分）</div>
+    <div class="q-text">（2）结合所学，概括古希腊古典时代的文化成就。（4分）</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>通过引起观众的怜悯与恐惧，使情感得到净化（陶冶），达到道德教化的目的。（2分）</p>
+      <p><strong>（2）</strong>①哲学：苏格拉底、柏拉图、亚里士多德三大哲人；②文学：《荷马史诗》和雅典戏剧（悲剧/喜剧）；③史学：希罗多德《历史》、修昔底德《伯罗奔尼撒战争史》；④艺术：米隆《掷铁饼者》、帕特农神庙。（每点1分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 3（中难度）— 不计分 -->
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>“拜占庭帝国继承了古代希腊、罗马文化，融汇了基督教文化和来自西亚、北非的文化，形成了独具一格的拜占庭文化。”——统编版教材</p>
+    </div>
+    <div class="q-text">（1）拜占庭文化的来源有哪些？（2分）</div>
+    <div class="q-text">（2）拜占庭文化对俄罗斯文化有何影响？（4分）</div>
+    <div class="a" id="ans-p4-mat3">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>来源：古希腊罗马文化、基督教文化、西亚北非文化。（2分）</p>
+      <p><strong>（2）</strong>①10世纪基辅罗斯接受基督教（东派），进入基督教文化圈；②东正教成为俄罗斯的国教，影响其宗教信仰；③拜占庭的建筑风格（穹顶、塔式）影响俄罗斯教堂建筑；④拜占庭灭亡后东正教中心转移至莫斯科，深刻塑造了俄罗斯文化。（每点1分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 5 — 知识结构图 -->
+<!-- ============================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 欧洲文化的形成</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🏛️</span><strong>古典希腊罗马</strong>
+        <p>三大哲人 · 《荷马史诗》 · 《十二铜表法》 · 万神殿</p>
+        <div class="kg-detail"><p>📌 高考常考：三大哲人思想、《十二铜表法》的深远影响。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">⛪</span><strong>中古西欧文化</strong>
+        <p>王权教权并立 · 《圣经》 · 骑士文学 · 市民文学</p>
+        <div class="kg-detail"><p>📌 高考常考：二元政治格局、《罗兰之歌》《列那狐的故事》。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">☦️</span><strong>拜占庭与俄罗斯</strong>
+        <p>《罗马民法大全》 · 东正教 · 圣索菲亚 · 塔式教堂</p>
+        <div class="kg-detail"><p>📌 高考常考：拜占庭的“桥梁”作用、东正教对俄罗斯的塑造。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌍</span><strong>文化传承逻辑</strong>
+        <p>保存→融合→传播→转型</p>
+        <div class="kg-detail"><p>🚀 欧洲文化的形成是“古典遗产+中世纪塑造+多元融合”的结果。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 希腊：理性·民主·哲学</div>
+      <div class="kg-rule r2">🟠 罗马：法律·建筑·历法</div>
+      <div class="kg-rule r3">🟢 中古：信仰·文学·二元</div>
+      <div class="kg-rule r4">🔴 东欧：东正·传承·融合</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 6 — 结束页 -->
+<!-- ============================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第二单元 · 丰富多样的世界文化</div>
+    <h1 style="font-size:22pt;">第4课 · 欧洲文化的形成</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>古典希腊罗马</h3>
+        <ul>
+          <li><strong>三大哲人</strong>：苏格拉底·柏拉图·亚里士多德</li>
+          <li><strong>文学</strong>：《荷马史诗》·雅典戏剧</li>
+          <li><strong>法律</strong>：《十二铜表法》·罗马法</li>
+          <li><strong>建筑</strong>：万神殿·大竞技场</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>中古西欧文化</h3>
+        <ul>
+          <li><strong>二元格局</strong>：王权与教权并立</li>
+          <li><strong>基督教</strong>：《圣经》·神学·阿奎那</li>
+          <li><strong>骑士文学</strong>：《罗兰之歌》</li>
+          <li><strong>市民文学</strong>：《列那狐的故事》</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>拜占庭·俄罗斯</h3>
+        <ul>
+          <li><strong>拜占庭</strong>：《罗马民法大全》·圣索菲亚</li>
+          <li><strong>东正教</strong>：1054年分裂·中心转移</li>
+          <li><strong>俄罗斯</strong>：《伊戈尔远征记》·塔式教堂</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <div class="bottom-nav">
+    <div><a href="选必3-U2-第3课 古代西亚、非洲文化.html">← 上一课：第3课</a></div>
+    <div class="nav-center">第4课</div>
+    <div><a href="选必3-U2-第5课 南亚、东亚与美洲的文化.html">下一课：第5课 →</a></div>
+  </div>
+
+
+  <footer>
+    <p>统编版高中历史 · 文化交流与传播（选必三） · 第二单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================== -->
+<!-- 底部翻页导航 -->
+<!-- ============================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================== -->
+<!-- JavaScript -->
+<!-- ============================== -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); nextPage(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); prevPage(); }
+  else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题（含自动显示解析） =====
+var correctAnswers = { q1:'C', q2:'B', q3:'D', q4:'B', q5:'C' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+  document.querySelectorAll('.ans-btn').forEach(function(b) {
+    if (b.textContent.indexOf('隐藏') === -1) return;
+    b.textContent = b.textContent.replace('隐藏答案','显示答案');
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序 IIFE =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key2','key3','key4','key5'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    el.style.borderColor = '#e74c3c';
+    setTimeout(function() { el.style.borderColor = ''; }, 500);
+  }
+}
+
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

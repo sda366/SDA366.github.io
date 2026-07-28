@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2课 中华文化的世界意义</title>
+<style>
+/* ========== CSS 变量与全局 ========== */
+:root {
+  --primary: #7c6cf0; --primary-dark: #3d2b8c; --primary-light: #b3a8ff;
+  --bg: #f5f3ff; --bg-card: #faf8ff; --border: #dcd4f5;
+  --green: #27ae60; --red: #e74c3c; --orange: #f39c12; --blue: #3498db; --purple: #8e44ad;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "SimHei","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size: 14pt; background: var(--bg); color: #333;
+  line-height: 1.75; max-width: 900px; margin: 0 auto;
+  padding: 0 20px 80px; overflow-x: hidden;
+}
+
+/* ========== 分页幻灯片系统 ========== */
+.page-slide { display: none; min-height: calc(100vh - 80px); padding-top: 10px; animation: slideIn 0.35s ease; }
+.page-slide.active { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-header { text-align:center; padding:14px 0 10px; margin-bottom:16px; border-bottom:2px solid var(--border); }
+.slide-header .module-num { font-size:12pt; color:var(--primary); font-weight:700; letter-spacing:2px; }
+.slide-header .module-title { font-size:18pt; color:var(--primary-dark); font-weight:700; margin-top:4px; }
+
+/* ========== 底部翻页导航栏 ========== */
+.pg-nav {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#fff; box-shadow:0 -2px 16px rgba(124,108,240,0.12);
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 16px; height:52px;
+}
+.pg-nav button {
+  background:var(--primary); color:#fff; border:none; border-radius:18px;
+  padding:6px 16px; font-size:13pt; cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.pg-nav button:hover { background:#5a4ac7; transform:scale(1.05); }
+.pg-nav button:disabled { background:#ccc; cursor:not-allowed; transform:none; }
+.pg-nav .pg-dots { display:flex; gap:8px; align-items:center; }
+.pg-nav .pg-dot { width:12px; height:12px; border-radius:50%; background:#dcd4f5; cursor:pointer; transition:all 0.25s; }
+.pg-nav .pg-dot.active { background:var(--primary); transform:scale(1.3); }
+.pg-nav .pg-dot:hover:not(.active) { background:var(--primary-light); }
+.pg-nav .pg-counter { font-size:13pt; font-weight:700; color:var(--primary-dark); min-width:40px; text-align:center; }
+
+/* ========== Hero & 封面 ========== */
+.hero-wrap { background:linear-gradient(135deg,#3d2b8c,#5a4ac7,#7c6cf0); padding:36px 20px 30px; text-align:center; color:#fff; border-radius:0 0 36px 36px; box-shadow:0 6px 30px rgba(61,43,140,0.20); margin:0 -20px 28px; }
+.hero-wrap .hero-unit { font-size:13pt; opacity:0.82; letter-spacing:2px; font-weight:300; margin-bottom:10px; }
+.hero-wrap h1 { font-size:26pt; margin:10px 0 8px; font-weight:700; letter-spacing:3px; color:#fff; }
+.hero-wrap .hero-sub { font-size:14pt; opacity:0.85; letter-spacing:2px; font-weight:300; }
+
+.learn-target { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:20px 24px; margin-bottom:24px; border:1px solid var(--border); }
+.learn-target h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:12px; }
+.learn-target .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.learn-target .target-item { font-size:13.5pt; padding:6px 8px; border-bottom:1px dashed var(--border); cursor:pointer; transition:all 0.2s; border-radius:6px; }
+.learn-target .target-item:hover { background:rgba(124,108,240,0.08); }
+.learn-target .target-item.done { opacity:0.45; text-decoration:line-through; color:#999; background:rgba(39,174,96,0.06); }
+
+.start-btn { display:block; margin:20px auto 10px; background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; border:none; border-radius:24px; padding:12px 36px; font-size:16pt; font-weight:700; cursor:pointer; transition:all 0.25s; box-shadow:0 4px 14px rgba(124,108,240,0.30); }
+.start-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(124,108,240,0.40); }
+
+/* ========== 标签页 & Page1 ========== */
+.tab-bar { display:flex; gap:0; margin-bottom:0; border-radius:12px 12px 0 0; overflow:hidden; }
+.tab-btn { flex:1; padding:14px 8px; font-size:14pt; font-weight:700; border:none; cursor:pointer; text-align:center; transition:all 0.25s; background:#e8e0ff; color:#5a4ac7; letter-spacing:1px; }
+.tab-btn.active { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; }
+.tab-btn:hover:not(.active) { background:#d5cef0; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+.stage-progress-wrap { background:#e8e0ff; border-radius:10px; padding:10px 14px; margin-bottom:16px; }
+.stage-progress-bar-bg { background:#fff; border-radius:6px; height:8px; overflow:hidden; margin:6px 0; }
+.stage-progress-bar-fill { background:linear-gradient(90deg,#7c6cf0,#5a4ac7); height:100%; border-radius:6px; transition:width 0.5s ease; width:0%; }
+.stage-progress-text { display:flex; justify-content:space-between; font-size:11pt; color:#888; }
+.stage-progress-text strong { color:var(--primary-dark); }
+
+.challenge-title { text-align:center; font-size:14pt; font-weight:700; color:var(--primary-dark); margin:10px 0; padding:8px; background:#f0edff; border-radius:10px; }
+
+/* 时间轴、知识卡片、贯通框 */
+.timeline-bar { background:#f0edff; border-radius:8px; padding:8px 16px; font-size:12pt; color:#5a4ac7; text-align:center; margin-bottom:12px; letter-spacing:1px; }
+.kp-card { background:var(--bg-card); border-left:4px solid var(--primary); border-radius:0 10px 10px 0; padding:18px 22px; margin-bottom:20px; box-shadow:0 2px 8px rgba(124,108,240,0.08); }
+.kp-card h3 { color:var(--primary-dark); font-size:16pt; margin-bottom:10px; }
+.kp-card ul { padding-left:22px; } .kp-card li { margin:6px 0; font-size:14pt; }
+.link-bar { border:2px dashed #d5cef0; border-radius:10px; padding:12px 16px; margin-top:14px; background:#faf8ff; font-size:13pt; color:#5a4ac7; }
+.kwd { background:#ffeb3b; padding:1px 4px; border-radius:3px; }
+.tag-gaokao { background:#f39c12; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-value { background:#e74c3c; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+.tag-soc { background:#3498db; color:#fff; border-radius:12px; padding:2px 10px; font-size:11pt; display:inline-block; margin-right:4px; }
+
+/* ========== 手风琴组 ========== */
+.acc-group { margin-bottom:16px; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.acc-group-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 22px; cursor:pointer; user-select:none; transition:all 0.25s; }
+.acc-group-hd.pt1 { background:linear-gradient(135deg,#3498db,#5dade2); }
+.acc-group-hd.pt2 { background:linear-gradient(135deg,#e67e22,#f0ad4e); }
+.acc-group-hd.pt3 { background:linear-gradient(135deg,#8e44ad,#a569bd); }
+.acc-group-hd h3 { color:#fff; font-size:15pt; margin:0; }
+.acc-group-hd .acc-arrow { color:#fff; font-size:18pt; transition:transform 0.3s; }
+.acc-group.open .acc-arrow { transform:rotate(180deg); }
+.acc-group-bd { display:none; background:#fff; border:1px solid #eee; border-top:none; }
+.acc-group.open .acc-group-bd { display:block; }
+.acc-mastered { display:flex; justify-content:flex-end; padding:10px 22px; background:#faf8ff; border-top:1px solid #eee; }
+.acc-mastered button { background:var(--green); color:#fff; border:none; border-radius:16px; padding:6px 16px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.acc-mastered button:hover { transform:scale(1.05); }
+.acc-mastered button.done { background:#ccc; pointer-events:none; }
+
+/* ========== deep-card ========== */
+.deep-card { margin:10px 18px 10px; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.deep-card-hd { background:linear-gradient(135deg,#e67e22,#f0ad4e); color:#fff; padding:10px 16px; font-size:13.5pt; font-weight:700; cursor:pointer; user-select:none; }
+.deep-card-bd { display:none; background:#fff; padding:14px 18px; border:1px solid #eee; border-top:none; font-size:13pt; }
+.deep-card-bd.show { display:block; }
+
+/* ========== diff-table ========== */
+.diff-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13pt; }
+.diff-table th { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 12px; text-align:center; }
+.diff-table td { padding:8px 12px; border:1px solid var(--border); text-align:center; }
+.diff-table tr:nth-child(even) { background:#faf8ff; }
+
+/* ========== Page3 栏目筛选 ========== */
+.filter-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.filter-chip { padding:6px 14px; border:2px solid var(--border); border-radius:20px; background:#fff; font-size:12pt; cursor:pointer; transition:all 0.2s; font-weight:600; color:#5a4ac7; }
+.filter-chip:hover { border-color:var(--primary); background:#f0edff; }
+.filter-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+.col-box { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 8px rgba(124,108,240,0.06); transition:all 0.3s; }
+.col-box.filtered-out { display:none; }
+.col-header { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; padding:10px 20px; font-size:15pt; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.col-header .col-toggle { font-size:16pt; transition:transform 0.3s; }
+.col-box.open .col-toggle { transform:rotate(180deg); }
+.col-body { display:none; padding:16px 20px; background:#fff; font-size:13.5pt; }
+.col-box.open .col-body { display:block; }
+
+/* ========== Page4 课堂训练 ========== */
+.score-banner { background:linear-gradient(135deg,#f0edff,#e0daff); border-radius:12px; padding:14px 20px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border); }
+.score-number { font-size:22pt; font-weight:700; color:var(--primary-dark); }
+.score-reset { background:transparent; border:2px solid var(--primary); color:var(--primary); border-radius:16px; padding:4px 14px; font-size:12pt; cursor:pointer; transition:all 0.2s; }
+.score-reset:hover { background:var(--primary); color:#fff; }
+
+.exercise { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:18px; }
+.q-text { font-size:14pt; margin:10px 0 6px; }
+.options label { display:block; padding:8px 14px; margin:4px 0; border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:14pt; transition:all 0.2s; background:#faf8ff; }
+.options label:hover { background:#f0edff; border-color:var(--primary); }
+.options label.disabled { pointer-events:none; }
+.options label.correct { background:#d4efdf; border-color:var(--green); color:var(--green); font-weight:700; }
+.options label.wrong { background:#fadbd8; border-color:var(--red); color:var(--red); }
+
+.source-material { border-left:4px solid var(--primary); padding:8px 14px; margin:8px 0; background:#faf8ff; font-size:13pt; }
+.source-ref { text-align:right; color:#888; font-size:10pt; margin-bottom:8px; }
+
+.a { display:none; background:#f0edff; border:1px solid #d5cef0; border-radius:8px; padding:12px 16px; margin:10px 0; font-size:14pt; }
+.a.show { display:block; }
+.ans-btn { background:var(--primary); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:12pt; cursor:pointer; margin:6px 0; transition:all 0.2s; }
+.ans-btn:hover { transform:scale(1.05); background:#5a4ac7; }
+
+/* ========== 知识结构图 ========== */
+.kg-wrap-simple { background:#fff; border-radius:14px; padding:24px; max-width:700px; margin:0 auto; box-shadow:0 2px 12px rgba(124,108,240,0.08); }
+.kg-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:20px; }
+.kg-chain { display:flex; flex-direction:column; align-items:center; }
+.kg-node { width:90%; border-radius:12px; padding:16px 20px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.3s; position:relative; }
+.kg-node:hover { transform:scale(1.03); box-shadow:0 4px 20px rgba(124,108,240,0.25); }
+.kg-node:active { transform:scale(0.98); }
+.kg-node.left { align-self:flex-start; } .kg-node.right { align-self:flex-end; }
+.kg-node.c1 { background:#e8e0ff; border:2px solid #7c6cf0; }
+.kg-node.c2 { background:#fff3e0; border:2px solid #f0ad4e; }
+.kg-node.c3 { background:#e0f2e9; border:2px solid #27ae60; }
+.kg-node.c4 { background:#fdecea; border:2px solid #e74c3c; }
+.kg-node strong { display:block; font-size:14pt; margin:6px 0; }
+.kg-node p { font-size:12pt; color:#555; margin:4px 0; }
+.kg-icon { font-size:22pt; }
+.kg-arrow { font-size:20pt; color:var(--primary); margin:4px 0; }
+@keyframes kgPulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,0.06);}50%{box-shadow:0 2px 20px rgba(124,108,240,0.18);} }
+.kg-node.pulse { animation:kgPulse 3s ease-in-out infinite; }
+.kg-expand-badge { position:absolute; top:-10px; right:-8px; background:var(--primary); color:#fff; font-size:11pt; font-weight:600; padding:3px 10px 3px 8px; border-radius:12px; box-shadow:0 2px 8px rgba(124,108,240,0.35); white-space:nowrap; transition:all 0.3s; z-index:2; }
+.kg-expand-badge .badge-arrow { display:inline-block; margin-right:3px; transition:transform 0.3s; }
+.kg-node.expanded .kg-expand-badge { background:#27ae60; box-shadow:0 2px 8px rgba(39,174,96,0.35); }
+.kg-node.expanded .kg-expand-badge .badge-arrow { transform:rotate(180deg); }
+.kg-detail { max-height:0; overflow:hidden; font-size:12pt; color:#666; margin-top:0; padding-top:0; border-top:none; transition:all 0.4s ease; }
+.kg-node.expanded .kg-detail { max-height:300px; margin-top:8px; padding-top:8px; border-top:1px dashed #ddd; }
+.kg-node.expanded { animation:none; }
+.kg-hint-banner { background:linear-gradient(135deg,#e8e0ff,#f3e8ff); border:1.5px dashed var(--primary); border-radius:10px; padding:10px 18px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:13pt; font-weight:600; color:var(--primary-dark); }
+.kg-hint-banner .hint-click { display:inline-block; background:var(--primary); color:#fff; padding:2px 10px; border-radius:10px; font-size:12pt; margin:0 4px; }
+.kg-rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.kg-rule { padding:10px 14px; border-radius:10px; font-size:12.5pt; text-align:center; font-weight:600; }
+.kg-rule.r1 { background:#e8e0ff; color:#5a4ac7; }
+.kg-rule.r2 { background:#fff3e0; color:#e67e22; }
+.kg-rule.r3 { background:#e0f2e9; color:#27ae60; }
+.kg-rule.r4 { background:#fdecea; color:#e74c3c; }
+
+/* ========== 结束页 ========== */
+.recap-section { margin-bottom:24px; }
+.recap-title { text-align:center; font-size:17pt; font-weight:700; color:var(--primary-dark); margin-bottom:16px; }
+.recap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.recap-card { background:#fff; border-radius:14px; padding:20px 16px 14px; border:1px solid var(--border); box-shadow:0 3px 12px rgba(124,108,240,0.08); position:relative; text-align:left; }
+.recap-card-num { position:absolute; top:-12px; left:16px; width:28px; height:28px; border-radius:50%; background:var(--primary); color:#fff; font-size:14pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.recap-card h3 { font-size:14pt; font-weight:700; color:var(--primary-dark); margin:4px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--primary-light); }
+.recap-card ul { list-style:none; padding:0; }
+.recap-card ul li { font-size:12.5pt; line-height:1.7; padding:4px 0 4px 18px; position:relative; color:#444; }
+.recap-card ul li::before { content:'▸'; position:absolute; left:0; top:4px; color:var(--primary); font-size:10pt; }
+.recap-card ul li strong { color:var(--primary-dark); }
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; background:#fff; padding:14px 20px; margin:20px 0; border-radius:12px; box-shadow:0 2px 10px rgba(124,108,240,0.08); font-size:12pt; }
+.bottom-nav a { color:#5a4ac7; text-decoration:none; }
+.bottom-nav .nav-center { font-weight:700; color:var(--primary-dark); }
+
+footer { text-align:center; padding:20px 0 10px; border-top:2px solid var(--border); margin-top:24px; font-size:12pt; color:#999; }
+footer p { margin:4px 0; }
+
+/* ========== 五关交互专用 ========== */
+.sort-pool { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; justify-content:center; }
+.sort-item { padding:8px 16px; background:#fff; border:2px solid var(--primary); border-radius:10px; cursor:grab; font-weight:700; font-size:13pt; color:#5a4ac7; user-select:none; transition:all 0.2s; }
+.sort-item:active { cursor:grabbing; }
+.sort-item.dragging { opacity:0.35; }
+.sort-item.placed { background:#e0daff; cursor:default; pointer-events:none; opacity:0.6; }
+.sort-slots { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; justify-content:center; }
+.sort-slot { min-width:90px; min-height:46px; border:2px dashed #dcd4f5; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12pt; transition:all 0.2s; background:#faf8ff; position:relative; }
+.sort-slot.filled { border-style:solid; background:#f0edff; }
+.sort-slot.correct { border-color:var(--green); background:#d4efdf; }
+.sort-slot.wrong { border-color:var(--red); background:#fadbd8; }
+.sort-slot .slot-label { position:absolute; top:-20px; font-size:10pt; color:#999; white-space:nowrap; }
+.sort-check-btn { display:block; margin:10px auto; }
+.sort-result { display:none; text-align:center; padding:8px; border-radius:8px; margin-top:8px; font-weight:700; font-size:13pt; }
+.sort-result.show { display:block; }
+.sort-result.pass { background:#d4efdf; color:var(--green); border:1px solid var(--green); }
+.sort-result.fail { background:#fadbd8; color:var(--red); border:1px solid var(--red); }
+
+.fill-blank-wrap { margin:14px 0; }
+.fill-blank-row { display:flex; align-items:center; margin:8px 0; font-size:13pt; flex-wrap:wrap; gap:6px; }
+.fill-input { width:110px; padding:8px 12px; border:2px solid #dcd4f5; border-radius:8px; font-size:13pt; text-align:center; transition:all 0.2s; background:#faf8ff; }
+.fill-input:focus { border-color:var(--primary); outline:none; box-shadow:0 0 0 3px rgba(124,108,240,0.15); }
+.fill-input.correct { border-color:var(--green); background:#d4efdf; color:var(--green); font-weight:700; }
+.fill-input.wrong { border-color:var(--red); background:#fadbd8; color:var(--red); }
+
+.match-area { background:#faf8ff; border-radius:12px; padding:16px; margin:12px 0; border:1px solid var(--border); }
+.match-cols { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.match-col { display:flex; flex-direction:column; gap:8px; min-width:110px; }
+.match-col-label { text-align:center; font-weight:700; font-size:12pt; color:var(--primary-dark); margin-bottom:4px; }
+.match-item { padding:10px 14px; border-radius:10px; font-size:12pt; cursor:pointer; transition:all 0.2s; border:2px solid #dcd4f5; background:#fff; text-align:center; }
+.match-item.selected { border-color:var(--primary); background:#f0edff; box-shadow:0 0 0 3px rgba(124,108,240,0.2); }
+.match-item.matched { border-color:var(--green); background:#d4efdf; color:var(--green); cursor:default; opacity:0.75; }
+
+.map-zone { position:relative; width:100%; max-width:520px; margin:14px auto; background:#faf8ff; border:2px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.map-instruction { font-size:11pt; color:#888; margin-bottom:8px; }
+.map-marker { cursor:pointer; transition:all 0.2s; }
+.map-marker:hover { filter:brightness(0.9); }
+.map-checklist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.map-check-item { font-size:11pt; padding:4px 10px; border-radius:8px; background:#fff; border:1px solid var(--border); transition:all 0.2s; }
+.map-check-item.done { background:#d4efdf; border-color:var(--green); color:var(--green); }
+
+.flash-section { margin:18px 0; }
+.flash-section-title { text-align:center; font-size:13pt; color:var(--primary-dark); margin-bottom:10px; font-weight:700; }
+.flash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.flash-card { perspective:700px; height:140px; cursor:pointer; }
+.flash-inner { position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+.flash-card.flipped .flash-inner { transform:rotateY(180deg); }
+.flash-front, .flash-back { position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; font-size:11pt; text-align:center; }
+.flash-front { background:linear-gradient(135deg,#7c6cf0,#5a4ac7); color:#fff; font-weight:700; }
+.flash-back { background:#fff; color:#333; transform:rotateY(180deg); border:2px solid var(--primary); font-size:10.5pt; line-height:1.5; }
+
+.stage-done { display:none; background:linear-gradient(135deg,#d4efdf,#a9dfbf); border:2px solid var(--green); border-radius:14px; padding:14px 18px; margin:12px 0; text-align:center; font-size:14pt; font-weight:700; color:var(--green); animation:fadeInUp 0.4s ease; }
+.stage-done.show { display:block; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* ========== 响应式 ========== */
+@media (max-width:680px) {
+  .recap-grid { grid-template-columns:1fr; }
+  .flash-grid { grid-template-columns:1fr 1fr; }
+  .learn-target .target-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== -->
+<!-- PAGE 0 — 封面页 -->
+<!-- ============================== -->
+<div class="page-slide active" id="page0">
+  <div class="hero-wrap">
+    <div class="hero-unit">第一单元 · 源远流长的中华文化</div>
+    <h1>第2课 · 中华文化的世界意义</h1>
+    <div class="hero-sub">统编版高中历史  文化交流与传播（选必三）</div>
+  </div>
+
+  <div class="learn-target" id="learnTargets">
+    <h3>🎯 学习目标（点击标记已了解 → 闯关解锁知识要点）</h3>
+    <div class="target-grid">
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t1">📖 <strong>唯物史观：</strong>运用社会存在决定社会意识的原理，理解文化交流与文明互鉴的内在逻辑</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t2">🕐 <strong>时空观念：</strong>梳理佛教传入、西学东渐、中华文化外传的时间脉络与空间路径</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t3">📜 <strong>史料实证：</strong>通过《清史稿》《马克思恩格斯文集》等史料，理解中外文化交流的双向性</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t4">🔍 <strong>历史解释：</strong>阐释中华文化在“吸收—转化—输出”中保持生命力的历史逻辑</div>
+      <div class="target-item" onclick="toggleTarget(this)" data-id="t5">❤️ <strong>家国情怀：</strong>认识中华文化对人类文明的贡献，增强文化自信与文明互鉴意识</div>
+    </div>
+    <div class="stage-done" id="targetsDone">✅ 学习目标已全部了解，可以开始学习！</div>
+  </div>
+
+  <button class="start-btn" onclick="goPage(1)">📖 开始学习 →</button>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 1 — 知识要点 + 五关闯关 -->
+<!-- ============================== -->
+<div class="page-slide" id="page1">
+  <div class="slide-header">
+    <div class="module-num">模块一</div>
+    <div class="module-title">知识要点 · 闯关解锁</div>
+  </div>
+
+  <!-- 闯关进度条 -->
+  <div class="stage-progress-wrap">
+    <div class="stage-progress-text">
+      <span>🏆 学习进度</span><strong id="stageProgressLabel">0/5 关完成</strong>
+    </div>
+    <div class="stage-progress-bar-bg">
+      <div class="stage-progress-bar-fill" id="stageProgressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTabV2('tab1')">子目一 · 交流中发展</button>
+    <button class="tab-btn" onclick="switchTabV2('tab2')">子目二 · 对世界影响</button>
+    <button class="tab-btn" onclick="switchTabV2('tab3')">子目三 · 双向互鉴</button>
+  </div>
+
+  <!-- ====== TAB1 子目一：中华文化在交流中发展 ====== -->
+  <div class="kp-card tab-panel active" id="tab1">
+    <div class="timeline-bar">📅 两汉 → 魏晋隋唐 → 宋明 → 明末清初 → 19世纪 → 五四</div>
+    <h3>中华文化在交流中发展</h3>
+    <ul>
+      <li><span class="kwd">两汉之际</span>：佛教传入中国</li>
+      <li>魏晋南北朝：佛教日趋兴盛，<span class="kwd">儒佛道</span>相互融合</li>
+      <li>隋唐：佛教完成本土化，<span class="kwd">禅宗</span>成为主流</li>
+      <li><span class="kwd">宋明</span>：理学形成（以儒学为核心，兼容佛道）</li>
+      <li><span class="kwd">明末</span>：利玛窦等来华，徐光启等会通中西，《几何原本》等译介</li>
+      <li><span class="kwd">清初</span>：汤若望、南怀仁主持钦天监</li>
+      <li>19世纪：<span class="kwd">魏源</span>“师夷之长技以制夷”；京师同文馆（1862）；江南制造总局翻译馆（1868）</li>
+      <li><span class="kwd">新文化运动</span>：民主与科学；五四后马克思主义传播</li>
+    </ul>
+
+    <!-- ① 拖拽排序 -->
+    <div class="challenge-title">🎮 挑战一：将以下文化交流事件按时间先后拖入槽位</div>
+    <div class="sort-pool" id="sortPool1">
+      <span class="sort-item" draggable="true" data-sortkey="key1" id="item_key1">佛教传入中国</span>
+      <span class="sort-item" draggable="true" data-sortkey="key2" id="item_key2">利玛窦来华</span>
+      <span class="sort-item" draggable="true" data-sortkey="key3" id="item_key3">宋明理学形成</span>
+      <span class="sort-item" draggable="true" data-sortkey="key4" id="item_key4">京师同文馆设立</span>
+      <span class="sort-item" draggable="true" data-sortkey="key5" id="item_key5">魏源提出师夷长技</span>
+      <span class="sort-item" draggable="true" data-sortkey="key6" id="item_key6">新文化运动</span>
+    </div>
+    <div class="sort-slots">
+      <div class="sort-slot" data-slot="0"><span class="slot-label">最早</span></div>
+      <div class="sort-slot" data-slot="1"><span class="slot-label">第二</span></div>
+      <div class="sort-slot" data-slot="2"><span class="slot-label">第三</span></div>
+      <div class="sort-slot" data-slot="3"><span class="slot-label">第四</span></div>
+      <div class="sort-slot" data-slot="4"><span class="slot-label">第五</span></div>
+      <div class="sort-slot" data-slot="5"><span class="slot-label">最晚</span></div>
+    </div>
+    <button class="ans-btn sort-check-btn" onclick="checkSort()">✅ 提交排序</button>
+    <div class="sort-result" id="sortResult"></div>
+    <div class="stage-done" id="stageSortDone">🎉 第①关通过！</div>
+
+    <!-- 翻转卡 Tab1 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">佛教本土化</div><div class="flash-back">佛教从两汉传入，经魏晋隋唐与儒道融合，至宋明成为理学组成部分，完成本土化。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">宋明理学</div><div class="flash-back">以儒学为核心，兼容佛教和道教理论，是中华文化吸收外来文化后形成的新形态。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">会通中西</div><div class="flash-back">明末徐光启、李之藻等主张以开放胸怀学习西方科技，译介《几何原本》等著作。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">师夷长技</div><div class="flash-back">魏源在《海国图志》中提出“师夷之长技以制夷”，开近代向西方学习之先河。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 中华文化在交流中发展常以<span class="kwd">阶段特征</span>选择题考查，重点把握佛教本土化与西学东渐的两次重要外来文化输入。
+    </div>
+  </div>
+
+  <!-- ====== TAB2 子目二：中华文化对世界的影响 ====== -->
+  <div class="kp-card tab-panel" id="tab2">
+    <h3>中华文化对世界的影响</h3>
+    <ul>
+      <li><span class="kwd">汉字</span>：公元前4—3世纪传入朝鲜、日本、东南亚；各国创制本国文字（谚文、假名、喃字）</li>
+      <li><span class="kwd">儒学</span>：3—5世纪流行东亚东南亚；隋唐后成为朝鲜、日本官学</li>
+      <li><span class="kwd">佛教</span>：4世纪后经中国传入朝鲜、日本</li>
+      <li><span class="kwd">制度</span>：朝鲜模仿中国制度；日本<span class="kwd">大化改新</span>以唐制为蓝本；越南移植中国教育科举</li>
+      <li><span class="kwd">四大发明</span>：造纸术（8世纪西传）→火药（13世纪）→指南针→印刷术，推动欧洲社会变革</li>
+      <li>16—18世纪：儒家经典、科技、文学传入欧洲，<span class="kwd">中国风</span>成为欧洲时尚</li>
+    </ul>
+
+    <!-- ③ 连线匹配（放在Tab2） -->
+    <div class="challenge-title">🎮 挑战三：将中华文化输出方向与影响配对</div>
+    <div class="match-area">
+      <div class="match-cols">
+        <div class="match-col">
+          <div class="match-col-label">📌 文化输出</div>
+          <div class="match-item match-left" data-match="a" onclick="selectMatch(this)">汉字</div>
+          <div class="match-item match-left" data-match="b" onclick="selectMatch(this)">儒学</div>
+          <div class="match-item match-left" data-match="c" onclick="selectMatch(this)">制度</div>
+          <div class="match-item match-left" data-match="d" onclick="selectMatch(this)">四大发明</div>
+          <div class="match-item match-left" data-match="e" onclick="selectMatch(this)">茶丝绸瓷器</div>
+        </div>
+        <div class="match-col">
+          <div class="match-col-label">🎯 影响</div>
+          <div class="match-item match-right" data-match="a" onclick="pairMatch(this)">朝鲜创制谚文、日本创制假名</div>
+          <div class="match-item match-right" data-match="b" onclick="pairMatch(this)">成为朝鲜、日本等国官学</div>
+          <div class="match-item match-right" data-match="c" onclick="pairMatch(this)">日本大化改新以唐制为蓝本</div>
+          <div class="match-item match-right" data-match="d" onclick="pairMatch(this)">推动欧洲火药武器、航海时代</div>
+          <div class="match-item match-right" data-match="e" onclick="pairMatch(this)">16—18世纪欧洲深受喜爱</div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-result" id="matchResult"></div>
+    <div class="stage-done" id="stageMatchDone">🎉 第③关通过！</div>
+
+    <!-- 翻转卡 Tab2 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">大化改新</div><div class="flash-back">7世纪日本以唐朝制度为蓝本推行改革，建立中央集权制、土地制度和赋税制度。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">四大发明西传</div><div class="flash-back">造纸术8世纪西传，火药13世纪经阿拉伯传入欧洲，指南针推动航海时代。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">儒家经典西传</div><div class="flash-back">16—18世纪孔子思想及儒家经典传入欧洲，引起欧洲知识界热烈反响。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">中国风</div><div class="flash-back">16—18世纪中国茶、丝绸、瓷器在欧洲深受喜爱，中国式园林建筑成为风尚。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·高频</span> 中华文化对世界影响常以<span class="kwd">比较类</span>选择题考查，四大发明西传是唯物史观分析的重点素材。
+    </div>
+  </div>
+
+  <!-- ====== TAB3 子目三：双向互鉴的文明逻辑 ====== -->
+  <div class="kp-card tab-panel" id="tab3">
+    <h3>中华文化“吸收—转化—输出”的双向逻辑</h3>
+    <ul>
+      <li><span class="kwd">吸收</span>：佛教传入→本土化→理学形成；西学传入→会通中西→近代转型</li>
+      <li><span class="kwd">转化</span>：外来文化与中国实际相结合（毛泽东“适合中国的实际”）</li>
+      <li><span class="kwd">输出</span>：汉字/儒学/制度/四大发明→东亚文化圈→世界影响</li>
+      <li><span class="kwd">内核</span>：“旧邦新命”——在坚守核心特质基础上不断吸收创新</li>
+    </ul>
+
+    <!-- ④ 地图标注 -->
+    <div class="challenge-title">🎮 挑战四：点击标注中华文化传播的重要区域</div>
+    <div class="map-zone" id="mapContainer">
+      <svg viewBox="0 0 420 260" style="width:100%;height:auto;background:#f5f1e8;border-radius:12px;">
+        <!-- 亚洲轮廓示意 -->
+        <path d="M80,180 L100,140 L140,120 L180,100 L220,90 L260,95 L300,110 L340,130 L360,160 L350,190 L330,210 L290,225 L250,230 L200,225 L160,215 L120,210 L90,200 Z" fill="#d4d0c8" stroke="#999" stroke-width="1.5"/>
+        <path d="M120,110 L140,85 L180,70 L220,65 L260,70 L290,85 L280,100 L240,95 L200,100 L160,105 Z" fill="#c8c4ba" stroke="#999" stroke-width="1.5"/>
+        <!-- 东亚、东南亚、欧洲标注 -->
+        <circle class="map-marker" data-point="pt-korea" cx="250" cy="100" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-japan" cx="300" cy="85" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-vietnam" cx="280" cy="200" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-seasia" cx="330" cy="200" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <circle class="map-marker" data-point="pt-europe" cx="80" cy="60" r="8" fill="#7c6cf0" stroke="#fff" stroke-width="2"/>
+        <!-- 标签 -->
+        <text x="235" y="92" font-size="9" fill="#333" font-weight="700">朝鲜</text>
+        <text x="290" y="75" font-size="9" fill="#333" font-weight="700">日本</text>
+        <text x="268" y="194" font-size="9" fill="#333" font-weight="700">越南</text>
+        <text x="320" y="192" font-size="9" fill="#333" font-weight="700">东南亚</text>
+        <text x="50" y="52" font-size="9" fill="#333" font-weight="700">欧洲</text>
+      </svg>
+      <div class="map-instruction">💡 点击紫色圆点标注文化传播目的地</div>
+      <div class="map-checklist" id="mapChecklist">
+        <span class="map-check-item" data-point="pt-korea">朝鲜</span>
+        <span class="map-check-item" data-point="pt-japan">日本</span>
+        <span class="map-check-item" data-point="pt-vietnam">越南</span>
+        <span class="map-check-item" data-point="pt-seasia">东南亚</span>
+        <span class="map-check-item" data-point="pt-europe">欧洲</span>
+      </div>
+    </div>
+    <div class="stage-done" id="stageMapDone">🎉 第④关通过！</div>
+
+    <!-- ② 填空填词（放在Tab3） -->
+    <div class="challenge-title">🎮 挑战二：填写关键词</div>
+    <div class="fill-blank-wrap" id="fillBlanks">
+      <div class="fill-blank-row">1. 两汉之际，<input class="fill-input" data-answer="佛教" placeholder="？">传入中国</div>
+      <div class="fill-blank-row">2. 隋唐时期，<input class="fill-input" data-answer="禅宗" placeholder="？">成为佛教主流</div>
+      <div class="fill-blank-row">3. 明末意大利人<input class="fill-input" data-answer="利玛窦" placeholder="？">带来天文、地理、数学等新知识</div>
+      <div class="fill-blank-row">4. 魏源提出“<input class="fill-input" data-answer="师夷之长技以制夷" placeholder="？">”</div>
+      <div class="fill-blank-row">5. 马克思主义在五四运动后于中国广泛传播，推动了中国革命的发展</div>
+    </div>
+    <button class="ans-btn" onclick="checkFillBlanks()">✅ 提交填空</button>
+    <div class="sort-result" id="fillResult"></div>
+    <div class="stage-done" id="stageFillDone">🎉 第②关通过！</div>
+
+    <!-- 翻转卡 Tab3 -->
+    <div class="flash-section">
+      <div class="flash-section-title">🧠 核心概念翻转卡（点击翻面）</div>
+      <div class="flash-grid">
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">旧邦新命</div><div class="flash-back">冯友兰引用《诗经》概括中华文化“古而又新”的特质——在传承中不断创新。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">双向互鉴</div><div class="flash-back">中华文化既吸收外来文化（佛教、西学），又向外输出（汉字、儒学、四大发明），形成双向互动。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">经世致用</div><div class="flash-back">明清之际思想家强调学术要服务于现实，近代魏源等继承这一传统，倡导学习西方。</div></div></div>
+        <div class="flash-card" onclick="flipCard(this)"><div class="flash-inner"><div class="flash-front">文化自信</div><div class="flash-back">中华文化在吸收外来中保持主体性，在输出中展现影响力，是文化自信的历史根基。</div></div></div>
+      </div>
+    </div>
+
+    <div class="link-bar">
+      <span class="tag-gaokao">📌 高考常考·中频</span> “吸收—转化—输出”双向逻辑常以<span class="kwd">综合性</span>材料题考查，需结合唯物史观分析文明互鉴的内在动力。
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 2 — 重难点解析（v3.0.1 深化固化） -->
+<!-- ============================== -->
+<div class="page-slide" id="page2">
+  <div class="slide-header">
+    <div class="module-num">模块二</div>
+    <div class="module-title">重难点解析</div>
+  </div>
+
+  <!-- 重难点一：佛教本土化与理学形成 -->
+  <div class="acc-group" id="acc1">
+    <div class="acc-group-hd pt1" onclick="toggleAccGrp('acc1')">
+      <h3>🔑 重难点一：佛教本土化与宋明理学的形成</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 佛教本土化的历程</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>佛教本土化是指源于古印度的佛教传入中国后，与中国本土的儒家、道家文化相互融合，最终成为中华文化有机组成部分的历史过程。</p>
+          <p><strong>阶段：</strong>两汉之际传入→魏晋南北朝与儒道融合→隋唐禅宗成为主流（完成本土化）→宋明理学将其内核吸收。</p>
+          <p><strong>简而言之：</strong>佛教本土化是外来文化“中国化”的典范——它不是被简单接受，而是被“消化吸收再创新”，最终融入中华文化的血脉之中。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 理学与佛教的深层关联</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>宋明理学“存天理，灭人欲”“格物致知”等命题，在方法论上吸收了佛教的思辨哲学（如华严宗的“理事无碍”），在修养论上借鉴了禅宗的“明心见性”。</p>
+          <p><strong>纵向联系：</strong>从魏晋玄学“以道解儒”，到隋唐佛学繁荣，再到宋明理学“援佛入儒”，中华文化在每一次吸收外来文化后都实现了理论升华。</p>
+          <p><strong>这一联系说明：</strong>中华文化的生命力在于“吸收—转化”机制——外来文化不是被排斥，而是被转化为自身理论资源，这正是中华文明“旧邦新命”的内在动力。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析佛教本土化</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“两汉之际，来自古印度的佛教传入中国。魏晋南北朝时期，佛教日趋兴盛，逐渐同儒家文化和道家文化相融合。隋唐时期，佛教出现了不同宗派，主张顿悟成佛的禅宗成为主流，佛教完成本土化。”——统编版教材</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 佛教本土化的深层逻辑：魏晋南北朝社会动荡，人民苦难深重，佛教“因果轮回”“彼岸世界”提供了精神慰藉，这是<b>社会存在决定社会意识</b>的体现。隋唐统一后，禅宗“顿悟成佛”简化修行路径，适应了更广泛的社会需求。宋明理学吸收佛教思辨哲学，完成了儒学的理论升级，反映了<b>上层建筑对经济基础的能动反作用</b>——思想文化在回应社会需求中不断演进。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>阅读材料，从唯物史观角度分析佛教本土化对中国思想文化的影响。（10分）</p>
+          <p><strong>答案：</strong>①丰富了中华文化的思想资源（引入思辨哲学、心性论）；②推动了儒学的理论升级（宋明理学）；③影响了文学艺术（诗词书画的意境追求）；④体现了中华文化的包容性，证明中华文明在吸收外来文化中保持旺盛生命力。</p>
+          <p><strong>解析：</strong>需从“社会需求→思想回应→文化创新”三层展开，唯物史观强调社会存在决定社会意识。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc1',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点二：西学东渐的历程与影响 -->
+  <div class="acc-group" id="acc2">
+    <div class="acc-group-hd pt2" onclick="toggleAccGrp('acc2')">
+      <h3>🔄 重难点二：西学东渐的历程与影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 西学东渐的三阶段</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>西学东渐是指西方自然科学、社会科学知识传入中国的历史过程，分为三个主要阶段。</p>
+          <p><strong>阶段：</strong>①明末清初（利玛窦、汤若望等，天文地理数学）；②19世纪中叶（魏源、京师同文馆、江南制造总局翻译馆）；③新文化运动（民主与科学→马克思主义）。</p>
+          <p><strong>简而言之：</strong>西学东渐从“科技引入”到“制度借鉴”再到“思想革命”，反映了中国对西方认识不断深化的过程。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 从“师夷长技”到“马克思主义”</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>魏源“师夷之长技以制夷”停留在“器物”层面；洋务运动“中体西用”扩展到“技术”层面；维新变法触及“制度”层面；新文化运动深入“思想”层面；五四后马克思主义提供了“科学世界观”。</p>
+          <p><strong>纵向联系：</strong>从林则徐、魏源到严复、詹天佑，从京师同文馆到江南制造总局翻译馆，西学传播的渠道不断扩大，内容不断深化。</p>
+          <p><strong>这一联系说明：</strong>西学东渐的深化过程反映了中国对现代化道路认识的不断深化——“器物→制度→思想”的演进轨迹，是民族危机推动下思想解放的必然逻辑。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析西学东渐</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“十月革命一声炮响，给我们送来了马克思列宁主义。十月革命帮助了全世界的也帮助了中国的先进分子，用无产阶级的宇宙观作为观察国家命运的工具，重新考虑自己的问题。”——毛泽东《论人民民主专政》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 从唯物史观看，西学东渐是<b>生产力发展推动生产关系变革</b>在思想领域的反映。鸦片战争后，中国被迫卷入世界资本主义体系，传统儒学无法应对“数千年未有之变局”，西方思想的传入提供了新的认知工具。马克思主义之所以能最终扎根中国，是因为它契合了救亡图存的时代主题，提供了科学认识社会发展的理论工具。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>结合所学，分析西学东渐从“器物”到“制度”再到“思想”的演进逻辑。（12分）</p>
+          <p><strong>答案：</strong>①器物层面（魏源、洋务）：认识中西差距在技术；②制度层面（维新、辛亥）：认识差距在制度；③思想层面（新文化运动）：认识差距在思想文化；④科学世界观（马克思主义）：提供根本解决路径。演进逻辑：民族危机加深→认识深化→从“用”到“体”的突破。</p>
+          <p><strong>解析：</strong>本题需结合“社会存在决定社会意识”——民族危机的不同阶段决定了认识的不同深度。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc2',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+
+  <!-- 重难点三：中华文化对世界的影响 -->
+  <div class="acc-group" id="acc3">
+    <div class="acc-group-hd pt3" onclick="toggleAccGrp('acc3')">
+      <h3>🌟 重难点三：中华文化对世界的影响</h3>
+      <span class="acc-arrow">▼</span>
+    </div>
+    <div class="acc-group-bd">
+      <div class="deep-card">
+        <div class="deep-card-hd">📘 基础理解 · 中华文化输出的四大维度</div>
+        <div class="deep-card-bd">
+          <p><strong>定义：</strong>中华文化对世界的影响体现在精神文化（汉字、儒学、佛教）和物质文明（四大发明、工艺产品）两大层面，覆盖东亚东南亚及欧洲。</p>
+          <p><strong>四大维度：</strong>①文字（汉字→谚文/假名/喃字）；②思想（儒学成为东亚官学）；③制度（大化改新以唐制为蓝本）；④科技（四大发明推动欧洲社会变革）。</p>
+          <p><strong>简而言之：</strong>中华文化对世界的影响不是单向的“输出”，而是通过“文化圈”的辐射，参与了世界文明的整体建构。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">🔗 联系拓展 · 四大发明的世界意义</div>
+        <div class="deep-card-bd">
+          <p><span class="tag-soc">🟢 比较史学</span> <strong>横向联系：</strong>马克思指出，火药“把骑士阶层炸得粉碎”，指南针“打开了世界市场”，印刷术“变成新教的工具”——四大发明从不同维度推动了欧洲从封建社会向资本主义社会的转型。</p>
+          <p><strong>纵向联系：</strong>从8世纪造纸术西传，到13世纪火药传入，再到活字印刷术的影响，中国科技在千年尺度上持续影响世界，体现了中华文明的原创性贡献。</p>
+          <p><strong>这一联系说明：</strong>中华文化的世界意义不仅在于“输出”了什么，更在于这些输出在历史关键节点上推动了人类文明的进程。</p>
+        </div>
+      </div>
+      <div class="deep-card">
+        <div class="deep-card-hd">📈 素养提升 · 唯物史观分析四大发明的影响</div>
+        <div class="deep-card-bd">
+          <div class="source-material">“火药、指南针、印刷术——这是预告资产阶级社会到来的三大发明。火药把骑士阶层炸得粉碎，指南针打开了世界市场并建立了殖民地，而印刷术则变成新教的工具，总的来说变成科学复兴的手段，变成对精神发展创造必要前提的最强大的杠杆。”——马克思《机器、自然力和科学的应用》</div>
+          <p><span class="tag-value">❤️ 唯物史观</span> 四大发明的影响体现了<b>科学技术是推动社会变革的革命性力量</b>。火药瓦解了封建骑士的军事优势，指南针推动了世界市场的形成，印刷术促进了思想解放——科技发明从生产力层面（工具）延伸到生产关系层面（社会结构变革），再上升到上层建筑层面（思想解放），完整呈现了唯物史观“生产力→生产关系→上层建筑”的因果链条。</p>
+          <p><span class="tag-gaokao">🎯 高考拓展</span> <strong>模拟题：</strong>阅读马克思对四大发明的评价，从唯物史观角度分析四大发明对欧洲社会转型的推动作用。（12分）</p>
+          <p><strong>答案：</strong>①火药→瓦解封建军事基础（骑士阶层衰落）；②指南针→推动世界市场形成（资本主义经济扩展）；③印刷术→促进思想解放（文艺复兴、宗教改革）；④三者共同为资产阶级革命和资本主义制度确立创造了物质条件和思想条件。</p>
+          <p><strong>解析：</strong>需从“科技（生产力）→社会结构（生产关系）→思想文化（上层建筑）”三级递进分析。</p>
+          <p><span class="tag-soc">🔵 社会学视角</span> <span class="tag-gaokao">🔴 高考命题方向·高频</span></p>
+        </div>
+      </div>
+      <div class="acc-mastered"><button onclick="markMastered('acc3',this)">✅ 我已掌握</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 3 — 教材栏目解答 -->
+<!-- ============================== -->
+<div class="page-slide" id="page3">
+  <div class="slide-header">
+    <div class="module-num">模块三</div>
+    <div class="module-title">教材栏目解答</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filterCol('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterCol('学习聚焦',this)">学习聚焦</button>
+    <button class="filter-chip" onclick="filterCol('史料阅读',this)">史料阅读</button>
+    <button class="filter-chip" onclick="filterCol('历史纵横',this)">历史纵横</button>
+    <button class="filter-chip" onclick="filterCol('学思之窗',this)">学思之窗</button>
+    <button class="filter-chip" onclick="filterCol('思考点',this)">思考点</button>
+    <button class="filter-chip" onclick="filterCol('探究与拓展',this)">探究与拓展</button>
+  </div>
+
+  <!-- 学习聚焦 -->
+  <div class="col-box" data-cat="学习聚焦">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🎯 学习聚焦 · 交流中发展升华</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>中华文化在与外来文化的交流中不断发展、升华，保持了旺盛的生命力。</p>
+      <div class="a" id="ans-p3-focus1">
+        <strong>📝 要点解析：</strong>“不断发展”强调中华文化不是封闭静止的，而是在与外来文化互动中持续演进；“升华”指通过吸收外来文化实现理论提升（如理学形成）；“旺盛的生命力”源于“吸收—转化—输出”的良性循环机制。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-focus1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 史料阅读：顺治论汤若望 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 顺治帝论汤若望</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“汤若望来自西洋，精于象纬，固通历法。徐光启特荐于朝，一时专掌治历如魏文魁等，实不及尔。但以远人，多忌成功，终不见用。朕承天眷，定鼎之初，尔为朕修《大清时宪历》，迄于有成。又能洁身持行，尽心办事……俾知天生贤人，佐佑定历，补数千年之阙略，非偶然也。”——《清史稿·汤若望传》</p>
+      <div class="a" id="ans-p3-material1">
+        <strong>📝 史料解读：</strong>①顺治帝肯定汤若望在天文历法方面的卓越才能；②“以远人，多忌成功”反映西学传播中遭遇的阻力（保守势力排斥）；③“补数千年之阙略”体现清初统治者对西方科技的开明态度——承认西方历法优于传统历法；④反映了明末清初西学东渐的时代背景。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 历史纵横：提倡男女平等 -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🧠 历史纵横 · 提倡男女平等</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>近代以来，西方的民主、平等思想对国人产生了影响，其中，男女平等的思想逐渐为人们所接受。民国初年，女性为争取参政权利，高举着“男女平等”旗帜，掀起了一场女权运动。这场运动被称为“五千年未女权之曙光”。在这种背景下，北京、上海等大城市纷纷兴办了女子学校，让女子受教育，培养妇女参政意识。但当时社会处于转型期，女子接受新式教育仍存在很大障碍。</p>
+      <div class="a" id="ans-p3-history1">
+        <strong>📝 要点归纳：</strong>①西方平等思想冲击传统“男尊女卑”观念；②民国初年女权运动是近代思想解放的重要组成部分；③女子教育兴起是社会进步的表现；④“转型期的障碍”反映了新旧思想的斗争和社会变革的艰巨性。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-history1')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 学思之窗：崔致远/那波守之 -->
+  <div class="col-box" data-cat="学思之窗">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔍 学思之窗 · 朝鲜日本诗人的汉诗</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>①崔致远（朝鲜）《长安旅舍与子慎微长官接邻》<br>②那波守之（日本）《读汉高帝纪》</p>
+      <p><strong>问题：</strong>阅读上述诗句，体会中华文化对朝鲜、日本的影响。</p>
+      <div class="a" id="ans-p3-think1">
+        <p><strong>📝 示例答案：</strong></p>
+        <p>①崔致远的诗以汉诗形式书写，用典“孟家邻”（孟母三迁），体现了朝鲜文人对中华经典的熟悉和运用；②那波守之的诗以中国历史典故（汉高帝、鸿沟）为题材，用汉诗体表达历史感慨；③朝鲜、日本文人使用汉字创作汉诗，说明中华文化（汉字、儒学、历史观）已深深融入东亚知识阶层的精神世界，成为东亚“汉字文化圈”的典型体现。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 史料阅读：马克思论四大发明 -->
+  <div class="col-box" data-cat="史料阅读">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📜 史料阅读 · 马克思论四大发明</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>“火药、指南针、印刷术——这是预告资产阶级社会到来的三大发明。火药把骑士阶层炸得粉碎，指南针打开了世界市场并建立了殖民地，而印刷术则变成新教的工具，总的来说变成科学复兴的手段，变成对精神发展创造必要前提的最强大的杠杆。”——马克思《机器、自然力和科学的应用》</p>
+      <div class="a" id="ans-p3-material2">
+        <strong>📝 史料解读：</strong>①马克思从唯物史观高度评价四大发明的世界历史意义；②火药→瓦解封建军事贵族；③指南针→推动资本主义世界市场；④印刷术→促进宗教改革和科学复兴；⑤三大发明从不同维度推动了欧洲从封建社会向资本主义社会的转型，体现了科学技术作为革命性力量的历史作用。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-material2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 思考点 -->
+  <div class="col-box" data-cat="思考点">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>💡 思考点 · 中华文化对人类发展的影响</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>中华文化对人类发展的影响还表现在哪些方面？</p>
+      <div class="a" id="ans-p3-think2">
+        <strong>📝 参考答案：</strong>①政治制度：科举制度影响西方文官制度；②农业技术：水稻种植、茶叶种植技术传播；③医学：中医针灸等对世界医学的贡献；④哲学思想：儒家“和而不同”为人类命运共同体提供思想资源；⑤艺术：中国书画、园林建筑对世界艺术的影响。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-think2')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 历史纵横：饮食风俗影响 -->
+  <div class="col-box" data-cat="历史纵横">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🧠 历史纵横 · 饮食风俗影响周边</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>原文：</strong>日本学习、改进中国的饮茶方法，形成独具特色的茶道。唐朝服装传入日本后，被改造为“和服”。唐人的打马球、角抵、围棋等体育活动，先后传入日本。中国传统节日春节、清明节、端午节、中秋节等也传入周边地区。</p>
+      <div class="a" id="ans-p3-history2">
+        <strong>📝 要点归纳：</strong>①茶道→中国茶文化在日本的本土化创新；②和服→唐服在日本的本土化改造；③体育项目→唐文化的生活化传播；④传统节日→中华岁时文化对周边的影响。体现了中华文化在日常生活层面的广泛辐射。
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-history2')">📝 查看解析</button>
+    </div>
+  </div>
+
+  <!-- 探究与拓展：问题探究 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>🔬 探究与拓展 · 学习借鉴外来文化</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>材料：</strong>“我们的方针是，一切民族、一切国家的长处都要学，政治、经济、科学、技术、文学、艺术的一切真正好的东西都要学。”——毛泽东《论十大关系》<br>“接受外来思想，并不意味着无条件地照搬，而必须根据具体条件加以采用，使之适合中国的实际……我们中国人必须用我们自己的头脑进行思考，并决定什么东西能在我们自己的土壤里生长起来。”——毛泽东《同英国记者斯坦因的谈话》</p>
+      <p><strong>问题：</strong>阅读材料并结合所学，谈谈你对学习、借鉴外来文化的看法。</p>
+      <div class="a" id="ans-p3-explore1">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>看法：</strong>①学习借鉴外来文化是文明进步的必由之路（中华文化在吸收佛教、西学中不断发展）；②必须坚持“以我为主、为我所用”的原则（毛泽东强调“适合中国实际”“用自己的头脑思考”）；③要反对两种错误倾向——盲目照搬（失去自我）和盲目排外（封闭僵化）；④中华文化的成功经验是“吸收—转化—创新”——吸收外来精华，转化为自身养分，实现理论创新。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore1')">📝 查看参考答案</button>
+    </div>
+  </div>
+
+  <!-- 探究与拓展：学习拓展 -->
+  <div class="col-box" data-cat="探究与拓展">
+    <div class="col-header" onclick="toggleColBox(this)">
+      <span>📖 探究与拓展 · 中华文化的当代贡献</span>
+      <span class="col-toggle">▼</span>
+    </div>
+    <div class="col-body">
+      <p><strong>问题：</strong>结合所学，联系社会生活，举例说明中华文化在当今人类文明发展中发挥的作用。</p>
+      <div class="a" id="ans-p3-explore2">
+        <p><strong>📝 参考答案：</strong></p>
+        <p><strong>举例：</strong>①“和而不同”为<b>人类命运共同体</b>理念提供思想资源；②“天人合一”为<b>生态文明建设</b>提供哲学基础；③“民为邦本”为<b>以人民为中心</b>的发展思想提供历史根基；④中医针灸在2010年被列入联合国非遗名录，为世界医学贡献中国智慧；⑤孔子学院在全球的设立，推动了中华文化的世界传播。</p>
+      </div>
+      <button class="ans-btn" onclick="toggleAnswer('ans-p3-explore2')">📝 查看参考答案</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 4 — 课堂训练（v3.0.2 固化版） -->
+<!-- ============================== -->
+<div class="page-slide" id="page4">
+  <div class="slide-header">
+    <div class="module-num">模块四</div>
+    <div class="module-title">课堂训练</div>
+  </div>
+
+  <div class="score-banner">
+    <div>
+      <div style="font-size:11pt;color:#888;">当前得分</div>
+      <div class="score-number" id="scoreVal">0</div>
+    </div>
+    <button class="score-reset" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+  <!-- 选择题 1 -->
+  <div class="exercise" id="q1">
+    <div class="q-text"><strong>1.</strong> 佛教传入中国后，逐渐完成本土化的标志是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q1')">A. 两汉之际传入中国</label>
+      <label onclick="optClick(this,'B','q1')">B. 魏晋南北朝与儒道融合</label>
+      <label onclick="optClick(this,'C','q1')">C. 隋唐时期禅宗成为主流</label>
+      <label onclick="optClick(this,'D','q1')">D. 宋明理学形成</label>
+    </div>
+    <div class="a" id="ans-p4-q1">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：C<br>
+      📌 解题思路：佛教本土化的核心标志是形成具有中国特色的宗派——禅宗主张“顿悟成佛”，简化修行路径，适应中国社会需求。<br>
+      ❌ 排除A：仅是传入时间；<br>
+      ❌ 排除B：仅是融合过程；<br>
+      ❌ 排除D：是佛教影响的结果，而非本土化标志。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q1')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 2 -->
+  <div class="exercise" id="q2">
+    <div class="q-text"><strong>2.</strong> 明末清初，主张“会通中西”的代表人物是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q2')">A. 林则徐、魏源</label>
+      <label onclick="optClick(this,'B','q2')">B. 徐光启、李之藻</label>
+      <label onclick="optClick(this,'C','q2')">C. 康有为、梁启超</label>
+      <label onclick="optClick(this,'D','q2')">D. 陈独秀、李大钊</label>
+    </div>
+    <div class="a" id="ans-p4-q2">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：明末徐光启、李之藻等与利玛窦合作译介西方科学著作，主张以开放胸怀学习西方科技。<br>
+      ❌ 排除A：林则徐魏源是19世纪“师夷长技”的代表；<br>
+      ❌ 排除C：维新运动代表人物；<br>
+      ❌ 排除D：新文化运动代表人物。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q2')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 3 -->
+  <div class="exercise" id="q3">
+    <div class="q-text"><strong>3.</strong> 日本大化改新以唐朝制度为蓝本，这反映了中华文化对日本的（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q3')">A. 文字影响</label>
+      <label onclick="optClick(this,'B','q3')">B. 制度影响</label>
+      <label onclick="optClick(this,'C','q3')">C. 宗教影响</label>
+      <label onclick="optClick(this,'D','q3')">D. 科技影响</label>
+    </div>
+    <div class="a" id="ans-p4-q3">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：大化改新涉及中央集权制、土地制度、赋税制度，均模仿唐朝，属于制度层面的影响。<br>
+      ❌ 排除A：文字影响表现为假名的创制；<br>
+      ❌ 排除C：宗教影响表现为佛教传入；<br>
+      ❌ 排除D：科技影响表现为四大发明等。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q3')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 4 -->
+  <div class="exercise" id="q4">
+    <div class="q-text"><strong>4.</strong> 马克思评价四大发明“预告资产阶级社会到来”，其唯物史观依据是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q4')">A. 科技发明直接决定社会性质</label>
+      <label onclick="optClick(this,'B','q4')">B. 科技是推动社会变革的革命性力量</label>
+      <label onclick="optClick(this,'C','q4')">C. 四大发明是中国独有的成就</label>
+      <label onclick="optClick(this,'D','q4')">D. 欧洲缺乏自己的科技发明</label>
+    </div>
+    <div class="a" id="ans-p4-q4">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：B<br>
+      📌 解题思路：唯物史观认为生产力（科技）是推动社会发展的根本动力，四大发明从军事、经济、文化三个维度推动了欧洲社会转型。<br>
+      ❌ 排除A：科技不直接决定社会性质，而是通过改变生产力→生产关系→上层建筑的链条发生作用；<br>
+      ❌ 排除C：与题意无关；<br>
+      ❌ 排除D：不符合史实。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q4')">📝 查看解析</button>
+  </div>
+
+  <!-- 选择题 5 -->
+  <div class="exercise" id="q5">
+    <div class="q-text"><strong>5.</strong> 中华文化“吸收—转化—输出”双向互鉴逻辑的成功案例是（　）</div>
+    <div class="options">
+      <label onclick="optClick(this,'A','q5')">A. 佛教传入→本土化→宋明理学→外传东亚</label>
+      <label onclick="optClick(this,'B','q5')">B. 儒家思想→科举制度→西方文官制度</label>
+      <label onclick="optClick(this,'C','q5')">C. 四大发明→西传欧洲→推动社会变革</label>
+      <label onclick="optClick(this,'D','q5')">D. 以上都是</label>
+    </div>
+    <div class="a" id="ans-p4-q5">
+      <strong>📖 答案解析：</strong><br>
+      ✅ 正确选项：D<br>
+      📌 解题思路：A体现佛教的“吸收（传入）—转化（本土化）—输出（东亚传播）”；B体现儒学的“吸收—转化—输出”；C体现科技的“创造—输出—影响”。三者均为双向互鉴的典型。<br>
+      ❌ 排除A、B、C：均为片面选项，D为综合正确选项。
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-q5')">📝 查看解析</button>
+  </div>
+
+  <!-- 材料题 1（高难度·唯物史观升华）— 不计分 -->
+  <div class="exercise" id="mq1">
+    <div class="q-text"><strong>材料题1</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p><strong>材料一：</strong>“火药、指南针、印刷术——这是预告资产阶级社会到来的三大发明。火药把骑士阶层炸得粉碎，指南针打开了世界市场并建立了殖民地，而印刷术则变成新教的工具。”——马克思《机器、自然力和科学的应用》</p>
+      <p><strong>材料二：</strong>“接受外来思想，并不意味着无条件地照搬，而必须根据具体条件加以采用，使之适合中国的实际。”——毛泽东《同英国记者斯坦因的谈话》</p>
+    </div>
+    <div class="q-text">（1）材料一中马克思认为四大发明对欧洲产生了什么影响？（3分）</div>
+    <div class="q-text">（2）材料二中毛泽东主张如何对待外来文化？（3分）</div>
+    <div class="q-text">（3）综合两则材料，从唯物史观角度分析文化互鉴的历史逻辑。（6分）</div>
+    <div class="a" id="ans-p4-mat1">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>①火药瓦解了封建骑士阶层；②指南针推动了世界市场的形成；③印刷术促进了宗教改革和科学复兴。三者共同推动了欧洲从封建社会向资本主义社会的转型。（3分）</p>
+      <p><strong>（2）</strong>主张对待外来文化要坚持“以我为主、为我所用”——根据中国具体条件加以采用，使之适合中国实际，不能无条件照搬。（3分）</p>
+      <p><strong>（3）</strong>唯物史观认为，文化交流与互鉴是<b>生产力发展推动文明进步</b>的重要机制。四大发明西传推动了欧洲社会变革，体现了科技（生产力）对生产关系变革的推动作用；中华文化吸收佛教、西学并实现本土化，体现了上层建筑对经济基础的能动反作用。文化互鉴的根本动力是<b>社会发展需求</b>——不同文明在回应各自时代挑战中相互借鉴、共同进步。这启示我们：在全球化时代，既要积极吸收外来优秀文化，又要坚持主体性，实现“古为今用、洋为中用”。（6分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat1')">📝 查看答案</button>
+    <!-- 材料题不计分 -->
+  </div>
+
+  <!-- 材料题 2（中难度）— 不计分 -->
+  <div class="exercise" id="mq2">
+    <div class="q-text"><strong>材料题2</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>“汤若望来自西洋，精于象纬，固通历法。徐光启特荐于朝，一时专掌治历如魏文魁等，实不及尔。”——《清史稿·汤若望传》</p>
+    </div>
+    <div class="q-text">（1）材料反映了清初统治者对西学的什么态度？（2分）</div>
+    <div class="q-text">（2）结合所学，概括明末清初西学东渐的主要特点。（4分）</div>
+    <div class="a" id="ans-p4-mat2">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>清初统治者对西学持开明态度，肯定西方科技的价值（“精于象纬”“补数千年之阙略”），任用西方人才主持钦天监。（2分）</p>
+      <p><strong>（2）</strong>特点：①以科技传入为主（天文、地理、数学）；②译介西方科学著作（《几何原本》《泰西水法》）；③传教士扮演重要角色（利玛窦、汤若望、南怀仁）；④部分中国知识分子以开放胸怀会通中西（徐光启、李之藻）。（每点1分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat2')">📝 查看答案</button>
+  </div>
+
+  <!-- 材料题 3（中难度）— 不计分 -->
+  <div class="exercise" id="mq3">
+    <div class="q-text"><strong>材料题3</strong> 阅读材料，回答问题：</div>
+    <div class="source-material">
+      <p>崔致远（朝鲜）：“上国恩深，多赐万里人。那堪孤客，得接孟家邻。守道惟稽古，交情岂惮贫。他乡少知己，莫厌访君频。”——《长安旅舍与子慎微长官接邻》</p>
+    </div>
+    <div class="q-text">（1）崔致远的诗反映了什么历史现象？（2分）</div>
+    <div class="q-text">（2）结合所学，概括中华文化对朝鲜半岛的影响。（4分）</div>
+    <div class="a" id="ans-p4-mat3">
+      <p><strong>参考答案：</strong></p>
+      <p><strong>（1）</strong>反映了朝鲜文人使用汉字、创作汉诗的文化现象，体现了中华文化（汉字、儒学）对朝鲜的深刻影响。（2分）</p>
+      <p><strong>（2）</strong>①汉字传入，朝鲜在此基础上创制了谚文；②儒学传入并成为官学；③佛教经中国传入朝鲜；④政治制度模仿中国；⑤科举制度、教育体制移植中国；⑥饮食、服饰、节日等日常生活层面受唐文化影响。（每点1分，答出4点即满分）</p>
+    </div>
+    <button class="ans-btn" onclick="toggleAnswer('ans-p4-mat3')">📝 查看答案</button>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 5 — 知识结构图 -->
+<!-- ============================== -->
+<div class="page-slide" id="page5">
+  <div class="slide-header">
+    <div class="module-num">模块五</div>
+    <div class="module-title">知识结构图</div>
+  </div>
+  <div class="kg-wrap-simple">
+    <div class="kg-title">📊 知识结构 · 中华文化的世界意义</div>
+    <div class="kg-hint-banner">
+      <span class="hint-icon">💡</span>
+      <span>知识结构图已生成。点击下方</span>
+      <span class="hint-click">各节点</span>
+      <span>查看详细解析与考点说明</span>
+    </div>
+    <div class="kg-chain">
+      <div class="kg-node left c1 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📥</span><strong>吸收外来文化</strong>
+        <p>佛教传入·本土化·理学形成 · 西学东渐·会通中西</p>
+        <div class="kg-detail"><p>🔑 两次重要输入：佛教（两汉→宋明）、西学（明末→五四）。<br>📌 高考常考：佛教本土化历程、西学东渐三阶段。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c2 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🔄</span><strong>转化机制</strong>
+        <p>以我为主·为我所用 · 适合中国实际</p>
+        <div class="kg-detail"><p>🧠 核心逻辑：外来文化→本土化→理论创新。<br>📌 高考常考：毛泽东“适合中国实际”的论述。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node left c3 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">📤</span><strong>输出世界影响</strong>
+        <p>汉字·儒学·制度·四大发明·中国风</p>
+        <div class="kg-detail"><p>💎 东亚文化圈：文字、思想、制度、习俗。<br>🌍 世界影响：四大发明推动欧洲社会变革。<br>📌 高考常考：四大发明的世界意义（马克思评价）。</p></div>
+      </div>
+      <div class="kg-arrow">⬇️</div>
+      <div class="kg-node right c4 pulse" onclick="toggleKgDetail(this)">
+        <span class="kg-expand-badge"><span class="badge-arrow">▶</span> 点击展开</span>
+        <span class="kg-icon">🌏</span><strong>双向互鉴逻辑</strong>
+        <p>吸收→转化→输出 · 旧邦新命</p>
+        <div class="kg-detail"><p>🚀 中华文化的生命力密码：在吸收中保持主体性，在输出中展现影响力。<br>📌 高考常考：综合材料题——“文明互鉴”的历史逻辑。</p></div>
+      </div>
+    </div>
+    <div class="kg-rules-grid">
+      <div class="kg-rule r1">🔵 政治：制度影响·大化改新</div>
+      <div class="kg-rule r2">🟠 经济：四大发明·世界市场</div>
+      <div class="kg-rule r3">🟢 文化：汉字圈·儒学传播</div>
+      <div class="kg-rule r4">🔴 思想：理学·马克思主义</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- PAGE 6 — 结束页 -->
+<!-- ============================== -->
+<div class="page-slide" id="page6">
+  <div class="hero-wrap" style="border-radius:36px; margin:0 -20px 28px;">
+    <div class="hero-unit">第一单元 · 源远流长的中华文化</div>
+    <h1 style="font-size:22pt;">第2课 · 中华文化的世界意义</h1>
+    <div class="hero-sub" style="margin-top:14px;">✅ 本课学习完成</div>
+  </div>
+
+  <section class="recap-section">
+    <h2 class="recap-title">📋 核心要点回顾</h2>
+    <div class="recap-grid">
+      <div class="recap-card">
+        <div class="recap-card-num">一</div>
+        <h3>吸收外来文化</h3>
+        <ul>
+          <li><strong>佛教</strong>：两汉传入→本土化→理学</li>
+          <li><strong>西学</strong>：明末利玛窦→清初汤若望</li>
+          <li><strong>近代</strong>：魏源师夷长技→新文化运动→马克思主义</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">二</div>
+        <h3>输出世界影响</h3>
+        <ul>
+          <li><strong>东亚</strong>：汉字·儒学·制度·习俗</li>
+          <li><strong>世界</strong>：四大发明推动欧洲社会变革</li>
+          <li><strong>欧洲</strong>：16-18世纪“中国风”</li>
+        </ul>
+      </div>
+      <div class="recap-card">
+        <div class="recap-card-num">三</div>
+        <h3>双向互鉴逻辑</h3>
+        <ul>
+          <li><strong>吸收</strong>→<strong>转化</strong>→<strong>输出</strong></li>
+          <li><strong>旧邦新命</strong>：古而又新</li>
+          <li><strong>当代启示</strong>：文明互鉴·文化自信</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <div class="bottom-nav">
+    <div><a href="选必3-U1-第1课_中华优秀传统文化的内涵与特点.html">← 上一课：第1课</a></div>
+    <div class="nav-center">第2课</div>
+    <div><a href="选必3-U2-第3课 古代西亚、非洲文化.html">下一课：第3课 →</a></div>
+  </div>
+
+
+  <footer>
+    <p>统编版高中历史 · 文化交流与传播（选必三） · 第一单元</p>
+    <p>基于教材内容整理 · 仅供教学参考使用</p>
+  </footer>
+</div>
+
+<!-- ============================== -->
+<!-- 底部翻页导航 -->
+<!-- ============================== -->
+<div class="pg-nav">
+  <button onclick="prevPage()" id="pgPrev">◀ 上一页</button>
+  <div class="pg-dots" id="pgDots">
+    <span class="pg-dot active" onclick="goPage(0)"></span>
+    <span class="pg-dot" onclick="goPage(1)"></span>
+    <span class="pg-dot" onclick="goPage(2)"></span>
+    <span class="pg-dot" onclick="goPage(3)"></span>
+    <span class="pg-dot" onclick="goPage(4)"></span>
+    <span class="pg-dot" onclick="goPage(5)"></span>
+    <span class="pg-dot" onclick="goPage(6)"></span>
+  </div>
+  <span class="pg-counter" id="pgCounter">1/7</span>
+  <button onclick="nextPage()" id="pgNext">下一页 ▶</button>
+</div>
+
+<!-- ============================== -->
+<!-- JavaScript -->
+<!-- ============================== -->
+<script>
+// ===== 分页导航 =====
+var totalPages = 7;
+var currentPage = 0;
+var pgDots = document.querySelectorAll('.pg-dot');
+var pgCounter = document.getElementById('pgCounter');
+var pgPrev = document.getElementById('pgPrev');
+var pgNext = document.getElementById('pgNext');
+
+function goPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  document.getElementById('page' + currentPage).classList.remove('active');
+  pgDots[currentPage].classList.remove('active');
+  currentPage = n;
+  document.getElementById('page' + currentPage).classList.add('active');
+  pgDots[currentPage].classList.add('active');
+  pgCounter.textContent = (currentPage + 1) + '/' + totalPages;
+  pgPrev.disabled = (currentPage === 0);
+  pgNext.disabled = (currentPage === totalPages - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextPage() { if (currentPage < totalPages - 1) goPage(currentPage + 1); }
+function prevPage() { if (currentPage > 0) goPage(currentPage - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); nextPage(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); prevPage(); }
+  else if (e.key === 'Home') { e.preventDefault(); goPage(0); }
+  else if (e.key === 'End') { e.preventDefault(); goPage(totalPages - 1); }
+});
+pgPrev.disabled = true;
+
+// ===== 闯关进度追踪 =====
+var stageDone = { sort:false, fill:false, match:false, map:false, flips:false };
+
+function updateStageProgress() {
+  var stages = ['sort','fill','match','map','flips'];
+  var done = 0;
+  stages.forEach(function(s) { if (stageDone[s]) done++; });
+  var pct = Math.round(done / 5 * 100);
+  var bar = document.getElementById('stageProgressBar');
+  var lbl = document.getElementById('stageProgressLabel');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) {
+    if (done >= 5) lbl.textContent = '🏆 全部闯关完成！';
+    else lbl.textContent = done + '/5 关完成';
+  }
+}
+
+// ===== 学习目标标记 =====
+var targetsDone = 0;
+function toggleTarget(el) {
+  el.classList.toggle('done');
+  targetsDone = document.querySelectorAll('.target-item.done').length;
+  if (targetsDone >= 5) {
+    document.getElementById('targetsDone').classList.add('show');
+  } else {
+    document.getElementById('targetsDone').classList.remove('show');
+  }
+}
+
+// ===== 标签页切换 =====
+function switchTabV2(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].getAttribute('onclick').indexOf(tabId) >= 0) { btns[i].classList.add('active'); break; }
+  }
+}
+
+// ===== 手风琴 =====
+function toggleAccGrp(id) { var grp = document.getElementById(id); if (grp) grp.classList.toggle('open'); }
+function markMastered(grpId, btn) { btn.classList.add('done'); btn.textContent = '✅ 已掌握'; }
+
+// ===== 答案显隐 =====
+function toggleAnswer(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('show');
+    var btn = el.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = el.classList.contains('show') ? '隐藏答案' : '显示答案';
+    }
+  }
+}
+
+// ===== 选择题（含自动显示解析） =====
+var correctAnswers = { q1:'C', q2:'B', q3:'B', q4:'B', q5:'D' };
+var mcDone = {};
+var matDone = {};
+var score = 0;
+
+function updateScore() { document.getElementById('scoreVal').textContent = score; }
+
+function optClick(el, opt, qid) {
+  if (mcDone[qid]) return;
+  var correct = correctAnswers[qid];
+  var opts = el.parentElement.querySelectorAll('label');
+  opts.forEach(function(o) {
+    o.classList.add('disabled');
+    var oText = o.textContent.trim().charAt(0);
+    if (oText === correct) { o.classList.add('correct'); }
+    else if (o === el) { o.classList.add('wrong'); }
+  });
+  mcDone[qid] = true;
+  if (opt === correct) score++;
+  updateScore();
+
+  // v3.0.2 固化：自动显示该题的答案解析
+  var ansId = 'ans-p4-' + qid;
+  var ansEl = document.getElementById(ansId);
+  if (ansEl) {
+    ansEl.classList.add('show');
+    var btn = ansEl.previousElementSibling;
+    while (btn && btn.tagName !== 'BUTTON') { btn = btn.previousElementSibling; }
+    if (btn && btn.classList.contains('ans-btn')) {
+      btn.textContent = '隐藏答案';
+    }
+  }
+}
+
+// ===== 材料题追踪（v3.0.2 固化：不计分） =====
+function trackMatQ(id) {
+  if (matDone[id]) return;
+  matDone[id] = true;
+  // 不执行 score++
+}
+
+function resetQuiz() {
+  mcDone = {}; matDone = {}; score = 0; updateScore();
+  document.querySelectorAll('.exercise').forEach(function(ex) {
+    ex.querySelectorAll('label').forEach(function(l) { l.classList.remove('disabled','correct','wrong'); });
+    ex.querySelectorAll('.a').forEach(function(a) { a.classList.remove('show'); });
+  });
+  document.querySelectorAll('.ans-btn').forEach(function(b) {
+    if (b.textContent.indexOf('隐藏') === -1) return;
+    b.textContent = b.textContent.replace('隐藏答案','显示答案');
+  });
+}
+
+// ===== 栏目筛选 =====
+function filterCol(cat, chip) {
+  document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+  chip.classList.add('active');
+  document.querySelectorAll('.col-box').forEach(function(box) {
+    if (cat === 'all' || box.getAttribute('data-cat') === cat) { box.classList.remove('filtered-out'); }
+    else { box.classList.add('filtered-out'); }
+  });
+}
+function toggleColBox(header) { header.parentElement.classList.toggle('open'); }
+
+// ===== 拖拽排序 IIFE =====
+(function initDragSort() {
+  var items = document.querySelectorAll('#sortPool1 .sort-item');
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-sortkey'));
+      item.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function(e) { item.classList.remove('dragging'); });
+  });
+  slots.forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', function() { slot.classList.remove('drag-over'); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault(); slot.classList.remove('drag-over');
+      var key = e.dataTransfer.getData('text/plain');
+      if (slot.querySelector('.sort-item')) {
+        var old = slot.querySelector('.sort-item');
+        old.classList.remove('placed');
+        document.getElementById('sortPool1').appendChild(old);
+      }
+      var item = document.getElementById('item_' + key);
+      if (item) { slot.appendChild(item); item.classList.add('placed'); slot.classList.add('filled'); }
+    });
+    slot.addEventListener('click', function() {
+      var item = this.querySelector('.sort-item');
+      if (item && !item.classList.contains('dragging')) {
+        item.classList.remove('placed');
+        this.classList.remove('filled');
+        document.getElementById('sortPool1').appendChild(item);
+      }
+    });
+  });
+  var pool = document.getElementById('sortPool1');
+  pool.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pool.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var key = e.dataTransfer.getData('text/plain');
+    var item = document.getElementById('item_' + key);
+    if (item && item.classList.contains('placed')) {
+      item.classList.remove('placed');
+      var parentSlot = item.parentElement;
+      if (parentSlot.classList.contains('sort-slot')) { parentSlot.classList.remove('filled'); }
+      pool.appendChild(item);
+    }
+  });
+})();
+
+function checkSort() {
+  var correctOrder = ['key1','key3','key2','key5','key4','key6'];
+  var slots = document.querySelectorAll('#page1 .sort-slot');
+  var result = document.getElementById('sortResult');
+  var allFilled = true;
+  var allCorrect = true;
+  slots.forEach(function(slot, i) {
+    var item = slot.querySelector('.sort-item');
+    if (!item) { allFilled = false; allCorrect = false; return; }
+    if (item.getAttribute('data-sortkey') === correctOrder[i]) {
+      slot.classList.add('correct'); slot.classList.remove('wrong');
+    } else {
+      slot.classList.add('wrong'); slot.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+  if (!allFilled) {
+    result.textContent = '❌ 请先将所有卡片拖入槽位';
+    result.className = 'sort-result show fail';
+    return;
+  }
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.sort = true;
+    updateStageProgress();
+    document.getElementById('stageSortDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 顺序不对，请重试';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 填空填词 =====
+function checkFillBlanks() {
+  var inputs = document.querySelectorAll('#fillBlanks .fill-input');
+  var allCorrect = true;
+  inputs.forEach(function(inp) {
+    var answer = inp.getAttribute('data-answer');
+    var val = inp.value.trim();
+    if (val === answer) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); allCorrect = false; }
+  });
+  var result = document.getElementById('fillResult');
+  if (allCorrect) {
+    result.textContent = '✅ 完全正确！';
+    result.className = 'sort-result show pass';
+    stageDone.fill = true;
+    updateStageProgress();
+    document.getElementById('stageFillDone').classList.add('show');
+  } else {
+    result.textContent = '❌ 有错误，请检查';
+    result.className = 'sort-result show fail';
+  }
+}
+
+// ===== 连线匹配 =====
+var selectedLeft = null;
+var matchedPairs = [];
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll('.match-left.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedLeft = el;
+}
+function pairMatch(el) {
+  if (!selectedLeft) return;
+  if (el.classList.contains('matched')) return;
+  var leftCat = selectedLeft.getAttribute('data-match');
+  var rightCat = el.getAttribute('data-match');
+  if (leftCat === rightCat) {
+    selectedLeft.classList.add('matched');
+    selectedLeft.classList.remove('selected');
+    el.classList.add('matched');
+    matchedPairs.push(leftCat);
+    selectedLeft = null;
+    if (matchedPairs.length >= 5) {
+      document.getElementById('matchResult').textContent = '✅ 全部配对正确！';
+      document.getElementById('matchResult').className = 'sort-result show pass';
+      stageDone.match = true;
+      updateStageProgress();
+      document.getElementById('stageMatchDone').classList.add('show');
+    }
+  } else {
+    el.style.borderColor = '#e74c3c';
+    setTimeout(function() { el.style.borderColor = ''; }, 500);
+  }
+}
+
+// ===== 地图标注 IIFE =====
+(function initMapMarkers() {
+  var markers = document.querySelectorAll('#mapContainer .map-marker');
+  var found = {};
+  markers.forEach(function(m) {
+    m.addEventListener('click', function() {
+      var pt = m.getAttribute('data-point');
+      if (found[pt]) return;
+      m.setAttribute('fill', 'rgba(39,174,96,0.8)');
+      m.setAttribute('stroke', '#27ae60');
+      found[pt] = true;
+      var checkItems = document.querySelectorAll('#mapChecklist .map-check-item');
+      checkItems.forEach(function(ci) {
+        if (ci.getAttribute('data-point') === pt) ci.classList.add('done');
+      });
+      var allFound = document.querySelectorAll('#mapChecklist .map-check-item.done').length;
+      var total = document.querySelectorAll('#mapChecklist .map-check-item').length;
+      if (allFound >= total) {
+        stageDone.map = true;
+        updateStageProgress();
+        document.getElementById('stageMapDone').classList.add('show');
+      }
+    });
+    m.style.cursor = 'pointer';
+  });
+})();
+
+// ===== 翻转卡 =====
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  var total = document.querySelectorAll('.flash-card').length;
+  var flipped = document.querySelectorAll('.flash-card.flipped').length;
+  if (total > 0 && flipped >= total) {
+    stageDone.flips = true;
+    updateStageProgress();
+    var doneEl = document.getElementById('stageFlipsDone');
+    if (doneEl) doneEl.classList.add('show');
+  }
+}
+
+// ===== 知识结构图节点展开 =====
+function toggleKgDetail(node) {
+  node.classList.toggle('expanded');
+  var badge = node.querySelector('.kg-expand-badge');
+  if (badge) {
+    var arrow = badge.querySelector('.badge-arrow');
+    if (node.classList.contains('expanded')) {
+      if (arrow) arrow.textContent = '▼';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 收起详情';
+    } else {
+      if (arrow) arrow.textContent = '▶';
+      badge.childNodes[badge.childNodes.length-1].textContent = ' 点击展开';
+    }
+  }
+}
+
+// ===== deep-card 折叠 IIFE =====
+(function(){
+  var cards = document.querySelectorAll('.deep-card');
+  cards.forEach(function(card){
+    var hd = card.querySelector('.deep-card-hd');
+    var bd = card.querySelector('.deep-card-bd');
+    if (hd && bd) {
+      hd.removeAttribute('onclick');
+      hd.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bd.classList.toggle('show');
+        hd.classList.toggle('active');
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
