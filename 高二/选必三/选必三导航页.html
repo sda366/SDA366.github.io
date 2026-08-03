@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选必三 整册导航 · 文化交流与传播</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:SimHei,"Microsoft YaHei",sans-serif;font-size:14pt;background:#f5f8fc;color:#222;padding:30px;}
+.main-wrap{max-width:1120px;margin:0 auto;background:#fff;border-radius:18px;padding:40px 50px;box-shadow:0 4px 20px rgba(9,132,227,0.12);}
+/* 标题 */
+.lesson-header{background:linear-gradient(135deg,#0652b5,#0984e3,#74b9ff);color:#fff;border-radius:14px;padding:28px 36px;margin-bottom:30px;position:relative;overflow:hidden;}
+.lesson-header::after{content:"";position:absolute;top:-40px;right:-30px;width:160px;height:160px;background:rgba(255,255,255,0.06);border-radius:50%;}
+.lesson-header .meta-bar{font-size:11pt;opacity:0.82;margin-bottom:6px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;}
+.lesson-header .meta-sep{opacity:0.45;}
+.lesson-header .unit-tag{display:inline-block;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:2px 12px;font-size:10.5pt;}
+.lesson-header h1{font-size:28pt;font-weight:700;letter-spacing:3px;text-align:center;margin:10px 0 8px;text-shadow:0 2px 6px rgba(0,0,0,0.15);}
+.lesson-header .sub{font-size:14pt;text-align:right;margin-top:6px;letter-spacing:2px;font-weight:700;color:#ffe14d;text-shadow:0 1px 4px rgba(0,0,0,0.3);}
+.standard-box{background:#fff;border-radius:12px;padding:18px 24px;margin:18px 0 28px;border:1px solid #b3d9f9;box-shadow:0 2px 10px rgba(9,132,227,0.06);position:relative;}
+.standard-box .standard-label{position:absolute;top:-13px;left:20px;background:linear-gradient(135deg,#0652b5,#0984e3);color:#fff;font-size:11pt;padding:3px 18px;border-radius:14px;font-weight:700;box-shadow:0 2px 6px rgba(9,132,227,0.2);}
+.standard-box .standard-body{color:#0652b5;font-size:12pt;line-height:1.85;text-indent:0;padding-top:4px;}
+/* 通用 */
+h2{font-size:20pt;color:#0652b5;border-left:6px solid #0984e3;padding-left:14px;margin:34px 0 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+h3{font-size:16pt;color:#0984e3;margin:22px 0 12px;border-bottom:2px solid #b3d9f9;padding-bottom:6px;}
+h4{font-size:14pt;color:#0652b5;margin:16px 0 8px;}
+p{line-height:1.8;margin:8px 0;text-indent:2em;}
+p.no-indent{text-indent:0;}
+.card{background:#eaf4fe;border-radius:10px;padding:18px 22px;margin:14px 0;border-left:4px solid #0984e3;}
+.tag{display:inline-block;background:linear-gradient(135deg,#0652b5,#0984e3);color:#fff;font-size:11pt;padding:2px 12px;border-radius:12px;margin-right:6px;}
+.tag-h{display:inline-block;background:#f0f7ff;color:#0984e3;font-size:11pt;padding:2px 14px;border-radius:14px;border:1px solid #0984e3;margin-right:6px;font-weight:bold;}
+/* 全书脉络贯通图 */
+.flow{display:flex;align-items:stretch;justify-content:center;gap:0;flex-wrap:wrap;margin:18px 0;}
+.flow .f-node{background:linear-gradient(135deg,#0652b5,#0984e3);color:#fff;border-radius:10px;padding:14px 18px;text-align:center;min-width:130px;box-shadow:0 2px 8px rgba(9,132,227,0.25);}
+.flow .f-node .f-u{font-size:10pt;opacity:0.85;}
+.flow .f-node .f-t{font-size:13pt;font-weight:700;margin-top:4px;}
+.flow .f-arrow{display:flex;align-items:center;justify-content:center;color:#0984e3;font-size:22pt;font-weight:700;padding:0 6px;}
+/* 单元卡 */
+.unit-card{background:linear-gradient(135deg,#f8fbff,#eaf4fe);border:2px solid #0984e3;border-radius:14px;padding:22px 26px;margin:20px 0;}
+.unit-card .u-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.unit-card .u-no{background:linear-gradient(135deg,#0652b5,#0984e3);color:#fff;font-size:13pt;font-weight:700;padding:3px 14px;border-radius:12px;}
+.unit-card .u-name{font-size:17pt;font-weight:700;color:#0652b5;}
+.unit-card .u-link{font-size:12pt;color:#0b7285;margin-bottom:10px;}
+/* 课链接卡 */
+.lesson-row{display:flex;align-items:stretch;gap:14px;margin:12px 0;flex-wrap:wrap;}
+.lesson-link{flex:0 0 250px;max-width:250px;display:block;text-decoration:none;background:#fff;border:1.5px solid #0984e3;border-radius:10px;padding:12px 16px;color:#0652b5;transition:all .15s;box-shadow:0 2px 6px rgba(9,132,227,0.1);}
+.lesson-link:hover{background:#0984e3;color:#fff;transform:translateY(-2px);}
+.lesson-link:hover .ll-no{background:rgba(255,255,255,0.25);}
+.lesson-link .ll-no{display:inline-block;background:#eaf4fe;color:#0652b5;font-size:11pt;font-weight:700;padding:1px 10px;border-radius:10px;margin-bottom:5px;}
+.lesson-link .ll-title{font-size:13.5pt;font-weight:700;line-height:1.35;}
+.lesson-link .ll-go{font-size:11pt;margin-top:6px;color:#0984e3;}
+.lesson-link:hover .ll-go{color:#ffe14d;}
+.lesson-conn{flex:1;min-width:260px;background:#f0f7ff;border-radius:10px;padding:12px 16px;border-left:4px solid #74b9ff;font-size:12.5pt;line-height:1.7;}
+.lesson-conn .conn-label{color:#0984e3;font-weight:700;}
+.lesson-conn b{color:#e03131;}
+.lesson-conn i{color:#0b7285;font-style:normal;font-weight:700;}
+/* 跨单元连接表 */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13pt;}
+th{background:linear-gradient(135deg,#0652b5,#0984e3);color:#fff;padding:10px 12px;text-align:center;font-weight:700;}
+td{padding:9px 12px;border:1px solid #b3d9f9;line-height:1.6;vertical-align:top;}
+tr:nth-child(even){background:#f0f7ff;}
+tr:nth-child(odd){background:#fff;}
+/* 结构图复用 */
+.struct{border:2px solid #0984e3;border-radius:12px;padding:18px 22px;margin:16px 0;background:linear-gradient(135deg,#f8fbff,#eaf4fe);}
+.struct .s-branch{display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px;margin:4px 0;}
+.struct .s-node{background:linear-gradient(135deg,#0652b5,#0984e3);color:#fff;border-radius:8px;padding:10px 22px;font-size:12.5pt;font-weight:700;text-align:center;}
+.struct .s-node3{background:#eaf4fe;color:#0652b5;border-radius:6px;padding:6px 16px;font-size:11pt;text-align:center;border:1px solid #b3d9f9;}
+.footer-nav{margin-top:36px;padding-top:20px;border-top:2px solid #b3d9f9;text-align:center;color:#666;font-size:12pt;}
+.footer-nav a{color:#0984e3;text-decoration:none;font-weight:700;}
+.footer-nav a:hover{text-decoration:underline;}
+.hl-r{color:#e03131;font-weight:700;}
+.hl-k{color:#0b7285;font-weight:700;}
+@media print{body{background:#fff;padding:10px;}.main-wrap{box-shadow:none;padding:20px 30px;}.lesson-link:hover{background:#fff;color:#0652b5;transform:none;}}
+@media(max-width:700px){.main-wrap{padding:18px 14px;}.lesson-header{padding:18px 16px;}.lesson-header h1{font-size:20pt;}.lesson-link{flex:1 1 100%;max-width:none;}.flow .f-arrow{transform:rotate(90deg);}}
+</style>
+</head>
+<body>
+<div class="main-wrap">
+
+<div class="lesson-header">
+  <div class="meta-bar">
+    <span>统编版·高中历史</span><span class="meta-sep">·</span>
+    <span>选择性必修3</span><span class="meta-sep">·</span>
+    <span class="unit-tag">文化交流与传播</span>
+  </div>
+  <h1>选必三 · 整册导航</h1>
+  <div class="sub">各美其美　美美与共　共同守护</div>
+</div>
+
+<div class="standard-box">
+  <div class="standard-label">教材定位</div>
+  <div class="standard-body">
+    《义务教育历史课程标准》与统编教材体系下，<b>选择性必修3《文化交流与传播》</b>在必修课程基础上，引导学生了解人类文化交流与传播的基本途径、主要方式与特点，理解文化交流与互鉴在文明进步中的重要作用。全册 15 课按"中华文化→世界文化→人口迁徙→商路贸易→战争交锋→传承保护"六个视角展开，<span class="hl-r">课与课之间以"文化交流与传播"为主线层层递进、前后贯通</span>。本导航页重点呈现各课"承接什么、引出什么"的脉络联系，便于整体把握与复习回扣。
+  </div>
+</div>
+
+<!-- 全书脉络贯通 -->
+<h2><span class="tag-h">全书脉络</span>文化交流与传播 · 六重视角前后贯通</h2>
+<p class="no-indent">全册始终围绕一条主线——<span class="hl-r">文化如何在不同人群、区域、时代之间交流、碰撞、融合与传承</span>。六个单元从"认识自己"走向"看见世界"，再经"人、物、冲突"三条交流路径，最终收束于"共同守护"：</p>
+<div class="flow">
+  <div class="f-node"><div class="f-u">第一单元</div><div class="f-t">中华文化</div></div>
+  <div class="f-arrow">→</div>
+  <div class="f-node"><div class="f-u">第二单元</div><div class="f-t">世界文化</div></div>
+  <div class="f-arrow">→</div>
+  <div class="f-node"><div class="f-u">第三单元</div><div class="f-t">人口迁徙</div></div>
+  <div class="f-arrow">→</div>
+  <div class="f-node"><div class="f-u">第四单元</div><div class="f-t">商路贸易</div></div>
+  <div class="f-arrow">→</div>
+  <div class="f-node"><div class="f-u">第五单元</div><div class="f-t">战争交锋</div></div>
+  <div class="f-arrow">→</div>
+  <div class="f-node"><div class="f-u">第六单元</div><div class="f-t">传承保护</div></div>
+</div>
+<div class="card">
+  <span class="tag">主线逻辑</span> <b>主体（U1）</b>先认清"自己的文化"特质与意义 → <b>空间（U2）</b>横向看见世界多样文化 → <b>人口（U3）</b>人如何流动带来文化交融 → <b>商路（U4）</b>物如何流动带来文化交流 → <b>战争（U5）</b>冲突如何倒逼文化碰撞 → <b>保护（U6）</b>文化成果如何传承与共同守护。前四单元是"交流的三种路径"，第五单元是"交流的冲突形态"，第六单元是"交流的归宿与守护"，首尾呼应 L1 中华内涵与 L15 人类共同财富，形成闭环。
+</div>
+
+<!-- U1 -->
+<div class="unit-card">
+  <div class="u-head"><span class="u-no">第一单元</span><span class="u-name">源远流长的中华文化</span></div>
+  <div class="u-link">全册根基：从"中华"看世界，为后续所有"文化交流"提供主体坐标。</div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U1-第1课_中华优秀传统文化的内涵与特点.html">
+      <span class="ll-no">第 1 课</span>
+      <span class="ll-title">中华优秀传统文化的内涵与特点</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span><b>全书起点</b>，无前承；奠定"中华文化特质"主体坐标，<i>引出第2课</i>中华文化的世界意义，并为全册"文化交流"提供参照系。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U1-第2课 · 中华文化的世界意义.html">
+      <span class="ll-no">第 2 课</span>
+      <span class="ll-title">中华文化的世界意义</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第1课中华内涵<b>向外辐射</b>；收束 U1，<i>引出第二单元</i>转入"世界其他文化"（L3起），完成由中华到世界的视野转换。
+    </div>
+  </div>
+</div>
+
+<!-- U2 -->
+<div class="unit-card">
+  <div class="u-head"><span class="u-no">第二单元</span><span class="u-name">丰富多样的世界文化</span></div>
+  <div class="u-link">空间横向展开：西亚非洲 → 欧洲 → 南亚东亚美洲，全为古代世界独立发展的多样文化。</div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U2-第3课 古代西亚、非洲文化.html">
+      <span class="ll-no">第 3 课</span>
+      <span class="ll-title">古代西亚、非洲文化</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>U2 起点；从人类文明最早发祥地切入，承接第2课"文化多样性"的世界视野，<i>引出第4课</i>欧洲文化（近东是欧洲文明的重要源头）。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U2-第4课 欧洲文化的形成.html">
+      <span class="ll-no">第 4 课</span>
+      <span class="ll-title">欧洲文化的形成</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第3课（西亚非洲→欧洲的历史延续），聚焦欧洲文化内核，<i>引出第5课</i>补全亚洲与美洲。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U2-第5课 南亚、东亚与美洲的文化.html">
+      <span class="ll-no">第 5 课</span>
+      <span class="ll-title">南亚、东亚与美洲的文化</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第3-4课，补全南亚/东亚与美洲独立发展文化；收束 U2，<i>引出第三单元</i>"人口迁徙如何带动文化交融"（L6起）。
+    </div>
+  </div>
+</div>
+
+<!-- U3 -->
+<div class="unit-card">
+  <div class="u-head"><span class="u-no">第三单元</span><span class="u-name">人口迁徙、文化交融与认同</span></div>
+  <div class="u-link">时间轴纵向展开：古代迁徙 → 近代殖民 → 现代移民，看"人"如何流动带来文化交融。</div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U3-第6课 古代人类的迁徙和区域文化的形成.html">
+      <span class="ll-no">第 6 课</span>
+      <span class="ll-title">古代人类的迁徙和区域文化的形成</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>U3 起点；从印欧、游牧迁徙看文化"因流动而形成"，<i>引出第7课</i>近代殖民式人口重构。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U3-第7课 近代殖民活动和人口的跨地域转移.html">
+      <span class="ll-no">第 7 课</span>
+      <span class="ll-title">近代殖民活动和人口的跨地域转移</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第6课"迁徙"主题，转为<b>近代暴力式人口重构</b>（美洲族群替换、华工命运），<i>引出第8课</i>。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U3-第8课 现代社会的移民和多元文化.html">
+      <span class="ll-no">第 8 课</span>
+      <span class="ll-title">现代社会的移民和多元文化</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第6-7课，转向和平时代劳动力全球流动与多元文化认同；收束 U3，<i>引出第四单元</i>"商路贸易"这一更和平的交流路径（L9起）。
+    </div>
+  </div>
+</div>
+
+<!-- U4 -->
+<div class="unit-card">
+  <div class="u-head"><span class="u-no">第四单元</span><span class="u-name">商路、贸易与文化交流</span></div>
+  <div class="u-link">时间轴纵向展开：古代商路 → 近代世界贸易，看"物"如何流动带来文化交流。</div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U4-第9课 古代的商路、贸易与文化交流.html">
+      <span class="ll-no">第 9 课</span>
+      <span class="ll-title">古代的商路、贸易与文化交流</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>U4 起点；丝绸之路等"和平交流之路"，承接 U3 人口流动、补充"<b>商品流动先于知识流动</b>"路径，<i>引出第10课</i>。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U4-第10课 近代以来的世界贸易与文化交流的扩展.html">
+      <span class="ll-no">第 10 课</span>
+      <span class="ll-title">近代以来的世界贸易与文化交流的扩展</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第9课，从古代商路跃入全球贸易网与近代文化交流；收束 U4，<i>引出第五单元</i>"战争"这一冲突性交流形态（L11起）。
+    </div>
+  </div>
+</div>
+
+<!-- U5 -->
+<div class="unit-card">
+  <div class="u-head"><span class="u-no">第五单元</span><span class="u-name">战争与文化交锋</span></div>
+  <div class="u-link">时间轴纵向展开：古代战争 → 近代战争 → 现代战争，看"冲突"如何倒逼文化碰撞（与 U4 和平交流对照）。</div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U5-第11课 古代战争与地域文化的演变.html">
+      <span class="ll-no">第 11 课</span>
+      <span class="ll-title">古代战争与地域文化的演变</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>U5 起点；战争作为"暴力版交流"，承接第9-10课和平交流作<b>对照</b>（剑会生锈、文化会留存），<i>引出第12课</i>。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U5-第12课 近代战争与西方文化的扩张.html">
+      <span class="ll-no">第 12 课</span>
+      <span class="ll-title">近代战争与西方文化的扩张</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第11课，从古代"客观交融"转为近代"<b>主观征服 / 文化侵略</b>"（软性殖民），<i>引出第13课</i>。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U5-第13课 现代战争与不同文化的碰撞和交流.html">
+      <span class="ll-no">第 13 课</span>
+      <span class="ll-title">现代战争与不同文化的碰撞和交流</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>承接第11-12课，现代战争催生<b>民族觉醒与新兴国家文化</b>；收束 U5，<i>引出第六单元</i>"传承与保护"（L14起）。
+    </div>
+  </div>
+</div>
+
+<!-- U6 -->
+<div class="unit-card">
+  <div class="u-head"><span class="u-no">第六单元</span><span class="u-name">文化的传承与保护</span></div>
+  <div class="u-link">全书收束：从"文化如何传下去"（载体）升华到"文化如何共同守护"（遗产），与 U1 首尾呼应。</div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U6-第14课 文化传承的多种载体及其发展.html">
+      <span class="ll-no">第 14 课</span>
+      <span class="ll-title">文化传承的多种载体及其发展</span>
+      <div class="ll-go">▶ 进入本课</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 引出：</span>U6 起点；学校/书籍/图博等"文化如何传下去"，承接全书文化成果，<i>引出第15课</i>由载体升华为遗产保护。
+    </div>
+  </div>
+  <div class="lesson-row">
+    <a class="lesson-link" href="选必3-U6-第15课_文化遗产全人类共同的财富.html">
+      <span class="ll-no">第 15 课</span>
+      <span class="ll-title">文化遗产：全人类共同的财富</span>
+      <div class="ll-go">▶ 进入本课（全书终点）</div>
+    </a>
+    <div class="lesson-conn">
+      <span class="conn-label">承接 / 全书终点：</span>承接第14课载体，升华到"<b>遗产保护</b>"与"人类共同财富"；呼应第1课中华内涵、第2课世界意义，完成"<span class="hl-r">各美其美 → 美美与共 → 共同守护</span>"闭环。
+    </div>
+  </div>
+</div>
+
+<!-- 跨单元连接表 -->
+<h2><span class="tag-h">前后联系</span>单元之间与课与课的关键连接点</h2>
+<table>
+  <tr><th style="width:18%">连接位置</th><th style="width:30%">连接的课 / 单元</th><th>贯通要点</th></tr>
+  <tr><td>U1 内</td><td>第1课 → 第2课</td><td>从"中华内涵"（主体）到"中华世界意义"（辐射），完成由内而外的视野转换。</td></tr>
+  <tr><td>U1→U2</td><td>第2课 → 第3课</td><td>由"中华文化世界意义"自然转入"世界其他文化"，开启横向空间展开。</td></tr>
+  <tr><td>U2 内</td><td>第3→4→5课</td><td>地理递进：西亚非洲（文明源头）→ 欧洲 → 南亚东亚美洲，体现文化多样性与独立发展。</td></tr>
+  <tr><td>U2→U3</td><td>第5课 → 第6课</td><td>从"静态的多样文化"转向"动态的人口迁徙如何塑造文化"，交流路径由空间转时间。</td></tr>
+  <tr><td>U3 内</td><td>第6→7→8课</td><td>时间轴：古代和平迁徙 → 近代殖民暴力重构 → 现代劳动力全球流动与多元认同。</td></tr>
+  <tr><td>U3→U4</td><td>第8课 → 第9课</td><td>由"人的流动"补充"物的流动"（商路贸易），和平交流路径登场，与 U3 暴力重构对照。</td></tr>
+  <tr><td>U4 内</td><td>第9→10课</td><td>从古代丝路到近代全球贸易网，"商品流动先于知识流动"贯穿，交流规模化、规则化。</td></tr>
+  <tr><td>U4→U5</td><td>第10课 → 第11课</td><td>由"和平贸易交流"转入"战争冲突交流"，同是交流却形态迥异，形成全书最强对照。</td></tr>
+  <tr><td>U5 内</td><td>第11→12→13课</td><td>时间轴：古代客观交融 → 近代主观征服/文化侵略 → 现代民族觉醒与新兴国家文化。</td></tr>
+  <tr><td>U5→U6</td><td>第13课 → 第14课</td><td>由"文化在冲突中碰撞"转向"文化如何被传承与保护"，进入归宿性单元。</td></tr>
+  <tr><td>U6 内</td><td>第14→15课</td><td>由"传承载体"（学校/书籍/图博）升华为"遗产保护"（人类共同财富）。</td></tr>
+  <tr><td>首尾呼应</td><td>第1课 ⇄ 第15课</td><td>起点"中华内涵"与终点"人类共同财富"遥相呼应，闭环于"各美其美→美美与共→共同守护"。</td></tr>
+</table>
+
+<div class="card">
+  <span class="tag">复习提示</span> 全册每课末尾的<b>「本课知识结构图 · 脉络贯通」</b>支，以及课堂训练中带"前后贯通 / 跨册"标记的判断题、单选题、材料题与综合探究，均呼应本页主线。建议以"单元内递进 + 单元间转向"两条线索回扣，先横向（同单元三课如何步步深入），再纵向（六单元如何围绕文化交流与传播层层推进）。
+</div>
+
+<div class="footer-nav">
+  <p>选择性必修3《文化交流与传播》· 全册 15 课导航页　|　各课底部"整册导航"均链回本页</p>
+  <p style="margin-top:8px;">回到：<a href="选必3-U1-第1课_中华优秀传统文化的内涵与特点.html">第1课（全书起点）</a>　·　<a href="选必3-U6-第15课_文化遗产全人类共同的财富.html">第15课（全书终点）</a></p>
+</div>
+
+</div>
+</body>
+</html>
