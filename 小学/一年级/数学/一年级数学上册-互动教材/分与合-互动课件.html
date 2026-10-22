@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一年级数学上册 · 分与合（P20-21）· 互动课件</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#eef3f8; color:#2b3a4a; line-height:1.6; }
+  .nav-back { position:sticky; top:0; z-index:999; display:block; text-align:center; background:#d84a2b; color:#fff;
+    padding:9px 0; font-size:14px; text-decoration:none; }
+  .nav-back:hover { background:#b83c20; }
+
+  .bar { display:flex; align-items:center; gap:10px; background:#fff; padding:10px 14px; box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky; top:38px; z-index:998; flex-wrap:wrap; }
+  .bar h1 { font-size:17px; margin-right:auto; }
+  .bar button { border:none; border-radius:20px; padding:7px 14px; font-size:13.5px; cursor:pointer; background:#1565c0; color:#fff; }
+  .bar button.sec { background:#e0e0e0; color:#333; }
+  .bar button.on { background:#2e7d32; }
+
+  .stage-wrap { max-width:1000px; margin:14px auto; padding:0 12px; }
+  .stage { position:relative; width:100%; border-radius:14px; overflow:hidden; box-shadow:0 4px 18px rgba(0,0,0,.18); background:#fff; }
+  .stage img { width:100%; display:block; }
+  .hotspot { position:absolute; transform:translate(-50%,-50%); background:rgba(21,101,192,.92); color:#fff;
+    border:none; border-radius:22px; padding:6px 12px; font-size:13px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);
+    white-space:nowrap; }
+  .hotspot::before { content:""; display:inline-block; width:9px; height:9px; border-radius:50%; background:#ffd54f; margin-right:6px; vertical-align:middle; }
+  body.book .hotspot { display:none; }
+
+  /* 弹窗 */
+  .mask { position:fixed; inset:0; background:rgba(20,30,45,.55); display:none; align-items:center; justify-content:center; z-index:1000; padding:14px; }
+  .mask.show { display:flex; }
+  .modal { background:#fff; width:min(640px,96vw); max-height:92vh; overflow:auto; border-radius:18px; padding:18px 20px 22px; box-shadow:0 12px 40px rgba(0,0,0,.35); }
+  .modal h2 { font-size:19px; color:#1565c0; margin-bottom:4px; }
+  .modal .tline { font-size:14px; color:#5a6b7b; margin-bottom:12px; }
+  .modal .close { float:right; border:none; background:#eee; border-radius:50%; width:30px; height:30px; cursor:pointer; font-size:16px; }
+  .scene { background:#f4f9ff; border:1px dashed #bcd6f2; border-radius:14px; padding:14px; min-height:120px;
+    display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:12px; position:relative; }
+  .leaf, .flower, .bird { font-size:30px; transition:transform .4s ease, opacity .3s; }
+  .pile { min-width:90px; min-height:60px; border:2px dotted #9bbfe0; border-radius:12px; padding:8px; display:flex; gap:4px; flex-wrap:wrap; align-content:flex-start; }
+  .pile.t { background:#fff7e6; }
+  .hand { font-size:40px; cursor:pointer; transition:transform .5s; transform-style:preserve-3d; }
+  .hand.flip { transform:rotateY(180deg); }
+  .house { font-size:46px; }
+  .eq { font-size:22px; font-weight:bold; color:#0d47a1; text-align:center; min-height:30px; margin:8px 0; }
+  .prompt { font-size:15px; background:#fff3e0; border-left:4px solid #f0b25a; border-radius:8px; padding:8px 12px; margin:8px 0; }
+  .choices { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0; }
+  .choices button, .act button { border:none; border-radius:12px; padding:8px 14px; font-size:14px; cursor:pointer; background:#1565c0; color:#fff; }
+  .choices button.alt { background:#e0e0e0; color:#333; }
+  .acts { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+
+  /* 填空 + 数字键盘 */
+  .fillrow { display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin:6px 0; font-size:18px; }
+  .blank { width:46px; height:40px; text-align:center; font-size:20px; border:2px solid #90caf9; border-radius:8px; background:#fafdff; }
+  .blank.ok { border-color:#2e7d32; background:#e8f5e9; }
+  .blank.no { border-color:#e53935; background:#ffebee; }
+  .keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; max-width:200px; margin:8px 0; }
+  .keypad button { border:none; border-radius:10px; padding:12px 0; font-size:18px; background:#1565c0; color:#fff; cursor:pointer; }
+  .keypad button.fn { background:#90a4ae; }
+
+  .speak { border:none; border-radius:12px; padding:6px 12px; font-size:13px; cursor:pointer; background:#6a1b9a; color:#fff; }
+  .feedback { min-height:24px; font-size:14px; margin-top:6px; font-weight:bold; }
+  .feedback.ok { color:#2e7d32; }
+  .feedback.no { color:#e53935; }
+  .reveal { font-size:14px; background:#e8f5e9; border-radius:10px; padding:10px 12px; margin-top:8px; display:none; }
+  .reveal.show { display:block; }
+
+  .stopbtn { position:fixed; right:14px; bottom:14px; z-index:1001; border:none; border-radius:24px; padding:10px 16px;
+    background:#37474f; color:#fff; font-size:14px; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,.3); }
+  footer { text-align:center; font-size:12.5px; color:#88a; padding:18px; }
+</style>
+</head>
+<body>
+
+<a class="nav-back" href="../index.html">📚 一年级上册 · 系列导航（点此返回）</a>
+
+<div class="bar">
+  <h1>🍃 分与合（一年级上册 P20-21）· 互动课件</h1>
+  <button class="sec" id="modeBtn">📖 教材模式（隐藏互动）</button>
+  <button class="speak" id="readBtn">🔊 朗读本页说明</button>
+</div>
+
+<div class="stage-wrap">
+  <div class="stage" id="stage">
+    <img src="images/分与合.jpg" alt="人教版一年级上册 分与合 第20-21页">
+    <!-- 热区：百分比定位在教材对应区域 -->
+    <button class="hotspot" style="left:30%; top:15%;" data-ex="fenhe">分与合·叶子</button>
+    <button class="hotspot" style="left:46%; top:33%;" data-ex="fenhe2">5可以分成几和几</button>
+    <button class="hotspot" style="left:40%; top:54%;" data-ex="flowers">试一试·4朵花</button>
+    <button class="hotspot" style="left:14%; top:15%;" data-ex="hands">做一做①·两只手</button>
+    <button class="hotspot" style="left:15%; top:46%;" data-ex="fill">做一做②·填一填</button>
+    <button class="hotspot" style="left:62%; top:38%;" data-ex="birds">做一做③·5只鸟</button>
+  </div>
+</div>
+
+<footer>底层为教材原页（保留原貌）· 彩色圆点为互动热区 · 点一点、拖一拖、听一听、答一答 · 建议使用 Chrome / Edge 打开</footer>
+
+<!-- 弹窗 -->
+<div class="mask" id="mask">
+  <div class="modal" id="modal">
+    <button class="close" id="closeBtn">✕</button>
+    <h2 id="mTitle"></h2>
+    <div class="tline" id="mLine"></div>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<button class="stopbtn" id="stopBtn">⏹ 停止朗读</button>
+
+<script>
+(function(){
+  /* ===== 声音：点读 + 反馈音 ===== */
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  var zhVoice = null;
+  function loadVoices(){ if(!synth) return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){
+    if(/zh|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+  function speak(t){ t=(t||'').replace(/\s+/g,' ').trim(); if(!t) return;
+    if(!synth){ return; } synth.cancel();
+    var u=new SpeechSynthesisUtterance(t); u.lang='zh-CN'; u.rate=0.9; u.pitch=1; if(zhVoice)u.voice=zhVoice; synth.speak(u); }
+  function stop(){ if(synth) synth.cancel(); }
+  function beep(freq,dur,type){ try{ var C=window.AudioContext||window.webkitAudioContext; var c=new C();
+    var o=c.createOscillator(),g=c.createGain(); o.type=type||'sine'; o.frequency.value=freq;
+    o.connect(g); g.connect(c.destination); var t=c.currentTime;
+    g.gain.setValueAtTime(0.001,t); g.gain.exponentialRampToValueAtTime(0.18,t+0.02); g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+    o.start(); o.stop(t+dur); }catch(e){} }
+  function fxOk(){ beep(660,0.1); setTimeout(function(){beep(880,0.16);},110); speak('真棒，你答对了！'); }
+  function fxNo(){ beep(280,0.2,'triangle'); speak('再想一想，你一定行。'); }
+
+  /* ===== 弹窗 ===== */
+  var mask=document.getElementById('mask'), modal=document.getElementById('modal');
+  var mTitle=document.getElementById('mTitle'), mLine=document.getElementById('mLine'), mBody=document.getElementById('mBody');
+  function openModal(title,line,builder){ mTitle.textContent=title; mLine.textContent=line; mBody.innerHTML='';
+    builder(mBody); mask.classList.add('show'); }
+  function closeModal(){ mask.classList.remove('show'); stop(); }
+  document.getElementById('closeBtn').onclick=closeModal;
+  mask.addEventListener('click',function(e){ if(e.target===mask) closeModal(); });
+
+  /* ===== 通用：数字键盘 + 填空 ===== */
+  // blanks: 数组，每项 {el, ans}
+  function buildKeypad(host, blanks){
+    var active=null;
+    blanks.forEach(function(b){ b.el.addEventListener('click',function(e){ active=b; e.stopPropagation(); }); });
+    var pad=document.createElement('div'); pad.className='keypad';
+    ['1','2','3','4','5','6','7','8','9'].forEach(function(d){
+      var b=document.createElement('button'); b.textContent=d; b.onclick=function(){ if(active) active.el.value=d; };
+      pad.appendChild(b);
+    });
+    var b0=document.createElement('button'); b0.textContent='0'; b0.className='fn';
+    b0.onclick=function(){ if(active) active.el.value='0'; };
+    var bk=document.createElement('button'); bk.textContent='⌫'; bk.className='fn';
+    bk.onclick=function(){ if(active) active.el.value=''; };
+    pad.appendChild(b0); pad.appendChild(bk);
+    var bs=document.createElement('button'); bs.textContent='清除'; bs.className='fn';
+    bs.onclick=function(){ blanks.forEach(function(x){ x.el.value=''; x.el.className='blank'; }); };
+    pad.appendChild(bs);
+    host.appendChild(pad);
+  }
+  function checkBlanks(blanks){
+    var allok=true;
+    blanks.forEach(function(b){ var v=parseInt(b.el.value,10);
+      if(v===b.ans){ b.el.className='blank ok'; } else { b.el.className='blank no'; allok=false; } });
+    return allok;
+  }
+  function mkBlank(){ var i=document.createElement('input'); i.className='blank'; i.readOnly=true; i.value=''; return i; }
+
+  /* ===== 1. 分与合（叶子） ===== */
+  function exFenhe(host){
+    var intro=document.createElement('div'); intro.className='prompt';
+    intro.textContent='把5片叶子分成两堆，有几种分法？点下面的按钮试一试。';
+    host.appendChild(intro);
+    var scene=document.createElement('div'); scene.className='scene';
+    var left=document.createElement('div'); left.className='pile t';
+    var right=document.createElement('div'); right.className='pile t';
+    scene.appendChild(left); scene.appendChild(right); host.appendChild(scene);
+    var eq=document.createElement('div'); eq.className='eq'; host.appendChild(eq);
+    var spk=document.createElement('button'); spk.className='speak'; spk.textContent='🔊 读一读';
+    spk.onclick=function(){ speak(eq.textContent); }; host.appendChild(spk);
+
+    function render(a,b){ left.innerHTML=''; right.innerHTML='';
+      for(var i=0;i<a;i++){ var s=document.createElement('span'); s.className='leaf'; s.textContent='🍃'; left.appendChild(s); }
+      for(var j=0;j<b;j++){ var s2=document.createElement('span'); s2.className='leaf'; s2.textContent='🍃'; right.appendChild(s2); }
+      eq.textContent='5可以分成'+a+'和'+b+'，'+a+'和'+b+'组成5'; }
+    var cho=document.createElement('div'); cho.className='choices';
+    [[1,4],[2,3],[3,2],[4,1]].forEach(function(p){
+      var b=document.createElement('button'); b.textContent='分成 '+p[0]+' 和 '+p[1];
+      b.onclick=function(){ render(p[0],p[1]); speak(eq.textContent); };
+      cho.appendChild(b);
+    });
+    host.appendChild(cho);
+
+    var more=document.createElement('button'); more.className='speak'; more.style.background='#00897b';
+    more.textContent='🌈 5还能怎样分？（点我）';
+    var rev=document.createElement('div'); rev.className='reveal';
+    rev.innerHTML='5的分法一共有4种：<br>1和4（4和1）、2和3（3和2），合起来是 <b>5</b>。<br>这一题说法不唯一，只要两堆加起来是5就对！';
+    more.onclick=function(){ rev.classList.toggle('show'); if(rev.classList.contains('show')) speak('5的分法一共有四种，1和4，2和3，3和2，4和1，说法不唯一。'); };
+    host.appendChild(more); host.appendChild(rev);
+  }
+
+  /* ===== 2. 试一试（4朵花） ===== */
+  function exFlowers(host){
+    var intro=document.createElement('div'); intro.className='prompt';
+    intro.textContent='把4朵花分到两个筐里，每放一朵都数一数。最后填空：4可以分成几和几？';
+    host.appendChild(intro);
+    var cnt=document.createElement('div'); cnt.className='eq'; cnt.textContent='左筐 0 朵，右筐 0 朵，一共 4 朵';
+    host.appendChild(cnt);
+    var scene=document.createElement('div'); scene.className='scene';
+    var pool=document.createElement('div'); pool.className='pile';
+    var lb=document.createElement('div'); lb.className='pile t'; lb.title='左筐';
+    var rb=document.createElement('div'); rb.className='pile t'; rb.title='右筐';
+    scene.appendChild(pool); scene.appendChild(lb); scene.appendChild(rb); host.appendChild(scene);
+    var flowers=[];
+    for(var i=0;i<4;i++){ var f=document.createElement('span'); f.className='flower'; f.textContent='🌸';
+      f.onclick=function(){ moveTo(curTarget); }; pool.appendChild(f); flowers.push(f); }
+    var curTarget='L';
+    var act=document.createElement('div'); act.className='acts';
+    var bl=document.createElement('button'); bl.textContent='→ 放到左筐'; bl.onclick=function(){ curTarget='L'; act.querySelectorAll('button').forEach(function(x){x.style.outline='';}); bl.style.outline='3px solid #1565c0'; };
+    var br=document.createElement('button'); br.textContent='→ 放到右筐'; br.className='alt'; br.onclick=function(){ curTarget='R'; act.querySelectorAll('button').forEach(function(x){x.style.outline='';}); br.style.outline='3px solid #1565c0'; };
+    act.appendChild(bl); act.appendChild(br); host.appendChild(act);
+    function moveTo(t){ if(!flowers.length) return; var f=flowers.shift();
+      (t==='L'?lb:rb).appendChild(f); speak('放到'+(t==='L'?'左':'右')+'筐'); update(); }
+    function update(){ var l=lb.querySelectorAll('.flower').length, r=rb.querySelectorAll('.flower').length;
+      cnt.textContent='左筐 '+l+' 朵，右筐 '+r+' 朵，一共 4 朵'; speak(cnt.textContent); }
+
+    var q=document.createElement('div'); q.className='prompt'; q.textContent='填空：4 可以分成 □ 和 □（答案不唯一，加起来是4就对）';
+    host.appendChild(q);
+    var row=document.createElement('div'); row.className='fillrow';
+    row.appendChild(document.createTextNode('4 ＝'));
+    var b1=mkBlank(), b2=mkBlank(); row.appendChild(b1); row.appendChild(document.createTextNode('＋')); row.appendChild(b2);
+    var spkQ=document.createElement('button'); spkQ.className='speak'; spkQ.textContent='🔊 读题'; spkQ.onclick=function(){ speak('4可以分成几和几？加起来等于4就可以。'); };
+    row.appendChild(spkQ); host.appendChild(row);
+    buildKeypad(host,[{el:b1,ans:-1},{el:b2,ans:-1}]);
+    var chk=document.createElement('button'); chk.style.marginTop='8px'; chk.textContent='✅ 检查';
+    var fb=document.createElement('div'); fb.className='feedback';
+    var rev=document.createElement('div'); rev.className='reveal';
+    rev.innerHTML='4可以分成：1和3、2和2、3和1 —— 三种分法都对！';
+    chk.onclick=function(){ var a=parseInt(b1.value,10), b=parseInt(b2.value,10);
+      if(isNaN(a)||isNaN(b)||a<0||b<0||a+b!==4){ b1.className='blank no'; b2.className='blank no'; fb.className='feedback no'; fb.textContent='再想想：两筐加起来要正好等于4哦。'; fxNo(); return; }
+      b1.className='blank ok'; b2.className='blank ok'; fb.className='feedback ok'; fb.textContent='对了！'+a+'和'+b+'组成4。'; fxOk(); rev.classList.add('show'); };
+    host.appendChild(chk); host.appendChild(fb); host.appendChild(rev);
+  }
+
+  /* ===== 3. 做一做① 两只手 ===== */
+  function exHands(host){
+    var intro=document.createElement('div'); intro.className='prompt';
+    intro.textContent='点一点右手，看看藏着几个△。然后再填一填。';
+    host.appendChild(intro);
+    var scene=document.createElement('div'); scene.className='scene';
+    var lh=document.createElement('div'); lh.className='hand'; lh.textContent='✋'; lh.title='左手（1个）';
+    var rh=document.createElement('div'); rh.className='hand'; rh.textContent='✋'; rh.title='右手（点我）';
+    scene.appendChild(lh); scene.appendChild(rh); host.appendChild(scene);
+    var shown=document.createElement('div'); shown.className='eq'; shown.textContent='右手藏着 2 个 △（左手 1 个）';
+    scene.appendChild(shown);
+    rh.onclick=function(){ rh.classList.add('flip'); shown.textContent='右手翻开：2 个 △，左手 1 个 △，合起来是 3'; speak('右手2个，左手1个，合起来是3'); };
+
+    var q=document.createElement('div'); q.className='prompt'; q.textContent='填空：1 和 □ 组成 3；□ 和 1 组成 3';
+    host.appendChild(q);
+    var row=document.createElement('div'); row.className='fillrow';
+    row.appendChild(document.createTextNode('1 和')); var b1=mkBlank(); row.appendChild(b1); row.appendChild(document.createTextNode('组成 3'));
+    row.appendChild(document.createTextNode('　　')); row.appendChild(document.createTextNode('□ 和 1 组成 3')); var b2=mkBlank(); row.appendChild(b2);
+    var spkQ=document.createElement('button'); spkQ.className='speak'; spkQ.textContent='🔊 读题'; spkQ.onclick=function(){ speak('1和几组成3？几和1组成3？都是2。'); };
+    row.appendChild(spkQ); host.appendChild(row);
+    buildKeypad(host,[{el:b1,ans:2},{el:b2,ans:2}]);
+    var chk=document.createElement('button'); chk.style.marginTop='8px'; chk.textContent='✅ 检查';
+    var fb=document.createElement('div'); fb.className='feedback';
+    var rev=document.createElement('div'); rev.className='reveal'; rev.innerHTML='1和2组成3，2和1也组成3。两堆合起来都是3！';
+    chk.onclick=function(){ if(checkBlanks([{el:b1,ans:2},{el:b2,ans:2}])){ fb.className='feedback ok'; fb.textContent='完全正确！'; fxOk(); rev.classList.add('show'); } else { fb.className='feedback no'; fb.textContent='不对，再数数看。'; fxNo(); } };
+    host.appendChild(chk); host.appendChild(fb); host.appendChild(rev);
+  }
+
+  /* ===== 4. 做一做② 填一填 ===== */
+  function exFill(host){
+    var intro=document.createElement('div'); intro.className='prompt';
+    intro.textContent='先摆一摆，再填一填。点空格，用数字键盘输入答案，最后点检查。';
+    host.appendChild(intro);
+    var items=[ {t:'3 和 □ 组成 5', ans:2}, {t:'1 和 □ 组成 2', ans:1}, {t:'2 和 □ 组成 3', ans:1},
+               {t:'□ 和 3 组成 4', ans:1}, {t:'2 和 3 组成 □', ans:5} ];
+    var blanks=[];
+    items.forEach(function(it){ var row=document.createElement('div'); row.className='fillrow';
+      var parts=it.t.split('□'); row.appendChild(document.createTextNode(parts[0]));
+      var b=mkBlank(); row.appendChild(b); blanks.push({el:b,ans:it.ans});
+      row.appendChild(document.createTextNode(parts[1])); host.appendChild(row); });
+    var spkQ=document.createElement('button'); spkQ.className='speak'; spkQ.textContent='🔊 读全部题目';
+    spkQ.onclick=function(){ speak('3和几组成5？1和几组成2？2和几组成3？几和3组成4？2和3组成几？'); };
+    host.appendChild(spkQ);
+    buildKeypad(host,blanks);
+    var chk=document.createElement('button'); chk.style.marginTop='8px'; chk.textContent='✅ 检查';
+    var fb=document.createElement('div'); fb.className='feedback';
+    var rev=document.createElement('div'); rev.className='reveal'; rev.innerHTML='答案：2、1、1、1、5。检查后绿色表示填对啦！';
+    chk.onclick=function(){ var ok=checkBlanks(blanks);
+      if(ok){ fb.className='feedback ok'; fb.textContent='全部正确，你真厉害！'; fxOk(); rev.classList.add('show'); }
+      else { fb.className='feedback no'; fb.textContent='有的还没填对，红色空格再想想。'; fxNo(); } };
+    host.appendChild(chk); host.appendChild(fb); host.appendChild(rev);
+  }
+
+  /* ===== 5. 做一做③ 5只鸟 ===== */
+  function exBirds(host){
+    var intro=document.createElement('div'); intro.className='prompt';
+    intro.textContent='5只鸟飞进两个屋，每个屋飞进的会同样多吗？先选一种分法，再回答。';
+    host.appendChild(intro);
+    var cnt=document.createElement('div'); cnt.className='eq'; cnt.textContent='左屋 0 只，右屋 0 只，一共 5 只';
+    host.appendChild(cnt);
+    var scene=document.createElement('div'); scene.className='scene';
+    var lb=document.createElement('div'); lb.className='pile t'; lb.title='左屋';
+    var rb=document.createElement('div'); rb.className='pile t'; rb.title='右屋';
+    scene.appendChild(lb); scene.appendChild(rb); host.appendChild(scene);
+    function fly(a,b){ lb.innerHTML=''; rb.innerHTML='';
+      for(var i=0;i<a;i++){ var x=document.createElement('span'); x.className='bird'; x.textContent='🐦'; lb.appendChild(x); }
+      for(var j=0;j<b;j++){ var y=document.createElement('span'); y.className='bird'; y.textContent='🐦'; rb.appendChild(y); }
+      cnt.textContent='左屋 '+a+' 只，右屋 '+b+' 只，一共 5 只'; }
+    var cho=document.createElement('div'); cho.className='choices';
+    [[1,4],[2,3],[3,2],[4,1]].forEach(function(p){
+      var b=document.createElement('button'); b.textContent='飞 '+p[0]+' 和 '+p[1];
+      b.onclick=function(){ fly(p[0],p[1]); speak('左屋'+p[0]+'只，右屋'+p[1]+'只'); };
+      cho.appendChild(b);
+    });
+    host.appendChild(cho);
+
+    var q=document.createElement('div'); q.className='prompt'; q.textContent='两个屋里的鸟会同样多吗？点你的答案：';
+    host.appendChild(q);
+    var ans=document.createElement('div'); ans.className='choices';
+    var yes=document.createElement('button'); yes.textContent='会同样多'; yes.className='alt';
+    var no=document.createElement('button'); no.textContent='不会同样多';
+    ans.appendChild(yes); ans.appendChild(no); host.appendChild(ans);
+    var fb=document.createElement('div'); fb.className='feedback';
+    var rev=document.createElement('div'); rev.className='reveal';
+    rev.innerHTML='💡 不会同样多！因为 5 是单数，不能分成两个相等的数。无论怎么飞：1和4、2和3…两边都不会一样多。只有总数是双数（如4）时，才能每只屋一样多（2和2）。';
+    yes.onclick=function(){ fb.className='feedback no'; fb.textContent='不对哦，再试试别的飞法。'; fxNo(); };
+    no.onclick=function(){ fb.className='feedback ok'; fb.textContent='对啦！5是单数，分不出一样多的两堆。'; fxOk(); rev.classList.add('show'); speak('因为5是单数，不能分成两个相等的数，所以不会同样多。'); };
+    host.appendChild(fb); host.appendChild(rev);
+  }
+
+  /* ===== 绑定热区 ===== */
+  var builders={ fenhe:function(h){ exFenhe(h); }, fenhe2:function(h){ exFenhe(h); }, flowers:function(h){ exFlowers(h); },
+    hands:function(h){ exHands(h); }, fill:function(h){ exFill(h); }, birds:function(h){ exBirds(h); } };
+  var titles={ fenhe:['分与合·叶子','5片叶子分成两堆，有几种分法？'], fenhe2:['5可以分成几和几','5的分法一共4种，说法不唯一'],
+    flowers:['试一试·4朵花','把4朵花分到两个筐，再填空'], hands:['做一做①·两只手','翻开右手数一数△，再填空'],
+    fill:['做一做②·填一填','先想组成，再用数字键盘填空'], birds:['做一做③·5只鸟','5只鸟飞两屋，会同样多吗？'] };
+  document.querySelectorAll('.hotspot').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var k=btn.getAttribute('data-ex');
+      openModal(titles[k][0], titles[k][1], builders[k]);
+    });
+  });
+
+  /* ===== 顶部按钮 ===== */
+  var modeBtn=document.getElementById('modeBtn');
+  modeBtn.onclick=function(){ document.body.classList.toggle('book');
+    var on=document.body.classList.contains('book');
+    modeBtn.textContent= on?'🎮 回到互动模式':'📖 教材模式（隐藏互动）';
+    modeBtn.classList.toggle('on',on); };
+  document.getElementById('readBtn').onclick=function(){ speak('这是一年级上册分与合。点彩色圆点，可以分叶子、分花朵、翻小手、填数字、让小鸟飞。每道题都能听、能动、能作答。'); };
+  document.getElementById('stopBtn').onclick=stop;
+})();
+</script>
+</body>
+</html>
