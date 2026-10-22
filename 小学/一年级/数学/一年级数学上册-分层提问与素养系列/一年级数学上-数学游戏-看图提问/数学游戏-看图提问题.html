@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学游戏 · 看图提问题 —— 一年级数学上（人教版2024）</title>
+<style>
+  /* ===== 全局样式：明亮活泼，适合刚入学的一年级小朋友 ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(180deg, #fdf6e3 0%, #fff9f0 100%);
+    color: #4a3728;
+    line-height: 1.8;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  /* ===== 页头 ===== */
+  header {
+    text-align: center;
+    background: linear-gradient(135deg, #ff9a56 0%, #ffcc66 100%);
+    border-radius: 24px;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 16px rgba(255, 154, 86, 0.35);
+  }
+  header h1 { font-size: 30px; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.15); margin-bottom: 8px; }
+  header p { color: #fff8ec; font-size: 16px; }
+  header .badge {
+    display: inline-block; background: #fff; color: #ff7a3c;
+    border-radius: 999px; padding: 4px 18px; font-size: 14px;
+    margin-top: 10px; font-weight: bold;
+  }
+
+  /* ===== 场景卡片 ===== */
+  .scene {
+    background: #fff;
+    border-radius: 24px;
+    margin-bottom: 36px;
+    box-shadow: 0 4px 14px rgba(120, 90, 60, 0.12);
+    overflow: hidden;
+  }
+  .scene-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 18px 24px 12px;
+  }
+  .scene-num {
+    flex: 0 0 auto;
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: bold; color: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+  .scene-head h2 { font-size: 22px; }
+  .scene-head .tag {
+    margin-left: auto; font-size: 13px; color: #9a8468;
+    background: #fdf3e3; border-radius: 999px; padding: 3px 12px;
+    white-space: nowrap;
+  }
+
+  /* 场景配色（每个场景一个主题色） */
+  .c1 .scene-num { background: #ff8a65; } .c1 .scene-head h2 { color: #e65100; }
+  .c2 .scene-num { background: #66bb6a; } .c2 .scene-head h2 { color: #2e7d32; }
+  .c3 .scene-num { background: #42a5f5; } .c3 .scene-head h2 { color: #1565c0; }
+  .c4 .scene-num { background: #ab47bc; } .c4 .scene-head h2 { color: #7b1fa2; }
+  .c5 .scene-num { background: #ffca28; } .c5 .scene-head h2 { color: #b28704; }
+  .c6 .scene-num { background: #26c6da; } .c6 .scene-head h2 { color: #00838f; }
+
+  .scene-img { text-align: center; padding: 0 24px; }
+  .scene-img img {
+    width: 100%; max-width: 760px;
+    border-radius: 16px;
+    border: 4px solid #fff3dd;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  .img-tip { font-size: 13px; color: #b09a80; margin-top: 6px; }
+
+  /* ===== 问题卡 ===== */
+  .qa-list { padding: 16px 24px 26px; }
+  .qa {
+    background: #fffdf7;
+    border: 2px solid #f5e6c8;
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin-top: 12px;
+  }
+  .qa-q {
+    display: flex; align-items: flex-start; gap: 10px;
+    cursor: pointer; user-select: none;
+  }
+  .qa-q .q-emoji { font-size: 22px; flex: 0 0 auto; }
+  .qa-q .q-text { font-size: 17px; font-weight: bold; color: #5b4632; flex: 1; }
+  .qa-q .toggle {
+    flex: 0 0 auto;
+    background: #ffe0b2; color: #e65100;
+    border-radius: 999px; padding: 2px 14px;
+    font-size: 13px; font-weight: bold;
+    transition: all 0.2s;
+  }
+  .qa.open .qa-q .toggle { background: #aed581; color: #33691e; }
+  .qa-a {
+    display: none;
+    margin-top: 12px;
+    background: #f1f8e9;
+    border-left: 5px solid #8bc34a;
+    border-radius: 0 12px 12px 0;
+    padding: 10px 14px;
+    font-size: 15.5px;
+    color: #3e5223;
+  }
+  .qa.open .qa-a { display: block; }
+  .qa-a .a-label { font-weight: bold; color: #558b2f; }
+  .qa-a ul { margin: 6px 0 0 22px; }
+  .qa-a li { margin-bottom: 4px; }
+  .qa-a .open-note {
+    display: inline-block; margin-top: 8px;
+    background: #fff3e0; color: #bf6a1a;
+    border-radius: 8px; padding: 3px 10px; font-size: 13px;
+  }
+
+  /* ===== 底部 ===== */
+  footer {
+    text-align: center; color: #b09a80; font-size: 14px;
+    margin-top: 10px;
+  }
+  footer .star { font-size: 20px; }
+
+  /* 给家长的提示框 */
+  .parent-tip {
+    background: #e3f2fd;
+    border-left: 5px solid #42a5f5;
+    border-radius: 0 14px 14px 0;
+    padding: 14px 18px;
+    font-size: 14.5px;
+    color: #1a5583;
+    margin-bottom: 30px;
+  }
+  .parent-tip b { color: #0d47a1; }
+</style>
+<style>
+  /* ===== 听读助手（语音） ===== */
+  .spk-btn{display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;border:none;
+    border-radius:14px;padding:4px 12px;font-size:12.5px;cursor:pointer;flex-shrink:0;font-family:inherit;}
+  .spk-btn:hover{background:#0d47a1;}
+  .qa-q .spk-btn{margin-left:8px;}
+  .qa-a .spk-btn{display:inline-block;margin:10px 0 0;background:#e65100;}
+  .qa-a .spk-btn:hover{background:#bf3f00;}
+  .voice-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:1000;
+    background:rgba(216,74,43,.97);color:#fff;border-radius:30px;padding:8px 14px;
+    display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(120,40,20,.30);font-size:13px;
+    max-width:94vw;flex-wrap:wrap;justify-content:center;}
+  .voice-bar button{background:#fff;color:#d84a2b;border:none;border-radius:18px;padding:6px 14px;
+    font-size:13px;cursor:pointer;font-weight:bold;}
+  .voice-bar button:hover{background:#ffe9d6;}
+  .voice-bar .hint{font-size:11px;opacity:.95;max-width:230px;}
+</style>
+</head>
+<body>
+<a href="../index.html" style="position:sticky;top:0;z-index:999;display:block;text-align:center;background:#d84a2b;color:#fff;padding:9px 0;font-size:14px;text-decoration:none;font-family:'Microsoft YaHei',sans-serif;">📚 一年级上册 · 分层提问系列导航（点此返回）</a>
+
+<div class="container">
+
+  <header>
+    <h1>🎈 数学游戏 · 看图提问题 🎈</h1>
+    <p>人教版《数学》一年级上册 · 数学游戏</p>
+    <span class="badge">点一点问题卡片，就能看到参考答案哦！</span>
+  </header>
+
+  <div class="parent-tip">
+    <b>👨‍👩‍👧 给家长和小朋友的话：</b>
+    这些问题来自课本第 1～11 页的六幅场景图。刚入学的孩子只要<b>愿意观察、敢于说出自己的想法</b>就是最棒的！
+    答案不止一个的"开放题"，孩子说得有道理就要大声表扬；数数时允许孩子用手指点着数、一个一个数。
+    建议每次只玩一个场景，一天一景，快乐起步。
+  </div>
+
+  <!-- ================= 场景 1：欢迎新同学 ================= -->
+  <div class="scene c1">
+    <div class="scene-head">
+      <div class="scene-num">1</div>
+      <h2>🏫 校门口 · 欢迎新同学</h2>
+      <span class="tag">数一数 · 比一比 · 认位置</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/01-欢迎新同学.jpg" alt="数学游戏：校门口欢迎新同学场景图">
+      <div class="img-tip">📖 课本第 1 页 · 数学游戏</div>
+    </div>
+    <div class="qa-list">
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔢</span>
+          <span class="q-text">问题 1：数一数，大拱门上的红色横幅上写着几个字？分别是什么字？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          一共有 <b>5</b> 个字。
+          <ul>
+            <li>从左往右读：欢、迎、新、同、学（共 5 个字）。</li>
+            <li>小提示：读横幅上的字要按"从左往右"的顺序读，这也是一种"顺序"哦！</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🎒</span>
+          <span class="q-text">问题 2：数一数，图中有多少个小朋友背着书包？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          图中背着书包的小朋友共有 <b>10 个</b>（用手指点着，一个一个数：校门里走进去的有 5 个，门口和爸爸妈妈在一起的有 5 个）。
+          <ul>
+            <li>数的时候要按一定的顺序：先数左边，再数右边，做到不重复、不遗漏。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：如果孩子数出的数量不同，只要能说清"是怎么数的"，同样值得表扬。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">👫</span>
+          <span class="q-text">问题 3：比一比，图中的大人多，还是小朋友多？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <b>小朋友多，大人少。</b>
+          <ul>
+            <li>可以用"一一对应"的方法比：一个大人对着一个小朋友，小朋友有剩下的，就说明小朋友多。</li>
+            <li>也可以分别数一数再比较。</li>
+          </ul>
+          <span class="open-note">🌈 说法不唯一：说"大人比小朋友少"也是对的。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🚩</span>
+          <span class="q-text">问题 4：国旗插在学校的什么地方？它在大拱门的哪一边？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          国旗插在<b>教学楼前面的操场中间</b>，从图上看，它在大拱门的<b>后面（里面）</b>。
+          <ul>
+            <li>还可以说：国旗在操场的"上面"飘着，小朋友在国旗的"下面"活动。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🧸</span>
+          <span class="q-text">问题 5：分一分，图里的人和物，哪些是"人"，哪些是"物"？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案（分类）：</span>
+          <ul>
+            <li><b>人：</b>小学生、门口的哥哥姐姐、爸爸妈妈、迎接的老师。</li>
+            <li><b>物：</b>书包、教学楼、国旗、大拱门、伸缩门、垃圾桶、小花坛。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：分类标准不同，分法就不同。按"会不会动"分、按"大和小"分都可以，说得有道理就对。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🙋</span>
+          <span class="q-text">问题 6（小小挑战）：你也能看着这幅图，向爸爸妈妈提一个数学问题吗？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考示例（提法不唯一）：</span>
+          <ul>
+            <li>"门口站着几个戴红领巾的哥哥姐姐？"（数一数：4 个）</li>
+            <li>"拉着一个大人的小朋友有几个？"</li>
+            <li>"教学楼比大树多几栋？"（体会"多几"的雏形）</li>
+          </ul>
+          <span class="open-note">🌟 能自己提出问题，就是了不起的数学家！</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= 场景 2：在校园里找一找 ================= -->
+  <div class="scene c2">
+    <div class="scene-head">
+      <div class="scene-num">2</div>
+      <h2>🌳 校园里 · 找一找</h2>
+      <span class="tag">认形状 · 数数量 · 说位置</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/02-在校园里找一找.jpg" alt="在校园里找一找场景图">
+      <div class="img-tip">📖 课本第 2～3 页 · 在校园里找一找</div>
+    </div>
+    <div class="qa-list">
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">⭐</span>
+          <span class="q-text">问题 1：国旗上有几颗五角星？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          国旗上有 <b>5 颗</b>五角星（1 颗大的，4 颗小的）。
+          <ul>
+            <li>数的时候说：1、2、3、4、5，一共有 5 颗。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🏢</span>
+          <span class="q-text">问题 2：数一数，校园里一共有几栋教学楼？图上的小朋友说"教学楼有 4 层"，你能找到第 1 层吗？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>从左往右数：1、2、3、4，一共有 <b>4 栋</b>教学楼。</li>
+            <li>楼层要从<b>下面</b>往上数：最下面一层是第 1 层，往上依次是第 2、3、4 层。图中的小朋友说"我们的教室在第 2 层"，就是从下往上数的第 2 层。</li>
+          </ul>
+          <span class="open-note">🌈 数楼的顺序不同（从左往右 / 从右往左），只要说清楚顺序，答案的"第几栋"可以不一样，都是对的。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🪟</span>
+          <span class="q-text">问题 3：找一找，图中哪些东西的形状和教室的窗户一样，是长方形的？还有哪些别的形状？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li><b>长方形：</b>教室的窗户、宣传栏、花坛的边。</li>
+            <li><b>圆形：</b>小朋友玩的呼啦圈、水桶的口。</li>
+            <li><b>五角星形：</b>国旗上的五角星。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：找到的形状不唯一，说出名称和在哪里找到的就可以。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🌻</span>
+          <span class="q-text">问题 4：数一数，花坛里种了几棵向日葵？和宣传栏比，哪个在右边？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>向日葵有 <b>6 棵</b>（从左往右点着数：1、2、3、4、5、6）。</li>
+            <li>宣传栏在向日葵的<b>右边</b>，向日葵在宣传栏的<b>左边</b>。</li>
+          </ul>
+          <span class="open-note">🌈 数量和位置以孩子实际点数为准；说"宣传栏在右边"或"向日葵在左边"都对。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🐦</span>
+          <span class="q-text">问题 5：天空中飞着一群鸽子，数一数有几只？再找一找，图里什么比教学楼"高"？什么比大树"矮"？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>鸽子有 <b>7 只</b>。</li>
+            <li>比教学楼高的：天上的<b>云朵</b>（飞得更高）。</li>
+            <li>比大树矮的：花坛、垃圾桶、小朋友。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：比高矮的答案不唯一，孩子说出一样、说清理由就算对。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">💬</span>
+          <span class="q-text">问题 6（小小挑战）：图中的小朋友说"学校真美呀！"，你能在图里也找出 3 样美好的东西，并且用数字说一说吗？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考示例：</span>
+          <ul>
+            <li>"有 1 面红旗在飘。"（数字：1）</li>
+            <li>"有 2 个小朋友在滚铁环。"（数字：2）</li>
+            <li>"有 4 栋教学楼。"（数字：4）</li>
+          </ul>
+          <span class="open-note">🌟 只要能把"看到的"和"数字"连起来说，就是会提数学问题了！</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= 场景 3：在操场上玩一玩 ================= -->
+  <div class="scene c3">
+    <div class="scene-head">
+      <div class="scene-num">3</div>
+      <h2>⚽ 操场上 · 玩一玩</h2>
+      <span class="tag">数游戏 · 比多少 · 认图形</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/03-在操场上玩一玩.jpg" alt="在操场上玩一玩场景图">
+      <div class="img-tip">📖 课本第 4～5 页 · 在操场上玩一玩</div>
+    </div>
+    <div class="qa-list">
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🌸</span>
+          <span class="q-text">问题 1：老师说"桃花朵朵开，开 3 朵"，就要 3 个小朋友抱在一起。如果喊"开 5 朵"，需要几个小朋友抱在一起？开 2 朵呢？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>开 5 朵 → <b>5 个</b>小朋友抱在一起；</li>
+            <li>开 2 朵 → <b>2 个</b>小朋友抱在一起。</li>
+            <li>喊几朵，就要几个小朋友抱在一起，"数"和"人数"一样多。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🐟</span>
+          <span class="q-text">问题 2：捕鱼游戏里，小朋友说"哈哈，网住了 4 条鱼"。数一数，当"渔网"的小朋友有几个？"鱼"和"渔网"哪个多？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>手拉手当"渔网"的小朋友有 <b>4 个</b>（和网住的 4 条"鱼"正好一一对应）。</li>
+            <li>"鱼"有 4 条，"渔网"有 4 个小朋友，<b>一样多</b>。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：若孩子数出的"渔网"人数不同，说出数的方法即可；比较结果"一样多 / 同样多"都对。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">⭕</span>
+          <span class="q-text">问题 3：跳圈游戏："双脚跳进○，单脚跳进△"。数一数，○有几个？△有几个？○比△多几个？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>○（圆圈）有 <b>3 个</b>，△（三角）有 <b>2 个</b>。</li>
+            <li>○ 比 △ <b>多 1 个</b>；也可以说 △ 比 ○ <b>少 1 个</b>。</li>
+          </ul>
+          <span class="open-note">🌈 顺带认一认：圆圆的是圆形，尖尖带三条边的是三角形。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🚪</span>
+          <span class="q-text">问题 4：排队回教室啦！小朋友说"男生多 1 个"。数一数，队伍里男生和女生各有几个？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>男生 <b>6 个</b>，女生 <b>5 个</b>，男生比女生多 1 个。</li>
+            <li>反过来还可以说：女生比男生<b>少 1 个</b>。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📏</span>
+          <span class="q-text">问题 5：有个小朋友说"我最高"。比一比：你和图里的小朋友，怎样比才能知道谁高谁矮？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案（比较方法）：</span>
+          <ul>
+            <li>比高矮要<b>站在同一条线上（同一起点）</b>，背对背站直了比，谁的头高出谁就高。</li>
+            <li>不能一个站台阶上、一个站地上比，那样不公平。</li>
+          </ul>
+          <span class="open-note">🌈 这是方法题，说出"站得一样平再比"的意思就对。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">💡</span>
+          <span class="q-text">问题 6（小小挑战）：如果捕鱼时"网住了 4 条鱼"，又跑来 1 条鱼被网住，现在一共网住了几条？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          4 条再添上 1 条，一共是 <b>5 条</b>（4 添上 1 是 5）。
+          <span class="open-note">🌟 这是"加法"的种子：合起来数一数就知道了。</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= 场景 4：在教室里认一认 ================= -->
+  <div class="scene c4">
+    <div class="scene-head">
+      <div class="scene-num">4</div>
+      <h2>🚪 教室里 · 认一认</h2>
+      <span class="tag">数班级 · 认教室 · 说前后左右</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/04-在教室里认一认.jpg" alt="在教室里认一认场景图">
+      <div class="img-tip">📖 课本第 6～7 页 · 在教室里认一认</div>
+    </div>
+    <div class="qa-list">
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🏫</span>
+          <span class="q-text">问题 1：小朋友说"一年级有 6 个班，我们是一（3）班"。从 1 班数起，一（3）班前面还有几个班？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>从 1 数到 3：1、2、3，一（3）班前面有 <b>2 个班</b>（一（1）班和一（2）班）。</li>
+            <li>6 个班里，一（3）班后面还有 <b>3 个班</b>（一（4）、一（5）、一（6）班）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🪑</span>
+          <span class="q-text">问题 2：数一数，教室里一共有几张课桌？几位小朋友坐在座位上？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>先横着数，再竖着数，或者一行一行数，做到不重复、不遗漏。</li>
+            <li>讲台下面的场景里有 <b>5 张</b>课桌、<b>5 位</b>小朋友；自我介绍的场景里也有 5 张课桌、5 位小朋友。</li>
+          </ul>
+          <span class="open-note">🌈 数量的参考以图为准，重点是"按顺序数"的方法。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🧭</span>
+          <span class="q-text">问题 3：教室的前面有什么？后面、左边、右边分别有什么？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li><b>前面：</b>黑板、国旗、讲台、钟表。</li>
+            <li><b>后面：</b>（可以让孩子回头看看自己教室的后面）学习园地 / 板报等。</li>
+            <li><b>左边、右边：</b>窗户在一边，门在另一边。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：请孩子在自己教室里实地找一找、说一说，和图上对照，说对位置就行。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">👨‍👩‍👧</span>
+          <span class="q-text">问题 4：小朋友说"我家有 4 口人"。你家有几口人？数一数，图上这位小朋友的"全家福"里有几个人？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>图上"介绍自己"的小朋友想的全家福里有 <b>4 口人</b>（爸爸、妈妈、小朋友，还有一位家人）。</li>
+            <li>自己家有几口人，用自己的小家数一数、说一说，如"我家有 3 口人""我家有 5 口人"。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：答案因家而异，能清楚说出"我家有 □ 口人，分别是……"即可。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔄</span>
+          <span class="q-text">问题 5（方位小高手）：坐在座位上，你的前面是什么？左边是什么？右边是什么？和同桌说的"左边"一样吗？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>示例：我的前面是黑板，左边是窗户，右边是墙。</li>
+            <li>面对面坐的两个人，<b>左右正好相反</b>：我的左边是同桌的右边。就像图中举手的小朋友，从对面看，举的"右手"在我们的左边。</li>
+          </ul>
+          <span class="open-note">🌈 这是左右方位的难点，多玩几次"举左手、举右手"游戏就能体会。</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= 场景 5：在教室里玩一玩 ================= -->
+  <div class="scene c5">
+    <div class="scene-head">
+      <div class="scene-num">5</div>
+      <h2>🎲 教室里 · 玩一玩</h2>
+      <span class="tag">左右游戏 · 第几个 · 拼图形</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/05-在教室里玩一玩.jpg" alt="在教室里玩一玩场景图">
+      <div class="img-tip">📖 课本第 8～9 页 · 在教室里玩一玩</div>
+    </div>
+    <div class="qa-list">
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">👂</span>
+          <span class="q-text">问题 1：游戏"我说你做"：摸（mō）摸你的左耳、跺（duò）跺你的左脚。请你现在就做一做，再反着做：摸右耳、跺右脚。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>这是<b>方位游戏</b>，没有固定的"对错答案"，做对了就是好样的！</li>
+            <li>小窍门：拿筷子的手多数是<b>右手</b>，右手这边就是右边，另一边就是左边。</li>
+            <li>图中做错的小朋友也没关系，发现错了改正，就是会学习！</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">1️⃣</span>
+          <span class="q-text">问题 2：一排小朋友站好了。"我左边的第 3 个同学蹲下"——请你从左边数一数，第 3 个是谁？有小朋友说"我做错了，我是第 4 个"，他是怎么数错的？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>从<b>左边</b>开始数：第 1 个、第 2 个、第 3 个——数到 3 就停，第 3 个同学蹲下。</li>
+            <li>那位说"我是第 4 个"的小朋友，可能是<b>数错了方向</b>（从右边数的），或者多数、漏数了。</li>
+            <li>说"第几个"之前，一定要先说清楚<b>从哪边开始数</b>！</li>
+          </ul>
+          <span class="open-note">🌈 从左边数和从右边数，"第几个"的人会不一样，两种说法都可以对。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🪑</span>
+          <span class="q-text">问题 3：老师问："为什么有人没坐到椅子？"想一想，什么样的情况会有人没椅子坐？怎样坐才正好一张椅子坐一个人？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>当<b>小朋友比椅子多</b>的时候，就会有人没椅子坐。</li>
+            <li>一个小朋友对着一张椅子（一一对应），人数和椅子数<b>同样多</b>时，才正好每人都有一张椅子。</li>
+          </ul>
+          <span class="open-note">🌈 "一一对应"是比多少的好办法，也是以后学"多几、少几"的基础。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔺</span>
+          <span class="q-text">问题 4：拼图形游戏：用 3 个黄色三角形和 1 个红色三角形，一共用了几个三角形？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>3 个加 1 个，合起来是 <b>4 个</b>三角形（3 和 1 合成 4）。</li>
+            <li>数的时候可以点着数：1、2、3，再添 1 个是 4。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🚗</span>
+          <span class="q-text">问题 5：小朋友用"2 个圆柱当车轮"拼小汽车。如果拼 2 辆这样的小汽车，一共需要几个圆柱车轮？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>1 辆车用 2 个，再拼 1 辆又用 2 个：2 和 2 合起来是 <b>4 个</b>。</li>
+            <li>顺带认一认：圆柱是<b>圆圆的、像罐子</b>一样的形状， Rolling（滚一滚）会跑哦！</li>
+          </ul>
+          <span class="open-note">🌈 开放题：如果孩子说"拼 3 辆要 6 个"（2、4、6 这样接着数），那是超棒的发现！</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= 场景 6：学习准备 ================= -->
+  <div class="scene c6">
+    <div class="scene-head">
+      <div class="scene-num">6</div>
+      <h2>⏰ 学习准备</h2>
+      <span class="tag">认时间 · 举手发言 · 摆放文具</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/06-学习准备.jpg" alt="学习准备场景图">
+      <div class="img-tip">📖 课本第 10～11 页 · 学习准备</div>
+    </div>
+    <div class="qa-list">
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">⏰</span>
+          <span class="q-text">问题 1：小朋友说"每天 8:30 开始上课"。看一看图上的钟表，长针（分针）指着几？短针（时针）大约指着几？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>钟面上<b>长针（分针）指着 6</b>，<b>短针（时针）指在 8 和 9 的中间</b>，这就是 8 时半（8:30）。</li>
+            <li>记住小口诀：分针指 6，就是"半点"。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">✋</span>
+          <span class="q-text">问题 2：发言要举手，"举手发言用右手"。数一数，上课的图中有几个小朋友举手了？他们举的都是哪只手？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>举手的小朋友共有 <b>5 个</b>（从左往右点着数）。</li>
+            <li>他们举的都是<b>右手</b>——用写作业的那只手举手，就是举手发言的规矩。</li>
+          </ul>
+          <span class="open-note">🌈 数出的数量以实际点数为准，重点是按顺序、不遗漏。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📚</span>
+          <span class="q-text">问题 3：小朋友说"书本摆在左上角，笔袋放在……"。想一想：书本的左上角，是相对什么说的？你的笔袋应该放在哪里？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>"左上角"是相对<b>课桌桌面</b>说的：桌面靠上的那条边，靠左的那个角。</li>
+            <li>笔袋一般放在桌面的<b>右上角</b>（或正前方），书本放左上角，铅笔放在笔袋旁，摆放整齐，拿取方便。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：各班习惯不同，孩子能说清"放在哪、为什么"即可。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🗯️</span>
+          <span class="q-text">问题 4：老师提醒小朋友"认真听讲"。比一比：认真听讲的小朋友和开小差的小朋友，哪一种人多？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考答案：</span>
+          <ul>
+            <li>坐得端正、看着老师的小朋友有 <b>4 个</b>，低头玩东西、开小差的只有 <b>1 个</b>。</li>
+            <li><b>认真听讲的人多</b>，4 比 1 多 3 个。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：判断"认真/开小差"的标准可能不同，只要两种人数加起来正好是 5，说得有道理就对。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🎒</span>
+          <span class="q-text">问题 5：下课前要整理书包。说一说：你的书包里要放哪些学习用品？数一数一共要带几样？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考示例：</span>
+          <ul>
+            <li>课本、铅笔、橡皮、尺子、笔袋、练习本……</li>
+            <li>如"我要带 6 样：3 本课本、2 支铅笔、1 块橡皮"，能把东西和数字对应起来就很好。</li>
+          </ul>
+          <span class="open-note">🌈 开放题：每人要带的东西不一样，说清楚是"几样"并点着数出来即可。</span>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🌟</span>
+          <span class="q-text">问题 6（小小挑战）：图中的小朋友说"校园里有很多我喜欢的地方"。你也用一句话说说：我喜欢的地方在哪里，那儿有几样你喜欢的东西？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a">
+          <span class="a-label">参考示例：</span>
+          <ul>
+            <li>"我喜欢操场，那里有 2 个球门。"</li>
+            <li>"我喜欢图书角，那里有 10 本图画书，我数过啦！"</li>
+          </ul>
+          <span class="open-note">🌟 把"喜欢的地点"和"数出的数量"连起来说，就是最棒的数学表达！</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p><span class="star">⭐</span> 恭喜你玩完了全部 6 个场景！<span class="star">⭐</span></p>
+    <p>人教版《数学》一年级上册 · 数学游戏（第 1～11 页）· 看图提问题练习</p>
+    <p>图片仅供个人学习使用，版权归原作者（人民教育出版社）所有</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  var zhVoice = null;
+  function loadVoices(){ if(!synth) return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){
+    if(/zh|chinese|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+  function clean(t){ return (t||'').replace(/\s+/g,' ').trim(); }
+  function ownBtn(el){ for(var k=0;k<el.children.length;k++){
+    if(el.children[k].className && String(el.children[k].className).indexOf('spk-btn')>=0) return true; } return false; }
+  function readText(el){
+    if(!el) return '';
+    var t = el.querySelector('.q-text');
+    var txt = t ? t.textContent : el.textContent;
+    return clean(txt).replace(/(看答案|看解读|听)$/,'');
+  }
+  function speak(text, rate){
+    text = clean(text); if(!text) return;
+    if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN'; u.rate=(rate||0.9); u.pitch=1;
+    if(zhVoice) u.voice=zhVoice;
+    synth.speak(u);
+  }
+  function stop(){ if(synth) synth.cancel(); }
+
+  /* 题目行：兼容 qa-q 与 qa-q-row 两种结构（逐个容错，单个失败不影响全局） */
+  var SEL = '.qa-q, .qa-q-row';
+  var qs = document.querySelectorAll(SEL);
+  for(var i=0;i<qs.length;i++){
+    try{
+      (function(q){
+        if(ownBtn(q)) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听';
+        btn.addEventListener('click',function(e){ e.stopPropagation(); speak(readText(q)); });
+        var tog=q.querySelector('.toggle');
+        if(tog && tog.parentElement===q){ q.insertBefore(btn,tog); } else { q.appendChild(btn); }
+      })(qs[i]);
+    }catch(err){}
+  }
+
+  /* 答案区 */
+  var as = document.querySelectorAll('.qa-a');
+  for(var j=0;j<as.length;j++){
+    try{
+      (function(a){
+        if(a.querySelector('.spk-btn')) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听答案';
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          var qa=a.parentElement; if(qa) qa.classList.add('open');
+          speak(clean(a.textContent).replace(/^参考答案[:：]?/,''));
+        });
+        a.insertBefore(btn,a.firstChild);
+      })(as[j]);
+    }catch(err){}
+  }
+
+  /* 底部听读助手条 */
+  try{
+    var bar=document.createElement('div'); bar.className='voice-bar';
+    bar.innerHTML='<span>🎧 听读助手：</span>'+
+      '<button type="button" id="vAll">🔊 朗读全部题目</button>'+
+      '<button type="button" id="vStop">⏹ 停止</button>'+
+      '<span class="hint">点题旁🔊逐题听；点🔊听答案可边看边听</span>';
+    document.body.appendChild(bar);
+    document.getElementById('vStop').addEventListener('click',stop);
+    document.getElementById('vAll').addEventListener('click',function(){
+      if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+      var list=document.querySelectorAll(SEL); var qi=0;
+      function next(){
+        if(qi>=list.length) return;
+        var txt=readText(list[qi++]);
+        if(!txt){ next(); return; }
+        synth.cancel();
+        var u=new SpeechSynthesisUtterance(txt); u.lang='zh-CN'; u.rate=0.9; u.pitch=1;
+        if(zhVoice) u.voice=zhVoice;
+        u.onend=function(){ setTimeout(next,260); };
+        synth.speak(u);
+      }
+      next();
+    });
+  }catch(err){}
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10的认识和加、减法 · 认知-强化-拓展分层提问 —— 一年级数学上（人教版2024）</title>
+<style>
+  /* ===== 全局：明亮活泼的一年级风格 ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(180deg, #f3f0ff 0%, #fffdf0 100%);
+    color: #3d3a4e;
+    line-height: 1.8;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  /* ===== 页头 ===== */
+  header {
+    text-align: center;
+    background: linear-gradient(135deg, #5e35b1 0%, #e91e63 100%);
+    border-radius: 24px;
+    padding: 28px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 16px rgba(94, 53, 177, 0.3);
+  }
+  header h1 { font-size: 26px; color: #fff; text-shadow: 1px 2px 4px rgba(0,0,0,0.15); margin-bottom: 8px; }
+  header p { color: #f4ecff; font-size: 15.5px; }
+
+  .level-legend {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .level-legend span {
+    border-radius: 999px; padding: 6px 18px; font-size: 14px; font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .lv-renzhi { background: #e3f2fd; color: #1565c0; }
+  .lv-qianghua { background: #fff3e0; color: #e65100; }
+  .lv-tuozhan { background: #fce4ec; color: #ad1457; }
+
+  /* ===== 场景卡片 ===== */
+  .scene {
+    background: #fff;
+    border-radius: 24px;
+    margin-bottom: 38px;
+    box-shadow: 0 4px 14px rgba(110, 80, 150, 0.13);
+    overflow: hidden;
+  }
+  .scene-head { display: flex; align-items: center; gap: 12px; padding: 18px 24px 10px; }
+  .scene-num {
+    flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: bold; color: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+  .scene-head h2 { font-size: 21px; }
+  .scene-head .tag {
+    margin-left: auto; font-size: 13px; color: #8a80a0;
+    background: #f2effa; border-radius: 999px; padding: 3px 12px; white-space: nowrap;
+  }
+  .s1 .scene-num { background: #5e35b1; } .s1 .scene-head h2 { color: #4527a0; }
+  .s2 .scene-num { background: #d81b60; } .s2 .scene-head h2 { color: #ad1457; }
+  .s3 .scene-num { background: #00897b; } .s3 .scene-head h2 { color: #00695c; }
+  .s4 .scene-num { background: #039be5; } .s4 .scene-head h2 { color: #0277bd; }
+  .s5 .scene-num { background: #f4511e; } .s5 .scene-head h2 { color: #bf360c; }
+  .s6 .scene-num { background: #7cb342; } .s6 .scene-head h2 { color: #558b2f; }
+  .s7 .scene-num { background: #ffb300; } .s7 .scene-head h2 { color: #b28704; }
+
+  .scene-img { text-align: center; padding: 0 24px; }
+  .scene-img img {
+    width: 100%; max-width: 780px;
+    border-radius: 16px;
+    border: 4px solid #efeaf9;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  .img-tip { font-size: 13px; color: #9c92b0; margin-top: 6px; }
+
+  /* ===== 三个层次分组 ===== */
+  .levels { padding: 14px 24px 26px; }
+  .level { border-radius: 16px; padding: 12px 16px 14px; margin-top: 14px; }
+  .level.renzhi   { background: #f2f9ff; border: 2px solid #cfe6fb; }
+  .level.qianghua { background: #fffaf0; border: 2px solid #ffe3b8; }
+  .level.tuozhan  { background: #fff4f8; border: 2px solid #ffd2e1; }
+  .level-title {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 16px; font-weight: bold;
+    border-radius: 999px; padding: 3px 16px; margin-bottom: 4px;
+  }
+  .renzhi   .level-title { background: #d6eaff; color: #1565c0; }
+  .qianghua .level-title { background: #ffe8c2; color: #b26500; }
+  .tuozhan  .level-title { background: #ffd9e6; color: #ad1457; }
+  .level-desc { font-size: 13px; color: #948da2; margin-left: 6px; }
+
+  /* ===== 问题卡 ===== */
+  .qa {
+    background: #fff;
+    border: 2px solid #eef1f7;
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-top: 10px;
+  }
+  .renzhi   .qa { border-color: #dbeeff; }
+  .qianghua .qa { border-color: #ffedcc; }
+  .tuozhan  .qa { border-color: #ffdce8; }
+  .qa-q {
+    display: flex; align-items: flex-start; gap: 10px;
+    cursor: pointer; user-select: none;
+  }
+  .qa-q .q-emoji { font-size: 21px; flex: 0 0 auto; }
+  .qa-q .q-text { font-size: 16.5px; font-weight: bold; color: #464058; flex: 1; }
+  .qa-q .toggle {
+    flex: 0 0 auto;
+    background: #e3ecf8; color: #3967a8;
+    border-radius: 999px; padding: 2px 14px;
+    font-size: 13px; font-weight: bold;
+  }
+  .renzhi   .qa .toggle { background: #dbeeff; color: #1565c0; }
+  .qianghua .qa .toggle { background: #ffe8c2; color: #b26500; }
+  .tuozhan  .qa .toggle { background: #ffd9e6; color: #ad1457; }
+  .qa-a {
+    display: none;
+    margin-top: 10px;
+    background: #f7f9fc;
+    border-left: 5px solid #b0c4de;
+    border-radius: 0 12px 12px 0;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: #454053;
+  }
+  .renzhi   .qa-a { border-color: #64a7e8; background: #f4faff; }
+  .qianghua .qa-a { border-color: #f0a94b; background: #fffaf2; }
+  .tuozhan  .qa-a { border-color: #ef7fa8; background: #fff6fa; }
+  .qa.open .qa-a { display: block; }
+  .qa-a .a-label { font-weight: bold; }
+  .renzhi   .qa-a .a-label { color: #1565c0; }
+  .qianghua .qa-a .a-label { color: #b26500; }
+  .tuozhan  .qa-a .a-label { color: #ad1457; }
+  .qa-a ul { margin: 6px 0 0 22px; }
+  .qa-a li { margin-bottom: 4px; }
+  .qa-a .open-note {
+    display: inline-block; margin-top: 8px;
+    background: #fff3e0; color: #bf6a1a;
+    border-radius: 8px; padding: 3px 10px; font-size: 13px;
+  }
+  .qa-a .think-note {
+    display: inline-block; margin-top: 8px;
+    background: #ede7f6; color: #5e35b1;
+    border-radius: 8px; padding: 3px 10px; font-size: 13px;
+  }
+
+  .parent-tip {
+    background: #fff8e1;
+    border-left: 5px solid #ffca28;
+    border-radius: 0 14px 14px 0;
+    padding: 14px 18px;
+    font-size: 14.5px;
+    color: #7a5c00;
+    margin-bottom: 28px;
+  }
+  .parent-tip b { color: #8d6708; }
+
+  footer { text-align: center; color: #9c92b0; font-size: 14px; margin-top: 6px; }
+</style>
+<style>
+  /* ===== 听读助手（语音） ===== */
+  .spk-btn{display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;border:none;
+    border-radius:14px;padding:4px 12px;font-size:12.5px;cursor:pointer;flex-shrink:0;font-family:inherit;}
+  .spk-btn:hover{background:#0d47a1;}
+  .qa-q .spk-btn{margin-left:8px;}
+  .qa-a .spk-btn{display:inline-block;margin:10px 0 0;background:#e65100;}
+  .qa-a .spk-btn:hover{background:#bf3f00;}
+  .voice-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:1000;
+    background:rgba(216,74,43,.97);color:#fff;border-radius:30px;padding:8px 14px;
+    display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(120,40,20,.30);font-size:13px;
+    max-width:94vw;flex-wrap:wrap;justify-content:center;}
+  .voice-bar button{background:#fff;color:#d84a2b;border:none;border-radius:18px;padding:6px 14px;
+    font-size:13px;cursor:pointer;font-weight:bold;}
+  .voice-bar button:hover{background:#ffe9d6;}
+  .voice-bar .hint{font-size:11px;opacity:.95;max-width:230px;}
+</style>
+</head>
+<body>
+<a href="../index.html" style="position:sticky;top:0;z-index:999;display:block;text-align:center;background:#d84a2b;color:#fff;padding:9px 0;font-size:14px;text-decoration:none;font-family:'Microsoft YaHei',sans-serif;">📚 一年级上册 · 分层提问系列导航（点此返回）</a>
+
+<div class="container">
+
+  <header>
+    <h1>🔟 10 的认识和加、减法 · 分层提问</h1>
+    <p>人教版《数学》一年级上册 · 第三单元"10 的认识和加、减法 + 整理和复习"（课本第 54～67 页）</p>
+  </header>
+
+  <div class="level-legend">
+    <span class="lv-renzhi">🧠 认知层 · 认识10、会算连加连减</span>
+    <span class="lv-qianghua">💪 强化层 · 凑十熟练、算式有规律</span>
+    <span class="lv-tuozhan">🚀 拓展层 · 会解决问题、会总结</span>
+  </div>
+
+  <div class="parent-tip">
+    <b>👨‍👩‍👧 使用建议：</b>这是第三单元的收官内容，共 <b>7 组 42 个问题</b>。
+    "10"是本学期最重要的数——<b>"凑十"是以后学习进位加法的基础</b>，"凑十好朋友"（1和9、2和8、3和7、4和6、5和5）要背得滚瓜烂熟。
+    连加连减、加减混合都按<b>从左往右</b>的顺序算。点击问题卡片展开参考答案。
+  </div>
+
+  <!-- ================= 内容1：10的认识 + 你知道吗 ================= -->
+  <div class="scene s1">
+    <div class="scene-head">
+      <div class="scene-num">1</div>
+      <h2>🔢 10 的认识 · 你知道吗（第54～55页）</h2>
+      <span class="tag">数10 · 写10 · 分与合 · 算筹</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/01-10的认识与算筹.jpg" alt="10的认识：水族馆图、计数、尺子、9<10；摆一摆填一填；做一做凑10卡片；你知道吗算筹">
+      <div class="img-tip">📖 课本第 54～55 页 · 10 的认识 / 做一做 / 你知道吗</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">数出 10、认识 10</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐠</span>
+            <span class="q-text">认知 1：水族馆图：数一数，图上一共有多少人？几条蝠鲼（像风筝的鱼）？你是怎么数出 10 的？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>老师和小朋友一共有 <b>10 人</b>（9 个小朋友加 1 位老师，9 再添 1 就是 10）；</li>
+              <li>蝠鲼有 10 条（以实际点数为准），一按顺序数：1、2、3……9、10。</li>
+            </ul>
+            <span class="think-note">💡 9 添上 1 是 10——10 是我们认识的第一个"两位数"！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">📏</span>
+            <span class="q-text">认知 2：尺子图：9○10、10○9，○里填 &gt; 还是 &lt;？方块图 9＜□，□里填几？"10"是用几个数字写成的？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>9 <b>&lt;</b> 10；10 <b>&gt;</b> 9；方块图 9＜<b>10</b>；</li>
+              <li>"10"是用 <b>1 和 0 两个数字</b>写成的——它是第一个两位数，1 在十位、0 在个位（以后会学到）。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">分与合、凑十游戏</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎋</span>
+            <span class="q-text">强化 1：先摆一摆，再填数：10 可以分成 9 和 □、□ 和 □……把 5 组分法全填完，并说说你是怎样填的。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            10 可以分成：<b>9 和 1、8 和 2、7 和 3、6 和 4、5 和 5</b>（还有交换的 1 和 9、2 和 8……）。
+            <ul>
+              <li>方法：按顺序，一边从 9 开始每次少 1，另一边从 1 开始每次多 1。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎴</span>
+            <span class="q-text">强化 2：做一做凑 10 卡片：一个小朋友出"8"，另一个马上出"2"。这个游戏的规则是什么？出"6"该对几？出"5"呢？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>规则：两张卡片上的数<b>合起来是 10</b>（凑十）；</li>
+              <li>出 6 对 <b>4</b>；出 5 对 <b>5</b>；出 9 对 1；出 7 对 3；出 10 对 0。</li>
+            </ul>
+            <span class="think-note">💡 1和9、2和8、3和7、4和6、5和5 是"凑十好朋友"，要背得滚瓜烂熟——以后学进位加法全靠它！</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">10 在身边、古人的智慧</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🖐️</span>
+            <span class="q-text">拓展 1：书上问："10 还能表示生活中哪些事物的数量？"请你说一说。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例（不唯一）：</span>
+            <ul>
+              <li>一只手 5 根手指，两只手合起来 <b>10 根</b>；</li>
+              <li>一盒鸡蛋 10 个；一捆小棒 10 根；</li>
+              <li>公交车牌上的 10 路车；日历上的 10 号。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🧮</span>
+            <span class="q-text">拓展 2（你知道吗）：我国古代用算筹表示数，有纵式和横式两种摆法。你能用算筹的样子写出 6 和 7 吗？猜一猜：为什么要有两种摆法？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>6 = 一横＋一竖（像"T"），7 = 一横＋两竖；对照书上的图照着摆一摆；</li>
+              <li>猜一猜：纵横交替着摆，<b>数位不会混在一起</b>，看得更清楚（古人的聪明办法！）。</li>
+            </ul>
+            <span class="open-note">🌟 算筹是两千多年前我们的祖先发明的计算工具，是数学史上的伟大创造！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容2：10的加、减法 + 练一练 ================= -->
+  <div class="scene s2">
+    <div class="scene-head">
+      <div class="scene-num">2</div>
+      <h2>✨ 10 的加、减法 · 练一练（第56～57页）</h2>
+      <span class="tag">凑十算式 · 找朋友 · 火箭倒计时</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/02-10的加减法与练一练.jpg" alt="10的加减法：点子图1和9等四组算式、找朋友、练一练数轴火箭算式表卡片转盘">
+      <div class="img-tip">📖 课本第 56～57 页 · 10 的加、减法 / 做一做 / 练一练</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">看图写算式</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🟡</span>
+            <span class="q-text">认知 1：点子图"1 和 9"：写出 1+9、9+1、10−1、10−9。为什么 1+9 和 9+1 都等于 10？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>1+9=<b>10</b>；9+1=<b>10</b>；10−1=<b>9</b>；10−9=<b>1</b>；</li>
+              <li>交换两个加数的位置，得数不变——所以两个加法算式都对。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🤔</span>
+            <span class="q-text">认知 2：想一想：5+5=□、10−5=□。为什么这一组只有两个算式？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>5+5=<b>10</b>；10−5=<b>5</b>；</li>
+              <li>因为两部分<b>同样多</b>（都是 5）：交换位置还是 5+5，去掉 5 剩下的还是 5——写不出新算式。</li>
+            </ul>
+            <span class="think-note">💡 和 4+4=8 一样的道理：两部分同样多时，算式"合二为一"。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">找朋友、列算式表</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">👫</span>
+            <span class="q-text">强化 1：做一做"找朋友"：小朋友举着 1、2、3、4、5、6、7、8、9 的卡片，谁和谁是好朋友？规则是什么？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>凑成 10 的两个数是好朋友：<b>1—9、2—8、3—7、4—6、5—5</b>；</li>
+              <li>规则：两张卡片上的数合起来是 10。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🔢</span>
+            <span class="q-text">强化 2：做一做第②题：算一算 8+2、6+4、7+3 和 10−8、10−2、10−3。再完成练一练第③题"10 的分成"两行填数。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>8+2=<b>10</b>；6+4=<b>10</b>；7+3=<b>10</b>；10−8=<b>2</b>；10−2=<b>8</b>；10−3=<b>7</b>；</li>
+              <li>第③题：上行 9、2、4、<b>3</b>、6、8 → 填 3；下行 1、3、5、7、<b>9</b>、9 → 9，每组上下两数合起来是 10。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">倒计时、转盘</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🚀</span>
+            <span class="q-text">拓展 1：练一练第②题火箭发射："□、□、8、□、6、5、□、□、1，点火！"该怎么填？为什么发射要倒数？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>从 10 倒着数：10、9、8、<b>7</b>、6、5、<b>4、3</b>、2、1（按图补齐：□=10、9 和 2、1）；</li>
+              <li>倒数是从大到小一个一个地数；发射指挥员用倒计时统一大家的行动。</li>
+            </ul>
+            <span class="open-note">🌈 顺着数、倒着数都要会——倒着数也是算减法的好帮手！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎡</span>
+            <span class="q-text">拓展 2（小小挑战）：练一练第⑤题："10−"转盘连着 5、3、8、1、7、2、4、6、9，把每个得数填出来。你发现了什么规律？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>10−5=<b>5</b>；10−3=<b>7</b>；10−8=<b>2</b>；10−1=<b>9</b>；10−7=<b>3</b>；10−2=<b>8</b>；10−4=<b>6</b>；10−6=<b>4</b>；10−9=<b>1</b>；</li>
+              <li>规律：减去几，得数就是它的"凑十好朋友"（10−3=7，3 和 7 是好朋友）！</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容3：练一练 + 连加连减 ================= -->
+  <div class="scene s3">
+    <div class="scene-head">
+      <div class="scene-num">3</div>
+      <h2>🐤 练一练 · 连加、连减（第58～59页）</h2>
+      <span class="tag">数学故事 · 连加连减从左往右</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/03-练一练与连加连减.jpg" alt="练一练：10的分成、梨和萝卜、7+3=10讲故事、10-4=6讲故事；连加连减小鸡图">
+      <div class="img-tip">📖 课本第 58～59 页 · 练一练 / 连加、连减</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">看图列式</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🍐</span>
+            <span class="q-text">认知 1：第⑦题：篮子里 6 个梨，外面 3 个梨，一共有多少个？列式□○□=□。萝卜图：一共 10 根，小兔拿走几根，还剩几根？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>6 + 3 = 9（个）；</li>
+              <li>10 − □ = □（根），按图上小兔拿走的数量填（如拿走 3 根：10−3=7 根，以图为准）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">➗</span>
+            <span class="q-text">认知 2：第⑥题：10 可以分成 1 和 □，1+□=10，10−1=□；再想 10 分成 □ 和 □，写出一组加减算式。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>10 分成 1 和 <b>9</b>；1+<b>9</b>=10；10−1=<b>9</b>；</li>
+              <li>还可以填：10 分成 2 和 8：2+8=10、10−2=8……（答案不唯一）。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">连加连减，从左往右</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">➕</span>
+            <span class="q-text">强化 1：小鸡图：原来有 5 只小鸡，先跑来 2 只，又跑来 1 只。算式 5+2+1=8 是怎么算出来的？先算什么、再算什么？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>先算 <b>5+2=7</b>（书上在 7 下面画了线），再算 <b>7+1=8</b>；</li>
+              <li>连加要<b>从左往右</b>，一步一步算：先把前两个数相加，再加第三个数。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">➖</span>
+            <span class="q-text">强化 2：第二幅小鸡图：原来有 8 只，先跑走 2 只，又跑走 2 只。8−2−2=4 先算什么、再算什么？做一做：4+3+□=□、10−3−□=□。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>先算 <b>8−2=6</b>（图中标 6），再算 <b>6−2=4</b>；</li>
+              <li>做一做：小棒图 4+3+<b>2</b>=<b>9</b>（以图为准）；星星图 10−3−<b>2</b>=<b>5</b>（圈走 3 个再划掉 2 个，以图为准）。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">给算式讲故事</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">📖</span>
+            <span class="q-text">拓展 1：第⑧题：看图讲一讲"7+3=10"的数学故事（图上小朋友有的跳绳、有的挖土）。7 和 3、10 分别表示什么？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例：</span>
+            <ul>
+              <li>"公园里有 7 个小朋友在跳绳，又跑来 3 个小朋友挖土，一共有 10 个小朋友在活动。"（以图上点数为准）</li>
+              <li>7 是一部分，3 是另一部分，10 是<b>合起来的总数</b>。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🌟</span>
+            <span class="q-text">拓展 2（小小挑战）：第⑨题：请你用"10−4=6"讲一个自己的数学故事（不见图、不看书，自己编！）。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例（编法不唯一）：</span>
+            <ul>
+              <li>"妈妈买了 10 个苹果，我吃了 4 个，还剩 6 个。"</li>
+              <li>"树上有 10 只小鸟，飞走了 4 只，还剩 6 只。"</li>
+              <li>"我有 10 颗糖，送给妹妹 4 颗，我还剩 6 颗。"</li>
+            </ul>
+            <span class="open-note">🌟 故事里说清"原来 10、去掉 4、剩 6"，就是好故事！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容4：加减混合 + 练一练 ================= -->
+  <div class="scene s4">
+    <div class="scene-head">
+      <div class="scene-num">4</div>
+      <h2>🦢 加减混合 · 练一练（第60～61页）</h2>
+      <span class="tag">又加又减 · 数字链</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/04-加减混合与练一练.jpg" alt="加减混合：天鹅图4+3-2=5、小鸭做一做；练一练口算、晾衣架燕子、动物加2减2、数字链">
+      <div class="img-tip">📖 课本第 60～61 页 · 加减混合 / 练一练</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">又加又减怎么算</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🦢</span>
+            <span class="q-text">认知 1：天鹅图：湖里原有 4 只天鹅，先飞来 3 只，又飞走 2 只。算式 4+3−2=5 先算什么、再算什么？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>先算 <b>4+3=7</b>（飞来是加，图上标 7），再算 <b>7−2=5</b>；</li>
+              <li>加减混合和连加连减一样，<b>从左往右</b>，先算前两个数。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🔄</span>
+            <span class="q-text">认知 2：第二幅天鹅图：4−2+3=□。先算什么、再算什么？为什么这次先算减法？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>先算 <b>4−2=2</b>，再算 <b>2+3=5</b>；</li>
+              <li>因为加减混合<b>按从左往右的顺序</b>算——谁在左边先算谁，不是"先加后减"。</li>
+            </ul>
+            <span class="think-note">💡 记住：加减混合，从左往右，一步一步来。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">看图列式、口算过关</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐤</span>
+            <span class="q-text">强化 1：做一做小鸭图：湖里 6 只小鸭，先游来几只、又游走几只？列式 6○□○□=□，并说说先算什么。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>按图上小鸭的来去填（如：6+2−3=5 或 6+1−2=5，以图为准）；</li>
+              <li>先算前两个数，再用得数和第三个数算。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">⏱️</span>
+            <span class="q-text">强化 2：练一练第①题：2+3、8−3、4+2、5+4、5−2、6−4、2+3+4、8−3−2、4+2−4。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>2+3=<b>5</b>；8−3=<b>5</b>；4+2=<b>6</b>；5+4=<b>9</b>；5−2=<b>3</b>；6−4=<b>2</b>；</li>
+              <li>2+3+4=<b>9</b>（先5再9）；8−3−2=<b>3</b>（先5再3）；4+2−4=<b>2</b>（先6再2）。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">找规律、闯数字链</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐘</span>
+            <span class="q-text">拓展 1：第③题动物排队：鹦鹉举牌"加 2""减 2"。熊 0+2、马 2+2、猴 4+2……接着往下说，你发现了什么规律？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>"加 2"一排：0+2=<b>2</b>、2+2=<b>4</b>、4+2=<b>6</b>、6+2=<b>8</b>、8+2=<b>10</b>；</li>
+              <li>"减 2"一排：9−2=<b>7</b>、7−2=<b>5</b>、5−2=<b>3</b>、3−2=<b>1</b>；</li>
+              <li>规律：加 2 就每次<b>多 2</b>（跳着数：2、4、6、8、10）；减 2 每次<b>少 2</b>（9、7、5、3、1）。</li>
+            </ul>
+            <span class="think-note">💡 两个两个地数（2、4、6、8、10），这就是"双数"的队伍！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🔗</span>
+            <span class="q-text">拓展 2（小小挑战）：第④题数字接龙：5+3→(−2)→(+4)→(−5)→(+3) 和 8−6→(+2)→(+5)→(−3)→(−4)，把每个空填出来。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>第一条链：5+3=<b>8</b>→8−2=<b>6</b>→6+4=<b>10</b>→10−5=<b>5</b>→5+3=<b>8</b>；</li>
+              <li>第二条链：8−6=<b>2</b>→2+2=<b>4</b>→4+5=<b>9</b>→9−3=<b>6</b>→6−4=<b>2</b>；</li>
+              <li>方法：把每个箭头的得数当作下一格的起点，从左往右一步步算。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容5：练一练 + 整理和复习 ================= -->
+  <div class="scene s5">
+    <div class="scene-head">
+      <div class="scene-num">5</div>
+      <h2>🧩 练一练 · 整理和复习（第62～63页）</h2>
+      <span class="tag">填数谜题 · 古埃及数字 · 知识图</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/05-练一练与整理复习.jpg" alt="练一练：连加减口算、猴子汽车图、填数得10谜题、古埃及数字；整理和复习知识图">
+      <div class="img-tip">📖 课本第 62～63 页 · 练一练 / 你知道吗 / 整理和复习</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">口算与看图列式</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">⏱️</span>
+            <span class="q-text">认知 1：第⑤题口算：1+4+5、2+4+4、7+2−5、10−1−4、10−4−4、7−5+2。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>1+4+5=<b>10</b>（先5再10）；2+4+4=<b>10</b>（先6再10）；7+2−5=<b>4</b>（先9再4）；</li>
+              <li>10−1−4=<b>5</b>（先9再5）；10−4−4=<b>2</b>（先6再2）；7−5+2=<b>4</b>（先2再4）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🍌</span>
+            <span class="q-text">认知 2：第⑥题：先说一说图的意思，再填空——猴子 10 根香蕉：10−3−□=□；停车场 4 辆汽车：4○□○□○□=□（辆）。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（以图为准）：</span>
+            <ul>
+              <li>香蕉：原来 10 根，先拿走 3 根，又拿走 2 根：10−3−<b>2</b>=<b>5</b>；</li>
+              <li>汽车：原来 4 辆，先开来 2 辆，又开来 1 辆……按图上 car 的来去填：4+2+□=□；</li>
+              <li>关键：弄清"原来多少、来了还是走了、来了（走了）多少"。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">填数谜题、古人数字</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🧩</span>
+            <span class="q-text">强化 1：第⑦题：填数，使每行、每列或每条线上的三个数相加都得 10。十字图（2、5、1 已给）和三角图（1、3、2 已给）分别怎么填？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（思路）：</span>
+            <ul>
+              <li>想"三个数合起来是 10"，用<b>凑十好朋友</b>倒着找：10−2−5=<b>3</b>；10−1−2=<b>7</b>……</li>
+              <li>先从已知两个数的行/列填起，每填一个就检查那行那列是否都得 10。</li>
+            </ul>
+            <span class="think-note">💡 这是最早的"数字谜题"（数阵），考验的是凑十和有序思考！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🏺</span>
+            <span class="q-text">强化 2：你知道吗：古埃及人用 | 表示 1、∩ 表示 10。∩−||（10 减 2）等于几？用埃及数字算一算 ||||−|||=□、∩−|||=□。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>∩−||=10−2=<b>8</b>；</li>
+              <li>||||−|||=4−3=<b>1</b>；∩−|||=10−3=<b>7</b>；</li>
+              <li>有趣的是：<b>3000 多年前的古埃及和古代中国，都想到用一根根小棒来表示数</b>——数学的思路全世界是相通的！</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">整理知识、画知识图</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🗺️</span>
+            <span class="q-text">拓展 1：整理和复习：书上同学的知识图有"比大小""分与合""加、减法"三块。看着知识图，把每块再补充一两个例子。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例：</span>
+            <ul>
+              <li><b>比大小：</b>7＞6、6＜7，还可以补 9＞8、10＞9；</li>
+              <li><b>分与合：</b>10 可以分成 9 和 1、8 和 2……还可以补 7 和 3、6 和 4；</li>
+              <li><b>加减法：</b>9+1=10、10−9=1、3+4+3=10、9−5+4=8，还可以补 10−4−4=2、2+3+4=9。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎨</span>
+            <span class="q-text">拓展 2（小小总结家）：本单元你学到了哪些知识？学着书上的样子，画一张自己的"知识图"，再向大家展示。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考要点（画其中几块即可）：</span>
+            <ul>
+              <li>认识 6~10，知道它们的顺序（数轴 0~10）；</li>
+              <li>6~10 的分与合（重点：凑十好朋友）；</li>
+              <li>6~10 的加减法、连加连减、加减混合（从左往右算）；</li>
+              <li>会用三步法解决问题，还会自己提出数学问题。</li>
+            </ul>
+            <span class="open-note">🌟 画知识图就是把学过的知识"串成串"，越串越清楚！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容6：算式表整理 + 练一练 ================= -->
+  <div class="scene s6">
+    <div class="scene-head">
+      <div class="scene-num">6</div>
+      <h2>🗂️ 整理算式表 · 练一练（第64～65页）</h2>
+      <span class="tag">算式阶梯表 · 找规律 · 说图意</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/06-算式表整理与练一练.jpg" alt="10以内加减法算式表阶梯图与三个问题；练一练：连线、连加减、蜻蜓蜗牛、熊猫鸽子">
+      <div class="img-tip">📖 课本第 64～65 页 · 小组合作整理算式表 / 练一练</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">算式表是怎么排的</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">📋</span>
+            <span class="q-text">认知 1：加法算式表：(1) 说一说表里的算式是怎样排列的？横着看、竖着看各有什么特点？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li><b>竖着看（第一列）：</b>0+0、0+1、0+2……0+10，第一个加数都是 0；</li>
+              <li><b>斜着看：</b>每条斜线上的算式得数相同（0+0 得 0；0+1、1+0 得 1；0+2、1+1、2+0 得 2……）；</li>
+              <li>表是按<b>得数从小到大</b>一层一层排的，像楼梯！</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">➖</span>
+            <span class="q-text">认知 2：减法算式表：1−1、2−1、3−0……它是怎样排列的？每一行的得数有什么变化？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>也是<b>楼梯形</b>：每一层得数相同，从 0−0 得 0 开始，一层比一层大；</li>
+              <li>同一行里，减号前面的数每次多 1，减号后面的数也每次多 1，得数不变（如 3−2、4−3、5−4 都得 1）。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">快速口算、发现规律</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎯</span>
+            <span class="q-text">强化 1：(2) 任指表中的一个算式，快速说出得数。和爸爸妈妈比赛：指 10 个算式，看谁又对又快！</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（方法）：</span>
+            <ul>
+              <li>快速口算的秘诀：<b>想分与合</b>——比如 7+2，想"7 和 2 组成 9"，直接得 9；</li>
+              <li>10 的加减法用"凑十好朋友"最快。</li>
+            </ul>
+            <span class="open-note">🌟 全部算式都能直接说出得数，就是"10 以内加减法过关"！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🔍</span>
+            <span class="q-text">强化 2：(3) 分别计算第一列算式，你发现了什么？还能发现什么规律？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>加法表第一列：0+0、0+1、0+2……0+10，得数依次是 0、1、2……10（<b>得数=第二个加数</b>）；</li>
+              <li>减法表第一列：1−1、2−1、3−1……得数每次多 1；</li>
+              <li>其他发现（不唯一）："几加 0 还得几""几减 0 还得几""同数相减得 0"……</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">看图解答、说清需要什么</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">⏱️</span>
+            <span class="q-text">拓展 1：练一练第②题：6+3−4、8+2−5、3+3+3、8−6−2、10−6+5、9−2−2。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>6+3−4=<b>5</b>（先9）；8+2−5=<b>5</b>（先10）；3+3+3=<b>9</b>（先6再9）；</li>
+              <li>8−6−2=<b>0</b>（先2再0）；10−6+5=<b>9</b>（先4再9）；9−2−2=<b>5</b>（先7再5）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐼</span>
+            <span class="q-text">拓展 2（最难挑战）：第③④题：先说一说图的意思 / 要解决什么问题、需要什么信息，再解答——蜻蜓蜗牛图；熊猫鸽子图"一共有多少只🐼"（□○□=□）。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（以图上点数为准）：</span>
+            <ul>
+              <li>蜻蜓图：草叶上 4 只 + 飞着 3 只？列加法；蜗牛图：一共 9 只，走了一些求剩下，列减法；</li>
+              <li>熊猫图：地上有 □ 只，又跑来 □ 只（或两处各有几只），求一共：□+□=□（只）；</li>
+              <li>关键：像书上说的，先想清楚<b>"要解决什么问题、需要什么信息"</b>，再找数列式——这是解决问题的完整思路！</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容7：练一练 + 成长小档案 ================= -->
+  <div class="scene s7">
+    <div class="scene-head">
+      <div class="scene-num">7</div>
+      <h2>🏁 练一练 · 成长小档案（第66页）</h2>
+      <span class="tag">比大小 · 写算式 · 单元总结</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/07-练一练与成长小档案.jpg" alt="练一练：猴子提问题、填大于小于等于、数字卡片写算式、最小填几；成长小档案">
+      <div class="img-tip">📖 课本第 66 页 · 练一练（第 5～8 题）/ 成长小档案</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">比大小、写算式</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">⚖️</span>
+            <span class="q-text">认知 1：第⑥题：在○里填上"&gt;""&lt;"或"="：3+6○9、2+4○7、7+3○9、10−4○8、9−3○5、9+0○9。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>3+6=<b>9</b>，9=9 填 <b>=</b>；2+4=<b>6</b>，6＜7 填 <b>&lt;</b>；7+3=<b>10</b>，10＞9 填 <b>&gt;</b>；</li>
+              <li>10−4=<b>6</b>，6＜8 填 <b>&lt;</b>；9−3=<b>6</b>，6＞5 填 <b>&gt;</b>；9+0=<b>9</b>，9=9 填 <b>=</b>。</li>
+            </ul>
+            <span class="think-note">💡 先把○两边算出来，再比大小——"先算后比"！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎴</span>
+            <span class="q-text">认知 2：第⑦题：用数字卡片 2、5、4、0、8、6、3、1、7、9 写出加法和减法算式。你能写出几道？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例：</span>
+            <ul>
+              <li>加法：2+5=7、3+4=7、6+3=9、5+4=9、2+8=10……</li>
+              <li>减法：8−5=3、9−4=5、7−2=5、10 除外（没有卡片 10）；6−0=6……</li>
+            </ul>
+            <span class="open-note">🌈 注意：三张卡片要能组成"一家人"（如 2、5、7）才能写出一加一减。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">提问题、最小填几</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐵</span>
+            <span class="q-text">强化 1：第⑤题：小猴子搬水（一共有 10 瓶）、岸上 6 只猴、船里几只猴——请你从图中提出数学问题并解答。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例（以图为准）：</span>
+            <ul>
+              <li>"一共有 10 瓶水，已经喝完/搬走 3 瓶，还剩几瓶？"（10−3=7）</li>
+              <li>"岸上有 6 只猴，船上有 3 只，一共有几只猴？"（6+3=9）</li>
+              <li>"岸上的猴比船上的多几只？"（6−3=3）</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🪜</span>
+            <span class="q-text">强化 2：第⑧题（带＊的挑战题）：□里<b>最小</b>可以填几？2＜□、5＜□、□＞6、□＞8。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>2＜□：比 2 大的数里最小的是 <b>3</b>；</li>
+              <li>5＜□：填 <b>6</b>；</li>
+              <li>□＞6：比 6 大的数里最小的是 <b>7</b>；</li>
+              <li>□＞8：填 <b>9</b>（10 也可以，但最小是 9）。</li>
+            </ul>
+            <span class="think-note">💡 "最小可以填几"＝找"刚好满足条件"的那个数——在尺子上找它右边（左边）紧挨着的数。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">成长小档案</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🌱</span>
+            <span class="q-text">拓展 1：书上小朋友说："我可以用 2、8、10 写出 4 个算式！"是哪 4 个？你也选三个数试一试。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>2+8=10、8+2=10、10−2=8、10−8=2（2、8、10 是一家人）；</li>
+              <li>自己选：如 3、6、9 → 3+6=9、6+3=9、9−3=6、9−6=3；</li>
+              <li>注意：选的三个数必须"两个小的合起来是大的"才行，如 1、2、4 就不行（1+2=3≠4）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🗣️</span>
+            <span class="q-text">拓展 2（成长小档案）：第三单元结束了，你想说些什么？说一说自己最大的收获，还有想继续努力的地方。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例：</span>
+            <ul>
+              <li>"我认识了 6~10，会写、会数、会比大小了！"</li>
+              <li>"我背熟了凑十好朋友：1和9、2和8、3和7、4和6、5和5。"</li>
+              <li>"我学会了连加连减、加减混合，知道要从左往右算。"</li>
+              <li>"我能用三步法解决问题，还会自己提数学问题！"</li>
+              <li>想努力的："口算再快一点""看图列式不再马虎"。</li>
+            </ul>
+            <span class="open-note">🌟 会总结的孩子，进步最快！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>⭐ 10 的加减法全过关，第三单元圆满收官！⭐</p>
+    <p>人教版《数学》一年级上册 · 第三单元"10 的认识和加、减法 + 整理和复习"（第 54～67 页）· 分层提问练习</p>
+    <p>图片仅供个人学习使用，版权归原作者（人民教育出版社）所有</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  var zhVoice = null;
+  function loadVoices(){ if(!synth) return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){
+    if(/zh|chinese|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+  function clean(t){ return (t||'').replace(/\s+/g,' ').trim(); }
+  function ownBtn(el){ for(var k=0;k<el.children.length;k++){
+    if(el.children[k].className && String(el.children[k].className).indexOf('spk-btn')>=0) return true; } return false; }
+  function readText(el){
+    if(!el) return '';
+    var t = el.querySelector('.q-text');
+    var txt = t ? t.textContent : el.textContent;
+    return clean(txt).replace(/(看答案|看解读|听)$/,'');
+  }
+  function speak(text, rate){
+    text = clean(text); if(!text) return;
+    if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN'; u.rate=(rate||0.9); u.pitch=1;
+    if(zhVoice) u.voice=zhVoice;
+    synth.speak(u);
+  }
+  function stop(){ if(synth) synth.cancel(); }
+
+  /* 题目行：兼容 qa-q 与 qa-q-row 两种结构（逐个容错，单个失败不影响全局） */
+  var SEL = '.qa-q, .qa-q-row';
+  var qs = document.querySelectorAll(SEL);
+  for(var i=0;i<qs.length;i++){
+    try{
+      (function(q){
+        if(ownBtn(q)) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听';
+        btn.addEventListener('click',function(e){ e.stopPropagation(); speak(readText(q)); });
+        var tog=q.querySelector('.toggle');
+        if(tog && tog.parentElement===q){ q.insertBefore(btn,tog); } else { q.appendChild(btn); }
+      })(qs[i]);
+    }catch(err){}
+  }
+
+  /* 答案区 */
+  var as = document.querySelectorAll('.qa-a');
+  for(var j=0;j<as.length;j++){
+    try{
+      (function(a){
+        if(a.querySelector('.spk-btn')) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听答案';
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          var qa=a.parentElement; if(qa) qa.classList.add('open');
+          speak(clean(a.textContent).replace(/^参考答案[:：]?/,''));
+        });
+        a.insertBefore(btn,a.firstChild);
+      })(as[j]);
+    }catch(err){}
+  }
+
+  /* 底部听读助手条 */
+  try{
+    var bar=document.createElement('div'); bar.className='voice-bar';
+    bar.innerHTML='<span>🎧 听读助手：</span>'+
+      '<button type="button" id="vAll">🔊 朗读全部题目</button>'+
+      '<button type="button" id="vStop">⏹ 停止</button>'+
+      '<span class="hint">点题旁🔊逐题听；点🔊听答案可边看边听</span>';
+    document.body.appendChild(bar);
+    document.getElementById('vStop').addEventListener('click',stop);
+    document.getElementById('vAll').addEventListener('click',function(){
+      if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+      var list=document.querySelectorAll(SEL); var qi=0;
+      function next(){
+        if(qi>=list.length) return;
+        var txt=readText(list[qi++]);
+        if(!txt){ next(); return; }
+        synth.cancel();
+        var u=new SpeechSynthesisUtterance(txt); u.lang='zh-CN'; u.rate=0.9; u.pitch=1;
+        if(zhVoice) u.voice=zhVoice;
+        u.onend=function(){ setTimeout(next,260); };
+        synth.speak(u);
+      }
+      next();
+    });
+  }catch(err){}
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一年级上册·认识立体图形 — 认知·强化·拓展 分层提问</title>
+<style>
+  /* ========== 页面基础 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #f5f6fa;
+    color: #333;
+    padding-bottom: 60px;
+  }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+  /* ========== 页头 ========== */
+  .header {
+    background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    color: #fff;
+    text-align: center;
+    padding: 36px 16px 28px;
+    border-radius: 0 0 24px 24px;
+    margin-bottom: 20px;
+  }
+  .header h1 { font-size: 30px; letter-spacing: 2px; margin-bottom: 10px; }
+  .header p { font-size: 16px; opacity: .92; line-height: 1.7; }
+
+  /* ========== 三层图例 ========== */
+  .level-legend {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; margin: 18px auto 8px; max-width: 700px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.18); border-radius: 20px;
+    padding: 7px 16px; font-size: 15px;
+  }
+  .legend-dot { width: 14px; height: 14px; border-radius: 50%; }
+  .dot-c { background: #1565c0; }  /* 认知-蓝 */
+  .dot-q { background: #e65100; }  /* 强化-橙 */
+  .dot-t { background: #ad1457; }  /* 拓展-粉 */
+
+  /* ========== 家长提示 ========== */
+  .parent-tip {
+    background: #fff8e1; border-left: 5px solid #ffb300;
+    border-radius: 8px; padding: 14px 18px; margin: 20px auto;
+    max-width: 820px; font-size: 15px; line-height: 1.8; color: #6d4c00;
+  }
+
+  /* ========== 场景卡片 ========== */
+  .scene {
+    background: #fff; border-radius: 16px; margin: 26px auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07); overflow: hidden;
+  }
+  .scene-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px;
+  }
+  .scene-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    color: #fff; font-size: 20px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .scene-head h2 { font-size: 21px; }
+  .scene-head .page-tag { font-size: 13px; color: #999; margin-top: 3px; }
+
+  /* 各场景主题色 */
+  .s1 .scene-head { background: #e3f2fd; } .s1 .scene-icon { background: #1565c0; }
+  .s2 .scene-head { background: #ede7f6; } .s2 .scene-icon { background: #5e35b1; }
+  .s3 .scene-head { background: #e8f5e9; } .s3 .scene-icon { background: #2e7d32; }
+  .s4 .scene-head { background: #fff3e0; } .s4 .scene-icon { background: #e65100; }
+  .s5 .scene-head { background: #fce4ec; } .s5 .scene-icon { background: #ad1457; }
+  .s6 .scene-head { background: #e0f7fa; } .s6 .scene-icon { background: #00838f; }
+
+  /* ========== 教材图片 ========== */
+  .scene-img {
+    width: 100%; display: block;
+    border-top: 1px solid #eee; border-bottom: 1px solid #eee;
+  }
+  .img-caption {
+    text-align: center; font-size: 13px; color: #999; padding: 8px;
+    background: #fafafa;
+  }
+
+  /* ========== 题目卡片 ========== */
+  .qa-list { padding: 14px 18px 20px; }
+  .qa {
+    border-radius: 12px; margin-bottom: 12px; overflow: hidden;
+    border: 1.5px solid #e8e8e8; transition: border-color .2s;
+  }
+  .qa:hover { border-color: #bbb; }
+  .qa-c { border-color: #90caf9; }  /* 认知蓝 */
+  .qa-q { border-color: #ffcc80; }  /* 强化橙 */
+  .qa-t { border-color: #f48fb1; }  /* 拓展粉 */
+
+  .qa-q-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 13px 15px; cursor: pointer; user-select: none;
+  }
+  .q-emoji { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .q-text { font-size: 16.5px; line-height: 1.65; flex: 1; }
+  .toggle {
+    flex-shrink: 0; font-size: 13px; color: #fff; border-radius: 14px;
+    padding: 4px 12px; margin-left: 6px; margin-top: 2px;
+  }
+  .qa-c .toggle { background: #1565c0; }
+  .qa-q .toggle { background: #e65100; }
+  .qa-t .toggle { background: #ad1457; }
+  .qa.open .toggle::after { content: " ▲"; }
+  .qa:not(.open) .toggle::after { content: " ▼"; }
+
+  .qa-a { display: none; padding: 13px 16px 15px; font-size: 15.5px; line-height: 1.85; }
+  .qa.open .qa-a { display: block; }
+  .qa-c .qa-a { background: #e3f2fd; }
+  .qa-q .qa-a { background: #fff3e0; }
+  .qa-t .qa-a { background: #fce4ec; }
+  .a-label { font-weight: bold; }
+  .qa-c .a-label { color: #1565c0; }
+  .qa-q .a-label { color: #e65100; }
+  .qa-t .a-label { color: #ad1457; }
+
+  .hint { color: #f57f17; }
+  .open-tag { color: #ad1457; font-weight: bold; }
+
+  /* ========== 页脚 ========== */
+  .footer { text-align: center; color: #aaa; font-size: 13px; margin-top: 30px; line-height: 1.8; }
+</style>
+<style>
+  /* ===== 听读助手（语音） ===== */
+  .spk-btn{display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;border:none;
+    border-radius:14px;padding:4px 12px;font-size:12.5px;cursor:pointer;flex-shrink:0;font-family:inherit;}
+  .spk-btn:hover{background:#0d47a1;}
+  .qa-q .spk-btn{margin-left:8px;}
+  .qa-a .spk-btn{display:inline-block;margin:10px 0 0;background:#e65100;}
+  .qa-a .spk-btn:hover{background:#bf3f00;}
+  .voice-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:1000;
+    background:rgba(216,74,43,.97);color:#fff;border-radius:30px;padding:8px 14px;
+    display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(120,40,20,.30);font-size:13px;
+    max-width:94vw;flex-wrap:wrap;justify-content:center;}
+  .voice-bar button{background:#fff;color:#d84a2b;border:none;border-radius:18px;padding:6px 14px;
+    font-size:13px;cursor:pointer;font-weight:bold;}
+  .voice-bar button:hover{background:#ffe9d6;}
+  .voice-bar .hint{font-size:11px;opacity:.95;max-width:230px;}
+</style>
+</head>
+<body>
+<a href="../index.html" style="position:sticky;top:0;z-index:999;display:block;text-align:center;background:#d84a2b;color:#fff;padding:9px 0;font-size:14px;text-decoration:none;font-family:'Microsoft YaHei',sans-serif;">📚 一年级上册 · 分层提问系列导航（点此返回）</a>
+
+
+<!-- ===================== 页头 ===================== -->
+<div class="header">
+  <h1>🧊 认识立体图形 · 分层提问</h1>
+  <p>人教版《数学》一年级上册 · 第四单元（第67~72页）</p>
+  <div class="level-legend">
+    <div class="legend-item"><span class="legend-dot dot-c"></span>认知层 · 看一看、认一认</div>
+    <div class="legend-item"><span class="legend-dot dot-q"></span>强化层 · 比一比、说一说</div>
+    <div class="legend-item"><span class="legend-dot dot-t"></span>拓展层 · 想一想、用一用</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="parent-tip">
+    <b>👨‍👩‍👧 家长使用建议：</b>① 先让孩子看图自由说一说，再逐题提问；② 点击问题卡展开参考答案；
+    ③ 本单元重点不是背图形名字，而是<b>动手摸一摸、滚一滚、搭一搭</b>，感受"平平的面"和"能滚动"的区别；
+    ④ 带 🌈 的是开放题，说法不唯一，孩子说得有道理就要肯定；带 💡 的是思维种子，重在讲道理。
+  </div>
+
+  <!-- ===================== 场景1：单元主题图 ===================== -->
+  <div class="scene s1">
+    <div class="scene-head">
+      <div class="scene-icon">一</div>
+      <div>
+        <h2>① 单元主题图：这些物品分别是什么形状的？</h2>
+        <div class="page-tag">教材第67页 · 认识立体图形（单元起始）</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/01-单元主题图-认识立体图形.jpg" alt="单元主题图">
+    <div class="img-caption">▲ 生活中的物品 —— 长方体、正方体、圆柱、球，就在我们身边</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔍</span>
+          <span class="q-text">【认知1】图里这么多物品，你能认出哪些？说说它们的名字。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>牙膏盒、肥皂盒、牛奶盒、木板、纸巾盒、积木车（长方体）；木箱、魔方、黄色积木块（正方体）；卷纸筒、红色保温筒、罐头（圆柱）；足球、篮球、粉色小球（球）。（🌈说法不唯一，认出几样说几样）</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">⚽</span>
+          <span class="q-text">【认知2】找一找：图里哪些物品的形状是球？它们有什么共同的地方？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>足球、篮球、粉色小球都是球。共同点：圆圆的、没有平平的面，放在桌上会滚来滚去。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📦</span>
+          <span class="q-text">【强化1】牙膏盒、肥皂盒、木板、纸巾盒，这些物品的形状有什么共同点？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>它们都是<b>长方体</b>——都有平平的面，外形是"方方的"。有的长长扁扁（木板），有的方方正正（肥皂盒），但都是长方体。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🥫</span>
+          <span class="q-text">【强化2】卷纸筒、罐头、牛奶盒三个好朋友里，谁<b>混进来</b>了？为什么？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>牛奶盒混进来了。卷纸筒和罐头都是<b>圆柱</b>（圆圆的筒，两头一样大，能滚动）；牛奶盒是<b>长方体</b>，有平平的面，不是圆筒。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🏠</span>
+          <span class="q-text">【拓展1】💡在我们家里或教室里找一找：这四种形状的物品各举一个例子。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。例如：长方体——书、抽屉、冰箱；正方体——魔方、方糖、正方形礼盒；圆柱——水杯、电池、易拉罐；球——乒乓球、皮球、地球仪。能说清理由即可。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🚂</span>
+          <span class="q-text">【拓展2】图下方的小朋友用积木搭了一辆小火车，用了哪些形状？为什么要这样搭？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。车身用了长方体（平平的面朝下放得稳），烟囱/车轮用了圆柱和球（圆圆的像真火车）。💡<span class="hint">思考点：</span>搭东西时"平的一面朝下"更稳，这是下一页要研究的秘密！</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== 场景2：例1 按形状分一分 ===================== -->
+  <div class="scene s2">
+    <div class="scene-head">
+      <div class="scene-icon">二</div>
+      <div>
+        <h2>② 例1：按形状分一分，你发现了什么？</h2>
+        <div class="page-tag">教材第68页 · 长方体、正方体、圆柱、球</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/02-例1-按形状分一分.png" alt="例1 按形状分一分">
+    <div class="img-caption">▲ 四个家：长方体、正方体、圆柱、球 —— 说一说你身边哪些物品是这些形状的</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📚</span>
+          <span class="q-text">【认知1】例1把物品分成了哪四个"家"？请大声说出它们的名字。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>四个家是：<b>长方体、正方体、圆柱、球</b>。（要读准名称："体"字不能丢哦）</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🧩</span>
+          <span class="q-text">【认知2】木箱、魔方、黄色积木块为什么都住进"正方体"这个家？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>它们都是<b>四四方方</b>的，每个面都一样大（方方正正），所以都是正方体。摸一摸魔方就能感觉到：六个面一模一样。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">💬</span>
+          <span class="q-text">【强化1】教材里三个小朋友玩后说："圆柱可以这样滚动""长方体有平平的面""球能向四面八方滚动"。你也动手试一试，还有什么发现？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。可能发现：圆柱躺着能滚、立着能站稳；长方体和正方体放在桌上不滚、推一推才动；球一碰就滚，立不住。能结合动手操作说出图形的特点即可。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🎯</span>
+          <span class="q-text">【强化2】圆柱和球都能滚动，它们滚起来的样子一样吗？试一试再回答。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>不一样。圆柱<b>只能朝一个方向直直地滚</b>（像轮子）；球<b>能向四面八方滚</b>，想滚哪儿滚哪儿。💡<span class="hint">思考点：</span>因为圆柱有两个平平的面"管着"它，球没有平的面。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🪵</span>
+          <span class="q-text">【拓展1】木板又薄又长，它为什么还是长方体？薄薄的东西能不能是长方体？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>能！长方体看的是<b>形状</b>不是<b>胖瘦</b>——只要像盒子一样有平平的面、方方的外形，就算很薄很薄（像课本、像木板）也是长方体。💡<span class="hint">思考点：</span>判断图形别被"大小、厚薄"骗了。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🧼</span>
+          <span class="q-text">【拓展2】说一说：你身边哪些物品是这些形状的？（每种形状至少说一个）</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。例：长方体——文具盒、书、药盒；正方体——魔方、骰子；圆柱——铅笔、水杯、易拉罐；球——乒乓球、玻璃珠。说得出物品、对得上形状即可。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== 场景3：做一做 我说你拿/猜/搭 ===================== -->
+  <div class="scene s3">
+    <div class="scene-head">
+      <div class="scene-icon">三</div>
+      <div>
+        <h2>③ 做一做：我说你拿、我说你猜、我说你搭</h2>
+        <div class="page-tag">教材第69页 · 三个小游戏</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/03-做一做-我说你拿猜搭.png" alt="做一做 三个小游戏">
+    <div class="img-caption">▲ 游戏1 我说你拿 · 游戏2 我说你猜 · 游戏3 我说你搭</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🙌</span>
+          <span class="q-text">【认知1】游戏1"我说你拿"：听到"圆柱"这个词，应该从桌上拿起什么样的积木？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>拿像卷纸筒那样<b>圆圆的筒状</b>积木——两头一样大、圆圆的身体，就是圆柱。桌上长方体、正方体、球都不能拿。</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🤔</span>
+          <span class="q-text">【认知2】游戏2里，同伴说"可以立起来，还可以滚动"，猜的是哪个图形？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span><b>圆柱</b>。圆柱立起来稳稳的，躺下能滚动。💡<span class="hint">思考点：</span>球只能滚不能立稳；长方体能立但不能滚——两条线索合在一起只有圆柱符合。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">✋</span>
+          <span class="q-text">【强化1】蒙上眼睛也能猜对图形，靠的是什么本领？摸的时候摸什么？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>靠<b>摸</b>。摸有没有<b>平平的面</b>（有→长方体/正方体）；摸有没有<b>圆面和弯弯的身子</b>（有→圆柱）；摸是不是<b>到处圆滚滚</b>（是→球）。眼睛看不见时，小手也能"看出"形状！</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🗣️</span>
+          <span class="q-text">【强化2】游戏3"我说你搭"要先说"先放一个长方体，再在长方体上面放一个正方体"。为什么要按这样的顺序说？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>因为搭积木有<b>先后顺序</b>：先放的在下面，后放的在上面。说得有顺序，隔板另一边的小朋友才能搭出<b>一模一样</b>的作品；乱着说，别人就不知道先搭哪个啦。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🎪</span>
+          <span class="q-text">【拓展1】轮到你出题了：用一两句话描述正方体，不许说名字，让家人猜。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。例："四四方方的，六个面都一样大，摸起来有平平的面，放哪儿都不滚。"猜：正方体！（描述抓住"每个面一样大"这个关键就行）</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🕵️</span>
+          <span class="q-text">【拓展2】💡如果同伴说"我能向四面八方滚动"，你该拿桌上哪一个？说说理由。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>拿<b>球</b>。理由：球没有平平的面，向哪个方向都能滚；圆柱虽然有圆身子，但有两个平的面"管着"，只能朝一个方向直直地滚。两条特点一对，就是球！</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== 场景4：例2 搭积木又稳又高 ===================== -->
+  <div class="scene s4">
+    <div class="scene-head">
+      <div class="scene-icon">四</div>
+      <div>
+        <h2>④ 例2：所有的积木都要用上，看谁搭得又稳又高</h2>
+        <div class="page-tag">教材第70页 · 三步解题：阅读理解 → 分析解答 → 回顾反思</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/04-例2-搭积木又稳又高.png" alt="例2 搭积木又稳又高">
+    <div class="img-caption">▲ 用上全部积木，搭得又稳又高 —— 巧妙运用各种积木的特点</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📋</span>
+          <span class="q-text">【认知1】这道题的要求是什么？用你自己的话说一说。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>两条要求：① <b>所有的积木都要用上</b>（一块也不能剩）；② 搭得<b>又稳又高</b>（不倒、越高越好）。少一条都不算完成任务哦。</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔢</span>
+          <span class="q-text">【认知2】这堆积木里有哪几种形状？每种有几个？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>有<b>长方体、正方体、圆柱、球</b>四种形状。长方体最多（横着躺着的、竖着站着的都有），正方体1个，球1个，圆柱1个。（点数时把图上每种形状分别数一遍，以实际数出的结果为准）</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📏</span>
+          <span class="q-text">【强化1】小女孩说："这个长方体，平放着比较稳，竖起来搭得高。"这句话是什么意思？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>同一个长方体有两种放法：<b>平放</b>——接触桌面的大面朝下，稳稳的，适合搭在下面；<b>竖放</b>——站起来的个头高，适合搭在上层往上摞。💡<span class="hint">思考点：</span>会看"哪一面平"，才能又稳又高。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🏀</span>
+          <span class="q-text">【强化2】球圆圆的会滚，小男孩是怎么让球放稳的？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>他<b>把球放在3个长方体围起来的中间</b>（像小窝一样卡住球），球就不滚了。说明：球自己立不稳，要请别的形状帮忙"围"住它。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🏗️</span>
+          <span class="q-text">【拓展1】💡搭高楼时，为什么下面要用大的、平的，上面用小的？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>下面大而平，像盖房子的<b>地基</b>，撑得住上面的重量，塔不容易倒；上面用小的，又轻又稳。这就是"下大上小"的秘密——生活中盖高楼也是这样哦！</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">⚠️</span>
+          <span class="q-text">【拓展2】想一想：如果把球放在最下面一层，会怎么样？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>球没有平的面，一放上去就<b>滚走了</b>，上面的积木会跟着倒——搭不成"稳"的高塔。💡<span class="hint">思考点：</span>所以球只能放在<b>最上面</b>或被围起来的地方。每种形状都有自己的"最佳岗位"！</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== 场景5：例3 拼一拼与做一做 ===================== -->
+  <div class="scene s5">
+    <div class="scene-head">
+      <div class="scene-icon">五</div>
+      <div>
+        <h2>⑤ 例3：拼一拼 —— 小积木拼出新图形</h2>
+        <div class="page-tag">教材第71页 · 例3 与做一做</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/05-例3-拼一拼与做一做.png" alt="例3 拼一拼与做一做">
+    <div class="img-caption">▲ 2个正方体拼成长方体 · 哪些是4个拼的 · 哪两堆可以拼成大长方体</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">➕</span>
+          <span class="q-text">【认知1】例3里，小女孩用2个正方体拼成什么新的图形了？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>2个正方体拼在一起，变成了一个<b>长方体</b>（长长方方的）。小积木组合起来能"变身"！</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🧱</span>
+          <span class="q-text">【认知2】做一做第3题：用4个相同的长方体，能拼出哪几种不同的长方体？动手试一试。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。可以4个<b>一字排开</b>拼成细细长长的；可以<b>2个2个上下摞</b>，拼成扁扁宽宽的；还可以<b>2并2排</b>拼成接近方方的。动手拼出的都对，说得出摆法更好。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">✅</span>
+          <span class="q-text">【强化1】做一做第1题：哪些作品是用4个正方体拼成的？怎么判断打钩对不对？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>要<b>一块一块地数</b>：露出来的要数，<b>藏在下面、后面的也要数</b>，数够4个的打"√"。（各作品是否为4个以图中实际数数为准）💡<span class="hint">思考点：</span>被挡住的正方体看不见，但它们真的存在！</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🙈</span>
+          <span class="q-text">【强化2】数正方体作品时，为什么不能只数露出来的面？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>因为有的正方体<b>藏在里面</b>，只露出一小部分甚至全被挡住，只数看见的会<b>数少</b>。正确方法：想清楚"这层有几个、下面还压着几个"，一层一层地数。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔄</span>
+          <span class="q-text">【拓展1】2个相同的正方体，除了横着拼，还能怎么拼？拼出来的还是长方体吗？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>还能<b>竖着摞</b>起来拼。横着拼、竖着拼，拼出来的都是<b>长方体</b>——只是站着的长方体和躺着的长方体，方向不同而已。💡<span class="hint">思考点：</span>转一转方向，图形没变。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🥫</span>
+          <span class="q-text">【拓展2】💡大胆想：2个相同的圆柱拼起来，会变成什么？像生活中的什么？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>拼成一个<b>更高更瘦的圆柱</b>（两个圆柱上下叠），像一根柱子、一摞纸杯、一节加长水管。🌈<span class="open-tag">说法不唯一</span>，像什么说得有道理就行。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== 场景6：练一练与成长小档案 ===================== -->
+  <div class="scene s6">
+    <div class="scene-head">
+      <div class="scene-icon">六</div>
+      <div>
+        <h2>⑥ 练一练 + 成长小档案：本单元收获了什么？</h2>
+        <div class="page-tag">教材第72页 · 单元综合练习与自我评价</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/06-练一练与成长小档案.jpg" alt="练一练与成长小档案">
+    <div class="img-caption">▲ 连一连 · 数一数 · 找规律圈答案 · 成长小档案</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔗</span>
+          <span class="q-text">【认知1】第1题连一连：胶棒、魔方、地球仪、文具盒，应该连到哪个图形朋友那里？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>胶棒→<b>圆柱</b>；魔方→<b>正方体</b>；地球仪→<b>球</b>；文具盒→<b>长方体</b>。连线前先说清每个物品的形状特点，再动笔连。</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔢</span>
+          <span class="q-text">【认知2】第2题数一数：搭建作品里，长方体、球、正方体、圆柱各有几个？一共有几个立体图形？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>按图中作品<b>一种一种分别数</b>，把数量填进括号（以实际点数为准），再把四种数量<b>合起来</b>就是总数。💡<span class="hint">思考点：</span>分类数、按顺序数，才不会漏。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📊</span>
+          <span class="q-text">【强化1】第3题数一数：长方体两三层叠在一起时，怎么数才不出错？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span><b>一层一层地数</b>：先数最上面一层，再数中间层，最后数下面被压住的部分；右边正方体作品也是先看清一排几个、有几排。数完可以再倒着数一遍检查。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔁</span>
+          <span class="q-text">【强化2】第4题找规律："接下来应该摆什么？"先读出规律，再圈答案。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>第一行是"牛奶盒、罐头"<b>一个隔一个</b>排列，接着该摆牛奶盒；第二行是"球、正方体、圆柱"<b>三个一组循环</b>，接着该摆球。（圈哪个以图上给出的两个选项中与规律一致的为准）方法：先找到"几个一组"，再看下一位是谁。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🏅</span>
+          <span class="q-text">【拓展1】成长小档案：本单元结束了，你想说些什么？学到了哪些本领？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。例：①认识了长方体、正方体、圆柱、球四种立体图形；②发现生活中有些物体的形状是长方体，有些是圆柱、球……；③我会用几个相同的正方体拼出长方体；④搭积木时下面放大而平的更稳。说出真实收获即可。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🗂️</span>
+          <span class="q-text">【拓展2】💡挑战任务：回家按四种形状给家里的物品"分家"，每家至少放2个成员，明天来汇报。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。例：长方体家——书、抽屉、鞋盒；正方体家——魔方、方糖盒；圆柱家——水杯、电池；球家——乒乓球、柚子。汇报时说清"为什么放这家"（抓住平平的面、圆滚滚等特点）就最棒。💡<span class="hint">思考点：</span>数学就在家里、在生活中！</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    人教版《数学》一年级上册 · 第四单元「认识立体图形」（第67~72页）<br>
+    认知 · 强化 · 拓展 三层提问 · 6组36题 · 点击问题卡展开/收起参考答案
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  var zhVoice = null;
+  function loadVoices(){ if(!synth) return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){
+    if(/zh|chinese|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+  function clean(t){ return (t||'').replace(/\s+/g,' ').trim(); }
+  function ownBtn(el){ for(var k=0;k<el.children.length;k++){
+    if(el.children[k].className && String(el.children[k].className).indexOf('spk-btn')>=0) return true; } return false; }
+  function readText(el){
+    if(!el) return '';
+    var t = el.querySelector('.q-text');
+    var txt = t ? t.textContent : el.textContent;
+    return clean(txt).replace(/(看答案|看解读|听)$/,'');
+  }
+  function speak(text, rate){
+    text = clean(text); if(!text) return;
+    if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN'; u.rate=(rate||0.9); u.pitch=1;
+    if(zhVoice) u.voice=zhVoice;
+    synth.speak(u);
+  }
+  function stop(){ if(synth) synth.cancel(); }
+
+  /* 题目行：兼容 qa-q 与 qa-q-row 两种结构（逐个容错，单个失败不影响全局） */
+  var SEL = '.qa-q, .qa-q-row';
+  var qs = document.querySelectorAll(SEL);
+  for(var i=0;i<qs.length;i++){
+    try{
+      (function(q){
+        if(ownBtn(q)) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听';
+        btn.addEventListener('click',function(e){ e.stopPropagation(); speak(readText(q)); });
+        var tog=q.querySelector('.toggle');
+        if(tog && tog.parentElement===q){ q.insertBefore(btn,tog); } else { q.appendChild(btn); }
+      })(qs[i]);
+    }catch(err){}
+  }
+
+  /* 答案区 */
+  var as = document.querySelectorAll('.qa-a');
+  for(var j=0;j<as.length;j++){
+    try{
+      (function(a){
+        if(a.querySelector('.spk-btn')) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听答案';
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          var qa=a.parentElement; if(qa) qa.classList.add('open');
+          speak(clean(a.textContent).replace(/^参考答案[:：]?/,''));
+        });
+        a.insertBefore(btn,a.firstChild);
+      })(as[j]);
+    }catch(err){}
+  }
+
+  /* 底部听读助手条 */
+  try{
+    var bar=document.createElement('div'); bar.className='voice-bar';
+    bar.innerHTML='<span>🎧 听读助手：</span>'+
+      '<button type="button" id="vAll">🔊 朗读全部题目</button>'+
+      '<button type="button" id="vStop">⏹ 停止</button>'+
+      '<span class="hint">点题旁🔊逐题听；点🔊听答案可边看边听</span>';
+    document.body.appendChild(bar);
+    document.getElementById('vStop').addEventListener('click',stop);
+    document.getElementById('vAll').addEventListener('click',function(){
+      if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+      var list=document.querySelectorAll(SEL); var qi=0;
+      function next(){
+        if(qi>=list.length) return;
+        var txt=readText(list[qi++]);
+        if(!txt){ next(); return; }
+        synth.cancel();
+        var u=new SpeechSynthesisUtterance(txt); u.lang='zh-CN'; u.rate=0.9; u.pitch=1;
+        if(zhVoice) u.voice=zhVoice;
+        u.onend=function(){ setTimeout(next,260); };
+        synth.speak(u);
+      }
+      next();
+    });
+  }catch(err){}
+})();
+</script>
+
+</body>
+</html>

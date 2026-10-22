@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6~10的认识和加、减法（6~9） · 认知-强化-拓展分层提问 —— 一年级数学上（人教版2024）</title>
+<style>
+  /* ===== 全局：明亮活泼的一年级风格 ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(180deg, #e8f6fb 0%, #fffef5 100%);
+    color: #33414d;
+    line-height: 1.8;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  /* ===== 页头 ===== */
+  header {
+    text-align: center;
+    background: linear-gradient(135deg, #0089c7 0%, #2bbfae 100%);
+    border-radius: 24px;
+    padding: 28px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 16px rgba(0, 137, 199, 0.3);
+  }
+  header h1 { font-size: 26px; color: #fff; text-shadow: 1px 2px 4px rgba(0,0,0,0.15); margin-bottom: 8px; }
+  header p { color: #e8f7ff; font-size: 15.5px; }
+
+  .level-legend {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .level-legend span {
+    border-radius: 999px; padding: 6px 18px; font-size: 14px; font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .lv-renzhi { background: #e3f2fd; color: #1565c0; }
+  .lv-qianghua { background: #fff3e0; color: #e65100; }
+  .lv-tuozhan { background: #fce4ec; color: #ad1457; }
+
+  /* ===== 场景卡片 ===== */
+  .scene {
+    background: #fff;
+    border-radius: 24px;
+    margin-bottom: 38px;
+    box-shadow: 0 4px 14px rgba(60, 110, 140, 0.13);
+    overflow: hidden;
+  }
+  .scene-head { display: flex; align-items: center; gap: 12px; padding: 18px 24px 10px; }
+  .scene-num {
+    flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: bold; color: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+  .scene-head h2 { font-size: 21px; }
+  .scene-head .tag {
+    margin-left: auto; font-size: 13px; color: #6f8a99;
+    background: #eaf4f8; border-radius: 999px; padding: 3px 12px; white-space: nowrap;
+  }
+  .s1 .scene-num { background: #0089c7; } .s1 .scene-head h2 { color: #00638f; }
+  .s2 .scene-num { background: #26a69a; } .s2 .scene-head h2 { color: #007065; }
+  .s3 .scene-num { background: #ef6c00; } .s3 .scene-head h2 { color: #bf5000; }
+  .s4 .scene-num { background: #8e24aa; } .s4 .scene-head h2 { color: #6a1b9a; }
+  .s5 .scene-num { background: #43a047; } .s5 .scene-head h2 { color: #2e7d32; }
+
+  .scene-img { text-align: center; padding: 0 24px; }
+  .scene-img img {
+    width: 100%; max-width: 780px;
+    border-radius: 16px;
+    border: 4px solid #e6f3f8;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  .img-tip { font-size: 13px; color: #8ba3b0; margin-top: 6px; }
+
+  /* ===== 三个层次分组 ===== */
+  .levels { padding: 14px 24px 26px; }
+  .level { border-radius: 16px; padding: 12px 16px 14px; margin-top: 14px; }
+  .level.renzhi   { background: #f2f9ff; border: 2px solid #cfe6fb; }
+  .level.qianghua { background: #fffaf0; border: 2px solid #ffe3b8; }
+  .level.tuozhan  { background: #fff4f8; border: 2px solid #ffd2e1; }
+  .level-title {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 16px; font-weight: bold;
+    border-radius: 999px; padding: 3px 16px; margin-bottom: 4px;
+  }
+  .renzhi   .level-title { background: #d6eaff; color: #1565c0; }
+  .qianghua .level-title { background: #ffe8c2; color: #b26500; }
+  .tuozhan  .level-title { background: #ffd9e6; color: #ad1457; }
+  .level-desc { font-size: 13px; color: #8a97a0; margin-left: 6px; }
+
+  /* ===== 问题卡 ===== */
+  .qa {
+    background: #fff;
+    border: 2px solid #eef1f7;
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-top: 10px;
+  }
+  .renzhi   .qa { border-color: #dbeeff; }
+  .qianghua .qa { border-color: #ffedcc; }
+  .tuozhan  .qa { border-color: #ffdce8; }
+  .qa-q {
+    display: flex; align-items: flex-start; gap: 10px;
+    cursor: pointer; user-select: none;
+  }
+  .qa-q .q-emoji { font-size: 21px; flex: 0 0 auto; }
+  .qa-q .q-text { font-size: 16.5px; font-weight: bold; color: #3d4b57; flex: 1; }
+  .qa-q .toggle {
+    flex: 0 0 auto;
+    background: #e3ecf8; color: #3967a8;
+    border-radius: 999px; padding: 2px 14px;
+    font-size: 13px; font-weight: bold;
+  }
+  .renzhi   .qa .toggle { background: #dbeeff; color: #1565c0; }
+  .qianghua .qa .toggle { background: #ffe8c2; color: #b26500; }
+  .tuozhan  .qa .toggle { background: #ffd9e6; color: #ad1457; }
+  .qa-a {
+    display: none;
+    margin-top: 10px;
+    background: #f7f9fc;
+    border-left: 5px solid #b0c4de;
+    border-radius: 0 12px 12px 0;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: #3e4c58;
+  }
+  .renzhi   .qa-a { border-color: #64a7e8; background: #f4faff; }
+  .qianghua .qa-a { border-color: #f0a94b; background: #fffaf2; }
+  .tuozhan  .qa-a { border-color: #ef7fa8; background: #fff6fa; }
+  .qa.open .qa-a { display: block; }
+  .qa-a .a-label { font-weight: bold; }
+  .renzhi   .qa-a .a-label { color: #1565c0; }
+  .qianghua .qa-a .a-label { color: #b26500; }
+  .tuozhan  .qa-a .a-label { color: #ad1457; }
+  .qa-a ul { margin: 6px 0 0 22px; }
+  .qa-a li { margin-bottom: 4px; }
+  .qa-a .open-note {
+    display: inline-block; margin-top: 8px;
+    background: #fff3e0; color: #bf6a1a;
+    border-radius: 8px; padding: 3px 10px; font-size: 13px;
+  }
+  .qa-a .think-note {
+    display: inline-block; margin-top: 8px;
+    background: #ede7f6; color: #5e35b1;
+    border-radius: 8px; padding: 3px 10px; font-size: 13px;
+  }
+
+  .parent-tip {
+    background: #fff8e1;
+    border-left: 5px solid #ffca28;
+    border-radius: 0 14px 14px 0;
+    padding: 14px 18px;
+    font-size: 14.5px;
+    color: #7a5c00;
+    margin-bottom: 28px;
+  }
+  .parent-tip b { color: #8d6708; }
+
+  footer { text-align: center; color: #8ba3b0; font-size: 14px; margin-top: 6px; }
+</style>
+<style>
+  /* ===== 听读助手（语音） ===== */
+  .spk-btn{display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;border:none;
+    border-radius:14px;padding:4px 12px;font-size:12.5px;cursor:pointer;flex-shrink:0;font-family:inherit;}
+  .spk-btn:hover{background:#0d47a1;}
+  .qa-q .spk-btn{margin-left:8px;}
+  .qa-a .spk-btn{display:inline-block;margin:10px 0 0;background:#e65100;}
+  .qa-a .spk-btn:hover{background:#bf3f00;}
+  .voice-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:1000;
+    background:rgba(216,74,43,.97);color:#fff;border-radius:30px;padding:8px 14px;
+    display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(120,40,20,.30);font-size:13px;
+    max-width:94vw;flex-wrap:wrap;justify-content:center;}
+  .voice-bar button{background:#fff;color:#d84a2b;border:none;border-radius:18px;padding:6px 14px;
+    font-size:13px;cursor:pointer;font-weight:bold;}
+  .voice-bar button:hover{background:#ffe9d6;}
+  .voice-bar .hint{font-size:11px;opacity:.95;max-width:230px;}
+</style>
+</head>
+<body>
+<a href="../index.html" style="position:sticky;top:0;z-index:999;display:block;text-align:center;background:#d84a2b;color:#fff;padding:9px 0;font-size:14px;text-decoration:none;font-family:'Microsoft YaHei',sans-serif;">📚 一年级上册 · 分层提问系列导航（点此返回）</a>
+
+<div class="container">
+
+  <header>
+    <h1>🐠 6~10 的认识和加、减法（6~9）· 分层提问</h1>
+    <p>人教版《数学》一年级上册 · 第三单元"6~10 的认识和加、减法"起步（课本第 34～43 页）</p>
+  </header>
+
+  <div class="level-legend">
+    <span class="lv-renzhi">🧠 认知层 · 认识6~9、数得对</span>
+    <span class="lv-qianghua">💪 强化层 · 会比大小、分与合</span>
+    <span class="lv-tuozhan">🚀 拓展层 · 找规律、敢挑战</span>
+  </div>
+
+  <div class="parent-tip">
+    <b>👨‍👩‍👧 使用建议：</b>每组内容配 <b>6 个问题</b>，按"认知 → 强化 → 拓展"三层递进。
+    6～9 的数数比以前更长，重点是<b>按顺序数、不重复不遗漏</b>；分与合从 6 到 9，重点是<b>按顺序分、成对记忆</b>。
+    点击问题卡片展开参考答案；图中数量请以孩子实际点数为准，数的方法比结果更重要。
+  </div>
+
+  <!-- ================= 内容1：单元主题图 海底世界 ================= -->
+  <div class="scene s1">
+    <div class="scene-head">
+      <div class="scene-num">1</div>
+      <h2>🌊 单元主题图 · 海底世界（第34～35页）</h2>
+      <span class="tag">单元起点 · 数 6~10</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/01-单元主题图-海底世界.jpg" alt="6~10的认识和加减法单元主题图：海底世界场景">
+      <div class="img-tip">📖 课本第 34～35 页 · 单元主题图</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">数一数海底的朋友</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐬</span>
+            <span class="q-text">认知 1：海底真热闹！找一找，图上有哪些海洋动物？选一种你最喜欢的，数一数有几条（只）。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            图上有<b>蝠鲼（像风筝一样的鱼）、海马、神仙鱼、海豚、鱿鱼、水母、小丑鱼</b>，还有海星、贝壳等。
+            <ul>
+              <li>例如数海豚：用手指点着，按从上到下（或从左到右）的顺序数，一共 <b>7 条</b>。</li>
+              <li>数量在 6～10 之间的动物，就是这个单元要认识的新数。</li>
+            </ul>
+            <span class="open-note">🌈 以实际点数为准，说出"我是按顺序数的"最重要。</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐙</span>
+            <span class="q-text">认知 2：数一数：粉红色的鱿鱼有几只？透明的水母有几只？把数量和数字连起来想一想。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>鱿鱼 <b>6 只</b>，用数字"6"表示；</li>
+              <li>水母 <b>8 只</b>，用数字"8"表示。</li>
+            </ul>
+            <span class="open-note">🌈 数的时候可以数一只做一个记号，做到不重复、不遗漏。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">数完会比多少、会找相同</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">⚖️</span>
+            <span class="q-text">强化 1：比一比：水母和鱿鱼谁多谁少？多几只（少几只）？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>水母 8 只，鱿鱼 6 只：8 &gt; 6，<b>水母多</b>；</li>
+              <li>水母比鱿鱼多 <b>2 只</b>，鱿鱼比水母少 2 只。</li>
+            </ul>
+            <span class="open-note">🌈 用一一对应比：一只水母对一只鱿鱼，水母多出 2 只。</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🧡</span>
+            <span class="q-text">强化 2：数一数小丑鱼有几条，神仙鱼有几条——这两种鱼的数量有什么关系？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            小丑鱼 <b>7 条</b>，神仙鱼 <b>7 条</b>——数量<b>同样多</b>！
+            <ul>
+              <li>7 = 7，虽然长得不一样，数量相同就能用同一个数表示。</li>
+            </ul>
+            <span class="open-note">🌈 以实际点数为准；发现"数量相同"是关键。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">大胆说、自己问</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐟</span>
+            <span class="q-text">拓展 1：把图里的动物按数量排排队：哪种最多？哪种最少？你能找出数量在 6～10 之间的所有动物吗？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（以实际点数为准）：</span>
+            <ul>
+              <li>如：鱿鱼 6 只 &lt; 海豚 7 条 = 小丑鱼 7 条 &lt; 水母 8 只；</li>
+              <li>它们都在 6～10 之间——这正是本单元要学的"新数"！</li>
+            </ul>
+            <span class="open-note">🌈 能排出顺序、说清理由就很好。</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🙋</span>
+            <span class="q-text">拓展 2（小小挑战）：看着海底世界图，你也来提一个数学问题考考爸爸妈妈！</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例（提法不唯一）：</span>
+            <ul>
+              <li>"海底一共有几种动物？"（数种类）</li>
+              <li>"海马比水母多还是少？"</li>
+              <li>"从左边数，海星排第几？"</li>
+            </ul>
+            <span class="open-note">🌟 自己会提问，就是数学学习最大的进步！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容2：6~9的认识 + 比大小、第几 ================= -->
+  <div class="scene s2">
+    <div class="scene-head">
+      <div class="scene-num">2</div>
+      <h2>🔢 6～9 的认识 · 比大小、第几（第36～37页）</h2>
+      <span class="tag">数对应 · 写数 · 序数</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/02-6到9的认识与比大小第几.jpg" alt="6~9的认识：实物与数字、写数、比大小、鱼缸第几">
+      <div class="img-tip">📖 课本第 36～37 页 · 6～9 的认识 / 比大小、第几</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">数与物对应、认识数序</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐠</span>
+            <span class="q-text">认知 1：照样子涂一涂：6 条鱼对应 6 个圆，涂满 6 个。照样子说说 7 只鸟、8 个贝壳、9 只海马分别用哪个数表示？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>7 只鸟 → <b>7</b>；8 个贝壳 → <b>8</b>；9 只海马 → <b>9</b>。</li>
+              <li>规律：有几个，就用数字几表示；数量越多，数越大。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">📏</span>
+            <span class="q-text">认知 2：写一写：6、7、8、9 各像什么？再看尺子图：6 的前面是几？7 的后面是几？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li><b>6</b> 像哨子（口哨），<b>7</b> 像镰刀，<b>8</b> 像葫芦／麻花，<b>9</b> 像气球拖着线；</li>
+              <li>尺子上：6 的前面是 <b>5</b>，7 的后面是 <b>8</b>；相邻两个数都相差 1。</li>
+            </ul>
+            <span class="think-note">💡 写 8 要注意：上下两个圆圈要一样大小才漂亮！</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">会比大小、会找第几</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🧊</span>
+            <span class="q-text">强化 1：摆方块比大小：5○6、6○7、7○8、8○9，○里填 &gt; 还是 &lt;？反过来 6○5、7○6 又该填什么？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>5 <b>&lt;</b> 6；6 <b>&lt;</b> 7；7 <b>&lt;</b> 8；8 <b>&lt;</b> 9；</li>
+              <li>反过来看：6 <b>&gt;</b> 5；7 <b>&gt;</b> 6；还可以继续写 8○□ 填 8 &gt; 7，9○□ 填 9 &gt; 8。</li>
+            </ul>
+            <span class="think-note">💡 记住：开口对着大的数，尖角对着小的数。</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐟</span>
+            <span class="q-text">强化 2：鱼缸图：一共有几个鱼缸？从左边数，第 6 个鱼缸里有几条鱼？有 6 条鱼的是第几个鱼缸？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>一共有 <b>7 个</b>鱼缸；</li>
+              <li>从左边数，第 6 个鱼缸里有 <b>4 条</b>鱼；</li>
+              <li>有 6 条鱼的是从左边数的第 <b>2</b> 个鱼缸（按图上实际点数为准）。</li>
+            </ul>
+            <span class="think-note">💡 "第 6 个"是位置，"6 条"是数量——先分清，再回答。然后像书上说的，同桌互相提一个问题吧！</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">联系生活、发现关系</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🏠</span>
+            <span class="q-text">拓展 1：书上问："6 还能表示生活中哪些事物的数量？7、8、9 呢？"请你说一说。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考示例（不唯一）：</span>
+            <ul>
+              <li><b>6：</b>骰子最多 6 点、蜜蜂 6 条腿、一星期 6 个上课日；</li>
+              <li><b>7：</b>一星期 7 天、彩虹 7 种颜色；</li>
+              <li><b>8：</b>螃蟹 8 条腿、八角星有 8 个角；</li>
+              <li><b>9：</b>猫 9 条命（故事里的）、九宫格 9 个格子。</li>
+            </ul>
+            <span class="open-note">🌟 说得越贴近生活越好！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🤝</span>
+            <span class="q-text">拓展 2（小小挑战）：和 6 相邻的两个数是几？比 8 多 1 的数是几？9 比 7 多几？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>和 6 相邻的是 <b>5 和 7</b>（前面一个、后面一个）；</li>
+              <li>比 8 多 1 是 <b>9</b>；</li>
+              <li>9 比 7 多 <b>2</b>（从 7 往后数：8、9，走了 2 步）。</li>
+            </ul>
+            <span class="open-note">🌈 在尺子上找一找，"多几"就是走了几步，一眼就看出来了。</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容3：做一做 + 6的分与合 ================= -->
+  <div class="scene s3">
+    <div class="scene-head">
+      <div class="scene-num">3</div>
+      <h2>🌸 做一做 · 6 的分与合（第38～39页）</h2>
+      <span class="tag">数数写数 · 第几 · 6的分与合</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/03-做一做与6的分与合.jpg" alt="做一做：数一数写一写、兔狗比多少、海马第几；6朵花分两组">
+      <div class="img-tip">📖 课本第 38～39 页 · 做一做 / 分与合</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">数一数、写一写、比一比</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🥬</span>
+            <span class="q-text">认知 1：做一做第①题：数一数，写一写——三幅图里的东西各有几个？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>先数一数再写数：第一幅图 <b>9</b> 棵青菜，第二幅图 <b>7</b> 个包子，第三幅图 <b>8</b> 个玩具（以实际点数为准）。</li>
+              <li>数的时候按顺序：一行一行数，或一圈一圈数。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐰</span>
+            <span class="q-text">认知 2：小狗和小兔排队比多少：小狗有几只、小兔有几只？在○里填 &gt; 或 &lt;。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>小狗 <b>8</b> 只，小兔 <b>7</b> 只（以实际点数为准）；</li>
+              <li>8 <b>&gt;</b> 7，小狗比小兔多；也可以说 7 <b>&lt;</b> 8，小兔比小狗少。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">分清数量与位置，学会有序分</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🐴</span>
+            <span class="q-text">强化 1：海马图：一共有几只海马？把<b>右边的 6 只</b>圈起来，再从左边数，在<b>第 7 只</b>海马上面画○。这两个"6"和"7"意思一样吗？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>一共 <b>9 只</b>海马（以实际点数为准）；</li>
+              <li><b>不一样！</b>"圈出 6 只"是<b>数量</b>——圈起来的海马有 6 只；"第 7 只"是<b>位置</b>——从左数排在第 7 的那一只。</li>
+            </ul>
+            <span class="think-note">💡 做这类题先问自己：说的是"多少只"，还是"排在第几"？</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🌺</span>
+            <span class="q-text">强化 2：6 朵红花分成两组，可以怎样分？书上已经分出 1 和 5、2 和 4、3 和 3，请你接着写完，并把空填完整。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            6 可以分成：<b>1 和 5、2 和 4、3 和 3、4 和 2、5 和 1</b>，一共 5 种分法。
+            <ul>
+              <li>书上问"你发现了什么？"——发现：<b>1 和 5 与 5 和 1 是一对</b>，2 和 4 与 4 和 2 是一对，交换位置就得到新的分法！</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">有序思考、平均分</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">📋</span>
+            <span class="q-text">拓展 1：书上小女孩说"按顺序分学好"。为什么按顺序分好？好在哪里？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            按顺序分（一边从 1 开始每次多 1），<b>一种都不会漏、也不会重复</b>。
+            <ul>
+              <li>6 的分法：1 和 5 → 2 和 4 → 3 和 3，接着"反过来"就是 4 和 2 → 5 和 1。</li>
+            </ul>
+            <span class="think-note">💡 "有序"是数学里特别好的习惯，分与合、找规律都要用它。</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">⚖️</span>
+            <span class="q-text">拓展 2（小小挑战）：6 可以分成 3 和 3，两边同样多。那 7 也可以分成"两边同样多"吗？5 呢？找找哪些数可以。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li><b>7 不行</b>：7 的分法是 1和6、2和5、3和4……没有两边一样的；</li>
+              <li><b>5 也不行</b>；</li>
+              <li>可以发现：<b>6、8、10</b> 这些数可以分成同样多的两份（6=3+3，8=4+4），而 <b>5、7、9</b> 不行。</li>
+            </ul>
+            <span class="open-note">🌟 这是"双数能平分、单数不能平分"的第一颗种子！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容4：7、8、9的分与合 ================= -->
+  <div class="scene s4">
+    <div class="scene-head">
+      <div class="scene-num">4</div>
+      <h2>🔺 7、8、9 的分与合（第40～41页）</h2>
+      <span class="tag">试一试 · 组成 · 又对又快</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/04-7到9的分与合.jpg" alt="7朵花分两组、8个圆分两组、9个三角形找所有分法、组成填表">
+      <div class="img-tip">📖 课本第 40～41 页 · 试一试 / 做一做 / 分与合</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">分一分 7 和 8</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🌺</span>
+            <span class="q-text">认知 1：试一试：7 朵红花分成两组，可以怎样分？把书上的空填完整。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            7 可以分成：<b>1 和 6、2 和 5、3 和 4、4 和 3、5 和 2、6 和 1</b>，共 6 种分法。
+            <ul>
+              <li>按顺序分，一对一对记：1↔6、2↔5、3↔4 交换位置。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🔴</span>
+            <span class="q-text">认知 2：8 个红点分成两组，可以怎样分？书上的小女孩为什么先想"8 可以分成 1 和 7"，马上又想到"8 可以分成 7 和 1"？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>8 可以分成：<b>1 和 7、2 和 6、3 和 5、4 和 4、5 和 3、6 和 2、7 和 1</b>；</li>
+              <li>因为<b>交换两边的数，总数不变</b>——想到一个分法，马上就有一对"好朋友"分法，又对又快！</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">会说组成、会用组成解决问题</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎴</span>
+            <span class="q-text">强化 1：做一做：两个小朋友玩卡片，"1 和几组成 6？"照样子说一说几和几组成 7。再填空：6 分成 3 和 □、□ 分成 2 和 4、7 分成 3 和 □、□ 分成 2 和 5。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>1 和 <b>5</b> 组成 6；组成 7 的有：1 和 6、2 和 5、3 和 4……</li>
+              <li>6 分成 3 和 <b>3</b>；<b>6</b> 分成 2 和 4；7 分成 3 和 <b>4</b>；<b>7</b> 分成 2 和 5。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🍓</span>
+            <span class="q-text">强化 2：做一做第③题：下面哪两盘草莓合起来是 6 个？哪两盘合起来是 7 个？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（方法）：</span>
+            <ul>
+              <li>先数出每盘有几个，再想"几和几合成 6（7）"。</li>
+              <li>如：2 盘的加 4 盘的 = 6（2 和 4 组成 6）；3 盘的加 4 盘的 = 7（3 和 4 组成 7）（以图上实际数量为准）。</li>
+            </ul>
+            <span class="open-note">🌈 这就是分与合的用处：看到两个数，马上想它们能组成几。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">又对又快的秘诀</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🔺</span>
+            <span class="q-text">拓展 1：试一试：9 个三角形分成两组，"怎样又能对又快地找到所有分法？"</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            按<b>顺序</b>分：先一边放 1 个（1 和 8），再 2 个（2 和 7）、3 个（3 和 6）、4 个（4 和 5）……
+            <ul>
+              <li>全部是：<b>1和8、2和7、3和6、4和5、5和4、6和3、7和2、8和1</b>，共 8 种；</li>
+              <li>秘诀：按顺序 + 想到一对记一对，不用摆也能想全！</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">📊</span>
+            <span class="q-text">拓展 2（小小挑战）：做一做第②题：把 8 和 9 的组成表填完整。横着看、竖着看，你发现了什么规律？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>8 的组成表：1 和 7、2 和 6、3 和 5、4 和 4……（7 在下一行配 1、2、3）；9 的组成表：1 和 8、2 和 7、3 和 6、4 和 5……</li>
+              <li>规律：上面一行从 1 开始每次<b>多 1</b>，下面一行每次<b>少 1</b>，上下合起来都是 8（或 9）。</li>
+            </ul>
+            <span class="think-note">💡 这个表就是"分与合"的全家福，横着背竖着看都行——找到规律，记忆就不是难事！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 内容5：练一练 ================= -->
+  <div class="scene s5">
+    <div class="scene-head">
+      <div class="scene-num">5</div>
+      <h2>🚂 练一练（第42～43页）</h2>
+      <span class="tag">连线 · 规律 · 火车第几 · 组成游戏</span>
+    </div>
+    <div class="scene-img">
+      <img src="images/05-练一练.jpg" alt="练一练：小猫钓鱼连线、按规律画、火车车厢、卡片组成6、算珠比大小、向日葵组成">
+      <div class="img-tip">📖 课本第 42～43 页 · 练一练</div>
+    </div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <span class="level-title">🧠 认知层</span><span class="level-desc">按顺序、找规律画</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎣</span>
+            <span class="q-text">认知 1：小猫钓鱼：按 0～9 的顺序连线，连出来的是什么？先想想 0 后面连几，9 前面连几。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            按 <b>0→1→2→3→4→5→6→7→8→9</b> 的顺序连，就钓到了一条<b>大鱼</b>！
+            <ul>
+              <li>连之前先把数字都看一遍，从 0 出发，一个一个往后找。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">⭐</span>
+            <span class="q-text">认知 2：第②题"按规律接着画一画"：星星和金鱼是按什么规律排的？接着该怎么画？再数一数各有多少、比一比。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>规律：按图上的排列（如"1 颗星、几条金鱼"一组一组重复）接着画；</li>
+              <li>画完数一数：星星有 □ 个、金鱼有 □ 条（以实际点数为准），再比较谁多谁少，在○里填 &gt; 或 &lt;。</li>
+            </ul>
+            <span class="open-note">🌈 找规律的方法：把重复的部分圈出来，一眼就看清楚了。</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <span class="level-title">💪 强化层</span><span class="level-desc">第几、组成、比大小一起练</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🚂</span>
+            <span class="q-text">强化 1：小火车：熊猫坐在第几车厢？长颈鹿说"我在第 1 车厢"。像书上那样，同桌互相提一个问题并回答。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（以图为准）：</span>
+            <ul>
+              <li>从车头方向数起，先弄清"从哪边开始数"；</li>
+              <li>示例问题："一共有几节车厢？""大象在第几车厢？""从右数，熊猫排第几？"</li>
+              <li>提问时说清"从左数 / 从右数"，回答才不会乱。</li>
+            </ul>
+            <span class="think-note">💡 说"第几"前先说方向——这是本题最重要的习惯！</span>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🎴</span>
+            <span class="q-text">强化 2：第④题：哪两张卡片上的数合起来是 6？你还提出什么问题？再练第⑤题：算珠图里 7○6、6○8、9○7、8○9 填 &gt; 还是 &lt;？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>合起来是 6 的两张：<b>2 和 4、5 和 1、3 和 3</b>（按图上卡片实际点数为准）；</li>
+              <li>还可以提："哪两张合起来是 7？哪两张合起来是 10？"</li>
+              <li>第⑤题：7 <b>&gt;</b> 6；6 <b>&lt;</b> 8；9 <b>&gt;</b> 7；8 <b>&lt;</b> 9。</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <span class="level-title">🚀 拓展层</span><span class="level-desc">圈组成、看花心找规律</span>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🔍</span>
+            <span class="q-text">拓展 1：第⑥题：圈出能组成 8 的两个数，圈出能组成 9 的两个数。说说你是怎么找的，怎样找得快？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案（方法）：</span>
+            <ul>
+              <li>想口诀：<b>"凑 8"：1 和 7、2 和 6、3 和 5、4 和 4；"凑 9"：1 和 8、2 和 7、3 和 6、4 和 5</b>；</li>
+              <li>找到一个就马上想它的"交换对"（如圈了 2 和 6，就再找 6 和 2）；</li>
+              <li>图上如：2 和 6、3 和 5 组成 8；1 和 8、2 和 7 组成 9（按图上数字为准）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+            <span class="q-emoji">🌻</span>
+            <span class="q-text">拓展 2（最难挑战）：第⑦题向日葵"照样子填一填"：花心里的数和两片叶子上的数是什么关系？把空全填出来。第⑧题的组成梯子也会填吗？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a">
+            <span class="a-label">参考答案：</span>
+            <ul>
+              <li>关系：<b>两片叶子上的数合起来，正好是花心里的数</b>（花心是"总数"）；</li>
+              <li>示例：7 → 1 和 6（已填）；8 → 4 和 <b>4</b>；9 → 3 和 <b>6</b>；9 → 5 和 <b>4</b>；</li>
+              <li>第⑧题按分与合填：9 分成 □ 和 3、7 分成 □ 和 5、8 分成 □ 和 4……想"几和几组成总数"逐层往上填。</li>
+            </ul>
+            <span class="open-note">🌟 向日葵就是"分与合"穿了新衣服——认出它的真面目，题目就变简单了！</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>⭐ 数得对、分得清、找得到规律——6~9 的小主人就是你！⭐</p>
+    <p>人教版《数学》一年级上册 · 第三单元"6~10 的认识和加、减法"（第 34～43 页）· 分层提问练习</p>
+    <p>图片仅供个人学习使用，版权归原作者（人民教育出版社）所有</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  var zhVoice = null;
+  function loadVoices(){ if(!synth) return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){
+    if(/zh|chinese|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+  function clean(t){ return (t||'').replace(/\s+/g,' ').trim(); }
+  function ownBtn(el){ for(var k=0;k<el.children.length;k++){
+    if(el.children[k].className && String(el.children[k].className).indexOf('spk-btn')>=0) return true; } return false; }
+  function readText(el){
+    if(!el) return '';
+    var t = el.querySelector('.q-text');
+    var txt = t ? t.textContent : el.textContent;
+    return clean(txt).replace(/(看答案|看解读|听)$/,'');
+  }
+  function speak(text, rate){
+    text = clean(text); if(!text) return;
+    if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN'; u.rate=(rate||0.9); u.pitch=1;
+    if(zhVoice) u.voice=zhVoice;
+    synth.speak(u);
+  }
+  function stop(){ if(synth) synth.cancel(); }
+
+  /* 题目行：兼容 qa-q 与 qa-q-row 两种结构（逐个容错，单个失败不影响全局） */
+  var SEL = '.qa-q, .qa-q-row';
+  var qs = document.querySelectorAll(SEL);
+  for(var i=0;i<qs.length;i++){
+    try{
+      (function(q){
+        if(ownBtn(q)) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听';
+        btn.addEventListener('click',function(e){ e.stopPropagation(); speak(readText(q)); });
+        var tog=q.querySelector('.toggle');
+        if(tog && tog.parentElement===q){ q.insertBefore(btn,tog); } else { q.appendChild(btn); }
+      })(qs[i]);
+    }catch(err){}
+  }
+
+  /* 答案区 */
+  var as = document.querySelectorAll('.qa-a');
+  for(var j=0;j<as.length;j++){
+    try{
+      (function(a){
+        if(a.querySelector('.spk-btn')) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听答案';
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          var qa=a.parentElement; if(qa) qa.classList.add('open');
+          speak(clean(a.textContent).replace(/^参考答案[:：]?/,''));
+        });
+        a.insertBefore(btn,a.firstChild);
+      })(as[j]);
+    }catch(err){}
+  }
+
+  /* 底部听读助手条 */
+  try{
+    var bar=document.createElement('div'); bar.className='voice-bar';
+    bar.innerHTML='<span>🎧 听读助手：</span>'+
+      '<button type="button" id="vAll">🔊 朗读全部题目</button>'+
+      '<button type="button" id="vStop">⏹ 停止</button>'+
+      '<span class="hint">点题旁🔊逐题听；点🔊听答案可边看边听</span>';
+    document.body.appendChild(bar);
+    document.getElementById('vStop').addEventListener('click',stop);
+    document.getElementById('vAll').addEventListener('click',function(){
+      if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+      var list=document.querySelectorAll(SEL); var qi=0;
+      function next(){
+        if(qi>=list.length) return;
+        var txt=readText(list[qi++]);
+        if(!txt){ next(); return; }
+        synth.cancel();
+        var u=new SpeechSynthesisUtterance(txt); u.lang='zh-CN'; u.rate=0.9; u.pitch=1;
+        if(zhVoice) u.voice=zhVoice;
+        u.onend=function(){ setTimeout(next,260); };
+        synth.speak(u);
+      }
+      next();
+    });
+  }catch(err){}
+})();
+</script>
+
+</body>
+</html>

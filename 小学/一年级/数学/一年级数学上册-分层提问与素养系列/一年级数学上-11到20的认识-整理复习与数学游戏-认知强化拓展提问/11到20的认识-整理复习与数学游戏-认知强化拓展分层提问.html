@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一年级上册·11~20的认识（整理复习与数学游戏）— 认知·强化·拓展 分层提问</title>
+<style>
+  /* ========== 页面基础 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #f5f6fa;
+    color: #333;
+    padding-bottom: 60px;
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+  /* ========== 页头 ========== */
+  .header {
+    background: linear-gradient(135deg, #0277bd 0%, #4fc3f7 100%);
+    color: #fff;
+    text-align: center;
+    padding: 34px 16px 26px;
+    border-radius: 0 0 24px 24px;
+    margin-bottom: 16px;
+  }
+  .header h1 { font-size: 29px; letter-spacing: 2px; margin-bottom: 10px; }
+  .header p { font-size: 16px; opacity: .92; line-height: 1.7; }
+
+  .unit-banner {
+    display: block; width: 100%; max-width: 760px;
+    margin: 0 auto 4px; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+  }
+
+  /* ========== 三层图例 ========== */
+  .level-legend {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; margin: 16px auto 8px; max-width: 700px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.18); border-radius: 20px;
+    padding: 7px 16px; font-size: 15px;
+  }
+  .legend-dot { width: 14px; height: 14px; border-radius: 50%; }
+  .dot-c { background: #1565c0; }  /* 认知-蓝 */
+  .dot-q { background: #e65100; }  /* 强化-橙 */
+  .dot-t { background: #ad1457; }  /* 拓展-粉 */
+
+  /* ========== 家长提示 ========== */
+  .parent-tip {
+    background: #fff8e1; border-left: 5px solid #ffb300;
+    border-radius: 8px; padding: 14px 18px; margin: 18px auto;
+    max-width: 840px; font-size: 15px; line-height: 1.8; color: #6d4c00;
+  }
+
+  /* ========== 场景卡片 ========== */
+  .scene {
+    background: #fff; border-radius: 16px; margin: 26px auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07); overflow: hidden;
+  }
+  .scene-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px;
+  }
+  .scene-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    color: #fff; font-size: 20px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .scene-head h2 { font-size: 21px; }
+  .scene-head .page-tag { font-size: 13px; color: #999; margin-top: 3px; }
+
+  /* 各场景主题色 */
+  .s1 .scene-head { background: #e0f2f1; } .s1 .scene-icon { background: #00695c; }
+  .s2 .scene-head { background: #fff3e0; } .s2 .scene-icon { background: #e65100; }
+  .s3 .scene-head { background: #f3e5f5; } .s3 .scene-icon { background: #6a1b9a; }
+
+  /* ========== 教材图片 ========== */
+  .scene-img {
+    width: 100%; display: block;
+    border-top: 1px solid #eee; border-bottom: 1px solid #eee;
+  }
+  .img-caption {
+    text-align: center; font-size: 13px; color: #999; padding: 8px;
+    background: #fafafa;
+  }
+
+  /* ========== 题目卡片 ========== */
+  .qa-list { padding: 14px 18px 20px; }
+  .qa {
+    border-radius: 12px; margin-bottom: 12px; overflow: hidden;
+    border: 1.5px solid #e8e8e8; transition: border-color .2s;
+  }
+  .qa:hover { border-color: #bbb; }
+  .qa-c { border-color: #90caf9; }  /* 认知蓝 */
+  .qa-q { border-color: #ffcc80; }  /* 强化橙 */
+  .qa-t { border-color: #f48fb1; }  /* 拓展粉 */
+
+  .qa-q-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 13px 15px; cursor: pointer; user-select: none;
+  }
+  .q-emoji { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .q-text { font-size: 16.5px; line-height: 1.65; flex: 1; }
+  .toggle {
+    flex-shrink: 0; font-size: 13px; color: #fff; border-radius: 14px;
+    padding: 4px 12px; margin-left: 6px; margin-top: 2px;
+  }
+  .qa-c .toggle { background: #1565c0; }
+  .qa-q .toggle { background: #e65100; }
+  .qa-t .toggle { background: #ad1457; }
+  .qa.open .toggle::after { content: " ▲"; }
+  .qa:not(.open) .toggle::after { content: " ▼"; }
+
+  .qa-a { display: none; padding: 13px 16px 15px; font-size: 15.5px; line-height: 1.85; }
+  .qa.open .qa-a { display: block; }
+  .qa-c .qa-a { background: #e3f2fd; }
+  .qa-q .qa-a { background: #fff3e0; }
+  .qa-t .qa-a { background: #fce4ec; }
+  .a-label { font-weight: bold; }
+  .qa-c .a-label { color: #1565c0; }
+  .qa-q .a-label { color: #e65100; }
+  .qa-t .a-label { color: #ad1457; }
+
+  .hint { color: #f57f17; }
+  .open-tag { color: #ad1457; font-weight: bold; }
+
+  /* ========== 页脚 ========== */
+  .footer { text-align: center; color: #aaa; font-size: 13px; margin-top: 30px; line-height: 1.8; }
+</style>
+<style>
+  /* ===== 听读助手（语音） ===== */
+  .spk-btn{display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;border:none;
+    border-radius:14px;padding:4px 12px;font-size:12.5px;cursor:pointer;flex-shrink:0;font-family:inherit;}
+  .spk-btn:hover{background:#0d47a1;}
+  .qa-q .spk-btn{margin-left:8px;}
+  .qa-a .spk-btn{display:inline-block;margin:10px 0 0;background:#e65100;}
+  .qa-a .spk-btn:hover{background:#bf3f00;}
+  .voice-bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:1000;
+    background:rgba(216,74,43,.97);color:#fff;border-radius:30px;padding:8px 14px;
+    display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(120,40,20,.30);font-size:13px;
+    max-width:94vw;flex-wrap:wrap;justify-content:center;}
+  .voice-bar button{background:#fff;color:#d84a2b;border:none;border-radius:18px;padding:6px 14px;
+    font-size:13px;cursor:pointer;font-weight:bold;}
+  .voice-bar button:hover{background:#ffe9d6;}
+  .voice-bar .hint{font-size:11px;opacity:.95;max-width:230px;}
+</style>
+</head>
+<body>
+<a href="../index.html" style="position:sticky;top:0;z-index:999;display:block;text-align:center;background:#d84a2b;color:#fff;padding:9px 0;font-size:14px;text-decoration:none;font-family:'Microsoft YaHei',sans-serif;">📚 一年级上册 · 分层提问系列导航（点此返回）</a>
+
+
+<!-- ===================== 页头 ===================== -->
+<div class="header">
+  <h1>🧮 11~20的认识 · 整理复习与数学游戏</h1>
+  <p>人教版《数学》一年级上册 · 第四单元收官（第85~87页）</p>
+  <div class="level-legend">
+    <div class="legend-item"><span class="legend-dot dot-c"></span>认知层 · 理一理、数一数</div>
+    <div class="legend-item"><span class="legend-dot dot-q"></span>强化层 · 算一算、辨一辨</div>
+    <div class="legend-item"><span class="legend-dot dot-t"></span>拓展层 · 画一画、用一用</div>
+  </div>
+</div>
+
+<div class="container">
+  <img class="unit-banner" src="images/00-单元标题横幅-11到20的认识.png" alt="第四单元 11~20的认识 单元标题">
+
+  <div class="parent-tip">
+    <b>👨‍👩‍👧 家长使用建议：</b>① 本页是第四单元的<b>收官复习</b>：先让孩子用小棒/计数器把"1个十和几个一"再摆一遍，
+    再做题；② 点击问题卡展开参考答案；③ 带 🌈 的是开放题，说法不唯一；带 💡 的是思维种子，重在讲道理；
+    ④ 第③组的"数学游戏涂色"和"单双数玉米"非常适合亲子一起动手——涂色前先口算，玉米要真的横切开数一数！
+  </div>
+
+  <!-- ===================== 场景1：整理和复习 ===================== -->
+  <div class="scene s1">
+    <div class="scene-head">
+      <div class="scene-icon">理</div>
+      <div>
+        <h2>① 整理和复习：这一单元学了什么？</h2>
+        <div class="page-tag">教材第85页 · 单元知识梳理与小宇的"知识图"</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/01-整理和复习与知识图.jpg" alt="整理和复习与知识图">
+    <div class="img-caption">▲ 数数10个一组 · 小棒捆成1捆 · 数尺0~20 · 小宇整理的"知识图"</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">📚</span>
+          <span class="q-text">【认知1】这一单元学习了什么知识？和10以内数的认识有什么不同？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>①数数时，<b>10个为一组</b>比较方便；②认识了 <b>11~20</b>，会读、会写它们，还知道了它们的顺序。不同之处：10以内的数<b>一个数字</b>就够，11~20要用<b>两个数字</b>（十位和个位）表示。</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🌾</span>
+          <span class="q-text">【认知2】图中散的小棒捆成1捆后还剩3根，数位表里十位写1、个位写3——这是哪个数？由什么组成？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>是 <b>13</b>。由 <b>1个十和3个一</b> 组成：10根捆成1捆（1个十），剩3根散的（3个一），合起来13。会写还要会读："十三"。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">💬</span>
+          <span class="q-text">【强化1】小雪说："10~20各数都是用两个数字来表示的。"为什么10~20需要两个数字，0~9只要一个？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>因为<b>满了10个就要"打包"</b>——10个一是1个十，需要新的数位"十位"来记它。所以要用<b>十位+个位</b>两个数字：比如13就是"1个十、3个一"。💡<span class="hint">思考点：</span>这就是"位值"，数字站的位置不同，意思就不同。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔢</span>
+          <span class="q-text">【强化2】数尺上13的两个"邻居"是谁？知识图里12和16之间藏着哪几个数？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>13的邻居是 <b>12 和 14</b>（前一个、后一个）；12和16之间藏着 <b>13、14、15</b> 三个数。看数尺一格一格数，又快又准。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🗺️</span>
+          <span class="q-text">【强化3】小宇的"知识图"画了哪几块内容？下面 10和3 合成13，配着哪三道算式？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>知识图有四块：①数位表（1个十8个一=18）；②数的顺序（12、13、14、15、16）；③组成（10和3合成13）；④加减法：<b>10+3=13、13-3=10、13-10=3</b>。一个数可以从"组成、顺序、加减"多角度认识。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🎨</span>
+          <span class="q-text">【拓展】你还能学到哪些知识？动手画一画、写一写<b>你自己的"知识图"</b>，和家人交流吧。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。可以画：数序条（0~20）、小棒图（几个十和几个一）、加减法例子（10+几=十几）、生活中的数（楼层、页码、车牌）。💡<span class="hint">思考点：</span>会"整理"的孩子，把零散的知识连成了网——这就是复习的魔法！</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== 场景2：练一练 ===================== -->
+  <div class="scene s2">
+    <div class="scene-head">
+      <div class="scene-icon">练</div>
+      <div>
+        <h2>② 练一练：估算、画珠子、公交站与水果路</h2>
+        <div class="page-tag">教材第86页 · 综合练习第1~5题</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/02-练一练-估算画珠子走格.jpg" alt="练一练 估算画珠子走格">
+    <div class="img-caption">▲ 先估再数 · 计数器画珠子 · 公交中间停几站 · 小猴按得数走 · 填空</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🍆</span>
+          <span class="q-text">【认知1】第1题：先估一估茄子和菠萝大约有多少个，再圈出10个数一数——各是几个十和几个一？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>先猜（如"十几个"），再动手：<b>圈出10个</b>（1个十），剩下的挨个数。茄子约1个十和4个一（十几），菠萝约1个十和几个一（具体以实际点数为准）。💡<span class="hint">思考点：</span>先估后数，估错了也没关系，数感就是这样练出来的。</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🧮</span>
+          <span class="q-text">【认知2】第2题画一画：17、15、18、20在计数器上怎么画珠子？20画好后为什么个位是空的？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>17→十位1颗、个位7颗；15→十位1颗、个位5颗；18→十位1颗、个位8颗；20→十位2颗、<b>个位不画</b>。个位空着表示"一个也没有"，但<b>0要写出来占位</b>——空位不占，数就变样了。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🚌</span>
+          <span class="q-text">【强化1】第3题：1路公交从白云路（第1站）到动物园（第18站），中间要停几站？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>中间的站是第2、3、4……17站，一共 <b>16站</b>。在站牌图上圈一圈：两端（白云路、动物园）<b>不算</b>，只数中间。这和"排队问题"里"<b>之间</b>"是同一类题——不算两头！</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🐒</span>
+          <span class="q-text">【强化2】第4题：按得数走一走，下一步的得数比上一步大1，小猴最后吃到了什么水果？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>从箭头处 <b>3+6=9</b> 出发，每步得数依次多1：9 →10（19-9）→11（16-5）→12（18-6）→13（17-4）→14（12+2）→15（19-4）→16（13+3）→17（11+6，以图中算式实际计算为准）→18（14+4）→19（16+3），走出格子吃到最后一格旁边的水果——<b>梨</b>。每算一格就把得数写上去，走错就回头检查。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔲</span>
+          <span class="q-text">【强化3】第5题填空：7+□=10、10+□=12、11+□=13。你是用什么好办法想出来的？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>7+<b>3</b>=10，10+<b>2</b>=12，11+<b>2</b>=13。办法一：想<b>组成</b>（7和3凑成10）；办法二：想<b>加减互逆</b>——10-7=3，所以7+3=10。两法互相检查，答案更牢。</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔎</span>
+          <span class="q-text">【拓展】公交站和"小悦小宇之间"都是"不算两头"，那"从第1站到第18站一共经过几站"呢？💡两种问法差在哪里？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>"一共经过"从第1站坐到第18站，<b>两头都算</b>：共 <b>18站</b>；"中间停几站"不算两头：16站。差的就是起点和终点两个。💡<span class="hint">思考点：</span>看到排队类题目，先圈出关键词——"<b>之间/中间</b>"不算两头，"<b>从…到…/一共</b>"两头都算，画图验证最保险。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== 场景3：数学游戏·你知道吗·成长小档案 ===================== -->
+  <div class="scene s3">
+    <div class="scene-head">
+      <div class="scene-icon">戏</div>
+      <div>
+        <h2>③ 数学游戏 · 你知道吗 · 成长小档案</h2>
+        <div class="page-tag">教材第87页 · 得数涂色游戏、单双数与玉米、单元自评</div>
+      </div>
+    </div>
+    <img class="scene-img" src="images/03-数学游戏你知道吗成长小档案.jpg" alt="数学游戏 你知道吗 成长小档案">
+    <div class="img-caption">▲ 按得数涂色藏画 · 双数单数 · 玉米横截面颗数一般是双数 · 单元小结</div>
+    <div class="qa-list">
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🎨</span>
+          <span class="q-text">【认知1】数学游戏的规则是什么？要先做什么，才能给格子涂上正确的颜色？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>规则：得数是 <b>8</b> 的涂蓝色，<b>10</b> 的涂棕色，<b>13</b> 的涂黄色，<b>14</b> 的涂绿色。先<b>口算出每格的得数</b>，再按得数选颜色涂。算错涂错，藏着的画就变样啦。</div>
+      </div>
+
+      <div class="qa qa-c">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🟦</span>
+          <span class="q-text">【认知2】找一找：游戏图里哪些算式的得数是8？哪些是14？各举几个。</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。得数是8的：8+0、2+6、6+2、4+4、10-2、9-1、17-9……得数是14的：10+4、8+6、13+1、14-0、17-3、19-5……💡<span class="hint">思考点：</span>得数相同的算式有很多——先算，再分类。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🖼️</span>
+          <span class="q-text">【强化1】按得数涂色后，格子中间会变出一幅画。想一想：为什么"按得数涂色"能藏出一幅画？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>因为出题的人按"<b>相同得数的格子放在一起</b>"设计好了图案——涂色时其实在做<b>分类</b>：得数相同的归一类、涂一色，同色区域连起来就是画。算得又对又快，画才完整。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🔢</span>
+          <span class="q-text">【强化2】"你知道吗"：像2、4、6、8……这样的数叫什么？1、3、5、7……呢？11~20里哪些是双数？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>2、4、6、8……是<b>双数</b>；1、3、5、7……是<b>单数</b>。11~20里：12、14、16、18、20是双数，11、13、15、17、19是单数。💡<span class="hint">思考点：</span>看个位就能判断——个位是0、2、4、6、8的是双数。</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🌽</span>
+          <span class="q-text">【强化3】玉米横截面上标着1~16，"玉米横截面的颗数一般是双数"。找几个玉米数一数，你能发现什么规律？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>图中玉米横截面数出来约 <b>16颗</b>（以实际数数为准），16是双数。因为玉米粒是<b>成双成对</b>排列的（一列对着一列），所以横截面的颗数一般是双数（12、14、16都常见）。💡<span class="hint">思考点：</span>数一数、验一验——大自然里也藏着数学规律！</div>
+      </div>
+
+      <div class="qa qa-t">
+        <div class="qa-q-row" onclick="this.parentElement.classList.toggle('open')">
+          <span class="q-emoji">🏅</span>
+          <span class="q-text">【拓展】成长小档案：小女孩说"10这个数很特别"，小男孩说"我发现用数数的方法可以解决很多问题"。你怎么说？本单元你想说些什么？</span>
+          <span class="toggle">看答案</span>
+        </div>
+        <div class="qa-a"><span class="a-label">参考答案：</span>🌈<span class="open-tag">说法不唯一</span>。"10很特别"——10个一是1个十，它是第一个用两个数字表示的数，还是"打包"的分界线。"数数能解决很多问题"——圈10再数、排队数人、公交数站、翻页数页，都是数数。说一说：我会数11~20、知道几个十和几个一、会算十加几和十几减几……给自己的努力打个分吧！</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    人教版《数学》一年级上册 · 第四单元「11~20的认识」收官（第85~87页）<br>
+    认知 · 强化 · 拓展 三层提问 · 3组18题 · 点击问题卡展开/收起参考答案
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  var zhVoice = null;
+  function loadVoices(){ if(!synth) return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){
+    if(/zh|chinese|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } }
+  if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+  function clean(t){ return (t||'').replace(/\s+/g,' ').trim(); }
+  function ownBtn(el){ for(var k=0;k<el.children.length;k++){
+    if(el.children[k].className && String(el.children[k].className).indexOf('spk-btn')>=0) return true; } return false; }
+  function readText(el){
+    if(!el) return '';
+    var t = el.querySelector('.q-text');
+    var txt = t ? t.textContent : el.textContent;
+    return clean(txt).replace(/(看答案|看解读|听)$/,'');
+  }
+  function speak(text, rate){
+    text = clean(text); if(!text) return;
+    if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN'; u.rate=(rate||0.9); u.pitch=1;
+    if(zhVoice) u.voice=zhVoice;
+    synth.speak(u);
+  }
+  function stop(){ if(synth) synth.cancel(); }
+
+  /* 题目行：兼容 qa-q 与 qa-q-row 两种结构（逐个容错，单个失败不影响全局） */
+  var SEL = '.qa-q, .qa-q-row';
+  var qs = document.querySelectorAll(SEL);
+  for(var i=0;i<qs.length;i++){
+    try{
+      (function(q){
+        if(ownBtn(q)) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听';
+        btn.addEventListener('click',function(e){ e.stopPropagation(); speak(readText(q)); });
+        var tog=q.querySelector('.toggle');
+        if(tog && tog.parentElement===q){ q.insertBefore(btn,tog); } else { q.appendChild(btn); }
+      })(qs[i]);
+    }catch(err){}
+  }
+
+  /* 答案区 */
+  var as = document.querySelectorAll('.qa-a');
+  for(var j=0;j<as.length;j++){
+    try{
+      (function(a){
+        if(a.querySelector('.spk-btn')) return;
+        var btn=document.createElement('button');
+        btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听答案';
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          var qa=a.parentElement; if(qa) qa.classList.add('open');
+          speak(clean(a.textContent).replace(/^参考答案[:：]?/,''));
+        });
+        a.insertBefore(btn,a.firstChild);
+      })(as[j]);
+    }catch(err){}
+  }
+
+  /* 底部听读助手条 */
+  try{
+    var bar=document.createElement('div'); bar.className='voice-bar';
+    bar.innerHTML='<span>🎧 听读助手：</span>'+
+      '<button type="button" id="vAll">🔊 朗读全部题目</button>'+
+      '<button type="button" id="vStop">⏹ 停止</button>'+
+      '<span class="hint">点题旁🔊逐题听；点🔊听答案可边看边听</span>';
+    document.body.appendChild(bar);
+    document.getElementById('vStop').addEventListener('click',stop);
+    document.getElementById('vAll').addEventListener('click',function(){
+      if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; }
+      var list=document.querySelectorAll(SEL); var qi=0;
+      function next(){
+        if(qi>=list.length) return;
+        var txt=readText(list[qi++]);
+        if(!txt){ next(); return; }
+        synth.cancel();
+        var u=new SpeechSynthesisUtterance(txt); u.lang='zh-CN'; u.rate=0.9; u.pitch=1;
+        if(zhVoice) u.voice=zhVoice;
+        u.onend=function(){ setTimeout(next,260); };
+        synth.speak(u);
+      }
+      next();
+    });
+  }catch(err){}
+})();
+</script>
+
+</body>
+</html>
