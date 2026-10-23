@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>一年级上册数学闯关 - 李宜庭专属版</title>
+<style>
+    /* ======= 全局基础 ======= */
+    *{box-sizing:border-box;margin:0;padding:0;user-select:none}
+    body{font-family:'楷体','Comic Sans MS',sans-serif;
+        background:
+            radial-gradient(circle at 18% 15%, rgba(201,162,75,0.10), transparent 42%),
+            radial-gradient(circle at 85% 5%, rgba(70,130,180,0.10), transparent 45%),
+            linear-gradient(135deg,#f6f1e7 0%,#eef2f6 50%,#f3ece0 100%);
+        min-height:100vh;display:flex;justify-content:center;align-items:center;padding:15px}
+    #app{width:100%;max-width:920px;min-height:600px;
+        background:linear-gradient(180deg,#ffffff 0%,#fffdf8 100%);
+        border-radius:32px;border:1px solid rgba(201,162,75,0.30);
+        box-shadow:0 30px 60px rgba(40,40,40,0.14), inset 0 1px 0 rgba(255,255,255,0.7);
+        padding:30px 28px;text-align:center;display:flex;flex-direction:column;position:relative;overflow-y:auto;max-height:95vh}
+    h1{color:#ff6b6b;font-size:32px;margin-bottom:15px;text-shadow:2px 2px 0 #fff;}
+    .pig{font-size:55px;display:inline-block;animation:float 2s infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .hidden{display:none!important}
+    .fade-in{animation:fadeIn 0.5s ease-in}
+    @keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+    .top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-shrink:0;}
+
+    /* ======= 按钮与目录 ======= */
+    .btn{background:#4CAF50;color:white;border:none;padding:10px 22px;font-size:18px;border-radius:25px;cursor:pointer;margin:8px;transition:0.2s;box-shadow:0 4px 0 #388E3C;font-family:inherit;}
+    .btn:active{transform:translateY(4px);box-shadow:0 0 0 #388E3C}
+    .btn-blue{background:#2196F3;box-shadow:0 4px 0 #1976D2}
+
+    /* ======= 首页高端美化（仅作用于 #homeScene，文字内容保持不变） ======= */
+    #homeScene{position:relative;padding:8px 2px 18px;animation:fadeIn 0.6s ease}
+    #homeScene h1{font-size:42px;margin-bottom:6px;letter-spacing:3px;line-height:1.2;
+        background:linear-gradient(120deg,#b8860b 0%,#d4af37 42%,#f3dca0 58%,#c9a24b 100%);
+        -webkit-background-clip:text;background-clip:text;color:transparent;
+        filter:drop-shadow(0 2px 3px rgba(170,130,40,0.25));text-shadow:none}
+    .home-emblem{display:block;margin:0 auto 6px;filter:drop-shadow(0 3px 5px rgba(170,130,40,0.22))}
+    .home-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:4px auto 2px;max-width:300px}
+    .home-divider::before,.home-divider::after{content:"";height:1px;flex:1;
+        background:linear-gradient(90deg,transparent,#c9a24b,transparent)}
+    .home-diamond{color:#c9a24b;font-size:13px;transform:rotate(45deg);display:inline-block}
+    .home-subtitle{display:inline-block;font-size:17px;color:#8a6d1f;letter-spacing:1px;
+        background:linear-gradient(180deg,#fff7e6,#fbeccf);
+        border:1px solid rgba(201,162,75,0.45);border-radius:30px;padding:8px 22px;margin:14px 0 4px;
+        box-shadow:0 3px 8px rgba(201,162,75,0.15)}
+    .grid-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:22px;text-align:left;}
+    .card{position:relative;background:linear-gradient(160deg,#ffffff 0%,#fbf6ec 100%);
+        border:1px solid rgba(201,162,75,0.35);border-radius:18px;padding:22px 16px;cursor:pointer;
+        font-size:18px;font-weight:bold;color:#3a4a5a;transition:all 0.3s ease;
+        box-shadow:0 6px 16px rgba(60,60,60,0.08);
+        display:flex;flex-direction:column;align-items:center;gap:8px;overflow:hidden}
+    .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;
+        background:linear-gradient(90deg,#2e8b8b,#3fb6b6);opacity:0.9}
+    .card:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(46,139,139,0.22);
+        border-color:#2e8b8b;background:linear-gradient(160deg,#ffffff 0%,#eef9f9 100%)}
+    .card.special-card{background:linear-gradient(160deg,#ffffff 0%,#eef4fb 100%);border-color:rgba(70,110,170,0.40);color:#1f3a5f}
+    .card.special-card::before{background:linear-gradient(90deg,#3a6ea5,#5b9bd5)}
+    .card.special-card:hover{border-color:#3a6ea5;box-shadow:0 14px 28px rgba(58,110,165,0.22);background:linear-gradient(160deg,#ffffff 0%,#e6f0fb 100%)}
+    .unit-icon{font-size:38px;margin-bottom:2px;filter:drop-shadow(0 2px 3px rgba(0,0,0,0.12))}
+
+    /* ======= 常规答题场景 ======= */
+    .question-text{font-size:30px;color:#333;margin:20px 0;font-weight:bold}
+    .options{display:flex;justify-content:center;gap:15px;margin-top:15px;flex-wrap:wrap}
+    .option-btn{font-size:26px;padding:12px 35px;border-radius:15px;border:3px solid #2196F3;background:white;color:#2196F3;cursor:pointer;transition:0.2s;font-family: inherit;}
+    .option-btn:hover{background:#E3F2FD}
+    .option-btn.correct{background:#4CAF50;color:white;border-color:#4CAF50;animation:bounce 0.5s}
+    .option-btn.wrong{background:#f44336;color:white;border-color:#f44336;animation:shake 0.5s}
+    @keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+    .progress-bar{width:80%;height:12px;background:#eee;border-radius:10px;margin:0 auto 15px;overflow:hidden}
+    .progress-fill{height:100%;background:#FF9800;width:0%;transition:width 0.3s}
+
+    /* ======= 专属复习场景（第6单元） ======= */
+    #reviewScene { text-align: left; }
+    .rev-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px dashed #ffb74d; position: relative; }
+    .rev-header h1 { color: #ff7043; font-size: 32px; margin-bottom: 10px; }
+    .rev-section-title { background: #4dd0e1; color: white; display: inline-block; padding: 8px 20px; border-radius: 20px; font-size: 22px; margin-bottom: 15px; box-shadow: 0 4px 0 #00bcd4; }
+    
+    .rev-card-group { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; }
+    .rev-card { flex: 1 1 250px; background: #fff8e1; border: 3px solid #ffe082; border-radius: 15px; padding: 20px; transition: transform 0.3s; text-align: left;}
+    .rev-card:hover { transform: translateY(-5px); }
+    .rev-card h3 { color: #f57c00; margin-bottom: 10px; font-size: 20px; }
+
+    .rev-numberline { background: #e1f5fe; border: 3px dashed #4fc3f7; border-radius: 15px; padding: 18px; margin-bottom: 40px; text-align: center; }
+    .rev-numberline .rev-section-subtitle { font-size: 20px; color: #0277bd; font-weight: bold; margin-bottom: 10px; }
+
+    .rev-quiz-box { background: #e8f5e9; border: 3px solid #a5d6a7; border-radius: 15px; padding: 20px; margin-bottom: 20px; text-align: left;}
+    .rev-question { font-size: 20px; margin-bottom: 15px; font-weight: bold; color: #2e7d32; }
+    .rev-options { display: flex; flex-wrap: wrap; gap: 15px; }
+    .rev-option-btn { background: white; border: 2px solid #66bb6a; color: #2e7d32; font-size: 20px; padding: 10px 25px; border-radius: 12px; cursor: pointer; transition: all 0.2s; font-family: inherit;}
+    .rev-option-btn:hover { background: #c8e6c9; }
+    .rev-option-btn.correct { background: #4caf50; color: white; border-color: #4caf50; }
+    .rev-option-btn.wrong { background: #ef5350; color: white; border-color: #ef5350; }
+    .rev-feedback { margin-top: 15px; font-size: 20px; font-weight: bold; min-height: 30px; }
+
+    .extend-box { background: #f3e5f5; border: 3px solid #ce93d8; border-radius: 15px; padding: 20px; margin-bottom: 20px; text-align: left;}
+    .extend-box .rev-question { color: #6a1b9a; }
+    .reveal-btn { background: #ab47bc; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-size: 18px; cursor: pointer; margin-top: 15px; font-family: inherit;}
+    .answer { display: none; margin-top: 15px; background: white; padding: 15px; border-radius: 10px; color: #4a148c; border-left: 5px solid #ab47bc; }
+    
+    .ten-frame { display: flex; align-items: center; gap: 10px; font-size: 24px; margin: 15px 0; font-weight: bold; }
+    .ten-box { width: 40px; height: 40px; border: 2px dashed #ff9800; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #ff9800;}
+    .move-arrow { font-size: 20px; color: #f44336; }
+    .highlight-cylinder { animation: blink 0.5s 3; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+    .img-container { text-align: center; margin: 15px 0; background: #fff; border-radius: 10px; padding: 10px; border: 1px solid #eee;}
+
+    /* 奖章区 */
+    .medal-wrap { text-align: center; margin: 30px 0 10px; padding-top: 20px; border-top: 3px dashed #ffb74d; }
+    .medal-box { margin-top: 15px; padding: 20px; background: #fffde7; border: 3px solid #ffd54f; border-radius: 20px; display: inline-block; }
+    .medal-box p { font-size: 22px; color: #f57f17; font-weight: bold; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div id="app">
+    <div class="top-bar">
+        <button class="btn btn-blue hidden" id="backBtn" onclick="goHome()">⬅ 返回目录</button>
+        <div class="pig">🐷</div>
+    </div>
+
+    <!-- 主界面：目录（首页高端美化，文字内容保持不变） -->
+    <div id="homeScene">
+        <svg class="home-emblem" width="74" height="74" viewBox="0 0 72 72" aria-hidden="true">
+            <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#e8c77a"/>
+                    <stop offset="0.5" stop-color="#c9a24b"/>
+                    <stop offset="1" stop-color="#b8860b"/>
+                </linearGradient>
+            </defs>
+            <circle cx="36" cy="36" r="32" fill="none" stroke="url(#goldGrad)" stroke-width="2.5"/>
+            <circle cx="36" cy="36" r="26" fill="rgba(201,162,75,0.08)"/>
+            <polygon points="36,21 39.65,30.98 50.27,31.36 41.90,37.92 44.82,48.14 36,42.2 27.18,48.14 30.10,37.92 21.73,31.36 32.35,30.98" fill="url(#goldGrad)"/>
+        </svg>
+        <h1>一上数学闯关乐园</h1>
+        <div class="home-divider"><span></span><span class="home-diamond">◆</span><span></span></div>
+        <div><span class="home-subtitle">李宜庭专属版（先易后难，快乐闯关）</span></div>
+        <div class="grid-box" id="unitList"></div>
+    </div>
+
+    <!-- 常规答题场景 -->
+    <div id="quizScene" class="hidden">
+        <h2 id="quizTitle" style="color:#2196F3;font-size:24px;margin-bottom:15px;">单元名称</h2>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <p id="progressText" style="color:#888;margin-bottom:10px;">第 1 / 10 题</p>
+        <div id="questionContainer" class="fade-in">
+            <div class="question-text" id="questionText">题目加载中...</div>
+            <div class="options" id="optionsContainer"></div>
+        </div>
+        <p id="feedback" style="font-size:24px;margin-top:15px;font-weight:bold;height:35px;"></p>
+        <button class="btn hidden" id="nextBtn" onclick="nextQuestion()">下一题 ➡</button>
+        <button class="btn btn-blue hidden" id="finishBtn" onclick="goHome()">完成闯关 🎉</button>
+    </div>
+
+    <!-- 专属复习场景（第6单元） -->
+    <div id="reviewScene" class="hidden">
+        <div class="rev-header">
+            <h1>第六单元：复习与关联</h1>
+            <p>李宜庭，一起来整理这学期学到的本领吧！</p>
+        </div>
+
+        <!-- 知识总结 -->
+        <div class="rev-section-title">🧠 知识大盘点</div>
+        <div class="rev-card-group">
+            <div class="rev-card">
+                <h3>1. 20以内的数</h3>
+                <p>📌 <b>数的组成：</b>10个一是1个十。十位上的1表示1个十，个位上的1表示1个一。</p>
+                <p>🔢 比如：1个十和2个一合起来是 <b>12</b>。</p>
+            </div>
+            <div class="rev-card">
+                <h3>2. 加与减（凑十法）</h3>
+                <p>📌 <b>看图想分与合：</b> 2+4=6，6-2=4，6-4=2。</p>
+                <p>✨ <b>凑十法演示：</b> 计算 <b>6+5</b> 时，把5分成4和1，6+4=10，10+1=11。</p>
+                <div class="ten-frame">
+                    <div class="ten-box">6</div> + 
+                    <div class="ten-box">4</div> 
+                    <span class="move-arrow">↖ (从5里借4)</span>
+                    <div class="ten-box">1</div>
+                    <span>= 10 + 1 = 11</span>
+                </div>
+            </div>
+            <div class="rev-card">
+                <h3>3. 认识立体图形</h3>
+                <p>🧊 <b>长方体/正方体：</b> 每个面都是平平的，不能滚动。</p>
+                <p>🥫 <b>圆柱：</b> 上下一样粗，放倒了能滚动。</p>
+                <p>⚽ <b>球：</b> 圆溜溜，到处都能滚。</p>
+            </div>
+            <div class="rev-card">
+                <h3>4. 比多少与位置</h3>
+                <p>⚖️ <b>比多少：</b> 谁多谁少，可以用 ＞、＜、＝ 表示。</p>
+                <p>🧭 <b>位置：</b> 上、下、左、右、前、后，能说清东西在哪里。</p>
+            </div>
+        </div>
+
+        <!-- 数尺宝宝：0~20 一目了然 -->
+        <div class="rev-numberline">
+            <div class="rev-section-subtitle">📏 数尺宝宝：从 0 数到 20</div>
+            <svg width="460" height="140" viewBox="0 0 460 140" role="img" aria-label="0到20的数尺，10和20是红色里程碑">
+                <!-- 第一行 0~10 -->
+                <circle cx="20"  cy="45" r="16" fill="#b0bec5"/><text x="20"  cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#37474f">0</text>
+                <circle cx="60"  cy="45" r="16" fill="#4fc3f7"/><text x="60"  cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">1</text>
+                <circle cx="100" cy="45" r="16" fill="#4fc3f7"/><text x="100" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">2</text>
+                <circle cx="140" cy="45" r="16" fill="#4fc3f7"/><text x="140" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">3</text>
+                <circle cx="180" cy="45" r="16" fill="#4fc3f7"/><text x="180" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">4</text>
+                <circle cx="220" cy="45" r="16" fill="#4fc3f7"/><text x="220" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">5</text>
+                <circle cx="260" cy="45" r="16" fill="#4fc3f7"/><text x="260" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">6</text>
+                <circle cx="300" cy="45" r="16" fill="#4fc3f7"/><text x="300" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">7</text>
+                <circle cx="340" cy="45" r="16" fill="#4fc3f7"/><text x="340" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">8</text>
+                <circle cx="380" cy="45" r="16" fill="#4fc3f7"/><text x="380" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">9</text>
+                <circle cx="420" cy="45" r="16" fill="#ff7043"/><text x="420" cy="50" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">10</text>
+                <!-- 第二行 11~20 -->
+                <circle cx="20"  cy="105" r="16" fill="#4fc3f7"/><text x="20"  cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">11</text>
+                <circle cx="60"  cy="105" r="16" fill="#4fc3f7"/><text x="60"  cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">12</text>
+                <circle cx="100" cy="105" r="16" fill="#4fc3f7"/><text x="100" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">13</text>
+                <circle cx="140" cy="105" r="16" fill="#4fc3f7"/><text x="140" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">14</text>
+                <circle cx="180" cy="105" r="16" fill="#4fc3f7"/><text x="180" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">15</text>
+                <circle cx="220" cy="105" r="16" fill="#4fc3f7"/><text x="220" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">16</text>
+                <circle cx="260" cy="105" r="16" fill="#4fc3f7"/><text x="260" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">17</text>
+                <circle cx="300" cy="105" r="16" fill="#4fc3f7"/><text x="300" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">18</text>
+                <circle cx="340" cy="105" r="16" fill="#4fc3f7"/><text x="340" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579b">19</text>
+                <circle cx="380" cy="105" r="16" fill="#ff7043"/><text x="380" cy="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">20</text>
+            </svg>
+            <p style="color:#ef6c00;font-weight:bold;font-size:18px;margin-top:6px;">数到 10 就是一个“十”，再接着数到 20！🚩</p>
+        </div>
+
+        <!-- 基础训练 -->
+        <div class="rev-section-title">✏️ 基础闯关练一练</div>
+        
+        <div class="rev-quiz-box" id="rq1">
+            <div class="rev-question">1. 看图写数：下面是一捆小棒和几根散棒，这是多少？</div>
+            <div class="img-container">
+                <svg width="460" height="150" viewBox="0 0 460 150" role="img" aria-label="一捆10根小棒加5根散棒">
+                    <g>
+                        <rect x="30"  y="15" width="3.5" height="95" rx="1.75" fill="#a1887f"/><rect x="35"  y="15" width="3.5" height="95" rx="1.75" fill="#8d6e63"/><rect x="40"  y="15" width="3.5" height="95" rx="1.75" fill="#a1887f"/><rect x="45"  y="15" width="3.5" height="95" rx="1.75" fill="#8d6e63"/><rect x="50"  y="15" width="3.5" height="95" rx="1.75" fill="#a1887f"/><rect x="55"  y="15" width="3.5" height="95" rx="1.75" fill="#8d6e63"/><rect x="60"  y="15" width="3.5" height="95" rx="1.75" fill="#a1887f"/><rect x="65"  y="15" width="3.5" height="95" rx="1.75" fill="#8d6e63"/><rect x="70"  y="15" width="3.5" height="95" rx="1.75" fill="#a1887f"/><rect x="75"  y="15" width="3.5" height="95" rx="1.75" fill="#8d6e63"/>
+                        <rect x="25" y="50" width="58" height="14" rx="5" fill="#ef5350"/>
+                        <text x="54" y="138" text-anchor="middle" font-size="17" fill="#555">1捆（10根）</text>
+                    </g>
+                    <text x="125" y="80" font-size="42" font-weight="bold" fill="#666">+</text>
+                    <g>
+                        <rect x="175" y="15" width="5" height="95" rx="2.5" fill="#8d6e63"/><rect x="220" y="15" width="5" height="95" rx="2.5" fill="#8d6e63"/><rect x="265" y="15" width="5" height="95" rx="2.5" fill="#8d6e63"/><rect x="310" y="15" width="5" height="95" rx="2.5" fill="#8d6e63"/><rect x="355" y="15" width="5" height="95" rx="2.5" fill="#8d6e63"/>
+                        <text x="268" y="138" text-anchor="middle" font-size="17" fill="#555">5根散的</text>
+                    </g>
+                </svg>
+            </div>
+            <div class="rev-options">
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq1')">7</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, true, 'rq1', '很好！1个十和5个一合起来是15。')">15</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq1')">25</button>
+            </div>
+            <div class="rev-feedback"></div>
+        </div>
+
+        <div class="rev-quiz-box" id="rq2">
+            <div class="rev-question">2. 左边有 8 只小蜜蜂，右边有 7 只小蜜蜂，一共有几只？</div>
+            <div class="img-container">
+                <svg width="460" height="130" viewBox="0 0 460 130" role="img" aria-label="左边8只蜜蜂，右边7只蜜蜂">
+                    <g transform="translate(20, 20)">
+                        <g transform="translate(10, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(40, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(70, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(100, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(10, 50) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(40, 50) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(70, 50) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(100, 50) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                    </g>
+                    <text x="220" y="70" font-size="36" fill="#666" text-anchor="middle">+</text>
+                    <g transform="translate(260, 20)">
+                        <g transform="translate(10, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(40, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(70, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(100, 10) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(10, 50) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(40, 50) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                        <g transform="translate(70, 50) scale(0.8)"><ellipse cx="10" cy="10" rx="8" ry="6" fill="#fbc02d"/><line x1="6" y1="10" x2="14" y2="10" stroke="#333" stroke-width="2"/><path d="M 8 4 Q 10 0 12 4" fill="#e0e0e0"/><path d="M 8 16 Q 10 20 12 16" fill="#e0e0e0"/></g>
+                    </g>
+                </svg>
+            </div>
+            <div class="rev-options">
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq2')">13</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, true, 'rq2', '答对啦！8+7=15。')">15</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq2')">16</button>
+            </div>
+            <div class="rev-feedback"></div>
+        </div>
+
+        <div class="rev-quiz-box" id="rq3">
+            <div class="rev-question">3. 这个机器人里，有几个圆柱？</div>
+            <div class="img-container">
+                <svg width="260" height="300" viewBox="0 0 260 300" role="img" aria-label="机器人，橙色部分是圆柱体" id="robot-svg">
+                    <line x1="130" y1="10" x2="130" y2="24" stroke="#546e7a" stroke-width="4"/>
+                    <circle cx="130" cy="8" r="5" fill="#ef5350"/>
+                    <rect x="92" y="24" width="76" height="55" rx="6" fill="#90caf9" stroke="#546e7a" stroke-width="3"/>
+                    <circle cx="112" cy="50" r="6" fill="#263238"/>
+                    <circle cx="148" cy="50" r="6" fill="#263238"/>
+                    <rect x="112" y="64" width="36" height="6" rx="3" fill="#263238"/>
+                    <rect x="85" y="87" width="90" height="73" rx="6" fill="#90caf9" stroke="#546e7a" stroke-width="3"/>
+                    <g class="cylinder-part">
+                        <rect x="28" y="102" width="54" height="20" rx="10" fill="#ffb74d" stroke="#ef6c00" stroke-width="2.5"/>
+                        <ellipse cx="34" cy="112" rx="6" ry="9" fill="#ffd699"/>
+                        <rect x="178" y="102" width="54" height="20" rx="10" fill="#ffb74d" stroke="#ef6c00" stroke-width="2.5"/>
+                        <ellipse cx="226" cy="112" rx="6" ry="9" fill="#ffd699"/>
+                        <rect x="97" y="160" width="22" height="62" rx="11" fill="#ffb74d" stroke="#ef6c00" stroke-width="2.5"/>
+                        <rect x="141" y="160" width="22" height="62" rx="11" fill="#ffb74d" stroke="#ef6c00" stroke-width="2.5"/>
+                        <rect x="68" y="240" width="124" height="16" fill="#ffb74d"/>
+                        <ellipse cx="130" cy="256" rx="62" ry="17" fill="#ffb74d" stroke="#ef6c00" stroke-width="2.5"/>
+                        <ellipse cx="130" cy="240" rx="62" ry="17" fill="#ffd699" stroke="#ef6c00" stroke-width="2.5"/>
+                    </g>
+                </svg>
+            </div>
+            <p style="font-size: 16px; color: #666;">(提示：<b style="color:#ef6c00;">橙色</b>的手臂、腿和底座都是圆柱体，<b style="color:#0277bd;">蓝色</b>的头和身体是方方的哦)</p>
+            <div class="rev-options">
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq3')">3</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq3')">4</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, true, 'rq3', '火眼金睛！2只手臂+2条腿+1个底座，一共5个圆柱。')">5</button>
+            </div>
+            <div class="rev-feedback"></div>
+        </div>
+
+        <!-- 新增：比多少 互动题 -->
+        <div class="rev-quiz-box" id="rq4">
+            <div class="rev-question">4. 比一比：左边的苹果和右边的苹果，哪一堆多？</div>
+            <div class="img-container">
+                <svg width="460" height="100" viewBox="0 0 460 100" role="img" aria-label="左边5个苹果，右边3个苹果">
+                    <!-- 左边 5 个 -->
+                    <g transform="translate(15,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <g transform="translate(55,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <g transform="translate(95,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <g transform="translate(135,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <g transform="translate(175,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <text x="105" y="78" text-anchor="middle" font-size="18" fill="#555">左边 5 个</text>
+                    <!-- 右边 3 个 -->
+                    <g transform="translate(265,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <g transform="translate(305,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <g transform="translate(345,15)"><circle cx="12" cy="16" r="11" fill="#ef5350"/><path d="M12 5 Q14 1 17 4" stroke="#6d4c41" stroke-width="2.5" fill="none"/><path d="M14 4 Q19 1 21 6 Q16 8 14 4" fill="#66bb6a"/></g>
+                    <text x="305" y="78" text-anchor="middle" font-size="18" fill="#555">右边 3 个</text>
+                </svg>
+            </div>
+            <div class="rev-options">
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, true, 'rq4', '对啦！左边5个，右边3个，5比3大，左边多。')">左边多</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq4')">右边多</button>
+                <button class="rev-option-btn" onclick="checkReviewAnswer(this, false, 'rq4')">一样多</button>
+            </div>
+            <div class="rev-feedback"></div>
+        </div>
+
+        <!-- 拓展提升 -->
+        <div class="rev-section-title">🚀 拓展与思考</div>
+
+        <div class="extend-box">
+            <div class="rev-question">挑战 1：游走的鸭子（逆向思维）</div>
+            <div class="img-container">
+                <svg width="460" height="160" viewBox="0 0 460 160" role="img" aria-label="游走了3只鸭子，池塘里还剩8只">
+                    <rect x="0" y="100" width="460" height="60" fill="#8bc34a"/>
+                    <g transform="translate(20, 30)">
+                        <text x="20" y="20" font-size="14" fill="#666">游走了3只：</text>
+                        <g transform="translate(10, 40)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d" stroke="#f57f17" stroke-width="1.5"/><circle cx="25" cy="5" r="5" fill="#fbc02d" stroke="#f57f17" stroke-width="1.5"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/><path d="M 5,15 L 15,25 L 25,15" fill="#fbc02d" stroke="#f57f17" stroke-width="1"/></g>
+                        <g transform="translate(50, 40)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d" stroke="#f57f17" stroke-width="1.5"/><circle cx="25" cy="5" r="5" fill="#fbc02d" stroke="#f57f17" stroke-width="1.5"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/><path d="M 5,15 L 15,25 L 25,15" fill="#fbc02d" stroke="#f57f17" stroke-width="1"/></g>
+                        <g transform="translate(90, 40)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d" stroke="#f57f17" stroke-width="1.5"/><circle cx="25" cy="5" r="5" fill="#fbc02d" stroke="#f57f17" stroke-width="1.5"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/><path d="M 5,15 L 15,25 L 25,15" fill="#fbc02d" stroke="#f57f17" stroke-width="1"/></g>
+                    </g>
+                    <g transform="translate(200, 10)">
+                        <text x="20" y="20" font-size="14" fill="#666">池塘里还剩8只：</text>
+                        <ellipse cx="130" cy="110" rx="120" ry="40" fill="#4dd0e1" opacity="0.6"/>
+                        <path d="M 30,110 Q 50,100 70,110 T 110,110 T 150,110 T 190,110 T 230,110" fill="none" stroke="#00bcd4" stroke-width="2"/>
+                        <g transform="translate(30, 70) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                        <g transform="translate(70, 70) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                        <g transform="translate(110, 70) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                        <g transform="translate(150, 70) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                        <g transform="translate(50, 100) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                        <g transform="translate(90, 100) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                        <g transform="translate(130, 100) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                        <g transform="translate(170, 100) scale(0.8)"><ellipse cx="15" cy="15" rx="12" ry="8" fill="#fbc02d"/><circle cx="25" cy="5" r="5" fill="#fbc02d"/><polygon points="30,5 36,5 30,8" fill="#ff5722"/></g>
+                    </g>
+                </svg>
+            </div>
+            <p style="font-size: 20px; margin-top: 10px;">池塘里还剩 8 只鸭子，原来池塘里有多少只鸭子？</p>
+            <button class="reveal-btn" onclick="toggleReviewAnswer('rans1')">点击查看解题思路</button>
+            <div id="rans1" class="answer">
+                <b>分析：</b>游走的 + 剩下的 = 原来的<br>
+                <b>算式：</b> 3 + 8 = 11（只）<br>
+                <b>答：</b>原来池塘里有 11 只鸭子。
+            </div>
+        </div>
+
+        <div class="extend-box">
+            <div class="rev-question">挑战 2：寻找规律（教材P106表格）</div>
+            <div class="img-container">
+                <svg width="460" height="160" viewBox="0 0 460 160" role="img" aria-label="用方块高度表示数字递增规律">
+                    <g transform="translate(30, 130)"><rect x="0" y="-20" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><text x="10" y="5" text-anchor="middle" font-size="16" fill="#fff" font-weight="bold">1</text></g>
+                    <g transform="translate(90, 130)"><rect x="0" y="-40" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-20" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><text x="10" y="-15" text-anchor="middle" font-size="16" fill="#fff" font-weight="bold">2</text></g>
+                    <g transform="translate(150, 130)"><rect x="0" y="-60" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-40" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-20" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><text x="10" y="-35" text-anchor="middle" font-size="16" fill="#fff" font-weight="bold">3</text></g>
+                    <g transform="translate(210, 130)"><rect x="0" y="-100" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-80" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-60" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-40" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-20" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><text x="10" y="-60" text-anchor="middle" font-size="16" fill="#fff" font-weight="bold">5</text></g>
+                    <g transform="translate(270, 130)"><rect x="0" y="-120" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-100" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-80" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-60" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-40" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="0" y="-20" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="-20" y="-120" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><rect x="-20" y="-100" width="20" height="20" fill="#64b5f6" stroke="#2196f3" stroke-width="2"/><text x="-10" y="-60" text-anchor="middle" font-size="16" fill="#fff" font-weight="bold">8</text></g>
+                    <g transform="translate(340, 130)"><rect x="-20" y="-180" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-160" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-140" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-120" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-100" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-80" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-60" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-40" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><rect x="-20" y="-20" width="20" height="20" fill="#eeeeee" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="4"/><text x="-10" y="-100" text-anchor="middle" font-size="20" fill="#f44336" font-weight="bold">?</text></g>
+                </svg>
+                <p style="font-size: 22px; letter-spacing: 5px; color: #2196f3; font-weight: bold; margin-top: 10px;">1, 2, 3, 5, 8, ( ), 21</p>
+            </div>
+            <p style="font-size: 16px; color: #666;">(提示：看看每堆方块的高度，发现相邻数字之间的秘密哦)</p>
+            <button class="reveal-btn" onclick="toggleReviewAnswer('rans2')">点击揭晓答案</button>
+            <div id="rans2" class="answer">
+                <b>答案：</b> 13<br>
+                <b>原因：</b> 从第三个数开始，每个数都是前面两个数相加的和。<br>
+                1+2=3，2+3=5，3+5=8，5+8=13，8+13=21。
+            </div>
+        </div>
+
+        <div class="extend-box">
+            <div class="rev-question">挑战 3：读书比赛（逻辑思考）</div>
+            <div class="img-container">
+                <svg width="460" height="160" viewBox="0 0 460 160" role="img" aria-label="小明读8页，小华读9页，谁剩下的多">
+                    <text x="30" y="40" font-size="18" fill="#333" font-weight="bold">小明：</text>
+                    <rect x="90" y="20" width="300" height="30" rx="5" fill="#f5f5f5" stroke="#999" stroke-width="2"/>
+                    <rect x="90" y="20" width="240" height="30" rx="5" fill="#4caf50"/>
+                    <text x="210" y="40" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">读了 8 页</text>
+                    <text x="400" y="40" font-size="16" fill="#666">剩 2 页</text>
+                    <text x="30" y="110" font-size="18" fill="#333" font-weight="bold">小华：</text>
+                    <rect x="90" y="90" width="300" height="30" rx="5" fill="#f5f5f5" stroke="#999" stroke-width="2"/>
+                    <rect x="90" y="90" width="270" height="30" rx="5" fill="#f44336"/>
+                    <text x="225" y="110" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">读了 9 页</text>
+                    <text x="400" y="110" font-size="16" fill="#666">剩 1 页</text>
+                    <path d="M 210,60 L 210,80" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#333" /></marker></defs>
+                </svg>
+            </div>
+            <p style="font-size: 20px;">小明和小华读同一本故事书。小明读了 8 页，小华读了 9 页。</p>
+            <p style="font-size: 20px; color: #d32f2f; margin-top: 10px;"><b>谁剩下的多？</b></p>
+            <button class="reveal-btn" onclick="toggleReviewAnswer('rans3')">点击揭晓答案</button>
+            <div id="rans3" class="answer">
+                <b>答案：</b>小明剩下的多。<br>
+                <b>原因：</b>因为书的总页数是一样多的，小华读了 9 页，比小明读的 8 页多，所以小华剩下的就少，小明剩下的就多。
+            </div>
+        </div>
+
+        <!-- 完成复习，领取奖章 -->
+        <div class="medal-wrap">
+            <button class="btn" id="getMedalBtn" onclick="getMedal()">完成复习，领取小奖章 🏅</button>
+            <div id="medalBox" class="medal-box hidden">
+                <svg width="160" height="170" viewBox="0 0 160 170" role="img" aria-label="小奖章">
+                    <!-- 绶带 -->
+                    <polygon points="55,10 80,55 45,55" fill="#ef5350"/>
+                    <polygon points="105,10 115,55 80,55" fill="#42a5f5"/>
+                    <!-- 奖章 -->
+                    <circle cx="80" cy="105" r="46" fill="#ffca28" stroke="#ff8f00" stroke-width="4"/>
+                    <circle cx="80" cy="105" r="34" fill="#fff8e1" stroke="#ff8f00" stroke-width="2"/>
+                    <!-- 五角星 -->
+                    <polygon points="80,82 88,100 108,100 92,112 98,131 80,118 62,131 68,112 52,100 72,100" fill="#ff8f00"/>
+                </svg>
+                <p>李宜庭，上册数学复习完成，你真棒！🌟</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ======= 语音与音效系统 =======
+    let audioCtx;
+    function initAudio() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    function speakText(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'zh-CN';
+            u.rate = 0.9;
+            u.pitch = 1.2; 
+            const voices = window.speechSynthesis.getVoices();
+            const zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
+            if (zhVoice) u.voice = zhVoice;
+            window.speechSynthesis.speak(u);
+        }
+    }
+
+    function playTone(type) {
+        initAudio();
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.connect(g); g.connect(audioCtx.destination);
+        const n = audioCtx.currentTime;
+        if(type === 'click') {
+            o.frequency.setValueAtTime(600,n); o.frequency.exponentialRampToValueAtTime(300,n+0.1);
+            g.gain.setValueAtTime(0.3,n); g.gain.exponentialRampToValueAtTime(0.01,n+0.1);
+            o.start(); o.stop(n+0.1);
+        } else if(type === 'correct') {
+            o.type = 'sine';
+            o.frequency.setValueAtTime(523, n); o.frequency.setValueAtTime(659, n + 0.1); o.frequency.setValueAtTime(784, n + 0.2);
+            g.gain.setValueAtTime(0.3, n); g.gain.exponentialRampToValueAtTime(0.01, n + 0.4);
+            o.start(); o.stop(n + 0.4);
+        } else if(type === 'wrong') {
+            o.type = 'sawtooth';
+            o.frequency.setValueAtTime(200, n); o.frequency.exponentialRampToValueAtTime(100, n + 0.2);
+            g.gain.setValueAtTime(0.3, n); g.gain.exponentialRampToValueAtTime(0.01, n + 0.2);
+            o.start(); o.stop(n + 0.2);
+        } else if(type === 'win') {
+            o.type = 'triangle';
+            [523, 659, 784, 1047].forEach((f,i) => { o.frequency.setValueAtTime(f, n + i * 0.15); });
+            g.gain.setValueAtTime(0.3, n); g.gain.exponentialRampToValueAtTime(0.01, n + 0.8);
+            o.start(); o.stop(n + 0.8);
+        }
+    }
+
+    // 智能语音格式化
+    function cleanTextForSpeech(text) {
+        let t = text.replace(/\+/g, '加').replace(/-/g, '减').replace(/×/g, '乘').replace(/÷/g, '除以')
+                    .replace(/……/g, '余').replace(/\( \)/g, '几').replace(/\(\)/g, '几');
+        if (t.endsWith('=?')) return t.replace(/=\?$/, '等于几');
+        if (t.includes('什么') || t.includes('几') || t.includes('多少') || t.endsWith('吗?')) return t.replace(/\?/g, '');
+        return t.replace(/\?/g, '是多少');
+    }
+
+    // ======= 一年级上册独立题库 =======
+    const qBank = {
+        "1. 5以内数的认识": [["1+1=?",[1,2,3],2],["2+1=?",[2,3,4],3],["3-1=?",[1,2,3],2],["2+2=?",[3,4,5],4],["4-2=?",[1,2,3],2],["3+2=?",[4,5,6],5],["5-3=?",[1,2,3],2],["1+3=?",[3,4,5],4],["4-1=?",[2,3,4],3],["2+3=?",[4,5,6],5]],
+        "2. 6~10的认识": [["6可以分成1和几?",[4,5,6],5],["6可以分成2和几?",[3,4,5],4],["7可以分成3和几?",[3,4,5],4],["8可以分成5和几?",[2,3,4],3],["9可以分成4和几?",[4,5,6],5],["10可以分成6和几?",[3,4,5],4],["6+1=?",[6,7,8],7],["7+2=?",[8,9,10],9],["8+1=?",[8,9,10],9],["10-3=?",[6,7,8],7]],
+        "3. 认识立体图形": [["牙膏盒是什么形状?",["长方体","正方体","圆柱"],"长方体"],["魔方是什么形状?",["长方体","正方体","球"],"正方体"],["水杯是什么形状?",["长方体","正方体","圆柱"],"圆柱"],["皮球是什么形状?",["长方体","正方体","球"],"球"],["长方体有几个面?",[4,6,8],6],["正方体有几个面?",[4,6,8],6],["圆柱能滚动吗?",["能","不能","不确定"],"能"],["球能滚动吗?",["能","不能","不确定"],"能"],["魔方是立体图形吗?",["是","不是","不确定"],"是"],["水杯是立体图形吗?",["是","不是","不确定"],"是"]],
+        "4. 11~20的认识": [["11+2=?",[12,13,14],13],["12+3=?",[14,15,16],15],["14-2=?",[11,12,13],12],["15-4=?",[10,11,12],11],["10+5=?",[14,15,16],15],["16-6=?",[9,10,11],10],["13+4=?",[16,17,18],17],["18-5=?",[12,13,14],13],["11+8=?",[18,19,20],19],["20-7=?",[12,13,14],13]],
+        "5. 20以内进位加法": [["9+2=?",[10,11,12],11],["8+3=?",[10,11,12],11],["9+3=?",[11,12,13],12],["7+4=?",[10,11,12],11],["9+4=?",[12,13,14],13],["8+5=?",[12,13,14],13],["9+5=?",[13,14,15],14],["7+6=?",[12,13,14],13],["8+7=?",[14,15,16],15],["9+9=?",[17,18,19],18]],
+        "6. 复习与关联": "special",
+        "7. 20以内加减法（高难度）": [["9+6=?",[14,15,16],15],["8+7=?",[13,14,15],15],["13-5=?",[7,8,9],8],["14-8=?",[5,6,7],6],["7+9=?",[15,16,17],16],["15-7=?",[7,8,9],8],["16-9=?",[6,7,8],7],["6+8=?",[12,13,14],14],["9+2+4=?",[14,15,16],15],["18-6-5=?",[6,7,8],7],["8+7-6=?",[8,9,10],9],["15-8+4=?",[10,11,12],11],["5+( )=14",[8,9,10],9],["16-( )=7",[8,9,10],9],["9+( )=17",[7,8,9],8],["14-( )=5",[8,9,10],9],["13+6=?",[18,19,20],19],["20-8=?",[11,12,13],12],["19-7=?",[11,12,13],12],["11+9=?",[19,20,21],20]]
+    };
+
+    // 首页目录图标（贴合一年级主题）
+    const unitIcons = {
+        "1. 5以内数的认识": "🔢",
+        "2. 6~10的认识": "🍎",
+        "3. 认识立体图形": "🧊",
+        "4. 11~20的认识": "🔟",
+        "5. 20以内进位加法": "➕",
+        "6. 复习与关联": "🌟",
+        "7. 20以内加减法（高难度）": "🏆"
+    };
+
+    // ======= 逻辑控制 =======
+    let currentQs=[], currentIdx=0, answered=false;
+    let reviewQuestCount = 0; 
+
+    function initHome(){
+        let fullHtml = '';
+        for (let u in qBank) {
+            let isSpecial = qBank[u] === "special";
+            let cardClass = isSpecial ? "card special-card" : "card";
+            let icon = unitIcons[u] || "📚";
+            fullHtml += `<div class="${cardClass}" onclick="startUnit('${u}')"><div class="unit-icon">${icon}</div>${u}</div>`;
+        }
+        document.getElementById('unitList').innerHTML = fullHtml;
+    }
+
+    function startUnit(unit){
+        playTone('click');
+        // 判断是否是特殊的复习单元
+        if (qBank[unit] === "special") {
+            document.getElementById('homeScene').classList.add('hidden');
+            document.getElementById('quizScene').classList.add('hidden');
+            document.getElementById('reviewScene').classList.remove('hidden');
+            document.getElementById('backBtn').classList.remove('hidden');
+            return;
+        }
+
+        // 普通选择题单元加载逻辑
+        currentQs = qBank[unit].map(q => {
+            let optionsCopy = [...q[1]];
+            for (let i = optionsCopy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [optionsCopy[i], optionsCopy[j]] = [optionsCopy[j], optionsCopy[i]];
+            }
+            return {q:q[0], options:optionsCopy, ans:q[2]};
+        });
+        
+        currentIdx = 0; answered = false;
+        
+        document.getElementById('homeScene').classList.add('hidden');
+        document.getElementById('reviewScene').classList.add('hidden');
+        document.getElementById('quizScene').classList.remove('hidden');
+        document.getElementById('backBtn').classList.remove('hidden');
+        document.getElementById('quizTitle').innerText = unit;
+        loadQ();
+    }
+
+    function loadQ(){
+        if(currentIdx >= currentQs.length){ endQuiz(); return }
+        answered = false;
+        const q = currentQs[currentIdx];
+        document.getElementById('progressText').innerText = `第 ${currentIdx+1} / ${currentQs.length} 题`;
+        document.getElementById('progressFill').style.width = `${(currentIdx/currentQs.length)*100}%`;
+        document.getElementById('questionText').innerText = q.q;
+        document.getElementById('feedback').innerText = '';
+        
+        const oc = document.getElementById('optionsContainer');
+        oc.innerHTML = '';
+        
+        speakText(cleanTextForSpeech(q.q));
+        
+        q.options.forEach(o => {
+            const b = document.createElement('button');
+            b.className = 'option-btn fade-in';
+            b.innerText = o;
+            b.onclick = () => checkAns(o, b, q.ans);
+            oc.appendChild(b);
+        });
+        
+        document.getElementById('nextBtn').classList.add('hidden');
+        document.getElementById('finishBtn').classList.add('hidden');
+    }
+
+    function checkAns(sel, btn, correct){
+        if(answered) return;
+        answered = true;
+        const fb = document.getElementById('feedback');
+        
+        if(sel == correct){
+            playTone('correct');
+            btn.classList.add('correct');
+            fb.innerText = "🎉 太棒了！答对啦！";
+            fb.style.color = "#4CAF50";
+            
+            // 李宜庭专属语音鼓励（第3题、第8题）
+            if (currentIdx === 2 || currentIdx === 7) {
+                speakText("李宜庭，好样的，加油！");
+            } else {
+                speakText("答对啦，太棒了！");
+            }
+            
+            document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+            
+            setTimeout(() => {
+                document.getElementById('nextBtn').classList.remove('hidden');
+                if(currentIdx === currentQs.length - 1){
+                    document.getElementById('nextBtn').classList.add('hidden');
+                    document.getElementById('finishBtn').classList.remove('hidden');
+                }
+            }, 1000);
+        } else {
+            playTone('wrong');
+            btn.classList.add('wrong');
+            fb.innerText = "😢 再想一想哦~";
+            fb.style.color = "#f44336";
+            speakText("再想一想哦");
+            setTimeout(() => {
+                btn.classList.remove('wrong');
+                btn.disabled = false;
+                answered = false;
+            }, 800);
+        }
+    }
+
+    function nextQuestion(){
+        playTone('click');
+        currentIdx++;
+        loadQ();
+    }
+
+    function endQuiz(){
+        playTone('win');
+        document.getElementById('progressFill').style.width = "100%";
+        document.getElementById('questionContainer').innerHTML = `
+            <div class="question-text" style="color:#FF9800;font-size:36px;">🎉 闯关成功！</div>
+            <p style="font-size:22px;">小猪为你鼓掌！李宜庭，你真棒！</p>
+        `;
+        document.getElementById('feedback').innerText = "太厉害了！👏";
+        document.getElementById('finishBtn').classList.remove('hidden');
+        speakText("恭喜李宜庭，闯关成功！");
+    }
+
+    // ======= 复习场景专属互动逻辑 =======
+    function checkReviewAnswer(btn, isCorrect, boxId, successMsg) {
+        const box = document.getElementById(boxId);
+        const feedback = box.querySelector('.rev-feedback');
+        const buttons = box.querySelectorAll('.rev-option-btn');
+        
+        buttons.forEach(b => b.disabled = true);
+
+        if (isCorrect) {
+            playTone('correct');
+            btn.classList.add('correct');
+            feedback.style.color = "#2e7d32";
+            feedback.innerText = "🎉 " + (successMsg || "太棒了，答对啦！");
+            
+            if (boxId === 'rq3') {
+                document.querySelectorAll('.cylinder-part').forEach(c => {
+                    c.classList.add('highlight-cylinder');
+                    setTimeout(() => c.classList.remove('highlight-cylinder'), 1500);
+                });
+            }
+
+            reviewQuestCount++;
+            if (reviewQuestCount === 2) {
+                speakText("李宜庭，好样的，加油！");
+            } else {
+                speakText("答对啦，太棒了！");
+            }
+        } else {
+            playTone('wrong');
+            btn.classList.add('wrong');
+            feedback.style.color = "#d32f2f";
+            feedback.innerText = "😢 哎呀，再仔细想一想哦~";
+            speakText("再想一想哦");
+            
+            setTimeout(() => {
+                btn.classList.remove('wrong');
+                buttons.forEach(b => b.disabled = false);
+            }, 1000);
+        }
+    }
+
+    function toggleReviewAnswer(id) {
+        const ans = document.getElementById(id);
+        if (ans.style.display === "block") {
+            ans.style.display = "none";
+        } else {
+            ans.style.display = "block";
+            playTone('correct');
+            speakText("来看看解题思路吧。");
+        }
+    }
+
+    // 完成复习，领取小奖章
+    function getMedal(){
+        playTone('win');
+        const box = document.getElementById('medalBox');
+        box.classList.remove('hidden');
+        box.classList.add('fade-in');
+        speakText("李宜庭，你完成了上册数学复习，真棒！这是你的小奖章！");
+        // 滚动到奖章位置，方便孩子看到
+        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function goHome(){
+        playTone('click');
+        window.speechSynthesis.cancel();
+        document.getElementById('homeScene').classList.remove('hidden');
+        document.getElementById('quizScene').classList.add('hidden');
+        document.getElementById('reviewScene').classList.add('hidden');
+        document.getElementById('backBtn').classList.add('hidden');
+        
+        // 重置复习状态
+        reviewQuestCount = 0;
+        document.querySelectorAll('.rev-feedback').forEach(el => el.innerText = '');
+        document.querySelectorAll('.rev-option-btn').forEach(b => {
+            b.disabled = false;
+            b.classList.remove('correct', 'wrong');
+        });
+        document.querySelectorAll('.answer').forEach(el => el.style.display = 'none');
+        // 重置奖章
+        const mb = document.getElementById('medalBox');
+        if (mb) { mb.classList.add('hidden'); mb.classList.remove('fade-in'); }
+    }
+
+    window.onload = function(){
+        try { initHome(); } catch(e) { console.error(e); alert("页面加载出错，请检查代码完整性。"); }
+        document.body.addEventListener('click', initAudio, { once: true });
+    };
+</script>
+</body>
+</html>
