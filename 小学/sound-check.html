@@ -41,7 +41,10 @@
     <a href="index.html" class="back-link">« 返回小学首页</a>
 
     <section class="section-block">
-      <h2 class="section-title">第 1 步 · 浏览器是否支持朗读</h2>
+      <h2 class="section-title">第 0 步 · 你现在用的是哪个浏览器</h2>
+      <div class="chk-box" id="box0"><div class="chk-title">检测中…</div><div class="chk-line"></div></div>
+
+      <h2 class="section-title">第 1 步 · 这个浏览器能不能朗读</h2>
       <div class="chk-box" id="box1"><div class="chk-title">检测中…</div><div class="chk-line"></div></div>
 
       <h2 class="section-title">第 2 步 · 装了哪些语音（有没有中文）</h2>
@@ -96,17 +99,58 @@
   var logEl = document.getElementById('log');
   function log(s){ logEl.textContent += s + '\n'; logEl.scrollTop = logEl.scrollHeight; }
 
+  // --- 第0步：认浏览器 ---
+  var ua = navigator.userAgent || '';
+  var box0 = document.getElementById('box0');
+  var BROWSERS = [
+    [/MicroMessenger/i, '微信内置浏览器', 0],
+    [/QQ\//i, 'QQ 内置浏览器', 0],
+    [/Weibo/i, '微博内置浏览器', 0],
+    [/Edge|EdgA|Edg\//i, 'Microsoft Edge', 1],
+    [/SamsungBrowser/i, '三星浏览器', 1],
+    [/MiuiBrowser|XiaoMi/i, '小米自带浏览器', 1],
+    [/HeyTapBrowser|OppoBrowser/i, 'OPPO 浏览器', 1],
+    [/VivoBrowser/i, 'vivo 浏览器', 1],
+    [/HuaweiBrowser/i, '华为浏览器', 1],
+    [/UCBrowser|UCWEB/i, 'UC 浏览器', 0],
+    [/Quark/i, '夸克浏览器', 0],
+    [/Baidu|BIDUBrowser/i, '百度浏览器', 0],
+    [/OPR|Opera/i, 'Opera', 0],
+    [/Firefox|FxiOS/i, 'Firefox', 0],
+    [/Chrome|CriOS/i, 'Chrome', 1],
+    [/Safari/i, 'Safari', 1]
+  ];
+  var bName = '未知浏览器', bOk = -1;
+  for (var i = 0; i < BROWSERS.length; i++) {
+    if (BROWSERS[i][0].test(ua)) { bName = BROWSERS[i][1]; bOk = BROWSERS[i][2]; break; }
+  }
+  var osName = /iPhone|iPad|iPod/i.test(ua) ? 'iPhone/iPad'
+             : (/Android/i.test(ua) ? '安卓' : (/Windows/i.test(ua) ? 'Windows' : '其他系统'));
+  var inApp = /MicroMessenger|QQ\/|Weibo/i.test(ua);
+  box0.className = 'chk-box ' + (bOk === 1 ? 'chk-ok' : (bOk === 0 ? 'chk-bad' : 'chk-box'));
+  box0.innerHTML =
+    '<div class="chk-title">' + (bOk === 1 ? '✅ ' : (bOk === 0 ? '⚠️ ' : '❓ ')) + bName + '（' + osName + '）</div>' +
+    '<div class="chk-line">' +
+    (inApp ? '这是 <b>APP 内置浏览器</b>，多数不带朗读能力。请点右上角「⋯ → 用浏览器打开」。<br>' : '') +
+    (bOk === 1 ? '这个浏览器<b>自带朗读能力</b>，若仍没声音，多半是缺中文语音包或媒体音量为 0，请看第 2 步。' : '') +
+    (bOk === 0 ? '这个浏览器<b>通常不能朗读</b>，建议改用 <b>Chrome</b> 或 <b>Edge</b>（应用商店可免费安装）。' : '') +
+    (bOk === -1 ? '未能识别，请以第 1 步的实际检测结果为准。' : '') +
+    '</div>';
+  log('[0] 浏览器: ' + bName + ' / ' + osName);
+
   // --- 第1步 ---
   var box1 = document.getElementById('box1');
   var ok = ('speechSynthesis' in window) && (typeof SpeechSynthesisUtterance !== 'undefined');
   log('浏览器: ' + navigator.userAgent);
   if (ok) {
     box1.className = 'chk-box chk-ok';
-    box1.innerHTML = '<div class="chk-title">✅ 支持朗读</div><div class="chk-line">这个浏览器具备网页朗读能力，可继续下一步。</div>';
+    box1.innerHTML = '<div class="chk-title">✅ ' + bName + ' 支持朗读</div><div class="chk-line">这个浏览器具备网页朗读能力，可继续下一步。</div>';
     log('[1] speechSynthesis 可用');
   } else {
     box1.className = 'chk-box chk-bad';
-    box1.innerHTML = '<div class="chk-title">❌ 不支持朗读</div><div class="chk-line">请换用 <b>Chrome</b> 或 <b>Safari</b> 打开本站；微信内置浏览器不支持。</div>';
+    box1.innerHTML = '<div class="chk-title">❌ ' + bName + ' 不支持朗读</div><div class="chk-line">' +
+      (inApp ? '请点右上角「⋯ → 用浏览器打开」，推荐 <b>Chrome</b> 或 <b>Edge</b>。' : '请换用 <b>Chrome</b> 或 <b>Edge</b> 打开本站（应用商店免费安装）。') +
+      '</div>';
     log('[1] 不支持 speechSynthesis');
     return;
   }
