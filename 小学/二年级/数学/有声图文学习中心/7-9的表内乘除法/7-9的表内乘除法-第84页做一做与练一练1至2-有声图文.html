@@ -500,51 +500,6 @@ document.querySelectorAll('.sayable').forEach(function(el){
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
 
-<!-- ===== 配音注入 BEGIN ===== -->
-<script>
-/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
-var AUDIO_MAP = {"做一做。": "001.mp3", "一盒铅笔有6支，4盒铅笔有多少支？把这些铅笔平均分给8名同学，每名同学分到几支？想一想怎么算。": "002.mp3", "第一问：6×4=24（支）；第二问：24÷8=3（支）。先乘出总数，再平均分。": "003.mp3", "练一练。": "004.mp3", "第1题算一算：42÷6=7，45÷5=9，56÷7=8，49-30=19；63÷9=7，35-7=28，6×8=48，18÷2=9；18+9=27，21÷3=7，36÷4=9，48÷8=6。": "005.mp3", "第2题填一填。": "006.mp3", "青蛙在线上跳，每次跳几格？跳几次到18？方框里填几？想一想。": "007.mp3", "青蛙每次跳3格，跳6次到18，方框里依次填6、9、12、15、18。": "008.mp3", "兔子每次跳6格，跳3次到18，方框里填6、12、18。": "009.mp3", "袋鼠每次跳9格，跳2次到18，方框里填9、18。": "010.mp3", "填空：兔子跳一次相当于青蛙跳2次；袋鼠跳一次相当于青蛙跳3次；袋鼠跳2次相当于兔子跳3次。": "011.mp3", "第2小题：6里面有几个3？9里面有几个3？18里面有几个3、几个6？想一想。": "012.mp3", "6里面有2个3；9里面有3个3；18里面有6个3，有3个6。": "013.mp3", "第一题，认知：4盒铅笔一共有多少支？想一想。": "014.mp3", "第二题，认知：青蛙每次跳几格？跳几次到18？想一想。": "015.mp3", "第三题，强化：24支铅笔平均分给8名同学，每人分到几支？想一想。": "016.mp3", "第四题，强化：兔子跳一次相当于青蛙跳几次？想一想。": "017.mp3", "第五题，强化：18里面有几个3？有几个6？想一想。": "018.mp3", "最后一题，拓展：袋鼠跳4次，相当于兔子跳几次？想一想。": "019.mp3", "6×4=24（支），口诀四六二十四，4盒铅笔一共有24支。": "020.mp3", "青蛙每次跳3格，跳6次，3×6=18，跳到18。": "021.mp3", "24÷8=3（支），口诀三八二十四，每名同学分到3支。": "022.mp3", "兔子每次跳6格，青蛙每次跳3格，6里面有2个3，所以兔子跳一次相当于青蛙跳2次。": "023.mp3", "18里面有6个3，有3个6。想口诀三六十八。": "024.mp3", "袋鼠每次跳9格，跳4次是9×4=36格；兔子每次跳6格，36÷6=6，相当于兔子跳6次。": "025.mp3", "一盒铅笔6支，4盒多少支？平均分给8名同学，每人几支？": "026.mp3", "42÷6=7，45÷5=9，56÷7=8，63÷9=7，6×8=48，18÷2=9。": "027.mp3", "青蛙每次跳3格，跳6次到18。": "028.mp3", "兔子每次跳6格，跳3次到18。": "029.mp3", "袋鼠每次跳9格，跳2次到18。": "030.mp3", "兔子一次等于青蛙2次；袋鼠一次等于青蛙3次；袋鼠2次等于兔子3次。": "031.mp3", "做一做铅笔两连问\n    看答案 ▾\n    \n      第一问：6×4=24（支）；\n      第二问：24÷8=3（支）；\n      💡 先乘出总数，再平均分。": "032.mp3", "跳格图三只小动物怎么跳？\n    看答案 ▾\n    \n      青蛙：每次 3 格，跳 6 次 → 18；\n      兔子：每次 6 格，跳 3 次 → 18；\n      袋鼠：每次 9 格，跳 2 次 → 18。": "033.mp3", "填一填谁的一次相当于谁的几次？\n    看答案 ▾\n    \n      兔子 1 次 = 青蛙 2 次（6 是 3 的 2 倍）；\n      袋鼠 1 次 = 青蛙 3 次（9 是 3 的 3 倍）；\n      袋鼠 2 次 = 兔子 3 次（18 一样远）。": "034.mp3", "第2题（2）几里面有几个几\n    看答案 ▾\n    \n      6 里面有（2）个 3；9 里面有（3）个 3；\n      18 里面有（6）个 3，有（3）个 6。": "035.mp3"};
-var AUDIO_BASE = 'audio/7-9的表内乘除法-第84页做一做与练一练1至2-有声图文/';
-var __audioEl = null;
-function __fallbackSpeak(text, finish){
-  try{
-    if(synth){
-      try{ synth.cancel(); }catch(e){}
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
-      var vs = synth.getVoices() || [];
-      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
-      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
-      u.onend=finish; u.onerror=finish;
-      synth.speak(u);
-      setTimeout(finish, Math.min(2500+text.length*260, 16000));
-    }else{ setTimeout(finish, 600+text.length*150); }
-  }catch(e){ setTimeout(finish, 600+text.length*150); }
-}
-function speak(text){
-  return new Promise(function(resolve){
-    if(!text){ resolve(); return; }
-    var capEl = document.getElementById('cap');
-    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
-    var done=false;
-    function finish(){ if(done) return; done=true; resolve(); }
-    var fn = AUDIO_MAP[text];
-    if(fn){
-      try{
-        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
-        __audioEl = new Audio(AUDIO_BASE + fn);
-        __audioEl.onended = finish;
-        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
-        var p = __audioEl.play();
-        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
-        return;
-      }catch(e){}
-    }
-    __fallbackSpeak(text, finish);
-  });
-}
-</script>
-<!-- ===== 配音注入 END ===== -->
 
 </body>
 </html>

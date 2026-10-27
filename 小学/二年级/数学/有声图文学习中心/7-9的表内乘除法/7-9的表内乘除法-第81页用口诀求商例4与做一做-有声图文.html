@@ -513,51 +513,6 @@ document.querySelectorAll('.sayable').forEach(function(el){
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
 
-<!-- ===== 配音注入 BEGIN ===== -->
-<script>
-/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
-var AUDIO_MAP = {"例题标题：用7到9的乘法口诀求商。": "001.mp3", "例4左边有一个方格图，每行8格，一共有7行。": "002.mp3", "7×8=56，口诀是什么？想一想。": "003.mp3", "口诀：七八五十六。方格图正好是7个8，一共56格。": "004.mp3", "你会计算56÷8吗？56÷8=7，想：（七）八五十六。": "005.mp3", "56÷7=8，想：七（八）五十六。同一句口诀算出两道除法。": "006.mp3", "做一做。": "007.mp3", "第1题，看图说出下列算式的含义。圆片图每行8个，有4行。": "008.mp3", "4×8=32、32÷8=4、32÷4=8，这三道算式各表示什么含义？想一想。": "009.mp3", "4×8=32表示4个8相加是32；32÷8=4表示32里面有4个8；32÷4=8表示32里面有8个4。": "010.mp3", "第2题，第一组：7×3=21，21÷7=3，21÷3=7。": "011.mp3", "第二组：8×6=48，48÷8=6，48÷6=8。": "012.mp3", "第三组：4×7=28，28÷7=4，28÷4=7。": "013.mp3", "计算每组算式时有什么相同的地方？想一想。": "014.mp3", "每组三道算式都用同一句乘法口诀：三七二十一、六八四十八、四七二十八。": "015.mp3", "第3题填空：5×几=35；6×几=42；49÷7=几。": "016.mp3", "40÷8=几；24÷8=几；8×几=64。": "017.mp3", "第一题，认知：计算56÷8用哪句口诀？商是几？想一想。": "018.mp3", "第二题，认知：32÷4=8表示什么含义？想一想。": "019.mp3", "第三题，强化：48÷6和48÷8各等于几？想哪句口诀？想一想。": "020.mp3", "第四题，强化：40÷8和24÷8各等于几？想一想。": "021.mp3", "第五题，强化：8乘几等于64？想一想。": "022.mp3", "最后一题，拓展：为什么7×8=56能帮我们算两道除法？想一想。": "023.mp3", "计算56÷8想口诀七八五十六，商是7。": "024.mp3", "32÷4=8表示32里面有8个4。看圆片图：每4个圆片摆成一份，正好摆8份。": "025.mp3", "48÷6想口诀六八四十八，商是6；48÷8想同一句口诀，商是8。": "026.mp3", "40÷8=5，想五八四十；24÷8=3，想三八二十四。": "027.mp3", "8×8=64，想口诀八八六十四，所以□里填8。": "028.mp3", "因为7×8=56，乘法和除法是一对互逆的运算：把56平均分成8份每份是7，就是56÷8=7；平均分成7份每份是8，就是56÷7=8。所以一句口诀七八五十六能同时算出这两道除法。": "029.mp3", "用7到9的乘法口诀求商。": "030.mp3", "方格图：每行8格，有7行，一共56格。": "031.mp3", "7×8=56，口诀：七八五十六。": "032.mp3", "56÷8=7，想：（七）八五十六。": "033.mp3", "56÷7=8，想：七（八）五十六。": "034.mp3", "圆片图每行8个，有4行。": "035.mp3", "4×8=32，32÷8=4，32÷4=8。": "036.mp3", "7×3=21，21÷7=3，21÷3=7。": "037.mp3", "8×6=48，48÷8=6，48÷6=8。": "038.mp3", "4×7=28，28÷7=4，28÷4=7。": "039.mp3", "每组算式都用同一句乘法口诀。": "040.mp3", "5×7=35，6×7=42，49÷7=7。": "041.mp3", "40÷8=5，24÷8=3，8×8=64。": "042.mp3", "例456÷8 和 56÷7 怎么想？\n    看答案 ▾\n    \n      56÷8=7，想：（七）八五十六；\n      56÷7=8，想：七（八）五十六；\n      💡 一句口诀七八五十六，算两道除法": "043.mp3", "做一做①三道算式各表示什么含义？\n    看答案 ▾\n    \n      4×8=32：4 个 8 相加是 32；\n      32÷8=4：32 里面有 4 个 8；\n      32÷4=8：32 里面有 8 个 4。": "044.mp3", "做一做②每组算式相同的地方是什么？\n    看答案 ▾\n    \n      第一组：三七二十一；\n      第二组：六八四十八；\n      第三组：四七二十八；\n      💡 每组 3 道算式用同一句口诀。": "045.mp3", "做一做③填空答案\n    看答案 ▾\n    \n      5×7=35；6×7=42；49÷7=7；\n      40÷8=5；24÷8=3；8×8=64。": "046.mp3"};
-var AUDIO_BASE = 'audio/7-9的表内乘除法-第81页用口诀求商例4与做一做-有声图文/';
-var __audioEl = null;
-function __fallbackSpeak(text, finish){
-  try{
-    if(synth){
-      try{ synth.cancel(); }catch(e){}
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
-      var vs = synth.getVoices() || [];
-      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
-      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
-      u.onend=finish; u.onerror=finish;
-      synth.speak(u);
-      setTimeout(finish, Math.min(2500+text.length*260, 16000));
-    }else{ setTimeout(finish, 600+text.length*150); }
-  }catch(e){ setTimeout(finish, 600+text.length*150); }
-}
-function speak(text){
-  return new Promise(function(resolve){
-    if(!text){ resolve(); return; }
-    var capEl = document.getElementById('cap');
-    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
-    var done=false;
-    function finish(){ if(done) return; done=true; resolve(); }
-    var fn = AUDIO_MAP[text];
-    if(fn){
-      try{
-        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
-        __audioEl = new Audio(AUDIO_BASE + fn);
-        __audioEl.onended = finish;
-        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
-        var p = __audioEl.play();
-        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
-        return;
-      }catch(e){}
-    }
-    __fallbackSpeak(text, finish);
-  });
-}
-</script>
-<!-- ===== 配音注入 END ===== -->
 
 </body>
 </html>

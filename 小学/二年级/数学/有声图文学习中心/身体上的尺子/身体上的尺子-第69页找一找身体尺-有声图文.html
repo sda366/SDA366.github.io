@@ -504,51 +504,6 @@ document.querySelectorAll('.sayable').forEach(function(el){
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
 
-<!-- ===== 配音注入 BEGIN ===== -->
-<script>
-/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
-var AUDIO_MAP = {"身体上的尺子。": "001.mp3", "妈妈在量衣服：有3拃长。": "002.mp3", "体育老师走路摆锥桶：每2步摆1个锥桶。": "003.mp3", "你见过上面测量长度的方法吗？拃、步是古代使用过的长度单位，又称为身体尺。想一想，为什么叫身体尺？": "004.mp3", "因为拃和步都来自我们的身体：拃是手指张开的长度，步是走路一步的距离。它们长在身体上，随时可以用，所以叫身体尺。": "005.mp3", "找一找。": "006.mp3", "你能找到哪些身体尺？讲给大家听吧！": "007.mp3", "第一排有四种：1指，1手，1脚，1肘。": "008.mp3", "第二排有三种：1拃，1庹，1步。": "009.mp3", "1拃是把手指用力张开，大拇指指尖到中指指尖的距离。想一想，量的时候要注意什么？": "010.mp3", "每一拃都要张得一样大，一拃挨着一拃量过去，不然量出的数就不准。": "011.mp3", "1庹是两臂左右平伸，两个中指指尖之间的距离。想一想，庹适合量什么？": "012.mp3", "庹是最长的身体尺，适合量长东西，比如教室的墙、黑板、树干。而且庹长和身高差不多，是个有趣的小秘密。": "013.mp3", "第一题，认知：课本介绍了哪几种身体尺？想一想。": "014.mp3", "第二题，认知：1拃是多长？用拃能量什么？想一想。": "015.mp3", "第三题，强化：1庹怎么量？说说量法。想一想。": "016.mp3", "第四题，强化：量教室的长和铅笔的长，各选哪种身体尺合适？想一想。": "017.mp3", "第五题，强化：课本图里的3拃长、每2步摆1个锥桶，是什么意思？想一想。": "018.mp3", "最后一题，拓展：身体尺这么方便，为什么还要发明统一的尺子？想一想。": "019.mp3", "课本介绍了七种身体尺：1指、1手、1脚、1肘、1拃、1庹、1步。它们都长在身体上，是天然的尺子。": "020.mp3", "1拃是把手指用力张开，大拇指指尖到中指指尖的距离。量课桌大约5拃，量数学书的宽大约2拃。": "021.mp3", "身体站直，两臂左右水平伸直，从左手中指指尖到右手中指指尖的距离就是1庹。可以两人合作，一人平伸一人帮忙量。": "022.mp3", "量教室的长用步比较方便，走一走数一数就行；量铅笔的长用指或拃，铅笔只有一两拃长。选身体尺要看物体有多长。": "023.mp3", "图上妈妈量衣服：有3拃长，说明这件衣服大约3个拃长；体育老师每走2步摆1个锥桶，用步数控制两个锥桶之间的距离。": "024.mp3", "示例：身体尺随身携带、随时能用，特别方便；但每个人的身体尺不一样长，量出的结果也不同，所以后来人们才发明了统一的尺子，定出厘米和米。": "025.mp3", "妈妈量衣服：有3拃长。": "026.mp3", "每2步摆1个锥桶。": "027.mp3", "拃、步是古代使用过的长度单位，又称为身体尺。": "028.mp3", "1指，1手，1脚，1肘。": "029.mp3", "1拃，1庹，1步。": "030.mp3", "1拃是把手指用力张开，大拇指指尖到中指指尖的距离。": "031.mp3", "1庹是两臂左右平伸，两个中指指尖之间的距离。": "032.mp3", "七种身体尺指 · 手 · 脚 · 肘 · 拃 · 庹 · 步\n    看答案 ▾\n    \n      第一排 4 种：1 指（一根手指的宽）、1 手（手掌的长）、1 脚（脚的长）、1 肘（肘到指尖的长）；\n      第二排 3 种：1 拃、1 庹、1 步；\n      从短到长大致是：指 → 手 → 拃 → 脚 → 肘 → 步 → 庹。": "033.mp3", "古代单位拃、步是古代的长度单位\n    看答案 ▾\n    \n      古人量布用拃，一拃一拃数出几拃长；\n      走路、量路用步，一步一步数出几步远；\n      因为它们都长在身体上，所以又叫\"身体尺\"。": "034.mp3", "1 拃1 拃是多长？\n    看答案 ▾\n    \n      把手指用力张开，大拇指指尖到中指指尖的距离就是 1 拃；\n      注意：每一拃都要张得一样大，不然量出的数就不准。": "035.mp3", "1 庹1 庹是多长？\n    看答案 ▾\n    \n      两臂左右平伸，两个中指指尖之间的距离就是 1 庹；\n      小秘密：庹长和身高差不多，下一页就能验证；\n      庹最长，适合量长东西，比如教室、黑板、树干。": "036.mp3"};
-var AUDIO_BASE = 'audio/身体上的尺子-第69页找一找身体尺-有声图文/';
-var __audioEl = null;
-function __fallbackSpeak(text, finish){
-  try{
-    if(synth){
-      try{ synth.cancel(); }catch(e){}
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
-      var vs = synth.getVoices() || [];
-      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
-      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
-      u.onend=finish; u.onerror=finish;
-      synth.speak(u);
-      setTimeout(finish, Math.min(2500+text.length*260, 16000));
-    }else{ setTimeout(finish, 600+text.length*150); }
-  }catch(e){ setTimeout(finish, 600+text.length*150); }
-}
-function speak(text){
-  return new Promise(function(resolve){
-    if(!text){ resolve(); return; }
-    var capEl = document.getElementById('cap');
-    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
-    var done=false;
-    function finish(){ if(done) return; done=true; resolve(); }
-    var fn = AUDIO_MAP[text];
-    if(fn){
-      try{
-        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
-        __audioEl = new Audio(AUDIO_BASE + fn);
-        __audioEl.onended = finish;
-        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
-        var p = __audioEl.play();
-        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
-        return;
-      }catch(e){}
-    }
-    __fallbackSpeak(text, finish);
-  });
-}
-</script>
-<!-- ===== 配音注入 END ===== -->
 
 </body>
 </html>

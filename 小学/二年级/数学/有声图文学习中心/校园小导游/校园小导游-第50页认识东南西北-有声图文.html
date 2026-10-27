@@ -517,51 +517,6 @@ document.querySelectorAll('.sayable').forEach(function(el){
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
 
-<!-- ===== 配音注入 BEGIN ===== -->
-<script>
-/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
-var AUDIO_MAP = {"认一认：认识东、南、西、北。": "001.mp3", "怎样辨认东、南、西、北呢？": "002.mp3", "早晨，小明站在山坡上看太阳。": "003.mp3", "小明说：科学课上学过，可以看太阳辨方向，太阳每天东升西落。": "004.mp3", "早晨起来面向太阳，前面是东，后面是西。想一想，左面和右面是什么方向？": "005.mp3", "左面是北，右面是南。记住口诀：面东背西，左北右南。": "006.mp3", "右边是指南针，盘面上标着北、东、南、西，磁针能指示南北。": "007.mp3", "可以用指南针辨别方向。": "008.mp3", "在校园里认一认方向，并完成记录单。": "009.mp3", "第一题：面向北，后面是什么方向？左面和右面呢？想一想。": "010.mp3", "面向北，后面是南，左面是西，右面是东。": "011.mp3", "第二题：哪两个方向相对？想一想。": "012.mp3", "东与西相对，南与北相对。": "013.mp3", "第三题：校园的东面有什么？南面、西面、北面各有什么？结合自己的校园说一说。": "014.mp3", "做一做。": "015.mp3", "你能用正方形纸做一个方向牌吗？把东南西北写在四条边上。": "016.mp3", "女孩说：我面向东，右面是南。你也能像她一样说一说吗？": "017.mp3", "第一题，认知：早晨面向太阳，前后左右各是什么方向？想一想。": "018.mp3", "第二题，认知：面向北站着，后面、左面、右面各是什么方向？想一想。": "019.mp3", "第三题，强化：哪两个方向是相对的？想一想。": "020.mp3", "第四题，强化：面向东时右面是南，那么面向南时右面是哪个方向？想一想。": "021.mp3", "第五题，强化：为什么看太阳就能辨别方向？想一想。": "022.mp3", "最后一题，拓展：用正方形纸做方向牌，你打算怎么标四个字？想一想。": "023.mp3", "早晨面向太阳，前面是东，后面是西，左面是北，右面是南。": "024.mp3", "东与西相对，南与北相对。相对的两个方向正好隔着人面对面。": "025.mp3", "面向东时右面是南；继续往右转，面向南时右面是西。身体的右面总是顺时针的下一个方向。": "026.mp3", "因为太阳每天从东方升起、西方落下，方向是固定不变的，所以早晨看太阳就能确定东西，再推出南北。": "027.mp3", "示例：把正方形纸摆平，上边写北，下边写南，左边写西，右边写东；也可以先写东，再按顺时针依次写南、西、北。做好后可以在校园里试一试。": "028.mp3", "科学课上学过，可以看太阳辨方向，太阳每天东升西落。": "029.mp3", "早晨起来面向太阳，前面是东，后面是西，左面是北，右面是南。": "030.mp3", "指南针：盘面上标着北、东、南、西。": "031.mp3", "面向北，后面是（），左面是（），右面是（）。": "032.mp3", "（）与（）相对，（）与（）相对。": "033.mp3", "校园的东面有（），南面有（），西面有（），北面有（）。": "034.mp3", "你能用正方形纸做一个方向牌吗？": "035.mp3", "我面向东，右面是南。": "036.mp3", "认一认早晨面向太阳辨方向\n    看答案 ▾\n    \n      太阳每天东升西落；早晨面向太阳：\n      前面是东 → 后面是西；\n      左面是北 → 右面是南。\n      🌈 口诀：面东背西，左北右南": "037.mp3", "指南针用指南针辨别方向\n    看答案 ▾\n    \n      指南针是我国的四大发明之一；\n      它的磁针一端指北、一端指南，盘面标着北、东、南、西；\n      阴天没有太阳时，用指南针照样能辨方向。": "038.mp3", "记录单三道记录单的答案\n    看答案 ▾\n    \n      1. 面向北 → 后面是南，左面是西，右面是东；\n      2. 东与西相对，南与北相对；\n      3. 开放题：结合自己的校园说，例如东面有图书馆、南面有大门（按学校实际填）。": "039.mp3", "做一做用正方形纸做方向牌\n    看答案 ▾\n    \n      把\"东、南、西、北\"四个字按顺时针顺序写在正方形纸的四条边上；\n      使用时先让\"东\"对着太阳升起的方向；\n      女孩示范：面向东时，右面是南。": "040.mp3"};
-var AUDIO_BASE = 'audio/校园小导游-第50页认识东南西北-有声图文/';
-var __audioEl = null;
-function __fallbackSpeak(text, finish){
-  try{
-    if(synth){
-      try{ synth.cancel(); }catch(e){}
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
-      var vs = synth.getVoices() || [];
-      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
-      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
-      u.onend=finish; u.onerror=finish;
-      synth.speak(u);
-      setTimeout(finish, Math.min(2500+text.length*260, 16000));
-    }else{ setTimeout(finish, 600+text.length*150); }
-  }catch(e){ setTimeout(finish, 600+text.length*150); }
-}
-function speak(text){
-  return new Promise(function(resolve){
-    if(!text){ resolve(); return; }
-    var capEl = document.getElementById('cap');
-    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
-    var done=false;
-    function finish(){ if(done) return; done=true; resolve(); }
-    var fn = AUDIO_MAP[text];
-    if(fn){
-      try{
-        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
-        __audioEl = new Audio(AUDIO_BASE + fn);
-        __audioEl.onended = finish;
-        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
-        var p = __audioEl.play();
-        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
-        return;
-      }catch(e){}
-    }
-    __fallbackSpeak(text, finish);
-  });
-}
-</script>
-<!-- ===== 配音注入 END ===== -->
 
 </body>
 </html>

@@ -501,51 +501,6 @@ document.querySelectorAll('.sayable').forEach(function(el){
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
 
-<!-- ===== 配音注入 BEGIN ===== -->
-<script>
-/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
-var AUDIO_MAP = {"在卡片上写出所有用乘法口诀计算的除法算式，再按一定的顺序整理。": "001.mp3", "（1）说一说你是按什么规律整理的。可以像表里这样，按1到9的口诀一行一行排。": "002.mp3", "（2）看表格：第1行是1÷1、2÷2、3÷3、4÷4；第2行是2÷1、4÷2、6÷3。想一想，第3行为什么是3÷1和6÷2？": "003.mp3", "因为一三得三，3÷1用1的口诀行3的口诀列；二三得六，6÷2用3的口诀行2的口诀列。": "004.mp3", "黄色高亮的十字形：中心是30÷5，上下左右是25÷5、35÷5、24÷4、36÷6。算一算这五个算式的商。": "005.mp3", "25÷5=5，30÷5=6，35÷5=7，24÷4=6，36÷6=6。": "006.mp3", "（3）观察上表，你发现了什么规律？同一行的商相同，同一列的商依次多1。": "007.mp3", "（4）十字形的五个算式分别用哪句乘法口诀计算？想一想。": "008.mp3", "24÷4用四六二十四；25÷5用五五二十五；30÷5用五六三十；35÷5用五七三十五；36÷6用六六三十六。": "009.mp3", "男孩说：计算30÷5，可以用五六三十这句乘法口诀。": "010.mp3", "女孩说：十字形中的算式，从左往右横着看，商都是6。": "011.mp3", "（5）利用你整理的除法算式表设计一个游戏，再玩一玩。比如翻卡片抢答说口诀。": "012.mp3", "第一题，认知：30÷5用哪句口诀？商是几？想一想。": "013.mp3", "第二题，认知：25÷5等于几？想一想。": "014.mp3", "第三题，强化：十字形五个算式的商分别是多少？想一想。": "015.mp3", "第四题，强化：竖着看十字形，商有什么规律？想一想。": "016.mp3", "第五题，强化：第1行1÷1、2÷2、3÷3、4÷4的商都是几？想一想。": "017.mp3", "最后一题，拓展：为什么表格的右上部分是空的？想一想。": "018.mp3", "计算30÷5想口诀五六三十，商是6。": "019.mp3", "25÷5=5，想口诀五五二十五。": "020.mp3", "五个商分别是：24÷4=6、25÷5=5、30÷5=6、35÷5=7、36÷6=6。": "021.mp3", "竖着看：25÷5、30÷5、35÷5的商依次是5、6、7，每次多1，因为被除数每次多5。": "022.mp3", "第1行算式1÷1、2÷2、3÷3、4÷4的商都是1，因为被除数和除数相同（除数不为0）。": "023.mp3", "因为表里只写用小九九口诀算的除法，像1×2和2×1用同一句一二得二，所以2÷1和1÷2只用记一个格子，表格上半部分就空着。": "024.mp3", "写出所有用口诀算的除法算式，按顺序整理。": "025.mp3", "说一说你是按什么规律整理的。": "026.mp3", "除法算式整理表：按1到9的口诀排列。": "027.mp3", "十字形：24÷4、25÷5、30÷5、35÷5、36÷6。": "028.mp3", "观察上表，你发现了什么规律？": "029.mp3", "十字形的五个算式分别用哪句口诀？": "030.mp3", "计算30÷5可以用五六三十。": "031.mp3", "从左往右横着看，商都是6。": "032.mp3", "利用算式表设计一个游戏，再玩一玩。": "033.mp3", "整理规律表里的算式怎么排的？\n    看答案 ▾\n    \n      行、列都按 1~9 的口诀排；\n      例子：二三得六 → 2 行 3 列写 6÷3；\n      💡 按口诀整理，找算式又快又准。": "034.mp3", "十字形五个算式各用哪句口诀？\n    看答案 ▾\n    \n      24÷4=6（四六二十四）；\n      25÷5=5（五五二十五）；\n      30÷5=6（五六三十）；\n      35÷5=7（五七三十五）；\n      36÷6=6（六六三十六）。": "035.mp3", "商的规律横看竖看有什么规律？\n    看答案 ▾\n    \n      横着看：商都是 6（24÷4、30÷5、36÷6）；\n      竖着看：商 5、6、7，依次多 1（被除数每次多 5）；\n      💡 被除数多几，商就有规律地变。": "036.mp3", "设计游戏用算式表玩什么游戏？\n    看答案 ▾\n    \n      翻卡片抢答：说出口诀 + 商就赢这张卡；\n      也可以你说商、我找算式；\n      💡 玩熟了，口诀就更牢了。": "037.mp3"};
-var AUDIO_BASE = 'audio/7-9的表内乘除法-第88页除法算式表整理-有声图文/';
-var __audioEl = null;
-function __fallbackSpeak(text, finish){
-  try{
-    if(synth){
-      try{ synth.cancel(); }catch(e){}
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
-      var vs = synth.getVoices() || [];
-      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
-      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
-      u.onend=finish; u.onerror=finish;
-      synth.speak(u);
-      setTimeout(finish, Math.min(2500+text.length*260, 16000));
-    }else{ setTimeout(finish, 600+text.length*150); }
-  }catch(e){ setTimeout(finish, 600+text.length*150); }
-}
-function speak(text){
-  return new Promise(function(resolve){
-    if(!text){ resolve(); return; }
-    var capEl = document.getElementById('cap');
-    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
-    var done=false;
-    function finish(){ if(done) return; done=true; resolve(); }
-    var fn = AUDIO_MAP[text];
-    if(fn){
-      try{
-        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
-        __audioEl = new Audio(AUDIO_BASE + fn);
-        __audioEl.onended = finish;
-        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
-        var p = __audioEl.play();
-        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
-        return;
-      }catch(e){}
-    }
-    __fallbackSpeak(text, finish);
-  });
-}
-</script>
-<!-- ===== 配音注入 END ===== -->
 
 </body>
 </html>

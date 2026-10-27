@@ -511,51 +511,6 @@ document.querySelectorAll('.sayable').forEach(function(el){
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
 
-<!-- ===== 配音注入 BEGIN ===== -->
-<script>
-/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
-var AUDIO_MAP = {"例1。": "001.mp3", "厘米是一个统一的长度单位，厘米可以用cm表示。下图是一把尺子的一部分，每一大格的长度是1厘米。": "002.mp3", "机器人说：拿出尺子，比画一下1厘米的长度。": "003.mp3", "看尺子：从刻度0到刻度1是一大格。想一想，这一大格有多长？": "004.mp3", "这一大格就是1厘米。可以用手指在尺子上比画出来。": "005.mp3", "说一说：身边哪些物体的长度大约是1厘米？先想一想。": "006.mp3", "食指的宽、便利贴的宽、指甲盖的宽，都大约1厘米。": "007.mp3", "图上食指的宽对着刻度0到1。想一想，食指宽大约多长？": "008.mp3", "食指的宽大约1厘米。": "009.mp3", "某种便利贴的宽对着刻度0到1，也大约1厘米。": "010.mp3", "量比较短的物体，可以用厘米作单位。": "011.mp3", "量一量：下面纸条的长度是多少厘米？先想一想怎么量。": "012.mp3", "把尺子的刻度0对准纸条的左端，再看纸条的右端对着刻度几。": "013.mp3", "看图：纸条的左端对着刻度0，右端对着刻度5。": "014.mp3", "机器人提醒：把尺子的刻度0对准纸条的左端，再看纸条的右端对着刻度几。": "015.mp3", "男孩说：纸条有5厘米长。": "016.mp3", "第一题，认知：厘米是什么？尺子上多大是1厘米？想一想。": "017.mp3", "第二题，认知：图中的纸条有多长？怎么量的？想一想。": "018.mp3", "第三题，强化：身边哪些物体的长度大约是1厘米？想一想。": "019.mp3", "第四题，强化：量比较短的物体，为什么用厘米作单位？想一想。": "020.mp3", "第五题，强化：用尺子量物体长度的正确方法是什么？想一想。": "021.mp3", "最后一题，拓展：不用尺子，你能估计橡皮大约几厘米长吗？想一想。": "022.mp3", "厘米是统一的长度单位，可以用cm表示。尺子上每一大格的长度是1厘米。": "023.mp3", "图上纸条的长度是5厘米。把刻度0对准纸条左端，右端对着刻度5，所以是5厘米。": "024.mp3", "身边大约1厘米的物体有：食指的宽、便利贴的宽、图钉的钉帽、橡皮的厚度等。可以用尺子量一量验证。": "025.mp3", "因为厘米是统一的长度单位，量比较短的物体用它，量出的数大家一看就明白，便于比较和交流。": "026.mp3", "量纸条时要把尺子的刻度0对准纸条的左端，贴紧放平不能斜，再看右端对着刻度几，就是几厘米。": "027.mp3", "示例：先记住食指宽大约1厘米，再用食指宽去比一比橡皮的长，大约有4个食指宽，就估计橡皮长约4厘米，最后用尺子量一量验证。": "028.mp3", "厘米是一个统一的长度单位，厘米可以用cm表示。尺子上每一大格的长度是1厘米。": "029.mp3", "拿出尺子，比画一下1厘米的长度。": "030.mp3", "尺子：从刻度0到刻度1，一大格就是1厘米。": "031.mp3", "身边哪些物体的长度大约是1厘米？": "032.mp3", "食指宽大约1厘米。": "033.mp3", "某种便利贴宽大约1厘米。": "034.mp3", "量一量：下面纸条的长度是多少厘米？": "035.mp3", "纸条左端对着刻度0，右端对着刻度5。": "036.mp3", "纸条有5厘米长。": "037.mp3", "例1认识厘米（cm）\n    看答案 ▾\n    \n      厘米是统一的长度单位，符号 cm；\n      尺子上每一大格的长度就是 1 厘米；\n      从刻度 0 到刻度 1，就是 1 厘米。": "038.mp3", "说一说大约 1 厘米的物体\n    看答案 ▾\n    \n      食指宽大约 1 厘米；便利贴宽大约 1 厘米；\n      还有：图钉的钉帽、田字格的边……大约都是 1 厘米；\n      💡 记住 1 厘米多长，估一估就有准头": "039.mp3", "量纸条怎么量纸条的长度？\n    看答案 ▾\n    \n      ① 把尺子的刻度 0 对准纸条的左端；\n      ② 尺子贴紧纸条，不能斜；\n      ③ 看右端对着刻度 5 → 纸条长 5 厘米。": "040.mp3", "量法口诀对准 0，看另一端\n    看答案 ▾\n    \n      一端对 0，贴紧放平，另一端对着几就是几厘米；\n      如果物体不是从 0 开始量，就要用大刻度减小刻度算出长度（后面会练到）。": "041.mp3"};
-var AUDIO_BASE = 'audio/厘米和米-第56页认识厘米-有声图文/';
-var __audioEl = null;
-function __fallbackSpeak(text, finish){
-  try{
-    if(synth){
-      try{ synth.cancel(); }catch(e){}
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
-      var vs = synth.getVoices() || [];
-      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
-      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
-      u.onend=finish; u.onerror=finish;
-      synth.speak(u);
-      setTimeout(finish, Math.min(2500+text.length*260, 16000));
-    }else{ setTimeout(finish, 600+text.length*150); }
-  }catch(e){ setTimeout(finish, 600+text.length*150); }
-}
-function speak(text){
-  return new Promise(function(resolve){
-    if(!text){ resolve(); return; }
-    var capEl = document.getElementById('cap');
-    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
-    var done=false;
-    function finish(){ if(done) return; done=true; resolve(); }
-    var fn = AUDIO_MAP[text];
-    if(fn){
-      try{
-        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
-        __audioEl = new Audio(AUDIO_BASE + fn);
-        __audioEl.onended = finish;
-        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
-        var p = __audioEl.play();
-        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
-        return;
-      }catch(e){}
-    }
-    __fallbackSpeak(text, finish);
-  });
-}
-</script>
-<!-- ===== 配音注入 END ===== -->
 
 </body>
 </html>
