@@ -518,5 +518,52 @@ document.querySelectorAll('.sayable').forEach(function(el){
 });
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
+
+<!-- ===== 配音注入 BEGIN ===== -->
+<script>
+/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
+var AUDIO_MAP = {"做一做。": "001.mp3", "第1题，对口诀，记口诀。": "002.mp3", "女同学说：四九……": "003.mp3", "两个同学正在对口诀。": "004.mp3", "男同学说：三十六。如果记不住，可以想三九二十七，再加一个9就是三十六。": "005.mp3", "第2题：2×9、3×9、4×9、5×9、9×9、8×9、7×9、6×9。想一想，每题用的是哪句口诀？": "006.mp3", "2×9=18二九十八，3×9=27三九二十七，4×9=36四九三十六，5×9=45五九四十五，9×9=81九九八十一，8×9=72八九七十二，7×9=63七九六十三，6×9=54六九五十四。": "007.mp3", "计算每一题分别用的是哪句口诀？你发现了什么？": "008.mp3", "数学游戏。": "009.mp3", "用双手表示9的乘法口诀。": "010.mp3", "三幅手图：分别弯下第1根、第2根、第3根手指。": "011.mp3", "一九得九，二九十八，三九二十七。": "012.mp3", "仔细观察，每一句口诀是怎样用手指表示的？弯曲手指左边的手指根数表示什么？右边呢？": "013.mp3", "弯下第几根手指就表示几九；弯曲手指左边的手指根数表示积的十位，右边的手指根数表示积的个位。比如弯下第2根，左边1根是1个十，右边8根是8个一，就是十八。": "014.mp3", "你能用手指表示出9的其他几句乘法口诀吗？": "015.mp3", "思考一下，你能说出其中的道理吗？": "016.mp3", "几个9就是几个十减几：弯下第几根手指，左边就是比几少1个十，右边正好补上个位。比如3个9就是3个十减3，等于27。": "017.mp3", "第一题，认知：对口诀，四九得多少？想一想。": "018.mp3", "第二题，认知：8×9和7×9各等于多少？想一想。": "019.mp3", "第三题，强化：记不住六九得多少，可以怎么想？想一想。": "020.mp3", "第四题，强化：用手指表示六九五十四，应弯下第几根？左边几根、右边几根？想一想。": "021.mp3", "第五题，强化：第2题的8道算式里，你发现了什么规律？想一想。": "022.mp3", "最后一题，拓展：为什么弯下第几根手指，左边的根数正好是十位？想一想。": "023.mp3", "四九三十六。想三九二十七，再加一个9就是36。": "024.mp3", "8×9=72，口诀八九七十二；7×9=63，口诀七九六十三。": "025.mp3", "办法一：想五九四十五，加一个9是54；办法二：想七九六十三，减一个9是54；办法三：6个9就是6个十减6，60−6=54。": "026.mp3", "弯下从左往右数第6根手指。左边5根表示5个十，右边4根表示4个一，合起来是54，就是六九五十四。": "027.mp3", "发现：每相邻两句口诀的得数相差9；一句口诀能算两道算式，比如2×9和9×2都用二九十八。": "028.mp3", "因为几个9就是几个十减几：弯下第n根手指，左边有n−1根，表示n−1个十；右边有10−n根，正好是9个n里剩下的个位。两手合起来正好是9×n。": "029.mp3", "对口诀，记口诀。": "030.mp3", "两个同学对口诀。": "031.mp3", "三十六。如果记不住，可以想三九二十七，再加一个9就是三十六。": "032.mp3", "2×9、3×9、4×9、5×9、9×9、8×9、7×9、6×9。": "033.mp3", "三幅手图，分别弯下第1、2、3根手指。": "034.mp3", "弯曲手指左边的手指根数表示什么？右边呢？": "035.mp3", "记口诀记不住时怎么想？\n    看答案 ▾\n    \n      想三九二十七，27+9=36，就是四九三十六；\n      也可以想熟的那句，加 9 或减 9 推出来；\n      💡 相邻两句口诀的得数相差 9": "036.mp3", "第②题8 道算式与发现\n    看答案 ▾\n    \n      2×9=18，3×9=27，4×9=36，5×9=45；\n      9×9=81，8×9=72，7×9=63，6×9=54；\n      发现：相邻两句口诀得数相差 9；一句口诀算两道算式；\n      💡 得数个位加1、十位减1，正好凑成 9": "037.mp3", "手指游戏怎样用双手表示 9 的口诀？\n    看答案 ▾\n    \n      弯下第 几 根手指，表示几九；\n      弯曲手指左边根数 → 积的十位；\n      弯曲手指右边根数 → 积的个位；\n      例：弯第 2 根 → 左 1 右 8 → 18；弯第 3 根 → 左 2 右 7 → 27；\n      💡 两只手就是一台 9 的口诀计算器": "038.mp3", "道理为什么手指能算 9 的口诀？\n    看答案 ▾\n    \n      几个 9 = 几个十减几；\n      弯第 3 根：3 个 9 = 30−3 = 27；\n      左边 2 根是 2 个十，右边 7 根是 7 个一，合起来 27；\n      💡 手指正好做了这个减法": "039.mp3"};
+var AUDIO_BASE = 'audio/7-9的表内乘除法-第78页做一做与手指游戏-有声图文/';
+var __audioEl = null;
+function __fallbackSpeak(text, finish){
+  try{
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs = synth.getVoices() || [];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{ setTimeout(finish, 600+text.length*150); }
+  }catch(e){ setTimeout(finish, 600+text.length*150); }
+}
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    var capEl = document.getElementById('cap');
+    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    var fn = AUDIO_MAP[text];
+    if(fn){
+      try{
+        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
+        __audioEl = new Audio(AUDIO_BASE + fn);
+        __audioEl.onended = finish;
+        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
+        var p = __audioEl.play();
+        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
+        return;
+      }catch(e){}
+    }
+    __fallbackSpeak(text, finish);
+  });
+}
+</script>
+<!-- ===== 配音注入 END ===== -->
+
 </body>
 </html>

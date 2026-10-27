@@ -503,5 +503,52 @@ document.querySelectorAll('.sayable').forEach(function(el){
 });
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
+
+<!-- ===== 配音注入 BEGIN ===== -->
+<script>
+/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
+var AUDIO_MAP = {"综合与实践：身体上的尺子。": "001.mp3", "生活中，什么情况下需要知道身体上一些部位的长度？想一想。": "002.mp3", "比如买衣服要知道身高、肩宽，买裤子要知道腰围，买帽子还要知道头围。这些长度都很重要，量准了衣服才合身。": "003.mp3", "图上，妈妈正在给小朋友量身高的高。": "004.mp3", "要给你买衣服了，需要量一下你的身高……": "005.mp3", "买上衣时要量肩宽……": "006.mp3", "买裤子时要量腰围……": "007.mp3", "身体上的长度。": "008.mp3", "你想了解自己身体哪些部位的长度？量一量并记录。想一想。": "009.mp3", "可以量身高的高、肩宽的宽，还可以量腰围、头围、颈围。量之前先估一估，再选合适的尺子量，把结果记在表格里。": "010.mp3", "两个小朋友合作：一人站直，一人量身高的高；另一组在量肩宽的宽。": "011.mp3", "表格里的测量部位有：身高、肩宽、腰围、头围、颈围。量好后把结果填在测量结果一行。": "012.mp3", "第一题，认知：生活中，什么情况下需要知道身体上一些部位的长度？想一想。": "013.mp3", "第二题，认知：课本表格里要量身体哪些部位？想一想。": "014.mp3", "第三题，强化：量身高的高和肩宽的宽，分别要注意什么？想一想。": "015.mp3", "第四题，强化：为什么课本让两人合作来量？想一想。": "016.mp3", "第五题，强化：你想了解自己身体哪个部位的长度？打算怎么量？想一想。": "017.mp3", "最后一题，拓展：生活中还有哪些工作需要量身体？想一想。": "018.mp3", "买衣服时要知道身高和肩宽，买裤子时要知道腰围，买帽子还要知道头围。生活中很多情况都需要知道身体上一些部位的长度。": "019.mp3", "表格里的测量部位有：身高、肩宽、腰围、头围、颈围。量好以后把结果填在测量结果一行。": "020.mp3", "量身高的高要脱鞋站直，从脚底量到头顶；量肩宽要从左肩最外量到右肩最外。量之前先估一估大约多长，再动手量。": "021.mp3", "因为有的部位自己一个人量不到，比如自己的肩宽、颈围；两人合作，一人被量一人量，量完交换，又快又准。": "022.mp3", "示例：我想量身高的高和头围。量身高用卷尺，站直从脚底量到头顶；量头围用软尺围头的最粗一圈。结果记在表格里，比如身高约130厘米。": "023.mp3", "裁缝做衣服前要给客人量身；体育老师给运动员测身体数据；医生给小朋友量头围看发育。把身体量得准，衣服才合身、帽子才戴得上。": "024.mp3", "生活中，什么情况下需要知道身体上一些部位的长度？": "025.mp3", "妈妈正在给小朋友量身高的高。": "026.mp3", "你想了解自己身体哪些部位的长度？量一量并记录。": "027.mp3", "两人合作：量身高的高，量肩宽的宽。": "028.mp3", "测量部位：身高、肩宽、腰围、头围、颈围。": "029.mp3", "生活场景为什么买衣服要量身体？\n    看答案 ▾\n    \n      买衣服量身高——知道衣服做多长；\n      买上衣量肩宽——知道上衣做多宽；\n      买裤子量腰围——知道裤子腰上多大才合身。": "030.mp3", "小知识头围、颈围是什么？\n    看答案 ▾\n    \n      头围：头的最粗一圈的长度（买帽子要用）；\n      颈围：脖子最粗一圈的长度（做领子要用）；\n      💡 像这样\"围一圈\"的长度，要用软尺量": "031.mp3", "量一量怎样才能量得准？\n    看答案 ▾\n    \n      量身高：脱鞋站直，从脚底量到头顶；\n      量肩宽：自然站好，从左肩最外量到右肩最外；\n      两人合作：一人当测量员，一人当模特，量完再交换。": "032.mp3", "单元预告身体上藏着\"尺子\"\n    看答案 ▾\n    \n      身体上天然的\"尺子\"有：拃、步、庹、脚……\n      没带尺子时它们随时能用；\n      接下来的活动课我们就来认识这些身体尺。": "033.mp3"};
+var AUDIO_BASE = 'audio/身体上的尺子-第68页单元页-有声图文/';
+var __audioEl = null;
+function __fallbackSpeak(text, finish){
+  try{
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs = synth.getVoices() || [];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{ setTimeout(finish, 600+text.length*150); }
+  }catch(e){ setTimeout(finish, 600+text.length*150); }
+}
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    var capEl = document.getElementById('cap');
+    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    var fn = AUDIO_MAP[text];
+    if(fn){
+      try{
+        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
+        __audioEl = new Audio(AUDIO_BASE + fn);
+        __audioEl.onended = finish;
+        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
+        var p = __audioEl.play();
+        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
+        return;
+      }catch(e){}
+    }
+    __fallbackSpeak(text, finish);
+  });
+}
+</script>
+<!-- ===== 配音注入 END ===== -->
+
 </body>
 </html>

@@ -503,5 +503,52 @@ document.querySelectorAll('.sayable').forEach(function(el){
 });
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
+
+<!-- ===== 配音注入 BEGIN ===== -->
+<script>
+/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
+var AUDIO_MAP = {"第3题，连一连。": "001.mp3", "上排算式：16÷2、36÷4、32÷4、14÷2、28÷4、56÷7。算一算，商各是几？": "002.mp3", "16÷2=8，36÷4=9，32÷4=8，14÷2=7，28÷4=7，56÷7=8。": "003.mp3", "三朵花上写着9、7、8，把算式和得数连起来。": "004.mp3", "下排算式：45÷5、81÷9、42÷6、35÷5、64÷8、21÷3，商分别是9、9、7、7、8、7。": "005.mp3", "第4题，用36个瓶盖做手工。": "006.mp3", "（1）如果用6个瓶盖做一条毛毛虫，可以做几条？想一想。": "007.mp3", "36÷6=6（条），口诀六六三十六。": "008.mp3", "看，每条毛毛虫用6个瓶盖拼成。": "009.mp3", "（2）如果这些瓶盖都用上，做4条相同的毛毛虫，每条要用几个瓶盖？36÷4=9（个）。": "010.mp3", "第5题：27元可以买9支同样的铅笔，每支铅笔多少钱？27÷9=3（元）。一支中性笔比一支铅笔贵3元，3+3=6（元），买一支中性笔要6元。": "011.mp3", "第6题：每9盒摆一个图案，需要63盆。要摆几个图案？想一想。": "012.mp3", "63÷9=7（个），要摆7个图案。": "013.mp3", "但盆花不够，只能用8盒摆一个图案。7×8=56（盆），最后用了56盆花。": "014.mp3", "第一题，认知：56÷7连到哪朵花？想一想。": "015.mp3", "第二题，认知：81÷9连到哪朵花？想一想。": "016.mp3", "第三题，强化：36个瓶盖，每6个做一条毛毛虫，能做几条？想一想。": "017.mp3", "第四题，强化：一支中性笔多少钱？想一想。": "018.mp3", "第五题，强化：要摆几个图案？最后用了多少盆花？想一想。": "019.mp3", "最后一题，拓展：摆完7个图案后还剩几盆？再添几盆就能再摆一个？想一想。": "020.mp3", "56÷7想口诀七八五十六，商是8，连到写着8的花朵。": "021.mp3", "81÷9想口诀九九八十一，商是9，连到写着9的花朵。": "022.mp3", "36÷6=6（条），可以做成6条毛毛虫，口诀六六三十六。": "023.mp3", "铅笔每支3元（27÷9=3），中性笔贵3元：3+3=6（元）。": "024.mp3", "先想图案个数：63÷9=7（个），要摆7个图案。改用8盒一个：7×8=56（盆），最后用了56盆花。": "025.mp3", "摆7个图案用了56盆，63-56=7（盆），还剩7盆。要再摆一个8盒的图案，8-7=1（盆），再添1盆就够了。": "026.mp3", "三朵花：9、7、8。": "027.mp3", "45÷5=9，81÷9=9，42÷6=7，35÷5=7，64÷8=8，21÷3=7。": "028.mp3", "用36个瓶盖做手工。": "029.mp3", "6个瓶盖做一条毛毛虫，可以做几条？36÷6=6条。": "030.mp3", "每条毛毛虫用6个瓶盖。": "031.mp3", "做4条相同的毛毛虫，每条用几个？36÷4=9个。": "032.mp3", "27元买9支铅笔：27÷9=3元；中性笔贵3元：3+3=6元。": "033.mp3", "每9盒摆一个图案需要63盆：63÷9=7个图案。": "034.mp3", "只能8盒摆一个：7×8=56盆。": "035.mp3", "第③题连一连：商是 9、7、8 的各有哪些？\n    看答案 ▾\n    \n      花 9：36÷4、45÷5、81÷9；\n      花 7：14÷2、28÷4、42÷6、35÷5、21÷3；\n      花 8：16÷2、32÷4、56÷7、64÷8。": "036.mp3", "第④题瓶盖毛毛虫两问\n    看答案 ▾\n    \n      （1）36÷6=6（条）；\n      （2）36÷4=9（个）；\n      💡 同样的 36 个瓶盖：按 6 个一份是 6 份，按 4 份分每份 9 个。": "037.mp3", "第⑤题买铅笔与中性笔\n    看答案 ▾\n    \n      铅笔：27÷9=3（元）；\n      中性笔：3+3=6（元）；\n      💡 贵 3 元，就在 3 元上加 3。": "038.mp3", "第⑥题盆花摆图案\n    看答案 ▾\n    \n      要摆几个图案：63÷9=7（个）；\n      最后用了多少盆：7×8=56（盆）；\n      💡 63 盆摆 8 盒图案只能摆 7 个，还剩 7 盆。": "039.mp3"};
+var AUDIO_BASE = 'audio/7-9的表内乘除法-第85页练一练3至6-有声图文/';
+var __audioEl = null;
+function __fallbackSpeak(text, finish){
+  try{
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs = synth.getVoices() || [];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{ setTimeout(finish, 600+text.length*150); }
+  }catch(e){ setTimeout(finish, 600+text.length*150); }
+}
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    var capEl = document.getElementById('cap');
+    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    var fn = AUDIO_MAP[text];
+    if(fn){
+      try{
+        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
+        __audioEl = new Audio(AUDIO_BASE + fn);
+        __audioEl.onended = finish;
+        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
+        var p = __audioEl.play();
+        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
+        return;
+      }catch(e){}
+    }
+    __fallbackSpeak(text, finish);
+  });
+}
+</script>
+<!-- ===== 配音注入 END ===== -->
+
 </body>
 </html>

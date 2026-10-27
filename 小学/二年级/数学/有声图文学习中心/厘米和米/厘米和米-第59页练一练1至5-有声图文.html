@@ -524,5 +524,52 @@ document.querySelectorAll('.sayable').forEach(function(el){
 });
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
+
+<!-- ===== 配音注入 BEGIN ===== -->
+<script>
+/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
+var AUDIO_MAP = {"练一练。": "001.mp3", "第1题：填一填。": "002.mp3", "看图：木棍下面铺着脚印。数一数，木棍有几个脚长？想一想。": "003.mp3", "木棍下面有4个脚印，木棍有4个脚长。": "004.mp3", "填写：木棍有4个脚长。": "005.mp3", "看图：红色铅笔分成几段，接起来和课桌一样高？想一想。": "006.mp3", "红色铅笔分成3段，课桌高有3根铅笔长。": "007.mp3", "填写：课桌高有3根铅笔长。": "008.mp3", "第2题：比一比，几号铅笔最长？": "009.mp3", "三支铅笔的笔尖都对齐，红色1号伸得最远。想一想，几号最长？": "010.mp3", "1号铅笔最长。": "011.mp3", "第3题：在圆圈里填上大于号、小于号或等号。": "012.mp3", "10米和10厘米、100厘米和1米、80厘米和1米，各怎么比？想一想。": "013.mp3", "记住1米=100厘米：10米大于10厘米；100厘米等于1米；80厘米小于1米。": "014.mp3", "第4题：填一填。": "015.mp3", "看两把尺：橡皮从刻度0到刻度4；蜡笔从刻度1到刻度4。各长几厘米？想一想。": "016.mp3", "橡皮长4厘米；蜡笔要从大刻度减小刻度：4减1等于3厘米。": "017.mp3", "第5题：拿一根绳子，量出1米、2米给同学看一看，感受一下它们有多长。": "018.mp3", "第一题，认知：木棍有几个脚长？想一想。": "019.mp3", "第二题，认知：课桌高有几根铅笔长？想一想。": "020.mp3", "第三题，强化：第3题三道比大小怎么填？想一想。": "021.mp3", "第四题，强化：橡皮和蜡笔各长几厘米？读法有什么不同？想一想。": "022.mp3", "第五题，强化：为什么1号铅笔最长？比长短要注意什么？想一想。": "023.mp3", "最后一题，拓展：在绳子上量出1米和2米后，怎么感受它们有多长？想一想。": "024.mp3", "木棍有4个脚长。看图数一数，木棍下面一共有4个脚印，所以木棍有4个脚长。": "025.mp3", "课桌高有3根铅笔长。图上红色铅笔分成3段接起来，正好和课桌一样高。": "026.mp3", "10米大于10厘米，因为米比厘米大得多；100厘米等于1米；80厘米小于1米，因为1米=100厘米，80不到100。": "027.mp3", "橡皮从刻度0到刻度4，长4厘米；蜡笔从刻度1到刻度4，长3厘米。量法不同：一个从0开始直接读，一个要用大刻度减小刻度。": "028.mp3", "因为三支铅笔的笔尖都对齐了，只要比另一端：1号伸得最远所以最长，2号最短，3号中等。比长短要先对齐一端。": "029.mp3", "示例：先在绳子上量出1米做个结，再接着量出第2个1米做个结。两臂张开大约1米3，比一比就知道1米比两臂短一点，2米比两臂张开还长。": "030.mp3", "木棍下面铺着4个脚印。": "031.mp3", "木棍有4个脚长。": "032.mp3", "红色铅笔分成3段，和课桌一样高。": "033.mp3", "课桌高有3根铅笔长。": "034.mp3", "三支铅笔笔尖对齐，1号伸得最远。": "035.mp3", "10米大于10厘米；100厘米等于1米；80厘米小于1米。": "036.mp3", "橡皮从0到4长4厘米；蜡笔从1到4长3厘米。": "037.mp3", "拿一根绳子，量出1米、2米给同学看一看。": "038.mp3", "第 1 题数一数有几个单位长\n    看答案 ▾\n    \n      木棍下面 4 个脚印 → 木棍有 4 个脚长；\n      课桌旁边 3 根铅笔接起来那么高 → 课桌高有 3 根铅笔长；\n      💡 单位长度要一样大、挨着放，数出来才准": "039.mp3", "第 2 题哪支铅笔最长？\n    看答案 ▾\n    \n      三支铅笔笔尖对齐，比另一端：红色 ① 号伸得最远；\n      所以 ① 号铅笔最长；\n      比长短要一端对齐再比另一端。": "040.mp3", "第 3 题填 ＞ ＜ 或 ＝\n    看答案 ▾\n    \n      10 米 ＞ 10 厘米（米大得多）；\n      100 厘米 ＝ 1 米；\n      80 厘米 ＜ 1 米（80 个厘米不够 100 个）。": "041.mp3", "第 4 题读刻度：橡皮与蜡笔\n    看答案 ▾\n    \n      橡皮：0 → 4，长 4 厘米；\n      蜡笔：1 → 4，4−1＝3 厘米；\n      💡 不从 0 开始：用大刻度减小刻度": "042.mp3", "第 5 题感受 1 米、2 米\n    看答案 ▾\n    \n      用米尺在绳子上量出 1 米做个记号；\n      再接着量一个 1 米，2 米处再做记号；\n      张开手臂比一比：2 米大约等于自己两臂张开再长一点。": "043.mp3"};
+var AUDIO_BASE = 'audio/厘米和米-第59页练一练1至5-有声图文/';
+var __audioEl = null;
+function __fallbackSpeak(text, finish){
+  try{
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs = synth.getVoices() || [];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{ setTimeout(finish, 600+text.length*150); }
+  }catch(e){ setTimeout(finish, 600+text.length*150); }
+}
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    var capEl = document.getElementById('cap');
+    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    var fn = AUDIO_MAP[text];
+    if(fn){
+      try{
+        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
+        __audioEl = new Audio(AUDIO_BASE + fn);
+        __audioEl.onended = finish;
+        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
+        var p = __audioEl.play();
+        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
+        return;
+      }catch(e){}
+    }
+    __fallbackSpeak(text, finish);
+  });
+}
+</script>
+<!-- ===== 配音注入 END ===== -->
+
 </body>
 </html>

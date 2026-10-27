@@ -502,5 +502,52 @@ document.querySelectorAll('.sayable').forEach(function(el){
 });
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
+
+<!-- ===== 配音注入 BEGIN ===== -->
+<script>
+/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
+var AUDIO_MAP = {"课本第三十四页，做一做。第1题：": "001.mp3", "一长排酸奶，数一数，一共10盒。": "002.mp3", "下面有2个空盘子，要把酸奶平均分成2份。": "003.mp3", "把10盒酸奶平均分成2份，每份几盒？想一想。": "004.mp3", "每份5盒：10里面有2个5，2乘5等于10，正好分完。": "005.mp3", "第2题：": "006.mp3", "图上有几只小熊？几罐蜂蜜？先数一数，想一想。": "007.mp3", "4只小熊，16罐蜂蜜。数的时候可以一部分一部分地数，别数漏。": "008.mp3", "要让每只小熊分得同样多，每只小熊能分到几罐？想一想。": "009.mp3", "每只分到4罐：16里面有4个4，4乘4等于16。": "010.mp3", "第3题：用小棒代替香蕉分一分。": "011.mp3", "数一数，一共有多少根香蕉？想一想。": "012.mp3", "2行，每行12根，一共24根香蕉。": "013.mp3", "平均分给2只小猴每只几根？3只呢？6只呢？想一想。": "014.mp3", "分给2只每只12根；分给3只每只8根；分给6只每只4根。都用乘法想：几乘几等于24。": "015.mp3", "第一题，认知：10盒酸奶平均分成2份，每份几盒？想一想。": "016.mp3", "第二题，认知：图上有几只小熊、几罐蜂蜜？每只分到几罐？想一想。": "017.mp3", "第三题，强化：24根香蕉分给2只、3只小猴，各分到几根？想一想。": "018.mp3", "第四题，强化：分给6只小猴每只几根？你发现了什么规律？想一想。": "019.mp3", "第五题，强化：分香蕉的三种分法有什么共同点？想一想。": "020.mp3", "最后一题，拓展：24根香蕉还可以平均分给几只小猴？每只分到几根？想一想。": "021.mp3", "把10盒酸奶平均分成2份，每份5盒。10里面有2个5。": "022.mp3", "图上有4只小熊、16罐蜂蜜。要让每只小熊分得同样多，每只分到4罐，16里面有4个4。": "023.mp3", "24根香蕉平均分给2只小猴每只12根，分给3只小猴每只8根。": "024.mp3", "分给6只小猴每只4根。发现：分的份数越多，每份就越少，但总数都是24根。": "025.mp3", "共同点：都是把24根香蕉平均分，每份都同样多；先数清总数，再看分给几只，用乘法想几乘几等于24。": "026.mp3", "24根香蕉还可以平均分给1只、2只、3只、4只、6只、8只、12只、24只小猴，每只分别分到24、12、8、6、4、3、2、1根。": "027.mp3", "第1题：酸奶平均分。": "028.mp3", "10盒酸奶。": "029.mp3", "平均分成2份，每份5盒。": "030.mp3", "10里面有2个5，每份5盒。": "031.mp3", "第2题：小熊分蜂蜜。": "032.mp3", "4只小熊，16罐蜂蜜。": "033.mp3", "每只小熊分到4罐：16里面有4个4。": "034.mp3", "2行香蕉，每行12根，一共24根。": "035.mp3", "给2只每只12根；给3只每只8根；给6只每只4根。": "036.mp3", "课本第 1 题把 10 盒酸奶平均分成 2 份，每份（　）盒\n    看答案 ▾\n    \n      每份 5 盒：10 里面有 2 个 5，想 2×5=10，正好分完。": "037.mp3", "课本第 2 题每只小熊分得同样多，能分到（　）罐蜂蜜\n    看答案 ▾\n    \n      图上有 4 只小熊、16 罐蜂蜜（先数一数！）。\n      16 里面有 4 个 4 → 每只小熊分到 4 罐。\n      🌈 分之前一定先数清总数和份数": "038.mp3", "课本第 3 题（题图）用小棒代替香蕉分一分：一共 24 根\n    看答案 ▾\n    \n      香蕉排成 2 行、每行 12 根，一共 24 根。\n      🌈 先数总数，再看分给几只小猴": "039.mp3", "课本第 3 题（三问）分给 2 只、3 只、6 只小猴，各分到几根？\n    看答案 ▾\n    \n      分给 2 只：每只 12 根（2×12=24）；\n      分给 3 只：每只 8 根（3×8=24）；\n      分给 6 只：每只 4 根（6×4=24）。": "040.mp3"};
+var AUDIO_BASE = 'audio/1-6的表内除法-第34页做一做酸奶蜂蜜香蕉-有声图文/';
+var __audioEl = null;
+function __fallbackSpeak(text, finish){
+  try{
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs = synth.getVoices() || [];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{ setTimeout(finish, 600+text.length*150); }
+  }catch(e){ setTimeout(finish, 600+text.length*150); }
+}
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    var capEl = document.getElementById('cap');
+    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    var fn = AUDIO_MAP[text];
+    if(fn){
+      try{
+        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
+        __audioEl = new Audio(AUDIO_BASE + fn);
+        __audioEl.onended = finish;
+        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
+        var p = __audioEl.play();
+        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
+        return;
+      }catch(e){}
+    }
+    __fallbackSpeak(text, finish);
+  });
+}
+</script>
+<!-- ===== 配音注入 END ===== -->
+
 </body>
 </html>

@@ -513,5 +513,52 @@ document.querySelectorAll('.sayable').forEach(function(el){
 });
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
+
+<!-- ===== 配音注入 BEGIN ===== -->
+<script>
+/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
+var AUDIO_MAP = {"课本第三十一页：一，除法的初步认识。": "001.mp3", "今天的新知识叫：平均分。": "002.mp3", "把6块糖分成3份，可以怎样分？": "003.mp3", "图上给了三种分法。看一看，哪种分法每份分得同样多？想一想。": "004.mp3", "第三种分法每份都是2块，同样多；前两种分法每份有多有少，不一样多。": "005.mp3", "机器人告诉我们：每份分得同样多，叫平均分。": "006.mp3", "例1：8袋饼干，每2袋一份，能分成几份？圈一圈，说一说。": "007.mp3", "每2袋圈一份，8袋饼干能圈出几份？想一想。": "008.mp3", "每2袋圈一圈，8里面有4个2，能分成4份，正好分完。": "009.mp3", "小女孩说：每2袋一份，分了这样的4份，正好分完。": "010.mp3", "小男孩说：每份都是2袋，这是平均分。": "011.mp3", "再圈一圈：12袋饼干，每3袋一份，能分成几份？": "012.mp3", "每3袋圈一圈，12袋饼干能圈出几份？想一想。": "013.mp3", "12里面有4个3，能分成4份，正好分完。": "014.mp3", "第一题，认知：6块糖分成3份，哪种分法是平均分？为什么？想一想。": "015.mp3", "第二题，认知：什么叫平均分？用自己的话说一说。想一想。": "016.mp3", "第三题，强化：8袋饼干每2袋一份，能分成几份？想一想。": "017.mp3", "第四题，强化：12袋饼干每3袋一份，能分成几份？想一想。": "018.mp3", "第五题，强化：圈一圈怎么做又对又快？说说你的方法。想一想。": "019.mp3", "最后一题，拓展：10颗糖每2颗一份和每5颗一份，各能分成几份？你发现了什么？想一想。": "020.mp3", "6块糖分成3份，每份2块、2块、2块的那种分法是平均分，因为每份分得同样多。": "021.mp3", "每份分得同样多，叫平均分。": "022.mp3", "8袋饼干每2袋一份，8里面有4个2，能分成4份。2×4=8，正好分完。": "023.mp3", "12袋饼干每3袋一份，12里面有4个3，能分成4份。": "024.mp3", "圈一圈的方法：按每几个一份圈一个圈，圈完数一数有几个圈，就是能分成几份；也可以想乘法口诀看总数里面有几个几。": "025.mp3", "10颗糖每2颗一份，10里面有5个2，能分成5份；每5颗一份，10里面有2个5，能分成2份。发现：每份数变大了，份数就变少了，但总数不变。": "026.mp3", "一，除法的初步认识。": "027.mp3", "平均分：每份分得同样多。": "028.mp3", "三种分法：1、1、4；1、2、3；2、2、2。只有2、2、2是平均分。": "029.mp3", "8袋饼干，每2袋一份，能分成几份？": "030.mp3", "每2袋圈一圈：8里面有4个2，能分成4份。": "031.mp3", "分了这样的4份，正好分完。": "032.mp3", "每份都是2袋，这是平均分。": "033.mp3", "12袋饼干，每3袋一份，能分成几份？": "034.mp3", "每3袋圈一圈：12里面有4个3，能分成4份。": "035.mp3", "课本例题把 6 块糖分成 3 份，可以怎样分？\n    看答案 ▾\n    \n      图上有三种分法：\n      ① 每份 1、1、4 块——不一样多；\n      ② 每份 1、2、3 块——不一样多；\n      ③ 每份 2、2、2 块——同样多！\n      🌈 第三种每份同样多，特别\"公平\"": "036.mp3", "重要概念每份分得同样多，叫平均分。\n    看答案 ▾\n    \n      判断平均分只看一条：每份是不是同样多。\n      6块糖分成3份，只有 2、2、2 这种分法是平均分。": "037.mp3", "课本例 18 袋饼干，每 2 袋一份，能分成几份？\n    看答案 ▾\n    \n      每 2 袋圈一圈：8 里面有 4 个 2，能分成 4 份，正好分完。\n      🌈 也可以想乘法：2×4=8": "038.mp3", "课本小结每份都是 2 袋，正好分完，这是平均分。\n    看答案 ▾\n    \n      \"按每几个一份\"地分，每份同样多、正好分完——也是平均分。平均分有两种情况：按份数分和按每份数分，后面都会学到。": "039.mp3", "课本圈一圈12 袋饼干，每 3 袋一份，能分成几份？\n    看答案 ▾\n    \n      每 3 袋圈一圈：12 里面有 4 个 3，能分成 4 份。\n      🌈 想：3×4=12，正好分完": "040.mp3"};
+var AUDIO_BASE = 'audio/1-6的表内除法-第31页除法的初步认识平均分-有声图文/';
+var __audioEl = null;
+function __fallbackSpeak(text, finish){
+  try{
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs = synth.getVoices() || [];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{ setTimeout(finish, 600+text.length*150); }
+  }catch(e){ setTimeout(finish, 600+text.length*150); }
+}
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    var capEl = document.getElementById('cap');
+    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    var fn = AUDIO_MAP[text];
+    if(fn){
+      try{
+        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
+        __audioEl = new Audio(AUDIO_BASE + fn);
+        __audioEl.onended = finish;
+        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
+        var p = __audioEl.play();
+        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
+        return;
+      }catch(e){}
+    }
+    __fallbackSpeak(text, finish);
+  });
+}
+</script>
+<!-- ===== 配音注入 END ===== -->
+
 </body>
 </html>

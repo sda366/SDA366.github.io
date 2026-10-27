@@ -513,5 +513,52 @@ document.querySelectorAll('.sayable').forEach(function(el){
 });
 </script>
 <a class="back-nav" href="../index.html">← 返回导航</a>
+
+<!-- ===== 配音注入 BEGIN ===== -->
+<script>
+/* 预录配音：优先播 MP3，失败才退回浏览器自带朗读 */
+var AUDIO_MAP = {"第1题：两只小熊分苹果。数一数，一共有几个苹果？想一想。": "001.mp3", "6个苹果：要让两只小熊分得同样多，每只分3个。": "002.mp3", "第1小题：要让每只小熊分得同样多，每只应分3个苹果。": "003.mp3", "写成除法算式：6除以2等于3。": "004.mp3", "第2小题：如果把这些苹果每2个装一袋，可以装3袋。": "005.mp3", "也是6除以2等于3：一个是平均分给2只，一个是每2个一份。": "006.mp3", "第2题：24个草莓，每4个圈一份，能圈几份？想一想。": "007.mp3", "24里面有6个4：24除以4等于6。": "008.mp3", "填一填：24里面有6个4，24除以4等于6。": "009.mp3", "9个圆点，每3个一份，箭头分给3个椭圆，正好分3份。": "010.mp3", "填一填：9里面有3个3，9除以3等于3。": "011.mp3", "第3题：数一数，一共有10支牙刷。想一想，可以怎样装盒？": "012.mp3", "每5支装一盒装2盒；或者平均装在2个盒子里，每盒5支。": "013.mp3", "第1小题：每5支装一盒，可以装2盒。": "014.mp3", "算式：10除以5等于2。": "015.mp3", "第2小题：平均装在2个盒子里，每盒装5支，10除以2等于5。": "016.mp3", "第一题，认知：6个苹果平均分给2只小熊，每只分几个？想一想。": "017.mp3", "第二题，认知：24个草莓每4个一份，24里面有6个4吗？想一想。": "018.mp3", "第三题，强化：第1题两小题都写6除以2等于3，意思一样吗？想一想。": "019.mp3", "第四题，强化：9里面有3个几？列出除法算式。想一想。": "020.mp3", "第五题，强化：10支牙刷，每5支装一盒装几盒？平均装2盒每盒几支？想一想。": "021.mp3", "最后一题，拓展：照样子编一个生活中的平均分小故事，用除法算一算。想一想。": "022.mp3", "6个苹果平均分给2只小熊，每只分3个。算式是6除以2等于3。": "023.mp3", "24里面有6个4。算式是24除以4等于6。": "024.mp3", "不一样。第1小题是把6个苹果平均分成2份，求每份几个；第2小题是每2个装一袋，求可以装几袋。一个是知道份数求每份数，一个是知道每份数求份数。": "025.mp3", "9里面有3个3。算式是9除以3等于3。": "026.mp3", "每5支装一盒，可以装2盒：10除以5等于2；平均装在2个盒子里，每盒装5支：10除以2等于5。": "027.mp3", "例如：12颗糖平均分给3个小朋友，每人分4颗，算式12除以3等于4。只要故事里有平均分，能用除法算式表示就可以。": "028.mp3", "两只小熊和6个苹果。": "029.mp3", "要让每只小熊分得同样多，每只应分3个苹果。": "030.mp3", "6除以2等于3。": "031.mp3", "每2个装一袋，可以装3袋。": "032.mp3", "也是6除以2等于3。": "033.mp3", "24个草莓，每4个圈一份，能圈6份。": "034.mp3", "24里面有6个4，24除以4等于6。": "035.mp3", "9个圆点，每3个一份，分3份。": "036.mp3", "9里面有3个3，9除以3等于3。": "037.mp3", "10支牙刷，可以怎样装盒？": "038.mp3", "每5支装一盒，可以装2盒。": "039.mp3", "10除以5等于2。": "040.mp3", "平均装在2个盒子里，每盒装5支，10除以2等于5。": "041.mp3", "课本第 1 题6 个苹果：每只分几个？每 2 个装一袋装几袋？\n    看答案 ▾\n    \n      （1）平均分给 2 只小熊 → 每只 3 个：6÷2＝3；\n      （2）每 2 个装一袋 → 装 3 袋：6÷2＝3。\n      🌈 两个 6÷2=3 意思不同：一个按份数分，一个按每份数分": "042.mp3", "课本第 2 题（1）24 里面有（6）个 4\n    看答案 ▾\n    \n      每 4 个圈一份，正好圈出 6 份。\n      算式：24÷4＝6（想：4×6=24）。": "043.mp3", "课本第 2 题（2）9 里面有 3 个（3）\n    看答案 ▾\n    \n      每 3 个一份，正好分 3 份。\n      算式：9÷3＝3。\n      🌈 被除数、除数、商都是 3，很特别": "044.mp3", "课本第 3 题10 支牙刷：每 5 支一盒？平均装 2 盒？\n    看答案 ▾\n    \n      （1）每 5 支装一盒 → 装 2 盒：10÷5＝2；\n      （2）平均装 2 个盒子 → 每盒 5 支：10÷2＝5。\n      🌈 5×2=10：两道题互为逆向，正好配成一对": "045.mp3"};
+var AUDIO_BASE = 'audio/1-6的表内除法-第39页练一练1至3-有声图文/';
+var __audioEl = null;
+function __fallbackSpeak(text, finish){
+  try{
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs = synth.getVoices() || [];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{ setTimeout(finish, 600+text.length*150); }
+  }catch(e){ setTimeout(finish, 600+text.length*150); }
+}
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    var capEl = document.getElementById('cap');
+    if(capEl){ capEl.textContent = text; capEl.style.display = 'block'; }
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    var fn = AUDIO_MAP[text];
+    if(fn){
+      try{
+        if(__audioEl){ try{ __audioEl.pause(); }catch(e){} }
+        __audioEl = new Audio(AUDIO_BASE + fn);
+        __audioEl.onended = finish;
+        __audioEl.onerror = function(){ __fallbackSpeak(text, finish); };
+        var p = __audioEl.play();
+        if(p && p.catch){ p.catch(function(){ __fallbackSpeak(text, finish); }); }
+        return;
+      }catch(e){}
+    }
+    __fallbackSpeak(text, finish);
+  });
+}
+</script>
+<!-- ===== 配音注入 END ===== -->
+
 </body>
 </html>
