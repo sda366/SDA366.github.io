@@ -20,6 +20,7 @@
   var rate   = parseFloat(localStorage.getItem(KEY_RATE) || '0.85'); // 语速（小学生偏慢）
   if (isNaN(rate) || rate < 0.6 || rate > 1.2) rate = 0.85;          // 存了异常值就回到默认
   var selOn  = localStorage.getItem(KEY_SEL) !== '0';     // 划词即读，默认开
+  var lastErr = '';                                       // 最近一次朗读错误
 
   /* ---------------- 样式（内联，不额外引 CSS） ---------------- */
   var css = [
@@ -42,7 +43,13 @@
     '#ra-rate-v{width:34px;text-align:right;color:#5b7c8d;}',
     '#ra-stop{width:100%;padding:9px;margin-top:8px;border:1.5px solid #c9dbe3;background:#f4f9fb;',
       'border-radius:10px;cursor:pointer;font-size:14px;color:#24485c;}',
-    '.ra-tip{margin:10px 0 0;font-size:12px;line-height:1.7;color:#7d97a5;}'
+    '.ra-tip{margin:10px 0 0;font-size:12px;line-height:1.7;color:#7d97a5;}',
+    '#ra-test{width:100%;padding:9px;margin-top:6px;border:1.5px solid #c9dbe3;background:#f4f9fb;',
+      'border-radius:10px;cursor:pointer;font-size:14px;color:#24485c;}',
+    '#ra-state{margin-top:10px;padding:8px 10px;border-radius:8px;background:#f4f9fb;',
+      'font-size:12px;line-height:1.6;color:#5b7c8d;word-break:break-all;}',
+    '#ra-state.warn{background:#fff5e6;color:#a35a00;}',
+    '#ra-state.err{background:#fdeaea;color:#b32d2d;}'
   ].join('');
 
   /* ---------------- 建 DOM ---------------- */
@@ -62,6 +69,8 @@
       '<div class="ra-row"><span>语速</span><input type="range" id="ra-rate" min="0.6" max="1.2" step="0.05" value="', rate, '"><span id="ra-rate-v">', rate.toFixed(2), '</span></div>',
       '<div class="ra-row"><input type="checkbox" id="ra-sel"', (selOn ? ' checked' : ''), '><label for="ra-sel">选中文字就朗读</label></div>',
       '<button id="ra-stop">⏹ 停止</button>',
+      '<button id="ra-test" class="ra-ghost">🔍 声音自检</button>',
+      '<div id="ra-state">未开启</div>',
       '<p class="ra-tip">用鼠标或手指选中一句话即可朗读。<br>iPhone 请关闭侧边静音拨杆。</p>',
     '</div>',
     '<button id="ra-ball" title="朗读小助手">🔊</button>'
@@ -75,22 +84,46 @@
   var rateV  = box.querySelector('#ra-rate-v');
   var selBox = box.querySelector('#ra-sel');
   var stopBt = box.querySelector('#ra-stop');
+  var testBt = box.querySelector('#ra-test');
+  var stateEl = box.querySelector('#ra-state');
+
+  /* ---------------- 状态显示（安卓无声时靠它自查） ---------------- */
+  function showState() {
+    if (!stateEl) return;
+    var s, cls = '';
+    if (!window.speechSynthesis) {
+      s = '❌ 此浏览器不支持朗读，请换 Chrome 或 Safari 打开'; cls = 'err';
+    } else if (lastErr) {
+      s = '❌ 朗读失败：' + lastErr; cls = 'err';
+    } else if (speaking) {
+      s = '🔊 正在朗读…'; 
+    } else if (!on) {
+      s = '未开启（点上方按钮开启）';
+    } else if (!hasZh) {
+      s = '⚠️ 没检测到中文语音包，会没声音。\n请到手机「设置 → 系统 → 语言和输入法 → 文字转语音」安装中文语音，或换用 Chrome。';
+      cls = 'warn';
+    } else {
+      s = '✅ 就绪 · 语音：' + (voice ? voice.name : '系统默认');
+    }
+    stateEl.className = cls;
+    stateEl.textContent = s;
+  }
 
   /* ---------------- 语音 ---------------- */
-  var voice = null;
+  var voice = null, hasZh = false;
   function pickVoice() {
     if (!window.speechSynthesis) return null;
     var vs = speechSynthesis.getVoices() || [];
     if (!vs.length) return null;
-    var zh = vs.filter(function (v) { return /zh|cmn|Chinese/i.test(v.lang + v.name); });
-    if (!zh.length) return vs[0];
-    // 优先女声 Xiaoxiao / Ting-Ting / Yaoyao
-    var nice = zh.filter(function (v) { return /xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(v.name); });
+    var zh = vs.filter(function (v) { return /zh|cmn|chinese|中文/i.test(v.lang + ' ' + v.name); });
+    hasZh = zh.length > 0;
+    if (!hasZh) return null;               // 没有中文语音就交给系统默认，别硬点英文引擎
+    var nice = zh.filter(function (v) { return /xiaoxiao|tingting|ting-ting|yaoyao|huihui|小燕|小爱/i.test(v.name); });
     return (nice[0] || zh[0]);
   }
   if (window.speechSynthesis) {
     voice = pickVoice();
-    speechSynthesis.onvoiceschanged = function () { voice = pickVoice(); };
+    speechSynthesis.onvoiceschanged = function () { voice = pickVoice(); showState(); };
   }
 
   // 长文本按标点切片，避免 Chrome 读到一半自动停
@@ -104,23 +137,47 @@
     return parts;
   }
 
-  var queue = [];
+  var queue = [], keepAlive = null, speaking = false;
+
+  // 安卓（小米/MIUI）已知问题：朗读十几秒后会被系统掐断，定时 resume 可续命
+  function startKeep() {
+    stopKeep();
+    keepAlive = setInterval(function () {
+      if (window.speechSynthesis && speechSynthesis.speaking) speechSynthesis.resume();
+    }, 8000);
+  }
+  function stopKeep() {
+    if (keepAlive) { clearInterval(keepAlive); keepAlive = null; }
+  }
+
   function playNext() {
-    if (!queue.length) return;
+    if (!queue.length) { speaking = false; stopKeep(); showState(); return; }
     var u = new SpeechSynthesisUtterance(queue.shift());
     u.lang = 'zh-CN'; u.rate = rate; u.pitch = 1;
     if (voice) u.voice = voice;
+    u.onstart = function () { speaking = true; showState(); };
     u.onend = playNext;
-    u.onerror = function () { queue = []; };
+    u.onerror = function (e) {
+      queue = []; speaking = false; stopKeep();
+      lastErr = (e && e.error) ? e.error : '未知错误';
+      showState();
+    };
     speechSynthesis.speak(u);
   }
+
   function speak(text) {
-    if (!window.speechSynthesis) return;
+    if (!window.speechSynthesis) { lastErr = '浏览器不支持语音'; showState(); return; }
     text = (text || '').trim();
     if (!text) return;
-    speechSynthesis.cancel();
-    queue = splitText(text);
-    playNext();
+    lastErr = '';
+    try { speechSynthesis.cancel(); } catch (e) {}
+    // 安卓上 cancel 后立刻 speak 常常失败，隔一拍再读；同时先 resume 唤醒引擎
+    setTimeout(function () {
+      try { if (speechSynthesis.paused) speechSynthesis.resume(); } catch (e) {}
+      queue = splitText(text);
+      startKeep();
+      playNext();
+    }, 100);
   }
 
   /* ---------------- 界面状态 ---------------- */
@@ -130,6 +187,7 @@
     ball.className = on ? 'on' : '';
     ball.textContent = on ? '🔊' : '🔇';
     selBox.disabled = !on;
+    showState();
   }
   render();
 
@@ -157,7 +215,28 @@
 
   stopBt.onclick = function () {
     queue = [];
+    speaking = false;
+    stopKeep();
     if (window.speechSynthesis) speechSynthesis.cancel();
+    showState();
+  };
+
+  // 声音自检：读一句测试音，并把引擎/错误直接显示在面板上
+  testBt.onclick = function () {
+    if (!window.speechSynthesis) { lastErr = '浏览器不支持语音'; showState(); return; }
+    pickVoice();
+    lastErr = '';
+    stateEl.className = '';
+    stateEl.textContent = '⏳ 正在测试…请听是否有声音';
+    var vs = (speechSynthesis.getVoices() || []).length;
+    speak('你好，我是朗读小助手');
+    setTimeout(function () {
+      if (lastErr) { showState(); return; }
+      stateEl.className = hasZh ? '' : 'warn';
+      stateEl.textContent = hasZh
+        ? ('✅ 测试已发出 · 语音：' + (voice ? voice.name : '系统默认'))
+        : ('⚠️ 本机共 ' + vs + ' 个语音，没有中文语音包。\n请到「设置 → 系统 → 语言和输入法 → 文字转语音」安装中文语音，或换 Chrome 打开。');
+    }, 2500);
   };
 
   /* ---------------- 划词即读 ---------------- */

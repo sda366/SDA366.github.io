@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朗读声音自检 · 家长/老师排查用</title>
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/xiaoxue-add.css">
+<style>
+  .chk-box { border-radius:12px; padding:1.1rem 1.2rem; margin:.8rem 0; background:#F4F9FB; border-left:5px solid #2E6E8E; }
+  .chk-ok  { border-left-color:#1E8E6E; background:#EDF7F2; }
+  .chk-bad { border-left-color:#C0392B; background:#FDEDEC; }
+  .chk-title { font-family:var(--font-title); font-weight:700; font-size:1.15rem; margin-bottom:.4rem; }
+  .chk-line { font-family:var(--font-body); font-size:1rem; line-height:1.9; color:#24485C; }
+  .chk-btns { display:flex; gap:.6rem; flex-wrap:wrap; margin:.7rem 0; }
+  .chk-btns button { padding:.6rem 1.3rem; border:none; border-radius:999px; background:#2E6E8E; color:#fff;
+                     font-size:1.05rem; font-weight:700; cursor:pointer; }
+  .chk-btns button.ghost { background:#fff; color:#2E6E8E; border:1.5px solid #2E6E8E; }
+  #log { font-family:Consolas,Monaco,monospace; font-size:.92rem; line-height:1.85; background:#163A4E; color:#D6E9F2;
+         padding:1rem 1.1rem; border-radius:10px; max-height:280px; overflow:auto; white-space:pre-wrap; }
+  .vl { margin:.4rem 0; padding:.5rem .7rem; background:#fff; border-radius:8px; border:1px solid #D6E5EC; font-size:.95rem; }
+  .vl b { color:#1E4E66; }
+</style>
+</head>
+<body class="theme-kids">
+
+  <header class="site-header">
+    <h1 class="site-title">朗读声音自检</h1>
+    <p class="page-subtitle">手机没声音时，打开这一页按步骤查原因</p>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../index.html">首页</a> &raquo;
+    <a href="index.html">小学</a> &raquo;
+    声音自检
+  </div>
+
+  <main class="main-content">
+
+    <a href="index.html" class="back-link">« 返回小学首页</a>
+
+    <section class="section-block">
+      <h2 class="section-title">第 1 步 · 浏览器是否支持朗读</h2>
+      <div class="chk-box" id="box1"><div class="chk-title">检测中…</div><div class="chk-line"></div></div>
+
+      <h2 class="section-title">第 2 步 · 装了哪些语音（有没有中文）</h2>
+      <div class="chk-box" id="box2"><div class="chk-title">检测中…</div><div class="chk-line"></div></div>
+      <div id="voices"></div>
+
+      <h2 class="section-title">第 3 步 · 实际试听</h2>
+      <div class="chk-box">
+        <div class="chk-title">点按钮听声音</div>
+        <div class="chk-line">先把手机<b>媒体音量调大</b>，再依次点下面两个按钮。</div>
+        <div class="chk-btns">
+          <button id="t-zh">🔊 读一句中文</button>
+          <button id="t-en">🔊 读一句英文</button>
+          <button id="t-stop" class="ghost">⏹ 停止</button>
+        </div>
+        <div class="chk-line" id="test-result">等待测试…</div>
+      </div>
+
+      <h2 class="section-title">运行记录</h2>
+      <div id="log"></div>
+    </section>
+
+    <section class="section-block">
+      <h2 class="section-title">常见原因与处理</h2>
+      <div class="qs-box">
+        <span class="qs-label">小米 / 安卓没声音</span><br>
+        绝大多数是<b>没装中文语音包</b>。处理：手机「设置 → 系统（或更多设置）→ 语言和输入法 → 文字转语音（TTS）输出」，
+        首选引擎选「小爱语音引擎」或「Google 语音服务」，点旁边设置按钮<b>安装中文（普通话）语音数据</b>，装完回到本页重试。
+      </div>
+      <div class="qs-box">
+        <span class="qs-label">音量通道</span><br>
+        朗读走的是<b>媒体音量</b>，不是通话音量。请先按手机侧键把媒体音量调大，并确认没开静音/勿扰。
+      </div>
+      <div class="qs-box">
+        <span class="qs-label">用微信打开</span><br>
+        微信内置浏览器不支持网页朗读。请点右上角「⋯ → 用浏览器打开」，推荐 Chrome。
+      </div>
+      <div class="qs-box">
+        <span class="qs-label">iPhone 没声音</span><br>
+        请关掉手机左侧的<b>静音拨杆</b>（看到橙色即为静音），并确认没有连接蓝牙耳机。
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-motto">鉴往知来</div>
+  </footer>
+
+<script>
+(function(){
+  var logEl = document.getElementById('log');
+  function log(s){ logEl.textContent += s + '\n'; logEl.scrollTop = logEl.scrollHeight; }
+
+  // --- 第1步 ---
+  var box1 = document.getElementById('box1');
+  var ok = ('speechSynthesis' in window) && (typeof SpeechSynthesisUtterance !== 'undefined');
+  log('浏览器: ' + navigator.userAgent);
+  if (ok) {
+    box1.className = 'chk-box chk-ok';
+    box1.innerHTML = '<div class="chk-title">✅ 支持朗读</div><div class="chk-line">这个浏览器具备网页朗读能力，可继续下一步。</div>';
+    log('[1] speechSynthesis 可用');
+  } else {
+    box1.className = 'chk-box chk-bad';
+    box1.innerHTML = '<div class="chk-title">❌ 不支持朗读</div><div class="chk-line">请换用 <b>Chrome</b> 或 <b>Safari</b> 打开本站；微信内置浏览器不支持。</div>';
+    log('[1] 不支持 speechSynthesis');
+    return;
+  }
+
+  // --- 第2步 ---
+  var box2 = document.getElementById('box2'), vEl = document.getElementById('voices');
+  function renderVoices(){
+    var vs = speechSynthesis.getVoices() || [];
+    vEl.innerHTML = '';
+    if (!vs.length) {
+      box2.className = 'chk-box chk-bad';
+      box2.innerHTML = '<div class="chk-title">⚠️ 还没读到语音列表</div><div class="chk-line">语音引擎可能正在启动，稍等 2 秒会自动刷新；若一直为空，说明系统缺少文字转语音服务。</div>';
+      return;
+    }
+    var zh = vs.filter(function(v){ return /zh|cmn|chinese|中文/i.test(v.lang + ' ' + v.name); });
+    if (zh.length) {
+      box2.className = 'chk-box chk-ok';
+      box2.innerHTML = '<div class="chk-title">✅ 找到 ' + zh.length + ' 个中文语音</div><div class="chk-line">中文语音包正常，朗读应该能有声。</div>';
+    } else {
+      box2.className = 'chk-box chk-bad';
+      box2.innerHTML = '<div class="chk-title">❌ 没有中文语音包（这就是没声音的原因）</div>' +
+        '<div class="chk-line">请到「设置 → 系统 → 语言和输入法 → 文字转语音（TTS）」安装<b>中文（普通话）语音数据</b>，或把首选引擎改成「小爱语音引擎」。</div>';
+    }
+    vs.forEach(function(v, i){
+      var d = document.createElement('div');
+      d.className = 'vl';
+      d.innerHTML = (i+1) + '. <b>' + v.name + '</b> — ' + v.lang + (v.localService ? '（本地）' : '（云端）');
+      vEl.appendChild(d);
+    });
+    log('[2] 语音数量 ' + vs.length + '，其中中文 ' + zh.length);
+    vs.slice(0, 20).forEach(function(v){ log('    · ' + v.name + ' | ' + v.lang); });
+  }
+  renderVoices();
+  speechSynthesis.onvoiceschanged = function(){ renderVoices(); log('[2] 语音列表已刷新'); };
+  setTimeout(renderVoices, 1500);
+  setTimeout(renderVoices, 3000);
+
+  // --- 第3步 ---
+  var resEl = document.getElementById('test-result');
+  function pick(lang){
+    var vs = speechSynthesis.getVoices() || [];
+    if (lang === 'zh') {
+      var zh = vs.filter(function(v){ return /zh|cmn|chinese|中文/i.test(v.lang + ' ' + v.name); });
+      return zh[0] || null;
+    }
+    var en = vs.filter(function(v){ return /^en/i.test(v.lang); });
+    return en[0] || null;
+  }
+  function test(text, lang, label){
+    try { speechSynthesis.cancel(); } catch(e){}
+    setTimeout(function(){
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = lang; u.rate = 0.85; u.pitch = 1;
+      var v = pick(lang);
+      if (v) u.voice = v;
+      resEl.textContent = '⏳ 正在朗读：' + label + '…';
+      u.onstart = function(){ log('[3] ' + label + ' onstart（已开始，应该出声了）'); resEl.textContent = '🔊 正在朗读：' + label; };
+      u.onend   = function(){ log('[3] ' + label + ' onend（正常读完）'); resEl.textContent = '✅ 读完：' + label + '。听到声音了吗？'; };
+      u.onerror = function(e){ log('[3] ' + label + ' 出错: ' + (e && e.error)); resEl.textContent = '❌ 朗读失败：' + ((e && e.error) || '未知') + '（多半是语音包问题）'; };
+      try {
+        if (speechSynthesis.paused) speechSynthesis.resume();
+        speechSynthesis.speak(u);
+      } catch(e){ resEl.textContent = '❌ 调用失败：' + e.message; log('[3] speak 异常 ' + e.message); }
+    }, 120);
+  }
+  document.getElementById('t-zh').onclick = function(){ test('你好，我是朗读小助手，能听到我说话吗？', 'zh-CN', '中文'); };
+  document.getElementById('t-en').onclick = function(){ test('Hello, this is a test.', 'en-US', '英文'); };
+  document.getElementById('t-stop').onclick = function(){ try{ speechSynthesis.cancel(); }catch(e){} resEl.textContent = '已停止'; log('[3] 已停止'); };
+})();
+</script>
+</body>
+</html>
