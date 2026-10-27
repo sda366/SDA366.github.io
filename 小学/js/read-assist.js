@@ -108,24 +108,79 @@
      —— 先静默预热；用户点击后若确认"没在发声"才提示
      ============================================================ */
   if (realTTS) {
-    var voices = [];
+    /* ---------- 语音列表：异步就绪 + 轮询兜底 + 挑出中文语音 ---------- */
+    var voices = [], zhVoice = null;
+
+    function pickZh(v) {
+      var zh = [], i, s;
+      for (i = 0; i < v.length; i++) {
+        s = v[i] || {};
+        if (/^zh|^cmn/i.test(s.lang || '') || /Chinese|中文|普通话/i.test(s.name || '')) zh.push(s);
+      }
+      if (!zh.length) return null;
+      for (i = 0; i < zh.length; i++) {
+        if (/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name || '')) return zh[i];
+      }
+      return zh[0];
+    }
     function loadVoices() {
       try {
         var v = synth.getVoices();
-        if (v && v.length) voices = v;
+        if (v && v.length) { voices = v; if (!zhVoice) zhVoice = pickZh(v); }
       } catch (e) {}
     }
     loadVoices();
     try {
       if ('onvoiceschanged' in synth) synth.onvoiceschanged = loadVoices;
-      synth.addEventListener && synth.addEventListener('voiceschanged', loadVoices);
+      if (synth.addEventListener) synth.addEventListener('voiceschanged', loadVoices);
     } catch (e) {}
-    /* 轮询预热：国产 ROM 常迟迟不触发 voiceschanged */
     var tries = 0;
     var timer = setInterval(function () {
       loadVoices();
-      if ((voices.length && tries > 4) || ++tries > 20) clearInterval(timer);
+      if ((voices.length && tries > 4) || ++tries > 40) clearInterval(timer);
     }, 100);
+
+    /* ---------- 修复②：补齐 voice，别只靠 lang ----------
+       页面 speak() 同步取 getVoices()（移动端首返 []），且只设 lang='zh-CN'
+       不指定 voice —— Safari 17+ / 部分安卓对未指定 voice 的中文会静默失败。
+       这里在引擎层兜住：只要拿到中文语音，就替它填上。 */
+    try {
+      var origSpeak = SpeechSynthesis.prototype.speak;
+      if (origSpeak && !origSpeak.__raPatched) {
+        SpeechSynthesis.prototype.speak = function (u) {
+          try {
+            if (u) {
+              if (!u.lang) u.lang = 'zh-CN';
+              if (zhVoice && (!u.voice || !/^zh|^cmn/i.test(u.voice.lang || ''))) u.voice = zhVoice;
+            }
+          } catch (e) {}
+          return origSpeak.apply(this, arguments);
+        };
+        SpeechSynthesis.prototype.speak.__raPatched = true;
+      }
+    } catch (e) {}
+
+    /* ---------- 修复①：在手势同步路径里先"解锁" ----------
+       页面 playStep1/playStep2 在首次 speak() 前有 await wait(600/500)，
+       发声已脱离 click 的同步上下文，移动端会静默拒绝。
+       这里用 capture 阶段（最先执行、仍在同步手势中）跑一次静音发声完成授权，
+       之后页面自己的 speak 即使晚几百毫秒也能正常出声。 */
+    var unlocked = false, lastUnlock = 0;
+    function unlockOnce() {
+      if (unlocked) return;
+      var now = Date.now();
+      if (now - lastUnlock < 3000) return;   // 语音还没就绪时，每 3 秒重试一次
+      lastUnlock = now;
+      try {
+        var u = new SpeechSynthesisUtterance('\u3000');  // 全角空格，极短
+        u.volume = 0; u.lang = 'zh-CN';
+        if (zhVoice) u.voice = zhVoice;
+        synth.speak(u);
+        if ((synth.getVoices() || []).length) unlocked = true;
+      } catch (e) {}
+    }
+    document.addEventListener('click', unlockOnce, true);
+    document.addEventListener('touchend', unlockOnce, true);
 
     function hasZh() {
       for (var i = 0; i < voices.length; i++) {
