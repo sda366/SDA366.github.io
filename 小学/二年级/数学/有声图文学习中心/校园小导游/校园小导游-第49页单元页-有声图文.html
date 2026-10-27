@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园小导游 · 课本第49页 单元页 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 综合与实践 · 校园小导游 · 课本第 49 页 · 单元页</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 · 认识方向从这里出发</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>认识校园平面图 · 描述位置与方向</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/40a-课本第49页-校园小导游单元页.jpg" alt="课本第49页：校园小导游单元页。校园平面图上有食堂、教学楼、多功能厅、图书馆、体育馆、科技馆、操场、国旗杆、存车处和大门。三个小朋友讨论：从大门往北走，可以到教学楼……教学楼在操场的左边……教学楼在操场的右边……教学楼到底在操场的左边还是右边呢？">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTitle"  style="top:5.5%;  left:14%; width:72%; height:5%;"></div>
+    <div class="hotspot" id="hotCanteen" style="top:13.5%; left:16%; width:17%; height:11%;"></div>
+    <div class="hotspot" id="hotTeach"  style="top:13%;  left:38%; width:27%; height:13%;"></div>
+    <div class="hotspot" id="hotMulti"  style="top:13.5%; left:67%; width:16%; height:10%;"></div>
+    <div class="hotspot" id="hotLib"    style="top:31%;  left:71%; width:15%; height:16%;"></div>
+    <div class="hotspot" id="hotGym"    style="top:31%;  left:14%; width:18%; height:14%;"></div>
+    <div class="hotspot" id="hotSci"    style="top:50%;  left:11%; width:17%; height:16%;"></div>
+    <div class="hotspot" id="hotField"  style="top:25%;  left:35%; width:29%; height:31%;"></div>
+    <div class="hotspot" id="hotPark"   style="top:57.5%; left:69%; width:15%; height:8%;"></div>
+    <div class="hotspot" id="hotGate"   style="top:63.5%; left:44%; width:15%; height:6%;"></div>
+    <div class="hotspot" id="hotBub1"   style="top:68.5%; left:10%; width:29%; height:7%;"></div>
+    <div class="hotspot" id="hotBub2"   style="top:69%;  left:44%; width:23%; height:8.5%;"></div>
+    <div class="hotspot" id="hotBub3"   style="top:68.5%; left:71%; width:22%; height:8.5%;"></div>
+    <div class="hotspot" id="hotQ"      style="top:87%;  left:47%; width:39%; height:9%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 49 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="校园平面图上有食堂、教学楼、多功能厅、图书馆、体育馆、科技馆、操场、国旗杆、存车处，还有大门。">
+    <span class="t-badge">校园地图</span><span class="t-main">图上有哪些地方？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      上排：<b>食堂、教学楼、多功能厅</b>；<br>
+      中间：<b>操场</b>（红色跑道）、<b>国旗杆</b>；两侧：<b>体育馆、图书馆</b>；<br>
+      下排：<b>科技馆、存车处、大门</b>。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 先认清这些建筑，才能当好小导游</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="男孩说：从大门往北走，可以到教学楼。往北走就是朝着北的方向走。">
+    <span class="t-badge">气泡一</span><span class="t-main">从大门往北走，可以到教学楼</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      大门在校园的<b>南面</b>（下方），教学楼在<b>北面</b>（上方）；<br>
+      从大门出来<b>朝北走</b>，正好经过操场附近，就能到教学楼。<br>
+      用"东南西北"来说方向，走到哪里都不会迷路。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="一个小朋友说教学楼在操场的左边，另一个说在操场的右边。他们面对面站着，左右正好相反，所以说的都对。">
+    <span class="t-badge">气泡二、三</span><span class="t-main">教学楼在操场的左边还是右边？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      两个小朋友<b>面对面</b>站着：一个的左边是另一个的右边；<br>
+      所以"在左""在右"<b>都说得对</b>，只是<b>面对的方向不同</b>；<br>
+      <span class="multi" style="display:inline-block;margin:0">💡 用"东南西北"描述位置，就不会有这种分歧</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="本单元是综合与实践活动：校园小导游。要做好导游，需要了解学校建筑物的方向，还要设计好导游路线。">
+    <span class="t-badge">单元任务</span><span class="t-main">当好小导游要做两件事</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      ① <b>了解学校建筑物的方向</b>——学会辨认东、南、西、北；<br>
+      ② <b>设计好导游路线</b>——用方向把路线说清楚；<br>
+      接下来的课本会带我们一步步完成这两件事。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="校园平面图上有食堂、教学楼、多功能厅、图书馆、体育馆、科技馆、操场、国旗杆、存车处和大门。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🏫</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>校园平面图上有哪些主要的建筑物？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">食堂、教学楼、多功能厅、图书馆、体育馆、科技馆、操场、国旗杆、存车处、<b>大门</b>。</div>
+      <div class="sol sol2">看清图上的建筑，是当好小导游的第一步。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="从大门往北走，可以到教学楼。大门在校园南面，教学楼在北面，往北走正好经过操场附近到达教学楼。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🚪</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>从大门往北走，可以到哪座楼？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">可以到<b>教学楼</b>。</div>
+      <div class="sol sol2">大门在南面、教学楼在北面，<b>往北走</b>正对教学楼。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="两个小朋友说的都对。因为他们面对面站着，一个人的左边正好是另一个人的右边，面对的方向不同，左右就不同。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">⚖️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>"教学楼在操场左边"和"在操场右边"，谁说得对？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>都说得对</b>；</div>
+      <div class="sol sol2">两人<b>面对面</b>站着，左右正好<b>相反</b>，所以说法不同都对。</div>
+      <span class="think-note">💡 左右会随面对方向变化，东南西北不会变</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="要做好导游，需要了解学校建筑物的方向；要设计好导游路线，用方向把参观的顺序说清楚。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🧭</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>要当好校园小导游，需要做哪些准备？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">① 了解学校<b>建筑物的方向</b>（东、南、西、北）；</div>
+      <div class="sol sol2">② <b>设计好导游路线</b>，把"先到哪、再到哪、往哪走"说清楚。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="左右会随着人面对的方向改变：面对面站着的两个人，左右正好相反。而东、南、西、北是固定不变的，所以描述位置用东南西北更准确。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🔄</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>为什么用"左右"说位置容易弄错？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">"左右"会跟着人<b>面对的方向</b>变：转过身，左右就反过来了；</div>
+      <div class="sol sol2"><b>东南西北</b>是固定不变的，谁来描述都一样。</div>
+      <span class="think-note">💡 所以本单元要学用"东南西北"来说方向</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="示例：教学楼在操场的北面，大门在校园的南面，食堂在校园的西北角，图书馆在校园的东面。用东南西北描述位置，别人一听就明白。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>试着用"东南西北"介绍校园里一个建筑物位置。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">示例：<b>教学楼在操场的北面</b>；<b>大门在校园的南面</b>；</div>
+      <div class="sol sol2">还可以说：食堂在校园的西北角，图书馆在校园的东面。</div>
+      <span class="multi">🌈 用固定的方向说位置，谁听都不会错</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotTitle', say:'综合与实践：校园小导游。这一单元我们要学会辨认方向，当好校园小导游。'},
+  {region:'hotCanteen', say:'校园平面图上，左上角是食堂。'},
+  {region:'hotTeach', say:'最上面中间是教学楼，它有好多间教室。'},
+  {region:'hotMulti', say:'右上角是多功能厅。'},
+  {region:'hotLib', say:'右面是图书馆，里面有很多书。'},
+  {region:'hotGym', say:'左面是体育馆。'},
+  {region:'hotSci', say:'左下角是科技馆。'},
+  {region:'hotField', say:'校园中间是操场，红色的跑道围着一圈绿茵场，旁边还立着国旗杆。'},
+  {region:'hotPark', say:'右下角是存车处。'},
+  {region:'hotGate', say:'校园的最下方中间是大门。'},
+  {region:'hotBub1', think:true, say:'男孩说：从大门往北走，可以到教学楼。想一想，为什么要用"往北走"来说？',
+    ans:'大门在校园的南面，教学楼在北面，用固定的方向"北"来说，别人一听就知道怎么走。'},
+  {region:'hotBub2', say:'一个小朋友说：教学楼在操场的左边。'},
+  {region:'hotBub3', say:'另一个小朋友说：教学楼在操场的右边。'},
+  {region:'hotQ', think:true, say:'教学楼到底在操场的左边还是右边呢？想一想。',
+    ans:'两个小朋友面对面站着，一个人的左边是另一个人的右边，所以两种说法都对。左右会变，东南西北不会变，这就是我们这一单元要学的内容。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：校园平面图上有哪些主要建筑物？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：从大门往北走，可以到哪座楼？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：教学楼在操场左边还是在右边，谁说得对？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：要当好校园小导游，需要做哪些准备？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：为什么用左右说位置容易弄错？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：用东南西北介绍校园里一个建筑物的位置。想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotTitle','综合与实践：校园小导游。'],
+ ['hotCanteen','校园平面图上，左上角是食堂。'],
+ ['hotTeach','最上面中间是教学楼。'],
+ ['hotMulti','右上角是多功能厅。'],
+ ['hotLib','右面是图书馆。'],
+ ['hotGym','左面是体育馆。'],
+ ['hotSci','左下角是科技馆。'],
+ ['hotField','校园中间是操场，旁边立着国旗杆。'],
+ ['hotPark','右下角是存车处。'],
+ ['hotGate','校园最下方中间是大门。'],
+ ['hotBub1','从大门往北走，可以到教学楼。'],
+ ['hotBub2','教学楼在操场的左边。'],
+ ['hotBub3','教学楼在操场的右边。'],
+ ['hotQ','教学楼到底在操场的左边还是右边呢？']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

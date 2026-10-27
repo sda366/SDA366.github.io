@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内乘法 · 课本第27页 练一练1~6 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .t-sub{ color:#455a64; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 1~6的表内乘法 · 课本第 27 页 · 练一练 1~6</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>买东西算钱·数地砖·数笔画·找规律</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/18a-课本第27页-练一练1至6.jpg" alt="课本第27页练一练：1水彩笔每盒4元、5元、6元。（1）小丽要买5元一盒的水彩笔，买4盒一共要多少钱？（2）请提出其他用乘法解决的问题并解答。2小林家阳台上的地砖，横着看每行是6块，竖着看每列是4块。阳台上一共铺了多少块地砖？3木字的笔画是4画，森字要写几画？森林两字呢？4妈妈学习插花，共用了3束玫瑰和4束百合花，每束百合花有6朵。她一共用了几束花？用了多少朵百合花？5食品售卖车价格表：煮玉米每根5元，鸡蛋饼每张6元，小米粥每杯4元。（1）买1根煮玉米和1杯小米粥，一共要花多少钱？（2）小明家3人各要1杯小米粥，一共要花多少钱？（3）请提出其他数学问题并解答。6用小棒摆三角形，图上是3根、6根、9根，照这样摆下去，第4个图形要用多少根小棒？第6个呢？">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotT1"    style="top:12.5%; left:4%;  width:92%; height:9%;"></div>
+    <div class="hotspot" id="hotT1a"   style="top:22.5%; left:6%;  width:90%; height:4.5%;"></div>
+    <div class="hotspot" id="hotT1b"   style="top:27.5%; left:6%;  width:90%; height:4%;"></div>
+    <div class="hotspot" id="hotT2"    style="top:33.5%; left:4%;  width:92%; height:8.5%;"></div>
+    <div class="hotspot" id="hotT3"    style="top:42.5%; left:4%;  width:92%; height:5.5%;"></div>
+    <div class="hotspot" id="hotT4"    style="top:49.5%; left:4%;  width:92%; height:9%;"></div>
+    <div class="hotspot" id="hotT5"    style="top:59.5%; left:4%;  width:44%; height:4.5%;"></div>
+    <div class="hotspot" id="hotPrice" style="top:55%;   left:50%; width:46%; height:18%;"></div>
+    <div class="hotspot" id="hotT5a"   style="top:64%;   left:4%;  width:44%; height:14.5%;"></div>
+    <div class="hotspot" id="hotT6"    style="top:80%;   left:4%;  width:52%; height:12.5%;"></div>
+    <div class="hotspot" id="hotTri"   style="top:80%;   left:58%; width:40%; height:12.5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 27 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第一题第（1）小题：小丽要买5元一盒的水彩笔，买4盒，一共要多少钱？5×4=20元。口诀四五二十。">
+    <span class="t-badge">课本第 1 题（1）</span><span class="t-main">买 5 元一盒的水彩笔，买 4 盒一共要多少钱？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      每盒 5 元、买 4 盒 = 求 <b>4 个 5</b> 是多少：<br>
+      <b>5×4=20</b>（元），口诀<b>四五二十</b>。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 口答：一共要 20 元</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="第一题第（2）小题：请提出其他用乘法解决的问题并解答。示例：买2盒4元的水彩笔要多少钱？4×2=8元。买3盒6元的水彩笔要多少钱？6×3=18元。">
+    <span class="t-badge">课本第 1 题（2）</span><span class="t-main">提出其他用乘法解决的问题并解答。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>示例一：</b>买 2 盒 4 元的水彩笔要多少钱？4×2=<b>8</b>（元）。<br>
+      <b>示例二：</b>买 3 盒 6 元的水彩笔要多少钱？6×3=<b>18</b>（元）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第二题：小林家阳台上的地砖，横着看每行是6块，竖着看每列是4块。阳台上一共铺了多少块地砖？6×4=24块。">
+    <span class="t-badge">课本第 2 题</span><span class="t-main">地砖横着看每行 6 块，竖着看每列 4 块。一共铺了多少块？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      横着看：4 行、每行 6 块 → <b>4 个 6</b>；竖着看：6 列、每列 4 块 → <b>6 个 4</b>。<br>
+      <b>6×4=24</b>（块），口诀<b>四六二十四</b>。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 横看竖看，算式不同、得数相同</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="第三题：木字的笔画是4画，森字要写几画？森是3个木，3×4=12画。森林两字呢？林是2个木，2×4=8画，12+8=20画。">
+    <span class="t-badge">课本第 3 题</span><span class="t-main">"木"字 4 画，"森"字要写几画？"森林"两字呢？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>森</b> = 3 个"木" → 3×4=<b>12</b>（画），三四十二；<br>
+      <b>林</b> = 2 个"木" → 2×4=<b>8</b>（画），二四得八；<br>
+      <b>森林</b>两字 = 12+8=<b>20</b>（画）。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 先想有几个木，再用口诀</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="第四题：妈妈学习插花，共用了3束玫瑰和4束百合花，每束百合花有6朵。她一共用了几束花？用了多少朵百合花？一共：3+4=7束。百合花：4×6=24朵。">
+    <span class="t-badge">课本第 4 题</span><span class="t-main">3 束玫瑰和 4 束百合花，每束百合花 6 朵。一共几束花？多少朵百合花？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>几束花：</b>3+4=<b>7</b>（束）——两部分合起来，用加法；<br>
+      <b>多少朵百合花：</b>4×6=<b>24</b>（朵）——4 束、每束 6 朵，每份同样多，用乘法。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 一题两问：先分清哪问用加、哪问用乘</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第五题：食品售卖车价格表：煮玉米每根5元，鸡蛋饼每张6元，小米粥每杯4元。（1）买1根煮玉米和1杯小米粥，一共要花多少钱？5+4=9元。（2）小明家3人各要1杯小米粥，一共要花多少钱？4×3=12元。（3）请提出其他数学问题并解答。">
+    <span class="t-badge">课本第 5 题</span><span class="t-main">价格表：煮玉米 5 元/根、鸡蛋饼 6 元/张、小米粥 4 元/杯。三小问怎么答？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>（1）</b>1 根玉米＋1 杯粥：5+4=<b>9</b>（元）——两样不同，加法；<br>
+      <b>（2）</b>3 人各 1 杯粥：4×3=<b>12</b>（元）——3 个 4，乘法；<br>
+      <b>（3）</b>示例：买 2 张鸡蛋饼要多少钱？6×2=<b>12</b>（元）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="第六题（星号题）：用小棒摆三角形，第1个用3根，第2个用6根，第3个用9根。照这样摆下去，第4个图形要用多少根小棒？第6个呢？每次多3根。第4个：3×4=12根。第6个：3×6=18根。">
+    <span class="t-badge">课本第 6 题</span><span class="t-main">摆三角形：3 根、6 根、9 根……第 4 个用几根？第 6 个呢？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      规律：每个图形比前一个<b>多 3 根</b>（就是几个 3）。<br>
+      <b>第 4 个：</b>3×4=<b>12</b>（根），三四十二；<br>
+      <b>第 6 个：</b>3×6=<b>18</b>（根），三六十八。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 星号题是挑战题：先找规律再算</span>
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="买4盒5元的水彩笔：5×4=20元，口诀四五二十。口答：一共要20元。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🖍️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>第 1 题：买 4 盒 5 元的水彩笔要多少钱？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">5×4=20（元），口诀四五二十</div>
+      <span class="think-note">💡 4 个 5 相加，用乘法</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="6×4=24块。横着看是4个6，竖着看是6个4，口诀都是四六二十四。横看竖看算式不同，得数相同。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🧱</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>第 2 题：阳台一共铺了多少块地砖？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">6×4=24（块），口诀四六二十四</div>
+      <span class="think-note">💡 横看 4 个 6，竖看 6 个 4，得数一样</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="森字是3个木，3×4=12画。林字是2个木，2×4=8画。森林两字一共12+8=20画。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🌲</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 3 题："森"几画？"森林"两字呢？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">森 = 3×4 = 12（画），三四十二</div>
+      <div class="sol sol2">森林 = 12 + 8 = 20（画）</div>
+      <span class="think-note">💡 森 12 画 + 林 8 画 = 20 画</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="一共用了几束花：3+4=7束，两部分合起来用加法。用了多少朵百合花：4×6=24朵，4束、每束6朵，每份同样多用乘法。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">💐</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 4 题：一共几束花？多少朵百合花？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">束数：3+4=7（束），加法</div>
+      <div class="sol sol2">百合花朵数：4×6=24（朵），乘法</div>
+      <span class="think-note">💡 两问方法不同：合起来用加，几个几用乘</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="小明家3人各要1杯小米粥，每杯4元，3个4相加：4×3=12元，口诀三四十二。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🥣</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 5 题（2）：3 人各 1 杯小米粥要多少钱？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">4×3=12（元），口诀三四十二</div>
+      <span class="think-note">💡 3 个 4 元，每份同样多</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="第4个图形：3×4=12根；第6个图形：3×6=18根。规律：每个图形都是三角形，用几根小棒就是几个3，每次多3根。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🔺</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>第 6 题：第 4 个、第 6 个图形各用几根小棒？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">第 4 个：3×4=12（根）</div>
+      <div class="sol sol2">第 6 个：3×6=18（根）</div>
+      <span class="think-note">💡 规律：第几个图形就是几个 3</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotT1', say:'课本第二十七页，练一练。第一题：水彩笔每盒4元、5元、6元三种。'},
+  {region:'hotT1a', think:true, say:'第（1）小题：小丽要买5元一盒的水彩笔，买4盒，一共要多少钱？想一想。',
+    ans:'每盒5元，买4盒，就是4个5。5×4=20元，口诀四五二十。'},
+  {region:'hotT1b', say:'第（2）小题：请提出其他用乘法解决的问题并解答。'},
+  {region:'hotT2', think:true, say:'第二题：阳台上的地砖，横着看每行是6块，竖着看每列是4块。一共铺了多少块地砖？想一想。',
+    ans:'6×4=24块。横着看是4个6，竖着看是6个4，口诀都是四六二十四。'},
+  {region:'hotT3', say:'第三题："木"字的笔画是4画，"森"字要写几画？"森林"两字呢？'},
+  {region:'hotT4', think:true, say:'第四题：妈妈共用了3束玫瑰和4束百合花，每束百合花有6朵。她一共用了几束花？用了多少朵百合花？想一想。',
+    ans:'几束花：3+4=7束。百合花：4×6=24朵。'},
+  {region:'hotT5', say:'第五题：食品售卖车。'},
+  {region:'hotPrice', say:'价格表：煮玉米每根5元，鸡蛋饼每张6元，小米粥每杯4元。'},
+  {region:'hotT5a', say:'（1）买1根煮玉米和1杯小米粥一共要花多少钱？5+4=9元。（2）小明家3人各要1杯小米粥，4×3=12元。（3）请提出其他数学问题并解答。'},
+  {region:'hotT6', think:true, say:'第六题（星号题）：用小棒摆三角形，图上是3根、6根、9根。照这样摆下去，第4个图形要用多少根小棒？第6个呢？想一想。',
+    ans:'每次多3根。第4个：3×4=12根；第6个：3×6=18根。'},
+  {region:'hotTri', say:'看图：3根、6根、9根，每次多3根，第几个图形就是几个3。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：买4盒5元的水彩笔要多少钱？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：阳台一共铺了多少块地砖？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：森字几画？森林两字呢？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：一共几束花？多少朵百合花？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：3人各1杯小米粥要多少钱？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：第4个、第6个三角形图形各用几根小棒？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotT1','第一题：水彩笔每盒4元、5元、6元。'],
+ ['hotT1a','买5元一盒的买4盒：5×4=20元，四五二十。'],
+ ['hotT1b','提出其他用乘法解决的问题并解答。'],
+ ['hotT2','每行6块、每列4块：6×4=24块，四六二十四。'],
+ ['hotT3','木字4画：森12画，森林两字20画。'],
+ ['hotT4','3束玫瑰4束百合：一共7束；百合4×6=24朵。'],
+ ['hotT5','第五题：食品售卖车价格表。'],
+ ['hotPrice','煮玉米每根5元，鸡蛋饼每张6元，小米粥每杯4元。'],
+ ['hotT5a','5+4=9元；4×3=12元；再提一个数学问题。'],
+ ['hotT6','摆三角形：第4个12根，第6个18根，每次多3根。'],
+ ['hotTri','3根、6根、9根，第几个图形就是几个3。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内乘法 · 课本第29页 练一练1~5与成长小档案 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .t-sub{ color:#455a64; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 1~6的表内乘法 · 课本第 29 页 · 练一练 1~5 与成长小档案</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>口诀算得数·先乘后加减·比大小</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/20a-课本第29页-练一练1至5与成长小档案.jpg" alt="课本第29页练一练：1算一算：3×6、2×6、5×5、3×5；5×3、3×3、2×3、4×2；3×1、4×5、5×2、1×1；6×4、3×4、4×1、4×3。2 6×3−8、5×4+30、4×4+12；5×3+9、6×6+6、4×6−4。3一套玩具小汽车有5辆，每辆5元，买这样的1套玩具小汽车需要多少钱？买2套呢？4超市里的七号电池有一板装4节的，也有一板装6节的。（1）两种包装的电池各买1板，一共是多少节电池？（2）如果买4板6节装的，一共是多少节电池？5每只小猫钓6条鱼，5只小猫钓多少条鱼？□○□=□（　）；7只小猫钓的鱼，比40条多还是少？成长小档案：本单元结束了，你想说些什么？我知道了相同数相加可以用乘法计算；用乘法口诀计算乘法真方便。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotT1a"  style="top:13%;   left:5%;  width:90%; height:11.5%;"></div>
+    <div class="hotspot" id="hotT1b"  style="top:24.5%; left:10%; width:84%; height:7%;"></div>
+    <div class="hotspot" id="hotT2"   style="top:33.5%; left:4%;  width:92%; height:8%;"></div>
+    <div class="hotspot" id="hotT3"   style="top:42.5%; left:4%;  width:92%; height:8.5%;"></div>
+    <div class="hotspot" id="hotT4"   style="top:52.5%; left:4%;  width:92%; height:6.5%;"></div>
+    <div class="hotspot" id="hotT4a"  style="top:59%;   left:8%;  width:88%; height:8.5%;"></div>
+    <div class="hotspot" id="hotT5"   style="top:68.5%; left:5%;  width:60%; height:8%;"></div>
+    <div class="hotspot" id="hotT5b"  style="top:75.5%; left:8%;  width:58%; height:4%;"></div>
+    <div class="hotspot" id="hotCat"  style="top:67.5%; left:66%; width:32%; height:13%;"></div>
+    <div class="hotspot" id="hotGrow" style="top:81%;   left:5%;  width:92%; height:15%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 29 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第一题算一算前两行：3×6=18，2×6=12，5×5=25，3×5=15；5×3=15，3×3=9，2×3=6，4×2=8。">
+    <span class="t-badge">课本第 1 题（上）</span><span class="t-main">算一算：3×6　2×6　5×5　3×5　5×3　3×3　2×3　4×2</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>3×6=18</b>（三六十八）；<b>2×6=12</b>（二六十二）；<b>5×5=25</b>（五五二十五）；<b>3×5=15</b>（三五十五）；<br>
+      <b>5×3=15</b>；<b>3×3=9</b>（三三得九）；<b>2×3=6</b>（二三得六）；<b>4×2=8</b>（二四得八）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="第一题算一算后两行：3×1=3，4×5=20，5×2=10，1×1=1；6×4=24，3×4=12，4×1=4，4×3=12。">
+    <span class="t-badge">课本第 1 题（下）</span><span class="t-main">算一算：3×1　4×5　5×2　1×1　6×4　3×4　4×1　4×3</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>3×1=3</b>（一三得三）；<b>4×5=20</b>（四五二十）；<b>5×2=10</b>（二五一十）；<b>1×1=1</b>（一一得一）；<br>
+      <b>6×4=24</b>（四六二十四）；<b>3×4=12</b>（三四十二）；<b>4×1=4</b>（一四得四）；<b>4×3=12</b>。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第二题：6×3−8=10，5×4+30=50，4×4+12=28；5×3+9=24，6×6+6=42，4×6−4=20。都是先算乘法，再算加减。">
+    <span class="t-badge">课本第 2 题</span><span class="t-main">6×3−8　5×4+30　4×4+12　5×3+9　6×6+6　4×6−4</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      都<b>先算乘法</b>，再算加减：<br>
+      <b>6×3−8=10</b>；<b>5×4+30=50</b>；<b>4×4+12=28</b>；<br>
+      <b>5×3+9=24</b>；<b>6×6+6=42</b>；<b>4×6−4=20</b>。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="第三题：一套玩具小汽车有5辆，每辆5元。买这样的1套玩具小汽车需要多少钱？5×5=25元。买2套呢？25+25=50元。">
+    <span class="t-badge">课本第 3 题</span><span class="t-main">1 套玩具小汽车 5 辆、每辆 5 元。买 1 套多少钱？买 2 套呢？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>1 套：</b>5×5=<b>25</b>（元），五五二十五；<br>
+      <b>2 套：</b>25+25=<b>50</b>（元）——2 套就是 2 个 25 合起来。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="第四题：超市里的七号电池有一板装4节的，也有一板装6节的。（1）两种包装的电池各买1板，一共是多少节？4+6=10节。（2）如果买4板6节装的，一共是多少节？6×4=24节。">
+    <span class="t-badge">课本第 4 题</span><span class="t-main">电池：一板 4 节的、一板 6 节的。各买 1 板是多少节？买 4 板 6 节装的呢？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>（1）</b>各买 1 板：4+6=<b>10</b>（节）——两个不同部分，加法；<br>
+      <b>（2）</b>4 板 6 节装：6×4=<b>24</b>（节）——4 个 6，乘法。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第五题（星号题）：每只小猫钓6条鱼，5只小猫钓多少条鱼？6×5=30条。7只小猫钓的鱼，比40条多还是少？想口诀六六三十六，6只钓36条还不够40；7只就是36加6等于42条，比40条多。">
+    <span class="t-badge">课本第 5 题</span><span class="t-main">每只小猫钓 6 条鱼，5 只钓多少条？7 只钓的比 40 条多还是少？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>5 只：</b>6×5=<b>30</b>（条），五六三十；<br>
+      <b>7 只：</b>6 只钓 6×6=<b>36</b>（条）还不够 40，36+6=<b>42</b>（条）→ <b>比 40 条多</b>。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 先算出 7 只钓多少，再和 40 比大小</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="成长小档案：本单元结束了，你想说些什么？我知道了相同数相加可以用乘法计算；用乘法口诀计算乘法真方便。">
+    <span class="t-badge">成长小档案</span><span class="t-main">本单元结束了，你想说些什么？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>课本小提示：</b>相同数相加可以用乘法计算；用乘法口诀计算乘法真方便。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 也说说自己的进步：比如我会背 1~6 的口诀了</span>
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="3×6=18，口诀三六十八；5×5=25，口诀五五二十五；1×1=1，口诀一一得一。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">✖️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>第 1 题：3×6、5×5、1×1 各等于多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">3×6=18（三六十八）</div>
+      <div class="sol sol2">5×5=25（五五二十五）；1×1=1（一一得一）</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="6×3−8：先算6×3=18，再算18−8=10。6×6+6：先算6×6=36，再算36+6=42。都是先算乘法再算加减。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🧮</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>第 2 题：6×3−8 和 6×6+6 各等于多少？先算什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">6×3−8：18−8=10</div>
+      <div class="sol sol2">6×6+6：36+6=42</div>
+      <span class="think-note">💡 先乘后加减</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="买1套：5×5=25元，口诀五五二十五。买2套：25+25=50元，2套就是2个25。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🚗</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 3 题：买 1 套玩具小汽车多少钱？买 2 套呢？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">1 套：5×5=25（元）</div>
+      <div class="sol sol2">2 套：25+25=50（元）</div>
+      <span class="think-note">💡 2 套 = 2 个 25 元合起来</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="第（1）小题各买1板：4+6=10节，两部分不同用加法。第（2）小题买4板6节装的：6×4=24节，4个6用乘法。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🔋</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 4 题：各买 1 板是多少节？买 4 板 6 节装的呢？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">（1）4+6=10（节）——加法</div>
+      <div class="sol sol2">（2）6×4=24（节）——4 个 6，乘法</div>
+      <span class="think-note">💡 和第 25 页比较题一个道理：看每份是否同样多</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="每只小猫钓6条鱼，5只小猫：6×5=30条。方框填：6×5=30（条），口诀五六三十。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🐱</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 5 题：5 只小猫钓多少条鱼？□○□=□ 怎么填？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">6×5=30（条）</div>
+      <span class="think-note">💡 写成 5×6=30 也对，口诀五六三十</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="想口诀六六三十六：6只小猫钓36条，36还比40少；7只就是36加6等于42条，42大于40，所以7只小猫钓的鱼比40条多。方法：先算6只的，再加一条猫钓的6条，最后比大小。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>7 只小猫钓的鱼比 40 条多还是少？你是怎样想的？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">6 只钓：6×6=<b>36</b>（条），36＜40 还不够</div>
+      <div class="sol sol2">7 只：36+6=<b>42</b>（条），42＞40 → 比 40 条多</div>
+      <span class="multi">🌈 方法：先用口诀算 6 只的，再加 6 条，最后比大小</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotT1a', think:true, say:'课本第二十九页，练一练。第一题算一算：3×6、2×6、5×5、3×5；5×3、3×3、2×3、4×2。先想口诀再写得数，想一想。',
+    ans:'3×6=18，三六十八；2×6=12，二六十二；5×5=25，五五二十五；3×5=15；3×3=9；2×3=6；4×2=8。'},
+  {region:'hotT1b', say:'后两行：3×1=3，4×5=20，5×2=10，1×1=1；6×4=24，3×4=12，4×1=4，4×3=12。'},
+  {region:'hotT2', think:true, say:'第二题：6×3−8、5×4+30、4×4+12；5×3+9、6×6+6、4×6−4。先算什么，再算什么？想一想。',
+    ans:'先算乘法，再算加减。得数是：10、50、28、24、42、20。'},
+  {region:'hotT3', say:'第三题：一套玩具小汽车有5辆，每辆5元。买1套需要多少钱？买2套呢？'},
+  {region:'hotT4', say:'第四题：超市里的七号电池有一板装4节的，也有一板装6节的。'},
+  {region:'hotT4a', think:true, say:'（1）两种包装的电池各买1板，一共是多少节？（2）买4板6节装的，一共是多少节？想一想。',
+    ans:'（1）4+6=10节。（2）6×4=24节。'},
+  {region:'hotT5', say:'第五题（星号题）：每只小猫钓6条鱼，5只小猫钓多少条鱼？在方框里填一填。'},
+  {region:'hotT5b', think:true, say:'7只小猫钓的鱼，比40条多还是少？想一想。',
+    ans:'想口诀六六三十六：6只钓36条，还不够40；7只就是36加6等于42条，42大于40，比40条多。'},
+  {region:'hotCat', say:'小猫钓到了满满一串鱼，多开心呀！'},
+  {region:'hotGrow', say:'成长小档案：本单元结束了，你想说些什么？我知道了相同数相加可以用乘法计算；用乘法口诀计算乘法真方便。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：3×6、5×5、1×1各等于多少？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：6×3−8和6×6+6各等于多少？先算什么？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：买1套玩具小汽车多少钱？买2套呢？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：两种电池各买1板是多少节？买4板6节装的呢？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：5只小猫钓多少条鱼？方框怎么填？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：7只小猫钓的鱼比40条多还是少？怎样想？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotT1a','3×6=18；2×6=12；5×5=25；3×5=15；5×3=15；3×3=9；2×3=6；4×2=8。'],
+ ['hotT1b','3×1=3；4×5=20；5×2=10；1×1=1；6×4=24；3×4=12；4×1=4；4×3=12。'],
+ ['hotT2','先算乘法再算加减：10、50、28、24、42、20。'],
+ ['hotT3','一套5辆、每辆5元：1套5×5=25元；2套25+25=50元。'],
+ ['hotT4','电池一板4节或6节。'],
+ ['hotT4a','各买1板：4+6=10节；4板6节装：6×4=24节。'],
+ ['hotT5','每只钓6条，5只：6×5=30条。'],
+ ['hotT5b','6只钓36条还不够40；7只36+6=42条，比40条多。'],
+ ['hotCat','小猫钓到了满满一串鱼！'],
+ ['hotGrow','相同数相加可以用乘法；口诀计算真方便。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

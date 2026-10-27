@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>身体上的尺子 · 课本第71页 说一说与小讲堂 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 综合与实践 · 身体上的尺子 · 课本第 71 页 · 说一说与小讲堂</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 · 身体尺中的秘密：头长与身高</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>记录表 · 6拃约90厘米 · 4头长到8头长</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/62a-课本第71页说一说与小讲堂.jpg" alt="课本第71页：你还遇到过哪些要用身体尺测量的情况？表格：测量的物品、身体尺、测量结果（几个身体尺长）、大约多少厘米。说一说：你测量了什么？用哪种身体尺测量的？有什么发现？我用拃量了电视机的宽，有6拃，大约……我和同桌都用庹量黑板的长，结果不同。小讲堂：关于身体尺，你还有哪些感兴趣的问题？小讲堂开播啦：身体尺中的秘密。一个人的头长和他的身高在不同年龄段有着不同的长度关系。画画时……4头长、5头长、6头长、7头长、8头长。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotAsk"    style="top:3%;    left:8%;  width:84%; height:5%;"></div>
+    <div class="hotspot" id="hotTable"  style="top:9%;    left:8%;  width:84%; height:9.5%;"></div>
+    <div class="hotspot" id="hotAsk2"   style="top:19.5%; left:6%;  width:88%; height:7.5%;"></div>
+    <div class="hotspot" id="hotBub1"   style="top:28%;   left:16%; width:38%; height:8%;"></div>
+    <div class="hotspot" id="hotBub2"   style="top:28%;   left:58%; width:38%; height:8%;"></div>
+    <div class="hotspot" id="hotLab"    style="top:38%;   left:10%; width:26%; height:6%;"></div>
+    <div class="hotspot" id="hotAsk3"   style="top:45%;   left:12%; width:76%; height:4.5%;"></div>
+    <div class="hotspot" id="hotOpen"   style="top:50.5%; left:8%;  width:30%; height:5%;"></div>
+    <div class="hotspot" id="hotTitle"  style="top:56%;   left:30%; width:40%; height:4%;"></div>
+    <div class="hotspot" id="hotBub3"   style="top:61%;   left:14%; width:58%; height:8.5%;"></div>
+    <div class="hotspot" id="hotPeople" style="top:70%;   left:6%;  width:88%; height:21%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 71 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="记录表有四栏：测量的物品、用的身体尺、测量结果（几个身体尺长）、大约多少厘米。比如：课本的宽，用拃量，有2拃，大约30厘米。">
+    <span class="t-badge">记录表</span><span class="t-main">身体尺测量记录表怎么填？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      四栏：<b>测量的物品 → 身体尺 → 几个身体尺长 → 大约多少厘米</b>；<br>
+      示例：课本的宽｜拃｜2 拃｜大约 30 厘米（以实测为准）；<br>
+      最后一栏要<b>估算</b>：一拃约 15 厘米，2 拃约 30 厘米。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="我用拃量了电视机的宽，有6拃。如果一拃大约15厘米，6拃就是6个15厘米，大约90厘米。要知道更准的数，还得用尺子量。">
+    <span class="t-badge">估一估</span><span class="t-main">电视机宽 6 拃，大约多少厘米？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      一拃约 <b>15 厘米</b>；<br>
+      6 拃 = 6 个 15 厘米 ≈ <b>90 厘米</b>；<br>
+      <span class="multi" style="display:inline-block;margin:0">💡 身体尺量出"几个"，再乘一拃的长，就能估出厘米数</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="我和同桌都用庹量黑板的长，结果不同。因为两人的个子不一样高，庹的长短就不同，量同一条黑板长，得到的数就不一样。">
+    <span class="t-badge">想一想</span><span class="t-main">都用庹量黑板，为什么结果不同？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      两人<b>个子不同 → 庹不同</b>；<br>
+      庹长量同一块黑板，得到的数就不一样；<br>
+      想比较、想交流，还是要用<b>统一的米和厘米</b>。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="小讲堂：身体尺中的秘密。一个人的头长和他的身高在不同年龄段有着不同的长度关系：婴儿大约4头长，成人大约8头长。画画时按头长去画身高，人物比例才好看。">
+    <span class="t-badge">小讲堂</span><span class="t-main">身体尺中的秘密：头长与身高</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>头长</b>就是头的长度；<br>
+      年龄越小，身高里头的"份"越大：婴儿约 <b>4 头长</b>，成人约 <b>8 头长</b>；<br>
+      画画时按<b>几个头长</b>去画身高，人物比例才自然。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="记录表有四栏：测量的物品、身体尺、测量结果（几个身体尺长）、大约多少厘米。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">📋</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>身体尺记录表有哪四栏？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">四栏：<b>测量的物品、身体尺、几个身体尺长、大约多少厘米</b>；</div>
+      <div class="sol sol2">先量出"几个"，再估出"多少厘米"。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="小讲堂讲的是身体尺中的秘密：头长和身高的关系。年龄越小身高包含的头长越少，婴儿大约4头长，成人大约8头长。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🏫</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>小讲堂讲了一个什么秘密？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">秘密是：<b>头长和身高的关系</b>随年龄变化；</div>
+      <div class="sol sol2">婴儿约 <b>4 头长</b>，成人约 <b>8 头长</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="一拃大约15厘米，6拃就是6个15厘米，大约90厘米。用几个身体尺长，乘每个身体尺大约的厘米数，就能估出来。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📺</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>电视机的宽有 6 拃，大约是多少厘米？怎么估？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">一拃约 <b>15 厘米</b>；</div>
+      <div class="sol sol2">6 拃 ≈ 6 个 15 厘米 ≈ <b>90 厘米</b>；</div>
+      <span class="think-note">💡 估出来的是"大约数"，要准数还得用尺子</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="因为我和同桌个子不一样高，庹的长短就不同，量同一条黑板长，得到的数自然不同。这和上学期男孩量课桌5拃、老师量3拃是一个道理。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🤔</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>我和同桌都用庹量黑板的长，为什么结果不同？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">个子不同 → <b>庹不同</b> → 数不同；</div>
+      <div class="sol sol2">和"5 拃对 3 拃量课桌"一样，都是<b>单位不同</b>；</div>
+      <span class="think-note">💡 所以交流测量结果要用统一的单位</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="4头长是婴儿，5头长、6头长是幼儿和儿童，7头长是少年，8头长是成人。年龄越大个子越高，身高里包含的头长越多。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🧒</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>从 4 头长到 8 头长，说明什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">从婴儿 <b>4 头长</b>到成人 <b>8 头长</b>；</div>
+      <div class="sol sol2">年龄越大个子越高，<b>身高里的头长越多</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="示例：知道了头长和身高的关系，画画时先画几个头长，人物比例就准；知道庹长约等于身高，双臂张开就能估门框、估窗帘。身体上的小秘密用处真多。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>"头长与身高"的秘密在生活中怎么用？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">画画先定<b>头长</b>，身高画几个头长，比例才好看；</div>
+      <div class="sol sol2">估身高：量别人头长，乘大约 8 就是成人身高；</div>
+      <span class="multi">🌈 头长也是一把身体尺</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotAsk', say:'你还遇到过哪些要用身体尺测量的情况？'},
+  {region:'hotTable', say:'把测量的物品、用的身体尺、几个身体尺长、大约多少厘米，填进这张表格里。'},
+  {region:'hotAsk2', think:true, say:'说一说：你测量了什么？用哪种身体尺测量的？有什么发现？想一想怎么说。',
+    ans:'可以按三步说：先说测量的物品，再说用的身体尺和几个身体尺长，最后说发现。比如：用拃量课本的宽，有2拃，大约30厘米。'},
+  {region:'hotBub1', think:true, say:'我用拃量了电视机的宽，有6拃，大约……猜一猜，大约多少厘米？',
+    ans:'一拃大约15厘米，6拃就是6个15厘米，大约90厘米。要知道更准的数，还得用尺子量。'},
+  {region:'hotBub2', say:'我和同桌都用庹量黑板的长，结果不同。'},
+  {region:'hotLab', say:'小讲堂。'},
+  {region:'hotAsk3', think:true, say:'关于身体尺，你还有哪些感兴趣的问题？想一想。',
+    ans:'比如：为什么庹长和身高差不多？大人的一拃和小孩的一拃差多少？古代的一尺到底有多长？带着问题进入小讲堂吧。'},
+  {region:'hotOpen', say:'小讲堂开播啦！'},
+  {region:'hotTitle', say:'身体尺中的秘密。'},
+  {region:'hotBub3', think:true, say:'一个人的头长和他的身高在不同年龄段有着不同的长度关系。画画时……想一想，头长和身高有什么关系？',
+    ans:'头长就是头的长度。年龄越小，身高里包含的头长越少：婴儿大约4头长，成人大约8头长。画画时按头长去画身高，人物比例才好看。'},
+  {region:'hotPeople', say:'看这五个人：4头长、5头长、6头长、7头长、8头长。从婴儿到成人，个子越来越高，身高里包含的头长也越来越多。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：身体尺记录表有哪四栏？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：小讲堂讲了一个什么秘密？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：电视机的宽有6拃，大约是多少厘米？怎么估？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：我和同桌都用庹量黑板的长，为什么结果不同？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：从4头长到8头长，说明什么？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：头长与身高的秘密在生活中怎么用？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotAsk','你还遇到过哪些要用身体尺测量的情况？'],
+ ['hotTable','测量的物品，身体尺，测量结果几个身体尺长，大约多少厘米。'],
+ ['hotAsk2','你测量了什么？用哪种身体尺测量的？有什么发现？'],
+ ['hotBub1','我用拃量了电视机的宽，有6拃，大约……'],
+ ['hotBub2','我和同桌都用庹量黑板的长，结果不同。'],
+ ['hotLab','小讲堂。'],
+ ['hotAsk3','关于身体尺，你还有哪些感兴趣的问题？'],
+ ['hotOpen','小讲堂开播啦！'],
+ ['hotTitle','身体尺中的秘密。'],
+ ['hotBub3','一个人的头长和他的身高在不同年龄段有着不同的长度关系。画画时……'],
+ ['hotPeople','4头长，5头长，6头长，7头长，8头长。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

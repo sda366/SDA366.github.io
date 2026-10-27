@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内乘法 · 课本第28页 整理和复习 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .t-sub{ color:#455a64; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 1~6的表内乘法 · 课本第 28 页 · 整理和复习</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>单元收获·口诀表规律·补全口诀表</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/19a-课本第28页-整理和复习.jpg" alt="课本第28页整理和复习：通过本单元的学习，你有哪些收获？小女孩说：我知道加数相同的加法可以用乘法表示。红点阵4行6列：6+6+6+6=24，6×4=24；4+4+4+4+4+4=24，4×6=24。小男孩说：有了乘法口诀，算得就比较快了。蓝点阵3列每列6个：三六十八，6×3=18，3×6=18。在卡片上写出1~6的乘法口诀，并把它们整理成一个表，说一说你是按什么规律整理的。小丽整理的口诀表：一二、二二；一三、二三、三三；一四、二四、三四、四四；一五、二五、三五、四五、五五；一六、二六、三六、四六、五六、六六（部分空着要补全）。（1）上表是小丽整理的情况，你发现了什么规律？（2）帮小丽把乘法口诀表补全。（3）任意指一句口诀，说出用它计算的乘法算式。（4）在卡片上写出1~6的所有乘法算式，并整理成一个表，它和上表有什么区别和联系？">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTitle" style="top:3.5%;  left:12%; width:60%; height:5.5%;"></div>
+    <div class="hotspot" id="hotGain"  style="top:13%;   left:12%; width:70%; height:4%;"></div>
+    <div class="hotspot" id="hotGirl"  style="top:17%;   left:6%;  width:38%; height:9%;"></div>
+    <div class="hotspot" id="hotRed"   style="top:16.5%; left:48%; width:50%; height:16%;"></div>
+    <div class="hotspot" id="hotBoy"   style="top:32%;   left:6%;  width:38%; height:8%;"></div>
+    <div class="hotspot" id="hotBlue"  style="top:32%;   left:52%; width:46%; height:10%;"></div>
+    <div class="hotspot" id="hotCard"  style="top:42%;   left:6%;  width:90%; height:9%;"></div>
+    <div class="hotspot" id="hotTable" style="top:51%;   left:8%;  width:88%; height:19%;"></div>
+    <div class="hotspot" id="hotQ1"    style="top:72.5%; left:8%;  width:90%; height:4%;"></div>
+    <div class="hotspot" id="hotQ2"    style="top:76.5%; left:8%;  width:90%; height:4%;"></div>
+    <div class="hotspot" id="hotQ3"    style="top:80%;   left:8%;  width:90%; height:4%;"></div>
+    <div class="hotspot" id="hotQ4"    style="top:84%;   left:8%;  width:90%; height:8%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 28 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="收获一：我知道加数相同的加法可以用乘法表示。看4行6列的红点：6+6+6+6=24，6×4=24；4+4+4+4+4+4=24，4×6=24。横着数是6个4，竖着数是4个6。">
+    <span class="t-badge">收获 ①</span><span class="t-main">加数相同的加法可以用乘法表示（4 行 6 列红点阵）</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      横着数：6+6+6+6=24 → <b>6×4=24</b>（4 个 6）；<br>
+      竖着数：4+4+4+4+4+4=24 → <b>4×6=24</b>（6 个 4）。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 同一个点阵，横看竖看写出两道乘法算式</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="收获二：有了乘法口诀，算得就比较快了。看3列蓝点、每列6个：三六十八，6×3=18，3×6=18。">
+    <span class="t-badge">收获 ②</span><span class="t-main">有了乘法口诀，算得就比较快了（蓝点阵：三六十八）</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      3 列、每列 6 个 → 6×3=18；3 个 6 → 3×6=18。<br>
+      一句口诀<b>三六十八</b>，能算两道算式，又对又快。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="在卡片上写出1到6的乘法口诀，并把它们整理成一个表，说一说你是按什么规律整理的。">
+    <span class="t-badge">整理任务</span><span class="t-main">写出 1~6 的乘法口诀，整理成一个表，说说整理的规律。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      小丽的整理法：<b>第几行就是几的口诀</b>——<br>
+      第 2 行是 2 的口诀，第 3 行是 3 的口诀……每行从"一几"开始。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 也可以按列整理，横竖都成规律</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="第（1）小题：上表是小丽整理的情况，你发现了什么规律？第几行就是几的口诀；每行从一几开始，后面是二几、三几，一句比一句多一个几。">
+    <span class="t-badge">第（1）问</span><span class="t-main">小丽整理的口诀表，你发现了什么规律？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>规律一：</b>第几行就是几的口诀（第 3 行都是 3 的口诀）；<br>
+      <b>规律二：</b>每行从"一几"开始，依次"二几、三几"；<br>
+      <b>规律三：</b>第几行就有几句口诀（第 2 行 2 句，第 6 行 6 句）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="第（2）小题：帮小丽把乘法口诀表补全。第4行补四四十六；第5行补一五得五、二五一十、三五十五、四五二十、五五二十五；第6行补一六得六、二六十二、三六十八、四六二十四、五六三十、六六三十六。">
+    <span class="t-badge">第（2）问</span><span class="t-main">帮小丽把乘法口诀表补全。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>第 4 行：</b>一四得四、二四得八、三四十二、<b>四四十六</b>；<br>
+      <b>第 5 行：</b>一五得五、二五一十、三五十五、四五二十、<b>五五二十五</b>；<br>
+      <b>第 6 行：</b>一六得六、二六十二、三六十八、四六二十四、五六三十、<b>六六三十六</b>。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第（3）小题：任意指一句口诀，说出用它计算的乘法算式。示例：三四十二，可以算3×4=12和4×3=12。">
+    <span class="t-badge">第（3）问</span><span class="t-main">任意指一句口诀，说出用它计算的乘法算式。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>示例一：</b>三四十二 → 3×4=12、4×3=12；<br>
+      <b>示例二：</b>五六三十 → 5×6=30、6×5=30；<br>
+      <b>示例三：</b>六六三十六 → 6×6=36（只有一个乘数相同的算式）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="第（4）小题：在卡片上写出1到6的所有乘法算式，并整理成一个表，它和上表有什么区别和联系？口诀表按口诀整理，算式表按算式整理。一句口诀一般能算两道乘法算式；像六六三十六这样两个乘数一样的，只能算一道6×6=36。">
+    <span class="t-badge">第（4）问</span><span class="t-main">写出所有乘法算式整理成表，和口诀表有什么区别和联系？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>区别：</b>口诀表按口诀排，算式表按算式排；<br>
+      <b>联系：</b>一句口诀一般对应<b>两道</b>算式（如 3×4 和 4×3）；<br>
+      两个乘数一样的口诀（如六六三十六）只对应<b>一道</b>算式。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="4行6列的红点阵可以写出：加法6+6+6+6=24和4+4+4+4+4+4=24；乘法6×4=24和4×6=24。横着数是4个6，竖着数是6个4。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🔴</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>红点阵可以写出哪两道加法算式和哪两道乘法算式？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">加法：6+6+6+6=24；4+4+4+4+4+4=24</div>
+      <div class="sol sol2">乘法：6×4=24；4×6=24</div>
+      <span class="think-note">💡 横数 4 个 6，竖数 6 个 4</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="蓝点阵3列、每列6个，用口诀三六十八。两道算式：6×3=18和3×6=18。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🔵</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>蓝点阵用哪句口诀？写出两道乘法算式。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">口诀：三六十八</div>
+      <div class="sol sol2">6×3=18；3×6=18</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="规律：第几行就是几的口诀，第2行是2的口诀，第3行是3的口诀；每行从一几开始，依次是二几、三几；第几行就有几句口诀。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📐</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>口诀表是按什么规律整理的？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">第几行 = 几的口诀（第 4 行都是 4 的口诀）</div>
+      <div class="sol sol2">每行从"一几"开始；第几行就有几句</div>
+      <span class="think-note">💡 按这个规律，空格也能自己推出来</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="第4行最后一句是四四十六。第6行是：一六得六、二六十二、三六十八、四六二十四、五六三十、六六三十六。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">✍️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>补全口诀表：第 4 行最后一句？第 6 行各句？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">第 4 行最后一句：四四十六</div>
+      <div class="sol sol2">第 6 行：一六得六、二六十二、三六十八、四六二十四、五六三十、六六三十六</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="指口诀三四十二，可以说出两道乘法算式：3×4=12和4×3=12。再如五六三十：5×6=30和6×5=30。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">👆</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>指口诀"三四十二"，说出用它计算的算式。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">3×4=12</div>
+      <div class="sol sol2">4×3=12</div>
+      <span class="think-note">💡 一句口诀，一般能算两道算式</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="区别：口诀表按口诀整理，算式表按算式整理。联系：一句口诀一般对应两道乘法算式，比如三四十二对应3×4=12和4×3=12；像六六三十六这样两个乘数一样的口诀，只对应一道算式6×6=36。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>算式表和口诀表有什么区别和联系？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="ref"><b>区别：</b>口诀表排口诀，算式表排算式</div>
+      <div class="ref"><b>联系：</b>一句口诀 ↔ 一般两道算式；乘数相同的口诀（六六三十六）只有一道</div>
+      <span class="multi">🌈 想想还有哪几句口诀只对应一道算式</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotTitle', say:'课本第二十八页，整理和复习。'},
+  {region:'hotGain', say:'通过本单元的学习，你有哪些收获？'},
+  {region:'hotGirl', say:'小女孩说：我知道加数相同的加法可以用乘法表示。'},
+  {region:'hotRed', think:true, say:'看4行6列的红点阵，可以写出哪两道加法算式和哪两道乘法算式？想一想。',
+    ans:'6+6+6+6=24，6×4=24；4+4+4+4+4+4=24，4×6=24。'},
+  {region:'hotBoy', say:'小男孩说：有了乘法口诀，算得就比较快了。'},
+  {region:'hotBlue', think:true, say:'看3列、每列6个的蓝点阵，用哪句口诀？想一想。',
+    ans:'三六十八。6×3=18，3×6=18。'},
+  {region:'hotCard', say:'在卡片上写出1~6的乘法口诀，并把它们整理成一个表，说一说你是按什么规律整理的。'},
+  {region:'hotTable', think:true, say:'这是小丽整理的口诀表。你发现了什么规律？想一想。',
+    ans:'第几行就是几的口诀：第2行是2的口诀，第3行是3的口诀……每行从一几开始，第几行就有几句。'},
+  {region:'hotQ1', say:'第（1）小题：上表是小丽整理的情况，你发现了什么规律？'},
+  {region:'hotQ2', say:'第（2）小题：帮小丽把乘法口诀表补全。'},
+  {region:'hotQ3', say:'第（3）小题：任意指一句口诀，说出用它计算的乘法算式。'},
+  {region:'hotQ4', think:true, say:'第（4）小题：写出1~6的所有乘法算式并整理成表，它和口诀表有什么区别和联系？想一想。',
+    ans:'口诀表按口诀整理，算式表按算式整理。一句口诀一般能算两道乘法算式，比如三四十二可以算3×4=12和4×3=12；像六六三十六这样两个乘数一样的，只能算一道6×6=36。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：红点阵可以写出哪两道加法算式和哪两道乘法算式？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：蓝点阵用哪句口诀？写出两道乘法算式。想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：口诀表是按什么规律整理的？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：补全口诀表，第4行最后一句是什么？第6行各句？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：指口诀三四十二，说出用它计算的算式。想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：算式表和口诀表有什么区别和联系？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotTitle','课本第二十八页，整理和复习。'],
+ ['hotGain','通过本单元的学习，你有哪些收获？'],
+ ['hotGirl','我知道加数相同的加法可以用乘法表示。'],
+ ['hotRed','6+6+6+6=24，6×4=24；4+4+4+4+4+4=24，4×6=24。'],
+ ['hotBoy','有了乘法口诀，算得就比较快了。'],
+ ['hotBlue','三六十八：6×3=18，3×6=18。'],
+ ['hotCard','写出1~6的乘法口诀，整理成一个表。'],
+ ['hotTable','第几行就是几的口诀，每行从一几开始。'],
+ ['hotQ1','第（1）问：你发现了什么规律？'],
+ ['hotQ2','第（2）问：帮小丽把口诀表补全。'],
+ ['hotQ3','第（3）问：任意指一句口诀，说出算式。'],
+ ['hotQ4','第（4）问：一句口诀一般对应两道算式；六六三十六只有一道。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

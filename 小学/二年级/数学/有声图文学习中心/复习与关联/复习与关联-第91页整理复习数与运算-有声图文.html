@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复习与关联 · 课本第91页 整理复习·数与运算 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 六、复习与关联 · 课本第 91 页 · 整理复习（数与运算）</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 · 画知识图 · 乘法与加法、除法与减法的联系</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>加乘减除一家亲 · 用乘法表示相同加数 · 用除法表示平均分</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/82a-课本第91页复习与关联数与运算.png" alt="课本第91页，单元六复习与关联。本学期你学习了哪些知识？把它们整理一下吧。整理复习，数与运算。下面是小丽整理的知识图，你也试着画一画吧。知识图：加法连着减法，中间写着67+28=95、95-28=67、95-67=28；乘法连着除法，中间写着6×9=54、54÷6=9、54÷9=6；加法下面是28+37，减法下面是31-19。本学期我们在加法和减法的基础上，学习了新的运算——乘法和除法，你有哪些收获？男孩说：加数相同的加法用乘法表示更简便。女孩说：平均分的过程用除法表示更简便。左边例子：2+2+2=6、2×3=6；3+3=6、3×2=6。中间是6个圆点的点阵，2行3列。右边例子：6-2-2-2=0、6÷2=3；6-3-3=0、6÷3=2。下面：乘法口诀：二三得六。2×3=6、6÷2=3；3×2=6、6÷3=2。女孩说：乘法口诀可以帮助我们快速计算。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTitle"  style="top:4.5%;  left:22%; width:56%; height:6.5%;"></div>
+    <div class="hotspot" id="hotLead"   style="top:13.5%; left:9%;  width:80%; height:4.5%;"></div>
+    <div class="hotspot" id="hotNum"    style="top:22%;   left:8%;  width:20%; height:5%;"></div>
+    <div class="hotspot" id="hotMap"    style="top:30%;   left:12%; width:76%; height:29%;"></div>
+    <div class="hotspot" id="hotMd"     style="top:46%;   left:47%; width:26%; height:11%;"></div>
+    <div class="hotspot" id="hotQ"      style="top:60.5%; left:6%;  width:88%; height:6.5%;"></div>
+    <div class="hotspot" id="hotBub1"   style="top:67.5%; left:14%; width:34%; height:9%;"></div>
+    <div class="hotspot" id="hotBub2"   style="top:67.5%; left:52%; width:34%; height:9%;"></div>
+    <div class="hotspot" id="hotEq1"    style="top:78%;   left:8%;  width:30%; height:8%;"></div>
+    <div class="hotspot" id="hotDots"   style="top:77.5%; left:40%; width:18%; height:8.5%;"></div>
+    <div class="hotspot" id="hotEq2"    style="top:78%;   left:60%; width:30%; height:8%;"></div>
+    <div class="hotspot" id="hotKF"     style="top:87.5%; left:10%; width:28%; height:4.5%;"></div>
+    <div class="hotspot" id="hotBub3"   style="top:86.5%; left:44%; width:30%; height:10%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 91 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="知识图的秘密：加法和减法是一对好朋友，67+28=95，反过来95-28=67、95-67=28；乘法和除法也是一对好朋友，6×9=54，反过来54÷6=9、54÷9=6。一个算式能变出两个朋友，这就是逆运算。">
+    <span class="t-badge">知识图</span><span class="t-main">加减、乘除为什么手拉手？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      加法：<b>67+28=95</b> → 减法：95-28=67、95-67=28；<br>
+      乘法：<b>6×9=54</b> → 除法：54÷6=9、54÷9=6；<br>
+      💡 合起来用加（乘），分回去用减（除）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="乘法的本领：2+2+2=6，加数都是2，就可以写成2×3=6，读作2乘3等于6；3+3=6也可以写成3×2=6。加数相同的加法，用乘法表示更简便。">
+    <span class="t-badge">乘法</span><span class="t-main">什么加法能用乘法表示？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>加数相同</b>的加法：2+2+2=6 → 2×3=6；<br>
+      3+3=6 → 3×2=6；<br>
+      💡 相同加数是几、有几个，就乘几。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="除法的本领：6个圆点，2个2个地分，6-2-2-2=0，分了3次刚好分完，就是6÷2=3；3个3个地分，6-3-3=0，分了2次，就是6÷3=2。平均分的过程用除法表示更简便。">
+    <span class="t-badge">除法</span><span class="t-main">连减和除法有什么关系？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      6-2-2-2=0：减了 <b>3</b> 次 → 6÷2=3；<br>
+      6-3-3=0：减了 <b>2</b> 次 → 6÷3=2；<br>
+      💡 从6里连续减去相同的数，减几次刚好减完，商就是几。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="口诀的作用：二三得六，既算乘法2×3=6、3×2=6，也算除法6÷2=3、6÷3=2。一句口诀通常能帮我们算一道乘法和两道除法，所以乘法口诀可以帮助我们快速计算。">
+    <span class="t-badge">口诀</span><span class="t-main">一句口诀能算几道题？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      二三得六：2×3=6、3×2=6（乘法两道）；<br>
+      6÷2=3、6÷3=2（除法两道）；<br>
+      💡 一句口诀管一家：乘 2 道 + 除 2 道。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="6×9=54，想口诀六九五十四。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">✖️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>知识图中 6×9 的积是多少？用哪句口诀？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">口诀：六九五十四；</div>
+      <div class="sol sol2">6×9=<b>54</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="67+28=95，想：67+20=87，87+8=95；也可以列竖式，个位7+8=15写5进1，十位6+2+1=9。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">➕</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>67+28 等于多少？说说你是怎么算的。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">个位 7+8=15，写 5 进 1；十位 6+2+1=9；</div>
+      <div class="sol sol2">67+28=<b>95</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="可以写出：2×3=6、3×2=6、6÷2=3、6÷3=2。因为它们都和二三得六这句口诀有关，乘法算总数，除法平均分或求份数。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🧮</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>看 6 个圆点的点阵，能写出哪四道算式？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">乘法：<b>2×3=6、3×2=6</b>；</div>
+      <div class="sol sol2">除法：<b>6÷2=3、6÷3=2</b>；</div>
+      <span class="multi">💡 全靠二三得六一句口诀</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="6-2-2-2=0，一共减了3次2，说明6里面有3个2，写成除法是6÷2=3。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>6-2-2-2=0 可以写成哪道除法算式？为什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">减了 <b>3</b> 次 2，刚好减完；</div>
+      <div class="sol sol2">6 里有 3 个 2 → <b>6÷2=3</b>。</div>
+      <span class="think-note">💡 连减几次，商就是几</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="67+28=95，所以95-28=67、95-67=28。和减一个加数等于另一个加数，加减法互为逆运算。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🔁</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>由 67+28=95 能写出哪两道减法算式？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>95-28=67</b>；</div>
+      <div class="sol sol2"><b>95-67=28</b>；</div>
+      <span class="think-note">💡 和-一个加数=另一个加数</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="不是。只有加数相同的加法才能写成乘法，比如2+2+2=6写成2×3；像28+37两个加数不相同，就只能用加法算，得65。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>所有加法都能写成乘法吗？28+37 为什么不能？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">乘法要求<b>加数相同</b>；</div>
+      <div class="sol sol2">28 和 37 不相同，只能老实用加法，得 <b>65</b>；</div>
+      <span class="multi">🌈 相同加数才请乘法来帮忙</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+var steps1=[
+  {region:'hotTitle', say:'第六单元，复习与关联。本学期你学习了哪些知识？把它们整理一下吧。'},
+  {region:'hotLead', say:'整理复习，数与运算。下面是小丽整理的知识图，你也试着画一画吧。'},
+  {region:'hotMap', think:true, say:'看知识图：加法连着减法，乘法连着除法。想一想，为什么它们要手拉手站在一起？',
+    ans:'因为它们互为逆运算：67+28=95，反过来95-28=67、95-67=28；6×9=54，反过来54÷6=9、54÷9=6。合与分，正好是一对。'},
+  {region:'hotMd', say:'中间这一对：乘法和除法。本学期我们在加法和减法的基础上，学习了新的运算——乘法和除法，你有哪些收获？'},
+  {region:'hotBub1', say:'男孩说：加数相同的加法用乘法表示更简便。'},
+  {region:'hotBub2', say:'女孩说：平均分的过程用除法表示更简便。'},
+  {region:'hotEq1', think:true, say:'看左边的例子：2+2+2=6、3+3=6。想一想，它们能写成乘法算式吗？',
+    ans:'能。2+2+2是3个2，写成2×3=6；3+3是2个3，写成3×2=6。加数相同才能用乘法。'},
+  {region:'hotDots', say:'中间的点阵：6个圆点，2行3列，正好把乘法和除法连起来。'},
+  {region:'hotEq2', say:'右边的例子：6-2-2-2=0，减了3次，就是6÷2=3；6-3-3=0，减了2次，就是6÷3=2。平均分用除法更简便。'},
+  {region:'hotKF', think:true, say:'下面是乘法口诀：二三得六。想一想，一句口诀能算哪几道题？',
+    ans:'乘法2×3=6、3×2=6；除法6÷2=3、6÷3=2。一句口诀管四道题。'},
+  {region:'hotBub3', say:'女孩说：乘法口诀可以帮助我们快速计算。把口诀记牢，乘法除法都不怕。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：6×9的积是多少？用哪句口诀？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：67+28等于多少？说说你怎么算。想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：看6个圆点的点阵，能写出哪四道算式？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：6-2-2-2=0可以写成哪道除法算式？为什么？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：由67+28=95能写出哪两道减法算式？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：所有加法都能写成乘法吗？28+37为什么不能？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读 */
+[['hotTitle','第六单元，复习与关联。'],
+ ['hotLead','把它们整理一下吧，看看小丽的知识图。'],
+ ['hotNum','数与运算。'],
+ ['hotMap','加法连着减法，乘法连着除法，互为逆运算。'],
+ ['hotMd','乘法和除法是本学期学的新运算。'],
+ ['hotBub1','加数相同的加法用乘法表示更简便。'],
+ ['hotBub2','平均分的过程用除法表示更简便。'],
+ ['hotEq1','2+2+2=6，写成2×3=6。'],
+ ['hotDots','6个圆点，2行3列。'],
+ ['hotEq2','6-2-2-2=0，就是6÷2=3。'],
+ ['hotKF','口诀二三得六，能算四道题。'],
+ ['hotBub3','乘法口诀可以帮助我们快速计算。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

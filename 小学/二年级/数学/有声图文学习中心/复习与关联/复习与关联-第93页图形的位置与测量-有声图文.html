@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复习与关联 · 课本第93页 图形的位置与测量 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 六、复习与关联 · 课本第 93 页 · 图形的位置与测量</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 · 东南西北 · 米和厘米 · 看疏散示意图</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>方向顺时针排序 · 1米=100厘米 · 会看平面示意图</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/84a-课本第93页图形的位置与测量.jpg" alt="课本第93页，图形的位置与测量。下面是小丽整理的知识图，你也试着画一画吧。指南针可以帮助辨认方向。方向图：上北下南左西右东，东、南、西、北四个方向在圆上的排列顺序与时针转动方向一致。长度单位：米、厘米，1米=100厘米。线段。测量。身体上的尺子：1拃、1庹、1步。这个学期我们学习了方向和测量的相关知识。男孩说：我会辨认东、南、西、北了，还学会了看安全疏散示意图。安全疏散示意图，一层：上面一排从左到右是音乐教室、体育库房、卫生保健室、心理辅导室、教室、音乐教室；下面一排从左到右是图书馆、打印室、水房、美术教室、体育教室；左边有校门、西门、扩门，下面中间是南门；右上角标着北。下面：一支长3厘米的线段放在直尺上，从0到3。卡片上写着：1米=100厘米。女孩说：我认识了长度单位厘米和米，还认识了线段。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTitle"   style="top:3%;    left:8%;  width:34%; height:5.5%;"></div>
+    <div class="hotspot" id="hotLead"   style="top:10.5%; left:10%; width:80%; height:4.5%;"></div>
+    <div class="hotspot" id="hotCompass" style="top:16%;  left:14%; width:34%; height:17%;"></div>
+    <div class="hotspot" id="hotBub"    style="top:19.5%; left:52%; width:42%; height:12%;"></div>
+    <div class="hotspot" id="hotLen"    style="top:36%;   left:24%; width:26%; height:10%;"></div>
+    <div class="hotspot" id="hotBody"   style="top:36.5%; left:63%; width:30%; height:12%;"></div>
+    <div class="hotspot" id="hotLead2"  style="top:51.5%; left:9%;  width:80%; height:4%;"></div>
+    <div class="hotspot" id="hotBoy"    style="top:56.5%; left:14%; width:32%; height:11%;"></div>
+    <div class="hotspot" id="hotSafe"   style="top:57.5%; left:40%; width:52%; height:22%;"></div>
+    <div class="hotspot" id="hotRuler"  style="top:81%;   left:48%; width:44%; height:5.5%;"></div>
+    <div class="hotspot" id="hotCard"   style="top:88.5%; left:49%; width:24%; height:6%;"></div>
+    <div class="hotspot" id="hotGirl"   style="top:85%;   left:13%; width:30%; height:10%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 93 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="方向图记忆法：上北、下南、左西、右东。东、南、西、北四个方向在圆上的排列顺序，和时针转动的方向一致：东→南→西→北，转一圈回到东。和指针同方向转的叫顺时针。">
+    <span class="t-badge">方向</span><span class="t-main">四个方向怎样排才不会乱？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      按<b>顺时针</b>记：东 → 南 → 西 → 北 → 东；<br>
+      口诀：<b>上北下南、左西右东</b>；<br>
+      💡 转的方向和时针一样，就叫顺时针。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="测量的知识图：长度单位有米和厘米，1米=100厘米；还要认识线段——直直的、有两个端点、可以量出长度。量较短的物体用厘米，量较长的物体用米。">
+    <span class="t-badge">测量</span><span class="t-main">长度单位怎么选？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>1米=100厘米</b>；<br>
+      短的（铅笔、手掌宽）用<b>厘米</b>；<br>
+      长的（教室、旗杆、身高）用<b>米</b>；<br>
+      💡 线段：直、有两个端点、能量长度。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="身体上的尺子：1拃，手指用力张开、拇指尖到中指尖的距离；1庹，两臂左右伸直的总长；1步，走路时前后脚尖之间的距离。身上带着尺子，没带尺子也能估一估。">
+    <span class="t-badge">身体尺</span><span class="t-main">身上有哪些尺子？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>1拃</b>：张开手，拇指尖到中指尖；<br>
+      <b>1庹</b>：两臂伸平的总长；<br>
+      <b>1步</b>：走一步前后脚的距离；<br>
+      💡 先量好自己的身体尺，估值才有准头。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="看疏散示意图三步走：第一步找指北针，确定图上的方向；第二步找到自己教室的位置；第三步顺着红色箭头找最近的门。箭头指向西边，就往西走。遇到危险不慌张，看清方向再行动。">
+    <span class="t-badge">疏散图</span><span class="t-main">怎么看安全疏散示意图？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      ① 找<b>指北针</b>定方向；② 找<b>自己的位置</b>；<br>
+      ③ 顺<b>红色箭头</b>找最近的出口；<br>
+      💡 图上方向和生活中的方向对起来。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="面向北时，后面是南，左面是西，右面是东。按上北下南左西右东来记。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🧭</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>面向北站着，背后、左面、右面各是什么方向？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">背后是<b>南</b>；</div>
+      <div class="sol sol2">左面是<b>西</b>，右面是<b>东</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="1米=100厘米，所以2米=200厘米。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">📏</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>1 米等于多少厘米？2 米呢？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">1米=<b>100</b>厘米；</div>
+      <div class="sol sol2">2米=<b>200</b>厘米。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="旗杆高约13米用米；手掌宽约7厘米、身高1米30厘米、一步约35厘米都用厘米。量长的用米，量短的用厘米。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">⚖️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>旗杆高 13（ ）、手掌宽 7（ ）、一步长 35（ ），各填什么单位？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">旗杆 13（<b>米</b>）；</div>
+      <div class="sol sol2">手掌宽 7（<b>厘米</b>），一步 35（<b>厘米</b>）；</div>
+      <span class="think-note">💡 用身体尺比一比再选单位</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="先在图上找到指北针确定方向，再找到自己的教室，最后沿红色箭头找最近的门撤离。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🚪</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>紧急疏散时，看示意图先做什么、再做什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">先看<b>指北针</b>定方向；再找<b>自己的教室</b>；</div>
+      <div class="sol sol2">最后沿<b>红色箭头</b>找最近的门。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="直尺上从0到3的这一段长3厘米，从刻度0量到刻度3就是3厘米。也可以从其他整刻度量起，用大刻度减小刻度。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">📐</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>直尺上从刻度 0 到刻度 3 的一段长多少？怎么读？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">从 0 到 3，长 <b>3 厘米</b>；</div>
+      <div class="sol sol2">不从 0 开始时：终点刻度-起点刻度；</div>
+      <span class="think-note">💡 两个刻度一减就是长度</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="例如：明明的1庹大约1米20厘米，比1米长。估测时先量好自己的1拃、1步、1庹，再用身体尺去量或估，最后用米尺量一量做检验，身体尺越准，估值越接近。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>用身体尺估一估教室门的宽，说说怎样估得更准。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">先用<b>拃</b>量：约 10 拃，1 拃约 15 厘米；</div>
+      <div class="sol sol2">估出约 150 厘米，再用米尺<b>验证</b>；</div>
+      <span class="multi">🌈 估一估 + 量一量，双保险</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+var steps1=[
+  {region:'hotTitle', say:'图形的位置与测量。下面是小丽整理的知识图，你也试着画一画吧。'},
+  {region:'hotCompass', think:true, say:'看方向图：指南针可以帮助辨认方向。想一想，东、南、西、北在圆上是按什么顺序排的？',
+    ans:'按顺时针排：东→南→西→北，和时针转动方向一致。图上还要记住：上北、下南、左西、右东。'},
+  {region:'hotBub', say:'女孩提示：东、南、西、北四个方向在圆上的排列顺序与时针转动方向一致。'},
+  {region:'hotLen', say:'测量部分：长度单位有米和厘米，1米=100厘米；还要认识线段。'},
+  {region:'hotBody', think:true, say:'看身体上的尺子：1拃、1庹、1步。想一想，它们分别量哪里？',
+    ans:'1拃是张开手拇指尖到中指尖的距离；1庹是两臂伸平的总长；1步是走一步前后脚的距离。'},
+  {region:'hotLead2', say:'这个学期我们学习了方向和测量的相关知识。'},
+  {region:'hotBoy', say:'男孩说：我会辨认东、南、西、北了，还学会了看安全疏散示意图。'},
+  {region:'hotSafe', think:true, say:'看安全疏散示意图：一层有音乐教室、体育库房、图书馆、打印室、水房、美术教室、体育教室等。想一想，看这幅图先找什么？',
+    ans:'先找右上角的指北针，确定图上的北；再找到自己教室的位置；最后沿红色箭头找最近的门，比如南门或西门。'},
+  {region:'hotRuler', say:'看直尺图：一条线段从刻度0排到刻度3，长3厘米。'},
+  {region:'hotCard', say:'卡片上写着：1米=100厘米。'},
+  {region:'hotGirl', say:'女孩说：我认识了长度单位厘米和米，还认识了线段。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：面向北站着，背后、左面、右面各是什么方向？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：1米等于多少厘米？2米呢？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：旗杆高13、手掌宽7、一步长35，各填什么单位？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：紧急疏散时，看示意图先做什么、再做什么？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：直尺上从刻度0到刻度3的一段长多少？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：用身体尺估一估教室门的宽，怎样估得更准？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读 */
+[['hotTitle','图形的位置与测量。'],
+ ['hotLead','小丽整理的知识图，你也试着画一画。'],
+ ['hotCompass','指南针帮助辨认方向，四个方向顺时针排。'],
+ ['hotBub','方向排列顺序与时针转动方向一致。'],
+ ['hotLen','长度单位：米、厘米，1米=100厘米。'],
+ ['hotBody','身体上的尺子：1拃、1庹、1步。'],
+ ['hotLead2','这学期学了方向和测量的知识。'],
+ ['hotBoy','我会辨认东南西北，还会看疏散示意图。'],
+ ['hotSafe','安全疏散示意图：先找指北针，再找教室，顺箭头走。'],
+ ['hotRuler','线段从0到3，长3厘米。'],
+ ['hotCard','1米=100厘米。'],
+ ['hotGirl','我认识了厘米和米，还认识了线段。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

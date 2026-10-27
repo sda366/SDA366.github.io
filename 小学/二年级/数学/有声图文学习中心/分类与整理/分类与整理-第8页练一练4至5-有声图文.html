@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分类与整理 · 课本第8页 练一练4～5 · 有声图文带读</title>
+<style>
+  :root{ --main:#e65100; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fdf6f2; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#e65100,#fb8c00); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#fff3e0; border:1px dashed #ffb74d; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#ffb74d; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#fff3e0; color:#e65100; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(191,54,12,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#bf360c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🚏 分类与整理 · 课本第 8 页 · 练一练 4～5</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>自选标准分类</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/08a-课本第8页-练一练4至5.jpg" alt="课本第8页练一练：4把道路交通标志分类，按形状填表、还可以怎样分、提出数学问题；5将11道算式分成两类记录在表中，还可以继续分吗">
+    <!-- 热区按 796×1080 版面估算百分比，交付前已对照原图核校 -->
+    <div class="hotspot" id="hotT4"     style="top:4.5%;  left:7%;  width:50%; height:4%;"></div>
+    <div class="hotspot" id="hotSigns"  style="top:9%;    left:18%; width:50%; height:15.5%;"></div>
+    <div class="hotspot" id="hotRobot"  style="top:6.5%;  left:67%; width:27%; height:8.5%;"></div>
+    <div class="hotspot" id="hotQ41"    style="top:24.5%; left:13%; width:55%; height:4%;"></div>
+    <div class="hotspot" id="hotTable41" style="top:28.5%; left:20%; width:56%; height:9%;"></div>
+    <div class="hotspot" id="hotQ42"    style="top:36.5%; left:13%; width:33%; height:4%;"></div>
+    <div class="hotspot" id="hotTable42" style="top:40%;   left:20%; width:56%; height:9.5%;"></div>
+    <div class="hotspot" id="hotQ43"    style="top:50.5%; left:13%; width:55%; height:4%;"></div>
+    <div class="hotspot" id="hotT5"     style="top:55.5%; left:13%; width:78%; height:14.5%;"></div>
+    <div class="hotspot" id="hotQ51"    style="top:71.5%; left:13%; width:80%; height:8.5%;"></div>
+    <div class="hotspot" id="hotTable51" style="top:80.5%; left:19%; width:41%; height:9%;"></div>
+    <div class="hotspot" id="hotQ52"    style="top:89.5%; left:13%; width:78%; height:4.5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 8 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第四题：把下面的道路交通标志分类。">
+    <span class="t-badge">练一练④</span><span class="t-main">④ 把下面的道路交通标志分类。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>先数一数：</b>一共 <b>9</b> 个交通标志。<br>
+      分类前先观察：形状有长方形、三角形、圆形；颜色有黄色、白色、蓝色；意思有警告、禁止、指示——从不同角度观察，就能找到不同的分类标准。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="你知道它们分别表示什么意思吗？">
+    <span class="t-badge">机器人的气泡</span><span class="t-main">你知道它们分别表示什么意思吗？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>按意思分三类：</b><br>
+      ① <b>警告标志</b>（黄色三角形，提醒小心）：注意行人、注意信号灯；<br>
+      ② <b>禁止标志</b>（红圈，不可以做）：禁止载货货车驶入、禁止掉头；<br>
+      ③ <b>指示标志</b>（蓝色，告诉怎么走）：向左转弯、向右转弯、公交线路专用车道、掉头车道、直行。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第一小题：按形状分类，填写下表。">
+    <span class="t-badge">练一练④(1)</span><span class="t-main">(1) 按形状分类，填写下表。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>参考答案：</b>个数一行填：长方形 <b>4</b>（向左转弯、向右转弯、公交专用、掉头车道）、三角形 <b>2</b>（注意行人、注意信号灯）、圆形 <b>3</b>（禁止载货货车驶入、禁止掉头、直行）。<br>
+      <b>自查</b>：4 + 2 + 3 = 9，和标志总数对上。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="第二小题：还可以怎样分？">
+    <span class="t-badge">练一练④(2)</span><span class="t-main">(2) 还可以怎样分？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>标准不唯一（表格是空白的，自己定标准自己填）：</b><br>
+      ① 按<b>颜色</b>分：黄色 2、白色 2、蓝色 5；<br>
+      ② 按<b>标志的意思</b>分：警告标志 2、禁止标志 2、指示标志 5。<br>
+      记住：一种表格里，类别和个数要上下对应。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="第三小题：你还能提出什么数学问题？">
+    <span class="t-badge">练一练④(3)</span><span class="t-main">(3) 你还能提出什么数学问题？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>参考问题：</b>三种形状的标志一共有多少个？4 + 2 + 3 = 9（个）。<br>
+      <span style="color:#8d6708">💡 能用分类结果提出问题并正确解答，都算对。比如：蓝色标志比黄色标志多几个？5 − 2 = 3（个）。</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第五题第一小题：将这些算式分成两类，可以怎样分？把分类的结果记录在下表中。">
+    <span class="t-badge">练一练⑤(1)</span><span class="t-main">(1) 将这些算式分成两类，可以怎样分？把分类的结果记录在下表中。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>参考答案（按是否退位分）：</b><br>
+      ① <b>不退位</b> 7 道：28−4、46−30、18−3、19−4、34−11、10−3、38−21（个位够减，不用借位）；<br>
+      ② <b>退位</b> 4 道：30−7、20−5、31−8、30−22（个位不够减，要向十位借 1）。<br>
+      <b>自查</b>：7 + 4 = 11，和算式总数对上。<br>
+      也可以按<b>减数是一位数还是两位数</b>分：7 道和 4 道。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="第五题第二小题：上面的分类结果，还可以继续分吗？和同学交流一下吧。">
+    <span class="t-badge">练一练⑤(2)</span><span class="t-main">(2) 上面的分类结果，还可以继续分吗？和同学交流一下吧。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>答：可以！这就是逐层分类。</b><br>
+      比如：不退位的 7 道，再按<b>减数是一位数还是两位数</b>分——4 道和 3 道；退位的 4 道，也可以再按<b>被减数是不是整十数</b>分——3 道（30−7、20−5、30−22）和 1 道（31−8）。<br>
+      一层一层往下分，越分越清楚。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="按形状分：长方形4个，三角形2个，圆形3个，一共9个。长方形是向左转弯、向右转弯、公交专用、掉头车道；三角形是注意行人、注意信号灯；圆形是禁止载货货车驶入、禁止掉头、直行。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🔵</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>标志按形状分类，各类有几个？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>长方形 4 个</b>：向左转弯、向右转弯、公交专用、掉头车道</div>
+      <div class="sol sol2"><b>三角形 2 个</b>：注意行人、注意信号灯</div>
+      <div class="sol sol3"><b>圆形 3 个</b>：禁止载货货车驶入、禁止掉头、直行</div>
+      <span class="think-note">💡 自查：4 + 2 + 3 = 9，与标志总数对上</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="黄色三角形是警告标志，提醒人们小心，比如注意行人、注意信号灯；红圈的是禁止标志，表示不可以做，比如禁止载货货车驶入、禁止掉头。认识标志的意思，就能按意思分类。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">⚠️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>黄色三角形、红圈的标志各表示什么意思？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>黄色三角形 = 警告标志</b>：提醒小心——注意行人、注意信号灯</li>
+        <li><b>红圈 = 禁止标志</b>：不可以做——禁止载货货车驶入、禁止掉头</li>
+        <li><b>蓝色 = 指示标志</b>：告诉怎么走——5 个</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="还可以按颜色分：黄色2个、白色2个、蓝色5个；也可以按标志的意思分：警告标志2个、禁止标志2个、指示标志5个。标准不同，分类结果不同，但总数都是9个，不变。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🎨</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>标志除了按形状分，还可以按什么分？结果怎样？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（标准不唯一）：</span>
+      <div class="sol sol1"><b>按颜色：</b>黄色 2、白色 2、蓝色 5</div>
+      <div class="sol sol2"><b>按意思：</b>警告 2、禁止 2、指示 5</div>
+      <span class="multi">🌈 标准不同，结果不同；<b>总数都是 9，不变</b></span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="可以按是否退位分：不退位的7道，28减4、46减30、18减3、19减4、34减11、10减3、38减21，个位够减不用借位；退位的4道，30减7、20减5、31减8、30减22，个位不够减要向十位借1。表格里类别写不退位、退位，数量写7和4。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">➖</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>11 道算式分成两类，按什么标准分？表格怎么填？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（按是否退位分）：</span>
+      <div class="sol sol1"><b>不退位 7 道</b>：28−4、46−30、18−3、19−4、34−11、10−3、38−21（个位够减）</div>
+      <div class="sol sol2"><b>退位 4 道</b>：30−7、20−5、31−8、30−22（个位不够减，借位）</div>
+      <span class="think-note">💡 自查：7 + 4 = 11，与算式总数对上。也可按减数是一位数/两位数分：7 道和 4 道</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="不一样。30减7个位0减7不够减，要向十位借1，是退位减法；28减4个位8减4够减，不用借位，是不退位减法。虽然都是两位数减一位数，但按退位不退位这个标准，它们分到不同的类里。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🔍</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>30−7 和 28−4 都是两位数减一位数，按「是否退位」分，它们在同一类吗？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>30−7</b>：个位 0 减 7 <b>不够减</b>，向十位借 1 → <b>退位</b>类</li>
+        <li><b>28−4</b>：个位 8 减 4 <b>够减</b>，不用借 → <b>不退位</b>类</li>
+        <li><b>道理</b>：同一个标准下，特征不同就分到不同的类</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="可以继续分。比如：不退位的7道再按减数是一位数还是两位数分，4道和3道；退位的4道再按被减数是不是整十数分，3道和1道。像这样一层一层往下分就是逐层分类，越分越清楚。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🚀</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>算式的分类结果还可以继续分吗？举一个例子。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（开放题 · 逐层分类）：</span>
+      <div class="ref"><b>例一：</b>不退位 7 道 → 再按减数是一位数 / 两位数分 → 4 道和 3 道。</div>
+      <div class="ref"><b>例二：</b>退位 4 道 → 再按被减数是不是整十数分 → 3 道和 1 道。</div>
+      <span class="multi">🌈 每层只用一个标准，一层一层往下分，就是逐层分类</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotT4', say:'第四题：把下面的道路交通标志分类。'},
+  {region:'hotSigns', say:'数一数，一共九个交通标志：向左转弯、禁止载货货车驶入、向右转弯、注意信号灯、注意行人、公交线路专用车道、禁止掉头、掉头车道、直行。'},
+  {region:'hotRobot', say:'机器人问：你知道它们分别表示什么意思吗？黄色三角形的是警告标志，红圈的是禁止标志，蓝色的是指示标志。'},
+  {region:'hotQ41', say:'第一小题：按形状分类，填写下表。'},
+  {region:'hotTable41', think:true, say:'长方形、三角形、圆形各有几个？想一想。',
+    ans:'长方形四个：向左转弯、向右转弯、公交线路专用车道、掉头车道；三角形两个：注意信号灯、注意行人；圆形三个：禁止载货货车驶入、禁止掉头、直行。四加二加三等于九，和标志总数对上。'},
+  {region:'hotQ42', say:'第二小题：还可以怎样分？注意，这个表格是空白的，要自己定标准、自己填。'},
+  {region:'hotTable42', think:true, say:'想一想：还可以按什么标准分？',
+    ans:'可以按颜色分：黄色两个、白色两个、蓝色五个。也可以按标志的意思分：警告标志两个、禁止标志两个、指示标志五个。'},
+  {region:'hotQ43', say:'第三小题：你还能提出什么数学问题？比如：三种形状的标志一共有多少个？四加二加三等于九个。'},
+  {region:'hotT5', say:'第五题：一共有十一道算式：28减4、30减7、20减5、46减30、18减3、31减8、19减4、34减11、10减3、38减21、30减22。'},
+  {region:'hotQ51', say:'第一小题：将这些算式分成两类，可以怎样分？把分类的结果记录在下表中。'},
+  {region:'hotTable51', think:true, say:'分成两类，标准是什么？想一想。',
+    ans:'可以按是否退位分：个位够减、不用借位的是不退位，有七道；个位不够减、要向十位借一的是退位，有四道。七加四等于十一，和算式总数对上。'},
+  {region:'hotQ52', say:'第二小题：上面的分类结果，还可以继续分吗？和同学交流一下吧。比如不退位的七道，还可以按减数是一位数还是两位数继续分。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：标志按形状分类，各类有几个？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：黄色三角形、红圈的标志各表示什么意思？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：标志除了按形状分，还可以按什么分？结果怎样？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：11道算式分成两类，按什么标准分？表格怎么填？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：30减7和28减4，按是否退位分，它们在同一类吗？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：算式的分类结果还可以继续分吗？举一个例子。想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotT4','第四题：把下面的道路交通标志分类。'],
+ ['hotSigns','9个交通标志：向左转弯、禁止载货货车驶入、向右转弯、注意信号灯、注意行人、公交专用、禁止掉头、掉头车道、直行。'],
+ ['hotRobot','机器人问：你知道它们分别表示什么意思吗？黄三角警告、红圈禁止、蓝色指示。'],
+ ['hotQ41','第一小题：按形状分类，填写下表。'],
+ ['hotTable41','按形状：长方形4个、三角形2个、圆形3个。4加2加3等于9。'],
+ ['hotQ42','第二小题：还可以怎样分？表格空白，自己定标准。'],
+ ['hotTable42','按颜色：黄2、白2、蓝5；按意思：警告2、禁止2、指示5。'],
+ ['hotQ43','第三小题：你还能提出什么数学问题？比如三种标志一共多少个？4加2加3等于9个。'],
+ ['hotT5','第五题：11道算式。可以按是否退位分成两类。'],
+ ['hotQ51','第一小题：将这些算式分成两类，可以怎样分？记录在下表中。'],
+ ['hotTable51','不退位7道，退位4道：30减7、20减5、31减8、30减22。7加4等于11。'],
+ ['hotQ52','第二小题：分类结果还可以继续分吗？比如不退位的7道再按减数是一位数还是两位数分。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

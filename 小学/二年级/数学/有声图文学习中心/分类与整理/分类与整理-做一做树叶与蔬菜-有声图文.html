@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>做一做 树叶与蔬菜 · 有声图文（听读带学）—— 二年级上册（人教版）</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{ --head-a:#00897b; --head-b:#4fc3f7; --blue:#1565c0; --orange:#e65100; --pink:#ad1457; --ink:#3a3f4a; --sub:#9c93ad; --hl:#ffb300; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:linear-gradient(180deg,#f0f7ff 0%,#fffef2 100%); color:var(--ink); line-height:1.8; padding-bottom:110px; }
+  .container{ max-width:900px; margin:0 auto; padding:20px 16px 40px; }
+  .topbar{ position:sticky; top:0; z-index:999; display:block; text-align:center; background:#d84a2b; color:#fff; padding:9px 0; font-size:14px; text-decoration:none; }
+  header{ position:relative; overflow:hidden; text-align:center; background:linear-gradient(135deg,var(--head-a) 0%,var(--head-b) 100%); border-radius:24px; padding:26px 20px; margin:16px 0 14px; box-shadow:0 8px 20px rgba(0,137,123,.28); }
+  header h1{ position:relative; font-size:25px; color:#fff; text-shadow:1px 2px 4px rgba(0,0,0,.15); margin-bottom:6px; }
+  header p{ position:relative; color:#eafaf7; font-size:14.5px; }
+
+  /* ===== 教材图 + 热区（读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; text-align:center; }
+  .img-wrap img{ width:100%; max-width:560px; height:auto; border-radius:16px; border:4px solid #edf1fb; box-shadow:0 3px 10px rgba(0,0,0,.1); }
+  .hotspot{ position:absolute; border:3px dashed transparent; border-radius:14px; transition:all .35s; pointer-events:none; }
+  /* 读到图片某一块时：虚线框闪动提示（读哪块、哪块闪） */
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash 1.1s ease-in-out infinite; }
+  /* 热区位置（按课本第2页截图估算，可按实际微调百分比） */
+  #hotSay{    left:8%;  top:2%;  width:84%; height:20%; }  /* 说一说 + 两个小朋友气泡 */
+  #hotLeaf{   left:6%;  top:34%; width:46%; height:19%; }  /* 做一做1 树叶图 */
+  #hotCircle{ left:49%; top:34%; width:24%; height:19%; }  /* 涂一涂的圆圈 */
+  #hotBlank{  left:73%; top:35%; width:22%; height:17%; }  /* 右侧（ ）片括号 */
+  #hotVeg{    left:22%; top:62%; width:58%; height:25%; }  /* 做一做2 蔬菜图 */
+  #hotVegQ{   left:8%;  top:87%; width:84%; height:9%;  }  /* (1)(2) 两个问题 */
+  .img-tip{ font-size:13px; color:var(--sub); margin-top:6px; text-align:center; }
+
+  /* ===== 课本文字行（点句子听读） ===== */
+  .sec-title{ font-size:19px; font-weight:bold; color:#00695c; margin:26px 0 10px; display:flex; align-items:center; gap:8px; }
+  .sec-title .bar{ width:6px; height:20px; border-radius:4px; background:var(--head-a); }
+  .sayable{ background:#fff; border:2px solid #e3ecf5; border-radius:14px; padding:10px 16px; margin-top:10px; cursor:pointer; transition:box-shadow .3s, border-color .3s; position:relative; }
+  .sayable:hover{ border-color:#b3dced; }
+  .sayable .t-badge{ display:inline-block; font-size:12px; color:#fff; background:#78909c; border-radius:8px; padding:1px 8px; margin-right:8px; }
+  .sayable .t-main{ font-size:16.5px; font-weight:bold; color:#37474f; }
+  .sayable .t-sub{ font-size:14px; color:#607d8b; }
+  /* 读到文字某一行时：整行卡片闪动提示 */
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash 1.1s ease-in-out infinite; }
+  .bubble-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .bubble-row .sayable{ flex:1; min-width:200px; margin-top:0; }
+  /* ===== 课本文字卡内嵌答案（点句子朗读 + 展开答案） ===== */
+  .say-toggle{ position:absolute; right:12px; top:10px; font-size:12px; color:#607d8b;
+    background:#eceff1; border-radius:8px; padding:2px 9px; transition:.3s; pointer-events:none; }
+  .sayable.open .say-toggle{ background:#ffecb3; color:#bf4a00; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f6fbf6; border:1.5px dashed #a5d6a7; border-radius:10px;
+    padding:9px 12px; font-size:14.5px; line-height:1.75; color:#33691e; }
+  .say-ans-box .a-label{ font-weight:bold; color:#1b5e20; }
+  .say-ans-box .sol{ border-radius:8px; padding:5px 10px; margin-top:6px; font-size:13.5px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable{ padding-right:96px; }          /* 给右上角「看答案」角标留空间 */
+  .bubble-row .sayable{ padding-right:72px; }
+
+  /* 图片热区闪动：橙黄交替，提示"正在读这一块" */
+  @keyframes regionFlash{
+    0%,100%{ border-color:var(--hl); background:rgba(255,179,0,.10); box-shadow:0 0 0 6px rgba(255,179,0,.16); }
+    50%{ border-color:#ff7043; background:rgba(255,112,67,.22); box-shadow:0 0 0 14px rgba(255,112,67,.34); }
+  }
+  /* 文字行闪动：同样的橙黄脉冲，提示"正在读这一行" */
+  @keyframes rowFlash{
+    0%,100%{ border-color:var(--hl); box-shadow:0 0 0 6px rgba(255,179,0,.16); }
+    50%{ border-color:#ff7043; box-shadow:0 0 0 12px rgba(255,112,67,.36); }
+  }
+
+  /* ===== 提问与解析卡 ===== */
+  .qa{ background:#fff; border:2px solid #e3ecf5; border-radius:16px; padding:14px 18px; margin-top:14px; position:relative; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash 1.1s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:flex-start; gap:10px; cursor:pointer; }
+  .qa-head .q-emoji{ font-size:22px; flex:0 0 auto; }
+  .qa-head .q-text{ font-size:16.5px; font-weight:bold; color:#37474f; flex:1; }
+  .lv-pill{ display:inline-block; font-size:12px; font-weight:bold; border-radius:999px; padding:1px 10px; margin-right:6px; vertical-align:2px; }
+  .lv-r{ background:#e3f2fd; color:var(--blue); } .lv-q{ background:#fff3e0; color:var(--orange); } .lv-t{ background:#fce4ec; color:var(--pink); }
+  .toggle{ flex:0 0 auto; background:#e0f2f1; color:#00695c; border-radius:999px; padding:3px 14px; font-size:13px; font-weight:bold; }
+  .think-pill{ display:none; align-items:center; gap:6px; margin-top:10px; background:#fff8e1; border:2px dashed #ffca28; color:#8d6708; border-radius:999px; padding:4px 14px; font-size:13.5px; font-weight:bold; cursor:pointer; width:max-content; }
+  .think-pill:hover{ background:#fff3cd; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .4s ease; overflow:hidden; min-height:0; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; margin-top:10px; background:#f4faff; border-left:5px solid #64a7e8; border-radius:0 12px 12px 0; padding:0 14px; font-size:15px; color:#44505c; }
+  .qa.open .qa-a-inner{ padding:10px 14px; }
+  .qa-a-inner .a-label{ font-weight:bold; color:var(--blue); }
+  .qa-a-inner ul{ margin:6px 0 0 22px; } .qa-a-inner li{ margin-bottom:4px; }
+  .sol{ border-radius:10px; padding:8px 12px; margin-top:8px; font-size:14.5px; }
+  .sol b{ display:inline-block; margin-bottom:2px; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  /* 参考答案块（给 1~2 条明确参考答案） */
+  .ref{ background:#e8f5e9; border-left:5px solid #43a047; border-radius:0 10px 10px 0; padding:8px 12px; margin-top:8px; font-size:14.5px; color:#1b5e20; }
+  .ref b{ color:#1b5e20; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff3e0; color:#bf6a1a; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  /* 第一步：解析教材图片的"思考 / 解析"读出区（始终贴在图片下方） */
+  .img-think{ display:none; align-items:center; gap:6px; margin:10px auto 0; width:max-content; background:#fff8e1; border:2px dashed #ffca28; color:#8d6708; border-radius:999px; padding:4px 14px; font-size:13.5px; font-weight:bold; cursor:pointer; }
+  .img-think:hover{ background:#fff3cd; }
+  .img-ans{ margin:10px auto 0; max-width:640px; background:#fff; border:2px solid #ffcc80; border-radius:14px; padding:0 14px; max-height:300px; overflow:hidden; transition:max-height .4s ease, padding .4s ease; font-size:15px; color:#5d4037; text-align:left; }
+  .img-ans.show{ max-height:300px; padding:10px 14px; }
+  .img-ans .a-h{ font-weight:bold; color:#e65100; display:block; margin-bottom:2px; }
+
+  /* ===== 底部控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:50%; bottom:14px; transform:translateX(-50%); z-index:1100; background:rgba(216,74,43,.97); color:#fff; border-radius:30px; padding:9px 16px; display:flex; gap:10px; align-items:center; box-shadow:0 4px 14px rgba(120,40,20,.30); font-size:13px; max-width:94vw; flex-wrap:wrap; justify-content:center; }
+  .ctrl-bar button{ background:#fff; color:#d84a2b; border:none; border-radius:18px; padding:7px 16px; font-size:13.5px; cursor:pointer; font-weight:bold; font-family:inherit; }
+  .ctrl-bar button:hover{ background:#ffe9d6; } .ctrl-bar button:disabled{ opacity:.55; cursor:default; }
+  #cap{ position:fixed; left:50%; bottom:64px; transform:translateX(-50%); z-index:1090; background:rgba(38,50,56,.92); color:#fff; border-radius:14px; padding:8px 16px; font-size:14px; max-width:88vw; text-align:center; display:none; box-shadow:0 4px 12px rgba(0,0,0,.25); }
+  .hint-bar{ background:#fff8e1; border-left:5px solid #ffca28; border-radius:0 14px 14px 0; padding:12px 16px; font-size:14px; color:#7a5c00; margin:14px 0 20px; }
+  footer{ text-align:center; color:var(--sub); font-size:13.5px; margin-top:10px; }
+  @media (max-width:560px){ .container{ padding:14px 10px; } header h1{ font-size:21px; } .sayable .t-main{ font-size:15px; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<a class="topbar" href="../index.html">📚 二年级上册 · 分层提问系列导航（点此返回）</a>
+<div class="container">
+
+  <header>
+    <h1>🔊 做一做 树叶与蔬菜 · 有声图文</h1>
+    <p>人教版《数学》二年级上册 · 课本第 2 页 · 有声带读 · 先想后看解析</p>
+  </header>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学（纯声音 + 高亮跟随）：</b><br>
+    <b>① 解析教材图片</b>——点「① 解析教材图片」：跟着声音读图，读到哪一块哪一块就<b>高亮闪动</b>；关键处会<b>倒计时让你思考</b>，再在图片下方给出解析。<br>
+    <b>② 分层提问练习</b>——点「② 分层提问练习」：做六道分层题（认知 / 强化 / 拓展 / 总结），每题先思考再出解析；这一步<b>不回图片</b>。也可以随时点任意一句话、任意一题<b>单独听</b>。
+  </div>
+
+  <!-- ===== 教材原图（热区叠加） ===== -->
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/02-课本第2页-做一做树叶与蔬菜.jpg" alt="课本第2页：说一说——生活中还有哪些需要分类整理的事情？分类整理有哪些好处？两位小朋友说：分类整理后物品更容易找到；分类整理后更容易数出每类物品。做一做1：按形状分一分，再涂一涂、填一填（树叶图、涂色圆圈、右侧括号）。做一做2：把下面的蔬菜分类，(1)按蔬菜的种类分一分，将结果表示出来；(2)哪种蔬菜最多？哪种最少？">
+    <div class="hotspot" id="hotSay"></div>
+    <div class="hotspot" id="hotLeaf"></div>
+    <div class="hotspot" id="hotCircle"></div>
+    <div class="hotspot" id="hotBlank"></div>
+    <div class="hotspot" id="hotVeg"></div>
+    <div class="hotspot" id="hotVegQ"></div>
+  </div>
+  <div class="img-tip">📖 课本第 2 页 · 做一做（树叶涂一涂、蔬菜分类）· 图片仅供个人学习，版权归人民教育出版社所有</div>
+  <!-- 第一步贴在图片下方的"思考 / 解析"读出区 -->
+  <div class="img-think" id="imgThink">🤔 想一想…</div>
+  <div class="img-ans" id="imgAns"></div>
+
+  <!-- ===== 课本文字（可点读） ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读给你听 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="说一说：生活中还有哪些需要分类整理的事情？分类整理有哪些好处？">
+    <span class="t-badge">说一说</span><span class="t-main">生活中还有哪些需要分类整理的事情？分类整理有哪些好处？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <span class="a-label">参考答案（开放题，说出自己的例子就对）：</span>
+      <div class="sol sol1">📒 <b>整理书包、书桌、衣柜</b>——分类摆放后，物品更容易找到。</div>
+      <div class="sol sol2">🛒 <b>超市货架、图书馆的图书</b>按类摆放——更容易数出每类有多少。</div>
+    </div></div></div>
+  </div>
+
+  <div class="bubble-row">
+    <div class="sayable" id="t2" data-say="男同学说：分类整理后，物品更容易找到。">
+      <span class="t-sub">🧒 分类整理后，物品更容易找到。</span>
+      <span class="say-toggle">看答案 ▾</span>
+      <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+        <span class="a-label">这是分类的<b>好处一</b></span>：东西有位置、有类别，<b>找起来快</b>。你说出类似的例子也算对。
+      </div></div></div>
+    </div>
+    <div class="sayable" id="t3" data-say="女同学说：分类整理后，更容易数出每类物品。">
+      <span class="t-sub">👧 分类整理后，更容易数出每类物品……</span>
+      <span class="say-toggle">看答案 ▾</span>
+      <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+        <span class="a-label">这是分类的<b>好处二</b></span>：一类一类放清楚，<b>数起来也快</b>。
+      </div></div></div>
+    </div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="做一做第一题：按形状分一分，再涂一涂、填一填。">
+    <span class="t-badge">做一做1</span><span class="t-main">按形状分一分，再涂一涂、填一填。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <span class="a-label">答案（已数好）：</span>
+      <b>绿叶 6 片、红枫叶 4 片、黄银杏叶 3 片、细长叶 3 片</b>，一共 16 片（圆圈格子共 20 个，涂满 16 个即可）。<br>
+      怎么做：① <b>分一分</b>：按形状定标准，分成四类；<br>
+      ② <b>涂一涂</b>：一类涂一行，一片叶子涂一个圈，上下对齐；<br>
+      ③ <b>填一填</b>：把上面的片数填进（　）里，再检查一遍。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="做一做第二题：把下面的蔬菜分类。">
+    <span class="t-badge">做一做2</span><span class="t-main">把下面的蔬菜分类。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <span class="a-label">答案（按种类分，共 6 类 14 个）：</span>
+      <b>西红柿 4 个、青椒 3 个、黄瓜 2 根、洋葱 2 个、红椒 2 个、胡萝卜 1 根</b>。<br>
+      先<b>定标准</b>（按种类），再<b>分一分</b>，最后把结果<b>表示出来</b>。一次分类只能用同一个标准。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第一小题：按蔬菜的种类分一分，将结果表示出来。">
+    <span class="t-badge">问题</span><span class="t-main">(1) 按蔬菜的种类分一分，将结果表示出来。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <span class="a-label">参考结果（数好了）：</span>
+      <div class="sol sol1">🔵 <b>象形图</b>：一类一行圆圈——西红柿涂4个、青椒3个、黄瓜2个、洋葱2个、红椒2个、胡萝卜1个。</div>
+      <div class="sol sol2">✍️ <b>画"正"字</b>：西红柿"四"、青椒"三"、黄瓜/洋葱/红椒各"二"、胡萝卜"一"。</div>
+      <div class="sol sol3">📋 <b>列成表格</b>：西红柿4、青椒3、黄瓜2、洋葱2、红椒2、胡萝卜1。</div>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="第二小题：哪种蔬菜最多？哪种最少？">
+    <span class="t-badge">问题</span><span class="t-main">(2) 哪种蔬菜最多？哪种最少？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <span class="a-label">答案（数好了）：</span>
+      <b>西红柿最多，有 4 个；胡萝卜最少，只有 1 根</b>。<br>
+      怎么比：先<b>数一数</b>每类各有几个——个数最大的最多，个数最小的最少；也可以在象形图上<b>对齐比长短</b>，一眼看出谁多谁少。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问与解析 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问 · 先想一想，再看解析</div>
+
+  <div class="qa" id="q1" data-ans="树叶按形状分，可以分成四类：宽绿叶6片，红枫叶4片，黄银杏叶3片，细长叶3片，一共16片。数的方法：一类一类地数，数一片记一片，不重不漏。分法不唯一，也可以按颜色分。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🍃</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>树叶按形状分一分，可以分成哪几类？每类怎么数？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（分法不唯一）：</span>
+      <ul>
+        <li><b>按形状定标准</b>：宽绿叶、红枫叶、黄银杏叶、细长叶——共四类</li>
+        <li><b>数的方法</b>：一类一类地数，<b>数一片记一片</b>（涂一个圈或画一画），不重不漏</li>
+        <li><b>数好了</b>：宽绿叶 <b>6</b> 片、红枫叶 <b>4</b> 片、黄银杏叶 <b>3</b> 片、细长叶 <b>3</b> 片，一共 <b>16</b> 片</li>
+      </ul>
+      <span class="multi">🌈 也可以按颜色分（红 / 黄 / 绿），只要标准统一就对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="涂一涂的好办法：一类涂一行，一片叶子涂一个圆圈，涂的时候上下对齐。涂完比一比：绿叶行最长，有6片；黄银杏叶行最短，只有3片。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🖍️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>涂一涂怎么涂，才能一眼看出哪类多、哪类少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>一类涂一行</b>，一片叶子对应涂<b>一个圈</b>，别涂串行（圆圈格子共 20 个，涂满 16 个，剩下 4 个不涂）</li>
+        <li>涂的时候<b>上下对齐</b>，像排队一样</li>
+        <li>涂完<b>比长短</b>：<b>绿叶行最长（6片）最多，黄银杏叶行最短（3片）最少</b></li>
+      </ul>
+      <span class="think-note">💡 这就是"象形图"——用图形把分类结果表示出来</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="蔬菜分类的标准不唯一：可以按种类分，西红柿4个、青椒3个、黄瓜2根、洋葱2个、红椒2个、胡萝卜1根；也可以按颜色分，红色6个、绿色5个、紫色2个、橙色1个。注意：一次分类只能用同一个标准。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🥕</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>蔬菜可以按什么标准分类？（不唯一）</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（标准不唯一）：</span>
+      <div class="sol sol1"><b>标准一 · 按种类：</b>西红柿 <b>4</b>、青椒 <b>3</b>、黄瓜 <b>2</b>、洋葱 <b>2</b>、红椒 <b>2</b>、胡萝卜 <b>1</b>，共 6 类 14 个。</div>
+      <div class="sol sol2"><b>标准二 · 按颜色：</b>红色 <b>6</b>（西红柿+红椒）、绿色 <b>5</b>（青椒+黄瓜）、紫色 <b>2</b>（洋葱）、橙色 <b>1</b>（胡萝卜）。</div>
+      <span class="multi">🌈 标准不同，分法不同；但<b>一次分类只能用同一个标准</b></span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="表示分类结果的方法不唯一：可以用象形图，一类一行圆圈，西红柿涂4个、青椒3个、黄瓜2个、洋葱2个、红椒2个、胡萝卜1个；可以画正字计数；也可以列成表格。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">📊</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>(1) 怎样把分类的结果表示出来？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（表示法多解）：</span>
+      <div class="sol sol1"><b>象形图：</b>一类画一行圆圈——西红柿涂 <b>4</b> 个、青椒 <b>3</b>、黄瓜 <b>2</b>、洋葱 <b>2</b>、红椒 <b>2</b>、胡萝卜 <b>1</b>。</div>
+      <div class="sol sol2"><b>画"正"字：</b>数一个画一笔，一个"正"字正好 5。</div>
+      <div class="sol sol3"><b>列成表格：</b>蔬菜一行、个数一行——4、3、2、2、2、1，清清楚楚。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="数一数每类蔬菜各有几个，再比大小：西红柿最多，有4个；胡萝卜最少，只有1根。也可以在象形图上对齐比长短，长得多、短得少。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">⚖️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>(2) 哪种蔬菜最多？哪种最少？怎么比？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>第一步</b>：数一数，每类各有几个（西红柿 4、青椒 3、黄瓜 2、洋葱 2、红椒 2、胡萝卜 1）</li>
+        <li><b>第二步</b>：比大小——<b>西红柿最多（4个），胡萝卜最少（1根）</b></li>
+        <li><b>偷懒法</b>：在象形图上对齐比长短，一眼看出谁多谁少</li>
+      </ul>
+      <span class="think-note">💡 答案不唯一时先数对，数对了结论才会对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="说一说：生活中需要分类整理的事情和分类的好处。参考答案一：整理书包、书桌、衣柜，分类摆放后物品更容易找到。参考答案二：超市货架、图书馆的图书按类摆放，更容易数出每类有多少，找起来也快。说出你自己的例子就是好答案。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">💬</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>说一说：生活中还有哪些需要分类整理的事情？有什么好处？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（开放题）：</span>
+      <div class="ref"><b>参考答案一：</b>整理<b>书包、书桌、衣柜</b>——分类摆放后，物品<b>更容易找到</b>（课本中小男孩说的）。</div>
+      <div class="ref"><b>参考答案二：</b><b>超市货架、图书馆的图书</b>按类摆放——<b>更容易数出每类有多少</b>，找起来也快（课本中小女孩说的）。</div>
+      <span class="multi">🌈 开放题：说出你自己的例子（如整理玩具、垃圾分类），说出"好找、好数"这类好处即达成</span>
+    </div></div>
+  </div>
+
+  <footer>
+    <p>人教版《数学》二年级上册 · 做一做 树叶与蔬菜 · 有声图文（听读带学）</p>
+    <p>图片仅供个人学习使用，版权归原作者（人民教育出版社）所有 · 建议用电脑版 Chrome / Edge 打开以启用语音</p>
+  </footer>
+
+</div>
+
+<!-- 字幕条 + 控制条 -->
+<div id="cap"></div>
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">第一步听图讲解析 · 第二步练分层题（不回图片）</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var synth=('speechSynthesis' in window)?window.speechSynthesis:null;
+var zhVoice=null;
+function loadVoices(){ if(!synth)return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){ if(/zh|chinese|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } }
+if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+var cap=document.getElementById('cap');
+var abort=false;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 高亮并滚到视野中央（纯声音 + 高亮跟随，无小鼠标） */
+function focusEl(el){
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  hl(el);
+}
+function updateCap(t){ cap.style.display='block'; cap.textContent=t; }
+
+/* 朗读：TTS 优先；无 TTS 时按字数定时（字幕同步显示） */
+function speak(text){
+  return new Promise(function(res){
+    updateCap(text);
+    if(!synth){ var ms=Math.min(9000, 600+text.length*150); setTimeout(res,ms); return; }
+    synth.cancel();
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN'; u.rate=0.85; u.pitch=1.05; if(zhVoice) u.voice=zhVoice;
+    var done=false; function fin(){ if(done)return; done=true; setTimeout(res,380); }
+    u.onend=fin; u.onerror=fin;
+    synth.speak(u);
+    /* 兜底：个别浏览器不触发 onend */
+    setTimeout(fin, Math.min(16000, 2500+text.length*260));
+  });
+}
+
+/* 思考倒计时（点胶囊可跳过） */
+function think(qa){
+  return new Promise(function(res){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    var n=secs;
+    pill.style.display='inline-flex';
+    pill.textContent='🤔 想一想 '+n+' 秒…（点我跳过）';
+    pill.onclick=function(){ n=1; };
+    var iv=setInterval(function(){
+      if(abort){ clearInterval(iv); pill.style.display='none'; res(); return; }
+      n--;
+      if(n<=0){ clearInterval(iv); pill.textContent='✔ 想好了，看解析！';
+        setTimeout(function(){ pill.style.display='none'; res(); },550);
+      } else { pill.textContent='🤔 想一想 '+n+' 秒…（点我跳过）'; }
+    },1000);
+  });
+}
+function openAnswer(qa){
+  qa.classList.add('open');
+  var t=qa.querySelector('.toggle'); if(t) t.textContent='收起';
+}
+function closeAnswer(qa){
+  qa.classList.remove('open');
+  var t=qa.querySelector('.toggle'); if(t) t.textContent='看解析';
+}
+/* 手动点题：先读出题目文字 → 留 3 秒思考 → 展开解析（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  var qtext=qa.querySelector('.q-text').textContent;   /* 给题目文字加上声音 */
+  speak(qtext);
+  var pill=qa.querySelector('.think-pill');
+  var n=3; pill.style.display='inline-flex';
+  pill.textContent='🤔 想一想 '+n+' 秒…（点我跳过）';
+  pill.onclick=function(){ n=0; };
+  var iv=setInterval(function(){
+    n--;
+    if(n<=0){ clearInterval(iv); pill.style.display='none'; openAnswer(qa); }
+    else pill.textContent='🤔 想一想 '+n+' 秒…（点我跳过）';
+  },1000);
+}
+
+/* 两个步骤共用的按钮与读出区引用 */
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+var imgThink=document.getElementById('imgThink');
+var imgAns=document.getElementById('imgAns');
+
+/* ================= 第一步：解析教材图片（纯声音读图，读到哪块哪块高亮闪动） ================= */
+var steps1=[
+  {region:'hotSay', say:'请看课本第二页。先说一说：生活中还有哪些需要分类整理的事情？分类整理有哪些好处？'},
+  {region:'hotSay', say:'两位小朋友说：分类整理后，物品更容易找到；分类整理后，更容易数出每类物品。这就是分类的两大好处。'},
+  {region:'hotLeaf', say:'做一做第一题：按形状分一分。图里的树叶有红红的枫叶、黄黄的银杏叶，还有宽宽的绿叶和细细长长的叶子。'},
+  {region:'hotLeaf', think:true, say:'想一想：按形状分，可以分成几类？每类怎么数？',
+    ans:'可以分成四类：宽绿叶6片，红枫叶4片，黄银杏叶3片，细长叶3片，一共16片。数的时候一类一类地数，数一片记一片，不重不漏。'},
+  {region:'hotCircle', say:'再涂一涂：下面有一排排圆圈，格子共20个，涂满16个就行（叶子一共16片），剩下4个不涂。一片叶子涂一个圈，一类涂一行，涂的时候上下对齐，像排队一样。'},
+  {region:'hotBlank', say:'最后填一填，从上往下：绿叶6片，红枫叶4片，黄银杏叶3片，细长叶3片。数完可以再检查一遍，加起来正好是16片。'},
+  {region:'hotVeg', say:'做一做第二题：把下面的蔬菜分类。数一数：西红柿4个，青椒3个，黄瓜2根，洋葱2个，红椒2个，胡萝卜1根，一共14个蔬菜。'},
+  {region:'hotVeg', think:true, say:'想一想：可以按什么标准分类？',
+    ans:'标准不唯一：可以按种类分，分成6类；也可以按颜色分，红色的6个，绿色的5个，紫色的2个，橙色的1个。记住，一次分类只能用同一个标准。'},
+  {region:'hotVegQ', say:'第一小题：按种类分一分，把结果表示出来。第二小题：比一比，西红柿最多，有4个；胡萝卜最少，只有1根。'}
+];
+
+/* 第一步：把整张图片滚到视野中央 */
+function scrollImage(){
+  document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'});
+}
+/* 第一步专用：思考倒计时（显示在图片下方的胶囊里，可点跳过） */
+function thinkPill(pillEl, secs){
+  return new Promise(function(res){
+    var n=secs;
+    pillEl.style.display='inline-flex';
+    pillEl.textContent='🤔 想一想 '+n+' 秒…（点我跳过）';
+    pillEl.onclick=function(){ n=1; };
+    var iv=setInterval(function(){
+      if(abort){ clearInterval(iv); pillEl.style.display='none'; res(); return; }
+      n--;
+      if(n<=0){ clearInterval(iv); pillEl.textContent='✔ 想好了！';
+        setTimeout(function(){ pillEl.style.display='none'; res(); },500);
+      } else { pillEl.textContent='🤔 想一想 '+n+' 秒…（点我跳过）'; }
+    },1000);
+  });
+}
+function showImgAns(head, text){
+  imgAns.innerHTML='';
+  var h=document.createElement('span'); h.className='a-h'; h.textContent=head;
+  var p=document.createElement('div'); p.textContent=text;
+  imgAns.appendChild(h); imgAns.appendChild(p);
+  imgAns.classList.add('show');
+}
+function clearImgAns(){ imgAns.classList.remove('show'); imgAns.innerHTML=''; }
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();               /* 把整图滚到视野中央 */
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=s.region?document.getElementById(s.region):null;
+    if(rg) rg.classList.add('hl');   /* 读到哪块，哪块闪动 */
+    await speak(s.say);              /* 朗读 + 字幕 */
+    if(abort) break;
+    if(s.think){                     /* 关键处：思考→给答案 */
+      clearImgAns();
+      await thinkPill(imgThink, 8);
+      if(abort) break;
+      showImgAns('📖 解析：', s.ans);
+      await speak(s.ans);
+      if(abort) break;
+      await wait(1400);
+      clearImgAns();
+    }
+    if(rg) rg.classList.remove('hl');
+    await wait(400);
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（按原技能，但不再回到图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一个问题：树叶按形状分一分，可以分成哪几类？每类怎么数？想一想。'},
+  {id:'q2', qa:'q2', say:'第二个问题：涂一涂怎么涂，才能一眼看出哪类多、哪类少？想一想。'},
+  {id:'q3', qa:'q3', say:'第三个问题：蔬菜可以按什么标准分类？想一想，标准可不只有一种。'},
+  {id:'q4', qa:'q4', say:'第四个问题：怎样把蔬菜分类的结果表示出来？想一想。'},
+  {id:'q5', qa:'q5', say:'第五个问题：哪种蔬菜最多？哪种最少？怎么比？想一想。'},
+  {id:'q6', qa:'q6', say:'最后说一说：生活中还有哪些需要分类整理的事情？分类整理有什么好处？'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);                   /* 高亮并滚到题目卡，不指向图片 */
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    if(s.qa){
+      var qa=document.getElementById(s.qa);
+      closeAnswer(qa);
+      await think(qa);               /* 题目自带倒计时 */
+      if(abort) break;
+      openAnswer(qa);
+      await wait(400);
+      if(abort) break;
+      await speak(qa.getAttribute('data-ans')||'');
+    }
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click', playStep1);
+btnStep2.addEventListener('click', playStep2);
+document.getElementById('btnStop').addEventListener('click', function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  imgThink.style.display='none'; clearImgAns();
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 单句点读：点文字 = 朗读 + 展开/收起答案（纯声音 + 高亮跟随） */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    /* 已展开的卡片：再点一次就收起 */
+    if(el.classList.contains('open')){
+      el.classList.remove('open');
+      el.querySelector('.say-toggle').textContent='看答案 ▾';
+      unhl();
+      return;
+    }
+    /* 先收起其他已展开的卡片，保证画面聚焦 */
+    document.querySelectorAll('.sayable.open').forEach(function(o){
+      o.classList.remove('open');
+      var tg=o.querySelector('.say-toggle'); if(tg) tg.textContent='看答案 ▾';
+    });
+    focusEl(el);
+    el.classList.add('open');
+    el.querySelector('.say-toggle').textContent='收起 ▴';
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+/* 热区也可单独点读（读图指图） */
+[['hotSay','说一说：生活中还有哪些需要分类整理的事情？分类整理有哪些好处？'],
+ ['hotLeaf','树叶图：按形状分一分，宽绿叶6片，红枫叶4片，黄银杏叶3片，细长叶3片，一共16片。'],
+ ['hotCircle','涂一涂：一片叶子涂一个圈，一类涂一行，上下对齐，格子共20个涂满16个。'],
+ ['hotBlank','填一填：绿叶6片，红枫叶4片，黄银杏叶3片，细长叶3片，把片数填进括号里。'],
+ ['hotVeg','蔬菜图：西红柿4个，青椒3个，黄瓜2根，洋葱2个，红椒2个，胡萝卜1根，一共14个。'],
+ ['hotVegQ','两个问题：按种类分一分表示出来；西红柿最多4个，胡萝卜最少1根。']].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.style.pointerEvents='auto'; el.style.cursor='pointer';
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

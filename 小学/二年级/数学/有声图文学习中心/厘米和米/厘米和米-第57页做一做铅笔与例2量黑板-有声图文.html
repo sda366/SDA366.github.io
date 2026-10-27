@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>厘米和米 · 课本第57页 做一做与例2量黑板 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 四、厘米和米 · 课本第 57 页 · 做一做与例2 量黑板</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 · 正确量法 · 认识米(m)</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>铅笔读数 · 量法对不对 · 手指比长度 · 量长物体用米</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/48a-课本第57页-做一做铅笔与例2量黑板.jpg" alt="课本第57页：做一做。1.用庹或步作单位，选择感兴趣的物体量一量它的长度。2.铅笔长7厘米（铅笔从刻度0到刻度7）。3.要量纸的长边，下面的量法对吗？说一说理由。三种量法：对齐刻度0贴紧纸边、没对齐、斜放。4.借助尺子，用手指表示出5厘米、10厘米大约有多长。例2 量出黑板的长度。男孩：这样量太麻烦了。老师：用这把米尺试试。量比较长的物体，通常用米作单位。米可以用m表示。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTitle" style="top:3.5%;  left:8%;  width:20%; height:6%;"></div>
+    <div class="hotspot" id="hotT1"    style="top:12.5%; left:8%;  width:76%; height:6%;"></div>
+    <div class="hotspot" id="hotT2q"   style="top:21%;   left:8%;  width:40%; height:4.5%;"></div>
+    <div class="hotspot" id="hotT2r"   style="top:26%;   left:10%; width:52%; height:6%;"></div>
+    <div class="hotspot" id="hotT3q"   style="top:34.5%; left:8%;  width:64%; height:4.5%;"></div>
+    <div class="hotspot" id="hotT3p"   style="top:39.5%; left:8%;  width:74%; height:9%;"></div>
+    <div class="hotspot" id="hotT4q"   style="top:51%;   left:8%;  width:76%; height:4.5%;"></div>
+    <div class="hotspot" id="hotT4r"   style="top:56%;   left:10%; width:76%; height:5%;"></div>
+    <div class="hotspot" id="hotTwo"   style="top:63%;   left:8%;  width:6%;  height:5%;"></div>
+    <div class="hotspot" id="hotT2big" style="top:63%;   left:16%; width:36%; height:4.5%;"></div>
+    <div class="hotspot" id="hotScene" style="top:68.5%; left:12%; width:78%; height:20%;"></div>
+    <div class="hotspot" id="hotBoy"   style="top:70.5%; left:13%; width:20%; height:7%;"></div>
+    <div class="hotspot" id="hotGirl"  style="top:68.5%; left:47%; width:20%; height:6%;"></div>
+    <div class="hotspot" id="hotM"     style="top:90%;   left:8%;  width:84%; height:7.5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 57 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="做一做第1题：用庹或步作单位，选择感兴趣的物体量一量它的长度。比如用庹量墙的宽，用步量教室的长。">
+    <span class="t-badge">做一做1</span><span class="t-main">用庹或步量物体</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      示例：用<b>庹</b>量黑板的宽（大约 2 庹多）；用<b>步</b>量教室的长（大约 10 步）；<br>
+      量的时候单位长度要一样大，一庹挨一庹、一步挨一步。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="做一做第2题：铅笔从刻度0量到刻度7，铅笔长7厘米。第3题：只有把刻度0对准纸的左端、贴紧纸边、不放歪的量法才对；没对齐的、斜着放的量法都不对。">
+    <span class="t-badge">做一做2、3</span><span class="t-main">铅笔读数 + 量法判断</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      第 2 题：铅笔从 <b>0 到 7</b>，长 <b>7 厘米</b>；<br>
+      第 3 题：<b>对齐刻度 0、贴紧纸边</b>的量法对；<b>没对齐 0</b> 的、<b>斜着放</b>的都不对。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="做一做第4题：借助尺子，用手指表示出5厘米、10厘米大约有多长。先在尺子上比出5厘米，再用手指记住这个宽度。">
+    <span class="t-badge">做一做4</span><span class="t-main">手指比 5 厘米、10 厘米</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      先在尺子上从 0 比<b> 5 厘米</b>，两个手指卡住这段距离，再离开尺子保持不变；<br>
+      10 厘米就是<b>两个 5 厘米</b>接起来，大约一拃长；<br>
+      <span class="multi" style="display:inline-block;margin:0">💡 5厘米、10厘米也是随身"活尺子"</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="例2：量出黑板的长度。用厘米的尺子一段一段量太麻烦了，老师拿出米尺。量比较长的物体，通常用米作单位，米可以用m表示。">
+    <span class="t-badge">例2</span><span class="t-main">量黑板 → 认识米（m）</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      用小尺子量黑板：量一次记一次，<b>太麻烦</b>；<br>
+      用<b>米尺</b>量，又快又方便；<br>
+      量<b>比较长</b>的物体，通常用<b>米</b>作单位，米用 <b>m</b> 表示。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="图中铅笔从刻度0到刻度7，铅笔长7厘米。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">✏️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>做一做第 2 题：铅笔长多少厘米？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">铅笔长 <b>7 厘米</b>。</div>
+      <div class="sol sol2">左端对 <b>0</b>，右端对着 <b>7</b>，就是 7 厘米。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="要量纸的长边，把刻度0对准纸的左端、尺子贴紧纸边、不放歪，这样量才对。没对齐刻度0的和斜着放的量法都不对。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">📄</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>做一做第 3 题：哪种量法对？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>对齐 0、贴紧纸边</b>的量法对；</div>
+      <div class="sol sol2">没对齐刻度 0 的、<b>斜放</b>的都不对，量出的数会不准。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="示例：黑板的长用厘米的尺子量，量一次做一次记号再接着量，量很多次才能量完，太麻烦了；所以要用米尺。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">😤</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>用小尺子量黑板，为什么男孩说太麻烦了？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">小尺子短，量一次只有十几厘米，要量<b>很多次</b>；</div>
+      <div class="sol sol2">换成<b>米尺</b>，一次一大段，量得又快又准。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="量比较长的物体，通常用米作单位，米可以用m表示。黑板、教室、操场这些长度都用米。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">📏</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>量比较长的物体用什么单位？怎么表示？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">用<b>米</b>作单位，用 <b>m</b> 表示；</div>
+      <div class="sol sol2">量黑板、量教室、量操场都常用米。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="先在尺子上找到刻度0和刻度5，两个手指卡住这段距离；再从刻度0到刻度10，两手指张开比出10厘米。记住这个宽度，就是随身的活尺子。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🤏</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>怎样用手指表示 5 厘米和 10 厘米？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">在尺子上比出 <b>0 到 5</b>，手指卡住记牢 → 5 厘米；</div>
+      <div class="sol sol2">比出 <b>0 到 10</b>，大约一拃宽 → 10 厘米。</div>
+      <span class="think-note">💡 随时用手比一比，估长本领越来越准</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="示例：量数学课本的宽用厘米，大约21厘米；量教室门的高用米，大约2米。物体长就用米，物体短就用厘米，选对了单位别人一听就知道大概多长。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>课本的宽和教室门的高，各用什么单位量合适？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">课本的宽是<b>短的</b> → 用<b>厘米</b>；</div>
+      <div class="sol sol2">门的高是<b>长的</b> → 用<b>米</b>。</div>
+      <span class="multi">🌈 短用厘米，长用米，选对单位才好交流</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotTitle', say:'做一做。'},
+  {region:'hotT1', say:'第1题：用庹或步作单位，选择感兴趣的物体量一量它的长度。'},
+  {region:'hotT2q', think:true, say:'第2题：铅笔长多少厘米？看图：铅笔左端对着刻度0，右端对着刻度7。想一想。',
+    ans:'从刻度0到刻度7，铅笔长7厘米。'},
+  {region:'hotT2r', say:'图上铅笔从0量到7。'},
+  {region:'hotT3q', think:true, say:'第3题：要量纸的长边，三种量法对吗？说一说理由。想一想。',
+    ans:'把刻度0对准纸的左端、贴紧纸边、不放歪的量法才对；没对齐的和斜着放的都不对。'},
+  {region:'hotT3p', say:'看三幅小图：对齐刻度0贴紧纸边的对；没对齐0的不对；斜着放的不对。'},
+  {region:'hotT4q', think:true, say:'第4题：借助尺子，用手指表示出5厘米、10厘米大约有多长。想一想怎么比。',
+    ans:'先在尺子上从0比到5，手指卡住这段距离；再从0比到10，大约一拃宽。'},
+  {region:'hotT4r', say:'尺子从0到11，先比5厘米，再比10厘米。'},
+  {region:'hotTwo', say:'例2。'},
+  {region:'hotT2big', say:'量出黑板的长度。'},
+  {region:'hotBoy', say:'男孩用小尺子量，说：这样量太麻烦了。'},
+  {region:'hotGirl', say:'老师说：用这把米尺试试。'},
+  {region:'hotScene', say:'男孩换上米尺，一下一下量黑板，快多了。'},
+  {region:'hotM', say:'量比较长的物体，通常用米作单位。米可以用m表示。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：做一做第2题，铅笔长多少厘米？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：做一做第3题，哪种量法对？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：用小尺子量黑板，为什么说太麻烦了？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：量比较长的物体用什么单位？怎么表示？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：怎样用手指表示5厘米和10厘米？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：课本的宽和教室门的高，各用什么单位量合适？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotTitle','做一做。'],
+ ['hotT1','用庹或步作单位，选择感兴趣的物体量一量它的长度。'],
+ ['hotT2q','铅笔长多少厘米？'],
+ ['hotT2r','铅笔从刻度0到刻度7。'],
+ ['hotT3q','要量纸的长边，下面的量法对吗？说一说理由。'],
+ ['hotT3p','对齐刻度0贴紧纸边的对；没对齐的和斜放的不对。'],
+ ['hotT4q','借助尺子，用手指表示出5厘米、10厘米大约有多长。'],
+ ['hotT4r','尺子从0到11。'],
+ ['hotTwo','例2。'],
+ ['hotT2big','量出黑板的长度。'],
+ ['hotBoy','这样量太麻烦了。'],
+ ['hotGirl','用这把米尺试试。'],
+ ['hotScene','用米尺量黑板，快多了。'],
+ ['hotM','量比较长的物体，通常用米作单位。米可以用m表示。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

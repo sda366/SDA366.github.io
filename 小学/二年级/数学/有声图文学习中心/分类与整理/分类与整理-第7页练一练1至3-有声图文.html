@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分类与整理 · 课本第7页 练一练1～3 · 有声图文带读</title>
+<style>
+  :root{ --main:#3949ab; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f5fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#3949ab,#5c6bc0); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e8eaf6; border:1px dashed #9fa8da; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#9fa8da; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e8eaf6; color:#3949ab; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(48,63,159,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#303f9f; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>✏️ 分类与整理 · 课本第 7 页 · 练一练 1～3</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>象形统计图读数</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/07a-课本第7页-练一练1至3.png" alt="课本第7页练一练：1将车圈出来共有几辆；2整理自己的书包说一说怎样整理的；3调查二(2)班最喜欢的动物象形统计图，填统计表并回答问题">
+    <!-- 热区按 780×1080 版面估算百分比，交付前已对照原图核校 -->
+    <div class="hotspot" id="hotLian"   style="top:5.5%;  left:19%; width:18%; height:5.5%;"></div>
+    <div class="hotspot" id="hotT1"     style="top:13%;   left:8%;  width:28%; height:4.5%;"></div>
+    <div class="hotspot" id="hotCars"   style="top:17%;   left:12%; width:56%; height:13.5%;"></div>
+    <div class="hotspot" id="hotCount"  style="top:26%;   left:70%; width:23%; height:5%;"></div>
+    <div class="hotspot" id="hotT2"     style="top:31.5%; left:8%;  width:78%; height:5%;"></div>
+    <div class="hotspot" id="hotT3"     style="top:37.5%; left:8%;  width:86%; height:8%;"></div>
+    <div class="hotspot" id="hotChart"  style="top:44.5%; left:16%; width:72%; height:24%;"></div>
+    <div class="hotspot" id="hotLabels" style="top:68.5%; left:12%; width:83%; height:3.5%;"></div>
+    <div class="hotspot" id="hotFill"   style="top:72.5%; left:12%; width:58%; height:4.5%;"></div>
+    <div class="hotspot" id="hotTable"  style="top:76.5%; left:14%; width:69%; height:9.5%;"></div>
+    <div class="hotspot" id="hotQ1"     style="top:86%;   left:12%; width:58%; height:4.5%;"></div>
+    <div class="hotspot" id="hotQ2"     style="top:91%;   left:12%; width:56%; height:4.5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 7 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第一题：将车圈出来。">
+    <span class="t-badge">练一练①</span><span class="t-main">① 将车圈出来。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>参考答案：</b>圈出 <b>4</b> 辆车——<b>大客车、货车、小汽车、面包车</b>。<br>
+      直升机、飞机在天上飞，帆船、轮船在水里走，都不是车，不圈。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="共有几辆车？">
+    <span class="t-badge">练一练①填空</span><span class="t-main">共有 □ 辆车。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>答：共有 4 辆车。</b>数的时候一辆一辆地数，数一辆做一个记号，就不会漏数、重复数。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第二题：整理一下自己的书包，说一说你是怎样整理的。">
+    <span class="t-badge">练一练②</span><span class="t-main">② 整理一下自己的书包。说一说你是怎样整理的。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>整理方法（多解，选一种说清楚）：</b><br>
+      ① 按<b>用途</b>分：书放一层，本子放一层，文具盒放一边；<br>
+      ② 按<b>科目</b>分：数学书和数学练习本放一起，语文书和语文练习本放一起；<br>
+      ③ 按<b>大小</b>分：大的书放下面，小的放上面。<br>
+      <span style="color:#8d6708">💡 记住：一次整理只用同一个标准。</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="第三题：调查二(2)班同学最喜欢的动物，结果如下，每个涂色的圆代表1名同学。">
+    <span class="t-badge">练一练③</span><span class="t-main">③ 调查二（2）班同学最喜欢的动物，结果如下（每个 ● 代表 1 名同学）。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>读图关键：</b>这是<b>象形统计图</b>——涂色的圆有几个，人数就是几。<br>
+      数的时候<b>从下往上、一个一个数</b>，数一个做一个记号，不漏数、不重复数。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="根据上图填写下表并回答问题。">
+    <span class="t-badge">练一练③填表</span><span class="t-main">根据上图填写下表并回答问题。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>统计表（人数一行）：</b>乌龟 <b>3</b>、猴 <b>6</b>、猫 <b>6</b>、狗 <b>7</b>、大熊猫 <b>8</b>。<br>
+      <b>自查</b>：3 + 6 + 6 + 7 + 8 = 30，全班一共 30 人。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第一小题：最喜欢哪种动物的人数最多？">
+    <span class="t-badge">练一练③(1)</span><span class="t-main">(1) 最喜欢哪种动物的人数最多？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>答：最喜欢大熊猫的人数最多</b>（8 人）。<br>
+      看统计表比大小：8 &gt; 7 &gt; 6 = 6 &gt; 3；也可以直接看象形图，涂色圆最多的一列就是人数最多的。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="第二小题：你还能提出什么数学问题？">
+    <span class="t-badge">练一练③(2)</span><span class="t-main">(2) 你还能提出什么数学问题？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>参考问题（多解）：</b><br>
+      ① 最喜欢狗的比最喜欢乌龟的多几人？7 − 3 = 4（人）；<br>
+      ② 最喜欢猫和狗的一共有多少人？6 + 7 = 13（人）；<br>
+      ③ 最喜欢大熊猫的比最喜欢乌龟的多几人？8 − 3 = 5（人）。<br>
+      <span style="color:#8d6708">💡 能用表中的数提出问题并正确解答，都算对。</span>
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="圈出4辆车：大客车、货车、小汽车、面包车，它们都在地上跑，是用来载人载物的车。共有4辆车。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🚗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>图上哪些是车？共有几辆？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>圈出 4 辆</b>：大客车、货车、小汽车、面包车</li>
+        <li><b>它们共同的特点</b>：在地上跑、载人载物的车</li>
+        <li>填空：共有 <b>4</b> 辆车</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="直升机和飞机在天上飞，帆船和轮船在水里走，都不符合车在地上跑这个标准，所以不圈。这道题告诉我们：先确定标准再圈，一次只用一个标准，才不会圈错。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🚁</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>直升机、帆船为什么不圈？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li>直升机、飞机——<b>在天上飞</b>，不是车</li>
+        <li>帆船、轮船——<b>在水里走</b>，不是车</li>
+        <li><b>道理</b>：先确定标准（在地上跑的车），再用标准去判断，一次只用一个标准</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="统计表人数一行填：乌龟3人，猴6人，猫6人，狗7人，大熊猫8人。检查：3加6加6加7加8等于30，全班一共30人，说明没数漏。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📋</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>统计表怎么填？怎样检查没数漏？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>人数一行</b>：乌龟 3、猴 6、猫 6、狗 7、大熊猫 8</div>
+      <div class="sol sol2"><b>数的方法</b>：从下往上一个个数涂色的圆，数一个做记号</div>
+      <span class="think-note">💡 自查：3 + 6 + 6 + 7 + 8 = 30，与全班人数对上</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="最喜欢大熊猫的人数最多，有8人；最喜欢乌龟的人数最少，只有3人。可以在统计表里比大小，也可以直接看象形图哪列涂色的圆最多、哪列最少。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🐼</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>最喜欢哪种动物的人数最多？哪种最少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>最多</b>：大熊猫，8 人</li>
+        <li><b>最少</b>：乌龟，3 人</li>
+        <li><b>两种比法</b>：统计表里比数字；或直接看象形图比列的长短</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="最喜欢狗的有7人，最喜欢乌龟的有3人。七减三等于四，最喜欢狗的比最喜欢乌龟的多4人。也可以在象形图上对齐比一比，多出来的部分就是4个圆，也就是4人。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">⚖️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>最喜欢狗的比最喜欢乌龟的多几人？怎么算？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>第一步</b>：查表——狗 7 人，乌龟 3 人</li>
+        <li><b>第二步</b>：7 − 3 = 4（人），<b>多 4 人</b></li>
+        <li><b>直观法</b>：象形图上对齐比一比，多出来的就是 4 个圆</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="参考答案一：最喜欢猫和狗的一共有多少人？6加7等于13人。参考答案二：最喜欢大熊猫的比最喜欢乌龟的多几人？8减3等于5人。参考答案三：二(2)班一共调查了多少人？3加6加6加7加8等于30人。能用表中的数提出问题并解答，都算对。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🚀</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>根据统计表，你还能提出什么数学问题？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（开放题）：</span>
+      <div class="ref"><b>问题一：</b>最喜欢猫和狗的一共有多少人？6 + 7 = 13（人）。</div>
+      <div class="ref"><b>问题二：</b>最喜欢大熊猫的比最喜欢乌龟的多几人？8 − 3 = 5（人）。</div>
+      <div class="ref"><b>问题三：</b>全班一共调查了多少人？3 + 6 + 6 + 7 + 8 = 30（人）。</div>
+      <span class="multi">🌈 用表中的数提出问题并正确解答，都算对</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotLian', say:'课本第七页，练一练。'},
+  {region:'hotT1', say:'第一题：将车圈出来。'},
+  {region:'hotCars', think:true, say:'图上有八个交通工具：大客车、货车、直升机、小汽车、帆船、飞机、面包车、轮船。想一想：哪些是车？把它们圈出来。',
+    ans:'车是在地上跑、载人载物的交通工具。大客车、货车、小汽车、面包车是车。直升机和飞机在天上飞，帆船和轮船在水里走，都不是车。'},
+  {region:'hotCount', say:'数一数：共有四辆车。在方框里填四。数的时候一辆一辆数，数一辆做一个记号。'},
+  {region:'hotT2', say:'第二题：整理一下自己的书包，说一说你是怎样整理的。可以先按用途分，书一层、本子一层、文具盒放一边；也可以按科目分。一次整理只用一个标准。'},
+  {region:'hotT3', say:'第三题：调查二(2)班同学最喜欢的动物，结果如下，每个涂色的圆代表一名同学。'},
+  {region:'hotChart', say:'看这张象形统计图：一共五列，从左到右是最喜欢乌龟的、猴的、猫的、狗的、大熊猫的。涂色的圆有几个，人数就是几。从下往上、一个一个数。'},
+  {region:'hotLabels', think:true, say:'数一数：每一列涂了几个圆？各是多少人？',
+    ans:'乌龟三人，猴六人，猫六人，狗七人，大熊猫八人。三加六加六加七加八等于三十，全班一共三十人。'},
+  {region:'hotFill', say:'根据上图填写下表并回答问题。'},
+  {region:'hotTable', say:'统计表这样填：人数一行，乌龟三、猴六、猫六、狗七、大熊猫八。'},
+  {region:'hotQ1', think:true, say:'第一小题：最喜欢哪种动物的人数最多？',
+    ans:'八最大，最喜欢大熊猫的人数最多，有八人。看统计表比大小，或者直接看象形图哪列涂色的圆最多，都可以。'},
+  {region:'hotQ2', say:'第二小题：你还能提出什么数学问题？比如：最喜欢狗的比最喜欢乌龟的多几人？七减三等于四，多四人。还可以问：最喜欢猫和狗的一共有多少人？六加七等于十三人。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：图上哪些是车？共有几辆？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：直升机、帆船为什么不圈？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：统计表怎么填？怎样检查没数漏？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：最喜欢哪种动物的人数最多？哪种最少？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：最喜欢狗的比最喜欢乌龟的多几人？怎么算？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：根据统计表，你还能提出什么数学问题？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotLian','课本第7页，练一练。'],
+ ['hotT1','第一题：将车圈出来。'],
+ ['hotCars','八个交通工具：大客车、货车、直升机、小汽车、帆船、飞机、面包车、轮船。车是在地上跑的：大客车、货车、小汽车、面包车。'],
+ ['hotCount','共有4辆车。数的时候一辆一辆数，做记号，不漏不重。'],
+ ['hotT2','第二题：整理一下自己的书包，说一说你是怎样整理的。一次整理只用一个标准。'],
+ ['hotT3','第三题：调查二(2)班同学最喜欢的动物，每个涂色的圆代表1名同学。'],
+ ['hotChart','象形统计图：涂色的圆有几个，人数就是几。从下往上、一个一个数。'],
+ ['hotLabels','五列依次是：最喜欢乌龟的、猴的、猫的、狗的、大熊猫的。人数分别是3、6、6、7、8。'],
+ ['hotFill','根据上图填写下表并回答问题。'],
+ ['hotTable','统计表：乌龟3、猴6、猫6、狗7、大熊猫8。3加6加6加7加8等于30人。'],
+ ['hotQ1','第一小题：最喜欢大熊猫的人数最多，有8人。'],
+ ['hotQ2','第二小题：你还能提出什么数学问题？比如：最喜欢狗的比最喜欢乌龟的多几人？7减3等于4，多4人。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

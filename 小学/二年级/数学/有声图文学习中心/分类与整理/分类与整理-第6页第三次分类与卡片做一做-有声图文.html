@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分类与整理 · 课本第6页（第三次分类与卡片做一做）· 有声图文带读</title>
+<style>
+  :root{ --main:#7b1fa2; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f7f4fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#7b1fa2,#ab47bc); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#f3e5f5; border:1px dashed #ce93d8; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#ce93d8; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#f3e5f5; color:#6a1b9a; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(106,27,154,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#6a1b9a; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🧮 分类与整理 · 课本第 6 页 · 第三次分类与卡片做一做</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>分类顺序与结果</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/06a-课本第6页-第二次分类与卡片做一做.jpg" alt="课本第6页：纽扣第三次分类最后分成8类；回顾分类过程有什么发现；做一件新衣服需要2粒相同扣子有几种选择；做一做：卡片先按形状分类再继续分">
+    <!-- 热区按 796×1080 版面估算百分比，交付前已对照原图核校 -->
+    <div class="hotspot" id="hotTitle"   style="top:3%;    left:12%; width:62%; height:4.5%;"></div>
+    <div class="hotspot" id="hotTable3"  style="top:6.5%;  left:50%; width:40%; height:16.5%;"></div>
+    <div class="hotspot" id="hotGirl1"   style="top:10.5%; left:13%; width:32%; height:9.5%;"></div>
+    <div class="hotspot" id="hotReview"  style="top:24%;   left:13%; width:76%; height:4.5%;"></div>
+    <div class="hotspot" id="hotGirl2"   style="top:29.5%; left:13%; width:38%; height:10%;"></div>
+    <div class="hotspot" id="hotBoy2"    style="top:27.5%; left:55%; width:30%; height:10.5%;"></div>
+    <div class="hotspot" id="hotRobot"   style="top:41%;   left:30%; width:46%; height:5.5%;"></div>
+    <div class="hotspot" id="hotChoice"  style="top:47.5%; left:12%; width:82%; height:4.5%;"></div>
+    <div class="hotspot" id="hotZuo"     style="top:51.5%; left:8%;  width:24%; height:5.5%;"></div>
+    <div class="hotspot" id="hotCards"   style="top:58.5%; left:19%; width:66%; height:15.5%;"></div>
+    <div class="hotspot" id="hotQ1"      style="top:74.5%; left:12%; width:80%; height:4.5%;"></div>
+    <div class="hotspot" id="hotTable"   style="top:79.5%; left:20%; width:47%; height:9.5%;"></div>
+    <div class="hotspot" id="hotQ2"      style="top:89.5%; left:12%; width:76%; height:4.5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 6 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第二次分类的结果，还可以继续分吗？">
+    <span class="t-badge">课本问题</span><span class="t-main">第二次分类的结果，还可以继续分吗？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>答：还可以！</b>按颜色分出的每一类里，纽扣的<b>孔数</b>还不一样——有的 2 个孔，有的 4 个孔，所以还能再按<b>孔数</b>分一次。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="还可以按孔数分，最后分成了8类。">
+    <span class="t-badge">女孩的气泡</span><span class="t-main">还可以按……分，最后分成了 8 类。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>第三次按孔数分：</b>红色方形分成 2 孔的和 4 孔的两类，红色圆形也一样；蓝色方形、蓝色圆形也都各分成 2 孔和 4 孔。<br>
+      <b>算一算</b>：4 类 × 每类再分 2 类 = <b>8 类</b>，和书上说的对上了。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="回顾分类过程，对比每次分类结果，你有什么发现？">
+    <span class="t-badge">课本问题</span><span class="t-main">回顾分类过程，对比每次分类结果，你有什么发现？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>书上有两个发现：</b><br>
+      ① 女孩：按一定标准分类后，<b>还可以再分</b>；<br>
+      ② 男孩：不管按什么<b>顺序</b>分类，最后都分成了 <b>8 类</b>——顺序换了，结果不变。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="我发现按一定标准分类后，还可以再分。">
+    <span class="t-badge">女孩的发现</span><span class="t-main">我发现按一定标准分类后，还可以再分。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>这句话的意思：</b>只要分出的每一类里还有不同，就能<b>再选一个标准继续分</b>——这就是逐层分类。分到不能再分为止。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="我发现不管按什么顺序分类，最后都分成了8类。">
+    <span class="t-badge">男孩的发现</span><span class="t-main">我发现不管按什么顺序分类，最后都分成了 8 类。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>验证一下：</b>先按形状→颜色→孔数，是 8 类；换成先按颜色→形状→孔数，最后还是同样的 8 类。<br>
+      <b>结论：分类的顺序换了，最终结果不变。</b>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="像这样逐层分类后，更方便使用纽扣。">
+    <span class="t-badge">机器人的话</span><span class="t-main">像这样逐层分类后，更方便使用纽扣。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>分类的好处：</b>纽扣原来混在一起，找 2 粒一样的很难；逐层分类后，每类里的纽扣<b>完全相同</b>，一眼就能找到要用的——这就是分类让生活更方便。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="如果做一件新衣服需要2粒相同的扣子，有几种选择？">
+    <span class="t-badge">课本问题</span><span class="t-main">如果做一件新衣服需要 2 粒相同的扣子，有几种选择？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>思考方法：</b>「相同」= 同一类的纽扣。在分好的 8 类里，<b>数一数哪几类够 2 粒</b>——够 2 粒的类有几类，就有几种选择。<br>
+      <span style="color:#8d6708">✏️ 注意：只有 1 粒的那一类不够用，不算一种选择。你自己数一数、算一算。</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t8" data-say="做一做：准备好下面的卡片，分一分。">
+    <span class="t-badge">做一做</span><span class="t-main">准备好下面的卡片，分一分。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>先观察卡片：</b>一共 <b>15</b> 张。形状有<b>三角形、正方形、圆形</b>三种；图案有<b>桃、梨、苹果</b>三种。能按形状分，也能按图案分。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t9" data-say="第一小题：先按卡片形状分类，再把结果记录在下表中。">
+    <span class="t-badge">做一做(1)</span><span class="t-main">(1) 先按卡片形状分类，再把结果记录在下表中。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>参考答案：</b>形状一行写「三角形、正方形、圆形」，个数一行对应写 <b>4、5、6</b>。<br>
+      <b>自查</b>：4 + 5 + 6 = 15，和卡片总数对上，说明没数漏。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t10" data-say="第二小题：上面的分类结果，还可以继续分吗？怎样分？">
+    <span class="t-badge">做一做(2)</span><span class="t-main">(2) 上面的分类结果，还可以继续分吗？怎样分？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>答：可以！</b>按形状分出的每一类里，图案还不同，可以再按<b>图案（桃 / 梨 / 苹果）</b>分一次。<br>
+      3 种形状 × 每种再分 3 类 = 最后 <b>9</b> 类。先按图案分、再按形状分，最后也是这 9 类——顺序换，结果不变。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="第三次是按孔数分的：每一类纽扣有的2个孔，有的4个孔。四类各再分两类，四乘二等于八，最后分成了8类。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🕳️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>纽扣第三次按什么分？最后分成了几类？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>标准</b>：按<b>孔数</b>分——2 个孔的 / 4 个孔的</li>
+        <li><b>过程</b>：红方、红圆、蓝方、蓝圆 4 类，每类再分 2 类</li>
+        <li><b>结果</b>：4 × 2 = <b>8 类</b></li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="男孩发现：不管按什么顺序分类，最后都分成了8类。比如先按形状、颜色、孔数分，或先按颜色、形状、孔数分，最后的8类完全一样。分类顺序换了，结果不变。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🔁</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>男孩对比每次分类结果，发现了什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>发现</b>：不管按什么<b>顺序</b>分类，最后都分成 <b>8 类</b></li>
+        <li><b>举例</b>：形状→颜色→孔数，和 颜色→形状→孔数，结果一样</li>
+        <li><b>结论</b>：顺序换，结果不变</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="按形状分：三角形4张，正方形5张，圆形6张，一共15张。表格里形状一行写三角形、正方形、圆形，个数一行写4、5、6。检查：4加5加6等于15，和卡片总数一样。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📋</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>卡片按形状分类，表格怎么填？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>形状行</b>：三角形、正方形、圆形</div>
+      <div class="sol sol2"><b>个数行</b>：4、5、6（合计 15 张）</div>
+      <span class="think-note">💡 自查：4 + 5 + 6 = 15，与卡片总数对上</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="可以继续分。每种形状的卡片里图案还不同，可以再按图案分：桃、梨、苹果。三种形状各分三类，三乘三等于九，最后9类。先按图案分再按形状分，结果也是这9类。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🪜</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>卡片按形状分完后，还能继续分吗？怎样分？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（逐层分类）：</span>
+      <ul>
+        <li><b>第一层</b>：按形状 → 三角形、正方形、圆形（3 类）</li>
+        <li><b>第二层</b>：每类再按图案 → 桃 / 梨 / 苹果</li>
+        <li><b>结果</b>：3 × 3 = <b>9 类</b>；换顺序（先图案后形状）也是这 9 类</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="做一件新衣服需要2粒相同的扣子。相同的意思是同一类。在分好的8类里，数一数哪几类够2粒，够2粒的类有几类，就有几种选择。只有1粒的那类不够用，不算一种选择。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">👔</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>做新衣服要 2 粒相同的扣子，这个问题怎么想？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（教方法，不代答案）：</span>
+      <ul>
+        <li><b>「相同」</b>= 同一类的纽扣（颜色、形状、孔数都一样）</li>
+        <li><b>方法</b>：在 8 类里逐类检查——<b>够 2 粒</b>的才算一种选择</li>
+        <li><b>提醒</b>：只有 1 粒的那类不够用，要排除</li>
+      </ul>
+      <span class="think-note">💡 数一数够 2 粒的类有几类，就是几种选择</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="参考答案：逐层分类每层只用一个标准，越分越清楚；分完后每类里的东西完全相同，找东西、用东西都更方便。比如纽扣分好类，要2粒相同的马上就能找到；超市、图书馆也是这样分类摆放的。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🚀</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>回顾这三次分类，逐层分类有什么好处？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（开放题）：</span>
+      <div class="ref"><b>好处一：</b>每层只用一个标准，越分越<b>清楚</b>，不会乱。</div>
+      <div class="ref"><b>好处二：</b>分完后每类里的东西<b>完全相同</b>，要找什么马上就能找到。</div>
+      <span class="multi">🌈 结合生活举例（超市货架、图书馆、衣柜）说得有道理都算对</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotTitle', say:'第二次分类的结果，还可以继续分吗？'},
+  {region:'hotGirl1', think:true, say:'女孩说：还可以按什么分，最后分成了8类。',
+    ans:'还能按孔数分：每类纽扣有的2个孔、有的4个孔。红色方形分成2孔和4孔两类，红色圆形也一样，蓝色方形、蓝色圆形也都各分两类。四类再各分两类，四乘二等于八，一共8类。'},
+  {region:'hotTable3', say:'看右边这个表：第三次分类后一共8个小格，每格就是一类，最后分成了8类。'},
+  {region:'hotReview', say:'回顾分类过程，对比每次分类结果，你有什么发现？'},
+  {region:'hotGirl2', say:'女孩发现：按一定标准分类后，还可以再分。'},
+  {region:'hotBoy2', say:'男孩发现：不管按什么顺序分类，最后都分成了8类。'},
+  {region:'hotRobot', say:'机器人提醒：像这样逐层分类后，更方便使用纽扣。'},
+  {region:'hotChoice', think:true, say:'如果做一件新衣服需要2粒相同的扣子，有几种选择？',
+    ans:'方法是这样的：相同，就是同一类的纽扣。在分好的8类里，数一数哪几类够2粒，够2粒的类有几类，就有几种选择。注意，只有1粒的那一类不够用，不算一种选择。'},
+  {region:'hotZuo', say:'下面是做一做：准备好下面的卡片，分一分。'},
+  {region:'hotCards', say:'数一数，一共15张卡片。形状有三角形、正方形、圆形三种；图案有桃、梨、苹果三种。'},
+  {region:'hotQ1', say:'第一小题：先按卡片形状分类，再把结果记录在下表中。'},
+  {region:'hotTable', think:true, say:'表格应该怎么填？想一想。',
+    ans:'形状一行写三角形、正方形、圆形；个数一行对应写4、5、6。检查一下：4加5加6等于15，和卡片总数对上，说明没数漏。'},
+  {region:'hotQ2', say:'第二小题：上面的分类结果，还可以继续分吗？怎样分？提示：每种形状的卡片里，图案还不同，可以再按图案分。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：纽扣第三次按什么分？最后分成了几类？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：男孩对比每次分类结果，发现了什么？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：卡片按形状分类，表格怎么填？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：卡片按形状分完后，还能继续分吗？怎样分？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：做新衣服要2粒相同的扣子，这个问题怎么想？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：回顾这三次分类，逐层分类有什么好处？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotTitle','第二次分类的结果，还可以继续分吗？'],
+ ['hotGirl1','女孩说：还可以按孔数分，最后分成了8类。'],
+ ['hotTable3','第三次分类的表格：8个小格就是8类，红色方形、红色圆形、蓝色方形、蓝色圆形，各按2孔和4孔分。'],
+ ['hotReview','回顾分类过程，对比每次分类结果，你有什么发现？'],
+ ['hotGirl2','女孩发现：按一定标准分类后，还可以再分。'],
+ ['hotBoy2','男孩发现：不管按什么顺序分类，最后都分成了8类。'],
+ ['hotRobot','机器人提醒：像这样逐层分类后，更方便使用纽扣。'],
+ ['hotChoice','如果做一件新衣服需要2粒相同的扣子，有几种选择？在8类里数一数哪几类够2粒。'],
+ ['hotZuo','做一做：准备好下面的卡片，分一分。'],
+ ['hotCards','一共15张卡片：形状有三角形、正方形、圆形；图案有桃、梨、苹果。'],
+ ['hotQ1','第一小题：先按卡片形状分类，再把结果记录在下表中。'],
+ ['hotTable','表格填法：形状写三角形、正方形、圆形；个数写4、5、6。4加5加6等于15。'],
+ ['hotQ2','第二小题：上面的分类结果，还可以继续分吗？可以再按图案分，桃、梨、苹果，最后9类。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人教版 · 义务教育教科书 · 数学 · 有声图文学习中心</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f2f5fa; color:#22303c; line-height:1.7; }
+  a{ text-decoration:none; color:inherit; }
+  .hero{ background:linear-gradient(135deg,#0d47a1 0%,#1565c0 45%,#00838f 100%); color:#fff; padding:52px 20px 44px; position:relative; overflow:hidden; }
+  .hero::after{ content:""; position:absolute; right:-80px; top:-80px; width:340px; height:340px; border-radius:50%; background:rgba(255,255,255,.07); }
+  .hero-inner{ max-width:1120px; margin:0 auto; position:relative; z-index:2; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:5px 16px; font-size:13px; }
+  .hero h1{ font-size:34px; margin:14px 0 10px; }
+  .hero .sub{ font-size:15px; opacity:.93; max-width:760px; }
+  .stats{ display:flex; flex-wrap:wrap; gap:14px; margin:26px 0 22px; }
+  .stats div{ background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); border-radius:14px; padding:12px 22px; min-width:120px; }
+  .stats b{ display:block; font-size:28px; line-height:1.2; }
+  .stats span{ font-size:12.5px; opacity:.9; }
+  .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .hero-actions a{ background:#fff; color:#0d47a1; border-radius:999px; padding:10px 24px; font-weight:bold; font-size:14.5px; box-shadow:0 4px 14px rgba(0,0,0,.18); }
+  .hero-actions a.ghost{ background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.6); box-shadow:none; }
+  .topnav{ position:sticky; top:0; z-index:50; background:rgba(255,255,255,.96); border-bottom:1px solid #dde5ee; }
+  .topnav-inner{ max-width:1120px; margin:0 auto; padding:12px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .chip{ font-size:13px; border-radius:999px; padding:6px 14px; background:#eef3f9; border:1px solid #dbe4ef; white-space:nowrap; transition:.2s; }
+  .chip:hover{ background:var(--c); color:#fff; border-color:var(--c); }
+  .searchbox{ margin-left:auto; }
+  .searchbox input{ border:1px solid #d5dee9; border-radius:999px; padding:7px 16px; font-size:13.5px; width:200px; outline:none; font-family:inherit; }
+  main{ max-width:1120px; margin:0 auto; padding:28px 20px 60px; }
+  .guide{ background:#fff; border-radius:18px; padding:24px 26px; box-shadow:0 4px 18px rgba(20,40,80,.07); margin-bottom:32px; border-left:6px solid #1565c0; }
+  .guide h2{ font-size:19px; color:#0d47a1; margin-bottom:12px; }
+  .steps{ display:flex; gap:14px; flex-wrap:wrap; }
+  .step{ flex:1; min-width:230px; background:#f6f9fd; border-radius:14px; padding:14px 16px; }
+  .step b{ display:block; color:#1565c0; font-size:15px; margin-bottom:4px; }
+  .step span{ font-size:13.5px; color:#546778; }
+  .tip{ margin-top:14px; font-size:13.5px; color:#546778; background:#fff8e1; border:1px dashed #ffca28; border-radius:10px; padding:10px 14px; }
+  .unit{ margin-bottom:38px; scroll-margin-top:80px; }
+  .uhead{ display:flex; align-items:center; gap:16px; background:#fff; border-radius:16px 16px 0 0; padding:16px 20px; border-left:6px solid var(--c); }
+  .unum{ flex:0 0 auto; width:52px; height:52px; border-radius:14px; background:var(--c); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold; }
+  .uinfo h2{ font-size:20px; }
+  .uinfo p{ font-size:13px; color:#7b8a99; }
+  .utop{ margin-left:auto; font-size:12.5px; color:#90a4ae; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(268px,1fr)); gap:14px; padding:16px; background:#fff; border-radius:0 0 16px 16px; }
+  .card{ position:relative; border:1px solid #e3eaf3; border-radius:14px; padding:14px 16px 40px; background:#fbfcfe; transition:.22s; overflow:hidden; }
+  .card::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--c); opacity:0; transition:.22s; }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 10px 22px rgba(20,40,80,.12); border-color:var(--c); background:#fff; }
+  .card:hover::before{ opacity:1; }
+  .card-top{ display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .pg{ background:var(--c); color:#fff; font-size:12px; border-radius:6px; padding:2px 8px; font-weight:bold; }
+  .qt{ font-size:12px; color:#90a4ae; }
+  .card h3{ font-size:16px; margin-bottom:6px; line-height:1.45; }
+  .card .meta{ font-size:12.8px; color:#6b7c8d; line-height:1.75; }
+  .go{ position:absolute; left:16px; bottom:12px; font-size:12.5px; color:var(--c); font-weight:bold; }
+  .card.hide{ display:none; }
+  .empty-hint{ display:none; padding:20px; text-align:center; color:#90a4ae; font-size:14px; }
+  footer{ background:#263238; color:#cfd8dc; text-align:center; padding:26px 20px; font-size:13px; }
+  footer b{ color:#fff; }
+  @media (max-width:720px){ .hero h1{ font-size:26px; } .searchbox input{ width:100%; } .uhead{ flex-wrap:wrap; } }
+  @media print{ .topnav,.hero-actions,.searchbox{ display:none; } .card{ break-inside:avoid; } }
+</style>
+</head>
+<body id="top">
+<header class="hero">
+  <div class="hero-inner">
+    <span class="badge">人教版 · 义务教育教科书</span>
+    <h1>📘 数学 · 有声图文学习中心</h1>
+    <p class="sub">全书 99 页逐页带读 · 按单元编排 · 点开即听：先读教材图（读到哪块哪块闪），再做分层提问（先思考后看解析）。适合课前预习、课堂讲评与家庭辅导。</p>
+    <div class="stats">
+      <div><b>99</b><span>份交互页面</span></div>
+      <div><b>8</b><span>大教学单元</span></div>
+      <div><b>602</b><span>道分层提问</span></div>
+      <div><b>有声</b><span>点读 + 字幕跟随</span></div>
+    </div>
+    <div class="hero-actions">
+      <a href="#u1">▶ 从第一单元开始</a>
+      <a class="ghost" href="#guide">📖 先看使用说明</a>
+      <a class="ghost" href="../index.html">← 返回二年级数学栏目</a>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+      <a class="chip" href="#u1" style="--c:#00838f">🗂️ 一、分类与整理</a>
+      <a class="chip" href="#u2" style="--c:#1565c0">✖️ 二、1～6 的表内乘法</a>
+      <a class="chip" href="#u3" style="--c:#6a1b9a">➗ 三、1～6 的表内除法</a>
+      <a class="chip" href="#u4" style="--c:#ef6c00">🧭 综合与实践 · 校园小导游</a>
+      <a class="chip" href="#u5" style="--c:#2e7d32">📏 四、厘米和米</a>
+      <a class="chip" href="#u6" style="--c:#c2185b">🖐️ 综合与实践 · 身体上的尺子</a>
+      <a class="chip" href="#u7" style="--c:#d84315">🔢 五、7～9 的表内乘、除法</a>
+      <a class="chip" href="#u8" style="--c:#4527a0">🎓 六、复习与关联</a>
+    <div class="searchbox"><input id="q" type="search" placeholder="搜索页码或主题，如 P77、口诀"></div>
+  </div>
+</nav>
+
+<main>
+  <section class="guide" id="guide">
+    <h2>📖 两步学习法（每页都是这个节奏）</h2>
+    <div class="steps">
+      <div class="step"><b>① 解析教材图片</b><span>纯声音读图，读到哪一块哪一块闪动；关键处先倒计时让你思考，再给出解析。</span></div>
+      <div class="step"><b>② 分层提问练习</b><span>六道分层题（认知 / 强化 / 拓展），先思考再展开解析并朗读参考答案。</span></div>
+      <div class="step"><b>③ 随时点读</b><span>点图上任意一块、任意一句课本文字都能单独听；点文字卡还会展开答案。</span></div>
+    </div>
+    <div class="tip">💡 建议：先按顺序逐页完成一个单元，再用搜索框按主题复习（如搜「口诀」「方向」「厘米」）。电脑端用 Chrome / Edge 打开，语音效果最佳。</div>
+  </section>
+
+    <section class="unit" id="u1" style="--c:#00838f">
+      <div class="uhead">
+        <div class="unum">一</div>
+        <div class="uinfo">
+          <h2>🗂️ 一、分类与整理</h2>
+          <p>课本第 1～9 页 · 共 9 页 · 62 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="分类与整理/分类与整理-第3页分两组做游戏-有声图文.html" data-k="分两组做游戏 读图讲解析 + 分层提问 p3">
+          <div class="card-top"><span class="pg">P3</span><span class="qt">6 题</span></div>
+          <h3>分两组做游戏</h3>
+          <p class="meta">读图讲解析 + 分层提问</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-第4页做一做衣服与动物分类-有声图文.html" data-k="做一做 衣服与动物分类 人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 p4">
+          <div class="card-top"><span class="pg">P4</span><span class="qt">6 题</span></div>
+          <h3>做一做 衣服与动物分类</h3>
+          <p class="meta">人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-第5页纽扣逐层分类-有声图文.html" data-k="例3 纽扣逐层分类 逐层分类 p5">
+          <div class="card-top"><span class="pg">P5</span><span class="qt">6 题</span></div>
+          <h3>例3 纽扣逐层分类</h3>
+          <p class="meta">逐层分类</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-第6页第三次分类与卡片做一做-有声图文.html" data-k="第三次分类与卡片做一做 分类顺序与结果 p6">
+          <div class="card-top"><span class="pg">P6</span><span class="qt">6 题</span></div>
+          <h3>第三次分类与卡片做一做</h3>
+          <p class="meta">分类顺序与结果</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-第7页练一练1至3-有声图文.html" data-k="练一练 1～3 象形统计图读数 p7">
+          <div class="card-top"><span class="pg">P7</span><span class="qt">6 题</span></div>
+          <h3>练一练 1～3</h3>
+          <p class="meta">象形统计图读数</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-第8页练一练4至5-有声图文.html" data-k="练一练 4～5 自选标准分类 p8">
+          <div class="card-top"><span class="pg">P8</span><span class="qt">6 题</span></div>
+          <h3>练一练 4～5</h3>
+          <p class="meta">自选标准分类</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-例1气球分类-有声图文.html" data-k="例1 气球分类 读图讲解析 + 分层提问 p1">
+          <div class="card-top"><span class="pg">P1</span><span class="qt">4 题</span></div>
+          <h3>例1 气球分类</h3>
+          <p class="meta">读图讲解析 + 分层提问</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-做一做树叶与蔬菜-有声图文.html" data-k="做一做 树叶与蔬菜 读图讲解析 + 分层提问 p2">
+          <div class="card-top"><span class="pg">P2</span><span class="qt">6 题</span></div>
+          <h3>做一做 树叶与蔬菜</h3>
+          <p class="meta">读图讲解析 + 分层提问</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="分类与整理/分类与整理-认知强化拓展分层提问.html" data-k="🧺 分类与整理 读图讲解析 + 分层提问 综合">
+          <div class="card-top"><span class="pg">综合</span><span class="qt">16 题</span></div>
+          <h3>🧺 分类与整理</h3>
+          <p class="meta">读图讲解析 + 分层提问</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+    <section class="unit" id="u2" style="--c:#1565c0">
+      <div class="uhead">
+        <div class="unum">二</div>
+        <div class="uinfo">
+          <h2>✖️ 二、1～6 的表内乘法</h2>
+          <p>课本第 10～29 页 · 共 20 页 · 120 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第10页单元主题图-有声图文.html" data-k="第 10 页 单元主题图 提出用加法解决的问题 p10">
+          <div class="card-top"><span class="pg">P10</span><span class="qt">6 题</span></div>
+          <h3>第 10 页 单元主题图</h3>
+          <p class="meta">提出用加法解决的问题</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第11页例1乘法的初步认识-有声图文.html" data-k="第 11 页 例1 乘法的初步认识 几个几相加 p11">
+          <div class="card-top"><span class="pg">P11</span><span class="qt">6 题</span></div>
+          <h3>第 11 页 例1 乘法的初步认识</h3>
+          <p class="meta">几个几相加</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第12页乘法算式与做一做-有声图文.html" data-k="第 12 页 乘法算式与做一做 乘数、乘号、积 p12">
+          <div class="card-top"><span class="pg">P12</span><span class="qt">6 题</span></div>
+          <h3>第 12 页 乘法算式与做一做</h3>
+          <p class="meta">乘数、乘号、积</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第13页例2看图列式与做一做-有声图文.html" data-k="第 13 页 例2 看图列式与做一做 换个角度看，乘法算式不同、积相同 p13">
+          <div class="card-top"><span class="pg">P13</span><span class="qt">6 题</span></div>
+          <h3>第 13 页 例2 看图列式与做一做</h3>
+          <p class="meta">换个角度看，乘法算式不同、积相同</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第14页练一练1至4-有声图文.html" data-k="第 14 页 练一练 1～4 乘法意义 + 说理 p14">
+          <div class="card-top"><span class="pg">P14</span><span class="qt">6 题</span></div>
+          <h3>第 14 页 练一练 1～4</h3>
+          <p class="meta">乘法意义 + 说理</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第15页练一练5至8与你知道吗-有声图文.html" data-k="第 15 页 练一练 5～8 与你知道吗 移多补少 + 几个几加减 p15">
+          <div class="card-top"><span class="pg">P15</span><span class="qt">6 题</span></div>
+          <h3>第 15 页 练一练 5～8 与你知道吗</h3>
+          <p class="meta">移多补少 + 几个几加减</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第16页5的乘法口诀-有声图文.html" data-k="第 16 页 5 的乘法口诀 5 的乘法口诀 p16">
+          <div class="card-top"><span class="pg">P16</span><span class="qt">6 题</span></div>
+          <h3>第 16 页 5 的乘法口诀</h3>
+          <p class="meta">5 的乘法口诀</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第17页1至4的乘法口诀-有声图文.html" data-k="第 17 页 1～4 的乘法口诀 4、3、2、1 的乘法口诀 p17">
+          <div class="card-top"><span class="pg">P17</span><span class="qt">6 题</span></div>
+          <h3>第 17 页 1～4 的乘法口诀</h3>
+          <p class="meta">4、3、2、1 的乘法口诀</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第18页做一做口诀巩固-有声图文.html" data-k="第 18 页 做一做（口诀巩固） 看图列式 + 找规律（几乘几） p18">
+          <div class="card-top"><span class="pg">P18</span><span class="qt">6 题</span></div>
+          <h3>第 18 页 做一做（口诀巩固）</h3>
+          <p class="meta">看图列式 + 找规律（几乘几）</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第19页练一练1至4-有声图文.html" data-k="第 19 页 练一练 1～4 跳格说口诀 + 乘加减比一比 p19">
+          <div class="card-top"><span class="pg">P19</span><span class="qt">6 题</span></div>
+          <h3>第 19 页 练一练 1～4</h3>
+          <p class="meta">跳格说口诀 + 乘加减比一比</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第20页练一练5至7-有声图文.html" data-k="第 20 页 练一练 5～7 口诀配对 + 圈点子 + 符号推理 p20">
+          <div class="card-top"><span class="pg">P20</span><span class="qt">6 题</span></div>
+          <h3>第 20 页 练一练 5～7</h3>
+          <p class="meta">口诀配对 + 圈点子 + 符号推理</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第21页乘加乘减-有声图文.html" data-k="第 21 页 乘加 乘减 乘加乘减与先乘后加减 p21">
+          <div class="card-top"><span class="pg">P21</span><span class="qt">6 题</span></div>
+          <h3>第 21 页 乘加 乘减</h3>
+          <p class="meta">乘加乘减与先乘后加减</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第22页6的乘法口诀-有声图文.html" data-k="第 22 页 6 的乘法口诀 6 的乘法口诀 p22">
+          <div class="card-top"><span class="pg">P22</span><span class="qt">6 题</span></div>
+          <h3>第 22 页 6 的乘法口诀</h3>
+          <p class="meta">6 的乘法口诀</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第23页练一练1至4-有声图文.html" data-k="第 23 页 练一练 1～4 看图列式与规律发现 p23">
+          <div class="card-top"><span class="pg">P23</span><span class="qt">6 题</span></div>
+          <h3>第 23 页 练一练 1～4</h3>
+          <p class="meta">看图列式与规律发现</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第24页练一练5至8与数学游戏-有声图文.html" data-k="第 24 页 练一练 5～8 与数学游戏 填表·选符号·想乘数·数青蛙 p24">
+          <div class="card-top"><span class="pg">P24</span><span class="qt">6 题</span></div>
+          <h3>第 24 页 练一练 5～8 与数学游戏</h3>
+          <p class="meta">填表·选符号·想乘数·数青蛙</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第25页解决问题比较两道题-有声图文.html" data-k="第 25 页 解决问题 · 比较两道题 同数连加用乘法·不同数相加用加法·画图比较 p25">
+          <div class="card-top"><span class="pg">P25</span><span class="qt">6 题</span></div>
+          <h3>第 25 页 解决问题 · 比较两道题</h3>
+          <p class="meta">同数连加用乘法·不同数相加用加法·画图比较</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第26页解决问题买3个笔袋-有声图文.html" data-k="第 26 页 解决问题 · 买 3 个笔袋 选条件·加乘两算·提乘法问题 p26">
+          <div class="card-top"><span class="pg">P26</span><span class="qt">6 题</span></div>
+          <h3>第 26 页 解决问题 · 买 3 个笔袋</h3>
+          <p class="meta">选条件·加乘两算·提乘法问题</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第27页练一练1至6-有声图文.html" data-k="第 27 页 练一练 1～6 买东西算钱·数地砖·数笔画·找规律 p27">
+          <div class="card-top"><span class="pg">P27</span><span class="qt">6 题</span></div>
+          <h3>第 27 页 练一练 1～6</h3>
+          <p class="meta">买东西算钱·数地砖·数笔画·找规律</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第28页整理和复习-有声图文.html" data-k="第 28 页 整理和复习 单元收获·口诀表规律·补全口诀表 p28">
+          <div class="card-top"><span class="pg">P28</span><span class="qt">6 题</span></div>
+          <h3>第 28 页 整理和复习</h3>
+          <p class="meta">单元收获·口诀表规律·补全口诀表</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内乘法/1-6的表内乘法-第29页练一练1至5与成长小档案-有声图文.html" data-k="第 29 页 练一练 1～5 与成长小档案 口诀算得数·先乘后加减·比大小 p29">
+          <div class="card-top"><span class="pg">P29</span><span class="qt">6 题</span></div>
+          <h3>第 29 页 练一练 1～5 与成长小档案</h3>
+          <p class="meta">口诀算得数·先乘后加减·比大小</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+    <section class="unit" id="u3" style="--c:#6a1b9a">
+      <div class="uhead">
+        <div class="unum">三</div>
+        <div class="uinfo">
+          <h2>➗ 三、1～6 的表内除法</h2>
+          <p>课本第 30～48 页 · 共 19 页 · 114 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第30页单元页-有声图文.html" data-k="第 30 页 单元页 认识新单元·感受&quot;分一分&quot; p30">
+          <div class="card-top"><span class="pg">P30</span><span class="qt">6 题</span></div>
+          <h3>第 30 页 单元页</h3>
+          <p class="meta">认识新单元·感受&quot;分一分&quot;</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第31页除法的初步认识平均分-有声图文.html" data-k="第 31 页 例1 除法的初步认识 每份同样多叫平均分·按每几个一份圈一圈 p31">
+          <div class="card-top"><span class="pg">P31</span><span class="qt">6 题</span></div>
+          <h3>第 31 页 例1 除法的初步认识</h3>
+          <p class="meta">每份同样多叫平均分·按每几个一份圈一圈</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第32页做一做平均分练习-有声图文.html" data-k="第 32 页 做一做 平均分练习 判断平均分·数枫叶填空·按每份数圈一圈 p32">
+          <div class="card-top"><span class="pg">P32</span><span class="qt">6 题</span></div>
+          <h3>第 32 页 做一做 平均分练习</h3>
+          <p class="meta">判断平均分·数枫叶填空·按每份数圈一圈</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第33页例2橘子平均分成6份-有声图文.html" data-k="第 33 页 例2 橘子平均分成 6 份 按份数平均分·每次每份放1个 p33">
+          <div class="card-top"><span class="pg">P33</span><span class="qt">6 题</span></div>
+          <h3>第 33 页 例2 橘子平均分成 6 份</h3>
+          <p class="meta">按份数平均分·每次每份放1个</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第34页做一做酸奶蜂蜜香蕉-有声图文.html" data-k="第 34 页 做一做 酸奶·蜂蜜·香蕉 数一数再平均分·每份数与份数 p34">
+          <div class="card-top"><span class="pg">P34</span><span class="qt">6 题</span></div>
+          <h3>第 34 页 做一做 酸奶·蜂蜜·香蕉</h3>
+          <p class="meta">数一数再平均分·每份数与份数</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第35页练一练1至4-有声图文.html" data-k="第 35 页 练一练 1～4 判断平均分·按每2根一份圈·按份数分 p35">
+          <div class="card-top"><span class="pg">P35</span><span class="qt">6 题</span></div>
+          <h3>第 35 页 练一练 1～4</h3>
+          <p class="meta">判断平均分·按每2根一份圈·按份数分</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第36页练一练5至7-有声图文.html" data-k="第 36 页 练一练 5～7 每3个一盘与平均2盘·数灯笼·开放平均分 p36">
+          <div class="card-top"><span class="pg">P36</span><span class="qt">6 题</span></div>
+          <h3>第 36 页 练一练 5～7</h3>
+          <p class="meta">每3个一盘与平均2盘·数灯笼·开放平均分</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第37页除法认识除号-有声图文.html" data-k="第 37 页 除法 · 认识除号 认识除号·除法算式与读法·三种圈法 p37">
+          <div class="card-top"><span class="pg">P37</span><span class="qt">6 题</span></div>
+          <h3>第 37 页 除法 · 认识除号</h3>
+          <p class="meta">认识除号·除法算式与读法·三种圈法</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第38页例4被除数除数商-有声图文.html" data-k="第 38 页 例4 被除数·除数·商 平均分写除法·认识被除数、除数、商 p38">
+          <div class="card-top"><span class="pg">P38</span><span class="qt">6 题</span></div>
+          <h3>第 38 页 例4 被除数·除数·商</h3>
+          <p class="meta">平均分写除法·认识被除数、除数、商</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第39页练一练1至3-有声图文.html" data-k="第 39 页 练一练 1～3 小熊分苹果·24里面有6个4·一图两问 p39">
+          <div class="card-top"><span class="pg">P39</span><span class="qt">6 题</span></div>
+          <h3>第 39 页 练一练 1～3</h3>
+          <p class="meta">小熊分苹果·24里面有6个4·一图两问</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第40页练一练4至7与你知道吗-有声图文.html" data-k="第 40 页 练一练 4～7 与你知道吗 搬凳子·一乘两除·除号的含义 p40">
+          <div class="card-top"><span class="pg">P40</span><span class="qt">6 题</span></div>
+          <h3>第 40 页 练一练 4～7 与你知道吗</h3>
+          <p class="meta">搬凳子·一乘两除·除号的含义</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第41页用1至6的乘法口诀求商-有声图文.html" data-k="第 41 页 用 1～6 的乘法口诀求商 连减求商·想口诀求商·12÷3与12÷4 p41">
+          <div class="card-top"><span class="pg">P41</span><span class="qt">6 题</span></div>
+          <h3>第 41 页 用 1～6 的乘法口诀求商</h3>
+          <p class="meta">连减求商·想口诀求商·12÷3与12÷4</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第42页用口诀求商包子笼屉-有声图文.html" data-k="第 42 页 用口诀求商 · 包子笼屉 一句口诀算三道·点阵写算式·想口诀填商 p42">
+          <div class="card-top"><span class="pg">P42</span><span class="qt">6 题</span></div>
+          <h3>第 42 页 用口诀求商 · 包子笼屉</h3>
+          <p class="meta">一句口诀算三道·点阵写算式·想口诀填商</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第43页解决问题15元买水杯-有声图文.html" data-k="第 43 页 解决问题 · 15 元买水杯 阅读理解→分析解答→回顾反思·两道除法问题 p43">
+          <div class="card-top"><span class="pg">P43</span><span class="qt">6 题</span></div>
+          <h3>第 43 页 解决问题 · 15 元买水杯</h3>
+          <p class="meta">阅读理解→分析解答→回顾反思·两道除法问题</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第44页做一做袜子与练一练1至3-有声图文.html" data-k="第 44 页 做一做·哪种袜子便宜 &amp;amp;amp; 练一练 1～3 比价问题 · 口算 · 算式含义 · 同数相除与除以1 p44">
+          <div class="card-top"><span class="pg">P44</span><span class="qt">6 题</span></div>
+          <h3>第 44 页 做一做·哪种袜子便宜 &amp;amp;amp; 练一练 1～3</h3>
+          <p class="meta">比价问题 · 口算 · 算式含义 · 同数相除与除以1</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第45页练一练4至8-有声图文.html" data-k="第 45 页 练一练 4～8 一图三式 · 平均分两问 · 线段图 · 购物问题 · 画图说算式 p45">
+          <div class="card-top"><span class="pg">P45</span><span class="qt">6 题</span></div>
+          <h3>第 45 页 练一练 4～8</h3>
+          <p class="meta">一图三式 · 平均分两问 · 线段图 · 购物问题 · 画图说算式</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第46页整理和复习-有声图文.html" data-k="第 46 页 整理和复习 单元知识梳理 · 平均分 · 口诀 · 加减乘除知识图 p46">
+          <div class="card-top"><span class="pg">P46</span><span class="qt">6 题</span></div>
+          <h3>第 46 页 整理和复习</h3>
+          <p class="meta">单元知识梳理 · 平均分 · 口诀 · 加减乘除知识图</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第47页练一练1至5-有声图文.html" data-k="第 47 页 练一练 1～5 口算 · 图意连线 · 填运算符号 · 求被盖住的数 p47">
+          <div class="card-top"><span class="pg">P47</span><span class="qt">6 题</span></div>
+          <h3>第 47 页 练一练 1～5</h3>
+          <p class="meta">口算 · 图意连线 · 填运算符号 · 求被盖住的数</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="1-6的表内除法/1-6的表内除法-第48页练一练6至9与成长小档案-有声图文.html" data-k="第 48 页 练一练 6～9 与成长小档案 除法应用 · 连线配问题 · 编数学小故事 · 单元总结 p48">
+          <div class="card-top"><span class="pg">P48</span><span class="qt">6 题</span></div>
+          <h3>第 48 页 练一练 6～9 与成长小档案</h3>
+          <p class="meta">除法应用 · 连线配问题 · 编数学小故事 · 单元总结</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+    <section class="unit" id="u4" style="--c:#ef6c00">
+      <div class="uhead">
+        <div class="unum">综合</div>
+        <div class="uinfo">
+          <h2>🧭 综合与实践 · 校园小导游</h2>
+          <p>课本第 49～54 页 · 共 6 页 · 36 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="校园小导游/校园小导游-第49页单元页-有声图文.html" data-k="第 49 页 单元页 认识校园平面图 · 描述位置与方向 p49">
+          <div class="card-top"><span class="pg">P49</span><span class="qt">6 题</span></div>
+          <h3>第 49 页 单元页</h3>
+          <p class="meta">认识校园平面图 · 描述位置与方向</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="校园小导游/校园小导游-第50页认识东南西北-有声图文.html" data-k="第 50 页 认识东、南、西、北 早晨面向太阳辨方向 · 记录单 · 做方向牌 p50">
+          <div class="card-top"><span class="pg">P50</span><span class="qt">6 题</span></div>
+          <h3>第 50 页 认识东、南、西、北</h3>
+          <p class="meta">早晨面向太阳辨方向 · 记录单 · 做方向牌</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="校园小导游/校园小导游-第51页比较不同的方向牌-有声图文.html" data-k="第 51 页 比较不同的方向牌 东西南北相对 · 顺时针排列不变 · 地图上北下南左西右东 p51">
+          <div class="card-top"><span class="pg">P51</span><span class="qt">6 题</span></div>
+          <h3>第 51 页 比较不同的方向牌</h3>
+          <p class="meta">东西南北相对 · 顺时针排列不变 · 地图上北下南左西右东</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="校园小导游/校园小导游-第52页设计导游路线-有声图文.html" data-k="第 52 页 设计导游路线 方向牌标位置 · 说清路线方向 · 争做优秀小导游 p52">
+          <div class="card-top"><span class="pg">P52</span><span class="qt">6 题</span></div>
+          <h3>第 52 页 设计导游路线</h3>
+          <p class="meta">方向牌标位置 · 说清路线方向 · 争做优秀小导游</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="校园小导游/校园小导游-第53页小讲堂大自然指方向-有声图文.html" data-k="第 53 页 小讲堂 · 大自然指方向 提出方向问题 · 大自然辨方向四个妙招 · 北斗导航 p53">
+          <div class="card-top"><span class="pg">P53</span><span class="qt">6 题</span></div>
+          <h3>第 53 页 小讲堂 · 大自然指方向</h3>
+          <p class="meta">提出方向问题 · 大自然辨方向四个妙招 · 北斗导航</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="校园小导游/校园小导游-第54页安全疏散示意图与成长小档案-有声图文.html" data-k="第 54 页 安全疏散示意图与成长小档案 看懂安全疏散示意图 · 单元收获与自我评价 p54">
+          <div class="card-top"><span class="pg">P54</span><span class="qt">6 题</span></div>
+          <h3>第 54 页 安全疏散示意图与成长小档案</h3>
+          <p class="meta">看懂安全疏散示意图 · 单元收获与自我评价</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+    <section class="unit" id="u5" style="--c:#2e7d32">
+      <div class="uhead">
+        <div class="unum">四</div>
+        <div class="uinfo">
+          <h2>📏 四、厘米和米</h2>
+          <p>课本第 55～67 页 · 共 13 页 · 78 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="厘米和米/厘米和米-第55页单元页-有声图文.html" data-k="第 55 页 单元页 庹与拃 · 同样长度结果不同 · 需要统一长度单位 p55">
+          <div class="card-top"><span class="pg">P55</span><span class="qt">6 题</span></div>
+          <h3>第 55 页 单元页</h3>
+          <p class="meta">庹与拃 · 同样长度结果不同 · 需要统一长度单位</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第56页认识厘米-有声图文.html" data-k="第 56 页 认识厘米 厘米(cm) · 1厘米的长度 · 从刻度0量起 p56">
+          <div class="card-top"><span class="pg">P56</span><span class="qt">6 题</span></div>
+          <h3>第 56 页 认识厘米</h3>
+          <p class="meta">厘米(cm) · 1厘米的长度 · 从刻度0量起</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第57页做一做铅笔与例2量黑板-有声图文.html" data-k="第 57 页 做一做与例2 · 量黑板 铅笔读数 · 量法对不对 · 手指比长度 · 量长物体用米 p57">
+          <div class="card-top"><span class="pg">P57</span><span class="qt">6 题</span></div>
+          <h3>第 57 页 做一做与例2 · 量黑板</h3>
+          <p class="meta">铅笔读数 · 量法对不对 · 手指比长度 · 量长物体用米</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第58页认识米1米等于100厘米-有声图文.html" data-k="第 58 页 认识米 · 1米=100厘米 1米的长度 · 1米=100厘米 · 比1米长还是短 p58">
+          <div class="card-top"><span class="pg">P58</span><span class="qt">6 题</span></div>
+          <h3>第 58 页 认识米 · 1米=100厘米</h3>
+          <p class="meta">1米的长度 · 1米=100厘米 · 比1米长还是短</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第59页练一练1至5-有声图文.html" data-k="第 59 页 练一练 1~5 数单位长度 · 比长短 · 米厘米比大小 · 读刻度 p59">
+          <div class="card-top"><span class="pg">P59</span><span class="qt">6 题</span></div>
+          <h3>第 59 页 练一练 1~5</h3>
+          <p class="meta">数单位长度 · 比长短 · 米厘米比大小 · 读刻度</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第60页练一练6至8与你知道吗-有声图文.html" data-k="第 60 页 练一练 6~8 与你知道吗 测量结果判断 · 估一估量一量 · 1米减30厘米 · 测量工具 p60">
+          <div class="card-top"><span class="pg">P60</span><span class="qt">6 题</span></div>
+          <h3>第 60 页 练一练 6~8 与你知道吗</h3>
+          <p class="meta">测量结果判断 · 估一估量一量 · 1米减30厘米 · 测量工具</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第61页线段与试一试-有声图文.html" data-k="第 61 页 线段与试一试 线段是直的可量长度 · 生活中的线段 · 从刻度0画到3 p61">
+          <div class="card-top"><span class="pg">P61</span><span class="qt">6 题</span></div>
+          <h3>第 61 页 线段与试一试</h3>
+          <p class="meta">线段是直的可量长度 · 生活中的线段 · 从刻度0画到3</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第62页做一做线段练习-有声图文.html" data-k="第 62 页 做一做 · 线段练习 判断线段 · 图形的边数 · 两点连线 · 按距离画图 p62">
+          <div class="card-top"><span class="pg">P62</span><span class="qt">6 题</span></div>
+          <h3>第 62 页 做一做 · 线段练习</h3>
+          <p class="meta">判断线段 · 图形的边数 · 两点连线 · 按距离画图</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第63页例4旗杆13厘米还是13米-有声图文.html" data-k="第 63 页 例4 · 旗杆13厘米还是13米 阅读理解 · 分析解答 · 回顾反思 · 选合适的单位 p63">
+          <div class="card-top"><span class="pg">P63</span><span class="qt">6 题</span></div>
+          <h3>第 63 页 例4 · 旗杆13厘米还是13米</h3>
+          <p class="meta">阅读理解 · 分析解答 · 回顾反思 · 选合适的单位</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第64页练一练1至4-有声图文.html" data-k="第 64 页 练一练 1~4 长方体正方体的线段 · 选单位 · 沿线段量距离 · 提问题 p64">
+          <div class="card-top"><span class="pg">P64</span><span class="qt">6 题</span></div>
+          <h3>第 64 页 练一练 1~4</h3>
+          <p class="meta">长方体正方体的线段 · 选单位 · 沿线段量距离 · 提问题</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第65页整理和复习知识图-有声图文.html" data-k="第 65 页 整理和复习 · 知识图 长度单位 · 1米=100厘米 · 线段的量与画 · 知识图 p65">
+          <div class="card-top"><span class="pg">P65</span><span class="qt">6 题</span></div>
+          <h3>第 65 页 整理和复习 · 知识图</h3>
+          <p class="meta">长度单位 · 1米=100厘米 · 线段的量与画 · 知识图</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第66页练一练1至4-有声图文.html" data-k="第 66 页 练一练 1~4 两端相减读尺 · 以1厘米估计 · 对边相等 · 先估后量 p66">
+          <div class="card-top"><span class="pg">P66</span><span class="qt">6 题</span></div>
+          <h3>第 66 页 练一练 1~4</h3>
+          <p class="meta">两端相减读尺 · 以1厘米估计 · 对边相等 · 先估后量</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="厘米和米/厘米和米-第67页练一练5至9与成长小档案-有声图文.html" data-k="第 67 页 练一练 5~9 与成长小档案 数图形线段 · 选长度单位 · 倒推问题 · 哥隆尺的奥妙 p67">
+          <div class="card-top"><span class="pg">P67</span><span class="qt">6 题</span></div>
+          <h3>第 67 页 练一练 5~9 与成长小档案</h3>
+          <p class="meta">数图形线段 · 选长度单位 · 倒推问题 · 哥隆尺的奥妙</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+    <section class="unit" id="u6" style="--c:#c2185b">
+      <div class="uhead">
+        <div class="unum">综合</div>
+        <div class="uinfo">
+          <h2>🖐️ 综合与实践 · 身体上的尺子</h2>
+          <p>课本第 68～72 页 · 共 5 页 · 30 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="身体上的尺子/身体上的尺子-第68页单元页-有声图文.html" data-k="第 68 页 单元页 买衣服要量身高 · 肩宽 · 腰围 · 身体上藏着&quot;尺子&quot; p68">
+          <div class="card-top"><span class="pg">P68</span><span class="qt">6 题</span></div>
+          <h3>第 68 页 单元页</h3>
+          <p class="meta">买衣服要量身高 · 肩宽 · 腰围 · 身体上藏着&quot;尺子&quot;</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="身体上的尺子/身体上的尺子-第69页找一找身体尺-有声图文.html" data-k="第 69 页 找一找 7 种身体尺：指手脚肘拃庹步 · 1拃与1庹的定义 p69">
+          <div class="card-top"><span class="pg">P69</span><span class="qt">6 题</span></div>
+          <h3>第 69 页 找一找</h3>
+          <p class="meta">7 种身体尺：指手脚肘拃庹步 · 1拃与1庹的定义</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="身体上的尺子/身体上的尺子-第70页量一量与用一用-有声图文.html" data-k="第 70 页 量一量与用一用 直尺软尺卷尺 · 庹长≈身高 · 弯路用步量 p70">
+          <div class="card-top"><span class="pg">P70</span><span class="qt">6 题</span></div>
+          <h3>第 70 页 量一量与用一用</h3>
+          <p class="meta">直尺软尺卷尺 · 庹长≈身高 · 弯路用步量</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="身体上的尺子/身体上的尺子-第71页说一说与小讲堂-有声图文.html" data-k="第 71 页 说一说与小讲堂 记录表 · 6拃约90厘米 · 4头长到8头长 p71">
+          <div class="card-top"><span class="pg">P71</span><span class="qt">6 题</span></div>
+          <h3>第 71 页 说一说与小讲堂</h3>
+          <p class="meta">记录表 · 6拃约90厘米 · 4头长到8头长</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="身体上的尺子/身体上的尺子-第72页古文中的身体尺与成长小档案-有声图文.html" data-k="第 72 页 古文中的身体尺与成长小档案 布手知尺 · 跬步千里 · 1步=2跬 · 自我评价 p72">
+          <div class="card-top"><span class="pg">P72</span><span class="qt">6 题</span></div>
+          <h3>第 72 页 古文中的身体尺与成长小档案</h3>
+          <p class="meta">布手知尺 · 跬步千里 · 1步=2跬 · 自我评价</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+    <section class="unit" id="u7" style="--c:#d84315">
+      <div class="uhead">
+        <div class="unum">五</div>
+        <div class="uinfo">
+          <h2>🔢 五、7～9 的表内乘、除法</h2>
+          <p>课本第 73～90 页 · 共 18 页 · 108 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第73页7的乘法口诀-有声图文.html" data-k="第 73 页 7 的乘法口诀 几个7连加 · 7句口诀 · 七七四十九 p73">
+          <div class="card-top"><span class="pg">P73</span><span class="qt">6 题</span></div>
+          <h3>第 73 页 7 的乘法口诀</h3>
+          <p class="meta">几个7连加 · 7句口诀 · 七七四十九</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第74页做一做与数学游戏-有声图文.html" data-k="第 74 页 做一做与数学游戏 一句口诀算两题 · 2×7=14天 · 莲花连一连 p74">
+          <div class="card-top"><span class="pg">P74</span><span class="qt">6 题</span></div>
+          <h3>第 74 页 做一做与数学游戏</h3>
+          <p class="meta">一句口诀算两题 · 2×7=14天 · 莲花连一连</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第75页8的乘法口诀-有声图文.html" data-k="第 75 页 8 的乘法口诀 数轴每次加8 · 8句口诀 · 八八六十四 p75">
+          <div class="card-top"><span class="pg">P75</span><span class="qt">6 题</span></div>
+          <h3>第 75 页 8 的乘法口诀</h3>
+          <p class="meta">数轴每次加8 · 8句口诀 · 八八六十四</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第76页练一练1至5-有声图文.html" data-k="第 76 页 练一练 1~5 口诀算得准 · 移补数正方形 · 加7减8规律 p76">
+          <div class="card-top"><span class="pg">P76</span><span class="qt">6 题</span></div>
+          <h3>第 76 页 练一练 1~5</h3>
+          <p class="meta">口诀算得准 · 移补数正方形 · 加7减8规律</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第77页9的乘法口诀-有声图文.html" data-k="第 77 页 9 的乘法口诀 九九消寒图 · 积的规律 · 九九八十一 p77">
+          <div class="card-top"><span class="pg">P77</span><span class="qt">6 题</span></div>
+          <h3>第 77 页 9 的乘法口诀</h3>
+          <p class="meta">九九消寒图 · 积的规律 · 九九八十一</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第78页做一做与手指游戏-有声图文.html" data-k="第 78 页 做一做与手指游戏 对口诀记口诀 · 用双手表示9的口诀 p78">
+          <div class="card-top"><span class="pg">P78</span><span class="qt">6 题</span></div>
+          <h3>第 78 页 做一做与手指游戏</h3>
+          <p class="meta">对口诀记口诀 · 用双手表示9的口诀</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第79页练一练1至4-有声图文.html" data-k="第 79 页 练一练 1~4 9的口诀开花 · 看图列乘法算式 · 想口诀填空 p79">
+          <div class="card-top"><span class="pg">P79</span><span class="qt">6 题</span></div>
+          <h3>第 79 页 练一练 1~4</h3>
+          <p class="meta">9的口诀开花 · 看图列乘法算式 · 想口诀填空</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第80页练一练5至9-有声图文.html" data-k="第 80 页 练一练 5~9 间隔问题 · 口诀解决问题 · 平方数规律 p80">
+          <div class="card-top"><span class="pg">P80</span><span class="qt">6 题</span></div>
+          <h3>第 80 页 练一练 5~9</h3>
+          <p class="meta">间隔问题 · 口诀解决问题 · 平方数规律</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第81页用口诀求商例4与做一做-有声图文.html" data-k="第 81 页 用口诀求商（例4）与做一做 用口诀求商 · 算式含义 · 一句口诀一条链 p81">
+          <div class="card-top"><span class="pg">P81</span><span class="qt">6 题</span></div>
+          <h3>第 81 页 用口诀求商（例4）与做一做</h3>
+          <p class="meta">用口诀求商 · 算式含义 · 一句口诀一条链</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第82页例5做一做与数学游戏-有声图文.html" data-k="第 82 页 例5 做一做与数学游戏 用口诀求商 · 连一连 · 口诀对应算式 p82">
+          <div class="card-top"><span class="pg">P82</span><span class="qt">6 题</span></div>
+          <h3>第 82 页 例5 做一做与数学游戏</h3>
+          <p class="meta">用口诀求商 · 连一连 · 口诀对应算式</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第83页例6解决问题-有声图文.html" data-k="第 83 页 例6 解决问题（游乐园） 乘除法两步解决问题 · 检验与反思 p83">
+          <div class="card-top"><span class="pg">P83</span><span class="qt">6 题</span></div>
+          <h3>第 83 页 例6 解决问题（游乐园）</h3>
+          <p class="meta">乘除法两步解决问题 · 检验与反思</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第84页做一做与练一练1至2-有声图文.html" data-k="第 84 页 做一做与练一练 1~2 连续两问 · 几里面有几个几 · 跳格找规律 p84">
+          <div class="card-top"><span class="pg">P84</span><span class="qt">6 题</span></div>
+          <h3>第 84 页 做一做与练一练 1~2</h3>
+          <p class="meta">连续两问 · 几里面有几个几 · 跳格找规律</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第85页练一练3至6-有声图文.html" data-k="第 85 页 练一练 3~6 口诀求商 · 平均分两问 · 有余实际情况 p85">
+          <div class="card-top"><span class="pg">P85</span><span class="qt">6 题</span></div>
+          <h3>第 85 页 练一练 3~6</h3>
+          <p class="meta">口诀求商 · 平均分两问 · 有余实际情况</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第86页练一练7至8你知道吗-有声图文.html" data-k="第 86 页 练一练 7~8 与你知道吗 平均分与除法 · 符号代数启蒙 · 口诀简牍文化 p86">
+          <div class="card-top"><span class="pg">P86</span><span class="qt">6 题</span></div>
+          <h3>第 86 页 练一练 7~8 与你知道吗</h3>
+          <p class="meta">平均分与除法 · 符号代数启蒙 · 口诀简牍文化</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第87页整理和复习口诀表-有声图文.html" data-k="第 87 页 整理和复习（乘法口诀表） 口诀表整理 · 找规律补口诀 · 小九九变大九九 p87">
+          <div class="card-top"><span class="pg">P87</span><span class="qt">6 题</span></div>
+          <h3>第 87 页 整理和复习（乘法口诀表）</h3>
+          <p class="meta">口诀表整理 · 找规律补口诀 · 小九九变大九九</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第88页除法算式表整理-有声图文.html" data-k="第 88 页 整理和复习（除法算式表） 除法算式整理表 · 十字形五个算式 · 发现商的规律 p88">
+          <div class="card-top"><span class="pg">P88</span><span class="qt">6 题</span></div>
+          <h3>第 88 页 整理和复习（除法算式表）</h3>
+          <p class="meta">除法算式整理表 · 十字形五个算式 · 发现商的规律</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第89页练一练1至5-有声图文.html" data-k="第 89 页 练一练 1~5 口诀求商 · 圆点阵列一图三式 · 算得数排大小 p89">
+          <div class="card-top"><span class="pg">P89</span><span class="qt">6 题</span></div>
+          <h3>第 89 页 练一练 1~5</h3>
+          <p class="meta">口诀求商 · 圆点阵列一图三式 · 算得数排大小</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="7-9的表内乘除法/7-9的表内乘除法-第90页练一练6至10成长小档案-有声图文.html" data-k="第 90 页 练一练 6~10 与成长小档案 分两次平均分 · 正方体8个顶点 · 以皮球为桥梁换算 p90">
+          <div class="card-top"><span class="pg">P90</span><span class="qt">6 题</span></div>
+          <h3>第 90 页 练一练 6~10 与成长小档案</h3>
+          <p class="meta">分两次平均分 · 正方体8个顶点 · 以皮球为桥梁换算</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+    <section class="unit" id="u8" style="--c:#4527a0">
+      <div class="uhead">
+        <div class="unum">六</div>
+        <div class="uinfo">
+          <h2>🎓 六、复习与关联</h2>
+          <p>课本第 91～99 页 · 共 9 页 · 54 道分层提问</p>
+        </div>
+        <a class="utop" href="#top">回到顶部 ↑</a>
+      </div>
+      <div class="grid">
+        <a class="card" href="复习与关联/复习与关联-第91页整理复习数与运算-有声图文.html" data-k="第 91 页 整理复习 · 数与运算 加乘减除一家亲 · 用乘法表示相同加数 · 用除法表示平均分 p91">
+          <div class="card-top"><span class="pg">P91</span><span class="qt">6 题</span></div>
+          <h3>第 91 页 整理复习 · 数与运算</h3>
+          <p class="meta">加乘减除一家亲 · 用乘法表示相同加数 · 用除法表示平均分</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第92页数量关系-有声图文.html" data-k="第 92 页 数量关系 三幅图看懂乘除应用题 · 总数÷每份数=份数 · 用图画数量关系 p92">
+          <div class="card-top"><span class="pg">P92</span><span class="qt">6 题</span></div>
+          <h3>第 92 页 数量关系</h3>
+          <p class="meta">三幅图看懂乘除应用题 · 总数÷每份数=份数 · 用图画数量关系</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第93页图形的位置与测量-有声图文.html" data-k="第 93 页 图形的位置与测量 方向顺时针排序 · 1米=100厘米 · 会看平面示意图 p93">
+          <div class="card-top"><span class="pg">P93</span><span class="qt">6 题</span></div>
+          <h3>第 93 页 图形的位置与测量</h3>
+          <p class="meta">方向顺时针排序 · 1米=100厘米 · 会看平面示意图</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第94页数据分类与应用提升1-有声图文.html" data-k="第 94 页 数据分类与应用提升① 按标准分类 · 乘法表对角线秘密 · 一积多口诀 p94">
+          <div class="card-top"><span class="pg">P94</span><span class="qt">6 题</span></div>
+          <h3>第 94 页 数据分类与应用提升①</h3>
+          <p class="meta">按标准分类 · 乘法表对角线秘密 · 一积多口诀</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第95页应用提升2和3-有声图文.html" data-k="第 95 页 应用提升②③ 说算式的含义 · 先乘后加减 · 定标准分卡片 p95">
+          <div class="card-top"><span class="pg">P95</span><span class="qt">6 题</span></div>
+          <h3>第 95 页 应用提升②③</h3>
+          <p class="meta">说算式的含义 · 先乘后加减 · 定标准分卡片</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第96页练一练1至2-有声图文.html" data-k="第 96 页 练一练 1~2 乘除三问互逆 · 看图写算式 · 想口诀连算式 p96">
+          <div class="card-top"><span class="pg">P96</span><span class="qt">6 题</span></div>
+          <h3>第 96 页 练一练 1~2</h3>
+          <p class="meta">乘除三问互逆 · 看图写算式 · 想口诀连算式</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第97页练一练3至8-有声图文.html" data-k="第 97 页 练一练 3~8 口诀口算全对 · 算出两边再比 · 先估后量 p97">
+          <div class="card-top"><span class="pg">P97</span><span class="qt">6 题</span></div>
+          <h3>第 97 页 练一练 3~8</h3>
+          <p class="meta">口诀口算全对 · 算出两边再比 · 先估后量</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第98页练一练9至11-有声图文.html" data-k="第 98 页 练一练 9~11 以小鸡家为中心说方向 · 车型统计 1·4·7·3·6 · 相同加数才用乘法 p98">
+          <div class="card-top"><span class="pg">P98</span><span class="qt">6 题</span></div>
+          <h3>第 98 页 练一练 9~11</h3>
+          <p class="meta">以小鸡家为中心说方向 · 车型统计 1·4·7·3·6 · 相同加数才用乘法</p>
+          <span class="go">点开即听 →</span>
+        </a>
+        <a class="card" href="复习与关联/复习与关联-第99页练一练12至14-有声图文.html" data-k="第 99 页 练一练 12~14 比单价选最便宜 · 由算式倒着想题目 · 买9个毽子的钱=一个足球 p99">
+          <div class="card-top"><span class="pg">P99</span><span class="qt">6 题</span></div>
+          <h3>第 99 页 练一练 12~14</h3>
+          <p class="meta">比单价选最便宜 · 由算式倒着想题目 · 买9个毽子的钱=一个足球</p>
+          <span class="go">点开即听 →</span>
+        </a>
+      </div>
+    </section>
+  <div class="empty-hint" id="emptyHint">没有匹配的页面，换个关键词试试。</div>
+</main>
+
+<footer>
+  <b>人教版 · 义务教育教科书 · 数学 · 有声图文学习中心</b><br>
+  全书 99 页 · 8 个单元 · 602 道分层提问 · 单文件离线可用<br>
+  保留全部教材原图，仅作教学辅助使用，版权归人民教育出版社所有
+</footer>
+
+<script>
+var input = document.getElementById('q');
+var cards = document.querySelectorAll('.card');
+var hint = document.getElementById('emptyHint');
+input.addEventListener('input', function () {
+  var kw = input.value.trim().toLowerCase();
+  var shown = 0;
+  cards.forEach(function (c) {
+    var hit = !kw || c.getAttribute('data-k').indexOf(kw) > -1;
+    c.classList.toggle('hide', !hit);
+    if (hit) shown++;
+  });
+  document.querySelectorAll('.unit').forEach(function (u) {
+    var vis = u.querySelectorAll('.card:not(.hide)').length;
+    u.style.display = vis ? '' : 'none';
+  });
+  hint.style.display = shown ? 'none' : 'block';
+});
+</script>
+</body>
+</html>

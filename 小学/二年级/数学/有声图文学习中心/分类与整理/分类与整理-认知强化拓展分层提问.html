@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分类与整理 · 一图片一解析 —— 二年级上册（人教版）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root{ --head-a:#00897b; --head-b:#4fc3f7; --blue:#1565c0; --orange:#e65100; --pink:#ad1457; --ink:#3a3f4a; --sub:#9c93ad; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:linear-gradient(180deg,#f0f7ff 0%,#fffef2 100%); color:var(--ink); line-height:1.8; }
+  .container{ max-width:920px; margin:0 auto; padding:20px 16px 80px; }
+  .topbar{ position:sticky; top:0; z-index:999; display:block; text-align:center; background:#d84a2b; color:#fff; padding:9px 0; font-size:14px; text-decoration:none; }
+  header{ position:relative; overflow:hidden; text-align:center; background:linear-gradient(135deg,var(--head-a) 0%,var(--head-b) 100%); border-radius:24px; padding:30px 20px; margin:16px 0 14px; box-shadow:0 8px 20px rgba(0,137,123,.28); }
+  header::before, header::after{ content:""; position:absolute; border-radius:50%; opacity:.25; }
+  header::before{ width:140px; height:140px; background:#fff; top:-50px; right:-30px; }
+  header::after{ width:90px; height:90px; background:#fff; bottom:-30px; left:-20px; }
+  header h1{ position:relative; font-size:27px; color:#fff; text-shadow:1px 2px 4px rgba(0,0,0,.15); margin-bottom:8px; }
+  header p{ position:relative; color:#eafaf7; font-size:15px; }
+  .stats{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+  .stats .st{ background:#fff; border-radius:14px; padding:8px 16px; text-align:center; box-shadow:0 3px 10px rgba(100,90,140,.12); min-width:78px; }
+  .stats .st b{ display:block; font-size:20px; } .stats .st span{ font-size:12px; color:var(--sub); }
+  .st.c-total b{ color:#5e35b1; } .st.c-r b{ color:var(--blue); } .st.c-q b{ color:var(--orange); } .st.c-t b{ color:var(--pink); }
+  .ctrl{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
+  .ctrl button{ border:none; border-radius:999px; padding:8px 18px; font-size:14px; font-weight:bold; cursor:pointer; font-family:inherit; color:#fff; background:#5e35b1; box-shadow:0 3px 8px rgba(94,53,177,.25); }
+  .ctrl button.alt{ background:#26a69a; } .ctrl button.alt2{ background:#ef6c00; } .ctrl button:hover{ filter:brightness(1.07); }
+  .level-legend{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:24px; }
+  .level-legend span{ border-radius:999px; padding:6px 18px; font-size:14px; font-weight:bold; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  .lv-renzhi{ background:#e3f2fd; color:var(--blue); } .lv-qianghua{ background:#fff3e0; color:var(--orange); } .lv-tuozhan{ background:#fce4ec; color:var(--pink); }
+
+  /* ===== 一图片一解析：图块（复用 .scene，1 图在上 + 解析在下） ===== */
+  .scene{ background:#fff; border-radius:24px; margin-bottom:38px; box-shadow:0 4px 14px rgba(100,90,140,.13); overflow:hidden; }
+  .scene-head{ display:flex; align-items:center; gap:12px; padding:18px 24px 10px; }
+  .scene-num{ flex:0 0 auto; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; color:#fff; box-shadow:0 3px 8px rgba(0,0,0,.15); }
+  .scene-head h2{ font-size:21px; } .scene-head .tag{ margin-left:auto; font-size:13px; color:var(--sub); background:#f1edfa; border-radius:999px; padding:3px 12px; white-space:nowrap; }
+  .s1 .scene-num{ background:#7e57c2; } .s1 .scene-head h2{ color:#5e35b1; }
+  .s2 .scene-num{ background:#26a69a; } .s2 .scene-head h2{ color:#00695c; }
+  .s3 .scene-num{ background:#ef6c00; } .s3 .scene-head h2{ color:#bf4a00; }
+  .s4 .scene-num{ background:#ad1457; } .s4 .scene-head h2{ color:#ad1457; }
+  .s5 .scene-num{ background:#2e7d32; } .s5 .scene-head h2{ color:#1b5e20; }
+  .scene-illu{ text-align:center; padding:4px 24px 0; }
+  .scene-illu img{ width:100%; max-width:640px; height:auto; border-radius:16px; border:4px solid #edf1fb; box-shadow:0 3px 10px rgba(0,0,0,.1); }
+  .img-tip{ font-size:13px; color:var(--sub); margin-top:6px; }
+  .illu-cap{ text-align:center; font-size:14px; color:#5e35b1; font-weight:bold; margin:10px 0 2px; }
+  .illu-cap span{ font-size:13px; color:var(--sub); font-weight:normal; }
+  .levels{ padding:14px 24px 26px; }
+  .level{ border-radius:16px; padding:12px 16px 14px; margin-top:14px; }
+  .level.renzhi{ background:#f2f9ff; border:2px solid #cfe6fb; } .level.qianghua{ background:#fffaf0; border:2px solid #ffe3b8; } .level.tuozhan{ background:#fff4f8; border:2px solid #ffd2e1; }
+  .level-head{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .level-title{ display:inline-flex; align-items:center; gap:8px; font-size:16px; font-weight:bold; border-radius:999px; padding:3px 16px; }
+  .renzhi .level-title{ background:#d6eaff; color:var(--blue); } .qianghua .level-title{ background:#ffe8c2; color:#b26500; } .tuozhan .level-title{ background:#ffd9e6; color:var(--pink); }
+  .level-desc{ font-size:13px; color:#948d9e; }
+  .master-stamp{ margin-left:auto; border:2px dashed #c9b8e8; background:#fff; color:#7e57c2; border-radius:999px; padding:3px 14px; font-size:13px; font-weight:bold; cursor:pointer; font-family:inherit; }
+  .master-stamp.on{ border-style:solid; background:#2e7d32; color:#fff; border-color:#2e7d32; }
+  .qa{ background:#fff; border:2px solid #eef1f7; border-radius:14px; padding:12px 16px; margin-top:10px; }
+  .renzhi .qa{ border-color:#dbeeff; } .qianghua .qa{ border-color:#ffedcc; } .tuozhan .qa{ border-color:#ffdce8; }
+  .qa-q{ display:flex; align-items:flex-start; gap:10px; cursor:pointer; user-select:none; }
+  .qa-q .q-emoji{ font-size:21px; flex:0 0 auto; } .qa-q .q-text{ font-size:16.5px; font-weight:bold; color:#453f52; flex:1; }
+  .qa-q .toggle{ flex:0 0 auto; border-radius:999px; padding:2px 14px; font-size:13px; font-weight:bold; }
+  .renzhi .toggle{ background:#dbeeff; color:var(--blue); } .qianghua .toggle{ background:#ffe8c2; color:#b26500; } .tuozhan .toggle{ background:#ffd9e6; color:var(--pink); }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; overflow:hidden; min-height:0; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; margin-top:10px; background:#f7f9fc; border-left:5px solid #b0c4de; border-radius:0 12px 12px 0; padding:0 14px; font-size:15px; color:#443e50; }
+  .qa.open .qa-a-inner{ padding:10px 14px; }
+  .renzhi .qa-a-inner{ border-color:#64a7e8; background:#f4faff; } .qianghua .qa-a-inner{ border-color:#f0a94b; background:#fffaf2; } .tuozhan .qa-a-inner{ border-color:#ef7fa8; background:#fff6fa; }
+  .qa-a-inner .a-label{ font-weight:bold; } .renzhi .a-label{ color:var(--blue); } .qianghua .a-label{ color:#b26500; } .tuozhan .a-label{ color:var(--pink); }
+  .qa-a-inner ul{ margin:6px 0 0 22px; } .qa-a-inner li{ margin-bottom:4px; }
+  .qa-a-inner .open-note{ display:inline-block; margin-top:8px; background:#fff3e0; color:#bf6a1a; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qa-a-inner .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .parent-tip{ background:#fff8e1; border-left:5px solid #ffca28; border-radius:0 14px 14px 0; padding:14px 18px; font-size:14.5px; color:#7a5c00; margin-bottom:26px; }
+  .parent-tip b{ color:#8d6708; }
+  footer{ text-align:center; color:var(--sub); font-size:14px; margin-top:6px; } footer p{ margin:2px 0; }
+  .spk-btn{ display:inline-flex; align-items:center; gap:4px; background:#1565c0; color:#fff; border:none; border-radius:14px; padding:4px 12px; font-size:12.5px; cursor:pointer; flex-shrink:0; font-family:inherit; }
+  .spk-btn:hover{ background:#0d47a1; } .qa-q .spk-btn{ margin-left:8px; } .qa-a-inner .spk-btn{ display:inline-block; margin:10px 0 0; background:#e65100; } .qa-a-inner .spk-btn:hover{ background:#bf3f00; }
+  .voice-bar{ position:fixed; left:50%; bottom:14px; transform:translateX(-50%); z-index:1000; background:rgba(216,74,43,.97); color:#fff; border-radius:30px; padding:8px 14px; display:flex; gap:10px; align-items:center; box-shadow:0 4px 14px rgba(120,40,20,.30); font-size:13px; max-width:94vw; flex-wrap:wrap; justify-content:center; }
+  .voice-bar button{ background:#fff; color:#d84a2b; border:none; border-radius:18px; padding:6px 14px; font-size:13px; cursor:pointer; font-weight:bold; font-family:inherit; }
+  .voice-bar button:hover{ background:#ffe9d6; } .voice-bar .hint{ font-size:11px; opacity:.95; max-width:230px; }
+  @media print{ .topbar,.ctrl,.voice-bar,.master-stamp,.spk-btn{ display:none !important; } .qa-a{ grid-template-rows:1fr !important; } .qa-a-inner{ padding:10px 14px !important; overflow:visible !important; } }
+  @media (max-width:560px){ .container{ padding:14px 10px 80px; } header h1{ font-size:22px; } .scene-head h2{ font-size:18px; } .stats .st{ min-width:64px; padding:6px 10px; } .qa-q .q-text{ font-size:15px; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<a class="topbar" href="../index.html">📚 二年级上册 · 分层提问系列导航（点此返回）</a>
+<div class="container">
+
+  <header>
+    <h1>📘 分类与整理 · 一图片一解析</h1>
+    <p>人教版《数学》二年级上册 · 第一单元（课本第 1～9 页）</p>
+  </header>
+
+  <div class="stats">
+    <div class="st c-total"><b>17</b><span>总题数</span></div>
+    <div class="st c-r"><b>7</b><span>认知层</span></div>
+    <div class="st c-q"><b>7</b><span>强化层</span></div>
+    <div class="st c-t"><b>3</b><span>拓展层</span></div>
+  </div>
+
+  <div class="ctrl">
+    <button type="button" id="btnAll">📂 展开全部</button>
+    <button type="button" class="alt" id="btnNone">📁 收起全部</button>
+    <button type="button" class="alt2" id="btnRand">🎲 随机一题</button>
+  </div>
+
+  <div class="level-legend">
+    <span class="lv-renzhi">🧠 认知层 · 会按标准分一分</span>
+    <span class="lv-qianghua">💪 强化层 · 会整理、能发现</span>
+    <span class="lv-tuozhan">🚀 拓展层 · 联系生活、总结方法</span>
+  </div>
+
+  <div class="parent-tip">
+    <b>👨‍👩‍👧 使用建议：</b>本组共 <b>17</b> 个问题，按"一图片一解析"排版——每张教材图在上，它对应的提问与解析在下方。本单元重难点：<b>自己确定分类标准、把结果整理成图表、体会"标准不同结果不同但总数不变"、学会逐层分类</b>。点击问题卡片在图下方展开/收起解析；每层可点「✓我会了」做自我记录。
+  </div>
+
+  <!-- ============ 图块1：课本第2~3页 全景（分类与分组） ============ -->
+  <div class="scene s1">
+    <div class="scene-head"><div class="scene-num">1</div><h2>🧺 分类与分组（全景）</h2><span class="tag">课本第 2～3 页</span></div>
+    <div class="scene-illu">
+      <img src="images/02-课本第2-3页-分类与分组全景.jpg" alt="课本第2~3页全景：说一说分类整理的好处；分两组做游戏怎样分组">
+      <div class="img-tip">📖 课本第 2～3 页 · 说一说 / 分组游戏</div>
+    </div>
+    <div class="illu-cap">👇 本图解析（点问题在下方展开 / 收起答案）<span> · 分类标准 · 分组游戏</span></div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <div class="level-head"><span class="level-title">🧠 认知层</span><span class="level-desc">会按标准分组</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🎈</span>
+            <span class="q-text">认知：分两组做游戏，两个小朋友分别想怎样分组？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>女生：按<b>大人和孩子</b>分</li>
+              <li>男生：按<b>性别</b>分（男 / 女）</li>
+            </ul>
+            <span class="think-note">💡 同一群人，可以有不同的分类标准</span>
+          </div></div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <div class="level-head"><span class="level-title">💪 强化层</span><span class="level-desc">会算、会发现</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🧮</span>
+            <span class="q-text">强化 1：按大人孩子分，大人 8 人、孩子 6 人，一共有多少人做游戏？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul><li>8 + 6 = <b>14（人）</b></li></ul>
+            <span class="think-note">💡 把两类人数合起来，用加法计算</span>
+          </div></div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🔍</span>
+            <span class="q-text">强化 2：对比"按大人孩子分"和"按性别分"的结果，你发现了什么？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>分类<b>标准不同，结果可能不同</b></li>
+              <li>但不管怎么分，<b>总数不变</b>（都是 14 人）</li>
+            </ul>
+            <span class="think-note">💡 这是分类整理的重要规律，请说给家长听</span>
+          </div></div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <div class="level-head"><span class="level-title">🚀 拓展层</span><span class="level-desc">联系生活</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🌈</span>
+            <span class="q-text">拓展：说一说，分类整理有哪些好处？（对应课本"说一说"）</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析（不唯一）：</span>
+            <ul>
+              <li>分类整理后，物品<b>更容易找到</b>；也<b>更容易数出</b>每类物品有多少</li>
+              <li>生活中：整理书包、衣柜、玩具架、图书角……</li>
+            </ul>
+            <span class="open-note">🌈 说出 2 条以上好处，即达成</span>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 图块2：课本第2页 做一做（树叶与蔬菜） ============ -->
+  <div class="scene s2">
+    <div class="scene-head"><div class="scene-num">2</div><h2>✏️ 做一做：树叶与蔬菜</h2><span class="tag">课本第 2 页</span></div>
+    <div class="scene-illu">
+      <img src="images/02-课本第2页-做一做树叶与蔬菜.jpg" alt="课本第2页做一做：按形状分树叶并涂一涂填一填；把蔬菜按种类分类">
+      <div class="img-tip">📖 课本第 2 页 · 做一做特写：树叶按形状分 / 蔬菜分类</div>
+    </div>
+    <div class="illu-cap">👇 本图解析（点问题在下方展开 / 收起答案）<span> · 按形状分 · 按种类分</span></div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <div class="level-head"><span class="level-title">🧠 认知层</span><span class="level-desc">会按标准分一分</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🍃</span>
+            <span class="q-text">认知 1：做一做 1，把树叶按形状分一分，可以怎样分？分完数一数。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>按<b>形状</b>分：圆形叶子、其他形状的叶子</li>
+              <li>再<b>涂一涂、填一填</b>，数出每类各有几片</li>
+            </ul>
+            <span class="think-note">💡 先想好"按什么分"，再动手涂和数</span>
+          </div></div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🍅</span>
+            <span class="q-text">认知 2：做一做 2，把蔬菜分类，可以按什么标准分？哪种最多、哪种最少？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>按<b>种类</b>分：西红柿、黄瓜、青椒、洋葱、胡萝卜</li>
+              <li>数一数、比一比，就知道哪种最多、哪种最少</li>
+            </ul>
+            <span class="think-note">💡 分类前先定标准，标准定了再分</span>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 图块3：课本第4~5页 纽扣分类 ============ -->
+  <div class="scene s3">
+    <div class="scene-head"><div class="scene-num">3</div><h2>🧷 纽扣盒里的分类</h2><span class="tag">课本第 4～5 页</span></div>
+    <div class="scene-illu">
+      <img src="images/04-课本第4-5页-纽扣分类.jpg" alt="课本第4~5页：把衣服分成两类；把动物分成两类；丽丽打翻了纽扣盒，小组讨论怎样分类">
+      <div class="img-tip">📖 课本第 4～5 页 · 做一做 / 例3 纽扣分类</div>
+    </div>
+    <div class="illu-cap">👇 本图解析（点问题在下方展开 / 收起答案）<span> · 先按一个标准分 · 逐层分类</span></div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <div class="level-head"><span class="level-title">🧠 认知层</span><span class="level-desc">先按一个标准分</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🔴</span>
+            <span class="q-text">认知 1：丽丽不小心打翻了纽扣盒，可以先用什么标准把纽扣分一分？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>可以按<b>形状</b>分：方形纽扣、圆形纽扣</li>
+              <li>也可以先按<b>颜色</b>分：红色、蓝色（标准不唯一）</li>
+            </ul>
+            <span class="think-note">💡 观察纽扣有什么不同，不同之处就是分类标准</span>
+          </div></div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🟦</span>
+            <span class="q-text">认知 2：按形状分完以后，分类的结果还可以继续分吗？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>可以。再把每类按<b>颜色</b>分：红色、蓝色</li>
+              <li>这样就越分越细、越分越清楚</li>
+            </ul>
+          </div></div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <div class="level-head"><span class="level-title">💪 强化层</span><span class="level-desc">体会逐层分类</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🧷</span>
+            <span class="q-text">强化：像这样先按形状、再按颜色一层一层地分，叫"逐层分类"。逐层分类有什么好处？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>逐层分类后，纽扣分得又细又清楚，<b>更方便使用</b></li>
+              <li>比如做新衣服时，能很快找到需要的 <b>2 粒相同的扣子</b></li>
+            </ul>
+            <span class="think-note">💡 分得越清楚，找起来越快——这就是分类整理的价值</span>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 图块4：课本第6~7页 逐层分类的发现与练一练 ============ -->
+  <div class="scene s4">
+    <div class="scene-head"><div class="scene-num">4</div><h2>🔁 分类的发现与练一练</h2><span class="tag">课本第 6～7 页</span></div>
+    <div class="scene-illu">
+      <img src="images/06-课本第6-7页-逐层分类与练一练.jpg" alt="课本第6~7页：第二次分类还可以继续分；回顾分类过程的发现；做一做卡片分类；练一练圈车、整理书包、调查喜欢的动物">
+      <div class="img-tip">📖 课本第 6～7 页 · 逐层分类的发现 / 做一做 / 练一练 1～3</div>
+    </div>
+    <div class="illu-cap">👇 本图解析（点问题在下方展开 / 收起答案）<span> · 发现规律 · 圈车 · 整理书包</span></div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <div class="level-head"><span class="level-title">🧠 认知层</span><span class="level-desc">按形状分卡片</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🃏</span>
+            <span class="q-text">认知：做一做，先按卡片的形状分类，可以怎样分？把结果记录在表格里。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>按卡片上的<b>图案形状</b>分：桃、梨、苹果</li>
+              <li>把每类个数记录在表格中，一目了然</li>
+            </ul>
+            <span class="think-note">💡 用表格记录分类结果，更清楚</span>
+          </div></div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <div class="level-head"><span class="level-title">💪 强化层</span><span class="level-desc">发现规律、会判断</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🔁</span>
+            <span class="q-text">强化 1：回顾纽扣分类：不管按什么顺序分，最后都分成了 8 类。你有什么发现？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>按一定标准分类后，<b>还可以再分</b></li>
+              <li>只要标准确定，<b>不管按什么顺序分，最后结果都一样</b>（都是 8 类）</li>
+            </ul>
+            <span class="think-note">💡 像这样逐层分类后，更方便使用纽扣</span>
+          </div></div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🚗</span>
+            <span class="q-text">强化 2：练一练 1，将车圈出来。哪些不是车？共有几辆车？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li><b>不是车</b>的：直升机、帆船、飞机、轮船</li>
+              <li>是车的：公交车、货车、小汽车、面包车，共有 <b>4 辆</b>车</li>
+            </ul>
+            <span class="think-note">💡 按"是不是车"这个标准判断，再数一数</span>
+          </div></div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <div class="level-head"><span class="level-title">🚀 拓展层</span><span class="level-desc">动手整理</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🎒</span>
+            <span class="q-text">拓展：练一练 2，整理一下自己的书包。说一说你是怎样整理的。</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析（不唯一）：</span>
+            <ul>
+              <li>按<b>科目</b>分：数学书放一起、语文书放一起……</li>
+              <li>也可以按<b>大小</b>分、按<b>常用和不常用</b>分</li>
+            </ul>
+            <span class="open-note">🌈 说出自己的分类标准和整理结果，即达成</span>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 图块5：课本第8~9页 练一练与成长小档案 ============ -->
+  <div class="scene s5">
+    <div class="scene-head"><div class="scene-num">5</div><h2>🏁 练一练 · 我会应用</h2><span class="tag">课本第 8～9 页</span></div>
+    <div class="scene-illu">
+      <img src="images/08-课本第8-9页-练一练与成长小档案.jpg" alt="课本第8~9页：道路交通标志分类；把减法算式分成两类；把图形分为两类；成长小档案">
+      <div class="img-tip">📖 课本第 8～9 页 · 练一练 4～7 / 成长小档案</div>
+    </div>
+    <div class="illu-cap">👇 本图解析（点问题在下方展开 / 收起答案）<span> · 标志分类 · 算式分类 · 成长小档案</span></div>
+    <div class="levels">
+
+      <div class="level renzhi">
+        <div class="level-head"><span class="level-title">🧠 认知层</span><span class="level-desc">给标志分类</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🚦</span>
+            <span class="q-text">认知：练一练 4，把下面的道路交通标志分类，可以按什么标准分？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>按<b>形状</b>分：长方形、三角形、圆形</li>
+              <li>还可以按<b>颜色</b>分：蓝色、黄色、红色、白色</li>
+            </ul>
+            <span class="think-note">💡 观察标志的特点，特点就是分类标准</span>
+          </div></div>
+        </div>
+
+      </div>
+
+      <div class="level qianghua">
+        <div class="level-head"><span class="level-title">💪 强化层</span><span class="level-desc">给算式和图形分类</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">➗</span>
+            <span class="q-text">强化 1：练一练 5，把这些减法算式分成两类，可以怎样分？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析（不唯一）：</span>
+            <ul>
+              <li>分法一：按<b>减数是一位数还是两位数</b>分，如 28−4、30−7 是减一位数，46−30、34−11 是减两位数</li>
+              <li>分法二：按<b>是否需要退位</b>分，如 30−7、20−5、31−8、10−3 要退位，28−4、18−3、19−4 不用退位</li>
+            </ul>
+            <span class="think-note">💡 答案不唯一，只要说出分类标准、分得对就可以</span>
+          </div></div>
+        </div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">🔷</span>
+            <span class="q-text">强化 2：练一练 7，把上面的图形分为两类，可以怎样分？还可以继续分吗？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析：</span>
+            <ul>
+              <li>分为<b>平面图形</b>和<b>立体图形</b>两类</li>
+              <li>立体图形还可以继续分：长方体、正方体、圆柱……</li>
+            </ul>
+            <span class="think-note">💡 第二次分类的结果，还可以继续分</span>
+          </div></div>
+        </div>
+
+      </div>
+
+      <div class="level tuozhan">
+        <div class="level-head"><span class="level-title">🚀 拓展层</span><span class="level-desc">单元总结</span><button type="button" class="master-stamp">✓ 我会了</button></div>
+
+        <div class="qa">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="q-emoji">📔</span>
+            <span class="q-text">拓展：成长小档案，本单元结束了，你想说些什么？</span>
+            <span class="toggle">看答案</span>
+          </div>
+          <div class="qa-a"><div class="qa-a-inner">
+            <span class="a-label">解析（不唯一）：</span>
+            <ul>
+              <li>我学会了<b>按不同的标准</b>分类</li>
+              <li>有些分类的结果<b>还可以再分</b>（逐层分类）</li>
+              <li>用<b>图表</b>表示分类的结果更清楚啦！</li>
+            </ul>
+            <span class="open-note">🌈 用自己的话说出 1～2 条收获，即达成</span>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>⭐ 会定标准、会逐层分、会用图表记录——你就是分类小能手！ ⭐</p>
+    <p>人教版《数学》二年级上册 · 第一单元 分类与整理（第 1～9 页）· 一图片一解析</p>
+    <p>教材图片仅供个人学习使用，版权归原作者（人民教育出版社）所有</p>
+  </footer>
+
+</div>
+
+<script>
+function toggleQA(q){ var qa=q.parentElement; qa.classList.toggle('open'); var t=q.querySelector('.toggle'); if(t){ t.textContent = qa.classList.contains('open') ? '收起' : '看答案'; } }
+function setAll(open){ var qs=document.querySelectorAll('.qa'); qs.forEach(function(qa){ qa.classList.toggle('open', open); var t=qa.querySelector('.toggle'); if(t) t.textContent = open ? '收起' : '看答案'; }); }
+document.getElementById('btnAll').addEventListener('click',function(){ setAll(true); });
+document.getElementById('btnNone').addEventListener('click',function(){ setAll(false); });
+document.getElementById('btnRand').addEventListener('click',function(){ var qs=document.querySelectorAll('.qa'); if(!qs.length) return; var qa=qs[Math.floor(Math.random()*qs.length)]; qa.classList.add('open'); var t=qa.querySelector('.toggle'); if(t) t.textContent='收起'; qa.scrollIntoView({behavior:'smooth',block:'center'}); });
+(function(){ var key='fdq-master-'+encodeURIComponent(document.title); var stamps=document.querySelectorAll('.master-stamp'); var saved={}; try{ saved=JSON.parse(localStorage.getItem(key)||'{}'); }catch(e){} stamps.forEach(function(btn,i){ if(saved[i]){ btn.classList.add('on'); btn.textContent='✓ 已掌握'; } btn.addEventListener('click',function(){ var on=btn.classList.toggle('on'); btn.textContent = on ? '✓ 已掌握' : '✓ 我会了'; saved[i]=on; try{ localStorage.setItem(key,JSON.stringify(saved)); }catch(e){} }); }); })();
+(function(){ var synth=('speechSynthesis' in window)?window.speechSynthesis:null; var zhVoice=null; function loadVoices(){ if(!synth) return; var vs=synth.getVoices(); for(var i=0;i<vs.length;i++){ if(/zh|chinese|中文|普通话/i.test((vs[i].lang||'')+(vs[i].name||''))){ zhVoice=vs[i]; break; } } } if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; } function clean(t){ return (t||'').replace(/\s+/g,' ').trim(); } function readText(el){ var t=el.querySelector('.q-text'); var txt=t?t.textContent:el.textContent; return clean(txt).replace(/(看答案|收起|听)$/,''); } function speak(text,rate){ text=clean(text); if(!text) return; if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; } synth.cancel(); var u=new SpeechSynthesisUtterance(text); u.lang='zh-CN'; u.rate=(rate||0.9); u.pitch=1; if(zhVoice) u.voice=zhVoice; synth.speak(u); } function stop(){ if(synth) synth.cancel(); } var SEL='.qa-q'; document.querySelectorAll(SEL).forEach(function(q){ try{ var btn=document.createElement('button'); btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听'; btn.addEventListener('click',function(e){ e.stopPropagation(); speak(readText(q)); }); var tog=q.querySelector('.toggle'); if(tog&&tog.parentElement===q){ q.insertBefore(btn,tog); } else { q.appendChild(btn); } }catch(e){} }); document.querySelectorAll('.qa-a-inner').forEach(function(a){ try{ var btn=document.createElement('button'); btn.className='spk-btn'; btn.type='button'; btn.textContent='🔊 听解析'; btn.addEventListener('click',function(e){ e.stopPropagation(); var qa=a.parentElement.parentElement; if(qa) qa.classList.add('open'); var t=qa?qa.querySelector('.toggle'):null; if(t) t.textContent='收起'; speak(clean(a.textContent).replace(/^解析[:：]?/,'')); }); a.insertBefore(btn,a.firstChild); }catch(e){} }); try{ var bar=document.createElement('div'); bar.className='voice-bar'; bar.innerHTML='<span>🎧 听读助手：</span><button type="button" id="vAll">🔊 朗读全部题目</button><button type="button" id="vStop">⏹ 停止</button><span class="hint">点题旁🔊逐题听；点🔊听解析边看边听</span>'; document.body.appendChild(bar); document.getElementById('vStop').addEventListener('click',stop); document.getElementById('vAll').addEventListener('click',function(){ if(!synth){ alert('当前浏览器不支持语音朗读，请用电脑版 Chrome 或 Edge 打开本页。'); return; } var list=document.querySelectorAll(SEL); var qi=0; function next(){ if(qi>=list.length) return; var txt=readText(list[qi++]); if(!txt){ next(); return; } synth.cancel(); var u=new SpeechSynthesisUtterance(txt); u.lang='zh-CN'; u.rate=0.9; u.pitch=1; if(zhVoice) u.voice=zhVoice; u.onend=function(){ setTimeout(next,260); }; synth.speak(u); } next(); }); }catch(e){} })();
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

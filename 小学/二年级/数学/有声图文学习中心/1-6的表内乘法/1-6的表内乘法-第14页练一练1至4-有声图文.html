@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内乘法 · 课本第14页 练一练1~4 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .t-sub{ color:#455a64; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔗 1~6的表内乘法 · 课本第 14 页 · 练一练 1~4</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>乘法意义 + 说理</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/05a-课本第14页-练一练1至4.png" alt="课本第14页练一练：1照样子连一连（2个3相加连3×2；3+3、6+6+6+6、乘数是6和4、5乘3、5+5+5可连；3+3+5、6+4、3+2不连）；2(1)3个8相加，和是多少？(2)一个乘数是8，另一个乘数是3，积是多少？3谁说得对？说一说理由（女生：2个6的和可以写成6×6；男生：3个4相加与4个3相加的计算结果是一样的）；4填一填：点子图每行6个共3行，□×□">
+    <!-- 热区按 756×1080 版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotT"      style="top:3.5%;  left:8%;  width:32%; height:7.5%;"></div>
+    <div class="hotspot" id="hotQ1"     style="top:12.5%; left:6%;  width:32%; height:5%;"></div>
+    <div class="hotspot" id="hotTags1"  style="top:17.5%; left:34%; width:64%; height:13%;"></div>
+    <div class="hotspot" id="hotHouses" style="top:30.5%; left:6%;  width:88%; height:23%;"></div>
+    <div class="hotspot" id="hotTags2"  style="top:54.5%; left:8%;  width:88%; height:11%;"></div>
+    <div class="hotspot" id="hotQ2"     style="top:67%;   left:5%;  width:66%; height:10%;"></div>
+    <div class="hotspot" id="hotQ3"     style="top:78%;   left:5%;  width:60%; height:5%;"></div>
+    <div class="hotspot" id="hotSays3"  style="top:81.5%; left:12%; width:82%; height:10.5%;"></div>
+    <div class="hotspot" id="hotQ4"     style="top:93%;   left:5%;  width:30%; height:5%;"></div>
+    <div class="hotspot" id="hotDots4"  style="top:92%;   left:38%; width:56%; height:7.5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 14 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第一题：照样子连一连。3+3连3×2；6+6+6+6连6×4；乘数是6和4连6×4；5乘3连5×3；5+5+5连5×3；3+3+5、6+4、3+2不连。">
+    <span class="t-badge">课本第 1 题</span><span class="t-main">照样子连一连。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>连线答案（示例 2个3相加→3×2 已连）：</b><br>
+      • <b>3+3</b> → 2 个 3 相加 → <b>3×2</b><br>
+      • <b>6+6+6+6</b> → 4 个 6 相加 → <b>6×4</b><br>
+      • <b>乘数是 6 和 4</b> → <b>6×4</b><br>
+      • <b>5 乘 3</b> → <b>5×3</b>；<b>5+5+5</b> → 3 个 5 相加 → <b>5×3</b><br>
+      • <b>不连</b>：3+3+5、6+4、3+2（<b>加数不相同</b>，不能写成乘法）
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="第二题：(1)3个8相加，和是24。(2)一个乘数是8，另一个乘数是3，积是24。">
+    <span class="t-badge">课本第 2 题</span><span class="t-main">(1) 3 个 8 相加，和是（　）。(2) 一个乘数是 8，另一个乘数是 3，积是（　）。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>(1)：</b>8+8+8=<b>24</b>（3 个 8 相加）。<br>
+      <b>(2)：</b>8×3=<b>24</b>。<br>
+      <b>发现：</b>两小题的得数相同——乘法本来就是加数相同的加法的简便写法。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第三题：谁说得对？说一说理由。">
+    <span class="t-badge">课本第 3 题</span><span class="t-main">谁说得对？说一说理由。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>判一判：</b>女生说"2 个 6 的和可以写成 6×6"——<b>不对</b>；男生说"3 个 4 相加与 4 个 3 相加的计算结果一样"——<b>对</b>。<br>
+      理由见下面两张气泡卡。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="女生说：2个6的和可以写成6×6。这是不对的，2个6相加应写成6×2，6×6是6个6相加。">
+    <span class="t-badge">女生的气泡 ✘</span><span class="t-main">"2 个 6 的和可以写成 6×6。"</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>不对。</b><br>
+      2 个 6 相加 = 6+6 = <b>6×2</b>（或 2×6）；<br>
+      <b>6×6 是 6 个 6 相加</b>（6 个 6 连加），意思完全不同。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="男生说：3个4相加与4个3相加的计算结果是一样的。这是对的，都得12。">
+    <span class="t-badge">男生的气泡 ✔</span><span class="t-main">"3 个 4 相加与 4 个 3 相加的计算结果是一样的。"</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>对。</b><br>
+      3 个 4 相加：4+4+4=<b>12</b>；4 个 3 相加：3+3+3+3=<b>12</b>。<br>
+      这就是上一页例 2 的发现：<b>乘数交换位置，积不变</b>（4×3=3×4=12）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第四题：填一填。点子图每行6个有3行，可以填6×3，也可以填3×6。">
+    <span class="t-badge">课本第 4 题</span><span class="t-main">填一填：□×□</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>看点子图：</b>每行 <b>6</b> 个，有 <b>3</b> 行（共 18 个）。<br>
+      <b>横着看：</b>3 个 6 相加 → <b>6×3</b>；<b>竖着看：</b>6 个 3 相加 → <b>3×6</b>。<br>
+      两个答案都对——乘数交换位置，积不变。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="3个8相加，加法算式8+8+8=24，和是24。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">➕</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>3 个 8 相加，和是多少？写出算式。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>算式：</b>8+8+8=24</div>
+      3 个 8 连加，和是 <b>24</b>。
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="一个乘数是8，另一个乘数是3，乘法算式8×3=24，积是24。和第(1)小题的得数一样，因为乘法就是加数相同的加法的简便写法。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">✖️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>一个乘数是 8，另一个乘数是 3，积是多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>算式：</b>8×3=24，积是 <b>24</b></div>
+      和第 (1) 小题得数相同——<b>乘法就是加数相同的加法的简便写法</b>。
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="能连的：3+3连3×2；6+6+6+6连6×4；乘数是6和4连6×4；5乘3连5×3；5+5+5连5×3。不能连的：3+3+5、6+4、3+2，因为加数不相同。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🔗</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 1 题：哪些卡片能连到房子上？哪些不能？为什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>能连：</b>3+3→3×2；6+6+6+6→6×4；乘数是6和4→6×4；5乘3→5×3；5+5+5→5×3</div>
+      <div class="sol sol2"><b>不能连：</b>3+3+5、6+4、3+2 —— <b>加数不相同</b></div>
+      <span class="think-note">💡 判断标准：只有<b>加数相同</b>的加法才能写成乘法</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="女生说得不对。2个6相加是6+6，写成乘法是6×2；6×6表示6个6相加，意思完全不同。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">👧</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>"2 个 6 的和可以写成 6×6"，对吗？为什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>不对</b></li>
+        <li>2 个 6 相加 = 6+6 = <b>6×2</b></li>
+        <li><b>6×6 是 6 个 6 相加</b>——乘法算式里，一个乘数是"相同的加数"，另一个是"个数"，不能混</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="男生说得对。3个4相加是4+4+4=12，4个3相加是3+3+3+3=12，得数一样。因为乘数交换位置积不变：4×3=3×4=12。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">👦</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>"3 个 4 相加与 4 个 3 相加结果一样"，对吗？说理由。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>对</b></li>
+        <li>3 个 4 相加：4+4+4=<b>12</b></li>
+        <li>4 个 3 相加：3+3+3+3=<b>12</b></li>
+        <li>理由：<b>乘数交换位置，积不变</b>（4×3=3×4）</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="参考答案一：每盘放4个苹果，放了6盘，4×6=24，一共有24个苹果。参考答案二：每组6人，3组做游戏，6×3=18。只要能用6乘4编出合理的数学故事都可以。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🚀</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>用「6×4」编一个数学小故事。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（开放题）：</span>
+      <div class="ref"><b>例一：</b>每盘放 4 个苹果，放 6 盘，一共有多少个？4×6=24。</div>
+      <div class="ref"><b>例二：</b>每组 6 人，3 组做游戏，一共有多少人？6×3=18。</div>
+      <span class="multi">🌈 故事里要有"每份同样多 + 份数"，能列出 6×4 就算对</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotT', say:'课本第十四页，练一练。这一页有四道题，都是关于乘法意义的练习。'},
+  {region:'hotQ1', say:'第一题：照样子连一连。把加法算式、乘法说法和乘法算式连起来。'},
+  {region:'hotTags1', think:true, say:'看上面的卡片：3加3、6加6加6加6、乘数是6和4、3加3加5。哪些能连到乘法算式上？想一想。',
+    ans:'3加3是2个3相加，连3×2；6加6加6加6是4个6相加，连6×4；乘数是6和4，连6×4。3加3加5加数不相同，不能连。'},
+  {region:'hotHouses', say:'三座房子上写着乘法算式：3×2、6×4、5×3。连线就是把意思一样的卡片连到房子上。'},
+  {region:'hotTags2', think:true, say:'下面一排：5乘3、6加4、3加2、5加5加5。怎么连？想一想。',
+    ans:'5乘3连5×3；5加5加5是3个5相加，也连5×3。6加4和3加2，加数不相同，不连。'},
+  {region:'hotQ2', think:true, say:'第二题：(1)3个8相加，和是多少？(2)一个乘数是8，另一个乘数是3，积是多少？想一想。',
+    ans:'第1小题：8+8+8=24。第2小题：8×3=24。两小题得数都是24。'},
+  {region:'hotQ3', say:'第三题：谁说得对？说一说理由。'},
+  {region:'hotSays3', think:true, say:'女生说：2个6的和可以写成6×6。男生说：3个4相加与4个3相加的计算结果一样。谁对谁错？想一想。',
+    ans:'女生不对：2个6相加是6+6，写成6×2；6×6是6个6相加。男生对：3个4相加得12，4个3相加也得12，乘数交换位置积不变。'},
+  {region:'hotQ4', say:'第四题：填一填。看点子图，填□×□。'},
+  {region:'hotDots4', think:true, say:'点子图：横着看每行几个？有几行？竖着看呢？想一想。',
+    ans:'每行6个，有3行，是3个6相加，填6×3；竖着看是6个3相加，填3×6。两个答案都对。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：3个8相加，和是多少？写出算式。想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：一个乘数是8，另一个乘数是3，积是多少？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：连一连，哪些卡片能连到房子上？哪些不能？为什么？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：2个6的和可以写成6乘6吗？对不对？为什么？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：3个4相加与4个3相加结果一样吗？说理由。想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：用6乘4编一个数学小故事。想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotT','课本第十四页，练一练。'],
+ ['hotQ1','第一题：照样子连一连。'],
+ ['hotTags1','3加3是2个3相加连3×2；6加6加6加6是4个6相加连6×4；乘数是6和4连6×4；3加3加5加数不同，不连。'],
+ ['hotHouses','三座房子：3×2、6×4、5×3。'],
+ ['hotTags2','5乘3连5×3；5加5加5是3个5相加连5×3；6加4、3加2加数不同，不连。'],
+ ['hotQ2','第1小题3个8相加得24；第2小题乘数是8和3，积也是24。'],
+ ['hotQ3','第三题：谁说得对？说一说理由。'],
+ ['hotSays3','女生不对：2个6相加写成6×2，6×6是6个6相加；男生对：3个4相加与4个3相加都得12。'],
+ ['hotQ4','第四题：填一填。'],
+ ['hotDots4','点子图每行6个有3行：横着看填6×3，竖着看填3×6，都对。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

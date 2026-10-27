@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复习与关联 · 课本第94页 数据分类与应用提升1 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 六、复习与关联 · 课本第 94 页 · 数据分类 与 应用提升①</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 · 分类再分类 · 九九乘法表找规律</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>按标准分类 · 乘法表对角线秘密 · 一积多口诀</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/85a-课本第94页数据分类与应用提升1.png" alt="课本第94页，数据分类。我们还学习了分类与整理。男孩说：分类要按照一定的标准进行。图中有红圆点、红方块、蓝方块、蓝圆点分成四格。女孩说：可以对第一次分类的结果按一定的标准继续分下去……应用提升。第1题：仔细观察，在空格里填出相应的积。九九乘法表：第一行和第一列是1到9，对角线上依次是1、4、9、16、25、36、49、64、81，其余空格待填。（1）任意指一个积，说出所用的乘法口诀。（2）观察每行或每列数，你能发现什么？（3）右面的表格是上表中的一部分，请把它们填完整。第一个小表2列2行：右上是24、右下是30；第二个小表2列2行：右下是63。（4）请写出每个乘法算式对应的除法算式。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTitle" style="top:3%;    left:8%;  width:22%; height:5.5%;"></div>
+    <div class="hotspot" id="hotLead"  style="top:9.5%;  left:12%; width:64%; height:4%;"></div>
+    <div class="hotspot" id="hotBoy"   style="top:14.5%; left:14%; width:30%; height:11%;"></div>
+    <div class="hotspot" id="hotPic"   style="top:13.5%; left:46%; width:22%; height:14%;"></div>
+    <div class="hotspot" id="hotGirl"  style="top:13.5%; left:70%; width:24%; height:15%;"></div>
+    <div class="hotspot" id="hotNo1"   style="top:33%;   left:8%;  width:44%; height:5%;"></div>
+    <div class="hotspot" id="hotTable" style="top:39%;   left:27%; width:46%; height:34%;"></div>
+    <div class="hotspot" id="hotQ1"    style="top:74.5%; left:9%;  width:70%; height:4%;"></div>
+    <div class="hotspot" id="hotQ2"    style="top:79%;   left:9%;  width:60%; height:4.5%;"></div>
+    <div class="hotspot" id="hotQ3"    style="top:84%;   left:9%;  width:48%; height:8%;"></div>
+    <div class="hotspot" id="hotSmall" style="top:83.5%; left:62%; width:32%; height:9%;"></div>
+    <div class="hotspot" id="hotQ4"    style="top:92.5%; left:9%;  width:60%; height:4%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 94 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="分类两句话：第一，分类要按照一定的标准进行，比如按颜色分、按形状分；第二，可以对第一次分类的结果按一定的标准继续分下去。比如圆点先按颜色分，红的一类、蓝的一类，再按形状分，每类里又分出圆和方块。">
+    <span class="t-badge">分类</span><span class="t-main">分类与整理还记得吗？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      ① 按<b>一定标准</b>分：颜色、形状都行；<br>
+      ② 还能<b>继续分</b>：先按颜色，再按形状；<br>
+      💡 标准不同，分的结果也不同。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="对角线的秘密：从左上到右下依次是1、4、9、16、25、36、49、64、81。它们是1×1、2×2、3×3……9×9的积，也就是两个相同乘数相乘，这样的数叫平方数。">
+    <span class="t-badge">对角线</span><span class="t-main">乘法表对角线上藏着什么数？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      1、4、9、16、25、36、49、64、81；<br>
+      分别是 <b>1×1 到 9×9</b> 的积；<br>
+      💡 乘数相同的口诀只有一句，如七七四十九。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="看行看列找规律：第3行依次是3、6、9、12、15、18、21、24、27，每次多3；每一列也一样，每次多几看列号。因为每一格都比左边多加一个相同的乘数，所以依次多几。">
+    <span class="t-badge">规律</span><span class="t-main">每行每列的数怎么变？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      第 3 行：3、6、9、12……<b>每次多 3</b>；<br>
+      第 5 列：5、10、15、20……<b>每次多 5</b>；<br>
+      💡 第几行（列）就每次多几。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="小表还原法：右上的24，找24在哪句口诀里——四六二十四、三八二十四都对，再看它和30同一列，30=5×6，所以24是4×6，两个空填4和5，第3行第6列。63=7×9，第二个表填7和9。">
+    <span class="t-badge">小表还原</span><span class="t-main">只有 24 和 30，怎么猜出原来的格子？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      30=5×6，24=4×6 → 同在第 <b>6</b> 列，填 4、5；<br>
+      63=<b>7×9</b> → 第二个表填 7、9；<br>
+      💡 先想口诀，再看行、列对不对得上。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="21在第3行第7列（或第7行第3列），想口诀三七二十一。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🎯</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>21 在乘法表里的哪个格子？用哪句口诀？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">口诀：三七二十一；</div>
+      <div class="sol sol2">在第 <b>3 行第 7 列</b>（也可说第 7 行第 3 列）。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="这些数是1、4、9、16、25、36、49、64、81，都是两个相同乘数的积：1×1、2×2、3×3……9×9。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🔶</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>对角线上的 9 个数分别是怎么来的？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">1×1=1、2×2=4、3×3=9……9×9=81；</div>
+      <div class="sol sol2">两个<b>相同乘数</b>相乘的积。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="第6行依次是6、12、18、24、30、36、42、48、54，每次多6。因为每往右一格，就多加1个6。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📈</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 6 行的数依次是多少？有什么规律？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">6、12、18、24、30、36、42、48、54；</div>
+      <div class="sol sol2"><b>每次多 6</b>（多加 1 个 6）；</div>
+      <span class="think-note">💡 第几行，每次就多几</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="24=4×6=3×8、30=5×6、63=7×9=9×7。第一个小表：同列是6的口诀列，上格4、下格5；第二个小表填7和9。先想积的口诀，再对行、列。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🧩</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>两个小表怎么填完整？说说你的想法。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">24=4×6、30=5×6 → 第 6 列，填 4 和 5；</div>
+      <div class="sol sol2">63=7×9 → 填 7 和 9；</div>
+      <span class="think-note">💡 先想口诀，再对位置</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="乘法：4×6=24；除法：24÷4=6、24÷6=4。一句口诀四六二十四管三道题。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">✍️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>写出积是 24 的乘法算式和对应的除法算式。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">乘法：<b>4×6=24</b>（口诀四六二十四）；</div>
+      <div class="sol sol2">除法：<b>24÷4=6</b>、<b>24÷6=4</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="不行。乘法表右上部分是空的，因为小九九里1×2和2×1是同一句口诀，只用记一次，所以每个积只出现一次（对角线上的数乘数相同更只有一次）。表格右上空着不是漏了，是口诀表本身的特点。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>乘法表的右上部分是空的，能把整张表填满吗？为什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">小九九里 1×2 和 2×1 是<b>同一句口诀</b>；</div>
+      <div class="sol sol2">每个积只记一次，右上就空着；</div>
+      <span class="multi">🌈 空格正是小九九和大九九的区别</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+var steps1=[
+  {region:'hotTitle', say:'数据分类。我们还学习了分类与整理。'},
+  {region:'hotBoy', say:'男孩说：分类要按照一定的标准进行。'},
+  {region:'hotPic', say:'看中间的点子图：红圆点、红方块、蓝圆点、蓝方块，先按颜色分，再按形状分。'},
+  {region:'hotGirl', say:'女孩说：可以对第一次分类的结果按一定的标准继续分下去。'},
+  {region:'hotNo1', say:'应用提升。第1题：仔细观察，在空格里填出相应的积。'},
+  {region:'hotTable', think:true, say:'看九九乘法表：第一行和第一列都是1到9，对角线上已经有1、4、9、16、25、36、49、64、81。想一想，对角线上的数是怎么来的？',
+    ans:'它们是1×1、2×2、3×3……9×9的积，两个相同乘数相乘。其他空格按行、列的口诀填。'},
+  {region:'hotQ1', say:'第（1）题：任意指一个积，说出所用的乘法口诀。'},
+  {region:'hotQ2', think:true, say:'第（2）题：观察每行或每列数，你能发现什么？',
+    ans:'第3行是3、6、9、12……每次多3；第几行（列）就每次多几，因为每格多加一个相同的乘数。'},
+  {region:'hotQ3', say:'第（3）题：右面的表格是上表中的一部分，请把它们填完整。'},
+  {region:'hotSmall', think:true, say:'看两个小表：一个右上24、右下30；另一个只有63。想一想，24和30的口诀里哪个乘数相同？',
+    ans:'24=4×6、30=5×6，都在第6列，缺的乘数填4和5；63=7×9，第二个表填7和9。'},
+  {region:'hotQ4', say:'第（4）题：请写出每个乘法算式对应的除法算式。比如4×6=24，可以写24÷4=6和24÷6=4。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：21在乘法表里的哪个格子？用哪句口诀？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：对角线上的9个数分别是怎么来的？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：第6行的数依次是多少？有什么规律？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：两个小表怎么填完整？说说想法。想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：写出积是24的乘法算式和对应的除法算式。想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：乘法表的右上部分是空的，能把整张表填满吗？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读 */
+[['hotTitle','数据分类。'],
+ ['hotLead','我们还学习了分类与整理。'],
+ ['hotBoy','分类要按照一定的标准进行。'],
+ ['hotPic','先按颜色分，再按形状分。'],
+ ['hotGirl','第一次分类的结果还可以继续分。'],
+ ['hotNo1','第1题，在空格里填出相应的积。'],
+ ['hotTable','九九乘法表，对角线是1到9自乘的积。'],
+ ['hotQ1','任意指一个积，说出乘法口诀。'],
+ ['hotQ2','观察每行或每列数，你发现了什么？'],
+ ['hotQ3','小表是乘法表的一部分，填完整。'],
+ ['hotSmall','24和30同列：4×6、5×6；63=7×9。'],
+ ['hotQ4','写出每个乘法算式对应的除法算式。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

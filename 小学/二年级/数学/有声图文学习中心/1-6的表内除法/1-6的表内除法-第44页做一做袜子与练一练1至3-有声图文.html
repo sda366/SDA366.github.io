@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内除法 · 课本第44页 做一做·哪种袜子便宜 & 练一练1~3 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 1~6的表内除法 · 课本第 44 页 · 做一做·哪种袜子便宜 & 练一练 1~3</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>比价问题 · 口算 · 算式含义 · 同数相除与除以1</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/35a-课本第44页-做一做袜子与练一练1至3.png" alt="课本第44页：比较上页两道题的相同与不同。做一做：有两种包装的袜子，一种每包5双标价20元，另一种每包6双标价30元，哪种每双便宜些？练一练1口算：18÷3、6×2、10÷5、22-3；12+8、24÷4、28-9、9÷3；25÷5、18+4、30÷6、4×6。2看图说算式含义：5×6=30、30÷6=5、30÷5=6，图是6个笔筒每个插5支毛笔。3算一算：6÷6、5÷5、4÷4；2÷1、3÷1、6÷1，你发现了什么？写出几组像上面这样的算式。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTop"   style="top:2.5%;  left:5%;  width:90%; height:10%;"></div>
+    <div class="hotspot" id="hotSock"  style="top:19%;   left:5%;  width:90%; height:13%;"></div>
+    <div class="hotspot" id="hotM1"    style="top:44%;   left:10%; width:82%; height:4.5%;"></div>
+    <div class="hotspot" id="hotM2"    style="top:49%;   left:10%; width:82%; height:4.5%;"></div>
+    <div class="hotspot" id="hotM3"    style="top:54%;   left:10%; width:82%; height:4.5%;"></div>
+    <div class="hotspot" id="hotT2"    style="top:58.5%; left:6%;  width:64%; height:5%;"></div>
+    <div class="hotspot" id="hotCups"  style="top:63.5%; left:22%; width:58%; height:11%;"></div>
+    <div class="hotspot" id="hotT3L"   style="top:77.5%; left:13%; width:24%; height:10.5%;"></div>
+    <div class="hotspot" id="hotT3R"   style="top:77.5%; left:39%; width:24%; height:10.5%;"></div>
+    <div class="hotspot" id="hotRobot" style="top:80.5%; left:67%; width:30%; height:7.5%;"></div>
+    <div class="hotspot" id="hotWrite" style="top:89%;   left:8%;  width:62%; height:5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 44 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="做一做：有两种包装的袜子，一种每包5双，标价20元；另一种每包6双，标价30元。哪种包装的袜子每双的价钱便宜些？">
+    <span class="t-badge">做一做</span><span class="t-main">两种包装的袜子，哪种每双更便宜？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      第一种：20 元 <b>5 双</b> → <b>20÷5＝4（元）</b>每双；<br>
+      第二种：30 元 <b>6 双</b> → <b>30÷6＝5（元）</b>每双；<br>
+      4 元 &lt; 5 元 → <b>每包 5 双、标价 20 元的便宜</b>。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="口算答案：18除以3等于6，6乘2等于12，10除以5等于2，22减3等于19；12加8等于20，24除以4等于6，28减9等于19，9除以3等于3；25除以5等于5，18加4等于22，30除以6等于5，4乘6等于24。">
+    <span class="t-badge">第 1 题</span><span class="t-main">口算 12 道全答案</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      第一行：<b>18÷3＝6</b>、6×2＝12、<b>10÷5＝2</b>、22−3＝19；<br>
+      第二行：12＋8＝20、<b>24÷4＝6</b>、28−9＝19、<b>9÷3＝3</b>；<br>
+      第三行：<b>25÷5＝5</b>、18＋4＝22、<b>30÷6＝5</b>、4×6＝24。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 除法题都想口诀：三六十八、四六二十四…</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第2题：6个笔筒，每个笔筒插5支毛笔。5乘6等于30表示6个5支一共30支；30除以6等于5表示30支平均插6个笔筒每个5支；30除以5等于6表示30支每5支插一个笔筒能插6个笔筒。">
+    <span class="t-badge">第 2 题</span><span class="t-main">看图说算式含义：5×6=30 · 30÷6=5 · 30÷5=6</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      图：<b>6 个笔筒</b>，每个插 <b>5 支</b>毛笔；<br>
+      <b>5×6＝30</b>：6 个 5 支一共 30 支；<br>
+      <b>30÷6＝5</b>：30 支平均插 6 个笔筒，每个 5 支；<br>
+      <b>30÷5＝6</b>：30 支每 5 支插一筒，能插 6 个笔筒。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="第3题：6除以6等于1，5除以5等于1，4除以4等于1；2除以1等于2，3除以1等于3，6除以1等于6。我发现：相同的数相除商是1，一个数除以1还得原来的数。">
+    <span class="t-badge">第 3 题</span><span class="t-main">算一算 + 你发现了什么？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      左列：6÷6＝1、5÷5＝1、4÷4＝1；右列：2÷1＝2、3÷1＝3、6÷1＝6；<br>
+      发现：<b>相同的数相除，商是 1</b>；<b>一个数除以 1，还得原来的数</b>。<br>
+      照样子写：7÷7＝1、8÷8＝1；9÷1＝9、10÷1＝10……
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="第一种每包5双20元，20除以5等于4元一双；第二种每包6双30元，30除以6等于5元一双。4元小于5元，每包5双标价20元的便宜。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🧦</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>两种袜子，哪种每双的价钱便宜些？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">第一种：<b>20÷5＝4（元）</b>；第二种：<b>30÷6＝5（元）</b>；</div>
+      <div class="sol sol2">4 元 ＜ 5 元 → <b>每包 5 双、20 元的便宜</b>。</div>
+      <span class="think-note">💡 先算出每双的价钱，再比较</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="18除以3等于6，10除以5等于2，24除以4等于6，30除以6等于5。都用乘法口诀求商：三六十八、二五一十、四六二十四、五六三十。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🧮</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>口算：18÷3、10÷5、24÷4、30÷6，各得几？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>18÷3＝6</b>（三六十八）、<b>10÷5＝2</b>（二五一十）；</div>
+      <div class="sol sol2"><b>24÷4＝6</b>（四六二十四）、<b>30÷6＝5</b>（五六三十）。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="6个笔筒每个插5支毛笔。5乘6等于30求一共有多少支；30除以6等于5把30支平均插6个笔筒求每个几支；30除以5等于6每5支插一筒求能插几个筒。三个算式用的是同一句口诀五六三十。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🖌️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>结合笔筒图，说一说 5×6=30、30÷6=5、30÷5=6 各表示什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>5×6＝30</b>：6 个 5 支一共 30 支（求总数）；</div>
+      <div class="sol sol2"><b>30÷6＝5</b>：平均插 6 筒求每筒几支（平均分）；<b>30÷5＝6</b>：每 5 支一筒求几筒（包含分）；</div>
+      <span class="think-note">💡 三个算式都用同一句口诀：五六三十</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="商都是1。因为除数和被除数相同，就是把自己的数平均分给自己每一份正好是1。例如6÷6=1，5÷5=1。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">1️⃣</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>6÷6、5÷5、4÷4 的商都是几？为什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">商都是 <b>1</b>；</div>
+      <div class="sol sol2">因为被除数和除数<b>相同</b>：把 6 平均分成 6 份，每份正好 1 个。想口诀：一六得六 → 商 1。</div>
+      <span class="think-note">💡 相同的数相除，商是 1</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="一个数除以1，商还是这个数。例如2除以1等于2，3除以1等于3，6除以1等于6。因为1乘任何数都等于那个数本身。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🔢</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>一个数除以 1，商有什么特点？举例说明。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">商<b>还是这个数</b>：2÷1＝2、3÷1＝3、6÷1＝6；</div>
+      <div class="sol sol2">道理：1 乘任何数都得原数，反过来除以 1 也得原数。</div>
+      <span class="think-note">💡 除以 1，等于"不变"</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="同数相除组：7÷7=1、9÷9=1、10÷10=1。除以1组：8÷1=8、9÷1=9、12÷1=12。还可以每组写出一句口诀，如一一得一、一八得八。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>照样子再写出几组这样的算式。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">同数相除：<b>7÷7＝1</b>、9÷9＝1、10÷10＝1……</div>
+      <div class="sol sol2">除以 1：<b>8÷1＝8</b>、9÷1＝9、12÷1＝12……</div>
+      <span class="multi">🌈 规律记牢：同数相除得 1，除以 1 不变</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotTop', say:'先想一想：比较上页的两道题，你能发现它们有什么相同的地方和不同的地方吗？'},
+  {region:'hotSock', think:true, say:'做一做：有两种包装的袜子，一种每包5双，标价20元；另一种每包6双，标价30元。哪种包装的袜子每双的价钱便宜些？想一想。',
+    ans:'求每双多少钱用除法：20除以5等于4元，30除以6等于5元。4元小于5元，每包5双标价20元的便宜。'},
+  {region:'hotM1', say:'第1题口算第一行：18除以3等于6，6乘2等于12，10除以5等于2，22减3等于19。'},
+  {region:'hotM2', say:'第二行：12加8等于20，24除以4等于6，28减9等于19，9除以3等于3。'},
+  {region:'hotM3', say:'第三行：25除以5等于5，18加4等于22，30除以6等于5，4乘6等于24。'},
+  {region:'hotT2', say:'第2题：看图说一说算式的含义。5乘6等于30，30除以6等于5，30除以5等于6。'},
+  {region:'hotCups', think:true, say:'图上是6个笔筒，每个笔筒插5支毛笔。想一想：这三个算式分别表示什么意思？',
+    ans:'5乘6等于30，表示6个5支一共30支；30除以6等于5，表示30支平均插6个笔筒每个5支；30除以5等于6，表示30支每5支插一个笔筒能插6个笔筒。'},
+  {region:'hotT3L', say:'第3题算一算左列：6除以6等于1，5除以5等于1，4除以4等于1。'},
+  {region:'hotT3R', say:'右列：2除以1等于2，3除以1等于3，6除以1等于6。'},
+  {region:'hotRobot', think:true, say:'你发现了什么？想一想。',
+    ans:'我发现：相同的数相除商是1；一个数除以1，还得原来的数。'},
+  {region:'hotWrite', say:'最后，写出几组像上面这样的算式，比如7除以7等于1，9除以1等于9。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：两种袜子，哪种每双的价钱便宜些？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：口算18除以3、10除以5、24除以4、30除以6，各得几？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：结合笔筒图，说一说三个算式各表示什么意思？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：6除以6、5除以5、4除以4，商都是几？为什么？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：一个数除以1，商有什么特点？举例说明。想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：照样子再写出几组这样的算式。想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotTop','比较上页两道题，有什么相同和不同？'],
+ ['hotSock','两种包装的袜子：每包5双20元，每包6双30元，哪种每双便宜些？'],
+ ['hotM1','18除以3等于6，6乘2等于12，10除以5等于2，22减3等于19。'],
+ ['hotM2','12加8等于20，24除以4等于6，28减9等于19，9除以3等于3。'],
+ ['hotM3','25除以5等于5，18加4等于22，30除以6等于5，4乘6等于24。'],
+ ['hotT2','看图说一说算式的含义：5乘6等于30，30除以6等于5，30除以5等于6。'],
+ ['hotCups','6个笔筒，每个笔筒插5支毛笔。'],
+ ['hotT3L','6除以6等于1，5除以5等于1，4除以4等于1。'],
+ ['hotT3R','2除以1等于2，3除以1等于3，6除以1等于6。'],
+ ['hotRobot','你发现了什么？'],
+ ['hotWrite','写出几组像上面这样的算式。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

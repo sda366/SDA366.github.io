@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>厘米和米 · 课本第58页 认识米1米=100厘米 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 四、厘米和米 · 课本第 58 页 · 认识米 · 1 米=100 厘米</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析 · 1 米有多长 · 选择合适的答案</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>1米的长度 · 1米=100厘米 · 比1米长还是短</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/49a-课本第58页-认识米1米等于100厘米.jpg" alt="课本第58页：拿一把米尺，看看1米有多长。女孩：1米有这么长。男孩：1米到我这儿。在米尺上看看：1米里面有多少个1厘米？1米=100厘米。做一做：1.照样子量一量，填一填。黑板约几米；身高几米几厘米。2.选择合适的答案，在方框里画对勾：跳绳比1米长、比1米短；猫比1米高、比1米矮；长椅比1米长、比1米短。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotAsk"    style="top:2%;    left:14%; width:56%; height:4.5%;"></div>
+    <div class="hotspot" id="hotGirl"   style="top:7%;    left:17%; width:19%; height:6%;"></div>
+    <div class="hotspot" id="hotGScene" style="top:9%;    left:33%; width:22%; height:22%;"></div>
+    <div class="hotspot" id="hotBoy"    style="top:7.5%;  left:62%; width:19%; height:6%;"></div>
+    <div class="hotspot" id="hotBScene" style="top:9%;    left:53%; width:9%;  height:22%;"></div>
+    <div class="hotspot" id="hotLook"   style="top:26%;   left:16%; width:56%; height:4.5%;"></div>
+    <div class="hotspot" id="hotEqual"  style="top:32%;   left:38%; width:24%; height:5.5%;"></div>
+    <div class="hotspot" id="hotDoT"    style="top:40%;   left:8%;  width:16%; height:6%;"></div>
+    <div class="hotspot" id="hotT1q"    style="top:49%;   left:8%;  width:36%; height:4.5%;"></div>
+    <div class="hotspot" id="hotBoard"  style="top:53.5%; left:16%; width:36%; height:12%;"></div>
+    <div class="hotspot" id="hotHeight" style="top:53.5%; left:60%; width:32%; height:13%;"></div>
+    <div class="hotspot" id="hotFill"   style="top:67.5%; left:8%;  width:86%; height:4.5%;"></div>
+    <div class="hotspot" id="hotT2q"    style="top:74%;   left:8%;  width:44%; height:4.5%;"></div>
+    <div class="hotspot" id="hotRope"   style="top:79.5%; left:6%;  width:24%; height:15%;"></div>
+    <div class="hotspot" id="hotCat"    style="top:79.5%; left:37%; width:24%; height:15%;"></div>
+    <div class="hotspot" id="hotBench"  style="top:79%;   left:66%; width:30%; height:16%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 58 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="拿一把米尺，看看1米有多长。女孩张开两臂：1米有这么长。男孩说：1米到我这儿。">
+    <span class="t-badge">1 米有多长</span><span class="t-main">用身体记住 1 米</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      米尺上 <b>0 到 100 厘米</b>的长度就是 1 米；<br>
+      女孩两臂张开比划：1 米有这么长；<br>
+      男孩说：1 米<b>到我这儿</b>（到胸口附近）。<br>
+      <span class="multi" style="display:inline-block;margin:0">💡 记住 1 米大约到自己身体的哪个位置</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="在米尺上看看：1米里面有多少个1厘米？1米=100厘米。">
+    <span class="t-badge">关键关系</span><span class="t-main">1 米 = 100 厘米</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      米尺上每一小格 1 厘米，数一数：<b>1 米里面有 100 个 1 厘米</b>；<br>
+      所以 <b>1 米＝100 厘米</b>（1m＝100cm）；<br>
+      米和厘米之间换算：2 米＝200 厘米，反过来 200 厘米＝2 米。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="做一做第1题：照样子量一量填一填。黑板的长度大约4米，同学的身高1米30厘米。要以实际测量为准。">
+    <span class="t-badge">做一做1</span><span class="t-main">量黑板与量身高</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      黑板的长：用米尺量，教室黑板常见大约 <b>3～4 米</b>（以实际测量为准）；<br>
+      身高：站直量，比如 <b>1 米 30 厘米</b>（每个同学不一样）；<br>
+      <span class="multi" style="display:inline-block;margin:0">💡 长度＋身高都用"米和厘米"一起说</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="做一做第2题：选择合适的答案画对勾。跳绳比1米长；猫比1米矮；长椅比1米长。">
+    <span class="t-badge">做一做2</span><span class="t-main">比 1 米长还是短？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      跳绳展开来 → <b>比 1 米长</b>（√）；<br>
+      猫蹲着 → <b>比 1 米矮</b>（√）；<br>
+      长椅 → <b>比 1 米长</b>（√）。<br>
+      方法：和 1 米比一比，或想一想生活中的实际样子。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="1米大约到二年级同学的胸口附近。可以张开两臂比一比，两臂张开的一半差不多是1米；也可以拿米尺站一站看1米到自己身体哪里。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🧍</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>1 米大约到自己身体的哪个位置？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">图上男孩：1 米<b>到胸口附近</b>；</div>
+      <div class="sol sol2">可以用米尺在自己身上<b>做个记号</b>，随时比一比。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="1米=100厘米。在米尺上数一数，1米里面有100个1厘米。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">📏</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>1 米里面有多少个 1 厘米？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>1 米＝100 厘米</b>；</div>
+      <div class="sol sol2">米尺上一小格 1 厘米，一共 100 格。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="跳绳展开来比1米长；猫蹲着比1米矮；长椅比1米长。想一想它们和1米的实际大小就能选对。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">✅</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>跳绳、猫、长椅，各比 1 米长还是短？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">跳绳<b>比 1 米长</b>；猫<b>比 1 米矮</b>；长椅<b>比 1 米长</b>；</div>
+      <div class="sol sol2">想象 1 米在自己身上到胸口，一比就出来了。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="因为黑板的长度比1米长得多，用厘米量数字太大不方便，用米作单位量出的数合适好说。黑板大约3到4米长。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🧑‍🏫</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>量黑板的长，为什么用米不用厘米？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">黑板约 3～4 米，用厘米说就是 300～400 厘米，<b>数太大</b>；</div>
+      <div class="sol sol2">用米量：<b>数小、好说、好记</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="2米=200厘米，因为1米=100厘米，2个100厘米就是200厘米。反过来300厘米=3米。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🔁</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>2 米是多少厘米？300 厘米是多少米？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">1 米＝100 厘米 → 2 米＝<b>200 厘米</b>；</div>
+      <div class="sol sol2">300 厘米里有 3 个 100 → <b>3 米</b>。</div>
+      <span class="think-note">💡 记住 1 米=100 厘米，换算就不用怕</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="示例：先伸出两臂比一比1米大约多长，再估计课桌高比1米矮、门高比1米高；最后用米尺量一量验证。多估多比，眼力会越来越准。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>不用尺子，怎么估计教室里物体比 1 米长还是短？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>身上找参照</b>：1 米到胸口，两臂张开后比一比；</div>
+      <div class="sol sol2">先估计再测量验证，误差会越来越小。</div>
+      <span class="multi">🌈 估一估、量一量，1 米记心中</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotAsk', say:'拿一把米尺，看看1米有多长。'},
+  {region:'hotGirl', say:'女孩张开两臂举着米尺说：1米有这么长。'},
+  {region:'hotGScene', say:'女孩两臂张开，1米有这么长。'},
+  {region:'hotBoy', think:true, say:'男孩把米尺立在地上说：1米到我这儿。想一想，1米到你的身体哪个位置？',
+    ans:'1米大约到二年级同学的胸口附近。回去拿米尺量一量、做个记号。'},
+  {region:'hotBScene', say:'米尺立在男孩身边，正好到他胸口。'},
+  {region:'hotLook', think:true, say:'在米尺上看看：1米里面有多少个1厘米？想一想。',
+    ans:'米尺上一小格是1厘米，数一数，1米里面有100个1厘米。'},
+  {region:'hotEqual', say:'所以，1米=100厘米。'},
+  {region:'hotDoT', say:'做一做。'},
+  {region:'hotT1q', think:true, say:'第1题：照样子量一量，填一填。黑板的长约几米？想一想。',
+    ans:'用米尺量，教室黑板大约3到4米，以实际测量为准。'},
+  {region:'hotBoard', say:'两个同学用长尺合作量黑板的长。'},
+  {region:'hotHeight', say:'右边老师帮同学量身高的图：身高几米几厘米，比如1米30厘米。'},
+  {region:'hotFill', say:'填写：黑板约几米，身高几米几厘米。'},
+  {region:'hotT2q', say:'第2题：选择合适的答案，在方框里画对勾。'},
+  {region:'hotRope', think:true, say:'跳绳：比1米长还是比1米短？想一想。',
+    ans:'跳绳展开来比1米长，画对勾在"比1米长"。'},
+  {region:'hotCat', think:true, say:'猫：比1米高还是比1米矮？想一想。',
+    ans:'猫蹲着比1米矮，画对勾在"比1米矮"。'},
+  {region:'hotBench', say:'长椅：比1米长，画对勾在"比1米长"。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：1米大约到自己身体的哪个位置？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：1米里面有多少个1厘米？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：跳绳、猫、长椅，各比1米长还是短？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：量黑板的长，为什么用米不用厘米？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：2米是多少厘米？300厘米是多少米？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：不用尺子，怎么估计教室里物体比1米长还是短？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotAsk','拿一把米尺，看看1米有多长。'],
+ ['hotGirl','1米有这么长。'],
+ ['hotGScene','女孩两臂张开，1米有这么长。'],
+ ['hotBoy','1米到我这儿。'],
+ ['hotBScene','米尺立在地上，到男孩胸口。'],
+ ['hotLook','在米尺上看看：1米里面有多少个1厘米？'],
+ ['hotEqual','1米=100厘米。'],
+ ['hotDoT','做一做。'],
+ ['hotT1q','照样子量一量，填一填。黑板的长约几米？'],
+ ['hotBoard','两个同学合作量黑板的长。'],
+ ['hotHeight','量身高的图。'],
+ ['hotFill','黑板约几米，身高几米几厘米。'],
+ ['hotT2q','选择合适的答案，在方框里画对勾。'],
+ ['hotRope','跳绳：比1米长。'],
+ ['hotCat','猫：比1米矮。'],
+ ['hotBench','长椅：比1米长。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

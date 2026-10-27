@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内乘法 · 课本第22页 6的乘法口诀 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .t-sub{ color:#455a64; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🍡 1~6的表内乘法 · 课本第 22 页 · 6 的乘法口诀</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>6 的乘法口诀</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/13a-课本第22页-6的乘法口诀.png" alt="课本第22页6的乘法口诀：6串糖葫芦，每串6个山楂；表格糖葫芦串数1~6，山楂颗数6、12；算式6×1到6×6与1×6到5×6；口诀一六得（）到六六（）。做一做：1补全口诀写出算式，三六（）、五六（）、四六（），小女孩提示三六得几可以在二六十二的积上加一个6，也可以在三五十五的积上加一个3；2一只蚂蚁6条腿，3只蚂蚁几条腿，6只蚂蚁几条腿。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotTitle"  style="top:3.5%;  left:11%; width:32%; height:6%;"></div>
+    <div class="hotspot" id="hotSkewer" style="top:10%;   left:6%;  width:86%; height:12%;"></div>
+    <div class="hotspot" id="hotTable"  style="top:22.5%; left:8%;  width:84%; height:7.5%;"></div>
+    <div class="hotspot" id="hotEqsL"   style="top:31%;   left:7%;  width:27%; height:25%;"></div>
+    <div class="hotspot" id="hotEqsR"   style="top:31%;   left:35%; width:27%; height:21%;"></div>
+    <div class="hotspot" id="hotKj"     style="top:30.5%; left:63%; width:34%; height:26%;"></div>
+    <div class="hotspot" id="hotZuo"    style="top:57%;   left:5%;  width:28%; height:5%;"></div>
+    <div class="hotspot" id="hotZ1"     style="top:62.5%; left:5%;  width:88%; height:14%;"></div>
+    <div class="hotspot" id="hotTip"    style="top:77%;   left:24%; width:70%; height:8.5%;"></div>
+    <div class="hotspot" id="hotAnt"    style="top:85.5%; left:4%;  width:92%; height:11%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 22 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="看图：6串糖葫芦，每串有6个山楂。数一数，一串正好6个。">
+    <span class="t-badge">主题图</span><span class="t-main">6 串糖葫芦，每串有 6 个山楂。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>读图：</b>每串糖葫芦 <b>6 个</b>山楂，一共 <b>6 串</b>。求总数就是求 <b>6 个 6</b> 是多少。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="表格：糖葫芦串数1、2、3、4、5、6；山楂颗数：1串6个，2串12个。往后每次多6：3串18、4串24、5串30、6串36。">
+    <span class="t-badge">例4 表格</span><span class="t-main">串数 1~6，山楂颗数：6、12、□、□、□、□</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>1 串</b> 6 个；<b>2 串</b> 12 个；每多 1 串就<b>多 6 个</b>：<br>
+      <b>3 串</b> 18；<b>4 串</b> 24；<b>5 串</b> 30；<b>6 串</b> 36。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="算式与口诀：6×1=6，一六得六；6×2=12，二六十二；6×3=18，三六十八；6×4=24，四六二十四；6×5=30，五六三十；6×6=36，六六三十六。1×6、2×6这些算式交换位置，积不变。">
+    <span class="t-badge">算式与口诀</span><span class="t-main">6×1=6 一六得六 …… 6×6=36 六六三十六</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>6×1=6</b> 一六得六；<b>6×2=12</b> 二六十二；<b>6×3=18</b> 三六十八；<br>
+      <b>6×4=24</b> 四六二十四；<b>6×5=30</b> 五六三十；<b>6×6=36</b> 六六三十六。<br>
+      🌈 右边 1×6、2×6……是交换位置，<b>积不变</b>，用同一句口诀。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="做一做第一题：补全口诀，写出算式。三六十八，算式3×6=18和6×3=18；五六三十，算式5×6=30和6×5=30；四六二十四，算式4×6=24和6×4=24。">
+    <span class="t-badge">做一做 1</span><span class="t-main">补全口诀，写出算式：三六（　）五六（　）四六（　）</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>三六（十八）</b>：3×6=18、6×3=18；<br>
+      <b>五六（三十）</b>：5×6=30、6×5=30；<br>
+      <b>四六（二十四）</b>：4×6=24、6×4=24。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 每句口诀（六六除外）都能写两道乘法算式</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="小女孩提示：三六得几，可以在二六十二的积上加一个6，12加6等于18；也可以在三五十五的积上加一个3，15加3等于18。">
+    <span class="t-badge">小女孩的提示</span><span class="t-main">三六得几？可以在"二六十二"的积上加一个 6，也可以在"三五十五"的积上加一个 3。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>想法一：</b>二六十二 → 12+6=<b>18</b>（3 个 6 比 2 个 6 多 1 个 6）；<br>
+      <b>想法二：</b>三五十五 → 15+3=<b>18</b>（3 个 6 = 3 个 5 再加 3 个 1）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="做一做第二题：1只蚂蚁6条腿，3只蚂蚁几条腿？3×6=18条。6只蚂蚁几条腿？6×6=36条。">
+    <span class="t-badge">做一做 2</span><span class="t-main">1 只蚂蚁 6 条腿，3 只蚂蚁（　）条腿，6 只蚂蚁（　）条腿。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>3 只：</b>3×6=<b>18</b>（条），口诀三六十八；<br>
+      <b>6 只：</b>6×6=<b>36</b>（条），口诀六六三十六。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="6的乘法口诀共有6句：一六得六、二六十二、三六十八、四六二十四、五六三十、六六三十六。相邻两句都差6，因为每多1串就多6个山楂。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🔢</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>6 的乘法口诀共有几句？相邻两句相差几？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>共 6 句</b>：一六得六 → 六六三十六</li>
+        <li><b>相邻差 6</b>：每多 1 串糖葫芦就多 6 个山楂</li>
+      </ul>
+      <span class="think-note">💡 差 6，正是"每次多 6"的规律</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="表格填空：3串18个、4串24个、5串30个、6串36个。方法：每次多6，或者用口诀三四十八不行，要用6的口诀：三六十八、四六二十四、五六三十、六六三十六。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">📋</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>表格填空：3 串、4 串、5 串、6 串各有多少个山楂？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">3 串 <b>18</b>（三六十八）；4 串 <b>24</b>（四六二十四）</div>
+      <div class="sol sol2">5 串 <b>30</b>（五六三十）；6 串 <b>36</b>（六六三十六）</div>
+      <span class="think-note">💡 也可以在 12 的基础上继续每次加 6</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="三六十八：3×6=18、6×3=18；五六三十：5×6=30、6×5=30；四六二十四：4×6=24、6×4=24。每句口诀可以写两道算式，因为交换乘数位置积不变。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">✏️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>补全口诀并各写两道算式：三六、五六、四六。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">三六（<b>十八</b>）：3×6=18、6×3=18</div>
+      <div class="sol sol2">五六（<b>三十</b>）：5×6=30、6×5=30</div>
+      <div class="sol sol3">四六（<b>二十四</b>）：4×6=24、6×4=24</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="忘了三六得几，有两种想法：一是在二六十二的积上加一个6，12+6=18；二是在三五十五的积上加一个3，15+3=18。这说明相邻或相近的口诀可以互相帮忙。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🧠</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>忘了"三六得几"怎么办？说出两种想法。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>想二六十二：</b>再加 1 个 6 → 12+6=<b>18</b></li>
+        <li><b>想三五十五：</b>再加 3 → 15+3=<b>18</b></li>
+      </ul>
+      <span class="think-note">💡 口诀之间是相通的，忘了一句可以推出来</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="1只蚂蚁6条腿：3只蚂蚁3×6=18条腿，用口诀三六十八；6只蚂蚁6×6=36条腿，用口诀六六三十六。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🐜</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>1 只蚂蚁 6 条腿，3 只、6 只蚂蚁各几条腿？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>3 只：</b>3×6=<b>18</b>（条），三六十八</div>
+      <div class="sol sol2"><b>6 只：</b>6×6=<b>36</b>（条），六六三十六</div>
+      <span class="think-note">💡 求"几只"就是求几个 6 相加</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="参考：蜂巢的巢房是六边形的，雪花有六个瓣，骰子有6个面。比如1盒酸奶6瓶，买4盒几瓶？4×6=24瓶。只要能用6的口诀的例子都可以。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>生活中哪里藏着"6 个 6 个"？举一个用 6 的口诀解决的例子。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（开放题）：</span>
+      <div class="ref"><b>可以这样找：</b>1 盒酸奶 6 瓶，买 4 盒几瓶？4×6=<b>24</b>（瓶）；骰子 6 个面，2 个骰子共 2×6=<b>12</b> 个面。</div>
+      <div class="ref"><b>自然里也有：</b>雪花 6 个瓣、蜂巢六边形——"6"就藏在我们身边。</div>
+      <span class="multi">🌈 例子合理、能用 6 的口诀算，都算对</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotTitle', say:'课本第二十二页，6的乘法口诀。'},
+  {region:'hotSkewer', say:'先看图：6串糖葫芦。数一数，每串有6个山楂。'},
+  {region:'hotTable', think:true, say:'表格：1串6个，2串12个。那3串、4串、5串、6串各是多少个？想一想。',
+    ans:'每次多6：3串18、4串24、5串30、6串36。'},
+  {region:'hotEqsL', say:'左边算式：6×1=6，6×2=12，6×3=18，6×4=24，6×5=30，6×6=36。'},
+  {region:'hotEqsR', say:'右边算式：1×6=6，2×6=12……5×6=30。交换位置，积不变，用同一句口诀。'},
+  {region:'hotKj', think:true, say:'口诀：一六得（　），二六（　），三六（　），四六（　），五六（　），六六（　）。先自己试着填一填。想一想。',
+    ans:'一六得六、二六十二、三六十八、四六二十四、五六三十、六六三十六。'},
+  {region:'hotZuo', say:'接下来做一做。'},
+  {region:'hotZ1', say:'第一题：补全口诀，写出算式。三六（　）、五六（　）、四六（　）。三六十八写3×6=18和6×3=18；五六三十写5×6=30和6×5=30；四六二十四写4×6=24和6×4=24。'},
+  {region:'hotTip', think:true, say:'小女孩提示：三六得几，可以在二六十二的积上加一个6，也可以在三五十五的积上加一个3。为什么要这样想？想一想。',
+    ans:'3个6比2个6多1个6，12加6等于18；也可以从3个5加3个1来想，15加3等于18。口诀之间可以互相帮忙。'},
+  {region:'hotAnt', think:true, say:'第二题：1只蚂蚁6条腿，3只蚂蚁几条腿？6只呢？想一想。',
+    ans:'3只：3×6=18条，三六十八；6只：6×6=36条，六六三十六。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：6的乘法口诀共有几句？相邻两句相差几？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：表格填空，3串、4串、5串、6串各有多少个山楂？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：补全口诀并各写两道算式，三六、五六、四六。想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：忘了三六得几怎么办？说出两种想法。想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：1只蚂蚁6条腿，3只、6只蚂蚁各几条腿？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：生活中哪里藏着6个6个？举一个用6的口诀解决的例子。想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotTitle','课本第二十二页，6的乘法口诀。'],
+ ['hotSkewer','6串糖葫芦，每串6个山楂。'],
+ ['hotTable','1串6个，2串12个，每次多6：18、24、30、36。'],
+ ['hotEqsL','6×1=6；6×2=12；6×3=18；6×4=24；6×5=30；6×6=36。'],
+ ['hotEqsR','1×6=6；2×6=12……5×6=30，交换位置积不变。'],
+ ['hotKj','一六得六；二六十二；三六十八；四六二十四；五六三十；六六三十六。'],
+ ['hotZuo','做一做。'],
+ ['hotZ1','三六十八：3×6=18、6×3=18；五六三十：5×6=30、6×5=30；四六二十四：4×6=24、6×4=24。'],
+ ['hotTip','三六得几？12加6等于18，或15加3等于18。'],
+ ['hotAnt','3只蚂蚁18条腿；6只蚂蚁36条腿。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内除法 · 课本第37页 除法·认识除号 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🔊 1~6的表内除法 · 课本第 37 页 · 除法（认识除号）</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>认识除号·除法算式与读法·三种圈法</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/28a-课本第37页-除法12个竹笋除号.png" alt="课本第37页除法：例3，12个竹笋，每4个放一盘，能放几盘？图上12个竹笋每4个一组共3组，箭头指向3个盘子。连减算式12-4-4-4=0。12个竹笋每4个放一盘能放3盘。可以用除法表示：12÷4=3，除号。读作：12除以4等于3。说一说：算式里的12、4、3分别表示什么？做一做：1.圈一圈填一填，12个圆片，每份2个可以分成6份，每份3个可以分成4份，每份6个可以分成2份。2.读一读：8÷4=2，15÷5=3，18÷3=6，36÷6=6。">
+    <!-- 热区按版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotT3"     style="top:11.5%; left:4%;  width:84%; height:4%;"></div>
+    <div class="hotspot" id="hotBamboo" style="top:16%;   left:12%; width:76%; height:11%;"></div>
+    <div class="hotspot" id="hotPlates" style="top:27%;   left:15%; width:70%; height:11%;"></div>
+    <div class="hotspot" id="hotSub"    style="top:38%;   left:28%; width:45%; height:4.5%;"></div>
+    <div class="hotspot" id="hotAns"    style="top:42.5%; left:10%; width:82%; height:4.5%;"></div>
+    <div class="hotspot" id="hotDiv"    style="top:47%;   left:8%;  width:84%; height:11%;"></div>
+    <div class="hotspot" id="hotRead"   style="top:58%;   left:30%; width:68%; height:4.5%;"></div>
+    <div class="hotspot" id="hotSay"    style="top:64%;   left:8%;  width:84%; height:4.5%;"></div>
+    <div class="hotspot" id="hotZuo"    style="top:70%;   left:4%;  width:30%; height:4.5%;"></div>
+    <div class="hotspot" id="hotQ1"     style="top:77%;   left:4%;  width:60%; height:3.5%;"></div>
+    <div class="hotspot" id="hotDots"   style="top:80.5%; left:8%;  width:70%; height:5%;"></div>
+    <div class="hotspot" id="hotFills"  style="top:85.5%; left:6%;  width:90%; height:8%;"></div>
+    <div class="hotspot" id="hotQ2"     style="top:94%;   left:4%;  width:92%; height:6%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 37 页 除法 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="例3：12个竹笋，每4个放一盘，能放3盘。可以用除法表示：12除以4等于3，读作12除以4等于3。">
+    <span class="t-badge">课本例 3</span><span class="t-main">12 个竹笋每 4 个放一盘 → 12÷4=3</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      12－4－4－4＝0，减了 <b>3</b> 次，正好放完 → 能放 <b>3</b> 盘。<br>
+      写成除法：<b>12÷4＝3</b>。<br>
+      12 是竹笋总数，4 是每盘放 4 个，3 是放 3 盘。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="除号：中间这个符号叫除号，它表示平均分。12除以4等于3，读算式时除号读作除以。">
+    <span class="t-badge">课本 · 除号与读法</span><span class="t-main">"÷"叫除号 · 读作"12 除以 4 等于 3"</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>÷</b> 叫<b>除号</b>，表示<b>平均分</b>。<br>
+      12÷4＝3 读作：<b>12 除以 4 等于 3</b>。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 读算式时，"÷"要读作"除以"，不读"除"</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="做一做第1题：圈一圈，填一填。12个圆片，每份2个可以分成6份；每份3个可以分成4份；每份6个可以分成2份。">
+    <span class="t-badge">课本做一做 1</span><span class="t-main">12 个圆片：每份 2 个 / 3 个 / 6 个，各分几份？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      每份 2 个 → 分成 <b>6</b> 份：<b>12÷2＝6</b>；<br>
+      每份 3 个 → 分成 <b>4</b> 份：<b>12÷3＝4</b>；<br>
+      每份 6 个 → 分成 <b>2</b> 份：<b>12÷6＝2</b>。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="做一做第2题：读一读。8除以4等于2；15除以5等于3；18除以3等于6；36除以6等于6。">
+    <span class="t-badge">课本做一做 2</span><span class="t-main">读一读：8÷4=2　15÷5=3　18÷3=6　36÷6=6</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>8÷4＝2</b> 读作：8 除以 4 等于 2；<br>
+      <b>15÷5＝3</b> 读作：15 除以 5 等于 3；<br>
+      <b>18÷3＝6</b> 读作：18 除以 3 等于 6；<br>
+      <b>36÷6＝6</b> 读作：36 除以 6 等于 6。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="12个竹笋每4个放一盘，能放3盘。用连减算是12减4减4减4等于0，用除法算是12除以4等于3。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🎍</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>12 个竹笋每 4 个放一盘，能放几盘？怎么用算式表示？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">能放 <b>3</b> 盘：12－4－4－4＝0，减了 3 次。</div>
+      <div class="sol sol2">用除法表示：<b>12÷4＝3</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="12除以4等于3读作12除以4等于3。中间的符号叫除号，表示平均分。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>12÷4=3 怎么读？中间的符号叫什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">读作：<b>12 除以 4 等于 3</b>。</div>
+      <div class="sol sol2">"÷"叫<b>除号</b>，表示<b>平均分</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="12表示一共有12个竹笋；4表示每4个放一盘；3表示能放3盘。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🔢</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>说一说：算式 12÷4=3 里的 12、4、3 分别表示什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>12</b>：一共有 12 个竹笋（要分的总数）；</div>
+      <div class="sol sol2"><b>4</b>：每 4 个放一盘（每份的个数）；<b>3</b>：能放 3 盘（份数）。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="12个圆片每份3个，可以分成4份。算式是12除以3等于4。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">⭕</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>12 个圆片每份 3 个，可以分成几份？列出除法算式。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">分成 <b>4</b> 份：想 3×4=12。</div>
+      <div class="sol sol2">除法算式：<b>12÷3＝4</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="15除以5等于3，读作15除以5等于3；36除以6等于6，读作36除以6等于6。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🗣️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>读一读：15÷5=3 和 36÷6=6。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>15÷5＝3</b> 读作：15 除以 5 等于 3。</div>
+      <div class="sol sol2"><b>36÷6＝6</b> 读作：36 除以 6 等于 6。</div>
+      <span class="think-note">💡 36÷6=6 里有两个 6：一个是要分的总数，一个是每份的个数，意思不一样</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="每份2个分6份，每份6个分2份。因为2乘6等于12，6乘2也等于12，总数不变；每份越多，分的份数就越少。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌈</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>同样 12 个圆片，每份 2 个分 6 份，每份 6 个只分 2 份。你发现了什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">2×6＝12，6×2＝12：总数都是 12，正好分完。</div>
+      <div class="sol sol2"><b>每份越多，分的份数就越少</b>；每份越少，份数就越多。</div>
+      <span class="multi">🌈 想乘法口诀：几乘几等于 12，就有一种分法</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotT3', say:'第3题：12个竹笋，每4个放一盘，能放几盘？'},
+  {region:'hotBamboo', say:'图上有12个竹笋，每4个圈成一组，正好圈出3组。'},
+  {region:'hotPlates', think:true, say:'3个盘子：每次往每个盘里放4个，能放几盘？想一想。',
+    ans:'4个放一盘，12里面有3个4：12减4减4减4等于0，正好放3盘。'},
+  {region:'hotSub', say:'看连减算式：12减4、再减4、再减4等于0，减了3次，就是3盘。'},
+  {region:'hotAns', say:'所以，12个竹笋每4个放一盘，能放3盘。'},
+  {region:'hotDiv', say:'可以用除法表示：12除以4等于3。中间这个新符号叫除号，它表示平均分。'},
+  {region:'hotRead', say:'读作：12除以4等于3。'},
+  {region:'hotSay', think:true, say:'说一说：算式里的12、4、3分别表示什么？想一想。',
+    ans:'12表示一共有12个竹笋，4表示每4个放一盘，3表示能放3盘。'},
+  {region:'hotZuo', say:'做一做。'},
+  {region:'hotQ1', say:'第1题：圈一圈，填一填。'},
+  {region:'hotDots', think:true, say:'12个圆片：每份2个分几份？每份3个呢？每份6个呢？想一想。',
+    ans:'每份2个分6份；每份3个分4份；每份6个分2份，都能正好分完。'},
+  {region:'hotFills', say:'对照算式：12除以2等于6；12除以3等于4；12除以6等于2。'},
+  {region:'hotQ2', say:'第2题：读一读。8除以4等于2；15除以5等于3；18除以3等于6；36除以6等于6。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：12个竹笋每4个放一盘，能放几盘？怎么用算式表示？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：12除以4等于3怎么读？中间的符号叫什么？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：算式里的12、4、3分别表示什么？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：12个圆片每份3个，可以分成几份？列出除法算式。想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：读一读，15除以5等于3，36除以6等于6。想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：每份2个分6份，每份6个只分2份，你发现了什么？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotT3','12个竹笋，每4个放一盘，能放几盘？'],
+ ['hotBamboo','12个竹笋，每4个圈成一组，正好3组。'],
+ ['hotPlates','3个盘子，每次每个盘里放4个。'],
+ ['hotSub','12减4减4减4等于0，减了3次。'],
+ ['hotAns','12个竹笋每4个放一盘，能放3盘。'],
+ ['hotDiv','可以用除法表示：12除以4等于3，这个符号叫除号。'],
+ ['hotRead','读作：12除以4等于3。'],
+ ['hotSay','算式里的12、4、3分别表示什么？'],
+ ['hotZuo','做一做。'],
+ ['hotQ1','圈一圈，填一填。'],
+ ['hotDots','12个圆片：每份2个分6份；每份3个分4份。'],
+ ['hotFills','12除以2等于6；12除以3等于4；12除以6等于2。'],
+ ['hotQ2','读一读：8除以4等于2，15除以5等于3，18除以3等于6，36除以6等于6。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

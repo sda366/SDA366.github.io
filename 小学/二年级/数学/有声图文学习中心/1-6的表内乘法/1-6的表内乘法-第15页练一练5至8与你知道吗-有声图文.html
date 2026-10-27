@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6的表内乘法 · 课本第15页 练一练5~8与你知道吗 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+
+  /* ===== 页头与统计 ===== */
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+
+  /* ===== 图片区（热区闪动：读到哪块哪块闪） ===== */
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* 图下思考胶囊 + 解析面板 */
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+
+  /* ===== 课本文字卡（点卡=朗读+展开答案） ===== */
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .t-sub{ color:#455a64; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .qa-a ul{ padding-left:20px; margin-top:4px; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ref{ background:#e8f5e9; border-left:4px solid #43a047; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:14px; line-height:1.8; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 控制条与字幕 ===== */
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .sayable{ padding-right:80px; }
+    .ctrl-bar button{ padding:8px 14px; font-size:14px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+
+  /* 返回导航按钮 */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="page-head">
+    <h1>🍉 1~6的表内乘法 · 课本第 15 页 · 练一练 5~8 与你知道吗</h1>
+    <p>人教版《数学》二年级上册 · 有声图文带读 · 先想后看解析</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>移多补少 + 几个几加减</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/06a-课本第15页-练一练5至8与你知道吗.png" alt="课本第15页练一练：5填空并在横线上写出加法算式，20=5×□，=4×□，你还能写出其他算式吗；6一共有多少个三角形（每行分别3、5、5、2个，共15个），你能用乘法算式表示吗？想办法移一移；7你能用加法算一算吗？8×5=、9×4=、15×3=、2×18=；8填一填：5×6+5=5×□（小花图），2×4-2=2×□（西瓜图）。你知道吗？乘号×是数学家在17世纪开始使用的，×可以看作由+斜过来写成的。">
+    <!-- 热区按 756×1080 版面估算百分比，交付前对照原图核校 -->
+    <div class="hotspot" id="hotQ5"     style="top:4%;    left:5%;  width:56%; height:11%;"></div>
+    <div class="hotspot" id="hotQ6"     style="top:16.5%; left:5%;  width:62%; height:6%;"></div>
+    <div class="hotspot" id="hotTri"    style="top:22.5%; left:7%;  width:45%; height:18.5%;"></div>
+    <div class="hotspot" id="hotMove"   style="top:26%;   left:54%; width:24%; height:6.5%;"></div>
+    <div class="hotspot" id="hotQ7"     style="top:42.5%; left:5%;  width:42%; height:5%;"></div>
+    <div class="hotspot" id="hotEqs7"   style="top:46.5%; left:7%;  width:86%; height:6%;"></div>
+    <div class="hotspot" id="hotQ8"     style="top:54.5%; left:6%;  width:20%; height:5%;"></div>
+    <div class="hotspot" id="hotFlowers" style="top:59%;  left:9%;  width:32%; height:16%;"></div>
+    <div class="hotspot" id="hotMelons" style="top:58%;  left:53%; width:34%; height:17%;"></div>
+    <div class="hotspot" id="hotKnow"   style="top:77%;  left:5%;  width:22%; height:6.5%;"></div>
+    <div class="hotspot" id="hotKnowTxt" style="top:83%; left:7%;  width:86%; height:14%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级上册 · 课本第 15 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第五题：20=5×□=4×□，填空并写出加法算式。20=5×4，加法算式是4+4+4+4+4=20；20=4×5，加法算式是5+5+5+5=20。">
+    <span class="t-badge">课本第 5 题</span><span class="t-main">填空并写出加法算式：20=5×□=＿＿；=4×□=＿＿</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>第一个空：</b>20=5×<b>4</b> → 加法算式：<b>4+4+4+4+4=20</b>（5 个 4 相加）。<br>
+      <b>第二个空：</b>20=4×<b>5</b> → 加法算式：<b>5+5+5+5=20</b>（4 个 5 相加）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="你还能写出其他算式吗？20=2×10，10个2相加；20=10×2，2个10相加；还可以写20×1或1×20。">
+    <span class="t-badge">课本第 5 题</span><span class="t-main">你还能写出其他算式吗？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>参考：</b>20=2×<b>10</b>（10 个 2 相加）；20=10×<b>2</b>（2 个 10 相加）；还有 20×1=20、1×20=20。<br>
+      <span class="multi" style="display:inline-block;margin:0">🌈 只要乘积是 20，写得合理都算对</span>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第六题：一共有多少个三角形？每行分别3个、5个、5个、2个，一共15个。移一移后每行5个，有3行，乘法算式3×5=15。">
+    <span class="t-badge">课本第 6 题</span><span class="t-main">一共有多少个 △？你能用乘法算式表示吗？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>先数：</b>每行 3、5、5、2 个，每行不一样多，<b>不能直接写乘法</b>。<br>
+      <b>总数：</b>3+5+5+2=<b>15</b>。<br>
+      <b>移一移：</b>把第一行的 3 个和第四行的 2 个<b>合并成一行 5 个</b> → 变成 3 行、每行 5 个。<br>
+      <b>乘法算式：</b><b>3×5=15</b>（3 个 5 相加）。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="小女孩提示：想办法移一移。把不一样多的行变得同样多，才能用乘法。">
+    <span class="t-badge">小女孩的提示</span><span class="t-main">想办法移一移。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>移多补少的思路：</b>每行个数<b>同样多</b>才能写成乘法。<br>
+      把散的行合并或移动，凑成<b>每行 5 个、共 3 行</b> → 3×5=15。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t5" data-say="第七题：你能用加法算一算吗？8×5是5个8相加得40；9×4是4个9相加得36；15×3是3个15相加得45；2×18是18个2相加得36。">
+    <span class="t-badge">课本第 7 题</span><span class="t-main">你能用加法算一算吗？8×5=　9×4=　15×3=　2×18=</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>8×5：</b>5 个 8 相加 → 8+8+8+8+8=<b>40</b>；<br>
+      <b>9×4：</b>4 个 9 相加 → 9+9+9+9=<b>36</b>；<br>
+      <b>15×3：</b>3 个 15 相加 → 15+15+15=<b>45</b>；<br>
+      <b>2×18：</b>18 个 2 相加 → <b>36</b>（也可以想 2 个 18 相加：18+18=36，<b>更快</b>！）
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t6" data-say="第八题：填一填。5×6+5=5×7=35；2×4-2=2×3=6。">
+    <span class="t-badge">课本第 8 题</span><span class="t-main">填一填：5×6+5=5×□；2×4-2=2×□</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>左题：</b>5×6 是 6 个 5，再加 1 个 5 → <b>7 个 5</b> → 填 <b>7</b>，5×7=35。<br>
+      <b>右题：</b>2×4 是 4 个 2，减 1 个 2 → <b>3 个 2</b> → 填 <b>3</b>，2×3=6。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t7" data-say="你知道吗？乘号乘，是数学家在17世纪开始使用的。乘号可以看作由加号斜过来写成的。">
+    <span class="t-badge">你知道吗</span><span class="t-main">乘号"×"，是数学家在 17 世纪开始使用的；"×"可以看作由"+"斜过来写成的。</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>小知识：</b>乘号"×"诞生于 <b>17 世纪</b>。把加号"+"<b>斜过来</b>就是"×"——因为<b>乘法本来就是特殊的加法</b>（加数相同的加法）！这个符号的设计藏着乘法的本质。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="20=5×4，方框里填4；加法算式是4+4+4+4+4=20，是5个4相加。也可以写20=4×5，加法算式5+5+5+5=20。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🔢</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>20=5×□，□填几？加法算式怎么写？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>填 4：</b>20=5×4 → 4+4+4+4+4=20（5 个 4 相加）</div>
+      <div class="sol sol2"><b>也可填：</b>20=4×5 → 5+5+5+5=20（4 个 5 相加）</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="8×5=40，是5个8相加；9×4=36，是4个9相加。用加法算：8+8+8+8+8=40，9+9+9+9=36。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">➕</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>用加法算一算：8×5 和 9×4 各等于多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>8×5：</b>8+8+8+8+8=<b>40</b>（5 个 8 相加）</div>
+      <div class="sol sol2"><b>9×4：</b>9+9+9+9=<b>36</b>（4 个 9 相加）</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="三角形每行3、5、5、2个，不能直接写乘法。总数3+5+5+2=15。移一移：把第一行的3个和第四行的2个合并成一行5个，变成3行每行5个，乘法算式3×5=15。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🔺</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>三角形题：为什么不能直接写乘法？移一移后怎么写？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>不能直接乘的原因：</b>每行 3、5、5、2 个，<b>每行不一样多</b></li>
+        <li><b>总数：</b>3+5+5+2=<b>15</b></li>
+        <li><b>移一移：</b>3 个+2 个合成一行 5 个 → 3 行每行 5 个</li>
+        <li><b>乘法算式：</b>3×5=15</li>
+      </ul>
+      <span class="think-note">💡 先把"每份"变得同样多，才能用乘法</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="5×6是6个5，加1个5就是7个5，所以5×6+5=5×7=35；2×4是4个2，减1个2就是3个2，所以2×4-2=2×3=6。道理是：乘法算式表示几个几，加一个或减一个，个数就加一或减一。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🧠</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>5×6+5=5×□ 和 2×4-2=2×□ 的道理是什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>5×6+5：</b>6 个 5 <b>加</b> 1 个 5 = <b>7 个 5</b> → 填 7，得 35</li>
+        <li><b>2×4-2：</b>4 个 2 <b>减</b> 1 个 2 = <b>3 个 2</b> → 填 3，得 6</li>
+      </ul>
+      <span class="think-note">💡 加 1 份个数加一，减 1 份个数减一</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="15×3是3个15相加，15+15+15=45，不算麻烦；2×18是18个2相加，写18个2太长，但可以想成2个18相加：18+18=36，一下就算出来了。说明同一个乘法算式，选"个数少的"那份来加更简便。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">⚡</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>15×3 和 2×18 用加法算麻烦吗？说说你的巧办法。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <ul>
+        <li><b>15×3：</b>3 个 15 相加，15+15+15=<b>45</b>，不算麻烦</li>
+        <li><b>2×18：</b>18 个 2 相加要写很长；<b>巧办法</b>：想成 2 个 18 相加，18+18=<b>36</b></li>
+      </ul>
+      <span class="think-note">💡 乘数交换位置积不变——挑"份数少"的来加更快</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="参考讲法：乘号×是数学家在17世纪开始使用的，把加号斜过来就是乘号，因为乘法本来就是加数相同的加法。还可以继续想知道：乘号是谁发明的？除号又是怎么来的？">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🚀</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>把乘号的小故事讲给家人听，再提出你还想知道的一个问题。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析（开放题）：</span>
+      <div class="ref"><b>可以这样讲：</b>"×"17 世纪才出现，它是把"+"斜过来写成的——因为乘法就是加数相同的加法。</div>
+      <div class="ref"><b>可以继续问：</b>乘号是谁发明的？除号"÷"又是怎么来的？</div>
+      <span class="multi">🌈 讲清楚"×由+变来 + 乘法是特殊加法"就算讲明白了</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+function focusEl(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); hl(el); }
+function scrollImage(){ document.getElementById('imgWrap').scrollIntoView({behavior:'smooth', block:'center'}); }
+
+/* 朗读引擎：Web Speech API + 超时兜底；无 TTS 降级为按字数定时 */
+function speak(text){
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      u.onend=finish; u.onerror=finish;
+      synth.speak(u);
+      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考倒计时（qa 卡内），点胶囊可跳过 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+/* 图下思考倒计时 */
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+/* 图下解析面板 */
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片（只读图，不碰文字题卡） ================= */
+var steps1=[
+  {region:'hotQ5', think:true, say:'课本第十五页。第五题：20=5乘方框，方框里填几？横线上还要写加法算式。想一想。',
+    ans:'填4：20=5×4，加法算式4+4+4+4+4=20。也可以填20=4×5，加法算式5+5+5+5=20。还能写2×10=20、10×2=20。'},
+  {region:'hotQ6', say:'第六题：一共有多少个三角形？你能用乘法算式表示吗？'},
+  {region:'hotTri', think:true, say:'数一数每行三角形个数：3个、5个、5个、2个。每行不一样多，能直接写乘法吗？想一想。',
+    ans:'不能。乘法要求每份同样多。总数是3加5加5加2等于15。'},
+  {region:'hotMove', think:true, say:'小女孩提示：想办法移一移。怎么移才能用乘法？想一想。',
+    ans:'把第一行的3个和第四行的2个合并成一行5个，就变成3行、每行5个，乘法算式3×5=15。'},
+  {region:'hotQ7', say:'第七题：你能用加法算一算吗？'},
+  {region:'hotEqs7', say:'8×5是5个8相加得40；9×4是4个9相加得36；15×3是3个15相加得45；2×18是18个2相加得36，也可以想成2个18相加，18加18等于36，更快。'},
+  {region:'hotQ8', say:'第八题：填一填。看图想一想。'},
+  {region:'hotFlowers', think:true, say:'左边：5×6+5=5×方框。5×6是6个5，再加5朵，是几个5？想一想。',
+    ans:'6个5加1个5是7个5，方框填7，5×7=35。'},
+  {region:'hotMelons', think:true, say:'右边：2×4-2=2×方框。4个2减1个2，是几个2？想一想。',
+    ans:'4个2减1个2是3个2，方框填3，2×3=6。'},
+  {region:'hotKnow', say:'最后看你知道吗？'},
+  {region:'hotKnowTxt', say:'乘号乘，是数学家在17世纪开始使用的。乘号可以看作由加号斜过来写成的——因为乘法本来就是加数相同的加法。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习（不回图片） ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知：20=5乘方框，方框填几？加法算式怎么写？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知：用加法算一算，8乘5和9乘4各等于多少？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化：三角形题，为什么不能直接写乘法？移一移后怎么写？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化：5×6+5=5×方框 和 2×4-2=2×方框 的道理是什么？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化：15×3 和 2×18 用加法算麻烦吗？说说巧办法。想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题，拓展：把乘号的小故事讲给家人听，再提出你还想知道的一个问题。想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
+function askQA(id){
+  var qa=document.getElementById(id);
+  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  abort=true; if(synth) synth.cancel();
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  speak(qtext).then(function(){
+    if(abort) return;
+    closeAnswer(qa);
+    think(qa).then(function(){
+      if(abort) return;
+      openAnswer(qa);
+      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
+    });
+  });
+}
+
+/* 热区点读：点图上哪块读哪块 */
+[['hotQ5','第五题：20=5×□，填空并写出加法算式：4+4+4+4+4=20；还能写2×10=20、10×2=20。'],
+ ['hotQ6','第六题：一共有多少个三角形？能用法乘法算式表示吗？'],
+ ['hotTri','每行3、5、5、2个，一共15个。每行不一样多，不能直接写乘法。'],
+ ['hotMove','想办法移一移：合并成3行每行5个，3×5=15。'],
+ ['hotQ7','第七题：你能用加法算一算吗？'],
+ ['hotEqs7','8×5=40；9×4=36；15×3=45；2×18=36。'],
+ ['hotQ8','第八题：填一填。'],
+ ['hotFlowers','5×6加5是7个5：5×7=35。'],
+ ['hotMelons','2×4减2是3个2：2×3=6。'],
+ ['hotKnow','你知道吗？乘号×是数学家在17世纪开始使用的。'],
+ ['hotKnowTxt','×可以看作由+斜过来写成的——因为乘法就是加数相同的加法。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡：点一下 = 朗读 + 展开答案；再点收起；自动收起其他已展开卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>
