@@ -52,7 +52,9 @@
   function sanitize(t) {
     var s = (t === null || t === undefined) ? '' : String(t);
     if (!s) return s;
-    s = s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g, ' ');  // 只剥真 HTML 标签
+    /* 只剥已知 HTML 标签（白名单）——写宽了会把 "3<a>5" 这类数学写法
+       剥成 "3 5"，小学数学虽少见但不可接受，故按标签名收窄。 */
+    s = s.replace(/<\/?(b|i|u|s|em|strong|span|div|p|br|hr|a|sup|sub|small|big|code|mark)(\s[^<>]*)?\/?>/gi, ' ');
     s = s.replace(/&lt;/gi, '\uFF1C').replace(/&gt;/gi, '\uFF1E');
     s = s.replace(/</g, '\uFF1C').replace(/>/g, '\uFF1E');     // 尖括号 → 全角
     s = s.replace(/&nbsp;/gi, ' ').replace(/\u00A0/g, ' ');
@@ -105,7 +107,7 @@
     } catch (e) { try { el.scrollIntoView(); } catch (e2) {} }
   }
   function ensureVisible(el, force) {
-    if (!el || window.__RA_NOSCROLL__) return;
+    if (!el || window.__RA_NOSCROLL__ || window.__RA_SHIM__) return;   // 垫片环境不改变原生滚动行为
     var now = Date.now();
     if (!force && now - lastScroll < 800) return;              // 节流：800ms 内只滚一次
     var r;
@@ -294,8 +296,41 @@
       if ((voices.length && tries > 4) || ++tries > 40) clearInterval(timer);
     }, 100);
 
-    /* ---------- 发声埋点：给"哑引擎"检测提供证据 ---------- */
+    /* ---------- 发声埋点 + 忙标志：给"哑引擎"检测和页面 watchdog 提供证据 ---------- */
     var stat = { last: 0, started: false, startedAt: 0 };
+    var busyCount = 0;          // 正在排队的分片链数量
+    /* 页面 watchdog 用它判断"还要不要继续等"：
+       分片链未播完 或 引擎仍在说 → true（页面不得提前 resolve，
+       否则下一步 speak() 开头的 synth.cancel() 会把后几片掐掉） */
+    window.__raBusy = function () {
+      try {
+        if (busyCount > 0) return true;
+        if (synth && (synth.speaking || synth.pending)) return true;
+      } catch (e) {}
+      return false;
+    };
+
+    /* ---------- cancel 令牌：让「⏹ 停止」能真正打断分片链 ----------
+       speakChunks 里的 setTimeout(next,30) 是 JS 定时器，synth.cancel() 管不到，
+       不给令牌的话点停止后仍会续播下一片。 */
+    var cancelToken = 0;
+    var chunkChains = [];        // 活跃的分片链，供 cancel 时统一收尾
+    function stopAllChains() {
+      var snap = chunkChains.slice();
+      chunkChains.length = 0;
+      for (var i = 0; i < snap.length; i++) { try { snap[i].stop(); } catch (e) {} }
+    }
+    try {
+      var origCancel = SpeechSynthesis.prototype.cancel;
+      if (origCancel && !origCancel.__raPatched) {
+        SpeechSynthesis.prototype.cancel = function () {
+          cancelToken++;
+          stopAllChains();       // ← 不能只靠引擎的 onerror：部分浏览器 cancel 后不抛事件
+          return origCancel.apply(this, arguments);
+        };
+        SpeechSynthesis.prototype.cancel.__raPatched = true;
+      }
+    } catch (e) {}
 
     /* ---------- 修复②：补齐 voice + 文本清洗 + 长文本分片 ----------
        页面 speak() 同步取 getVoices()（移动端首返 []），且只设 lang='zh-CN'
@@ -333,9 +368,16 @@
     function speakChunks(self, u) {
       var parts = splitText(u.text), i = 0;
       var origEnd = u.onend, origErr = u.onerror;
-      function finish() { if (typeof origEnd === 'function') { try { origEnd.call(u, {}); } catch (e) {} } }
-      function fail() { if (typeof origErr === 'function') { try { origErr.call(u, {}); } catch (e) {} } }
+      var myToken = cancelToken, released = false;
+      function unregister() { var k = chunkChains.indexOf(chain); if (k >= 0) chunkChains.splice(k, 1); }
+      var chain = { stop: function () { finish(); } };
+      busyCount++;
+      function release() { if (!released) { released = true; busyCount--; } }
+      function finish() { unregister(); release(); if (typeof origEnd === 'function') { try { origEnd.call(u, {}); } catch (e) {} } }
+      function fail() { unregister(); release(); if (typeof origErr === 'function') { try { origErr.call(u, {}); } catch (e) {} } }
+      chunkChains.push(chain);
       function next() {
+        if (cancelToken !== myToken) { finish(); return; }   // ← 被 cancel：立即收尾，不续播
         if (i >= parts.length) { finish(); return; }
         var t = parts[i++];
         if (i === 1) {

@@ -359,7 +359,7 @@ function speak(text){
       if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
       u.onend=finish; u.onerror=finish;
       synth.speak(u);
-      setTimeout(finish, Math.min(2500+text.length*260, 16000));
+      var __t0=Date.now(),__m=0;function __wd(){if(done)return;if(Date.now()-__t0>120000){finish();return;}var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());if(__b){__m=0;setTimeout(__wd,1500);return;}if(Date.now()-__t0<3500||++__m<2){setTimeout(__wd,800);return;}finish();}setTimeout(__wd,3500);
     }else{
       setTimeout(finish, 600+text.length*150);
     }
