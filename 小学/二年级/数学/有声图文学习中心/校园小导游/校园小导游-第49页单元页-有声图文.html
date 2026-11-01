@@ -81,6 +81,38 @@
 <body>
 <script src="../../../../js/read-assist.js"></script>
 <div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../../../../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
 
   <div class="page-head">
     <h1>🔊 综合与实践 · 校园小导游 · 课本第 49 页 · 单元页</h1>
