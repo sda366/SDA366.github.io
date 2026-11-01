@@ -335,7 +335,7 @@ function speak(text){
       for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
       if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
       u.onend=finish; u.onerror=finish;
-      synth.speak(u);
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
       var __t0=Date.now(),__m=0;function __wd(){if(done)return;if(Date.now()-__t0>120000){finish();return;}var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());if(__b){__m=0;setTimeout(__wd,1500);return;}if(Date.now()-__t0<3500||++__m<2){setTimeout(__wd,800);return;}finish();}setTimeout(__wd,3500);
     }else{
       setTimeout(finish, 600+text.length*150);
@@ -493,21 +493,29 @@ document.getElementById('btnStop').addEventListener('click',function(){
 });
 
 /* 手动点题：读题 + 思考 + 展开解析 + 朗读答案（再点收起） */
-function askQA(id){
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
   var qa=document.getElementById(id);
-  if(qa.classList.contains('open')){ closeAnswer(qa); return; }
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
   abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
   focusEl(qa);
   var qtext=qa.querySelector('.q-text').textContent;
-  speak(qtext).then(function(){
-    if(abort) return;
-    closeAnswer(qa);
-    think(qa).then(function(){
-      if(abort) return;
-      openAnswer(qa);
-      speak(qa.getAttribute('data-ans')||'').then(function(){ unhl(); });
-    });
-  });
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
 }
 
 /* 热区点读：点图上哪块读哪块 */
