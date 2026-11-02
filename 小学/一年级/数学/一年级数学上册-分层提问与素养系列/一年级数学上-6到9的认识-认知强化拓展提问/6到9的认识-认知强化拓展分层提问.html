@@ -894,7 +894,7 @@
         btn.addEventListener('click',function(e){
           e.stopPropagation();
           var qa=a.parentElement; if(qa) qa.classList.add('open');
-          speak(clean(a.textContent).replace(/^参考答案[:：]?/,''));
+          var at=[];for(var cn=a.childNodes,ci=0,cl=cn.length;ci<cl;ci++){var nd=cn[ci];if(nd.nodeType===1&&/spk-btn|a-label|open-note|think-note/.test(nd.className||''))continue;at.push(nd.nodeType===3?nd.nodeValue:nd.textContent);}speak(clean(at.join(' ')));
         });
         a.insertBefore(btn,a.firstChild);
       })(as[j]);
