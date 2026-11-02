@@ -28,10 +28,15 @@
    ④ 字幕条避让    —— 动态测量控制栏实际高度，把 #cap 抬高到控制栏之上，
       解决手机上按钮换行导致字幕压住按钮、点不到的问题。
 
+   v6.5（2026-11-02）：手机端直接隐藏 #cap 朗读字幕小框——原文段落朗读时
+   本来就有 .hl 高亮 + 自动滚动定位，底部那条深色字幕纯属重复，还挡内容和按钮。
+   隐藏条件：视口 ≤900px 或 触摸设备(pointer:coarse)；电脑宽屏保留。
+
    全局开关（页面里 window.__RA_XXX__ = 1 可临时关掉某一项）：
       __RA_NOSPLIT__   关闭长文本分片
       __RA_NOSCROLL__  关闭智能滚动（恢复浏览器原生行为）
       __RA_NOCAPFIX__  关闭字幕避让
+      __RA_SHOWCAP__   手机上也显示字幕小框（临时要看时用）
 
    用法：页面 <body> 开标签后、页面自身脚本之前加
    <script src="相对路径/js/read-assist.js"></script>
@@ -584,7 +589,16 @@
       '50%{outline-color:var(--hl2,#ff7043);box-shadow:0 0 0 8px rgba(255,112,67,.20);}}',
 
     /* ---- 字幕条：手机上控制栏按钮会换行，静态兜底抬高（JS 还会按实测再调）---- */
-    '@media (max-width:600px){ #cap{bottom:110px;} }'
+    '@media (max-width:600px){ #cap{bottom:110px;} }',
+
+    /* ---- 2026-11-02：手机端不再显示朗读字幕小框 ----
+       理由：朗读时原文段落本身已加 .hl 高亮并自动滚动到视野（见 hl/__scrollTo），
+       底部字幕既挡内容又挡按钮，纯属重复。窄屏(<=900px)或触屏设备一律隐藏；
+       电脑(鼠标+宽屏)保留，便于看清整句。
+       用 !important 才能压过页面 JS 写的内联 style="display:block"。
+       元素本身必须留在 DOM 里——speak() 里直接 cap.textContent=…，删元素会报错。
+       页面若需要临时显示（如家长辅导），在页面脚本前加 window.__RA_SHOWCAP__=1 即可。 */
+    (window.__RA_SHOWCAP__ ? '' : '@media (max-width:900px), (pointer:coarse){ #cap{display:none !important;} }')
   ].join('');
   document.head.appendChild(st);
 })();
