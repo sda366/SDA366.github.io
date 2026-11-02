@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第七单元 语文园地七 · 单元综合课件</title>
+<style>
+  :root{
+    --main:#3949ab;      /* 主色：月夜蓝（呼应本单元星空、云雾与雪的想象主题） */
+    --main2:#5c6bc0;
+    --deep:#1a237e;
+    --hl:#f9a825;        /* 高亮：暖黄 */
+    --ink:#33302c;
+    --line:#e6ded4;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    background:#fbf9f4; color:var(--ink);
+    padding-bottom:120px;
+    -webkit-text-size-adjust:100%;
+  }
+  .container{ max-width:900px; margin:0 auto; padding:14px 14px 30px; }
+
+  /* ========== 封面 ========== */
+  .cover{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#1a237e 0%,#3949ab 46%,#7986cb 100%);
+    color:#fff; border-radius:16px; padding:20px 20px 16px; margin-bottom:12px;
+  }
+  .cover::after{
+    content:""; position:absolute; right:-40px; top:-50px; width:190px; height:190px;
+    background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%); border-radius:50%;
+  }
+  .cover .u-tag{
+    display:inline-block; font-size:12.5px; background:rgba(255,255,255,.22);
+    border-radius:999px; padding:3px 12px; margin-bottom:8px;
+  }
+  .cover h1{ font-size:25px; letter-spacing:1px; margin-bottom:6px; }
+  .cover .sub{ font-size:13.5px; opacity:.95; line-height:1.85; }
+  .cover .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+  .cover .chip{
+    font-size:12.5px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.34);
+    border-radius:999px; padding:3px 11px;
+  }
+
+  /* ========== 单元地图 ========== */
+  .map{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin:12px 0 4px; }
+  .map a{
+    display:block; text-decoration:none; color:inherit; background:#fff;
+    border:1.5px solid var(--line); border-radius:12px; padding:10px 11px;
+    transition:border-color .22s, transform .22s;
+  }
+  .map a:hover{ border-color:var(--main2); transform:translateY(-2px); }
+  .map .m-no{ font-size:11.5px; color:#8d6e63; }
+  .map .m-t{ font-size:14.5px; font-weight:bold; margin-top:2px; color:#1a237e; }
+  .map .m-d{ font-size:11.5px; color:#7b6a5e; margin-top:3px; line-height:1.5; }
+
+  /* ========== 板块导航 ========== */
+  .navi{
+    position:sticky; top:0; z-index:900; background:rgba(251,249,244,.97);
+    padding:8px 0 9px; margin-bottom:2px; border-bottom:1px dashed #dcd3c8;
+    display:flex; gap:6px; flex-wrap:wrap; overflow:hidden;
+  }
+  .navi::-webkit-scrollbar{ display:none; }
+  .navi a{
+    flex:0 0 auto; text-decoration:none; font-size:12.5px; color:#3949ab;
+    background:#fff; border:1.5px solid #c5cae9; border-radius:999px; padding:4px 10px;
+    white-space:nowrap;
+  }
+  .navi a:active,.navi a.on{ background:var(--main); color:#fff; border-color:var(--main); }
+
+  /* ========== 通用板块 ========== */
+  .block{ margin-top:16px; }
+  .sec-title{
+    display:flex; align-items:center; gap:9px; font-size:17.5px; font-weight:bold;
+    color:#3949ab; margin:0 0 9px; flex-wrap:wrap;
+  }
+  .sec-title .bar{ width:6px; height:20px; background:var(--main); border-radius:3px; flex:0 0 auto; }
+  .sec-title .pg{
+    font-size:11.5px; font-weight:normal; color:#8d6e63;
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:1px 8px;
+  }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+  .hint{
+    background:#e8eaf6; border:1px dashed #9fa8da; border-radius:11px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-bottom:10px;
+  }
+  .hint b{ color:#283593; }
+
+  /* 可点读 */
+  .say{ cursor:pointer; border-radius:5px; transition:background .18s, box-shadow .18s; }
+  .say:hover{ background:#fff8e1; }
+  .say.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.32); }
+
+  ruby{ ruby-align:center; }
+  rt{ font-size:10.5px; color:#3949ab; font-family:"Segoe UI",Arial,sans-serif; letter-spacing:0; }
+
+  /* ========== ① 词语卡（注音按课本位置，只标课本标的字）========== */
+  .wc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .wc{
+    background:#fff; border:1.5px solid var(--line); border-radius:11px;
+    padding:7px 4px 9px; text-align:center; cursor:pointer;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .wc:hover{ border-color:#9fa8da; }
+  .wc.hl{ border-color:var(--hl); background:#fffde7; }
+  .wc .w{
+    font-family:"KaiTi","STKaiti",serif; font-size:23px; line-height:1.3;
+    letter-spacing:2px;
+  }
+  .wc .wp{ font-size:10.5px; color:#3949ab; height:13px; font-family:"Segoe UI",Arial,sans-serif; }
+
+  /* ========== 字卡 ========== */
+  .strip{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:4px; }
+  .strip .zi{ width:64px; }
+  .zi{
+    background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:7px 4px 9px; text-align:center; cursor:pointer;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .zi:hover{ border-color:#9fa8da; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; }
+  .zi .py{ font-size:11px; color:#3949ab; height:14px; font-family:"Segoe UI",Arial,sans-serif; }
+  .zi .hz{ font-family:"KaiTi","STKaiti",serif; font-size:30px; line-height:1.22; }
+  .zi .ci{ font-size:11px; color:#6d4c41; margin-top:1px; }
+  .zi.write{ border-color:#c5cae9; background:#eef0fa; }
+  .zi-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-top:4px; }
+
+  /* 田字格 */
+  .tzg{
+    width:52px; height:52px; margin:1px auto 3px; position:relative;
+    border:1.5px solid #d84315; border-radius:3px; background:#fff;
+  }
+  .tzg::before{
+    content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+    background-image:linear-gradient(to right,#f0bdb4 45%,transparent 45%);
+    background-size:6px 1px; background-repeat:repeat-x;
+  }
+  .tzg::after{
+    content:""; position:absolute; top:0; bottom:0; left:50%; width:1px;
+    background-image:linear-gradient(to bottom,#f0bdb4 45%,transparent 45%);
+    background-size:1px 6px; background-repeat:repeat-y;
+  }
+  .tzg i{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:32px; font-style:normal;
+  }
+
+  .bubble{
+    background:#fff8e1; border:1.5px solid #ffe082; border-radius:12px;
+    padding:9px 13px; font-size:13px; line-height:1.85; margin-top:9px; color:#795548;
+  }
+  .bubble b{ color:#e65100; }
+
+  /* ========== ③ 部首查字法查字表 ========== */
+  .lk-wrap{ overflow-x:auto; background:#fff; border:1.5px solid var(--line); border-radius:12px; }
+  table.lk{ border-collapse:collapse; width:100%; min-width:560px; }
+  .lk th{
+    font-size:12px; color:#5d4037; font-weight:bold;
+    background:#f5f0e6; padding:8px 6px; border:1px solid #e6ded4; white-space:nowrap;
+  }
+  .lk td{
+    font-size:14px; text-align:center; padding:9px 6px;
+    border:1px solid #e6ded4; font-family:"KaiTi","STKaiti",serif;
+  }
+  .lk tr.r{ cursor:pointer; transition:background .18s; }
+  .lk tr.r:hover{ background:#fff8e1; }
+  .lk tr.r.hl{ background:#fff59d; }
+  .lk .big{ font-size:22px; font-weight:bold; color:#1a237e; }
+  .lk .ans{ display:none; color:#c62828; font-weight:bold; }
+  .lk tr.open .ans{ display:inline; }
+  .lk .blank{ color:#b0a89b; }
+  .lk tr.open .blank{ display:none; }
+
+  /* ========== ④ 易错字四色盒 ========== */
+  .dz-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+  .dz-box{
+    border-radius:12px; padding:11px 13px; position:relative;
+    border:1.5px solid transparent;
+  }
+  .dz-box .dz-t{ font-size:12px; color:#6d4c41; margin-bottom:7px; font-weight:bold; }
+  .dz-box .dz-ws{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:5px 10px;
+    font-family:"KaiTi","STKaiti",serif; font-size:20px; line-height:1.75;
+  }
+  .dz-box .dz-w{ cursor:pointer; border-radius:6px; padding:0 4px; display:inline-block; }
+  .dz-box .dz-w:hover{ background:rgba(255,255,255,.75); }
+  .dm{
+    text-emphasis:filled circle #3949ab;
+    -webkit-text-emphasis:filled circle #3949ab;
+    text-emphasis-position:under right;
+    -webkit-text-emphasis-position:under right;
+  }
+  .dz-box.b1{ background:#e3f2fd; border-color:#90caf9; }
+  .dz-box.b2{ background:#e8f5e9; border-color:#a5d6a7; }
+  .dz-box.b3{ background:#fce4ec; border-color:#f48fb1; }
+  .dz-box.b4{ background:#fff8e1; border-color:#ffe082; }
+
+  /* ========== ⑤ 天气词 + 有趣句子 ========== */
+  .wxc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .wxc{
+    background:#fff; border:1.5px solid #c5cae9; border-radius:999px;
+    padding:8px 6px; text-align:center; cursor:pointer;
+    font-family:"KaiTi","STKaiti",serif; font-size:18px; letter-spacing:1px;
+  }
+  .wxc:hover{ border-color:var(--main2); }
+  .wxc.hl{ background:#fff59d; border-color:var(--hl); }
+
+  .fun{
+    background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 14px; margin-top:9px;
+    font-family:"KaiTi","STKaiti",serif; font-size:18.5px; line-height:2.1;
+  }
+  .fun .fd{ color:#e65100; margin-right:7px; }
+
+  /* ========== ⑥ 日积月累 ========== */
+  .poem{
+    background:linear-gradient(180deg,#f8f9ff,#eef0fb);
+    border:1.5px solid #c5cae9; border-radius:14px; padding:16px 14px; text-align:center;
+  }
+  .poem.hl{ border-color:var(--hl); }
+  .poem .p-line{
+    font-family:"KaiTi","STKaiti",serif; font-size:20px; line-height:2.4;
+    cursor:pointer; border-radius:8px; padding:2px 6px; display:inline-block;
+  }
+  .poem .p-line:hover{ background:#fff8e1; }
+  .poem .p-line.hl{ background:#fff59d; }
+  .poem rt{ font-size:10.5px; }
+  .poem .p-src{
+    font-family:"KaiTi","STKaiti",serif; font-size:14.5px; color:#6d4c41;
+    margin-left:12px; cursor:pointer; border-radius:6px; padding:2px 5px; display:inline-block;
+  }
+  .poem .p-src:hover{ background:#fff8e1; }
+  .poem .p-src.hl{ background:#fff59d; }
+  .poem .p-trans{
+    margin-top:12px; text-align:left; font-size:13.5px; line-height:1.95;
+    background:#fff; border-radius:10px; padding:10px 13px; color:#4e342e;
+  }
+  .poem .p-trans b{ color:#3949ab; }
+
+  .recite{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .recite button{
+    flex:1; min-width:120px; border:1.5px solid #c5cae9; background:#fff; color:#3949ab;
+    border-radius:10px; padding:9px 10px; font-size:13px; cursor:pointer; font-family:inherit;
+  }
+  .recite button:hover{ background:#e8eaf6; }
+
+  /* ========== ⑦ 写话 ========== */
+  .step3{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+  .ts{
+    background:#fff; border:1.5px solid #c5cae9; border-radius:12px; padding:10px 11px;
+    position:relative;
+  }
+  .ts.hl{ border-color:var(--hl); background:#fffde7; }
+  .ts .n{
+    display:inline-block; width:21px; height:21px; line-height:21px; text-align:center;
+    border-radius:50%; background:#3949ab; color:#fff; font-size:12px;
+  }
+  .ts .t{ font-size:13px; font-weight:bold; color:#283593; margin-top:5px; line-height:1.5; }
+  .ts .d{ font-size:12px; color:#4e342e; line-height:1.7; margin-top:4px; }
+
+  .scene{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-top:4px; }
+  .sc{
+    background:#fff; border:1.5px solid #c5cae9; border-radius:12px;
+    padding:11px 13px; cursor:pointer;
+    font-family:"KaiTi","STKaiti",serif; font-size:16px; line-height:1.9; color:#37474f;
+  }
+  .sc:hover{ border-color:#9fa8da; }
+  .sc.hl{ border-color:var(--hl); background:#fffde7; }
+  .sc .emo{ font-size:26px; display:block; margin-bottom:4px; }
+
+  /* ========== ⑧ 我爱阅读 ========== */
+  .st-title{
+    text-align:center; font-family:"KaiTi","STKaiti",serif; font-size:26px;
+    color:#37474f; margin-bottom:10px; letter-spacing:3px;
+  }
+  .st-title .note{
+    font-family:sans-serif; font-size:11px; color:#8d6e63; vertical-align:super; letter-spacing:0;
+  }
+  .story{ background:#fff; border:1.5px solid var(--line); border-radius:13px; padding:13px 15px; }
+  .story .s-para{
+    font-family:"KaiTi","STKaiti",serif; font-size:18px; line-height:2.1;
+    margin-bottom:8px; cursor:pointer; border-radius:6px; padding:2px 3px;
+  }
+  .story .s-para:last-child{ margin-bottom:0; }
+  .story .s-para:hover{ background:#fff8e1; }
+  .story .s-para.hl{ background:#fff59d; }
+  .story .s-no{
+    display:inline-block; background:#3949ab; color:#fff; font-size:11.5px;
+    border-radius:5px; padding:0 7px; margin-right:7px; vertical-align:2px;
+    font-family:sans-serif; cursor:pointer;
+  }
+
+  /* ========== ⑨ 闯关 ========== */
+  .quiz-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; align-items:start; }
+  .q{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 12px; }
+  .q.right{ border-color:#66bb6a; background:#f1f8e9; }
+  .q.wrong{ border-color:#ef9a9a; background:#ffebee; }
+  .q .q-t{ font-size:13.5px; line-height:1.75; }
+  .q .q-t b{ color:#3949ab; }
+  .q .opts{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+  .q .opt{
+    border:1.5px solid #e0e0e0; border-radius:9px; padding:7px 10px; font-size:13px;
+    cursor:pointer; line-height:1.6; background:#fafafa;
+    transition:border-color .18s, background .18s;
+  }
+  .q .opt:hover{ border-color:#90caf9; background:#f1f8ff; }
+  .q .opt.ok{ border-color:#66bb6a; background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .q .opt.no{ border-color:#ef5350; background:#ffebee; color:#b71c1c; }
+  .q .exp{ display:none; font-size:12px; color:#4527a0; background:#ede7f6; border-radius:7px; padding:6px 9px; margin-top:7px; line-height:1.7; }
+  .q.done .exp{ display:block; }
+  .score{
+    margin-top:10px; text-align:center; font-size:14px; color:#3949ab;
+    background:#e8eaf6; border:1px dashed #9fa8da; border-radius:11px; padding:10px;
+  }
+
+  /* ========== 课本原页 ========== */
+  .pic-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+  .pic{
+    background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:7px;
+    text-align:center; cursor:pointer;
+  }
+  .pic img{ width:100%; display:block; border-radius:6px; }
+  .pic .cap{ font-size:11.5px; color:#5d4037; margin-top:5px; }
+  #lb{
+    position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:2000; display:none;
+    align-items:center; justify-content:center; padding:10px; cursor:zoom-out;
+  }
+  #lb img{ max-width:100%; max-height:100%; border-radius:6px; }
+
+  /* ========== 底部控制条 / 字幕 ========== */
+  .ctrl-bar{
+    position:fixed; left:0; right:0; bottom:0; background:rgba(26,35,126,.97);
+    display:flex; gap:7px; align-items:center; justify-content:center;
+    padding:10px 10px; z-index:1000; flex-wrap:wrap;
+  }
+  .ctrl-bar button{
+    border:none; border-radius:999px; padding:8px 13px; font-size:13.5px; cursor:pointer;
+    background:#fff; color:#1a237e; font-weight:bold; font-family:inherit;
+  }
+  .ctrl-bar button.stop{ background:#c5cae9; color:#1a237e; }
+  .ctrl-bar button.on{ background:#ffd54f; color:#5d4037; }
+  #cap{
+    position:fixed; left:50%; transform:translateX(-50%); bottom:62px; max-width:92%;
+    background:rgba(38,50,56,.93); color:#fff; border-radius:10px; padding:7px 15px;
+    font-size:14.5px; line-height:1.6; display:none; z-index:1100; text-align:center;
+  }
+  .back-nav{
+    position:fixed; right:12px; bottom:60px; z-index:1200;
+    background:rgba(26,35,126,.93); color:#fff; border-radius:999px;
+    padding:7px 16px; font-size:13px; text-decoration:none;
+  }
+  body.no-py rt{ visibility:hidden; }
+
+  @media (max-width:620px){
+    .cover h1{ font-size:20px; }
+    .navi{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+    .map{ grid-template-columns:1fr; }
+    .wc-grid{ grid-template-columns:repeat(3,1fr); }
+    .zi-grid{ grid-template-columns:repeat(2,1fr); }
+    .dz-grid{ grid-template-columns:1fr; }
+    .wxc-grid{ grid-template-columns:repeat(2,1fr); }
+    .step3{ grid-template-columns:1fr; }
+    .scene{ grid-template-columns:1fr; }
+    .quiz-grid{ grid-template-columns:1fr; }
+    .pic-grid{ grid-template-columns:1fr; }
+    .strip .zi{ width:58px; }
+    .strip .zi .hz{ font-size:25px; }
+    .poem .p-line{ font-size:16.5px; }
+    .story .s-para{ font-size:17px; }
+    .fun{ font-size:16.5px; }
+    .ctrl-bar button{ padding:7px 10px; font-size:12.5px; }
+    #cap{ bottom:104px; }
+  }
+  @media print{ .ctrl-bar,#cap,.back-nav,.navi{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ================= 封面 ================= -->
+  <div class="cover">
+    <span class="u-tag">统编版 · 二年级上册 · 第七单元</span>
+    <h1>第七单元 · 单元课件</h1>
+    <p class="sub">语文园地七 · 部首查字法 · 易错字 · 天气词语 · 夜宿山寺 · 看图写故事 · 鸭和霞<br>课本第 91~94 页，点哪句读哪句</p>
+    <div class="chips">
+      <span class="chip">要认 12 字</span>
+      <span class="chip">会写 4 字</span>
+      <span class="chip">查字 3 个</span>
+      <span class="chip">易错字 24 个</span>
+      <span class="chip">天气词 8 个</span>
+      <span class="chip">古诗 1 首</span>
+      <span class="chip">儿歌 1 篇</span>
+      <span class="chip">闯关 8 题</span>
+    </div>
+  </div>
+
+  <!-- ================= 单元地图 ================= -->
+  <div class="map">
+    <a href="第18课-古诗二首-有声图文.html">
+      <div class="m-no">第 18 课</div>
+      <div class="m-t">古诗二首</div>
+      <div class="m-d">江雪 · 敕勒歌，读古诗想画面</div>
+    </a>
+    <a href="第19课-雾在哪里-有声图文.html">
+      <div class="m-no">第 19 课</div>
+      <div class="m-t">雾在哪里</div>
+      <div class="m-d">淘气的雾把什么都藏了起来</div>
+    </a>
+    <a href="第20课-雪孩子-有声图文.html">
+      <div class="m-no">第 20 课</div>
+      <div class="m-t">雪孩子</div>
+      <div class="m-d">雪孩子救了小白兔，变成了白云</div>
+    </a>
+  </div>
+
+  <div class="hint" style="margin-top:10px">
+    <b>这个单元学了什么：</b>古诗二首、雾在哪里、雪孩子——都是让我们<b>展开想象</b>的课文。
+    语文园地七带大家<b>记一记容易写错的字</b>、用<b>部首查字法</b>查独体字、积累<b>天气词语</b>，
+    背一背李白<b>站得高</b>的诗，再看图<b>编一个故事</b>，读一首<b>鸭和霞</b>的绕口令儿歌。
+    点一下任一卡片或句子，就能听。
+  </div>
+
+  <!-- ================= 板块导航 ================= -->
+  <div class="navi" id="navi">
+    <a href="#b1">① 识字加油站</a>
+    <a href="#b2">② 写字</a>
+    <a href="#b3">③ 部首查字法</a>
+    <a href="#b4">④ 易错字</a>
+    <a href="#b5">⑤ 天气词与句子</a>
+    <a href="#b6">⑥ 日积月累</a>
+    <a href="#b7">⑦ 写话</a>
+    <a href="#b8">⑧ 我爱阅读</a>
+    <a href="#b9">⑨ 单元闯关</a>
+    <a href="#pics">课本原页</a>
+  </div>
+
+  <!-- ================= ① 识字加油站 ================= -->
+  <section class="block" id="b1">
+    <div class="sec-title">
+      <span class="bar"></span>① 识字加油站 · 读一读
+      <span class="pg">课本第 91 页</span>
+      <span class="sec-note">读一读，你还能说出这样的词语吗</span>
+    </div>
+
+    <div class="wc-grid" id="wcBox" style="margin-top:4px"></div>
+
+    <div class="sec-title" style="margin-top:16px">
+      <span class="bar"></span>本页要认的字 · 12 个
+      <span class="sec-note">按课本生字条原序，点字听读音</span>
+    </div>
+    <div class="strip" id="stripBox"></div>
+  </section>
+
+  <!-- ================= ② 写字 ================= -->
+  <section class="block" id="b2">
+    <div class="sec-title">
+      <span class="bar"></span>② 写字 · 饥 饿 宁 库
+      <span class="pg">课本第 91 页 · 田字格</span>
+      <span class="sec-note">点卡片听书写要点</span>
+    </div>
+    <div class="zi-grid" id="ziwGrid"></div>
+  </section>
+
+  <!-- ================= ③ 字词句运用 · 部首查字法 ================= -->
+  <section class="block" id="b3">
+    <div class="sec-title">
+      <span class="bar"></span>③ 字词句运用 · 用部首查字法查下面的字
+      <span class="pg">课本第 91 页</span>
+      <span class="sec-note">先自己查一查，再点行对答案</span>
+    </div>
+
+    <div class="hint say" data-say="用部首查字法查下面的字，并填一填。">
+      <b>课本原题：</b>用部首查字法查下面的字，并<b>填一填</b>。
+    </div>
+
+    <div class="lk-wrap">
+      <table class="lk">
+        <tr>
+          <th>要查的字</th><th>部首</th><th>部首页码</th><th>除去部首<br>有几画</th><th>字的页码</th><th>读音</th><th>组词（参考）</th>
+        </tr>
+        <tbody id="lkBody"></tbody>
+      </table>
+    </div>
+    <div class="sec-note" style="margin-top:6px">页码每本字典不一样，请翻自己的字典填一填；点表格行可以核对部首和笔画。</div>
+
+    <div class="bubble say" data-say="我发现很多独体字的部首是它的第一笔。">
+      <b>课本气泡：</b>我发现很多<b>独体字</b>的部首是它的<b>第一笔</b>。
+    </div>
+    <div class="bubble say" data-say="我把我知道的部首整理了出来，以后查字典就会更快了。">
+      <b>课本气泡：</b>我把我知道的部首整理了出来，以后查字典就会更快了。
+    </div>
+    <div class="bubble say" data-say="丸的第一笔是撇，部首就是撇。申的第一笔是竖，部首就是竖。丹的第一笔是撇，部首也是撇。这是老师的话。">
+      <b>老师的话：</b>这三个都是<b>独体字</b>，部首常常就是<b>第一笔</b>：丸→丿，申→丨，丹→丿。（有的字典把"申"收在"田"部，查不到时可以换部首再试。）
+    </div>
+  </section>
+
+  <!-- ================= ④ 易错字 · 加点字 ================= -->
+  <section class="block" id="b4">
+    <div class="sec-title">
+      <span class="bar"></span>④ 读一读，注意加点的字
+      <span class="pg">课本第 92 页</span>
+      <span class="sec-note">你整理了哪些容易写错的字？和同学交流</span>
+    </div>
+
+    <div class="dz-grid" id="dzBox" style="margin-top:4px"></div>
+
+    <div class="bubble say" data-say="加点的字我曾经写错过。我把正确的写在校错本上，会经常看一看。">
+      <b>课本气泡：</b>加点的字我曾经写错过。我把正确的写在校错本上，会经常看一看。
+    </div>
+    <div class="bubble say" data-say="我把容易弄混的字作了比较，并分类整理。">
+      <b>课本气泡：</b>我把容易弄混的字作了比较，并分类整理。
+    </div>
+    <div class="bubble say" data-say="步字下面不能多一点，瓜的里面要有一点。今和令不一样，令的下面有一点。已和以、再和在、园和圆、汽和气、做和作，都要分清楚。这是老师的话。">
+      <b>老师的话：</b>这些加点字都容易写错——<b>步</b>少一点、<b>瓜</b>多一点、<b>令</b>有一点而<b>今</b>没有；
+      <b>已·以·再·在</b>要分清用法；<b>园·圆</b>、<b>汽·气</b>、<b>做·作</b>要比较着记。
+    </div>
+  </section>
+
+  <!-- ================= ⑤ 天气词语 + 有趣的句子 ================= -->
+  <section class="block" id="b5">
+    <div class="sec-title">
+      <span class="bar"></span>⑤ 你见过这些词语描写的景象吗
+      <span class="pg">课本第 92 页</span>
+      <span class="sec-note">选一两个，跟同学说一说当时的情景</span>
+    </div>
+
+    <div class="wxc-grid" id="wxBox" style="margin-top:4px"></div>
+
+    <div class="sec-title" style="margin-top:16px">
+      <span class="bar"></span>读读下面的句子，说说有趣在哪里
+      <span class="sec-note">这两句都来自本单元的课文</span>
+    </div>
+    <div class="fun say" data-say="我要把大海藏起来。于是，雾把大海藏了起来。"><span class="fd">◇</span>“我要把大海藏起来。”于是，雾把大海藏了起来。</div>
+    <div class="fun say" data-say="调皮的风拿了我的手绢，擦过了汗，扔到地上；又拿了妹妹的圆帽子，当作铁环滚走了。"><span class="fd">◇</span><ruby>调<rt>tiáo</rt></ruby>皮的风拿了我的手<ruby>绢<rt>jùn</rt></ruby>，<ruby>擦<rt>cā</rt></ruby>过了<ruby>汗<rt>hàn</rt></ruby>，扔到地上；又拿了妹妹的圆<ruby>帽<rt>mào</rt></ruby>子，当作铁环滚走了。</div>
+
+    <div class="bubble say" data-say="雾把大海和风当作人来写，它们会说话、会拿东西，句子一下子就变有趣了。像这样把事物当作人来写，你的作文也能变得生动。这是老师的话。">
+      <b>老师的话：</b>雾和风被当作<b>人来写</b>——会说话、会拿东西，句子一下子就活了。像这样写，你的写话也能变生动。
+    </div>
+  </section>
+
+  <!-- ================= ⑥ 日积月累 · 夜宿山寺 ================= -->
+  <section class="block" id="b6">
+    <div class="sec-title">
+      <span class="bar"></span>⑥ 日积月累 · 夜宿山寺
+      <span class="pg">课本第 93 页</span>
+      <span class="sec-note">点哪句读哪句</span>
+    </div>
+
+    <div class="poem">
+      <div class="p-line say" data-say="夜宿山寺。"><ruby>夜<rt>yè</rt></ruby><ruby>宿<rt>sù</rt></ruby><ruby>山<rt>shān</rt></ruby><ruby>寺<rt>sì</rt></ruby><span class="p-src say" data-say="唐朝的李白。">[唐] <ruby>李<rt>lǐ</rt></ruby><ruby>白<rt>bái</rt></ruby></span></div>
+      <div class="p-line say" data-say="危楼高百尺。"><ruby>危<rt>wēi</rt></ruby><ruby>楼<rt>lóu</rt></ruby><ruby>高<rt>gāo</rt></ruby><ruby>百<rt>bǎi</rt></ruby><ruby>尺<rt>chǐ</rt></ruby>，</div>
+      <div class="p-line say" data-say="手可摘星辰。"><ruby>手<rt>shǒu</rt></ruby><ruby>可<rt>kě</rt></ruby><ruby>摘<rt>zhāi</rt></ruby><ruby>星<rt>xīng</rt></ruby><ruby>辰<rt>chén</rt></ruby>。</div>
+      <div class="p-line say" data-say="不敢高声语。"><ruby>不<rt>bù</rt></ruby><ruby>敢<rt>gǎn</rt></ruby><ruby>高<rt>gāo</rt></ruby><ruby>声<rt>shēng</rt></ruby><ruby>语<rt>yǔ</rt></ruby>，</div>
+      <div class="p-line say" data-say="恐惊天上人。"><ruby>恐<rt>kǒng</rt></ruby><ruby>惊<rt>jīng</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>上<rt>shàng</rt></ruby><ruby>人<rt>rén</rt></ruby>。</div>
+
+      <div class="p-trans">
+        <b>小知识（老师的话）：</b>“危楼”就是<b>很高的楼</b>。诗人说站在这座楼上，一伸手就能摘到星星；
+        不敢大声说话，怕惊动天上的仙人。——你看，李白把楼写得多高、多有趣！
+      </div>
+    </div>
+
+    <div class="recite">
+      <button id="btnPoemAll">🔊 连读一遍</button>
+      <button id="btnRecite">🎯 跟着背</button>
+    </div>
+  </section>
+
+  <!-- ================= ⑦ 写话 · 看图写故事 ================= -->
+  <section class="block" id="b7">
+    <div class="sec-title">
+      <span class="bar"></span>⑦ 写话 · 看图写故事
+      <span class="pg">课本第 93 页</span>
+      <span class="sec-note">先说一说，再写下来</span>
+    </div>
+
+    <div class="hint say" data-say="看看下面这幅图，小老鼠在干什么？电脑屏幕上突然出现了谁？接下来会怎样？先和同学说一说，再写下来，分享自己的奇思妙想。注意书写工整。">
+      <b>课本原题：</b>看看下面这幅图，小老鼠在干什么？电脑屏幕上突然出现了谁？接下来会怎样？
+      先和同学<b>说一说</b>，再<b>写下来</b>，分享自己的<b>奇思妙想</b>。注意书写工整。
+    </div>
+
+    <div class="step3">
+      <div class="ts say" data-say="第一步，看图想一想，小老鼠在干什么。">
+        <span class="n">1</span>
+        <div class="t">小老鼠在干什么？</div>
+        <div class="d">看它的表情和动作，猜猜它遇到了什么。</div>
+      </div>
+      <div class="ts say" data-say="第二步，看图想一想，电脑屏幕上突然出现了谁。">
+        <span class="n">2</span>
+        <div class="t">屏幕上出现了谁？</div>
+        <div class="d">它是怎么出现的？小老鼠看见后是什么样子？</div>
+      </div>
+      <div class="ts say" data-say="第三步，大胆想象，接下来会怎样。">
+        <span class="n">3</span>
+        <div class="t">接下来会怎样？</div>
+        <div class="d">大胆想象，把故事编下去，结果由你决定。</div>
+      </div>
+    </div>
+
+    <div class="scene">
+      <div class="sc say" data-say="图上的小老鼠正盯着电脑屏幕看。"><span class="emo">🐭💻</span>◇ 图上：小老鼠正盯着电脑屏幕看。</div>
+      <div class="sc say" data-say="屏幕上突然出现了一只猫。小老鼠吓了一跳。接下来会发生什么呢？"><span class="emo">🐱😱</span>◇ 屏幕上突然出现了一只猫……接下来会发生什么？</div>
+    </div>
+
+    <div class="bubble say" data-say="写话的时候，用上突然、吓得、连忙这样的词，故事会更精彩。写完记得读一读，看句子通不通顺。这是老师的话。">
+      <b>老师的话：</b>写的时候用上<b>突然、吓得、连忙</b>这样的词，故事会更精彩；写完读一读，看句子通不通顺。
+    </div>
+  </section>
+
+  <!-- ================= ⑧ 我爱阅读 ================= -->
+  <section class="block" id="b8">
+    <div class="sec-title">
+      <span class="bar"></span>⑧ 我爱阅读 · 分不清是鸭还是霞
+      <span class="pg">课本第 94 页</span>
+      <span class="sec-note">读起来像绕口令，试试越读越顺</span>
+    </div>
+
+    <div class="st-title">分不清是鸭还是霞<span class="note">①</span></div>
+
+    <div class="story" id="storyBox"></div>
+
+    <div class="bubble say" data-say="本文作者阮居平，选作课文时有改动。霞是天上的彩云，鸭是水里的麻花鸭。霞和鸭读音很像，读的时候注意，麻花鸭的麻读第二声麻。">
+      <b>课本注释：</b>① 本文作者阮居平，选作课文时有改动。——<b>霞</b>是天上的彩云，<b>鸭</b>是水里的麻花鸭；
+      两个字读音很像，读的时候注意“麻”读<b>第二声</b>（má）。
+    </div>
+  </section>
+
+  <!-- ================= ⑨ 单元闯关 ================= -->
+  <section class="block" id="b9">
+    <div class="sec-title">
+      <span class="bar"></span>⑨ 单元闯关 · 8 题
+      <span class="sec-note">点选项就判对错，答完自动算分</span>
+    </div>
+    <div class="quiz-grid" id="quizBox"></div>
+    <div class="score" id="scoreBox">已经答 0 题，答对 0 题。</div>
+  </section>
+
+  <!-- ================= 课本原页 ================= -->
+  <section class="block" id="pics">
+    <div class="sec-title"><span class="bar"></span>课本原页 · 第 91~94 页<span class="sec-note">点图放大</span></div>
+    <div class="pic-grid">
+      <div class="pic"><img src="images/91a-课本第91页-识字加油站与部首查字法.jpg" alt="课本第91页"><div class="cap">第 91 页 · 识字加油站 · 部首查字法</div></div>
+      <div class="pic"><img src="images/92a-课本第92页-易错字与天气词语.jpg" alt="课本第92页"><div class="cap">第 92 页 · 易错字 · 天气词语</div></div>
+      <div class="pic"><img src="images/93a-课本第93页-日积月累夜宿山寺与写话.jpg" alt="课本第93页"><div class="cap">第 93 页 · 夜宿山寺 · 写话</div></div>
+      <div class="pic"><img src="images/94a-课本第94页-我爱阅读分不清是鸭还是霞.jpg" alt="课本第94页"><div class="cap">第 94 页 · 我爱阅读 分不清是鸭还是霞</div></div>
+    </div>
+  </section>
+
+</div>
+
+<div id="lb"><img src="" alt=""></div>
+<div id="cap"></div>
+
+<div class="ctrl-bar">
+  <button id="btnRead">🔊 读这一板块</button>
+  <button id="btnAll">▶️ 整页连读</button>
+  <button id="btnStop" class="stop">⏹ 停</button>
+  <button id="btnPy">拼 拼音</button>
+</div>
+<a class="back-nav" href="../index.html">← 学习中心</a>
+
+<script>
+/* ============================================================
+   第七单元 · 语文园地七 · 单元综合课件
+   全部文字依据课本第 91~94 页逐字录入
+   ============================================================ */
+
+/* ---------- 1. 识字加油站 12 词（课本第 91 页，注音只标课本标的字）---------- */
+var WORDS = [
+  { w:'跟踪', py:['',''],            say:'跟踪。' },
+  { w:'洗漱', py:['','shù'],         say:'洗漱。' },
+  { w:'饥饿', py:['','è'],           say:'饥饿。' },
+  { w:'沼泽', py:['zhǎo','zé'],      say:'沼泽。' },
+  { w:'安宁', py:['','níng'],        say:'安宁。' },
+  { w:'杠杆', py:['gàng','gān'],     say:'杠杆。' },
+  { w:'栋梁', py:['dòng',''],        say:'栋梁。' },
+  { w:'买卖', py:['',''],            say:'买卖。' },
+  { w:'车库', py:['','kù'],          say:'车库。' },
+  { w:'闸门', py:['zhá',''],         say:'闸门。' },
+  { w:'羊羔', py:['','gāo'],         say:'羊羔。' },
+  { w:'蝗虫', py:['huáng',''],       say:'蝗虫。' }
+];
+
+/* ---------- 2. 会认 12 字（课本第 91 页生字条原序）---------- */
+var ZIN = [
+  { z:'漱', p:'shù',   c:'洗漱 · 漱口' },
+  { z:'饿', p:'è',     c:'饥饿 · 挨饿' },
+  { z:'沼', p:'zhǎo',  c:'沼泽 · 池沼' },
+  { z:'泽', p:'zé',    c:'沼泽 · 光泽' },
+  { z:'宁', p:'níng',  c:'安宁 · 安宁' },
+  { z:'杠', p:'gàng',  c:'杠杆 · 单杠' },
+  { z:'杆', p:'gān',   c:'杠杆 · 栏杆' },
+  { z:'栋', p:'dòng',  c:'栋梁 · 一栋楼' },
+  { z:'库', p:'kù',    c:'车库 · 仓库' },
+  { z:'闸', p:'zhá',   c:'闸门 · 电闸' },
+  { z:'羔', p:'gāo',   c:'羊羔 · 羔羊' },
+  { z:'蝗', p:'huáng', c:'蝗虫 · 飞蝗' }
+];
+
+/* ---------- 3. 会写 4 字（田字格：饥 饿 宁 库）---------- */
+var ZIW = [
+  { z:'饥', p:'jī', c:'饥饿 · 饥寒', tzg:'饥',
+    meta:'5 画 · 左右结构（饣 + 几）',
+    tip:'笔顺是，撇、横撇、竖提、撇、横折弯钩。食字旁三笔，先写撇、横撇、竖提；右边的几，撇要穿插到食字旁下面。' },
+  { z:'饿', p:'è', c:'饥饿 · 饿了', tzg:'饿',
+    meta:'10 画 · 左右结构（饣 + 我）',
+    tip:'笔顺是，撇、横撇、竖提，然后写右边的我，撇、横、竖钩、提、斜钩、撇、点。斜钩要写得舒展。' },
+  { z:'宁', p:'níng', c:'安宁 · 安宁', tzg:'宁',
+    meta:'5 画 · 上下结构（宀 + 丁）',
+    tip:'笔顺是，点、点、横钩，然后写下面的丁，横、竖钩。竖钩要正对上面的点，字才站得稳。' },
+  { z:'库', p:'kù', c:'车库 · 仓库', tzg:'库',
+    meta:'7 画 · 半包围结构（广 + 车）',
+    tip:'笔顺是，点、横、撇，先写广字旁；再写里面的车，横、撇折、横、竖。广字旁的撇要写得舒展，把车包住。' }
+];
+
+/* ---------- 4. 部首查字法查字 3 行（课本第 91 页，答案按"独体字部首是第一笔"）---------- */
+var LK = [
+  { z:'丸', bs:'丿', rem:'2 画', py:'wán',  c:'丸子 · 药丸',
+    s:'丸。独体字，部首是第一笔撇。除去部首还有两画。参考组词，丸子、药丸。' },
+  { z:'申', bs:'丨', rem:'4 画', py:'shēn', c:'申请 · 申办',
+    s:'申。独体字，部首是第一笔竖。除去部首还有四画。参考组词，申请、三番五次地申。' },
+  { z:'丹', bs:'丿', rem:'3 画', py:'dān',  c:'牡丹 · 仙丹',
+    s:'丹。独体字，部首是第一笔撇。除去部首还有三画。参考组词，牡丹、仙丹。' }
+];
+
+/* ---------- 5. 易错字 4 盒（课本第 92 页，加点字经放大核对）---------- */
+var DZ = [
+  { cls:'b1', t:'第一组 · 蓝色盒',
+    ws:[ ['棉被','被'], ['忘记','记'], ['带领','领'], ['孩子','子'], ['散步','步'], ['南瓜','瓜'] ] },
+  { cls:'b2', t:'第二组 · 绿色盒',
+    ws:[ ['彩带','带'], ['穿戴','戴'], ['以后','以'], ['已经','已'], ['再见','再'], ['正在','在'] ] },
+  { cls:'b3', t:'第三组 · 粉色盒',
+    ws:[ ['战士','士'], ['土地','土'], ['今天','今'], ['口令','令'], ['找到','找'], ['年代','代'] ] },
+  { cls:'b4', t:'第四组 · 黄色盒',
+    ws:[ ['果园','园'], ['圆心','圆'], ['汽水','汽'], ['气体','气'], ['做事','做'], ['作家','作'] ] }
+];
+
+/* ---------- 6. 天气词语 8 个（课本第 92 页，注音只标课本标的字）---------- */
+var WEA = [
+  { w:'云开雾散', py:['',''],            say:'云开雾散。' },
+  { w:'微风习习', py:['wēi',''],         say:'微风习习。' },
+  { w:'冰天雪地', py:['',''],            say:'冰天雪地。' },
+  { w:'风雨交加', py:['',''],            say:'风雨交加。' },
+  { w:'云雾缭绕', py:['','liáo'],        say:'云雾缭绕。' },
+  { w:'寒风呼啸', py:['','xiào'],        say:'寒风呼啸。' },
+  { w:'鹅毛大雪', py:['é',''],           say:'鹅毛大雪。' },
+  { w:'电闪雷鸣', py:['','míng'],        say:'电闪雷鸣。' }
+];
+
+/* ---------- 7. 《分不清是鸭还是霞》9 句（课本第 94 页，注音只标课本标的字）---------- */
+var RHY = [
+  { say:'天空飘着一片霞。',   html:'天空飘着一片霞，' },
+  { say:'水上游来一群鸭。',   html:'水上游来一群鸭。' },
+  { say:'霞是五彩霞。',       html:'霞是五彩霞，' },
+  { say:'鸭是麻花鸭。',       html:'鸭是<ruby>麻<rt>má</rt></ruby>花鸭。' },
+  { say:'麻花鸭游进五彩霞。', html:'麻花鸭游进五彩霞，' },
+  { say:'五彩霞网住麻花鸭。', html:'五彩霞网住麻花鸭。' },
+  { say:'乐坏了鸭。',         html:'乐坏了鸭，' },
+  { say:'拍碎了霞。',         html:'拍<ruby>碎<rt>suì</rt></ruby>了霞，' },
+  { say:'分不清是鸭还是霞。', html:'分不清是鸭还是霞。' }
+];
+
+/* ---------- 8. 闯关 8 题 ---------- */
+var QUIZ = [
+  { q:'“洗漱”的“漱”读音是？',
+    opts:[['shù（树）',1],['shū（书）',0],['sù（速）',0]],
+    exp:'漱读 shù，第四声，漱口就是用水含在嘴里洗口腔。' },
+
+  { q:'用部首查字法查“丸”，部首是什么？',
+    opts:[['丿（第一笔）',1],['丶（点）',0],['九',0]],
+    exp:'很多独体字的部首是它的第一笔。丸的第一笔是撇，部首就是丿，除去部首还有 2 画。' },
+
+  { q:'“散步”的“步”容易写错，错在哪里？',
+    opts:[['下面容易多一点',1],['上面少一横',0],['没有容易错的地方',0]],
+    exp:'步的下面是少字少一点，不能多写那一点；而西瓜的瓜，里面要有一点。' },
+
+  { q:'“今天”的“今”和“口令”的“令”，下面有什么不同？',
+    opts:[['令的下面有一点，今没有',1],['今的下面有一点，令没有',0],['两个都有一点',0]],
+    exp:'令的下面有一点，今的下面没有点。这一组加点字最容易多写少写。' },
+
+  { q:'“以后、已经、再见、正在”，这组加点字为什么容易弄混？',
+    opts:[['读音和字形都很像，用法不同',1],['它们的意思完全一样',0],['它们的笔画一样多',0]],
+    exp:'已、以、再、在读音相近、字形相像，但用法不同：已经 表示完成，再见 是又一次见。' },
+
+  { q:'“电闪雷鸣”描写的是？',
+    opts:[['打雷闪电的天气',1],['下雪的天气',0],['大雾天气',0]],
+    exp:'电闪雷鸣：闪电划过，雷声轰鸣，多形容雷雨天气。' },
+
+  { q:'《夜宿山寺》的作者是？',
+    opts:[['唐 代诗人 李白',1],['宋 代诗人 苏轼',0],['唐 代诗人 白居易',0]],
+    exp:'夜宿山寺，是唐代诗人李白的作品：危楼高百尺，手可摘星辰。' },
+
+  { q:'儿歌里“麻花鸭游进五彩霞”，把鸭和霞弄混了，是因为？',
+    opts:[['鸭和霞读音很像，霞光里分不清它们',1],['鸭子飞到天上去了',0],['霞掉进了水里',0]],
+    exp:'霞和鸭读音相近，晚霞映在水里，水上有鸭、天上有霞，就分不清是鸭还是霞了。' }
+];
+
+/* ============================================================
+   渲染
+   ============================================================ */
+function el(tag, cls, html){
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html != null) e.innerHTML = html;
+  return e;
+}
+
+/* 识字加油站 12 词（逐字套 ruby，只套课本注音的字） */
+(function(){
+  var box = document.getElementById('wcBox');
+  WORDS.forEach(function(it){
+    var chars = it.w.split('');
+    var inner = chars.map(function(c, i){
+      return it.py[i] ? ('<ruby>' + c + '<rt>' + it.py[i] + '</rt></ruby>') : c;
+    }).join('');
+    var d = el('div', 'wc', '<div class="w">' + inner + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* 会认字条 */
+(function(){
+  var box = document.getElementById('stripBox');
+  ZIN.forEach(function(it){
+    var d = el('div', 'zi',
+      '<div class="py">' + it.p + '</div><div class="hz">' + it.z + '</div><div class="ci">' + it.c + '</div>');
+    d.setAttribute('data-say', it.z + '。' + it.c.replace(' · ', '，'));
+    box.appendChild(d);
+  });
+})();
+
+/* 会写字卡（带田字格） */
+(function(){
+  var box = document.getElementById('ziwGrid');
+  ZIW.forEach(function(it){
+    var d = el('div', 'zi write',
+      '<div class="py">' + it.p + '</div>' +
+      '<div class="tzg"><i>' + it.tzg + '</i></div>' +
+      '<div class="ci">' + it.c + '</div>' +
+      '<div class="ci" style="color:#8d6e63">' + it.meta + '</div>' +
+      '<div class="ci" style="color:#1565c0;background:#e3f2fd;border-radius:5px;padding:2px 4px;margin-top:3px">' + it.tip + '</div>');
+    d.setAttribute('data-say', it.z + '。' + it.tip);
+    box.appendChild(d);
+  });
+})();
+
+/* 部首查字法查字表（点行揭晓，页码留白让学生翻字典） */
+(function(){
+  var body = document.getElementById('lkBody');
+  LK.forEach(function(it){
+    var tr = el('tr', 'r say');
+    tr.setAttribute('data-say', it.s);
+    tr.innerHTML =
+      '<td class="big">' + it.z + '</td>' +
+      '<td><span class="blank">（　）</span><span class="ans">' + it.bs + '</span></td>' +
+      '<td class="blank">自己查</td>' +
+      '<td><span class="blank">（　）</span><span class="ans">' + it.rem + '</span></td>' +
+      '<td class="blank">自己查</td>' +
+      '<td><span class="blank">（　）</span><span class="ans">' + it.py + '</span></td>' +
+      '<td><span class="ans" style="font-size:12px">' + it.c + '</span><span class="blank" style="font-size:12px">参考</span></td>';
+    tr.onclick = function(){
+      tr.classList.toggle('open');
+      hlOnly(tr);
+      speakText(tr.getAttribute('data-say'));
+    };
+    body.appendChild(tr);
+  });
+})();
+
+/* 易错字 4 盒（加点字用着重号还原课本加 ·） */
+(function(){
+  var box = document.getElementById('dzBox');
+  DZ.forEach(function(g){
+    var ws = g.ws.map(function(pair){
+      var w = pair[0], dm = pair[1];
+      var chars = w.split('');
+      var inner = chars.map(function(c){
+        return c === dm ? ('<span class="dm">' + c + '</span>') : c;
+      }).join('');
+      return '<span class="dz-w say" data-say="' + w + '。">' + inner + '</span>';
+    }).join('');
+    box.appendChild(el('div', 'dz-box ' + g.cls, '<div class="dz-t">' + g.t + '</div><div class="dz-ws">' + ws + '</div>'));
+  });
+})();
+
+/* 天气词语 8 个 */
+(function(){
+  var box = document.getElementById('wxBox');
+  WEA.forEach(function(it){
+    var chars = it.w.split('');
+    var inner = chars.map(function(c, i){
+      return it.py[i] ? ('<ruby>' + c + '<rt>' + it.py[i] + '</rt></ruby>') : c;
+    }).join('');
+    var d = el('div', 'wxc say', inner);
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* 《分不清是鸭还是霞》9 句 */
+(function(){
+  var box = document.getElementById('storyBox');
+  RHY.forEach(function(it, i){
+    var d = el('div', 's-para',
+      '<span class="s-no">' + (i + 1) + '</span>' + it.html);
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* 闯关题 */
+var answered = {}, rightCount = 0;
+(function(){
+  var box = document.getElementById('quizBox');
+  QUIZ.forEach(function(item, i){
+    var q = el('div', 'q');
+    q.innerHTML = '<div class="q-t"><b>' + (i + 1) + '.</b> ' + item.q + '</div>';
+    var opts = el('div', 'opts');
+    item.opts.forEach(function(pair, k){
+      var o = el('div', 'opt', pair[0]);
+      o.onclick = function(){
+        if (q.classList.contains('done')) return;
+        q.classList.add('done');
+        var ok = pair[1] === 1;
+        o.classList.add(ok ? 'ok' : 'no');
+        if (!ok){
+          /* 把正确项也标出来 */
+          Array.prototype.forEach.call(opts.children, function(c, ci){
+            if (item.opts[ci][1] === 1) c.classList.add('ok');
+          });
+        }
+        q.classList.add(ok ? 'right' : 'wrong');
+        q.appendChild(el('div', 'exp', (ok ? '✅ 答对了。' : '❌ 再想想。') + item.exp));
+        answered[i] = ok;
+        if (ok) rightCount++;
+        updateScore();
+        speakText(ok ? '答对了。' + item.exp : '再想想。' + item.exp);
+      };
+      opts.appendChild(o);
+    });
+    q.appendChild(opts);
+    box.appendChild(q);
+  });
+})();
+
+function updateScore(){
+  var n = Object.keys(answered).length;
+  var box = document.getElementById('scoreBox');
+  if (n === 0){ box.textContent = '已经答 0 题，答对 0 题。'; return; }
+  var tip = n === QUIZ.length
+    ? (rightCount === QUIZ.length ? '全部答对，太棒了！' : (rightCount >= 6 ? '很不错，再检查一下错的题。' : '再看一遍前面的板块，然后重试。'))
+    : '还剩 ' + (QUIZ.length - n) + ' 题。';
+  box.innerHTML = '已经答 ' + n + ' 题，答对 <b>' + rightCount + '</b> 题。' + tip;
+}
+
+/* ============================================================
+   语音引擎（沿用技能里验证过的 watchdog 方案）
+   ============================================================ */
+var cap = document.getElementById('cap');
+var abort = false;
+var synth = window.speechSynthesis || null;
+var __voices = [], __zhVoice = null;
+
+function __pickZh(v){
+  var zh = [], i, s;
+  for (i = 0; i < v.length; i++){
+    s = v[i] || {};
+    if (/^zh|^cmn/i.test(s.lang || '') || /Chinese|中文|普通话/i.test(s.name || '')) zh.push(s);
+  }
+  if (!zh.length) return null;
+  for (i = 0; i < zh.length; i++){
+    if (/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name || '')) return zh[i];
+  }
+  return zh[0];
+}
+function __loadVoices(){
+  if (!synth) return;
+  try{
+    var v = synth.getVoices();
+    if (v && v.length){ __voices = v; if (!__zhVoice) __zhVoice = __pickZh(v); }
+  }catch(e){}
+}
+__loadVoices();
+if (synth){
+  try{
+    if ('onvoiceschanged' in synth) synth.onvoiceschanged = __loadVoices;
+    if (synth.addEventListener) synth.addEventListener('voiceschanged', __loadVoices);
+  }catch(e){}
+  var __vt = setInterval(function(){ __loadVoices(); if (__voices.length) clearInterval(__vt); }, 150);
+}
+
+/* 文本清洗：TTS 遇到尖括号或多余符号会卡死 */
+function __safeText(t){
+  var s = (t == null) ? '' : String(t);
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g, ' ')
+          .replace(/&lt;/gi, '＜').replace(/&gt;/gi, '＞')
+          .replace(/</g, '＜').replace(/>/g, '＞')
+          .replace(/[ \t\r\n]{2,}/g, ' ');
+}
+
+var __unlocked = false;
+function __unlockTTS(){
+  if (!synth || __unlocked) return;
+  try{
+    var u = new SpeechSynthesisUtterance('\u3000');
+    u.volume = 0; u.lang = 'zh-CN';
+    if (__zhVoice) u.voice = __zhVoice;
+    setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+    if ((synth.getVoices() || []).length) __unlocked = true;
+  }catch(e){}
+}
+document.addEventListener('click', __unlockTTS, true);
+document.addEventListener('touchend', __unlockTTS, true);
+
+function speak(text){
+  text = __safeText(text);
+  return new Promise(function(resolve){
+    if (!text){ resolve(); return; }
+    cap.textContent = text; cap.style.display = 'block';
+    var done = false;
+    function finish(){ if (done) return; done = true; resolve(); }
+    if (synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN'; u.rate = 0.82; u.pitch = 1;
+      var vs = synth.getVoices(), i;
+      for (i = 0; i < vs.length; i++){
+        if (vs[i].lang && vs[i].lang.indexOf('zh') === 0 && vs[i].name.indexOf('Xiaoxiao') > -1){ u.voice = vs[i]; break; }
+      }
+      if (!u.voice){ for (i = 0; i < vs.length; i++){ if (vs[i].lang && vs[i].lang.indexOf('zh') === 0){ u.voice = vs[i]; break; } } }
+      if (!u.voice && __zhVoice) u.voice = __zhVoice;
+      u.onend = finish; u.onerror = finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+      var t0 = Date.now(), miss = 0;
+      function __wd(){
+        if (done) return;
+        if (Date.now() - t0 > 120000){ finish(); return; }
+        var busy = (synth && (synth.speaking || synth.pending));
+        if (busy){ miss = 0; setTimeout(__wd, 1500); return; }
+        if (Date.now() - t0 < 3500 || ++miss < 2){ setTimeout(__wd, 800); return; }
+        finish();
+      }
+      setTimeout(__wd, 3500);
+    }else{
+      setTimeout(finish, 600 + text.length * 150);
+    }
+  });
+}
+
+function speakText(t){ abort = false; return speak(t); }
+
+function stopAll(){
+  abort = true;
+  cap.style.display = 'none';
+  if (synth){ try{ synth.cancel(); }catch(e){} }
+  document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); });
+}
+
+function wait(ms){
+  return new Promise(function(res){
+    var t0 = Date.now();
+    var id = setInterval(function(){
+      if (abort || Date.now() - t0 >= ms){ clearInterval(id); res(); }
+    }, 80);
+  });
+}
+
+/* ============================================================
+   点读 + 连读
+   ============================================================ */
+function hlOnly(e){
+  document.querySelectorAll('.hl').forEach(function(x){ x.classList.remove('hl'); });
+  if (e) e.classList.add('hl');
+}
+
+document.addEventListener('click', function(ev){
+  var t = ev.target.closest('[data-say]');
+  if (!t) return;
+  if (t.tagName === 'BUTTON') return;
+  ev.stopPropagation();
+  abort = false;
+  hlOnly(t);
+  speakText(t.getAttribute('data-say'));
+});
+
+/* 当前视口所在板块 */
+function currentSection(){
+  var secs = document.querySelectorAll('section.block');
+  var best = null, bestD = 1e9;
+  secs.forEach(function(s){
+    var r = s.getBoundingClientRect();
+    var d = Math.abs(r.top - 80);
+    if (r.bottom > 120 && d < bestD){ bestD = d; best = s; }
+  });
+  return best || secs[0];
+}
+
+function readList(nodes){
+  var arr = Array.prototype.slice.call(nodes);
+  abort = false;
+  (function step(i){
+    if (abort || i >= arr.length){ cap.style.display = 'none'; return; }
+    var nd = arr[i];
+    var txt = nd.getAttribute('data-say');
+    if (!txt){ step(i + 1); return; }
+    hlOnly(nd);
+    try{ nd.scrollIntoView({ behavior: 'smooth', block: 'center' }); }catch(e){}
+    speak(txt).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+}
+
+document.getElementById('btnRead').onclick = function(){
+  var s = currentSection();
+  readList(s.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnAll').onclick = function(){
+  readList(document.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnStop').onclick = stopAll;
+
+/* 拼音开关 */
+var pyOn = true;
+document.getElementById('btnPy').onclick = function(){
+  pyOn = !pyOn;
+  document.body.classList.toggle('no-py', !pyOn);
+  this.classList.toggle('on', !pyOn);
+};
+
+/* ============================================================
+   《夜宿山寺》背诵闯关
+   ============================================================ */
+var POEMSEQ = [
+  '夜宿山寺，唐朝，李白。',
+  '危楼高百尺，手可摘星辰。',
+  '不敢高声语，恐惊天上人。'
+];
+document.getElementById('btnPoemAll').onclick = function(){
+  abort = false;
+  (function step(i){
+    if (abort || i >= POEMSEQ.length){ cap.style.display = 'none'; return; }
+    speak(POEMSEQ[i]).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+};
+document.getElementById('btnRecite').onclick = function(){
+  abort = false;
+  var seq = [
+    '第一步，跟读。我读一句，你读一句。',
+    '夜宿山寺，唐朝，李白。', '（停）',
+    '危楼高百尺，手可摘星辰。', '（停）',
+    '不敢高声语，恐惊天上人。', '（停）',
+    '第二步，看提示读。危楼……', '（等三秒）', '不敢……',
+    '第三步，闭上眼睛，把这首诗连起来背一遍。'
+  ];
+  (function step(i){
+    if (abort || i >= seq.length){ cap.style.display = 'none'; return; }
+    var t = seq[i];
+    if (t.indexOf('（停）') === 0){ wait(2600).then(function(){ step(i + 1); }); return; }
+    if (t.indexOf('（等三秒）') === 0){ wait(3000).then(function(){ step(i + 1); }); return; }
+    speak(t).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+};
+
+/* ============================================================
+   图片放大 / 导航高亮
+   ============================================================ */
+var lb = document.getElementById('lb');
+document.querySelectorAll('.pic').forEach(function(p){
+  p.onclick = function(){
+    var img = p.querySelector('img');
+    lb.querySelector('img').src = img.src;
+    lb.style.display = 'flex';
+  };
+});
+lb.onclick = function(){ lb.style.display = 'none'; };
+
+/* 导航高亮 */
+var navLinks = Array.prototype.slice.call(document.querySelectorAll('#navi a'));
+window.addEventListener('scroll', function(){
+  var s = currentSection();
+  if (!s) return;
+  navLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + s.id); });
+}, { passive: true });
+
+/* 键盘：空格停 */
+document.addEventListener('keydown', function(e){
+  if (e.code === 'Space' && e.target === document.body){ e.preventDefault(); stopAll(); }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>写字表 · 二年级语文上册有声图文学习中心</title>
+<style>
+  /* ============================================================
+     写字表附页 · 版面照课本第 113~115 页：
+     阅读 / 识字 分组 + 课文序号 + 语文园地标签 + 拼音，共250个字
+     唯一改动：每个字装进「田字格」（写字的字更要用田字格），点格即听。
+     底色照课本淡蓝；分区徽章照课本橙棕色、园地标签照课本蓝框。
+     ============================================================ */
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    background:#eaf5fd; color:#37474f;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wrap{ max-width:900px; margin:0 auto; padding:18px 12px 46px; }
+
+  /* ---- 页头（供导航抓取：page-head > p 副标题、chip 亮点） ---- */
+  .page-head{
+    background:linear-gradient(135deg,#29a3d4,#6cc4e8);
+    color:#fff; border-radius:14px; padding:20px 18px; margin-bottom:12px;
+    border:3px solid #7fd0ef;
+  }
+  .page-head h1{
+    font-family:"KaiTi","楷体","STKaiti",serif;
+    font-size:30px; letter-spacing:10px; margin-bottom:8px;
+  }
+  .page-head p{ font-size:13.5px; opacity:.96; line-height:1.8; }
+  .chips{ margin-top:10px; }
+  .chip{
+    display:inline-block; font-size:12.5px; background:rgba(255,255,255,.22);
+    border:1px solid rgba(255,255,255,.55); border-radius:20px;
+    padding:3px 12px; margin:2px 6px 0 0;
+  }
+
+  /* ---- 使用提示条 ---- */
+  .hint{
+    background:#fff; border:1.5px dashed #29a3d4; border-radius:12px;
+    padding:10px 14px; font-size:13.5px; line-height:1.9; margin-bottom:14px;
+  }
+  .hint b{ color:#0277bd; }
+
+  /* ---- 分区徽章（阅读 / 识字）：仿课本橙棕圆角框 ---- */
+  .secbadge{
+    display:inline-block; font-family:"KaiTi","楷体",serif;
+    font-size:22px; color:#b26a00; background:#fff3e0;
+    border:2px solid #ef9a5a; border-radius:10px;
+    padding:4px 22px; margin:20px 0 10px;
+  }
+
+  /* ---- 每一行：序号 + 一串田字格 ---- */
+  .row{ margin:10px 0 14px; }
+  .row-line{ display:flex; flex-wrap:wrap; align-items:flex-start; }
+  .no{
+    flex:0 0 40px; font-family:"KaiTi","楷体",serif;
+    font-size:24px; color:#455a64; text-align:left; padding-top:26px;
+  }
+  .no-yd{ flex:0 0 auto; padding-top:14px; margin-right:8px; }
+  .ydbadge{
+    display:inline-block; font-family:"KaiTi","楷体",serif;
+    font-size:17px; color:#0288d1; background:#f2fbff;
+    border:2px solid #4fc3f7; border-radius:10px;
+    padding:4px 14px; margin-top:16px; white-space:nowrap;
+  }
+  .cells{ flex:1; display:flex; flex-wrap:wrap; }
+
+  /* ---- 单个字：拼音 + 田字格（虚线十字） ---- */
+  .cell{
+    display:flex; flex-direction:column; align-items:center;
+    width:62px; margin:4px 3px; cursor:pointer;
+    -webkit-user-select:none; user-select:none;
+  }
+  .cell .py{
+    height:20px; font-size:13.5px; color:#546e7a; line-height:20px;
+    font-family:Arial,"Segoe UI",sans-serif; white-space:nowrap;
+  }
+  .zg{
+    width:54px; height:54px; background:#fff;
+    border:2px solid #4fc3f7; border-radius:8px;
+    position:relative; display:flex; align-items:center; justify-content:center;
+    transition:transform .15s, box-shadow .15s;
+  }
+  /* 田字格虚线十字：伪元素画横竖两条居中线 */
+  .zg::before{
+    content:''; position:absolute; left:50%; top:4px; bottom:4px;
+    border-left:1.5px dashed #b3e0f5;
+  }
+  .zg::after{
+    content:''; position:absolute; top:50%; left:4px; right:4px;
+    border-top:1.5px dashed #b3e0f5;
+  }
+  .zg b{
+    font-family:"KaiTi","楷体","STKaiti",serif; font-weight:400;
+    font-size:36px; line-height:1; position:relative; color:#37474f;
+  }
+  .cell:active .zg{ transform:scale(.92); }
+  @media (hover:hover){ .cell:hover .zg{ box-shadow:0 2px 8px rgba(41,163,212,.4); transform:translateY(-2px); } }
+
+  /* ---- 结尾：总数照录 ---- */
+  .total{
+    text-align:right; font-family:"KaiTi","楷体",serif;
+    font-size:18px; color:#546e7a; margin:18px 4px 6px;
+  }
+
+  /* ---- 底部控制条 ---- */
+  .ctrl-bar{ text-align:center; margin-top:22px; }
+  .ctrl-bar a{
+    display:inline-block; text-decoration:none; color:#fff;
+    background:#29a3d4; border-radius:24px; padding:10px 26px; font-size:14.5px;
+  }
+  .ctrl-bar a:active{ opacity:.85; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:24px; letter-spacing:6px; }
+    .cell{ width:52px; margin:4px 2px; }
+    .zg{ width:46px; height:46px; }
+    .zg b{ font-size:30px; }
+    .cell .py{ font-size:12px; }
+    .no{ flex-basis:30px; font-size:20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page-head">
+    <h1>写 字 表</h1>
+    <p>统编版二年级语文上册 · 版面照课本第 113~115 页，每个字装进田字格，点一下听读音</p>
+    <div class="chips">
+      <span class="chip">共250个字（课本标注）</span><span class="chip">田字格范写</span><span class="chip">点格即听</span>
+    </div>
+  </div>
+
+  <div class="hint">
+    <b>怎么用：</b>这一页的字都要求<b>会写、会默</b>。点任意田字格听这个字的读音，看着田字格里的字记住它在格子中的位置；「语文园地一~八」各行是各园地要求会写的字。
+  </div>
+
+  <div id="table"></div>
+
+  <div class="total">（共250个字）</div>
+
+  <div class="ctrl-bar"><a href="index.html">⌂ 返回学习中心</a></div>
+</div>
+
+<script>
+/* ============================================================
+   数据：逐字照录课本第 113~115 页写字表（全部会写字，无蓝字）。
+   sec：'read'=「阅读」分区徽章  'sz'=「识字」分区徽章（只在分区开头标）
+   no ：课文序号（阅读 1~23、识字 1~4 各自编号，照课本）
+   yd ：语文园地行（用蓝色标签代替序号）
+   ============================================================ */
+var GROUPS=[
+  { sec:'read', no:'1', zs:'两条哪宽那短孩成',
+    py:'liǎng tiáo nǎ kuān nà duǎn hái chéng' },
+  { no:'2', zs:'升连起海洋许作法',
+    py:'shēng lián qǐ hǎi yáng xǔ zuò fǎ' },
+  { no:'3', zs:'如果已经别轻发胆肚识',
+    py:'rú guǒ yǐ jīng bié qīng fā dǎn dù shí' },
+  { yd:'语文园地一', zs:'转夹', py:'zhuǎn jiā' },
+  { sec:'sz', no:'1', zs:'处块座园群队领',
+    py:'chù kuài zuò yuán qún duì lǐng' },
+  { no:'2', zs:'树之杨松柏化金桂',
+    py:'shù zhī yáng sōng bǎi huà jīn guì' },
+  { no:'3', zs:'拍世界彩丛休朋友保护',
+    py:'pāi shì jiè cǎi cóng xiū péng yǒu bǎo hù' },
+  { no:'4', zs:'季肥农事谷体辛苦初年',
+    py:'jì féi nóng shì gǔ tǐ xīn kǔ chū nián' },
+  { yd:'语文园地二', zs:'丑诚', py:'chǒu chéng' },
+  { sec:'read', no:'4', zs:'丽提吗圆哥秋挂啊',
+    py:'lì tí ma yuán gē qiū guà a' },
+  { no:'5', zs:'宝玩活些总告诉曲名香',
+    py:'bǎo wán huó xiē zǒng gěi sù qǔ míng xiāng' },
+  { no:'6', zs:'数晚奶您爷很变勺张汉',
+    py:'shù wǎn nǎi nín yé hěn biàn sháo zhāng hàn' },
+  { yd:'语文园地三', zs:'图泥铁环', py:'tú ní tiě huán' },
+  { no:'7', zs:'依尽穷层照炉烟川直银',
+    py:'yī jìn qióng céng zhào lú yān chuān zhí yín' },
+  { no:'8', zs:'仙顶巨位闪狗形状',
+    py:'xiān dǐng jù wèi shǎn gǒu xíng zhuàng' },
+  { no:'9', zs:'湖区胜岛弯现就外',
+    py:'hú qū shèng dǎo wān xiàn jiù wài' },
+  { no:'10', zs:'份枝客城市孔钉味',
+    py:'fèn zhī kè chéng shì kǒng dīng wèi' },
+  { yd:'语文园地四', zs:'号丰', py:'hào fēng' },
+  { no:'11', zs:'观呀答话抬能信',
+    py:'guān ya dá huà tái néng xìn' },
+  { no:'12', zs:'阵做冻第像冷冰亮',
+    py:'zhèn zuò dòng dì xiàng lěng bīng liàng' },
+  { no:'13', zs:'种棵以次想邻居吧奇怪',
+    py:'zhòng kē yǐ cì xiǎng lín jū ba qí guài' },
+  { yd:'语文园地五', zs:'货科', py:'huò kē' },
+  { no:'14', zs:'楼代穿视利路',
+    py:'lóu dài chuān shì lì lù' },
+  { no:'15', zs:'同志军敌常非每战士戴',
+    py:'tóng zhì jūn dí cháng fēi měi zhàn shì dài' },
+  { no:'16', zs:'难忘民因理串裤令',
+    py:'nán wàng mín yīn lǐ chuàn kù lìng' },
+  { no:'17', zs:'反村由于员被声岁消息',
+    py:'fǎn cūn yóu yú yuán bèi shēng suì xiāo xī' },
+  { yd:'语文园地六', zs:'抄炒', py:'chāo chǎo' },
+  { no:'18', zs:'绝灭舟独阴似野低',
+    py:'jué miè zhōu dú yīn sì yě dī' },
+  { no:'19', zs:'论船猫切该散步失',
+    py:'lùn chuán māo qiè gāi sàn bù shī' },
+  { no:'20', zs:'要伙伴歌得闭忙谁汽',
+    py:'yào huǒ bàn gē de bì máng shuí qì' },
+  { yd:'语文园地七', zs:'饥饿宁库', py:'jī è níng kù' },
+  { no:'21', zs:'拿仔极送椅怎拉收接',
+    py:'ná zǎi jí sòng yǐ zěn lā shōu jiē' },
+  { no:'22', zs:'纸抓线吵但受句哭',
+    py:'zhǐ zhuā xiàn chǎo dàn shòu jù kū' },
+  { no:'23', zs:'游戏爱呢跳咱',
+    py:'yóu xì ài ne tiào zán' },
+  { yd:'语文园地八', zs:'狼蛇', py:'láng shé' }
+];
+
+/* ============================================================
+   渲染
+   ============================================================ */
+(function(){
+  var box = document.getElementById('table');
+
+  GROUPS.forEach(function(g){
+    var row = document.createElement('div');
+    row.className = 'row';
+    var line = document.createElement('div');
+    line.className = 'row-line';
+
+    /* 左列：分区徽章（换分区时在行前插一条大徽章）、课文序号或园地标签 */
+    if (g.sec === 'read'){
+      var sb = document.createElement('div');
+      sb.className = 'secbadge';
+      sb.textContent = '阅读';
+      row.appendChild(sb);
+      row.appendChild(document.createElement('br'));
+    } else if (g.sec === 'sz'){
+      var sb2 = document.createElement('div');
+      sb2.className = 'secbadge';
+      sb2.textContent = '识字';
+      row.appendChild(sb2);
+      row.appendChild(document.createElement('br'));
+    }
+    if (g.yd){
+      var yd = document.createElement('span');
+      yd.className = 'no-yd';
+      yd.innerHTML = '<span class="ydbadge">' + g.yd + '</span>';
+      line.appendChild(yd);
+    } else {
+      var no = document.createElement('span');
+      no.className = 'no';
+      no.textContent = g.no;
+      line.appendChild(no);
+    }
+
+    /* 字格：拼音 + 田字格 */
+    var zs = g.zs.split('');
+    var pys = g.py.split(' ');
+    var cells = document.createElement('span');
+    cells.style.display = 'contents';
+    zs.forEach(function(z, i){
+      var c = document.createElement('span');
+      c.className = 'cell';
+      c.innerHTML = '<span class="py">' + (pys[i] || '') + '</span>' +
+                    '<span class="zg"><b>' + z + '</b></span>';
+      /* 点格即听：直接朗读这个字 */
+      c.onclick = function(){ speak(z); };
+      cells.appendChild(c);
+    });
+    line.appendChild(cells);
+    row.appendChild(line);
+    box.appendChild(row);
+  });
+})();
+
+/* ---- 点格朗读（与其余课件同一套 speechSynthesis） ---- */
+function speak(t){
+  if (!window.speechSynthesis) return;
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(t);
+    u.lang = 'zh-CN';
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+</script>
+</body>
+</html>

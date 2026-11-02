@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>词语表 · 二年级语文上册有声图文学习中心</title>
+<style>
+  /* ============================================================
+     词语表附页 · 版面照课本第 116~118 页：
+     阅读 / 识字 分组 + 课文序号 + 全部词语（236 个）
+     要求一：每个词的每个字装进田字格，词与词之间空一个字的字间距
+     要求二：每课抽 2~3 个代表词，给出「造句 + 课文原句」，文字+声音
+     ============================================================ */
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    background:#eef7ee; color:#33691e;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wrap{ max-width:900px; margin:0 auto; padding:18px 12px 46px; }
+
+  /* ---- 页头（供导航抓取：page-head > p 副标题、chip 亮点） ---- */
+  .page-head{
+    background:linear-gradient(135deg,#43a047,#81c784);
+    color:#fff; border-radius:14px; padding:20px 18px; margin-bottom:12px;
+    border:3px solid #4caf50;
+  }
+  .page-head h1{
+    font-family:"KaiTi","楷体","STKaiti",serif;
+    font-size:30px; letter-spacing:10px; margin-bottom:8px;
+  }
+  .page-head p{ font-size:13.5px; opacity:.96; line-height:1.8; }
+  .chips{ margin-top:10px; }
+  .chip{
+    display:inline-block; font-size:12.5px; background:rgba(255,255,255,.22);
+    border:1px solid rgba(255,255,255,.55); border-radius:20px;
+    padding:3px 12px; margin:2px 6px 0 0;
+  }
+
+  /* ---- 使用提示条 ---- */
+  .hint{
+    background:#fff; border:1.5px dashed #43a047; border-radius:12px;
+    padding:10px 14px; font-size:13.5px; line-height:1.9; margin-bottom:14px;
+  }
+  .hint b{ color:#2e7d32; }
+
+  /* ---- 分区徽章（阅读 / 识字） ---- */
+  .secbadge{
+    display:inline-block; font-family:"KaiTi","楷体",serif;
+    font-size:22px; color:#2e7d32; background:#e8f5e9;
+    border:2px solid #66bb6a; border-radius:10px;
+    padding:4px 22px; margin:20px 0 10px;
+  }
+
+  /* ---- 每一行：序号 + 词格串 ---- */
+  .row{ margin:10px 0 6px; }
+  .row-line{ display:flex; flex-wrap:wrap; align-items:flex-start; }
+  .no{
+    flex:0 0 40px; font-family:"KaiTi","楷体",serif;
+    font-size:24px; color:#37474f; text-align:left; padding-top:26px;
+  }
+  .words{ flex:1; display:flex; flex-wrap:wrap; align-items:flex-end; }
+
+  /* ---- 单个词：字格序列（词内相连，词间空一格字宽） ---- */
+  .word{
+    display:inline-flex; margin:4px 54px 4px 0;  /* 右空 54px = 一个字格宽 */
+    cursor:pointer; -webkit-user-select:none; user-select:none;
+  }
+  .word .py{
+    display:block; height:20px; font-size:13.5px; color:#33691e;
+    line-height:20px; font-family:Arial,"Segoe UI",sans-serif;
+    text-align:center; white-space:nowrap;
+  }
+  .wzg{
+    width:54px; height:54px; background:#fff;
+    border:2px solid #4caf50; border-radius:8px;
+    position:relative; display:flex; align-items:center; justify-content:center;
+    margin-left:-2px;                          /* 词内字格相连 */
+    transition:transform .15s, box-shadow .15s;
+  }
+  .wzg:first-of-type{ border-radius:8px 4px 4px 8px; }
+  .wzg:last-of-type{ border-radius:4px 8px 8px 4px; }
+  /* 田字格虚线十字 */
+  .wzg::before{
+    content:''; position:absolute; left:50%; top:4px; bottom:4px;
+    border-left:1.5px dashed #bfe3c0;
+  }
+  .wzg::after{
+    content:''; position:absolute; top:50%; left:4px; right:4px;
+    border-top:1.5px dashed #bfe3c0;
+  }
+  .wzg b{
+    font-family:"KaiTi","楷体","STKaiti",serif; font-weight:400;
+    font-size:36px; line-height:1; position:relative; color:#37474f;
+  }
+  .word:active .wzg{ transform:scale(.94); }
+  @media (hover:hover){ .word:hover .wzg{ box-shadow:0 2px 8px rgba(76,175,80,.45); } }
+
+  /* ---- 造句卡：每课 2~3 个代表词，造句 + 课文原句 ---- */
+  .cz{
+    background:#fff; border:1.5px solid #a5d6a7; border-radius:12px;
+    margin:8px 0 16px 40px; padding:10px 12px 8px;
+  }
+  .cz-title{
+    font-size:12.5px; color:#2e7d32; letter-spacing:1px; margin-bottom:6px;
+  }
+  .cz-item{ margin:8px 0; }
+  .cz-w{
+    display:inline-block; font-family:"KaiTi","楷体",serif; font-size:17px;
+    color:#1b5e20; background:#e8f5e9; border:1.5px solid #81c784;
+    border-radius:8px; padding:1px 10px; margin-bottom:4px;
+  }
+  .cz-line{
+    font-size:14px; line-height:1.8; color:#3e2723;
+    border-radius:8px; padding:5px 8px; margin:3px 0; cursor:pointer;
+  }
+  .cz-line:active{ background:#f1f8e9; }
+  @media (hover:hover){ .cz-line:hover{ background:#f1f8e9; } }
+  .cz-line .tag{
+    display:inline-block; font-size:11.5px; color:#fff; border-radius:6px;
+    padding:1px 8px; margin-right:6px; vertical-align:1px; white-space:nowrap;
+  }
+  .cz-line.made .tag{ background:#ef6c00; }   /* 造句=老师的话（橙） */
+  .cz-line.orig .tag{ background:#2e7d32; }   /* 原句=课文原文（绿） */
+  .cz-line .hot{ color:#d84315; font-weight:700; }  /* 原句里的目标词 */
+  .cz-line .src{ font-size:11.5px; color:#9e9e9e; margin-left:6px; white-space:nowrap; }
+
+  /* ---- 结尾：总数照录 ---- */
+  .total{
+    text-align:right; font-family:"KaiTi","楷体",serif;
+    font-size:18px; color:#33691e; margin:18px 4px 6px;
+  }
+
+  /* ---- 底部控制条 ---- */
+  .ctrl-bar{ text-align:center; margin-top:22px; }
+  .ctrl-bar a{
+    display:inline-block; text-decoration:none; color:#fff;
+    background:#43a047; border-radius:24px; padding:10px 26px; font-size:14.5px;
+  }
+  .ctrl-bar a:active{ opacity:.85; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:24px; letter-spacing:6px; }
+    .word{ margin:4px 46px 4px 0; }            /* 手机端词间距也缩到一个格宽 */
+    .wzg{ width:46px; height:46px; }
+    .wzg b{ font-size:30px; }
+    .word .py{ font-size:12px; }
+    .no{ flex-basis:30px; font-size:20px; }
+    .cz{ margin-left:30px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page-head">
+    <h1>词 语 表</h1>
+    <p>统编版二年级语文上册 · 版面照课本第 116~118 页，每个词装进田字格、词间空一个字；每课附 2~3 个代表词的造句与课文原句，点一下就能听</p>
+    <div class="chips">
+      <span class="chip">共236个词（课本标注）</span><span class="chip">每词田字格 · 词间距一字</span><span class="chip">造句+原句 点读</span>
+    </div>
+  </div>
+
+  <div class="hint">
+    <b>怎么用：</b>点任意<b>词语</b>听这个词的读音；每课下面的卡片里，<b style="color:#ef6c00">橙色「造句」</b>是老师写的例句（课本没有），<b style="color:#2e7d32">绿色「原句」</b>逐字来自本课课文、原词已标红——点句子即可听读。词语表不含第 7、18 课（古诗课没有词语表，照课本）。
+  </div>
+
+  <div id="table"></div>
+
+  <div class="total">（共236个词）</div>
+
+  <div class="ctrl-bar"><a href="index.html">⌂ 返回学习中心</a></div>
+</div>
+
+<script>
+/* ============================================================
+   数据：词语逐词照录课本第 116~118 页（共 236 个词）。
+   sec ：'read'=「阅读」分区徽章  'sz'=「识字」分区徽章（只在分区开头标）
+   no  ：课文序号（照课本，跳过 7、18 两课古诗）
+   ws  ：词语串（空格分隔）
+   cz  ：本课代表词造句卡 —— w=词  made=造句（老师的话）  orig=课文原句（逐字来自课件转录的课文）
+   ============================================================ */
+var GROUPS=[
+  { sec:'read', no:'1',
+    ws:'妈妈 他们 看见 我们 哪里 那边 雪白 过去 孩子 什么',
+    cz:[
+      { w:'看见', made:'雨停了，我在天上看见一道美丽的彩虹。',
+        orig:'他们看见鲤鱼妈妈在教小鲤鱼捕食，就迎上去，问：“鲤鱼阿姨，我们的妈妈在哪里？”' },
+      { w:'雪白', made:'雪白的荷花在池塘里开了。',
+        orig:'他们游到荷花旁边，看见荷叶上蹲着一只大青蛙，披着碧绿的衣裳，露着雪白的肚皮，鼓着一对大眼睛。' }
+    ]},
+  { no:'2',
+    ws:'太阳 天空 一起 冬天 花朵 池子 江河 海洋 许多 田地 工作 办法 你们',
+    cz:[
+      { w:'太阳', made:'早晨，太阳从东边升起来了。', orig:'太阳一晒，我就变成汽。' },
+      { w:'办法', made:'我想到一个好办法。', orig:'人们想出种种办法管住我，让我光做好事，不做坏事。' },
+      { w:'江河', made:'江河里的水日夜不停地流。', orig:'平常我在池子里睡觉，在小溪里散步，在江河里奔跑，在海洋里跳舞，唱歌，开大会。' }
+    ]},
+  { no:'3',
+    ws:'如果 已经 告别 四海为家 自己 出发 动物 胆子 肚子 那里 知识',
+    cz:[
+      { w:'如果', made:'如果明天不下雨，我们就去公园。', orig:'孩子如果已经长大，就得告别妈妈，四海为家。' },
+      { w:'四海为家', made:'蒲公英妈妈的孩子们四海为家。', orig:'孩子如果已经长大，就得告别妈妈，四海为家。' },
+      { w:'知识', made:'读书能让我们学到很多知识。', orig:'那里有许许多多的知识，粗心的小朋友却得不到它。' }
+    ]},
+  { sec:'sz', no:'1',
+    ws:'花园 飞鸟 红领巾 欢笑',
+    cz:[
+      { w:'花园', made:'学校的花园里开满了花。', orig:'一座花园' },
+      { w:'红领巾', made:'胸前的红领巾飘起来。', orig:'一队“红领巾”' },
+      { w:'欢笑', made:'公园里到处是欢笑。', orig:'一片欢笑' }
+    ]},
+  { no:'2',
+    ws:'杨树 树叶 松柏 化石 开花',
+    cz:[
+      { w:'松柏', made:'松柏一年四季都是绿的。', orig:'松柏四季披绿装' },
+      { w:'化石', made:'博物馆里陈列着恐龙化石。', orig:'银杏水杉活化石' },
+      { w:'开花', made:'春天到了，桃树开花了。', orig:'金桂开花满院香' }
+    ]},
+  { no:'3',
+    ws:'拍手 世界 云彩 丛林 竹林 朋友 保护',
+    cz:[
+      { w:'保护', made:'我们要保护小动物。', orig:'保护动物是大事。' },
+      { w:'朋友', made:'我和他是最好的朋友。', orig:'人和动物是朋友。' }
+    ]},
+  { no:'4',
+    ws:'四季 春风 农事 月光 身体 辛苦 心里 大家',
+    cz:[
+      { w:'辛苦', made:'妈妈工作很辛苦。', orig:'身体虽辛苦，心里喜洋洋。' },
+      { w:'农事', made:'春天农事忙，农民伯伯都在种田。', orig:'农事忙，采桑养蚕又插秧。' },
+      { w:'月光', made:'月光洒在院子里。', orig:'早起勤耕作，归来戴月光。' }
+    ]},
+  { sec:'read', no:'4',
+    ws:'天上 美丽 爸爸 下来 不用 高兴 哥哥 秋千 彩云',
+    cz:[
+      { w:'美丽', made:'春天，花园里开满美丽的花。', orig:'雨停了，天上出现了一座美丽的桥。' },
+      { w:'秋千', made:'我在公园里荡秋千。', orig:'如果我把它挂在彩虹桥上，坐着秋千荡来荡去，花裙子飘啊飘的，不就成了一朵彩云吗？' },
+      { w:'高兴', made:'收到礼物，我很高兴。', orig:'您就不用挑水去浇田了，您高兴吗？' }
+    ]},
+  { no:'5',
+    ws:'宝贝 干活 回来 一些 天气 欢快 它们 告诉 名字 出门',
+    cz:[
+      { w:'宝贝', made:'这本旧书是爷爷的宝贝。', orig:'山上山下宝贝多，有吃的，有玩的，还有看的。' },
+      { w:'干活', made:'爸爸在地里干活。', orig:'有时候舅舅从山上干活回来，会带一些山楂、柿子或毛栗子，外婆总要给我留一份。' },
+      { w:'欢快', made:'小鸟唱着欢快的歌。', orig:'天气好的时候，在屋后的山上玩，会看到一只只小山雀在林间欢快地蹦来跳去，它们是我最喜欢的宝贝。' }
+    ]},
+  { no:'6',
+    ws:'星星 晚上 无数 奶奶 中间 总是 爷爷 北边 勺子 转动 这个 后来',
+    cz:[
+      { w:'星星', made:'夜晚，星星在天上一闪一闪。', orig:'晚上，满天的星星像无数珍珠撒在碧玉盘里。' },
+      { w:'无数', made:'天上有无数的星星。', orig:'晚上，满天的星星像无数珍珠撒在碧玉盘里。' },
+      { w:'北边', made:'大雁往北边飞去。', orig:'爷爷停了停，指着北边的天空，说：“你看，那七颗星，连起来像一把勺子，叫北斗七星。' }
+    ]},
+  { no:'8',
+    ws:'那些 山顶 山头 云海 仙人 前方 仙女',
+    cz:[
+      { w:'云海', made:'站在山顶上，脚下是一片云海。', orig:'它两只胳膊抱着腿，一动不动地蹲在山头，望着翻滚的云海。' },
+      { w:'仙人', made:'传说中的仙人会飞。', orig:'远远望去，那巨石真像一位仙人站在高高的山峰上，伸着手臂指向前方。' },
+      { w:'那些', made:'那些花真美啊！', orig:'那里景色秀丽神奇，尤其是那些怪石，有趣极了。' }
+    ]},
+  { no:'9',
+    ws:'山区 群山 树木 灯光 中午 眼前 细雨 风光 中外',
+    cz:[
+      { w:'灯光', made:'夜晚，城市的灯光真亮。', orig:'天边的晨星和山上的点点灯光，隐隐约约地倒映在湖水中。' },
+      { w:'细雨', made:'细雨悄悄地落在草地上。', orig:'要是下起蒙蒙细雨，日月潭好像披上轻纱，周围的景物一片朦胧，就像童话中的仙境。' },
+      { w:'风光', made:'家乡的风光真美。', orig:'日月潭风光秀丽，吸引了许许多多的中外游客。' }
+    ]},
+  { no:'10',
+    ws:'地方 水果 月份 枝叶 五光十色 好客 老乡 有的 城市 空气 水分 这里 味道 有名',
+    cz:[
+      { w:'五光十色', made:'节日的灯光五光十色。', orig:'葡萄一大串一大串地挂在绿叶底下，有红的、白的、紫的、淡绿的，五光十色，美丽极了。' },
+      { w:'好客', made:'小明是个热情好客的孩子。', orig:'要是这时候你到葡萄沟去，热情好客的维吾尔族老乡，准会摘下最甜的葡萄，让你吃个够。' },
+      { w:'水分', made:'西瓜里有很多水分。', orig:'成串的葡萄挂在架子上，利用流动的热空气，让水分蒸发掉，就成了葡萄干。' }
+    ]},
+  { no:'11',
+    ws:'坐井观天 哪儿 回答 大话 不过 那么 抬头',
+    cz:[
+      { w:'大话', made:'我们不要说大话。', orig:'青蛙说：“朋友，别说大话了！天不过井口那么大，还用飞那么远吗？”' },
+      { w:'抬头', made:'我抬头看见月亮。', orig:'青蛙笑了，说：“朋友，我天天坐在井里，一抬头就能看见天。我不会弄错的。”' },
+      { w:'回答', made:'上课要举手回答问题。', orig:'小鸟回答说：“我从天上来，飞了一百多里，口渴了，下来找点儿水喝。”' }
+    ]},
+  { no:'12',
+    ws:'当作 前面 面对面 出去 过冬 知道 赶快 正好 明天 清早 好像 一样 天亮 出来',
+    cz:[
+      { w:'赶快', made:'下雨了，赶快收衣服。', orig:'喜鹊说：“寒号鸟，别睡了。天气暖和，赶快做窝。”' },
+      { w:'清早', made:'清早，空气特别新鲜。', orig:'第二天清早，风停了，太阳暖暖的，好像又是春天了。' },
+      { w:'当作', made:'我把小狗当作好朋友。', orig:'山脚下有一堵石崖，崖上有一道缝，寒号鸟就把这道缝当作自己的窝。' }
+    ]},
+  { no:'13',
+    ws:'从前 以后 多么 那个 叶子 虫子 自言自语 邻居 奇怪',
+    cz:[
+      { w:'自言自语', made:'他一边走一边自言自语。', orig:'他盯着小葫芦自言自语地说：“我的小葫芦，快长啊，快长啊！长得赛过大南瓜才好呢！”' },
+      { w:'邻居', made:'我家邻居是一位和气的爷爷。', orig:'一个邻居看见了，对他说：“你别光盯着葫芦了，叶子上生了蚜虫，快治一治吧！”' },
+      { w:'奇怪', made:'弟弟总爱问一些奇怪的问题。', orig:'那个人感到很奇怪，说：“什么？叶子上的虫还用治？我要的是葫芦。”' }
+    ]},
+  { no:'14',
+    ws:'年代 明亮 星星之火 中国 胜利 道路',
+    cz:[
+      { w:'星星之火', made:'一点星星之火，也能照亮黑夜。', orig:'凝视着这星星之火，毛主席在沉思，连毯子滑落下来也没有察觉到。' },
+      { w:'胜利', made:'我们队赢得了胜利。', orig:'就在这盏清油灯下，毛主席写下了许多光辉著作，照亮了中国革命胜利的道路。' },
+      { w:'道路', made:'道路两旁种着大树。', orig:'就在这盏清油灯下，毛主席写下了许多光辉著作，照亮了中国革命胜利的道路。' }
+    ]},
+  { no:'15',
+    ws:'同志 红军 敌人 生产 常常 来回 非常 战士 一块儿 白天',
+    cz:[
+      { w:'红军', made:'红军爬雪山、过草地，非常勇敢。', orig:'红军在山上，山下不远处就是敌人。' },
+      { w:'一块儿', made:'放学后，我们一块儿回家。', orig:'他穿着草鞋，戴着斗笠，挑起粮食，跟大家一块儿爬山。' },
+      { w:'战士', made:'解放军战士守卫着祖国。', orig:'朱德同志也跟战士们一块儿去挑粮。' }
+    ]},
+  { no:'16',
+    ws:'难忘 火红 人民 因为 总理 人们 四面八方 为了 人群 欢乐 开心',
+    cz:[
+      { w:'四面八方', made:'同学们从四面八方赶来上学。', orig:'那天早晨，人们敲起象脚鼓，从四面八方赶来了。' },
+      { w:'总理', made:'周总理深受人民爱戴。', orig:'1961年的泼水节，傣族人民特别高兴，因为敬爱的周恩来总理和他们一起过泼水节。' },
+      { w:'欢乐', made:'操场上充满了欢乐的笑声。', orig:'他接过一面象脚鼓，敲起欢乐的鼓点，踩着凤凰花铺成的“地毯”，同傣族人民一起跳舞。' }
+    ]},
+  { no:'17',
+    ws:'由于 年轻 共产党员 共产党 现在 一点儿 消息',
+    cz:[
+      { w:'共产党员', made:'刘胡兰是年轻的共产党员。', orig:'由于叛徒的出卖，年轻的共产党员刘胡兰被捕了，关在一座庙里。' },
+      { w:'一点儿', made:'一点儿困难也不怕。', orig:'刘胡兰像钢铁铸成似的，一点儿也不动摇。' },
+      { w:'消息', made:'这个好消息让大家都很开心。', orig:'毛主席听到这个消息，亲笔为她题词：“生的伟大，死的光荣。”' }
+    ]},
+  { no:'19',
+    ws:'于是 无论 船只 同时 行人 一切 上空 看来 不久 路上 出现 散步 消失',
+    cz:[
+      { w:'船只', made:'河上来往的船只很多。', orig:'不久，大海连同船只，天空连同太阳，海岸连同城市，街道连同房屋和桥梁，都露出来了。' },
+      { w:'行人', made:'下雨天，行人都打着伞。', orig:'路上走着行人。' },
+      { w:'散步', made:'晚饭后，我和妈妈去散步。', orig:'小黑猫也出现了，它摇着黑尾巴，悠闲地散步。' }
+    ]},
+  { no:'20',
+    ws:'空地 伙伴 唱歌 回家 一会儿 着火 火星 一边 连忙 树林 水汽 白云',
+    cz:[
+      { w:'连忙', made:'看见老师，我连忙问好。', orig:'他连忙把小白兔抱起来，跑到屋外。' },
+      { w:'水汽', made:'水烧开时冒出水汽。', orig:'瞧，太阳晒着晒着，他变成了很轻很轻的水汽。' },
+      { w:'伙伴', made:'我和小伙伴一起做游戏。', orig:'小白兔有了小伙伴，就不跟妈妈去了。' }
+    ]},
+  { no:'21',
+    ws:'果子 木工 身边 仔细 能干 椅子 怎么 自信 从来 这么',
+    cz:[
+      { w:'自信', made:'上台发言要自信。', orig:'小獾拉着小刺猬的手，说：“在我有点儿泄气的时候，是你称赞了我，让我有了自信。瞧，我已经会做椅子了。这是我的一点儿心意，收下吧。”' },
+      { w:'仔细', made:'做题要仔细检查。', orig:'小刺猬走到小獾身边，拿起板凳仔细地看了看。' },
+      { w:'能干', made:'姐姐很能干，会做很多事。', orig:'他对小獾说：“你真能干，小板凳做得一个比一个好！”' }
+    ]},
+  { no:'22',
+    ws:'上面 快乐 可是 难过 但是 和好',
+    cz:[
+      { w:'和好', made:'吵架之后，他们很快和好了。', orig:'他在一只折好的纸船上写了一句话：“如果你愿意和好，就放一只风筝吧！”' },
+      { w:'难过', made:'小狗生病了，我很难过。', orig:'小熊很难过。' },
+      { w:'快乐', made:'祝你生日快乐！', orig:'纸船里放着一个小松果，松果上挂着一张纸条，上面写着：“祝你快乐！”' }
+    ]},
+  { no:'23',
+    ws:'眼泪 水花 青草 游戏 只有 可爱 可以 多少 咱们 田野 大地 远方',
+    cz:[
+      { w:'眼泪', made:'感动得流下了眼泪。', orig:'小河擦了擦眼泪，告别大山，来到泉水旁边。' },
+      { w:'田野', made:'秋天，田野里一片金黄。', orig:'泉水说：“好啊！请你带我流向很远很远的地方。流过田野，给大地穿上美丽的衣裳；流进大海，推着船儿驶向前方……”' },
+      { w:'咱们', made:'咱们一起去看电影吧。', orig:'他对泉水说：“咱们做好朋友吧！手拉着手，一块儿向前流。”' }
+    ]}
+];
+
+/* ============================================================
+   渲染
+   ============================================================ */
+(function(){
+  var box = document.getElementById('table');
+  var wordCount = 0, charCount = 0;
+
+  GROUPS.forEach(function(g){
+    var row = document.createElement('div');
+    row.className = 'row';
+
+    /* 分区徽章（换分区时在行前插一条大徽章） */
+    if (g.sec){
+      var sb = document.createElement('div');
+      sb.className = 'secbadge';
+      sb.textContent = (g.sec === 'read') ? '阅读' : '识字';
+      row.appendChild(sb);
+      row.appendChild(document.createElement('br'));
+    }
+
+    var line = document.createElement('div');
+    line.className = 'row-line';
+
+    /* 左列：课文序号 */
+    var no = document.createElement('span');
+    no.className = 'no';
+    no.textContent = g.no;
+    line.appendChild(no);
+
+    /* 词格：每个词一组田字格，词间空一格字宽（CSS margin） */
+    var words = document.createElement('span');
+    words.className = 'words';
+    g.ws.split(' ').forEach(function(w){
+      wordCount++; charCount += w.length;
+      var wd = document.createElement('span');
+      wd.className = 'word';
+      wd.title = w;
+      var cells = document.createElement('span');
+      cells.style.display = 'flex';
+      w.split('').forEach(function(z){
+        var c = document.createElement('span');
+        c.className = 'wzg';
+        c.innerHTML = '<b>' + z + '</b>';
+        cells.appendChild(c);
+      });
+      wd.appendChild(cells);
+      /* 点词即听：读整个词 */
+      wd.onclick = function(){ speak(w); };
+      words.appendChild(wd);
+    });
+    line.appendChild(words);
+    row.appendChild(line);
+    box.appendChild(row);
+
+    /* 造句卡：本课代表词的造句 + 课文原句 */
+    if (g.cz && g.cz.length){
+      var cz = document.createElement('div');
+      cz.className = 'cz';
+      var t = document.createElement('div');
+      t.className = 'cz-title';
+      t.textContent = '▪ 词语运用（造句是老师的话；原句逐字来自本课课文，点击即可听）';
+      cz.appendChild(t);
+      g.cz.forEach(function(it){
+        var item = document.createElement('div');
+        item.className = 'cz-item';
+        /* 词名 */
+        var w = document.createElement('span');
+        w.className = 'cz-w';
+        w.textContent = it.w;
+        w.onclick = function(){ speak(it.w); };
+        item.appendChild(w);
+        /* 造句行（老师的话，橙） */
+        var made = document.createElement('div');
+        made.className = 'cz-line made';
+        made.innerHTML = '<span class="tag">造句</span>' + it.made;
+        made.onclick = function(){ speak(it.made); };
+        item.appendChild(made);
+        /* 原句行（课文原文，绿；目标词标红） */
+        var orig = document.createElement('div');
+        orig.className = 'cz-line orig';
+        var marked = it.orig.split(it.w).join('<span class="hot">' + it.w + '</span>');
+        orig.innerHTML = '<span class="tag">原句</span><span>' + marked + '</span>' +
+                         '<span class="src">课文第' + g.no + '课</span>';
+        orig.onclick = function(){ speak(cleanSay(it.orig)); };
+        item.appendChild(orig);
+        cz.appendChild(item);
+      });
+      box.appendChild(cz);
+    }
+  });
+
+  /* 控制台核对用：词数与字数 */
+  window.__czStat = { words: wordCount, chars: charCount };
+})();
+
+/* ---- 朗读稿清洗：去引号、省略号（与其余课件 data-say 禁令一致） ---- */
+function cleanSay(t){
+  return t.replace(/[“”‘’]/g, '').replace(/……/g, '');
+}
+
+/* ---- 点读（与其余课件同一套 speechSynthesis） ---- */
+function speak(t){
+  if (!window.speechSynthesis) return;
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(t);
+    u.lang = 'zh-CN';
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+</script>
+</body>
+</html>
