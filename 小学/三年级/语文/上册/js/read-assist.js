@@ -258,8 +258,12 @@
   /* ============================================================
      引导层：只在"确定发不出声"时出现
      ============================================================ */
+  /* 课件页静默开关（口径同 11/02 二年级语文）：0 = 不弹「没声音」引导层；
+     改成 1 可恢复自动弹窗。手机按返回键 / 点任何按钮都不再触发。 */
+  var SHOW_GUIDE = 0;
   var guideLast = 0;
   function showGuide(kind) {
+    if (!SHOW_GUIDE) return;   // 静默：不建 DOM、不弹层、不打扰
     var now = Date.now();
     if (now - guideLast < 30000) return;   // 30 秒内只弹一次
     guideLast = now;
@@ -530,6 +534,7 @@
 
     /* 用户点击课件按钮后，等一会儿确认到底有没有发声（900ms 初判 + 2.4s 复查） */
     document.addEventListener('click', function () {
+      if (!SHOW_GUIDE) return;
       if (Date.now() - guideLast < 30000) return;
       setTimeout(diagnose, 900);
       setTimeout(diagnose, 2400);
