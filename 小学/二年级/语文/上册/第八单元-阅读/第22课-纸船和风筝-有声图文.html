@@ -231,6 +231,18 @@
   .word-row .wk{ font-size:15px; padding:3px 9px; }
 }
   .word-row .ws .lpy{ font-family:"Segoe UI",Arial,Helvetica,sans-serif; font-size:17px; letter-spacing:0; color:#bf360c; font-weight:bold; }
+
+  /* RA_MOBILE_FIX 2026-11-03：手机端「返回导航」上移 + 去掉遮挡层（口径同三年级语文）
+     1) .back-nav 由原 bottom:60/62px 上移到 104px，避开手机上会换行的 .ctrl-bar 与底部点读区；
+     2) #cap 字幕小框在手机/触摸设备隐藏（二年级语文原 @media 把它也放在 104px，
+        按钮上移后会与之重叠；课件已有高亮+自动滚动，字幕重复）；
+     3) #sndTip 常驻「没声音」黄条隐藏（本册页面无此元素，此条为与三年级一致的预防规则）。
+     带标记，重复执行不会叠加。js 侧三份 read-assist.js 均已有 SHOW_GUIDE=0，无需改动。 */
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+    #sndTip{ display:none !important; }
+  }
 </style>
 </head>
 <body>
