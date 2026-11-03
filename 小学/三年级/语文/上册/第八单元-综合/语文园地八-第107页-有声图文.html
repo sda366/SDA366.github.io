@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  小学语文 · 有声图文带读页  chinese-primary-courseware v1.8
+  课文：统编版语文三年级上册 第一单元-阅读 语文园地八（课本 P107~108）
+  统编版语文 · 第八单元 · 语文园地
+  ----------------------------------------------------------------------------
+  二版相对一版的四项升级（对应使用者要求）：
+  1. 高标准朗读 + 点读：课文拆到「句」，点哪句读哪句；范读/跟读双模式；
+     跟读模式读完一句留时间让学生自己读，防走神；朗读要求（老师标准）单独成卡。
+  2. 深入理解：提问由 6 题扩到 8 题，认知→理解→运用→拓展四层，
+     开放题明确标注「答案不唯一」，每题给 2~3 个思路。
+  3. 词语：新增「听写」（读两遍→写→报答案）+ 逐词示范造句 + 4 组近义词辨析
+     （相同点 / 不一样在哪 / 各造一句）。
+  4. 其他：分角色朗读（课后题一）、按顺序讲故事（课后题二）、会写字书写提示、
+     词语拓展（数量词 / 颜色词 / 游来游去式）。
+  红线：课文原文、生字表、课后题一律照录教材，不编造；
+        拼音只做视觉显示，不进朗读文本；部首笔画与书写提示标注「供参考」。
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>语文园地八 · 单元盘点 · 有声图文带读</title>
+<style>
+  :root{ --main:#c62828; --main2:#ef6c00; --hl:#f9a825; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fdf8f3; color:#3e2723; padding-bottom:130px; }
+  .container{ max-width:880px; margin:0 auto; padding:16px; }
+
+  .page-head{ background:linear-gradient(135deg,#00897b,#4db6ac); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.94; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:#00695c; margin:22px 0 12px; flex-wrap:wrap; }
+  .sec-title .bar{ width:6px; height:22px; background:#00897b; border-radius:3px; }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  /* ===== 工具条 ===== */
+  .tool-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+  .tool-btn{ border:1.5px solid #80cbc4; background:#fff; color:#00695c; border-radius:999px;
+    padding:6px 14px; font-size:13.5px; cursor:pointer; }
+  .tool-btn.on{ background:#00897b; color:#fff; border-color:#00897b; }
+  body.no-py rt{ visibility:hidden; }
+
+  /* ===== 朗读要求卡 ===== */
+  .req-card{ background:#fff8e1; border:1.5px solid #ffd54f; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.95; cursor:pointer; }
+  .req-card.hl{ animation:rowFlash .8s ease-in-out infinite; }
+  .req-card b{ color:#e65100; }
+
+  /* ===== 课文段落 / 句级点读 ===== */
+  .para{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 16px; margin-top:10px;
+    font-family:"KaiTi","STKaiti","Kaiti SC",serif; font-size:19px; line-height:2.2;
+    transition:border-color .25s, box-shadow .25s; }
+  .para.hl{ border-color:var(--hl); background:#fffde7; }
+  .para .no{ display:inline-block; background:#00695c; color:#fff; font-size:12px; border-radius:6px;
+    padding:1px 8px; margin-right:8px; vertical-align:2px; font-family:sans-serif; cursor:pointer; }
+  .para .no:hover{ background:#00897b; }
+  .sent{ cursor:pointer; border-radius:5px; padding:1px 1px; transition:background .2s, box-shadow .2s; }
+  .sent:hover{ background:#fff8e1; }
+  .sent.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.35); }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(249,168,37,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  ruby{ ruby-align:center; }
+  /* 连续两三个字都注音时（如「弄错」nòng cuò、「蝌蚪」kē dǒu），拼音比汉字宽，
+     会贴在一起分不清是哪个字的音；只给相邻的注音之间留 2px 空隙 */
+  .para ruby + ruby{ margin-left:2px; }
+  rt{ font-size:11px; color:#c62828; font-family:sans-serif; letter-spacing:0; }
+  .para-tip{ font-family:sans-serif; font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:8px;
+    padding:3px 10px; margin:4px 0 0; display:inline-block; cursor:pointer; }
+
+  /* ===== 教材图片 ===== */
+  .pic-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+  .pic-card{ background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:8px; cursor:pointer; text-align:center;
+    transition:border-color .25s, box-shadow .25s; }
+  .pic-card img{ width:100%; display:block; border-radius:6px; }
+  .pic-card .cap{ font-size:12.5px; color:#5d4037; margin-top:6px; line-height:1.6; }
+  .pic-card.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* ===== 生字卡 ===== */
+  .zi-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:10px; }
+  .zi{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:8px 6px 10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .zi:hover{ border-color:#ffcc80; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .zi .py{ font-size:12px; color:#c62828; height:16px; }
+  .zi .hz{ font-family:"KaiTi","STKaiti",serif; font-size:34px; line-height:1.25; color:#212121; }
+  .zi .ci{ font-size:12.5px; color:#6d4c41; margin-top:2px; }
+  .zi.write .hz{ font-size:30px; }
+  .zi .meta{ font-size:11px; color:#8d6e63; margin-top:3px; line-height:1.5; }
+  .zi .wtip{ font-size:11px; color:#1565c0; background:#e3f2fd; border-radius:6px; padding:2px 5px; margin-top:4px; line-height:1.5; }
+
+  /* 田字格 */
+  .tzg{ width:56px; height:56px; margin:2px auto 4px; position:relative; border:1.5px solid #d84315; border-radius:4px; background:#fff; }
+  .tzg::before,.tzg::after{ content:""; position:absolute; background-image:linear-gradient(to right,#f0bdb4 45%,transparent 45%);
+    background-size:6px 1px; background-repeat:repeat-x; }
+  .tzg::before{ left:0; right:0; top:50%; height:1px; }
+  .tzg::after{ top:0; bottom:0; left:50%; width:1px; background-image:linear-gradient(to bottom,#f0bdb4 45%,transparent 45%);
+    background-size:1px 6px; background-repeat:repeat-y; }
+  .tzg span{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; }
+
+  /* ===== 词语行 / 词语卡 ===== */
+  .word-row{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap; transition:border-color .25s, box-shadow .25s; }
+  .word-row.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .word-row .wk{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:6px; padding:2px 8px; }
+  .word-row .ws{ font-family:"KaiTi","STKaiti",serif; font-size:19px; line-height:1.9; }
+  .word-row .ws em{ font-style:normal; background:#ffecb3; border-radius:4px; padding:0 3px; }
+  .bubble{ background:#ede7f6; color:#5e35b1; border-radius:10px; padding:8px 12px; font-size:13.5px; margin-top:8px; line-height:1.8; }
+
+  /* 听写区 */
+  .dict-panel{ background:#fff; border:2px solid #00897b; border-radius:14px; padding:14px; margin-top:10px; text-align:center; }
+  .dict-stage{ font-size:15px; color:#00695c; margin-bottom:6px; }
+  .dict-word{ font-family:"KaiTi","STKaiti",serif; font-size:40px; letter-spacing:8px; line-height:1.4; color:#212121; min-height:56px; }
+  .dict-word.mask{ color:#bdbdbd; }
+  .dict-hint{ font-size:13.5px; color:#8d6e63; margin-top:6px; min-height:20px; }
+  .dict-btns{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+
+  /* 词语卡（听写词 + 造句） */
+  .wc-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px; }
+  .wc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px 12px; }
+  .wc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .wc .w-top{ display:flex; align-items:baseline; gap:8px; cursor:pointer; }
+  .wc .w-hz{ font-family:"KaiTi","STKaiti",serif; font-size:24px; }
+  .wc .w-no{ font-size:12px; color:#90a4ae; }
+  .wc .w-lab{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; }
+  .wc .w-say{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:5px; cursor:pointer; }
+  .wc .w-own{ font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:6px; padding:3px 8px; margin-top:4px; cursor:pointer; }
+
+  /* 近义词辨析 */
+  .near{ background:#fff; border:1.5px solid #e1bee7; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; }
+  .near.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .near .n-top{ font-family:"KaiTi","STKaiti",serif; font-size:20px; color:#6a1b9a; margin-bottom:4px; }
+  .near .n-same{ font-size:13.5px; color:#4e342e; line-height:1.8; }
+  .near .n-diff{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:4px; }
+  .near .n-diff b{ color:#c62828; }
+  .near .n-eg{ font-size:13.5px; color:#1b5e20; background:#e8f5e9; border-radius:6px; padding:5px 9px; margin-top:5px; line-height:1.8; }
+
+  /* 词语拓展 */
+  .acc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:11px 13px; margin-top:10px; cursor:pointer; font-size:14px; line-height:1.9; }
+  .acc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .acc .a-t{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; margin-right:6px; }
+  .acc .a-c{ font-family:"KaiTi","STKaiti",serif; font-size:17px; }
+
+  /* ===== 成长顺序 / 角色 ===== */
+  .grow{ display:flex; gap:8px; flex-wrap:wrap; }
+  .gstep{ flex:1; min-width:110px; background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .gstep .n{ display:inline-block; width:22px; height:22px; line-height:22px; border-radius:50%; background:#00897b; color:#fff; font-size:12.5px; }
+  .gstep .t{ font-size:14px; margin-top:6px; line-height:1.6; color:#4e342e; }
+  .gstep.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+  .role{ background:#fff; border:1.5px solid #b39ddb; border-radius:12px; padding:10px 12px; cursor:pointer; }
+  .role.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role .r-n{ font-size:15px; color:#5e35b1; font-weight:bold; }
+  .role .r-t{ font-family:"KaiTi","STKaiti",serif; font-size:15px; color:#4e342e; margin-top:4px; line-height:1.75; }
+  .role .r-m{ font-size:12.5px; color:#8d6e63; margin-top:4px; line-height:1.6; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-y{ background:#e8f5e9; color:#2e7d32; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 思考面板 / 字幕 / 控制条 ===== */
+  #thinkPill{ display:none; margin:10px auto 0; width:max-content; max-width:96%; background:#ede7f6; color:#5e35b1;
+    border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; text-align:center; line-height:1.6; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:8px;
+    align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 14px; font-size:14px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff;
+    border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .para{ font-size:17.5px; padding:11px 12px; }
+    .zi-grid{ grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); }
+    .wc-grid{ grid-template-columns:1fr; }
+    .ctrl-bar button{ padding:8px 11px; font-size:13px; }
+    #cap{ bottom:110px; }
+    body{ padding-bottom:160px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#thinkPill{ display:none !important; } body{ padding-bottom:0; } }
+  /* 返回导航按钮（模板自带，新页无需再跑 add_back_button.py） */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); text-decoration:none; }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+  /* 字卡列数：桌面端按固定列排。auto-fill 在 1100px 宽下会算成 7 列，
+     8 个会写字就变成「7+1」、最后一张被拉成整行宽。 */
+  @media (min-width:601px){
+    #zinGrid{ grid-template-columns:repeat(6,1fr); }
+    #ziwGrid{ grid-template-columns:repeat(4,1fr); }
+  }
+</style>
+</head>
+<body>
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+<style>
+.p-sum{ font-family:sans-serif; font-size:13px; color:#00695c; background:#e0f2f1; border-left:4px solid #00897b; border-radius:6px; padding:5px 10px; margin:8px 0 0; line-height:1.7; }
+.p-sum b{ color:#c62828; }
+.sec-title .sn{ color:#00897b; }
+</style>
+<style>
+.p-sum{ font-family:sans-serif; font-size:13px; color:#00695c; background:#e0f2f1; border-left:4px solid #00897b; border-radius:6px; padding:5px 10px; margin:8px 0 0; line-height:1.7; }
+.p-sum b{ color:#c62828; }
+.sec-title .sn{ color:#00897b; }
+/* 字卡拼音用 ruby 显示（三年级课文正文不注音，仅字卡标音） */
+.zi .hz{ display:inline-block; }
+.tzg ruby{ font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; line-height:1.1; }
+.tzg rt{ font-size:11px; color:#c62828; }
+.zi ruby rt{ font-size:11px; color:#c62828; }
+</style>
+<style>
+.p-sum{ font-family:sans-serif; font-size:13px; color:#00695c; background:#e0f2f1; border-left:4px solid #00897b; border-radius:6px; padding:5px 10px; margin:8px 0 0; line-height:1.7; }
+.p-sum b{ color:#c62828; }
+.sec-title .sn{ color:#00897b; }
+/* 字卡拼音用 ruby 显示（三年级课文正文不注音，仅字卡标音） */
+.zi .hz{ display:inline-block; }
+.tzg ruby{ font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; line-height:1.1; }
+.tzg rt{ font-size:11px; color:#c62828; }
+.zi ruby rt{ font-size:11px; color:#c62828; }
+/* ===== 升级模块样式：素养目标 / 单元要素 / 默读 / 新鲜感 / 评价 / 小练笔 ===== */
+.lit-flag{ background:linear-gradient(135deg,#6a1b9a,#8e24aa); color:#fff; border-radius:12px; padding:12px 16px; margin-top:10px; font-size:15px; line-height:1.95; }
+.lit-flag b{ color:#ffe082; }
+.lit-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; margin-top:10px; }
+.lit-card{ background:#fff; border:1.5px solid #e1bee7; border-left:5px solid #8e24aa; border-radius:12px; padding:12px 14px; cursor:pointer; transition:border-color .2s,box-shadow .2s; }
+.lit-card:hover{ border-color:#ba68c8; box-shadow:0 2px 8px rgba(142,36,170,.12); }
+.lit-card.hl{ border-color:#ffb300; background:#fffde7; }
+.lit-ic{ font-size:20px; }
+.lit-h{ font-family:"Microsoft YaHei",sans-serif; font-size:15px; font-weight:bold; color:#6a1b9a; margin:4px 0; }
+.lit-d{ font-size:13px; color:#4e342e; line-height:1.85; }
+.silent{ background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; font-size:13.5px; line-height:1.9; color:#1b5e20; }
+.silent.hl{ border-color:#ffb300; background:#fffde7; }
+.silent b{ color:#c62828; }
+.fresh{ background:#fff; border:1.5px solid #ffe0b2; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; transition:border-color .2s,box-shadow .2s; }
+.fresh:hover{ border-color:#ffb74d; box-shadow:0 2px 8px rgba(255,152,0,.12); }
+.fresh.hl{ border-color:#ffb300; background:#fffde7; }
+.fresh-t{ font-size:15px; font-weight:bold; color:#e65100; margin-bottom:4px; }
+.fresh-c{ font-size:13.5px; color:#4e342e; line-height:1.85; }
+.fresh-c b{ color:#c62828; }
+.fresh-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:10px; margin-top:10px; }
+.fresh-intro{ font-size:13.5px; color:#5d4037; line-height:1.9; margin-top:8px; background:#fff; border:1px solid #ffe0b2; border-radius:10px; padding:10px 12px; }
+.rubric{ background:#fff; border:1.5px solid #b3e5fc; border-radius:12px; padding:12px 14px; margin-top:10px; }
+.rub-item{ font-size:13.5px; color:#014a5f; line-height:1.95; }
+.rub-item .star{ color:#ffb300; font-size:16px; }
+.pen{ background:#fff8e1; border:1.5px solid #ffd54f; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; font-size:13.5px; line-height:1.95; color:#5d4037; }
+.pen.hl{ border-color:#ffb300; background:#fffde7; }
+.pen b{ color:#c62828; }
+</style>
+<style>
+.p-sum{ font-family:sans-serif; font-size:13px; color:#00695c; background:#e0f2f1; border-left:4px solid #00897b; border-radius:6px; padding:5px 10px; margin:8px 0 0; line-height:1.7; }
+.p-sum b{ color:#c62828; }
+.sec-title .sn{ color:#00897b; }
+/* 字卡拼音用 ruby 显示（三年级课文正文不注音，仅字卡标音） */
+.zi .hz{ display:inline-block; }
+.tzg ruby{ font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; line-height:1.1; }
+.tzg rt{ font-size:11px; color:#c62828; }
+.zi ruby rt{ font-size:11px; color:#c62828; }
+/* ===== 升级模块样式：素养目标 / 单元要素 / 默读 / 新鲜感 / 评价 / 小练笔 ===== */
+.lit-flag{ background:linear-gradient(135deg,#6a1b9a,#8e24aa); color:#fff; border-radius:12px; padding:12px 16px; margin-top:10px; font-size:15px; line-height:1.95; }
+.lit-flag b{ color:#ffe082; }
+.lit-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; margin-top:10px; }
+.lit-card{ background:#fff; border:1.5px solid #e1bee7; border-left:5px solid #8e24aa; border-radius:12px; padding:12px 14px; cursor:pointer; transition:border-color .2s,box-shadow .2s; }
+.lit-card:hover{ border-color:#ba68c8; box-shadow:0 2px 8px rgba(142,36,170,.12); }
+.lit-card.hl{ border-color:#ffb300; background:#fffde7; }
+.lit-ic{ font-size:20px; }
+.lit-h{ font-family:"Microsoft YaHei",sans-serif; font-size:15px; font-weight:bold; color:#6a1b9a; margin:4px 0; }
+.lit-d{ font-size:13px; color:#4e342e; line-height:1.85; }
+.silent{ background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; font-size:13.5px; line-height:1.9; color:#1b5e20; }
+.silent.hl{ border-color:#ffb300; background:#fffde7; }
+.silent b{ color:#c62828; }
+.fresh{ background:#fff; border:1.5px solid #ffe0b2; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; transition:border-color .2s,box-shadow .2s; }
+.fresh:hover{ border-color:#ffb74d; box-shadow:0 2px 8px rgba(255,152,0,.12); }
+.fresh.hl{ border-color:#ffb300; background:#fffde7; }
+.fresh-t{ font-size:15px; font-weight:bold; color:#e65100; margin-bottom:4px; }
+.fresh-c{ font-size:13.5px; color:#4e342e; line-height:1.85; }
+.fresh-c b{ color:#c62828; }
+.fresh-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:10px; margin-top:10px; }
+.fresh-intro{ font-size:13.5px; color:#5d4037; line-height:1.9; margin-top:8px; background:#fff; border:1px solid #ffe0b2; border-radius:10px; padding:10px 12px; }
+.rubric{ background:#fff; border:1.5px solid #b3e5fc; border-radius:12px; padding:12px 14px; margin-top:10px; }
+.rub-item{ font-size:13.5px; color:#014a5f; line-height:1.95; }
+.rub-item .star{ color:#ffb300; font-size:16px; }
+.pen{ background:#fff8e1; border:1.5px solid #ffd54f; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; font-size:13.5px; line-height:1.95; color:#5d4037; }
+.pen.hl{ border-color:#ffb300; background:#fffde7; }
+.pen b{ color:#c62828; }
+/* ===== 教材插图放大展示（图片精美，适当体现，不增加使用难度） ===== */
+.pic-grid{ grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+.pic-card{ box-shadow:0 2px 10px rgba(62,39,35,.10); }
+</style>
+<style>
+.p-sum{ font-family:sans-serif; font-size:13px; color:#00695c; background:#e0f2f1; border-left:4px solid #00897b; border-radius:6px; padding:5px 10px; margin:8px 0 0; line-height:1.7; }
+.p-sum b{ color:#c62828; }
+.sec-title .sn{ color:#00897b; }
+.zi .hz{ display:inline-block; }
+.zi ruby{ display:inline-block; }
+.tzg ruby{ font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; line-height:1.1; }
+.tzg rt{ font-size:11px; color:#c62828; }
+.zi ruby rt{ font-size:11px; color:#c62828; }
+.lit-flag{ background:linear-gradient(135deg,#6a1b9a,#8e24aa); color:#fff; border-radius:12px; padding:12px 16px; margin-top:10px; font-size:15px; line-height:1.95; }
+.lit-flag b{ color:#ffe082; }
+.lit-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; margin-top:10px; }
+.lit-card{ background:#fff; border:1.5px solid #e1bee7; border-left:5px solid #8e24aa; border-radius:12px; padding:12px 14px; cursor:pointer; transition:border-color .2s,box-shadow .2s; }
+.lit-card:hover{ border-color:#ba68c8; box-shadow:0 2px 8px rgba(142,36,170,.12); }
+.lit-card.hl{ border-color:#ffb300; background:#fffde7; }
+.lit-ic{ font-size:20px; }
+.lit-h{ font-family:"Microsoft YaHei",sans-serif; font-size:15px; font-weight:bold; color:#6a1b9a; margin:4px 0; }
+.lit-d{ font-size:13px; color:#4e342e; line-height:1.85; }
+.silent{ background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; font-size:13.5px; line-height:1.9; color:#1b5e20; }
+.silent.hl{ border-color:#ffb300; background:#fffde7; }
+.silent b{ color:#c62828; }
+.fresh{ background:#fff; border:1.5px solid #ffe0b2; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; transition:border-color .2s,box-shadow .2s; }
+.fresh:hover{ border-color:#ffb74d; box-shadow:0 2px 8px rgba(255,152,0,.12); }
+.fresh.hl{ border-color:#ffb300; background:#fffde7; }
+.fresh-t{ font-size:15px; font-weight:bold; color:#e65100; margin-bottom:4px; }
+.fresh-c{ font-size:13.5px; color:#4e342e; line-height:1.85; }
+.fresh-c b{ color:#c62828; }
+.fresh-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:10px; margin-top:10px; }
+.fresh-intro{ font-size:13.5px; color:#5d4037; line-height:1.9; margin-top:8px; background:#fff; border:1px solid #ffe0b2; border-radius:10px; padding:10px 12px; }
+.rubric{ background:#fff; border:1.5px solid #b3e5fc; border-radius:12px; padding:12px 14px; margin-top:10px; }
+.rub-item{ font-size:13.5px; color:#014a5f; line-height:1.95; }
+.rub-item .star{ color:#ffb300; font-size:16px; }
+.pen{ background:#fff8e1; border:1.5px solid #ffd54f; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; font-size:13.5px; line-height:1.95; color:#5d4037; }
+.pen.hl{ border-color:#ffb300; background:#fffde7; }
+.pen b{ color:#c62828; }
+.pic-grid{ grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+.pic-card{ box-shadow:0 2px 10px rgba(62,39,35,.10); }
+.pic-card.wide{ grid-column:1/-1; }
+</style>
+  <div class="page-head">
+    <h1>🏞 语文园地八 · 有声图文学习页</h1>
+    <p>统编版语文 · 第八单元 · 课本 P107~108 · 素养升级版（对标 2022 课标第二学段）</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">板块内容 <b>6</b> 段</span>
+    <span class="stat">素养目标 <b>4</b></span>
+    <span class="stat">会认字 <b>6</b></span>
+    <span class="stat">会写字 <b>8</b></span>
+    <span class="stat">听写词 <b>12</b></span>
+    <span class="stat">近义词 <b>4</b> 组</span>
+    <span class="stat">深入理解 <b>8</b> 题</span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 语文园地这样学（可随时点任意一句、一个字、一个词单独听）：</b><br>
+    <b>① 梳理与交流</b>——默读的三个好做法（教材三气泡照录）。<br>
+    <b>② 识字加油站</b>——目字族：睁、瞪、瞅、眶、呆、睹；田字格 8 个字。<br>
+    <b>③ 词句段运用</b>——陆续、继续、连续能不能互换？再帮志愿者列一份读书交流会清单。<br>
+    <b>④ 日积月累</b>——三句名言，读一读、背一背。<br>
+    <b>⑤ 深入理解</b>——8 道题，把园地的本领练扎实。<br>
+    <b>🌟 默读三诀（本单元收官）：不出声不指读不动唇；随读随画记问题；带着问题边读边想。</b>
+  </div>
+  <div class="sec-title"><span class="bar"></span>🌟 板块素养目标（对标 2022 课标 · 第二学段）</div>
+  <div class="lit-flag">
+    📌 <b>本单元语文要素——单元导语（P95 照录）：美好的品质，犹如温暖的阳光，带给我们希望和力量；阅读：学习带着问题默读，理解课文内容；习作：学写一件简单的事。</b><br>
+    📐 对标 2022 课标第二学段：初步学会默读，不出声、不指读；能不拘形式地写下自己的见闻、感受和想法；乐于与人交流，讲述见闻清楚完整。
+  </div>
+  <div class="lit-grid">
+    <div class="lit-card" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="🀄 文化自信。诵读《论语》《墨子》《荀子》三句名言，感受中华优秀传统文化中立志、守信、坚持的力量。">
+      <div class="lit-ic">🀄 文化自信</div><div class="lit-h">🀄 文化自信</div><div class="lit-d">诵读《论语》《墨子》《荀子》三句名言，感受中华优秀传统文化中立志、守信、坚持的力量。</div>
+    </div>
+    <div class="lit-card" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="🗣 语言运用。交流默读的好做法；认识目字族 6 个生字、会写 8 个字；辨析陆续、继续、连续，学着列一份清单。">
+      <div class="lit-ic">🗣 语言运用</div><div class="lit-h">🗣 语言运用</div><div class="lit-d">交流默读的好做法；认识目字族 6 个生字、会写 8 个字；辨析陆续、继续、连续，学着列一份清单。</div>
+    </div>
+    <div class="lit-card" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="💡 思维能力。发现目字旁的字大多与看有关；判断三个加点词语能否互换，说出理由。">
+      <div class="lit-ic">💡 思维能力</div><div class="lit-h">💡 思维能力</div><div class="lit-d">发现目字旁的字大多与看有关；判断三个加点词语能否互换，说出理由。</div>
+    </div>
+    <div class="lit-card" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="🎨 审美创造。把默读的好方法变成自己的读书本领，把名言读进心里、用在身上。">
+      <div class="lit-ic">🎨 审美创造</div><div class="lit-h">🎨 审美创造</div><div class="lit-d">把默读的好方法变成自己的读书本领，把名言读进心里、用在身上。</div>
+    </div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>① 听读板块内容（点哪一句，读哪一句）<span class="sec-note">点段前的 ①②③ 听整段</span></div>
+
+  <div class="tool-row">
+    <button type="button" class="tool-btn" id="btnFollow">🔁 跟读模式：关</button>
+    <button type="button" class="tool-btn" id="btnPy">👁 隐藏注音（自测用）</button>
+    <span class="sec-note">词语卡上的拼音标的是易错音，读音供参考</span>
+  </div>
+
+  <div class="req-card" id="req1" data-say="园地学习要求：一，梳理与交流：你在默读文章时有什么好的做法？和同学交流。二，识字加油站：认识目字族的生字，读记词语，学写田字格里的八个字。三，词句段运用：说说加点的词语是否可以互相调换，再选择一个词语写一句话；帮志愿者列一份读书交流会物品清单。四，日积月累：读一读，背一背三句名言。">
+    🎤 <b>园地学习要求（教材标准）</b><br>
+    ① <b>梳理与交流</b>：你在默读文章时有什么好的做法？和同学交流；<br>
+    ② <b>识字加油站</b>：认识目字族生字，读记词语，学写田字格 8 个字；<br>
+    ③ <b>词句段运用</b>：加点词语能否互换？再列一份读书交流会清单；<br>
+    ④ <b>日积月累</b>：读一读，背一背三句名言。
+  </div>
+
+
+  <div class="silent" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="园地小提示：第一步，交流默读好做法，说出你自己的经验。第二步，发现目字族的秘密：目字旁的字大多和看有关。第三步，辨析陆续、继续、连续，各写一句话。第四步，按类别列清单，一件不漏。第五步，把三句名言读熟背下，挑一句做座右铭。">
+    💡 <b>园地小提示（五步走）</b><br>
+    第一步 <b>交流默读</b>——说出你的好做法；<b>第二步 发现秘密</b>——目字旁的字大多和看有关；<b>第三步 辨词语</b>——陆续、继续、连续各写一句；<b>第四步 列清单</b>——按类别一件不漏；<b>第五步 背名言</b>——挑一句做座右铭。<br>
+    交流别人的好方法，变成自己的真本领。
+  </div>
+
+
+  <div class="para" id="p①" data-say="你在默读文章时有什么好的做法？和同学交流。">
+    <span class="no" title="听这一整段">①</span>
+    <span class="sent" data-say="你在默读文章时有什么好的做法？和同学交流。" data-tip="梳理与交流导语照录——本单元练了一路的默读，现在轮到你分享好方法。">你在默读文章时有什么好的做法？和同学交流。</span>
+    <div class="p-sum">📌 这一段讲：梳理与交流导语（照录）：你在默读文章时有什么好的做法？和同学交流。</div>
+  </div>
+  <div class="para" id="p②" data-say="默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度。我默读时，会随时把不认识的字、不理解的词语画出来，读完后冉想办法弄清楚它们的意思。我会带着问题默读。一边读一边思考，能帮助我更好地理解内容。没读懂的地方我会标记出来，联系上下文进一步思考，或者向别人请教。">
+    <span class="no" title="听这一整段">②</span>
+    <span class="sent" data-say="默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度。" data-tip="气泡一（照录）——三个不要：不出声、不指读、不动唇。">默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度。</span>
+    <span class="sent" data-say="我默读时，会随时把不认识的字、不理解的词语画出来，读完后冉想办法弄清楚它们的意思。" data-tip="气泡二（照录）——随读随画：不认识的字、不理解的词画出来，读完再弄懂。">我默读时，会随时把不认识的字、不理解的词语画出来，读完后冉想办法弄清楚它们的意思。</span>
+    <span class="sent" data-say="我会带着问题默读。一边读一边思考，能帮助我更好地理解内容。没读懂的地方我会标记出来，联系上下文进一步思考，或者向别人请教。" data-tip="气泡三（照录）——带着问题读、边读边想，没读懂的标记出来，联系上下文思考或向别人请教——正好用上本单元学的本领。">我会带着问题默读。一边读一边思考，能帮助我更好地理解内容。没读懂的地方我会标记出来，联系上下文进一步思考，或者向别人请教。</span>
+    <div class="p-sum">📌 这一段讲：默读三个好做法（教材三气泡照录）：不出声不指读不动唇；随读随画，读完再弄懂；带着问题边读边想，标记后联系上下文思考或向别人请教。</div>
+  </div>
+  <div class="para" id="p③" data-say="怒目圆睁眨眼眼眶目瞪口呆耳闻目睹">
+    <span class="no" title="听这一整段">③</span>
+    <span class="sent" data-say="怒目圆睁" data-tip="睁——两眼瞪得大大的，露出怒气，读的时候咬字有力。">怒目圆睁</span>
+    <span class="sent" data-say="眨眼" data-tip="眨——眼皮一开一合，读得轻快。">眨眼</span>
+    <span class="sent" data-say="眼眶" data-tip="眶——眼睛的外围，含泪的时候眼眶会发热。">眼眶</span>
+    <span class="sent" data-say="目瞪口呆" data-tip="瞪、呆——瞪着眼说不出话，形容又吃惊又发愣。">目瞪口呆</span>
+    <span class="sent" data-say="耳闻目睹" data-tip="睹——亲眼听到、亲眼看到，闻是听、睹是看。">耳闻目睹</span>
+    <div class="p-sum">📌 这一段讲：识字加油站（目字族词语照录）：怒目圆睁、眨眼、眼眶、目瞪口呆、耳闻目睹——目字旁的字大多和看有关。</div>
+  </div>
+  <div class="para" id="p④" data-say="读下面的句子，说说加点的词语是否可以互相调换，再选择一个词语写一句话。我军的伤员陆续从火线上抬下来。白求恩低下头，继续给伤员做手术。白求恩大夫在手术台旁，连续工作了六十九个小时。">
+    <span class="no" title="听这一整段">④</span>
+    <span class="sent" data-say="读下面的句子，说说加点的词语是否可以互相调换，再选择一个词语写一句话。" data-tip="题目照录——加点词语：陆续、继续、连续。">读下面的句子，说说加点的词语是否可以互相调换，再选择一个词语写一句话。</span>
+    <span class="sent" data-say="我军的伤员陆续从火线上抬下来。" data-tip="菱形句一（照录）——陆续：前前后后、断断续续，一个接一个。">我军的伤员陆续从火线上抬下来。</span>
+    <span class="sent" data-say="白求恩低下头，继续给伤员做手术。" data-tip="菱形句二（照录）——继续：停一下之后再接着做。">白求恩低下头，继续给伤员做手术。</span>
+    <span class="sent" data-say="白求恩大夫在手术台旁，连续工作了六十九个小时。" data-tip="菱形句三（照录）——连续：中间不间断，一口气做下去。">白求恩大夫在手术台旁，连续工作了六十九个小时。</span>
+    <div class="p-sum">📌 这一段讲：词句段运用一（照录）：陆续、继续、连续能否互换？伤员陆续抬下来；低下头继续做手术；连续工作六十九个小时。</div>
+  </div>
+  <div class="para" id="p⑤" data-say="社区要开读书交流会，需要提前准备哪些物品？请你帮志愿者列一份清单。书籍。文具。设备。">
+    <span class="no" title="听这一整段">⑤</span>
+    <span class="sent" data-say="社区要开读书交流会，需要提前准备哪些物品？请你帮志愿者列一份清单。" data-tip="题目照录——列清单要按类别分，一条一条列清楚。">社区要开读书交流会，需要提前准备哪些物品？请你帮志愿者列一份清单。</span>
+    <span class="sent" data-say="书籍。" data-tip="清单第一类照录——书籍：故事书、绘本、字典……">书籍：</span>
+    <span class="sent" data-say="文具。" data-tip="清单第二类照录——文具：笔、本子、姓名贴……">文具：</span>
+    <span class="sent" data-say="设备。" data-tip="清单第三类照录——设备：话筒、音响、桌椅……">设备：</span>
+    <div class="p-sum">📌 这一段讲：词句段运用二（照录）：帮志愿者列读书交流会物品清单——书籍、文具、设备，还可以补充自己的类别。</div>
+  </div>
+  <div class="para" id="p⑥" data-say="士不可以不弘毅，任重而道远。志不强者智不达，言不信者行不果。锲而舍之，朽木不折；锲而不舍，金石可镂。">
+    <span class="no" title="听这一整段">⑥</span>
+    <span class="sent" data-say="士不可以不弘毅，任重而道远。" data-tip="第一句照录——读书人要刚强有毅力，因为责任重大，路途遥远。出自论语。">士不可以不弘毅，任重而道远。——《论语》</span>
+    <span class="sent" data-say="志不强者智不达，言不信者行不果。" data-tip="第二句照录——志向不坚定的人智慧就达不到；说话不守信用的人做事就不会有结果。出自墨子。">志不强者智不达，言不信者行不果。——《墨子》</span>
+    <span class="sent" data-say="锲而舍之，朽木不折；锲而不舍，金石可镂。" data-tip="第三句照录——刻几下就放弃，朽木也刻不断；坚持不停地刻，金石也能雕刻成功。出自荀子——注意锲而不舍的锲，就是第24课注释里作者张锲的锲。">锲而舍之，朽木不折；锲而不舍，金石可镂。——《荀子》</span>
+    <div class="p-sum">📌 这一段讲：日积月累（三句名言照录）：士不可以不弘毅，任重而道远（《论语》）；志不强者智不达，言不信者行不果（《墨子》）；锲而舍之，朽木不折，锲而不舍，金石可镂（《荀子》）。</div>
+  </div>
+
+  <div id="thinkPill">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+  <div class="sec-title"><span class="bar"></span>课本的样子（点一张图，听读这一页）</div>
+  <div class="pic-grid">
+  <div class="pic-card wide" id="pic1" data-say="课本第 107 页 ， 梳理与交流 ， 识字加油站（双页左）。">
+      <img src="images/106b-课本第106-107页-习作那次经历真难忘与语文园地八-双页.jpg" alt="课本第 107 页 · 梳理与交流 · 识字加油站（双页左）">
+      <div class="cap">第 107 页 · 梳理与交流 · 识字加油站（双页左）</div>
+    </div>
+  <div class="pic-card" id="pic2" data-say="课本第 108 页 ， 词句段运用 ， 日积月累。">
+      <img src="images/108a-课本第108页-语文园地八词句段运用与日积月累.png" alt="课本第 108 页 · 词句段运用 · 日积月累">
+      <div class="cap">第 108 页 · 词句段运用 · 日积月累</div>
+    </div>
+  </div>
+  <div class="img-tip">📖 人教版《语文》三年级上册 · 课本第 107~108 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+  <div class="sec-title"><span class="bar"></span>🔤 词语加油站（易错音词语 6 个）<span class="sec-note">点一张卡，听读音和词语（提示为通用规范，供参考）</span></div>
+  <div class="zi-grid" id="zinGrid">
+    <div class="zi" data-say="睁，怒目圆睁的睁，目字旁。眼睛睁得大大的，露出怒气。"><ruby>睁<rt>zhēng</rt></ruby><div class="ci">怒目圆睁</div></div>
+    <div class="zi" data-say="瞪，目瞪口呆的瞪，目字旁。瞪大眼睛直发愣。"><ruby>瞪<rt>dèng</rt></ruby><div class="ci">目瞪口呆</div></div>
+    <div class="zi" data-say="瞅，瞅一瞅的瞅，目字旁。就是看一瞧的意思。"><ruby>瞅<rt>chǒu</rt></ruby><div class="ci">瞅一瞅</div></div>
+    <div class="zi" data-say="眶，眼眶的眶，目字旁加匡。眼睛的外围叫眼眶。"><ruby>眶<rt>kuàng</rt></ruby><div class="ci">眼眶</div></div>
+    <div class="zi" data-say="呆，目瞪口呆的呆。发愣的样子，口字上有木，像木头一样愣住。"><ruby>呆<rt>dāi</rt></ruby><div class="ci">目瞪口呆</div></div>
+    <div class="zi" data-say="睹，耳闻目睹的睹，目字旁。睹就是看见——闻是听，睹是看。"><ruby>睹<rt>dǔ</rt></ruby><div class="ci">耳闻目睹</div></div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>✍️ 会写一写（8 个）<span class="sec-note">结构、部首与书写提示为通用规范，供参考，以教材和老师的指导为准</span></div>
+  <div class="zi-grid" id="ziwGrid">
+    <div class="zi write" data-say="会写字睁，睁眼的睁。书写提示：目字旁写窄，右边的争字横画间距均匀，竖钩有力。">
+      <div class="tzg"><ruby>睁<rt>zhēng</rt></ruby></div><div class="ci">睁眼</div><div class="meta">左右 · 目 · 11画</div><div class="wtip">目字旁写窄，右边的争字横画间距均匀，竖钩有力。</div></div>
+    <div class="zi write" data-say="会写字眨，眨眼的眨。书写提示：目字旁要窄，右边的乏字先写撇，点不要丢。">
+      <div class="tzg"><ruby>眨<rt>zhǎ</rt></ruby></div><div class="ci">眨眼</div><div class="meta">左右 · 目 · 9画</div><div class="wtip">目字旁要窄，右边的乏字先写撇，点不要丢。</div></div>
+    <div class="zi write" data-say="会写字瞪，瞪眼的瞪。书写提示：目字旁窄长，右边的登字上宽下稳，豆字底横要长。">
+      <div class="tzg"><ruby>瞪<rt>dèng</rt></ruby></div><div class="ci">瞪眼</div><div class="meta">左右 · 目 · 17画</div><div class="wtip">目字旁窄长，右边的登字上宽下稳，豆字底横要长。</div></div>
+    <div class="zi write" data-say="会写字瞅，瞅一瞅的瞅。书写提示：左宽右窄，目字旁写正，右边的秋字撇捺舒展。">
+      <div class="tzg"><ruby>瞅<rt>chǒu</rt></ruby></div><div class="ci">瞅一瞅</div><div class="meta">左右 · 目 · 14画</div><div class="wtip">左宽右窄，目字旁写正，右边的秋字撇捺舒展。</div></div>
+    <div class="zi write" data-say="会写字怒，怒目的怒。书写提示：上面是奴，写紧凑；心字底要托稳，卧钩有力。">
+      <div class="tzg"><ruby>怒<rt>nù</rt></ruby></div><div class="ci">怒目</div><div class="meta">上下 · 心 · 9画</div><div class="wtip">上面是奴，写紧凑；心字底要托稳，卧钩有力。</div></div>
+    <div class="zi write" data-say="会写字眶，眼眶的眶。书写提示：目字旁窄，右边的匡字先横后里再竖折，最后封底。">
+      <div class="tzg"><ruby>眶<rt>kuàng</rt></ruby></div><div class="ci">眼眶</div><div class="meta">左右 · 目 · 11画</div><div class="wtip">目字旁窄，右边的匡字先横后里再竖折，最后封底。</div></div>
+    <div class="zi write" data-say="会写字呆，发呆的呆。书写提示：口字上提写小，木字横短撇捺舒展，竖写在正中。">
+      <div class="tzg"><ruby>呆<rt>dāi</rt></ruby></div><div class="ci">发呆</div><div class="meta">上下 · 口 · 7画</div><div class="wtip">口字上提写小，木字横短撇捺舒展，竖写在正中。</div></div>
+    <div class="zi write" data-say="会写字睹，目睹的睹。书写提示：目字旁写窄，右边的者字撇要长，日字底写扁。">
+      <div class="tzg"><ruby>睹<rt>dǔ</rt></ruby></div><div class="ci">目睹</div><div class="meta">左右 · 目 · 13画</div><div class="wtip">目字旁写窄，右边的者字撇要长，日字底写扁。</div></div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>③ 读一读，记一记（词语积累）<span class="sec-note">点一行，听读这一组词语</span></div>
+  <div class="word-row" id="w1" data-say="第1组，读一读记一记：睁眼、睁开、怒目圆睁。">
+    <span class="wk">睁</span><span class="ws">睁眼　睁开　怒目圆睁</span>
+  </div>
+  <div class="word-row" id="w2" data-say="第2组，读一读记一记：眼眶、眼眶发热。">
+    <span class="wk">眶</span><span class="ws">眼眶　眼眶发热</span>
+  </div>
+  <div class="word-row" id="w3" data-say="第3组，读一读记一记：发呆、目瞪口呆、呆住。">
+    <span class="wk">呆</span><span class="ws">发呆　目瞪口呆　呆住</span>
+  </div>
+  <div class="word-row" id="w4" data-say="第4组，读一读记一记：目睹、耳闻目睹、有目共睹。">
+    <span class="wk">睹</span><span class="ws">目睹　耳闻目睹　有目共睹</span>
+  </div>
+  <div class="sec-title"><span class="bar"></span>③ 听写（12 个词）<span class="sec-note">读两遍 → 你在纸上写 → 报答案 → 听示范句</span></div>
+  <div class="dict-panel">
+    <div class="dict-stage" id="dictStage">准备听写 · 共 12 个词</div>
+    <div class="dict-word mask" id="dictWord">○ ○ ○</div>
+    <div class="dict-hint" id="dictHint">点下面的「开始听写」，听到一个词就写一个词。</div>
+    <div class="dict-btns">
+      <button type="button" class="tool-btn" id="btnDictStart">▶ 开始听写</button>
+      <button type="button" class="tool-btn" id="btnDictAgain">🔁 再读一遍</button>
+      <button type="button" class="tool-btn" id="btnDictShow">👁 看答案</button>
+    </div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>③ 听写的词 · 造句示范<span class="sec-note">点词听读，点句子听示范句，再自己说一句</span></div>
+  <div class="wc-grid" id="wcGrid">
+    <div class="wc" id="wc1"><div class="w-top" data-say="怒目"><span class="w-no">1</span><span class="w-hz">怒目</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：他怒目圆睁，盯着捣乱的同学。">示范句：他怒目圆睁，盯着捣乱的同学。</div><div class="w-own" data-say="我也能说：谁怒目圆睁。">✏️ 我也能说：谁怒目圆睁。</div></div>
+    <div class="wc" id="wc2"><div class="w-top" data-say="睁眼"><span class="w-no">2</span><span class="w-hz">睁眼</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：清晨，我睁开眼睛。">示范句：清晨，我睁开眼睛。</div><div class="w-own" data-say="我也能说：谁睁眼。">✏️ 我也能说：谁睁眼。</div></div>
+    <div class="wc" id="wc3"><div class="w-top" data-say="眨眼"><span class="w-no">3</span><span class="w-hz">眨眼</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：小猫冲我眨了眨眼。">示范句：小猫冲我眨了眨眼。</div><div class="w-own" data-say="我也能说：谁眨眼。">✏️ 我也能说：谁眨眼。</div></div>
+    <div class="wc" id="wc4"><div class="w-top" data-say="瞪眼"><span class="w-no">4</span><span class="w-hz">瞪眼</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：别瞪眼，好好说。">示范句：别瞪眼，好好说。</div><div class="w-own" data-say="我也能说：谁瞪眼。">✏️ 我也能说：谁瞪眼。</div></div>
+    <div class="wc" id="wc5"><div class="w-top" data-say="眼眶"><span class="w-no">5</span><span class="w-hz">眼眶</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：听到这个消息，她的眼眶红了。">示范句：听到这个消息，她的眼眶红了。</div><div class="w-own" data-say="我也能说：谁的眼眶怎么样。">✏️ 我也能说：谁的眼眶怎么样。</div></div>
+    <div class="wc" id="wc6"><div class="w-top" data-say="发呆"><span class="w-no">6</span><span class="w-hz">发呆</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：他望着窗外发呆。">示范句：他望着窗外发呆。</div><div class="w-own" data-say="我也能说：谁在发呆。">✏️ 我也能说：谁在发呆。</div></div>
+    <div class="wc" id="wc7"><div class="w-top" data-say="目睹"><span class="w-no">7</span><span class="w-hz">目睹</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：我亲眼目睹了这感人的一幕。">示范句：我亲眼目睹了这感人的一幕。</div><div class="w-own" data-say="我也能说：谁目睹什么。">✏️ 我也能说：谁目睹什么。</div></div>
+    <div class="wc" id="wc8"><div class="w-top" data-say="陆续"><span class="w-no">8</span><span class="w-hz">陆续</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：我军的伤员陆续从火线上抬下来。">示范句：我军的伤员陆续从火线上抬下来。</div><div class="w-own" data-say="我也能说：谁陆续怎么样。">✏️ 我也能说：谁陆续怎么样。</div></div>
+    <div class="wc" id="wc9"><div class="w-top" data-say="继续"><span class="w-no">9</span><span class="w-hz">继续</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：白求恩低下头，继续给伤员做手术。">示范句：白求恩低下头，继续给伤员做手术。</div><div class="w-own" data-say="我也能说：谁继续做什么。">✏️ 我也能说：谁继续做什么。</div></div>
+    <div class="wc" id="wc10"><div class="w-top" data-say="连续"><span class="w-no">10</span><span class="w-hz">连续</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：白求恩连续工作了六十九个小时。">示范句：白求恩连续工作了六十九个小时。</div><div class="w-own" data-say="我也能说：谁连续做什么。">✏️ 我也能说：谁连续做什么。</div></div>
+    <div class="wc" id="wc11"><div class="w-top" data-say="书籍"><span class="w-no">11</span><span class="w-hz">书籍</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：读书交流会要准备书籍。">示范句：读书交流会要准备书籍。</div><div class="w-own" data-say="我也能说：准备什么。">✏️ 我也能说：准备什么。</div></div>
+    <div class="wc" id="wc12"><div class="w-top" data-say="清单"><span class="w-no">12</span><span class="w-hz">清单</span><span class="w-lab">积累词</span></div><div class="w-say" data-say="示范句：请你帮志愿者列一份物品清单。">示范句：请你帮志愿者列一份物品清单。</div><div class="w-own" data-say="我也能说：谁列什么。">✏️ 我也能说：谁列什么。</div></div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>③ 近义词辨析（4 组）<span class="sec-note">相同点 / 不一样在哪 / 各造一句</span></div>
+  <div class="near" id="n1" data-say="第1组：陆续 — 连续。相同点：都表示一个接一个。。不一样的地方：<b>陆续</b>是前前后后、有先有后，中间可以断；<b>连续</b>是中间不间断，一口气下去。。造句：陆续：伤员陆续从火线上抬下来。<br>连续：白求恩连续工作了六十九个小时。。">
+    <div class="n-top">陆续 — 连续</div>
+    <div class="n-same">相同：都表示一个接一个。</div>
+    <div class="n-diff">不一样：<b>陆续</b>是前前后后、有先有后，中间可以断；<b>连续</b>是中间不间断，一口气下去。</div>
+    <div class="n-eg">陆续：伤员陆续从火线上抬下来。<br>连续：白求恩连续工作了六十九个小时。</div>
+  </div>
+  <div class="near" id="n2" data-say="第2组：继续 — 接着。相同点：都表示停了之后再往下。。不一样的地方：<b>继续</b>稍正式，可带对象（继续做手术）；<b>接着</b>更口语，多用在前文衔接。。造句：继续：白求恩低下头，继续给伤员做手术。<br>接着：他讲完一个故事，接着又讲了一个。。">
+    <div class="n-top">继续 — 接着</div>
+    <div class="n-same">相同：都表示停了之后再往下。</div>
+    <div class="n-diff">不一样：<b>继续</b>稍正式，可带对象（继续做手术）；<b>接着</b>更口语，多用在前文衔接。</div>
+    <div class="n-eg">继续：白求恩低下头，继续给伤员做手术。<br>接着：他讲完一个故事，接着又讲了一个。</div>
+  </div>
+  <div class="near" id="n3" data-say="第3组：目睹 — 看见。相同点：都表示用眼睛看到。。不一样的地方：<b>目睹</b>是书面语，强调亲眼看到（常配耳闻）；<b>看见</b>是口语，日常都用。。造句：目睹：我亲眼目睹了这感人的一幕。<br>看见：我看见一只小鸟落在窗台。。">
+    <div class="n-top">目睹 — 看见</div>
+    <div class="n-same">相同：都表示用眼睛看到。</div>
+    <div class="n-diff">不一样：<b>目睹</b>是书面语，强调亲眼看到（常配耳闻）；<b>看见</b>是口语，日常都用。</div>
+    <div class="n-eg">目睹：我亲眼目睹了这感人的一幕。<br>看见：我看见一只小鸟落在窗台。</div>
+  </div>
+  <div class="near" id="n4" data-say="第4组：竖立 — 建立。相同点：字形相近，注意区分。。不一样的地方：<b>竖立</b>是物体直直立起（旗杆竖立）；<b>建立</b>是使形成、创立（建立友谊）。。造句：竖立：广场上竖立着一根旗杆。<br>建立：我和小明建立了深厚的友谊。。">
+    <div class="n-top">竖立 — 建立</div>
+    <div class="n-same">相同：字形相近，注意区分。</div>
+    <div class="n-diff">不一样：<b>竖立</b>是物体直直立起（旗杆竖立）；<b>建立</b>是使形成、创立（建立友谊）。</div>
+    <div class="n-eg">竖立：广场上竖立着一根旗杆。<br>建立：我和小明建立了深厚的友谊。</div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>③ 词语拓展（说一说，记一记）</div>
+  <div class="acc" id="a1" data-say="默读三不要：不出声、不指读、不动唇。">
+    <span class="a-t">默读三不要</span><span class="a-c">不出声　不指读　不动唇</span>
+  </div>
+  <div class="acc" id="a2" data-say="默读三要做：随读随画、带着问题边读边想、标记后联系上下文思考或向别人请教。">
+    <span class="a-t">默读三要做</span><span class="a-c">随读随画　带着问题边读边想　标记后联系上下文思考或向别人请教</span>
+  </div>
+  <div class="acc" id="a3" data-say="目字族词语：怒目圆睁、眨眼、眼眶、目瞪口呆、耳闻目睹。">
+    <span class="a-t">目字族词语</span><span class="a-c">怒目圆睁　眨眼　眼眶　目瞪口呆　耳闻目睹</span>
+  </div>
+  <div class="acc" id="a4" data-say="三句名言出处：《论语》弘毅任重、《墨子》志强言信、《荀子》锲而不舍。">
+    <span class="a-t">三句名言出处</span><span class="a-c">《论语》弘毅任重　《墨子》志强言信　《荀子》锲而不舍</span>
+  </div>
+  <div class="sec-title"><span class="bar"></span>🔍 园地八的六个收获（交流·识字·辨词·列清单·读名言）<span class="sec-note">点一张卡，听读这一条</span></div>
+  <div class="fresh-intro">语文园地是<b>单元的收获仓库</b>——把这一单元的默读本领、目字族识字、三兄弟词语和三句名言，一样一样装进书包。</div>
+  <div class="fresh-grid">
+    <div class="fresh" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="🤫 默读三不要：默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度——三条你都做到了吗？">
+      <div class="fresh-t">🤫 默读三不要</div><div class="fresh-c">默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度——三条你都做到了吗？</div>
+    </div>
+    <div class="fresh" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="✏️ 默读三要做：随读随画：不认识的字、不理解的词画出来，读完再弄懂；带着问题边读边想；没读懂的标记出来，联系上下文思考或向别人请教。">
+      <div class="fresh-t">✏️ 默读三要做</div><div class="fresh-c">随读随画：不认识的字、不理解的词画出来，读完再弄懂；带着问题边读边想；没读懂的标记出来，联系上下文思考或向别人请教。</div>
+    </div>
+    <div class="fresh" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="👀 目字族的秘密：睁、瞪、瞅、眶、睹都是目字旁，大多和眼睛、看有关——认字旁猜字义，一猜一个准。🌈 再找找还有哪些目字旁的字。">
+      <div class="fresh-t">👀 目字族的秘密</div><div class="fresh-c">睁、瞪、瞅、眶、睹都是目字旁，大多和眼睛、看有关——认字旁猜字义，一猜一个准。🌈 再找找还有哪些目字旁的字。</div>
+    </div>
+    <div class="fresh" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="🧩 陆续继续连续：陆续有先有后；继续停后再做；连续中间不停——对着教材三个菱形句读一读，差别就清楚了。再选一个词语写一句话。">
+      <div class="fresh-t">🧩 陆续继续连续</div><div class="fresh-c">陆续有先有后；继续停后再做；连续中间不停——对着教材三个菱形句读一读，差别就清楚了。再选一个词语写一句话。</div>
+    </div>
+    <div class="fresh" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="📋 清单小妙招：列清单按类别分：书籍、文具、设备……一类一类想，一条一条列，还要想想漏了什么——这就是做事有条理。">
+      <div class="fresh-t">📋 清单小妙招</div><div class="fresh-c">列清单按类别分：书籍、文具、设备……一类一类想，一条一条列，还要想想漏了什么——这就是做事有条理。</div>
+    </div>
+    <div class="fresh" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="📜 三句名言记心间：弘毅任重、志强言信、锲而不舍——挑一句抄下来做座右铭，说说你为什么选它。🌈 答案不唯一。">
+      <div class="fresh-t">📜 三句名言记心间</div><div class="fresh-c">弘毅任重、志强言信、锲而不舍——挑一句抄下来做座右铭，说说你为什么选它。🌈 答案不唯一。</div>
+    </div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>④ 深入理解（8 题 · 先想后看）<span class="sec-note">标「答案不唯一」的题，说得有道理都对</span></div>
+  <div class="qa" id="q1" data-ans="默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>默读三气泡里，“不要做”的是哪三件事？（照录）</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="qa" id="q2" data-ans="士不可以不弘毅，任重而道远出自《论语》；志不强者智不达，言不信者行不果出自《墨子》；锲而舍之，朽木不折，锲而不舍，金石可镂出自《荀子》。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>日积月累三句名言分别出自哪些书？（照录）</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">士不可以不弘毅，任重而道远出自《论语》；志不强者智不达，言不信者行不果出自《墨子》；锲而舍之，朽木不折，锲而不舍，金石可镂出自《荀子》。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="qa" id="q3" data-ans="不能随便调换：陆续是前前后后、有先有后（伤员陆续抬下来）；继续是停顿之后再接着做（低下头继续做手术）；连续是中间不间断（连续工作六十九个小时）——意思各有侧重，换了句子就不对了。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>词句段运用①：加点的陆续、继续、连续可以互相调换吗？说说理由。（照录题目）</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">不能随便调换：陆续是前前后后、有先有后（伤员陆续抬下来）；继续是停顿之后再接着做（低下头继续做手术）；连续是中间不间断（连续工作六十九个小时）——意思各有侧重，换了句子就不对了。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="qa" id="q4" data-ans="它们都是目字旁，大多和眼睛、看有关——认字先看偏旁，就能猜出字义的大方向；再联系词语（怒目圆睁、耳闻目睹）就记得牢。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>睁、瞪、瞅、眶、呆、睹有什么共同点？这能帮我们怎样认字？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">它们都是目字旁，大多和眼睛、看有关——认字先看偏旁，就能猜出字义的大方向；再联系词语（怒目圆睁、耳闻目睹）就记得牢。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="qa" id="q5" data-ans="按类别分：书籍类——故事书、绘本、字典；文具类——笔、本子、姓名贴；设备类——话筒、音响、桌椅；再补一类——水和小点心。🌈 类别分清、一条条列清楚就好。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>帮志愿者列读书交流会物品清单，你打算怎么列？（照录题目）</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">按类别分：书籍类——故事书、绘本、字典；文具类——笔、本子、姓名贴；设备类——话筒、音响、桌椅；再补一类——水和小点心。🌈 类别分清、一条条列清楚就好。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="qa" id="q6" data-ans="🌈 答案不唯一：陆续——放学了，同学们陆续走出校门；继续——休息了一会儿，我们继续写作业；连续——他连续三天得了满分。句子通顺、用词对位就对。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>选择陆续、继续、连续中的一个词语写一句话。（照录要求）</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">🌈 答案不唯一：陆续——放学了，同学们陆续走出校门；继续——休息了一会儿，我们继续写作业；连续——他连续三天得了满分。句子通顺、用词对位就对。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="qa" id="q7" data-ans="刻几下就放弃，连朽木也刻不断；坚持不停地刻，金石也能雕刻成功——让我想到童第周（基础差不放弃，终于赶上来）和白求恩（连续工作六十九个小时）。🌈 意思对、联系课文有理都算对。">
+    <div class="qa-head" onclick="askQA('q7')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>用自己的话说说“锲而舍之，朽木不折；锲而不舍，金石可镂”的意思，再说说它让你想到本单元的谁。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">刻几下就放弃，连朽木也刻不断；坚持不停地刻，金石也能雕刻成功——让我想到童第周（基础差不放弃，终于赶上来）和白求恩（连续工作六十九个小时）。🌈 意思对、联系课文有理都算对。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="qa" id="q8" data-ans="🌈 答案不唯一：如选锲而不舍，金石可镂——因为它提醒我做事要坚持；选志不强者智不达——因为志向坚定，本领才长得大。说出名言、讲清理由就好。">
+    <div class="qa-head" onclick="askQA('q8')">
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>三句名言里，你最想把哪一句做座右铭？为什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">🌈 答案不唯一：如选锲而不舍，金石可镂——因为它提醒我做事要坚持；选志不强者智不达——因为志向坚定，本领才长得大。说出名言、讲清理由就好。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>⑤ 语文园地八的五件事（按顺序听一听）</div>
+  <div class="grow">
+    <div class="gstep" id="g1" data-say="第1步：默读三不要、三要做，和同学交流好做法。">
+      <div class="n">1</div><div class="t">交流默读</div></div>
+    <div class="gstep" id="g2" data-say="第2步：睁瞪瞅眶呆睹，认目字旁，写田字格八字。">
+      <div class="n">2</div><div class="t">目字识字</div></div>
+    <div class="gstep" id="g3" data-say="第3步：陆续、继续、连续，不能随便互换。">
+      <div class="n">3</div><div class="t">辨析词语</div></div>
+    <div class="gstep" id="g4" data-say="第4步：读书交流会物品清单，按类别一条条列。">
+      <div class="n">4</div><div class="t">学列清单</div></div>
+    <div class="gstep" id="g5" data-say="第5步：三句名言读熟背下，挑一句做座右铭。">
+      <div class="n">5</div><div class="t">积累名言</div></div>
+  </div>
+  <div class="bubble">💬 学习支架：<b>先</b>交流默读好做法 → <b>再</b>认目字族 → <b>接着</b>辨陆续继续连续 → <b>然后</b>学列清单 → <b>最后</b>背三句名言。</div>
+
+  <div class="sec-title"><span class="bar"></span>⑤ 分角色朗读 / 示范讲述<span class="sec-note">点一个角色，听他（她）说的话</span></div>
+  <div class="role-grid">
+    <div class="role" id="r1" data-role="小主持人" data-lines="欢迎来到语文园地收获交流会！今天我们晒一晒第八单元的收获：默读好做法、目字族、三兄弟词语，还有三句名言。">
+      <div class="r-n">🎭 小主持人</div>
+      <div class="r-t">欢迎来到语文园地收获交流会！今天我们晒一晒第八单元的收获：默读好做法、目字族、三兄弟词语，还有三句名言。</div>
+      <div class="r-m">💬 要读得<b>自然、有味</b>，像真的在开收获交流会</div>
+    </div>
+    <div class="role" id="r2" data-role="默读分享员" data-lines="我默读时，会随时把不认识的字、不理解的词语画出来，读完后冉想办法弄清楚它们的意思；我还会带着问题默读，一边读一边思考。">
+      <div class="r-n">🎭 默读分享员</div>
+      <div class="r-t">我默读时，会随时把不认识的字、不理解的词语画出来，读完后冉想办法弄清楚它们的意思；我还会带着问题默读，一边读一边思考。</div>
+      <div class="r-m">💬 要读得<b>自然、有味</b>，像真的在开收获交流会</div>
+    </div>
+    <div class="role" id="r3" data-role="识字小达人" data-lines="目字族的秘密我知道：睁、瞪、瞅、眶、睹都是目字旁，大多和看有关——怒目圆睁、目瞪口呆、耳闻目睹，一起读！">
+      <div class="r-n">🎭 识字小达人</div>
+      <div class="r-t">目字族的秘密我知道：睁、瞪、瞅、眶、睹都是目字旁，大多和看有关——怒目圆睁、目瞪口呆、耳闻目睹，一起读！</div>
+      <div class="r-m">💬 要读得<b>自然、有味</b>，像真的在开收获交流会</div>
+    </div>
+    <div class="role" id="r4" data-role="名言领读员" data-lines="士不可以不弘毅，任重而道远；锲而不舍，朽木不折；锲而不舍，金石可镂——跟我读，声音要坚定！">
+      <div class="r-n">🎭 名言领读员</div>
+      <div class="r-t">士不可以不弘毅，任重而道远；锲而不舍，朽木不折；锲而不舍，金石可镂——跟我读，声音要坚定！</div>
+      <div class="r-m">💬 要读得<b>自然、有味</b>，像真的在开收获交流会</div>
+    </div>
+    <div class="role" id="r5" data-role="旁白" data-lines="语文园地是收获的仓库——把好方法、新汉字、好词语、好句子都收进书包，下一单元再见！">
+      <div class="r-n">🎭 旁白</div>
+      <div class="r-t">语文园地是收获的仓库——把好方法、新汉字、好词语、好句子都收进书包，下一单元再见！</div>
+      <div class="r-m">💬 要读得<b>自然、有味</b>，像真的在开收获交流会</div>
+    </div>
+  </div>
+  <div class="sec-title"><span class="bar"></span>📋 学习评价（素养达成自评）<span class="sec-note">每题给自己打 1~3 颗星</span></div>
+  <div class="rubric">
+    <div class="rub-item">1. 我能说出默读的三个好做法，并用在读书上。 <span class="star">☆ ☆ ☆</span></div>
+    <div class="rub-item">2. 我能认读目字族 6 个生字，规范书写田字格 8 个字。 <span class="star">☆ ☆ ☆</span></div>
+    <div class="rub-item">3. 我能辨析陆续、继续、连续，选词写一句话。 <span class="star">☆ ☆ ☆</span></div>
+    <div class="rub-item">4. 我能按类别列一份物品清单，一条不漏。 <span class="star">☆ ☆ ☆</span></div>
+    <div class="rub-item">5. 我能背诵三句名言，说出自己最喜欢的一句和理由。 <span class="star">☆ ☆ ☆</span></div>
+  </div>
+  <div class="pen" onclick="hl(this);speak(this.getAttribute('data-say')||this.textContent).then(function(){unhl();})" data-say="小练笔：读下面的句子，说说加点的词语是否可以互相调换，再选择一个词语写一句话。写完和同桌交换，看看他写的句子用词对不对。也可以把三句名言抄下来，挑一句做座右铭，写一写你为什么选它。">
+    ✍️ <b>小练笔</b>（照词句段运用要求）：读三个菱形句，说说加点词语能否互换，再<b>选择一个词语写一句话</b>。<br>
+    写完和同桌交换，看看用词对不对。<br>
+    💡 也可以把三句名言<b>抄下来</b>，挑一句<b>做座右铭</b>，写一写你为什么选它。
+  </div>
+  </div>
+
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 听读课文</button>
+  <button type="button" id="btnStep2">② 学字词</button>
+  <button type="button" id="btnStep3">③ 词语·听写</button>
+  <button type="button" id="btnStep4">④ 深入理解</button>
+  <button type="button" id="btnStep5">⑤ 讲故事·分角色</button>
+  <button type="button" id="btnStop" class="stop">⏹ 停止</button>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+var follow=false;          /* 跟读模式 */
+var dictSkip=false;        /* 听写「看答案」提前揭晓 */
+
+/* 可被「停止」打断的等待（每 80ms 检查一次 abort / 外部条件） */
+function wait(ms, check){
+  return new Promise(function(res){
+    var t0=Date.now();
+    var id=setInterval(function(){
+      if(abort || (check && check()) || Date.now()-t0>=ms){ clearInterval(id); res(); }
+    },80);
+  });
+}
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+
+/* 文本安全清洗（iOS Safari：以 < 开头、以 > 结尾且含中文 → TTS 彻底卡死） */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 语音就绪 + 手势解锁（移动端必需） */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+/* 朗读引擎（watchdog 兜底：引擎还在说就继续等，不用固定时长硬切） */
+function speak(text){
+  text=__safeText(text);
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.82; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考面板（课文区共用），点一下可跳过；tip 模式只显示不倒计时 */
+var tipPill=document.getElementById('thinkPill');
+function showTip(txt){
+  tipPill.textContent='💡 '+txt+'（点我听）';
+  tipPill.style.display='block';
+  tipPill.onclick=function(){ speak(txt); };
+}
+function hideTip(){ tipPill.style.display='none'; tipPill.onclick=null; }
+function imgThinkWait(tip){
+  return new Promise(function(resolve){
+    var secs=parseInt(tipPill.getAttribute('data-secs'))||8;
+    tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    tipPill.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); hideTip(); resolve(); return; }
+      tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    },1000);
+    tipPill.onclick=function(){ clearInterval(t); hideTip(); resolve(); };
+  });
+}
+/* 题目卡内倒计时 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  document.getElementById('imgAnsBox').textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= ① 听读课文 ================= */
+/* 每句一个朗读单元；think/ans 挂在句子后面，读到关键处停下来让学生先想 */
+var stepsRead=[
+  {id:'s1', say:'你在默读文章时有什么好的做法？和同学交流。'},
+  {id:'s2', say:'默读的时候不要发出声音，不要指读，也不要动唇，否则会影响阅读速度。', think:'默读三气泡里，哪些是“不要做”的？哪些是“要做”的？', ans:'不要做的：发出声音、指读、动唇——它们都会拖慢速度；要做的：随读随画、带着问题边读边想、标记后联系上下文思考或向别人请教。'},
+  {id:'s3', say:'我默读时，会随时把不认识的字、不理解的词语画出来，读完后冉想办法弄清楚它们的意思。'},
+  {id:'s4', say:'我会带着问题默读。一边读一边思考，能帮助我更好地理解内容。没读懂的地方我会标记出来，联系上下文进一步思考，或者向别人请教。'},
+  {id:'s5', say:'怒目圆睁', think:'睁、瞪、瞅、睹这些字有什么共同的秘密？', ans:'它们都是目字旁，大多和眼睛、看有关——怒目圆睁是瞪眼看、瞅是瞧、目睹是亲眼看到。认字旁就能猜字义。'},
+  {id:'s6', say:'眨眼'},
+  {id:'s7', say:'眼眶'},
+  {id:'s8', say:'目瞪口呆'},
+  {id:'s9', say:'耳闻目睹'},
+  {id:'s10', say:'读下面的句子，说说加点的词语是否可以互相调换，再选择一个词语写一句话。'},
+  {id:'s11', say:'我军的伤员陆续从火线上抬下来。', think:'陆续、继续、连续可以互相调换吗？', ans:'不能随便换：伤员陆续抬下来是前前后后一个接一个；低下头继续做手术是停了之后再接着做；连续工作六十九个小时是中间一直没停——它们的意思各有侧重。'},
+  {id:'s12', say:'白求恩低下头，继续给伤员做手术。'},
+  {id:'s13', say:'白求恩大夫在手术台旁，连续工作了六十九个小时。'},
+  {id:'s14', say:'社区要开读书交流会，需要提前准备哪些物品？请你帮志愿者列一份清单。'},
+  {id:'s15', say:'书籍。'},
+  {id:'s16', say:'文具。'},
+  {id:'s17', say:'设备。'},
+  {id:'s18', say:'士不可以不弘毅，任重而道远。'},
+  {id:'s19', say:'志不强者智不达，言不信者行不果。'},
+  {id:'s20', say:'锲而舍之，朽木不折；锲而不舍，金石可镂。', think:'“锲而不舍，金石可镂”让你想到谁？', ans:'想到童第周：基础差不放弃，夜灯下苦读终于赶上来；想到白求恩：连续工作六十九个小时不休息——坚持到底，金石也能雕成。'},
+];
+
+
+
+
+
+
+/* 给课文里的每个句子编上 id（s1…s14），顺序与 stepsRead 一致 */
+(function(){
+  var sents=document.querySelectorAll('.para .sent');
+  for(var i=0;i<sents.length && i<stepsRead.length;i++){ sents[i].id=stepsRead[i].id; }
+})();
+
+/* 跟读：读完一句，留时间让学生自己读（按字数给时间，3~8 秒） */
+async function followWait(text){
+  var secs=Math.min(8, Math.max(3, Math.round(text.length/6)));
+  await speak('你来读。');
+  tipPill.textContent='🗣 你来读… '+secs+' 秒（读完点我直接下一句）';
+  tipPill.style.display='block';
+  var skipped=false;
+  tipPill.onclick=function(){ skipped=true; };
+  await wait(secs*1000, function(){ return skipped; });
+  hideTip();
+}
+
+/* ================= ② 学字词 ================= */
+var stepsWord=[
+  {id:'zinGrid', say:'先读目字族的生字和词语，再读园地里的积累词。', lead:true}
+];
+
+
+
+
+
+
+/* ================= ③ 词语·听写 ================= */
+var dictWords=[
+  {w:'怒目', eg:'示范句：他怒目圆睁，盯着捣乱的同学。'},
+  {w:'睁眼', eg:'示范句：清晨，我睁开眼睛。'},
+  {w:'眨眼', eg:'示范句：小猫冲我眨了眨眼。'},
+  {w:'瞪眼', eg:'示范句：别瞪眼，好好说。'},
+  {w:'眼眶', eg:'示范句：听到这个消息，她的眼眶红了。'},
+  {w:'发呆', eg:'示范句：他望着窗外发呆。'},
+  {w:'目睹', eg:'示范句：我亲眼目睹了这感人的一幕。'},
+  {w:'陆续', eg:'示范句：我军的伤员陆续从火线上抬下来。'},
+  {w:'继续', eg:'示范句：白求恩低下头，继续给伤员做手术。'},
+  {w:'连续', eg:'示范句：白求恩连续工作了六十九个小时。'},
+  {w:'书籍', eg:'示范句：读书交流会要准备书籍。'},
+  {w:'清单', eg:'示范句：请你帮志愿者列一份物品清单。'},
+];
+
+
+
+
+
+var stepsWord2=[
+  {id:'w1', say:'先读积累的词语。第1组：睁眼、睁开、怒目圆睁。'},
+  {id:'w2', say:'先读积累的词语。第2组：眼眶、眼眶发热。'},
+  {id:'w3', say:'先读积累的词语。第3组：发呆、目瞪口呆、呆住。'},
+  {id:'w4', say:'先读积累的词语。第4组：目睹、耳闻目睹、有目共睹。'},
+  {id:'n1', say:'再听四组近义词。第1组：陆续 — 连续。'},
+  {id:'n2', say:'再听四组近义词。第2组：继续 — 接着。'},
+  {id:'n3', say:'再听四组近义词。第3组：目睹 — 看见。'},
+  {id:'n4', say:'再听四组近义词。第4组：竖立 — 建立。'},
+  {id:'a1', say:'最后是词语拓展：默读三不要。'}
+];
+
+
+
+
+
+
+/* ================= ④ 深入理解 ================= */
+var stepsQa=[
+  {id:'q1', say:'第1题，认知：默读三气泡里，“不要做”的是哪三件事？（照录）想一想。'},
+  {id:'q2', say:'第2题，认知：日积月累三句名言分别出自哪些书？（照录）想一想。'},
+  {id:'q3', say:'第3题，理解：词句段运用①：加点的陆续、继续、连续可以互相调换吗？说说理由。（照录题目）想一想。'},
+  {id:'q4', say:'第4题，理解：睁、瞪、瞅、眶、呆、睹有什么共同点？这能帮我们怎样认字？想一想。'},
+  {id:'q5', say:'第5题，理解：帮志愿者列读书交流会物品清单，你打算怎么列？（照录题目）想一想。'},
+  {id:'q6', say:'第6题，运用：选择陆续、继续、连续中的一个词语写一句话。（照录要求）想一想。'},
+  {id:'q7', say:'第7题，运用：用自己的话说说“锲而舍之，朽木不折；锲而不舍，金石可镂”的意思，再说说它让你想到本单元的谁。想一想。'},
+  {id:'q8', say:'第8题，拓展：三句名言里，你最想把哪一句做座右铭？为什么？想一想。'},
+];
+
+
+
+
+
+
+/* ================= ⑤ 讲故事·分角色 ================= */
+var stepsStory=[{id:'g1'},{id:'g2'},{id:'g3'},{id:'g4'},{id:'g5'}];
+var stepsRole=[{id:'r1'},{id:'r2'},{id:'r3'},{id:'r4'},{id:'r5'}];
+
+/* ================= 按钮状态 ================= */
+var btns=['btnStep1','btnStep2','btnStep3','btnStep4','btnStep5'].map(function(i){ return document.getElementById(i); });
+function lock(on){ btns.forEach(function(b){ b.disabled=on; }); }
+
+/* ================= ① 听读课文 ================= */
+async function playRead(){
+  abort=false;
+  lock(true);
+  await speak('先听老师读要求：和同学交流默读的好做法；认识目字族的生字；辨析陆续、继续、连续；读一读、背一背三句名言。');
+  await wait(300);
+  for(var i=0;i<stepsRead.length;i++){
+    if(abort) break;
+    var s=stepsRead[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(follow){ await followWait(s.say); if(abort) break; }
+    if(s.think){
+      await imgThinkWait(s.think);
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+      clearImgAns();
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns(); hideTip();
+  lock(false);
+}
+
+/* ================= ② 学字词 ================= */
+async function playWord(){
+  abort=false;
+  lock(true);
+  await wait(300);
+  for(var i=0;i<stepsWord.length;i++){
+    if(abort) break;
+    var s=stepsWord[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    var cards = el ? Array.prototype.slice.call(el.querySelectorAll('.zi')) : [];
+    unhl();
+    for(var k=0;k<cards.length;k++){
+      if(abort) break;
+      var c=cards[k];
+      hl(c); __scrollTo(c);
+      await speak(c.getAttribute('data-say')||c.textContent);
+      if(abort) break;
+      await wait(120);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ③ 词语·听写·造句·近义词 ================= */
+var dictStage=document.getElementById('dictStage');
+var dictWord=document.getElementById('dictWord');
+var dictHint=document.getElementById('dictHint');
+
+function setDict(i, masked, hint, word){
+  dictStage.textContent = (i>0 ? ('第 '+i+' 个 / 共 '+dictWords.length+' 个') : '准备听写 · 共 '+dictWords.length+' 个词');
+  if(masked){ dictWord.classList.add('mask'); dictWord.textContent='○ ○ ○'; }
+  else{ dictWord.classList.remove('mask'); dictWord.textContent=word||''; }
+  dictHint.textContent=hint||'';
+}
+async function playDict(){
+  abort=false;
+  lock(true);
+  setDict(0,true,'点下面的「开始听写」，听到一个词就写一个词。');
+  await speak('下面开始听写，一共十个词。每个词读两遍，听完就在纸上写一个。写完点「看答案」，也可以等几秒钟自动出答案。');
+  if(abort){ lock(false); return; }
+  await wait(600);
+  for(var i=0;i<dictWords.length;i++){
+    if(abort) break;
+    var d=dictWords[i];
+    dictSkip=false;
+    setDict(i+1,true,'✏️ 听到就写下来…');
+    await speak('第 '+(i+1)+' 个。'+d.w+'。'+d.w+'。');
+    if(abort) break;
+    await wait(6000, function(){ return dictSkip; });       /* 写词时间，可点「看答案」提前 */
+    if(abort) break;
+    setDict(i+1,false,'答案是：'+d.w, d.w);
+    await speak('答案是：'+d.w+'。');
+    if(abort) break;
+    await wait(500);
+    if(abort) break;
+    await speak(d.eg);                                       /* 顺带听一句示范造句 */
+    if(abort) break;
+    await wait(900);
+  }
+  if(!abort){
+    setDict(0,false,'✅ 听写完了','听写完了！');
+    await speak('十个词听写完了。点开下面的词语卡，可以再听一遍词语和示范句，自己也试着说一句。');
+  }
+  /* 再读词语积累、近义词、拓展 */
+  for(var j=0;j<stepsWord2.length;j++){
+    if(abort) break;
+    var s=stepsWord2[j];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.id.indexOf('n')===0){
+      await speak(el.getAttribute('data-say')||'');
+      if(abort) break;
+    }
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ④ 深入理解 ================= */
+async function playQa(){
+  abort=false;
+  lock(true);
+  for(var i=0;i<stepsQa.length;i++){
+    if(abort) break;
+    var s=stepsQa[i];
+    var qa=document.getElementById(s.id);
+    if(!qa) continue;
+    focusEl(qa);
+    await wait(400);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ⑤ 讲故事·分角色 ================= */
+async function playStory(){
+  abort=false;
+  lock(true);
+  await speak('先按顺序讲故事。可以用上先、再、接着、最后这几个词。');
+  if(abort){ lock(false); return; }
+  for(var i=0;i<stepsStory.length;i++){
+    if(abort) break;
+    var s=stepsStory[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    hl(el); __scrollTo(el);
+    await speak(el.getAttribute('data-say')||'');
+    if(abort) break;
+    await wait(300);
+  }
+  if(abort){ unhl(); cap.style.display='none'; lock(false); return; }
+  unhl();
+  await speak('下面听收获交流会的同学们晒收获——注意他们把好方法说得清清楚楚。');
+  if(abort){ cap.style.display='none'; lock(false); return; }
+  for(var k=0;k<stepsRole.length;k++){
+    if(abort) break;
+    var r=document.getElementById(stepsRole[k].id);
+    if(!r) continue;
+    hl(r); __scrollTo(r);
+    var name=r.getAttribute('data-role')||'';
+    var lines=(r.getAttribute('data-lines')||'').split('|');
+    await speak('现在读'+name+'的话。'+ (r.querySelector('.r-m')?r.querySelector('.r-m').textContent.replace('💬 ',''):''));
+    if(abort) break;
+    for(var m=0;m<lines.length;m++){
+      if(abort) break;
+      if(!lines[m]) continue;
+      await speak(lines[m]);
+      if(abort) break;
+      await wait(350);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+document.getElementById('btnStep1').addEventListener('click',playRead);
+document.getElementById('btnStep2').addEventListener('click',playWord);
+document.getElementById('btnStep3').addEventListener('click',playDict);
+document.getElementById('btnStep4').addEventListener('click',playQa);
+document.getElementById('btnStep5').addEventListener('click',playStory);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  hideTip(); unhl(); cap.style.display='none'; clearImgAns();
+  lock(false);
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 句级点读：点哪句读哪句；读完把朗读提示显示出来（点提示可再听） */
+document.querySelectorAll('.para .sent').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var tip=el.getAttribute('data-tip');
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){
+      if(tip) showTip(tip);
+    });
+  });
+});
+/* 点段前序号 → 读整段 */
+document.querySelectorAll('.para .no').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    var para=el.parentNode;
+    hl(para);
+    speak(para.getAttribute('data-say')||para.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 通用点读：教材图 / 词语行 / 成长顺序 / 近义词 / 朗读要求
+   注意：词语拓展 .acc 不放进 id 列表，改由下方 querySelectorAll('.acc') 动态绑定，
+   这样新增拓展组（a5、a6…）无需再改这里，避免「新增了却点不出声」。 */
+['pic1','pic2','pic3','pic4','w1','w2','w3','g1','g2','g3','g4','g5','n1','n2','n3','n4','req1'
+].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 词语拓展卡点读：动态绑定所有 .acc（新增组自动生效） */
+document.querySelectorAll('.acc').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 生字卡点读 */
+document.querySelectorAll('.zi').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 角色卡点读：读角色名 + 语气提示 + 逐句台词 */
+document.querySelectorAll('.role').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var name=el.getAttribute('data-role')||'';
+    var lines=(el.getAttribute('data-lines')||'').split('|');
+    speak('现在读'+name+'的话。').then(function(){
+      var i=0;
+      function nx(){
+        if(abort||i>=lines.length){ unhl(); return; }
+        speak(lines[i++]).then(function(){ setTimeout(nx,350); });
+      }
+      nx();
+    });
+  });
+});
+
+/* 词语卡点读（词 / 示范句 / 说话支架） */
+document.querySelectorAll('.wc').forEach(function(card){
+  card.querySelectorAll('[data-say]').forEach(function(el){
+    el.addEventListener('click',function(ev){
+      ev.stopPropagation();
+      abort=true; if(synth) synth.cancel();
+      hl(card);
+      speak(el.getAttribute('data-say')||'').then(function(){ unhl(); });
+    });
+  });
+});
+
+/* 跟读模式开关 */
+document.getElementById('btnFollow').addEventListener('click',function(){
+  follow=!follow;
+  this.textContent = follow ? '🔁 跟读模式：开' : '🔁 跟读模式：关';
+  this.classList.toggle('on', follow);
+  speak(follow ? '跟读模式打开了。我读一句，你跟着读一句。' : '跟读模式关闭了。');
+});
+
+/* 听写按钮 */
+document.getElementById('btnDictStart').addEventListener('click',function(){
+  abort=false; playDict();
+});
+document.getElementById('btnDictAgain').addEventListener('click',function(){
+  var i=parseInt((dictStage.textContent.match(/第\s*(\d+)\s*个/)||[])[1]||0);
+  var d=dictWords[i-1];
+  if(d) speak(d.w+'。'+d.w+'。');
+  else speak('先点开始听写。');
+});
+document.getElementById('btnDictShow').addEventListener('click',function(){
+  dictSkip=true;
+});
+
+/* 隐藏 / 显示注音 */
+document.getElementById('btnPy').addEventListener('click',function(){
+  var on=document.body.classList.toggle('no-py');
+  this.textContent = on ? '👁 显示注音' : '👁 隐藏注音（自测用）';
+  this.classList.toggle('on', on);
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>
