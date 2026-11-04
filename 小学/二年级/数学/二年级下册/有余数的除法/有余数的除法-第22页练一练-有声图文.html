@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 小学数学课件技能 math-primary-courseware
+  本页：有余数的除法 · 练一练 · 课本第 22 页
+  ----------------------------------------------------------------------------
+  CSS 与脚本引擎逐字保留标准模板 v4.0，只改占位符、热区、steps1/steps2、
+  热区点读表、文字卡与分层题
+  校验：node assets/check_page.js 本页.html 8 4 4 8
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>练一练 · 有余数的除法（课本第22页）有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>练一练（整理和复习）</h1>
+    <p>算一算买文具装鸡蛋——余数与除数关系的综合运用</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>除法与乘加互检、进一法、规律看余数、余数最大最小</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/22a-课本第22页-练一练.png" alt="课本第22页练一练：算一算想一想、买文具买2送1、50个鸡蛋装盒、图形规律第33个、想一想填一填">
+    <div class="hotspot" id="hotTitle"      style="top:3%;    left:12%; width:26%; height:5.4%;"></div>
+    <div class="hotspot" id="hotDivRow"     style="top:15.9%; left:7%;  width:86%; height:3%;"></div>
+    <div class="hotspot" id="hotMulRow"     style="top:20.1%; left:7%;  width:86%; height:3.3%;"></div>
+    <div class="hotspot" id="hotBuy"        style="top:26%;   left:6%;  width:88%; height:16.7%;"></div>
+    <div class="hotspot" id="hotEgg"        style="top:44.8%; left:6%;  width:88%; height:16%;"></div>
+    <div class="hotspot" id="hotPatternQ"   style="top:62.9%; left:6%;  width:88%; height:3.6%;"></div>
+    <div class="hotspot" id="hotPatternRow" style="top:67%;   left:6%;  width:88%; height:3.6%;"></div>
+    <div class="hotspot" id="hotFill"       style="top:72.8%; left:6%;  width:88%; height:15.4%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 22 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）=====
+       结构必须完整：.sayable > (.t-badge + .t-main + .say-toggle) + .say-ans > .say-ans-inner > .say-ans-box
+       data-say = 点卡时朗读的文本；.say-ans-box 内写答案（用 <br> 分行、<b> 高亮关键、💡 给方法点拨）
+       默认 4 张卡（t1~t4）；内容多的页可增到 5~6 张，但校验参数要同步改。 -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第一题六道题是上下配对的。四十六除以七等于六余四，反过来七乘六加四就等于四十六；二十八除以五等于五余三，五乘五加三也等于二十八；七十四除以八等于九余二，八乘九加二等于七十四。">
+    <span class="t-badge">互检</span><span class="t-main">46÷7 和 7×6+4 有什么关系？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      46÷7=<b>6……4</b>　←→　7×6+4=<b>46</b><br>
+      28÷5=5……3　←→　5×5+3=28<br>
+      74÷8=9……2　←→　8×9+2=74<br>
+      💡 商×除数+余数=被除数，可以用来检查除法。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="买文具。每支六元，买二送一。十五元先按钱算：十五除以六等于二支余三元；买两支正好满二送一，再送一支，一共三支，还剩三元不够再买一支。">
+    <span class="t-badge">买文具</span><span class="t-main">15元，每支6元，买2送1，能买几支？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      15÷6=2（支）……3（元）→ 付2支的钱<br>
+      买2送1 → 再送 <b>1支</b>，共 2+1=<b>3支</b><br>
+      剩3元 ＜ 6元，不够再买<br>
+      💡 先算钱够买几支，再加上送的那支。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="五十个鸡蛋装盒。六个装一盒，五十除以六等于八盒余二个，可以装满八盒。八个装一盒，五十除以八等于六盒余二个，装满六盒；剩下二个也要一个盒子，六加一等于七，要准备七个盒子才能全部装下。">
+    <span class="t-badge">装盒</span><span class="t-main">50个鸡蛋，装满几盒？全部装下要几个盒？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      (1) 50÷6=8（盒）……2（个）→ 装满 <b>8盒</b><br>
+      (2) 50÷8=6（盒）……2（个）→ 装满 <b>6盒</b><br>
+      　　剩2个也要装 → 6+1=<b>7个盒</b><br>
+      💡 「装满」只取商；「全部装下」有余数就商加1。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="规律题分三步：先找出几个图形一组，再用总数除以每组个数，最后看余数落在组里第几个。三十三除以六等于五组余三个，第三个是正方形。余数还告诉我们：余数最大是除数减一，除数最小是余数加一。">
+    <span class="t-badge">规律</span><span class="t-main">第33个图形是什么？余数最大、最小怎么定？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      三步：分组（6个一组）→ 除法（33÷6=5……3）→ 看余数<br>
+      余数3 → 一组里第3个 → <b>□（正方形）</b><br>
+      余数最大 = 除数－1；除数最小 = 余数+1<br>
+      💡 33÷6=5……3；☆÷5 时余数最大是 4；☆÷□=△……5 时，□最小是 6。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <!-- ===== 分层提问（固定 6 题：认知 2 / 强化 3 / 拓展 1）=====
+       每题结构：.qa[id=qN][data-ans=朗读答案] > .qa-head(onclick=askQA('qN')) > (.q-emoji + .q-text[.lv-pill] + .toggle)
+                 + .think-pill[data-secs] + .qa-a > .qa-a-inner > (.a-label + .sol.sol1/.sol2 + 可选 .multi/.think-note)
+       层级：lv-r=认知(蓝) / lv-q=强化(橙) / lv-t=拓展(粉)，必须 2:3:1
+       data-secs：认知 8 秒，强化/拓展 10 秒 -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="七乘六加四，先算七乘六等于四十二，再加四等于四十六，正好是四十六除以七的被除数。因为四十六除以七商六余四，商乘除数再加余数就回到被除数。二十八除以五商五余三，五乘五加三也等于二十八，同样对得上。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>46÷7=6……4，那么 7×6+4 等于多少？为什么正好相等？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先按运算顺序算出乘加的结果，再把它和除法的被除数比一比，看商、除数、余数三者能不能拼回被除数。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">7×6=42，42+4=<b>46</b>，正好等于被除数</div>
+      <div class="sol sol2">46÷7=6……4 → <b>商×除数+余数=被除数</b></div>
+      <div class="think-note">💡 做完除法，用这道乘加题就能检查对不对。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="七十四除以八，想八的口诀：八九七十二，七十二最接近七十四又不超过，商是九。九乘八等于七十二，七十四减七十二等于二，所以商九余二。余数二比除数八小，说明商九正好，不能再商十。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🧮</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>74÷8 的商和余数各是多少？用哪句口诀想？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先背八的口诀，找出乘得的积最接近七十四又不超过七十四的那句；再用被除数减这个积，得到余数。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">8×9=72 最接近74且不超过 → 商 <b>9</b></div>
+      <div class="sol sol2">74－72=<b>2</b> → 余数2 ＜ 除数8 ✓</div>
+      <div class="think-note">💡 商再大一点就是8×10=80，超过74了，不行。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="十五除以六等于二支余三元。买两支要十二元，买二送一，商店再送一支，一共三支；还剩三元，不够再买一支。所以十五元能买三支。注意送的那支不花钱，但要买够两支才能送。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🖊️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>买文具：每支 6 元，买 2 送 1。15 元能买几支？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先用钱数除以单价，看能付几支的钱；再看够不够买2支，够了就把送的那支加进来；最后看剩下的钱还够不够再买。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">15÷6=2（支）……3（元）→ 付2支的钱，用去12元</div>
+      <div class="sol sol2">买2送1 → 2+1=<b>3支</b>；剩3元＜6元，不能再买</div>
+      <div class="think-note">💡 先把钱花到最多，再算送的数量。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="五十除以八等于六盒余二个。八个装一盒可以装满六盒；剩下的二个也要装一盒，六加一等于七，所以要准备七个盒子才能全部装下。装满几盒只看商，全部装下有余数就要用商加一。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🥚</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>50 个鸡蛋，8 个装一盒，可以装满几盒？要准备几个盒子才能全部装下？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看清每盒装几个，用总数除以每盒个数；再想剩下的两个鸡蛋能不能不装，不能就要再加一个盒子。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">50÷8=6（盒）……2（个）→ 装满 <b>6盒</b></div>
+      <div class="sol sol2">剩2个也要装 → 6+1=<b>7个盒</b>才能全部装下</div>
+      <div class="think-note">💡 两问只差一个字：装满看商，全部装下商加1。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="两个星、一个正方形、三个圆，六个一组。三十三除以六等于五组余三个，五组用去三十个，第三十三个就是新一组的第三个。一组里第三个是正方形，所以第三十三个是正方形。看余数是几，就数到组里第几个。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🔷</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>按 ☆☆□○○○ 的规律摆下去，第 33 个是什么图形？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先数清一组有几个图形、顺序怎样；再用总数除以每组个数，最后顺着余数在一组里数到第几个。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">6个一组（☆☆□○○○）；33÷6=5（组）……3（个）</div>
+      <div class="sol sol2">余3 → 一组里第3个 → <b>□（正方形）</b></div>
+      <div class="think-note">💡 余数是0时，就是一组里的最后一个。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="除以五商五，余数要比五小，最大是四，这时被除数是五乘五加四，等于二十九。第二问余数是五，除数要比五大，最小是六。记住两句话：余数最大是除数减一，除数最小是余数加一。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">💡</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>☆÷5=5……□，□最大是几？这时☆是几？若☆÷□=△……5，□最小是几？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先抓住一条铁律——余数一定比除数小；再用余数去卡除数，或者用除数去卡余数，最后把商、除数、余数按乘加关系拼回被除数。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">□＜5 → □最大 <b>4</b>；☆=5×5+4=<b>29</b></div>
+      <div class="sol sol2">5＜□ → □最小 <b>6</b></div>
+      <div class="think-note">💡 余数最大=除数－1；除数最小=余数+1。</div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'练一练。这一页用六道题，把有余数的除法和学过的知识连起来练一练。'},
+  {region:'hotDivRow', think:true, say:'先看第一行，三道除法：四十六除以七、二十八除以五、七十四除以八。除数和被除数都比较大，要先想口诀。先自己算一算，商是几，余数是几？', ans:'四十六除以七，想七六四十二，商六余四；二十八除以五，想五五二十五，商五余三；七十四除以八，想八九七十二，商九余二。三道题的余数都比除数小，说明算对了。'},
+  {region:'hotMulRow', say:'再看第二行，三道乘加：七乘六加四等于四十六，五乘五加三等于二十八，八乘九加二等于七十四。商乘除数再加余数，正好等于被除数，所以上下两题是一对，可以用乘法检查除法。'},
+  {region:'hotBuy', think:true, say:'第二题买文具。海报上写买二送一，六元一支。小女孩说，我有十五元，能买几支？先想一想，送的那支要不要花钱？', ans:'十五除以六等于二支余三元。买两支要十二元，买二送一，还能再送一支，一共三支，还剩三元，不够再买一支。所以十五元能买三支。'},
+  {region:'hotEgg', think:true, say:'第三题，五十个鸡蛋装盒。第一问，六个装一盒，可以装满几盒？第二问，八个装一盒，可以装满几盒，要准备几个盒子才能全部装下？先想一想，两个问题的答法一样吗？', ans:'五十除以六等于八盒余二个，六个装一盒可以装满八盒。五十除以八等于六盒余二个，八个装一盒可以装满六盒；剩下的二个也要装一盒，六加一等于七，所以要准备七个盒子才能全部装下。装满只看商，全部装下要看商加一。'},
+  {region:'hotPatternQ', say:'第四题，小丽按规律摆了一排图形，问第三十三个是什么图形。做规律题先分组，两个星、一个正方形、三个圆，六个一组；再用三十三除以六，等于五组余三个，就看一组里的第三个。'},
+  {region:'hotPatternRow', say:'看这一排图形：星、星、正方形、圆、圆、圆，后面又重复一遍，再重复一遍，最后是省略号，表示按这个规律一直摆下去。'},
+  {region:'hotFill', think:true, say:'第五题，想一想填一填。三道题都在问方框最大是几、最小是几。先想一想，余数和除数有什么关系？', ans:'余数一定要比除数小。第一题除以五，余数最大是四。第二题余数是五，除数要比五大，最小是六。第三题除以五商五，余数最大是四，这时被除数等于五乘五加四，是二十九。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，四十六除以七等于六余四，那么七乘六加四等于多少？先想一想，它们为什么会相等。'},
+  {id:'q2', qa:'q2', say:'第二题，七十四除以八。商是几，余数是几，用哪句口诀想？先想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，买文具。每支六元，买二送一，十五元能买几支？先想一想送的那支怎么算。'},
+  {id:'q4', qa:'q4', say:'第四题，五十个鸡蛋八个装一盒。装满几盒，全部装下要几个盒子？先想一想，剩下的两个怎么办。'},
+  {id:'q5', qa:'q5', say:'第五题，图形规律。两个星、一个正方形、三个圆一组，第三十三个是什么？先想一想，余数是三要看哪里。'},
+  {id:'q6', qa:'q6', say:'第六题，拓展题。方框最大是几，除数最小是几，被除数又是几？先想一想，余数和除数谁大谁小。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条（热区id, 点这块时朗读的一句话），条数 = 热区个数 */
+[['hotTitle','练一练，整理和复习的第二页。'],
+ ['hotDivRow','第一行三道除法：四十六除以七商六余四，二十八除以五商五余三，七十四除以八商九余二。'],
+ ['hotMulRow','第二行三道乘加：七乘六加四等于四十六，五乘五加三等于二十八，八乘九加二等于七十四。'],
+ ['hotBuy','买文具，每支六元，买二送一。十五元先买两支，再送一支，一共三支。'],
+ ['hotEgg','五十个鸡蛋，六个装一盒装满八盒；八个装一盒装满六盒，全部装下要七个盒子。'],
+ ['hotPatternQ','小丽按规律摆图形，第三十三个是什么图形？'],
+ ['hotPatternRow','两个星、一个正方形、三个圆，六个一组，一组一组重复下去。'],
+ ['hotFill','想一想填一填：除以五余数最大四；余数是五除数最小六；除以五商五时被除数是二十九。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 标准模板 v4.0（小学数学课件技能 math-primary-courseware）
+  ----------------------------------------------------------------------------
+  用法：复制本文件 → 替换 {{...}} 占位符 → 写热区/steps1/steps2/文字卡/分层题 → 跑校验
+  红线：CSS 与脚本 已实战验证（99 页），除 steps1/steps2/热区点读表外不要改动
+  填写顺序：IMG → 热区 → steps1 → 文字卡 → 分层题 → steps2 → 热区点读表 → 校验
+  校验：node assets/check_page.js <html> <热区数> <steps1思考数> <文字卡数> <点读表条数>
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>时间在哪里 · 第4页 读一读·试一试（有声图文带读）</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>读一读（怎样认读钟表上的时间）</h1>
+    <p>从4时开始数——分针从12走了多少小格，就是4时多少分</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>先看时针定几时，再看分针数几分</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/04a-课本第4页-读一读试一试.jpg" alt="人教版数学二年级下册课本第4页：读一读，怎样认读钟表上的时间，三个钟面4时5分、4时30分、4时45分，以及试一试四个钟面">
+    <!-- ===== 热区：按教材图版面估算百分比（left/top/width/height），交付前对照原图核校 ===== -->
+    <div class="hotspot" id="hotTitle"    style="top:2%; left:6%; width:62%; height:13%;"></div>
+    <div class="hotspot" id="hotEx1"      style="top:17.5%; left:12%; width:19%; height:23%;"></div>
+    <div class="hotspot" id="hotEx2"      style="top:17.5%; left:38%; width:19%; height:23%;"></div>
+    <div class="hotspot" id="hotEx3"      style="top:17.5%; left:69%; width:19%; height:23%;"></div>
+    <div class="hotspot" id="hotBubble"   style="top:40.5%; left:38%; width:53%; height:9%;"></div>
+    <div class="hotspot" id="hotTryLeft"  style="top:58%; left:19%; width:25%; height:34%;"></div>
+    <div class="hotspot" id="hotTryRight" style="top:58%; left:56%; width:25%; height:34%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 4 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第一个钟面，时针刚刚走过4，分针从12正好指着1。从12到1有5个小格，一小格是一分，所以是4时5分。电子表写作4:05。">
+    <span class="t-badge">例钟面一</span><span class="t-main">4时5分怎么读？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      分针指着 <b>1</b> → 从12走到1是 <b>5</b> 个小格 → <b>4时5分</b><br>
+      电子表写作 <b>4:05</b><br>
+      💡 分针从12走到1，一大格里有5个小格，指着1就是5分。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="第二个钟面，时针走过4，分针正好指着6。从12到6有30个小格，30分正好是半小时，所以是4时30分，也可以说4时半。电子表写作4:30。">
+    <span class="t-badge">例钟面二</span><span class="t-main">4时30分为什么也叫4时半？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      分针指着 <b>6</b> → 走了 <b>30</b> 个小格 → <b>4时30分或4时半</b><br>
+      电子表写作 <b>4:30</b><br>
+      💡 30分正好是钟面一圈60小格的一半，所以叫“半”。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="第三个钟面，时针走过4，很接近5了。分针指着9，从12到9有45个小格，所以是4时45分。电子表写作4:45。">
+    <span class="t-badge">例钟面三</span><span class="t-main">4时45分怎么读？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      分针指着 <b>9</b> → 走了 <b>45</b> 个小格 → <b>4时45分</b><br>
+      电子表写作 <b>4:45</b><br>
+      💡 时针越接近5，说明4时多的“多”就越大。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="读钟面上的时间，先看时针：时针刚走过几，就是几时多。再看分针：分针从12走了多少个小格，就是多少分。把它们合起来读出来就可以了。">
+    <span class="t-badge">读法口诀</span><span class="t-main">读钟面先看什么、再看什么？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      先看<b>时针</b> → 刚走过几，就是几时多<br>
+      再看<b>分针</b> → 从12走了多少小格，就是多少分<br>
+      💡 用这个方法读一读“试一试”的四个钟面吧。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问（固定 6 题：认知 2 / 强化 3 / 拓展 1）===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="先看时针：刚刚走过4，说明是4时多。再看分针：正好指着1，从12走到1有5个小格，一小格是一分，5个小格就是5分。合起来读作4时5分。易错提醒：不要看到分针指1就说一分，要想起来一大格里面有五个小格。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>钟面上时针刚走过4，分针从12正好指着1，是什么时间？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看时针刚刚走过4，确定是4时多；再从12起看分针，指着1就是5个小格；一小格是一分，5个小格是5分，合起来就是4时5分。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">时针刚走过 4 → 是 4 时多。</div>
+      <div class="sol sol2">分针指着 1 → 从12到1是 <b>5</b> 个小格 → <b>4时5分</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="电子表上冒号前面表示时，后面表示分。四时三十分。钟面上分针正好指着六，从十二走到六是三十个小格，三十分正好是半个钟面，所以四时三十分也可以说成四时半。两种说法都对，生活中说四时半更多一些。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>电子表上写着 4:30，读作什么？还有别的说法吗？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先认电子表：冒号前是时、冒号后是分，读作4时30分；再看钟面，分针指6走了30小格，正好半个钟面，所以又叫4时半。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">4:30 → 冒号前是4时，冒号后是30分 → 读作 4时30分。</div>
+      <div class="sol sol2">分针指着 6 → 30小格正好是半圈 → 也可以说 <b>4时半</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="四时四十五分的时候，时针已经走过四，很接近五了；分针指着九。从十二到九有九个大格，一大格是五个小格，九个五正好四十五个小格，就是四十五分。检查的时候可以五个五个地数：五、十、十五，一直数到四十五，一分都不会差。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>4时45分的钟面上，时针和分针分别指着哪里？为什么分针指9就是45分？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先定时针：走过4接近5，所以是4时多；再看分针指着9，从12到9数一数有几个大格，一大格5小格，算出总小格数就是分。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">时针走过4、很接近5；分针指着 9。</div>
+      <div class="sol sol2">12到9是 9 大格 × 5 小格 = <b>45</b> 小格 → <b>4时45分</b>。</div>
+      <div class="multi">五个五个数：5、10、15……45</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="钟面一圈有六十个小格，分针走完一整圈是六十分，正好一时。分针走到六，正好走了半个钟面，三十个小格，是三十分。三十分正好是一时的一半，所以四时三十分又叫四时半。提醒：说四时半的时候，时针应该在四和五的中间，不是正好指着四。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>为什么 4:30 也可以叫“4时半”？说说你的道理。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想钟面一圈共有60小格，是60分；再看分针指6，正好走了一半的格子；一半的分钟数就叫“半”，所以30分就是半小时。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">钟面一圈 60 小格 = 60 分 = 1 时。</div>
+      <div class="sol sol2">分针指 6 → 正好半圈 → <b>30分 = 半小时</b> → 4时30分也叫4时半。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="先看时针：它已经走过九，马上要到十了，说明是九时多。再看分针：分针指着十一，离十二只差一小格，也就是五十五个小格，是五十五分。合起来是九时五十五分。易错提醒：时针走过九快到十，千万不能读成十时，要看它还没有走到十。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>“试一试”里 9时55分 的钟面，你是怎么读的？先看什么、再看什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先用时针定“几时”：走过9快到10，是9时多；再用分针定“几分”：指11，离12只差1小格，60小格减1小格是55小格，就是55分。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">时针走过9、快到10 → 9时多（还不能读10时）。</div>
+      <div class="sol sol2">分针指着 11 → 差1小格到12 → <b>55</b> 小格 → <b>9时55分</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="这是一道联系生活的开放题。可以这样说：我早上七时三十分出门上学，那时时针刚走过七，分针指着六。也可以说动画片八时整开始，那时时针正好指着八，分针指着十二。只要先说清楚是几时，再说清楚分针从十二走了多少个小格，说得有道理就可以。和同桌互相考一考吧。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>生活中你在哪里见过“几时几分”？说一个时刻，并说说那时时针、分针大概指着哪里。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先从生活里找一个熟悉的时刻，比如上学、吃饭、动画片开始的时间；再照本页的方法，先定时针的位置，再定分针走过的小格。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">例：7:30 出门 → 时针刚走过7，分针指6（30小格）。</div>
+      <div class="sol sol2">例：8:00 动画片开始 → 时针正好指8，分针指12（0小格）。</div>
+      <div class="think-note">开放题：说得有道理都算对，重点是先看时针、再看分针。</div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）===== */
+var steps1=[
+  {region:'hotTitle', say:'这一页是读一读。题目问：怎样认读钟表上的时间？书上告诉我们，要从4时开始数。'},
+  {region:'hotEx1', say:'先看第一个钟面。时针刚刚走过4，还在4和5之间，说明是4时多。分针从12出发，正好指着1，走了5个小格，所以是4时5分。下面的电子表写着4:05，读作4时5分。'},
+  {region:'hotEx2', say:'再看中间的钟面。时针走过4，快到5了。分针正好指着6，从12走到6，走了30个小格，也就是半小时。所以是4时30分，也可以说4时半。电子表写作4:30。'},
+  {region:'hotEx3', say:'最后看右边的钟面。时针走过4，更接近5了。分针指着9，从12到9，走了45个小格，所以是4时45分。电子表写作4:45。'},
+  {region:'hotBubble', think:true, say:'小机器人提醒我们：从4时开始，分针从12转了多少个小格，就是4时多少分。想一想，分针指着1、3、6、9的时候，各走了多少小格呢？', ans:'分针从12走到1，走了5个小格，是5分；走到3，走了15个小格，是15分；走到6，走了30个小格，是30分，正好半小时；走到9，走了45个小格，是45分。记住：一大格里有5个小格，分针指着几，就走了几个5小格。'},
+  {region:'hotTryLeft', say:'试一试。左上角的钟面：时针走过9，分针指着2，走了10个小格，是9时10分。左下角的钟面：时针走过9，快到10了，分针指着11，走了55个小格，是9时55分。'},
+  {region:'hotTryRight', say:'右上角的钟面：时针走过9，分针指着3，走了15个小格，是9时15分。右下角的钟面：时针走过10，分针指着1，走了5个小格，是10时5分。读的时候，先看时针走过几，再数分针走了多少小格。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题是认知题：钟面上时针刚走过4，分针从12正好指着1，这是什么时间？先想一想。'},
+  {id:'q2', qa:'q2', say:'第二题也是认知题：电子表上写着4:30，读作什么？还有别的说法吗？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题要讲算理：4时45分的钟面上，时针和分针分别指着哪里？为什么分针指9就是45分？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题：为什么4:30也可以叫4时半？想一想，说出你的道理。'},
+  {id:'q5', qa:'q5', say:'第五题：试一试里9时55分的钟面，你是怎么读的？先看什么、再看什么？想一想。'},
+  {id:'q6', qa:'q6', say:'最后一题是拓展题：说一个生活中的几时几分，再说说那时时针和分针大概指着哪里。想一想，和同桌互相考一考。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条，条数 = 热区个数 */
+[['hotTitle','读一读：怎样认读钟表上的时间？要从4时开始数。'],
+ ['hotEx1','第一个钟面：时针走过4，分针指着1，是4时5分，电子表写作4:05。'],
+ ['hotEx2','中间的钟面：时针走过4，分针指着6，是4时30分或4时半，电子表写作4:30。'],
+ ['hotEx3','右边的钟面：时针走过4，分针指着9，是4时45分，电子表写作4:45。'],
+ ['hotBubble','小机器人说：从4时开始，分针从12转了多少个小格，就是4时多少分。'],
+ ['hotTryLeft','试一试左列：上面是9时10分，下面是9时55分。先看时针走过几，再数分针的小格。'],
+ ['hotTryRight','试一试右列：上面是9时15分，下面是10时5分。先看时针走过几，再数分针的小格。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 分层提问与素养系列（小学数学 · 人教版）
+  底本：课件技能 page-template-voice.html v4.0 —— 样式与朗读引擎逐字保留
+  本页只改：占位符、热区、steps1、steps2、热区点读表、文字卡、分层题
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>练一练：连一连·填一填·找规律（课本第45页）｜万以内数的认识</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>练一练（连一连·填一填·找规律）</h1>
+    <p>图、计数器与数对一对</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>看数位·找规律</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/45a-课本第45页-练一练连线与填数.jpg" alt="人教版二年级下册数学第45页练一练：四幅图与406与538与230连线、数字5表示多少、方框填数、按规律填数">
+    <!-- ===== 热区：按教材图版面估算百分比（left/top/width/height），交付前对照原图核校 =====
+         id 统一命名 hotXxx；每个热区都要在下方「热区点读表」里有对应一条。
+         估算方法：先看整页有几个"块"（标题/例题图/算式行/人物泡泡/小题），再按视觉位置给百分比。 -->
+    <div class="hotspot" id="hotTitle" style="top:3.2%; left:6%; width:78%; height:3%;"></div>
+    <div class="hotspot" id="hotL5" style="top:6.2%; left:8%; width:88%; height:30%;"></div>
+    <div class="hotspot" id="hotL6" style="top:33.7%; left:6%; width:89%; height:26.4%;"></div>
+    <div class="hotspot" id="hotL7" style="top:60.7%; left:6%; width:89%; height:13%;"></div>
+    <div class="hotspot" id="hotL8a" style="top:79.3%; left:6%; width:89%; height:4.3%;"></div>
+    <div class="hotspot" id="hotL8b" style="top:83.6%; left:6%; width:89%; height:4.4%;"></div>
+    <div class="hotspot" id="hotL8c" style="top:88%; left:6%; width:89%; height:4.7%;"></div>
+    <!-- 热区到此为止，数量与下方点读表一致 -->
+  </div>
+  <div class="img-tip">📖 课本第 45 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）=====
+       结构必须完整：.sayable > (.t-badge + .t-main + .say-toggle) + .say-ans > .say-ans-inner > .say-ans-box
+       data-say = 点卡时朗读的文本；.say-ans-box 内写答案（用 <br> 分行、<b> 高亮关键、💡 给方法点拨）
+       默认 4 张卡（t1~t4）；内容多的页可增到 5~6 张，但校验参数要同步改。 -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="第五题四幅图，小棒图看大捆和小捆，计数器看每一位的珠子，方块图看百板、十柱和小方块，一幅一幅数清再连线。">
+    <span class="t-badge">第5题</span><span class="t-main">四幅图分别表示哪个数？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      小棒：2 大捆＋3 小捆 → <b>230</b><br>计数器：百位 5、十位 3、个位 8 → <b>538</b><br>左下方块：4 块百板＋6 个一 → <b>406</b>（十位空着）<br>右下方块：5 块百板＋3 条十柱＋8 个一 → <b>538</b><br>💡 中间一位一个也没有，写数时要写 0。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="同一个数字五，放在百位、十位、个位上，表示的大小完全不同。先找五在哪一位，再说它表示几个百、几个十或几个一。">
+    <span class="t-badge">第6题</span><span class="t-main">同一个“5”，为什么表示的大小不一样？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      521 的 5 在百位 → <b>5 个百</b>（500）<br>305 的 5 在个位 → <b>5 个一</b>（5）<br>850 的 5 在十位 → <b>5 个十</b>（50）<br>💡 数字相同，数位不同，表示的大小就不同。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="方框填数，就是把这个三位数拆成几个百、几个十、几个一，缺哪一部分就补哪一部分。">
+    <span class="t-badge">第7题</span><span class="t-main">方框里各填几？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      475＝400＋<b>70</b>＋5<br>392＝<b>300</b>＋90＋2<br>700＋60＋4＝<b>764</b><br>400＋<b>80</b>＋7＝487<br>💡 拆完再合起来读一遍，检查是不是原来的数。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="按规律填数，先看相邻两个数相差多少，再看方框在哪一段，一位一位地数，快满十、满百、满千时要进一。">
+    <span class="t-badge">第8题</span><span class="t-main">三行数各有什么规律？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      (1) 400、500、600、<b>700</b>、800、<b>900</b>、<b>1000</b>（每次多 100）<br>(2) 940、950、960、<b>970</b>、980、<b>990</b>、<b>1000</b>（每次多 10）<br>(3) 994、995、996、<b>997</b>、998、<b>999</b>、<b>1000</b>（每次多 1）<br>💡 先看每次多几，再一位一位数，满十进一。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <!-- ===== 分层提问（固定 6 题：认知 2 / 强化 3 / 拓展 1）=====
+       每题结构：.qa[id=qN][data-ans=朗读答案] > .qa-head(onclick=askQA('qN')) > (.q-emoji + .q-text[.lv-pill] + .toggle)
+                 + .think-pill[data-secs] + .qa-a > .qa-a-inner > (.a-label + .sol.sol1/.sol2 + 可选 .multi/.think-note)
+       层级：lv-r=认知(蓝) / lv-q=强化(橙) / lv-t=拓展(粉)，必须 2:3:1
+       data-secs：认知 8 秒，强化/拓展 10 秒 -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="五百二十一里的五在百位上，表示五个百，是五百；三百零五里的五在个位上，表示五个一，是五。同一个数字五，数位不同，表示的大小就差很多。看一个数字表示多少，先看它在哪一位上。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🔗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>521 里的 5 表示多少？305 里的 5 呢？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先给数位排队：从右边起个位、十位、百位。再看这个数字站在哪一位，就知道它表示几个百、几个十或几个一。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">521：5 在百位 → 5 个百；305：5 在个位 → 5 个一</div>
+      <div class="sol sol2">521 的 5 表示 <b>500</b>，305 的 5 表示 <b>5</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="四百七十五，百位是四，个位是五，十位上是七。所以要填十位上的数，就是七十。可以把四百七十五拆成四百加七十再加五，拆完再合起来，还是四百七十五，这样就检查对了。填的时候先看方框在哪一位，别把十位当成百位。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">✏️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>475＝400＋□＋5，□里填几？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>看等号右边已经有了几百和几个一，缺的就是十位那一段，把十位上的数乘十补进去。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">475：4 个百、7 个十、5 个一</div>
+      <div class="sol sol2">475＝400＋<b>70</b>＋5；验算 400＋70＋5＝475 ✓</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="九百四十、九百五十、九百六十，每次都多十。接着是九百七十、九百八十、九百九十。注意九百九十再添一个十就是一千，不能写成九百一百。数的时候盯住十位，十位满十要向百位进一。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📈</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>从 940 起一十一十地数，940、950、960，接着三个数是多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>一十一十地数，只看十位和百位。十位从九再添一个十，就要进位到百位，这时要写成整整的一千。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">940 → 950 → 960 → 970 → 980 → 990 → 1000</div>
+      <div class="sol sol2">接着三个数是 <b>970、980、990</b>；990 再添 10 就是 <b>1000</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="九百九十四、九百九十五、九百九十六，每次多一，接着是九百九十七、九百九十八、九百九十九。九百九十九再添一个就是一千。快接近整千的时候最容易错，要记住满十进一、满百进一、满千进一。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">📈</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>994、995、996 后面接着三个数是多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>一个一个地数，个位到九再添一就要进位：个位满十进十位，十位满十进百位，百位满十进千位。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">994 → 995 → 996 → 997 → 998 → 999 → 1000</div>
+      <div class="sol sol2">接着三个数是 <b>997、998、999</b>；999 再添 1 就是 <b>1000</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="左下方块图表示四百零六。它有四块百板，是四个百；六个小方块，是六个一；中间没有十柱，十位上一个计数单位也没有，所以十位写零。写作四百零六，十位上的零不能丢，丢了就变成四十六。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🧱</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>哪幅图表示 406？为什么它的十位上一个也没有？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先数百板得到几个百，再看有没有十柱，最后数单个小方块。哪一位没有对应的图形，那一位就是零。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">4 块百板 → 4 个百；0 条十柱 → 0 个十；6 个小方块 → 6 个一</div>
+      <div class="sol sol2">写作 <b>406</b>，读作四百零六；十位的 0 是占位的，不能省。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="从四百起，一百一百地数：四百、五百、六百、七百、八百、九百、一千。连同四百一起数是七次，从四百再往后数六次就到一千。也可以想，一千里面有十个百，已经数了四个百，还差六个百。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🧠</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>从 400 起一百一百地数到 1000，一共数了几次？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>可以把数过的数一个一个写出来再数个数，也可以用一千里面有几个百来算，两种办法互相检查更稳。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">400、500、600、700、800、900、1000 → 共 7 个数</div>
+      <div class="sol sol2">从 400 再数 <b>6</b> 次到 1000；连同起点一共数了 <b>7</b> 次。</div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'练一练第五题到第八题。连一连、填一填、找规律，都要用到数的组成和数位。'},
+  {region:'hotL5', think:true, say:'第五题，下面各图表示的数各是多少？连一连。四幅图分别是小棒、计数器、两幅方块图；中间三个数是四百零六、五百三十八、二百三十。先一幅一幅数清楚，再连线。', ans:'小棒图是两大捆和三个小捆，二百三十。计数器上百位五颗、十位三颗、个位八颗，五百三十八。左下方块图四块百板、六个小方块，十位没有，四百零六。右下方块图五块百板、三条十柱、八个小方块，也是五百三十八。'},
+  {region:'hotL6', think:true, say:'第六题，每个数中的五各表示多少？连一连。三个数是五百二十一、三百零五、八百五十；下面三种图分别是五个一、五个十、五个百。先看五在哪一位。', ans:'五百二十一里的五在百位，表示五个百；三百零五里的五在个位，表示五个一；八百五十里的五在十位，表示五个十。同一个数字，所在数位不同，表示的大小就不同。'},
+  {region:'hotL7', think:true, say:'第七题，在方框里填上适当的数。四百七十五等于四百加几十加五？三百九十二等于几百加九十加二？七百加六十加四等于多少？四百加几十加七等于四百八十七？', ans:'四百七十五，十位是七，方框里填七十。三百九十二，百位是三，填三百。七百加六十加四，是七百六十四。四百八十七，十位是八，填八十。填完再合起来读一遍，检查是不是原来的数。'},
+  {region:'hotL8a', think:true, say:'第八题第一行，四百、五百、六百、方框、八百、方框、方框。先看每次多多少。', ans:'这一行每次都多一百，所以六百后面是七百，八百后面是九百，再后面是一千。填七百、九百、一千，读作七百、九百、一千。'},
+  {region:'hotL8b', say:'第二行，九百四十、九百五十、九百六十、方框、九百八十、方框、方框。每次都多十，所以三个方框里依次是九百七十、九百九十、一千。注意九百九十再添一个十就是一千。'},
+  {region:'hotL8c', say:'第三行，九百九十四、九百九十五、九百九十六、方框、九百九十八、方框、方框。每次都多一，所以依次填九百九十七、九百九十九、一千。快到整千的时候最容易数错。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，五百二十一里的五、三百零五里的五，各表示多少？想一想，它们分别在哪一位上？'},
+  {id:'q2', qa:'q2', say:'第二题，四百七十五等于四百加几十加五？想一想，十位上是几？'},
+  {id:'q3', qa:'q3', say:'第三题，从九百四十起一十一十地数，接着三个数是多少？想一想，九百九十再添十是多少？'},
+  {id:'q4', qa:'q4', say:'第四题，九百九十四、九百九十五、九百九十六后面接着数三个数。想一想，九百九十九再添一是多少？'},
+  {id:'q5', qa:'q5', say:'第五题，哪幅图表示四百零六？想一想，为什么它的十位上一个也没有？'},
+  {id:'q6', qa:'q6', say:'第六题，从四百起一百一百地数到一千，一共数了几次？想一想，一千里面有几个百？'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条（热区编号加一句朗读稿），条数 = 热区个数 */
+[['hotTitle','练一练，四道题：图与数连线、五表示多少、方框填数、按规律填数。'],
+ ['hotL5','第五题，小棒二百三十，计数器五百三十八，左下方块四百零六，右下方块也是五百三十八。'],
+ ['hotL6','第六题，五百二十一里的五是五个百，三百零五里的五是五个一，八百五十里的五是五个十。'],
+ ['hotL7','第七题，方框里依次填七十、三百、七百六十四、八十。'],
+ ['hotL8a','第八题第一行，每次多一百，填七百、九百、一千。'],
+ ['hotL8b','第八题第二行，每次多十，填九百七十、九百九十、一千。'],
+ ['hotL8c','第八题第三行，每次多一，填九百九十七、九百九十九、一千。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

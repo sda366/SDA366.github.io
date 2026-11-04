@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 标准模板 v4.0（小学数学课件技能 math-primary-courseware）
+  ----------------------------------------------------------------------------
+  用法：复制本文件 → 替换 {{...}} 占位符 → 写热区/steps1/steps2/文字卡/分层题 → 跑校验
+  红线：CSS 与「脚本」已实战验证（99 页），除 steps1/steps2/热区点读表外不要改动
+  填写顺序：IMG → 热区 → steps1 → 文字卡 → 分层题 → steps2 → 热区点读表 → 校验
+  校验：node assets/check_page.js <html> <热区数> <steps1思考数> <文字卡数> <点读表条数>
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第71页 练一练：退位减法·表格·看图列式·游客问题（有声图文带读）</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>练一练（退位减法·表格·看图列式·游客问题）</h1>
+    <p>十位和百位各怎样减——先说一说再动笔</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>连续退位与填表求减数</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/71a-课本第71页-练一练减法和差看图列式公园游客.png" alt="人教版二年级下册数学课本第71页：练一练 1 先说十位百位怎样减再计算四道竖式；2 列竖式计算并验算六题；3 被减数减数差的填表；4 学校到家共503米的线段图看图列式；5 生态公园游客843人两步问题；6 五张数字卡片的和与差">
+    <!-- ===== 热区：按教材图版面百分比（left/top/width/height）标定，交付前已对照原图核校 =====
+         id 统一命名 hotXxx；每个热区都要在页面底部「热区点读表」里有对应一条。
+         标定方法：先用百分比网格读出每个块的上下左右边界，再留一点余量。 -->
+    <div class="hotspot" id="hotTitle" style="top:2.6%; left:7%; width:48%; height:7%;"></div>
+    <div class="hotspot" id="hotL1A"   style="top:12.8%; left:4.5%; width:49%; height:12%;"></div>
+    <div class="hotspot" id="hotL1B"   style="top:12.8%; left:54%; width:44%; height:12%;"></div>
+    <div class="hotspot" id="hotL2"    style="top:27.6%; left:4%; width:92%; height:11.6%;"></div>
+    <div class="hotspot" id="hotL3"    style="top:40.4%; left:9%; width:84%; height:13.6%;"></div>
+    <div class="hotspot" id="hotL4"    style="top:55%; left:5%; width:90%; height:14.3%;"></div>
+    <div class="hotspot" id="hotL5"    style="top:70.8%; left:4%; width:92%; height:8.6%;"></div>
+    <div class="hotspot" id="hotL6"    style="top:80.3%; left:7%; width:87%; height:12%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 71 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）=====
+       结构必须完整：.sayable > (.t-badge + .t-main + .say-toggle) + .say-ans > .say-ans-inner > .say-ans-box
+       data-say = 点卡时朗读的文本；.say-ans-box 内写答案（用 <br> 分行、<b> 高亮关键、💡 给方法点拨）
+       默认 4 张卡（t1~t4）；内容多的页可增到 5~6 张，但校验参数要同步改。 -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="四百三十八减二百五十六，十位三减五不够，向百位退一，十位变十三，十三减五得八；百位是从四里退了一，剩三，三减二得一，差是一百八十二。九百四十减八十三更麻烦，个位不够退，十位只剩三；十位三减八还不够，再向百位退一，十位变十三，十三减八得五，百位九退一剩八，差是八百五十七。两道都是十位退位，一道退一次，一道连着退两次。">
+    <span class="t-badge">连续退位</span><span class="t-main">十位退一次和连着退两次，走法有什么不同？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      438-256（退一次）：个位 8-6=<b>2</b>；十位 3 不够减 5，向百位退 1 → 13-5=<b>8</b>；百位 4-1=3，3-2=<b>1</b> → <b>182</b><br>
+      940-83（连退两次）：个位 0-3 不够 → 十位 4 变 <b>3</b>，个位 10-3=<b>7</b>；十位 3 仍不够减 8，再向百位退 1 → 13-8=<b>5</b>；百位 9-1=8 → <b>857</b><br>
+      💡 退位一次，前一位就少 1；前一位本来就小，还得再往前借一次，这就是连续退位。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="表格里求减数，用的还是被减数减差。因为被减数等于减数加差，所以减数等于被减数减差。六百四十五减五百七十九，个位退位，得六十六；七百六十六减六百零七，个位六减七不够，退位得九，十位五，百位一，得一百五十九。">
+    <span class="t-badge">填表</span><span class="t-main">表格里求减数，该用加还是用减？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      被减数 - 减数 = 差 → 求差：<b>被减数 - 减数</b><br>
+      被减数 - 差 = 减数 → 求减数：<b>被减数 - 差</b>（因为 减数 + 差 = 被减数）<br>
+      第一行（已知被减数、减数，求差）：468-76=<b>392</b>；803-674=<b>129</b>；600-493=<b>107</b><br>
+      第二行（已知被减数、差，求减数）：645-579=<b>66</b>；766-607=<b>159</b><br>
+      💡 求减数不是用加，而是用被减数减差；填完用「减数 + 差 = 被减数」验一验。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="线段图告诉我们，学校到家一共五百零三米，已经走了一百四十八米，问还剩多少米。求剩下的一段就用总长减已行，五百零三减一百四十八，个位和十位都要退，算得三百五十五米。">
+    <span class="t-badge">看图列式</span><span class="t-main">总长 503 米，已行 148 米，还剩多少米？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      整条线段 = 一共的路 = <b>503 米</b>；左边一段 = 已行 = <b>148 米</b>；右边一段 = 还剩 = ？<br>
+      列式：<b>503-148=355（米）</b><br>
+      个位 3-8 不够，向十位退，十位是 0 借不到，再向百位退 → 十位变 10，退 1 给个位后剩 9<br>
+      个位 13-8=<b>5</b>；十位 9-4=<b>5</b>；百位 5-1-1=3 → 355<br>
+      💡 看图先认清「总数」和「部分」，求另一部分就用总数减已知部分。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="公园里上午有八百四十三人，中午走了二百六十五人，下午又来了四百零八人。走掉的人要用减法减掉，又来的人要用加法加上，所以先减后加。八百四十三减二百六十五得五百七十八，再加四百零八，得九百八十六人。">
+    <span class="t-badge">两步问题</span><span class="t-main">走了 265 人，又来 408 人，园内现在多少人？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      上午 843 人 →（离开 265 人）→ 还剩 843-265=<b>578</b> 人 →（又来 408 人）→ 578+408=<b>986</b> 人<br>
+      综合算式：<b>843-265+408=986（人）</b><br>
+      💡 离开要<b>减</b>，又来要<b>加</b>；按事情发生的先后顺序算，从左往右。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <!-- ===== 分层提问（固定 6 题：认知 2 / 强化 3 / 拓展 1）=====
+       每题结构：.qa[id=qN][data-ans=朗读答案] > .qa-head(onclick=askQA('qN')) > (.q-emoji + .q-text[.lv-pill] + .toggle)
+                 + .think-pill[data-secs] + .qa-a > .qa-a-inner > (.a-label + .sol.sol1/.sol2 + 可选 .multi/.think-note)
+       层级：lv-r=认知(蓝) / lv-q=强化(橙) / lv-t=拓展(粉)，必须 2:3:1
+       data-secs：认知 8 秒，强化/拓展 10 秒 -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="先看个位，八减六够减，得二。再看十位，三减五不够减，从百位退一，十位变成十三，十三减五得八；百位退掉一后剩三，三减二得一。所以四百三十八减二百五十六等于一百八十二。检查一下，一百八十二加二百五十六正好是四百三十八，算对了。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">➖</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>练1：列竖式计算 438-256，说一说十位是怎样退位的。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先从个位算，够减就直接减；再看十位，3 减 5 不够，就向百位借 1 当 10 个十；最后算百位时要记住已经借走 1。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">个位：8-6=<b>2</b><br>十位：3 不够减 5，向百位退 1 → 13-5=<b>8</b><br>百位：4 被借走 1 剩 3，3-2=<b>1</b><br>所以 <b>438-256=182</b></div>
+      <div class="sol sol2">验算：182+256=438，与被减数相同，答案正确。<br>易错：百位忘了已经借走 1，写成 4-2=2，就错了。</div>
+      <span class="multi">竖式要对齐数位：个位对个位，十位对十位。</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="九百四十减八十三，个位零减三不够，从十位退一，十位四变三，个位十减三得七。十位三减八还不够，再从百位退一，十位十三减八得五，百位九退掉一剩八。所以差是八百五十七。检查，八百五十七加八十三等于九百四十，正确。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">➖</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>练1：940-83，个位退位后十位只剩 3，还是不够减 8，怎么办？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先算个位，0 减 3 要向十位借，十位变成 3；接着算十位，3 减 8 仍不够，只好再向百位借，这就叫连续退位。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">个位：0-3 不够，向十位退 1，十位 4 变 <b>3</b>，10-3=<b>7</b><br>十位：3-8 不够，向百位退 1，13-8=<b>5</b><br>百位：9 被借走 1 剩 <b>8</b><br>所以 <b>940-83=857</b></div>
+      <div class="sol sol2">验算：857+83=940。<br>易错：十位只写 3-8 算不出，就以为题目错了；其实要再往前借一次。</div>
+      <span class="multi">83 是两位数，竖式里要写在个位、十位下面，百位下面空着当 0。</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="表格里六百四十五那一列，被减数和差都知道，要求减数。因为被减数等于减数加差，所以减数等于被减数减差。用六百四十五减五百七十九，个位五减九要退位，算得六十六。验算一下，六十六加五百七十九等于六百四十五，所以减数是六十六。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📋</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>练3：表格中 645 与 579 对应的一格，减数是多少？为什么用减法？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看清哪一格空着——这一列给的是被减数 645 和差 579，缺减数；再用「被减数 - 差 = 减数」去算，最后用加法验一验。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">关系式：减数 + 差 = 被减数 → 减数 = 被减数 - 差<br>645-579：个位 5-9 不够，退位 15-9=<b>6</b>；十位 3-7 不够，退位 13-7=<b>6</b>；百位 5-1=4<br>所以减数是 <b>66</b></div>
+      <div class="sol sol2">同一行再练两格：766-607=<b>159</b>（求减数）；468-76=<b>392</b>、803-674=<b>129</b>、600-493=<b>107</b>（求差）。<br>💡 求减数别用加法硬凑，用被减数减差最快。</div>
+      <span class="multi">表格三行：被减数、减数、差，先认行再认列。</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="看图，学校到家的路一共五百零三米，已经走了一百四十八米，求还剩多少米。求剩下的一段，就用总长减去已行的，列式五百零三减一百四十八。个位三减八要退位，十位是零也要连着退，算得三百五十五米。检查，三百五十五加一百四十八等于五百零三。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">📏</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>练4：线段图共 503 米，已行 148 米，还剩多少米？为什么用减法？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先读图，整条线段是总数 503 米，左边一段是已行的 148 米；求右边剩下的部分，就从总数里去掉已知部分，用减法。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">列式：<b>503-148=355（米）</b><br>个位 3-8 不够，向十位退，十位是 0，再向百位退：十位变 10，退 1 给个位后剩 <b>9</b><br>个位 13-8=<b>5</b>；十位 9-4=<b>5</b>；百位 5-1-1=<b>3</b></div>
+      <div class="sol sol2">验算：355+148=503，正好是全程。<br>易错：十位是 0 时忘了连着往百位借，把十位写成 0 直接减 4。</div>
+      <span class="multi">看图列式三步：找总数 → 找已知部分 → 总数减部分。</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="先理一理，上午八百四十三人，中午走了二百六十五人，要先减；下午又来四百零八人，再加。八百四十三减二百六十五等于五百七十八，五百七十八加四百零八等于九百八十六。所以这时园内有游客九百八十六人。注意离开用减，又来用加，顺序不能反。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🌳</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>练5：上午 843 人，中午离开 265 人，下午又来 408 人。这时园内有多少人？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先按时间理顺序：上午的人数先减去走掉的，再加上又来的；离开用减、又来用加，从左往右算两步。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">第一步：843-265=<b>578</b>（人）<br>第二步：578+408=<b>986</b>（人）<br>综合算式：<b>843-265+408=986（人）</b></div>
+      <div class="sol sol2">答：这时园内有游客 986 人。<br>易错：把 265 也加上，或者先加后减却把 408 减掉，都是没弄清「走」和「来」。</div>
+      <span class="multi">两步题先写小标题：先减什么，再加什么。</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="可以照着公园游客那道来编。比如图书角原有三百二十本书，借出八十五本，又还回四十六本，现在有多少本。先减后加，三百二十减八十五等于二百三十五，二百三十五加四十六等于二百八十一本。编题时要说清先发生什么，再发生什么。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">✍️</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>请你自编一道两步加减的实际问题（先减后加或先加后减），并解答。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想一个生活场景，定好原来的数量，再安排一次减少和一次增加；把两个变化写成两句话，最后按顺序列式解答。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">示例：图书角原有 320 本书，借出 85 本，又还回 46 本，现在有多少本？<br>320-85=<b>235</b>（本）<br>235+46=<b>281</b>（本）<br>答：现在有 281 本。</div>
+      <div class="sol sol2">也可以编先加后减：车上原有 275 人，到站上来 68 人，又下去 94 人 → 275+68-94=<b>249</b>（人）。<br>💡 编完自己算一遍，再用逆运算验一验，题目才站得住。</div>
+      <span class="think-note">开放题：情境可以不同，只要两步、数量合理、答案能验算就行。</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'第七十一页，练一练。这一页把退位减法集中练一遍：先说十位、百位各怎样减，再计算；还要填表、看图列式，最后解决公园游客的两步问题。'},
+  {region:'hotL1A', say:'先看练一，左边两道是四百三十八减二百五十六，七百九十二减四百七十八。题目要求先说十位、百位各怎样减，再计算。四百三十八减二百五十六：个位八减六得二；十位三减五不够，向百位退一，十三减五得八；百位四被借走一剩三，三减二得一，差是一百八十二。七百九十二减四百七十八：个位二减八不够，退位得四；十位九退掉一剩八，八减七得一；百位七减四得三，差是三百一十四。'},
+  {region:'hotL1B', think:true, say:'右边两道是九百四十减八十三，三百零五减一百六十八。这两道十位上的数，退过一次以后变得更小了，还要再退。想一想，连续退位该怎么一步一步走？', ans:'九百四十减八十三：个位零减三不够，向十位退一，十位四变三，个位十减三得七；十位三减八还不够，再向百位退一，十位变十三，十三减八得五；百位九退掉一剩八，差是八百五十七。三百零五减一百六十八：个位五减八不够，向十位退一，可十位是零，只好向百位退一，十位变十，再退一给个位，十位剩九，个位十五减八得七；十位九减六得三；百位三退掉一剩二，二减一得一，差是一百三十七。连续退位的关键，是每退一次，前一位就少一。'},
+  {region:'hotL2', say:'练二是列竖式计算并验算，六道题：一百七十五减九十三，四百九十六减二百七十九，七百一十六减三百四十八，二百减六十七，六百零二减三百七十五，一千减五百八十六。算完别忘了用差加减数，看等不等于被减数。'},
+  {region:'hotL3', think:true, say:'练三是填表，表格三行分别是被减数、减数、差。有的格子给了被减数和减数，求差；有的给了被减数和差，求减数。想一想，求减数该用加还是用减？为什么？', ans:'求差用被减数减减数；求减数用被减数减差，因为被减数等于减数加差。第一列四百六十八减七十六得三百九十二。第二列六百四十五减五百七十九得六十六。第三列八百零三减六百七十四得一百二十九。第四列七百六十六减六百零七得一百五十九。第五列六百减四百九十三得一百零七。填完都可以用减数加差等于被减数来验算。'},
+  {region:'hotL4', say:'练四是看图列式。线段图左边是学校，右边是家，整条线段表示一共五百零三米，前面一段是已行的一百四十八米，后面一段标着还剩多少米。求剩下的一段，列式是五百零三减一百四十八。个位三减八要退位，十位是零还要连着退，算得三百五十五米。'},
+  {region:'hotL5', think:true, say:'练五，生态公园里上午有游客八百四十三人，中午有二百六十五人离开，下午又来了四百零八人，问这时园内有多少人。想一想，为什么要先减后加？能先加后减吗？', ans:'离开的人要减掉，又来的人要加上，事情是按时间先后发生的，所以先减后加。八百四十三减二百六十五等于五百七十八，五百七十八加四百零八等于九百八十六，这时园内有游客九百八十六人。先加后减结果其实一样，但先减后加更符合题意，也不容易把走掉的人算成来了的人。'},
+  {region:'hotL6', say:'练六，每张卡片上两个数的和是多少？差是多少？五张卡片分别是六百一十四和二百四十五，七百七十五和一百三十五，六百和二百四十三，五百零五和三百五十六，四百六十八和二百三十九。求和用加法，求差用减法，一张一张算清楚。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，四百三十八减二百五十六，十位该怎样退位？先自己列竖式，想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，九百四十减八十三，个位退位后十位只剩三，还是不够减八，怎么办？想一想连续退位。'},
+  {id:'q3', qa:'q3', say:'第三题，表格里给了被减数六百四十五和差五百七十九，要求减数。该用加还是用减？为什么？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，看图列式，全程五百零三米，已行一百四十八米，还剩多少米？为什么用减法？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，上午八百四十三人，中午走了二百六十五人，下午又来四百零八人。两步怎么排？想一想。'},
+  {id:'q6', qa:'q6', say:'第六题是开放题，请你自编一道两步加减的实际问题，还要自己解答。先想好场景和数量，再动笔，想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条，格式为 热区 id 加一句朗读文本，条数要与热区个数相等 */
+[['hotTitle','第七十一页，练一练，退位减法集中练，还要填表、看图列式、解决游客问题。'],
+ ['hotL1A','练一，左边两道，四百三十八减二百五十六，七百九十二减四百七十八，先说十位、百位怎样减，再计算。'],
+ ['hotL1B','练一，右边两道，九百四十减八十三，三百零五减一百六十八，连续退位，一次不够还要再退一次。'],
+ ['hotL2','练二，列竖式计算并验算，六道题，算完用差加减数检查。'],
+ ['hotL3','练三，填表，求差用被减数减减数，求减数用被减数减差。'],
+ ['hotL4','练四，看图列式，全程五百零三米，已行一百四十八米，还剩三百五十五米。'],
+ ['hotL5','练五，公园游客，八百四十三减二百六十五再加四百零八，得九百八十六人。'],
+ ['hotL6','练六，五张卡片，每张两个数，求和用加法，求差用减法。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

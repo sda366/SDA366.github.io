@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 标准模板 v4.0（小学数学课件技能 math-primary-courseware）
+  ----------------------------------------------------------------------------
+  用法：复制本文件 → 替换 {{...}} 占位符 → 写热区/steps1/steps2/文字卡/分层题 → 跑校验
+  红线：CSS 与 脚本 已实战验证（99 页），除 steps1/steps2/热区点读表外不要改动
+  填写顺序：IMG → 热区 → steps1 → 文字卡 → 分层题 → steps2 → 热区点读表 → 校验
+  校验：node assets/check_page.js html文件 热区数 思考数 文字卡数 点读表条数
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>练一练（竖式验算·图书调查·连一连·修路）｜万以内的加法和减法 · 课本第67页</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>练一练（竖式验算·图书调查·连一连·修路）</h1>
+    <p>算得对不对——交换加数再算一遍就知道</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>验算与多余条件</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/67a-课本第67页-练一练2图书调查连线与修路.png" alt="人教版二年级下册数学课本第67页：练一练第2题竖式验算、第3题图书调查表、第4题连一连、第5题修路">
+    <!-- ===== 热区：按教材图版面估算百分比（left/top/width/height），交付前对照原图核校 =====
+         id 统一命名 hotXxx；每个热区都要在下方「热区点读表」里有对应一条。
+         估算方法：先看整页有几个块（标题/例题图/算式行/人物泡泡/小题），再按视觉位置给百分比。 -->
+    <div class="hotspot" id="hotTitle" style="top:3%; left:3%; width:52%; height:5%;"></div>
+    <div class="hotspot" id="hotL2a"   style="top:7.5%; left:3%; width:94%; height:4.5%;"></div>
+    <div class="hotspot" id="hotL2b"   style="top:11.5%; left:3%; width:94%; height:4.5%;"></div>
+    <div class="hotspot" id="hotL3t"   style="top:16.5%; left:3%; width:94%; height:25%;"></div>
+    <div class="hotspot" id="hotL3q"   style="top:42%; left:3%; width:94%; height:7%;"></div>
+    <div class="hotspot" id="hotL4"    style="top:52%; left:3%; width:94%; height:15%;"></div>
+    <div class="hotspot" id="hotL4n"   style="top:80%; left:3%; width:94%; height:8%;"></div>
+    <div class="hotspot" id="hotL5"    style="top:87%; left:3%; width:94%; height:9%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 67 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）=====
+       结构必须完整：.sayable > (.t-badge + .t-main + .say-toggle) + .say-ans > .say-ans-inner > .say-ans-box
+       data-say = 点卡时朗读的文本；.say-ans-box 内写答案（用 <br> 分行、<b> 高亮关键、💡 给方法点拨） -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="验算就是交换两个加数的位置再算一遍，两次结果一样，说明算对了。比如七百四十五加一百二十九等于八百七十四，再算一百二十九加七百四十五，还是八百七十四。">
+    <span class="t-badge">验算</span><span class="t-main">验算到底怎么验？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      745+129=<b>874</b> → 验算 129+745=<b>874</b>，两次相同 ✓<br>
+      838+172=<b>1010</b> → 验算 172+838=<b>1010</b> ✓<br>
+      💡 两个加数交换位置，和不变，这是加法最省事的验算办法。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="提问题可以从三个方向想：一共多少，用加法；相差多少，用减法；谁比谁多多少，也用减法。提完问题要自己解答，还要检查单位是不是人。">
+    <span class="t-badge">提问题</span><span class="t-main">调查表上还能提出什么问题？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      一共：258+336=<b>594</b>（人）<br>
+      三类合计：258+336+189=<b>783</b>（人）<br>
+      相差：336-189=<b>147</b>（人）<br>
+      💡 提的问题要能用表里的数算出来，问完记得写单位、写答语。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="连一连不要凭眼睛猜，先把每道算式算出来，写好得数，再到下面找一样的数连起来。算完五个得数，正好和下面五个数一一对应。">
+    <span class="t-badge">连一连</span><span class="t-main">连一连先做什么最省事？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      252+743=<b>995</b>；630+180=<b>810</b>；236+374=<b>610</b><br>
+      178+273=<b>451</b>；547+169=<b>716</b><br>
+      💡 五个得数互不相同，正好和下面的五个数一一配对，连完回头数一遍就能查漏。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="修路这道题，八百四十米是这条路的总长。问的是一共修了多少米，用不上总长，它是多余条件。只有当问题问还剩多少米没修，才要用总长去减。">
+    <span class="t-badge">多余条件</span><span class="t-main">840 米这个条件为什么用不上？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      上午 + 下午：356+278=<b>634</b>（米）<br>
+      840 米是全长，问「一共修了多少」时用不上<br>
+      💡 先圈出问题，再挑条件；用不上的条件不要硬塞进算式。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <!-- ===== 分层提问（固定 6 题：认知 2 / 强化 3 / 拓展 1）=====
+       每题结构：.qa[id=qN][data-ans=朗读答案] > .qa-head(onclick=askQA('qN')) > (.q-emoji + .q-text[.lv-pill] + .toggle)
+                 + .think-pill[data-secs] + .qa-a > .qa-a-inner > (.a-label + .sol.sol1/.sol2 + 可选 .multi/.think-note)
+       层级：lv-r=认知(蓝) / lv-q=强化(橙) / lv-t=拓展(粉)，必须 2:3:1
+       data-secs：认知 8 秒，强化/拓展 10 秒 -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="先算个位，五加九等于十四，写四进一；十位四加二再加进上的一等于七；百位七加一等于八。得八百七十四。验算时把一百二十九和七百四十五交换位置再算一遍，还是一百二十九加七百四十五等于八百七十四，两次一样，说明算对了。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">➕</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>列竖式算 745+129，并验算。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先从个位算，五加九满十要进一；再算十位，别忘加进上来的一；最后算百位。凭什么验算？两个加数交换位置，和应该不变，两次一样才算对。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">5+9=14，写 4 进 1；4+2+1=7；7+1=8。</div>
+      <div class="sol sol2">745+129=<b>874</b>；验算 129+745=<b>874</b>，两次相同，算对了。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="个位八加二等于十，写零向十位进一；十位三加七再加进上的一等于十一，写一向百位进一；百位八加一再加一等于十，写零向千位进一。所以是一千零一十。中间那个零是十位写下来的，不能省，也不能写成一百一十。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🤔</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>838+172 为什么得 1010，中间的 0 从哪来？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先算个位八加二，正好满十写零进一；再算十位三加七再加一，得十一，写一进一；最后算百位八加一再加一，又是十。凭什么有零？哪一位算出十就写零。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">8+2=10，写 0 进 1；3+7+1=11，写 1 进 1；8+1+1=10，写 0 进 1。</div>
+      <div class="sol sol2">838+172=<b>1010</b>，十位上的 0 是算出来写下的，不能省，也不能写成 110。</div>
+      <span class="think-note">得数里有 0 的题，一定要一位一位对齐写</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="第一问求一共有多少人喜欢文学类和科普类，把两个数合起来：二百五十八加三百三十六，个位八加六等于十四进一，十位五加三再加一等于九，百位二加三等于五，得五百九十四人。第二问可以这样提：三类一共多少人喜欢？三个数相加得七百八十三人。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">📚</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>文学类 258 人、科普类 336 人、历史类 189 人。①喜欢文学类和科普类的一共多少人？②再提一个问题并解答。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看第一问的关键词「一共」，把两类人数合起来，用加法；再想第二问，可以从三类合计、两类相差两个方向提。凭什么这样提？问题的数必须能从表里取到。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">① 258+336=<b>594</b>（人）<br>② 示例：三类一共多少人喜欢？258+336+189=<b>783</b>（人）</div>
+      <div class="sol sol2">还可以问：喜欢科普类的比喜欢历史类的多多少人？336-189=<b>147</b>（人）。</div>
+      <span class="multi">第②问答案不唯一，只要问题能用表里的数算出来就行</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="连一连要先算再连。二百三十六加三百七十四：个位六加四等于十进一，十位三加七再加一等于十一进一，百位二加三再加一等于六，得六百一十。五百四十七加一百六十九：个位七加九等于十六进一，十位四加六再加一等于十一进一，百位五加一再加一等于七，得七百一十六。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🕊️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>连一连：236+374、547+169 各连哪个数？（可选：610、716、810、995、451）</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先一道一道算出得数，写好再去找下面相同的数，不要凭眼睛猜。凭什么这样连？得数是唯一的，算准了才能一一对上。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">236+374：6+4=10 进 1；3+7+1=11 进 1；2+3+1=6 → <b>610</b></div>
+      <div class="sol sol2">547+169：7+9=16 进 1；4+6+1=11 进 1；5+1+1=7 → <b>716</b></div>
+      <span class="think-note">两道题都进了两次位，连完回头核对一遍</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="问题问的是上午和下午一共维修了多少米，把两段合起来就行：三百五十六加二百七十八等于六百三十四米。八百四十米是这条路的总长，这题用不上，它是多余条件。判断的办法是先读问题，看问的是一共还是还剩。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🛠️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>要维修长 840 米的道路，上午修了 356 米，下午修了 278 米。上午和下午一共修了多少米？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先把问题读清楚，问的是上午和下午「一共」，那就把两段合起来；再想 840 米是全长，这里用不上。凭什么不用它？问题没问还剩多少。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">356+278：6+8=14 进 1；5+7+1=13 进 1；3+2+1=6 → <b>634</b>（米）</div>
+      <div class="sol sol2">答：上午和下午一共维修了 <b>634</b> 米。<b>840 米是多余条件</b>，这题用不上。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="要改成还剩多少米没修，就要用总长减去已经修的。先算已经修的：三百五十六加二百七十八等于六百三十四米。再用八百四十减六百三十四，等于二百零六米。这时候八百四十米就不是多余条件了，它变成了被减数。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">✍️</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>把第 5 题改成一个「还剩多少米没修」的问题，并解答。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看清「还剩」要用减法，被减数是全长；再先算出已经修了多少，然后才做减法。凭什么先加后减？减法要用到已经修的米数，这个数题里没直接给。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">已修：356+278=<b>634</b>（米）；还剩：840-634=<b>206</b>（米）。</div>
+      <div class="sol sol2">答：还剩 <b>206</b> 米没修。同一个 840 米，换个问题就从多余条件变成了必须用的条件。</div>
+      <span class="multi">拓展：条件用不用，由问题决定，不由条件多少决定</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'第六十七页，练一练的第二题到第五题。第二题的要求是：列竖式计算并验算。验算，就是把两个加数交换位置再算一遍。'},
+  {region:'hotL2a', think:true, say:'先看上面一行三道：七百四十五加一百二十九，八百三十八加一百七十二，六百八十七加二百二十五。八百三十八加一百七十二这道，结果中间会出一个零，先想一想这个零是从哪来的。', ans:'七百四十五加一百二十九：个位五加九等于十四，写四进一；十位四加二再加一等于七；百位七加一等于八。得八百七十四。八百三十八加一百七十二：个位八加二等于十，写零进一；十位三加七再加一等于十一，写一进一；百位八加一再加一等于十，写零进一。得一千零一十，中间这个零是十位上算出来写下的零，不能省。六百八十七加二百二十五：个位七加五等于十二，进一；十位八加二再加一等于十一，进一；百位六加二再加一等于九。得九百一十二。'},
+  {region:'hotL2b', say:'下面一行三道：七百三十六加二百七十九，个位六加九等于十五，进一；十位三加七再加一等于十一，进一；百位七加二再加一等于十，再进一，得一千零一十五。四百五十九加六百三十五，得一千零九十四。六百五十六加一百七十二，得八百二十八。六道题都可以交换加数再算一遍验算。'},
+  {region:'hotL3t', say:'第三题，某学校二、三年级学生喜爱的图书类别调查结果如下表，每人只投一票。表格里文学类二百五十八票，科普类三百三十六票，历史类一百八十九票。'},
+  {region:'hotL3q', say:'两个问题。第一问，一共有多少人喜欢文学类图书和科普类图书？二百五十八加三百三十六等于五百九十四人。第二问要自己提问题并解答，比如三类一共多少人喜欢，三个数相加得七百八十三人；也可以问喜欢科普类比喜欢历史类的多多少人，三百三十六减一百八十九等于一百四十七人。'},
+  {region:'hotL4', think:true, say:'第四题连一连。上面五只鸽子，每只下面挂一道算式：二百五十二加七百四十三、六百三十加一百八十、二百三十六加三百七十四、一百七十八加二百七十三、五百四十七加一百六十九。下面五个数：六百一十、七百一十六、八百一十、九百九十五、四百五十一。先想一想，怎样连最省事、最不出错？', ans:'连一连的办法是先算再连，不要凭感觉猜。二百五十二加七百四十三等于九百九十五；六百三十加一百八十等于八百一十；二百三十六加三百七十四等于六百一十；一百七十八加二百七十三等于四百五十一；五百四十七加一百六十九等于七百一十六。五个得数正好和下面的五个数一一对上，没有重复也没有落下的。'},
+  {region:'hotL4n', say:'下面这一排就是刚才算出的五个得数：六百一十、七百一十六、八百一十、九百九十五、四百五十一。连完可以回头检查，每个数是不是只用了一次。'},
+  {region:'hotL5', think:true, say:'第五题，某工程队要维修长八百四十米的道路，上午维修了三百五十六米，下午维修了二百七十八米。问上午和下午一共维修了多少米。先想一想，八百四十米这个条件要不要用？', ans:'问的是上午和下午一共维修了多少米，就是把上午的和下午的合起来：三百五十六加二百七十八。个位六加八等于十四，进一；十位五加七再加一等于十三，进一；百位三加二再加一等于六。得六百三十四米。八百四十米是这条路的总长，只有在问还剩多少米没修的时候才用得上，这题用不上，它是多余条件。做题先把问题读清楚，再挑条件。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，七百四十五加一百二十九，还要验算。想一想，验算的时候该交换哪两个数。'},
+  {id:'q2', qa:'q2', say:'第二题，八百三十八加一百七十二。想一想，它的得数中间为什么会有一个零。'},
+  {id:'q3', qa:'q3', say:'第三题，图书调查表。先算文学类和科普类一共多少人，再自己提一个问题，想一想可以怎么提。'},
+  {id:'q4', qa:'q4', say:'第四题，连一连。想一想，先算还是先猜更靠得住。'},
+  {id:'q5', qa:'q5', say:'第五题，修路。想一想，题里的八百四十米到底要不要用。'},
+  {id:'q6', qa:'q6', say:'最后一题，把修路这题改成问还剩多少米。想一想，这回八百四十米还能不能用不上。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条（热区 id 配一句点读话），条数 = 热区个数 */
+[['hotTitle','练一练第二题，列竖式计算并验算。'],
+ ['hotL2a','第二题上面一行：八百七十四、一千零一十、九百一十二。'],
+ ['hotL2b','第二题下面一行：一千零一十五、一千零九十四、八百二十八。'],
+ ['hotL3t','第三题图书调查表：文学类二百五十八票，科普类三百三十六票，历史类一百八十九票。'],
+ ['hotL3q','第三题两问：文学类和科普类一共五百九十四人，第二问自己提问题。'],
+ ['hotL4','第四题连一连：五只鸽子的算式对应九百九十五、八百一十、六百一十、四百五十一、七百一十六。'],
+ ['hotL4n','下面五个得数：六百一十、七百一十六、八百一十、九百九十五、四百五十一。'],
+ ['hotL5','第五题修路：三百五十六加二百七十八等于六百三十四米，八百四十米是多余条件。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

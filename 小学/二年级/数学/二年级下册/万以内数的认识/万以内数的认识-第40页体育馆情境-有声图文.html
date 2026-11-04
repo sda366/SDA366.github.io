@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 依据 math-primary-courseware 标准模板 v4.0 生成
+  ----------------------------------------------------------------------------
+  页面：人教版《数学》二年级下册 第四单元 万以内数的认识 · 课本第 40 页
+  朗读引擎与样式沿用模板，未作改动；只替换占位符并写入热区/朗读稿/文字卡/分层题
+  校验：node check_page.js <html> <热区数> <steps1思考数> <文字卡数> <点读表条数>
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万以内数的认识（单元起始）· 课本第40页 体育馆情境 · 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 body 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>万以内数的认识（单元起始）</h1>
+    <p>体育馆里能坐多少人——猜一猜、估一估</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>用五千、八千、一万这样的数，估出体育馆大约能坐多少人</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/40a-课本第40页-体育馆情境.jpg" alt="人教版二年级下册数学课本第40页 万以内数的认识 单元起始页：体育馆看台全景，小机器人问“猜一猜：体育馆里大约能坐多少人？”，四个小朋友分别说“比一百多得多”“五千人”“八千人”“我知道，能坐一万人”。">
+    <!-- ===== 热区：按教材图版面估算百分比，交付前已对照原图核校 ===== -->
+    <div class="hotspot" id="hotTitle"   style="top:4.2%; left:6%; width:90%; height:6.6%;"></div>
+    <div class="hotspot" id="hotPic"     style="top:11.2%; left:1.5%; width:97%; height:40%;"></div>
+    <div class="hotspot" id="hotRobot"   style="top:51.8%; left:37%; width:25%; height:6.6%;"></div>
+    <div class="hotspot" id="hotSummary" style="top:62.5%; left:25%; width:50%; height:10%;"></div>
+    <div class="hotspot" id="hotB1"      style="top:73.4%; left:9%; width:43%; height:5.4%;"></div>
+    <div class="hotspot" id="hotB2"      style="top:73.4%; left:52.5%; width:40%; height:5.4%;"></div>
+    <div class="hotspot" id="hotKids"    style="top:78.6%; left:6%; width:90%; height:20.5%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 40 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字卡 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="一百以内的数，数我们班的同学、数一盒糖，够用了。可是体育馆的座位一层又一层，比一百多得多。要说出这样的数量，就得用更大的数：一千、一万。所以我们要学习万以内的数。">
+    <span class="t-badge">想一想</span><span class="t-main">为什么需要更大的数？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      一百以内的数，只能表示比较少的数量；<br>
+      体育馆座位一层又一层，远远超过一百个；<br>
+      💡 数量变大了，就要请出更大的计数单位：一千、一万。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="比一百多得多，不是说一百零一、一百二十，而是远远超过一百。就像走一百步和走一万步，差得远。这个说法是在估：比一百大很多很多。">
+    <span class="t-badge">词语</span><span class="t-main">“比一百多得多”怎么理解？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      “多得多”＝远远超过，不是多一点点；<br>
+      比一比：“比一百多一些”是一百零几、一百几十；<br>
+      💡 估数时常用“多得多、多一些、少一些”这样的说法，把差距说清楚。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="五千是五个一千，八千是八个一千，一万是十个一千。一千已经很多了：一千根小棒要捆成十捆，每捆一百根。所以一万是很大很大的数。">
+    <span class="t-badge">数的大小</span><span class="t-main">五千、八千、一万有多大？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      五千＝5 个一千；八千＝8 个一千；一万＝10 个一千；<br>
+      一千一千地数：一千、二千……九千、一万；<br>
+      💡 几个一千，就是几千；十个一千，就是一万。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="体育馆的座位那么多，一个一个数太慢，也数不清。先估一估，说出大概有多少，就能知道要准备多少张票、多少瓶水。估算不必数清，也能说出大概。">
+    <span class="t-badge">方法</span><span class="t-main">为什么要估算？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      估＝先看一部分，再推整体；<br>
+      “大约”“大概”都是估算时常用的词；<br>
+      💡 估算的结果不唯一，只要说得有道理、数量级对得上，就是合理的估计。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="要先弄清“多得多”的意思。比一百多一点点，是一百零几、一百几十，那叫多一些。比一百多得多，是远远超过一百，可能是几千，也可能是一万。体育馆座位一层又一层，比一百多很多很多，所以说多得多。答案是多很多，不是一点点。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🔍</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>小朋友说“比一百多得多”，这里的“多得多”是比一百多一点点，还是多很多？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先分清“多一些”和“多得多”两个说法有什么不同，再想“多一点点”对应哪些数，最后看体育馆的座位远远超过一百，所以“多得多”指的是多很多。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">“比一百多一些”：一百零几、一百二十、一百五十，只多一点点。</div>
+      <div class="sol sol2">“比一百多得多”：远远超过一百，可以是<b>几千</b>，也可以是<b>一万</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="三个数都是比一百大得多的数。先看它们各有几个一千：五千是五个一千，八千是八个一千，一万是十个一千。几个一千越多，这个数就越大。十个一千比八个一千多，八个一千又比五个一千多。所以一万最大，八千排第二，五千最小。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">📊</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>五千、八千、一万这三个数，哪个最大？哪个最小？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先把每个数看成几个一千，再比一比谁的一千多，最后按一千的个数从多到少排序，就知道谁最大、谁最小。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">五千是 5 个一千，八千是 8 个一千，一万是 10 个一千。</div>
+      <div class="sol sol2">一千的个数越多，数就越大：<b>一万最大</b>，八千第二，<b>五千最小</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="因为他们都没有一个一个地数，都是估的。站的位置不同，有人只看一个看台，有人看整个场馆；心里的标准也不同，有人用一百作标准，有人用一千作标准。估算本来就不要求唯一答案，只要说得有道理就行。要比谁的估计更合理，就看谁找的依据更接近实际。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🤝</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>同一个体育馆，四个小朋友猜的数为什么不一样？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看四个人有没有真的数过，再想他们各自盯着哪一块、用什么数作标准，最后明白估算允许不同答案，但要能说出依据。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">四个人都是“估”，没有一个人一个一个数，所以答案本来就不会相同。</div>
+      <div class="sol sol2">看的范围不同、心里的标准不同（用一百还是用一千），估出的数就不同；<b>估算合理就好</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="可以一千一千地数：一千、二千、三千、四千、五千、六千、七千、八千、九千、一万。正好数了十次，所以一万里面有十个一千。也可以反过来想：一万去掉一个一千，还剩九千，说明它是由十个一千合起来的。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🔢</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>一万里面有几个一千？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先一千一千地往下数，一边数一边记数了几次，再数到一万停下，最后数了几次就是几个一千，还可以反过来减一减验证。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">一千一千地数：一千、二千、三千……九千、一万，正好十个一千。</div>
+      <div class="sol sol2">所以 <b>一万里面有十个一千</b>；一万去掉一个一千，还剩九千。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="可以先数一小块：数一排有多少个座位，再数这样的座位有几排，算出一个看台大约有多少个。几个看台差不多，就把一个看台的数乘上看台数。也可以把场地分成很多小片，数清一片再乘片数。这样不必一个一个数，也能估出大概。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">📐</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>要估计体育馆能坐多少人，可以怎样估？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想座位是整齐排列的，再数出一小部分的座位数，最后用一小块去推整个场馆，就能估出大概的总数。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">先数一排几个座位，再数有几排，就算出一个看台大约多少个。</div>
+      <div class="sol sol2">一个看台的数乘上看台数，就是全场大概的座位数；<b>先数一小块，再推整体</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="比如学校全体同学的人数、超市一天卖出的鸡蛋个数、一本书的字数、一座城市的常住人口。这些东西的数量都远远超过一百，用一百以内的数说不清，就要用几千、几万来表示。判断的标准很简单：数量比一百多得多，就需要更大的数。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌏</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>生活中还有哪些地方要用到比一百大的数？举两个例子，说说为什么。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先找身边数量特别多的东西，再想用一百以内的数能不能说清，最后挑两个例子说明为什么必须用更大的数。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">例子：全校同学的人数、一袋大米有多少粒、一本书的字数、城市的人口。</div>
+      <div class="sol sol2">它们的数量都<b>比一百多得多</b>，用一百以内的数说不清，所以要用几千、几万。</div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'万以内数的认识。这是第四单元的起始页。这一单元，我们要认识比一百大得多的数。先来看课本第四十页，体育馆里的场面。'},
+  {region:'hotPic', think:true, say:'这是一个很大的体育馆。看台一层又一层，座位多得一眼数不清。猜一猜：体育馆里大约能坐多少人？请先自己试着猜一个数。', ans:'我们先不用一个一个地数。看一看：一个看台就有好多好多排座位，每一排又有好多位置。座位这么多，用几十、一百这样的数肯定不够，要说清楚，必须用更大的数。'},
+  {region:'hotRobot', say:'小机器人问：猜一猜，体育馆里大约能坐多少人？注意“大约”两个字，就是让我们估一估，不必说得和实际一模一样。'},
+  {region:'hotB1', think:true, say:'第一个小朋友说：比一百多得多。第二个小朋友说：五千人。', ans:'“比一百多得多”，意思是远远超过一百，不是一百零几，也不是一百几十。五千人就是五个一千，比一百大得多。这两个说法都在告诉我们：座位数远远超过一百。'},
+  {region:'hotB2', say:'第三个小朋友说：八千人。第四个小朋友说：我知道，能坐一万人。八千、一万，都是比一百大得多的数。'},
+  {region:'hotKids', say:'四个小朋友，四种说法：比一百多得多、五千人、八千人、一万人。他们说的是同一个体育馆，可猜出来的数并不一样。'},
+  {region:'hotSummary', think:true, say:'那么，一万人到底有多大呢？请你闭上眼睛想一想。', ans:'一万是很大的数。我们一个班只有几十人，一万人要好多好多个班才坐得下。所以描述体育馆的座位数，就要用五千、八千、一万这么大的数。估算就是不必数清，也能说出大概有多少。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知题。小朋友说，比一百多得多。这个多得多，是比一百多一点点，还是多很多呢？请你想一想，再说出理由。'},
+  {id:'q2', qa:'q2', say:'第二题，认知题。五千、八千、一万这三个数，哪个最大，哪个最小？想一想，你是按什么比较的。'},
+  {id:'q3', qa:'q3', say:'第三题，强化题。同一个体育馆，四个小朋友猜的数为什么不一样？想一想，他们各自看了什么、用了什么作标准。'},
+  {id:'q4', qa:'q4', say:'第四题，强化题。一万里面有几个一千？想一想，可以一千一千地数一数。'},
+  {id:'q5', qa:'q5', say:'第五题，强化题。如果要估计体育馆能坐多少人，可以怎样估？想一想，先数哪一小块最方便。'},
+  {id:'q6', qa:'q6', say:'第六题，拓展题。生活中还有哪些地方要用到比一百大的数？想一想，先举两个例子，再说说为什么。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条，条数等于热区个数 */
+[['hotTitle','这一页是第四单元万以内数的认识，从数体育馆的座位开始。'],
+ ['hotPic','体育馆又大又高，看台一层又一层，座位多得数不清。'],
+ ['hotRobot','小机器人问：猜一猜，体育馆里大约能坐多少人？'],
+ ['hotSummary','一万是很大的数，估一估，不必数清也能说出大概。'],
+ ['hotB1','比一百多得多，五千人。'],
+ ['hotB2','八千人。我知道，能坐一万人。'],
+ ['hotKids','四个小朋友围着看台，一边看一边猜，猜出的数都不一样。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

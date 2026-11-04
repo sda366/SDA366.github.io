@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 标准模板 v4.0（小学数学课件技能 math-primary-courseware）
+  ----------------------------------------------------------------------------
+  用法：复制本文件 → 替换页面占位符 → 写热区/steps1/steps2/文字卡/分层题 → 跑校验
+  红线：CSS 与「脚本」已实战验证（99 页），除 steps1/steps2/热区点读表外不要改动
+  填写顺序：IMG → 热区 → steps1 → 文字卡 → 分层题 → steps2 → 热区点读表 → 校验
+  校验：node assets/check_page.js <html> <热区数> <steps1思考数> <文字卡数> <点读表条数>
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整理和复习 · 万以内数的认识（人教版二年级下册 第60页）</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>整理和复习（万以内数的认识·单元回顾）</h1>
+    <p>从百以内到万以内——计数单位、数位、数位顺序表</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>数位顺序与满十进一</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/60a-课本第60页-整理和复习.jpg" alt="人教版二年级数学下册第60页 整理和复习：计数单位与数位、四个计数器进位图、数位顺序表与数字序列表">
+    <!-- ===== 热区：按教材图版面估算百分比（left/top/width/height），交付前对照原图核校 =====
+         id 统一命名 hotXxx；每个热区都要在下方「热区点读表」里有对应一条。 -->
+    <div class="hotspot" id="hotTitle"   style="top:2%; left:6%; width:88%; height:11%;"></div>
+    <div class="hotspot" id="hotBubble1" style="top:14.2%; left:5%; width:90%; height:9.6%;"></div>
+    <div class="hotspot" id="hotCounter" style="top:23.8%; left:3%; width:94%; height:15%;"></div>
+    <div class="hotspot" id="hotBubble2" style="top:38.6%; left:11%; width:42%; height:9.2%;"></div>
+    <div class="hotspot" id="hotBubble3" style="top:38.6%; left:52%; width:45%; height:9.2%;"></div>
+    <div class="hotspot" id="hotTable"   style="top:52.4%; left:6%; width:88%; height:16.6%;"></div>
+    <div class="hotspot" id="hotNum"     style="top:69.4%; left:6%; width:88%; height:21%;"></div>
+    <div class="hotspot" id="hotEnd"     style="top:91.6%; left:6%; width:88%; height:6%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 60 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="计数单位有：个、十、百、千、万。相邻两个计数单位之间的进率是十。十个一是十，十个十是一百，十个一百是一千，十个一千是一万。数位和计数单位要一一配对。">
+    <span class="t-badge">计数单位</span><span class="t-main">计数单位有哪些？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      从小到大：<b>个、十、百、千、万</b><br>
+      10个一是1个十，10个十是1个百，10个百是1个千，10个千是1个万。<br>
+      💡 数位与计数单位配对记：个位—个，十位—十，百位—百，千位—千，万位—万。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="拨数的时候，哪一位满十，就要向前一位进一。个位满十向十位进一，十位满十向百位进一，百位满十向千位进一，千位满十向万位进一。进一以后，这一位上的珠子要全部退回去。">
+    <span class="t-badge">满十进一</span><span class="t-main">满十进一是什么意思？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      个位满十 → 向<b>十位</b>进1<br>
+      十位满十 → 向<b>百位</b>进1<br>
+      百位满十 → 向<b>千位</b>进1<br>
+      千位满十 → 向<b>万位</b>进1<br>
+      💡 进一之后本位归零，十颗低单位的珠子正好换一颗高单位的珠子。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="数位顺序表有两行。上面一行写数位，从右往左是个位、十位、百位、千位、万位；下面一行写对应的计数单位，个、十、百、千、万。最左边用省略号，表示还有更多的数位。">
+    <span class="t-badge">数位顺序表</span><span class="t-main">数位顺序表怎么看？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      数位：…… 万位 千位 百位 十位 个位<br>
+      计数单位：…… 万 千 百 十 个（一）<br>
+      💡 从右往左一位比一位大十倍；同一个数字站在不同数位上，表示的大小不一样。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="因为每一位上最多只放九个，满十就向前一位进一，哪一位上一个也没有，就写零占位。所以只要数位够多，用零到九这十个数字，就能把所有的数表示出来。">
+    <span class="t-badge">0~9 的道理</span><span class="t-main">为什么0~9就能表示所有数？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      每一位只放 <b>0~9</b> 十个数字<br>
+      满十 → 向前一位进 1；空位 → 用 <b>0</b> 占位（如 6003 中间的 0）<br>
+      💡 数字只有十个，数位却能不断向左增加，所以再大的数也写得出来。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="从右边起，第一位是个位，第二位是十位，第三位是百位，第四位是千位，第五位是万位。每一位都对应一个计数单位，个位对着个，十位对着十，百位对着百，千位对着千，万位对着万。越往左数位越高，一个数字表示的大小也越大。检查时按住数位顺序表从右往左数一遍，别把千位和万位的位置弄反。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">➗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>万以内的数位顺序是怎样的？从右边起，第一位是什么位？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想数位顺序表，从右往左一位一位数；再给每一位配上计数单位。凭的是相邻两个数位之间进率是十，位置越靠左，单位就越大。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">从右往左依次是：个位、十位、百位、千位、万位。</div>
+      <div class="sol sol2">计数单位一一对应：个、十、百、千、万。<b>万位在第五位</b>，再往左还有十万位……</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="十个一是十，十个十是一百，十个一百是一千，十个一千是一万。相邻两个计数单位之间的进率是十，也就是满十进一。拨计数器时，某一位满十颗珠子，就要把这十颗全部退回去，向前一位进一颗。记住这一条，读数、写数、拆数都不会乱。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🧮</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>十个一是多少？十个一百是多少？相邻计数单位之间有什么关系？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先从最小的计数单位想起，一个个往上数十；再看每一级是不是都差十倍。凭的是十进制计数法，相邻单位进率固定是十。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">10个一=1个十，10个十=1个百，10个百=1个千，10个千=1个万。</div>
+      <div class="sol sol2">相邻两个计数单位的进率都是 <b>10</b>，所以叫「满十进一」。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="一样。先看位数，位数多的数大；位数相同，就从最高位开始一位一位比，哪一位上的数大，那个数就大。比如一千零二十和九百九十九，一千零二十是四位数，位数多，所以大。再比如八千五百三十和八千四百二十一，都是四位数，千位都是八，就看百位，五大，所以八千五百三十大。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">⚖️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>比较万以内数的大小，方法和比较百以内数的大小一样吗？举例说明。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看两个数各有几位，位数多的直接判大；位数相同再从最高位逐位比。凭的是数位越高单位越大，高位上的一个顶低位上的很多个。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">先比位数：1020 是四位数，999 是三位数，所以 <b>1020 &gt; 999</b>。</div>
+      <div class="sol sol2">位数相同比最高位：8530 与 8421，千位同为 8，百位 <b>5 &gt; 4</b>，所以 8530 &gt; 8421。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="个位满十颗，就要把这十颗全部退回去，向十位进一颗，个位变成零。如果十位原来一颗也没有，进了一颗以后十位就是一，这个数就是十。要是十位原来已有九颗，再进一颗又满十，还要继续向百位进一。所以拨珠要一位一位检查，满十就进位。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🔴</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>计数器上个位拨了10颗珠子，应该怎么处理？处理后十位上是几？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先数个位珠子够不够十颗；够十颗就整组退掉，向前一位加一颗。凭的是满十进一，十颗低单位的珠子正好换一颗高单位的珠子。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">个位 10 颗 → 全部退回，向十位进 1 颗，个位记 0。</div>
+      <div class="sol sol2">十位原来是 0 颗，进 1 颗后是 <b>1</b>，这个数是 10；若十位已满 10 颗，还要再向百位进 1。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="省略号表示数位还没有排完，左边还有更多的数位。万位左边是十万位，再往左是百万位、千万位。我们现在只学到万位，但数位的道理是一样的，仍然是满十进一。所以看到省略号不要以为数位到头了，它只是告诉我们后面还有。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">…</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>数位顺序表最左边的省略号表示什么？万位左边是什么位？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看省略号在表的哪一端，它在最左边；再想数位是怎么增加的，满十进一就多出一位。凭的是十进制，左边永远还有更高的数位。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">省略号在数位顺序表最左端，表示「后面还有更多数位」。</div>
+      <div class="sol sol2">万位左边依次是 <b>十万位、百万位、千万位</b>……本单元只学到万位。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="因为同一个数字放在不同的数位上，表示的大小不同。个位上的五表示五个一，千位上的五表示五个千。每一位最多放九个，满十就向前一位进一，空着的位置写零占位。数位可以不断向左增加，所以只要数位够多，十个数字就能组合出所有的数。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">💡</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>只用0~9这十个数字，为什么能表示出成千上万的数？请用「数位」和「满十进一」说明。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想一个数字放到不同数位上会怎样，再想每一位最多放几个、满了怎么办。凭的是十进制计数法：十个数字加上无限延伸的数位。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">同一个数字<b>位置不同，大小不同</b>：5 在个位是 5，在千位是 5000。</div>
+      <div class="sol sol2">每位只放 0~9，满十进一、空位补 0；数位不断向左增加 → 有限个数字表示无限多的数。</div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'整理和复习。这一单元，我们从认识百以内的数，走到了认识万以内的数。先看这一句问话：从认识百以内的数，到认识万以内的数，你有哪些收获？'},
+  {region:'hotBubble1', say:'左边的女孩先说了她的收获：我认识了更多的计数单位和数位。'},
+  {region:'hotCounter', think:true, say:'看这四个计数器。第一个计数器上有百位、十位、个位，个位上满十颗珠子，就要向十位进一；第二个计数器还是百位、十位、个位，十位满十，向百位进一；第三个计数器，百位满十，向千位进一，这时就有了千位；第四个计数器有千位、百位、十位、个位，再往后呢？', ans:'每满十就进一，同时多出一个新的数位。个位满十向十位进一，十位满十向百位进一，百位满十向千位进一，千位满十还要向万位进一。所以数位可以一直往左增加，图上的省略号就表示后面还有。'},
+  {region:'hotBubble2', say:'旁边的男孩说：十个一是1个十，十个十是1个百，十个百是1个千。拨数的时候，个位满十就要向十位进一。'},
+  {region:'hotBubble3', think:true, say:'女孩又提醒我们：比较万以内数的大小时，方法和比较百以内数的大小相同。想一想，为什么方法可以一样呢？', ans:'因为数的道理是一样的。先比位数，位数多的数大；位数相同，就从最高位比起，最高位上大的那个数就大。百以内、千以内、万以内，都是这个道理。'},
+  {region:'hotTable', think:true, say:'下面是小组同学一起整理的知识图，你看懂了吗？最上面一行是数位：个位、十位、百位、千位、万位，左边用省略号表示还有更多。下面一行是计数单位：个、十、百、千、万。想一想，万位的左边还有数位吗？', ans:'有。万位左边还有十万位、百万位，数位可以一直往左排下去。现在我们只认识个位到万位这五个数位。注意数位和计数单位要一一对应：个位对着个，十位对着十，百位对着百，千位对着千，万位对着万。'},
+  {region:'hotNum', think:true, say:'再看下面这张表。第一段从零开始，零、一、二，一直到九；第二段是十、十一，一直到九十九；第三段是一百、一百零一，一直到九百九十九；第四段是一千、一千零一，一直到九千九百九十九。每增加一个数位，能表示的数就多了一大片。想一想，为什么增加数位以后，用零到九这几个数字就够了？', ans:'因为每一位上最多只放九个，满十就向前一位进一，空位用零占位。所以不管数有多大，只要数位够多，用零到九这十个数字就能表示出来。这就是十进制计数法。'},
+  {region:'hotEnd', say:'最后一句：向大家展示你的知识图，一起交流吧！把自己的整理说给同学听，比只看一遍记得更牢。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知题。万以内的数位顺序是怎样的，从右边起第一位是什么位？先想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知题。十个一是多少，十个一百是多少，相邻计数单位之间有什么关系？先想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化题。比较万以内数的大小，方法和比较百以内数的大小一样吗？请举个例子。先想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化题。计数器上个位拨了十颗珠子，应该怎么处理，处理后十位上是几？先想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化题。数位顺序表最左边的省略号表示什么，万位左边是什么位？先想一想。'},
+  {id:'q6', qa:'q6', say:'第六题，拓展题。只用零到九这十个数字，为什么能表示出成千上万的数？先想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条记录，形如热区 id 加一句朗读文字，条数 = 热区个数 */
+[['hotTitle','整理和复习，从认识百以内的数，到认识万以内的数，你有哪些收获？'],
+ ['hotBubble1','女孩说：我认识了更多的计数单位和数位。'],
+ ['hotCounter','四个计数器排成一排，每满十就向前一位进一，同时多出一个新数位。'],
+ ['hotBubble2','男孩说：十个一是1个十，拨数时个位满十向十位进一。'],
+ ['hotBubble3','女孩说：比较万以内数的大小，方法和比较百以内数的大小相同。'],
+ ['hotTable','这是小组同学整理的知识图，上面一行是数位，下面一行是计数单位。'],
+ ['hotNum','从零到九千九百九十九，数位越多，能表示的数就越多。'],
+ ['hotEnd','向大家展示你的知识图，一起交流吧！']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

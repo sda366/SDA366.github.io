@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 标准模板 v4.0（小学数学课件技能 math-primary-courseware）
+  ----------------------------------------------------------------------------
+  用法：复制本文件 → 替换占位符 → 写热区/steps1/steps2/文字卡/分层题 → 跑校验
+  红线：CSS 与脚本引擎已实战验证（99 页），除 steps1/steps2/热区点读表外不要改动
+  填写顺序：IMG → 热区 → steps1 → 文字卡 → 分层题 → steps2 → 热区点读表 → 校验
+  校验：node assets/check_page.js <html> <热区数> <steps1思考数> <文字卡数> <点读表条数>
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有余数的除法（练一练·巩固竖式）· 课本第16页 · 有声图文</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 body 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>有余数的除法（练一练·巩固竖式）</h1>
+    <p>说出竖式中每个数的含义——商、积、余数各表示什么</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>说清竖式里商、积、余数的含义，会用乘加算式验算</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/16a-课本第16页-练一练巩固竖式.png" alt="人教版二年级下册课本第16页：练一练巩固竖式">
+    <div class="hotspot" id="hotQ1"    style="top:12%; left:8%; width:84%; height:17%;"></div>
+    <div class="hotspot" id="hotQ2"    style="top:30%; left:8%; width:84%; height:13%;"></div>
+    <div class="hotspot" id="hotQ3"    style="top:43%; left:8%; width:84%; height:12%;"></div>
+    <div class="hotspot" id="hotRobot" style="top:53%; left:52%; width:42%; height:8%;"></div>
+    <div class="hotspot" id="hotQ4"    style="top:61%; left:8%; width:84%; height:23%;"></div>
+    <div class="hotspot" id="hotQ5"    style="top:85%; left:8%; width:84%; height:10%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 16 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="十四根棒棒糖平均装到四个盒子里。十四除以四商三，商三表示每盒装三根；竖式中间的十二是四乘三的积，表示已经装掉的根数；最下面的二是余数，表示还剩两根。">
+    <span class="t-badge">第1题</span><span class="t-main">14 根棒棒糖的竖式里，每个数表示什么？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      14÷4=<b>3</b>……2<br>
+      商 3：每盒装 3 根｜积 12：已经装掉 4×3 根｜余数 2：还剩 2 根<br>
+      💡 竖式下方两个空分别填 <b>12</b> 和 <b>2</b>
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="填一填：二十一除以五商四余一，四乘五加一等于二十一；十七除以六商二余五，二乘六加五等于十七。商乘除数再加余数正好等于被除数，乘加算式可以验算带余除法。">
+    <span class="t-badge">第2题</span><span class="t-main">21÷5 和 4×5+1、17÷6 和 2×6+5 有什么关系？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      21÷5=<b>4</b>……1，4×5+1=<b>21</b><br>
+      17÷6=<b>2</b>……5，2×6+5=<b>17</b><br>
+      💡 商×除数+余数=被除数，这就是验算方法
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="怎样才能很快想出商？想除数的乘法口诀：找积最接近被除数又比它小的那一句，商就是口诀里的几。二十六里最多有八个三，二十七里最多有五个五。">
+    <span class="t-badge">第3题</span><span class="t-main">怎样才能很快想出商？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      想除数的<b>乘法口诀</b>：积最接近被除数又小于它<br>
+      26 里最多有 <b>8</b> 个 3（3×8=24）；27 里最多有 <b>5</b> 个 5（5×5=25）<br>
+      💡 口诀背得熟，商就出得快
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="三十九名同学分组活动，每五人一组。三十九除以五商七余四，可以分成七组还剩四人；一组要五人，还缺一人，所以再增加一人就可以正好再分一组。">
+    <span class="t-badge">第5题</span><span class="t-main">39 人每 5 人一组，再增加几人正好再分一组？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      39÷5=<b>7（组）……4（人）</b><br>
+      一组要 5 人，现在剩 4 人，5−4=1 → 再增加 <b>1 人</b><br>
+      💡 补齐问题用「除数−余数」来想
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="十四根棒棒糖平均装到四个盒子里，十四除以四商三，商三写在个位上，表示每盒装三根；竖式下面的方框填十二，是四乘三的积，表示已经装进去的根数；最下面的方框填二，是剩下的两根。检查：三乘四加二等于十四，说明算对了。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🍬</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>第 1 题：14÷4 的竖式里每个数是什么含义？下面的空怎么填？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>按竖式从上到下的顺序说含义：商是每份分到的数，积是已经分掉的总数，余数是分不完剩下的数，再对照图里的棒棒糖验证。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">14÷4=<b>3</b>……2：商 3 表示每盒 3 根；下方空填 <b>12</b>（4×3 的积）。</div>
+      <div class="sol sol2">最下面的空填 <b>2</b>，是余数；4×3+2=14 ✔</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="二十一除以五商四余一，四乘五加一等于二十一；十七除以六商二余五，二乘六加五等于十七。两组算式告诉我们一个规律：商乘除数再加余数，正好等于被除数。所以乘加算式可以用来检查带余除法算得对不对。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">🍬</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>第 2 题：21÷5=□……□，4×5+1=□；17÷6=□……□，2×6+5=□，怎么填？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想口诀求商和余数，再用商乘除数加余数算出被除数，两组算式正好互相验证，发现被除数、商、除数、余数之间的关系。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">21÷5=<b>4</b>……1，4×5+1=<b>21</b>。</div>
+      <div class="sol sol2">17÷6=<b>2</b>……5，2×6+5=<b>17</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="二十六里最多有几个三：想三的口诀，三八二十四最接近二十六又比它小，所以是八个，二十六除以三商八余二。二十七里最多有几个五：五五二十五，所以是五个，二十七除以五商五余二。机器人问怎样才能很快想出商，窍门就是熟背除数的乘法口诀。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">✏️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 3 题：26 里最多有□个 3？27 里最多有□个 5？怎样才能很快想出商？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>求一个数里最多有几个几，就想几的乘法口诀，找积不超过这个数的最大口诀；写竖式时商对着个位，再用减法求余数。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">26 里最多有 <b>8</b> 个 3：26÷3=8……2（3×8=24）。</div>
+      <div class="sol sol2">27 里最多有 <b>5</b> 个 5：27÷5=5……2（5×5=25）。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="十二个羽毛球平均分给五人，想五的口诀：五二得十，最接近十二又比它小，商二余二。每人分到二个还剩二个，算式是十二除以五等于二余二。检查：二乘五加二等于十二。注意商和余数的单位都是个，答案要写清楚每人分到几个、还剩几个。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🏸</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 4 题(1)：12 个羽毛球平均分给 5 人，每人分到几个还剩几个？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>平均分给五人就是求十二里面有几个五，用除法；试商想五的口诀，商二余二，再检查余数二比除数五小，合适。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">12÷5=<b>2（个）……2（个）</b>，每人分到 2 个还剩 2 个。</div>
+      <div class="sol sol2">验算：5×2+2=12 ✔</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="一箱矿泉水有二十四瓶，平均分给九人。想九的口诀：九二十八最接近二十四又比它小，九三二十七就超过了，所以商二余六：每人分到二瓶还剩六瓶。检查：二乘九加六等于二十四。提醒：要先看清图上标注的一箱是二十四瓶，再用二十四去除。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">💧</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>第 4 题(2)：一箱 24 瓶矿泉水平均分给 9 人，每人分到几瓶？还剩几瓶？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>从图上箱子读出数量是二十四瓶，平均分给九人用除法；试商时九三二十七已经超过二十四，只能商二，剩下六瓶不够每人再分一瓶。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">24÷9=<b>2（瓶）……6（瓶）</b>，每人分到 2 瓶还剩 6 瓶。</div>
+      <div class="sol sol2">验算：9×2+6=24 ✔　余数 6＜9 ✔</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="三十九名同学每五人一组，想五七三十五，商七余四：可以分成七组还剩四人。再增加几人正好再分一组？一组要五人，现在只剩四人，五减四等于一，所以再增加一人就能正好再分一组。这种补齐问题不要用商去加，要用除数减余数来想。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🌟</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>第 5 题：39 人每 5 人一组，可以分几组还剩几人？再增加几人正好再分一组？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先用除法求组数和剩余人数，再把问题和余数联系起来：剩下的不够一组，差几个人凑满一组，就用除数减余数来算。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">39÷5=<b>7（组）……4（人）</b>，分成 7 组还剩 4 人。</div>
+      <div class="sol sol2">5−4=<b>1（人）</b>，再增加 1 人正好再分一组（5×8=40）。</div>
+      <div class="think-note">💡 关键：余数离除数还差几，就补几人</div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+var steps1=[
+  {region:'hotQ1', think:true, say:'第一题：把十四根棒棒糖平均装到四个盒子里，竖式已经写了商三。想一想：竖式中每个数表示什么？下面的空填什么？', ans:'商 3 表示每盒装 3 根；竖式下面的空填 12，是 4×3 的积，表示已经装掉的根数；最下面的空填 2，是余数，表示还剩 2 根。'},
+  {region:'hotQ2', say:'第二题填一填：二十一除以五商四余一，四乘五加一等于二十一；十七除以六商二余五，二乘六加五等于十七。商乘除数加余数正好等于被除数。'},
+  {region:'hotQ3', think:true, say:'第三题：二十六里最多有几个三？二十七里最多有几个五？先想口诀。', ans:'26 里最多有 8 个 3（3×8=24），26÷3=8……2；27 里最多有 5 个 5（5×5=25），27÷5=5……2。'},
+  {region:'hotRobot', say:'机器人问：怎样才能很快想出商？窍门是想除数的乘法口诀，找积最接近被除数又比它小的那句。'},
+  {region:'hotQ4', say:'第四题学校举办羽毛球比赛：十二个羽毛球平均分给五人，每人分到二个还剩二个；一箱矿泉水二十四瓶平均分给九人，每人分到二瓶还剩六瓶。'},
+  {region:'hotQ5', think:true, say:'第五题：三十九名同学分组活动，每五人一组，可以分成几组？还剩几人？再增加几人就可以正好再分一组？先想一想。', ans:'39÷5=7（组）……4（人），分成 7 组还剩 4 人；一组要 5 人，5−4=1，再增加 1 人就能正好再分一组。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题：十四根棒棒糖的竖式里每个数是什么含义？下面的空怎么填？想一想。'},
+  {id:'q2', qa:'q2', say:'第二题：两组填一填的方框怎么填？它们之间有什么关系？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题：二十六里最多有几个三？二十七里最多有几个五？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题：十二个羽毛球平均分给五人，每人分到几个还剩几个？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题：二十四瓶矿泉水平均分给九人，每人分到几瓶还剩几瓶？想一想。'},
+  {id:'q6', qa:'q6', say:'第六题：三十九人每五人一组，再增加几人正好再分一组？想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条 */
+[['hotQ1','点这一块：十四根棒棒糖平均装到四个盒子里，你能说出竖式中每个数的含义吗？'],
+ ['hotQ2','点这一块：填一填，二十一除以五、十七除以六，再用乘加算式验算。'],
+ ['hotQ3','点这一块：二十六里最多有几个三？二十七里最多有几个五？'],
+ ['hotRobot','点机器人的泡泡：怎样才能很快想出商？想除数的乘法口诀。'],
+ ['hotQ4','点这一块：学校举办羽毛球比赛，分羽毛球和分矿泉水两道题。'],
+ ['hotQ5','点这一块：三十九名同学分组活动，每五人一组，再增加几人正好再分一组？']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

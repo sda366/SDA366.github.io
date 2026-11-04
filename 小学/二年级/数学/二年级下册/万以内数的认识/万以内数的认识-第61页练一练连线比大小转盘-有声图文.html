@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 标准模板 v4.0（小学数学课件技能 math-primary-courseware）
+  ----------------------------------------------------------------------------
+  用法：复制本文件 → 替换页面占位符 → 写热区/steps1/steps2/文字卡/分层题 → 跑校验
+  红线：CSS 与「脚本」已实战验证（99 页），除 steps1/steps2/热区点读表外不要改动
+  填写顺序：IMG → 热区 → steps1 → 文字卡 → 分层题 → steps2 → 热区点读表 → 校验
+  校验：node assets/check_page.js <html> <热区数> <steps1思考数> <文字卡数> <点读表条数>
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>练一练 连线·比大小·转盘 · 万以内数的认识（人教版二年级下册 第61页）</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>练一练（连线·比大小·转盘游戏）</h1>
+    <p>六千零三到底是多少——中间和末尾的0最难读</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>中间和末尾的0怎么读</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/61a-课本第61页-练一练连线比大小转盘.jpg" alt="人教版二年级数学下册第61页 练一练：读数连线、圆圈里填大于小于、翻卡片组四位数、转盘游戏与记录表">
+    <!-- ===== 热区：按教材图版面估算百分比（left/top/width/height），交付前对照原图核校 =====
+         id 统一命名 hotXxx；每个热区都要在下方「热区点读表」里有对应一条。 -->
+    <div class="hotspot" id="hotTitle" style="top:2%; left:4%; width:92%; height:11%;"></div>
+    <div class="hotspot" id="hotLian"  style="top:13.5%; left:3%; width:94%; height:16%;"></div>
+    <div class="hotspot" id="hotBi"    style="top:30%; left:3%; width:94%; height:8.5%;"></div>
+    <div class="hotspot" id="hotQ3"    style="top:38.5%; left:3%; width:94%; height:9%;"></div>
+    <div class="hotspot" id="hotPic3"  style="top:47.5%; left:3%; width:94%; height:18%;"></div>
+    <div class="hotspot" id="hotWheel" style="top:66.5%; left:3%; width:46%; height:22%;"></div>
+    <div class="hotspot" id="hotTable" style="top:72.8%; left:46.5%; width:51%; height:15%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 61 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="读数写数要一位一位对。中间有一个零或者连续几个零，都只读一个零；末尾的零不读。写数的时候，哪一位上一个单位也没有，就用零占位，不能空着。比如六千零三，千位写六，百位和十位都写零，个位写三。">
+    <span class="t-badge">读数写数</span><span class="t-main">读数写数怎么对照？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      六千零三 → <b>6003</b>（中间两个 0，只读一个零）<br>
+      六千零三十三 → <b>6033</b><br>
+      六千三百 → <b>6300</b>（末尾的 0 不读）<br>
+      六千三百零三 → <b>6303</b><br>
+      💡 读的时候零只读一次，写的时候一个数位也不能漏。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="比大小分两步。第一步比位数，位数多的数大。第二步，位数相同，就从最高位比起，哪一位上的数大，那个数就大；这一位相同，再比下一位。">
+    <span class="t-badge">比大小</span><span class="t-main">比大小分几步？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      第一步：比位数，位数多的大（1020 &gt; 999）<br>
+      第二步：位数相同，从最高位逐位比（5940 与 5230，千位同为 5，百位 9 &gt; 2，所以 5940 大）<br>
+      💡 最高位一分出胜负，后面的位就不用再比了。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="两个数都是四位数，位数相同，比最高位。八千五百三十的千位是八，七千四百二十一的千位是七，八大于七，所以八千五百三十大。百位、十位、个位根本不用看。">
+    <span class="t-badge">比一比</span><span class="t-main">8530 和 7421 谁大？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      8530 与 7421<br>
+      位数相同 → 比千位：<b>8 &gt; 7</b><br>
+      所以 <b>8530 &gt; 7421</b><br>
+      💡 男孩说「你的比我的大」，说得对：千位一输，后面全白搭。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="先画一张表，第一行写转盘上的四个数：一千、一百、十、一。第二行写每个数转到的次数。转十次，转完以后把次数填好，再用次数乘对应的数，最后加起来，就是总分。">
+    <span class="t-badge">转盘记录</span><span class="t-main">转盘游戏怎么记录？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      所指的数｜1000｜100｜10｜1<br>
+      指的次数｜　｜　｜　｜　（转一次记一次）<br>
+      总分 = 1000×次数 + 100×次数 + 10×次数 + 1×次数<br>
+      💡 先记次数再算总分，比一次一次加更清楚，也不容易漏。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="六千零三，千位是六，百位和十位都是零，个位是三，写出来是千位六、百位零、十位零、个位三。六千零三十三，百位是零，十位和个位都是三。六千三百，十位和个位都是零，末尾的零不读。六千三百零三，百位是三，十位是零，个位是三。零站在不同位置，数就完全不同。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">🔗</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>六千零三、六千零三十三、六千三百、六千三百零三，各写作多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先听清每个数里零在什么位置，再把千位、百位、十位、个位一个个填上，没有数的位写零。凭的是读数规则：中间零读一个，末尾零不读。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">六千零三 → <b>6003</b>；六千零三十三 → <b>6033</b>。</div>
+      <div class="sol sol2">六千三百 → <b>6300</b>；六千三百零三 → <b>6303</b>。<b>区别全在零的位置</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="一千零二十大。一千零二十是四位数，九百九十九是三位数，四位数一定比三位数大。比大小先比位数，位数多的那个数就大，这一步比完，就不用再看各位上的数字了。以后遇到四位数和三位数比，先看位数就能下结论。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">⚖️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>1020 和 999 比，哪个大？为什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先数一数两个数各有几位，位数不同就直接判。凭的是四位数一定大于最大的三位数，数位多表示的数量级更大。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">1020 是四位数，999 是三位数。</div>
+      <div class="sol sol2">四位数 &gt; 三位数，所以 <b>1020 &gt; 999</b>；同理 398 &lt; 402（百位 3 &lt; 4）、5940 &gt; 5230（百位 9 &gt; 2）。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="八千五百三十大。两个数都是四位数，位数相同，就从最高位千位开始比。八千五百三十的千位是八，七千四百二十一的千位是七，八大于七，所以八千五百三十大。千位已经分出大小，百位、十位、个位都不用再比了。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🃏</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>8530 和 7421 哪个大？只比哪一位就能判断？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看位数是否相同，都是四位；再从最高位千位比起。凭的是高位一个单位更大，千位分出胜负，后面再多也翻不了盘。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">位数相同 → 比千位：<b>8 &gt; 7</b>。</div>
+      <div class="sol sol2">所以 <b>8530 &gt; 7421</b>，男孩说「你的比我的大」是对的。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="画一个表最清楚。第一行写转盘上的四个数，第二行写每个数转到的次数。每转一次就在对应的格子里加一。十次转完，用次数乘对应的数，再把四个结果加起来，就是总分。这样不会漏记，也算得快。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🎯</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>转盘上是一千、一百、十、一，要转十次再求和，怎样记录最清楚？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想十次的数怎么才不乱，按种类归堆；再画表，一行写数、一行记次数。凭的是乘法是相同加数相加的简便算法。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">表头：所指的数 1000 / 100 / 10 / 1；指的次数逐次打勾累计。</div>
+      <div class="sol sol2">总分 = 1000×a + 100×b + 10×c + 1×d（a+b+c+d=10）。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="因为零站的位置不一样。六千零三的百位和十位都是零，只有千位和个位有数；六千三百的百位是三，十位和个位都是零。一个零在中间，一个零在末尾，读法不同，写法也差得很远。读数时先想每个数位上有几个单位，再动笔写。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">0️⃣</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>六千零三和六千三百，读起来只差一个字，为什么写出来差很多？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先把两个数拆到数位上，再比较每一位上的数。凭的是同一个数字在不同数位表示的大小不同，零的位置决定哪一位是空的。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">六千零三：千位 6、百位 0、十位 0、个位 3 → 6003。</div>
+      <div class="sol sol2">六千三百：千位 6、百位 3、十位 0、个位 0 → 6300；<b>零的位置不同，数就不同</b>。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="把四张卡片从大到小，依次放在千位、百位、十位、个位，组成的数就最大。因为千位上的一个顶一千个一，越高的位越要放大数字。如果翻到零，零不能放在千位，四位数的最高位不能是零，要把它放到个位或者别的空位。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">💡</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>翻四张卡片组成四位数，要想组成的数最大，卡片怎么放？翻到0怎么办？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想哪个数位最值钱，千位最值钱；再把最大的数字放到最值钱的位上，依次排下去。凭的是位值，位置越高数越大。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">四张卡片从大到小排 → 依次占千位、百位、十位、个位。</div>
+      <div class="sol sol2">例：8、5、3、0 → 最大 <b>8530</b>；0 不能放千位，否则就成了三位数。</div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'练一练。这一页有四道练习：连一连、比大小、翻卡片组四位数、转盘游戏。最难的是读数，尤其是中间和末尾有零的数。'},
+  {region:'hotLian', think:true, say:'第一题，连一连。上面是四个用汉字写的数：六千零三、六千零三十三、六千三百、六千三百零三。下面是四个数字。先仔细看：六千零三和六千三百，哪里不一样？', ans:'六千零三，千位是六，百位和十位都是零，个位是三，所以写出来中间要留两个零。六千三百，千位是六，百位是三，十位和个位都是零，末尾的零不读。六千零三十三，百位是零，十位和个位都是三。六千三百零三，百位是三，十位是零，个位是三。零的位置不同，数就完全不同。'},
+  {region:'hotBi', say:'第二题，在圆圈里填大于号或小于号。一千零二十和九百九十九比，一个是四位数，一个是三位数，四位数大。三百九十八和四百零二比，百位上三小于四，所以三百九十八小。五千九百四十和五千二百三十比，千位都是五，百位上九大于二，所以五千九百四十大。'},
+  {region:'hotQ3', say:'第三题，把零到九的数字卡片背面朝上放在桌上，每人翻四张，组成四位数，比一比谁组成的数大。翻到卡片以后，把大的数字放在千位，数就更大。'},
+  {region:'hotPic3', think:true, say:'女孩说她组成的四位数是八千五百三十，男孩说他的是七千四百二十一，还说你的比我的大。想一想，八千五百三十和七千四百二十一，谁大？只看哪一位就够了？', ans:'八千五百三十大。两个数都是四位数，位数相同，就从最高位千位比起。八千五百三十的千位是八，七千四百二十一的千位是七，八大于七，所以八千五百三十大。位数相同的时候，最高位一比就能定输赢，后面的百位、十位、个位都不用看。'},
+  {region:'hotWheel', say:'第四题，用四个圆片做一个转盘，四个扇形上分别写着一千、一百、十、一。每人转十次，记录每次指针指到的数，再把它们加起来，谁的和最大谁获胜。转盘上每个数大小差得很远，转到一千最划算。'},
+  {region:'hotTable', think:true, say:'男孩说，可以画一个表，记录每次得到的数，这样比较清楚。表格第一行写所指的数：一千、一百、十、一；第二行写指的次数。想一想，为什么一定要画表记录？', ans:'因为要转十次，数字多，记在脑子里容易乱。画表以后，每个数转了几次一目了然，算总分只要用次数乘对应的数再相加。比如一千转了三次就是三千，一百转了两次就是二百，再加十和一的次数，又快又不会漏。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知题。六千零三、六千零三十三、六千三百、六千三百零三，各写作多少？先想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知题。一千零二十和九百九十九比，哪个大，为什么？先想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化题。八千五百三十和七千四百二十一，哪个大，只比哪一位就能判断？先想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化题。转盘上是一千、一百、十、一，要转十次再求和，怎样记录最清楚？先想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化题。六千零三和六千三百，读起来只差一个字，为什么写出来差很多？先想一想。'},
+  {id:'q6', qa:'q6', say:'第六题，拓展题。翻四张卡片组成四位数，要想组成的数最大，卡片应该怎么放，翻到零怎么办？先想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条记录，形如热区 id 加一句朗读文字，条数 = 热区个数 */
+[['hotTitle','练一练，这一页有连一连、比大小、翻卡片和转盘游戏四道题。'],
+ ['hotLian','第一题连一连，上面是四个汉字写的数，下面是四个数字。'],
+ ['hotBi','第二题，在圆圈里填大于号或小于号，先比位数，再比最高位。'],
+ ['hotQ3','第三题，翻四张卡片组成四位数，比一比谁组成的数大。'],
+ ['hotPic3','女孩组成八千五百三十，男孩组成七千四百二十一。'],
+ ['hotWheel','第四题，转盘上有四个数，一人转十次，把每次的数加起来。'],
+ ['hotTable','男孩说：可以画一个表，记录每次得到的数，这样比较清楚。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

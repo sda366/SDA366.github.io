@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>做一做 · 小讲堂｜时间在哪里 · 第8页 有声图文带读</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>做一做 · 小讲堂（做自己的时间小书，开讲时间的故事）</h1>
+    <p>按时间先后做小书，选一个感兴趣的时间问题研究并讲一讲</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>按先后做小书，选问题查一查再讲</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/08a-课本第8页-做一做小讲堂.jpg" alt="人教版二年级下册第8页 做一做与小讲堂 圭表与日晷照片">
+    <div class="hotspot" id="hotTitle"   style="top:2.8%;  left:8%;  width:84%; height:11%;"></div>
+    <div class="hotspot" id="hotBubbles" style="top:14%;   left:17%; width:66%; height:8%;"></div>
+    <div class="hotspot" id="hotShare"   style="top:22.4%; left:11%; width:82%; height:4.2%;"></div>
+    <div class="hotspot" id="hotHall"    style="top:29.6%; left:9%;  width:62%; height:13.4%;"></div>
+    <div class="hotspot" id="hotAsk"     style="top:41.6%; left:13%; width:74%; height:16.4%;"></div>
+    <div class="hotspot" id="hotCast"    style="top:61.4%; left:7%;  width:78%; height:14.2%;"></div>
+    <div class="hotspot" id="hotGui"     style="top:74.2%; left:9.5%; width:26%; height:17.4%;"></div>
+    <div class="hotspot" id="hotRigui"   style="top:74.2%; left:40%;  width:15%; height:17.4%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 8 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="做一做有两步。第一步，按照时间先后的顺序，制作自己的时间小书，可以像小明那样，一格放一张照片，旁边写清几时几分。第二步，和大家分享你的时间小书，互相提出与时间有关的问题。">
+    <span class="t-badge">做一做</span><span class="t-main">自己的时间小书怎么做？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>第一步 做</b>：按<b>时间先后顺序</b>，一格一件事，写清几时几分，配照片或画一画。<br>
+      <b>第二步 分享</b>：和同学互相提出与时间有关的问题。<br>
+      泡泡里的两个想法：《有趣的一天》《我的快乐周末》。<br>
+      💡 先排时刻，再贴照片，顺序就不会乱。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="小讲堂先问，关于时间，你还有哪些问题。有同学问，古代的计时工具和现在的钟表一样吗，也有时、分、秒吗。还有同学想知道，与时间有关的成语有哪些。选一个感兴趣的问题，了解、研究一下，再给大家讲一讲。">
+    <span class="t-badge">小讲堂</span><span class="t-main">关于时间，还能问什么？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      书上给了两个问题：<br>
+      ① 古代的计时工具和现在的钟表一样吗？也有时、分、秒吗？<br>
+      ② 与时间有关的成语有哪些？<br>
+      研究三步：<b>选问题 → 查资料（书、网络、问大人、去博物馆）→ 讲给大家听</b>。<br>
+      💡 讲的时候先说问题，再说找到的答案。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="开播的讲稿说，圭表和日晷被称为太阳钟。因为它们都靠太阳照出来的影子计时。太阳在天上移动，影子的方向和长短就跟着变，看影子落在哪里，就知道大概是什么时刻。圭读第一声，日晷的晷读第三声。">
+    <span class="t-badge">开播啦</span><span class="t-main">圭表和日晷为什么叫太阳钟？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>圭（guī）表</b>：立一根竿子当表，看太阳照出的影子，影子长短、方向随时间变化。<br>
+      <b>日晷（guǐ）</b>：刻着时刻的圆盘加一根晷针，看针影落在哪个刻度上。<br>
+      两者都不用发条、不用电池，靠<b>太阳的影子</b>计时，所以叫<b>太阳钟</b>。<br>
+      💡 太阳在动，影子就动；影子一动，时刻就看得见了。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="分享小书的时候，可以互相提与时间有关的问题。可以问经过了多长时间，可以问几时在做什么，也可以问哪一个时刻更早。提完问题，要请对方在自己的小书里找一找，用时刻说清楚。">
+    <span class="t-badge">分享</span><span class="t-main">互相可以提哪些时间问题？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      <b>问经过</b>：从做作业到睡觉用了多长时间？<br>
+      <b>问时刻</b>：几时几分你在做什么？<br>
+      <b>比先后</b>：哪件事做得更早？<br>
+      💡 好问题的标准：能在小书里找到那一格，能用时刻说清楚。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="先看题目要求。做一做说，按照时间先后顺序，制作自己的时间小书。也就是说，先把一天里做过的事排一排，几时做什么，再按从早到晚的顺序一格一格贴上去。答案，按时间先后的顺序。检查一下，小书里的时刻要一格比一格晚，顺序不能颠倒。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">📒</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>「做一做」要求我们按什么顺序制作自己的时间小书？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先在题目里找关键词，做一做第一句就写着顺序要求；再用小明的小书对一对，箭头是不是一格比一格晚。关键词加上例子，就能确认。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">题目原句：<b>按照时间先后顺序，制作自己的时间小书</b>。</div>
+      <div class="sol sol2">对照第7页的小书：9:30 → 9:55 → 10:15 → 11:35 → 12:45 → 下午2:30，时刻一格比一格晚。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="看开播这一段讲稿。圭表和日晷被称为太阳钟。因为它们不用发条，也不用电池，是看太阳照出来的影子来计时间的。太阳在天上走，影子的位置和长短就跟着变，看到影子在哪里，就知道大概是什么时候。答案，被称为太阳钟，因为它们靠太阳的影子计时。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">☀️</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>课本上说，圭表和日晷被称为什么？为什么这样叫？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先在讲稿里找到这个称呼，再想它们和太阳有什么关系。名字里带太阳，说明计时靠的是太阳，不是发条也不是电池。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">讲稿原句：圭表和日晷被称为<b>太阳钟</b>。</div>
+      <div class="sol sol2">因为它们靠<b>太阳照出的影子</b>计时：太阳动，影子跟着动，影子落在哪里就是什么时刻。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="先想一想小书是给谁看的，是给别人看的。只写早上、中午、下午，说不清谁在前谁在后，也说不清过了多久。写清几时几分，别人一眼就能看出顺序，还能算出经过的时间。答案，每一格都要写清几时几分，因为时刻才能说清先后和长短。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">✍️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>做小书时，每一格为什么都要写清是几时几分？只写「早上、中午、下午」行不行？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想小书有什么用，是给别人看的；再看「早上」这类词说得清不清。说不清先后、也算不出长短，就说明必须写具体时刻。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">只写「早上」和「上午」，两件事谁先谁后说不准，也没法算经过的时间。</div>
+      <div class="sol sol2">写成 <b>8:10 吃早饭、8:40 出门</b>，先后一眼看清，还能算出用了 <b>30 分钟</b>。</div>
+      <span class="multi">时刻说得越具体，小书越有用</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="太阳每天从东边升起，从西边落下，影子就跟着慢慢移动。早上影子长，方向偏一边，中午影子短，到了傍晚影子又变长，方向也换了。所以看影子落在哪个刻度上，就能知道大约是什么时刻。答案，因为太阳在动，影子跟着动，影子的位置和时刻是对应的。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🕳️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>日晷上有一根晷针，太阳一照就留下影子。为什么影子的位置能告诉我们时间？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先想影子是怎么来的，是太阳照出来的；再想太阳一天里怎么走。太阳的位置一直在变，影子的位置也就一直在变，两者是一一对应的关系。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">太阳东升西落，光线方向不断改变，<b>晷针的影子就跟着转动</b>。</div>
+      <div class="sol sol2">盘上刻好刻度，影子落在哪个刻度，就表示到了哪个时刻，所以能计时。</div>
+      <span class="think-note">💡 关键关系：太阳位置 ↔ 影子位置 ↔ 时刻</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="一时等于六十分，一分等于六十秒。一秒很短，可一分有六十秒，一时有六十分，攒起来就很长了。所以成语说分秒必争，就是一分一秒也不放过。答案，一时等于六十分，一分等于六十秒，小的时间攒起来就是大时间。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">⏱️</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>成语「分秒必争」里有分和秒。请你说说：1时等于多少分？1分等于多少秒？为什么说分秒也要争？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先回忆时、分、秒之间的进率，都是六十；再想小单位和大单位的关系，六十秒才够一分，六十分才够一时，小时间攒起来就是大时间。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1"><b>1 时 = 60 分，1 分 = 60 秒</b>。</div>
+      <div class="sol sol2">60 秒看着短，攒 60 个就是 1 分，再攒 60 个就是 1 时，所以一分一秒都不能白白放过。</div>
+      <span class="multi">珍惜时间，就是从一分钟、一秒钟开始</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="先选一个自己最想问的问题，比如古代的计时工具和现在的钟表一样吗。然后可以查书、上网、问老师，或者去博物馆看一看，把找到的记下来。讲的时候先说问题，再说找到的答案，最后说自己的感受。答案不唯一，只要问题清楚、办法可行就行。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">🎤</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>选一个你感兴趣的时间问题，说说你准备怎么了解、研究，再讲给大家听。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先挑一个自己真想知道的问题，再想哪里能找到答案；最后安排讲的顺序，先说问题、再说答案，别人才听得明白。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">选问题：古代计时工具与现在钟表的区别，或与时间有关的成语。</div>
+      <div class="sol sol2">研究办法：查书、上网、问大人、去博物馆；讲的时候按「问题 → 答案 → 感受」说。</div>
+      <span class="think-note">💡 答案不唯一，问题清楚、办法可行、讲得有条理就好。</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+var steps1=[
+  {region:'hotTitle', say:'看这一页。最上面是做一做。要求是，按照时间先后顺序，制作自己的时间小书。'},
+  {region:'hotBubbles', think:true, say:'下面有两个泡泡。左边的小男孩说，我想制作有趣的一天。右边的小女孩说，我想制作我的快乐周末。想一想，做一本时间小书，第一步要先做什么？',
+   ans:'第一步先想清楚要记哪一天；第二步把这一天做过的事按时间先后排一排；第三步给每一格写上几时几分，配上照片或者画一画。顺序排好了，小书才讲得清。'},
+  {region:'hotShare', say:'做完还要走一步，和大家分享你的时间小书，互相提出与时间有关的问题。别人提问的时候，你要能在小书里找到那一格，用时刻说清楚。'},
+  {region:'hotHall', say:'下面是第二个板块，小讲堂。开头先问一句，关于时间，你还有哪些问题？'},
+  {region:'hotAsk', think:true, say:'小讲堂里有两个问题。左边的小男孩问，古代的计时工具和现在的钟表一样吗，也有时、分、秒吗。右边的小女孩说，我想知道与时间有关的成语有哪些。书上说，选一个你感兴趣的问题，了解、研究一下，给大家讲一讲。想一想，研究一个问题，可以分成哪几步？',
+   ans:'可以分三步。第一步选问题，挑自己最想知道的那一个；第二步去了解，查书、上网、问大人，把找到的记下来；第三步讲一讲，先说问题，再说答案，最后说自己的感受。'},
+  {region:'hotCast', think:true, say:'这是小讲堂开播啦。讲稿是这样说的，今天我要讲的是，博物馆里的古代计时工具。圭表和日晷被称为太阳钟，因为后面还有话没说完。想一想，为什么把它们叫做太阳钟？',
+   ans:'因为它们不用发条也不用电池，是看太阳照出来的影子计时的。太阳在天上慢慢移动，影子的方向和长短就跟着变，影子落在哪里，就说明大概到了什么时刻，所以叫太阳钟。'},
+  {region:'hotGui', say:'左边这张照片是圭表。圭读第一声。它立着一根竿子当表，太阳一照就有影子，看影子的长短和方向，就知道时间在怎么变化。'},
+  {region:'hotRigui', say:'右边这张照片是日晷，晷读第三声。它是一个刻着时刻的圆盘，中间立着一根晷针。太阳照过来，针的影子落在哪个刻度上，就表示大概是什么时刻。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，认知题。做一做要求我们按什么顺序制作时间小书？先在题目里找关键词。想一想。'},
+  {id:'q2', qa:'q2', say:'第二题，认知题。圭表和日晷被称为什么，为什么这样叫？想一想。'},
+  {id:'q3', qa:'q3', say:'第三题，强化题。做小书时，每一格为什么要写清几时几分，只写早上、中午、下午行不行？想一想。'},
+  {id:'q4', qa:'q4', say:'第四题，强化题。日晷靠晷针的影子计时。为什么影子的位置能告诉我们时间？想一想。'},
+  {id:'q5', qa:'q5', say:'第五题，强化题。分秒必争里有分和秒。一时等于多少分，一分等于多少秒？为什么分秒也要争？想一想。'},
+  {id:'q6', qa:'q6', say:'第六题，拓展题。选一个你感兴趣的时间问题，说说你准备怎么研究，再讲给大家听。想一想。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条 */
+[['hotTitle','做一做，按照时间先后顺序，制作自己的时间小书。'],
+ ['hotBubbles','我想制作有趣的一天。我想制作我的快乐周末。'],
+ ['hotShare','和大家分享你的时间小书，互相提出与时间有关的问题。'],
+ ['hotHall','小讲堂。关于时间，你还有哪些问题？'],
+ ['hotAsk','古代的计时工具和现在的钟表一样吗？我想知道与时间有关的成语有哪些。'],
+ ['hotCast','今天我要讲的是，博物馆里的古代计时工具。圭表和日晷被称为太阳钟。'],
+ ['hotGui','圭表，圭读第一声，靠太阳照出的影子计时。'],
+ ['hotRigui','日晷，晷读第三声，看晷针的影子落在哪个刻度上。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>

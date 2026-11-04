@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  有声图文带读页 · 标准模板 v4.0（小学数学课件技能 math-primary-courseware）
+  ----------------------------------------------------------------------------
+  用法：复制本文件 → 替换 {{...}} 占位符 → 写热区/steps1/steps2/文字卡/分层题 → 跑校验
+  红线：CSS 与 脚本 已实战验证（99 页），除 steps1/steps2/热区点读表外不要改动
+  填写顺序：IMG → 热区 → steps1 → 文字卡 → 分层题 → steps2 → 热区点读表 → 校验
+  校验：node assets/check_page.js html文件 热区数 思考数 文字卡数 点读表条数
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>练一练·思考题（付钱·填数·九宫格）｜万以内的加法和减法 · 课本第68页</title>
+<style>
+  :root{ --main:#1565c0; --hl:#ffb300; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding-bottom:88px; }
+  .container{ max-width:860px; margin:0 auto; padding:16px; }
+  .page-head{ background:linear-gradient(135deg,#00897b,#26a69a); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.92; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:var(--main); margin:22px 0 12px; }
+  .sec-title .bar{ width:6px; height:22px; background:var(--main); border-radius:3px; }
+  .img-wrap{ position:relative; background:#fff; border-radius:12px; padding:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .img-wrap img{ width:100%; display:block; border-radius:8px; }
+  .hotspot{ position:absolute; border:2.5px dashed transparent; border-radius:10px; transition:border-color .3s, background .3s; cursor:pointer; }
+  .hotspot.hl{ border-color:var(--hl); background:rgba(255,179,0,.10); animation:regionFlash .8s ease-in-out infinite; }
+  @keyframes regionFlash{ 0%,100%{ border-color:#ffb300; box-shadow:0 0 0 4px rgba(255,179,0,.18);} 50%{ border-color:#ff7043; box-shadow:0 0 0 9px rgba(255,112,67,.22);} }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+  #imgThink{ display:none; margin:10px auto 0; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .sayable{ position:relative; background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; padding:12px 96px 12px 14px; margin-top:10px; font-size:15px; line-height:1.8; cursor:pointer; transition:border-color .25s, box-shadow .25s; }
+  .sayable:hover{ border-color:#80cbc4; }
+  .sayable.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(255,179,0,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  .t-badge{ display:inline-block; background:#e0f2f1; color:#00695c; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; }
+  .t-main{ font-weight:bold; }
+  .say-toggle{ position:absolute; right:12px; top:12px; font-size:12.5px; color:#2e7d32; background:#e8f5e9; border-radius:999px; padding:3px 10px; }
+  .sayable.open{ border-color:#a5d6a7; }
+  .sayable.open .say-toggle{ background:#2e7d32; color:#fff; }
+  .say-ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .sayable.open .say-ans{ grid-template-rows:1fr; }
+  .say-ans-inner{ overflow:hidden; }
+  .say-ans-box{ margin-top:10px; background:#f1f8e9; border:1.5px dashed #81c784; border-radius:10px; padding:10px 12px; font-size:14px; line-height:1.9; color:#33691e; }
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; }
+  .qa-a-inner{ padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:10px; align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 20px; font-size:15px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff; border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  @media (max-width:600px){ .page-head h1{ font-size:18px; } .sayable{ padding-right:80px; } .ctrl-bar button{ padding:8px 14px; font-size:14px; } #cap{ bottom:110px; } }
+  @media print{ .ctrl-bar,#cap,.think-pill,#imgThink{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+<!-- 朗读引擎：必须紧跟 <body> 开标签、早于页面脚本，否则垫片接不住 window.speechSynthesis -->
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="page-head">
+    <h1>练一练·思考题（付钱·填数·九宫格）</h1>
+    <p>付100元纸币要几张——先算总价再想面额</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">题数 <b>6</b></span>
+    <span class="stat">认知 <b>2</b></span>
+    <span class="stat">强化 <b>3</b></span>
+    <span class="stat">拓展 <b>1</b></span>
+    <span class="stat">本页重点 <b>填数推理与九宫格</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 分两步学：</b><br>
+    <b>① 解析教材图片</b>——纯声音读图，读到哪一块哪一块闪动提示；关键处先倒计时让你思考，再在图片下方给出解析并朗读。<br>
+    <b>② 分层提问练习</b>——六道分层题（认知 / 强化 / 拓展），先思考再展开解析、朗读参考答案；这一步不再回到图片。<br>
+    也可以随时点任意一句话、图上任意一块单独听；点课本文字卡还会展开答案。
+  </div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>教材图片（点块听读，读到哪块哪块闪）</div>
+  <div class="img-wrap" id="imgWrap">
+    <img src="images/68a-课本第68页-练一练填数与思考题九宫格.png" alt="人教版二年级下册数学课本第68页：练一练第6题买微波炉和炒锅、第7题五道竖式、第8题填数、第9题填相同的数、思考题九宫格">
+    <!-- ===== 热区：按教材图版面估算百分比（left/top/width/height），交付前对照原图核校 =====
+         id 统一命名 hotXxx；每个热区都要在下方「热区点读表」里有对应一条。
+         估算方法：先看整页有几个块（标题/例题图/算式行/人物泡泡/小题），再按视觉位置给百分比。 -->
+    <div class="hotspot" id="hotTitle" style="top:2.5%; left:3%; width:94%; height:5.5%;"></div>
+    <div class="hotspot" id="hotL6"     style="top:8%; left:3%; width:94%; height:16%;"></div>
+    <div class="hotspot" id="hotL7a"    style="top:25%; left:3%; width:93%; height:11%;"></div>
+    <div class="hotspot" id="hotL7b"    style="top:36.5%; left:3%; width:93%; height:10%;"></div>
+    <div class="hotspot" id="hotL8"     style="top:47%; left:3%; width:94%; height:19%;"></div>
+    <div class="hotspot" id="hotL9"     style="top:66.5%; left:3%; width:94%; height:9%;"></div>
+    <div class="hotspot" id="hotThink"  style="top:76%; left:3%; width:63%; height:21%;"></div>
+    <div class="hotspot" id="hotGrid"   style="top:77%; left:67%; width:29%; height:20%;"></div>
+  </div>
+  <div class="img-tip">📖 人教版《数学》二年级下册 · 课本第 68 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <div id="imgThink" data-secs="8">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 课本的文字（.sayable 文字卡，点卡：朗读 + 展开答案）=====
+       结构必须完整：.sayable > (.t-badge + .t-main + .say-toggle) + .say-ans > .say-ans-inner > .say-ans-box
+       data-say = 点卡时朗读的文本；.say-ans-box 内写答案（用 <br> 分行、<b> 高亮关键、💡 给方法点拨） -->
+  <div class="sec-title"><span class="bar"></span>课本的文字（点句子：听读 + 看答案）</div>
+
+  <div class="sayable" id="t1" data-say="付钱问题先算总价，再看总价里有几个整百。七百七十元里有七个一百元，还多七十元，七张只有七百元不够，所以要付八张。">
+    <span class="t-badge">付钱</span><span class="t-main">770 元，为什么不能只付 7 张？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      650+120=<b>770</b>（元）<br>
+      770 = 7 个百 + 70 元 → 付 7 张只有 700 元，不够<br>
+      要付 <b>8 张</b>（800 元），找回 30 元<br>
+      💡 只要还多出零头，就要多付一张。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t2" data-say="填数题从个位想起，进位是钥匙。个位相加正好等于结果的个位，就不进位；比结果的个位大，就说明满十进了位。">
+    <span class="t-badge">填数</span><span class="t-main">方框里的数该从哪一位想起？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      3□+□5=87 → 32+55=87<br>
+      1□6+□7□=594 → 116+478=594（个位 6+8=14，进 1）<br>
+      7□5+□8□=1□9□ → 答案不唯一，如 715+384=1099<br>
+      💡 先判断这一位进不进位，再定方框里的数。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t3" data-say="方框里要填相同的数，只能一个一个试，但可以先估。结果的最高位是六，说明这个四位数不会太大，方框里的数最多是五。试五正好成立。">
+    <span class="t-badge">相同的数</span><span class="t-main">四个方框里填同一个数，怎么试？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      □□□□+9□0=6□0□<br>
+      试 5：5555+950=<b>6505</b>，正好是 6□0□ 的样子 ✓<br>
+      💡 先看结果首位估范围（最多到 5），再从小到大试。
+    </div></div></div>
+  </div>
+
+  <div class="sayable" id="t4" data-say="九宫格的秘密有三条：正中间放九个数的平均数；每行三个数的和等于九个数的总和除以三；再把最大和最小的数配成一对，配上中间数正好凑成每行的和。">
+    <span class="t-badge">九宫格</span><span class="t-main">九宫格凭什么这样填？</span>
+    <span class="say-toggle">看答案 ▾</span>
+    <div class="say-ans"><div class="say-ans-inner"><div class="say-ans-box">
+      中间放 <b>154</b>；每行和 = 1386÷3 = <b>462</b><br>
+      150+158=308、151+157=308、152+156=308、153+155=308<br>
+      308+154=462<br>
+      💡 大数配小数，中间数补差，九宫格就摆平了。
+    </div></div></div>
+  </div>
+
+  <!-- ===== 分层提问 ===== -->
+  <!-- ===== 分层提问（固定 6 题：认知 2 / 强化 3 / 拓展 1）=====
+       每题结构：.qa[id=qN][data-ans=朗读答案] > .qa-head(onclick=askQA('qN')) > (.q-emoji + .q-text[.lv-pill] + .toggle)
+                 + .think-pill[data-secs] + .qa-a > .qa-a-inner > (.a-label + .sol.sol1/.sol2 + 可选 .multi/.think-note)
+       层级：lv-r=认知(蓝) / lv-q=强化(橙) / lv-t=拓展(粉)，必须 2:3:1
+       data-secs：认知 8 秒，强化/拓展 10 秒 -->
+  <div class="sec-title"><span class="bar"></span>分层提问练习（先想后看解析）</div>
+
+  <div class="qa" id="q1" data-ans="先算两件东西一共多少钱，六百五十加一百二十等于七百七十元。七百七十元里面有七个一百元，还多七十元。只付七张一百元是七百元，不够，所以要多付一张，付八张，一共八百元，找回三十元。付完还要回头检查，八百减七百七十正好是三十。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-emoji">💰</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>微波炉 650 元、炒锅 120 元，只有 100 元纸币，要付几张？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先把两件东西的价钱合起来，求出总价；再看总价里有几个一百，多出来的零头也要多付一张。凭什么多付一张？七张只够七百元，差的那七十元没处付。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">650+120=<b>770</b>（元）；770 里有 7 个百，还剩 70 元。</div>
+      <div class="sol sol2">7 张 = 700 元，不够；要付 <b>8 张</b> = 800 元，找回 <b>30</b> 元。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="位数不同的两个数相加，也要相同数位对齐，末位对齐，从个位算起。六十五加三百九十八，个位五加八满十进一，得四百六十三。二千五百六十五加四千三百九十八，个位五加八等于十三，十位六加九再加一等于十六，百位五加三再加一等于九，千位二加四等于六，得六千九百六十三。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-emoji">📐</span>
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>65+398 和 2565+4398，位数不同怎么写竖式？得多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先让两个数的末位对齐，短的数左边空着就空着，不要往左靠；再从个位开始一位一位加。凭什么这样写？数位对齐了，每一位上的数才能相加。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">65+398：5+8=13 进 1；6+9+1=16 进 1；3+1=4 → <b>463</b></div>
+      <div class="sol sol2">2565+4398：5+8=13；6+9+1=16；5+3+1=9；2+4=6 → <b>6963</b></div>
+      <span class="think-note">末位对齐，不是左边对齐</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="填数要从个位想起。个位六加几得四，说明一定满十进了位，六加八等于十四，方框填八，向十位进一。十位方框加七再加一等于九，方框填一。百位一加方框等于五，方框填四。所以是一百一十六加四百七十八等于五百九十四。算完把数代回去检查。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-emoji">🔢</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>1□6+□7□=594，两个方框里各填几？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先从个位想起，六加几能得四？只有满十才可能；确定要进位后，十位就要多算一个一；最后看百位。凭什么先算个位？个位决定了进不进位，后面两位都受它影响。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">个位 6+<b>8</b>=14，写 4 进 1；十位 <b>1</b>+7+1=9；百位 1+<b>4</b>=5。</div>
+      <div class="sol sol2">116+478=<b>594</b>，代回去验算：116+478=594 ✓</div>
+      <span class="think-note">个位满十，是这道题的钥匙</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="相同的数只能一个一个试，但可以先估范围。结果的最高位是六，说明这个四位数不会太大，方框里的数最多是五。试五：五千五百五十五加九百五十等于六千五百零五，正好是六千五百零五，符合要求的格式。所以方框里都填五。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-emoji">🎯</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>□□□□+9□0=6□0□，方框里填相同的数，是几？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先看结果首位是六，估出方框里的数不会超过五；再从小到大试，试到格式对得上为止。凭什么最多是五？四位数加三位数要到六千多，首位只能是五左右。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">试 5：5555+950=<b>6505</b>，个位 5+0=5，十位 5+5=10 进 1，百位 5+9+1=15 进 1，千位 5+1=6。</div>
+      <div class="sol sol2">6505 正好是 6□0□ 的样子，所以方框里都填 <b>5</b>。</div>
+      <span class="think-note">先估范围，再试算，比乱猜快得多</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="九个数加起来是一千三百八十六，平均分成三行，每行三个数的和是四百六十二。正中间放中间数一百五十四。最大和最小配成一对，一百五十配一百五十八，一百五十一配一百五十七，一百五十二配一百五十六，一百五十三配一百五十五，每对都是三百零八，加一百五十四正好四百六十二。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-emoji">🧩</span>
+      <span class="q-text"><span class="lv-pill lv-q">强化</span>九宫格里正中间该放哪个数？每行三个数的和是多少？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先把九个数全部加起来，再平均分成三行，就得到每行的和；中间格子被行、列、斜线共用，所以放中间那个数。凭什么放 154？它是这九个数的平均数。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">总和 1386，1386÷3=<b>462</b>；正中放 <b>154</b>。</div>
+      <div class="sol sol2">150+158=308、151+157=308、152+156=308、153+155=308；308+154=<b>462</b>，每行每列都成立。</div>
+      <span class="think-note">中心数 × 3 = 每行的和：154×3=462</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="编填数题，要让进位真的发生才有意思。比如几十几加几十几等于八十五，个位相加必须满十。编好以后自己先算一遍，再把方框里的数代回去检查是不是成立。答案可以不唯一，但要说得清哪一位必须进位。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-emoji">✍️</span>
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>请你编一道「个位必须进位」的填数题，并给出一种填法。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <div class="sol sol3"><b>怎么想的：</b>先定好结果，再让个位相加满十，这样才有进位可推；十位留一个方框，让答案需要算进位。凭什么这样编？有个位进位，填数才有推理的味道。</div>
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">示例：4□+□7=85。个位 <b>8</b>+7=15，写 5 进 1；十位 4+<b>3</b>+1=8。</div>
+      <div class="sol sol2">48+37=<b>85</b>，个位进位、十位刚好，成立。</div>
+      <span class="multi">答案不唯一，只要个位真的满十进位就行</span>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 解析教材图片</button>
+  <button type="button" id="btnStep2">② 分层提问练习</button>
+  <button type="button" id="btnStop">⏹ 停止</button>
+  <span style="opacity:.95">纯声音 + 高亮跟随 · 想好才出解析</span>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+
+/* ===== 语音就绪（2026-10-27 补：移动端必修） =====================
+   手机端 getVoices() 首次返回 []，且不保证触发 voiceschanged；
+   仅设 lang 不指定 voice 时，Safari 17+ / 部分安卓会静默失败。
+   因此：异步等语音列表 + 明确挑一个中文语音。                     */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+/* 手势解锁：playStep1/2 首次 speak 前有 await wait，已脱离点击同步路径，
+   移动浏览器会静默拒绝。这里在 capture 阶段（仍是同步手势）先发一次静音声。 */
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+/* 滚动节流：800ms 内只滚一次；read-assist.js 还会再判一次"是否已可见"，
+   两层叠加的结果 = 手机上只在真的看不见时才轻轻滚一下，不会来回抽搐 */
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+function scrollImage(){ __scrollTo(document.getElementById('imgWrap')); }
+
+/* 文本安全清洗：iOS Safari 遇到「< 开头 + > 结尾 + 含中文」的文本会让
+   speechSynthesis 彻底卡死（要重启 Safari 才恢复）。进引擎前一律转全角。
+   与 js/read-assist.js 的清洗等价且幂等，双保险。 */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 朗读引擎 */
+function speak(text){
+  text=__safeText(text);          /* ← 移动端第一道防线：危险字符清洗 */
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.85; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }   /* 兜底：拿到中文语音就必填 */
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      /* 兜底 watchdog：引擎还在说就继续等，别用固定时长硬切
+         （80 字 ≈ 17.6s 已超 16s 上限；分片后总时长更长，硬切会掐掉后几片） */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function imgThinkWait(){
+  return new Promise(function(resolve){
+    var p=document.getElementById('imgThink');
+    var secs=parseInt(p.getAttribute('data-secs'))||8;
+    p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    p.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); return; }
+      p.textContent='🤔 想一想… '+secs+' 秒（点我可跳过）';
+    },1000);
+    p.onclick=function(){ clearInterval(t); p.style.display='none'; p.onclick=null; resolve(); };
+  });
+}
+
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  var box=document.getElementById('imgAnsBox');
+  box.textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= 第一步：解析教材图片 ================= */
+/* ===== steps1：解析教材图片（读哪块哪块闪）=====
+   每条：{region:'hotXxx', say:'朗读文本'}
+   关键处加 think:true + ans:'解析' —— 先倒计时 8 秒思考，再在图下面板出解析并朗读
+   全程只引用热区 id，绝不引用文字卡 */
+var steps1=[
+  {region:'hotTitle', say:'第六十八页，练一练的第六题到第九题，最后还有一个思考题。'},
+  {region:'hotL6', think:true, say:'第六题。王爷爷要买一台微波炉和一个炒锅，微波炉六百五十元，炒锅一百二十元。他只有面额一百元的纸币，问要付多少张。先算一算一共多少钱，再想一想七张够不够。', ans:'先算总价：六百五十加一百二十等于七百七十元。七百七十元里有七个一百元，还多七十元。付七张只有七百元，不够；所以要付八张，八百元，找回三十元。付钱的问题，先算总价，再看里面有几个整百，不够整百也要多付一张。'},
+  {region:'hotL7a', say:'第七题，五道竖式。前四道是：六十五加八得七十三，六十五加九十八得一百六十三，六十五加三百九十八得四百六十三，五百六十五加四千三百九十八得四千九百六十三。'},
+  {region:'hotL7b', say:'最后一道，二千五百六十五加四千三百九十八，得六千九百六十三。旁边的机器人问：最后一题你会算吗？说说计算时要注意什么。要注意的是，位数不同的两个数相加，也要相同数位对齐，末位对齐，从个位算起。'},
+  {region:'hotL8', think:true, say:'第八题，在方框里填上合适的数，一共三道。第一道是三十几加几十五等于八十七。先想一想，该从哪一位想起？', ans:'填数题从个位想起，进位是关键。第一道：个位方框加五等于七，方框填二；十位三加方框等于八，方框填五，所以是三十二加五十五等于八十七。第二道：个位六加方框得四，必须满十，六加八等于十四，方框填八，向十位进一；十位方框加七再加一等于九，方框填一；百位一加方框等于五，方框填四。所以是一百一十六加四百七十八等于五百九十四。第三道答案不唯一，只要百位满十进一就行，比如七百一十五加三百八十四等于一千零九十九。'},
+  {region:'hotL9', say:'第九题，在方框里填上相同的数。四个方框组成一个四位数，加上九百几十，等于六千零几。先看结果的首位是六，说明这个数不会太大，方框里的数最多是五。试五：五千五百五十五加九百五十等于六千五百零五，正好符合。所以方框里都填五。'},
+  {region:'hotThink', think:true, say:'思考题。把一百五十到一百五十八这九个连续的数，填在右边的九宫格里，使每行、每列三个数的和都相等。先想一想，九个数的总和是多少，每行三个数的和应该是多少？', ans:'九个数的和是一千三百八十六，平均分成三行，每行三个数的和就是四百六十二。九个数里正中间的那个数是一百五十四，把它放在九宫格的正中间。再把最大和最小的数配成一对：一百五十和一百五十八，一百五十一和一百五十七，一百五十二和一百五十六，一百五十三和一百五十五，每一对的和都是三百零八，配上正中间的一百五十四，正好四百六十二。'},
+  {region:'hotGrid', think:true, say:'右边就是九宫格，九个格子怎么摆才能每行每列都一样？先想一想，正中间那个格子最特殊，该放哪个数？', ans:'正中间放一百五十四，因为它是这九个数的平均数，也是排在正中间的那个数。放好以后，上下左右就能一对一对配上。第一行填一百五十三、一百五十八、一百五十一；第二行填一百五十二、一百五十四、一百五十六；第三行填一百五十七、一百五十、一百五十五。这样每行、每列、每条斜线上三个数相加，都是四百六十二。'}
+];
+
+var btnStep1=document.getElementById('btnStep1');
+var btnStep2=document.getElementById('btnStep2');
+
+async function playStep1(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  scrollImage();
+  await wait(600);
+  for(var i=0;i<steps1.length;i++){
+    if(abort) break;
+    var s=steps1[i];
+    var rg=document.getElementById(s.region);
+    if(rg){ hl(rg); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.think){
+      await imgThinkWait();
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns();
+  document.getElementById('imgThink').style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+/* ================= 第二步：分层提问练习 ================= */
+/* ===== steps2：分层提问练习 =====
+   每条：{id:'qN', qa:'qN', say:'引语'} —— 顺序与上面 q1~q6 一致
+   红线：不得出现 imgWrap 或 hotXxx（这一步不回图片） */
+var steps2=[
+  {id:'q1', qa:'q1', say:'第一题，买微波炉和炒锅，只带一百元的纸币。想一想，先算什么，再看什么。'},
+  {id:'q2', qa:'q2', say:'第二题，位数不同的两个数相加。想一想，竖式该怎么对齐。'},
+  {id:'q3', qa:'q3', say:'第三题，填数。想一想，为什么必须从个位想起。'},
+  {id:'q4', qa:'q4', say:'第四题，方框里填相同的数。想一想，能不能先估一估范围再试。'},
+  {id:'q5', qa:'q5', say:'第五题，九宫格。想一想，正中间为什么放一百五十四，每行三个数的和又是多少。'},
+  {id:'q6', qa:'q6', say:'最后一题，请你自己编一道个位必须进位的填数题。想一想，怎样编才会有进位可推。'}
+];
+
+async function playStep2(){
+  abort=false;
+  btnStep1.disabled=true; btnStep2.disabled=true;
+  for(var i=0;i<steps2.length;i++){
+    if(abort) break;
+    var s=steps2[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    focusEl(el);
+    await wait(500);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    var qa=document.getElementById(s.qa);
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none';
+  btnStep1.disabled=false; btnStep2.disabled=false;
+}
+
+btnStep1.addEventListener('click',playStep1);
+btnStep2.addEventListener('click',playStep2);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  var ip=document.getElementById('imgThink'); ip.style.display='none'; ip.onclick=null;
+  unhl(); cap.style.display='none'; clearImgAns();
+  btnStep1.disabled=false; btnStep2.disabled=false;
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 热区点读表：每个热区一条（热区 id 配一句点读话），条数 = 热区个数 */
+[['hotTitle','练一练第六题到第九题，还有一个思考题。'],
+ ['hotL6','第六题付钱：微波炉六百五十元、炒锅一百二十元，一共七百七十元，要付八张一百元。'],
+ ['hotL7a','第七题前四道竖式：七十三、一百六十三、四百六十三、四千九百六十三。'],
+ ['hotL7b','第七题最后一道：二千五百六十五加四千三百九十八等于六千九百六十三。'],
+ ['hotL8','第八题填数三道：三十二加五十五等于八十七；一百一十六加四百七十八等于五百九十四；第三道答案不唯一。'],
+ ['hotL9','第九题填相同的数：五千五百五十五加九百五十等于六千五百零五，方框里都填五。'],
+ ['hotThink','思考题：把一百五十到一百五十八填进九宫格，每行每列的和都相等。'],
+ ['hotGrid','九宫格：中间一百五十四，每行每列的和都是四百六十二。']
+].forEach(function(pair){
+  var el=document.getElementById(pair[0]); if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(pair[1]).then(function(){ unhl(); });
+  });
+});
+
+/* 课本文字卡 */
+document.querySelectorAll('.sayable').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    var wasOpen=el.classList.contains('open');
+    document.querySelectorAll('.sayable.open').forEach(function(o){ if(o!==el) o.classList.remove('open'); });
+    if(wasOpen){ el.classList.remove('open'); return; }
+    el.classList.add('open');
+    focusEl(el);
+    var say=el.getAttribute('data-say')||el.textContent;
+    speak(say).then(function(){ unhl(); });
+  });
+});
+</script>
+</body>
+</html>
