@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  小学语文 · 有声图文带读页  chinese-primary-courseware v1.8
+  课文：统编版语文二年级下册 第二单元-阅读 第6课《千人糕》（课本 第 18~20 页）
+  出处：课本第 18 页脚注 ① 本文选自商务印书馆《基本教科书国语第六册》，有改动
+  ----------------------------------------------------------------------------
+  二版相对一版的四项升级（对应使用者要求）：
+  1. 高标准朗读 + 点读：课文拆到「句」，点哪句读哪句；范读/跟读双模式；
+     跟读模式读完一句留时间让学生自己读，防走神；朗读要求（老师标准）单独成卡。
+  2. 深入理解：提问由 6 题扩到 8 题，认知→理解→运用→拓展四层，
+     开放题明确标注「答案不唯一」，每题给 2~3 个思路。
+  3. 词语：新增「听写」（读两遍→写→报答案）+ 逐词示范造句 + 4 组近义词辨析
+     （相同点 / 不一样在哪 / 各造一句）。
+  4. 其他：默读课文结合插图说千人糕（课后题一）、举一个很多人劳动的例子（课后题二）、
+     读一读记一记 4 框 12 词（课后题三）、分角色朗读、会写字书写提示、词语拓展（一问一答 / 叠词 / 顿号清单）。
+  红线：课文原文、生字表、课后题一律照录教材，不编造；
+        拼音只做视觉显示，不进朗读文本；部首笔画与书写提示标注「供参考」。
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>千人糕 · 语文第6课 · 有声图文带读</title>
+<style>
+  :root{ --main:#c62828; --main2:#ef6c00; --hl:#f9a825; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fdf8f3; color:#3e2723; padding-bottom:130px; }
+  .container{ max-width:880px; margin:0 auto; padding:16px; }
+
+  .page-head{ background:linear-gradient(135deg,#00897b,#4db6ac); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.94; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:#00695c; margin:22px 0 12px; flex-wrap:wrap; }
+  .sec-title .bar{ width:6px; height:22px; background:#00897b; border-radius:3px; }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  /* ===== 工具条 ===== */
+  .tool-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+  .tool-btn{ border:1.5px solid #80cbc4; background:#fff; color:#00695c; border-radius:999px;
+    padding:6px 14px; font-size:13.5px; cursor:pointer; }
+  .tool-btn.on{ background:#00897b; color:#fff; border-color:#00897b; }
+  body.no-py rt{ visibility:hidden; }
+
+  /* ===== 朗读要求卡 ===== */
+  .req-card{ background:#fff8e1; border:1.5px solid #ffd54f; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.95; cursor:pointer; }
+  .req-card.hl{ animation:rowFlash .8s ease-in-out infinite; }
+  .req-card b{ color:#e65100; }
+
+  /* ===== 课文段落 / 句级点读 ===== */
+  .para{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 16px; margin-top:10px;
+    font-family:"KaiTi","STKaiti","Kaiti SC",serif; font-size:19px; line-height:2.2;
+    transition:border-color .25s, box-shadow .25s; }
+  .para.hl{ border-color:var(--hl); background:#fffde7; }
+  .para .no{ display:inline-block; background:#00695c; color:#fff; font-size:12px; border-radius:6px;
+    padding:1px 8px; margin-right:8px; vertical-align:2px; font-family:sans-serif; cursor:pointer; }
+  .para .no:hover{ background:#00897b; }
+  .sent{ cursor:pointer; border-radius:5px; padding:1px 1px; transition:background .2s, box-shadow .2s; }
+  .sent:hover{ background:#fff8e1; }
+  .sent.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.35); }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(249,168,37,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  ruby{ ruby-align:center; }
+  /* 连续两三个字都注音时（如「敕勒」chì lè、「穹庐」qióng lú），拼音比汉字宽，
+     会贴在一起分不清是哪个字的音；只给相邻的注音之间留 2px 空隙 */
+  .para ruby + ruby{ margin-left:2px; }
+  rt{ font-size:11px; color:#c62828; font-family:sans-serif; letter-spacing:0; }
+  .para-tip{ font-family:sans-serif; font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:8px;
+    padding:3px 10px; margin:4px 0 0; display:inline-block; cursor:pointer; }
+
+  /* ===== 教材图片 ===== */
+  .pic-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+  .pic-card{ background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:8px; cursor:pointer; text-align:center;
+    transition:border-color .25s, box-shadow .25s; }
+  .pic-card img{ width:100%; display:block; border-radius:6px; }
+  .pic-card .cap{ font-size:12.5px; color:#5d4037; margin-top:6px; line-height:1.6; }
+  .pic-card.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* ===== 生字卡 ===== */
+  .zi-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:10px; }
+  .zi{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:8px 6px 10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .zi:hover{ border-color:#ffcc80; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .zi .py{ font-size:12px; color:#c62828; height:16px; }
+  .zi .hz{ font-family:"KaiTi","STKaiti",serif; font-size:34px; line-height:1.25; color:#212121; }
+  .zi .ci{ font-size:12.5px; color:#6d4c41; margin-top:2px; }
+  .zi.write .hz{ font-size:30px; }
+  .zi .meta{ font-size:11px; color:#8d6e63; margin-top:3px; line-height:1.5; }
+  .zi .wtip{ font-size:11px; color:#1565c0; background:#e3f2fd; border-radius:6px; padding:2px 5px; margin-top:4px; line-height:1.5; }
+
+  /* 田字格 */
+  .tzg{ width:56px; height:56px; margin:2px auto 4px; position:relative; border:1.5px solid #d84315; border-radius:4px; background:#fff; }
+  .tzg::before,.tzg::after{ content:""; position:absolute; background-image:linear-gradient(to right,#f0bdb4 45%,transparent 45%);
+    background-size:6px 1px; background-repeat:repeat-x; }
+  .tzg::before{ left:0; right:0; top:50%; height:1px; }
+  .tzg::after{ top:0; bottom:0; left:50%; width:1px; background-image:linear-gradient(to bottom,#f0bdb4 45%,transparent 45%);
+    background-size:1px 6px; background-repeat:repeat-y; }
+  .tzg span{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; }
+
+  /* ===== 词语行 / 词语卡 ===== */
+  .word-row{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap; transition:border-color .25s, box-shadow .25s; }
+  .word-row.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .word-row .wk{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:6px; padding:2px 8px; }
+  .word-row .ws{ font-family:"KaiTi","STKaiti",serif; font-size:19px; line-height:1.9; }
+  .word-row .ws em{ font-style:normal; background:#ffecb3; border-radius:4px; padding:0 3px; }
+  .bubble{ background:#ede7f6; color:#5e35b1; border-radius:10px; padding:8px 12px; font-size:13.5px; margin-top:8px; line-height:1.8; }
+
+  /* 听写区 */
+  .dict-panel{ background:#fff; border:2px solid #00897b; border-radius:14px; padding:14px; margin-top:10px; text-align:center; }
+  .dict-stage{ font-size:15px; color:#00695c; margin-bottom:6px; }
+  .dict-word{ font-family:"KaiTi","STKaiti",serif; font-size:40px; letter-spacing:8px; line-height:1.4; color:#212121; min-height:56px; }
+  .dict-word.mask{ color:#bdbdbd; }
+  .dict-hint{ font-size:13.5px; color:#8d6e63; margin-top:6px; min-height:20px; }
+  .dict-btns{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+
+  /* 词语卡（听写词 + 造句） */
+  .wc-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px; }
+  .wc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px 12px; }
+  .wc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .wc .w-top{ display:flex; align-items:baseline; gap:8px; cursor:pointer; }
+  .wc .w-hz{ font-family:"KaiTi","STKaiti",serif; font-size:24px; }
+  .wc .w-no{ font-size:12px; color:#90a4ae; }
+  .wc .w-lab{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; }
+  .wc .w-say{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:5px; cursor:pointer; }
+  .wc .w-own{ font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:6px; padding:3px 8px; margin-top:4px; cursor:pointer; }
+
+  /* 近义词辨析 */
+  .near{ background:#fff; border:1.5px solid #e1bee7; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; }
+  .near.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .near .n-top{ font-family:"KaiTi","STKaiti",serif; font-size:20px; color:#6a1b9a; margin-bottom:4px; }
+  .near .n-same{ font-size:13.5px; color:#4e342e; line-height:1.8; }
+  .near .n-diff{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:4px; }
+  .near .n-diff b{ color:#c62828; }
+  .near .n-eg{ font-size:13.5px; color:#1b5e20; background:#e8f5e9; border-radius:6px; padding:5px 9px; margin-top:5px; line-height:1.8; }
+
+  /* 词语拓展 */
+  .acc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:11px 13px; margin-top:10px; cursor:pointer; font-size:14px; line-height:1.9; }
+  .acc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .acc .a-t{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; margin-right:6px; }
+  .acc .a-c{ font-family:"KaiTi","STKaiti",serif; font-size:17px; }
+
+  /* ===== 成长顺序 / 角色 ===== */
+  .grow{ display:flex; gap:8px; flex-wrap:wrap; }
+  .gstep{ flex:1; min-width:110px; background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .gstep .n{ display:inline-block; width:22px; height:22px; line-height:22px; border-radius:50%; background:#00897b; color:#fff; font-size:12.5px; }
+  .gstep .t{ font-size:14px; margin-top:6px; line-height:1.6; color:#4e342e; }
+  .gstep.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+  .role{ background:#fff; border:1.5px solid #b39ddb; border-radius:12px; padding:10px 12px; cursor:pointer; }
+  .role.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role .r-n{ font-size:15px; color:#5e35b1; font-weight:bold; }
+  .role .r-t{ font-family:"KaiTi","STKaiti",serif; font-size:15px; color:#4e342e; margin-top:4px; line-height:1.75; }
+  .role .r-m{ font-size:12.5px; color:#8d6e63; margin-top:4px; line-height:1.6; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-y{ background:#e8f5e9; color:#2e7d32; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 思考面板 / 字幕 / 控制条 ===== */
+  #thinkPill{ display:none; margin:10px auto 0; width:max-content; max-width:96%; background:#ede7f6; color:#5e35b1;
+    border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; text-align:center; line-height:1.6; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:8px;
+    align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 14px; font-size:14px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff;
+    border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .para{ font-size:17.5px; padding:11px 12px; }
+    .zi-grid{ grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); }
+    .wc-grid{ grid-template-columns:1fr; }
+    .ctrl-bar button{ padding:8px 11px; font-size:13px; }
+    #cap{ bottom:110px; }
+    body{ padding-bottom:160px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#thinkPill{ display:none !important; } body{ padding-bottom:0; } }
+  /* 返回导航按钮（模板自带，新页无需再跑 add_back_button.py） */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); text-decoration:none; }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+  /* 字卡列数：桌面端按固定列排。auto-fill 在 1100px 宽下会算成 7 列，
+     8 个会写字就变成「7+1」、最后一张被拉成整行宽。 */
+  @media (min-width:601px){
+    #zinGrid{ grid-template-columns:repeat(6,1fr); }
+    #ziwGrid{ grid-template-columns:repeat(4,1fr); }
+    /* 本页听写词 10 个：默认 auto-fill 在 1100px 下算成 3 列，排成 3+3+3+1 落单，
+       故按“能整除 10 的最大列数”覆盖成 5 列（5+5）。 */
+    #wcGrid{ grid-template-columns:repeat(5,1fr); }
+    /* 5 列时卡宽约 145px，“字 + 标签”挤在一行会把两字词压成竖排，
+       故让标签换到下一行、词不许断行。 */
+    #wcGrid .w-top{ flex-wrap:wrap; gap:2px 6px; }
+    #wcGrid .w-hz{ white-space:nowrap; font-size:22px; }
+  }
+
+  /* RA_MOBILE_FIX 2026-11-03：手机端「返回导航」上移 + 去掉遮挡层（口径同三年级语文）
+     1) .back-nav 由原 bottom:60/62px 上移到 104px，避开手机上会换行的 .ctrl-bar 与底部点读区；
+     2) #cap 字幕小框在手机/触摸设备隐藏（二年级语文原 @media 把它也放在 104px，
+        按钮上移后会与之重叠；课件已有高亮+自动滚动，字幕重复）；
+     3) #sndTip 常驻「没声音」黄条隐藏（本册页面无此元素，此条为与三年级一致的预防规则）。
+     带标记，重复执行不会叠加。js 侧三份 read-assist.js 均已有 SHOW_GUIDE=0，无需改动。 */
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+    #sndTip{ display:none !important; }
+  }
+
+  /* ===== 第6课页面专属覆盖（叙事对话变体，后置同特异性，必定生效） ===== */
+  .para{ font-size:18.5px; line-height:2.12; padding:13px 17px; }
+  .para .sent{ line-height:2.12; }
+  .para ruby + ruby{ margin-left:2px; }
+  .pic-grid{ grid-template-columns:repeat(3,1fr); gap:12px; }
+  .pic-card{ box-shadow:0 2px 10px rgba(62,39,35,.10); }
+  .word-row .wk{ font-size:15px; padding:3px 9px; white-space:nowrap; }
+  .word-row .ws{ line-height:1.78; }
+  /* 拉丁字母统一用无衬线字体，楷体行里的拼音不会被拉成 z h ē n g */
+  .lpy{ font-family:"Segoe UI",Arial,Helvetica,sans-serif; font-size:.9em; }
+  .qbox{ display:inline-block; padding:7px 14px; margin:5px 8px 5px 0; border-radius:14px;
+         font-family:"KaiTi","STKaiti",serif; font-size:17px; }
+  .qbox rt{ font-size:10.5px; }
+  @media (min-width:601px){
+    #zinGrid{ grid-template-columns:repeat(4,1fr); }
+    #ziwGrid{ grid-template-columns:repeat(5,1fr); }
+    #wcGrid{ grid-template-columns:repeat(5,1fr); }
+    #wcGrid .w-top{ flex-wrap:wrap; gap:2px 6px; }
+    #wcGrid .w-hz{ white-space:nowrap; font-size:21px; }
+    .role-grid{ grid-template-columns:repeat(4,1fr); }
+  }
+  @media (max-width:600px){
+    .para{ font-size:17px; }
+    .role-grid{ grid-template-columns:repeat(2,1fr); }
+    .pic-grid{ grid-template-columns:1fr; }
+    .word-row .wk{ white-space:normal; }
+    .qbox{ font-size:15px; padding:6px 10px; }
+  }
+</style>
+</head>
+<body>
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+  <div class="page-head">
+    <h1>🍚 第 6 课《千人糕》· 有声图文带读</h1>
+    <p>统编版语文 · 第二单元·阅读 · 课本 第 18~20 页 · 一篇一问一答的生活故事</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">课文 <b>11</b> 段 · <b>19</b> 句</span>
+    <span class="stat">会认字 <b>16</b></span>
+    <span class="stat">会写字 <b>10</b></span>
+    <span class="stat">听写词 <b>10</b></span>
+    <span class="stat">近义词 <b>4</b> 组</span>
+    <span class="stat">深入理解 <b>8</b> 题</span>
+    <span class="stat">本课本领 <b>默读课文·说清一块糕里多少人的劳动</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 五步学（可随时点任意一句、一个字、一个词单独听）：</b><br>
+    <b>① 听读课文</b>——11 个自然段、19 句，一句一句读，读到哪句哪句发光；开「跟读」后读完一句留时间自己读。<br>
+    <b>② 学字词</b>——16 个会认字、10 个会写字（含书写提示），点一个读一个。<br>
+    <b>③ 词语·听写·造句</b>——读课本第 20 页三道课后题和 12 个词语，<span style="white-space:nowrap">听写 10 个词，再听 4 组近义词辨析。</span><br>
+    <b>④ 深入理解</b>——8 道题（认知 / 理解 / 运用 / 拓展），开放题答案不唯一，先想后看。<br>
+    <b>⑤ 说劳动经过·分角色</b>——按顺序说说一块米糕要经过哪些劳动；再按旁白、爸爸、孩子分角色朗读全课。
+  </div>
+
+  <div class="bubble" id="mapUnit" data-say="本册第二单元是阅读单元，照课本目录一共有三篇课文和一个语文园地：第五课雷锋叔叔你在哪里，第六课千人糕，第七课我不是最弱小的，后面是语文园地二，园地二后面还连着快乐读书吧，读读儿童故事。前一课我们沿着小溪和小路寻找那个处处帮助别人的人，本课换成一块平平常常的米糕，数一数它经过多少人的劳动；下一课我不是最弱小的讲雨中一家人保护比自己更弱小的野蔷薇花。三课都和关爱、帮助、珍惜别人的付出有关。">
+    📚 <b>本册第二单元·阅读（照课本目录）：</b>5 雷锋叔叔，你在哪里　→　6 千人糕（本课）<br>
+    　　→　7 我不是最弱小的　→　语文园地二　→　快乐读书吧<br>
+    <span style="font-size:13px;color:#6d5647;">前后连起来看：找那个帮助别人的人 → 一块糕里很多人的劳动 → 雨中保护比自己更弱小的</span>
+  </div>
+
+  <div class="bubble" id="srcNote" data-say="课本第 18 页脚注照录：本文选自商务印书馆基本教科书国语第六册，有改动。课题右上角那个圈一，指的就是这条脚注。课题里糕字上面注的音读第一声。">
+    📖 <b>课文出处（课本第 18 页照录）</b>：① 本文选自商务印书馆<br>
+    　　《基本教科书国语第六册》，有改动。<br>
+    <span style="font-size:13px;color:#6d5647;">课题「千人糕」的糕字上方注音 <span class="lpy">gāo</span>，右上角标 ①</span>
+  </div>
+
+  <!-- ================= ① 听读课文 ================= -->
+  <div class="sec-title"><span class="bar"></span>① 听读课文（点哪一句，读哪一句）<span class="sec-note">点段前的 ①~⑪ 听整段</span></div>
+
+  <div class="tool-row">
+    <button type="button" class="tool-btn" id="btnFollow">🔁 跟读模式：关</button>
+    <button type="button" class="tool-btn" id="btnPy">👁 隐藏注音（自测用）</button>
+    <span class="sec-note">注音只标本课要认、要写的字，读音照课本第 18~20 页，每个字只注一次</span>
+  </div>
+
+  <div class="req-card" id="req1" data-say="朗读要求。本课课后第一题是，默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作千人糕。一，读准字音：糕读第一声，尝读第二声，嘛读轻声，磨成粉的磨读第四声，粉读第三声，糖读第二声，料读第四声，甘蔗汁三个字分别读第一声、第四声、第一声，熬读第二声，销售读第一声和第四声，的确的读第二声，确读第四声，应该在课文里读第一声。二，默读时不出声、不指读，一边读一边想这块糕经过哪些人的劳动。三，课文是一问一答：孩子好奇地问，问句上扬；爸爸慢慢地答，语气平稳、有耐心。四，不添字不漏字，逗号停得短，句号、问号、感叹号停得长，省略号处停一停，表示还有很多没说完。五，结合课本第十八页和第十九页的插图，把种子、农具、甘蔗甜菜、熬糖、包装、送货、销售，一样一样和课文对上。">
+    🎤 <b>朗读要求 · 默读课文 + 读好一问一答（课后题①的老师标准）</b><br>
+    ① <b>读准字音</b>：糕 <span class="lpy">gāo</span>、尝 <span class="lpy">cháng</span>、嘛 <span class="lpy">ma</span>（轻声）、磨 <span class="lpy">mò</span>、粉 <span class="lpy">fěn</span>、糖 <span class="lpy">táng</span>、料 <span class="lpy">liào</span>、甘蔗汁 <span class="lpy">gān zhè zhī</span>、熬 <span class="lpy">áo</span>、销售 <span class="lpy">xiāo shòu</span>、的确应 <span class="lpy">dí què yīng</span>（照课本第 18~20 页）；<b>的</b>在「的确」里读 <span class="lpy">dí</span>，在「平常吃的米糕」里读轻声 <span class="lpy">de</span>；<b>应</b>在「应该」里读 <span class="lpy">yīng</span>。<br>
+    ② <b>默读</b>（课后题①的新本领）：不出声、不指读，一边读一边想<b>这块糕经过哪些人的劳动</b>；<br>
+    ③ <b>一问一答</b>：孩子好奇地问，<b>问句上扬</b>；爸爸一句一句答，语气<b>平稳、有耐心</b>；<br>
+    ④ <b>标点</b>：逗号停得短，句号、问号、感叹号停得长；省略号处停一停，表示还没说完；<br>
+    ⑤ <b>结合插图</b>：第 18 页的种子、农具、甘蔗甜菜，第 19 页的熬糖、蒸糕、包装、货架，和课文一步一步对上。
+  </div>
+
+  <div class="para" id="p1" data-say="第一自然段。一天，爸爸对孩子说：今天我们来吃千人糕吧。">
+    <span class="no" title="听这一自然段">①</span>
+    <span class="sent" data-say="一天，爸爸对孩子说：今天我们来吃千人糕吧。" data-tip="开头交代是谁、说什么；爸爸的话读得平常、亲切，不要夸张。">一天，爸爸对孩子说：“今天我们来吃千人<ruby>糕<rt>gāo</rt></ruby>吧。”</span>
+  </div>
+
+  <div class="para" id="p2" data-say="第二自然段。爸爸，什么是千人糕？孩子好奇地问。">
+    <span class="no" title="听这一自然段">②</span>
+    <span class="sent" data-say="爸爸，什么是千人糕？孩子好奇地问。" data-tip="这是孩子第一次发问，好奇两个字要读出来，问句末尾上扬。">“爸爸，什么是千人糕？”孩子好奇地问。</span>
+  </div>
+
+  <div class="para" id="p3" data-say="第三自然段。需要很多很多人才能做成的糕。爸爸回答。">
+    <span class="no" title="听这一自然段">③</span>
+    <span class="sent" data-say="需要很多很多人才能做成的糕。爸爸回答。" data-tip="爸爸只答了一句，很多很多人读得慢一点、重一点，这是全文最要紧的一句话。">“需要很多很多人才能做成的糕。”爸爸回答。</span>
+  </div>
+
+  <div class="para" id="p4" data-say="第四自然段。孩子想：这糕要很多很多人才能做成，一定特别大，也许比桌子还大吧？">
+    <span class="no" title="听这一自然段">④</span>
+    <span class="sent" data-say="孩子想：这糕要很多很多人才能做成，一定特别大，也许比桌子还大吧？" data-tip="这是孩子心里想的，不是说出来的，读得轻一点；一定、也许带一点猜的语气。">孩子想：这糕要很多很多人才能做成，一定特别大，也许比<ruby>桌<rt>zhuō</rt></ruby>子还大吧？</span>
+  </div>
+
+  <div class="para" id="p5" data-say="第五自然段。爸爸端来一块糕，那糕看上去跟平时吃的糕没什么两样。难道它的味道很特别吗？孩子急忙尝了尝，笑了：这不就是平常吃的米糕嘛！您给我买过。">
+    <span class="no" title="听这一自然段">⑤</span>
+    <span class="sent" data-say="爸爸端来一块糕，那糕看上去跟平时吃的糕没什么两样。" data-tip="没什么两样就是和平常一样，读得平稳，给后面的转折留余地。">爸爸端来一块糕，那糕看上去跟平时吃的糕没什么两样。</span>
+    <span class="sent" data-say="难道它的味道很特别吗？" data-tip="难道是反问，读出孩子心里的疑惑，句尾稍稍上扬。">难道它的味道很特别吗？</span>
+    <span class="sent" data-say="孩子急忙尝了尝，笑了：这不就是平常吃的米糕嘛！您给我买过。" data-tip="急忙读得快一点，嘛读轻声，笑了以后语气亮起来，带一点我早知道的高兴。">孩子急忙<ruby>尝<rt>cháng</rt></ruby>了尝，笑了：“这不就是平常吃的米糕<ruby>嘛<rt>ma</rt></ruby>！您给我<ruby>买<rt>mǎi</rt></ruby>过。”</span>
+  </div>
+
+  <div class="para" id="p6" data-say="第六自然段。爸爸说：是的，就是平常吃的米糕。你知道这糕是怎么做成的吗？">
+    <span class="no" title="听这一自然段">⑥</span>
+    <span class="sent" data-say="爸爸说：是的，就是平常吃的米糕。" data-tip="爸爸先顺着孩子说，是的读得肯定、不急。">爸爸说：“是的，就是平常吃的米糕。</span>
+    <span class="sent" data-say="你知道这糕是怎么做成的吗？" data-tip="这一问把话头从糕是什么转到怎么做，问句后留一点停顿，让人想下去。">你知道这糕是怎么做成的吗？”</span>
+  </div>
+
+  <div class="para" id="p7" data-say="第七自然段。孩子说：是把大米磨成粉做的，还加了糖。">
+    <span class="no" title="听这一自然段">⑦</span>
+    <span class="sent" data-say="孩子说：是把大米磨成粉做的，还加了糖。" data-tip="磨在这里读第四声，是把米碾碎；孩子答得又快又肯定，读得干脆。">孩子说：“是把大米<ruby>磨<rt>mò</rt></ruby>成<ruby>粉<rt>fěn</rt></ruby>做的，还加了<ruby>糖<rt>táng</rt></ruby>。”</span>
+  </div>
+
+  <div class="para" id="p8" data-say="第八自然段。爸爸说：是啊，大米是用农民种的稻子加工出来的。农民种稻子需要种子、农具、肥料、水等等。">
+    <span class="no" title="听这一自然段">⑧</span>
+    <span class="sent" data-say="爸爸说：是啊，大米是用农民种的稻子加工出来的。" data-tip="是啊是接住孩子的话，读得温和；加工出来的说明米不是现成的。">爸爸说：“是啊，大米是用农民种的稻子加工出来的。</span>
+    <span class="sent" data-say="农民种稻子需要种子、农具、肥料、水等等。" data-tip="顿号一个一个停清楚，省略号处停一停，表示要用的东西还很多。">农民种稻子需要种子、农<ruby>具<rt>jù</rt></ruby>、肥<ruby>料<rt>liào</rt></ruby>、水……”</span>
+  </div>
+
+  <div class="para" id="p9" data-say="第九自然段。爸爸接着说：糖呢，是用甘蔗汁或者甜菜汁熬出来的。甘蔗、甜菜也要有人种。熬糖的时候，要有工具，还得有火等等。就算米糕做好了，还得要人包装、送货、销售，这些又需要很多人的劳动。">
+    <span class="no" title="听这一自然段">⑨</span>
+    <span class="sent" data-say="爸爸接着说：糖呢，是用甘蔗汁或者甜菜汁熬出来的。" data-tip="甘蔗汁、甜菜汁是两样东西，或者要读清楚；熬是慢慢煮，读得慢一点。">爸爸接着说：“糖呢，是用<ruby>甘<rt>gān</rt></ruby><ruby>蔗<rt>zhè</rt></ruby><ruby>汁<rt>zhī</rt></ruby>或者<ruby>甜<rt>tián</rt></ruby><ruby>菜<rt>cài</rt></ruby>汁<ruby>熬<rt>áo</rt></ruby>出来的。</span>
+    <span class="sent" data-say="甘蔗、甜菜也要有人种。" data-tip="也要有人种，把话题从东西转到人，读得稍重。">甘蔗、甜菜也要有人种。</span>
+    <span class="sent" data-say="熬糖的时候，要有工具，还得有火等等。" data-tip="要有、还得有，一层加一层；省略号停一停，说明还不止这些。">熬糖的时候，要有工具，还得有火……</span>
+    <span class="sent" data-say="就算米糕做好了，还得要人包装、送货、销售，这些又需要很多人的劳动。" data-tip="就算做好了还要接着往下数，包装、送货、销售三个词一个不落，劳动两个字读得重。">就算米糕做好了，还得要人包装、送货、<ruby>销<rt>xiāo</rt></ruby><ruby>售<rt>shòu</rt></ruby>，这些又需要很多人的<ruby>劳<rt>láo</rt></ruby>动。”</span>
+  </div>
+
+  <div class="para" id="p10" data-say="第十自然段。爸爸拿起面前的糕，说：你看，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。">
+    <span class="no" title="听这一自然段">⑩</span>
+    <span class="sent" data-say="爸爸拿起面前的糕，说：你看，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。" data-tip="你看是把孩子的眼睛引到糕上，稍读重；要经过、才能放慢，一句把道理收住。">爸爸拿起面前的糕，说：“你看，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。”</span>
+  </div>
+
+  <div class="para" id="p11" data-say="第十一自然段。孩子听了爸爸的话，仔细想了想，说：爸爸，这糕的确应该叫千人糕啊！">
+    <span class="no" title="听这一自然段">⑪</span>
+    <span class="sent" data-say="孩子听了爸爸的话，仔细想了想，说：爸爸，" data-tip="仔细想了想读得慢，说明孩子这回是真想明白了，不是随口答。">孩子听了爸爸的话，仔细想了想，说：“爸爸，</span>
+    <span class="sent" data-say="这糕的确应该叫千人糕啊！" data-tip="的确的在这里读第二声，应读第一声；啊带着恍然大悟的高兴，收得亮一点。">这糕<ruby>的<rt>dí</rt></ruby><ruby>确<rt>què</rt></ruby><ruby>应<rt>yīng</rt></ruby>该叫‘千人糕’啊！”</span>
+  </div>
+
+  <div id="thinkPill">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的样子（点一张图，听读这一页）<span class="sec-note">点一张图，听读整页</span></div>
+  <div class="pic-grid">
+    <div class="pic-card" id="pic1" data-say="课本第 18 页，课题是第六课千人糕，糕字上面注音，右上角有一个圈一。课文前六个自然段：一天，爸爸对孩子说，今天我们来吃千人糕吧；爸爸，什么是千人糕，孩子好奇地问；需要很多很多人才能做成的糕，爸爸回答；孩子想，这糕一定特别大，也许比桌子还大吧；爸爸端来一块糕，跟平时吃的糕没什么两样，孩子急忙尝了尝，笑了，这不就是平常吃的米糕嘛，您给我买过；爸爸说，是的，就是平常吃的米糕，你知道这糕是怎么做成的吗。页下有三幅小图：一袋种子、一位农民在田里插秧、一捆甘蔗和甜菜。页脚脚注写着，本文选自商务印书馆基本教科书国语第六册，有改动。">
+      <img src="images/18a-课本第18页-千人糕课文与插图.jpg" alt="课本第 18 页课题、前六段、脚注与种子农具甘蔗插图">
+      <div class="cap">第 18 页 · 课题、前 6 段与插图</div>
+    </div>
+    <div class="pic-card" id="pic2" data-say="课本第 19 页，接着写后五个自然段：孩子说，是把大米磨成粉做的，还加了糖；爸爸说，是啊，大米是用农民种的稻子加工出来的，农民种稻子需要种子、农具、肥料、水；爸爸接着说，糖呢，是用甘蔗汁或者甜菜汁熬出来的，甘蔗、甜菜也要有人种，熬糖的时候要有工具，还得有火；就算米糕做好了，还得要人包装、送货、销售；爸爸拿起面前的糕说，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前；孩子听了爸爸的话，仔细想了想，说，爸爸，这糕的确应该叫千人糕啊。页面下半部画着熬糖的大锅、蒸糕的蒸笼、写着米糕的包装箱和摆满糕点的货架，中间用一串橙色圆点连起来，正好是米糕从原料到货架的路。">
+      <img src="images/19a-课本第19页-千人糕课文与插图.jpg" alt="课本第 19 页后五段与熬糖蒸糕包装销售插图">
+      <div class="cap">第 19 页 · 后 5 段与米糕的来路</div>
+    </div>
+    <div class="pic-card" id="pic3" data-say="课本第 20 页，上面两行是十六个会认字和拼音：糕、尝、嘛、磨、粉、糖、料、甘、蔗、汁、熬、销、售、的、确、应，其中的字印成蓝色，是多音字。中间田字格五行两列，共十个会写字：桌、尝、买、具、甘、汁、甜、菜、劳、应。下面是三道课后题：默读课文，结合课文内容和插图，说说一块平常的米糕为什么被称作千人糕；我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说；读一读，记一记。最后是四个彩色词框，一共十二个词：蛋糕、雪糕、糕点；米粉、面粉、粉丝；品尝、尝鲜、尝试；确定、确实、正确。蛋、品、实三个字上方课本注了音。">
+      <img src="images/20a-课本第20页-生字表与课后题.png" alt="课本第 20 页生字表、田字格、课后题与读一读记一记">
+      <div class="cap">第 20 页 · 生字表与课后题</div>
+    </div>
+  </div>
+  <div class="img-tip">📖 人教版《语文》二年级下册 · 课本第 18~20 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <!-- ================= ② 学字词 ================= -->
+  <div class="sec-title"><span class="bar"></span>② 会认字（16 个）<span class="sec-note">点一个字，听读音、词语和课文里的句子；照课本第 20 页生字表顺序，「的」是蓝色多音字</span></div>
+  <div class="zi-grid" id="zinGrid">
+    <div class="zi" data-say="糕，千人糕的糕，读第一声，米字旁。课文开头爸爸说，今天我们来吃千人糕吧。还能组词：米糕、蛋糕。"><div class="py">gāo</div><div class="hz">糕</div><div class="ci">千人糕 · 米糕</div></div>
+    <div class="zi" data-say="尝，尝了尝的尝，读第二声。课文写孩子急忙尝了尝，笑了。这个字既要认又要写。还能组词：品尝、尝鲜。"><div class="py">cháng</div><div class="hz">尝</div><div class="ci">尝了尝 · 品尝</div></div>
+    <div class="zi" data-say="嘛，米糕嘛的嘛，读轻声，口字旁，是语气词。孩子说，这不就是平常吃的米糕嘛，语气里带着一点我早知道的高兴。"><div class="py">ma</div><div class="hz">嘛</div><div class="ci">米糕嘛 · 好嘛</div></div>
+    <div class="zi" data-say="磨，磨成粉的磨，在这里读第四声，是把米碾碎的意思。孩子说，是把大米磨成粉做的。这个字还有另一个读音，磨刀的磨读第二声，读音供参考，以教材和字典为准。"><div class="py">mò</div><div class="hz">磨</div><div class="ci">磨成粉 · 磨坊</div></div>
+    <div class="zi" data-say="粉，磨成粉的粉，读第三声，米字旁。课文里说把大米磨成粉，课后读一读记一记里还有米粉、面粉、粉丝。"><div class="py">fěn</div><div class="hz">粉</div><div class="ci">米粉 · 面粉</div></div>
+    <div class="zi" data-say="糖，加了糖的糖，读第二声，米字旁。孩子说还加了糖；爸爸接着说，糖呢，是用甘蔗汁或者甜菜汁熬出来的。"><div class="py">táng</div><div class="hz">糖</div><div class="ci">加了糖 · 白糖</div></div>
+    <div class="zi" data-say="料，肥料的料，读第四声。爸爸说，农民种稻子需要种子、农具、肥料、水。"><div class="py">liào</div><div class="hz">料</div><div class="ci">肥料 · 材料</div></div>
+    <div class="zi" data-say="甘，甘蔗的甘，读第一声，五画，独体字。糖是用甘蔗汁或者甜菜汁熬出来的。这个字既要认又要写。"><div class="py">gān</div><div class="hz">甘</div><div class="ci">甘蔗 · 甘甜</div></div>
+    <div class="zi" data-say="蔗，甘蔗的蔗，读第四声，草字头。甘蔗和甜菜都要有人种，榨出的汁才能熬糖。"><div class="py">zhè</div><div class="hz">蔗</div><div class="ci">甘蔗 · 蔗糖</div></div>
+    <div class="zi" data-say="汁，甘蔗汁的汁，读第一声，三点水。课文里连用两次：甘蔗汁或者甜菜汁。这个字既要认又要写。"><div class="py">zhī</div><div class="hz">汁</div><div class="ci">甘蔗汁 · 甜菜汁</div></div>
+    <div class="zi" data-say="熬，熬出来的熬，读第二声，下面是四点底。熬糖要慢慢煮，还要有工具、有火。"><div class="py">áo</div><div class="hz">熬</div><div class="ci">熬出来 · 熬糖</div></div>
+    <div class="zi" data-say="销，销售的销，读第一声，金字旁。爸爸说，米糕做好了还得要人包装、送货、销售。"><div class="py">xiāo</div><div class="hz">销</div><div class="ci">销售 · 畅销</div></div>
+    <div class="zi" data-say="售，销售的售，读第四声，下面是口。销售就是把做好的东西卖出去，也要有人做。"><div class="py">shòu</div><div class="hz">售</div><div class="ci">销售 · 出售</div></div>
+    <div class="zi" data-say="的，的确的，课本生字表上这个字是蓝色的，是个多音字。在的确这个词里读第二声，课文最后说，这糕的确应该叫千人糕啊。在平常吃的米糕里读轻声，在目的里读第四声。读音供参考，以教材和老师的指导为准。"><div class="py">dí</div><div class="hz">的</div><div class="ci">的确 · 目的</div></div>
+    <div class="zi" data-say="确，的确的确，读第四声，石字旁。的确就是确实、真的。课后读一读记一记里还有确定、确实、正确。"><div class="py">què</div><div class="hz">确</div><div class="ci">的确 · 确实</div></div>
+    <div class="zi" data-say="应，应该的应，课本注第一声，广字头。孩子最后说，这糕的确应该叫千人糕啊。这个字既要认又要写；说答应、回应的时候读第四声，读音供参考。"><div class="py">yīng</div><div class="hz">应</div><div class="ci">应该 · 应当</div></div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>② 会写字（10 个）<span class="sec-note">结构、部首、笔画与书写提示为通用规范，供参考，以教材和老师的指导为准</span></div>
+  <div class="zi-grid" id="ziwGrid">
+    <div class="zi write" data-say="桌，桌子的桌，十画，上下结构，下面是木。书写提示：上面写窄一点，下面木的撇和捺要舒展，稳稳托住上面。课文里孩子想，也许比桌子还大吧。还能组词：书桌。">
+      <div class="tzg"><span>桌</span></div><div class="py">zhuō</div><div class="ci">桌子 · 书桌</div><div class="meta">10 画 · 上下（木）</div><div class="wtip">上部写窄，木的撇捺舒展托住上面</div></div>
+    <div class="zi write" data-say="尝，尝了尝的尝，九画，上下结构，上面是小字头，中间是秃宝盖，下面是云。书写提示：小字头居中，秃宝盖要写宽盖住下面，云的两横上短下长。这个字既要认又要写。">
+      <div class="tzg"><span>尝</span></div><div class="py">cháng</div><div class="ci">尝了尝 · 品尝</div><div class="meta">9 画 · 上下（小字头）</div><div class="wtip">小字头居中，秃宝盖写宽</div></div>
+    <div class="zi write" data-say="买，买过的买，六画，上下结构，上面是横钩，下面是头。书写提示：横钩写短，下面头的两点左右分开，最后一捺写得舒展。课文里孩子说，您给我买过。">
+      <div class="tzg"><span>买</span></div><div class="py">mǎi</div><div class="ci">买过 · 买菜</div><div class="meta">6 画 · 上下（横钩）</div><div class="wtip">横钩写短，下面两点分开，末捺舒展</div></div>
+    <div class="zi write" data-say="具，农具的具，八画，上下结构。书写提示：里面三横间距要匀，最后一横写长一点，下面两点左右站稳。课文里农民种稻子需要种子、农具、肥料、水，熬糖的时候要有工具。">
+      <div class="tzg"><span>具</span></div><div class="py">jù</div><div class="ci">农具 · 工具</div><div class="meta">8 画 · 上下（八）</div><div class="wtip">里面三横间距匀，末横写长，下面两点站稳</div></div>
+    <div class="zi write" data-say="甘，甘蔗的甘，五画，独体字。书写提示：横平竖直，中间一横写短，两竖略向内收，整个字写得方正。这个字既要认又要写。">
+      <div class="tzg"><span>甘</span></div><div class="py">gān</div><div class="ci">甘蔗 · 甘甜</div><div class="meta">5 画 · 独体（甘）</div><div class="wtip">横平竖直，中间一横短，两竖略向内收</div></div>
+    <div class="zi write" data-say="汁，甘蔗汁的汁，五画，左右结构，三点水加一个十。书写提示：三点水三笔略微排成弧形，右边的十横短竖长，竖要写直。这个字既要认又要写。">
+      <div class="tzg"><span>汁</span></div><div class="py">zhī</div><div class="ci">甘蔗汁 · 果汁</div><div class="meta">5 画 · 左右（氵）</div><div class="wtip">三点水排成弧形，右边十横短竖长</div></div>
+    <div class="zi write" data-say="甜，甜菜的甜，十一画，左右结构，左边是舌，右边是甘。书写提示：左右大致等宽，舌的撇写短一点让着右边，甘的横要平。课文里甘蔗、甜菜也要有人种。">
+      <div class="tzg"><span>甜</span></div><div class="py">tián</div><div class="ci">甜菜 · 香甜</div><div class="meta">11 画 · 左右（舌）</div><div class="wtip">左右等宽，舌的撇写短，右边甘的横要平</div></div>
+    <div class="zi write" data-say="菜，甜菜的菜，十一画，上下结构，草字头，下面是采。书写提示：草字头写宽，盖住下面；采里面的木，撇和捺要舒展。还能组词：白菜、种菜。">
+      <div class="tzg"><span>菜</span></div><div class="py">cài</div><div class="ci">甜菜 · 白菜</div><div class="meta">11 画 · 上下（艹）</div><div class="wtip">草字头写宽盖住下面，采的木撇捺舒展</div></div>
+    <div class="zi write" data-say="劳，劳动的劳，七画，上下结构，上面草字头，中间秃宝盖，下面是力。书写提示：草字头写宽，秃宝盖托住上面，力的撇要写得舒展。课文里说，这些又需要很多人的劳动。">
+      <div class="tzg"><span>劳</span></div><div class="py">láo</div><div class="ci">劳动 · 辛劳</div><div class="meta">7 画 · 上下（艹）</div><div class="wtip">草字头写宽，秃宝盖托住，力的撇舒展</div></div>
+    <div class="zi write" data-say="应，应该的应，七画，半包围结构，广字头。这个字有两个读音：课文里应该读第一声；说答应、回应的时候读第四声。书写提示：广字头的点居中、横稍长，撇写得舒展，里面三点排均匀。读音供参考，以教材和老师的指导为准。">
+      <div class="tzg"><span>应</span></div><div class="py">yīng</div><div class="ci">应该 · 应当</div><div class="meta">7 画 · 半包围（广）</div><div class="wtip">广字头点居中、横稍长，撇舒展，里面三点排匀</div></div>
+  </div>
+
+  <!-- ================= ③ 词语·听写·造句·近义词 ================= -->
+  <div class="sec-title"><span class="bar"></span>③ 课后题（课本第 20 页照录）<span class="sec-note">点一行，听题目和这一框的词</span></div>
+  <div class="bubble" id="hwText" data-say="课本第 20 页课后题原文：一，默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作千人糕。二，我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说。三，读一读，记一记。下面四个彩色词框一共十二个词：蛋糕、雪糕、糕点；米粉、面粉、粉丝；品尝、尝鲜、尝试；确定、确实、正确。蛋读第四声，品读第三声，实读第二声。">
+    📖 <b>课后题（课本第 20 页照录）</b>：<br>
+    　① 默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作“千人糕”。<br>
+    　② 我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说。<br>
+    　③ 读一读，记一记。<br>
+    <div style="margin-top:8px;">
+      <span class="qbox" style="background:#fde8dc;"><ruby>蛋<rt>dàn</rt></ruby>糕　雪糕　糕点</span>
+      <span class="qbox" style="background:#eaf6d8;">米粉　面粉　粉丝</span><br>
+      <span class="qbox" style="background:#e2f2fb;"><ruby>品<rt>pǐn</rt></ruby>尝　尝鲜　尝试</span>
+      <span class="qbox" style="background:#eee9f7;">确定　确<ruby>实<rt>shí</rt></ruby>　正确</span>
+    </div>
+    <span style="font-size:13px;color:#6d5647;">四个词框共 12 个词（课本在蛋、品、实上注音）；下面 7 行是三道课后题和四个词框。</span>
+  </div>
+  <div class="word-row" id="w1" data-say="课后第一题照录：默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作千人糕。默读就是不出声、不指读，一边读一边想；插图在课本第十八页和第十九页。">
+    <span class="wk">课后题 ①</span><span class="ws">默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作“千人糕”。</span>
+  </div>
+  <div class="word-row" id="w2" data-say="课后第二题照录：我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说。说话支架：先说一样东西，再按先、再、接着、最后说出哪些人出过力，最后说所以要爱惜它。">
+    <span class="wk">课后题 ②</span><span class="ws">我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说。</span>
+  </div>
+  <div class="word-row" id="w3" data-say="课后第三题照录：读一读，记一记。课本给了四个彩色词框，一共十二个词，都是围绕糕、粉、尝、确这几类字组成的。">
+    <span class="wk">课后题 ③</span><span class="ws">读一读，记一记。</span>
+  </div>
+  <div class="word-row" id="w4" data-say="第一个词框：蛋糕、雪糕、糕点。课本在蛋字上注了音，读第四声。三个词里都有糕字，糕是本课要认的字。">
+    <span class="wk">词框 ①</span><span class="ws"><ruby>蛋<rt>dàn</rt></ruby>糕　雪糕　糕点</span>
+  </div>
+  <div class="word-row" id="w5" data-say="第二个词框：米粉、面粉、粉丝。三个词里都有粉字，粉读第三声，是把米或麦子磨出来的细末。">
+    <span class="wk">词框 ②</span><span class="ws">米粉　面粉　粉丝</span>
+  </div>
+  <div class="word-row" id="w6" data-say="第三个词框：品尝、尝鲜、尝试。课本在品字上注了音，读第三声。尝是本课既要认又要写的字，读第二声。">
+    <span class="wk">词框 ③</span><span class="ws"><ruby>品<rt>pǐn</rt></ruby>尝　尝鲜　尝试</span>
+  </div>
+  <div class="word-row" id="w7" data-say="第四个词框：确定、确实、正确。课本在实字上注了音，读第二声。确是本课要认的字，在课文最后的的确这个词里也出现。">
+    <span class="wk">词框 ④</span><span class="ws">确定　确<ruby>实<rt>shí</rt></ruby>　正确</span>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 听写（10 个词）<span class="sec-note">读两遍 → 你在纸上写 → 报答案 → 听示范句</span></div>
+  <div class="dict-panel">
+    <div class="dict-stage" id="dictStage">准备听写 · 共 10 个词</div>
+    <div class="dict-word mask" id="dictWord">○ ○ ○</div>
+    <div class="dict-hint" id="dictHint">点下面的「开始听写」，听到一个词就写一个词。</div>
+    <div class="dict-btns">
+      <button type="button" class="tool-btn" id="btnDictStart">▶ 开始听写</button>
+      <button type="button" class="tool-btn" id="btnDictAgain">🔁 再读一遍</button>
+      <button type="button" class="tool-btn" id="btnDictShow">👁 看答案</button>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 听写的词 · 造句示范<span class="sec-note">点词听读，点句子听示范句，再自己说一句</span></div>
+  <div class="wc-grid" id="wcGrid">
+    <div class="wc" id="wc1"><div class="w-top" data-say="桌子"><span class="w-no">1</span><span class="w-hz">桌子</span><span class="w-lab">会写字 · 桌</span></div><div class="w-say" data-say="示范句：也许比桌子还大吧？">示范句：也许比桌子还大吧？</div><div class="w-own" data-say="我也能说：什么 + 比 + 什么 + 还大。比如：这棵树比我们教室还高。你也试着说一句。">✏️ 我也能说：比一比大小</div></div>
+    <div class="wc" id="wc2"><div class="w-top" data-say="品尝"><span class="w-no">2</span><span class="w-hz">品尝</span><span class="w-lab">会写字 · 尝 · 课后词</span></div><div class="w-say" data-say="示范句：我们品尝了妈妈做的米糕。">示范句：我们品尝了妈妈做的米糕。</div><div class="w-own" data-say="我也能说：谁 + 品尝 + 什么。比如：大家一起品尝了新摘的桃子。你也试着说一句。">✏️ 我也能说：品尝 + 什么</div></div>
+    <div class="wc" id="wc3"><div class="w-top" data-say="买过"><span class="w-no">3</span><span class="w-hz">买过</span><span class="w-lab">会写字 · 买</span></div><div class="w-say" data-say="示范句：您给我买过。">示范句：您给我买过。</div><div class="w-own" data-say="我也能说：谁 + 给我买过 + 什么。比如：奶奶给我买过一本图画书。你也试着说一句。">✏️ 我也能说：买过 + 什么</div></div>
+    <div class="wc" id="wc4"><div class="w-top" data-say="农具"><span class="w-no">4</span><span class="w-hz">农具</span><span class="w-lab">会写字 · 具</span></div><div class="w-say" data-say="示范句：农民种稻子需要种子、农具、肥料、水等等。">示范句：农民种稻子需要种子、农具、肥料、水等等。</div><div class="w-own" data-say="我也能说：做什么 + 需要 + 什么。比如：写字需要铅笔、橡皮和本子。你也试着说一句。">✏️ 我也能说：需要 + 什么</div></div>
+    <div class="wc" id="wc5"><div class="w-top" data-say="甘蔗汁"><span class="w-no">5</span><span class="w-hz">甘蔗汁</span><span class="w-lab">会写字 · 甘、汁</span></div><div class="w-say" data-say="示范句：糖呢，是用甘蔗汁或者甜菜汁熬出来的。">示范句：糖呢，是用甘蔗汁或者甜菜汁熬出来的。</div><div class="w-own" data-say="我也能说：什么 + 是用 + 什么 + 做出来的。比如：果汁是用水果榨出来的。你也试着说一句。">✏️ 我也能说：用什么做出来</div></div>
+    <div class="wc" id="wc6"><div class="w-top" data-say="甜菜"><span class="w-no">6</span><span class="w-hz">甜菜</span><span class="w-lab">会写字 · 甜、菜</span></div><div class="w-say" data-say="示范句：甘蔗、甜菜也要有人种。">示范句：甘蔗、甜菜也要有人种。</div><div class="w-own" data-say="我也能说：什么 + 也要有人 + 做什么。比如：白菜也要有人浇水、施肥。你也试着说一句。">✏️ 我也能说：也要有人做</div></div>
+    <div class="wc" id="wc7"><div class="w-top" data-say="劳动"><span class="w-no">7</span><span class="w-hz">劳动</span><span class="w-lab">会写字 · 劳</span></div><div class="w-say" data-say="示范句：这些又需要很多人的劳动。">示范句：这些又需要很多人的劳动。</div><div class="w-own" data-say="我也能说：谁的 + 劳动 + 带来了什么。比如：清洁工的劳动换来了干净的街道。你也试着说一句。">✏️ 我也能说：谁的劳动</div></div>
+    <div class="wc" id="wc8"><div class="w-top" data-say="应该"><span class="w-no">8</span><span class="w-hz">应该</span><span class="w-lab">会写字 · 应</span></div><div class="w-say" data-say="示范句：这糕的确应该叫千人糕啊！">示范句：这糕的确应该叫千人糕啊！</div><div class="w-own" data-say="我也能说：什么 + 应该 + 怎么做。比如：我们应该爱惜每一粒米。你也试着说一句。">✏️ 我也能说：应该 + 怎么做</div></div>
+    <div class="wc" id="wc9"><div class="w-top" data-say="蛋糕"><span class="w-no">9</span><span class="w-hz">蛋糕</span><span class="w-lab">课后词 · 读一读记一记</span></div><div class="w-say" data-say="示范句：生日那天，我们分了一块蛋糕。">示范句：生日那天，我们分了一块蛋糕。</div><div class="w-own" data-say="我也能说：什么时候 + 谁 + 吃了 + 什么。比如：过年时，全家一起吃了年糕。你也试着说一句。">✏️ 我也能说：什么时候吃什么</div></div>
+    <div class="wc" id="wc10"><div class="w-top" data-say="千人糕"><span class="w-no">10</span><span class="w-hz">千人糕</span><span class="w-lab">课文核心词</span></div><div class="w-say" data-say="示范句：今天我们来吃千人糕吧。">示范句：今天我们来吃千人糕吧。</div><div class="w-own" data-say="我也能说：一说起千人糕，我就想到 + 谁。比如：一说起千人糕，我就想到种稻子的农民。你也试着说一句。">✏️ 我也能说：想到哪些人</div></div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 近义词辨析（4 组）<span class="sec-note">相同点 / 不一样在哪 / 各造一句</span></div>
+  <div class="near" id="n1" data-say="第一组：平常和平时。相同点：都写普通、不特别。不一样的地方：平常常用来形容东西或日子的样子，课文里写平常吃的米糕、一块平平常常的糕；平时多指一般的时候，课文写跟平时吃的糕没什么两样。造句：就是平常吃的米糕。跟平时吃的糕没什么两样。">
+    <div class="n-top">平常 — 平时</div>
+    <div class="n-same">相同：都写<b>普通、不特别</b>。</div>
+    <div class="n-diff">不一样：<b>平常</b>常用来形容东西或日子的样子，课文里写平常吃的米糕、一块平平常常的糕；<b>平时</b>多指一般的时候，课文写跟平时吃的糕没什么两样。</div>
+    <div class="n-eg">平常：就是平常吃的米糕。<br>平时：跟平时吃的糕没什么两样。</div>
+  </div>
+  <div class="near" id="n2" data-say="第二组：的确和确实。相同点：都写真的、是这样。不一样的地方：的确更肯定，常用在想明白以后下结论，课文最后孩子说这糕的确应该叫千人糕啊；确实也表示真的，说起来更平实，课后读一读记一记里就有这个词。造句：这糕的确应该叫千人糕啊。这块糕确实要经过很多人的劳动。">
+    <div class="n-top">的确 — 确实</div>
+    <div class="n-same">相同：都写<b>真的、是这样</b>。</div>
+    <div class="n-diff">不一样：<b>的确</b>更肯定，常用在想明白以后下结论，课文最后孩子说这糕的确应该叫千人糕啊；<b>确实</b>也表示真的，说起来更平实，课后读一读记一记里就有这个词。</div>
+    <div class="n-eg">的确：这糕的确应该叫千人糕啊！<br>确实：这块糕确实要经过很多人的劳动。</div>
+  </div>
+  <div class="near" id="n3" data-say="第三组：平平常常和普普通通。相同点：都写很一般、不稀奇。不一样的地方：平平常常是课文里的原词，写的是摆在面前的那一块糕；普普通通意思一样，用得更广，可以说人、说日子、说东西。两个都是叠词，读起来把普通说得更足。造句：一块平平常常的糕。一个普普通通的日子。">
+    <div class="n-top">平平常常 — 普普通通</div>
+    <div class="n-same">相同：都写<b>很一般、不稀奇</b>。</div>
+    <div class="n-diff">不一样：<b>平平常常</b>是课文里的原词，写的是摆在面前的那一块糕；<b>普普通通</b>意思一样，用得更广，可以说人、说日子、说东西。两个都是叠词，读起来把普通说得更足。</div>
+    <div class="n-eg">平平常常：一块平平常常的糕。<br>普普通通：一个普普通通的日子。</div>
+  </div>
+  <div class="near" id="n4" data-say="第四组：应该和应当。相同点：都写这样做才对。不一样的地方：应该课文里用过，孩子最后说这糕的确应该叫千人糕啊，口语和书面都常用；应当意思一样，语气稍正式一点，多见于提醒和规矩。造句：这糕的确应该叫千人糕啊。我们应当爱惜别人的劳动。">
+    <div class="n-top">应该 — 应当</div>
+    <div class="n-same">相同：都写<b>这样做才对</b>。</div>
+    <div class="n-diff">不一样：<b>应该</b>课文里用过，孩子最后说这糕的确应该叫千人糕啊，口语和书面都常用；<b>应当</b>意思一样，语气稍正式一点，多见于提醒和规矩。</div>
+    <div class="n-eg">应该：这糕的确应该叫千人糕啊！<br>应当：我们应当爱惜别人的劳动。</div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 词语拓展（说一说，记一记）</div>
+  <div class="acc" id="a1" data-say="整篇课文是一问一答写下来的：孩子好奇地问，爸爸一句一句答，答到后面又反过来问孩子，你知道这糕是怎么做成的吗。读的时候把问和答的语气分清楚，道理就自己出来了。">
+    <span class="a-t">一问一答</span><span class="a-c">孩子问：什么是千人糕？<br>爸爸答：需要很多很多人才能做成的糕。</span>
+  </div>
+  <div class="acc" id="a2" data-say="两个叠词放在同一课里，正好相反：糕的样子平平常常，做糕的人却很多很多。越是把糕说得平常，越显出背后的人了不起，这是课文最巧的一处。">
+    <span class="a-t">很多很多 / 平平常常</span><span class="a-c">很多很多人的劳动<br>一块平平常常的糕</span>
+  </div>
+  <div class="acc" id="a3" data-say="爸爸数了两串东西，中间都用顿号：前一串是种稻子要用的，后一串是糕做好以后要做的。两串末尾的省略号告诉我们，还没数完。说话时照这个样子一项一项说，就不会乱。">
+    <span class="a-t">顿号数清单</span><span class="a-c">种子、农具、肥料、水……<br>包装、送货、销售</span>
+  </div>
+  <div class="acc" id="a4" data-say="这个句式把条件和结果连起来：先说要经过什么，再说才能得到什么。照样子也能说一句，比如要经过很多人的手，一本新书才能摆上书店的架子。答案不唯一，说清两半都对。">
+    <span class="a-t">要经过……才能……</span><span class="a-c">要经过很多很多人的劳动，<br>才能摆在我们面前。</span>
+  </div>
+
+  <!-- ================= ④ 深入理解 ================= -->
+  <div class="sec-title"><span class="bar"></span>④ 深入理解（8 题 · 先想后看）<span class="sec-note">标「答案不唯一」的题，说得有道理都对</span></div>
+
+  <div class="qa" id="q1" data-ans="爸爸说，千人糕是需要很多很多人才能做成的糕。孩子把很多很多人听成了糕要做得很大，心想一定特别大，也许比桌子还大吧。等爸爸端来一块糕，他才发现跟平时吃的糕没什么两样，尝了尝还是平常吃的米糕。原来大不在个头，在做事的人多。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>爸爸说千人糕是什么？孩子一开始以为这块糕有多大？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">需要很多很多人才能做成的糕。</div>
+      <div class="sol sol2">一定特别大，也许比桌子还大吧？</div>
+      <div class="sol sol3">端来的糕跟平时吃的没什么两样。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="课文点出来的有这些：农民种稻子，需要种子、农具、肥料、水；甘蔗、甜菜也要有人种；熬糖要有工具，还得有火；就算米糕做好了，还得要人包装、送货、销售。爸爸最后说，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。课本第 18、19 页的插图，正好把这些一步一步画了出来。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>照课文数一数：一块米糕从种稻子到摆上桌，要经过哪些人的劳动？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">大米是用农民种的稻子加工出来的。</div>
+      <div class="sol sol2">甘蔗、甜菜要有人种，熬糖要工具和火。</div>
+      <div class="sol sol3">包装、送货、销售，都要人做。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="千人不是真的数出一千个人，是说人数多得数不清。米是农民种稻子加工出来的，糖是甘蔗或甜菜熬出来的，熬糖要工具和火，做好了还要包装、送货、销售；每一步都由不同的人出力。孩子仔细想了想才明白，所以最后说，这糕的确应该叫千人糕啊。结合插图看，种子袋、插秧的农民、甘蔗甜菜、熬糖的锅、写着米糕的箱子、摆满糕点的货架，正好连成一条长长的劳动线。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>课后题①：一块平常的米糕，为什么被称作“千人糕”？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">是说人多得数不清。</div>
+      <div class="sol sol2">种稻子、种甘蔗甜菜、熬糖、包装、送货、销售。</div>
+      <div class="sol sol3">第十八页的原料，第十九页的锅、箱子和货架。</div>
+      <div class="sol sol3">这糕的确应该叫千人糕啊。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="他听到很多很多人才能做成，就把人多想成了糕大，这是孩子式的猜想，读起来很有趣。尝了以后发现味道和平常的米糕一样，和自己想的不一样，于是笑了，还说这不就是您给我买过的米糕嘛。这一笑写出了孩子的天真，也让后面爸爸的追问更自然：既然糕这么平常，为什么还叫千人糕呢。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>孩子为什么先猜糕特别大，尝了以后又笑了？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">人多 → 糕一定特别大。</div>
+      <div class="sol sol2">跟平时吃的糕没什么两样。</div>
+      <div class="sol sol3">猜错了，才笑；笑过才要问为什么。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="课文是一问一答写下来的。爸爸先让孩子自己猜、自己尝，再问你知道这糕是怎么做成的吗，接着从大米、糖，一直数到包装、送货、销售。孩子是自己一步步想明白的，最后那句的确应该叫千人糕啊才可信、才有分量。如果一上来就把道理说完，故事就没有这份自己发现的味道了。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>爸爸为什么不直接讲道理，而要一句一句问孩子？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">全课由孩子问、爸爸答推着走。</div>
+      <div class="sol sol2">先猜 → 再尝 → 再数劳动 → 最后下结论。</div>
+      <div class="sol sol3">孩子仔细想了想，才说出应该叫千人糕。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="答案不唯一。示例一：一件衣服，先要有人种棉花，再有人纺纱、织布、染色、裁剪、缝制，还要有人运到商店、卖给我们。示例二：一支铅笔，要有人种树、做笔杆，有人做笔芯，有人组装、包装、送货，最后才到我们的文具盒里。说话支架：先说这样东西叫什么，再按先、再、接着、最后说出经过哪些人的手，最后说一句所以要爱惜它。🌈 答案不唯一，说得有道理都对。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>课后题②：我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">衣服、铅笔、书本、面包都可以。</div>
+      <div class="sol sol2">谁做原料、谁加工、谁运送、谁卖。</div>
+      <div class="sol sol3">所以要爱惜，不浪费。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q7" data-ans="答案不唯一。示例：要经过农民种稻子、工人磨粉，才能做出细细的米粉；要经过很多人试了又试，才能把这道菜做得确实好吃；要经过反复品尝，才能定下蛋糕的味道。说的时候先讲清要经过哪些事，再讲清才能得到什么，两半合起来才完整。🌈 答案不唯一，说得有道理都对。">
+    <div class="qa-head" onclick="askQA('q7')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>照课文的样子，用「要经过……才能……」说一句话，再用上课后「读一读，记一记」里的一个词。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">要经过很多很多人的劳动，才能摆在我们面前。</div>
+      <div class="sol sol2">米粉、面粉、品尝、蛋糕、确实……</div>
+      <div class="sol sol3">前半说经过，后半说结果。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q8" data-ans="答案不唯一。思路一：早上喝的牛奶，要有人养牛、挤奶、消毒、装瓶、送货；思路二：教室里的课桌，要有人种树、锯木、打磨、上漆、搬进教室；思路三：手里的课本，要有人写、有人画、有人印、有人运到学校。想说的话可以是谢谢你们，也可以是我会爱惜、不浪费。🌈 答案不唯一，说清是哪样东西、经过哪些人、你想说什么，就是完整的一段话。">
+    <div class="qa-head" onclick="askQA('q8')">
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>生活里还有哪些东西像千人糕一样，藏着很多人的劳动？你想对这些人说什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">吃的、穿的、用的、坐的，都能想。</div>
+      <div class="sol sol2">先谁、再谁、接着谁、最后谁。</div>
+      <div class="sol sol3">谢谢、爱惜、不浪费都可以。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <!-- ================= ⑤ 说经过·分角色 ================= -->
+  <div class="sec-title"><span class="bar"></span>⑤ 按劳动经过说一说（课后题①）<span class="sec-note">点一步，听这一步</span></div>
+  <div class="grow">
+    <div class="gstep" id="g1" data-say="第一步，先说故事怎么开头。爸爸说今天我们来吃千人糕吧，孩子好奇地问，爸爸，什么是千人糕。爸爸答，需要很多很多人才能做成的糕。">
+      <div class="n">1</div><div class="t"><b>先 · 爸爸说吃千人糕</b><br>一天，爸爸说吃千人糕<br>孩子好奇地问：什么是千人糕</div></div>
+    <div class="gstep" id="g2" data-say="第二步，再说孩子看到的和尝到的。孩子原以为糕特别大，也许比桌子还大，结果爸爸端来的糕跟平时吃的没什么两样；他急忙尝了尝，笑了，这不就是平常吃的米糕嘛，您给我买过。">
+      <div class="n">2</div><div class="t"><b>再 · 端来平平常常的糕</b><br>跟平时吃的糕没什么两样<br>尝了尝，笑了：这不就是米糕嘛</div></div>
+    <div class="gstep" id="g3" data-say="第三步，接着顺着爸爸的问题往回找：你知道这糕是怎么做成的吗。孩子说，是把大米磨成粉做的，还加了糖。爸爸说，大米是用农民种的稻子加工出来的，农民种稻子需要种子、农具、肥料、水，还有好多没数完。">
+      <div class="n">3</div><div class="t"><b>接着 · 米从哪儿来</b><br>大米是农民种的稻子加工出来的<br>种子、农具、肥料、水……</div></div>
+    <div class="gstep" id="g4" data-say="第四步，然后说糖和糕做好以后的事。糖是用甘蔗汁或者甜菜汁熬出来的，甘蔗、甜菜也要有人种；熬糖要有工具，还得有火；就算米糕做好了，还得要人包装、送货、销售。每一步都是人做出来的。">
+      <div class="n">4</div><div class="t"><b>然后 · 糖和后头的事</b><br>甘蔗汁、甜菜汁熬出糖<br>熬糖要工具、火；包装、送货、销售</div></div>
+    <div class="gstep" id="g5" data-say="第五步，最后说道理和孩子明白过来的那句话。爸爸拿起面前的糕说，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。孩子听了爸爸的话，仔细想了想，说，爸爸，这糕的确应该叫千人糕啊。">
+      <div class="n">5</div><div class="t"><b>最后 · 的确应该叫千人糕</b><br>一块平平常常的糕<br>要经过很多很多人的劳动，才能摆在我们面前</div></div>
+  </div>
+  <div class="bubble" id="storyTip" data-say="课后第一题照录：默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作千人糕。说话支架：先说爸爸提出吃千人糕、孩子好奇地问，再说端来一块平平常常的糕、孩子尝了尝笑了，接着说大米是农民种的稻子加工出来的，然后说糖是甘蔗汁或甜菜汁熬出来的、做好了还要包装送货销售，最后说一块糕要经过很多很多人的劳动才能摆在我们面前，所以的确应该叫千人糕。">
+    💬 <b>课后题①照录</b>：默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作“千人糕”。<br>
+    说话支架：<b>先</b>说爸爸提出吃糕、孩子好奇 → <b>再</b>说端来平平常常的糕、尝了尝笑了 → <b>接着</b>说种稻子、磨成粉 → <b>然后</b>说种甘蔗甜菜、熬糖、包装送货销售 → <b>最后</b>说很多很多人的劳动，的确应该叫千人糕。
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>⑤ 分角色朗读（12 张卡，19 句全覆盖）<span class="sec-note">点一张卡，听这一位读的那几句</span></div>
+  <div class="role-grid">
+    <div class="role" id="r1" data-role="旁白·开场" data-lines="一天，爸爸对孩子说：今天我们来吃千人糕吧。">
+      <div class="r-n">📖 旁白·开场</div>
+      <div class="r-t">一天，爸爸对孩子说：今天我们来吃千人糕吧。</div>
+      <div class="r-m">💬 开场读得<b>平常、亲切</b></div>
+    </div>
+    <div class="role" id="r2" data-role="孩子·好奇" data-lines="爸爸，什么是千人糕？孩子好奇地问。">
+      <div class="r-n">❓ 孩子·好奇</div>
+      <div class="r-t">爸爸，什么是千人糕？孩子好奇地问。</div>
+      <div class="r-m">💬 问句<b>上扬</b>，读出好奇</div>
+    </div>
+    <div class="role" id="r3" data-role="爸爸·回答" data-lines="需要很多很多人才能做成的糕。爸爸回答。">
+      <div class="r-n">🍚 爸爸·回答</div>
+      <div class="r-t">需要很多很多人才能做成的糕。爸爸回答。</div>
+      <div class="r-m">💬 很多很多人<b>读得慢而重</b></div>
+    </div>
+    <div class="role" id="r4" data-role="孩子·心里想" data-lines="孩子想：这糕要很多很多人才能做成，一定特别大，也许比桌子还大吧？">
+      <div class="r-n">💭 孩子·心里想</div>
+      <div class="r-t">这糕一定特别大，也许比桌子还大吧？</div>
+      <div class="r-m">💬 心里想的话<b>轻一点</b></div>
+    </div>
+    <div class="role" id="r5" data-role="旁白·端来糕" data-lines="爸爸端来一块糕，那糕看上去跟平时吃的糕没什么两样。|难道它的味道很特别吗？">
+      <div class="r-n">🍰 旁白·端来糕</div>
+      <div class="r-t">爸爸端来一块糕，跟平时吃的没什么两样；难道它的味道很特别吗？</div>
+      <div class="r-m">💬 先平稳叙述，再读出疑惑</div>
+    </div>
+    <div class="role" id="r6" data-role="孩子·尝了尝" data-lines="孩子急忙尝了尝，笑了：这不就是平常吃的米糕嘛！您给我买过。">
+      <div class="r-n">😄 孩子·尝了尝</div>
+      <div class="r-t">这不就是平常吃的米糕嘛！您给我买过。</div>
+      <div class="r-m">💬 急忙读得快，笑了以后<b>亮起来</b></div>
+    </div>
+    <div class="role" id="r7" data-role="爸爸·先顺着说" data-lines="爸爸说：是的，就是平常吃的米糕。|你知道这糕是怎么做成的吗？">
+      <div class="r-n">🙂 爸爸·先顺着说</div>
+      <div class="r-t">是的，就是平常吃的米糕。你知道这糕是怎么做成的吗？</div>
+      <div class="r-m">💬 先肯定，再用问句<b>引出下文</b></div>
+    </div>
+    <div class="role" id="r8" data-role="孩子·米粉加糖" data-lines="孩子说：是把大米磨成粉做的，还加了糖。">
+      <div class="r-n">🍬 孩子·米粉加糖</div>
+      <div class="r-t">是把大米磨成粉做的，还加了糖。</div>
+      <div class="r-m">💬 孩子答得<b>又快又干脆</b></div>
+    </div>
+    <div class="role" id="r9" data-role="爸爸·种稻子" data-lines="爸爸说：是啊，大米是用农民种的稻子加工出来的。|农民种稻子需要种子、农具、肥料、水等等。">
+      <div class="r-n">🌾 爸爸·种稻子</div>
+      <div class="r-t">大米是用农民种的稻子加工出来的；种稻子需要种子、农具、肥料、水。</div>
+      <div class="r-m">💬 一层一层<b>慢慢数</b></div>
+    </div>
+    <div class="role" id="r10" data-role="爸爸·熬糖与包装" data-lines="爸爸接着说：糖呢，是用甘蔗汁或者甜菜汁熬出来的。|甘蔗、甜菜也要有人种。|熬糖的时候，要有工具，还得有火等等。|就算米糕做好了，还得要人包装、送货、销售，这些又需要很多人的劳动。">
+      <div class="r-n">🔥 爸爸·熬糖与包装</div>
+      <div class="r-t">糖是用甘蔗汁或者甜菜汁熬出来的；做好了还要包装、送货、销售。</div>
+      <div class="r-m">💬 从种到熬到卖，<b>一步都不能漏</b></div>
+    </div>
+    <div class="role" id="r11" data-role="爸爸·一句话收住" data-lines="爸爸拿起面前的糕，说：你看，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。">
+      <div class="r-n">📦 爸爸·一句话收住</div>
+      <div class="r-t">一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。</div>
+      <div class="r-m">💬 要经过、才能<b>放慢读</b></div>
+    </div>
+    <div class="role" id="r12" data-role="齐读·的确应该叫" data-lines="孩子听了爸爸的话，仔细想了想，说：爸爸，|这糕的确应该叫千人糕啊！">
+      <div class="r-n">🌻 齐读·的确应该叫</div>
+      <div class="r-t">孩子仔细想了想：这糕的确应该叫千人糕啊！</div>
+      <div class="r-m">💬 <b>恍然大悟</b>，收得亮一点</div>
+    </div>
+  </div>
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 听读课文</button>
+  <button type="button" id="btnStep2">② 学字词</button>
+  <button type="button" id="btnStep3">③ 词语·听写</button>
+  <button type="button" id="btnStep4">④ 深入理解</button>
+  <button type="button" id="btnStep5">⑤ 说经过·分角色</button>
+  <button type="button" id="btnStop" class="stop">⏹ 停止</button>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+var follow=false;          /* 跟读模式 */
+var dictSkip=false;        /* 听写「看答案」提前揭晓 */
+
+/* 可被「停止」打断的等待（每 80ms 检查一次 abort / 外部条件） */
+function wait(ms, check){
+  return new Promise(function(res){
+    var t0=Date.now();
+    var id=setInterval(function(){
+      if(abort || (check && check()) || Date.now()-t0>=ms){ clearInterval(id); res(); }
+    },80);
+  });
+}
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+
+/* 文本安全清洗（iOS Safari：以 < 开头、以 > 结尾且含中文 → TTS 彻底卡死） */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 语音就绪 + 手势解锁（移动端必需） */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+/* 朗读引擎（watchdog 兜底：引擎还在说就继续等，不用固定时长硬切） */
+function speak(text){
+  text=__safeText(text);
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.82; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考面板（课文区共用），点一下可跳过；tip 模式只显示不倒计时 */
+var tipPill=document.getElementById('thinkPill');
+function showTip(txt){
+  tipPill.textContent='💡 '+txt+'（点我听）';
+  tipPill.style.display='block';
+  tipPill.onclick=function(){ speak(txt); };
+}
+function hideTip(){ tipPill.style.display='none'; tipPill.onclick=null; }
+function imgThinkWait(tip){
+  return new Promise(function(resolve){
+    var secs=parseInt(tipPill.getAttribute('data-secs'))||8;
+    tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    tipPill.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); hideTip(); resolve(); return; }
+      tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    },1000);
+    tipPill.onclick=function(){ clearInterval(t); hideTip(); resolve(); };
+  });
+}
+/* 题目卡内倒计时 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  document.getElementById('imgAnsBox').textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= ① 听读课文 ================= */
+/* 每句一个朗读单元；think/ans 挂在句子后面，读到关键处停下来让学生先想 */
+var stepsRead=[
+  {id:'s1', say:'一天，爸爸对孩子说：今天我们来吃千人糕吧。'},
+  {id:'s2', say:'爸爸，什么是千人糕？孩子好奇地问。'},
+  {id:'s3', say:'需要很多很多人才能做成的糕。爸爸回答。',
+   think:'爸爸说的很多很多人是什么意思',
+   ans:'不是真的数出一千个人，是说做成一块糕要很多很多人出力。课文后面会把这些人一样一样数给我们看。'},
+  {id:'s4', say:'孩子想：这糕要很多很多人才能做成，一定特别大，也许比桌子还大吧？'},
+  {id:'s5', say:'爸爸端来一块糕，那糕看上去跟平时吃的糕没什么两样。'},
+  {id:'s6', say:'难道它的味道很特别吗？',
+   think:'孩子为什么笑了',
+   ans:'他原以为千人糕特别大，尝了才发现就是平常吃的米糕，和自己想的不一样，所以笑了。'},
+  {id:'s7', say:'孩子急忙尝了尝，笑了：这不就是平常吃的米糕嘛！您给我买过。'},
+  {id:'s8', say:'爸爸说：是的，就是平常吃的米糕。'},
+  {id:'s9', say:'你知道这糕是怎么做成的吗？'},
+  {id:'s10', say:'孩子说：是把大米磨成粉做的，还加了糖。'},
+  {id:'s11', say:'爸爸说：是啊，大米是用农民种的稻子加工出来的。'},
+  {id:'s12', say:'农民种稻子需要种子、农具、肥料、水等等。',
+   think:'顿号后面为什么用省略号',
+   ans:'种子、农具、肥料、水只是举了几样，农民要准备的东西还有很多，省略号表示没说完。'},
+  {id:'s13', say:'爸爸接着说：糖呢，是用甘蔗汁或者甜菜汁熬出来的。'},
+  {id:'s14', say:'甘蔗、甜菜也要有人种。'},
+  {id:'s15', say:'熬糖的时候，要有工具，还得有火等等。'},
+  {id:'s16', say:'就算米糕做好了，还得要人包装、送货、销售，这些又需要很多人的劳动。',
+   think:'做好了为什么还不算完',
+   ans:'米糕做好了还要包装、送货、销售，每一步都要人去做，所以爸爸说这些又需要很多人的劳动。'},
+  {id:'s17', say:'爸爸拿起面前的糕，说：你看，一块平平常常的糕，要经过很多很多人的劳动，才能摆在我们面前。'},
+  {id:'s18', say:'孩子听了爸爸的话，仔细想了想，说：爸爸，'},
+  {id:'s19', say:'这糕的确应该叫千人糕啊！',
+   think:'的为什么在这里读第二声',
+   ans:'的确是一个词，表示确实、真的，这里的读第二声；平常吃的米糕里的读轻声，两个读音不一样。'}
+];
+
+/* 给课文里的每个句子编上 id（s1…s19），顺序与 stepsRead 一致 */
+(function(){
+  var sents=document.querySelectorAll('.para .sent');
+  for(var i=0;i<sents.length && i<stepsRead.length;i++){ sents[i].id=stepsRead[i].id; }
+})();
+
+/* 跟读：读完一句，留时间让学生自己读（按字数给时间，3~8 秒） */
+async function followWait(text){
+  var secs=Math.min(8, Math.max(3, Math.round(text.length/6)));
+  await speak('你来读。');
+  tipPill.textContent='🗣 你来读… '+secs+' 秒（读完点我直接下一句）';
+  tipPill.style.display='block';
+  var skipped=false;
+  tipPill.onclick=function(){ skipped=true; };
+  await wait(secs*1000, function(){ return skipped; });
+  hideTip();
+}
+
+/* ================= ② 学字词 ================= */
+var stepsWord=[
+  {id:'zinGrid', say:'先读 16 个会认字。这些字只要认得、读得出就行。生字表里印成蓝色的那个字是多音字，在的确这个词里读第二声。', lead:true},
+  {id:'ziwGrid', say:'下面是 10 个会写字。这些字不但要认得，还要会写，注意听每一条的书写提示。', lead:true}
+];
+
+/* ================= ③ 词语·听写 ================= */
+var dictWords=[
+  {w:'桌子', eg:'示范句：也许比桌子还大吧？'},
+  {w:'品尝', eg:'示范句：我们品尝了妈妈做的米糕。'},
+  {w:'买过', eg:'示范句：您给我买过。'},
+  {w:'农具', eg:'示范句：农民种稻子需要种子、农具、肥料、水等等。'},
+  {w:'甘蔗汁', eg:'示范句：糖呢，是用甘蔗汁或者甜菜汁熬出来的。'},
+  {w:'甜菜', eg:'示范句：甘蔗、甜菜也要有人种。'},
+  {w:'劳动', eg:'示范句：这些又需要很多人的劳动。'},
+  {w:'应该', eg:'示范句：这糕的确应该叫千人糕啊！'},
+  {w:'蛋糕', eg:'示范句：生日那天，我们分了一块蛋糕。'},
+  {w:'千人糕', eg:'示范句：今天我们来吃千人糕吧。'}
+];
+var stepsWord2=[
+  {id:'w1', say:'课后第一题：默读课文。结合课文内容和插图，说说一块平常的米糕为什么被称作千人糕。'},
+  {id:'w2', say:'课后第二题：我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说。'},
+  {id:'w3', say:'课后第三题：读一读，记一记。下面有四个彩色词框，一共十二个词。'},
+  {id:'w4', say:'第一个词框：蛋糕、雪糕、糕点。课本在蛋字上注了音，读第四声。'},
+  {id:'w5', say:'第二个词框：米粉、面粉、粉丝。三个词里都有粉字，读第三声。'},
+  {id:'w6', say:'第三个词框：品尝、尝鲜、尝试。课本在品字上注了音，读第三声。'},
+  {id:'w7', say:'第四个词框：确定、确实、正确。课本在实字上注了音，读第二声。'},
+  {id:'n1', say:'下面听四组近义词。第一组：平常和平时。'},
+  {id:'n2', say:'第二组：的确和确实。'},
+  {id:'n3', say:'第三组：平平常常和普普通通。'},
+  {id:'n4', say:'第四组：应该和应当。'},
+  {id:'a1', say:'最后是词语拓展：一问一答、很多很多和平平常常、顿号数清单，还有要经过什么才能怎样的句式。'}
+];
+
+/* ================= ④ 深入理解 ================= */
+var stepsQa=[
+  {id:'q1', say:'第一题，认知：爸爸说千人糕是什么？孩子一开始以为这块糕有多大？想一想。'},
+  {id:'q2', say:'第二题，认知：照课文数一数，一块米糕从种稻子到摆上桌，要经过哪些人的劳动？想一想。'},
+  {id:'q3', say:'第三题，理解：课后第一题，一块平常的米糕，为什么被称作千人糕？想一想。'},
+  {id:'q4', say:'第四题，理解：孩子为什么先猜糕特别大，尝了以后又笑了？想一想。'},
+  {id:'q5', say:'第五题，理解：爸爸为什么不直接讲道理，而要一句一句问孩子？想一想。'},
+  {id:'q6', say:'第六题，运用：课后第二题，我们穿的衣服、用的文具等，都要经过很多人的劳动，举个例子说一说。答案不唯一。想一想。'},
+  {id:'q7', say:'第七题，运用：照课文的样子，用要经过什么才能怎样说一句话，再用上读一读记一记里的一个词。答案不唯一。想一想。'},
+  {id:'q8', say:'最后一题，拓展：生活里还有哪些东西像千人糕一样，藏着很多人的劳动？你想对这些人说什么？答案不唯一。想一想。'}
+];
+
+/* ================= ⑤ 说经过·分角色 ================= */
+var stepsStory=[{id:'g1'},{id:'g2'},{id:'g3'},{id:'g4'},{id:'g5'}];
+var stepsRole=[{id:'r1'},{id:'r2'},{id:'r3'},{id:'r4'},{id:'r5'},{id:'r6'},{id:'r7'},{id:'r8'},{id:'r9'},{id:'r10'},{id:'r11'},{id:'r12'}];
+
+/* ================= 按钮状态 ================= */
+var btns=['btnStep1','btnStep2','btnStep3','btnStep4','btnStep5'].map(function(i){ return document.getElementById(i); });
+function lock(on){ btns.forEach(function(b){ b.disabled=on; }); }
+
+/* ================= ① 听读课文 ================= */
+async function playRead(){
+  abort=false;
+  lock(true);
+  await speak('先听老师读要求：读准字音，不添字不漏字；逗号稍停，句号、问号停得长一点；孩子好奇地问要上扬，爸爸的回答平稳、有耐心；默读时不出声、不指读。');
+  await wait(300);
+  for(var i=0;i<stepsRead.length;i++){
+    if(abort) break;
+    var s=stepsRead[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(follow){ await followWait(s.say); if(abort) break; }
+    if(s.think){
+      await imgThinkWait(s.think);
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+      clearImgAns();
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns(); hideTip();
+  lock(false);
+}
+
+/* ================= ② 学字词 ================= */
+async function playWord(){
+  abort=false;
+  lock(true);
+  await wait(300);
+  for(var i=0;i<stepsWord.length;i++){
+    if(abort) break;
+    var s=stepsWord[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    var cards = el ? Array.prototype.slice.call(el.querySelectorAll('.zi')) : [];
+    unhl();
+    for(var k=0;k<cards.length;k++){
+      if(abort) break;
+      var c=cards[k];
+      hl(c); __scrollTo(c);
+      await speak(c.getAttribute('data-say')||c.textContent);
+      if(abort) break;
+      await wait(120);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ③ 词语·听写·造句·近义词 ================= */
+var dictStage=document.getElementById('dictStage');
+var dictWord=document.getElementById('dictWord');
+var dictHint=document.getElementById('dictHint');
+
+function setDict(i, masked, hint, word){
+  dictStage.textContent = (i>0 ? ('第 '+i+' 个 / 共 '+dictWords.length+' 个') : '准备听写 · 共 '+dictWords.length+' 个词');
+  if(masked){ dictWord.classList.add('mask'); dictWord.textContent='○ ○ ○'; }
+  else{ dictWord.classList.remove('mask'); dictWord.textContent=word||''; }
+  dictHint.textContent=hint||'';
+}
+async function playDict(){
+  abort=false;
+  lock(true);
+  setDict(0,true,'点下面的「开始听写」，听到一个词就写一个词。');
+  await speak('下面开始听写，一共十个词。每个词读两遍，听完就在纸上写一个。写完点「看答案」，也可以等几秒钟自动出答案。');
+  if(abort){ lock(false); return; }
+  await wait(600);
+  for(var i=0;i<dictWords.length;i++){
+    if(abort) break;
+    var d=dictWords[i];
+    dictSkip=false;
+    setDict(i+1,true,'✏️ 听到就写下来…');
+    await speak('第 '+(i+1)+' 个。'+d.w+'。'+d.w+'。');
+    if(abort) break;
+    await wait(6000, function(){ return dictSkip; });       /* 写词时间，可点「看答案」提前 */
+    if(abort) break;
+    setDict(i+1,false,'答案是：'+d.w, d.w);
+    await speak('答案是：'+d.w+'。');
+    if(abort) break;
+    await wait(500);
+    if(abort) break;
+    await speak(d.eg);                                       /* 顺带听一句示范造句 */
+    if(abort) break;
+    await wait(900);
+  }
+  if(!abort){
+    setDict(0,false,'✅ 听写完了','听写完了！');
+    await speak('十个词听写完了。点开下面的词语卡，可以再听一遍词语和示范句，自己也试着说一句。');
+  }
+  /* 再读词语积累、近义词、拓展 */
+  for(var j=0;j<stepsWord2.length;j++){
+    if(abort) break;
+    var s=stepsWord2[j];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.id.indexOf('n')===0){
+      await speak(el.getAttribute('data-say')||'');
+      if(abort) break;
+    }
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ④ 深入理解 ================= */
+async function playQa(){
+  abort=false;
+  lock(true);
+  for(var i=0;i<stepsQa.length;i++){
+    if(abort) break;
+    var s=stepsQa[i];
+    var qa=document.getElementById(s.id);
+    if(!qa) continue;
+    focusEl(qa);
+    await wait(400);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ⑤ 说经过·分角色 ================= */
+async function playStory(){
+  abort=false;
+  lock(true);
+  await speak('先按课文顺序说说一块米糕要经过哪些人的劳动。可以用上先、再、接着、然后、最后这几个词。');
+  if(abort){ lock(false); return; }
+  for(var i=0;i<stepsStory.length;i++){
+    if(abort) break;
+    var s=stepsStory[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    hl(el); __scrollTo(el);
+    await speak(el.getAttribute('data-say')||'');
+    if(abort) break;
+    await wait(300);
+  }
+  if(abort){ unhl(); cap.style.display='none'; lock(false); return; }
+  unhl();
+  await speak('说完了。下面分角色朗读课文，旁白、爸爸、孩子和齐读，语气各不相同。');
+  if(abort){ cap.style.display='none'; lock(false); return; }
+  for(var k=0;k<stepsRole.length;k++){
+    if(abort) break;
+    var r=document.getElementById(stepsRole[k].id);
+    if(!r) continue;
+    hl(r); __scrollTo(r);
+    var name=r.getAttribute('data-role')||'';
+    var lines=(r.getAttribute('data-lines')||'').split('|');
+    await speak('现在请'+name+'来读。'+ (r.querySelector('.r-m')?r.querySelector('.r-m').textContent.replace('💬 ',''):''));
+    if(abort) break;
+    for(var m=0;m<lines.length;m++){
+      if(abort) break;
+      if(!lines[m]) continue;
+      await speak(lines[m]);
+      if(abort) break;
+      await wait(350);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+document.getElementById('btnStep1').addEventListener('click',playRead);
+document.getElementById('btnStep2').addEventListener('click',playWord);
+document.getElementById('btnStep3').addEventListener('click',playDict);
+document.getElementById('btnStep4').addEventListener('click',playQa);
+document.getElementById('btnStep5').addEventListener('click',playStory);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  hideTip(); unhl(); cap.style.display='none'; clearImgAns();
+  lock(false);
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 句级点读：点哪句读哪句；读完把朗读提示显示出来（点提示可再听） */
+document.querySelectorAll('.para .sent').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var tip=el.getAttribute('data-tip');
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){
+      if(tip) showTip(tip);
+    });
+  });
+});
+/* 点段前序号 → 读整段 */
+document.querySelectorAll('.para .no').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    var para=el.parentNode;
+    hl(para);
+    speak(para.getAttribute('data-say')||para.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 通用点读：教材图 / 词语行 / 成长顺序 / 近义词 / 朗读要求
+   注意：词语拓展 .acc 不放进 id 列表，改由下方 querySelectorAll('.acc') 动态绑定，
+   这样新增拓展组（a5、a6…）无需再改这里，避免「新增了却点不出声」。 */
+['pic1','pic2','pic3','w1','w2','w3','w4','w5','w6','w7','g1','g2','g3','g4','g5','n1','n2','n3','n4','req1','mapUnit','srcNote','hwText','storyTip'
+].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 词语拓展卡点读：动态绑定所有 .acc（新增组自动生效） */
+document.querySelectorAll('.acc').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 生字卡点读 */
+document.querySelectorAll('.zi').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 角色卡点读：读角色名 + 语气提示 + 逐句台词 */
+document.querySelectorAll('.role').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var name=el.getAttribute('data-role')||'';
+    var lines=(el.getAttribute('data-lines')||'').split('|');
+    speak('现在请'+name+'来读。').then(function(){
+      var i=0;
+      function nx(){
+        if(abort||i>=lines.length){ unhl(); return; }
+        speak(lines[i++]).then(function(){ setTimeout(nx,350); });
+      }
+      nx();
+    });
+  });
+});
+
+/* 词语卡点读（词 / 示范句 / 说话支架） */
+document.querySelectorAll('.wc').forEach(function(card){
+  card.querySelectorAll('[data-say]').forEach(function(el){
+    el.addEventListener('click',function(ev){
+      ev.stopPropagation();
+      abort=true; if(synth) synth.cancel();
+      hl(card);
+      speak(el.getAttribute('data-say')||'').then(function(){ unhl(); });
+    });
+  });
+});
+
+/* 跟读模式开关 */
+document.getElementById('btnFollow').addEventListener('click',function(){
+  follow=!follow;
+  this.textContent = follow ? '🔁 跟读模式：开' : '🔁 跟读模式：关';
+  this.classList.toggle('on', follow);
+  speak(follow ? '跟读模式打开了。我读一句，你跟着读一句。' : '跟读模式关闭了。');
+});
+
+/* 听写按钮 */
+document.getElementById('btnDictStart').addEventListener('click',function(){
+  abort=false; playDict();
+});
+document.getElementById('btnDictAgain').addEventListener('click',function(){
+  var i=parseInt((dictStage.textContent.match(/第\s*(\d+)\s*个/)||[])[1]||0);
+  var d=dictWords[i-1];
+  if(d) speak(d.w+'。'+d.w+'。');
+  else speak('先点开始听写。');
+});
+document.getElementById('btnDictShow').addEventListener('click',function(){
+  dictSkip=true;
+});
+
+/* 隐藏 / 显示注音 */
+document.getElementById('btnPy').addEventListener('click',function(){
+  var on=document.body.classList.toggle('no-py');
+  this.textContent = on ? '👁 显示注音' : '👁 隐藏注音（自测用）';
+  this.classList.toggle('on', on);
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

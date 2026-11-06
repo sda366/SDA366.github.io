@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  小学语文 · 有声图文带读页  chinese-primary-courseware v1.8
+  课文：统编版语文二年级下册 第一单元-阅读 第4课《邓小平爷爷植树》（课本 第 9~10 页）
+  出处：课本第 9 页脚注，本文根据欧庆林的《首都百余万军民义务植树》改写
+  ----------------------------------------------------------------------------
+  二版相对一版的四项升级（对应使用者要求）：
+  1. 高标准朗读 + 点读：课文拆到「句」，点哪句读哪句；范读/跟读双模式；
+     跟读模式读完一句留时间让学生自己读，防走神；朗读要求（老师标准）单独成卡。
+  2. 深入理解：提问由 6 题扩到 8 题，认知→理解→运用→拓展四层，
+     开放题明确标注「答案不唯一」，每题给 2~3 个思路。
+  3. 词语：新增「听写」（读两遍→写→报答案）+ 逐词示范造句 + 4 组近义词辨析
+     （相同点 / 不一样在哪 / 各造一句）。
+  4. 其他：朗读课文（课后题一）、默读第 3 自然段说植树情景（课后题二）、拓展活动两个泡泡、
+     会写字书写提示、词语拓展（天气四字词 / 动作词 / 绿油油式 / 顺序词）。
+  红线：课文原文、生字表、课后题一律照录教材，不编造；
+        拼音只做视觉显示，不进朗读文本；部首笔画与书写提示标注「供参考」。
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>邓小平爷爷植树 · 语文第4课 · 有声图文带读</title>
+<style>
+  :root{ --main:#c62828; --main2:#ef6c00; --hl:#f9a825; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fdf8f3; color:#3e2723; padding-bottom:130px; }
+  .container{ max-width:880px; margin:0 auto; padding:16px; }
+
+  .page-head{ background:linear-gradient(135deg,#00897b,#4db6ac); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.94; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:#00695c; margin:22px 0 12px; flex-wrap:wrap; }
+  .sec-title .bar{ width:6px; height:22px; background:#00897b; border-radius:3px; }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  /* ===== 工具条 ===== */
+  .tool-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+  .tool-btn{ border:1.5px solid #80cbc4; background:#fff; color:#00695c; border-radius:999px;
+    padding:6px 14px; font-size:13.5px; cursor:pointer; }
+  .tool-btn.on{ background:#00897b; color:#fff; border-color:#00897b; }
+  body.no-py rt{ visibility:hidden; }
+
+  /* ===== 朗读要求卡 ===== */
+  .req-card{ background:#fff8e1; border:1.5px solid #ffd54f; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.95; cursor:pointer; }
+  .req-card.hl{ animation:rowFlash .8s ease-in-out infinite; }
+  .req-card b{ color:#e65100; }
+
+  /* ===== 课文段落 / 句级点读 ===== */
+  .para{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 16px; margin-top:10px;
+    font-family:"KaiTi","STKaiti","Kaiti SC",serif; font-size:19px; line-height:2.2;
+    transition:border-color .25s, box-shadow .25s; }
+  .para.hl{ border-color:var(--hl); background:#fffde7; }
+  .para .no{ display:inline-block; background:#00695c; color:#fff; font-size:12px; border-radius:6px;
+    padding:1px 8px; margin-right:8px; vertical-align:2px; font-family:sans-serif; cursor:pointer; }
+  .para .no:hover{ background:#00897b; }
+  .sent{ cursor:pointer; border-radius:5px; padding:1px 1px; transition:background .2s, box-shadow .2s; }
+  .sent:hover{ background:#fff8e1; }
+  .sent.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.35); }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(249,168,37,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  ruby{ ruby-align:center; }
+  /* 连续两三个字都注音时（如「敕勒」chì lè、「穹庐」qióng lú），拼音比汉字宽，
+     会贴在一起分不清是哪个字的音；只给相邻的注音之间留 2px 空隙 */
+  .para ruby + ruby{ margin-left:2px; }
+  rt{ font-size:11px; color:#c62828; font-family:sans-serif; letter-spacing:0; }
+  .para-tip{ font-family:sans-serif; font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:8px;
+    padding:3px 10px; margin:4px 0 0; display:inline-block; cursor:pointer; }
+
+  /* ===== 教材图片 ===== */
+  .pic-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+  .pic-card{ background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:8px; cursor:pointer; text-align:center;
+    transition:border-color .25s, box-shadow .25s; }
+  .pic-card img{ width:100%; display:block; border-radius:6px; }
+  .pic-card .cap{ font-size:12.5px; color:#5d4037; margin-top:6px; line-height:1.6; }
+  .pic-card.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* ===== 生字卡 ===== */
+  .zi-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:10px; }
+  .zi{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:8px 6px 10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .zi:hover{ border-color:#ffcc80; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .zi .py{ font-size:12px; color:#c62828; height:16px; }
+  .zi .hz{ font-family:"KaiTi","STKaiti",serif; font-size:34px; line-height:1.25; color:#212121; }
+  .zi .ci{ font-size:12.5px; color:#6d4c41; margin-top:2px; }
+  .zi.write .hz{ font-size:30px; }
+  .zi .meta{ font-size:11px; color:#8d6e63; margin-top:3px; line-height:1.5; }
+  .zi .wtip{ font-size:11px; color:#1565c0; background:#e3f2fd; border-radius:6px; padding:2px 5px; margin-top:4px; line-height:1.5; }
+
+  /* 田字格 */
+  .tzg{ width:56px; height:56px; margin:2px auto 4px; position:relative; border:1.5px solid #d84315; border-radius:4px; background:#fff; }
+  .tzg::before,.tzg::after{ content:""; position:absolute; background-image:linear-gradient(to right,#f0bdb4 45%,transparent 45%);
+    background-size:6px 1px; background-repeat:repeat-x; }
+  .tzg::before{ left:0; right:0; top:50%; height:1px; }
+  .tzg::after{ top:0; bottom:0; left:50%; width:1px; background-image:linear-gradient(to bottom,#f0bdb4 45%,transparent 45%);
+    background-size:1px 6px; background-repeat:repeat-y; }
+  .tzg span{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; }
+
+  /* ===== 词语行 / 词语卡 ===== */
+  .word-row{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap; transition:border-color .25s, box-shadow .25s; }
+  .word-row.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .word-row .wk{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:6px; padding:2px 8px; }
+  .word-row .ws{ font-family:"KaiTi","STKaiti",serif; font-size:19px; line-height:1.9; }
+  .word-row .ws em{ font-style:normal; background:#ffecb3; border-radius:4px; padding:0 3px; }
+  .bubble{ background:#ede7f6; color:#5e35b1; border-radius:10px; padding:8px 12px; font-size:13.5px; margin-top:8px; line-height:1.8; }
+
+  /* 听写区 */
+  .dict-panel{ background:#fff; border:2px solid #00897b; border-radius:14px; padding:14px; margin-top:10px; text-align:center; }
+  .dict-stage{ font-size:15px; color:#00695c; margin-bottom:6px; }
+  .dict-word{ font-family:"KaiTi","STKaiti",serif; font-size:40px; letter-spacing:8px; line-height:1.4; color:#212121; min-height:56px; }
+  .dict-word.mask{ color:#bdbdbd; }
+  .dict-hint{ font-size:13.5px; color:#8d6e63; margin-top:6px; min-height:20px; }
+  .dict-btns{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+
+  /* 词语卡（听写词 + 造句） */
+  .wc-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px; }
+  .wc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px 12px; }
+  .wc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .wc .w-top{ display:flex; align-items:baseline; gap:8px; cursor:pointer; }
+  .wc .w-hz{ font-family:"KaiTi","STKaiti",serif; font-size:24px; }
+  .wc .w-no{ font-size:12px; color:#90a4ae; }
+  .wc .w-lab{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; }
+  .wc .w-say{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:5px; cursor:pointer; }
+  .wc .w-own{ font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:6px; padding:3px 8px; margin-top:4px; cursor:pointer; }
+
+  /* 近义词辨析 */
+  .near{ background:#fff; border:1.5px solid #e1bee7; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; }
+  .near.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .near .n-top{ font-family:"KaiTi","STKaiti",serif; font-size:20px; color:#6a1b9a; margin-bottom:4px; }
+  .near .n-same{ font-size:13.5px; color:#4e342e; line-height:1.8; }
+  .near .n-diff{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:4px; }
+  .near .n-diff b{ color:#c62828; }
+  .near .n-eg{ font-size:13.5px; color:#1b5e20; background:#e8f5e9; border-radius:6px; padding:5px 9px; margin-top:5px; line-height:1.8; }
+
+  /* 词语拓展 */
+  .acc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:11px 13px; margin-top:10px; cursor:pointer; font-size:14px; line-height:1.9; }
+  .acc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .acc .a-t{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; margin-right:6px; }
+  .acc .a-c{ font-family:"KaiTi","STKaiti",serif; font-size:17px; }
+
+  /* ===== 成长顺序 / 角色 ===== */
+  .grow{ display:flex; gap:8px; flex-wrap:wrap; }
+  .gstep{ flex:1; min-width:110px; background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .gstep .n{ display:inline-block; width:22px; height:22px; line-height:22px; border-radius:50%; background:#00897b; color:#fff; font-size:12.5px; }
+  .gstep .t{ font-size:14px; margin-top:6px; line-height:1.6; color:#4e342e; }
+  .gstep.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+  .role{ background:#fff; border:1.5px solid #b39ddb; border-radius:12px; padding:10px 12px; cursor:pointer; }
+  .role.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role .r-n{ font-size:15px; color:#5e35b1; font-weight:bold; }
+  .role .r-t{ font-family:"KaiTi","STKaiti",serif; font-size:15px; color:#4e342e; margin-top:4px; line-height:1.75; }
+  .role .r-m{ font-size:12.5px; color:#8d6e63; margin-top:4px; line-height:1.6; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-y{ background:#e8f5e9; color:#2e7d32; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 思考面板 / 字幕 / 控制条 ===== */
+  #thinkPill{ display:none; margin:10px auto 0; width:max-content; max-width:96%; background:#ede7f6; color:#5e35b1;
+    border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; text-align:center; line-height:1.6; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:8px;
+    align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 14px; font-size:14px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff;
+    border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .para{ font-size:17.5px; padding:11px 12px; }
+    .zi-grid{ grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); }
+    .wc-grid{ grid-template-columns:1fr; }
+    .ctrl-bar button{ padding:8px 11px; font-size:13px; }
+    #cap{ bottom:110px; }
+    body{ padding-bottom:160px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#thinkPill{ display:none !important; } body{ padding-bottom:0; } }
+  /* 返回导航按钮（模板自带，新页无需再跑 add_back_button.py） */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); text-decoration:none; }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+  /* 字卡列数：桌面端按固定列排。auto-fill 在 1100px 宽下会算成 7 列，
+     8 个会写字就变成「7+1」、最后一张被拉成整行宽。 */
+  @media (min-width:601px){
+    #zinGrid{ grid-template-columns:repeat(6,1fr); }
+    #ziwGrid{ grid-template-columns:repeat(4,1fr); }
+    /* 本页听写词 10 个：默认 auto-fill 在 1100px 下算成 3 列，排成 3+3+3+1 落单，
+       故按“能整除 10 的最大列数”覆盖成 5 列（5+5）。 */
+    #wcGrid{ grid-template-columns:repeat(5,1fr); }
+    /* 5 列时卡宽约 145px，“字 + 标签”挤在一行会把两字词压成竖排，
+       故让标签换到下一行、词不许断行。 */
+    #wcGrid .w-top{ flex-wrap:wrap; gap:2px 6px; }
+    #wcGrid .w-hz{ white-space:nowrap; font-size:22px; }
+  }
+
+  /* RA_MOBILE_FIX 2026-11-03：手机端「返回导航」上移 + 去掉遮挡层（口径同三年级语文）
+     1) .back-nav 由原 bottom:60/62px 上移到 104px，避开手机上会换行的 .ctrl-bar 与底部点读区；
+     2) #cap 字幕小框在手机/触摸设备隐藏（二年级语文原 @media 把它也放在 104px，
+        按钮上移后会与之重叠；课件已有高亮+自动滚动，字幕重复）；
+     3) #sndTip 常驻「没声音」黄条隐藏（本册页面无此元素，此条为与三年级一致的预防规则）。
+     带标记，重复执行不会叠加。js 侧三份 read-assist.js 均已有 SHOW_GUIDE=0，无需改动。 */
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+    #sndTip{ display:none !important; }
+  }
+
+  /* ===== 第4课页面专属覆盖（后置同特异性，必定生效） ===== */
+  .para{ font-size:18px; line-height:2.15; }
+  .para .sent{ display:inline; font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    font-size:18px; letter-spacing:0; text-align:left; line-height:2.15; }
+  .para ruby + ruby{ margin-left:2px; }
+  /* 教材图放大：2 张课本页一排，恰好不落单 */
+  .pic-grid{ grid-template-columns:repeat(2,1fr); gap:14px; }
+  .pic-card{ box-shadow:0 2px 10px rgba(62,39,35,.10); }
+  /* 课后题词牌：多笔画字在 12px 下会糊成一团 */
+  .word-row .wk{ font-size:15px; padding:3px 9px; }
+  @media (min-width:601px){
+    #zinGrid{ grid-template-columns:repeat(5,1fr); }
+    #ziwGrid{ grid-template-columns:repeat(3,1fr); }
+    #wcGrid{ grid-template-columns:repeat(5,1fr); }
+    #wcGrid .w-top{ flex-wrap:wrap; gap:2px 6px; }
+    #wcGrid .w-hz{ white-space:nowrap; font-size:21px; }
+    .role-grid{ grid-template-columns:repeat(5,1fr); }
+  }
+  @media (max-width:600px){
+    .para{ font-size:17px; }
+    .para .sent{ font-size:17px; }
+    .role-grid{ grid-template-columns:repeat(2,1fr); }
+    .pic-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+  <div class="page-head">
+    <h1>🌳 第 4 课《邓小平爷爷植树》· 有声图文带读</h1>
+    <p>统编版语文 · 第一单元·阅读 · 课本 第 9~10 页 · 本文根据欧庆林《首都百余万军民义务植树》改写</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">课文 <b>5</b> 段 · <b>11</b> 句</span>
+    <span class="stat">会认字 <b>15</b></span>
+    <span class="stat">会写字 <b>6</b></span>
+    <span class="stat">听写词 <b>10</b></span>
+    <span class="stat">近义词 <b>4</b> 组</span>
+    <span class="stat">深入理解 <b>8</b> 题</span>
+    <span class="stat">本课本领 <b>朗读·默读·按顺序说植树情景</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 五步学（可随时点任意一句、一个字、一个词单独听）：</b><br>
+    <b>① 听读课文</b>——5 个自然段、11 句，一句一句读，读到哪一句哪一句发光；开「跟读」后读完一句留时间让你自己读。<br>
+    <b>② 学字词</b>——15 个会认字、6 个会写字（含书写提示），点一个读一个。<br>
+    <b>③ 词语·听写·造句</b>——读课本第 10 页课后题和拓展活动，听写 10 个词（读两遍→写→报答案），<span style="white-space:nowrap">再听四组近义词辨析。</span><br>
+    <b>④ 深入理解</b>——8 道题（认知 / 理解 / 运用 / 拓展），开放题答案不唯一，先想后看。<br>
+    <b>⑤ 说情景·分工朗读</b>——借助课本插图，按先、再、接着、然后、最后说说邓爷爷植树的情景，再按自然段分工朗读课文。
+  </div>
+
+  <div class="bubble" id="mapUnit" data-say="本册第一单元是阅读单元，一共有四篇课文和一个语文园地：第一课古诗二首，第二课找春天，第三课开满鲜花的小路，第四课邓小平爷爷植树，后面是语文园地一。四课都和春天有关。第一课是诗里的春天，第二课是孩子们出门去找春天，第三课是春天里一个关于花籽和礼物的故事，第四课写人亲手给春天种下一棵树。上一课花籽漏在路上，悄悄把春天铺成了一路鲜花；这一课邓爷爷亲手栽下一棵小柏树，很多年以后，它长成了天坛公园一处美丽的风景。两课都在讲，春天不只会自己来，也可以由人亲手种下。">
+    📚 <b>本册第一单元·阅读（照课本目录）：</b>1 古诗二首　→　2 找春天　→　3 开满鲜花的小路<br>
+    　　→　<b>4 邓小平爷爷植树（本课）</b>　→　语文园地一<br>
+    <span style="font-size:13px;color:#6d5647;">前后连起来看：诗里的春天 → 出门找春天 → 春天里的一路鲜花 → 亲手种下春天</span>
+  </div>
+
+  <div class="bubble" id="srcNote" data-say="课本第 9 页脚注照录：本文根据欧庆林的首都百余万军民义务植树改写，原文刊载于一九八七年四月六日人民日报。课题右上角那个圈一，指的就是这条脚注。">
+    📖 <b>课文出处（课本第 9 页脚注照录）</b>：① 本文根据欧庆林的《首都百余万军民义务植树》改写，<br>
+    　　原文刊载于 1987 年 4 月 6 日《人民日报》。
+  </div>
+
+  <!-- ================= ① 听读课文 ================= -->
+  <div class="sec-title"><span class="bar"></span>① 听读课文（点哪一句，读哪一句）<span class="sec-note">点段前的 ①~⑤ 听整段</span></div>
+
+  <div class="tool-row">
+    <button type="button" class="tool-btn" id="btnFollow">🔁 跟读模式：关</button>
+    <button type="button" class="tool-btn" id="btnPy">👁 隐藏注音（自测用）</button>
+    <span class="sec-note">注音只标本课要认、要写的字，以及课本随文标了音的字；读音照课本第 9~10 页</span>
+  </div>
+
+  <div class="req-card" id="req1" data-say="朗读要求。本课课后第一题是朗读课文，第二题是默读第 3 自然段，结合课文内容和插图说说邓爷爷植树的情景。一，读准字音：邓读第四声，坛读第二声，龄读第二声，锹读第一声，坑读第一声，茁读第二声，栽读第一声，扶读第二声，跟着课本第 9 页和第 10 页的注音读。二，不添字、不漏字，逗号停得短，句号停得长，长句子中间换一口气再往下读。三，第 3 自然段要默读，不出声、不指读，一边读一边把挖树坑、挑选树苗、移入树坑、挥锹填土、仔细看看、扶正这些动作连起来想。四，人物只有一处话，是邓爷爷连声说不行不行，要读得干脆、着急一点；其余都是旁白，读得清楚平稳。五，最后一段读得慢一点，读出很多年以后回头看这棵树的感情。">
+    🎤 <b>朗读要求 · 朗读课文 + 默读第 3 自然段（课后题①②的老师标准）</b><br>
+    ① <b>读准字音</b>：邓、坛、龄、锹、坑、茁、栽、扶跟着课本第 9~10 页的注音读；「植」「引」「注」「满」是会写字，也要读准；<br>
+    ② <b>不添字、不漏字</b>：逗号停得短，句号停得长；「碧空如洗，万里无云」「兴致勃勃」这样的四字词要读完整；<br>
+    ③ <b>默读第 3 自然段</b>：<b>不出声、不指读</b>，边读边找邓爷爷一连串的动作，再对着插图想一想当时的情景；<br>
+    ④ <b>唯一的人物的话</b>：「不行，不行！」是邓爷爷说的，要读得<b>干脆、着急</b>；其余是旁白，读得清楚平稳；<br>
+    ⑤ <b>结尾照应开头</b>：最后一段读慢一点，把「令人难忘的日子」和「美丽的风景」连起来体会。
+  </div>
+
+  <div class="para" id="p1" data-say="第一自然段。一九八七年四月五日，是个令人难忘的日子。">
+    <span class="no" title="听这一自然段">①</span>
+    <span class="sent" data-say="一九八七年四月五日，是个令人难忘的日子。" data-tip="一开头就把年月日说清楚，读得平稳、郑重一点，日子两个字稍稍加重，让人一听就记住。">1987年4月5日，是个令人难忘的日子。</span>
+  </div>
+
+  <div class="para" id="p2" data-say="第二自然段。这一天，碧空如洗，万里无云。在北京天坛公园植树的人群里，八十三岁高龄的邓小平爷爷格外引人注目。只见他手握铁锹，兴致勃勃地挖着树坑，额头已经满是汗珠，仍不肯休息。">
+    <span class="no" title="听这一自然段">②</span>
+    <span class="sent" data-say="这一天，碧空如洗，万里无云。" data-tip="碧空如洗、万里无云写天气特别好，读得亮一点、舒展一点，两句之间停得短。">这一天，碧空如洗，万里无云。</span>
+    <span class="sent" data-say="在北京天坛公园植树的人群里，八十三岁高龄的邓小平爷爷格外引人注目。" data-tip="高龄、格外引人注目要读清楚，读出人群里一眼就看见邓爷爷的感觉；引人注目的注读第四声。">在北京天<ruby>坛<rt>tán</rt></ruby>公园<ruby>植<rt>zhí</rt></ruby>树的人群里，83岁高<ruby>龄<rt>líng</rt></ruby>的<ruby>邓<rt>dèng</rt></ruby>小平爷爷<ruby>格<rt>gé</rt></ruby>外<ruby>引<rt>yǐn</rt></ruby>人<ruby>注<rt>zhù</rt></ruby>目。</span>
+    <span class="sent" data-say="只见他手握铁锹，兴致勃勃地挖着树坑，额头已经满是汗珠，仍不肯休息。" data-tip="兴致勃勃读得有劲，满是汗珠慢一点，最后仍不肯休息要读得稳，把邓爷爷不怕累的样子读出来。">只见他手握铁<ruby>锹<rt>qiāo</rt></ruby>，兴<ruby>致<rt>zhì</rt></ruby><ruby>勃<rt>bó</rt></ruby>勃地<ruby>挖<rt>wā</rt></ruby>着树<ruby>坑<rt>kēng</rt></ruby>，<ruby>额<rt>é</rt></ruby>头已经<ruby>满<rt>mǎn</rt></ruby>是<ruby>汗<rt>hàn</rt></ruby>珠，<ruby>仍<rt>réng</rt></ruby>不<ruby>肯<rt>kěn</rt></ruby>休息。</span>
+  </div>
+
+  <div class="para" id="p3" data-say="第三自然段。一个树坑挖好了。邓爷爷精心地挑选了一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土。他站到几步之外仔细看看，觉得不是很直，连声说，不行，不行！他又走上前把树苗扶正。">
+    <span class="no" title="听这一自然段">③</span>
+    <span class="sent" data-say="一个树坑挖好了。" data-tip="这一句短，交代第一件事做完了，读完稍停一下，再说下面一连串的动作。">一个树坑挖好了。</span>
+    <span class="sent" data-say="邓爷爷精心地挑选了一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土。" data-tip="精心、小心这两个词读得慢一点、轻一点；挑选、移入、挥锹填是一个接一个的动作，中间停得短。"><ruby>邓<rt>dèng</rt></ruby>爷爷<ruby>精<rt>jīng</rt></ruby>心地挑选了一棵<ruby>茁<rt>zhuó</rt></ruby>壮的柏树苗，小心地<ruby>移<rt>yí</rt></ruby>入树坑，又<ruby>挥<rt>huī</rt></ruby>锹填了几锹土。</span>
+    <span class="sent" data-say="他站到几步之外仔细看看，觉得不是很直，连声说，不行，不行！" data-tip="前面几句读得平稳；不行，不行是邓爷爷说的话，要读得干脆、着急一点，两句中间几乎不停。">他站到几步之外仔细看看，觉得不是很直，连声说：“不行，不行！”</span>
+    <span class="sent" data-say="他又走上前把树苗扶正。" data-tip="又字读清楚，扶正收得干脆，读出他马上回去把事情做好的样子。">他又走上前把树苗<ruby>扶<rt>fú</rt></ruby>正。</span>
+  </div>
+
+  <div class="para" id="p4" data-say="第四自然段。一棵绿油油的小柏树栽好了，就像战士一样笔直地站在那里。邓爷爷的脸上露出了满意的笑容。">
+    <span class="no" title="听这一自然段">④</span>
+    <span class="sent" data-say="一棵绿油油的小柏树栽好了，就像战士一样笔直地站在那里。" data-tip="绿油油读得亮一点；笔直地站在那里要读得稳、读得神气，像小战士站得直直的。">一棵绿油油的小柏树<ruby>栽<rt>zāi</rt></ruby>好了，就像战士一样笔直地站在那里。</span>
+    <span class="sent" data-say="邓爷爷的脸上露出了满意的笑容。" data-tip="这一句写心情，读得慢一点、暖一点，满意两个字稍稍加重。"><ruby>邓<rt>dèng</rt></ruby>爷爷的脸上露出了满意的笑容。</span>
+  </div>
+
+  <div class="para" id="p5" data-say="第五自然段。今天，邓小平爷爷亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。">
+    <span class="no" title="听这一自然段">⑤</span>
+    <span class="sent" data-say="今天，邓小平爷爷亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。" data-tip="亲手栽种、已经长大读得慢一点；最后美丽的风景读得舒展，和开头那个令人难忘的日子呼应起来。">今天，<ruby>邓<rt>dèng</rt></ruby>小平爷爷亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。</span>
+  </div>
+
+  <div id="thinkPill">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的样子（点一张图，听读这一页）<span class="sec-note">点一张图，听读整页</span></div>
+  <div class="pic-grid">
+    <div class="pic-card" id="pic1" data-say="课本第 9 页，课题是第四课邓小平爷爷植树。课文开头写，一九八七年四月五日，是个令人难忘的日子；这一天碧空如洗，万里无云，八十三岁高龄的邓爷爷在北京天坛公园植树，手握铁锹挖树坑，额头满是汗珠仍不肯休息。右边配着一张邓爷爷给树苗浇水的照片，旁边接着写第 3 自然段：一个树坑挖好了，精心挑选树苗，小心移入树坑，挥锹填土，发现不是很直，连声说不行不行，又走上前把树苗扶正。页下脚注写着，本文根据欧庆林的首都百余万军民义务植树改写。">
+      <img src="images/09a-课本第9页-邓小平爷爷植树课文.jpg" alt="课本第 9 页《邓小平爷爷植树》课题、前三个自然段与插图">
+      <div class="cap">第 9 页 · 课题、前 3 段与插图</div>
+    </div>
+    <div class="pic-card" id="pic2" data-say="课本第 10 页，上面接着写第 4 和第 5 自然段：一棵绿油油的小柏树栽好了，就像战士一样笔直地站在那里，邓爷爷的脸上露出了满意的笑容；今天，邓爷爷亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。中间一行是十五个会认字的拼音和字，下面是六个会写字的田字格：邓、格、注、植、引、满。再往下是两道课后题：朗读课文；默读第 3 自然段，结合课文内容和插图说说邓爷爷植树的情景。最下面是绿色的拓展活动框。">
+      <img src="images/10a-课本第10页-生字表与课后题.png" alt="课本第 10 页后两个自然段、生字表、田字格与课后题">
+      <div class="cap">第 10 页 · 后 2 段、生字表与课后题</div>
+    </div>
+  </div>
+  <div class="img-tip">📖 人教版《语文》二年级下册 · 课本第 9~10 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <!-- ================= ② 学字词 ================= -->
+  <div class="sec-title"><span class="bar"></span>② 会认字（15 个）<span class="sec-note">点一个字，听读音、词语和课文里的句子；「锹」「坑」「精」「栽」是课本随文注音的字，不在生字表里</span></div>
+  <div class="zi-grid" id="zinGrid">
+    <div class="zi" data-say="邓，邓小平爷爷的邓，又字旁，读第四声。课题上就注了音。课文里写，八十三岁高龄的邓小平爷爷格外引人注目。这个字也是本课要会写的字。"><div class="py">dèng</div><div class="hz">邓</div><div class="ci">邓爷爷 · 姓邓</div></div>
+    <div class="zi" data-say="坛，天坛公园的坛，土字旁，读第二声。天坛在北京，是课文里邓爷爷植树的地方。课文开头和结尾都写到天坛公园。还能组词：花坛、讲坛。"><div class="py">tán</div><div class="hz">坛</div><div class="ci">天坛 · 花坛</div></div>
+    <div class="zi" data-say="龄，高龄的龄，齿字旁，读第二声。龄就是岁数，高龄是说年纪很大了。课文里说，八十三岁高龄的邓小平爷爷格外引人注目。"><div class="py">líng</div><div class="hz">龄</div><div class="ci">高龄 · 年龄</div></div>
+    <div class="zi" data-say="格，格外的格，木字旁，读第二声。格外就是特别、比平常更进一层。课文说邓爷爷在植树的人群里格外引人注目。这个字也是本课要会写的字。"><div class="py">gé</div><div class="hz">格</div><div class="ci">格外 · 方格</div></div>
+    <div class="zi" data-say="致，兴致勃勃的致，读第四声。兴致就是兴趣、劲头。课文说，只见他手握铁锹，兴致勃勃地挖着树坑，写出邓爷爷干得很有劲。"><div class="py">zhì</div><div class="hz">致</div><div class="ci">兴致 · 细致</div></div>
+    <div class="zi" data-say="勃，兴致勃勃的勃，读第二声。勃勃是劲头很足的样子，兴致勃勃合起来就是兴趣特别高。这个字在课文里连着出现两次，写成兴致勃勃。"><div class="py">bó</div><div class="hz">勃</div><div class="ci">勃勃 · 蓬勃</div></div>
+    <div class="zi" data-say="挖，挖着树坑的挖，提手旁，读第一声。挖是用手或工具把土翻开。第 2 自然段写挖着树坑，第 3 自然段开头就说一个树坑挖好了。"><div class="py">wā</div><div class="hz">挖</div><div class="ci">挖着 · 挖土</div></div>
+    <div class="zi" data-say="额，额头的额，读第二声。额头就是脑门儿。课文写，额头已经满是汗珠，仍不肯休息，说明邓爷爷干了很久、很用力。"><div class="py">é</div><div class="hz">额</div><div class="ci">额头 · 名额</div></div>
+    <div class="zi" data-say="汗，汗珠的汗，三点水，读第四声。汗珠是一颗一颗的汗。课文用满是汗珠写出邓爷爷植树时的辛苦。还能组词：出汗、流汗。"><div class="py">hàn</div><div class="hz">汗</div><div class="ci">汗珠 · 出汗</div></div>
+    <div class="zi" data-say="仍，仍不肯休息的仍，单人旁，读第二声。仍是还、依旧的意思。满了头汗还接着干，一个仍字就把邓爷爷不怕累写出来了。"><div class="py">réng</div><div class="hz">仍</div><div class="ci">仍不肯 · 仍然</div></div>
+    <div class="zi" data-say="肯，不肯休息的肯，读第三声。不肯就是不愿意、不答应。课文里仍不肯休息，是说别人劝他歇一歇，他还想接着把树种好。"><div class="py">kěn</div><div class="hz">肯</div><div class="ci">不肯 · 肯定</div></div>
+    <div class="zi" data-say="茁，茁壮的茁，草字头，读第二声。茁壮是长得壮实、有精神。第 3 自然段写邓爷爷精心地挑选了一棵茁壮的柏树苗。"><div class="py">zhuó</div><div class="hz">茁</div><div class="ci">茁壮 · 茁长</div></div>
+    <div class="zi" data-say="移，移入树坑的移，禾木旁，读第二声。移是把东西从一个地方挪到另一个地方。课文说小心地移入树坑，小心两个字写出他怕碰伤树苗。"><div class="py">yí</div><div class="hz">移</div><div class="ci">移入 · 移动</div></div>
+    <div class="zi" data-say="挥，挥锹填土的挥，提手旁，读第一声。挥是举起手臂来回动。课文里又挥锹填了几锹土，是植树的一个动作。还能组词：挥手、指挥。"><div class="py">huī</div><div class="hz">挥</div><div class="ci">挥锹 · 挥手</div></div>
+    <div class="zi" data-say="扶，扶正的扶，提手旁，读第二声。扶是用手扶着、帮它站好。邓爷爷发现树苗不是很直，又走上前把树苗扶正，这个字是第 3 自然段的最后一个动作。"><div class="py">fú</div><div class="hz">扶</div><div class="ci">扶正 · 扶住</div></div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>② 会写字（6 个）<span class="sec-note">结构、部首、笔画与书写提示为通用规范，供参考，以教材和老师的指导为准</span></div>
+  <div class="zi-grid" id="ziwGrid">
+    <div class="zi write" data-say="邓，邓小平爷爷的邓，又字旁，四画，左右结构，右边是双耳旁。书写提示：左边的又写窄一点，最后一笔捺要收成点，给右边让位置；右耳旁的竖要写直、写得挺。课文里写，八十三岁高龄的邓小平爷爷格外引人注目。这个字既在会认表里，也在会写表里。">
+      <div class="tzg"><span>邓</span></div><div class="py">dèng</div><div class="ci">邓爷爷 · 姓邓</div><div class="meta">4 画 · 左右（又）</div><div class="wtip">左又写窄、捺变点，右耳旁竖要直</div></div>
+    <div class="zi write" data-say="植，植树的植，木字旁，十二画，左右结构，右边是直。书写提示：木字旁写窄、末笔捺变成点；右边的直里面是三横，不要少写一横，最后一横要长一点托住上面。课题和第 2 自然段都写到植树。还能组词：种植、植物。">
+      <div class="tzg"><span>植</span></div><div class="py">zhí</div><div class="ci">植树 · 种植</div><div class="meta">12 画 · 左右（木）</div><div class="wtip">木字旁窄，右边直里三横别少写</div></div>
+    <div class="zi write" data-say="格，格外的格，木字旁，十画，左右结构，右边是各。书写提示：木字旁写窄，右边各字的撇和捺要写得舒展，口字不要写太大、位置偏上一点。课文说邓爷爷在植树的人群里格外引人注目。还能组词：方格、表格。">
+      <div class="tzg"><span>格</span></div><div class="py">gé</div><div class="ci">格外 · 方格</div><div class="meta">10 画 · 左右（木）</div><div class="wtip">木字旁窄，右边各字撇捺舒展</div></div>
+    <div class="zi write" data-say="引，引人注目的引，弓字旁，四画，左右结构。书写提示：左边的弓写窄、写得紧凑，右边一竖要写直，上端稍稍出头，不要写成一撇。课文用格外引人注目写人群里一眼就看见邓爷爷。还能组词：引导、吸引。">
+      <div class="tzg"><span>引</span></div><div class="py">yǐn</div><div class="ci">引人注目 · 引导</div><div class="meta">4 画 · 左右（弓）</div><div class="wtip">左弓写窄，右竖要直、稍稍出头</div></div>
+    <div class="zi write" data-say="注，引人注目的注，三点水，八画，左右结构，右边是主。书写提示：三点水三笔略微排成弧形，不要写成一条直线；右边主字上面那一点别丢，三横间距均匀。还能组词：注意、注视。">
+      <div class="tzg"><span>注</span></div><div class="py">zhù</div><div class="ci">引人注目 · 注意</div><div class="meta">8 画 · 左右（氵）</div><div class="wtip">三点水呈弧形，右边主字点别丢</div></div>
+    <div class="zi write" data-say="满，满意的满，三点水，十三画，左右结构。书写提示：三点水写窄；右边草字头盖住下面，下面两个入要写扁一点、左右匀称，不要挤成一团。课文里两处用到这个字：额头已经满是汗珠、露出了满意的笑容。还能组词：满分、装满。">
+      <div class="tzg"><span>满</span></div><div class="py">mǎn</div><div class="ci">满意 · 满是汗珠</div><div class="meta">13 画 · 左右（氵）</div><div class="wtip">三点水窄，右边草字头下两入要写扁</div></div>
+  </div>
+
+  <!-- ================= ③ 词语·听写·造句·近义词 ================= -->
+  <div class="sec-title"><span class="bar"></span>③ 课后题与拓展活动（课本第 10 页照录）<span class="sec-note">点一行，听题目、动作顺序和说话支架</span></div>
+  <div class="bubble" id="hwText" data-say="课本第 10 页课后题原文：一，朗读课文。二，默读第 3 自然段，结合课文内容和插图，说说邓爷爷植树的情景。下面是绿色虚线框里的拓展活动，两个泡泡分别写着，我们也去找春天吧，去看一看，听一听，闻一闻；我还要把春天里的发现告诉小伙伴。这一页没有读一读记一记的词语表。">
+    📖 <b>课后题（课本第 10 页照录）</b>：① 朗读课文。<br>
+    　② 默读第 3 自然段。结合课文内容和插图，说说邓爷爷植树的情景。<br>
+    <span style="font-family:'KaiTi','STKaiti',serif;font-size:17px;">🌿 拓展活动：我们也去找春天吧！去看一看，听一听，闻一闻……<br>　我还要把春天里的发现告诉小伙伴。</span><br>
+    <span style="font-size:13px;color:#6d5647;">本课没有「读一读，记一记」词语表；下面 6 行是课后题、第 3 自然段的动作顺序和说话支架。</span>
+  </div>
+  <div class="word-row" id="w1" data-say="课后第一题：朗读课文。朗读就是出声地读，读准字音，不添字、不漏字，逗号停得短，句号停得长。这一课只有一处人物说的话，是邓爷爷连声说不行不行，其余都是旁白。">
+    <span class="wk">课后题 ①</span><span class="ws">朗读课文。</span>
+  </div>
+  <div class="word-row" id="w2" data-say="课后第二题：默读第 3 自然段，结合课文内容和插图，说说邓爷爷植树的情景。默读要不出声、不指读；说情景时，一边看第 9 页的插图，一边把课文里一连串的动作按顺序说出来。">
+    <span class="wk">课后题 ②</span><span class="ws">默读第 3 自然段。结合课文内容和插图，说说邓爷爷植树的情景。</span>
+  </div>
+  <div class="word-row" id="w3" data-say="第 3 自然段里藏着六个动作，照课文顺序排：一个树坑挖好了，精心地挑选了一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土，站到几步之外仔细看看，最后走上前把树苗扶正。说情景时把这六个动作连起来，就不会漏。">
+    <span class="wk">第 3 段·动作</span><span class="ws">挖好树坑 → 挑选树苗 → 移入树坑 → 挥锹填土 → 仔细看看 → 扶正</span>
+  </div>
+  <div class="word-row" id="w4" data-say="说话支架：先说时间和天气，再说挖树坑，接着说挑选和移入树苗、挥锹填土，然后说发现不直、又走回去扶正，最后说小柏树栽好了、邓爷爷露出满意的笑容。答案不唯一，能按顺序说清楚就好。">
+    <span class="wk">说话支架</span><span class="ws">先……再……接着……然后……最后……</span>
+  </div>
+  <div class="word-row" id="w5" data-say="课本第 10 页拓展活动左边泡泡照录：我们也去找春天吧，去看一看，听一听，闻一闻。这是接着第 2 课找春天说的，用眼睛、耳朵、鼻子一样一样去发现春天。">
+    <span class="wk">拓展活动 1</span><span class="ws">我们也去找春天吧！去看一看，听一听，闻一闻……</span>
+  </div>
+  <div class="word-row" id="w6" data-say="课本第 10 页拓展活动右边泡泡照录：我还要把春天里的发现告诉小伙伴。找到春天以后，还可以把看到、听到、闻到的说给同学听，说清楚是在哪儿发现的、是什么样的。">
+    <span class="wk">拓展活动 2</span><span class="ws">我还要把春天里的发现告诉小伙伴。</span>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 听写（10 个词）<span class="sec-note">读两遍 → 你在纸上写 → 报答案 → 听示范句</span></div>
+  <div class="dict-panel">
+    <div class="dict-stage" id="dictStage">准备听写 · 共 10 个词</div>
+    <div class="dict-word mask" id="dictWord">○ ○ ○</div>
+    <div class="dict-hint" id="dictHint">点下面的「开始听写」，听到一个词就写一个词。</div>
+    <div class="dict-btns">
+      <button type="button" class="tool-btn" id="btnDictStart">▶ 开始听写</button>
+      <button type="button" class="tool-btn" id="btnDictAgain">🔁 再读一遍</button>
+      <button type="button" class="tool-btn" id="btnDictShow">👁 看答案</button>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 听写的词 · 造句示范<span class="sec-note">点词听读，点句子听示范句，再自己说一句</span></div>
+  <div class="wc-grid" id="wcGrid">
+    <div class="wc" id="wc1"><div class="w-top" data-say="邓爷爷"><span class="w-no">1</span><span class="w-hz">邓爷爷</span><span class="w-lab">会写字 · 邓</span></div><div class="w-say" data-say="示范句：八十三岁高龄的邓小平爷爷格外引人注目。">示范句：八十三岁高龄的邓小平爷爷格外引人注目。</div><div class="w-own" data-say="我也能说：谁 + 在做什么。比如：邓爷爷手握铁锹，兴致勃勃地挖着树坑。你也试着说一句。">✏️ 我也能说：谁 + 在做什么</div></div>
+    <div class="wc" id="wc2"><div class="w-top" data-say="格外"><span class="w-no">2</span><span class="w-hz">格外</span><span class="w-lab">会写字 · 格</span></div><div class="w-say" data-say="示范句：邓小平爷爷格外引人注目。">示范句：邓小平爷爷格外引人注目。</div><div class="w-own" data-say="我也能说：谁或什么 + 格外 + 怎么样。比如：雨后的天空格外蓝。你也试着说一句。">✏️ 我也能说：格外 + 怎么样</div></div>
+    <div class="wc" id="wc3"><div class="w-top" data-say="引人注目"><span class="w-no">3</span><span class="w-hz">引人注目</span><span class="w-lab">会写字 · 引、注</span></div><div class="w-say" data-say="示范句：83岁高龄的邓小平爷爷格外引人注目。">示范句：83岁高龄的邓小平爷爷格外引人注目。</div><div class="w-own" data-say="我也能说：什么 + 引人注目。比如：操场中间那面红旗格外引人注目。你也试着说一句。">✏️ 我也能说：什么 + 引人注目</div></div>
+    <div class="wc" id="wc4"><div class="w-top" data-say="植树"><span class="w-no">4</span><span class="w-hz">植树</span><span class="w-lab">会写字 · 植</span></div><div class="w-say" data-say="示范句：在北京天坛公园植树的人群里，邓爷爷格外引人注目。">示范句：在北京天坛公园植树的人群里，邓爷爷格外引人注目。</div><div class="w-own" data-say="我也能说：谁 + 在哪里 + 植树。比如：春天，同学们在校园里植树。你也试着说一句。">✏️ 我也能说：谁 + 在哪里 + 植树</div></div>
+    <div class="wc" id="wc5"><div class="w-top" data-say="满意"><span class="w-no">5</span><span class="w-hz">满意</span><span class="w-lab">会写字 · 满</span></div><div class="w-say" data-say="示范句：邓爷爷的脸上露出了满意的笑容。">示范句：邓爷爷的脸上露出了满意的笑容。</div><div class="w-own" data-say="我也能说：谁 + 露出了满意的笑容。比如：妈妈看了我的字，露出了满意的笑容。你也试着说一句。">✏️ 我也能说：谁 + 露出了满意的笑容</div></div>
+    <div class="wc" id="wc6"><div class="w-top" data-say="树坑"><span class="w-no">6</span><span class="w-hz">树坑</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：只见他手握铁锹，兴致勃勃地挖着树坑。">示范句：只见他手握铁锹，兴致勃勃地挖着树坑。</div><div class="w-own" data-say="我也能说：谁 + 怎样地 + 挖着树坑。比如：爸爸弯着腰，一下一下地挖着树坑。你也试着说一句。">✏️ 我也能说：谁 + 怎样地 + 挖着树坑</div></div>
+    <div class="wc" id="wc7"><div class="w-top" data-say="精心"><span class="w-no">7</span><span class="w-hz">精心</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：邓爷爷精心地挑选了一棵茁壮的柏树苗。">示范句：邓爷爷精心地挑选了一棵茁壮的柏树苗。</div><div class="w-own" data-say="我也能说：谁 + 精心地 + 做什么。比如：姐姐精心地给布娃娃缝了一件小裙子。你也试着说一句。">✏️ 我也能说：谁 + 精心地 + 做什么</div></div>
+    <div class="wc" id="wc8"><div class="w-top" data-say="茁壮"><span class="w-no">8</span><span class="w-hz">茁壮</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：他挑选了一棵茁壮的柏树苗。">示范句：他挑选了一棵茁壮的柏树苗。</div><div class="w-own" data-say="我也能说：什么样的 + 小树苗 + 怎么样。比如：一棵茁壮的小树苗在春风里越长越高。你也试着说一句。">✏️ 我也能说：茁壮的 + 什么</div></div>
+    <div class="wc" id="wc9"><div class="w-top" data-say="扶正"><span class="w-no">9</span><span class="w-hz">扶正</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：他又走上前把树苗扶正。">示范句：他又走上前把树苗扶正。</div><div class="w-own" data-say="我也能说：谁 + 把什么 + 扶正。比如：风把小树吹歪了，我和同学一起把它扶正。你也试着说一句。">✏️ 我也能说：把什么 + 扶正</div></div>
+    <div class="wc" id="wc10"><div class="w-top" data-say="风景"><span class="w-no">10</span><span class="w-hz">风景</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：柏树成了天坛公园一处美丽的风景。">示范句：柏树成了天坛公园一处美丽的风景。</div><div class="w-own" data-say="我也能说：哪里 + 有一处美丽的风景。比如：小河边有一处美丽的风景。你也试着说一句。">✏️ 我也能说：哪里 + 有一处美丽的风景</div></div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 近义词辨析（4 组）<span class="sec-note">相同点 / 不一样在哪 / 各造一句</span></div>
+  <div class="near" id="n1" data-say="第一组：格外和特别。相同点：都写比平常更进一层。不一样的地方：格外常带着跟别的一比、更显眼的意思，课文说邓爷爷在植树的人群里格外引人注目；特别用得更宽，可以说特别高兴、特别想去，也能单独用。造句：邓爷爷格外引人注目。今天的天空特别蓝。">
+    <div class="n-top">格外 — 特别</div>
+    <div class="n-same">相同：都写<b>比平常更进一层</b>。</div>
+    <div class="n-diff">不一样：<b>格外</b>常带着跟别的一比、更显眼的意思，课文说邓爷爷在植树的人群里「格外引人注目」；<b>特别</b>用得更宽，可以说特别高兴、特别想去，也能单独用。</div>
+    <div class="n-eg">格外：邓爷爷格外引人注目。<br>特别：今天的天空特别蓝。</div>
+  </div>
+  <div class="near" id="n2" data-say="第二组：精心和细心。相同点：都写很用心、不马虎。不一样的地方：精心偏事先花了心思去挑、去准备，课文说精心地挑选树苗；细心偏做的时候处处留意，比如细心地把树苗扶正。造句：精心地挑选了一棵茁壮的柏树苗。他细心地把树苗扶正。">
+    <div class="n-top">精心 — 细心</div>
+    <div class="n-same">相同：都写<b>很用心、不马虎</b>。</div>
+    <div class="n-diff">不一样：<b>精心</b>偏事先花了心思去挑、去准备，课文说「精心地挑选」树苗；<b>细心</b>偏做的时候处处留意，比如细心地扶正、细心地检查。</div>
+    <div class="n-eg">精心：精心地挑选了一棵茁壮的柏树苗。<br>细心：他细心地把树苗扶正。</div>
+  </div>
+  <div class="near" id="n3" data-say="第三组：满意和满足。相同点：都写心里觉得挺好。不一样的地方：满意是对做出来的结果认可，课文里小柏树栽得像战士一样笔直，邓爷爷露出了满意的笑容；满足偏觉得已经够了、不想再要更多。造句：邓爷爷的脸上露出了满意的笑容。有一本好看的书，我就很满足了。">
+    <div class="n-top">满意 — 满足</div>
+    <div class="n-same">相同：都写<b>心里觉得挺好</b>。</div>
+    <div class="n-diff">不一样：<b>满意</b>是对做出来的结果认可，课文里小柏树栽得像战士一样笔直，邓爷爷「露出了满意的笑容」；<b>满足</b>偏觉得已经够了、不想再要更多。</div>
+    <div class="n-eg">满意：邓爷爷的脸上露出了满意的笑容。<br>满足：有一本好看的书，我就很满足了。</div>
+  </div>
+  <div class="near" id="n4" data-say="第四组：美丽和漂亮。相同点：都写好看。不一样的地方：美丽多写风景、大自然，也能写心灵，课文结尾写一处美丽的风景；漂亮多写衣服、样子、小物件，说起来更口语。造句：成了天坛公园一处美丽的风景。妹妹的新书包真漂亮。">
+    <div class="n-top">美丽 — 漂亮</div>
+    <div class="n-same">相同：都写<b>好看</b>。</div>
+    <div class="n-diff">不一样：<b>美丽</b>多写风景、大自然，也能写心灵，课文结尾写「一处美丽的风景」；<b>漂亮</b>多写衣服、样子、小物件，说起来更口语。</div>
+    <div class="n-eg">美丽：成了天坛公园一处美丽的风景。<br>漂亮：妹妹的新书包真漂亮。</div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 词语拓展（说一说，记一记）</div>
+  <div class="acc" id="a1" data-say="第 2 自然段开头用两个四字词写天气：碧空如洗是说天空蓝得像洗过一样干净，万里无云是说天上一点云也没有。读的时候两个词中间停得短，读出天特别晴、特别敞亮。">
+    <span class="a-t">写天气的四字词</span><span class="a-c">碧空如洗　万里无云</span>
+  </div>
+  <div class="acc" id="a2" data-say="兴致勃勃写邓爷爷挖树坑很有劲；绿油油写小柏树的颜色；笔直写小柏树像战士一样站得直；茁壮写树苗长得壮实。把这几个词连起来，第 3、4 自然段的画面就出来了。">
+    <span class="a-t">写劲头与样子</span><span class="a-c">兴致勃勃　绿油油　笔直　茁壮</span>
+  </div>
+  <div class="acc" id="a3" data-say="课后题②要说邓爷爷植树的情景，最稳的办法就是抓动作：一个树坑挖好了，精心挑选树苗，小心移入树坑，挥锹填了几锹土，站到几步之外仔细看看，又走上前扶正。按这个顺序说，不会漏。">
+    <span class="a-t">第 3 段的动作词</span><span class="a-c">挖好　挑选　移入　挥锹填　仔细看看　扶正</span>
+  </div>
+  <div class="acc" id="a4" data-say="说一段完整的话，可以用上先、再、接着、然后、最后。说植树情景时，先说时间和天气，再说挖树坑，接着说选苗、移苗、填土，然后说扶正，最后说小柏树栽好了、邓爷爷满意地笑了。">
+    <span class="a-t">顺序词说话</span><span class="a-c">先……再……接着……然后……最后……</span>
+  </div>
+
+  <!-- ================= ④ 深入理解 ================= -->
+  <div class="sec-title"><span class="bar"></span>④ 深入理解（8 题 · 先想后看）<span class="sec-note">标「答案不唯一」的题，说得有道理都对</span></div>
+
+  <div class="qa" id="q1" data-ans="是一九八七年四月五日。那天碧空如洗，万里无云，天空蓝得像洗过一样干净，一点云也没有。课文把年月日写得这么清楚，是因为这是真实发生过的事，也说明这一天在作者心里记得很牢。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>课文开头说哪一天是个令人难忘的日子？那天的天气怎么样？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">1987年4月5日，是个令人难忘的日子。</div>
+      <div class="sol sol2">这一天，碧空如洗，万里无云。</div>
+      <div class="sol sol3">先说日子，再说天气，两句话合起来就是开头。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="一共六个动作，照课文顺序是：一个树坑挖好了；精心地挑选了一棵茁壮的柏树苗；小心地移入树坑；又挥锹填了几锹土；站到几步之外仔细看看；最后又走上前把树苗扶正。默读时要不出声、不指读，一边读一边把这些动作圈出来。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>课后题②：默读第 3 自然段，邓爷爷植树时做了哪些动作？按顺序说一说。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">一个树坑挖好了。</div>
+      <div class="sol sol2">挑选、移入、挥锹填土。</div>
+      <div class="sol sol3">仔细看看，发现不很直，又走回去扶正。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="满是汗珠说明他已经干了很久、很用力，八十三岁高龄还亲自握铁锹挖树坑，是很累的。可他仍不肯休息，一个仍字把累和坚持放在一起，越累越不肯停，就越显出他对植树这件事认真、不马虎。这样写比直接说邓爷爷很认真更有画面。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>课文写邓爷爷「额头已经满是汗珠，仍不肯休息」，为什么要写汗珠？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">干了很久，很用力，很累。</div>
+      <div class="sol sol2">还、依旧，累了也不停。</div>
+      <div class="sol sol3">越累越坚持，认真就写出来了。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="因为他站到几步之外仔细看看，觉得小树不是很直，就连声说不行，不行，马上又走上前把树苗扶正。他要的不是把树种下去就算完，而是要让小树像战士一样笔直地站在那里。这一处写出了他做事严格、一点不将就，也为后面满意的笑容作了铺垫。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>树苗已经栽进坑、土也填了，邓爷爷为什么又走回去把它扶正？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">站到几步之外仔细看看，觉得不是很直。</div>
+      <div class="sol sol2">连声说不行不行，是马上否定、马上改。</div>
+      <div class="sol sol3">第 4 自然段写小柏树像战士一样笔直地站在那里。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="开头点明那一天值得记住，结尾告诉我们为什么：当年亲手栽下的小柏树已经长大了，成了公园里一处美丽的风景，很多人都能看见它。日子过去了很多年，树种下的好处还在，所以那一天才令人难忘。前后一呼应，课文从一件小事写出了长久的意义。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>开头说「令人难忘的日子」，结尾写柏树「成了天坛公园一处美丽的风景」，这两处怎么连起来看？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">1987年4月5日，是个令人难忘的日子。</div>
+      <div class="sol sol2">今天，柏树已经长大了，成了天坛公园一处美丽的风景。</div>
+      <div class="sol sol3">从栽下到长大，中间隔了很多年。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="答案不唯一。示例：先说那一天碧空如洗、万里无云，邓爷爷在北京天坛公园的人群里格外引人注目；再说他手握铁锹，兴致勃勃地挖着树坑，额头满是汗珠仍不肯休息；接着说一个树坑挖好了，他精心挑选一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土；然后说他站到几步之外仔细看看，觉得不很直，连声说不行不行，又走上前把树苗扶正；最后说小柏树像战士一样笔直地站在那里，他脸上露出了满意的笑容。🌈 答案不唯一，用上顺序词、把动作说清楚都对。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>课后题②：结合课文内容和插图，说说邓爷爷植树的情景。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">第 9 页照片里邓爷爷在给树苗浇水，可以对着说。</div>
+      <div class="sol sol2">挖好、挑选、移入、填土、看看、扶正。</div>
+      <div class="sol sol3">先、再、接着、然后、最后。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q7" data-ans="答案不唯一。示例：看一看柳枝上有没有新芽、迎春花开了没有；听一听小鸟的叫声、小河化冻后的水声；闻一闻泥土和青草的味道、花儿的香味。还可以接着第 2 课的方法，用手摸一摸、用心想一想。🌈 答案不唯一，说清用什么去发现、发现了什么、在哪里发现的，就是完整的一段话。">
+    <div class="qa-head" onclick="askQA('q7')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>拓展活动①：我们也去找春天吧！去看一看，听一听，闻一闻，你打算怎么找？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">找春天用眼睛、耳朵、鼻子，还用手。</div>
+      <div class="sol sol2">看到什么、听到什么、闻到什么。</div>
+      <div class="sol sol3">在校园里、在小河边、在公园里。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q8" data-ans="答案不唯一。思路一：告诉小伙伴我在楼下看见玉兰开了、听见燕子叫了，邀请他一起去看。思路二：像第 3 课的花籽一样，一棵小树长大以后能给很多人遮阴、让公园更美，种树的人自己不一定一直看得见，所以是送给别人的心意。思路三：和同学一起在校园里种一棵树、给它浇水，过几年回来看，这份快乐会分给后来的人。🌈 答案不唯一，说清告诉谁、说什么、为什么美好，就是完整的一段话。">
+    <div class="qa-head" onclick="askQA('q8')">
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>拓展活动②：把春天里的发现告诉小伙伴，你想说什么？亲手种下一棵树为什么也像一份美好的礼物？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">花籽漏在路上，长成一路鲜花，让大家都高兴。</div>
+      <div class="sol sol2">亲手栽的柏树长成了天坛公园一处美丽的风景。</div>
+      <div class="sol sol3">你想把哪个发现、和谁一起分享。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <!-- ================= ⑤ 说情景·分工朗读 ================= -->
+  <div class="sec-title"><span class="bar"></span>⑤ 借助插图，按顺序说说邓爷爷植树的情景<span class="sec-note">点一步，听这一步</span></div>
+  <div class="grow">
+    <div class="gstep" id="g1" data-say="第一步，先说时间和天气。一九八七年四月五日，是个令人难忘的日子。这一天碧空如洗，万里无云，在北京天坛公园植树的人群里，八十三岁高龄的邓小平爷爷格外引人注目。">
+      <div class="n">1</div><div class="t"><b>先 · 难忘的日子</b><br>1987年4月5日<br>碧空如洗，万里无云</div></div>
+    <div class="gstep" id="g2" data-say="第二步，再说挖树坑。只见他手握铁锹，兴致勃勃地挖着树坑，额头已经满是汗珠，仍不肯休息。说的时候可以指着第 9 页的插图，讲讲他弯着腰干活的样子。">
+      <div class="n">2</div><div class="t"><b>再 · 挖树坑</b><br>手握铁锹，兴致勃勃<br>额头满是汗珠，仍不肯休息</div></div>
+    <div class="gstep" id="g3" data-say="第三步，接着说种树苗。一个树坑挖好了，邓爷爷精心地挑选了一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土。三个动作连着说，不要漏掉精心和小心这两个词。">
+      <div class="n">3</div><div class="t"><b>接着 · 选苗移苗填土</b><br>精心挑选一棵茁壮的柏树苗<br>小心移入树坑，挥锹填了几锹土</div></div>
+    <div class="gstep" id="g4" data-say="第四步，然后说他不满意又改了一遍。他站到几步之外仔细看看，觉得不是很直，连声说不行不行，又走上前把树苗扶正。这是整段里最能看出他认真的一处。">
+      <div class="n">4</div><div class="t"><b>然后 · 回头扶正</b><br>站到几步之外仔细看看<br>不行，不行！又走上前扶正</div></div>
+    <div class="gstep" id="g5" data-say="第五步，最后说结果。一棵绿油油的小柏树栽好了，就像战士一样笔直地站在那里，邓爷爷的脸上露出了满意的笑容。今天，他亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。">
+      <div class="n">5</div><div class="t"><b>最后 · 笔直的小柏树</b><br>像战士一样笔直地站在那里<br>今天成了天坛公园一处美丽的风景</div></div>
+  </div>
+  <div class="bubble" id="storyTip" data-say="课后第二题照录：默读第 3 自然段，结合课文内容和插图，说说邓爷爷植树的情景。说话支架：先说时间和天气，再说挖树坑，接着说精心挑选树苗、小心移入树坑、挥锹填土，然后说站到几步之外仔细看看、又走回去把树苗扶正，最后说小柏树像战士一样笔直地站着，邓爷爷露出了满意的笑容。默读的时候要不出声、不指读。">
+    💬 <b>课后题②照录</b>：默读第 3 自然段。结合课文内容和插图，说说邓爷爷植树的情景。<br>
+    说话支架：<b>先</b>说难忘的日子和好天气 → <b>再</b>说手握铁锹挖树坑、满头汗仍不肯休息 → <b>接着</b>说选苗、移苗、填土 → <b>然后</b>说发现不直、又走回去扶正 → <b>最后</b>说小柏树笔直地站住、邓爷爷满意地笑了。默读时不出声、不指读。
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>⑤ 按自然段分工朗读（10 张卡，11 句全覆盖）<span class="sec-note">点一张卡，听这一位读的那几句</span></div>
+  <div class="role-grid">
+    <div class="role" id="r1" data-role="朗读员·难忘的日子" data-lines="一九八七年四月五日，是个令人难忘的日子。">
+      <div class="r-n">📅 朗读员·难忘的日子</div>
+      <div class="r-t">1987年4月5日，是个令人难忘的日子。</div>
+      <div class="r-m">💬 开头读得<b>平稳、郑重</b></div>
+    </div>
+    <div class="role" id="r2" data-role="朗读员·好天气" data-lines="这一天，碧空如洗，万里无云。">
+      <div class="r-n">☀️ 朗读员·好天气</div>
+      <div class="r-t">这一天，碧空如洗，万里无云。</div>
+      <div class="r-m">💬 两个四字词读得<b>亮、舒展</b></div>
+    </div>
+    <div class="role" id="r3" data-role="朗读员·人群里" data-lines="在北京天坛公园植树的人群里，八十三岁高龄的邓小平爷爷格外引人注目。">
+      <div class="r-n">👀 朗读员·人群里</div>
+      <div class="r-t">在北京天坛公园植树的人群里，83岁高龄的邓小平爷爷格外引人注目。</div>
+      <div class="r-m">💬 高龄、格外引人注目<b>读清楚</b></div>
+    </div>
+    <div class="role" id="r4" data-role="朗读员·挖树坑" data-lines="只见他手握铁锹，兴致勃勃地挖着树坑，额头已经满是汗珠，仍不肯休息。">
+      <div class="r-n">💪 朗读员·挖树坑</div>
+      <div class="r-t">只见他手握铁锹，兴致勃勃地挖着树坑，额头已经满是汗珠，仍不肯休息。</div>
+      <div class="r-m">💬 兴致勃勃有劲，末句<b>稳一点</b></div>
+    </div>
+    <div class="role" id="r5" data-role="朗读员·树坑挖好了" data-lines="一个树坑挖好了。">
+      <div class="r-n">🌱 朗读员·树坑挖好了</div>
+      <div class="r-t">一个树坑挖好了。</div>
+      <div class="r-m">💬 句子短，读完<b>稍停</b></div>
+    </div>
+    <div class="role" id="r6" data-role="朗读员·选苗移苗填土" data-lines="邓爷爷精心地挑选了一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土。">
+      <div class="r-n">🌲 朗读员·选苗移苗填土</div>
+      <div class="r-t">邓爷爷精心地挑选了一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土。</div>
+      <div class="r-m">💬 精心、小心读得<b>慢而轻</b></div>
+    </div>
+    <div class="role" id="r7" data-role="邓爷爷·连声说" data-lines="他站到几步之外仔细看看，觉得不是很直，连声说，不行，不行！">
+      <div class="r-n">🗣️ 邓爷爷·连声说</div>
+      <div class="r-t">他站到几步之外仔细看看，觉得不是很直，连声说：“不行，不行！”</div>
+      <div class="r-m">💬 唯一的人物的话，读得<b>干脆、着急</b></div>
+    </div>
+    <div class="role" id="r8" data-role="朗读员·扶正" data-lines="他又走上前把树苗扶正。">
+      <div class="r-n">✋ 朗读员·扶正</div>
+      <div class="r-t">他又走上前把树苗扶正。</div>
+      <div class="r-m">💬 又字读清楚，收得<b>干脆</b></div>
+    </div>
+    <div class="role" id="r9" data-role="朗读员·小柏树" data-lines="一棵绿油油的小柏树栽好了，就像战士一样笔直地站在那里。|邓爷爷的脸上露出了满意的笑容。">
+      <div class="r-n">🌳 朗读员·小柏树</div>
+      <div class="r-t">一棵绿油油的小柏树栽好了，就像战士一样笔直地站在那里。邓爷爷的脸上露出了满意的笑容。</div>
+      <div class="r-m">💬 笔直读得神气，末句<b>慢而暖</b></div>
+    </div>
+    <div class="role" id="r10" data-role="朗读员·美丽的风景" data-lines="今天，邓小平爷爷亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。">
+      <div class="r-n">📖 朗读员·美丽的风景</div>
+      <div class="r-t">今天，邓小平爷爷亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。</div>
+      <div class="r-m">💬 结尾读慢，<b>照应开头</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 听读课文</button>
+  <button type="button" id="btnStep2">② 学字词</button>
+  <button type="button" id="btnStep3">③ 词语·听写</button>
+  <button type="button" id="btnStep4">④ 深入理解</button>
+  <button type="button" id="btnStep5">⑤ 说情景·分工朗读</button>
+  <button type="button" id="btnStop" class="stop">⏹ 停止</button>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+var follow=false;          /* 跟读模式 */
+var dictSkip=false;        /* 听写「看答案」提前揭晓 */
+
+/* 可被「停止」打断的等待（每 80ms 检查一次 abort / 外部条件） */
+function wait(ms, check){
+  return new Promise(function(res){
+    var t0=Date.now();
+    var id=setInterval(function(){
+      if(abort || (check && check()) || Date.now()-t0>=ms){ clearInterval(id); res(); }
+    },80);
+  });
+}
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+
+/* 文本安全清洗（iOS Safari：以 < 开头、以 > 结尾且含中文 → TTS 彻底卡死） */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 语音就绪 + 手势解锁（移动端必需） */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+/* 朗读引擎（watchdog 兜底：引擎还在说就继续等，不用固定时长硬切） */
+function speak(text){
+  text=__safeText(text);
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.82; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考面板（课文区共用），点一下可跳过；tip 模式只显示不倒计时 */
+var tipPill=document.getElementById('thinkPill');
+function showTip(txt){
+  tipPill.textContent='💡 '+txt+'（点我听）';
+  tipPill.style.display='block';
+  tipPill.onclick=function(){ speak(txt); };
+}
+function hideTip(){ tipPill.style.display='none'; tipPill.onclick=null; }
+function imgThinkWait(tip){
+  return new Promise(function(resolve){
+    var secs=parseInt(tipPill.getAttribute('data-secs'))||8;
+    tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    tipPill.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); hideTip(); resolve(); return; }
+      tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    },1000);
+    tipPill.onclick=function(){ clearInterval(t); hideTip(); resolve(); };
+  });
+}
+/* 题目卡内倒计时 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  document.getElementById('imgAnsBox').textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= ① 听读课文 ================= */
+/* 每句一个朗读单元；think/ans 挂在句子后面，读到关键处停下来让学生先想 */
+var stepsRead=[
+  {id:'s1', say:'一九八七年四月五日，是个令人难忘的日子。',
+   think:'为什么一开头就把年月日写得这么清楚',
+   ans:'因为这是真实发生过的事。明白写出一九八七年四月五日，才显得这一天确实令人难忘；读到结尾你会知道，那天种下的柏树后来长成了天坛公园一处美丽的风景。'},
+  {id:'s2', say:'这一天，碧空如洗，万里无云。'},
+  {id:'s3', say:'在北京天坛公园植树的人群里，八十三岁高龄的邓小平爷爷格外引人注目。'},
+  {id:'s4', say:'只见他手握铁锹，兴致勃勃地挖着树坑，额头已经满是汗珠，仍不肯休息。'},
+  {id:'s5', say:'一个树坑挖好了。'},
+  {id:'s6', say:'邓爷爷精心地挑选了一棵茁壮的柏树苗，小心地移入树坑，又挥锹填了几锹土。'},
+  {id:'s7', say:'他站到几步之外仔细看看，觉得不是很直，连声说，不行，不行！',
+   think:'邓爷爷为什么连声说不行不行',
+   ans:'因为他站到几步之外仔细看看，觉得小树不是很直，对自己要求很严格，所以马上又走上前把树苗扶正。这两句要读得干脆、着急一点。'},
+  {id:'s8', say:'他又走上前把树苗扶正。'},
+  {id:'s9', say:'一棵绿油油的小柏树栽好了，就像战士一样笔直地站在那里。'},
+  {id:'s10', say:'邓爷爷的脸上露出了满意的笑容。'},
+  {id:'s11', say:'今天，邓小平爷爷亲手栽种的柏树已经长大了，成了天坛公园一处美丽的风景。',
+   think:'最后一段和开头怎么呼应',
+   ans:'开头说这一天令人难忘，结尾说亲手栽种的柏树已经长大、成了美丽的风景。日子过去了很多年，树种下的好处还在，所以那一天才值得记住。'}
+];
+
+/* 给课文里的每个句子编上 id（s1…s11），顺序与 stepsRead 一致 */
+(function(){
+  var sents=document.querySelectorAll('.para .sent');
+  for(var i=0;i<sents.length && i<stepsRead.length;i++){ sents[i].id=stepsRead[i].id; }
+})();
+
+/* 跟读：读完一句，留时间让学生自己读（按字数给时间，3~8 秒） */
+async function followWait(text){
+  var secs=Math.min(8, Math.max(3, Math.round(text.length/6)));
+  await speak('你来读。');
+  tipPill.textContent='🗣 你来读… '+secs+' 秒（读完点我直接下一句）';
+  tipPill.style.display='block';
+  var skipped=false;
+  tipPill.onclick=function(){ skipped=true; };
+  await wait(secs*1000, function(){ return skipped; });
+  hideTip();
+}
+
+/* ================= ② 学字词 ================= */
+var stepsWord=[
+  {id:'zinGrid', say:'先读 15 个会认字。这些字只要认得、读得出就行。', lead:true},
+  {id:'ziwGrid', say:'下面是 6 个会写字。这些字不但要认得，还要会写，注意听每一条的书写提示。', lead:true}
+];
+
+/* ================= ③ 词语·听写 ================= */
+var dictWords=[
+  {w:'邓爷爷', eg:'示范句：八十三岁高龄的邓小平爷爷格外引人注目。'},
+  {w:'格外', eg:'示范句：邓小平爷爷格外引人注目。'},
+  {w:'引人注目', eg:'示范句：83岁高龄的邓小平爷爷格外引人注目。'},
+  {w:'植树', eg:'示范句：在北京天坛公园植树的人群里，邓爷爷格外引人注目。'},
+  {w:'满意', eg:'示范句：邓爷爷的脸上露出了满意的笑容。'},
+  {w:'树坑', eg:'示范句：只见他手握铁锹，兴致勃勃地挖着树坑。'},
+  {w:'精心', eg:'示范句：邓爷爷精心地挑选了一棵茁壮的柏树苗。'},
+  {w:'茁壮', eg:'示范句：他挑选了一棵茁壮的柏树苗。'},
+  {w:'扶正', eg:'示范句：他又走上前把树苗扶正。'},
+  {w:'风景', eg:'示范句：柏树成了天坛公园一处美丽的风景。'}
+];
+var stepsWord2=[
+  {id:'w1', say:'先读课后第一题：朗读课文。出声地读，读准字音，不添字不漏字。'},
+  {id:'w2', say:'课后第二题：默读第 3 自然段，结合课文内容和插图，说说邓爷爷植树的情景。默读要不出声、不指读。'},
+  {id:'w3', say:'第 3 自然段的六个动作：挖好树坑、挑选树苗、移入树坑、挥锹填土、仔细看看、扶正。'},
+  {id:'w4', say:'说话支架：先、再、接着、然后、最后。用上顺序词，说一段完整的话。'},
+  {id:'w5', say:'拓展活动左边泡泡：我们也去找春天吧，去看一看，听一听，闻一闻。'},
+  {id:'w6', say:'拓展活动右边泡泡：我还要把春天里的发现告诉小伙伴。'},
+  {id:'n1', say:'下面听四组近义词。第一组：格外和特别。'},
+  {id:'n2', say:'第二组：精心和细心。'},
+  {id:'n3', say:'第三组：满意和满足。'},
+  {id:'n4', say:'第四组：美丽和漂亮。'},
+  {id:'a1', say:'最后是词语拓展：写天气的四字词、写劲头与样子、第 3 段的动作词，还有顺序词说话。'}
+];
+
+/* ================= ④ 深入理解 ================= */
+var stepsQa=[
+  {id:'q1', say:'第一题，认知：课文开头说哪一天是个令人难忘的日子？那天的天气怎么样？想一想。'},
+  {id:'q2', say:'第二题，认知：默读第 3 自然段，邓爷爷植树时做了哪些动作？按顺序说一说。想一想。'},
+  {id:'q3', say:'第三题，理解：课文写邓爷爷额头已经满是汗珠，仍不肯休息，为什么要写汗珠？想一想。'},
+  {id:'q4', say:'第四题，理解：树苗已经栽进坑、土也填了，邓爷爷为什么又走回去把它扶正？想一想。'},
+  {id:'q5', say:'第五题，理解：开头说令人难忘的日子，结尾写柏树成了美丽的风景，这两处怎么连起来看？想一想。'},
+  {id:'q6', say:'第六题，运用：课后第二题，结合课文内容和插图，说说邓爷爷植树的情景。答案不唯一。想一想。'},
+  {id:'q7', say:'第七题，运用：拓展活动，我们也去找春天吧，去看一看，听一听，闻一闻，你打算怎么找？答案不唯一。想一想。'},
+  {id:'q8', say:'最后一题，拓展：把春天里的发现告诉小伙伴，你想说什么？亲手种下一棵树为什么也像一份美好的礼物？答案不唯一。想一想。'}
+];
+
+/* ================= ⑤ 说情景·分工朗读 ================= */
+var stepsStory=[{id:'g1'},{id:'g2'},{id:'g3'},{id:'g4'},{id:'g5'}];
+var stepsRole=[{id:'r1'},{id:'r2'},{id:'r3'},{id:'r4'},{id:'r5'},{id:'r6'},{id:'r7'},{id:'r8'},{id:'r9'},{id:'r10'}];
+
+/* ================= 按钮状态 ================= */
+var btns=['btnStep1','btnStep2','btnStep3','btnStep4','btnStep5'].map(function(i){ return document.getElementById(i); });
+function lock(on){ btns.forEach(function(b){ b.disabled=on; }); }
+
+/* ================= ① 听读课文 ================= */
+async function playRead(){
+  abort=false;
+  lock(true);
+  await speak('先听老师读要求：朗读课文要读准字音，不添字不漏字，逗号停得短，句号停得长；默读第 3 自然段时不出声、不指读，一边读一边把邓爷爷植树的一个个动作连起来想。');
+  await wait(300);
+  for(var i=0;i<stepsRead.length;i++){
+    if(abort) break;
+    var s=stepsRead[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(follow){ await followWait(s.say); if(abort) break; }
+    if(s.think){
+      await imgThinkWait(s.think);
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+      clearImgAns();
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns(); hideTip();
+  lock(false);
+}
+
+/* ================= ② 学字词 ================= */
+async function playWord(){
+  abort=false;
+  lock(true);
+  await wait(300);
+  for(var i=0;i<stepsWord.length;i++){
+    if(abort) break;
+    var s=stepsWord[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    var cards = el ? Array.prototype.slice.call(el.querySelectorAll('.zi')) : [];
+    unhl();
+    for(var k=0;k<cards.length;k++){
+      if(abort) break;
+      var c=cards[k];
+      hl(c); __scrollTo(c);
+      await speak(c.getAttribute('data-say')||c.textContent);
+      if(abort) break;
+      await wait(120);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ③ 词语·听写·造句·近义词 ================= */
+var dictStage=document.getElementById('dictStage');
+var dictWord=document.getElementById('dictWord');
+var dictHint=document.getElementById('dictHint');
+
+function setDict(i, masked, hint, word){
+  dictStage.textContent = (i>0 ? ('第 '+i+' 个 / 共 '+dictWords.length+' 个') : '准备听写 · 共 '+dictWords.length+' 个词');
+  if(masked){ dictWord.classList.add('mask'); dictWord.textContent='○ ○ ○'; }
+  else{ dictWord.classList.remove('mask'); dictWord.textContent=word||''; }
+  dictHint.textContent=hint||'';
+}
+async function playDict(){
+  abort=false;
+  lock(true);
+  setDict(0,true,'点下面的「开始听写」，听到一个词就写一个词。');
+  await speak('下面开始听写，一共十个词。每个词读两遍，听完就在纸上写一个。写完点「看答案」，也可以等几秒钟自动出答案。');
+  if(abort){ lock(false); return; }
+  await wait(600);
+  for(var i=0;i<dictWords.length;i++){
+    if(abort) break;
+    var d=dictWords[i];
+    dictSkip=false;
+    setDict(i+1,true,'✏️ 听到就写下来…');
+    await speak('第 '+(i+1)+' 个。'+d.w+'。'+d.w+'。');
+    if(abort) break;
+    await wait(6000, function(){ return dictSkip; });       /* 写词时间，可点「看答案」提前 */
+    if(abort) break;
+    setDict(i+1,false,'答案是：'+d.w, d.w);
+    await speak('答案是：'+d.w+'。');
+    if(abort) break;
+    await wait(500);
+    if(abort) break;
+    await speak(d.eg);                                       /* 顺带听一句示范造句 */
+    if(abort) break;
+    await wait(900);
+  }
+  if(!abort){
+    setDict(0,false,'✅ 听写完了','听写完了！');
+    await speak('十个词听写完了。点开下面的词语卡，可以再听一遍词语和示范句，自己也试着说一句。');
+  }
+  /* 再读词语积累、近义词、拓展 */
+  for(var j=0;j<stepsWord2.length;j++){
+    if(abort) break;
+    var s=stepsWord2[j];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.id.indexOf('n')===0){
+      await speak(el.getAttribute('data-say')||'');
+      if(abort) break;
+    }
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ④ 深入理解 ================= */
+async function playQa(){
+  abort=false;
+  lock(true);
+  for(var i=0;i<stepsQa.length;i++){
+    if(abort) break;
+    var s=stepsQa[i];
+    var qa=document.getElementById(s.id);
+    if(!qa) continue;
+    focusEl(qa);
+    await wait(400);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ⑤ 说情景·分工朗读 ================= */
+async function playStory(){
+  abort=false;
+  lock(true);
+  await speak('先借助课本插图，按顺序说说邓爷爷植树的情景。可以用上先、再、接着、然后、最后这几个词。');
+  if(abort){ lock(false); return; }
+  for(var i=0;i<stepsStory.length;i++){
+    if(abort) break;
+    var s=stepsStory[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    hl(el); __scrollTo(el);
+    await speak(el.getAttribute('data-say')||'');
+    if(abort) break;
+    await wait(300);
+  }
+  if(abort){ unhl(); cap.style.display='none'; lock(false); return; }
+  unhl();
+  await speak('说完了。下面按自然段分工朗读课文，注意把邓爷爷植树时的一连串动作一句一句读清楚。');
+  if(abort){ cap.style.display='none'; lock(false); return; }
+  for(var k=0;k<stepsRole.length;k++){
+    if(abort) break;
+    var r=document.getElementById(stepsRole[k].id);
+    if(!r) continue;
+    hl(r); __scrollTo(r);
+    var name=r.getAttribute('data-role')||'';
+    var lines=(r.getAttribute('data-lines')||'').split('|');
+    await speak('现在请'+name+'来读。'+ (r.querySelector('.r-m')?r.querySelector('.r-m').textContent.replace('💬 ',''):''));
+    if(abort) break;
+    for(var m=0;m<lines.length;m++){
+      if(abort) break;
+      if(!lines[m]) continue;
+      await speak(lines[m]);
+      if(abort) break;
+      await wait(350);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+document.getElementById('btnStep1').addEventListener('click',playRead);
+document.getElementById('btnStep2').addEventListener('click',playWord);
+document.getElementById('btnStep3').addEventListener('click',playDict);
+document.getElementById('btnStep4').addEventListener('click',playQa);
+document.getElementById('btnStep5').addEventListener('click',playStory);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  hideTip(); unhl(); cap.style.display='none'; clearImgAns();
+  lock(false);
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 句级点读：点哪句读哪句；读完把朗读提示显示出来（点提示可再听） */
+document.querySelectorAll('.para .sent').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var tip=el.getAttribute('data-tip');
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){
+      if(tip) showTip(tip);
+    });
+  });
+});
+/* 点段前序号 → 读整段 */
+document.querySelectorAll('.para .no').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    var para=el.parentNode;
+    hl(para);
+    speak(para.getAttribute('data-say')||para.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 通用点读：教材图 / 词语行 / 成长顺序 / 近义词 / 朗读要求
+   注意：词语拓展 .acc 不放进 id 列表，改由下方 querySelectorAll('.acc') 动态绑定，
+   这样新增拓展组（a5、a6…）无需再改这里，避免「新增了却点不出声」。 */
+['pic1','pic2','w1','w2','w3','w4','w5','w6','g1','g2','g3','g4','g5','n1','n2','n3','n4','req1','mapUnit','srcNote','hwText','storyTip'
+].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 词语拓展卡点读：动态绑定所有 .acc（新增组自动生效） */
+document.querySelectorAll('.acc').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 生字卡点读 */
+document.querySelectorAll('.zi').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 角色卡点读：读角色名 + 语气提示 + 逐句台词 */
+document.querySelectorAll('.role').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var name=el.getAttribute('data-role')||'';
+    var lines=(el.getAttribute('data-lines')||'').split('|');
+    speak('现在请'+name+'来读。').then(function(){
+      var i=0;
+      function nx(){
+        if(abort||i>=lines.length){ unhl(); return; }
+        speak(lines[i++]).then(function(){ setTimeout(nx,350); });
+      }
+      nx();
+    });
+  });
+});
+
+/* 词语卡点读（词 / 示范句 / 说话支架） */
+document.querySelectorAll('.wc').forEach(function(card){
+  card.querySelectorAll('[data-say]').forEach(function(el){
+    el.addEventListener('click',function(ev){
+      ev.stopPropagation();
+      abort=true; if(synth) synth.cancel();
+      hl(card);
+      speak(el.getAttribute('data-say')||'').then(function(){ unhl(); });
+    });
+  });
+});
+
+/* 跟读模式开关 */
+document.getElementById('btnFollow').addEventListener('click',function(){
+  follow=!follow;
+  this.textContent = follow ? '🔁 跟读模式：开' : '🔁 跟读模式：关';
+  this.classList.toggle('on', follow);
+  speak(follow ? '跟读模式打开了。我读一句，你跟着读一句。' : '跟读模式关闭了。');
+});
+
+/* 听写按钮 */
+document.getElementById('btnDictStart').addEventListener('click',function(){
+  abort=false; playDict();
+});
+document.getElementById('btnDictAgain').addEventListener('click',function(){
+  var i=parseInt((dictStage.textContent.match(/第\s*(\d+)\s*个/)||[])[1]||0);
+  var d=dictWords[i-1];
+  if(d) speak(d.w+'。'+d.w+'。');
+  else speak('先点开始听写。');
+});
+document.getElementById('btnDictShow').addEventListener('click',function(){
+  dictSkip=true;
+});
+
+/* 隐藏 / 显示注音 */
+document.getElementById('btnPy').addEventListener('click',function(){
+  var on=document.body.classList.toggle('no-py');
+  this.textContent = on ? '👁 显示注音' : '👁 隐藏注音（自测用）';
+  this.classList.toggle('on', on);
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>

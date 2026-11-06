@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  小学语文 · 有声图文带读页  chinese-primary-courseware v1.8
+  课文：统编版语文二年级下册 第一单元-阅读 第3课《开满鲜花的小路》（课本 第 6~8 页）
+  作者：林颂英（课本第 6 页脚注：选作课文时有改动）
+  ----------------------------------------------------------------------------
+  二版相对一版的四项升级（对应使用者要求）：
+  1. 高标准朗读 + 点读：课文拆到「句」，点哪句读哪句；范读/跟读双模式；
+     跟读模式读完一句留时间让学生自己读，防走神；朗读要求（老师标准）单独成卡。
+  2. 深入理解：提问由 6 题扩到 8 题，认知→理解→运用→拓展四层，
+     开放题明确标注「答案不唯一」，每题给 2~3 个思路。
+  3. 词语：新增「听写」（读两遍→写→报答案）+ 逐词示范造句 + 4 组近义词辨析
+     （相同点 / 不一样在哪 / 各造一句）。
+  4. 其他：分角色朗读（课后题一）、借助插图按顺序讲故事、照样子说一说（课后题二）、
+     会写字书写提示、词语拓展（一大片什么样的 / 写花的样子 / 语气词啊 / 照样子说一处）。
+  红线：课文原文、生字表、课后题一律照录教材，不编造；
+        拼音只做视觉显示，不进朗读文本；部首笔画与书写提示标注「供参考」。
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开满鲜花的小路 · 语文第3课 · 有声图文带读</title>
+<style>
+  :root{ --main:#c62828; --main2:#ef6c00; --hl:#f9a825; --hl2:#ff7043; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fdf8f3; color:#3e2723; padding-bottom:130px; }
+  .container{ max-width:880px; margin:0 auto; padding:16px; }
+
+  .page-head{ background:linear-gradient(135deg,#00897b,#4db6ac); color:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; }
+  .page-head h1{ font-size:22px; margin-bottom:6px; }
+  .page-head p{ font-size:13px; opacity:.94; }
+  .stat-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stat{ background:#fff; border-radius:10px; padding:8px 14px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .stat b{ color:var(--main); font-size:18px; }
+  .hint-bar{ background:#e0f2f1; border:1px dashed #80cbc4; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.9; margin-bottom:6px; }
+  .sec-title{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:bold; color:#00695c; margin:22px 0 12px; flex-wrap:wrap; }
+  .sec-title .bar{ width:6px; height:22px; background:#00897b; border-radius:3px; }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  /* ===== 工具条 ===== */
+  .tool-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+  .tool-btn{ border:1.5px solid #80cbc4; background:#fff; color:#00695c; border-radius:999px;
+    padding:6px 14px; font-size:13.5px; cursor:pointer; }
+  .tool-btn.on{ background:#00897b; color:#fff; border-color:#00897b; }
+  body.no-py rt{ visibility:hidden; }
+
+  /* ===== 朗读要求卡 ===== */
+  .req-card{ background:#fff8e1; border:1.5px solid #ffd54f; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.95; cursor:pointer; }
+  .req-card.hl{ animation:rowFlash .8s ease-in-out infinite; }
+  .req-card b{ color:#e65100; }
+
+  /* ===== 课文段落 / 句级点读 ===== */
+  .para{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 16px; margin-top:10px;
+    font-family:"KaiTi","STKaiti","Kaiti SC",serif; font-size:19px; line-height:2.2;
+    transition:border-color .25s, box-shadow .25s; }
+  .para.hl{ border-color:var(--hl); background:#fffde7; }
+  .para .no{ display:inline-block; background:#00695c; color:#fff; font-size:12px; border-radius:6px;
+    padding:1px 8px; margin-right:8px; vertical-align:2px; font-family:sans-serif; cursor:pointer; }
+  .para .no:hover{ background:#00897b; }
+  .sent{ cursor:pointer; border-radius:5px; padding:1px 1px; transition:background .2s, box-shadow .2s; }
+  .sent:hover{ background:#fff8e1; }
+  .sent.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.35); }
+  @keyframes rowFlash{ 0%,100%{ box-shadow:0 0 0 3px rgba(249,168,37,.20);} 50%{ box-shadow:0 0 0 8px rgba(255,112,67,.25);} }
+  ruby{ ruby-align:center; }
+  /* 连续两三个字都注音时（如「敕勒」chì lè、「穹庐」qióng lú），拼音比汉字宽，
+     会贴在一起分不清是哪个字的音；只给相邻的注音之间留 2px 空隙 */
+  .para ruby + ruby{ margin-left:2px; }
+  rt{ font-size:11px; color:#c62828; font-family:sans-serif; letter-spacing:0; }
+  .para-tip{ font-family:sans-serif; font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:8px;
+    padding:3px 10px; margin:4px 0 0; display:inline-block; cursor:pointer; }
+
+  /* ===== 教材图片 ===== */
+  .pic-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+  .pic-card{ background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:8px; cursor:pointer; text-align:center;
+    transition:border-color .25s, box-shadow .25s; }
+  .pic-card img{ width:100%; display:block; border-radius:6px; }
+  .pic-card .cap{ font-size:12.5px; color:#5d4037; margin-top:6px; line-height:1.6; }
+  .pic-card.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .img-tip{ font-size:12px; color:#90a4ae; text-align:center; margin-top:8px; }
+
+  /* ===== 生字卡 ===== */
+  .zi-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:10px; }
+  .zi{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:8px 6px 10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .zi:hover{ border-color:#ffcc80; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .zi .py{ font-size:12px; color:#c62828; height:16px; }
+  .zi .hz{ font-family:"KaiTi","STKaiti",serif; font-size:34px; line-height:1.25; color:#212121; }
+  .zi .ci{ font-size:12.5px; color:#6d4c41; margin-top:2px; }
+  .zi.write .hz{ font-size:30px; }
+  .zi .meta{ font-size:11px; color:#8d6e63; margin-top:3px; line-height:1.5; }
+  .zi .wtip{ font-size:11px; color:#1565c0; background:#e3f2fd; border-radius:6px; padding:2px 5px; margin-top:4px; line-height:1.5; }
+
+  /* 田字格 */
+  .tzg{ width:56px; height:56px; margin:2px auto 4px; position:relative; border:1.5px solid #d84315; border-radius:4px; background:#fff; }
+  .tzg::before,.tzg::after{ content:""; position:absolute; background-image:linear-gradient(to right,#f0bdb4 45%,transparent 45%);
+    background-size:6px 1px; background-repeat:repeat-x; }
+  .tzg::before{ left:0; right:0; top:50%; height:1px; }
+  .tzg::after{ top:0; bottom:0; left:50%; width:1px; background-image:linear-gradient(to bottom,#f0bdb4 45%,transparent 45%);
+    background-size:1px 6px; background-repeat:repeat-y; }
+  .tzg span{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:34px; color:#212121; }
+
+  /* ===== 词语行 / 词语卡 ===== */
+  .word-row{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap; transition:border-color .25s, box-shadow .25s; }
+  .word-row.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .word-row .wk{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:6px; padding:2px 8px; }
+  .word-row .ws{ font-family:"KaiTi","STKaiti",serif; font-size:19px; line-height:1.9; }
+  .word-row .ws em{ font-style:normal; background:#ffecb3; border-radius:4px; padding:0 3px; }
+  .bubble{ background:#ede7f6; color:#5e35b1; border-radius:10px; padding:8px 12px; font-size:13.5px; margin-top:8px; line-height:1.8; }
+
+  /* 听写区 */
+  .dict-panel{ background:#fff; border:2px solid #00897b; border-radius:14px; padding:14px; margin-top:10px; text-align:center; }
+  .dict-stage{ font-size:15px; color:#00695c; margin-bottom:6px; }
+  .dict-word{ font-family:"KaiTi","STKaiti",serif; font-size:40px; letter-spacing:8px; line-height:1.4; color:#212121; min-height:56px; }
+  .dict-word.mask{ color:#bdbdbd; }
+  .dict-hint{ font-size:13.5px; color:#8d6e63; margin-top:6px; min-height:20px; }
+  .dict-btns{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+
+  /* 词语卡（听写词 + 造句） */
+  .wc-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px; }
+  .wc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px 12px; }
+  .wc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .wc .w-top{ display:flex; align-items:baseline; gap:8px; cursor:pointer; }
+  .wc .w-hz{ font-family:"KaiTi","STKaiti",serif; font-size:24px; }
+  .wc .w-no{ font-size:12px; color:#90a4ae; }
+  .wc .w-lab{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; }
+  .wc .w-say{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:5px; cursor:pointer; }
+  .wc .w-own{ font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:6px; padding:3px 8px; margin-top:4px; cursor:pointer; }
+
+  /* 近义词辨析 */
+  .near{ background:#fff; border:1.5px solid #e1bee7; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer; }
+  .near.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .near .n-top{ font-family:"KaiTi","STKaiti",serif; font-size:20px; color:#6a1b9a; margin-bottom:4px; }
+  .near .n-same{ font-size:13.5px; color:#4e342e; line-height:1.8; }
+  .near .n-diff{ font-size:13.5px; color:#4e342e; line-height:1.8; margin-top:4px; }
+  .near .n-diff b{ color:#c62828; }
+  .near .n-eg{ font-size:13.5px; color:#1b5e20; background:#e8f5e9; border-radius:6px; padding:5px 9px; margin-top:5px; line-height:1.8; }
+
+  /* 词语拓展 */
+  .acc{ background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:11px 13px; margin-top:10px; cursor:pointer; font-size:14px; line-height:1.9; }
+  .acc.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .acc .a-t{ font-size:12px; color:#00695c; background:#e0f2f1; border-radius:5px; padding:1px 7px; margin-right:6px; }
+  .acc .a-c{ font-family:"KaiTi","STKaiti",serif; font-size:17px; }
+
+  /* ===== 成长顺序 / 角色 ===== */
+  .grow{ display:flex; gap:8px; flex-wrap:wrap; }
+  .gstep{ flex:1; min-width:110px; background:#fff; border:1.5px solid #efe0d4; border-radius:12px; padding:10px; text-align:center; cursor:pointer;
+    transition:border-color .25s, box-shadow .25s; }
+  .gstep .n{ display:inline-block; width:22px; height:22px; line-height:22px; border-radius:50%; background:#00897b; color:#fff; font-size:12.5px; }
+  .gstep .t{ font-size:14px; margin-top:6px; line-height:1.6; color:#4e342e; }
+  .gstep.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+  .role{ background:#fff; border:1.5px solid #b39ddb; border-radius:12px; padding:10px 12px; cursor:pointer; }
+  .role.hl{ border-color:var(--hl); background:#fffde7; animation:rowFlash .8s ease-in-out infinite; }
+  .role .r-n{ font-size:15px; color:#5e35b1; font-weight:bold; }
+  .role .r-t{ font-family:"KaiTi","STKaiti",serif; font-size:15px; color:#4e342e; margin-top:4px; line-height:1.75; }
+  .role .r-m{ font-size:12.5px; color:#8d6e63; margin-top:4px; line-height:1.6; }
+
+  /* ===== 分层提问 ===== */
+  .qa{ background:#fff; border:1.5px solid #e0e7ef; border-radius:12px; margin-top:12px; overflow:hidden; transition:border-color .25s; }
+  .qa.hl{ border-color:var(--hl); animation:rowFlash .8s ease-in-out infinite; }
+  .qa-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; font-size:15.5px; }
+  .q-text{ flex:1; line-height:1.6; }
+  .lv-pill{ display:inline-block; font-size:12px; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:1px; }
+  .lv-r{ background:#e3f2fd; color:#1565c0; }
+  .lv-q{ background:#fff3e0; color:#e65100; }
+  .lv-y{ background:#e8f5e9; color:#2e7d32; }
+  .lv-t{ background:#fce4ec; color:#ad1457; }
+  .toggle{ font-size:12.5px; color:#90a4ae; white-space:nowrap; }
+  .qa.open .toggle{ color:#2e7d32; }
+  .think-pill{ display:none; margin:0 14px 10px; width:max-content; background:#ede7f6; color:#5e35b1; border-radius:999px; padding:5px 16px; font-size:13.5px; cursor:pointer; }
+  .qa-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s ease; }
+  .qa.open .qa-a{ grid-template-rows:1fr; }
+  .qa-a-inner{ overflow:hidden; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .qa.open .qa-a-inner{ padding:2px 14px 14px; }
+  .a-label{ color:#2e7d32; font-weight:bold; }
+  .sol{ border-radius:8px; padding:6px 10px; margin-top:6px; font-size:14px; line-height:1.7; }
+  .sol1{ background:#e8f5e9; color:#1b5e20; } .sol2{ background:#fff3e0; color:#bf4a00; } .sol3{ background:#ede7f6; color:#4527a0; }
+  .multi{ display:inline-block; margin-top:8px; background:#fff8e1; color:#b26a00; border-radius:8px; padding:3px 10px; font-size:13px; }
+  .think-note{ display:inline-block; margin-top:8px; background:#ede7f6; color:#5e35b1; border-radius:8px; padding:3px 10px; font-size:13px; }
+
+  /* ===== 思考面板 / 字幕 / 控制条 ===== */
+  #thinkPill{ display:none; margin:10px auto 0; width:max-content; max-width:96%; background:#ede7f6; color:#5e35b1;
+    border-radius:999px; padding:6px 18px; font-size:14px; cursor:pointer; text-align:center; line-height:1.6; }
+  #imgAns{ display:none; margin-top:10px; }
+  .img-ans-inner{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease; }
+  .img-ans-inner.show{ grid-template-rows:1fr; }
+  .img-ans-box{ overflow:hidden; background:#e8f5e9; border:1.5px dashed #66bb6a; border-radius:10px; padding:0 14px; font-size:14.5px; line-height:1.9; }
+  .img-ans-inner.show .img-ans-box{ padding:10px 14px; }
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(0,105,92,.96); color:#fff; display:flex; gap:8px;
+    align-items:center; justify-content:center; padding:11px 12px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:9px 14px; font-size:14px; cursor:pointer; background:#fff; color:#00695c; font-weight:bold; }
+  .ctrl-bar button:disabled{ opacity:.5; cursor:not-allowed; }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:64px; max-width:92%; background:rgba(38,50,56,.92); color:#fff;
+    border-radius:10px; padding:8px 16px; font-size:15px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+
+  @media (max-width:600px){
+    .page-head h1{ font-size:18px; }
+    .para{ font-size:17.5px; padding:11px 12px; }
+    .zi-grid{ grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); }
+    .wc-grid{ grid-template-columns:1fr; }
+    .ctrl-bar button{ padding:8px 11px; font-size:13px; }
+    #cap{ bottom:110px; }
+    body{ padding-bottom:160px; }
+  }
+  @media print{ .ctrl-bar,#cap,.think-pill,#thinkPill{ display:none !important; } body{ padding-bottom:0; } }
+  /* 返回导航按钮（模板自带，新页无需再跑 add_back_button.py） */
+  .back-nav{ position:fixed; right:14px; bottom:62px; z-index:1200; background:rgba(13,71,161,.92);
+    color:#fff; border-radius:999px; padding:8px 18px; font-size:13.5px; box-shadow:0 4px 12px rgba(0,0,0,.22); text-decoration:none; }
+  .back-nav:hover{ background:rgba(13,71,161,1); }
+  @media print{ .back-nav{ display:none !important; } }
+  /* 字卡列数：桌面端按固定列排。auto-fill 在 1100px 宽下会算成 7 列，
+     8 个会写字就变成「7+1」、最后一张被拉成整行宽。 */
+  @media (min-width:601px){
+    #zinGrid{ grid-template-columns:repeat(6,1fr); }
+    #ziwGrid{ grid-template-columns:repeat(4,1fr); }
+    /* 本页听写词 10 个：默认 auto-fill 在 1100px 下算成 3 列，排成 3+3+3+1 落单，
+       故按“能整除 10 的最大列数”覆盖成 5 列（5+5）。 */
+    #wcGrid{ grid-template-columns:repeat(5,1fr); }
+    /* 5 列时卡宽约 145px，“字 + 标签”挤在一行会把两字词压成竖排，
+       故让标签换到下一行、词不许断行。 */
+    #wcGrid .w-top{ flex-wrap:wrap; gap:2px 6px; }
+    #wcGrid .w-hz{ white-space:nowrap; font-size:22px; }
+  }
+
+  /* RA_MOBILE_FIX 2026-11-03：手机端「返回导航」上移 + 去掉遮挡层（口径同三年级语文）
+     1) .back-nav 由原 bottom:60/62px 上移到 104px，避开手机上会换行的 .ctrl-bar 与底部点读区；
+     2) #cap 字幕小框在手机/触摸设备隐藏（二年级语文原 @media 把它也放在 104px，
+        按钮上移后会与之重叠；课件已有高亮+自动滚动，字幕重复）；
+     3) #sndTip 常驻「没声音」黄条隐藏（本册页面无此元素，此条为与三年级一致的预防规则）。
+     带标记，重复执行不会叠加。js 侧三份 read-assist.js 均已有 SHOW_GUIDE=0，无需改动。 */
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+    #sndTip{ display:none !important; }
+  }
+
+  /* ===== 第3课页面专属覆盖（后置同特异性，必定生效） ===== */
+  .para{ font-size:18px; line-height:2.15; }
+  .para .sent{ display:inline; font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    font-size:18px; letter-spacing:0; text-align:left; line-height:2.15; }
+  .para ruby + ruby{ margin-left:2px; }
+  /* 教材图放大：3 张课本页一排，恰好不落单 */
+  .pic-grid{ grid-template-columns:repeat(3,1fr); gap:14px; }
+  .pic-card{ box-shadow:0 2px 10px rgba(62,39,35,.10); }
+  /* 课后题词牌：多笔画字在 12px 下会糊成一团 */
+  .word-row .wk{ font-size:15px; padding:3px 9px; }
+  /* 课本填空横线（照第 8 页版式） */
+  .word-row .blank{ display:inline-block; width:190px; border-bottom:1.5px solid #7a5c46;
+    vertical-align:middle; margin:0 4px; }
+  @media (min-width:601px){
+    #zinGrid{ grid-template-columns:repeat(5,1fr); }
+    #ziwGrid{ grid-template-columns:repeat(4,1fr); }
+    #wcGrid{ grid-template-columns:repeat(5,1fr); }
+    #wcGrid .w-top{ flex-wrap:wrap; gap:2px 6px; }
+    #wcGrid .w-hz{ white-space:nowrap; font-size:21px; }
+    .role-grid{ grid-template-columns:repeat(5,1fr); }
+  }
+  @media (max-width:600px){
+    .para{ font-size:17px; }
+    .para .sent{ font-size:17px; }
+    .role-grid{ grid-template-columns:repeat(2,1fr); }
+    .pic-grid{ grid-template-columns:1fr; }
+    .word-row .blank{ width:110px; }
+  }
+</style>
+</head>
+<body>
+<script src="../js/read-assist.js"></script>
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+  <div class="page-head">
+    <h1>🌸 第 3 课《开满鲜花的小路》· 有声图文带读</h1>
+    <p>统编版语文 · 第一单元·阅读 · 课本 第 6~8 页 · 作者：林颂英（选作课文时有改动）</p>
+  </div>
+
+  <div class="stat-bar">
+    <span class="stat">课文 <b>12</b> 段 · <b>21</b> 句</span>
+    <span class="stat">会认字 <b>15</b></span>
+    <span class="stat">会写字 <b>7</b></span>
+    <span class="stat">听写词 <b>10</b></span>
+    <span class="stat">近义词 <b>4</b> 组</span>
+    <span class="stat">深入理解 <b>8</b> 题</span>
+    <span class="stat">本课本领 <b>分角色朗读·看图讲故事·照样子说</b></span>
+  </div>
+
+  <div class="hint-bar">
+    <b>🎧 五步学（可随时点任意一句、一个字、一个词单独听）：</b><br>
+    <b>① 听读课文</b>——12 个自然段、21 句，一句一句读，读到哪一句哪一句发光；开「跟读」后读完一句留时间让你自己读。<br>
+    <b>② 学字词</b>——15 个会认字、7 个会写字（含书写提示），点一个读一个。<br>
+    <b>③ 词语·听写·造句</b>——先读课本第 8 页三道课后题（含加点部分和照样子说一说），再听写 10 个词（读两遍→你写→报答案→听示范句），最后听 4 组近义词辨析。<br>
+    <b>④ 深入理解</b>——8 道题（认知 / 理解 / 运用 / 拓展），开放题答案不唯一，先想后看。<br>
+    <b>⑤ 讲故事·分角色</b>——借助课本插图按先、再、接着、最后讲这个故事，再按课文里的真人物分角色朗读。
+  </div>
+
+  <div class="bubble" id="mapUnit" data-say="本册第一单元是阅读单元，一共有四篇课文和一个语文园地：第一课古诗二首，第二课找春天，第三课开满鲜花的小路，第四课邓小平爷爷植树，后面是语文园地一。四课都和春天有关。第一课是诗里的春天，第二课是孩子们出门去找春天，第三课是春天里一个关于花籽和礼物的故事，第四课写人亲手给春天种下一棵树。上一课找春天，用眼睛、耳朵、鼻子、手一样一样去发现；这一课里，一包漏掉的花籽悄悄把春天铺成了一路鲜花，同样要仔细看才明白。">
+    📚 <b>本册第一单元·阅读（照课本目录）：</b>1 古诗二首　→　2 找春天　→　<b>3 开满鲜花的小路（本课）</b><br>
+    　　→　4 邓小平爷爷植树　→　语文园地一<br>
+    <span style="font-size:13px;color:#6d5647;">前后连起来看：诗里的春天 → 出门找春天 → 春天里的一路鲜花 → 亲手种下春天</span>
+  </div>
+
+  <div class="bubble" id="srcNote" data-say="课本第 6 页脚注照录：本文作者林颂英，选作课文时有改动。">
+    📖 <b>课文出处（课本第 6 页脚注照录）</b>：① 本文作者林颂英，选作课文时有改动。
+  </div>
+
+  <div class="bubble" id="lightNote" data-say="课本第 7 页脚注照录：本册教科书按本音标注汉字字音，其中用棕色拼音标注的字在这里改读轻声。本课狐狸的狸，在课文里要读轻声，读得又轻又短。">
+    📖 <b>读音提示（课本第 7 页脚注照录）</b>：① 本册教科书按本音标注汉字字音，其中用棕色拼音标注的字在这里改读轻声。<br>
+    <span style="font-size:13px;color:#6d5647;">本课「狐狸」的「狸」在课文里读轻声，要读得又轻又短；生字表上标的是它的本音。</span>
+  </div>
+
+  <!-- ================= ① 听读课文 ================= -->
+  <div class="sec-title"><span class="bar"></span>① 听读课文（点哪一句，读哪一句）<span class="sec-note">点段前的 ①~⑫ 听整段</span></div>
+
+  <div class="tool-row">
+    <button type="button" class="tool-btn" id="btnFollow">🔁 跟读模式：关</button>
+    <button type="button" class="tool-btn" id="btnPy">👁 隐藏注音（自测用）</button>
+    <span class="sec-note">注音只标本课要认、要写的字，以及课本随文标了音的字；读音照课本第 6~8 页</span>
+  </div>
+
+  <div class="req-card" id="req1" data-say="朗读要求，也是课后第一题分角色朗读的要求。一，读准字音：懊丧的丧读第四声，绚丽多彩的绚读第四声，花籽的籽读第三声，正巧的巧读第三声；狐狸的狸在这里读轻声，要读得又轻又短；啊在课文里表示吃惊，读第四声。二，不添字、不漏字，逗号停得短，句号停得长。三，人物的话要读出各人自己的语气：邮递员黄狗是喊，鼹鼠先生是请教和老实回答，刺猬太太又惊又喜，狐狸太太是想不明白地奇怪，松鼠太太是恍然大悟。四，问句句尾轻轻上扬，多美啊、真美啊、多么美好的礼物啊这些感叹句要读出惊喜。五，分角色时旁白读得清楚平稳，把故事连起来。">
+    🎤 <b>朗读要求 · 分角色朗读（课后题①的老师标准）</b><br>
+    ① <b>读准字音</b>：懊丧、绚丽多彩、花籽、正巧跟着课本第 6~8 页的注音读；「狐狸」的「狸」读轻声（见第 7 页脚注），「啊」在课文里表示吃惊；<br>
+    ② <b>不添字、不漏字</b>：逗号停得短，句号停得长，一句一句读清楚；<br>
+    ③ <b>人物的话各有语气</b>：黄狗是<b>喊</b>，鼹鼠先生是<b>请教</b>和老实回答，刺猬太太<b>又惊又喜</b>，狐狸太太<b>奇怪</b>，松鼠太太<b>恍然大悟</b>；<br>
+    ④ <b>问句上扬、感叹句读出惊喜</b>：「这是谁在我家门前种的花？」「多美啊！」「真美啊！」「这是多么美好的礼物啊！」；<br>
+    ⑤ <b>旁白要稳</b>：分角色时旁白把故事连起来，读得清楚、不抢人物的话。
+  </div>
+
+  <div class="para" id="p1" data-say="第一自然段。邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！">
+    <span class="no" title="听这一自然段">①</span>
+    <span class="sent" data-say="邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！" data-tip="黄狗是在门口喊的，声音响一点、亮一点，句尾往上扬，整个故事就从这一声喊开始。"><ruby>邮<rt>yóu</rt></ruby><ruby>递<rt>dì</rt></ruby>员黄狗在门口喊：“<ruby>鼹<rt>yǎn</rt></ruby>鼠先生，您的包<ruby>裹<rt>guǒ</rt></ruby>单！”</span>
+  </div>
+
+  <div class="para" id="p2" data-say="第二自然段。原来，长颈鹿大叔给鼹鼠先生寄来了一个包裹。">
+    <span class="no" title="听这一自然段">②</span>
+    <span class="sent" data-say="原来，长颈鹿大叔给鼹鼠先生寄来了一个包裹。" data-tip="原来是回过头来交代一句，读得平稳；长颈鹿大叔、寄来这几个词要读清楚。"><ruby>原<rt>yuán</rt></ruby>来，长<ruby>颈<rt>jǐng</rt></ruby>鹿大<ruby>叔<rt>shū</rt></ruby>给鼹鼠先生<ruby>寄<rt>jì</rt></ruby>来了一个包裹。</span>
+  </div>
+
+  <div class="para" id="p3" data-say="第三自然段。鼹鼠先生赶紧骑着摩托车，到邮局去领包裹。他回家后打开包裹，看见一堆小颗粒，可认不出是什么东西。">
+    <span class="no" title="听这一自然段">③</span>
+    <span class="sent" data-say="鼹鼠先生赶紧骑着摩托车，到邮局去领包裹。" data-tip="赶紧、骑着、去领，三个动作连着读，读出他急着想知道包裹里是什么。">鼹鼠先生赶<ruby>紧<rt>jǐn</rt></ruby><ruby>骑<rt>qí</rt></ruby>着摩托车，到邮<ruby>局<rt>jú</rt></ruby>去领包裹。</span>
+    <span class="sent" data-say="他回家后打开包裹，看见一堆小颗粒，可认不出是什么东西。" data-tip="小颗粒读得慢一点；可认不出读出纳闷、想不明白的语气。">他回家后打开包裹，看见一堆小颗<ruby>粒<rt>lì</rt></ruby>，可认不出是什么东西。</span>
+  </div>
+
+  <div class="para" id="p4" data-say="第四自然段。鼹鼠先生拿着包裹，来到松鼠太太家。他问松鼠太太，长颈鹿大叔寄来一个包裹，您能帮我看看是什么东西吗？">
+    <span class="no" title="听这一自然段">④</span>
+    <span class="sent" data-say="鼹鼠先生拿着包裹，来到松鼠太太家。" data-tip="这一句只交代去哪儿，读得平稳，给下一句的问话留出停顿。"><ruby>鼹<rt>yǎn</rt></ruby>鼠先生拿着包裹，来到松鼠太太家。</span>
+    <span class="sent" data-say="他问松鼠太太，长颈鹿大叔寄来一个包裹，您能帮我看看是什么东西吗？" data-tip="这是向别人请教，用商量的、有礼貌的语气，句尾吗字轻轻往上扬。">他问松鼠太太：“长颈鹿大叔寄来一个包裹，您能帮我看看是什么东西吗？”</span>
+  </div>
+
+  <div class="para" id="p5" data-say="第五自然段。松鼠太太拿过来一看，里面空空的，什么也没有。原来，包裹破了，里面的东西不见了。看来都漏在来时的路上啦！鼹鼠先生很懊丧。">
+    <span class="no" title="听这一自然段">⑤</span>
+    <span class="sent" data-say="松鼠太太拿过来一看，里面空空的，什么也没有。" data-tip="空空的读得轻一点，读出意外的感觉。">松鼠太太拿过来一看，里面空空的，什么也没有。</span>
+    <span class="sent" data-say="原来，包裹破了，里面的东西不见了。" data-tip="这一句说出了原因，破字读清楚，语气稍微一顿。">原来，包裹<ruby>破<rt>pò</rt></ruby>了，里面的东西不见了。</span>
+    <span class="sent" data-say="看来都漏在来时的路上啦！" data-tip="啦字读出忽然明白的语气，这是猜出来的，不是肯定的。">看来都<ruby>漏<rt>lòu</rt></ruby>在来时的路上啦！</span>
+    <span class="sent" data-say="鼹鼠先生很懊丧。" data-tip="懊丧就是又失望又有点后悔，读得慢一点、低一点。">鼹鼠先生很<ruby>懊<rt>ào</rt></ruby><ruby>丧<rt>sàng</rt></ruby>。</span>
+  </div>
+
+  <div class="para" id="p6" data-say="第六自然段。春天来了，鼹鼠先生要去松鼠太太家做客。啊，通往松鼠太太家的路，成了一条开满鲜花的小路。">
+    <span class="no" title="听这一自然段">⑥</span>
+    <span class="sent" data-say="春天来了，鼹鼠先生要去松鼠太太家做客。" data-tip="时间一下子从去年跳到春天，春天来了读得亮一点，像翻开新的一页。">春天来了，鼹鼠先生要去松鼠太太家做客。</span>
+    <span class="sent" data-say="啊，通往松鼠太太家的路，成了一条开满鲜花的小路。" data-tip="啊是吃了一惊，稍稍拖长；开满鲜花的小路要读得亮起来，像一下子看见满路的花。"><ruby>啊<rt>à</rt></ruby>，<ruby>通<rt>tōng</rt></ruby>往松鼠太太家的路，成了一条开满<ruby>鲜<rt>xiān</rt></ruby>花的小路。</span>
+  </div>
+
+  <div class="para" id="p7" data-say="第七自然段。鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。看到门前开着一大片绚丽多彩的鲜花，她惊奇地说，这是谁在我家门前种的花？多美啊！">
+    <span class="no" title="听这一自然段">⑦</span>
+    <span class="sent" data-say="鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。" data-tip="正巧就是刚好碰上，读得轻快一点，两个正巧形成了故事的节奏。"><ruby>鼹<rt>yǎn</rt></ruby>鼠先生路过刺猬太太家，正<ruby>巧<rt>qiǎo</rt></ruby>，刺猬太太走出门。</span>
+    <span class="sent" data-say="看到门前开着一大片绚丽多彩的鲜花，她惊奇地说，这是谁在我家门前种的花，多美啊！" data-tip="这是刺猬太太又惊奇又高兴的话，多美啊要读得亮、往上扬，别读成平平的陈述。">看到门前开着一大片<ruby>绚<rt>xuàn</rt></ruby>丽多彩的鲜花，她<ruby>惊<rt>jīng</rt></ruby>奇地说：“这是谁在我家门前种的花？多美啊！”</span>
+  </div>
+
+  <div class="para" id="p8" data-say="第八自然段。鼹鼠先生回答，我不知道！">
+    <span class="no" title="听这一自然段">⑧</span>
+    <span class="sent" data-say="鼹鼠先生回答，我不知道！" data-tip="鼹鼠先生是真的不知道，读得干脆、老实，不要拖长。">鼹鼠先生回答：“我不知道！”</span>
+  </div>
+
+  <div class="para" id="p9" data-say="第九自然段。鼹鼠先生经过狐狸太太家，正巧，狐狸太太走出门。看到门前开着一大片五颜六色的鲜花，她奇怪地问，这是谁在我家门前种的花？真美啊！">
+    <span class="no" title="听这一自然段">⑨</span>
+    <span class="sent" data-say="鼹鼠先生经过狐狸太太家，正巧，狐狸太太走出门。" data-tip="狐狸的狸在课文里读轻声，读得又轻又短，照课本第 7 页的脚注。">鼹鼠先生经过<ruby>狐<rt>hú</rt></ruby><ruby>狸<rt>lí</rt></ruby>太太家，正巧，狐狸太太走出门。</span>
+    <span class="sent" data-say="看到门前开着一大片五颜六色的鲜花，她奇怪地问，这是谁在我家门前种的花，真美啊！" data-tip="狐狸太太是奇怪地问，先读出想不明白的疑问，再读出真美啊的赞叹。">看到门前开着一大片五颜六色的鲜花，她奇怪地问：“这是谁在我家门前种的花？真美啊！”</span>
+  </div>
+
+  <div class="para" id="p10" data-say="第十自然段。鼹鼠先生回答，我不知道！">
+    <span class="no" title="听这一自然段">⑩</span>
+    <span class="sent" data-say="鼹鼠先生回答，我不知道！" data-tip="第二次说我不知道，语气和第一次一样老实，可以稍稍快一点。">鼹鼠先生回答：“我不知道！”</span>
+  </div>
+
+  <div class="para" id="p11" data-say="第十一自然段。鼹鼠先生来到松鼠太太门前。松鼠太太走出门，看见门前的小路上花朵簇簇，小松鼠、小刺猬和小狐狸在那里快活地蹦啊跳啊。">
+    <span class="no" title="听这一自然段">⑪</span>
+    <span class="sent" data-say="鼹鼠先生来到松鼠太太门前。" data-tip="读得平稳，这是故事快到结尾了。">鼹鼠先生来到松鼠太太门前。</span>
+    <span class="sent" data-say="松鼠太太走出门，看见门前的小路上花朵簇簇，小松鼠、小刺猬和小狐狸在那里快活地蹦啊跳啊。" data-tip="花朵簇簇、蹦啊跳啊读得轻快、有节奏，读出小动物们的快活。">松鼠太太走出门，看见门前的小路上花朵<ruby>簇<rt>cù</rt></ruby>簇，小松鼠、小刺猬和小狐狸在那里快活地<ruby>蹦<rt>bèng</rt></ruby>啊跳啊。</span>
+  </div>
+
+  <div class="para" id="p12" data-say="第十二自然段。松鼠太太对鼹鼠先生说，我知道了，去年长颈鹿大叔寄给您的是花籽。这是多么美好的礼物啊！">
+    <span class="no" title="听这一自然段">⑫</span>
+    <span class="sent" data-say="松鼠太太对鼹鼠先生说，我知道了，去年长颈鹿大叔寄给您的是花籽，这是多么美好的礼物啊！" data-tip="我知道了读出恍然大悟；最后一句是全课的收尾，读得慢、读得暖，美好两个字要读清楚。">松鼠太太对鼹鼠先生说：“我知道了，去年长颈鹿大叔寄给您的是花<ruby>籽<rt>zǐ</rt></ruby>。这是多么美好的<ruby>礼<rt>lǐ</rt></ruby>物啊！”</span>
+  </div>
+
+  <div id="thinkPill">🤔 想一想（点我可跳过）</div>
+  <div id="imgAns"><div class="img-ans-inner" id="imgAnsInner"><div class="img-ans-box" id="imgAnsBox"></div></div></div>
+
+  <!-- ===== 教材图片 ===== -->
+  <div class="sec-title"><span class="bar"></span>课本的样子（点一张图，听读这一页）<span class="sec-note">点一张图，听读整页</span></div>
+  <div class="pic-grid">
+    <div class="pic-card" id="pic1" data-say="课本第 6 页，课题是第三课开满鲜花的小路，课文从这里开始，讲的是邮递员黄狗送包裹单、鼹鼠先生领回一个包裹。页下脚注写着，本文作者林颂英，选作课文时有改动。">
+      <img src="images/06a-课本第6页-开满鲜花的小路课文.jpg" alt="课本第 6 页《开满鲜花的小路》课题与前六个自然段">
+      <div class="cap">第 6 页 · 课题与课文前半</div>
+    </div>
+    <div class="pic-card" id="pic2" data-say="课本第 7 页，春天来了，通往松鼠太太家的路成了一条开满鲜花的小路。刺猬太太、狐狸太太都惊奇地问是谁种的花，最后松鼠太太说出，去年长颈鹿大叔寄给您的是花籽，这是多么美好的礼物啊。右下角有一个泡泡，写着，我能借助插图讲讲这个故事。">
+      <img src="images/07a-课本第7页-开满鲜花的小路课文.jpg" alt="课本第 7 页《开满鲜花的小路》课文后半与插图">
+      <div class="cap">第 7 页 · 开满鲜花的小路与故事结尾</div>
+    </div>
+    <div class="pic-card" id="pic3" data-say="课本第 8 页，上面一行是十五个会认字的拼音和字，中间是七个会写字的田字格，下面是三道课后题：分角色朗读课文；读一读注意加点的部分，再看看课文插图照样子说一说；为什么说长颈鹿大叔寄来的花籽是美好的礼物。">
+      <img src="images/08a-课本第8页-生字表与课后题.png" alt="课本第 8 页生字表、田字格与课后题">
+      <div class="cap">第 8 页 · 生字表与课后题</div>
+    </div>
+  </div>
+  <div class="img-tip">📖 人教版《语文》二年级下册 · 课本第 6~8 页 · 图片仅供个人学习，版权归人民教育出版社所有</div>
+
+  <!-- ================= ② 学字词 ================= -->
+  <div class="sec-title"><span class="bar"></span>② 会认字（15 个）<span class="sec-note">点一个字，听读音、词语和课文里的句子；「邮」「递」「鼹」「紧」「骑」「局」「簇」「蹦」是课本随文注音的字，不在生字表里</span></div>
+  <div class="zi-grid" id="zinGrid">
+    <div class="zi" data-say="裹，包裹的裹。课文开头邮递员黄狗喊，鼹鼠先生，您的包裹单。裹就是把东西包起来、包在外面。还能组词：裹住、裹紧。"><div class="py">guǒ</div><div class="hz">裹</div><div class="ci">包裹 · 裹住</div></div>
+    <div class="zi" data-say="颈，长颈鹿的颈，读第三声。颈就是脖子，长颈鹿的脖子特别长。课文里长颈鹿大叔给鼹鼠先生寄来了一个包裹。"><div class="py">jǐng</div><div class="hz">颈</div><div class="ci">长颈鹿 · 脖颈</div></div>
+    <div class="zi" data-say="寄，寄来的寄，读第四声。寄就是通过邮局把东西送给远方的人。课文里包裹是长颈鹿大叔寄来的，最后寄的原来是花籽。"><div class="py">jì</div><div class="hz">寄</div><div class="ci">寄来 · 寄信</div></div>
+    <div class="zi" data-say="粒，小颗粒的粒，米字旁。粒是小小的一颗一颗的东西。课文说鼹鼠先生打开包裹，看见一堆小颗粒，可认不出是什么东西。"><div class="py">lì</div><div class="hz">粒</div><div class="ci">颗粒 · 一粒</div></div>
+    <div class="zi" data-say="破，包裹破了的破，石字旁。破就是东西坏了、不完整了。课文说原来，包裹破了，里面的东西不见了。还能组词：破洞、破旧。"><div class="py">pò</div><div class="hz">破</div><div class="ci">破了 · 破洞</div></div>
+    <div class="zi" data-say="漏，漏在来时的路上的漏，三点水。漏就是东西从破口掉出去、没留住。花籽正是从破了的包裹里漏出去，才有了后来一路的鲜花。"><div class="py">lòu</div><div class="hz">漏</div><div class="ci">漏在 · 漏水</div></div>
+    <div class="zi" data-say="懊，懊丧的懊，竖心旁，读第四声。懊是心里不痛快、有点后悔。课文说鼹鼠先生很懊丧，因为包裹里的东西全漏在路上了。"><div class="py">ào</div><div class="hz">懊</div><div class="ci">懊丧 · 懊恼</div></div>
+    <div class="zi" data-say="丧，懊丧的丧，读第四声。懊丧合起来就是又失望又没精神。这个字还有另一个读音，丧事读第一声，本课读第四声。"><div class="py">sàng</div><div class="hz">丧</div><div class="ci">懊丧 · 丧气</div></div>
+    <div class="zi" data-say="啊，生字表上标的是第一声，它是一个多音字。课文第六自然段里表示吃了一惊，读第四声；多美啊、真美啊里表示赞叹，读得轻一点。跟着句子里的语气读就好。"><div class="py">ā</div><div class="hz">啊</div><div class="ci">啊 · 多美啊</div></div>
+    <div class="zi" data-say="巧，正巧的巧，工字旁，读第三声。正巧就是刚好、凑巧。课文里鼹鼠先生路过刺猬太太家和狐狸太太家，两次都是正巧，两位太太走出门。"><div class="py">qiǎo</div><div class="hz">巧</div><div class="ci">正巧 · 巧手</div></div>
+    <div class="zi" data-say="绚，绚丽多彩的绚，绞丝旁，读第四声。绚丽多彩就是颜色又多又亮、光彩耀眼。课文用它写刺猬太太门前那一大片的鲜花。"><div class="py">xuàn</div><div class="hz">绚</div><div class="ci">绚丽 · 绚烂</div></div>
+    <div class="zi" data-say="狐，狐狸的狐，反犬旁。狐狸是一种动物。课文里有一位狐狸太太，她出门看见门前开着一大片五颜六色的鲜花。"><div class="py">hú</div><div class="hz">狐</div><div class="ci">狐狸 · 狐皮</div></div>
+    <div class="zi" data-say="狸，狐狸的狸，反犬旁。生字表上标的是它的本音，课本第 7 页脚注说，用棕色拼音标注的字在这里改读轻声，所以狐狸的狸在课文里要读得又轻又短。"><div class="py">lí</div><div class="hz">狸</div><div class="ci">狐狸 · 狸猫</div></div>
+    <div class="zi" data-say="籽，花籽的籽，米字旁，读第三声。籽就是植物的种子。松鼠太太最后说，去年长颈鹿大叔寄给您的是花籽，谜底到这儿才揭开。"><div class="py">zǐ</div><div class="hz">籽</div><div class="ci">花籽 · 菜籽</div></div>
+    <div class="zi" data-say="礼，礼物的礼，示字旁，读第三声。礼物是送给别人的心意。课文最后一句说，这是多么美好的礼物啊。还能组词：礼貌、敬礼。"><div class="py">lǐ</div><div class="hz">礼</div><div class="ci">礼物 · 礼貌</div></div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>② 会写字（7 个）<span class="sec-note">结构、部首、笔画与书写提示为通用规范，供参考，以教材和老师的指导为准</span></div>
+  <div class="zi-grid" id="ziwGrid">
+    <div class="zi write" data-say="鲜，鲜花的鲜，鱼字旁，十四画，左右结构，右边是羊。书写提示：左边鱼和右边羊都写窄一点，两边一样高，不要一高一低。课文说成了一条开满鲜花的小路。这个字还有另一个读音，鲜为人知读第三声，本课读第一声。还能组词：新鲜、鲜美。">
+      <div class="tzg"><span>鲜</span></div><div class="py">xiān</div><div class="ci">鲜花 · 新鲜</div><div class="meta">14 画 · 左右（鱼）</div><div class="wtip">左鱼右羊都写窄，两边一样高</div></div>
+    <div class="zi write" data-say="原，原来的原，厂字头，十画，半包围结构。书写提示：厂字头的横和撇要写得舒展、盖住下面，里面的白和小写紧凑，不要散开。课文里原来出现过两次，都是回过头来交代原因。还能组词：草原、原野。">
+      <div class="tzg"><span>原</span></div><div class="py">yuán</div><div class="ci">原来 · 草原</div><div class="meta">10 画 · 半包围（厂）</div><div class="wtip">厂字头写舒展，里面白小要写紧凑</div></div>
+    <div class="zi write" data-say="叔，大叔的叔，八画，左右结构，右边是又字。书写提示：左边上面写小、下面稍大，右边又字的捺要写得舒展，托住左边。课文里长颈鹿大叔寄来了包裹。还能组词：叔叔、叔伯。">
+      <div class="tzg"><span>叔</span></div><div class="py">shū</div><div class="ci">大叔 · 叔叔</div><div class="meta">8 画 · 左右（又）</div><div class="wtip">左上小下大，右边又字捺要舒展</div></div>
+    <div class="zi write" data-say="通，通往的通，走之底，十画，半包围结构。书写提示：先写里面的甬，走之底最后写，最后一笔平捺要平、要长，稳稳托住里面。课文说通往松鼠太太家的路，成了一条开满鲜花的小路。还能组词：通过、交通。">
+      <div class="tzg"><span>通</span></div><div class="py">tōng</div><div class="ci">通往 · 通过</div><div class="meta">10 画 · 半包围（辶）</div><div class="wtip">走之底最后写，平捺要托住里面</div></div>
+    <div class="zi write" data-say="巧，正巧的巧，工字旁，五画，左右结构。书写提示：左边的工字写窄、末笔横变成提，右边的竖折折钩要一笔写成，不要断成两笔。课文里两次写到正巧。还能组词：巧手、灵巧。">
+      <div class="tzg"><span>巧</span></div><div class="py">qiǎo</div><div class="ci">正巧 · 巧手</div><div class="meta">5 画 · 左右（工）</div><div class="wtip">左工写窄，右边竖折折钩一笔写成</div></div>
+    <div class="zi write" data-say="惊，惊奇的惊，竖心旁，十一画，左右结构，右边是京。书写提示：竖心旁先写左右两点、再写中间一竖，右边的京字要写正，中间口不要写扁。课文说她惊奇地说。还能组词：惊喜、吃惊。">
+      <div class="tzg"><span>惊</span></div><div class="py">jīng</div><div class="ci">惊奇 · 惊喜</div><div class="meta">11 画 · 左右（忄）</div><div class="wtip">竖心旁先两点后竖，右边京字写正</div></div>
+    <div class="zi write" data-say="礼，礼物的礼，示字旁，五画，左右结构。书写提示：示字旁一共四笔，不要多写一点写成衣字旁；右边竖弯钩要写得舒展、往上钩。课文最后说，这是多么美好的礼物啊。还能组词：礼貌、敬礼。">
+      <div class="tzg"><span>礼</span></div><div class="py">lǐ</div><div class="ci">礼物 · 礼貌</div><div class="meta">5 画 · 左右（礻）</div><div class="wtip">示字旁四笔别多写一点，竖弯钩舒展</div></div>
+  </div>
+
+  <!-- ================= ③ 词语·听写·造句·近义词 ================= -->
+  <div class="sec-title"><span class="bar"></span>③ 课后题（课本第 8 页照录）<span class="sec-note">点一行，听题目、例句和怎么说更好</span></div>
+  <div class="bubble" id="hwText" data-say="课本第 8 页课后题原文：一，分角色朗读课文。二，读一读，注意加点的部分。再看看课文插图，照样子说一说。例句，门前开着一大片五颜六色的鲜花，其中一大片五颜六色的是加点的部分。下面三行是填空：房子旁边，山坡上，还有一行空白自己写。三，为什么说长颈鹿大叔寄来的花籽是美好的礼物？生活中还有什么也是美好的礼物？">
+    📖 <b>课后题（课本第 8 页照录）</b>：① 分角色朗读课文。　② 读一读，注意加点的部分。再看看课文插图，照样子说一说。<br>
+    <span style="font-family:'KaiTi','STKaiti',serif;font-size:17px;">◇ 门前开着<u>一大片五颜六色的</u>鲜花。　◇ 房子旁边＿＿＿＿＿。　◇ 山坡上＿＿＿＿＿。<br>◇ ＿＿＿＿＿＿＿＿＿。</span><br>
+    ③ 为什么说长颈鹿大叔寄来的花籽是“美好的礼物”？生活中还有什么也是美好的礼物？
+  </div>
+  <div class="word-row" id="w1" data-say="课后第一题：分角色朗读课文。这一课里有邮递员黄狗、鼹鼠先生、刺猬太太、狐狸太太和松鼠太太，还有把故事连起来的旁白。分角色时，旁白读得平稳，每个人说的话读出自己的语气。">
+    <span class="wk">课后题 ①</span><span class="ws">分角色朗读课文。</span>
+  </div>
+  <div class="word-row" id="w2" data-say="课后第二题：读一读，注意加点的部分。再看看课文插图，照样子说一说。加点的部分写的是有多少、是什么样的，把这个说清楚，句子就有了画面。">
+    <span class="wk">课后题 ②</span><span class="ws">读一读，注意加点的部分。再看看课文插图，照样子说一说。</span>
+  </div>
+  <div class="word-row" id="w3" data-say="课本上的例句：门前开着一大片五颜六色的鲜花。加点的是一大片五颜六色的，一大片说有多少，五颜六色的说是什么样的。照这个样子，先说哪里，再说开着或长着多少什么样的东西。">
+    <span class="wk">例句</span><span class="ws">◇ 门前开着<em>一大片五颜六色的</em>鲜花。</span>
+  </div>
+  <div class="word-row" id="w4" data-say="第一条仿说：房子旁边。答案不唯一。示例：房子旁边长着一大片绿油油的小草，或者房子旁边种着几棵高大的桃树。先说房子旁边，再说有多少、什么样的东西。">
+    <span class="wk">照样子 1</span><span class="ws">◇ 房子旁边<span class="blank"></span>。</span>
+  </div>
+  <div class="word-row" id="w5" data-say="第二条仿说：山坡上。答案不唯一。示例：山坡上开着一大片粉红色的野花，或者山坡上长着一棵棵翠绿的小树。还可以自己再想一处地方，照样子说一句。">
+    <span class="wk">照样子 2</span><span class="ws">◇ 山坡上<span class="blank"></span>。</span>
+  </div>
+  <div class="word-row" id="w6" data-say="课后第三题：为什么说长颈鹿大叔寄来的花籽是美好的礼物？生活中还有什么也是美好的礼物？先在课文里找花籽后来变成了什么，再联系自己的生活想一想。">
+    <span class="wk">课后题 ③</span><span class="ws">为什么说长颈鹿大叔寄来的花籽是“美好的礼物”？生活中还有什么也是美好的礼物？</span>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 听写（10 个词）<span class="sec-note">读两遍 → 你在纸上写 → 报答案 → 听示范句</span></div>
+  <div class="dict-panel">
+    <div class="dict-stage" id="dictStage">准备听写 · 共 10 个词</div>
+    <div class="dict-word mask" id="dictWord">○ ○ ○</div>
+    <div class="dict-hint" id="dictHint">点下面的「开始听写」，听到一个词就写一个词。</div>
+    <div class="dict-btns">
+      <button type="button" class="tool-btn" id="btnDictStart">▶ 开始听写</button>
+      <button type="button" class="tool-btn" id="btnDictAgain">🔁 再读一遍</button>
+      <button type="button" class="tool-btn" id="btnDictShow">👁 看答案</button>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 听写的词 · 造句示范<span class="sec-note">点词听读，点句子听示范句，再自己说一句</span></div>
+  <div class="wc-grid" id="wcGrid">
+    <div class="wc" id="wc1"><div class="w-top" data-say="鲜花"><span class="w-no">1</span><span class="w-hz">鲜花</span><span class="w-lab">会写字 · 鲜</span></div><div class="w-say" data-say="示范句：门前开着一大片五颜六色的鲜花。">示范句：门前开着一大片五颜六色的鲜花。</div><div class="w-own" data-say="我也能说：哪里 + 开着 + 什么样的鲜花。比如：小路两旁开着一大片金黄的迎春花。你也试着说一句。">✏️ 我也能说：哪里 + 开着 + 什么样的鲜花</div></div>
+    <div class="wc" id="wc2"><div class="w-top" data-say="原来"><span class="w-no">2</span><span class="w-hz">原来</span><span class="w-lab">会写字 · 原</span></div><div class="w-say" data-say="示范句：原来，包裹破了，里面的东西不见了。">示范句：原来，包裹破了，里面的东西不见了。</div><div class="w-own" data-say="我也能说：原来，+ 刚刚明白的事。比如：原来，那一路的鲜花是漏掉的花籽长出来的。你也试着说一句。">✏️ 我也能说：原来，+ 明白了什么</div></div>
+    <div class="wc" id="wc3"><div class="w-top" data-say="大叔"><span class="w-no">3</span><span class="w-hz">大叔</span><span class="w-lab">会写字 · 叔</span></div><div class="w-say" data-say="示范句：长颈鹿大叔给鼹鼠先生寄来了一个包裹。">示范句：长颈鹿大叔给鼹鼠先生寄来了一个包裹。</div><div class="w-own" data-say="我也能说：谁 + 给谁 + 寄来了什么。比如：姑姑给我寄来了一盒彩笔。你也试着说一句。">✏️ 我也能说：谁 + 给谁 + 寄来了什么</div></div>
+    <div class="wc" id="wc4"><div class="w-top" data-say="通往"><span class="w-no">4</span><span class="w-hz">通往</span><span class="w-lab">会写字 · 通</span></div><div class="w-say" data-say="示范句：通往松鼠太太家的路，成了一条开满鲜花的小路。">示范句：通往松鼠太太家的路，成了一条开满鲜花的小路。</div><div class="w-own" data-say="我也能说：通往哪里 + 的路上有什么。比如：通往学校的小路上种着一排梧桐树。你也试着说一句。">✏️ 我也能说：通往哪里 + 的路上有什么</div></div>
+    <div class="wc" id="wc5"><div class="w-top" data-say="正巧"><span class="w-no">5</span><span class="w-hz">正巧</span><span class="w-lab">会写字 · 巧</span></div><div class="w-say" data-say="示范句：鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。">示范句：鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。</div><div class="w-own" data-say="我也能说：谁 + 正巧 + 碰上什么。比如：我刚到门口，正巧碰上同学出来。你也试着说一句。">✏️ 我也能说：谁 + 正巧 + 碰上什么</div></div>
+    <div class="wc" id="wc6"><div class="w-top" data-say="惊奇"><span class="w-no">6</span><span class="w-hz">惊奇</span><span class="w-lab">会写字 · 惊</span></div><div class="w-say" data-say="示范句：她惊奇地说，多美啊！">示范句：她惊奇地说，多美啊！</div><div class="w-own" data-say="我也能说：谁 + 惊奇地 + 说了什么。比如：弟弟惊奇地喊，天上有一道彩虹。你也试着说一句。">✏️ 我也能说：谁 + 惊奇地 + 说了什么</div></div>
+    <div class="wc" id="wc7"><div class="w-top" data-say="礼物"><span class="w-no">7</span><span class="w-hz">礼物</span><span class="w-lab">会写字 · 礼</span></div><div class="w-say" data-say="示范句：这是多么美好的礼物啊！">示范句：这是多么美好的礼物啊！</div><div class="w-own" data-say="我也能说：什么 + 是美好的礼物。比如：妈妈亲手做的书签是美好的礼物。你也试着说一句。">✏️ 我也能说：什么 + 是美好的礼物</div></div>
+    <div class="wc" id="wc8"><div class="w-top" data-say="包裹"><span class="w-no">8</span><span class="w-hz">包裹</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！">示范句：邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！</div><div class="w-own" data-say="我也能说：谁 + 收到了一个包裹。比如：爷爷收到了一个从南方寄来的包裹。你也试着说一句。">✏️ 我也能说：谁 + 收到了一个包裹</div></div>
+    <div class="wc" id="wc9"><div class="w-top" data-say="懊丧"><span class="w-no">9</span><span class="w-hz">懊丧</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：鼹鼠先生很懊丧。">示范句：鼹鼠先生很懊丧。</div><div class="w-own" data-say="我也能说：谁 + 为什么 + 很懊丧。比如：我把拼好的模型碰倒了，心里很懊丧。你也试着说一句。">✏️ 我也能说：谁 + 为什么 + 很懊丧</div></div>
+    <div class="wc" id="wc10"><div class="w-top" data-say="花籽"><span class="w-no">10</span><span class="w-hz">花籽</span><span class="w-lab">课文里的词</span></div><div class="w-say" data-say="示范句：去年长颈鹿大叔寄给您的是花籽。">示范句：去年长颈鹿大叔寄给您的是花籽。</div><div class="w-own" data-say="我也能说：花籽 + 后来变成了什么。比如：春天一到，花籽变成了满路的鲜花。你也试着说一句。">✏️ 我也能说：花籽 + 后来变成了什么</div></div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 近义词辨析（4 组）<span class="sec-note">相同点 / 不一样在哪 / 各造一句</span></div>
+  <div class="near" id="n1" data-say="第一组：惊奇和奇怪。相同点：都写没想到、觉得意外。不一样的地方：惊奇偏又惊又喜，课文里刺猬太太看到一大片绚丽多彩的鲜花，惊奇地说多美啊；奇怪偏不明白、想问清楚，狐狸太太奇怪地问这是谁在我家门前种的花。造句：她惊奇地说，多美啊！她奇怪地问，这是谁在我家门前种的花？">
+    <div class="n-top">惊奇 — 奇怪</div>
+    <div class="n-same">相同：都写<b>没想到、觉得意外</b>。</div>
+    <div class="n-diff">不一样：<b>惊奇</b>偏又惊又喜，课文里刺猬太太看到一大片绚丽多彩的鲜花，惊奇地说「多美啊」；<b>奇怪</b>偏不明白、想问清楚，狐狸太太奇怪地问「这是谁在我家门前种的花」。</div>
+    <div class="n-eg">惊奇：她惊奇地说，多美啊！<br>奇怪：她奇怪地问，这是谁在我家门前种的花？</div>
+  </div>
+  <div class="near" id="n2" data-say="第二组：绚丽多彩和五颜六色。相同点：都写颜色多、很好看。不一样的地方：绚丽多彩强调光彩耀眼、鲜亮，五颜六色强调颜色种类多。课文分别用在刺猬太太和狐狸太太门前，写的是同一路花，换个说法就不重复了。造句：一大片绚丽多彩的鲜花。一大片五颜六色的鲜花。">
+    <div class="n-top">绚丽多彩 — 五颜六色</div>
+    <div class="n-same">相同：都写<b>颜色多、很好看</b>。</div>
+    <div class="n-diff">不一样：<b>绚丽多彩</b>强调光彩耀眼、鲜亮；<b>五颜六色</b>强调颜色种类多。课文分别用在刺猬太太和狐狸太太门前，写的是同一路花，换了说法就不重复。</div>
+    <div class="n-eg">绚丽多彩：一大片绚丽多彩的鲜花。<br>五颜六色：一大片五颜六色的鲜花。</div>
+  </div>
+  <div class="near" id="n3" data-say="第三组：赶紧和连忙。相同点：都写动作快、不耽搁。不一样的地方：赶紧是抓紧时间自己去做一件事，课文说鼹鼠先生赶紧骑着摩托车去领包裹；连忙多是听到、看到之后马上接着做，常用来回应别人。造句：赶紧骑着摩托车去领包裹。听见有人叫我，我连忙跑过去。">
+    <div class="n-top">赶紧 — 连忙</div>
+    <div class="n-same">相同：都写<b>动作快、不耽搁</b>。</div>
+    <div class="n-diff">不一样：<b>赶紧</b>是抓紧时间自己去做一件事，课文说鼹鼠先生赶紧骑着摩托车去领包裹；<b>连忙</b>多是听到、看到之后马上接着做，常用来回应别人。</div>
+    <div class="n-eg">赶紧：赶紧骑着摩托车去领包裹。<br>连忙：听见有人叫我，我连忙跑过去。</div>
+  </div>
+  <div class="near" id="n4" data-say="第四组：懊丧和难过。相同点：都写心里不高兴。不一样的地方：懊丧还带着白忙一场、有点后悔、提不起劲的意思，课文里包裹空了、东西全漏在路上了，鼹鼠先生很懊丧；难过只说伤心，不一定有后悔。造句：鼹鼠先生很懊丧。小狗走丢了，我心里很难过。">
+    <div class="n-top">懊丧 — 难过</div>
+    <div class="n-same">相同：都写<b>心里不高兴</b>。</div>
+    <div class="n-diff">不一样：<b>懊丧</b>还带着「白忙一场、有点后悔、提不起劲」的意思，课文里包裹空了、东西全漏了，鼹鼠先生很懊丧；<b>难过</b>只说伤心，不一定有后悔。</div>
+    <div class="n-eg">懊丧：鼹鼠先生很懊丧。<br>难过：小狗走丢了，我心里很难过。</div>
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>③ 词语拓展（说一说，记一记）</div>
+  <div class="acc" id="a1" data-say="课后第二题加点的部分，正好是两半：一大片说有多少，绚丽多彩、五颜六色的说是什么样的。照样子说话时，把这两半都说上，句子就有画面了。">
+    <span class="a-t">一大片……的</span><span class="a-c"><em>一大片绚丽多彩的</em>鲜花　<em>一大片五颜六色的</em>鲜花</span>
+  </div>
+  <div class="acc" id="a2" data-say="课文写这一路花用了好几个词：刺猬太太门前是绚丽多彩，狐狸太太门前是五颜六色，松鼠太太门前是花朵簇簇，课题和第六自然段说开满鲜花。同一个意思换着说，读起来不重复。">
+    <span class="a-t">写花的样子</span><span class="a-c">绚丽多彩　五颜六色　花朵簇簇　开满鲜花</span>
+  </div>
+  <div class="acc" id="a3" data-say="课文里四处用到啊。开头那个啊是吃了一惊，读第四声、稍稍拖长；后面三个是赞叹，读得亮一点、往上扬。分角色朗读时把这几个啊读好，人物的心情就出来了。">
+    <span class="a-t">语气词「啊」</span><span class="a-c">啊，成了一条开满鲜花的小路　多美啊！　真美啊！　这是多么美好的礼物啊！</span>
+  </div>
+  <div class="acc" id="a4" data-say="课后第二题给了三处地方让你接着说：门前、房子旁边、山坡上，最后一行还可以自己再想一处。句式是哪里加动词加多少什么样的东西，说完再看看课本插图，对得上就更棒了。">
+    <span class="a-t">照样子说一处</span><span class="a-c">门前开着一大片五颜六色的鲜花　房子旁边……　山坡上……</span>
+  </div>
+
+  <!-- ================= ④ 深入理解 ================= -->
+  <div class="sec-title"><span class="bar"></span>④ 深入理解（8 题 · 先想后看）<span class="sec-note">标「答案不唯一」的题，说得有道理都对</span></div>
+
+  <div class="qa" id="q1" data-ans="是长颈鹿大叔寄来的。包裹里原来是一堆小颗粒，也就是花籽。因为包裹破了，花籽都漏在来时的路上了，所以松鼠太太拿过来一看，里面空空的，什么也没有。">
+    <div class="qa-head" onclick="askQA('q1')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>谁给鼹鼠先生寄来了包裹？包裹里原来是什么？后来为什么不见了？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">长颈鹿大叔寄来一个包裹，鼹鼠先生领回一堆认不出的小颗粒。</div>
+      <div class="sol sol2">包裹破了，看来都漏在来时的路上啦，鼹鼠先生很懊丧。</div>
+      <div class="sol sol3">松鼠太太最后才说出，寄给您的是花籽。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q2" data-ans="一共三位：刺猬太太、狐狸太太、松鼠太太。刺猬太太惊奇地说，这是谁在我家门前种的花？多美啊！狐狸太太奇怪地问，这是谁在我家门前种的花？真美啊！松鼠太太走出门，看见了门前小路上花朵簇簇，还说出花籽的秘密。">
+    <div class="qa-head" onclick="askQA('q2')">
+      <span class="q-text"><span class="lv-pill lv-r">认知</span>一路上哪几位太太门前开了鲜花？她们分别说了什么？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="8">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">刺猬太太家、狐狸太太家、松鼠太太门前。</div>
+      <div class="sol sol2">两句都问是谁种的花，一句说多美啊，一句说真美啊。</div>
+      <div class="sol sol3">她不光看花，还揭开了谜底。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q3" data-ans="懊丧是因为他领回的包裹空了，里面的东西全漏在来时的路上，白跑一趟，又失望又有点后悔。后来开满鲜花，正是因为漏在路上的不是别的东西，是花籽；春天一来，花籽发芽开花，撒在哪儿就开到哪儿，那条路就成了一条开满鲜花的小路。">
+    <div class="qa-head" onclick="askQA('q3')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>鼹鼠先生为什么「很懊丧」？后来那条小路为什么「开满鲜花」？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">包裹空了、东西不见了，所以又失望又没劲。</div>
+      <div class="sol sol2">漏掉的是花籽，春天一到就变成一路鲜花。</div>
+      <div class="sol sol3">当时最懊丧的事，后来成了最美好的事。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q4" data-ans="因为这份礼物不只让一个人高兴。花籽漏在路上，第二年长成一路鲜花，刺猬太太、狐狸太太、松鼠太太都看见了，小松鼠、小刺猬和小狐狸还在花间快活地蹦啊跳啊。鼹鼠先生自己没留住包裹，却把春天送给了整条小路和所有邻居，所以说它是最美好的礼物。">
+    <div class="qa-head" onclick="askQA('q4')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>课后题③：为什么说长颈鹿大叔寄来的花籽是「美好的礼物」？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">不是鼹鼠先生一个人，是三家太太和一群小动物。</div>
+      <div class="sol sol2">一堆小颗粒，变成了一条开满鲜花的小路。</div>
+      <div class="sol sol3">松鼠太太说，这是多么美好的礼物啊。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q5" data-ans="不能简单对换。惊奇偏又惊又喜，所以刺猬太太接着赞叹多美啊；奇怪偏想不明白，所以狐狸太太接着追问这是谁在我家门前种的花，真美啊。课文用两个不同的词、两句差不多的话，写出两家太太看到花时不一样的反应，也避免了重复。">
+    <div class="qa-head" onclick="askQA('q5')">
+      <span class="q-text"><span class="lv-pill lv-q">理解</span>刺猬太太「惊奇地说」、狐狸太太「奇怪地问」，这两个词能不能换一换？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="10">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">一个赞叹多美啊，一个追问是谁种的。</div>
+      <div class="sol sol2">惊奇偏惊喜，奇怪偏纳闷。</div>
+      <div class="sol sol3">两次经过写得不重复，故事更有节奏。</div>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q6" data-ans="答案不唯一。示例：房子旁边长着一大片绿油油的小草。山坡上开着一大片粉红色的野花。小路两旁站着一棵棵高大的梧桐树。🌈 答案不唯一，先说哪里，再说有多少、什么样的东西，句子就完整了。">
+    <div class="qa-head" onclick="askQA('q6')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>课后题②：看看课文插图，照「门前开着一大片五颜六色的鲜花」的样子说一说。</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">房子旁边、山坡上，或者自己再想一处。</div>
+      <div class="sol sol2">有多少，是什么样的，正好是课文加点的部分。</div>
+      <div class="sol sol3">说的景物在插图上找得到吗。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q7" data-ans="答案不唯一。示例：邮递员黄狗是喊，声音要响、句尾上扬；鼹鼠先生请教时用商量的语气，两次我不知道读得干脆老实；刺猬太太又惊又喜，多美啊要亮；狐狸太太是先纳闷再赞叹；松鼠太太最后恍然大悟，读得慢一点、暖一点；旁白读得平稳，把故事连起来。🌈 答案不唯一，能说出为什么这样读都对。">
+    <div class="qa-head" onclick="askQA('q7')">
+      <span class="q-text"><span class="lv-pill lv-y">运用</span>课后题①：分角色朗读课文，怎样读好每个人说的话？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">黄狗、鼹鼠先生、三位太太，还有旁白。</div>
+      <div class="sol sol2">喊、请教、惊奇、奇怪、我知道了、啊。</div>
+      <div class="sol sol3">问句轻轻上扬，感叹句读出惊喜。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+
+  <div class="qa" id="q8" data-ans="答案不唯一。思路一：亲手做的一张贺卡、一幅画，送给生病没来上学的同学，像花籽一样把心意送到。思路二：帮楼下奶奶把门口的落叶扫干净，或者在小区里种下一粒种子，让大家都看得见。思路三：把自己学会的一个故事讲给弟弟妹妹听，快乐分给了别人，就是美好的礼物。🌈 答案不唯一，说清送什么、送给谁、为什么美好，就是完整的一段话。">
+    <div class="qa-head" onclick="askQA('q8')">
+      <span class="q-text"><span class="lv-pill lv-t">拓展</span>课后题③后半：生活中还有什么也是「美好的礼物」？你想送给谁？</span>
+      <span class="toggle">看解析</span>
+    </div>
+    <div class="think-pill" data-secs="12">🤔 想一想</div>
+    <div class="qa-a"><div class="qa-a-inner">
+      <span class="a-label">解析：</span>
+      <div class="sol sol1">美好的礼物是让别人也高兴，不只自己高兴。</div>
+      <div class="sol sol2">你做过、收到过什么样的心意。</div>
+      <div class="sol sol3">为什么它也美好，理由比答案更重要。</div>
+      <span class="multi">🌈 答案不唯一，说得有道理都对</span>
+    </div></div>
+  </div>
+  <!-- ================= ⑤ 讲故事·分角色 ================= -->
+  <div class="sec-title"><span class="bar"></span>⑤ 借助插图，按顺序讲讲这个故事<span class="sec-note">点一步，听这一步</span></div>
+  <div class="grow">
+    <div class="gstep" id="g1" data-say="第一步，先说故事怎么开头。邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！原来，长颈鹿大叔给他寄来了一个包裹。">
+      <div class="n">1</div><div class="t"><b>先 · 包裹单来了</b><br>邮递员黄狗在门口喊<br>鼹鼠先生，您的包裹单！</div></div>
+    <div class="gstep" id="g2" data-say="第二步，再说鼹鼠先生赶紧骑着摩托车到邮局去领包裹，回家打开一看，是一堆小颗粒，可认不出是什么东西。他还拿着包裹去问松鼠太太。">
+      <div class="n">2</div><div class="t"><b>再 · 领回小颗粒</b><br>赶紧骑着摩托车去领包裹<br>看见一堆小颗粒，认不出</div></div>
+    <div class="gstep" id="g3" data-say="第三步，接着说包裹破了，里面的东西不见了，看来都漏在来时的路上啦，鼹鼠先生很懊丧。当时谁也没想到，漏掉的是花籽。">
+      <div class="n">3</div><div class="t"><b>接着 · 花籽漏在路上</b><br>包裹破了，里面空空的<br>鼹鼠先生很懊丧</div></div>
+    <div class="gstep" id="g4" data-say="第四步，然后说春天来了，通往松鼠太太家的路成了一条开满鲜花的小路。鼹鼠先生路过刺猬太太家、经过狐狸太太家，两位太太都惊奇地问是谁种的花。">
+      <div class="n">4</div><div class="t"><b>然后 · 一路开满鲜花</b><br>春天来了，啊，成了开满鲜花的小路<br>刺猬太太、狐狸太太都惊奇</div></div>
+    <div class="gstep" id="g5" data-say="第五步，最后说松鼠太太揭开了谜底：去年长颈鹿大叔寄给您的是花籽。这是多么美好的礼物啊！故事到这儿，前面的懊丧全变成了惊喜。">
+      <div class="n">5</div><div class="t"><b>最后 · 最美好的礼物</b><br>松鼠太太说：我知道了<br>去年寄给您的是花籽</div></div>
+  </div>
+  <div class="bubble" id="storyTip" data-say="课本第 7 页泡泡照录：我能借助插图讲讲这个故事。说话支架：先说包裹单来了，再说领回一堆认不出的小颗粒，接着说包裹破了、花籽漏在路上、鼹鼠先生很懊丧，然后说春天来了、一路开满鲜花、两位太太都惊奇，最后说松鼠太太揭晓，花籽是最美好的礼物。">
+    💬 <b>课本第 7 页泡泡照录</b>：我能借助插图讲讲这个故事。<br>
+    说话支架：<b>先</b>说包裹单来了 → <b>再</b>说领回一堆认不出的小颗粒 → <b>接着</b>说包裹破了、花籽漏在路上，鼹鼠先生很懊丧 → <b>然后</b>说春天来了，一路开满鲜花 → <b>最后</b>说松鼠太太揭晓：花籽是最美好的礼物。
+  </div>
+
+  <div class="sec-title"><span class="bar"></span>⑤ 分角色朗读（课后题① · 10 张卡，21 句全覆盖）<span class="sec-note">点一张卡，听这个角色读的那几句</span></div>
+  <div class="role-grid">
+    <div class="role" id="r1" data-role="旁白·包裹单" data-lines="邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！|原来，长颈鹿大叔给鼹鼠先生寄来了一个包裹。">
+      <div class="r-n">📮 旁白·包裹单</div>
+      <div class="r-t">邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！原来，长颈鹿大叔给鼹鼠先生寄来了一个包裹。</div>
+      <div class="r-m">💬 黄狗是<b>喊</b>，旁白读得平稳</div>
+    </div>
+    <div class="role" id="r2" data-role="旁白·领包裹" data-lines="鼹鼠先生赶紧骑着摩托车，到邮局去领包裹。|他回家后打开包裹，看见一堆小颗粒，可认不出是什么东西。">
+      <div class="r-n">📦 旁白·领包裹</div>
+      <div class="r-t">鼹鼠先生赶紧骑着摩托车，到邮局去领包裹。他回家后打开包裹，看见一堆小颗粒，可认不出是什么东西。</div>
+      <div class="r-m">💬 三个动作<b>连着读</b>，读出急着想知道</div>
+    </div>
+    <div class="role" id="r3" data-role="鼹鼠先生·请教" data-lines="鼹鼠先生拿着包裹，来到松鼠太太家。|他问松鼠太太，长颈鹿大叔寄来一个包裹，您能帮我看看是什么东西吗？">
+      <div class="r-n">🐹 鼹鼠先生·请教</div>
+      <div class="r-t">鼹鼠先生拿着包裹，来到松鼠太太家。“长颈鹿大叔寄来一个包裹，您能帮我看看是什么东西吗？”</div>
+      <div class="r-m">💬 请教要<b>有礼貌</b>，句尾轻轻上扬</div>
+    </div>
+    <div class="role" id="r4" data-role="旁白·包裹破了" data-lines="松鼠太太拿过来一看，里面空空的，什么也没有。|原来，包裹破了，里面的东西不见了。|看来都漏在来时的路上啦！|鼹鼠先生很懊丧。">
+      <div class="r-n">😔 旁白·包裹破了</div>
+      <div class="r-t">原来，包裹破了，里面的东西不见了。看来都漏在来时的路上啦！鼹鼠先生很懊丧。</div>
+      <div class="r-m">💬 最后一句<b>慢一点、低一点</b>，读出懊丧</div>
+    </div>
+    <div class="role" id="r5" data-role="旁白·春天来了" data-lines="春天来了，鼹鼠先生要去松鼠太太家做客。|啊，通往松鼠太太家的路，成了一条开满鲜花的小路。">
+      <div class="r-n">🌱 旁白·春天来了</div>
+      <div class="r-t">春天来了，鼹鼠先生要去松鼠太太家做客。啊，通往松鼠太太家的路，成了一条开满鲜花的小路。</div>
+      <div class="r-m">💬 <b>啊</b>稍稍拖长，后半句一下子亮起来</div>
+    </div>
+    <div class="role" id="r6" data-role="刺猬太太·惊奇" data-lines="鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。|看到门前开着一大片绚丽多彩的鲜花，她惊奇地说，这是谁在我家门前种的花，多美啊！">
+      <div class="r-n">🦔 刺猬太太·惊奇</div>
+      <div class="r-t">鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。“这是谁在我家门前种的花？多美啊！”</div>
+      <div class="r-m">💬 <b>又惊又喜</b>，多美啊要读得亮</div>
+    </div>
+    <div class="role" id="r7" data-role="鼹鼠先生·第一次回答" data-lines="鼹鼠先生回答，我不知道！">
+      <div class="r-n">🐹 鼹鼠先生·第一次回答</div>
+      <div class="r-t">“我不知道！”</div>
+      <div class="r-m">💬 读得<b>干脆、老实</b>，不要拖</div>
+    </div>
+    <div class="role" id="r8" data-role="狐狸太太·奇怪" data-lines="鼹鼠先生经过狐狸太太家，正巧，狐狸太太走出门。|看到门前开着一大片五颜六色的鲜花，她奇怪地问，这是谁在我家门前种的花，真美啊！">
+      <div class="r-n">🦊 狐狸太太·奇怪</div>
+      <div class="r-t">鼹鼠先生经过狐狸太太家，正巧，狐狸太太走出门。“这是谁在我家门前种的花？真美啊！”</div>
+      <div class="r-m">💬 先<b>纳闷</b>再赞叹，狸读轻声</div>
+    </div>
+    <div class="role" id="r9" data-role="鼹鼠先生·第二次回答" data-lines="鼹鼠先生回答，我不知道！">
+      <div class="r-n">🐹 鼹鼠先生·第二次回答</div>
+      <div class="r-t">“我不知道！”</div>
+      <div class="r-m">💬 和第一次一样老实，可以<b>稍快</b></div>
+    </div>
+    <div class="role" id="r10" data-role="松鼠太太·揭晓礼物" data-lines="鼹鼠先生来到松鼠太太门前。|松鼠太太走出门，看见门前的小路上花朵簇簇，小松鼠、小刺猬和小狐狸在那里快活地蹦啊跳啊。|松鼠太太对鼹鼠先生说，我知道了，去年长颈鹿大叔寄给您的是花籽，这是多么美好的礼物啊！">
+      <div class="r-n">🐿️ 松鼠太太·揭晓礼物</div>
+      <div class="r-t">松鼠太太走出门，看见门前的小路上花朵簇簇，小松鼠、小刺猬和小狐狸在那里快活地蹦啊跳啊。“我知道了，去年长颈鹿大叔寄给您的是花籽。这是多么美好的礼物啊！”</div>
+      <div class="r-m">💬 <b>恍然大悟</b>，最后一句读得慢、读得暖</div>
+    </div>
+  </div>
+</div>
+
+<!-- 字幕条 -->
+<div id="cap"></div>
+
+<!-- 控制条 -->
+<div class="ctrl-bar">
+  <button type="button" id="btnStep1">① 听读课文</button>
+  <button type="button" id="btnStep2">② 学字词</button>
+  <button type="button" id="btnStep3">③ 词语·听写</button>
+  <button type="button" id="btnStep4">④ 深入理解</button>
+  <button type="button" id="btnStep5">⑤ 讲故事·分角色</button>
+  <button type="button" id="btnStop" class="stop">⏹ 停止</button>
+</div>
+
+<script>
+/* ================= 基础工具 ================= */
+var cap=document.getElementById('cap');
+var abort=false;
+var synth=window.speechSynthesis||null;
+var follow=false;          /* 跟读模式 */
+var dictSkip=false;        /* 听写「看答案」提前揭晓 */
+
+/* 可被「停止」打断的等待（每 80ms 检查一次 abort / 外部条件） */
+function wait(ms, check){
+  return new Promise(function(res){
+    var t0=Date.now();
+    var id=setInterval(function(){
+      if(abort || (check && check()) || Date.now()-t0>=ms){ clearInterval(id); res(); }
+    },80);
+  });
+}
+function hl(el){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); el.classList.add('hl'); }
+function unhl(){ document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+var __lastScroll=0;
+function __scrollTo(el){
+  if(!el) return;
+  var now=Date.now();
+  if(now-__lastScroll<800) return;
+  __lastScroll=now;
+  try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+}
+function focusEl(el){ __scrollTo(el); hl(el); }
+
+/* 文本安全清洗（iOS Safari：以 < 开头、以 > 结尾且含中文 → TTS 彻底卡死） */
+function __safeText(t){
+  var s=(t===null||t===undefined)?'':String(t);
+  if(!s) return s;
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g,' ')
+          .replace(/&lt;/gi,'＜').replace(/&gt;/gi,'＞')
+          .replace(/</g,'＜').replace(/>/g,'＞')
+          .replace(/[ \t\r\n]{2,}/g,' ');
+}
+
+/* 语音就绪 + 手势解锁（移动端必需） */
+var __voices=[], __zhVoice=null;
+function __pickZh(v){
+  var zh=[],i,s;
+  for(i=0;i<v.length;i++){ s=v[i]||{}; if(/^zh|^cmn/i.test(s.lang||'')||/Chinese|中文|普通话/i.test(s.name||'')) zh.push(s); }
+  if(!zh.length) return null;
+  for(i=0;i<zh.length;i++){ if(/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name||'')) return zh[i]; }
+  return zh[0];
+}
+function __loadVoices(){
+  if(!synth) return;
+  try{ var v=synth.getVoices(); if(v&&v.length){ __voices=v; if(!__zhVoice) __zhVoice=__pickZh(v); } }catch(e){}
+}
+__loadVoices();
+if(synth){
+  try{ if('onvoiceschanged' in synth) synth.onvoiceschanged=__loadVoices;
+       if(synth.addEventListener) synth.addEventListener('voiceschanged',__loadVoices); }catch(e){}
+  var __vt=setInterval(function(){ __loadVoices(); if(__voices.length) clearInterval(__vt); },150);
+}
+var __unlocked=false;
+function __unlockTTS(){
+  if(!synth||__unlocked) return;
+  try{ var u=new SpeechSynthesisUtterance('\u3000'); u.volume=0; u.lang='zh-CN';
+       if(__zhVoice) u.voice=__zhVoice; setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+       if((synth.getVoices()||[]).length) __unlocked=true; }catch(e){}
+}
+document.addEventListener('click',__unlockTTS,true);
+document.addEventListener('touchend',__unlockTTS,true);
+
+/* 朗读引擎（watchdog 兜底：引擎还在说就继续等，不用固定时长硬切） */
+function speak(text){
+  text=__safeText(text);
+  return new Promise(function(resolve){
+    if(!text){ resolve(); return; }
+    cap.textContent=text; cap.style.display='block';
+    var done=false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN'; u.rate=0.82; u.pitch=1;
+      var vs=synth.getVoices();
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang && vs[i].lang.indexOf('zh')===0 && vs[i].name.indexOf('Xiaoxiao')>-1){ u.voice=vs[i]; break; } }
+      if(!u.voice){ for(var j=0;j<vs.length;j++){ if(vs[j].lang && vs[j].lang.indexOf('zh')===0){ u.voice=vs[j]; break; } } }
+      if(!u.voice && __zhVoice){ u.voice=__zhVoice; }
+      u.onend=finish; u.onerror=finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */
+      var __t0=Date.now(),__m=0;
+      function __wd(){
+        if(done) return;
+        if(Date.now()-__t0>120000){ finish(); return; }
+        var __b=(synth&&(synth.speaking||synth.pending))||(window.__raBusy&&window.__raBusy());
+        if(__b){ __m=0; setTimeout(__wd,1500); return; }
+        if(Date.now()-__t0<3500||++__m<2){ setTimeout(__wd,800); return; }
+        finish();
+      }
+      setTimeout(__wd,3500);
+    }else{
+      setTimeout(finish, 600+text.length*150);
+    }
+  });
+}
+
+/* 思考面板（课文区共用），点一下可跳过；tip 模式只显示不倒计时 */
+var tipPill=document.getElementById('thinkPill');
+function showTip(txt){
+  tipPill.textContent='💡 '+txt+'（点我听）';
+  tipPill.style.display='block';
+  tipPill.onclick=function(){ speak(txt); };
+}
+function hideTip(){ tipPill.style.display='none'; tipPill.onclick=null; }
+function imgThinkWait(tip){
+  return new Promise(function(resolve){
+    var secs=parseInt(tipPill.getAttribute('data-secs'))||8;
+    tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    tipPill.style.display='block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); hideTip(); resolve(); return; }
+      tipPill.textContent='🤔 '+(tip||'想一想')+'… '+secs+' 秒（点我可跳过）';
+    },1000);
+    tipPill.onclick=function(){ clearInterval(t); hideTip(); resolve(); };
+  });
+}
+/* 题目卡内倒计时 */
+function think(qa){
+  return new Promise(function(resolve){
+    var pill=qa.querySelector('.think-pill');
+    var secs=parseInt(pill.getAttribute('data-secs'))||8;
+    pill.textContent='🤔 想一想… '+secs+' 秒';
+    pill.style.display='inline-block';
+    var t=setInterval(function(){
+      secs--;
+      if(abort||secs<=0){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); return; }
+      pill.textContent='🤔 想一想… '+secs+' 秒';
+    },1000);
+    pill.onclick=function(){ clearInterval(t); pill.style.display='none'; pill.onclick=null; resolve(); };
+  });
+}
+function openAnswer(qa){ qa.classList.add('open'); }
+function closeAnswer(qa){ qa.classList.remove('open'); }
+function showImgAns(txt){
+  var wrap=document.getElementById('imgAns');
+  var inner=document.getElementById('imgAnsInner');
+  document.getElementById('imgAnsBox').textContent=txt;
+  wrap.style.display='block';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ inner.classList.add('show'); }); });
+}
+function clearImgAns(){
+  document.getElementById('imgAns').style.display='none';
+  document.getElementById('imgAnsInner').classList.remove('show');
+}
+
+/* ================= ① 听读课文 ================= */
+/* 每句一个朗读单元；think/ans 挂在句子后面，读到关键处停下来让学生先想 */
+var stepsRead=[
+  {id:'s1', say:'邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！',
+   think:'为什么故事一开头就写邮递员黄狗喊包裹单',
+   ans:'因为整个故事是从一个包裹开始的。黄狗这一喊，才有后面领包裹、认不出小颗粒、包裹破了、花籽漏在路上一串事。'},
+  {id:'s2', say:'原来，长颈鹿大叔给鼹鼠先生寄来了一个包裹。'},
+  {id:'s3', say:'鼹鼠先生赶紧骑着摩托车，到邮局去领包裹。'},
+  {id:'s4', say:'他回家后打开包裹，看见一堆小颗粒，可认不出是什么东西。'},
+  {id:'s5', say:'鼹鼠先生拿着包裹，来到松鼠太太家。'},
+  {id:'s6', say:'他问松鼠太太，长颈鹿大叔寄来一个包裹，您能帮我看看是什么东西吗？'},
+  {id:'s7', say:'松鼠太太拿过来一看，里面空空的，什么也没有。'},
+  {id:'s8', say:'原来，包裹破了，里面的东西不见了。'},
+  {id:'s9', say:'看来都漏在来时的路上啦！'},
+  {id:'s10', say:'鼹鼠先生很懊丧。'},
+  {id:'s11', say:'春天来了，鼹鼠先生要去松鼠太太家做客。'},
+  {id:'s12', say:'啊，通往松鼠太太家的路，成了一条开满鲜花的小路。',
+   think:'啊字后面为什么用感叹号，又用逗号接下去',
+   ans:'因为鼹鼠先生一出门，忽然看见满路的鲜花，完全没想到，先吃了一惊，所以啊一声；接着才把看到的情景慢慢说出来。'},
+  {id:'s13', say:'鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。'},
+  {id:'s14', say:'看到门前开着一大片绚丽多彩的鲜花，她惊奇地说，这是谁在我家门前种的花，多美啊！'},
+  {id:'s15', say:'鼹鼠先生回答，我不知道！'},
+  {id:'s16', say:'鼹鼠先生经过狐狸太太家，正巧，狐狸太太走出门。'},
+  {id:'s17', say:'看到门前开着一大片五颜六色的鲜花，她奇怪地问，这是谁在我家门前种的花，真美啊！'},
+  {id:'s18', say:'鼹鼠先生回答，我不知道！'},
+  {id:'s19', say:'鼹鼠先生来到松鼠太太门前。'},
+  {id:'s20', say:'松鼠太太走出门，看见门前的小路上花朵簇簇，小松鼠、小刺猬和小狐狸在那里快活地蹦啊跳啊。'},
+  {id:'s21', say:'松鼠太太对鼹鼠先生说，我知道了，去年长颈鹿大叔寄给您的是花籽，这是多么美好的礼物啊！',
+   think:'为什么松鼠太太说花籽是美好的礼物',
+   ans:'因为花籽漏在路上，第二年春天长成了一路鲜花，三家太太和小动物们都很快活。这份礼物不只让一个人高兴，让大家都高兴，所以美好。'}
+];
+
+/* 给课文里的每个句子编上 id（s1…s21），顺序与 stepsRead 一致 */
+(function(){
+  var sents=document.querySelectorAll('.para .sent');
+  for(var i=0;i<sents.length && i<stepsRead.length;i++){ sents[i].id=stepsRead[i].id; }
+})();
+
+/* 跟读：读完一句，留时间让学生自己读（按字数给时间，3~8 秒） */
+async function followWait(text){
+  var secs=Math.min(8, Math.max(3, Math.round(text.length/6)));
+  await speak('你来读。');
+  tipPill.textContent='🗣 你来读… '+secs+' 秒（读完点我直接下一句）';
+  tipPill.style.display='block';
+  var skipped=false;
+  tipPill.onclick=function(){ skipped=true; };
+  await wait(secs*1000, function(){ return skipped; });
+  hideTip();
+}
+
+/* ================= ② 学字词 ================= */
+var stepsWord=[
+  {id:'zinGrid', say:'先读 15 个会认字。这些字只要认得、读得出就行。', lead:true},
+  {id:'ziwGrid', say:'下面是 7 个会写字。这些字不但要认得，还要会写，注意听每一条的书写提示。', lead:true}
+];
+
+/* ================= ③ 词语·听写 ================= */
+var dictWords=[
+  {w:'鲜花', eg:'示范句：门前开着一大片五颜六色的鲜花。'},
+  {w:'原来', eg:'示范句：原来，包裹破了，里面的东西不见了。'},
+  {w:'大叔', eg:'示范句：长颈鹿大叔给鼹鼠先生寄来了一个包裹。'},
+  {w:'通往', eg:'示范句：通往松鼠太太家的路，成了一条开满鲜花的小路。'},
+  {w:'正巧', eg:'示范句：鼹鼠先生路过刺猬太太家，正巧，刺猬太太走出门。'},
+  {w:'惊奇', eg:'示范句：她惊奇地说，多美啊！'},
+  {w:'礼物', eg:'示范句：这是多么美好的礼物啊！'},
+  {w:'包裹', eg:'示范句：邮递员黄狗在门口喊，鼹鼠先生，您的包裹单！'},
+  {w:'懊丧', eg:'示范句：鼹鼠先生很懊丧。'},
+  {w:'花籽', eg:'示范句：去年长颈鹿大叔寄给您的是花籽。'}
+];
+var stepsWord2=[
+  {id:'w1', say:'先读课后第一题：分角色朗读课文。这一课有黄狗、鼹鼠先生和三位太太，还有旁白。'},
+  {id:'w2', say:'课后第二题：读一读，注意加点的部分，再看看课文插图，照样子说一说。'},
+  {id:'w3', say:'课本例句：门前开着一大片五颜六色的鲜花。加点的部分，一半说有多少，一半说是什么样的。'},
+  {id:'w4', say:'第一条仿说：房子旁边。答案不唯一，比如房子旁边长着一大片绿油油的小草。'},
+  {id:'w5', say:'第二条仿说：山坡上。答案不唯一，比如山坡上开着一大片粉红色的野花。'},
+  {id:'w6', say:'课后第三题：为什么说花籽是美好的礼物？生活中还有什么也是美好的礼物？'},
+  {id:'n1', say:'下面听四组近义词。第一组：惊奇和奇怪。'},
+  {id:'n2', say:'第二组：绚丽多彩和五颜六色。'},
+  {id:'n3', say:'第三组：赶紧和连忙。'},
+  {id:'n4', say:'第四组：懊丧和难过。'},
+  {id:'a1', say:'最后是词语拓展：一大片什么样的、写花的样子、语气词啊，还有照样子说一处。'}
+];
+
+/* ================= ④ 深入理解 ================= */
+var stepsQa=[
+  {id:'q1', say:'第一题，认知：谁给鼹鼠先生寄来了包裹？包裹里原来是什么？后来为什么不见了？想一想。'},
+  {id:'q2', say:'第二题，认知：一路上哪几位太太门前开了鲜花？她们分别说了什么？想一想。'},
+  {id:'q3', say:'第三题，理解：鼹鼠先生为什么很懊丧？后来那条小路为什么开满鲜花？想一想。'},
+  {id:'q4', say:'第四题，理解：课后第三题，为什么说长颈鹿大叔寄来的花籽是美好的礼物？想一想。'},
+  {id:'q5', say:'第五题，理解：刺猬太太惊奇地说，狐狸太太奇怪地问，这两个词能不能换一换？想一想。'},
+  {id:'q6', say:'第六题，运用：课后第二题，看看课文插图，照样子说一说。答案不唯一。想一想。'},
+  {id:'q7', say:'第七题，运用：课后第一题，分角色朗读课文，怎样读好每个人说的话？答案不唯一。想一想。'},
+  {id:'q8', say:'最后一题，拓展：生活中还有什么也是美好的礼物？你想送给谁？答案不唯一。想一想。'}
+];
+
+/* ================= ⑤ 讲故事·分角色 ================= */
+var stepsStory=[{id:'g1'},{id:'g2'},{id:'g3'},{id:'g4'},{id:'g5'}];
+var stepsRole=[{id:'r1'},{id:'r2'},{id:'r3'},{id:'r4'},{id:'r5'},{id:'r6'},{id:'r7'},{id:'r8'},{id:'r9'},{id:'r10'}];
+
+/* ================= 按钮状态 ================= */
+var btns=['btnStep1','btnStep2','btnStep3','btnStep4','btnStep5'].map(function(i){ return document.getElementById(i); });
+function lock(on){ btns.forEach(function(b){ b.disabled=on; }); }
+
+/* ================= ① 听读课文 ================= */
+async function playRead(){
+  abort=false;
+  lock(true);
+  await speak('先听老师读要求：读准字音，不添字不漏字；逗号稍停，句号停得长一点；问句读出问的语气；分角色朗读时，黄狗是喊、鼹鼠先生是请教、三位太太又惊又喜，每个人说话的语气都不一样。');
+  await wait(300);
+  for(var i=0;i<stepsRead.length;i++){
+    if(abort) break;
+    var s=stepsRead[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(follow){ await followWait(s.say); if(abort) break; }
+    if(s.think){
+      await imgThinkWait(s.think);
+      if(abort) break;
+      showImgAns(s.ans);
+      await wait(400);
+      if(abort) break;
+      await speak(s.ans);
+      if(abort) break;
+      await wait(600);
+      clearImgAns();
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; clearImgAns(); hideTip();
+  lock(false);
+}
+
+/* ================= ② 学字词 ================= */
+async function playWord(){
+  abort=false;
+  lock(true);
+  await wait(300);
+  for(var i=0;i<stepsWord.length;i++){
+    if(abort) break;
+    var s=stepsWord[i];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    var cards = el ? Array.prototype.slice.call(el.querySelectorAll('.zi')) : [];
+    unhl();
+    for(var k=0;k<cards.length;k++){
+      if(abort) break;
+      var c=cards[k];
+      hl(c); __scrollTo(c);
+      await speak(c.getAttribute('data-say')||c.textContent);
+      if(abort) break;
+      await wait(120);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ③ 词语·听写·造句·近义词 ================= */
+var dictStage=document.getElementById('dictStage');
+var dictWord=document.getElementById('dictWord');
+var dictHint=document.getElementById('dictHint');
+
+function setDict(i, masked, hint, word){
+  dictStage.textContent = (i>0 ? ('第 '+i+' 个 / 共 '+dictWords.length+' 个') : '准备听写 · 共 '+dictWords.length+' 个词');
+  if(masked){ dictWord.classList.add('mask'); dictWord.textContent='○ ○ ○'; }
+  else{ dictWord.classList.remove('mask'); dictWord.textContent=word||''; }
+  dictHint.textContent=hint||'';
+}
+async function playDict(){
+  abort=false;
+  lock(true);
+  setDict(0,true,'点下面的「开始听写」，听到一个词就写一个词。');
+  await speak('下面开始听写，一共十个词。每个词读两遍，听完就在纸上写一个。写完点「看答案」，也可以等几秒钟自动出答案。');
+  if(abort){ lock(false); return; }
+  await wait(600);
+  for(var i=0;i<dictWords.length;i++){
+    if(abort) break;
+    var d=dictWords[i];
+    dictSkip=false;
+    setDict(i+1,true,'✏️ 听到就写下来…');
+    await speak('第 '+(i+1)+' 个。'+d.w+'。'+d.w+'。');
+    if(abort) break;
+    await wait(6000, function(){ return dictSkip; });       /* 写词时间，可点「看答案」提前 */
+    if(abort) break;
+    setDict(i+1,false,'答案是：'+d.w, d.w);
+    await speak('答案是：'+d.w+'。');
+    if(abort) break;
+    await wait(500);
+    if(abort) break;
+    await speak(d.eg);                                       /* 顺带听一句示范造句 */
+    if(abort) break;
+    await wait(900);
+  }
+  if(!abort){
+    setDict(0,false,'✅ 听写完了','听写完了！');
+    await speak('十个词听写完了。点开下面的词语卡，可以再听一遍词语和示范句，自己也试着说一句。');
+  }
+  /* 再读词语积累、近义词、拓展 */
+  for(var j=0;j<stepsWord2.length;j++){
+    if(abort) break;
+    var s=stepsWord2[j];
+    var el=document.getElementById(s.id);
+    if(el){ hl(el); __scrollTo(el); }
+    await speak(s.say);
+    if(abort) break;
+    if(s.id.indexOf('n')===0){
+      await speak(el.getAttribute('data-say')||'');
+      if(abort) break;
+    }
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ④ 深入理解 ================= */
+async function playQa(){
+  abort=false;
+  lock(true);
+  for(var i=0;i<stepsQa.length;i++){
+    if(abort) break;
+    var s=stepsQa[i];
+    var qa=document.getElementById(s.id);
+    if(!qa) continue;
+    focusEl(qa);
+    await wait(400);
+    if(abort) break;
+    await speak(s.say);
+    if(abort) break;
+    closeAnswer(qa);
+    await think(qa);
+    if(abort) break;
+    openAnswer(qa);
+    await wait(350);
+    if(abort) break;
+    await speak(qa.getAttribute('data-ans')||'');
+    if(abort) break;
+    unhl();
+    await wait(250);
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+/* ================= ⑤ 讲故事·分角色 ================= */
+async function playStory(){
+  abort=false;
+  lock(true);
+  await speak('先借助课本插图，按顺序讲讲这个故事。可以用上先、再、接着、最后这几个词。');
+  if(abort){ lock(false); return; }
+  for(var i=0;i<stepsStory.length;i++){
+    if(abort) break;
+    var s=stepsStory[i];
+    var el=document.getElementById(s.id);
+    if(!el) continue;
+    hl(el); __scrollTo(el);
+    await speak(el.getAttribute('data-say')||'');
+    if(abort) break;
+    await wait(300);
+  }
+  if(abort){ unhl(); cap.style.display='none'; lock(false); return; }
+  unhl();
+  await speak('讲完了。下面分角色朗读课文，注意每个人说话的语气不一样。');
+  if(abort){ cap.style.display='none'; lock(false); return; }
+  for(var k=0;k<stepsRole.length;k++){
+    if(abort) break;
+    var r=document.getElementById(stepsRole[k].id);
+    if(!r) continue;
+    hl(r); __scrollTo(r);
+    var name=r.getAttribute('data-role')||'';
+    var lines=(r.getAttribute('data-lines')||'').split('|');
+    await speak('现在请'+name+'来读。'+ (r.querySelector('.r-m')?r.querySelector('.r-m').textContent.replace('💬 ',''):''));
+    if(abort) break;
+    for(var m=0;m<lines.length;m++){
+      if(abort) break;
+      if(!lines[m]) continue;
+      await speak(lines[m]);
+      if(abort) break;
+      await wait(350);
+    }
+    unhl();
+  }
+  unhl(); cap.style.display='none'; lock(false);
+}
+
+document.getElementById('btnStep1').addEventListener('click',playRead);
+document.getElementById('btnStep2').addEventListener('click',playWord);
+document.getElementById('btnStep3').addEventListener('click',playDict);
+document.getElementById('btnStep4').addEventListener('click',playQa);
+document.getElementById('btnStep5').addEventListener('click',playStory);
+
+document.getElementById('btnStop').addEventListener('click',function(){
+  abort=true; if(synth) synth.cancel();
+  document.querySelectorAll('.think-pill').forEach(function(p){ p.style.display='none'; });
+  hideTip(); unhl(); cap.style.display='none'; clearImgAns();
+  lock(false);
+});
+
+/* 手动点题 */
+async function askQA(id){  /* RA-ASKQA-FIXED：abort 打断后必须复位 */
+  var qa=document.getElementById(id);
+  if(!qa) return;
+  if(qa.classList.contains('open')){
+    abort=true; if(synth) synth.cancel(); unhl(); try{ cap.style.display='none'; }catch(e){}
+    closeAnswer(qa); return;
+  }
+  abort=true; if(synth) synth.cancel();
+  await wait(150);
+  abort=false;
+  focusEl(qa);
+  var qtext=qa.querySelector('.q-text').textContent;
+  await speak(qtext);
+  if(abort) return;
+  closeAnswer(qa);
+  await think(qa);
+  if(abort) return;
+  openAnswer(qa);
+  await wait(300);
+  if(abort) return;
+  await speak(qa.getAttribute('data-ans')||'');
+  if(abort) return;
+  unhl(); try{ cap.style.display='none'; }catch(e){}
+}
+
+/* 句级点读：点哪句读哪句；读完把朗读提示显示出来（点提示可再听） */
+document.querySelectorAll('.para .sent').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var tip=el.getAttribute('data-tip');
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){
+      if(tip) showTip(tip);
+    });
+  });
+});
+/* 点段前序号 → 读整段 */
+document.querySelectorAll('.para .no').forEach(function(el){
+  el.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    abort=true; if(synth) synth.cancel();
+    var para=el.parentNode;
+    hl(para);
+    speak(para.getAttribute('data-say')||para.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 通用点读：教材图 / 词语行 / 成长顺序 / 近义词 / 朗读要求
+   注意：词语拓展 .acc 不放进 id 列表，改由下方 querySelectorAll('.acc') 动态绑定，
+   这样新增拓展组（a5、a6…）无需再改这里，避免「新增了却点不出声」。 */
+['pic1','pic2','pic3','w1','w2','w3','w4','w5','w6','g1','g2','g3','g4','g5','n1','n2','n3','n4','req1','mapUnit','srcNote','lightNote','hwText','storyTip'
+].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 词语拓展卡点读：动态绑定所有 .acc（新增组自动生效） */
+document.querySelectorAll('.acc').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 生字卡点读 */
+document.querySelectorAll('.zi').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    speak(el.getAttribute('data-say')||el.textContent).then(function(){ unhl(); });
+  });
+});
+
+/* 角色卡点读：读角色名 + 语气提示 + 逐句台词 */
+document.querySelectorAll('.role').forEach(function(el){
+  el.addEventListener('click',function(){
+    abort=true; if(synth) synth.cancel();
+    hl(el);
+    var name=el.getAttribute('data-role')||'';
+    var lines=(el.getAttribute('data-lines')||'').split('|');
+    speak('现在请'+name+'来读。').then(function(){
+      var i=0;
+      function nx(){
+        if(abort||i>=lines.length){ unhl(); return; }
+        speak(lines[i++]).then(function(){ setTimeout(nx,350); });
+      }
+      nx();
+    });
+  });
+});
+
+/* 词语卡点读（词 / 示范句 / 说话支架） */
+document.querySelectorAll('.wc').forEach(function(card){
+  card.querySelectorAll('[data-say]').forEach(function(el){
+    el.addEventListener('click',function(ev){
+      ev.stopPropagation();
+      abort=true; if(synth) synth.cancel();
+      hl(card);
+      speak(el.getAttribute('data-say')||'').then(function(){ unhl(); });
+    });
+  });
+});
+
+/* 跟读模式开关 */
+document.getElementById('btnFollow').addEventListener('click',function(){
+  follow=!follow;
+  this.textContent = follow ? '🔁 跟读模式：开' : '🔁 跟读模式：关';
+  this.classList.toggle('on', follow);
+  speak(follow ? '跟读模式打开了。我读一句，你跟着读一句。' : '跟读模式关闭了。');
+});
+
+/* 听写按钮 */
+document.getElementById('btnDictStart').addEventListener('click',function(){
+  abort=false; playDict();
+});
+document.getElementById('btnDictAgain').addEventListener('click',function(){
+  var i=parseInt((dictStage.textContent.match(/第\s*(\d+)\s*个/)||[])[1]||0);
+  var d=dictWords[i-1];
+  if(d) speak(d.w+'。'+d.w+'。');
+  else speak('先点开始听写。');
+});
+document.getElementById('btnDictShow').addEventListener('click',function(){
+  dictSkip=true;
+});
+
+/* 隐藏 / 显示注音 */
+document.getElementById('btnPy').addEventListener('click',function(){
+  var on=document.body.classList.toggle('no-py');
+  this.textContent = on ? '👁 显示注音' : '👁 隐藏注音（自测用）';
+  this.classList.toggle('on', on);
+});
+</script>
+<a class="back-nav" href="../index.html">← 返回导航</a>
+</body>
+</html>
