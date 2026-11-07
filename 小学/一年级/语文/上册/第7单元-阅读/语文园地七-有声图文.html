@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>语文园地七 · 有声图文课件</title>
+<style>
+  :root{
+    --main:#1565c0; --main2:#42a5f5; --dark:#0d47a1;
+    --sky:#0277bd; --hl:#f9a825; --ink:#33302c; --line:#e6ded4;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fbf9f4; color:var(--ink);
+    padding-bottom:120px; -webkit-text-size-adjust:100%; }
+  .container{ max-width:900px; margin:0 auto; padding:14px 14px 30px; }
+
+  .cover{ position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#e8973a 0%,#f2b04e 55%,#f8cd82 100%);
+    color:#fff; border-radius:16px; padding:20px 20px 16px; margin-bottom:12px; }
+  .cover::after{ content:""; position:absolute; right:-40px; top:-50px; width:190px; height:190px;
+    background:radial-gradient(circle,rgba(255,255,255,.2),transparent 70%); border-radius:50%; }
+  .cover .u-tag{ display:inline-block; font-size:12.5px; background:rgba(255,255,255,.25);
+    border-radius:999px; padding:3px 12px; margin-bottom:8px; }
+  .cover h1{ font-size:25px; letter-spacing:1px; margin-bottom:6px; text-shadow:0 1px 3px rgba(150,80,0,.25); }
+  .cover .sub{ font-size:13.5px; opacity:.97; line-height:1.85; }
+  .cover .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+  .cover .chip{ font-size:12.5px; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:3px 11px; }
+
+  .map{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:12px 0 4px; }
+  .map a{ display:block; text-decoration:none; color:inherit; background:#fff;
+    border:1.5px solid var(--line); border-radius:12px; padding:9px 6px; text-align:center;
+    transition:border-color .22s, transform .22s; }
+  .map a:hover{ border-color:var(--main2); transform:translateY(-2px); }
+  .map a.cur{ border-color:var(--main); background:#f0f6ff; }
+  .map .m-no{ font-size:11px; color:#8d6e63; }
+  .map .m-t{ font-size:13px; font-weight:bold; margin-top:2px; color:var(--dark); }
+
+  .hint{ background:#fff3e0; border:1px dashed #ffcc80; border-radius:11px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-bottom:10px; }
+  .hint b{ color:#bf6a1c; }
+
+  .navi{ position:sticky; top:0; z-index:900; background:rgba(251,249,244,.97);
+    padding:8px 0 9px; margin-bottom:2px; border-bottom:1px dashed #dcd3c8;
+    display:flex; gap:6px; flex-wrap:wrap; overflow:hidden; }
+  .navi::-webkit-scrollbar{ display:none; }
+  .navi a{ flex:0 0 auto; text-decoration:none; font-size:12.5px; color:var(--main);
+    background:#fff; border:1.5px solid #cfe0f3; border-radius:999px; padding:4px 10px; white-space:nowrap; }
+  .navi a:active,.navi a.on{ background:var(--main); color:#fff; border-color:var(--main); }
+
+  .block{ margin-top:16px; }
+  .sec-title{ display:flex; align-items:center; gap:9px; font-size:17.5px; font-weight:bold;
+    color:var(--main); margin:0 0 9px; flex-wrap:wrap; }
+  .sec-title .bar{ width:6px; height:20px; background:var(--main); border-radius:3px; flex:0 0 auto; }
+  .sec-title .pg{ font-size:11.5px; font-weight:normal; color:#8d6e63;
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:1px 8px; }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  .say{ cursor:pointer; border-radius:5px; transition:background .18s, box-shadow .18s; }
+  .say:hover{ background:#fff8e1; }
+  .say.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.32); }
+
+  .bubble{ background:#fff8e1; border:1.5px solid #ffe082; border-radius:12px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-top:10px; color:#795548; cursor:pointer; }
+  .bubble b{ color:#e65100; }
+
+  /* ① 课文段落 */
+  .story{ background:#fff; border:1.5px solid var(--line); border-radius:13px; padding:18px 16px; }
+  .story .s-title{ text-align:center; font-size:24px; font-weight:bold; font-family:"KaiTi","STKaiti",serif; margin-bottom:6px; }
+  .story .s-para{ font-family:"KaiTi","STKaiti",serif; font-size:21px; line-height:2.15;
+    letter-spacing:1px; cursor:pointer; border-radius:6px; padding:2px 4px; text-indent:2em; position:relative; }
+  .story .s-para.hl{ background:#fff59d; }
+  .story .s-num{ position:absolute; left:0; top:2px; width:1.6em; height:1.6em; line-height:1.6em;
+    text-align:center; background:#e3f2fd; color:var(--dark); border-radius:50%;
+    font-size:12px; font-family:"Microsoft YaHei",sans-serif; text-indent:0; }
+  .story .s-note{ color:#8d6e63; font-size:13px; font-family:"Microsoft YaHei",sans-serif; letter-spacing:0; margin-top:10px; }
+  ruby{ ruby-align:center; }
+  rt{ font-size:10.5px; color:#c62828; font-family:"Segoe UI",Arial,sans-serif; letter-spacing:0; }
+
+  .recite{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .recite button{ flex:1; min-width:120px; border:1.5px solid #b2dfdb; background:#fff; color:var(--main);
+    border-radius:10px; padding:9px 10px; font-size:13px; cursor:pointer; font-family:inherit; }
+  .recite button:hover{ background:#e0f2f1; }
+
+  /* ② 会认字卡 */
+  .zi-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+  .zi{ background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:8px 4px 10px; text-align:center; cursor:pointer; transition:border-color .2s; }
+  .zi:hover{ border-color:#ffcc80; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; }
+  .zi .py{ font-size:11.5px; color:#c62828; height:15px; font-family:"Segoe UI",Arial,sans-serif; }
+  .zi .hz{ font-family:"KaiTi","STKaiti",serif; font-size:31px; line-height:1.22; }
+  .zi .ci{ font-size:11px; color:#6d4c41; margin-top:2px; }
+  .zi.write{ border-color:#b2dfdb; background:#f4fbfa; }
+  .zi-grid.two{ grid-template-columns:repeat(4,1fr); }
+
+  .pat{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 13px; margin-top:9px; }
+  .pat .p-lab{ font-size:11.5px; color:var(--main); background:#e3f2fd; border-radius:5px;
+    padding:1px 8px; display:inline-block; margin-bottom:5px; }
+  .pat .p-s{ font-family:"KaiTi","STKaiti",serif; font-size:19px; line-height:2.0; letter-spacing:2px; }
+  .pat .p-s b{ color:#c62828; font-size:13px; font-family:"Microsoft YaHei",sans-serif; letter-spacing:0; vertical-align:middle; }
+
+  .tzg{ width:52px; height:52px; margin:1px auto 3px; position:relative;
+    border:1.5px solid #d84315; border-radius:3px; background:#fff; }
+  .tzg::before{ content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+    background-image:linear-gradient(to right,#f0bdb4 45%,transparent 45%);
+    background-size:6px 1px; background-repeat:repeat-x; }
+  .tzg::after{ content:""; position:absolute; top:0; bottom:0; left:50%; width:1px;
+    background-image:linear-gradient(to bottom,#f0bdb4 45%,transparent 45%);
+    background-size:1px 6px; background-repeat:repeat-y; }
+  .tzg i{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:32px; font-style:normal; }
+
+  /* ③ 「一」变调卡 */
+  .tone-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-top:9px; }
+  .tone{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:12px 6px 10px;
+    text-align:center; cursor:pointer; }
+  .tone:hover{ border-color:#ffcc80; }
+  .tone.hl{ border-color:var(--hl); background:#fffde7; }
+  .tone .to-w{ font-family:"KaiTi","STKaiti",serif; font-size:22px; font-weight:bold; }
+  .tone .to-py{ font-family:"Segoe UI",Arial,sans-serif; font-size:13px; color:#c62828; margin-top:3px; }
+  .tone .to-b{ display:inline-block; font-size:11px; border-radius:999px; padding:2px 10px; margin-top:5px; color:#fff; }
+  .tone .b1{ background:#42a5f5; }
+  .tone .b2{ background:#ab47bc; }
+  .tone .b4{ background:#ef6c61; }
+
+  /* ④ 数自然段 */
+  .para-btns{ display:flex; gap:8px; flex-wrap:wrap; margin-top:9px; }
+  .para-btn{ background:#fff; border:1.5px solid #cfe0f3; border-radius:10px; padding:8px 16px;
+    font-size:14px; cursor:pointer; color:var(--dark); font-family:inherit; }
+  .para-btn:hover{ background:#f1f8ff; }
+
+  .quiz-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; align-items:start; }
+  .q{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 12px; }
+  .q.right{ border-color:#66bb6a; background:#f1f8e9; }
+  .q.wrong{ border-color:#ef9a9a; background:#ffebee; }
+  .q .q-t{ font-size:13.5px; line-height:1.75; cursor:pointer; border-radius:5px; }
+  .q .q-t b{ color:var(--main); }
+  .q .opts{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+  .q .opt{ border:1.5px solid #e0e0e0; border-radius:9px; padding:8px 10px; font-size:13.5px;
+    cursor:pointer; line-height:1.6; background:#fafafa; transition:border-color .18s, background .18s; }
+  .q .opt:hover{ border-color:#90caf9; background:#f1f8ff; }
+  .q .opt.ok{ border-color:#66bb6a; background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .q .opt.no{ border-color:#ef5350; background:#ffebee; color:#b71c1c; }
+  .q .exp{ display:none; font-size:12px; color:#4527a0; background:#ede7f6; border-radius:7px; padding:6px 9px; margin-top:7px; line-height:1.7; }
+  .q.done .exp{ display:block; }
+  .score{ margin-top:10px; text-align:center; font-size:14px; color:var(--main);
+    background:#e3f2fd; border:1px dashed #90caf9; border-radius:11px; padding:10px; }
+
+  .pic-grid{ display:grid; grid-template-columns:1fr; gap:9px; }
+  .pic{ background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:7px; text-align:center;
+    cursor:pointer; box-shadow:0 2px 10px rgba(62,39,35,.10); }
+  .pic img{ width:100%; display:block; border-radius:6px; }
+  .pic .cap{ font-size:11.5px; color:#5d4037; margin-top:5px; }
+  #lb{ position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:2000; display:none;
+    align-items:center; justify-content:center; padding:10px; cursor:zoom-out; }
+  #lb img{ max-width:100%; max-height:100%; border-radius:6px; }
+
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(13,71,161,.97);
+    display:flex; gap:7px; align-items:center; justify-content:center; padding:10px 10px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:8px 13px; font-size:13.5px; cursor:pointer;
+    background:#fff; color:var(--main); font-weight:bold; font-family:inherit; }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:62px; max-width:92%;
+    background:rgba(38,50,56,.93); color:#fff; border-radius:10px; padding:7px 15px;
+    font-size:14.5px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  .back-nav{ position:fixed; right:12px; bottom:60px; z-index:1200;
+    background:rgba(13,71,161,.93); color:#fff; border-radius:999px; padding:7px 16px; font-size:13px; text-decoration:none; }
+
+  @media (max-width:620px){
+    .cover h1{ font-size:20px; }
+    .navi{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+    .map{ grid-template-columns:repeat(2,1fr); }
+    .zi-grid{ grid-template-columns:repeat(4,1fr); }
+    .zi-grid.two{ grid-template-columns:repeat(2,1fr); }
+    .tone-grid{ grid-template-columns:repeat(2,1fr); }
+    .quiz-grid{ grid-template-columns:1fr; }
+    .story .s-para{ font-size:19px; }
+    .ctrl-bar button{ padding:7px 10px; font-size:12.5px; }
+    #cap{ bottom:104px; }
+  }
+  @media (min-width:900px){ #sndTip{ display:none; } }
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+  }
+  @media print{ .ctrl-bar,#cap,.back-nav,.navi,#sndTip{ display:none !important; } body{ padding-bottom:0; } }
+:root{ --main:#00695c; --main2:#4db6ac; --dark:#004d40; }
+  .cover{ background:linear-gradient(135deg,#00897b 0%,#4db6ac 55%,#d7f5ef 100%); }
+  .cover h1{ text-shadow:0 1px 3px rgba(0,55,45,.28); }
+  /* 桌面端胶囊导航换行，避免最后一项被裁掉 */
+  .navi{ flex-wrap:wrap; }
+  @media (max-width:620px){ .navi{ flex-wrap:nowrap; overflow-x:auto; } }
+  /* 古诗 / 故事副标题（骨架未定义，此处补齐） */
+  .s-sub{ text-align:center; font-size:15px; color:#6d4c41; margin:2px 0 10px; letter-spacing:1px; cursor:pointer; }
+  .s-sub.hl{ background:#fff59d; border-radius:6px; }
+  /* ① 家人称呼：三行彩色胶囊（配色照课本绿 / 橙 / 蓝） */
+  .fam-row{ margin-top:9px; border-radius:14px; padding:11px 10px 12px; }
+  .fam-row.f1{ background:#f1f8e9; border:1.5px solid #aed581; }
+  .fam-row.f2{ background:#fff3e0; border:1.5px solid #ffcc80; }
+  .fam-row.f3{ background:#e3f2fd; border:1.5px solid #90caf9; }
+  .fam-row .fr-h{ font-size:12.5px; font-weight:bold; margin-bottom:7px; color:#4e342e; }
+  .fam-row.f1 .fr-h{ color:#33691e; }
+  .fam-row.f2 .fr-h{ color:#e65100; }
+  .fam-row.f3 .fr-h{ color:#1565c0; }
+  .fam-row .fr-g{ display:grid; gap:8px; }
+  .fam-row.f1 .fr-g,.fam-row.f3 .fr-g{ grid-template-columns:repeat(4,1fr); }
+  .fam-row.f2 .fr-g{ grid-template-columns:repeat(6,1fr); }
+  .fam{ background:#fff; border:1.5px solid rgba(0,0,0,.07); border-radius:11px;
+    padding:8px 3px 7px; text-align:center; cursor:pointer; }
+  .fam:hover{ background:#fffde7; }
+  .fam.hl{ background:#fff59d; border-color:#f9a825; }
+  .fam .fm-py{ font-family:"Segoe UI",Arial,sans-serif; font-size:11px; color:#c62828; height:15px; }
+  .fam .fm-w{ font-family:"KaiTi","STKaiti",serif; font-size:23px; color:#263238; letter-spacing:2px; }
+  /* 女字旁提示卡 */
+  .rad-tip{ margin-top:10px; background:#fff; border:1.5px dashed #4db6ac; border-radius:13px;
+    padding:11px 13px; display:flex; align-items:center; gap:13px; cursor:pointer; flex-wrap:wrap; }
+  .rad-tip .rt-z{ width:60px; height:60px; line-height:60px; text-align:center; flex:0 0 auto;
+    font-family:"KaiTi","STKaiti",serif; font-size:38px; color:#c62828;
+    background:#e0f2f1; border:1.5px solid #80cbc4; border-radius:9px; }
+  .rad-tip .rt-b{ font-size:12.5px; color:#3e2723; line-height:1.75; flex:1; min-width:200px; }
+  /* 会认 5 字 / 会写 2 字：按张数定列数，末行不落单 */
+  #ziGrid{ grid-template-columns:repeat(5,1fr); }
+  .zi-grid.two{ grid-template-columns:repeat(2,1fr); }
+  /* ② 比一比写一写：4 组形近字 */
+  .bj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-top:9px; }
+  .bj{ background:#fff; border:1.5px solid #b2dfdb; border-radius:13px; padding:11px 12px; cursor:pointer; }
+  .bj:hover{ background:#e0f2f1; }
+  .bj.hl{ background:#fff59d; border-color:#f9a825; }
+  .bj .bj-h{ font-size:12px; color:#00695c; font-weight:bold; margin-bottom:8px; }
+  .bj .bj-pair{ display:flex; gap:12px; justify-content:center; }
+  .bj .tz{ width:52px; height:52px; line-height:52px; text-align:center; background:#fff;
+    border:1.5px solid #80cbc4; border-radius:4px; font-family:"KaiTi","STKaiti",serif;
+    font-size:31px; color:#004d40;
+    background-image:linear-gradient(to right,transparent 49%,#c8e6e9 49%,#c8e6e9 51%,transparent 51%),
+                     linear-gradient(to bottom,transparent 49%,#c8e6e9 49%,#c8e6e9 51%,transparent 51%); }
+  .bj .tz.red{ color:#e53935; }
+  .bj .bj-b{ font-size:11.5px; color:#4e342e; line-height:1.65; margin-top:8px; }
+  /* ③ 我的发现：两组字 */
+  .find-row{ margin-top:9px; background:#fff; border:1.5px solid #cfd8dc; border-radius:13px; padding:11px; }
+  .find-row .fd-h{ font-size:12.5px; font-weight:bold; color:#00695c; margin-bottom:8px; }
+  .find-row .fd-g{ display:flex; gap:9px; justify-content:center; flex-wrap:wrap; }
+  .find-row .fz{ width:62px; text-align:center; border-radius:10px; padding:8px 0; cursor:pointer;
+    font-family:"KaiTi","STKaiti",serif; font-size:29px; }
+  .find-row.g1 .fz{ background:#e8f5e9; border:1.5px solid #a5d6a7; color:#1b5e20; }
+  .find-row.g2 .fz{ background:#fce4ec; border:1.5px solid #f48fb1; color:#880e4f; }
+  .find-row .fz:hover,.find-row .fz.hl{ background:#fff59d; }
+  .find-row .fd-b{ font-size:11.5px; color:#546e7a; margin-top:8px; line-height:1.6; }
+  /* ④ 方向歌：逐行点读 + 十字方向图 */
+  .dir-song{ background:#fffdf7; border:1.5px solid #d7ccc8; border-radius:13px; padding:14px; margin-top:9px; }
+  .dir-song .ds-l{ text-align:center; font-family:"KaiTi","STKaiti",serif; font-size:24px;
+    line-height:2.0; letter-spacing:3px; cursor:pointer; border-radius:6px; }
+  .dir-song .ds-l.hl{ background:#fff59d; }
+  .dir-song .ds-l small{ display:block; font-family:"Segoe UI",Arial,sans-serif;
+    font-size:10.5px; color:#8d6e63; letter-spacing:0; }
+  .dir-cross{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:11px; }
+  .dir-cross .dc{ background:#e0f2f1; border:1.5px solid #80cbc4; border-radius:9px;
+    padding:9px 3px; text-align:center; font-size:13px; color:#004d40; cursor:pointer; }
+  .dir-cross .dc:hover,.dir-cross .dc.hl{ background:#fff59d; }
+  .dir-cross .dc.me{ background:#fff8e1; border-color:#ffd54f; font-weight:bold; }
+  .dir-cross .dc b{ display:block; font-family:"KaiTi","STKaiti",serif; font-size:20px; }
+  /* ⑤ 日积月累：4 句谚语 */
+  .say-box{ background:#fffdf7; border:1.5px solid #ffe0b2; border-radius:13px; padding:13px; margin-top:9px; }
+  .say-l{ text-align:center; cursor:pointer; border-radius:8px; padding:8px 4px; }
+  .say-l.hl{ background:#fff59d; }
+  .say-l .sl-h{ font-family:"KaiTi","STKaiti",serif; font-size:23px; letter-spacing:2px; color:#3e2723; }
+  .say-l .sl-p{ font-family:"Segoe UI",Arial,sans-serif; font-size:10.5px; color:#a1887f; letter-spacing:0; margin-top:2px; }
+  .say-l .sl-b{ font-size:11.5px; color:#6d4c41; margin-top:4px; line-height:1.6; }
+  /* ⑥ 口语交际：三张场景卡 */
+  .voice-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:9px; }
+  .voice{ background:#fff; border:1.5px solid #b0bec5; border-radius:13px; padding:12px 9px;
+    text-align:center; cursor:pointer; }
+  .voice:hover{ background:#eceff1; }
+  .voice.hl{ background:#fff59d; border-color:#f9a825; }
+  .voice .v-e{ font-size:31px; display:block; }
+  .voice .v-h{ font-size:13.5px; font-weight:bold; color:#37474f; margin:4px 0 6px; }
+  .voice .v-q{ font-size:12px; color:#3e2723; line-height:1.6; min-height:38px; }
+  .voice .v-badge{ display:inline-block; border-radius:20px; padding:3px 12px; font-size:12px;
+    font-weight:bold; color:#fff; margin-top:6px; }
+  .voice .v-badge.low{ background:#1565c0; }
+  .voice .v-badge.mid{ background:#ef6c00; }
+  .voice .v-badge.high{ background:#c62828; }
+  .voice .v-r{ font-size:11.5px; color:#546e7a; line-height:1.6; margin-top:7px; }
+  /* ⑦ 猴子捞月亮：故事段落 + 顺序卡 */
+  .story .s-para.hp{ font-size:19px; line-height:2.05; text-indent:2em; }
+  .seq-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:9px; }
+  .seq{ background:#e0f2f1; border:1.5px solid #80cbc4; border-radius:12px;
+    padding:10px 6px; text-align:center; cursor:pointer; }
+  .seq:hover,.seq.hl{ background:#fff59d; }
+  .seq .sq-n{ display:inline-block; width:22px; height:22px; line-height:22px; border-radius:50%;
+    background:#00695c; color:#fff; font-size:12px; font-weight:bold; }
+  .seq .sq-t{ font-size:12px; color:#004d40; line-height:1.6; margin-top:6px; }
+  @media (max-width:620px){
+    .fam-row.f1 .fr-g,.fam-row.f3 .fr-g{ grid-template-columns:repeat(2,1fr); }
+    .fam-row.f2 .fr-g{ grid-template-columns:repeat(3,1fr); }
+    .bj-grid{ grid-template-columns:1fr; }
+    .voice-grid,.seq-grid{ grid-template-columns:1fr; }
+    .dir-song .ds-l{ font-size:20px; }
+    .say-l .sl-h{ font-size:19px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="cover">
+    <span class="u-tag">统编版 · 一年级上册 · 第七单元 · 语文园地七</span>
+    <h1>语文园地七</h1>
+    <p class="sub">介绍我的家人、比一比写一写、发现偏旁的秘密、背方向歌、4 句谚语、用多大的声音说话、猴子捞月亮。<br>课本第 90~94 页，会认 5 字 · 会写 2 字</p>
+    <div class="chips"><span class="chip">家人称呼 14 个</span><span class="chip">会认 5 字</span><span class="chip">会写 2 字</span><span class="chip">日积月累 4 句</span><span class="chip">口语交际</span><span class="chip">和大人一起读</span><span class="chip">闯关 8 题</span></div>
+  </div>
+
+  <div class="map">
+    <a href="课文5-小小的船-有声图文.html"><div class="m-no">课文 5</div><div class="m-t">小小的船</div></a>
+    <a href="课文6-影子-有声图文.html"><div class="m-no">课文 6</div><div class="m-t">影子</div></a>
+    <a href="课文7-两件宝-有声图文.html"><div class="m-no">课文 7</div><div class="m-t">两件宝</div></a>
+    <a class="cur" href="语文园地七-有声图文.html"><div class="m-no">园地</div><div class="m-t">语文园地七</div></a>
+  </div>
+
+  <div class="hint">
+    <b>这个园地学什么：</b>用 <b>14 个家人称呼</b>介绍自己的家人，认 5 个字、写好「爸、妈」；
+    比一比 <b>4 组形近字</b>；发现<b>日字旁和女字旁</b>的秘密；背<b>方向歌</b>、记 <b>4 句谚语</b>；
+    学会<b>什么时候大声、什么时候小声</b>；再和大人一起读《猴子捞月亮》。🐒
+    <br><span style="font-size:12px;color:#6d4c41">页面上的拼音照课本标注，只供看，不进朗读；家人关系说明、句意解释是帮你说给大家听的，课本只印称呼和原句。</span>
+  </div>
+
+  <div class="navi" id="navi">
+    <a href="#b1">① 识字加油站</a>
+    <a href="#b2">② 比一比写一写</a>
+    <a href="#b3">③ 我的发现</a>
+    <a href="#b4">④ 方向歌</a>
+    <a href="#b5">⑤ 日积月累</a>
+    <a href="#b6">⑥ 口语交际</a>
+    <a href="#b7">⑦ 猴子捞月亮</a>
+    <a href="#b8">⑧ 闯关 8 题</a>
+    <a href="#pics">课本原页</a>
+  </div>
+
+  <!-- ============ ① 识字加油站 ============ -->
+  <section class="block" id="b1">
+    <div class="sec-title"><span class="bar"></span>① 识字加油站 · 我给大家介绍一下我的家人
+      <span class="pg">课本第 90 页</span><span class="sec-note">点一个称呼读一个</span></div>
+
+    <div class="bubble" data-say="我给大家介绍一下我的家人。课本上的小朋友要介绍自己的家人。请你也指着下面的称呼，一个一个介绍给同学听。">
+      <b>课本气泡：</b>「<b>我给大家介绍一下我的家人……</b>」——
+      下面的称呼按课本分成<b>绿、橙、蓝</b>三行，点一个读一个。👨‍👩‍👧
+    </div>
+
+    <div class="fam-row f1">
+      <div class="fr-h">🌿 第一行（课本绿色）· 爷爷奶奶、姥爷姥姥</div>
+      <div class="fr-g" id="famBox1"></div>
+    </div>
+    <div class="fam-row f2">
+      <div class="fr-h">🍊 第二行（课本橙色）· 叔叔姑姑、爸爸妈妈、舅舅姨妈</div>
+      <div class="fr-g" id="famBox2"></div>
+    </div>
+    <div class="fam-row f3">
+      <div class="fr-h">💧 第三行（课本蓝色）· 哥哥姐姐、弟弟妹妹</div>
+      <div class="fr-g" id="famBox3"></div>
+    </div>
+
+    <div class="bubble" data-say="课本只给一部分字注了音，比如爷爷的爷、奶奶的奶、姥爷的姥、叔叔的叔、姑姑的姑、舅舅的舅、姨妈的姨、姐姐的姐、妹妹的妹。爸爸、妈妈、哥哥、弟弟这几个词，课本没有注音，因为我们已经认识了。">
+      <b>🔎 看一看：</b>课本只给<b>爷、奶、姥、叔、姑、舅、姨、姐、妹</b>注了音；
+      <b>爸爸、妈妈、哥哥、弟弟</b>没注音——这些字我们已经认识啦。
+    </div>
+
+    <div class="rad-tip" data-say="课本在生字条上方写了一个女字，提醒我们注意女字旁。爷、奶、叔、姐、妹这五个要认的字里，奶、姐、妹三个都带女字旁，都是称呼家里的女性。爷和叔不带女字旁。第九十一页还会让我们再发现一次。">
+      <div class="rt-z">女</div>
+      <div class="rt-b"><b>课本生字条上方的「女」字</b>：五个要认的字里，
+        <b>奶、姐、妹</b> 都带<b>女字旁</b>，都是家里女性的称呼；<b>爷、叔</b> 不带女字旁。<br>
+        📌 第 91 页「我的发现」还会再遇到它。</div>
+    </div>
+
+    <div class="pat" style="margin-top:10px">
+      <span class="p-lab">识字条 · 连起来读</span>
+      <div class="p-s" data-say="爷，奶，叔，姐，妹。五个要认的字连起来读一遍。其中奶、姐、妹都有女字旁。">
+        <b>爷 奶 叔 姐 妹</b> —— 五个字里，<b style="color:#00695c">奶 姐 妹</b> 都有女字旁
+      </div>
+    </div>
+    <div class="zi-grid" id="ziGrid" style="margin-top:9px"></div>
+
+    <div class="sec-title" style="margin-top:16px"><span class="bar"></span>写一写 · 会写 2 个字
+      <span class="pg">课本第 90 页田字格</span><span class="sec-note">点卡听笔顺</span></div>
+    <div class="zi-grid two" id="ziwGrid"></div>
+    <div class="bubble" data-say="课本在田字格上方用红字一步一步写出了爸和妈。爸是上下结构，上面是父，下面是巴。妈是左右结构，左边是女字旁，右边是马，左窄右宽。写字前先坐正，看清每一笔在田字格的什么位置，再动笔。">
+      <b>✍️ 课本上的红字笔顺：</b><b>爸</b>＝父＋巴（上下结构），<b>妈</b>＝女＋马（左右结构，左窄右宽）。
+      田字格里「黑字示范 → 红字描红 → 空格自己写」。笔顺提示供参考，以课本和老师为准。
+    </div>
+  </section>
+
+  <!-- ============ ② 字词句运用 ============ -->
+  <section class="block" id="b2">
+    <div class="sec-title"><span class="bar"></span>② 字词句运用 · 比一比，写一写
+      <span class="pg">课本第 90 页</span><span class="sec-note">点一组读一组</span></div>
+
+    <div class="bubble" data-say="比一比，写一写。这四组字长得有点像，先看清楚它们哪里不一样，再照着田字格写。第一组了和才，第二组云和山，第三组儿和四，第四组我和心。">
+      <b>课本原题：</b>比一比，写一写。<br>
+      四组字长得有点像：<b>了—才、云—山、儿—四、我—心</b>。先看清楚差别，再动笔。🔍
+    </div>
+
+    <div class="bj-grid" id="bjBox"></div>
+
+    <div class="bubble" data-say="比一比的好办法：先数一数笔画，再看关键的一笔在哪里。了和才，才多了一撇，还把横写长了。云和山，云有两横，山中间一竖最高。儿和四，儿只有撇和竖弯钩，四是个方框。我和心，我有一笔斜钩，心是三个点加卧钩。看准了再写，就不容易写错。">
+      <b>💡 比一比的好办法：</b>① 先数笔画；② 找<b>最关键的一笔</b>在哪儿；③ 看它住在田字格的哪一格。
+      写之前用小手指在桌上空写一遍，再落到本子上。
+    </div>
+  </section>
+
+  <!-- ============ ③ 我的发现 ============ -->
+  <section class="block" id="b3">
+    <div class="sec-title"><span class="bar"></span>③ 读一读，和同学交流你的发现
+      <span class="pg">课本第 91 页</span><span class="sec-note">点一个字读一个字</span></div>
+
+    <div class="bubble" data-say="读一读，和同学交流你的发现。课本上的小朋友说，这几个字的意思都和时间有关。她指的是第一行明、晚、昨、春。">
+      <b>课本原题：</b>读一读，和同学交流你的发现。<br>
+      <b>课本气泡：</b>「<b>这几个字的意思都和时间有关。</b>」—— 说的是第一行。💬
+    </div>
+
+    <div class="find-row g1">
+      <div class="fd-h">☀️ 第一组 · 明 晚 昨 春（点字听读）</div>
+      <div class="fd-g" id="findBox1"></div>
+      <div class="fd-b"><b>我的发现：</b>这四个字里都藏着「<b>日</b>」：明＝日＋月，晚、昨是日字旁，
+        春的下面也是日。<b>它们都和时间有关</b>——明天、晚上、昨天、春天。</div>
+    </div>
+
+    <div class="find-row g2">
+      <div class="fd-h">🌸 第二组 · 妈 奶 姐 妹（点字听读，自己先想一想）</div>
+      <div class="fd-g" id="findBox2"></div>
+      <div class="fd-b"><b>我的发现：</b>四个字<b>都是女字旁</b>，都是家里女性的称呼。
+        和第 90 页生字条上方的「女」字对上了！<b>看偏旁猜意思</b>，是识字的好办法。</div>
+    </div>
+
+    <div class="bubble" data-say="交流的时候可以这样说。我发现明、晚、昨、春都和时间有关，因为它们都有日。我发现妈、奶、姐、妹都是女字旁，都是叫家里人的。先说我发现，再说因为什么，同学就听懂了。">
+      <b>🗣️ 和同学这样说：</b>「我<b>发现</b>……，<b>因为</b>……」
+      先说发现，再说理由；听的同学可以补充，也可以问一个问题。
+    </div>
+  </section>
+
+  <!-- ============ ④ 读一读，背一背 ============ -->
+  <section class="block" id="b4">
+    <div class="sec-title"><span class="bar"></span>④ 读一读，背一背 · 方向歌
+      <span class="pg">课本第 91 页</span><span class="sec-note">点一行读一行</span></div>
+
+    <div class="bubble" data-say="读一读，背一背。课本只给晨、面、太阳这几个字注了音。早晨起来，面向太阳。前面是东，后面是西。左面是北，右面是南。读的时候一句一句读清楚，边读边用手指一指方向。">
+      <b>课本原题：</b>读一读，背一背。<br>
+      📌 课本只给 <b>晨、面、太阳</b> 注了音，其余的字我们都认识。
+    </div>
+
+    <div class="dir-song" id="dirBox"></div>
+
+    <div class="recite">
+      <button id="btnDir">🎵 四句连读</button>
+      <button id="btnDirSlow">🐢 放慢背一背（每句读两遍）</button>
+    </div>
+
+    <div class="dir-cross" id="dirCross"></div>
+
+    <div class="bubble" data-say="早晨太阳从东边升起来。面朝太阳站好，前面就是东，后面是西，伸开两只手，左手那边是北，右手那边是南。背诵的时候先想自己站在操场上，再一句一句往下背。明天早上真的去试一试，记得最牢。">
+      <b>🧭 背之前先站一站：</b>早晨<b>面向太阳</b>站好，前东、后西、左北、右南。
+      明天早上到操场真的试一次，四句话就记住啦！🌅
+    </div>
+  </section>
+
+  <!-- ============ ⑤ 日积月累 ============ -->
+  <section class="block" id="b5">
+    <div class="sec-title"><span class="bar"></span>⑤ 日积月累 · 四句谚语
+      <span class="pg">课本第 91 页</span><span class="sec-note">点一句读一句</span></div>
+
+    <div class="bubble" data-say="日积月累。这四句话是老一辈传下来的谚语，句子短，道理深。先一句一句读准，再听听每句讲的是什么意思，最后试着背下来。">
+      <b>📖 日积月累：</b>四句短短的<b>谚语</b>，一句一个道理。
+      先读准 → 再听意思 → 最后背下来。课本给每个字都注了音。
+    </div>
+
+    <div class="say-box" id="sayBox"></div>
+
+    <div class="recite">
+      <button id="btnSay">🎵 四句连读</button>
+      <button id="btnSaySlow">🐢 放慢背一背（每句读两遍）</button>
+    </div>
+
+    <div class="bubble" data-say="背谚语的小窍门：每句都是前后两半，前半说什么，后半就说什么结果。种瓜得瓜，种豆得豆；前人栽树，后人乘凉；千里之行，始于足下；百尺竿头，更进一步。先背前半，再接后半，四句就串起来了。">
+      <b>🎯 背诵小窍门：</b>每句都是<b>前半 + 后半</b>——先记住前半（种瓜得瓜），
+      再接后半（种豆得豆）。一句一句接上去，四句就串成串啦。
+    </div>
+  </section>
+
+  <!-- ============ ⑥ 口语交际 ============ -->
+  <section class="block" id="b6">
+    <div class="sec-title"><span class="bar"></span>⑥ 口语交际 · 用多大的声音说话
+      <span class="pg">课本第 92 页</span><span class="sec-note">点一张读一张</span></div>
+
+    <div class="bubble" data-say="用多大的声音说话。什么时候要大声说话？什么时候要小声说话？想一想，试一试。先看课本上的三幅图，再自己试着说一说。">
+      <b>课本原题：</b>什么时候要<b>大声</b>说话？什么时候要<b>小声</b>说话？<b>想一想，试一试。</b>
+    </div>
+
+    <div class="voice-grid" id="voiceBox"></div>
+
+    <div class="bubble" data-say="有时候要大声说话，让别人听清楚。有时候要小声说话，不影响其他人。课本右下角这两句话，就是这次口语交际要记住的道理。">
+      <b>📌 课本右下角的话（照录）：</b><br>
+      ◎ <b>有时候要大声说话，让别人听清楚。</b><br>
+      ◎ <b>有时候要小声说话，不影响其他人。</b>
+    </div>
+
+    <div class="sec-title" style="margin-top:16px"><span class="bar"></span>试一试 · 这三个地方该用多大的声音？
+      <span class="sec-note">自己先说，再点卡听参考</span></div>
+    <div class="voice-grid" id="tryBox"></div>
+
+    <div class="bubble" data-say="判断音量的好办法，先看看旁边有没有人在看书、休息，再想想听你说话的人离你多远。别人在安静做事，就小声；要让大家听清楚，就大声。说话的时候还要看着对方的眼睛，把话说完整。">
+      <b>🗣️ 说话小提醒：</b>先看<b>旁边有没有人在安静做事</b>，再看<b>听的人离你多远</b>；
+      说话时看着对方的眼睛，把话说完整。音量选对了，就是有礼貌的孩子。⭐
+    </div>
+  </section>
+
+  <!-- ============ ⑦ 和大人一起读 ============ -->
+  <section class="block" id="b7">
+    <div class="sec-title"><span class="bar"></span>⑦ 和大人一起读 · 《猴子捞月亮》
+      <span class="pg">课本第 93~94 页</span><span class="sec-note">点一段读一段</span></div>
+
+    <div class="bubble" data-say="和大人一起读，猴子捞月亮。这篇故事跨两页，第九十三页讲猴子们发现井里有个月亮，一个个叫起来；第九十四页讲它们倒挂成一串去捞，最后老猴子一抬头，发现月亮还在天上。可以先和大人一人读一段，再换过来读一遍。">
+      <b>👨‍👩‍👧 和大人一起读：</b>故事跨两页——
+      第 93 页<b>发现井里的月亮</b>，第 94 页<b>倒挂成一串去捞</b>。
+      建议：大人读一段，你读一段，再换过来读一遍。🐒
+    </div>
+
+    <div class="story" id="storyBox"></div>
+
+    <div class="recite">
+      <button id="btnStory">🎵 全文连读</button>
+      <button id="btnFollow">🔁 跟读模式（读完一段停一停）</button>
+      <button id="btnSeq">🧩 按顺序讲一遍（5 张卡片）</button>
+    </div>
+
+    <div class="sec-title" style="margin-top:16px"><span class="bar"></span>按顺序讲一讲
+      <span class="sec-note">点一张读一张，连起来就是故事</span></div>
+    <div class="seq-grid" id="seqBox"></div>
+
+    <div class="bubble" data-say="井里为什么会有月亮呢？月亮真的掉进井里了吗？其实月亮好好地挂在天上，井里的是月亮在水里的倒影。小猴子的手一碰到水，水面起了波纹，影子就散了，所以月亮不见了。抬头看一看，月亮还在天上呢。这个故事告诉我们，遇到事情先别着急，仔细看一看、想一想。">
+      <b>读后想一想：</b>井里为什么会有月亮？月亮真的掉进去了吗？🌕<br>
+      原来井里的是<b>月亮在水里的倒影</b>；手一碰水，水面起了波纹，影子就散了。
+      <b>抬头一看，月亮还好好地挂在天上呢！</b>
+      小道理：遇到事情别急着下结论，先<b>看一看、想一想</b>。
+    </div>
+  </section>
+
+  <!-- ============ ⑧ 闯关 ============ -->
+  <section class="block" id="b8">
+    <div class="sec-title"><span class="bar"></span>⑧ 闯关 · 8 题
+      <span class="sec-note">点题目可以听题，点选项就判对错，答完自动算分</span></div>
+    <div class="quiz-grid" id="quizBox"></div>
+    <div class="score" id="scoreBox">已经答 0 题，答对 0 题。</div>
+  </section>
+
+  <!-- ============ 课本原页 ============ -->
+  <section class="block" id="pics">
+    <div class="sec-title"><span class="bar"></span>课本原页 · 第 90~94 页<span class="sec-note">点图放大</span></div>
+    <div class="pic-grid">
+      <div class="pic"><img src="images/90a-课本第90页-语文园地七-识字加油站与字词句运用.png" alt="课本第90页"><div class="cap">第 90 页 · 识字加油站 · 字词句运用</div></div>
+      <div class="pic"><img src="images/91a-课本第91页-我的发现与方向歌与日积月累.jpg" alt="课本第91页"><div class="cap">第 91 页 · 我的发现 · 读一读背一背 · 日积月累</div></div>
+      <div class="pic"><img src="images/92a-课本第92页-口语交际-用多大的声音说话.jpg" alt="课本第92页"><div class="cap">第 92 页 · 口语交际 · 用多大的声音说话</div></div>
+      <div class="pic"><img src="images/93a-课本第93页-和大人一起读-猴子捞月亮.jpg" alt="课本第93页"><div class="cap">第 93 页 · 和大人一起读 · 猴子捞月亮（上）</div></div>
+      <div class="pic"><img src="images/94a-课本第94页-猴子捞月亮续篇.jpg" alt="课本第94页"><div class="cap">第 94 页 · 猴子捞月亮（下） · 老猴子抬头看天</div></div>
+    </div>
+  </section>
+</div>
+
+<div id="lb"><img src="" alt=""></div>
+<div id="cap"></div>
+
+<div class="ctrl-bar">
+  <button id="btnRead">🔊 读这一板块</button>
+  <button id="btnAll">▶️ 整页连读</button>
+  <button id="btnStop" class="stop">⏹ 停</button>
+</div>
+<a class="back-nav" href="../index.html">← 学习中心</a>
+
+<script>
+/* ========== 公共渲染函数（由生成器统一注入） ========== */
+function el(tag, cls, html){
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html != null) e.innerHTML = html;
+  return e;
+}
+
+/* 课文 / 儿歌 / 古诗段落
+   opt.title  居中大标题（如「② 江 南」）
+   opt.sub    副标题（如「汉乐府」）
+   opt.note   脚注原文（照录课本）
+   opt.num    是否显示自然段圆号码
+   opt.cls    段落自定义类（默认 s-para）
+*/
+function renderStory(boxId, STORY, opt){
+  opt = opt || {};
+  var box = document.getElementById(boxId);
+  if (!box) return;
+  if (opt.title){
+    var t = el('div', 's-title', opt.title);
+    t.setAttribute('data-say', opt.sayTitle || opt.title.replace(/\s/g, '') + '。');
+    box.appendChild(t);
+  }
+  if (opt.sub){
+    var s = el('div', 's-sub', opt.sub);
+    s.setAttribute('data-say', opt.saySub || opt.sub);
+    box.appendChild(s);
+  }
+  STORY.forEach(function(it, i){
+    var inner = (opt.num ? '<span class="s-num">' + (i + 1) + '</span>' : '') + it.t;
+    var d = el('div', opt.cls || 's-para', inner);
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  if (opt.note) box.appendChild(el('div', 's-note', opt.note));
+}
+
+/* 会认字卡：拼音 + 大字 + 组词 */
+function renderZi(boxId, ZI){
+  var box = document.getElementById(boxId);
+  if (!box) return;
+  ZI.forEach(function(it){
+    var d = el('div', 'zi',
+      '<div class="py">' + it.p + '</div><div class="hz">' + it.z + '</div>' +
+      '<div class="ci">' + it.c + '</div>');
+    d.setAttribute('data-say', it.say || (it.z + '，' + it.c.replace(' · ', '，')));
+    box.appendChild(d);
+  });
+}
+
+/* 会写字卡：田字格 + 笔画数 + 笔顺提示（点卡朗读笔顺） */
+function renderZiw(boxId, ZIW){
+  var box = document.getElementById(boxId);
+  if (!box) return;
+  ZIW.forEach(function(it){
+    var d = el('div', 'zi write',
+      '<div class="py">' + it.p + '</div>' +
+      '<div class="tzg"><i>' + it.tzg + '</i></div>' +
+      '<div class="ci">' + it.c + '</div>' +
+      '<div class="ci" style="color:#8d6e63">' + it.meta + '</div>' +
+      '<div class="ci" style="color:#1565c0;background:#e3f2fd;border-radius:5px;padding:2px 4px;margin-top:3px">' + it.tip + '</div>');
+    d.setAttribute('data-say', it.z + '，' + it.tip);
+    box.appendChild(d);
+  });
+}
+
+/* 闯关 8 题：点题目读「题目+选项」，点选项读选项+判分反馈 */
+var answered = {}, rightCount = 0;
+function renderQuiz(QUIZ, boxId){
+  var box = document.getElementById(boxId || 'quizBox');
+  if (!box) return;
+  QUIZ.forEach(function(item, i){
+    var q = el('div', 'q');
+    var qt = el('div', 'q-t say', '<b>' + (i + 1) + '.</b> ' + item.q);
+    qt.setAttribute('data-say', item.say);
+    q.appendChild(qt);
+    var opts = el('div', 'opts');
+    item.opts.forEach(function(pair){
+      var o = el('div', 'opt', pair[0]);
+      o.onclick = function(){
+        if (q.classList.contains('done')) return;
+        q.classList.add('done');
+        var ok = pair[1] === 1;
+        o.classList.add(ok ? 'ok' : 'no');
+        if (!ok){
+          Array.prototype.forEach.call(opts.children, function(c, ci){
+            if (item.opts[ci][1] === 1) c.classList.add('ok');
+          });
+        }
+        q.classList.add(ok ? 'right' : 'wrong');
+        q.appendChild(el('div', 'exp', (ok ? '✅ 答对了。' : '❌ 再想想。') + item.exp));
+        answered[i] = ok;
+        if (ok) rightCount++;
+        updateScore();
+        speakText(pair[0] + '。' + (ok ? '答对了。' : '再想想。') + item.exp);
+      };
+      opts.appendChild(o);
+    });
+    q.appendChild(opts);
+    box.appendChild(q);
+  });
+}
+function updateScore(){
+  var n = Object.keys(answered).length;
+  var box = document.getElementById('scoreBox');
+  if (!box) return;
+  if (n === 0){ box.textContent = '已经答 0 题，答对 0 题。'; return; }
+  var total = (typeof QUIZ !== 'undefined' && QUIZ.length) ? QUIZ.length : 8;
+  var tip = n === total
+    ? (rightCount === total ? '全部答对，太棒了！' : (rightCount >= 6 ? '很不错，再检查一下错的题。' : '再听一遍前面的板块，然后重试。'))
+    : '还剩 ' + (total - n) + ' 题。';
+  box.innerHTML = '已经答 ' + n + ' 题，答对 <b>' + rightCount + '</b> 题。' + tip;
+}
+
+/* 全文连读 / 跟读模式（按钮存在才绑定；跟读每句留 4 秒给学生） */
+function bindStoryButtons(STORY, sel){
+  var nodes = sel ? document.querySelectorAll(sel) : document.querySelectorAll('#storyBox .s-para');
+  function hlPara(i){ hlOnly(nodes[i]); }
+  var a = document.getElementById('btnStory');
+  if (a) a.onclick = function(){
+    abort = false;
+    (function step(i){
+      if (abort || i >= STORY.length){ cap.style.display = 'none'; return; }
+      hlPara(i);
+      speak(STORY[i].say).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+  var b = document.getElementById('btnFollow');
+  if (b) b.onclick = function(){
+    abort = false;
+    (function step(i){
+      if (abort || i >= STORY.length){ cap.style.display = 'none'; return; }
+      hlPara(i);
+      cap.textContent = '👂 听：' + STORY[i].say + ' —— 该你读啦！';
+      cap.style.display = 'block';
+      speak(STORY[i].say).then(function(){
+        if (abort) return;
+        cap.textContent = '🎤 该你读啦！（停 4 秒）';
+        return new Promise(function(res){ setTimeout(res, 4000); });
+      }).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+}
+
+/* 自定义台词连读：按传入的字符串数组逐句朗读并高亮对应节点 */
+function bindSeqRead(btnId, texts, sel){
+  var btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.onclick = function(){
+    var nodes = document.querySelectorAll(sel);
+    abort = false;
+    (function step(i){
+      if (abort || i >= texts.length){ cap.style.display = 'none'; return; }
+      if (nodes[i]) hlOnly(nodes[i]);
+      speak(texts[i]).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+}
+
+/* ============================================================
+   语文园地七（课本第 90~94 页逐字录入）
+   《猴子捞月亮》脚注：① 本文选自陈鹤琴等编《儿童故事》，有改动。
+   说明：带调拼音只用于「显示」（py / p / sl-p 等字段），
+         朗读稿（say / tip / exp / data-say）一律用汉字与无调字母。
+   ============================================================ */
+
+/* ① 家人称呼 14 个（课本第 90 页三行；py 为课本标注的单字读音，只作显示） */
+var FAM1 = [
+  { w:'爷爷', py:'yé',  say:'爷爷。爷爷是爸爸的爸爸。课本给爷爷的爷注了音。' },
+  { w:'奶奶', py:'nǎi', say:'奶奶。奶奶是爸爸的妈妈。奶奶的奶是女字旁。' },
+  { w:'姥爷', py:'lǎo', say:'姥爷。姥爷是妈妈的爸爸。课本给姥爷的姥注了音。' },
+  { w:'姥姥', py:'lǎo', say:'姥姥。姥姥是妈妈的妈妈。两个姥字都读一个音。' }
+];
+var FAM2 = [
+  { w:'叔叔', py:'shū', say:'叔叔。叔叔是爸爸的弟弟。课本给叔叔的叔注了音。' },
+  { w:'姑姑', py:'gū',  say:'姑姑。姑姑是爸爸的姐妹。姑姑的姑是女字旁。' },
+  { w:'爸爸', py:'',    say:'爸爸。课本没有给爸爸注音，我们都认识这个字，今天还要会写。' },
+  { w:'妈妈', py:'',    say:'妈妈。课本没有给妈妈注音，妈是女字旁加马，今天也要会写。' },
+  { w:'舅舅', py:'jiù', say:'舅舅。舅舅是妈妈的兄弟。课本给舅舅的舅注了音。' },
+  { w:'姨妈', py:'yí',  say:'姨妈。姨妈是妈妈的姐妹。课本给姨妈的姨注了音。' }
+];
+var FAM3 = [
+  { w:'哥哥', py:'',    say:'哥哥。哥哥是比自己大的男孩子。课本没有注音。' },
+  { w:'姐姐', py:'jiě', say:'姐姐。姐姐是比自己大的女孩子。姐姐的姐是女字旁。' },
+  { w:'弟弟', py:'',    say:'弟弟。弟弟是比自己小的男孩子。课本没有注音。' },
+  { w:'妹妹', py:'mèi', say:'妹妹。妹妹是比自己小的女孩子。妹妹的妹是女字旁。' }
+];
+
+/* 会认 5 字（课本第 90 页识字条：爷 奶 叔 姐 妹） */
+var ZI = [
+  { z:'爷', p:'yé',  c:'爷爷 · 姥爷' },
+  { z:'奶', p:'nǎi', c:'奶奶 · 牛奶' },
+  { z:'叔', p:'shū', c:'叔叔 · 大叔' },
+  { z:'姐', p:'jiě', c:'姐姐 · 姐妹' },
+  { z:'妹', p:'mèi', c:'妹妹 · 姐妹' }
+];
+
+/* 会写 2 字（课本第 90 页田字格：爸 妈） */
+var ZIW = [
+  { z:'爸', p:'bà', c:'爸爸 · 爸妈', tzg:'爸', meta:'8 画 · 上下结构',
+    tip:'笔顺供参考：撇、点、撇、捺、横折、竖、横、竖弯钩。上面父要写得扁一点，下面的巴写在正中，上下不挤。' },
+  { z:'妈', p:'mā', c:'妈妈 · 大妈', tzg:'妈', meta:'6 画 · 左右结构',
+    tip:'笔顺供参考：撇点、撇、横、横折、竖折折钩、横。左边女字旁写窄，最后一横不出头；右边马写宽一点，左窄右宽。' }
+];
+
+/* ② 比一比，写一写 4 组（课本第 90 页田字格：了才 / 云山 / 儿四 / 我心） */
+var BIJIAO = [
+  { h:'第一组 · 了 — 才', a:'了', b:'才',
+    d:'「了」两笔：横撇、弯钩；「才」比它多一撇，还把第一笔写成了长横。',
+    say:'了，才。了字两笔，横撇加弯钩。才字先写一横，再写竖钩，最后加一撇，一共三笔。两个字都有一笔往下带钩，可别把才的那一撇丢了。' },
+  { h:'第二组 · 云 — 山', a:'云', b:'山',
+    d:'「云」上面两横、下面撇折加点；「山」先写中间最高的竖，再写竖折，最后右边一竖。',
+    say:'云，山。云字上面两横，下面是撇折和点。山字中间一竖最高，左边竖折，右边一竖收住。一个有横，一个全是竖和折。' },
+  { h:'第三组 · 儿 — 四', a:'儿', b:'四',
+    d:'「儿」只有撇和竖弯钩两笔；「四」是个方框，里面是撇和竖弯，最后一横封口。',
+    say:'儿，四。儿字两笔，一撇加竖弯钩，两笔分开站。四字是个方框，里面先写撇，再写竖弯，最后用一横把下面封住。' },
+  { h:'第四组 · 我 — 心', a:'我', b:'心',
+    d:'「我」有一笔长长的斜钩，还有一撇；「心」是三个点加一个卧钩，字形是扁的。',
+    say:'我，心。我字有一笔斜钩，从左上一直斜到右下，要写得舒展。心字扁扁的，左边一点，中间卧钩，上面两点。两个字的最后一笔都不是横。' }
+];
+
+/* ③ 我的发现两组（课本第 91 页：明晚昨春 / 妈奶姐妹） */
+var FIND1 = [
+  { z:'明', say:'明，日和月合起来是明。明天的明，也和时间有关。' },
+  { z:'晚', say:'晚，日字旁。晚上是一天里太阳落山以后的时间。' },
+  { z:'昨', say:'昨，日字旁。昨天是今天的前一天。' },
+  { z:'春', say:'春，下面是个日。春天是一年里的第一个季节。' }
+];
+var FIND2 = [
+  { z:'妈', say:'妈，女字旁。妈妈是家里的女性。' },
+  { z:'奶', say:'奶，女字旁。奶奶是家里的女性。' },
+  { z:'姐', say:'姐，女字旁。姐姐是家里的女性。' },
+  { z:'妹', say:'妹，女字旁。妹妹是家里的女性。' }
+];
+
+/* ④ 方向歌 4 句（课本第 91 页逐字照录；p 为课本注音，只作显示） */
+var DIR = [
+  { t:'早晨起来，面向太阳。', p:'chén · miàn · tài yáng',
+    say:'早晨起来，面向太阳。' },
+  { t:'前面是东，后面是西。', p:'',
+    say:'前面是东，后面是西。' },
+  { t:'左面是北，右面是南。', p:'',
+    say:'左面是北，右面是南。' }
+];
+
+/* 方向十字图：前东 / 后西 / 左北 / 右南 */
+var DIRCROSS = [
+  { h:'', b:'', cls:'', say:'' },
+  { h:'东', b:'前面', cls:'', say:'面向太阳站好，前面是东。' },
+  { h:'', b:'', cls:'', say:'' },
+  { h:'北', b:'左面', cls:'', say:'左手那边是北。' },
+  { h:'人', b:'面向太阳', cls:'me', say:'早晨起来，面向太阳。' },
+  { h:'南', b:'右面', cls:'', say:'右手那边是南。' },
+  { h:'', b:'', cls:'', say:'' },
+  { h:'西', b:'后面', cls:'', say:'后面是西。' },
+  { h:'', b:'', cls:'', say:'' }
+];
+
+/* ⑤ 日积月累 4 句谚语（课本第 91 页逐字照录；p 为课本注音，只作显示） */
+var SAYING = [
+  { t:'种瓜得瓜，种豆得豆。', p:'zhòng guā dé guā, zhòng dòu dé dòu',
+    b:'种下什么，就收获什么；付出什么样的努力，就得到什么样的结果。',
+    say:'种瓜得瓜，种豆得豆。意思是种下什么，就收获什么。' },
+  { t:'前人栽树，后人乘凉。', p:'qián rén zāi shù, hòu rén chéng liáng',
+    b:'前面的人种下树，后面的人才能在树荫下乘凉；前辈的付出，让后来的人受益。',
+    say:'前人栽树，后人乘凉。意思是前面的人种树，后面的人才能乘凉。' },
+  { t:'千里之行，始于足下。', p:'qiān lǐ zhī xíng, shǐ yú zú xià',
+    b:'走一千里路，也是从脚下第一步开始的；再大的事，都要从眼前的小事做起。',
+    say:'千里之行，始于足下。意思是走很远的路，也要从脚下第一步开始。' },
+  { t:'百尺竿头，更进一步。', p:'bǎi chǐ gān tóu, gèng jìn yí bù',
+    b:'已经站得很高了，还要再往上一步；学得再好，也还能再进步。',
+    say:'百尺竿头，更进一步。意思是已经做得很好了，还要再往前一步。' }
+];
+
+/* ⑥ 口语交际三幅图（课本第 92 页，气泡原文照录） */
+var VOICE = [
+  { e:'📚', h:'图书馆里', q:'请问，这里有人吗？', badge:'小声', cls:'low',
+    r:'旁边有「静」字，大家在看书，要小声说，不影响其他人。',
+    say:'图书馆里。请问，这里有人吗？旁边立着静字牌，大家在安静看书，这句话要小声说，不影响其他人。' },
+  { e:'🏫', h:'老师办公室', q:'老师，我在教室里捡到一块橡皮。', badge:'让老师听清', cls:'mid',
+    r:'要向老师报告事情，声音要让老师听得清楚，不必喊，也不能太小。',
+    say:'老师办公室。老师，我在教室里捡到一块橡皮。这是向老师报告事情，声音要让老师听清楚，不用喊，也不能小到听不见。' },
+  { e:'🎤', h:'给大家讲故事', q:'我给大家讲一个故事', badge:'大声', cls:'high',
+    r:'面对全班同学，要大声说，让最后一排也听得清。',
+    say:'给大家讲故事。我给大家讲一个故事。面对全班同学，要大声说，让坐在最后一排的同学也听得清楚。' }
+];
+
+/* 试一试：3 个新场景（练习，非教材原文） */
+var TRY = [
+  { e:'✋', h:'上课回答老师的提问', q:'这道题我来答', badge:'大声', cls:'high',
+    r:'练习：让全班和老师都听清楚，声音要响亮、把话说完整。',
+    say:'练一练。上课回答老师的提问。要大声说，让全班同学和老师都听清楚，还要把话说完整。' },
+  { e:'🎬', h:'在电影院里找座位', q:'我们的座位在哪一排', badge:'小声', cls:'low',
+    r:'练习：旁边的人都在看电影，凑近同伴小声说就好。',
+    say:'练一练。在电影院里找座位。旁边的人都在看电影，凑近同伴小声说，不影响其他人。' },
+  { e:'🏃', h:'在操场喊远处的同学', q:'等一等我', badge:'大声', cls:'high',
+    r:'练习：同学离得远，声音要送得远，但不能尖叫。',
+    say:'练一练。在操场喊远处的同学。同学离得远，声音要大一点才送得到，但不用尖叫。' }
+];
+
+/* ⑦ 《猴子捞月亮》7 段（课本第 93~94 页；显示保留引号，朗读稿去引号） */
+var STORY = [
+  { t:'有只小猴子在井边玩。他往井里一看，里面有个月亮。小猴子叫起来：“糟啦，糟啦！月亮掉在井里啦！”',
+    say:'有只小猴子在井边玩。他往井里一看，里面有个月亮。小猴子叫起来，糟啦，糟啦！月亮掉在井里啦！' },
+  { t:'大猴子听见了，跑过来一看，跟着叫起来：“糟啦，糟啦！月亮掉在井里啦！”',
+    say:'大猴子听见了，跑过来一看，跟着叫起来，糟啦，糟啦！月亮掉在井里啦！' },
+  { t:'老猴子听见了，跑过来一看，也跟着叫起来：“糟啦，糟啦！月亮掉在井里啦！”',
+    say:'老猴子听见了，跑过来一看，也跟着叫起来，糟啦，糟啦！月亮掉在井里啦！' },
+  { t:'附近的猴子听见了，都跑过来看。大家跟着叫起来：“糟啦，糟啦！月亮掉在井里啦！咱们快把它捞上来！”',
+    say:'附近的猴子听见了，都跑过来看。大家跟着叫起来，糟啦，糟啦！月亮掉在井里啦！咱们快把它捞上来！' },
+  { t:'猴子们爬上了井旁边的大树。老猴子倒挂在树上，拉住大猴子的脚。大猴子也倒挂着，拉住另一只猴子的脚。猴子们就这样一只拉一只，一直挂到井里头，小猴子挂在最下边。',
+    say:'猴子们爬上了井旁边的大树。老猴子倒挂在树上，拉住大猴子的脚。大猴子也倒挂着，拉住另一只猴子的脚。猴子们就这样一只拉一只，一直挂到井里头，小猴子挂在最下边。' },
+  { t:'小猴子伸手去捞月亮，手刚碰到水，月亮就不见了。',
+    say:'小猴子伸手去捞月亮，手刚碰到水，月亮就不见了。' },
+  { t:'老猴子一抬头，看见月亮还在天上。他喘着气说：“不用捞了，不用捞了！月亮还好好地挂在天上呢！”',
+    say:'老猴子一抬头，看见月亮还在天上。他喘着气说，不用捞了，不用捞了！月亮还好好地挂在天上呢！' }
+];
+
+/* 按顺序讲故事 5 卡（复述支架，非教材原文） */
+var SEQ = [
+  { t:'小猴子在井边玩，<br>看见井里有个月亮',
+    say:'先说，小猴子在井边玩，看见井里有个月亮，急得叫起来。' },
+  { t:'大猴子、老猴子、附近的猴子<br>都跑来跟着叫',
+    say:'接着说，大猴子、老猴子、附近的猴子都跑来看，一个跟着一个叫起来，说月亮掉在井里啦。' },
+  { t:'猴子们倒挂成一串，<br>小猴子挂在最下边',
+    say:'再说，猴子们爬上大树，一只拉一只倒挂成一串，一直挂到井里头，小猴子挂在最下边。' },
+  { t:'小猴子伸手去捞，<br>手一碰水，月亮不见了',
+    say:'然后说，小猴子伸手去捞月亮，手刚碰到水，水面起了波纹，月亮就不见了。' },
+  { t:'老猴子一抬头，<br>月亮还好好地挂在天上',
+    say:'最后说，老猴子一抬头，看见月亮还在天上，喘着气说，不用捞了，月亮还好好地挂在天上呢。' }
+];
+
+/* ⑧ 闯关 8 题 */
+var QUIZ = [
+  { q:'「爷爷」「奶奶」是哪一行的称呼？',
+    say:'第一题。爷爷、奶奶是哪一行的称呼？选项一，课本第一行绿色。选项二，课本第三行蓝色。',
+    opts:[['第一行绿色',1],['第三行蓝色',0]],
+    exp:'课本第 90 页第一行是绿色的：爷爷、奶奶、姥爷、姥姥；第三行蓝色是哥哥、姐姐、弟弟、妹妹。' },
+  { q:'「姐」「妹」「奶」都有什么偏旁？',
+    say:'第二题。姐、妹、奶都有什么偏旁？选项一，女字旁。选项二，日字旁。',
+    opts:[['女字旁',1],['日字旁',0]],
+    exp:'这三个字都是女字旁，都是家里女性的称呼。日字旁的是明、晚、昨。' },
+  { q:'课本气泡说「明、晚、昨、春」的意思都和什么有关？',
+    say:'第三题。课本气泡说，明、晚、昨、春的意思都和什么有关？选项一，时间。选项二，颜色。',
+    opts:[['时间',1],['颜色',0]],
+    exp:'这几个字里都藏着日：明天、晚上、昨天、春天，说的都和时间有关。' },
+  { q:'早晨起来，面向太阳，前面是哪个方向？',
+    say:'第四题。早晨起来，面向太阳，前面是哪个方向？选项一，东。选项二，西。',
+    opts:[['东',1],['西',0]],
+    exp:'方向歌：早晨起来，面向太阳。前面是东，后面是西。左面是北，右面是南。' },
+  { q:'「种瓜得瓜」的下一句是什么？',
+    say:'第五题。种瓜得瓜的下一句是什么？选项一，种豆得豆。选项二，后人乘凉。',
+    opts:[['种豆得豆',1],['后人乘凉',0]],
+    exp:'日积月累第一句是种瓜得瓜，种豆得豆；后人乘凉是第二句前人栽树，后人乘凉的后半。' },
+  { q:'在图书馆里问「这里有人吗」，该用多大的声音？',
+    say:'第六题。在图书馆里问，这里有人吗，该用多大的声音？选项一，小声。选项二，大声。',
+    opts:[['小声',1],['大声',0]],
+    exp:'图书馆里有静字牌，大家在看书，要小声说话，不影响其他人。' },
+  { q:'猴子们为什么在井里捞不到月亮？',
+    say:'第七题。猴子们为什么在井里捞不到月亮？选项一，井里是月亮的倒影。选项二，月亮真的掉进井里了。',
+    opts:[['井里是倒影',1],['月亮掉进井里',0]],
+    exp:'井里的是月亮在水里的倒影。手一碰水，水面起了波纹，影子就散了；月亮一直好好挂在天上。' },
+  { q:'故事最后，老猴子一抬头看见了什么？',
+    say:'第八题。故事最后，老猴子一抬头看见了什么？选项一，月亮还在天上。选项二，月亮被捞上来了。',
+    opts:[['月亮还在天上',1],['月亮被捞上来了',0]],
+    exp:'老猴子一抬头，看见月亮还在天上，喘着气说不用捞了，月亮还好好地挂在天上呢。' }
+];
+
+/* ---------- 渲染 ---------- */
+renderZi('ziGrid', ZI);
+renderZiw('ziwGrid', ZIW);
+renderQuiz(QUIZ);
+
+/* ① 三行家人称呼 */
+(function(){
+  function fill(id, arr){
+    var box = document.getElementById(id);
+    arr.forEach(function(it){
+      var d = el('div', 'fam',
+        '<div class="fm-py">' + it.py + '</div><div class="fm-w">' + it.w + '</div>');
+      d.setAttribute('data-say', it.say);
+      box.appendChild(d);
+    });
+  }
+  fill('famBox1', FAM1);
+  fill('famBox2', FAM2);
+  fill('famBox3', FAM3);
+})();
+
+/* ② 比一比写一写 4 组 */
+(function(){
+  var box = document.getElementById('bjBox');
+  BIJIAO.forEach(function(it){
+    var d = el('div', 'bj',
+      '<div class="bj-h">' + it.h + '</div>' +
+      '<div class="bj-pair"><div class="tz">' + it.a + '</div><div class="tz red">' + it.b + '</div></div>' +
+      '<div class="bj-b">' + it.d + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* ③ 我的发现两组 */
+(function(){
+  function fill(id, arr){
+    var box = document.getElementById(id);
+    arr.forEach(function(it){
+      var d = el('div', 'fz', it.z);
+      d.setAttribute('data-say', it.say);
+      box.appendChild(d);
+    });
+  }
+  fill('findBox1', FIND1);
+  fill('findBox2', FIND2);
+})();
+
+/* ④ 方向歌逐句 + 连读 + 放慢背一背 */
+(function(){
+  var box = document.getElementById('dirBox');
+  DIR.forEach(function(it){
+    var d = el('div', 'ds-l', it.t + (it.p ? '<small>课本注音：' + it.p + '</small>' : ''));
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+bindSeqRead('btnDir', DIR.map(function(s){ return s.say; }), '#dirBox .ds-l');
+(function(){
+  var btn = document.getElementById('btnDirSlow');
+  if (!btn) return;
+  btn.onclick = function(){
+    var nodes = document.querySelectorAll('#dirBox .ds-l');
+    var lines = [];
+    DIR.forEach(function(s){ lines.push(s.say); lines.push(s.say); });
+    abort = false;
+    (function step(i){
+      if (abort || i >= lines.length){ cap.style.display = 'none'; return; }
+      if (nodes[Math.floor(i / 2)]) hlOnly(nodes[Math.floor(i / 2)]);
+      speak(lines[i]).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+})();
+/* 方向十字图：空格用 visibility 占位，不点读 */
+(function(){
+  var box = document.getElementById('dirCross');
+  DIRCROSS.forEach(function(it){
+    if (!it.h){ box.appendChild(el('div', 'dc', '<span style="visibility:hidden">·</span>')); return; }
+    var d = el('div', 'dc ' + it.cls, '<b>' + it.h + '</b>' + it.b);
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* ⑤ 日积月累四句 + 连读 + 放慢背一背 */
+(function(){
+  var box = document.getElementById('sayBox');
+  SAYING.forEach(function(it){
+    var d = el('div', 'say-l',
+      '<div class="sl-h">' + it.t + '</div>' +
+      '<div class="sl-p">' + it.p + '</div>' +
+      '<div class="sl-b">' + it.b + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+bindSeqRead('btnSay', SAYING.map(function(s){ return s.say; }), '#sayBox .say-l');
+(function(){
+  var btn = document.getElementById('btnSaySlow');
+  if (!btn) return;
+  btn.onclick = function(){
+    var nodes = document.querySelectorAll('#sayBox .say-l');
+    var lines = [];
+    SAYING.forEach(function(s){ lines.push(s.say); lines.push(s.say); });
+    abort = false;
+    (function step(i){
+      if (abort || i >= lines.length){ cap.style.display = 'none'; return; }
+      if (nodes[Math.floor(i / 2)]) hlOnly(nodes[Math.floor(i / 2)]);
+      speak(lines[i]).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+})();
+
+/* ⑥ 口语交际三幅图 + 试一试 */
+(function(){
+  function fill(id, arr){
+    var box = document.getElementById(id);
+    arr.forEach(function(it){
+      var d = el('div', 'voice',
+        '<span class="v-e">' + it.e + '</span><div class="v-h">' + it.h + '</div>' +
+        '<div class="v-q">' + it.q + '</div>' +
+        '<div class="v-badge ' + it.cls + '">' + it.badge + '</div>' +
+        '<div class="v-r">' + it.r + '</div>');
+      d.setAttribute('data-say', it.say);
+      box.appendChild(d);
+    });
+  }
+  fill('voiceBox', VOICE);
+  fill('tryBox', TRY);
+})();
+
+/* ⑦ 《猴子捞月亮》故事 + 顺序卡 */
+renderStory('storyBox', STORY, {
+  title:'猴 子 捞 月 亮', sayTitle:'猴子捞月亮。',
+  cls:'s-para hp',
+  note:'① 本文选自陈鹤琴等编《儿童故事》，有改动。'
+});
+bindStoryButtons(STORY, '#storyBox .s-para');
+(function(){
+  var box = document.getElementById('seqBox');
+  SEQ.forEach(function(it, i){
+    var d = el('div', 'seq', '<span class="sq-n">' + (i + 1) + '</span><div class="sq-t">' + it.t + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+bindSeqRead('btnSeq', SEQ.map(function(s){ return s.say; }), '#seqBox .seq');
+
+/* ---------- 语音引擎 ---------- */
+var cap = document.getElementById('cap');
+var abort = false;
+var synth = window.speechSynthesis || null;
+var __voices = [], __zhVoice = null;
+
+function __pickZh(v){
+  var zh = [], i, s;
+  for (i = 0; i < v.length; i++){
+    s = v[i] || {};
+    if (/^zh|^cmn/i.test(s.lang || '') || /Chinese|中文|普通话/i.test(s.name || '')) zh.push(s);
+  }
+  if (!zh.length) return null;
+  for (i = 0; i < zh.length; i++){
+    if (/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name || '')) return zh[i];
+  }
+  return zh[0];
+}
+function __loadVoices(){
+  if (!synth) return;
+  try{
+    var v = synth.getVoices();
+    if (v && v.length){ __voices = v; if (!__zhVoice) __zhVoice = __pickZh(v); }
+  }catch(e){}
+}
+__loadVoices();
+if (synth){
+  try{
+    if ('onvoiceschanged' in synth) synth.onvoiceschanged = __loadVoices;
+    if (synth.addEventListener) synth.addEventListener('voiceschanged', __loadVoices);
+  }catch(e){}
+  var __vt = setInterval(function(){ __loadVoices(); if (__voices.length) clearInterval(__vt); }, 150);
+}
+
+function __safeText(t){
+  var s = (t == null) ? '' : String(t);
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g, ' ')
+          .replace(/&lt;/gi, '＜').replace(/&gt;/gi, '＞')
+          .replace(/</g, '＜').replace(/>/g, '＞')
+          .replace(/[ \t\r\n]{2,}/g, ' ');
+}
+
+var __unlocked = false;
+function __unlockTTS(){
+  if (!synth || __unlocked) return;
+  try{
+    var u = new SpeechSynthesisUtterance('\u3000');
+    u.volume = 0; u.lang = 'zh-CN';
+    if (__zhVoice) u.voice = __zhVoice;
+    setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+    if ((synth.getVoices() || []).length) __unlocked = true;
+  }catch(e){}
+}
+document.addEventListener('click', __unlockTTS, true);
+document.addEventListener('touchend', __unlockTTS, true);
+
+function speak(text){
+  text = __safeText(text);
+  return new Promise(function(resolve){
+    if (!text){ resolve(); return; }
+    cap.textContent = text; cap.style.display = 'block';
+    var done = false;
+    function finish(){ if (done) return; done = true; resolve(); }
+    if (synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN'; u.rate = 0.82; u.pitch = 1;
+      var vs = synth.getVoices(), i;
+      for (i = 0; i < vs.length; i++){
+        if (vs[i].lang && vs[i].lang.indexOf('zh') === 0 && vs[i].name.indexOf('Xiaoxiao') > -1){ u.voice = vs[i]; break; }
+      }
+      if (!u.voice){ for (i = 0; i < vs.length; i++){ if (vs[i].lang && vs[i].lang.indexOf('zh') === 0){ u.voice = vs[i]; break; } } }
+      if (!u.voice && __zhVoice) u.voice = __zhVoice;
+      u.onend = finish; u.onerror = finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+      var t0 = Date.now(), miss = 0;
+      function __wd(){
+        if (done) return;
+        if (Date.now() - t0 > 120000){ finish(); return; }
+        var busy = (synth && (synth.speaking || synth.pending));
+        if (busy){ miss = 0; setTimeout(__wd, 1500); return; }
+        if (Date.now() - t0 < 3500 || ++miss < 2){ setTimeout(__wd, 800); return; }
+        finish();
+      }
+      setTimeout(__wd, 3500);
+    }else{
+      setTimeout(finish, 600 + text.length * 150);
+    }
+  });
+}
+
+function speakText(t){ abort = false; return speak(t); }
+
+function stopAll(){
+  abort = true;
+  cap.style.display = 'none';
+  if (synth){ try{ synth.cancel(); }catch(e){} }
+  document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); });
+}
+
+/* ---------- 点读 + 连读 ---------- */
+function hlOnly(e){
+  document.querySelectorAll('.hl').forEach(function(x){ x.classList.remove('hl'); });
+  if (e) e.classList.add('hl');
+}
+
+document.addEventListener('click', function(ev){
+  var t = ev.target.closest('[data-say]');
+  if (!t) return;
+  if (t.tagName === 'BUTTON') return;
+  if (t.classList.contains('opt')) return;
+  ev.stopPropagation();
+  abort = false;
+  hlOnly(t);
+  speakText(t.getAttribute('data-say'));
+});
+
+function currentSection(){
+  var secs = document.querySelectorAll('section.block');
+  var best = null, bestD = 1e9;
+  secs.forEach(function(s){
+    var r = s.getBoundingClientRect();
+    var d = Math.abs(r.top - 80);
+    if (r.bottom > 120 && d < bestD){ bestD = d; best = s; }
+  });
+  return best || secs[0];
+}
+
+function readList(nodes){
+  var arr = Array.prototype.slice.call(nodes);
+  abort = false;
+  (function step(i){
+    if (abort || i >= arr.length){ cap.style.display = 'none'; return; }
+    var nd = arr[i];
+    var txt = nd.getAttribute('data-say');
+    if (!txt){ step(i + 1); return; }
+    hlOnly(nd);
+    try{ nd.scrollIntoView({ behavior: 'smooth', block: 'center' }); }catch(e){}
+    speak(txt).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+}
+
+document.getElementById('btnRead').onclick = function(){
+  var s = currentSection();
+  readList(s.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnAll').onclick = function(){
+  readList(document.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnStop').onclick = stopAll;
+
+/* ---------- 图片放大 / 导航高亮 / 空格停止 ---------- */
+var lb = document.getElementById('lb');
+document.querySelectorAll('.pic').forEach(function(p){
+  p.onclick = function(){
+    var img = p.querySelector('img');
+    lb.querySelector('img').src = img.src;
+    lb.style.display = 'flex';
+  };
+});
+lb.onclick = function(){ lb.style.display = 'none'; };
+
+var navLinks = Array.prototype.slice.call(document.querySelectorAll('#navi a'));
+window.addEventListener('scroll', function(){
+  var s = currentSection();
+  if (!s) return;
+  navLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + s.id); });
+}, { passive: true });
+
+document.addEventListener('keydown', function(e){
+  if (e.code === 'Space' && e.target === document.body){ e.preventDefault(); stopAll(); }
+});
+</script>
+
+</body>
+</html>

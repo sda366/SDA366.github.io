@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拼音9 y w · 有声图文课件</title>
+<style>
+  :root{
+    --main:#1565c0; --main2:#42a5f5; --dark:#0d47a1;
+    --sky:#0277bd; --hl:#f9a825; --ink:#33302c; --line:#e6ded4;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fbf9f4; color:var(--ink);
+    padding-bottom:120px; -webkit-text-size-adjust:100%; }
+  .container{ max-width:900px; margin:0 auto; padding:14px 14px 30px; }
+
+  .cover{ position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#0d47a1 0%,#1976d2 46%,#64b5f6 100%);
+    color:#fff; border-radius:16px; padding:20px 20px 16px; margin-bottom:12px; }
+  .cover::after{ content:""; position:absolute; right:-40px; top:-50px; width:190px; height:190px;
+    background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%); border-radius:50%; }
+  .cover .u-tag{ display:inline-block; font-size:12.5px; background:rgba(255,255,255,.22);
+    border-radius:999px; padding:3px 12px; margin-bottom:8px; }
+  .cover h1{ font-size:25px; letter-spacing:1px; margin-bottom:6px; }
+  .cover .sub{ font-size:13.5px; opacity:.95; line-height:1.85; }
+  .cover .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+  .cover .chip{ font-size:12.5px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.34);
+    border-radius:999px; padding:3px 11px; }
+
+  .map{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:12px 0 4px; }
+  .map a{ display:block; text-decoration:none; color:inherit; background:#fff;
+    border:1.5px solid var(--line); border-radius:12px; padding:9px 10px; transition:border-color .22s, transform .22s; }
+  .map a:hover{ border-color:var(--main2); transform:translateY(-2px); }
+  .map a.cur{ border-color:var(--main); background:#f0f6ff; }
+  .map .m-no{ font-size:11px; color:#8d6e63; }
+  .map .m-t{ font-size:13.5px; font-weight:bold; margin-top:2px; color:var(--dark); }
+
+  .hint{ background:#e3f2fd; border:1px dashed #90caf9; border-radius:11px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-bottom:10px; }
+  .hint b{ color:var(--dark); }
+
+  .navi{ position:sticky; top:0; z-index:900; background:rgba(251,249,244,.97);
+    padding:8px 0 9px; margin-bottom:2px; border-bottom:1px dashed #dcd3c8;
+    display:flex; gap:6px; flex-wrap:wrap; overflow:hidden; }
+  .navi::-webkit-scrollbar{ display:none; }
+  .navi a{ flex:0 0 auto; text-decoration:none; font-size:12.5px; color:var(--main);
+    background:#fff; border:1.5px solid #cfe0f3; border-radius:999px; padding:4px 10px; white-space:nowrap; }
+  .navi a:active,.navi a.on{ background:var(--main); color:#fff; border-color:var(--main); }
+
+  .block{ margin-top:16px; }
+  .sec-title{ display:flex; align-items:center; gap:9px; font-size:17.5px; font-weight:bold;
+    color:var(--main); margin:0 0 9px; flex-wrap:wrap; }
+  .sec-title .bar{ width:6px; height:20px; background:var(--main); border-radius:3px; flex:0 0 auto; }
+  .sec-title .pg{ font-size:11.5px; font-weight:normal; color:#8d6e63;
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:1px 8px; }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  .say{ cursor:pointer; border-radius:5px; transition:background .18s, box-shadow .18s; }
+  .say:hover{ background:#fff8e1; }
+  .say.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.32); }
+
+  .zi-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .zi{ background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:8px 4px 10px; text-align:center; cursor:pointer; transition:border-color .2s, box-shadow .2s; }
+  .zi:hover{ border-color:#ffcc80; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; }
+  .zi .py{ font-size:11.5px; color:#c62828; min-height:15px; font-family:"Segoe UI",Arial,sans-serif; }
+  .zi .hz{ font-family:"Segoe UI",Arial,sans-serif; font-size:34px; line-height:1.25; color:var(--main); font-weight:bold; }
+  .zi .ci{ font-size:11.5px; color:#6d4c41; margin-top:2px; line-height:1.7; }
+  .zi.write{ border-color:#b2dfdb; background:#f4fbfa; }
+
+  .fsg{ width:64px; height:40px; margin:2px auto 4px; position:relative;
+    border-bottom:1.5px solid #4682b4; }
+  .fsg::before{ content:""; position:absolute; left:0; right:0; top:33%; height:0;
+    border-top:1px dashed #b0c4d8; }
+  .fsg::after{ content:""; position:absolute; left:0; right:0; top:66%; height:0;
+    border-top:1px dashed #b0c4d8; }
+  .fsg i{ position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center;
+    font-family:"Segoe UI",Arial,sans-serif; font-size:26px; font-style:normal; color:var(--main); }
+
+  /* 音节表 */
+  .tone{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 12px; margin-top:9px; }
+  .tone .t-lab{ font-size:12px; color:#fff; background:var(--main2); border-radius:5px;
+    padding:2px 9px; display:inline-block; margin-bottom:7px; }
+  .t-row{ display:grid; grid-template-columns:repeat(5,1fr); gap:7px; }
+  .t-cell{ border:1.5px solid #e3ecf5; border-radius:10px; padding:7px 4px 6px; text-align:center; cursor:pointer; background:#fbfdff; }
+  .t-cell:hover{ border-color:#90caf9; background:#f1f8ff; }
+  .t-cell.hl{ border-color:var(--hl); background:#fffde7; }
+  .t-cell .s-big{ font-family:"Segoe UI",Arial,sans-serif; font-size:24px; color:var(--main); line-height:1.35; }
+  .t-cell .s-hz{ font-size:11px; color:#6d4c41; }
+
+  .story{ background:#fff; border:1.5px solid var(--line); border-radius:13px; padding:18px 16px; }
+  .story .s-para{ font-family:"KaiTi","STKaiti",serif; font-size:21px; line-height:2.3;
+    letter-spacing:2px; cursor:pointer; border-radius:6px; padding:2px 4px; text-align:center; }
+  .story .s-para.hl{ background:#fff59d; }
+  ruby{ ruby-align:center; }
+  rt{ font-size:10.5px; color:#c62828; font-family:"Segoe UI",Arial,sans-serif; letter-spacing:0; }
+  .story ruby{ margin:0 2px; }
+  .story .s-note{ color:#8d6e63; font-size:13px; font-family:"Microsoft YaHei",sans-serif; letter-spacing:0; margin-top:10px; }
+
+  .pat{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 13px; margin-top:9px; }
+  .pat .p-lab{ font-size:11.5px; color:var(--main); background:#e3f2fd; border-radius:5px;
+    padding:1px 8px; display:inline-block; margin-bottom:5px; }
+  .pat .p-s{ font-family:"KaiTi","STKaiti",serif; font-size:18px; line-height:2.0; }
+  .pat .p-tip{ font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:7px; padding:6px 10px; margin-top:7px; line-height:1.75; }
+
+  .bubble{ background:#fff8e1; border:1.5px solid #ffe082; border-radius:12px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-top:10px; color:#795548; cursor:pointer; }
+  .bubble b{ color:#e65100; }
+
+  /* 整体认读 / 组合表 */
+  .umap{ background:#fff; border:1.5px solid var(--line); border-radius:13px; padding:14px 12px; margin-top:9px; text-align:center; }
+  .umap .u-flow{ display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;
+    font-family:"Segoe UI",Arial,sans-serif; }
+  .umap .u-box{ border:2px solid var(--main); border-radius:10px; padding:6px 13px;
+    font-size:27px; color:var(--main); font-weight:bold; background:#f0f6ff; }
+  .umap .u-box.u2{ border-color:#e65100; color:#e65100; background:#fff3e0; }
+  .umap .u-arrow{ font-size:22px; color:#8d6e63; }
+  .umap .u-res{ border:2.5px solid var(--dark); border-radius:10px; padding:6px 15px;
+    font-size:29px; color:var(--dark); font-weight:bold; background:#e3f2fd; }
+  .umap .u-role{ display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:8px; font-size:12px; color:#6d4c41; }
+  .umap .u-role span{ background:#f5f0e8; border-radius:6px; padding:2px 9px; }
+  .umap .u-tip{ font-size:12.5px; color:#5e35b1; background:#ede7f6; border-radius:7px; padding:6px 10px; margin-top:9px; line-height:1.75; }
+
+  .recite{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .recite button{ flex:1; min-width:120px; border:1.5px solid #b2dfdb; background:#fff; color:var(--main);
+    border-radius:10px; padding:9px 10px; font-size:13px; cursor:pointer; font-family:inherit; }
+  .recite button:hover{ background:#e0f2f1; }
+
+  /* 词语卡 */
+  .word-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-top:9px; }
+  .word{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:12px 8px 10px;
+    text-align:center; cursor:pointer; font-family:"KaiTi","STKaiti",serif; }
+  .word:hover{ border-color:#ffcc80; }
+  .word.hl{ border-color:var(--hl); background:#fffde7; }
+  .word .w-py{ font-family:"Segoe UI",Arial,sans-serif; font-size:12.5px; color:#c62828; letter-spacing:1px; }
+  .word .w-hz{ font-size:27px; color:var(--ink); line-height:1.55; letter-spacing:5px; }
+
+  .quiz-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; align-items:start; }
+  .q{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 12px; }
+  .q.right{ border-color:#66bb6a; background:#f1f8e9; }
+  .q.wrong{ border-color:#ef9a9a; background:#ffebee; }
+  .q .q-t{ font-size:13.5px; line-height:1.75; cursor:pointer; border-radius:5px; }
+  .q .q-t b{ color:var(--main); }
+  .q .opts{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+  .q .opt{ border:1.5px solid #e0e0e0; border-radius:9px; padding:8px 10px; font-size:13.5px;
+    cursor:pointer; line-height:1.6; background:#fafafa; transition:border-color .18s, background .18s; }
+  .q .opt:hover{ border-color:#90caf9; background:#f1f8ff; }
+  .q .opt.ok{ border-color:#66bb6a; background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .q .opt.no{ border-color:#ef5350; background:#ffebee; color:#b71c1c; }
+  .q .exp{ display:none; font-size:12px; color:#4527a0; background:#ede7f6; border-radius:7px; padding:6px 9px; margin-top:7px; line-height:1.7; }
+  .q.done .exp{ display:block; }
+  .score{ margin-top:10px; text-align:center; font-size:14px; color:var(--main);
+    background:#e3f2fd; border:1px dashed #90caf9; border-radius:11px; padding:10px; }
+
+  .pic-grid{ display:grid; grid-template-columns:1fr; gap:9px; }
+  .pic{ background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:7px; text-align:center;
+    cursor:pointer; box-shadow:0 2px 10px rgba(62,39,35,.10); }
+  .pic img{ width:100%; display:block; border-radius:6px; }
+  .pic .cap{ font-size:11.5px; color:#5d4037; margin-top:5px; }
+  #lb{ position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:2000; display:none;
+    align-items:center; justify-content:center; padding:10px; cursor:zoom-out; }
+  #lb img{ max-width:100%; max-height:100%; border-radius:6px; }
+
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(13,71,161,.97);
+    display:flex; gap:7px; align-items:center; justify-content:center; padding:10px 10px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:8px 13px; font-size:13.5px; cursor:pointer;
+    background:#fff; color:var(--main); font-weight:bold; font-family:inherit; }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:62px; max-width:92%;
+    background:rgba(38,50,56,.93); color:#fff; border-radius:10px; padding:7px 15px;
+    font-size:14.5px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  .back-nav{ position:fixed; right:12px; bottom:60px; z-index:1200;
+    background:rgba(13,71,161,.93); color:#fff; border-radius:999px; padding:7px 16px; font-size:13px; text-decoration:none; }
+
+  @media (max-width:620px){
+    .cover h1{ font-size:20px; }
+    .navi{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+    .map{ grid-template-columns:repeat(2,1fr); }
+    .zi-grid{ grid-template-columns:repeat(2,1fr); }
+    .t-row{ grid-template-columns:repeat(3,1fr); gap:5px; }
+    .word-grid{ grid-template-columns:repeat(2,1fr); }
+    .quiz-grid{ grid-template-columns:1fr; }
+    .story .s-para{ font-size:18px; }
+    .ctrl-bar button{ padding:7px 10px; font-size:12.5px; }
+    #cap{ bottom:104px; }
+  }
+  @media (min-width:900px){ #sndTip{ display:none; } }
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+  }
+  @media print{ .ctrl-bar,#cap,.back-nav,.navi,#sndTip{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="cover">
+    <span class="u-tag">统编版 · 一年级上册 · 第三单元 · 汉语拼音 9</span>
+    <h1>拼音 9 · y w</h1>
+    <p class="sub">两个声母：树杈树杈 yyy，屋顶相连 www<br>课本第 40~41 页，重点学<b>整体认读音节 yi wu yu</b>，读儿歌《哪座房子最漂亮》</p>
+    <div class="chips"><span class="chip">认声母</span><span class="chip">yi wu yu</span><span class="chip">y+ü 去点</span><span class="chip">闯关 8 题</span></div>
+  </div>
+
+  <div class="map">
+    <a href="拼音5-gkh-有声图文.html"><div class="m-no">拼音 5</div><div class="m-t">g k h</div></a>
+    <a href="拼音6-jqx-有声图文.html"><div class="m-no">拼音 6</div><div class="m-t">j q x</div></a>
+    <a href="拼音7-zcs-有声图文.html"><div class="m-no">拼音 7</div><div class="m-t">z c s</div></a>
+    <a href="拼音8-zhchr-有声图文.html"><div class="m-no">拼音 8</div><div class="m-t">zh ch sh r</div></a>
+    <a class="cur" href="拼音9-yw-有声图文.html"><div class="m-no">拼音 9</div><div class="m-t">y w</div></a>
+  </div>
+
+  <div class="hint">
+    <b>这一课学什么：</b>认识两个<b>声母</b> y、w 和三个<b>整体认读音节</b> yi、wu、yu，
+    重点弄清课本右上角的组合表——y 带 i、w 带 u、y 带 ü，再读词语「鱼、鸭子、乌鸦、蚂蚁」和儿歌《哪座房子最漂亮》。发音方法以课本和老师教的为准。
+  </div>
+
+  <div class="navi" id="navi">
+    <a href="#b1">① 认一认</a>
+    <a href="#b2">② yi wu yu</a>
+    <a href="#b3">③ 拼一拼</a>
+    <a href="#b4">④ 写一写</a>
+    <a href="#b5">⑤ 词语读一读</a>
+    <a href="#b6">⑥ 读一读 · 哪座房子最漂亮</a>
+    <a href="#b7">⑦ 闯关 8 题</a>
+    <a href="#pics">课本原页</a>
+  </div>
+
+  <!-- ============ ① 认一认 ============ -->
+  <section class="block" id="b1">
+    <div class="sec-title"><span class="bar"></span>① 认一认 · 两个声母
+      <span class="pg">课本第 40 页</span><span class="sec-note">点卡片听口诀</span></div>
+    <div class="zi-grid" id="artGrid"></div>
+    <div class="bubble" data-say="y 和 w 像什么？y 像大树的树杈，也像妈妈织毛衣的针。w 像连在一起的屋顶，雨点打在屋顶上沙沙响。">
+      <b>y 和 w 像什么：</b><b>y</b> 像大树分叉的树杈（YNC 的 y），<b>w</b> 像两座屋顶连在一起（雨点打在屋顶上）。🌳🏠
+    </div>
+  </section>
+
+  <!-- ============ ② yi wu yu ============ -->
+  <section class="block" id="b2">
+    <div class="sec-title"><span class="bar"></span>② 整体认读音节 yi wu yu · 本课重点
+      <span class="pg">课本第 40 页</span><span class="sec-note">大 y 大 w 带上小 i u ü</span></div>
+
+    <div class="umap">
+      <div class="u-flow" data-say="看组合表。大 y 带小 i，读衣，衣服的衣。大 w 带小 u，读乌，乌鸦的乌。大 y 带小 u 上加两点，两点去掉，读鱼，小鱼的鱼。">
+        <span class="u-box">y</span><span class="u-arrow">＋</span><span class="u-box u2">i</span><span class="u-arrow">→</span>
+        <span class="u-res">yi</span>
+        <span class="u-box">w</span><span class="u-arrow">＋</span><span class="u-box u2">u</span><span class="u-arrow">→</span>
+        <span class="u-res">wu</span>
+        <span class="u-box">y</span><span class="u-arrow">＋</span><span class="u-box u2">ü</span><span class="u-arrow">→</span>
+        <span class="u-res">yu</span>
+      </div>
+      <div class="u-role"><span>yi：衣服的衣</span><span>wu：乌鸦的乌</span><span>yu：小鱼的鱼（ü 两点省去，还念 ü）</span></div>
+      <div class="u-tip">💡 <b>为什么要有 yi wu yu？</b>i、u、ü 不能自己站出来当音节，所以要请大 y、大 w 来牵手：y＋i＝yi，w＋u＝wu。<br>⚠️ <b>y 和 ü 相拼，ü 上两点要省去</b>——还记得拼音 6 学过的规则吗？j q x 和 y 都让小 ü 脱帽子！</div>
+    </div>
+
+    <div class="bubble" data-say="带调整体认读。yi 的第一声，衣服的衣。wu 的第三声，跳舞的舞。yu 的第三声，下雨的雨。跟我读，医，舞，雨。">
+      <b>带调认一认：</b>课本上有 yī（衣服的<b>衣</b>）、wǔ（跳舞的<b>舞</b>）、yǔ（下雨的<b>雨</b>）。🎁
+    </div>
+  </section>
+
+  <!-- ============ ③ 拼一拼 ============ -->
+  <section class="block" id="b3">
+    <div class="sec-title"><span class="bar"></span>③ 拼一拼 · 音节表
+      <span class="pg">课本第 40 页</span><span class="sec-note">点一格读一格</span></div>
+    <div id="sylBox"></div>
+    <div class="bubble" data-say="拼读方法复习。前音轻短后音重，两音相连猛一碰。">
+      <b>拼读方法复习：</b>前音轻短后音重，两音相连猛一碰。🎯
+    </div>
+  </section>
+
+  <!-- ============ ④ 写一写 ============ -->
+  <section class="block" id="b4">
+    <div class="sec-title"><span class="bar"></span>④ 写一写 · 四线格
+      <span class="pg">课本第 40 页</span><span class="sec-note">先看写法，再动笔</span></div>
+    <div class="zi-grid" id="wrGrid"></div>
+  </section>
+
+  <!-- ============ ⑤ 词语读一读 ============ -->
+  <section class="block" id="b5">
+    <div class="sec-title"><span class="bar"></span>⑤ 词语读一读
+      <span class="pg">课本第 41 页</span><span class="sec-note">点词卡跟读</span></div>
+    <div class="word-grid" id="wordBox"></div>
+    <div class="pat">
+      <span class="p-lab">连起来读</span>
+      <div class="p-s" data-say="鱼，鸭子，乌鸦，蚂蚁。小池塘里，鱼儿游，鸭子游，乌鸦站在岸边看，蚂蚁爬到草叶上，多热闹呀。">
+        <b>鱼 · 鸭子 · 乌鸦 · 蚂蚁</b>——池塘里鱼儿游、鸭子游，岸边乌鸦看、蚂蚁爬，多热闹！
+      </div>
+      <div class="p-tip">💡 四个词里藏着三个整体认读音节：<b>yú</b> 鱼、<b>yā</b> 鸭、<b>wū</b> 乌鸦的乌。</div>
+    </div>
+  </section>
+
+  <!-- ============ ⑥ 读一读 ============ -->
+  <section class="block" id="b6">
+    <div class="sec-title"><span class="bar"></span>⑥ 读一读 · 哪座房子最漂亮
+      <span class="pg">课本第 41 页</span><span class="sec-note">点一行读一行</span></div>
+    <div class="story" id="songBox">
+      <div class="s-para" data-say="一座房，两座房，">一<ruby>座<rt>zuò</rt></ruby><ruby>房<rt>fáng</rt></ruby>，两<ruby>座<rt>zuò</rt></ruby><ruby>房<rt>fáng</rt></ruby>，</div>
+      <div class="s-para" data-say="青青的瓦，白白的墙。">青<ruby>青<rt>qīng</rt></ruby>的<ruby>瓦<rt>wǎ</rt></ruby>，白<ruby>白<rt>bái</rt></ruby>的<ruby>墙<rt>qiáng</rt></ruby>。</div>
+      <div class="s-para" data-say="三座房，四座房，">三<ruby>座<rt>zuò</rt></ruby><ruby>房<rt>fáng</rt></ruby>，四<ruby>座<rt>zuò</rt></ruby><ruby>房<rt>fáng</rt></ruby>，</div>
+      <div class="s-para" data-say="房前花果香，屋后树成行。"><ruby>房<rt>fáng</rt></ruby><ruby>前<rt>qián</rt></ruby><ruby>花<rt>huā</rt></ruby><ruby>果<rt>guǒ</rt></ruby><ruby>香<rt>xiāng</rt></ruby>，<ruby>屋<rt>wū</rt></ruby><ruby>后<rt>hòu</rt></ruby><ruby>树<rt>shù</rt></ruby>成<ruby>行<rt>háng</rt></ruby>。</div>
+      <div class="s-para" data-say="哪座房子最漂亮？">哪<ruby>座<rt>zuò</rt></ruby><ruby>房<rt>fáng</rt></ruby><ruby>子<rt>zi</rt></ruby>最<ruby>漂<rt>piào</rt></ruby><ruby>亮<rt>liàng</rt></ruby>？</div>
+      <div class="s-para" data-say="要数我们的小学堂。">要<ruby>数<rt>shǔ</rt></ruby>我<ruby>们<rt>men</rt></ruby>的<ruby>小<rt>xiǎo</rt></ruby><ruby>学<rt>xué</rt></ruby><ruby>堂<rt>táng</rt></ruby>。</div>
+      <div class="s-note" data-say="本文作者杨霞丹，选作课文时有改动。">① 本文作者杨霞丹，选作课文时有改动。</div>
+    </div>
+
+    <div class="recite">
+      <button id="btnSong">🎵 全首连读</button>
+    </div>
+
+    <div class="bubble" data-say="读一读，想一想。青青的瓦，白白的墙，房前花果香，屋后树成行，可最漂亮的要数我们的小学堂。为什么？因为学校里有老师，有同学，是我们学习的地方。">
+      <b>读一读，想一想：</b>房子一座座都漂亮，为什么最漂亮的是<b>小学堂</b>？因为那里有老师、有同学，是我们学习成长的地方。🏫
+    </div>
+  </section>
+
+  <!-- ============ ⑦ 闯关 ============ -->
+  <section class="block" id="b7">
+    <div class="sec-title"><span class="bar"></span>⑦ 闯关 · 8 题
+      <span class="sec-note">点题目可以听题，点选项就判对错，答完自动算分</span></div>
+    <div class="quiz-grid" id="quizBox"></div>
+    <div class="score" id="scoreBox">已经答 0 题，答对 0 题。</div>
+  </section>
+
+  <!-- ============ 课本原页 ============ -->
+  <section class="block" id="pics">
+    <div class="sec-title"><span class="bar"></span>课本原页 · 第 40~41 页<span class="sec-note">点图放大</span></div>
+    <div class="pic-grid">
+      <div class="pic"><img src="images/40b-课本第40页-拼音9-yw.png" alt="课本第40页"><div class="cap">第 40 页 · y w · 整体认读 yi wu yu · 组合表 · 四线格</div></div>
+      <div class="pic"><img src="images/41b-课本第41页-词语与哪座房子最漂亮.jpg" alt="课本第41页"><div class="cap">第 41 页 · 鱼鸭子乌鸦蚂蚁 · 儿歌《哪座房子最漂亮》</div></div>
+    </div>
+  </section>
+
+</div>
+
+<div id="lb"><img src="" alt=""></div>
+<div id="cap"></div>
+
+<div class="ctrl-bar">
+  <button id="btnRead">🔊 读这一板块</button>
+  <button id="btnAll">▶️ 整页连读</button>
+  <button id="btnStop" class="stop">⏹ 停</button>
+</div>
+<a class="back-nav" href="../index.html">← 学习中心</a>
+
+<script>
+/* ============================================================
+   拼音9 y w（课本第 40~41 页）
+   ============================================================ */
+
+/* 认一认 2 卡 */
+var ART = [
+  { big:'y', py:'声母', c:'树杈树杈 yyy',
+    say:'y。树杈树杈 y y y。像大树分出的杈，像妈妈晾衣服的衣架。声母要读得又轻又短。' },
+  { big:'w', py:'声母', c:'屋顶相连 www',
+    say:'w。屋顶相连 w w w。像两座屋顶连在一起，雨点打在屋顶上沙沙响。' }
+];
+
+/* 音节表（显示拼音，朗读用汉字） */
+var SYL = [
+  { letter:'y', cells:[
+    ['yá','牙','牙，牙齿的牙。第二声。'],
+    ['yā','鸭','鸭，鸭子的鸭。第一声。'],
+    ['yǔ','雨','雨，下雨的雨。第三声。整体认读音节。'],
+    ['yù','玉','玉，宝玉的玉。第四声。整体认读音节。'] ] },
+  { letter:'w', cells:[
+    ['wá','娃','娃，娃娃的娃。第二声。'],
+    ['wō','窝','窝，鸟窝的窝。第一声。'],
+    ['wǔ','舞','舞，跳舞的舞。第三声。整体认读音节。'],
+    ['wù','雾','雾，大雾的雾。第四声。整体认读音节。'] ] }
+];
+
+/* 写一写（笔顺标记按课本：\ y、\ w） */
+var WR = [
+  { big:'y', fsg:'y', tip:'两笔写成：先写右斜，再写左斜，左斜要写到下格，像树杈分两叉。' },
+  { big:'w', fsg:'w', tip:'两笔写成：先写斜斜斜，再写斜斜斜，像两座尖屋顶连在一起，住中格。' }
+];
+
+/* 词语 */
+var WORDS = [
+  { py:'yú', hz:'鱼', say:'鱼。第二声的鱼，小鱼的鱼，整体认读音节。' },
+  { py:'yā zi', hz:'鸭子', say:'鸭子。第一声的鸭，轻声的子，鸭子。' },
+  { py:'wū yā', hz:'乌鸦', say:'乌鸦。第一声的乌，第一声的鸦，乌鸦。' },
+  { py:'mǎ yǐ', hz:'蚂蚁', say:'蚂蚁。第三声的蚂，第三声的蚁，蚂蚁。' }
+];
+
+/* 闯关 8 题 */
+var QUIZ = [
+  { q:'树杈树杈 yyy，说的是哪个声母？',
+    say:'第一题。树杈树杈，说的是哪个声母？选项一，y。选项二，x。',
+    opts:[['y',1],['x',0]],
+    exp:'y 像树杈；x 是两个斜斜的叉叉，像切西瓜。' },
+
+  { q:'yi、wu、yu 是什么音节？',
+    say:'第二题。yi，wu，yu，是什么音节？选项一，整体认读音节。选项二，三拼音节。',
+    opts:[['整体认读音节',1],['三拼音节',0]],
+    exp:'yi、wu、yu 是整体认读音节，大 y 大 w 牵着小 i 小 u 小 ü，一口读出来。' },
+
+  { q:'y 和 ü 相拼，ü 上两点怎么办？',
+    say:'第三题。y 和 ü 相拼，ü 上两点怎么办？选项一，省去两点，读 yu。选项二，两点要保留。',
+    opts:[['省去两点，读 yu',1],['两点要保留',0]],
+    exp:'j q x 和 y 都让小 ü 脱帽子——yu 两点省去，还念 ü。' },
+
+  { q:'小 i 不能自己当音节，谁牵着它？',
+    say:'第四题。小 i 不能自己当音节，谁牵着它？选项一，大 y。选项二，大 w。',
+    opts:[['大 y',1],['大 w',0]],
+    exp:'y 带 i 读 yi，衣服的衣；w 带 u 读 wu。' },
+
+  { q:'wu 读第几声是「跳舞的舞」？',
+    say:'第五题。wu 读第几声是跳舞的舞？选项一，第三声。选项二，第一声。',
+    opts:[['第三声',1],['第一声',0]],
+    exp:'wǔ，第三声，跳舞的舞；第一声的 wū 是乌鸦的乌。' },
+
+  { q:'儿歌里，哪座房子最漂亮？',
+    say:'第六题。儿歌里，哪座房子最漂亮？选项一，我们的小学堂。选项二，最高的楼房。',
+    opts:[['我们的小学堂',1],['最高的楼房',0]],
+    exp:'哪座房子最漂亮？要数我们的小学堂。' },
+
+  { q:'儿歌里说小学堂什么样？',
+    say:'第七题。儿歌里说小学堂什么样？选项一，青青的瓦，白白的墙，房前花果香，屋后树成行。选项二，高高的楼，宽宽的门。',
+    opts:[['青青的瓦，白白的墙，房前花果香，屋后树成行',1],['高高的楼，宽宽的门',0]],
+    exp:'一座房两座房，青青的瓦白白的墙，房前花果香，屋后树成行。' },
+
+  { q:'《哪座房子最漂亮》的作者是谁？',
+    say:'第八题。哪座房子最漂亮的作者是谁？选项一，杨霞丹。选项二，樊发稼。',
+    opts:[['杨霞丹',1],['樊发稼',0]],
+    exp:'脚注写明：本文作者杨霞丹，选作课文时有改动。樊发稼是《说话》的作者。' }
+];
+
+/* ---------- 渲染 ---------- */
+function el(tag, cls, html){
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html != null) e.innerHTML = html;
+  return e;
+}
+
+/* 认一认 */
+(function(){
+  var box = document.getElementById('artGrid');
+  ART.forEach(function(it){
+    var d = el('div', 'zi',
+      '<div class="py">' + it.py + '</div><div class="hz">' + it.big + '</div><div class="ci">' + it.c + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* 音节表 */
+(function(){
+  var box = document.getElementById('sylBox');
+  SYL.forEach(function(row){
+    var t = el('div', 'tone');
+    t.appendChild(el('span', 't-lab', row.letter + ' 的音节'));
+    var grid = el('div', 't-row');
+    row.cells.forEach(function(c){
+      var cell = el('div', 't-cell',
+        '<div class="s-big">' + c[0] + '</div><div class="s-hz">' + c[1] + '</div>');
+      cell.setAttribute('data-say', c[2]);
+      grid.appendChild(cell);
+    });
+    t.appendChild(grid);
+    box.appendChild(t);
+  });
+})();
+
+/* 写一写 */
+(function(){
+  var box = document.getElementById('wrGrid');
+  WR.forEach(function(it){
+    var d = el('div', 'zi write',
+      '<div class="fsg"><i>' + it.fsg + '</i></div>' +
+      '<div class="ci" style="font-weight:bold;color:#0d47a1">' + it.big + '</div>' +
+      '<div class="ci" style="color:#1565c0;background:#e3f2fd;border-radius:5px;padding:2px 4px;margin-top:3px">' + it.tip + '</div>');
+    d.setAttribute('data-say', '写' + it.big + '。' + it.tip);
+    box.appendChild(d);
+  });
+})();
+
+/* 词语 */
+(function(){
+  var box = document.getElementById('wordBox');
+  WORDS.forEach(function(it){
+    var d = el('div', 'word',
+      '<div class="w-py">' + it.py + '</div><div class="w-hz">' + it.hz + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* 闯关 */
+var answered = {}, rightCount = 0;
+(function(){
+  var box = document.getElementById('quizBox');
+  QUIZ.forEach(function(item, i){
+    var q = el('div', 'q');
+    var qt = el('div', 'q-t say', '<b>' + (i + 1) + '.</b> ' + item.q);
+    qt.setAttribute('data-say', item.say);
+    q.appendChild(qt);
+    var opts = el('div', 'opts');
+    item.opts.forEach(function(pair){
+      var o = el('div', 'opt', pair[0]);
+      o.onclick = function(){
+        if (q.classList.contains('done')) return;
+        q.classList.add('done');
+        var ok = pair[1] === 1;
+        o.classList.add(ok ? 'ok' : 'no');
+        if (!ok){
+          Array.prototype.forEach.call(opts.children, function(c, ci){
+            if (item.opts[ci][1] === 1) c.classList.add('ok');
+          });
+        }
+        q.classList.add(ok ? 'right' : 'wrong');
+        q.appendChild(el('div', 'exp', (ok ? '✅ 答对了。' : '❌ 再想想。') + item.exp));
+        answered[i] = ok;
+        if (ok) rightCount++;
+        updateScore();
+        speakText(pair[0] + '。' + (ok ? '答对了。' : '再想想。') + item.exp);
+      };
+      opts.appendChild(o);
+    });
+    q.appendChild(opts);
+    box.appendChild(q);
+  });
+})();
+
+function updateScore(){
+  var n = Object.keys(answered).length;
+  var box = document.getElementById('scoreBox');
+  if (n === 0){ box.textContent = '已经答 0 题，答对 0 题。'; return; }
+  var tip = n === QUIZ.length
+    ? (rightCount === QUIZ.length ? '全部答对，太棒了！' : (rightCount >= 6 ? '很不错，再检查一下错的题。' : '再听一遍前面的板块，然后重试。'))
+    : '还剩 ' + (QUIZ.length - n) + ' 题。';
+  box.innerHTML = '已经答 ' + n + ' 题，答对 <b>' + rightCount + '</b> 题。' + tip;
+}
+
+/* ---------- 语音引擎 ---------- */
+var cap = document.getElementById('cap');
+var abort = false;
+var synth = window.speechSynthesis || null;
+var __voices = [], __zhVoice = null;
+
+function __pickZh(v){
+  var zh = [], i, s;
+  for (i = 0; i < v.length; i++){
+    s = v[i] || {};
+    if (/^zh|^cmn/i.test(s.lang || '') || /Chinese|中文|普通话/i.test(s.name || '')) zh.push(s);
+  }
+  if (!zh.length) return null;
+  for (i = 0; i < zh.length; i++){
+    if (/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name || '')) return zh[i];
+  }
+  return zh[0];
+}
+function __loadVoices(){
+  if (!synth) return;
+  try{
+    var v = synth.getVoices();
+    if (v && v.length){ __voices = v; if (!__zhVoice) __zhVoice = __pickZh(v); }
+  }catch(e){}
+}
+__loadVoices();
+if (synth){
+  try{
+    if ('onvoiceschanged' in synth) synth.onvoiceschanged = __loadVoices;
+    if (synth.addEventListener) synth.addEventListener('voiceschanged', __loadVoices);
+  }catch(e){}
+  var __vt = setInterval(function(){ __loadVoices(); if (__voices.length) clearInterval(__vt); }, 150);
+}
+
+function __safeText(t){
+  var s = (t == null) ? '' : String(t);
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g, ' ')
+          .replace(/&lt;/gi, '＜').replace(/&gt;/gi, '＞')
+          .replace(/</g, '＜').replace(/>/g, '＞')
+          .replace(/[ \t\r\n]{2,}/g, ' ');
+}
+
+var __unlocked = false;
+function __unlockTTS(){
+  if (!synth || __unlocked) return;
+  try{
+    var u = new SpeechSynthesisUtterance('\u3000');
+    u.volume = 0; u.lang = 'zh-CN';
+    if (__zhVoice) u.voice = __zhVoice;
+    setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+    if ((synth.getVoices() || []).length) __unlocked = true;
+  }catch(e){}
+}
+document.addEventListener('click', __unlockTTS, true);
+document.addEventListener('touchend', __unlockTTS, true);
+
+function speak(text){
+  text = __safeText(text);
+  return new Promise(function(resolve){
+    if (!text){ resolve(); return; }
+    cap.textContent = text; cap.style.display = 'block';
+    var done = false;
+    function finish(){ if (done) return; done = true; resolve(); }
+    if (synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN'; u.rate = 0.82; u.pitch = 1;
+      var vs = synth.getVoices(), i;
+      for (i = 0; i < vs.length; i++){
+        if (vs[i].lang && vs[i].lang.indexOf('zh') === 0 && vs[i].name.indexOf('Xiaoxiao') > -1){ u.voice = vs[i]; break; }
+      }
+      if (!u.voice){ for (i = 0; i < vs.length; i++){ if (vs[i].lang && vs[i].lang.indexOf('zh') === 0){ u.voice = vs[i]; break; } } }
+      if (!u.voice && __zhVoice) u.voice = __zhVoice;
+      u.onend = finish; u.onerror = finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+      var t0 = Date.now(), miss = 0;
+      function __wd(){
+        if (done) return;
+        if (Date.now() - t0 > 120000){ finish(); return; }
+        var busy = (synth && (synth.speaking || synth.pending));
+        if (busy){ miss = 0; setTimeout(__wd, 1500); return; }
+        if (Date.now() - t0 < 3500 || ++miss < 2){ setTimeout(__wd, 800); return; }
+        finish();
+      }
+      setTimeout(__wd, 3500);
+    }else{
+      setTimeout(finish, 600 + text.length * 150);
+    }
+  });
+}
+
+function speakText(t){ abort = false; return speak(t); }
+
+function stopAll(){
+  abort = true;
+  cap.style.display = 'none';
+  if (synth){ try{ synth.cancel(); }catch(e){} }
+  document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); });
+}
+
+/* ---------- 点读 + 连读 ---------- */
+function hlOnly(e){
+  document.querySelectorAll('.hl').forEach(function(x){ x.classList.remove('hl'); });
+  if (e) e.classList.add('hl');
+}
+
+document.addEventListener('click', function(ev){
+  var t = ev.target.closest('[data-say]');
+  if (!t) return;
+  if (t.tagName === 'BUTTON') return;
+  if (t.classList.contains('opt')) return;
+  ev.stopPropagation();
+  abort = false;
+  hlOnly(t);
+  speakText(t.getAttribute('data-say'));
+});
+
+function currentSection(){
+  var secs = document.querySelectorAll('section.block');
+  var best = null, bestD = 1e9;
+  secs.forEach(function(s){
+    var r = s.getBoundingClientRect();
+    var d = Math.abs(r.top - 80);
+    if (r.bottom > 120 && d < bestD){ bestD = d; best = s; }
+  });
+  return best || secs[0];
+}
+
+function readList(nodes){
+  var arr = Array.prototype.slice.call(nodes);
+  abort = false;
+  (function step(i){
+    if (abort || i >= arr.length){ cap.style.display = 'none'; return; }
+    var nd = arr[i];
+    var txt = nd.getAttribute('data-say');
+    if (!txt){ step(i + 1); return; }
+    hlOnly(nd);
+    try{ nd.scrollIntoView({ behavior: 'smooth', block: 'center' }); }catch(e){}
+    speak(txt).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+}
+
+document.getElementById('btnRead').onclick = function(){
+  var s = currentSection();
+  readList(s.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnAll').onclick = function(){
+  readList(document.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnStop').onclick = stopAll;
+
+/* ---------- 儿歌连读 ---------- */
+var SONG = [
+  '一座房，两座房，',
+  '青青的瓦，白白的墙。',
+  '三座房，四座房，',
+  '房前花果香，屋后树成行。',
+  '哪座房子最漂亮？',
+  '要数我们的小学堂。'
+];
+document.getElementById('btnSong').onclick = function(){
+  abort = false;
+  (function step(i){
+    if (abort || i >= SONG.length){ cap.style.display = 'none'; return; }
+    speak(SONG[i]).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+};
+
+/* ---------- 图片放大 / 导航高亮 / 空格停止 ---------- */
+var lb = document.getElementById('lb');
+document.querySelectorAll('.pic').forEach(function(p){
+  p.onclick = function(){
+    var img = p.querySelector('img');
+    lb.querySelector('img').src = img.src;
+    lb.style.display = 'flex';
+  };
+});
+lb.onclick = function(){ lb.style.display = 'none'; };
+
+var navLinks = Array.prototype.slice.call(document.querySelectorAll('#navi a'));
+window.addEventListener('scroll', function(){
+  var s = currentSection();
+  if (!s) return;
+  navLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + s.id); });
+}, { passive: true });
+
+document.addEventListener('keydown', function(e){
+  if (e.code === 'Space' && e.target === document.body){ e.preventDefault(); stopAll(); }
+});
+</script>
+
+</body>
+</html>

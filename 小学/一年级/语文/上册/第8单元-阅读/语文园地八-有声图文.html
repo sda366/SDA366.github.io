@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>语文园地八 · 有声图文课件</title>
+<style>
+  :root{
+    --main:#1565c0; --main2:#42a5f5; --dark:#0d47a1;
+    --sky:#0277bd; --hl:#f9a825; --ink:#33302c; --line:#e6ded4;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#fbf9f4; color:var(--ink);
+    padding-bottom:120px; -webkit-text-size-adjust:100%; }
+  .container{ max-width:900px; margin:0 auto; padding:14px 14px 30px; }
+
+  .cover{ position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#e8973a 0%,#f2b04e 55%,#f8cd82 100%);
+    color:#fff; border-radius:16px; padding:20px 20px 16px; margin-bottom:12px; }
+  .cover::after{ content:""; position:absolute; right:-40px; top:-50px; width:190px; height:190px;
+    background:radial-gradient(circle,rgba(255,255,255,.2),transparent 70%); border-radius:50%; }
+  .cover .u-tag{ display:inline-block; font-size:12.5px; background:rgba(255,255,255,.25);
+    border-radius:999px; padding:3px 12px; margin-bottom:8px; }
+  .cover h1{ font-size:25px; letter-spacing:1px; margin-bottom:6px; text-shadow:0 1px 3px rgba(150,80,0,.25); }
+  .cover .sub{ font-size:13.5px; opacity:.97; line-height:1.85; }
+  .cover .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+  .cover .chip{ font-size:12.5px; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:3px 11px; }
+
+  .map{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:12px 0 4px; }
+  .map a{ display:block; text-decoration:none; color:inherit; background:#fff;
+    border:1.5px solid var(--line); border-radius:12px; padding:9px 6px; text-align:center;
+    transition:border-color .22s, transform .22s; }
+  .map a:hover{ border-color:var(--main2); transform:translateY(-2px); }
+  .map a.cur{ border-color:var(--main); background:#f0f6ff; }
+  .map .m-no{ font-size:11px; color:#8d6e63; }
+  .map .m-t{ font-size:13px; font-weight:bold; margin-top:2px; color:var(--dark); }
+
+  .hint{ background:#fff3e0; border:1px dashed #ffcc80; border-radius:11px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-bottom:10px; }
+  .hint b{ color:#bf6a1c; }
+
+  .navi{ position:sticky; top:0; z-index:900; background:rgba(251,249,244,.97);
+    padding:8px 0 9px; margin-bottom:2px; border-bottom:1px dashed #dcd3c8;
+    display:flex; gap:6px; flex-wrap:wrap; overflow:hidden; }
+  .navi::-webkit-scrollbar{ display:none; }
+  .navi a{ flex:0 0 auto; text-decoration:none; font-size:12.5px; color:var(--main);
+    background:#fff; border:1.5px solid #cfe0f3; border-radius:999px; padding:4px 10px; white-space:nowrap; }
+  .navi a:active,.navi a.on{ background:var(--main); color:#fff; border-color:var(--main); }
+
+  .block{ margin-top:16px; }
+  .sec-title{ display:flex; align-items:center; gap:9px; font-size:17.5px; font-weight:bold;
+    color:var(--main); margin:0 0 9px; flex-wrap:wrap; }
+  .sec-title .bar{ width:6px; height:20px; background:var(--main); border-radius:3px; flex:0 0 auto; }
+  .sec-title .pg{ font-size:11.5px; font-weight:normal; color:#8d6e63;
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:1px 8px; }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  .say{ cursor:pointer; border-radius:5px; transition:background .18s, box-shadow .18s; }
+  .say:hover{ background:#fff8e1; }
+  .say.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.32); }
+
+  .bubble{ background:#fff8e1; border:1.5px solid #ffe082; border-radius:12px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-top:10px; color:#795548; cursor:pointer; }
+  .bubble b{ color:#e65100; }
+
+  /* ① 课文段落 */
+  .story{ background:#fff; border:1.5px solid var(--line); border-radius:13px; padding:18px 16px; }
+  .story .s-title{ text-align:center; font-size:24px; font-weight:bold; font-family:"KaiTi","STKaiti",serif; margin-bottom:6px; }
+  .story .s-para{ font-family:"KaiTi","STKaiti",serif; font-size:21px; line-height:2.15;
+    letter-spacing:1px; cursor:pointer; border-radius:6px; padding:2px 4px; text-indent:2em; position:relative; }
+  .story .s-para.hl{ background:#fff59d; }
+  .story .s-num{ position:absolute; left:0; top:2px; width:1.6em; height:1.6em; line-height:1.6em;
+    text-align:center; background:#e3f2fd; color:var(--dark); border-radius:50%;
+    font-size:12px; font-family:"Microsoft YaHei",sans-serif; text-indent:0; }
+  .story .s-note{ color:#8d6e63; font-size:13px; font-family:"Microsoft YaHei",sans-serif; letter-spacing:0; margin-top:10px; }
+  ruby{ ruby-align:center; }
+  rt{ font-size:10.5px; color:#c62828; font-family:"Segoe UI",Arial,sans-serif; letter-spacing:0; }
+
+  .recite{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .recite button{ flex:1; min-width:120px; border:1.5px solid #b2dfdb; background:#fff; color:var(--main);
+    border-radius:10px; padding:9px 10px; font-size:13px; cursor:pointer; font-family:inherit; }
+  .recite button:hover{ background:#e0f2f1; }
+
+  /* ② 会认字卡 */
+  .zi-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+  .zi{ background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:8px 4px 10px; text-align:center; cursor:pointer; transition:border-color .2s; }
+  .zi:hover{ border-color:#ffcc80; }
+  .zi.hl{ border-color:var(--hl); background:#fffde7; }
+  .zi .py{ font-size:11.5px; color:#c62828; height:15px; font-family:"Segoe UI",Arial,sans-serif; }
+  .zi .hz{ font-family:"KaiTi","STKaiti",serif; font-size:31px; line-height:1.22; }
+  .zi .ci{ font-size:11px; color:#6d4c41; margin-top:2px; }
+  .zi.write{ border-color:#b2dfdb; background:#f4fbfa; }
+  .zi-grid.two{ grid-template-columns:repeat(4,1fr); }
+
+  .pat{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 13px; margin-top:9px; }
+  .pat .p-lab{ font-size:11.5px; color:var(--main); background:#e3f2fd; border-radius:5px;
+    padding:1px 8px; display:inline-block; margin-bottom:5px; }
+  .pat .p-s{ font-family:"KaiTi","STKaiti",serif; font-size:19px; line-height:2.0; letter-spacing:2px; }
+  .pat .p-s b{ color:#c62828; font-size:13px; font-family:"Microsoft YaHei",sans-serif; letter-spacing:0; vertical-align:middle; }
+
+  .tzg{ width:52px; height:52px; margin:1px auto 3px; position:relative;
+    border:1.5px solid #d84315; border-radius:3px; background:#fff; }
+  .tzg::before{ content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+    background-image:linear-gradient(to right,#f0bdb4 45%,transparent 45%);
+    background-size:6px 1px; background-repeat:repeat-x; }
+  .tzg::after{ content:""; position:absolute; top:0; bottom:0; left:50%; width:1px;
+    background-image:linear-gradient(to bottom,#f0bdb4 45%,transparent 45%);
+    background-size:1px 6px; background-repeat:repeat-y; }
+  .tzg i{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:32px; font-style:normal; }
+
+  /* ③ 「一」变调卡 */
+  .tone-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-top:9px; }
+  .tone{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:12px 6px 10px;
+    text-align:center; cursor:pointer; }
+  .tone:hover{ border-color:#ffcc80; }
+  .tone.hl{ border-color:var(--hl); background:#fffde7; }
+  .tone .to-w{ font-family:"KaiTi","STKaiti",serif; font-size:22px; font-weight:bold; }
+  .tone .to-py{ font-family:"Segoe UI",Arial,sans-serif; font-size:13px; color:#c62828; margin-top:3px; }
+  .tone .to-b{ display:inline-block; font-size:11px; border-radius:999px; padding:2px 10px; margin-top:5px; color:#fff; }
+  .tone .b1{ background:#42a5f5; }
+  .tone .b2{ background:#ab47bc; }
+  .tone .b4{ background:#ef6c61; }
+
+  /* ④ 数自然段 */
+  .para-btns{ display:flex; gap:8px; flex-wrap:wrap; margin-top:9px; }
+  .para-btn{ background:#fff; border:1.5px solid #cfe0f3; border-radius:10px; padding:8px 16px;
+    font-size:14px; cursor:pointer; color:var(--dark); font-family:inherit; }
+  .para-btn:hover{ background:#f1f8ff; }
+
+  .quiz-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; align-items:start; }
+  .q{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 12px; }
+  .q.right{ border-color:#66bb6a; background:#f1f8e9; }
+  .q.wrong{ border-color:#ef9a9a; background:#ffebee; }
+  .q .q-t{ font-size:13.5px; line-height:1.75; cursor:pointer; border-radius:5px; }
+  .q .q-t b{ color:var(--main); }
+  .q .opts{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+  .q .opt{ border:1.5px solid #e0e0e0; border-radius:9px; padding:8px 10px; font-size:13.5px;
+    cursor:pointer; line-height:1.6; background:#fafafa; transition:border-color .18s, background .18s; }
+  .q .opt:hover{ border-color:#90caf9; background:#f1f8ff; }
+  .q .opt.ok{ border-color:#66bb6a; background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .q .opt.no{ border-color:#ef5350; background:#ffebee; color:#b71c1c; }
+  .q .exp{ display:none; font-size:12px; color:#4527a0; background:#ede7f6; border-radius:7px; padding:6px 9px; margin-top:7px; line-height:1.7; }
+  .q.done .exp{ display:block; }
+  .score{ margin-top:10px; text-align:center; font-size:14px; color:var(--main);
+    background:#e3f2fd; border:1px dashed #90caf9; border-radius:11px; padding:10px; }
+
+  .pic-grid{ display:grid; grid-template-columns:1fr; gap:9px; }
+  .pic{ background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:7px; text-align:center;
+    cursor:pointer; box-shadow:0 2px 10px rgba(62,39,35,.10); }
+  .pic img{ width:100%; display:block; border-radius:6px; }
+  .pic .cap{ font-size:11.5px; color:#5d4037; margin-top:5px; }
+  #lb{ position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:2000; display:none;
+    align-items:center; justify-content:center; padding:10px; cursor:zoom-out; }
+  #lb img{ max-width:100%; max-height:100%; border-radius:6px; }
+
+  .ctrl-bar{ position:fixed; left:0; right:0; bottom:0; background:rgba(13,71,161,.97);
+    display:flex; gap:7px; align-items:center; justify-content:center; padding:10px 10px; z-index:1000; flex-wrap:wrap; }
+  .ctrl-bar button{ border:none; border-radius:999px; padding:8px 13px; font-size:13.5px; cursor:pointer;
+    background:#fff; color:var(--main); font-weight:bold; font-family:inherit; }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  #cap{ position:fixed; left:50%; transform:translateX(-50%); bottom:62px; max-width:92%;
+    background:rgba(38,50,56,.93); color:#fff; border-radius:10px; padding:7px 15px;
+    font-size:14.5px; line-height:1.6; display:none; z-index:1100; text-align:center; }
+  .back-nav{ position:fixed; right:12px; bottom:60px; z-index:1200;
+    background:rgba(13,71,161,.93); color:#fff; border-radius:999px; padding:7px 16px; font-size:13px; text-decoration:none; }
+
+  @media (max-width:620px){
+    .cover h1{ font-size:20px; }
+    .navi{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+    .map{ grid-template-columns:repeat(2,1fr); }
+    .zi-grid{ grid-template-columns:repeat(4,1fr); }
+    .zi-grid.two{ grid-template-columns:repeat(2,1fr); }
+    .tone-grid{ grid-template-columns:repeat(2,1fr); }
+    .quiz-grid{ grid-template-columns:1fr; }
+    .story .s-para{ font-size:19px; }
+    .ctrl-bar button{ padding:7px 10px; font-size:12.5px; }
+    #cap{ bottom:104px; }
+  }
+  @media (min-width:900px){ #sndTip{ display:none; } }
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+  }
+  @media print{ .ctrl-bar,#cap,.back-nav,.navi,#sndTip{ display:none !important; } body{ padding-bottom:0; } }
+/* 第八单元收官合订页：新年 / 春节主题，用中国红＋暖金，与三课紫蓝系区分 */
+  :root{ --main:#c62828; --main2:#ef6c00; --dark:#8e0000; }
+  .cover{ background:linear-gradient(135deg,#b71c1c 0%,#e65100 55%,#ffe0b2 100%); }
+  .cover h1{ text-shadow:0 1px 3px rgba(90,10,0,.35); }
+  /* 桌面端胶囊导航换行，避免最后一项被裁掉 */
+  .navi{ flex-wrap:wrap; }
+  @media (max-width:620px){ .navi{ flex-wrap:nowrap; overflow-x:auto; } }
+  /* 骨架未定义的副标题（诗题下的朝代作者）在此补齐 */
+  .s-sub{ text-align:center; font-size:15px; color:#6d4c41; margin:2px 0 10px; letter-spacing:1px; cursor:pointer; }
+  .s-sub.hl{ background:#fff59d; border-radius:6px; }
+
+  /* ① 会认 6 字：模板默认 5 列会变成 5+1 落单，改 3 列正好 2 行 3 列。
+     用 id 选择器保证手机端也不被模板的 4 列覆盖。 */
+  #ziGrid{ grid-template-columns:repeat(3,1fr); }
+
+  /* ① 连一连：三个篮子（花=上下结构 / 口=独体字 / 作=左右结构） */
+  .basket-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:9px; }
+  .basket{ background:#fff; border:2px solid #ffcc80; border-radius:14px;
+    padding:12px 8px; text-align:center; cursor:pointer; }
+  .basket:hover,.basket.hl{ background:#fff59d; border-color:#f9a825; }
+  .basket .bk-e{ font-size:25px; display:block; }
+  .basket .bk-z{ font-family:"KaiTi","STKaiti",serif; font-size:31px;
+    font-weight:bold; color:#b71c1c; }
+  .basket .bk-n{ font-size:13px; font-weight:bold; color:#8e0000; margin-top:3px; }
+  .basket .bk-t{ font-size:11px; color:#6d4c41; line-height:1.6; margin-top:4px; }
+  /* 10 个字按结构分三行：橙=上下、绿=独体、蓝=左右，与篮子对应 */
+  .struct-row{ margin-top:9px; border-radius:13px; padding:11px; }
+  .struct-row.s1{ background:#fff3e0; border:1.5px solid #ffcc80; }
+  .struct-row.s2{ background:#e8f5e9; border:1.5px solid #a5d6a7; }
+  .struct-row.s3{ background:#e3f2fd; border:1.5px solid #90caf9; }
+  .struct-row .sh{ font-size:13px; font-weight:bold; color:#4e342e; margin-bottom:7px; }
+  .struct-row .sg{ display:flex; gap:8px; flex-wrap:wrap; }
+  .sz{ background:#fff; border:1.5px solid rgba(0,0,0,.09); border-radius:10px;
+    padding:7px 11px; text-align:center; cursor:pointer; min-width:58px; }
+  .sz:hover,.sz.hl{ background:#fff59d; border-color:#f9a825; }
+  .sz .sz-py{ font-family:"Segoe UI",Arial,sans-serif; font-size:10.5px;
+    color:#c62828; height:14px; }
+  .sz .sz-z{ font-family:"KaiTi","STKaiti",serif; font-size:26px; color:#3e2723; }
+  .sz .sz-tag{ display:inline-block; font-size:9.5px; background:#ffecb3;
+    color:#8e0000; border-radius:20px; padding:1px 6px; font-family:"Microsoft YaHei",sans-serif; }
+  @media (max-width:620px){ .basket-grid{ grid-template-columns:1fr; } }
+
+  /* ② 字词句运用：6 组同字词语 */
+  .word-pair-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:9px; }
+  .wp{ background:#fff; border:1.5px solid #ffcc80; border-radius:13px; padding:11px; cursor:pointer; }
+  .wp:hover,.wp.hl{ background:#fff59d; border-color:#f9a825; }
+  .wp .wp-h{ font-size:11.5px; color:#bf6a1c; font-weight:bold; margin-bottom:6px; }
+  .wp .wp-w{ font-family:"KaiTi","STKaiti",serif; font-size:20px;
+    color:#3e2723; letter-spacing:2px; }
+  .wp .wp-key{ display:inline-block; margin-top:6px; background:#ffebee; color:#c62828;
+    border-radius:20px; font-size:11px; padding:2px 9px; font-weight:bold;
+    font-family:"Microsoft YaHei",sans-serif; }
+  @media (max-width:620px){ .word-pair-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ③ 新年贺卡：课本原样 + 练习示例 */
+  .card-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-top:9px; }
+  .gcard{ background:#fff0f5; border:1.5px solid #f8bbd0; border-radius:13px; padding:13px; cursor:pointer; }
+  .gcard:hover,.gcard.hl{ background:#fff59d; border-color:#f9a825; }
+  .gcard .gc-to{ font-family:"KaiTi","STKaiti",serif; font-size:18px; color:#ad1457; }
+  .gcard .gc-msg{ font-family:"KaiTi","STKaiti",serif; font-size:20px;
+    color:#3e2723; margin:10px 0; line-height:1.8; }
+  .gcard .gc-from{ text-align:right; font-family:"KaiTi","STKaiti",serif;
+    font-size:15px; color:#6d4c41; line-height:1.7; }
+  .gcard .gc-t{ font-size:11px; color:#8d6e63; margin-top:7px; }
+  @media (max-width:620px){ .card-grid{ grid-template-columns:1fr; } }
+
+  /* ④ 书写提示：两条笔顺规则 + 田字格示范字 */
+  .rule-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-top:9px; }
+  .rule{ background:#fff; border:1.5px solid #ffcc80; border-radius:13px; padding:13px; cursor:pointer; }
+  .rule:hover,.rule.hl{ background:#fff59d; border-color:#f9a825; }
+  .rule .ru-h{ font-size:15px; font-weight:bold; color:#b71c1c; }
+  .rule .ru-z{ display:flex; gap:10px; justify-content:center; margin:11px 0; }
+  .rule .ru-z span{ width:56px; height:56px; line-height:56px; text-align:center;
+    font-family:"KaiTi","STKaiti",serif; font-size:32px; color:#b71c1c;
+    border:1.5px solid #ffcc80; border-radius:4px; background:#fff;
+    background-image:linear-gradient(to right,transparent 49%,#ffe0b2 49%,#ffe0b2 51%,transparent 51%),
+                     linear-gradient(to bottom,transparent 49%,#ffe0b2 49%,#ffe0b2 51%,transparent 51%); }
+  .rule .ru-b{ font-size:12px; color:#5d4037; line-height:1.7; }
+  @media (max-width:620px){ .rule-grid{ grid-template-columns:1fr; } }
+
+  /* ⑤ 日积月累《风》 */
+  .poem-box{ background:#fffdf7; border:1.5px solid #ffcc80; border-radius:13px; padding:14px; margin-top:9px; }
+  .poem-box .pb-t{ text-align:center; font-family:"KaiTi","STKaiti",serif;
+    font-size:27px; font-weight:bold; color:#b71c1c; cursor:pointer; }
+  .poem-l{ text-align:center; cursor:pointer; border-radius:8px; padding:7px 4px; }
+  .poem-l.hl{ background:#fff59d; }
+  .poem-l .pl-py{ font-family:"Segoe UI",Arial,sans-serif; font-size:10.5px;
+    color:#a1887f; letter-spacing:1px; }
+  .poem-l .pl-h{ font-family:"KaiTi","STKaiti",serif; font-size:24px;
+    letter-spacing:3px; color:#3e2723; }
+  .poem-l .pl-b{ font-size:11.5px; color:#6d4c41; line-height:1.6; margin-top:2px; }
+  @media (max-width:620px){ .poem-l .pl-h{ font-size:20px; } }
+
+  /* ⑥ 口语交际：三幅场景 + 办法卡 */
+  .oral-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:9px; }
+  .oral{ background:#fff; border:1.5px solid #ffab91; border-radius:13px;
+    padding:12px 9px; text-align:center; cursor:pointer; }
+  .oral:hover,.oral.hl{ background:#fff59d; border-color:#f9a825; }
+  .oral .or-e{ font-size:32px; display:block; }
+  .oral .or-h{ font-size:13px; font-weight:bold; color:#bf360c; margin:5px 0; }
+  .oral .or-b{ font-size:11.5px; color:#5d4037; line-height:1.7; }
+  .idea-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-top:9px; }
+  .idea{ background:#fff8e1; border:1.5px solid #ffe082; border-radius:13px; padding:12px; cursor:pointer; }
+  .idea:hover,.idea.hl{ background:#fff59d; border-color:#f9a825; }
+  .idea .id-n{ display:inline-block; background:#ef6c00; color:#fff; border-radius:20px;
+    font-size:11px; padding:2px 10px; font-weight:bold; font-family:"Microsoft YaHei",sans-serif; }
+  .idea .id-h{ font-size:15px; font-weight:bold; color:#8e0000; margin:6px 0 4px; }
+  .idea .id-b{ font-size:12px; color:#4e342e; line-height:1.7; }
+  @media (max-width:620px){ .oral-grid,.idea-grid{ grid-template-columns:1fr; } }
+
+  /* ⑦ 春节童谣 13 行 + 过年时间轴 */
+  .song-box{ background:#fffdf7; border:1.5px solid #ffcc80; border-radius:13px; padding:14px; margin-top:9px; }
+  .song-l{ text-align:center; cursor:pointer; border-radius:8px; padding:5px; }
+  .song-l.hl{ background:#fff59d; }
+  .song-l .sl-py{ font-family:"Segoe UI",Arial,sans-serif; font-size:10px;
+    color:#a1887f; letter-spacing:.6px; }
+  .song-l .sl-h{ font-family:"KaiTi","STKaiti",serif; font-size:22px;
+    letter-spacing:2px; color:#3e2723; }
+  /* 童谣脚注：.song-box 不是 .story，模板的 .story .s-note 管不到，这里补齐 */
+  .song-box .s-note{ color:#8d6e63; font-size:12.5px;
+    font-family:"Microsoft YaHei",sans-serif; letter-spacing:0; margin-top:11px; }
+  .time-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:9px; }
+  .tm{ background:#fff; border:1.5px solid #ffab91; border-radius:11px;
+    padding:9px 5px; text-align:center; cursor:pointer; }
+  .tm:hover,.tm.hl{ background:#fff59d; border-color:#f9a825; }
+  .tm .tm-d{ display:inline-block; background:#c62828; color:#fff; border-radius:20px;
+    font-size:11px; padding:2px 8px; font-weight:bold; font-family:"Microsoft YaHei",sans-serif; }
+  .tm .tm-w{ font-family:"KaiTi","STKaiti",serif; font-size:15px;
+    color:#8e0000; margin-top:6px; line-height:1.5; }
+  @media (max-width:620px){
+    .song-l .sl-h{ font-size:19px; }
+    .time-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <div class="cover">
+    <span class="u-tag">统编版 · 一年级上册 · 第八单元 · 语文园地八</span>
+    <h1>语文园地八</h1>
+    <p class="sub">按结构给字分类、读好同字词语、写一句新年祝福、记两条笔顺规则、背《风》、帮小兔想办法、和大人一起读《春节童谣》。<br>课本第 101~104 页，会认 6 字 · 会写 4 字 · 全单元收官</p>
+    <div class="chips"><span class="chip">连一连 10 字</span><span class="chip">会认 6 字</span><span class="chip">会写 4 字</span><span class="chip">词语 6 组</span><span class="chip">日积月累《风》</span><span class="chip">口语交际</span><span class="chip">春节童谣</span><span class="chip">闯关 10 题</span></div>
+  </div>
+
+  <div class="map">
+    <a href="课文8-比尾巴-有声图文.html"><div class="m-no">课文 8</div><div class="m-t">比尾巴</div></a>
+    <a href="课文9-乌鸦喝水-有声图文.html"><div class="m-no">课文 9</div><div class="m-t">乌鸦喝水</div></a>
+    <a href="课文10-雨点儿-有声图文.html"><div class="m-no">课文 10</div><div class="m-t">雨点儿</div></a>
+    <a class="cur" href="语文园地八-有声图文.html"><div class="m-no">园地</div><div class="m-t">语文园地八</div></a>
+  </div>
+
+  <div class="hint">
+    <b>这个园地学什么：</b>把 10 个字<b>按结构送进三个篮子</b>；发现 6 组词语里<b>都有一个相同的字</b>；
+    学写<b>新年贺卡</b>；记住「<b>先外后内</b>」「<b>先中间后两边</b>」两条笔顺规则；
+    背古诗《<b>风</b>》；帮小兔<b>大胆说出运南瓜的办法</b>；最后和大人一起读《<b>春节童谣</b>》。🏮
+    <br><span style="font-size:12px;color:#6d4c41">页面上的拼音照课本标注，只供看，不进朗读；结构说明、诗意白话、办法示例是帮你说给大家听的，课本只印字、词和原句，练习示例均已单独标明。</span>
+  </div>
+
+  <div class="navi" id="navi">
+    <a href="#b1">① 连一连</a>
+    <a href="#b2">② 读一读</a>
+    <a href="#b3">③ 写祝福</a>
+    <a href="#b4">④ 书写提示</a>
+    <a href="#b5">⑤ 日积月累</a>
+    <a href="#b6">⑥ 我会想办法</a>
+    <a href="#b7">⑦ 春节童谣</a>
+    <a href="#b8">⑧ 闯关 10 题</a>
+    <a href="#pics">课本原页</a>
+  </div>
+
+  <!-- ============ ① 识字加油站·连一连 ============ -->
+  <section class="block" id="b1">
+    <div class="sec-title"><span class="bar"></span>① 识字加油站 · 连一连
+      <span class="pg">课本第 101 页</span><span class="sec-note">点字读字，点篮子听规则</span></div>
+
+    <div class="bubble" data-say="连一连。课本上的学习伙伴提示：有些字可以分成上下两部分。三个篮子里分别写着花、口、作。花是上下结构，可以分成上下两部分；口是独体字，不能拆开；作是左右结构，可以分成左右两部分。课本已经连好三个例子：元连到花的篮子，巴连到口的篮子，叶连到作的篮子。照着样子，把剩下的字也送进对应的篮子。">
+      <b>题目：连一连。</b> 💡 学习伙伴提示：「<b>有些字可以分成上下两部分</b>」。
+      三个篮子其实是<b>三种字的结构</b>：<b>花</b>=上下结构、<b>口</b>=独体字、<b>作</b>=左右结构。
+      课本已连好 3 个例子：<b>元→花</b>、<b>巴→口</b>、<b>叶→作</b>（下面标了「课本示例」）。🧺
+    </div>
+
+    <div class="basket-grid" id="basketBox"></div>
+    <div id="structBox"></div>
+
+    <div class="recite">
+      <button id="btnStruct">🔊 按结构把 10 个字连起来读</button>
+    </div>
+
+    <div class="sec-title" style="margin-top:16px"><span class="bar"></span>识字条 · 会认 6 个字
+      <span class="pg">课本第 101 页</span><span class="sec-note">点一张读一张</span></div>
+    <div class="pat">
+      <span class="p-lab">识字条 · 连起来读</span>
+      <div class="p-s" data-say="牛，羊，爪，元，拼，音。六个字连起来读一遍。牛、羊、爪是独体字；元是上下结构；拼是左右结构；音是上下结构。其中牛、羊、爪、白还要会写。">
+        <b>牛 羊 爪 元 拼 音</b> —— 这 6 个字都在上面的「连一连」里出现过
+      </div>
+    </div>
+    <div class="zi-grid" id="ziGrid" style="margin-top:9px"></div>
+
+    <div class="sec-title" style="margin-top:16px"><span class="bar"></span>田字格 · 会写 4 个字
+      <span class="pg">课本第 101 页</span><span class="sec-note">先看笔顺，再动笔</span></div>
+    <div class="zi-grid two" id="ziwGrid"></div>
+    <div class="bubble" data-say="写字前先坐正：头正、肩平、背直、脚放平。牛字先写一短撇，再写两横，最后一竖压在竖中线上，要出头。羊字上面两点左右分开，三横长短不一样，最后一竖也要压竖中线。爪字先写短撇，再写竖撇，中间的竖要直，最后一捺舒展。白字先写一短撇，再写竖和横折，里面两横别漏写。课本上黑字示范、两格红字描红、一格自己写。">
+      <b>✍️ 写字小提醒：</b><b>牛</b>最后一竖要出头、压竖中线；<b>羊</b>两点分开、三横长短不同；
+      <b>爪</b>中间一竖要直、最后一捺舒展；<b>白</b>先短撇，里面两横别漏。
+      课本上「<b>黑字示范 → 两格红字描红 → 一格自己写</b>」。
+    </div>
+  </section>
+
+  <!-- ============ ② 字词句运用·读一读 ============ -->
+  <section class="block" id="b2">
+    <div class="sec-title"><span class="bar"></span>② 字词句运用 · 读一读
+      <span class="pg">课本第 101 页</span><span class="sec-note">点一组读一组</span></div>
+
+    <div class="bubble" data-say="读一读。课本给了十二个词语，正好分成六组。果皮和树皮都有皮字，加法和办法都有法字，回来和回答都有回字，许多和不许都有许字，到处和四处都有处字，方向和地方都有方字。每组词语里都有一个相同的字，同一个字可以和不同的字组成新词语。">
+      <b>题目：读一读。</b> 🔍 读完全部 12 个词，你会发现一个秘密：
+      <b>每组都有一个相同的字</b>——同一个字，换个伙伴就是新词。
+    </div>
+
+    <div class="word-pair-grid" id="wordBox"></div>
+
+    <div class="recite">
+      <button id="btnWords">🔊 六组词语连起来读</button>
+    </div>
+
+    <div class="bubble" data-say="一字开花。用每组里那个相同的字，还能组出别的词。皮可以组皮衣、牛皮、皮毛。法可以组方法、说法、书法。回可以组回家、回头、回声。许可以组也许、许可。处可以组长处、好处、去处。方可以组前方、东方、大方。这些都是练习示例，课本只印了上面十二个词，自己再想别的也可以。">
+      <b>🌼 一字开花（练习）：</b>用每组共同的那个字再组词，比如
+      <b>皮</b>→皮衣、牛皮；<b>法</b>→方法、书法；<b>回</b>→回家、回头；
+      <b>方</b>→前方、东方……看谁开的花最多。
+      <br><span style="font-size:12px;color:#6d4c41">上面这些是拓展练习，不是课本词语，说自己想到的词也可以。</span>
+    </div>
+  </section>
+
+  <!-- ============ ③ 写一句祝福的话 ============ -->
+  <section class="block" id="b3">
+    <div class="sec-title"><span class="bar"></span>③ 写一句祝福的话
+      <span class="pg">课本第 102 页</span><span class="sec-note">点贺卡听读</span></div>
+
+    <div class="bubble" data-say="新年快到了，给家人或朋友写一句祝福的话吧。课本上有一张小华写给妈妈的贺卡。左上方写想祝福的人，妈妈。中间写祝福的话，祝您新年快乐。右下方写自己的名字和日期，小华，十二月三十一日。写的时候，先想清楚要祝福谁，再想清楚要说哪一句祝福的话，最后别忘了署名和日期。">
+      <b>题目：新年快到了，给家人或朋友写一句祝福的话吧！</b><br>
+      📮 <b>贺卡格式</b>：<b>左上方</b>写想祝福的人 → 中间写<b>一句祝福的话</b> →
+      <b>右下方</b>写自己的名字和日期。
+    </div>
+
+    <div class="card-grid" id="cardBox"></div>
+
+    <div class="bubble" data-say="写给不同的人，称呼和祝福的话也要换一换。写给长辈可以用您，写给同学朋友可以用你。写完自己小声读一遍，看看有没有错别字，称呼、祝福、署名、日期是不是都写全了。也可以画上几颗小爱心，把贺卡送给那个人。">
+      <b>💌 写之前想三件事：</b>① 祝福<b>谁</b>（称呼）→ ② 说哪一句<b>祝福的话</b> →
+      ③ 别忘了<b>署名和日期</b>。写给长辈用「<b>您</b>」，写给同学用「<b>你</b>」。✍️
+    </div>
+  </section>
+
+  <!-- ============ ④ 书写提示 ============ -->
+  <section class="block" id="b4">
+    <div class="sec-title"><span class="bar"></span>④ 书写提示 · 两条笔顺规则
+      <span class="pg">课本第 102 页</span><span class="sec-note">点卡听规则</span></div>
+
+    <div class="bubble" data-say="书写提示。课本给了两条笔顺规则。第一条，先外后内，用月和风示范。第二条，先中间后两边，用小和水示范。写字的时候按规则一笔一笔来，字就写得又稳又好看。">
+      <b>两条笔顺规则：</b>「<b>先外后内</b>」和「<b>先中间后两边</b>」。
+      按规则一笔一笔写，字就又稳又好看。🖌️
+    </div>
+
+    <div class="rule-grid" id="ruleBox"></div>
+
+    <div class="recite">
+      <button id="btnRule">🔊 两条规则连起来读</button>
+    </div>
+  </section>
+
+  <!-- ============ ⑤ 日积月累·《风》 ============ -->
+  <section class="block" id="b5">
+    <div class="sec-title"><span class="bar"></span>⑤ 日积月累 · 《风》
+      <span class="pg">课本第 102 页</span><span class="sec-note">点一句读一句</span></div>
+
+    <div class="bubble" data-say="日积月累。古诗风，唐代诗人李峤写的。一共四句。有意思的是，四句里一个风字都没有，可是每一句都在写风。风看不见，我们却能从树叶、花朵、江浪、竹子身上看见它做过的事。">
+      <b>🔎 一个有趣的发现：</b>这首诗<b>四句里一个「风」字都没有</b>，
+      却句句都在写风——风看不见，我们从<b>树叶、春花、江浪、竹林</b>身上看见它。🍃
+    </div>
+
+    <div class="poem-box" id="poemBox"></div>
+
+    <div class="recite">
+      <button id="btnPoem">🎵 全诗连读</button>
+      <button id="btnPoemSlow">🐢 放慢背一背（每句读两遍）</button>
+    </div>
+  </section>
+
+  <!-- ============ ⑥ 口语交际·我会想办法 ============ -->
+  <section class="block" id="b6">
+    <div class="sec-title"><span class="bar"></span>⑥ 口语交际 · 我会想办法
+      <span class="pg">课本第 103 页</span><span class="sec-note">点卡听读，大胆说</span></div>
+
+    <div class="bubble" data-say="口语交际。我会想办法。小兔要把南瓜运回家，可以用哪些办法呢？快来帮它想想吧。课本给了三幅图。第一幅，小兔在南瓜地里看见一个又大又圆的南瓜。第二幅是一个问号，留给小朋友自己想办法。第三幅，南瓜已经到了蘑菇房家门口，兔妈妈正和小兔说话。课本右下角还提醒我们：大胆说出自己的想法。">
+      <b>我会想办法。</b> 题目原文：<b>小兔要把南瓜运回家，可以用哪些办法呢？快来帮它想想吧。</b><br>
+      📌 课本右下角提示：「<b>大胆说出自己的想法。</b>」——办法不止一种，说清楚就行。🐰🎃
+    </div>
+
+    <div class="oral-grid" id="oralBox"></div>
+
+    <div class="sec-title" style="margin-top:16px"><span class="bar"></span>同学想出的办法
+      <span class="pg">练习示例 · 课本留白</span><span class="sec-note">点卡听读</span></div>
+    <div class="idea-grid" id="ideaBox"></div>
+
+    <div class="recite">
+      <button id="btnIdeas">🗣️ 把办法连起来说一遍</button>
+    </div>
+
+    <div class="bubble" data-say="说办法的时候，可以用上先、再、最后，把怎么做说清楚。比如，南瓜圆圆的像轮子，我先把它立起来，再一路滚回家，最后请妈妈帮我搬进屋。也可以说说为什么选这个办法：这样最省力。想的和别人不一样没关系，只要说得清楚、说得有理，就是好办法。">
+      <b>🗣️ 怎么说得更清楚：</b>用「<b>先 → 再 → 最后</b>」把做法连起来，
+      再补一句「<b>为什么这样最省力</b>」。和别人想得不一样也没关系，
+      <b>大胆说、说清楚</b>就是好办法。🌟
+    </div>
+  </section>
+
+  <!-- ============ ⑦ 和大人一起读·春节童谣 ============ -->
+  <section class="block" id="b7">
+    <div class="sec-title"><span class="bar"></span>⑦ 和大人一起读 · 《春节童谣》
+      <span class="pg">课本第 104 页</span><span class="sec-note">点一行读一行</span></div>
+
+    <div class="bubble" data-say="和大人一起读。春节童谣。这首童谣从腊八开始，一天一天数到过大年，把过年前要做的准备都唱出来了。可以和爸爸妈妈、爷爷奶奶一人读一句，也可以拍着手打节奏读。课本第一百零四页脚注写着，本文是传统童谣，由王文宝整理，选作课文时有改动。">
+      <b>🏮 怎么读：</b>这首童谣从<b>腊八</b>一天天数到<b>大年初一初二</b>，
+      像一张过年的日程表。可以和大人<b>一人读一句</b>，或者拍着手打节奏读。
+      <br><span style="font-size:12px;color:#6d4c41">脚注：① 本文是传统童谣，由王文宝整理，选作课文时有改动。</span>
+    </div>
+
+    <div class="song-box" id="songBox"></div>
+
+    <div class="recite">
+      <button id="btnStory">🎵 全文连读</button>
+      <button id="btnFollow">🔁 跟读模式（读完一行停一停）</button>
+      <button id="btnSongSlow">🐢 放慢背一背（每行读两遍）</button>
+    </div>
+
+    <div class="sec-title" style="margin-top:16px"><span class="bar"></span>过年前的日程表
+      <span class="pg">按童谣顺序</span><span class="sec-note">点卡听读</span></div>
+    <div class="time-grid" id="timeBox"></div>
+
+    <div class="recite">
+      <button id="btnTime">📅 从腊八数到大年初二</button>
+    </div>
+
+    <div class="bubble" data-say="读后想一想。童谣里从腊八到大年初二，每一天都有要做的事：喝腊八粥、糖瓜粘、扫房子、磨豆腐、去买肉、宰公鸡、把面发、蒸馒头、三十晚上熬一宿、初一初二满街走。你家过年会做什么呢？可以问问家里的大人，再和同学说一说，也可以把自己家过年的事编成一句新童谣。">
+      <b>💬 读后想一想：</b>你家过年会做什么？问问家里的大人，
+      再和同学说一说；也可以学着童谣的样子，把自家过年的事编成一句新童谣。🧧
+    </div>
+  </section>
+
+  <!-- ============ ⑧ 闯关 ============ -->
+  <section class="block" id="b8">
+    <div class="sec-title"><span class="bar"></span>⑧ 闯关 · 10 题
+      <span class="sec-note">点题目可以听题，点选项就判对错，答完自动算分</span></div>
+    <div class="quiz-grid" id="quizBox"></div>
+    <div class="score" id="scoreBox">已经答 0 题，答对 0 题。</div>
+  </section>
+
+  <!-- ============ 课本原页 ============ -->
+  <section class="block" id="pics">
+    <div class="sec-title"><span class="bar"></span>课本原页 · 第 101~104 页<span class="sec-note">点图放大</span></div>
+    <div class="pic-grid">
+      <div class="pic"><img src="images/101a-课本第101页-语文园地八-识字加油站与字词句运用.jpg" alt="课本第101页"><div class="cap">第 101 页 · 识字加油站连一连 · 识字条 · 田字格 · 字词句运用</div></div>
+      <div class="pic"><img src="images/102a-课本第102页-书写提示与日积月累-风.jpg" alt="课本第102页"><div class="cap">第 102 页 · 写祝福语贺卡 · 书写提示 · 日积月累《风》</div></div>
+      <div class="pic"><img src="images/103a-课本第103页-口语交际-我会想办法.jpg" alt="课本第103页"><div class="cap">第 103 页 · 口语交际《我会想办法》三幅图</div></div>
+      <div class="pic"><img src="images/104a-课本第104页-和大人一起读-春节童谣.jpg" alt="课本第104页"><div class="cap">第 104 页 · 和大人一起读《春节童谣》全文 · 脚注</div></div>
+    </div>
+  </section>
+</div>
+
+<div id="lb"><img src="" alt=""></div>
+<div id="cap"></div>
+
+<div class="ctrl-bar">
+  <button id="btnRead">🔊 读这一板块</button>
+  <button id="btnAll">▶️ 整页连读</button>
+  <button id="btnStop" class="stop">⏹ 停</button>
+</div>
+<a class="back-nav" href="../index.html">← 学习中心</a>
+
+<script>
+/* ========== 公共渲染函数（由生成器统一注入） ========== */
+function el(tag, cls, html){
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html != null) e.innerHTML = html;
+  return e;
+}
+
+/* 课文 / 儿歌 / 古诗段落
+   opt.title  居中大标题（如「② 江 南」）
+   opt.sub    副标题（如「汉乐府」）
+   opt.note   脚注原文（照录课本）
+   opt.num    是否显示自然段圆号码
+   opt.cls    段落自定义类（默认 s-para）
+*/
+function renderStory(boxId, STORY, opt){
+  opt = opt || {};
+  var box = document.getElementById(boxId);
+  if (!box) return;
+  if (opt.title){
+    var t = el('div', 's-title', opt.title);
+    t.setAttribute('data-say', opt.sayTitle || opt.title.replace(/\s/g, '') + '。');
+    box.appendChild(t);
+  }
+  if (opt.sub){
+    var s = el('div', 's-sub', opt.sub);
+    s.setAttribute('data-say', opt.saySub || opt.sub);
+    box.appendChild(s);
+  }
+  STORY.forEach(function(it, i){
+    var inner = (opt.num ? '<span class="s-num">' + (i + 1) + '</span>' : '') + it.t;
+    var d = el('div', opt.cls || 's-para', inner);
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  if (opt.note) box.appendChild(el('div', 's-note', opt.note));
+}
+
+/* 会认字卡：拼音 + 大字 + 组词 */
+function renderZi(boxId, ZI){
+  var box = document.getElementById(boxId);
+  if (!box) return;
+  ZI.forEach(function(it){
+    var d = el('div', 'zi',
+      '<div class="py">' + it.p + '</div><div class="hz">' + it.z + '</div>' +
+      '<div class="ci">' + it.c + '</div>');
+    d.setAttribute('data-say', it.say || (it.z + '，' + it.c.replace(' · ', '，')));
+    box.appendChild(d);
+  });
+}
+
+/* 会写字卡：田字格 + 笔画数 + 笔顺提示（点卡朗读笔顺） */
+function renderZiw(boxId, ZIW){
+  var box = document.getElementById(boxId);
+  if (!box) return;
+  ZIW.forEach(function(it){
+    var d = el('div', 'zi write',
+      '<div class="py">' + it.p + '</div>' +
+      '<div class="tzg"><i>' + it.tzg + '</i></div>' +
+      '<div class="ci">' + it.c + '</div>' +
+      '<div class="ci" style="color:#8d6e63">' + it.meta + '</div>' +
+      '<div class="ci" style="color:#1565c0;background:#e3f2fd;border-radius:5px;padding:2px 4px;margin-top:3px">' + it.tip + '</div>');
+    d.setAttribute('data-say', it.z + '，' + it.tip);
+    box.appendChild(d);
+  });
+}
+
+/* 闯关 8 题：点题目读「题目+选项」，点选项读选项+判分反馈 */
+var answered = {}, rightCount = 0;
+function renderQuiz(QUIZ, boxId){
+  var box = document.getElementById(boxId || 'quizBox');
+  if (!box) return;
+  QUIZ.forEach(function(item, i){
+    var q = el('div', 'q');
+    var qt = el('div', 'q-t say', '<b>' + (i + 1) + '.</b> ' + item.q);
+    qt.setAttribute('data-say', item.say);
+    q.appendChild(qt);
+    var opts = el('div', 'opts');
+    item.opts.forEach(function(pair){
+      var o = el('div', 'opt', pair[0]);
+      o.onclick = function(){
+        if (q.classList.contains('done')) return;
+        q.classList.add('done');
+        var ok = pair[1] === 1;
+        o.classList.add(ok ? 'ok' : 'no');
+        if (!ok){
+          Array.prototype.forEach.call(opts.children, function(c, ci){
+            if (item.opts[ci][1] === 1) c.classList.add('ok');
+          });
+        }
+        q.classList.add(ok ? 'right' : 'wrong');
+        q.appendChild(el('div', 'exp', (ok ? '✅ 答对了。' : '❌ 再想想。') + item.exp));
+        answered[i] = ok;
+        if (ok) rightCount++;
+        updateScore();
+        speakText(pair[0] + '。' + (ok ? '答对了。' : '再想想。') + item.exp);
+      };
+      opts.appendChild(o);
+    });
+    q.appendChild(opts);
+    box.appendChild(q);
+  });
+}
+function updateScore(){
+  var n = Object.keys(answered).length;
+  var box = document.getElementById('scoreBox');
+  if (!box) return;
+  if (n === 0){ box.textContent = '已经答 0 题，答对 0 题。'; return; }
+  var total = (typeof QUIZ !== 'undefined' && QUIZ.length) ? QUIZ.length : 8;
+  var tip = n === total
+    ? (rightCount === total ? '全部答对，太棒了！' : (rightCount >= 6 ? '很不错，再检查一下错的题。' : '再听一遍前面的板块，然后重试。'))
+    : '还剩 ' + (total - n) + ' 题。';
+  box.innerHTML = '已经答 ' + n + ' 题，答对 <b>' + rightCount + '</b> 题。' + tip;
+}
+
+/* 全文连读 / 跟读模式（按钮存在才绑定；跟读每句留 4 秒给学生） */
+function bindStoryButtons(STORY, sel){
+  var nodes = sel ? document.querySelectorAll(sel) : document.querySelectorAll('#storyBox .s-para');
+  function hlPara(i){ hlOnly(nodes[i]); }
+  var a = document.getElementById('btnStory');
+  if (a) a.onclick = function(){
+    abort = false;
+    (function step(i){
+      if (abort || i >= STORY.length){ cap.style.display = 'none'; return; }
+      hlPara(i);
+      speak(STORY[i].say).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+  var b = document.getElementById('btnFollow');
+  if (b) b.onclick = function(){
+    abort = false;
+    (function step(i){
+      if (abort || i >= STORY.length){ cap.style.display = 'none'; return; }
+      hlPara(i);
+      cap.textContent = '👂 听：' + STORY[i].say + ' —— 该你读啦！';
+      cap.style.display = 'block';
+      speak(STORY[i].say).then(function(){
+        if (abort) return;
+        cap.textContent = '🎤 该你读啦！（停 4 秒）';
+        return new Promise(function(res){ setTimeout(res, 4000); });
+      }).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+}
+
+/* 自定义台词连读：按传入的字符串数组逐句朗读并高亮对应节点 */
+function bindSeqRead(btnId, texts, sel){
+  var btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.onclick = function(){
+    var nodes = document.querySelectorAll(sel);
+    abort = false;
+    (function step(i){
+      if (abort || i >= texts.length){ cap.style.display = 'none'; return; }
+      if (nodes[i]) hlOnly(nodes[i]);
+      speak(texts[i]).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+}
+
+/* ============================================================
+   语文园地八（课本第 101~104 页逐字录入，一页教材 = 一个板块）
+   101 页：识字加油站连一连 / 识字条 6 字 / 田字格 4 字 / 字词句运用读一读 6 组
+   102 页：写一句祝福的话（承接字词句运用）/ 书写提示两条规则 / 日积月累《风》
+   103 页：口语交际《我会想办法》
+   104 页：和大人一起读《春节童谣》13 行 + 脚注
+   朗读红线：带调拼音、中文弯引号、省略号一律只作显示，不进 data-say。
+   「连一连」三种结构答案依据教材示例连线（元→花/巴→口/叶→作）与教材教学用书。
+   ============================================================ */
+
+/* ① 三个篮子：花=上下结构、口=独体字、作=左右结构 */
+var BASKETS = [
+  { z:'花', n:'上下结构', t:'能分成<b>上下两部分</b>，上面一部分、下面一部分。',
+    say:'第一个篮子是花。花是上下结构，能分成上下两部分，上面是草字头，下面是变化的化。像花这样的字，要放进这个篮子。' },
+  { z:'口', n:'独体字', t:'<b>不能拆开</b>，整个字就是一个整体。',
+    say:'第二个篮子是口。口是独体字，不能拆开，整个字就是一个整体。像口这样的字，要放进这个篮子。' },
+  { z:'作', n:'左右结构', t:'能分成<b>左右两部分</b>，左边一部分、右边一部分。',
+    say:'第三个篮子是作。作是左右结构，能分成左右两部分，左边是单人旁，右边是乍。像作这样的字，要放进这个篮子。' }
+];
+
+/* ① 10 个字按结构分三行：py 只给课本识字条标了拼音的 6 个字，其余留空不臆断 */
+var STRUCT = [
+  { k:'s1', h:'🌼 放进「花」篮子 · 上下结构（3 个）', list:[
+    { z:'元', py:'yuán', eg:1, say:'元，上下结构，放进花的篮子。这是课本已经连好的例子。' },
+    { z:'只', py:'', say:'只，上下结构，上面是口，下面是两点，放进花的篮子。' },
+    { z:'音', py:'yīn', say:'音，上下结构，上面是立，下面是日，放进花的篮子。' }
+  ]},
+  { k:'s2', h:'🧩 放进「口」篮子 · 独体字（5 个）', list:[
+    { z:'巴', py:'', eg:1, say:'巴，独体字，不能拆开，放进口的篮子。这是课本已经连好的例子。' },
+    { z:'牛', py:'niú', say:'牛，独体字，不能拆开，放进口的篮子。' },
+    { z:'羊', py:'yáng', say:'羊，独体字，不能拆开，放进口的篮子。' },
+    { z:'爪', py:'zhuǎ', say:'爪，独体字，不能拆开，放进口的篮子。' },
+    { z:'白', py:'', say:'白，独体字，不能拆开，放进口的篮子。' }
+  ]},
+  { k:'s3', h:'🧭 放进「作」篮子 · 左右结构（2 个）', list:[
+    { z:'叶', py:'', eg:1, say:'叶，左右结构，左边是口，右边是十，放进作的篮子。这是课本已经连好的例子。' },
+    { z:'拼', py:'pīn', say:'拼，左右结构，左边是提手旁，右边是并，放进作的篮子。' }
+  ]}
+];
+
+/* ① 会认 6 字（课本第 101 页识字条：牛 羊 爪 元 拼 音） */
+var ZI = [
+  { z:'牛', p:'niú', c:'黄牛 · 水牛' },
+  { z:'羊', p:'yáng', c:'山羊 · 羊毛' },
+  { z:'爪', p:'zhuǎ', c:'爪子 · 鸡爪' },
+  { z:'元', p:'yuán', c:'元旦 · 一元' },
+  { z:'拼', p:'pīn', c:'拼音 · 拼图' },
+  { z:'音', p:'yīn', c:'声音 · 音乐' }
+];
+
+/* ① 会写 4 字（课本第 101 页田字格：牛 羊 爪 白） */
+var ZIW = [
+  { z:'牛', p:'niú', c:'黄牛 · 水牛', tzg:'牛', meta:'4 画 · 独体字',
+    tip:'笔顺：撇、横、横、竖。先写一短撇，再写两横，最后一竖压在竖中线上，一定要出头，别写成中午的午。' },
+  { z:'羊', p:'yáng', c:'山羊 · 羊毛', tzg:'羊', meta:'6 画 · 独体字',
+    tip:'笔顺：点、撇、横、横、横、竖。上面左点右撇要分开，三横长短不一样，最后一竖压竖中线，要写直。' },
+  { z:'爪', p:'zhuǎ', c:'爪子 · 鸡爪', tzg:'爪', meta:'4 画 · 独体字',
+    tip:'笔顺：撇、撇、竖、捺。第一撇短一点，第二撇是竖撇，中间一竖要直，最后一捺向右下舒展。' },
+  { z:'白', p:'bái', c:'白色 · 明白', tzg:'白', meta:'5 画 · 独体字',
+    tip:'笔顺：撇、竖、横折、横、横。先写上面一短撇，再写竖和横折，里面的两横别漏写，最后封口。' }
+];
+
+/* ② 字词句运用：6 组同字词语，逐字照录课本 */
+var WORDS = [
+  { h:'第 1 组', a:'果皮', b:'树皮', k:'皮',
+    say:'第一组。果皮，树皮。两个词里都有皮字。' },
+  { h:'第 2 组', a:'加法', b:'办法', k:'法',
+    say:'第二组。加法，办法。两个词里都有法字。' },
+  { h:'第 3 组', a:'回来', b:'回答', k:'回',
+    say:'第三组。回来，回答。两个词里都有回字。' },
+  { h:'第 4 组', a:'许多', b:'不许', k:'许',
+    say:'第四组。许多，不许。两个词里都有许字。' },
+  { h:'第 5 组', a:'到处', b:'四处', k:'处',
+    say:'第五组。到处，四处。两个词里都有处字。' },
+  { h:'第 6 组', a:'方向', b:'地方', k:'方',
+    say:'第六组。方向，地方。两个词里都有方字。' }
+];
+
+/* ③ 新年贺卡：第 1 张课本原样，其余标注为练习示例 */
+var CARDS = [
+  { to:'妈妈：', msg:'祝您新年快乐！', from:'小华<br>12月31日', t:'课本第 102 页贺卡原样',
+    say:'课本上的贺卡。左上方写，妈妈。中间写，祝您新年快乐。右下方写，小华，十二月三十一日。' },
+  { to:'爸爸：', msg:'祝您新年大吉！', from:'元元<br>12月31日', t:'练习示例，不是课本原文',
+    say:'练习一。写给爸爸。左上方写，爸爸。中间写，祝您新年大吉。右下方写，元元，十二月三十一日。' },
+  { to:'奶奶：', msg:'祝您身体健康！', from:'小文<br>12月31日', t:'练习示例，不是课本原文',
+    say:'练习二。写给奶奶。左上方写，奶奶。中间写，祝您身体健康。右下方写，小文，十二月三十一日。' },
+  { to:'小力：', msg:'祝你天天开心！', from:'小语<br>12月31日', t:'练习示例，不是课本原文',
+    say:'练习三。写给好朋友。左上方写，小力。中间写，祝你天天开心。右下方写，小语，十二月三十一日。写给同学用你，写给长辈用您。' }
+];
+
+/* ④ 书写提示两条笔顺规则 + 示范字（照录课本） */
+var RULES = [
+  { h:'先外后内', zs:['月','风'],
+    b:'先写外面的框，再写里面的部分。<b>月</b>先写撇、横折钩，再写里面两横；<b>风</b>先写撇、横折弯钩，再写里面的撇和点。',
+    say:'第一条笔顺规则，先外后内。课本用月和风示范。先写外面的框，再写里面的部分。月先写撇和横折钩，再写里面两横；风先写外面的框，再写里面的撇和点。' },
+  { h:'先中间后两边', zs:['小','水'],
+    b:'先写中间一笔，再写左右两边。<b>小</b>先写中间竖钩，再写左右两点；<b>水</b>先写中间竖钩，再写左右两边的笔画。',
+    say:'第二条笔顺规则，先中间后两边。课本用小和水示范。先写中间一笔，再写左右两边。小先写中间的竖钩，再写左右两点；水也先写中间的竖钩，再写两边。' }
+];
+
+/* ⑤ 日积月累《风》〔唐〕李峤：4 句逐字照录，拼音照课本只作显示 */
+var POEM = [
+  { py:'jiě luò sān qiū yè', t:'解落三秋叶，', b:'风能吹落深秋的树叶。',
+    say:'解落三秋叶。风能吹落深秋的树叶。' },
+  { py:'néng kāi èr yuè huā', t:'能开二月花。', b:'风能吹开早春二月的鲜花。',
+    say:'能开二月花。风能吹开早春二月的鲜花。' },
+  { py:'guò jiāng qiān chǐ làng', t:'过江千尺浪，', b:'风刮过江面，掀起很高的浪。',
+    say:'过江千尺浪。风刮过江面，掀起很高的浪。' },
+  { py:'rù zhú wàn gān xié', t:'入竹万竿斜。', b:'风吹进竹林，许多竹子都倾斜了。',
+    say:'入竹万竿斜。风吹进竹林，许多竹子都倾斜了。' }
+];
+
+/* ⑥ 口语交际：课本三幅图（第二幅是留给学生的问号框） */
+var ORAL = [
+  { e:'🐰🎃', h:'第一幅 · 看见大南瓜', b:'小兔在南瓜地里看见一个又大又圆的南瓜，正想着怎么把它弄回家。',
+    say:'第一幅图。小兔在南瓜地里，看见一个又大又圆的南瓜，正想着怎么把它运回家。' },
+  { e:'❓', h:'第二幅 · 留给你想', b:'课本这里是一个空白的问号框：可以用哪些办法呢？',
+    say:'第二幅图。课本留了一个空白的问号框，让小朋友自己想一想，可以用哪些办法。' },
+  { e:'🏠🐰', h:'第三幅 · 到家了', b:'南瓜已经到了蘑菇房家门口，兔妈妈正和小兔说话。',
+    say:'第三幅图。南瓜已经到了蘑菇房家门口，兔妈妈正和小兔说话。小兔把办法讲给妈妈听。' }
+];
+
+/* ⑥ 办法卡：课本留白、答案开放，全部标明为练习示例 */
+var IDEAS = [
+  { n:'办法 1', h:'立起来滚回家', b:'南瓜圆圆的像轮子，先把它立起来，再一路滚回家，最省力。',
+    say:'办法一。南瓜圆圆的像轮子，先把它立起来，再一路滚回家，这样最省力。' },
+  { n:'办法 2', h:'请朋友一起抬', b:'找好朋友来帮忙，一人抬一边，一起把南瓜抬回家。',
+    say:'办法二。找好朋友来帮忙，一人抬一边，一起把南瓜抬回家。' },
+  { n:'办法 3', h:'用小车或篮子装', b:'推来小车、找来大篮子，把南瓜装进去运回家。',
+    say:'办法三。推来小车，或者找来大篮子，把南瓜装进去运回家。' },
+  { n:'办法 4', h:'请大人帮一把', b:'搬不动就请大人帮忙，也可以先把办法说给大人听再动手。',
+    say:'办法四。搬不动就请大人帮忙，也可以先把自己的办法说给大人听，再动手试一试。' }
+];
+
+/* ⑦ 《春节童谣》13 行：逐字照录，拼音照课本只作显示 */
+var SONG = [
+  { py:'xiǎo hái xiǎo hái nǐ bié chán', t:'小孩小孩你别馋，', say:'小孩小孩你别馋。' },
+  { py:'guò le là bā jiù shì nián', t:'过了腊八就是年。', say:'过了腊八就是年。' },
+  { py:'là bā zhōu，hē jǐ tiān', t:'腊八粥，喝几天，', say:'腊八粥，喝几天。' },
+  { py:'lī li lā lā èr shí sān', t:'哩哩啦啦二十三。', say:'哩哩啦啦二十三。' },
+  { py:'èr shí sān，táng guā zhān', t:'二十三，糖瓜粘。', say:'二十三，糖瓜粘。' },
+  { py:'èr shí sì，sǎo fáng zi', t:'二十四，扫房子。', say:'二十四，扫房子。' },
+  { py:'èr shí wǔ，mò dòu fu', t:'二十五，磨豆腐。', say:'二十五，磨豆腐。' },
+  { py:'èr shí liù，qù mǎi ròu', t:'二十六，去买肉。', say:'二十六，去买肉。' },
+  { py:'èr shí qī，zǎi gōng jī', t:'二十七，宰公鸡。', say:'二十七，宰公鸡。' },
+  { py:'èr shí bā，bǎ miàn fā', t:'二十八，把面发。', say:'二十八，把面发。' },
+  { py:'èr shí jiǔ，zhēng mán tou', t:'二十九，蒸馒头。', say:'二十九，蒸馒头。' },
+  { py:'sān shí wǎn shang áo yì xiǔ', t:'三十晚上熬一宿，', say:'三十晚上熬一宿。' },
+  { py:'chū yī chū èr mǎn jiē zǒu', t:'初一初二满街走。', say:'初一初二满街走。' }
+];
+
+/* ⑦ 过年时间轴：10 个节点全部取自童谣原句 */
+var TIME = [
+  { d:'腊八', w:'喝腊八粥', say:'腊八，喝腊八粥。' },
+  { d:'二十三', w:'糖瓜粘', say:'二十三，糖瓜粘。' },
+  { d:'二十四', w:'扫房子', say:'二十四，扫房子。' },
+  { d:'二十五', w:'磨豆腐', say:'二十五，磨豆腐。' },
+  { d:'二十六', w:'去买肉', say:'二十六，去买肉。' },
+  { d:'二十七', w:'宰公鸡', say:'二十七，宰公鸡。' },
+  { d:'二十八', w:'把面发', say:'二十八，把面发。' },
+  { d:'二十九', w:'蒸馒头', say:'二十九，蒸馒头。' },
+  { d:'三十晚上', w:'熬一宿', say:'三十晚上熬一宿。' },
+  { d:'初一初二', w:'满街走', say:'初一初二满街走。' }
+];
+
+/* ⑧ 闯关 10 题：覆盖本园地 8 个板块 */
+var QUIZ = [
+  { q:'「花」是什么结构的字？',
+    say:'第一题。花是什么结构的字？选项一，上下结构。选项二，左右结构。',
+    opts:[['上下结构',1],['左右结构',0]],
+    exp:'花能分成上下两部分，是上下结构，所以它是第一个篮子。' },
+  { q:'「作」是什么结构的字？',
+    say:'第二题。作是什么结构的字？选项一，左右结构。选项二，独体字。',
+    opts:[['左右结构',1],['独体字',0]],
+    exp:'作左边是单人旁、右边是乍，能分成左右两部分，是左右结构。' },
+  { q:'下面哪个字是独体字？',
+    say:'第三题。下面哪个字是独体字？选项一，牛。选项二，拼。',
+    opts:[['牛',1],['拼',0]],
+    exp:'牛不能拆开，是独体字，放进口的篮子；拼是左右结构，放进作的篮子。' },
+  { q:'「果皮、树皮」这两个词里都有哪个字？',
+    say:'第四题。果皮、树皮，这两个词里都有哪个字？选项一，皮。选项二，法。',
+    opts:[['皮',1],['法',0]],
+    exp:'果皮和树皮都有皮字；加法和办法才都有法字。' },
+  { q:'「先外后内」这条规则，课本用哪两个字示范？',
+    say:'第五题。先外后内，这条笔顺规则课本用哪两个字示范？选项一，月和风。选项二，小和水。',
+    opts:[['月、风',1],['小、水',0]],
+    exp:'先外后内用月和风示范；先中间后两边用小和水示范。' },
+  { q:'《风》这首诗的作者是谁？',
+    say:'第六题。古诗风的作者是谁？选项一，李峤。选项二，李白。',
+    opts:[['李峤',1],['李白',0]],
+    exp:'课本第一百零二页写着，唐代李峤。李白是静夜思、古朗月行的作者。' },
+  { q:'「解落三秋叶」的下一句是什么？',
+    say:'第七题。解落三秋叶的下一句是什么？选项一，能开二月花。选项二，过江千尺浪。',
+    opts:[['能开二月花',1],['过江千尺浪',0]],
+    exp:'四句顺序是：解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。' },
+  { q:'童谣里「二十四」要做什么？',
+    say:'第八题。春节童谣里，二十四要做什么？选项一，扫房子。选项二，磨豆腐。',
+    opts:[['扫房子',1],['磨豆腐',0]],
+    exp:'童谣唱的是二十四，扫房子；二十五才是磨豆腐。' },
+  { q:'《春节童谣》的脚注说由谁整理？',
+    say:'第九题。春节童谣的脚注说由谁整理？选项一，王文宝。选项二，金波。',
+    opts:[['王文宝',1],['金波',0]],
+    exp:'课本第一百零四页脚注写着，本文是传统童谣，由王文宝整理，选作课文时有改动。金波是上一课雨点儿的作者。' },
+  { q:'写贺卡时，名字和日期写在哪里？',
+    say:'第十题。写贺卡时，名字和日期写在哪里？选项一，右下方。选项二，左上方。',
+    opts:[['右下方',1],['左上方',0]],
+    exp:'左上方写想祝福的人，中间写祝福的话，右下方写自己的名字和日期。' }
+];
+
+/* ---------- 渲染 ---------- */
+renderZi('ziGrid', ZI);
+renderZiw('ziwGrid', ZIW);
+renderQuiz(QUIZ);
+
+/* ① 三个篮子 */
+(function(){
+  var box = document.getElementById('basketBox');
+  var emo = ['🌼','🧩','🧭'];
+  BASKETS.forEach(function(it, i){
+    var d = el('div', 'basket',
+      '<span class="bk-e">' + emo[i] + '</span><div class="bk-z">' + it.z + '</div>' +
+      '<div class="bk-n">' + it.n + '</div><div class="bk-t">' + it.t + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* ① 10 个字按结构分三行 */
+(function(){
+  var out = document.getElementById('structBox');
+  var all = [];
+  STRUCT.forEach(function(grp){
+    var row = el('div', 'struct-row ' + grp.k, '<div class="sh">' + grp.h + '</div>');
+    var g = el('div', 'sg');
+    grp.list.forEach(function(it){
+      var d = el('div', 'sz',
+        '<div class="sz-py">' + it.py + '</div><div class="sz-z">' + it.z + '</div>' +
+        (it.eg ? '<span class="sz-tag">课本示例</span>' : ''));
+      d.setAttribute('data-say', it.say);
+      g.appendChild(d);
+      all.push({ say:it.say, node:d });
+    });
+    row.appendChild(g);
+    out.appendChild(row);
+  });
+  /* 按结构连起来读：用同一批节点逐个高亮 */
+  var btn = document.getElementById('btnStruct');
+  btn.onclick = function(){
+    abort = false;
+    (function step(i){
+      if (abort || i >= all.length){ cap.style.display = 'none'; return; }
+      hlOnly(all[i].node);
+      speak(all[i].say).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+})();
+
+/* ② 6 组同字词语 */
+(function(){
+  var box = document.getElementById('wordBox');
+  WORDS.forEach(function(it){
+    var d = el('div', 'wp',
+      '<div class="wp-h">' + it.h + '</div><div class="wp-w">' + it.a + '　' + it.b + '</div>' +
+      '<span class="wp-key">都有「' + it.k + '」</span>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  bindSeqRead('btnWords', WORDS.map(function(x){ return x.say; }), '#wordBox .wp');
+})();
+
+/* ③ 新年贺卡 */
+(function(){
+  var box = document.getElementById('cardBox');
+  CARDS.forEach(function(it){
+    var d = el('div', 'gcard',
+      '<div class="gc-to">' + it.to + '</div><div class="gc-msg">' + it.msg + '</div>' +
+      '<div class="gc-from">' + it.from + '</div><div class="gc-t">' + it.t + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+})();
+
+/* ④ 两条笔顺规则 */
+(function(){
+  var box = document.getElementById('ruleBox');
+  RULES.forEach(function(it){
+    var zs = '';
+    it.zs.forEach(function(z){ zs += '<span>' + z + '</span>'; });
+    var d = el('div', 'rule',
+      '<div class="ru-h">' + it.h + '</div><div class="ru-z">' + zs + '</div>' +
+      '<div class="ru-b">' + it.b + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  bindSeqRead('btnRule', RULES.map(function(x){ return x.say; }), '#ruleBox .rule');
+})();
+
+/* ⑤ 《风》4 句 + 全诗连读 + 放慢背一背 */
+(function(){
+  var box = document.getElementById('poemBox');
+  var t = el('div', 'pb-t', '风');
+  t.setAttribute('data-say', '古诗，风。唐代诗人李峤。');
+  box.appendChild(t);
+  var a = el('div', 's-sub', '〔唐〕李峤');
+  a.setAttribute('data-say', '唐代，李峤。');
+  box.appendChild(a);
+  POEM.forEach(function(it){
+    var d = el('div', 'poem-l',
+      '<div class="pl-py">' + it.py + '</div><div class="pl-h">' + it.t + '</div>' +
+      '<div class="pl-b">' + it.b + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  bindSeqRead('btnPoem', POEM.map(function(x){ return x.say; }), '#poemBox .poem-l');
+  document.getElementById('btnPoemSlow').onclick = function(){
+    var nodes = document.querySelectorAll('#poemBox .poem-l');
+    var lines = [];
+    POEM.forEach(function(x){ lines.push(x.say); lines.push(x.say); });
+    abort = false;
+    (function step(i){
+      if (abort || i >= lines.length){ cap.style.display = 'none'; return; }
+      if (nodes[Math.floor(i / 2)]) hlOnly(nodes[Math.floor(i / 2)]);
+      speak(lines[i]).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+})();
+
+/* ⑥ 口语交际三幅图 + 办法卡 */
+(function(){
+  var box = document.getElementById('oralBox');
+  ORAL.forEach(function(it){
+    var d = el('div', 'oral',
+      '<span class="or-e">' + it.e + '</span><div class="or-h">' + it.h + '</div>' +
+      '<div class="or-b">' + it.b + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  var ib = document.getElementById('ideaBox');
+  IDEAS.forEach(function(it){
+    var d = el('div', 'idea',
+      '<span class="id-n">' + it.n + '</span><div class="id-h">' + it.h + '</div>' +
+      '<div class="id-b">' + it.b + '</div>');
+    d.setAttribute('data-say', it.say);
+    ib.appendChild(d);
+  });
+  bindSeqRead('btnIdeas', IDEAS.map(function(x){ return x.say; }), '#ideaBox .idea');
+})();
+
+/* ⑦ 《春节童谣》13 行 + 连读 / 跟读 / 放慢背一背 */
+(function(){
+  var box = document.getElementById('songBox');
+  SONG.forEach(function(it){
+    var d = el('div', 'song-l',
+      '<div class="sl-py">' + it.py + '</div><div class="sl-h">' + it.t + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  box.appendChild(el('div', 's-note', '① 本文是传统童谣，由王文宝整理，选作课文时有改动。'));
+  bindStoryButtons(SONG, '#songBox .song-l');
+  document.getElementById('btnSongSlow').onclick = function(){
+    var nodes = document.querySelectorAll('#songBox .song-l');
+    var lines = [];
+    SONG.forEach(function(x){ lines.push(x.say); lines.push(x.say); });
+    abort = false;
+    (function step(i){
+      if (abort || i >= lines.length){ cap.style.display = 'none'; return; }
+      if (nodes[Math.floor(i / 2)]) hlOnly(nodes[Math.floor(i / 2)]);
+      speak(lines[i]).then(function(){ if (!abort) step(i + 1); });
+    })(0);
+  };
+})();
+
+/* ⑦ 过年时间轴 10 节点 */
+(function(){
+  var box = document.getElementById('timeBox');
+  TIME.forEach(function(it){
+    var d = el('div', 'tm',
+      '<span class="tm-d">' + it.d + '</span><div class="tm-w">' + it.w + '</div>');
+    d.setAttribute('data-say', it.say);
+    box.appendChild(d);
+  });
+  bindSeqRead('btnTime', TIME.map(function(x){ return x.say; }), '#timeBox .tm');
+})();
+
+/* ---------- 语音引擎 ---------- */
+var cap = document.getElementById('cap');
+var abort = false;
+var synth = window.speechSynthesis || null;
+var __voices = [], __zhVoice = null;
+
+function __pickZh(v){
+  var zh = [], i, s;
+  for (i = 0; i < v.length; i++){
+    s = v[i] || {};
+    if (/^zh|^cmn/i.test(s.lang || '') || /Chinese|中文|普通话/i.test(s.name || '')) zh.push(s);
+  }
+  if (!zh.length) return null;
+  for (i = 0; i < zh.length; i++){
+    if (/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name || '')) return zh[i];
+  }
+  return zh[0];
+}
+function __loadVoices(){
+  if (!synth) return;
+  try{
+    var v = synth.getVoices();
+    if (v && v.length){ __voices = v; if (!__zhVoice) __zhVoice = __pickZh(v); }
+  }catch(e){}
+}
+__loadVoices();
+if (synth){
+  try{
+    if ('onvoiceschanged' in synth) synth.onvoiceschanged = __loadVoices;
+    if (synth.addEventListener) synth.addEventListener('voiceschanged', __loadVoices);
+  }catch(e){}
+  var __vt = setInterval(function(){ __loadVoices(); if (__voices.length) clearInterval(__vt); }, 150);
+}
+
+function __safeText(t){
+  var s = (t == null) ? '' : String(t);
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g, ' ')
+          .replace(/&lt;/gi, '＜').replace(/&gt;/gi, '＞')
+          .replace(/</g, '＜').replace(/>/g, '＞')
+          .replace(/[ \t\r\n]{2,}/g, ' ');
+}
+
+var __unlocked = false;
+function __unlockTTS(){
+  if (!synth || __unlocked) return;
+  try{
+    var u = new SpeechSynthesisUtterance('\u3000');
+    u.volume = 0; u.lang = 'zh-CN';
+    if (__zhVoice) u.voice = __zhVoice;
+    setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+    if ((synth.getVoices() || []).length) __unlocked = true;
+  }catch(e){}
+}
+document.addEventListener('click', __unlockTTS, true);
+document.addEventListener('touchend', __unlockTTS, true);
+
+function speak(text){
+  text = __safeText(text);
+  return new Promise(function(resolve){
+    if (!text){ resolve(); return; }
+    cap.textContent = text; cap.style.display = 'block';
+    var done = false;
+    function finish(){ if (done) return; done = true; resolve(); }
+    if (synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN'; u.rate = 0.82; u.pitch = 1;
+      var vs = synth.getVoices(), i;
+      for (i = 0; i < vs.length; i++){
+        if (vs[i].lang && vs[i].lang.indexOf('zh') === 0 && vs[i].name.indexOf('Xiaoxiao') > -1){ u.voice = vs[i]; break; }
+      }
+      if (!u.voice){ for (i = 0; i < vs.length; i++){ if (vs[i].lang && vs[i].lang.indexOf('zh') === 0){ u.voice = vs[i]; break; } } }
+      if (!u.voice && __zhVoice) u.voice = __zhVoice;
+      u.onend = finish; u.onerror = finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+      var t0 = Date.now(), miss = 0;
+      function __wd(){
+        if (done) return;
+        if (Date.now() - t0 > 120000){ finish(); return; }
+        var busy = (synth && (synth.speaking || synth.pending));
+        if (busy){ miss = 0; setTimeout(__wd, 1500); return; }
+        if (Date.now() - t0 < 3500 || ++miss < 2){ setTimeout(__wd, 800); return; }
+        finish();
+      }
+      setTimeout(__wd, 3500);
+    }else{
+      setTimeout(finish, 600 + text.length * 150);
+    }
+  });
+}
+
+function speakText(t){ abort = false; return speak(t); }
+
+function stopAll(){
+  abort = true;
+  cap.style.display = 'none';
+  if (synth){ try{ synth.cancel(); }catch(e){} }
+  document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); });
+}
+
+/* ---------- 点读 + 连读 ---------- */
+function hlOnly(e){
+  document.querySelectorAll('.hl').forEach(function(x){ x.classList.remove('hl'); });
+  if (e) e.classList.add('hl');
+}
+
+document.addEventListener('click', function(ev){
+  var t = ev.target.closest('[data-say]');
+  if (!t) return;
+  if (t.tagName === 'BUTTON') return;
+  if (t.classList.contains('opt')) return;
+  ev.stopPropagation();
+  abort = false;
+  hlOnly(t);
+  speakText(t.getAttribute('data-say'));
+});
+
+function currentSection(){
+  var secs = document.querySelectorAll('section.block');
+  var best = null, bestD = 1e9;
+  secs.forEach(function(s){
+    var r = s.getBoundingClientRect();
+    var d = Math.abs(r.top - 80);
+    if (r.bottom > 120 && d < bestD){ bestD = d; best = s; }
+  });
+  return best || secs[0];
+}
+
+function readList(nodes){
+  var arr = Array.prototype.slice.call(nodes);
+  abort = false;
+  (function step(i){
+    if (abort || i >= arr.length){ cap.style.display = 'none'; return; }
+    var nd = arr[i];
+    var txt = nd.getAttribute('data-say');
+    if (!txt){ step(i + 1); return; }
+    hlOnly(nd);
+    try{ nd.scrollIntoView({ behavior: 'smooth', block: 'center' }); }catch(e){}
+    speak(txt).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+}
+
+document.getElementById('btnRead').onclick = function(){
+  var s = currentSection();
+  readList(s.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnAll').onclick = function(){
+  readList(document.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnStop').onclick = stopAll;
+
+/* ---------- 图片放大 / 导航高亮 / 空格停止 ---------- */
+var lb = document.getElementById('lb');
+document.querySelectorAll('.pic').forEach(function(p){
+  p.onclick = function(){
+    var img = p.querySelector('img');
+    lb.querySelector('img').src = img.src;
+    lb.style.display = 'flex';
+  };
+});
+lb.onclick = function(){ lb.style.display = 'none'; };
+
+var navLinks = Array.prototype.slice.call(document.querySelectorAll('#navi a'));
+window.addEventListener('scroll', function(){
+  var s = currentSection();
+  if (!s) return;
+  navLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + s.id); });
+}, { passive: true });
+
+document.addEventListener('keydown', function(e){
+  if (e.code === 'Space' && e.target === document.body){ e.preventDefault(); stopAll(); }
+});
+</script>
+
+</body>
+</html>

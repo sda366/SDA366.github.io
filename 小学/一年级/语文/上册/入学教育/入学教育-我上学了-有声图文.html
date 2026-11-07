@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>入学教育 · 我上学了 · 有声图文课件</title>
+<style>
+  :root{
+    --main:#bf3a30;      /* 主色：国旗红（入学教育·爱国主题） */
+    --main2:#d9665c;
+    --dark:#7b241c;      /* 深红（标题强调） */
+    --sky:#1565c0;       /* 辅色：蓝 */
+    --hl:#f9a825;        /* 高亮：暖黄 */
+    --ink:#33302c;
+    --line:#e6ded4;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    background:#fdf7f2; color:var(--ink);
+    padding-bottom:120px;
+    -webkit-text-size-adjust:100%;
+  }
+  .container{ max-width:900px; margin:0 auto; padding:14px 14px 30px; }
+
+  /* ========== 封面 ========== */
+  .cover{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#a31f1a 0%,#c0392b 46%,#e57368 100%);
+    color:#fff; border-radius:16px; padding:20px 20px 16px; margin-bottom:12px;
+  }
+  .cover::after{
+    content:""; position:absolute; right:-40px; top:-50px; width:190px; height:190px;
+    background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%); border-radius:50%;
+  }
+  .cover .u-tag{
+    display:inline-block; font-size:12.5px; background:rgba(255,255,255,.22);
+    border-radius:999px; padding:3px 12px; margin-bottom:8px;
+  }
+  .cover h1{ font-size:25px; letter-spacing:1px; margin-bottom:6px; }
+  .cover .sub{ font-size:13.5px; opacity:.95; line-height:1.85; }
+  .cover .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+  .cover .chip{
+    font-size:12.5px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.34);
+    border-radius:999px; padding:3px 11px;
+  }
+
+  /* ========== 提示条 / 导航 ========== */
+  .hint{
+    background:#fdecea; border:1px dashed #f0a499; border-radius:11px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-bottom:10px;
+  }
+  .hint b{ color:var(--dark); }
+
+  .navi{
+    position:sticky; top:0; z-index:900; background:rgba(253,247,242,.97);
+    padding:8px 0 9px; margin-bottom:2px; border-bottom:1px dashed #e3d3c9;
+    display:flex; gap:6px; flex-wrap:wrap; overflow:hidden;
+  }
+  .navi::-webkit-scrollbar{ display:none; }
+  .navi a{
+    flex:0 0 auto; text-decoration:none; font-size:12.5px; color:var(--main);
+    background:#fff; border:1.5px solid #f0d2cc; border-radius:999px; padding:4px 10px;
+    white-space:nowrap;
+  }
+  .navi a:active,.navi a.on{ background:var(--main); color:#fff; border-color:var(--main); }
+
+  /* ========== 通用板块 ========== */
+  .block{ margin-top:16px; }
+  .sec-title{
+    display:flex; align-items:center; gap:9px; font-size:17.5px; font-weight:bold;
+    color:var(--main); margin:0 0 9px; flex-wrap:wrap;
+  }
+  .sec-title .bar{ width:6px; height:20px; background:var(--main); border-radius:3px; flex:0 0 auto; }
+  .sec-title .pg{
+    font-size:11.5px; font-weight:normal; color:#8d6e63;
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:1px 8px;
+  }
+  .sec-note{ font-size:12.5px; color:#8d6e63; font-weight:normal; }
+
+  /* 可点读 */
+  .say{ cursor:pointer; border-radius:5px; transition:background .18s, box-shadow .18s; }
+  .say:hover{ background:#fff8e1; }
+  .say.hl{ background:#fff59d; box-shadow:0 0 0 3px rgba(249,168,37,.32); }
+
+  /* ========== 课文朗读卡 ========== */
+  .story{
+    background:#fff; border:1.5px solid var(--line); border-radius:13px; padding:15px 16px;
+  }
+  .story .s-para{
+    font-family:"KaiTi","STKaiti",serif; font-size:21px; line-height:2.5;
+    letter-spacing:2px; cursor:pointer; border-radius:6px; padding:2px 4px;
+  }
+  .story .s-para:hover{ background:#fff8e1; }
+  .story .s-para.hl{ background:#fff59d; }
+  .story .s-no{
+    display:inline-block; background:var(--main); color:#fff; font-size:11.5px;
+    border-radius:5px; padding:0 7px; margin-right:7px; vertical-align:2px;
+    font-family:sans-serif; cursor:pointer;
+  }
+  ruby{ ruby-align:center; }
+  rt{ font-size:10.5px; color:#c62828; font-family:"Segoe UI",Arial,sans-serif; letter-spacing:0; }
+  .story ruby{ margin:0 1px; }
+  .story ruby + ruby{ margin-left:2px; }
+  .story .s-note{ color:#8d6e63; font-size:13px; font-family:"Microsoft YaHei",sans-serif; letter-spacing:0; }
+
+  /* ========== 认一认卡 ========== */
+  .know-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:10px; }
+  .know{
+    background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 8px 12px; text-align:center; cursor:pointer;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .know:hover{ border-color:#ffcc80; }
+  .know.hl{ border-color:var(--hl); background:#fffde7; }
+  .know .k-ico{ font-size:24px; line-height:1.3; }
+  .know .k-hz{ font-family:"KaiTi","STKaiti",serif; font-size:22px; margin-top:3px; }
+  .know .k-hz ruby{ margin:0 1px; }
+  .know .k-m{ font-size:11.5px; color:#7b6a5e; line-height:1.55; margin-top:4px; }
+
+  .bubble{
+    background:#fff8e1; border:1.5px solid #ffe082; border-radius:12px;
+    padding:10px 13px; font-size:13.5px; line-height:1.9; margin-top:10px; color:#795548;
+    cursor:pointer;
+  }
+  .bubble.hl{ border-color:var(--hl); background:#fffde7; }
+  .bubble b{ color:#e65100; }
+
+  /* ========== 祖国山河卡（② 用）========== */
+  .land-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+  .land{
+    background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:12px 10px; text-align:center; cursor:pointer;
+    transition:border-color .2s;
+  }
+  .land:hover{ border-color:#ffcc80; }
+  .land.hl{ border-color:var(--hl); background:#fffde7; }
+  .land .l-ico{ font-size:30px; }
+  .land .l-hz{ font-family:"KaiTi","STKaiti",serif; font-size:22px; margin-top:4px; }
+  .land .l-hz ruby{ margin:0 1px; }
+  .land .l-m{ font-size:11.5px; color:#7b6a5e; line-height:1.6; margin-top:4px; }
+
+  /* ========== 上学歌（③ 用，诗行居中楷体）========== */
+  .song{
+    background:linear-gradient(180deg,#fffdf5,#fff6e5);
+    border:1.5px solid #f2d9a0; border-radius:14px; padding:16px 14px; text-align:center;
+  }
+  .song .g-title{ font-family:"KaiTi","STKaiti",serif; font-size:24px; letter-spacing:4px; color:var(--dark); }
+  .song .g-line{
+    font-family:"KaiTi","STKaiti",serif; font-size:21px; line-height:2.3; letter-spacing:2px;
+    cursor:pointer; border-radius:8px; padding:2px 6px; display:inline-block;
+  }
+  .song .g-line:hover{ background:#fff8e1; }
+  .song .g-line.hl{ background:#fff59d; }
+  .song .g-line ruby{ margin:0 1px; }
+  .song .g-line ruby + ruby{ margin-left:2px; }
+  .song .g-note{
+    margin-top:10px; text-align:left; font-size:12.5px; line-height:1.8;
+    background:#fff; border-radius:10px; padding:9px 12px; color:#8d6e63;
+  }
+  .recite{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .recite button{
+    flex:1; min-width:120px; border:1.5px solid #f5c6bd; background:#fff; color:var(--main);
+    border-radius:10px; padding:9px 10px; font-size:13px; cursor:pointer; font-family:inherit;
+  }
+  .recite button:hover{ background:#fdecea; }
+
+  /* ========== 本领卡（④ 用）========== */
+  .skill-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+  .skill{
+    background:#fff; border:1.5px solid var(--line); border-radius:12px;
+    padding:14px 10px; text-align:center; cursor:pointer;
+    transition:border-color .2s;
+  }
+  .skill:hover{ border-color:#ffcc80; }
+  .skill.hl{ border-color:var(--hl); background:#fffde7; }
+  .skill .sk-ico{ font-size:30px; }
+  .skill .sk-hz{ font-family:"KaiTi","STKaiti",serif; font-size:23px; margin-top:5px; }
+  .skill .sk-hz ruby{ margin:0 1px; }
+  .skill .sk-m{ font-size:11.5px; color:#7b6a5e; line-height:1.6; margin-top:5px; }
+
+  .two-col{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-top:9px; }
+  .mini{ background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .mini h4{ font-size:13.5px; color:var(--dark); margin-bottom:5px; }
+  .mini ul{ list-style:none; font-size:12.5px; line-height:1.95; color:#4e342e; }
+  .mini li::before{ content:"· "; color:var(--main2); font-weight:bold; }
+
+  /* ========== 闯关 ========== */
+  .quiz-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; align-items:start; }
+  .q{
+    background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:11px 12px;
+  }
+  .q.right{ border-color:#66bb6a; background:#f1f8e9; }
+  .q.wrong{ border-color:#ef9a9a; background:#ffebee; }
+  .q .q-t{ font-size:13.5px; line-height:1.75; cursor:pointer; border-radius:5px; }
+  .q .q-t b{ color:var(--main); }
+  .q .opts{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+  .q .opt{
+    border:1.5px solid #e0e0e0; border-radius:9px; padding:8px 10px; font-size:13.5px;
+    cursor:pointer; line-height:1.6; background:#fafafa;
+    transition:border-color .18s, background .18s;
+  }
+  .q .opt:hover{ border-color:#90caf9; background:#f1f8ff; }
+  .q .opt.ok{ border-color:#66bb6a; background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .q .opt.no{ border-color:#ef5350; background:#ffebee; color:#b71c1c; }
+  .q .exp{ display:none; font-size:12px; color:#4527a0; background:#ede7f6; border-radius:7px; padding:6px 9px; margin-top:7px; line-height:1.7; }
+  .q.done .exp{ display:block; }
+  .score{
+    margin-top:10px; text-align:center; font-size:14px; color:var(--main);
+    background:#fdecea; border:1px dashed #f0a499; border-radius:11px; padding:10px;
+  }
+
+  /* ========== 课本原页 ========== */
+  .pic-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+  .pic-grid .wide{ grid-column:1/-1; }
+  .pic{
+    background:#fff; border:1.5px solid #e0e7ef; border-radius:10px; padding:7px;
+    text-align:center; cursor:pointer;
+    box-shadow:0 2px 10px rgba(62,39,35,.10);
+  }
+  .pic img{ width:100%; display:block; border-radius:6px; }
+  .pic .cap{ font-size:11.5px; color:#5d4037; margin-top:5px; }
+  #lb{
+    position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:2000; display:none;
+    align-items:center; justify-content:center; padding:10px; cursor:zoom-out;
+  }
+  #lb img{ max-width:100%; max-height:100%; border-radius:6px; }
+
+  /* ========== 底部控制条 / 字幕 ========== */
+  .ctrl-bar{
+    position:fixed; left:0; right:0; bottom:0; background:rgba(127,32,25,.97);
+    display:flex; gap:7px; align-items:center; justify-content:center;
+    padding:10px 10px; z-index:1000; flex-wrap:wrap;
+  }
+  .ctrl-bar button{
+    border:none; border-radius:999px; padding:8px 13px; font-size:13.5px; cursor:pointer;
+    background:#fff; color:var(--main); font-weight:bold; font-family:inherit;
+  }
+  .ctrl-bar button.stop{ background:#ffcdd2; color:#b71c1c; }
+  .ctrl-bar button.on{ background:#ffd54f; color:#5d4037; }
+  #cap{
+    position:fixed; left:50%; transform:translateX(-50%); bottom:62px; max-width:92%;
+    background:rgba(38,50,56,.93); color:#fff; border-radius:10px; padding:7px 15px;
+    font-size:14.5px; line-height:1.6; display:none; z-index:1100; text-align:center;
+  }
+  .back-nav{
+    position:fixed; right:12px; bottom:60px; z-index:1200;
+    background:rgba(21,101,192,.93); color:#fff; border-radius:999px;
+    padding:7px 16px; font-size:13px; text-decoration:none;
+  }
+  body.no-py rt{ visibility:hidden; }
+
+  @media (max-width:620px){
+    .cover h1{ font-size:20px; }
+    .navi{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+    .know-grid{ grid-template-columns:repeat(3,1fr); gap:7px; }
+    .land-grid,.skill-grid,.two-col,.quiz-grid{ grid-template-columns:1fr; }
+    .pic-grid{ grid-template-columns:1fr; }
+    .story .s-para{ font-size:19px; }
+    .song .g-line{ font-size:18px; }
+    .ctrl-bar button{ padding:7px 10px; font-size:12.5px; }
+    #cap{ bottom:104px; }
+  }
+  @media (min-width:900px){ #sndTip{ display:none; } }
+  @media (max-width:900px), (pointer:coarse){
+    .back-nav{ bottom:104px; }
+    #cap{ display:none !important; }
+  }
+  @media print{ .ctrl-bar,#cap,.back-nav,.navi,#sndTip{ display:none !important; } body{ padding-bottom:0; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+<style>
+#sndTip{ margin:12px 0 2px; padding:10px 34px 10px 14px; background:#FFF8E1; border:1.5px dashed #F9A825;
+  border-radius:12px; font-size:13.5px; line-height:1.9; color:#5D4037; position:relative; }
+#sndTip b{ color:#E65100; }
+#sndTip .st-t{ font-weight:bold; color:#E65100; }
+#sndTip .st-x{ position:absolute; right:6px; top:4px; cursor:pointer; font-size:18px; color:#8D6E63; padding:2px 6px; }
+#sndTip a{ color:#1565C0; font-weight:bold; }
+@media (min-width:900px){ #sndTip{ display:none; } }
+</style>
+<div id="sndTip">
+  <span class="st-x" id="sndTipX" role="button" aria-label="关闭提示">&times;</span>
+  <span class="st-t">🔊 手机听不到声音怎么办？</span><br>
+  ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机；在微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+  ② 还是没声音？到应用商店免费下载 <b>Microsoft Edge 浏览器</b>（它自带朗读发声），用它打开本页面就能出声。<br>
+  ③ 换了 Edge 仍然没声音，说明这部手机的<b>硬件/系统不支持</b>网页朗读（多为老旧机型）；近几年买的新手机一般都能正常播放。
+  <a href="../sound-check.html">→ 打开声音自检</a>
+</div>
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('sndTipClosed') === '1'){
+      var t0 = document.getElementById('sndTip'); if(t0) t0.style.display = 'none'; return;
+    }
+    var x = document.getElementById('sndTipX');
+    if(x) x.onclick = function(){
+      var t = document.getElementById('sndTip'); if(t) t.style.display = 'none';
+      try{ localStorage.setItem('sndTipClosed','1'); }catch(e){}
+    };
+  }catch(e){}
+})();
+</script>
+
+
+  <!-- ================= 封面 ================= -->
+  <div class="cover">
+    <span class="u-tag">统编版 · 一年级上册 · 入学教育</span>
+    <h1>我上学了 · 入学教育</h1>
+    <p class="sub">我是中国人 · 我爱我们的祖国 · 我是小学生 · 我爱学语文<br>课本第 2~7 页，点哪句读哪句</p>
+    <div class="chips">
+      <span class="chip">4 个板块</span>
+      <span class="chip">全文注音</span>
+      <span class="chip">点哪读哪</span>
+      <span class="chip">闯关 8 题</span>
+    </div>
+  </div>
+
+  <div class="hint" id="hint1">
+    <b>上学第一课学什么：</b>认识我们的国旗和祖国，学会唱《上学歌》，知道学语文要读书、写字、讲故事、听故事。
+    一年级的课文页还没有拼音，这一页的拼音是按字典标出来的，<b>供参考</b>，以课本和老师教的为准。点一下任一句子或卡片，就能听。
+  </div>
+
+  <!-- ================= 板块导航 ================= -->
+  <div class="navi" id="navi">
+    <a href="#b1">① 我是中国人</a>
+    <a href="#b2">② 我爱我们的祖国</a>
+    <a href="#b3">③ 我是小学生</a>
+    <a href="#b4">④ 我爱学语文</a>
+    <a href="#b5">⑤ 入学闯关</a>
+    <a href="#pics">课本原页</a>
+  </div>
+
+  <!-- ================= ① 我是中国人 ================= -->
+  <section class="block" id="b1">
+    <div class="sec-title">
+      <span class="bar"></span>① 我是中国人
+      <span class="pg">课本第 2~3 页</span>
+      <span class="sec-note">点一句读一句</span>
+    </div>
+
+    <div class="story" id="storyBox1">
+      <div class="s-para" data-say="我是中国人。">
+        <ruby>我<rt>wǒ</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>中<rt>zhōng</rt></ruby><ruby>国<rt>guó</rt></ruby><ruby>人<rt>rén</rt></ruby>。
+      </div>
+      <div class="s-para" data-say="我们都是中国人。">
+        <ruby>我<rt>wǒ</rt></ruby><ruby>们<rt>men</rt></ruby><ruby>都<rt>dōu</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>中<rt>zhōng</rt></ruby><ruby>国<rt>guó</rt></ruby><ruby>人<rt>rén</rt></ruby>。
+      </div>
+      <div class="s-para" data-say="中华民族是一家人。">
+        <ruby>中<rt>zhōng</rt></ruby><ruby>华<rt>huá</rt></ruby><ruby>民<rt>mín</rt></ruby><ruby>族<rt>zú</rt></ruby><ruby>是<rt>shì</rt></ruby><ruby>一<rt>yì</rt></ruby><ruby>家<rt>jiā</rt></ruby><ruby>人<rt>rén</rt></ruby>。
+      </div>
+    </div>
+
+    <div class="sec-title" style="margin-top:14px">
+      <span class="bar"></span>认一认 · 课本图画里的它们
+    </div>
+    <div class="know-grid">
+      <div class="know" data-say="五星红旗。我们的国旗。红旗上有五颗黄色的星星，一颗大，四颗小。">
+        <div class="k-ico">🚩</div>
+        <div class="k-hz"><ruby>五<rt>wǔ</rt></ruby><ruby>星<rt>xīng</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>旗<rt>qí</rt></ruby></div>
+        <div class="k-m">我们的国旗，红旗上有五颗星星</div>
+      </div>
+      <div class="know" data-say="北京天安门。在北京，是我们国家很重要的地方，升国旗仪式就在这里举行。">
+        <div class="k-ico">🏯</div>
+        <div class="k-hz"><ruby>北<rt>běi</rt></ruby><ruby>京<rt>jīng</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>安<rt>ān</rt></ruby><ruby>门<rt>mén</rt></ruby></div>
+        <div class="k-m">在北京，升国旗仪式在这里举行</div>
+      </div>
+      <div class="know" data-say="各民族小朋友。我们的国家有五十六个民族，大家穿不同的衣服，都是中国人，像一家人一样亲。">
+        <div class="k-ico">👧👦</div>
+        <div class="k-hz"><ruby>各<rt>gè</rt></ruby><ruby>民<rt>mín</rt></ruby><ruby>族<rt>zú</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>朋<rt>péng</rt></ruby><ruby>友<rt>yǒu</rt></ruby></div>
+        <div class="k-m">五十六个民族，像一家人</div>
+      </div>
+    </div>
+
+    <div class="bubble" data-say="想一想，说一说。你是中国人，你的好朋友是中国人，黑板前的老师也是中国人。我们都是中国人，中华民族是一家人。">
+      <b>想一想 · 说一说：</b>你身边还有谁是中国人？爸爸、妈妈、同学、老师……我们都是中国人，中华民族是一家人。
+    </div>
+  </section>
+
+  <!-- ================= ② 我爱我们的祖国 ================= -->
+  <section class="block" id="b2">
+    <div class="sec-title">
+      <span class="bar"></span>② 我爱我们的祖国
+      <span class="pg">课本第 4~5 页</span>
+      <span class="sec-note">点图卡和句子都能听</span>
+    </div>
+
+    <div class="land-grid">
+      <div class="land" data-say="五星红旗。我们的国旗。">
+        <div class="l-ico">🚩</div>
+        <div class="l-hz"><ruby>五<rt>wǔ</rt></ruby><ruby>星<rt>xīng</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>旗<rt>qí</rt></ruby></div>
+        <div class="l-m">我们的国旗</div>
+      </div>
+      <div class="land" data-say="北京天安门。">
+        <div class="l-ico">🏯</div>
+        <div class="l-hz"><ruby>北<rt>běi</rt></ruby><ruby>京<rt>jīng</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>安<rt>ān</rt></ruby><ruby>门<rt>mén</rt></ruby></div>
+        <div class="l-m">庄严又美丽</div>
+      </div>
+      <div class="land" data-say="长江。我们国家最长的大江。">
+        <div class="l-ico">🌊</div>
+        <div class="l-hz"><ruby>长<rt>cháng</rt></ruby><ruby>江<rt>jiāng</rt></ruby></div>
+        <div class="l-m">我们国家最长的大江</div>
+      </div>
+      <div class="land" data-say="黄河。我们国家的母亲河，河水是黄色的。">
+        <div class="l-ico">💧</div>
+        <div class="l-hz"><ruby>黄<rt>huáng</rt></ruby><ruby>河<rt>hé</rt></ruby></div>
+        <div class="l-m">我们的母亲河，河水是黄色的</div>
+      </div>
+    </div>
+
+    <div class="sec-title" style="margin-top:14px">
+      <span class="bar"></span>课文 · 读一读
+      <span class="sec-note">课本原句逐字照录</span>
+    </div>
+    <div class="story" id="storyBox2">
+      <div class="s-para" data-say="我爱五星红旗。我爱北京天安门。">
+        <ruby>我<rt>wǒ</rt></ruby><ruby>爱<rt>ài</rt></ruby><ruby>五<rt>wǔ</rt></ruby><ruby>星<rt>xīng</rt></ruby><ruby>红<rt>hóng</rt></ruby><ruby>旗<rt>qí</rt></ruby>。<ruby>我<rt>wǒ</rt></ruby><ruby>爱<rt>ài</rt></ruby><ruby>北<rt>běi</rt></ruby><ruby>京<rt>jīng</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>安<rt>ān</rt></ruby><ruby>门<rt>mén</rt></ruby>。
+      </div>
+      <div class="s-para" data-say="我爱长江，我爱黄河。我爱中华人民共和国。">
+        <ruby>我<rt>wǒ</rt></ruby><ruby>爱<rt>ài</rt></ruby><ruby>长<rt>cháng</rt></ruby><ruby>江<rt>jiāng</rt></ruby>，<ruby>我<rt>wǒ</rt></ruby><ruby>爱<rt>ài</rt></ruby><ruby>黄<rt>huáng</rt></ruby><ruby>河<rt>hé</rt></ruby>。<ruby>我<rt>wǒ</rt></ruby><ruby>爱<rt>ài</rt></ruby><ruby>中<rt>zhōng</rt></ruby><ruby>华<rt>huá</rt></ruby><ruby>人<rt>rén</rt></ruby><ruby>民<rt>mín</rt></ruby><ruby>共<rt>gòng</rt></ruby><ruby>和<rt>hé</rt></ruby><ruby>国<rt>guó</rt></ruby>。
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini">
+        <h4>读准这两个字</h4>
+        <ul>
+          <li><b>长</b> cháng：长江的“长”，是“不短”的意思。</li>
+          <li><b>一</b> yì：一家人。说话时“一”常会变调，页面按实际读音标注，供参考。</li>
+        </ul>
+      </div>
+      <div class="mini">
+        <h4>我们的国家</h4>
+        <ul>
+          <li>国家的全称：中华人民共和国。</li>
+          <li>我们的首都：北京。</li>
+          <li>国旗：五星红旗。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bubble" data-say="跟着读。我爱五星红旗，我爱北京天安门，我爱长江，我爱黄河，我爱中华人民共和国。读的时候声音响亮，心里暖暖的。">
+      <b>大声跟读：</b>我爱五星红旗 · 我爱北京天安门 · 我爱长江 · 我爱黄河 · 我爱中华人民共和国。
+    </div>
+  </section>
+
+  <!-- ================= ③ 我是小学生 ================= -->
+  <section class="block" id="b3">
+    <div class="sec-title">
+      <span class="bar"></span>③ 我是小学生 · 上学歌
+      <span class="pg">课本第 6 页</span>
+      <span class="sec-note">点一行读一行，还可以连起来唱</span>
+    </div>
+
+    <div class="song" id="songBox">
+      <div class="g-title">上 学 歌</div>
+      <div style="height:8px"></div>
+      <div class="g-line" data-say="太阳当空照，">
+        <ruby>太<rt>tài</rt></ruby><ruby>阳<rt>yáng</rt></ruby><ruby>当<rt>dāng</rt></ruby><ruby>空<rt>kōng</rt></ruby><ruby>照<rt>zhào</rt></ruby>，
+      </div><br>
+      <div class="g-line" data-say="花儿对我笑。">
+        <ruby>花<rt>huā</rt></ruby><ruby>儿<rt>ér</rt></ruby><ruby>对<rt>duì</rt></ruby><ruby>我<rt>wǒ</rt></ruby><ruby>笑<rt>xiào</rt></ruby>。
+      </div><br>
+      <div class="g-line" data-say="小鸟说，早，早，早，你为什么背上小书包？">
+        <ruby>小<rt>xiǎo</rt></ruby><ruby>鸟<rt>niǎo</rt></ruby><ruby>说<rt>shuō</rt></ruby>：“<ruby>早<rt>zǎo</rt></ruby>，<ruby>早<rt>zǎo</rt></ruby>，<ruby>早<rt>zǎo</rt></ruby>，
+      </div><br>
+      <div class="g-line" data-say="你为什么背上小书包？">
+        <ruby>你<rt>nǐ</rt></ruby><ruby>为<rt>wèi</rt></ruby><ruby>什<rt>shén</rt></ruby><ruby>么<rt>me</rt></ruby><ruby>背<rt>bēi</rt></ruby><ruby>上<rt>shàng</rt></ruby><ruby>小<rt>xiǎo</rt></ruby><ruby>书<rt>shū</rt></ruby><ruby>包<rt>bāo</rt></ruby>？”
+      </div><br>
+      <div class="g-line" data-say="我去上学校，天天不迟到。">
+        <ruby>我<rt>wǒ</rt></ruby><ruby>去<rt>qù</rt></ruby><ruby>上<rt>shàng</rt></ruby><ruby>学<rt>xué</rt></ruby><ruby>校<rt>xiào</rt></ruby>，<ruby>天<rt>tiān</rt></ruby><ruby>天<rt>tiān</rt></ruby><ruby>不<rt>bú</rt></ruby><ruby>迟<rt>chí</rt></ruby><ruby>到<rt>dào</rt></ruby>。
+      </div><br>
+      <div class="g-line" data-say="爱学习，爱劳动，长大要为人民立功劳。">
+        <ruby>爱<rt>ài</rt></ruby><ruby>学<rt>xué</rt></ruby><ruby>习<rt>xí</rt></ruby>，<ruby>爱<rt>ài</rt></ruby><ruby>劳<rt>láo</rt></ruby><ruby>动<rt>dòng</rt></ruby>，<ruby>长<rt>zhǎng</rt></ruby><ruby>大<rt>dà</rt></ruby><ruby>要<rt>yào</rt></ruby><ruby>为<rt>wèi</rt></ruby><ruby>人<rt>rén</rt></ruby><ruby>民<rt>mín</rt></ruby><ruby>立<rt>lì</rt></ruby><ruby>功<rt>gōng</rt></ruby><ruby>劳<rt>láo</rt></ruby>。
+      </div>
+
+      <div class="g-note" data-say="本文由北京市小学唱歌教研组集体创作，选作课文时有改动。">
+        ① 本文由北京市小学唱歌教研组集体创作，选作课文时有改动。
+      </div>
+    </div>
+
+    <div class="recite">
+      <button id="btnSong">🎵 连起来唱一遍</button>
+      <button id="btnFollow">🔁 一句一句跟读</button>
+    </div>
+    <div class="bubble" id="followTip" style="display:none" data-say="跟读模式。我读一句，你跟着读一句。我读完会等你几秒，你再大声读出来。">
+      <b>跟读模式：</b>我读一句 → 等你读 → 再读下一句。点按钮开始。
+    </div>
+
+    <div class="two-col">
+      <div class="mini">
+        <h4>读准这三个字</h4>
+        <ul>
+          <li><b>背</b> bēi：背上小书包，是“背在背上”的意思。</li>
+          <li><b>不</b> bú：不迟到。说话时“不”会变调，按实际读音标注，供参考。</li>
+          <li><b>长</b> zhǎng：长大。长大的“长”，和长江的 cháng 不一样。</li>
+        </ul>
+      </div>
+      <div class="mini">
+        <h4>小学生要做到</h4>
+        <ul>
+          <li>天天上学<b>不迟到</b>。</li>
+          <li><b>爱学习</b>：上课认真听。</li>
+          <li><b>爱劳动</b>：自己的事情自己做。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ④ 我爱学语文 ================= -->
+  <section class="block" id="b4">
+    <div class="sec-title">
+      <span class="bar"></span>④ 我爱学语文
+      <span class="pg">课本第 7 页</span>
+      <span class="sec-note">点卡片听一听，跟着做一做</span>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill" data-say="读书。打开课本，手指着字，一个字一个字读。读书的时候，身体坐直，声音响亮。">
+        <div class="sk-ico">📖</div>
+        <div class="sk-hz"><ruby>读<rt>dú</rt></ruby><ruby>书<rt>shū</rt></ruby></div>
+        <div class="sk-m">手指着字，一个字一个字读，声音响亮</div>
+      </div>
+      <div class="skill" data-say="写字。写字的时候，身体坐直，本子放正，一笔一画认真写。先描红，再自己写。">
+        <div class="sk-ico">✍️</div>
+        <div class="sk-hz"><ruby>写<rt>xiě</rt></ruby><ruby>字<rt>zì</rt></ruby></div>
+        <div class="sk-m">身体坐直，本子放正，一笔一画认真写</div>
+      </div>
+      <div class="skill" data-say="讲故事。把听到的事讲给同学听。讲的时候说清楚什么人，做了什么事。">
+        <div class="sk-ico">🗣️</div>
+        <div class="sk-hz"><ruby>讲<rt>jiǎng</rt></ruby><ruby>故<rt>gù</rt></ruby><ruby>事<rt>shi</rt></ruby></div>
+        <div class="sk-m">说清楚什么人，做了什么事</div>
+      </div>
+      <div class="skill" data-say="听故事。听别人讲故事的时候，眼睛看着说话的人，安安静静听，不打断。">
+        <div class="sk-ico">👂</div>
+        <div class="sk-hz"><ruby>听<rt>tīng</rt></ruby><ruby>故<rt>gù</rt></ruby><ruby>事<rt>shi</rt></ruby></div>
+        <div class="sk-m">眼睛看着说话的人，安安静静听</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini">
+        <h4>说话的人</h4>
+        <ul>
+          <li>声音响亮，让大家听得见。</li>
+          <li>说清楚“谁、做了什么”。</li>
+        </ul>
+      </div>
+      <div class="mini">
+        <h4>听的人</h4>
+        <ul>
+          <li>不打断别人说话。</li>
+          <li>听完可以提问、可以鼓掌。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bubble" data-say="说一说。今天回家，把这四件本领讲给爸爸妈妈听。读书，写字，讲故事，听故事。还可以讲一讲你今天在学校做了哪一件。">
+      <b>回家小任务：</b>把读书、写字、讲故事、听故事这四件本领，讲给爸爸妈妈听，再说一说你今天做到了哪一件。
+    </div>
+  </section>
+
+  <!-- ================= ⑤ 入学闯关 ================= -->
+  <section class="block" id="b5">
+    <div class="sec-title">
+      <span class="bar"></span>⑤ 入学闯关 · 8 题
+      <span class="sec-note">点题目可以听题，点选项就判对错，答完自动算分</span>
+    </div>
+    <div class="quiz-grid" id="quizBox"></div>
+    <div class="score" id="scoreBox">已经答 0 题，答对 0 题。</div>
+  </section>
+
+  <!-- ================= 课本原页 ================= -->
+  <section class="block" id="pics">
+    <div class="sec-title"><span class="bar"></span>课本原页 · 目录与第 2~7 页<span class="sec-note">点图放大</span></div>
+    <div class="pic-grid">
+      <div class="pic"><img src="images/00a-课本目录一-我上学了与一二单元.png" alt="课本目录一"><div class="cap">目录一 · 我上学了 · 第一、二单元</div></div>
+      <div class="pic"><img src="images/00b-课本目录二-三至八单元.png" alt="课本目录二"><div class="cap">目录二 · 第三至八单元 · 字词表</div></div>
+      <div class="pic wide"><img src="images/02a-课本第2-3页-我是中国人-双页.jpg" alt="课本第2-3页"><div class="cap">第 2~3 页 · 我是中国人</div></div>
+      <div class="pic wide"><img src="images/04a-课本第4-5页-我爱我们的祖国-双页.jpg" alt="课本第4-5页"><div class="cap">第 4~5 页 · 我爱我们的祖国</div></div>
+      <div class="pic wide"><img src="images/06a-课本第6-7页-我是小学生我爱学语文-双页.jpg" alt="课本第6-7页"><div class="cap">第 6~7 页 · 我是小学生 · 我爱学语文</div></div>
+    </div>
+  </section>
+
+</div>
+
+<div id="lb"><img src="" alt=""></div>
+<div id="cap"></div>
+
+<div class="ctrl-bar">
+  <button id="btnRead">🔊 读这一板块</button>
+  <button id="btnAll">▶️ 整页连读</button>
+  <button id="btnStop" class="stop">⏹ 停</button>
+  <button id="btnPy">拼 拼音</button>
+</div>
+<a class="back-nav" href="../index.html">← 学习中心</a>
+
+<script>
+/* ============================================================
+   入学教育 · 我上学了 · 有声图文课件
+   全部文字依据课本第 2~7 页逐字录入；拼音为页面自注（供参考）
+   ============================================================ */
+
+/* ---------- 闯关 8 题 ---------- */
+/* q=题目显示；say=朗读稿（题目加选项一起读，一年级识字量小，先听再做）；
+   opts=[选项文字, 是否正确]；exp=解析 */
+var QUIZ = [
+  { q:'我们的国旗是什么？',
+    say:'第一题。我们的国旗是什么？选项一，五星红旗。选项二，绿旗。',
+    opts:[['五星红旗',1],['绿旗',0]],
+    exp:'我们的国旗是五星红旗，红旗上有五颗黄色的星星。' },
+
+  { q:'“我是中国人。”下一句说什么？',
+    say:'第二题。我是中国人。下一句说什么？选项一，我们都是中国人。选项二，我上学校。',
+    opts:[['我们都是中国人',1],['我上学校',0]],
+    exp:'课文说：我是中国人。我们都是中国人。中华民族是一家人。' },
+
+  { q:'《上学歌》里，小鸟问了什么？',
+    say:'第三题。上学歌里，小鸟问了什么？选项一，你为什么背上小书包。选项二，你吃饭了吗。',
+    opts:[['你为什么背上小书包？',1],['你吃饭了吗？',0]],
+    exp:'小鸟说：早，早，早，你为什么背上小书包？' },
+
+  { q:'“我去上学校，天天不迟到。”告诉我们要怎样？',
+    say:'第四题。我去上学校，天天不迟到。告诉我们要怎样？选项一，按时上学，不迟到。选项二，想不来就不来。',
+    opts:[['按时上学，不迟到',1],['想不来就不来',0]],
+    exp:'小学生要天天上学，按时到校，不迟到。' },
+
+  { q:'“我爱学语文”里有哪四件事？',
+    say:'第五题。我爱学语文里有哪四件事？选项一，读书，写字，讲故事，听故事。选项二，跑步，跳绳，画画，唱歌。',
+    opts:[['读书 · 写字 · 讲故事 · 听故事',1],['跑步 · 跳绳 · 画画 · 唱歌',0]],
+    exp:'课本第 7 页画的四幅图就是：读书、写字、讲故事、听故事。' },
+
+  { q:'我们国家的全称是什么？',
+    say:'第六题。我们国家的全称是什么？选项一，中华人民共和国。选项二，长城。',
+    opts:[['中华人民共和国',1],['长城',0]],
+    exp:'我们国家的全称是中华人民共和国。课本里写着：我爱中华人民共和国。' },
+
+  { q:'长江和黄河是什么？',
+    say:'第七题。长江和黄河是什么？选项一，两条大河。选项二，两座山。',
+    opts:[['两条大河',1],['两座山',0]],
+    exp:'长江是我们国家最长的大江，黄河是我们的母亲河，课本里说：我爱长江，我爱黄河。' },
+
+  { q:'“长大要为人民立功劳”是什么意思？',
+    say:'第八题。长大要为人民立功劳，是什么意思？选项一，长大后为大家做好事、有本领。选项二，长大后每天睡觉。',
+    opts:[['长大后为大家做好事、有本领',1],['长大后每天睡觉',0]],
+    exp:'为人民立功劳，就是长大了学到真本领，为大家做好事。🌈 你的想法还可以和老师同学说一说。' }
+];
+
+/* ---------- 《上学歌》连唱 / 跟读 ---------- */
+var SONG = [
+  '太阳当空照，', '花儿对我笑。', '小鸟说，早，早，早，',
+  '你为什么背上小书包？', '我去上学校，天天不迟到。', '爱学习，爱劳动，长大要为人民立功劳。'
+];
+
+/* ============================================================
+   语音引擎（沿用技能里验证过的 watchdog 方案）
+   ============================================================ */
+var cap = document.getElementById('cap');
+var abort = false;
+var synth = window.speechSynthesis || null;
+var __voices = [], __zhVoice = null;
+
+function __pickZh(v){
+  var zh = [], i, s;
+  for (i = 0; i < v.length; i++){
+    s = v[i] || {};
+    if (/^zh|^cmn/i.test(s.lang || '') || /Chinese|中文|普通话/i.test(s.name || '')) zh.push(s);
+  }
+  if (!zh.length) return null;
+  for (i = 0; i < zh.length; i++){
+    if (/xiaoxiao|tingting|ting-ting|yaoyao|huihui/i.test(zh[i].name || '')) return zh[i];
+  }
+  return zh[0];
+}
+function __loadVoices(){
+  if (!synth) return;
+  try{
+    var v = synth.getVoices();
+    if (v && v.length){ __voices = v; if (!__zhVoice) __zhVoice = __pickZh(v); }
+  }catch(e){}
+}
+__loadVoices();
+if (synth){
+  try{
+    if ('onvoiceschanged' in synth) synth.onvoiceschanged = __loadVoices;
+    if (synth.addEventListener) synth.addEventListener('voiceschanged', __loadVoices);
+  }catch(e){}
+  var __vt = setInterval(function(){ __loadVoices(); if (__voices.length) clearInterval(__vt); }, 150);
+}
+
+/* 文本清洗：TTS 遇到尖括号或多余符号会卡死 */
+function __safeText(t){
+  var s = (t == null) ? '' : String(t);
+  return s.replace(/<\/?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?\/?>/g, ' ')
+          .replace(/&lt;/gi, '＜').replace(/&gt;/gi, '＞')
+          .replace(/</g, '＜').replace(/>/g, '＞')
+          .replace(/[ \t\r\n]{2,}/g, ' ');
+}
+
+var __unlocked = false;
+function __unlockTTS(){
+  if (!synth || __unlocked) return;
+  try{
+    var u = new SpeechSynthesisUtterance('\u3000');
+    u.volume = 0; u.lang = 'zh-CN';
+    if (__zhVoice) u.voice = __zhVoice;
+    setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+    if ((synth.getVoices() || []).length) __unlocked = true;
+  }catch(e){}
+}
+document.addEventListener('click', __unlockTTS, true);
+document.addEventListener('touchend', __unlockTTS, true);
+
+function speak(text){
+  text = __safeText(text);
+  return new Promise(function(resolve){
+    if (!text){ resolve(); return; }
+    cap.textContent = text; cap.style.display = 'block';
+    var done = false;
+    function finish(){ if (done) return; done = true; resolve(); }
+    if (synth){
+      try{ synth.cancel(); }catch(e){}
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN'; u.rate = 0.82; u.pitch = 1;
+      var vs = synth.getVoices(), i;
+      for (i = 0; i < vs.length; i++){
+        if (vs[i].lang && vs[i].lang.indexOf('zh') === 0 && vs[i].name.indexOf('Xiaoxiao') > -1){ u.voice = vs[i]; break; }
+      }
+      if (!u.voice){ for (i = 0; i < vs.length; i++){ if (vs[i].lang && vs[i].lang.indexOf('zh') === 0){ u.voice = vs[i]; break; } } }
+      if (!u.voice && __zhVoice) u.voice = __zhVoice;
+      u.onend = finish; u.onerror = finish;
+      setTimeout(function(){ try{ synth.speak(u); }catch(e){} }, 150);
+      var t0 = Date.now(), miss = 0;
+      function __wd(){
+        if (done) return;
+        if (Date.now() - t0 > 120000){ finish(); return; }
+        var busy = (synth && (synth.speaking || synth.pending));
+        if (busy){ miss = 0; setTimeout(__wd, 1500); return; }
+        if (Date.now() - t0 < 3500 || ++miss < 2){ setTimeout(__wd, 800); return; }
+        finish();
+      }
+      setTimeout(__wd, 3500);
+    }else{
+      setTimeout(finish, 600 + text.length * 150);
+    }
+  });
+}
+
+function speakText(t){ abort = false; return speak(t); }
+
+function stopAll(){
+  abort = true;
+  cap.style.display = 'none';
+  if (synth){ try{ synth.cancel(); }catch(e){} }
+  document.querySelectorAll('.hl').forEach(function(e){ e.classList.remove('hl'); });
+}
+
+/* 可被打断的等待（跟读留白用） */
+function wait(ms){
+  return new Promise(function(res){
+    var t0 = Date.now();
+    var id = setInterval(function(){
+      if (abort || Date.now() - t0 >= ms){ clearInterval(id); res(); }
+    }, 80);
+  });
+}
+
+/* ============================================================
+   点读 + 连读
+   ============================================================ */
+function hlOnly(e){
+  document.querySelectorAll('.hl').forEach(function(x){ x.classList.remove('hl'); });
+  if (e) e.classList.add('hl');
+}
+
+document.addEventListener('click', function(ev){
+  var t = ev.target.closest('[data-say]');
+  if (!t) return;
+  if (t.tagName === 'BUTTON') return;
+  if (t.classList.contains('opt')) return;   /* 选项单独处理，避免双重朗读 */
+  ev.stopPropagation();
+  abort = false;
+  hlOnly(t);
+  speakText(t.getAttribute('data-say'));
+});
+
+/* 当前视口所在板块 */
+function currentSection(){
+  var secs = document.querySelectorAll('section.block');
+  var best = null, bestD = 1e9;
+  secs.forEach(function(s){
+    var r = s.getBoundingClientRect();
+    var d = Math.abs(r.top - 80);
+    if (r.bottom > 120 && d < bestD){ bestD = d; best = s; }
+  });
+  return best || secs[0];
+}
+
+function readList(nodes){
+  var arr = Array.prototype.slice.call(nodes);
+  abort = false;
+  (function step(i){
+    if (abort || i >= arr.length){ cap.style.display = 'none'; return; }
+    var nd = arr[i];
+    var txt = nd.getAttribute('data-say');
+    if (!txt){ step(i + 1); return; }
+    hlOnly(nd);
+    try{ nd.scrollIntoView({ behavior: 'smooth', block: 'center' }); }catch(e){}
+    speak(txt).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+}
+
+document.getElementById('btnRead').onclick = function(){
+  var s = currentSection();
+  readList(s.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnAll').onclick = function(){
+  readList(document.querySelectorAll('[data-say]'));
+};
+document.getElementById('btnStop').onclick = stopAll;
+
+/* 拼音开关 */
+var pyOn = true;
+document.getElementById('btnPy').onclick = function(){
+  pyOn = !pyOn;
+  document.body.classList.toggle('no-py', !pyOn);
+  this.classList.toggle('on', !pyOn);
+};
+
+/* ============================================================
+   《上学歌》连唱 + 一句一句跟读（跟读留白 4 秒，可被打断）
+   ============================================================ */
+document.getElementById('btnSong').onclick = function(){
+  abort = false;
+  (function step(i){
+    if (abort || i >= SONG.length){ cap.style.display = 'none'; return; }
+    speak(SONG[i]).then(function(){ if (!abort) step(i + 1); });
+  })(0);
+};
+
+document.getElementById('btnFollow').onclick = function(){
+  var tip = document.getElementById('followTip');
+  tip.style.display = 'block';
+  abort = false;
+  (function step(i){
+    if (abort || i >= SONG.length){ cap.style.display = 'none'; return; }
+    speak(SONG[i]).then(function(){
+      if (abort) return;
+      /* 读完一句，留 4 秒给学生自己读（wait 可被「停」打断） */
+      wait(4000).then(function(){ if (!abort) step(i + 1); });
+    });
+  })(0);
+};
+
+/* ============================================================
+   闯关题（点题听题 → 点选项判分 → 朗读反馈）
+   ============================================================ */
+var answered = {}, rightCount = 0;
+(function(){
+  var box = document.getElementById('quizBox');
+  QUIZ.forEach(function(item, i){
+    var q = el('div', 'q');
+    var qt = el('div', 'q-t say', '<b>' + (i + 1) + '.</b> ' + item.q);
+    qt.setAttribute('data-say', item.say);   /* 点题目：题目和选项一起读 */
+    q.appendChild(qt);
+    var opts = el('div', 'opts');
+    item.opts.forEach(function(pair){
+      var o = el('div', 'opt', pair[0]);
+      o.onclick = function(){
+        if (q.classList.contains('done')) return;
+        q.classList.add('done');
+        var ok = pair[1] === 1;
+        o.classList.add(ok ? 'ok' : 'no');
+        if (!ok){
+          Array.prototype.forEach.call(opts.children, function(c, ci){
+            if (item.opts[ci][1] === 1) c.classList.add('ok');
+          });
+        }
+        q.classList.add(ok ? 'right' : 'wrong');
+        q.appendChild(el('div', 'exp', (ok ? '✅ 答对了。' : '❌ 再想想。') + item.exp));
+        answered[i] = ok;
+        if (ok) rightCount++;
+        updateScore();
+        /* 题目和选项都配音：先把选中的选项读出来，再给判分反馈 */
+        speakText(pair[0] + '。' + (ok ? '答对了。' : '再想想。') + item.exp);
+      };
+      opts.appendChild(o);
+    });
+    q.appendChild(opts);
+    box.appendChild(q);
+  });
+})();
+
+function el(tag, cls, html){
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html != null) e.innerHTML = html;
+  return e;
+}
+
+function updateScore(){
+  var n = Object.keys(answered).length;
+  var box = document.getElementById('scoreBox');
+  if (n === 0){ box.textContent = '已经答 0 题，答对 0 题。'; return; }
+  var tip = n === QUIZ.length
+    ? (rightCount === QUIZ.length ? '全部答对，太棒了！' : (rightCount >= 6 ? '很不错，再检查一下错的题。' : '再听一遍前面的板块，然后重试。'))
+    : '还剩 ' + (QUIZ.length - n) + ' 题。';
+  box.innerHTML = '已经答 ' + n + ' 题，答对 <b>' + rightCount + '</b> 题。' + tip;
+}
+
+/* ============================================================
+   图片放大 / 导航高亮 / 空格停止
+   ============================================================ */
+var lb = document.getElementById('lb');
+document.querySelectorAll('.pic').forEach(function(p){
+  p.onclick = function(){
+    var img = p.querySelector('img');
+    lb.querySelector('img').src = img.src;
+    lb.style.display = 'flex';
+  };
+});
+lb.onclick = function(){ lb.style.display = 'none'; };
+
+var navLinks = Array.prototype.slice.call(document.querySelectorAll('#navi a'));
+window.addEventListener('scroll', function(){
+  var s = currentSection();
+  if (!s) return;
+  navLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + s.id); });
+}, { passive: true });
+
+document.addEventListener('keydown', function(e){
+  if (e.code === 'Space' && e.target === document.body){ e.preventDefault(); stopAll(); }
+});
+</script>
+
+</body>
+</html>
