@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>声音自检 · 数学听读课件</title>
+<style>
+  :root{ --main:#00897b; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f4f7fb; color:#263238; padding:24px 16px; line-height:1.9; }
+  .wrap{ max-width:720px; margin:0 auto; background:#fff; border-radius:14px; padding:22px; box-shadow:0 2px 10px rgba(0,0,0,.08); }
+  h1{ color:var(--main); font-size:22px; margin-bottom:10px; }
+  p{ font-size:15px; margin:10px 0; }
+  .status{ font-size:16px; font-weight:bold; padding:12px 14px; border-radius:10px; margin:14px 0; }
+  .ok{ background:#e8f5e9; color:#1b5e20; }
+  .bad{ background:#ffebee; color:#b71c1c; }
+  button{ border:none; border-radius:999px; padding:11px 22px; font-size:15px; cursor:pointer; background:var(--main); color:#fff; font-weight:bold; }
+  button:disabled{ opacity:.5; }
+  .tip{ background:#fff8e1; border:1.5px dashed #f9a825; border-radius:12px; padding:12px 14px; font-size:14px; color:#5d4037; margin-top:14px; }
+  code{ background:#eceff1; padding:2px 6px; border-radius:4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔊 声音自检</h1>
+  <p>本页用来测试你的设备能不能正常朗读中文。课件里的「纯声音听读」功能依赖浏览器的网页语音（SpeechSynthesis）。</p>
+
+  <div id="status" class="status">正在检测……</div>
+
+  <button id="testBtn" type="button">▶ 朗读测试句</button>
+  <p id="hint" style="font-size:13px;color:#607d8b;"></p>
+
+  <div class="tip">
+    <b>如果点了没声音：</b><br>
+    ① 先把手机<b>媒体音量调大</b>，确认没开静音、没连蓝牙耳机。<br>
+    ② 微信里打开的，点右上角「⋯ → 用浏览器打开」。<br>
+    ③ 还是没声音，到应用商店下载 <b>Microsoft Edge 浏览器</b>（自带朗读发声），用它打开课件就能出声。<br>
+    ④ 换了 Edge 仍没声音，说明这部手机硬件／系统不支持网页朗读（多为老旧机型），近几年新手机一般正常。
+  </div>
+</div>
+
+<script>
+(function(){
+  var st=document.getElementById('status');
+  var btn=document.getElementById('testBtn');
+  var hint=document.getElementById('hint');
+  var synth=window.speechSynthesis||null;
+
+  function setStatus(cls,msg){ st.className='status '+cls; st.textContent=msg; }
+
+  if(!synth){
+    setStatus('bad','❌ 当前浏览器不支持网页朗读（SpeechSynthesis 不可用）。请用 Microsoft Edge 等较新浏览器。');
+    btn.disabled=true;
+    return;
+  }
+
+  var voices=[];
+  function pick(){
+    try{ voices=synth.getVoices()||[]; }catch(e){ voices=[]; }
+    var zh=null;
+    for(var i=0;i<voices.length;i++){ var v=voices[i]||{}; if(/^zh|^cmn/i.test(v.lang||'')||/Chinese|中文|普通话/i.test(v.name||'')){ zh=v; } }
+    return zh;
+  }
+  pick();
+  if('onvoiceschanged' in synth){ synth.onvoiceschanged=function(){ pick(); }; }
+
+  if(!pick()){
+    setStatus('ok','⚠️ 已检测到网页朗读接口，但暂未加载到中文语音；点下面按钮试读，多数设备能正常出声。');
+  } else {
+    setStatus('ok','✅ 已检测到网页朗读接口并找到中文语音，点下面按钮试读。');
+  }
+
+  btn.addEventListener('click',function(){
+    try{ synth.cancel(); }catch(e){}
+    var u=new SpeechSynthesisUtterance('你好，这是数学听读课件的声音自检，如果你能听到这句话，说明设备可以正常朗读。');
+    u.lang='zh-CN'; u.rate=0.9; u.pitch=1;
+    var zh=pick();
+    if(zh) u.voice=zh;
+    u.onend=function(){ hint.textContent='✅ 朗读结束，说明设备正常。'; };
+    u.onerror=function(){ hint.textContent='❌ 朗读出错，请参考下方提示换浏览器或调音量。'; };
+    try{ setTimeout(function(){ try{ synth.speak(u); }catch(e){} },150);  /* RA-SPEAK-DELAY：cancel 后立刻 speak 会被浏览器静默吞掉 */ hint.textContent='正在朗读……'; }catch(e){
+      hint.textContent='❌ 朗读被拒绝：'+(e&&e.message||e);
+    }
+  });
+})();
+</script>
+</body>
+</html>
