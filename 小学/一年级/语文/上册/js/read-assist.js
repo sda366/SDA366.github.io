@@ -70,7 +70,15 @@
     s = s.replace(/&nbsp;/gi, ' ').replace(/\u00A0/g, ' ');
     s = s.replace(/[ \t\r\n]{2,}/g, ' ');                      // 压缩空白（不动 \u3000）
     if (window.__RA_NOPOLY__) return s;                        // 读音修正可单项关闭
-    return polyphone(s);                                       // ⑤ 多音字读音修正
+    s = polyphone(s);                                          // ⑤ 多音字读音修正
+    /* ⑥ 拼音字母→汉字读音：仅「语文」课件启用，避免把孤立拼音字母读成英语字母名。
+       整音节（ba、ma…）与带调音节（bá、mā…）不动——中文 TTS 本就能读对。 */
+    if (!window.__RA_NOPINYIN__) {
+      var _p = '';
+      try { _p = decodeURIComponent(location.href); } catch (e) { _p = ''; }
+      if (/语文|拼音/.test((location.pathname || '') + ' ' + _p)) s = pinyinRead(s);
+    }
+    return s;
   }
 
   /* ============================================================
@@ -150,6 +158,67 @@
       if (s.indexOf(ph) >= 0) s = s.split(ph).join(POLY_KEEP[i]);
     }
     return s;
+  }
+
+  /* ============================================================
+     ⑥ 拼音字母→汉字读音（仅一年级·语文课件启用，见 sanitize）
+     ------------------------------------------------------------
+     一年级拼音/识字课件里大量朗读文本夹着孤立拼音字母
+     （如「是 a。」「a、o、e 都写在中间一格」「鼻音 n 和边音 l」「翘舌音 sh、zh、ch」），
+     中文 TTS 会把孤立拉丁字母读成英语字母名（a→诶、b→比、sh→诗喝…），
+     学生听成"英语字母拼读"。
+     修复：把【孤立的拼音字母串】替换成对应汉字读音
+     （a→啊、o→喔、b→波、p→坡、n→讷、l→勒、sh→狮、zh→知、ch→吃、zhi→知…）。
+     整音节（ba、ma…）不在表里，保持原样——中文 TTS 本就能读对，不画蛇添足。
+     按"字母串切分"匹配（不用正则 lookbehind，兼容旧手机浏览器），
+     只对整段命中拼音表的片段替换；英文单词（如 apple / shirt）整段不在表 → 不动。
+     开关：window.__RA_NOPINYIN__ = 1 关闭本项。
+     ============================================================ */
+  var PINYIN_MAP = {
+    'a':'啊','o':'喔','e':'鹅','i':'衣','u':'乌','\u00fc':'迂',
+    'b':'波','p':'坡','m':'摸','f':'佛','d':'得','t':'特','n':'讷','l':'勒',
+    'g':'哥','k':'科','h':'喝','j':'机','q':'七','x':'希',
+    'r':'日','z':'资','c':'疵','s':'丝','y':'衣','w':'屋',
+    'zh':'知','ch':'吃','sh':'狮',
+    'er':'耳',
+    'zhi':'知','chi':'吃','shi':'狮','ri':'日','zi':'资','ci':'疵','si':'丝',
+    'yi':'衣','wu':'乌','yu':'迂','ye':'耶','yue':'约','yuan':'冤','yin':'因','yun':'晕','ying':'英'
+  };
+  /* 声调符 → 基础字母：把带调元音【还原】成基础元音（不是删掉！）。
+     旧版用空串替换会把整段元音删光，mā→m→"摸"、bá→b→"波"，就错了。
+     这里用查表映射 ā→a / á→a / ǎ→a / à→a …，mā→ma、bá→ba，
+     整音节不在拼音表 → 原样保留，中文 TTS 本就把 ma 读成"妈"。 */
+  var TONE_MAP = {
+    '\u0101':'a','\u00e1':'a','\u01ce':'a','\u00e0':'a',   // ā á ǎ à
+    '\u0113':'e','\u00e9':'e','\u011b':'e','\u00e8':'e',   // ē é ě è
+    '\u012b':'i','\u00ed':'i','\u01d0':'i','\u00ec':'i',   // ī í ǐ ì
+    '\u014d':'o','\u00f3':'o','\u01d2':'o','\u00f2':'o',   // ō ó ǒ ò
+    '\u016b':'u','\u00fa':'u','\u01d4':'u','\u00f9':'u',   // ū ú ǔ ù
+    '\u01d6':'\u00fc','\u01d8':'\u00fc','\u01da':'\u00fc','\u01dc':'\u00fc' // ǖ ǘ ǚ ǜ
+  };
+  var TONE_RE = /[\u0101\u00e1\u01ce\u00e0\u0113\u00e9\u011b\u00e8\u012b\u00ed\u01d0\u00ec\u014d\u00f3\u01d2\u00f2\u016b\u00fa\u01d4\u00f9\u01d6\u01d8\u01da\u01dc]/g;
+  /* 组合声调符（NFD 分解形式，U+0300–U+036F），如 mā 拆成 m+a+◌̄ 时剥离 ◌̄ */
+  var COMBINING_TONE = /[\u0300-\u036F]/g;
+  /* 匹配"整段拼音字母串（含 ü）"，作用于【去调后】的文本 */
+  var PINYIN_CHARS = /[a-zA-Z\u00fc]+/g;
+  function pinyinRead(t) {
+    /* 三步：① ü 有时写作 v → ü；② 去调；③ 只把"整段字母串正好等于某拼音键"的片段
+       替换成汉字读音：单字母 a→啊、双字母 sh→狮、整体认读 zhi→知…；
+       整音节（ma、ba…）和英文单词（apple、shirt）整段不在表里 → 原样保留，
+       中文 TTS 本就把 ma 读成"妈"、也不会把英文当拼音。 */
+    var s = String(t == null ? '' : t).replace(/v/gi, '\u00fc');   // ü 有时写作 v
+    /* ②a 先处理 NFC 下的 precomposed 带调元音（ā→a） */
+    s = s.replace(TONE_RE, function (c) {
+      return Object.prototype.hasOwnProperty.call(TONE_MAP, c) ? TONE_MAP[c] : c;
+    });
+    /* ②b 再处理 NFD 分解形式：拆成基础+组合符 → 去掉组合声调符 → 重新组合 */
+    try {
+      s = s.normalize('NFD').replace(COMBINING_TONE, '').normalize('NFC');
+    } catch (e) {}
+    /* ③ 仅替换整段命中拼音表的字母串 */
+    return s.replace(PINYIN_CHARS, function (seg) {
+      return Object.prototype.hasOwnProperty.call(PINYIN_MAP, seg) ? PINYIN_MAP[seg] : seg;
+    });
   }
 
   /* ============================================================
